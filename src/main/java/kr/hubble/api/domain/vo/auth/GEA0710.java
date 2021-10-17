@@ -1,0 +1,21 @@
+package kr.hubble.api.domain.vo.auth;
+
+import javax.validation.constraints.NotBlank;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
+import lombok.Data;
+
+@Data
+@ApiModel("사용자ID찾기 Input")
+public class GEA0710 {
+
+	@ApiModelProperty(notes = "사용자명", required = true)
+	@NotBlank
+	private String userNm;
+	
+	@ApiModelProperty(notes = "휴대폰 번호", required = true)
+	@NotBlank
+	private String hp;
+}

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clss.stdtMng">
+
+	<select id="selectToStdtBase" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.STDT_ID
+	      ,A.STDT_NM
+	      ,A.TEL_NO
+	      ,A.MTEL_NO
+	      ,A.MAIL_ADDR
+	      ,CAST(A.PROF_IMG_NO AS CHAR)              AS PROF_IMG_NO
+	      ,B.FILE_PATH
+	      ,B.LGIC_FILE_NM
+	      ,B.PGIC_FILE_NM
+	      ,CONCAT(B.FILE_PATH, B.PGIC_FILE_NM)      AS STDT_PROF_FILE_NM
+	      ,STDT_STAT_CD
+	      ,FN_CD_NM('STDT_STAT_CD', A.STDT_STAT_CD) AS STDT_STAT_NM
+	FROM   TO_STDT_BASE A
+	       LEFT OUTER JOIN TC_FILE B
+	       ON  B.FILE_NO = A.PROF_IMG_NO
+	WHERE  1 = 1
+<if test=" stdtId != null and stdtId != '' ">
+	AND    STDT_ID = #{stdtId}				</if>
+<if test=" stdtNm != null and stdtNm != '' ">
+	AND    STDT_NM LIKE CONCAT('%', #{stdtNm}, '%')	</if>
+<if test=" mtelNo != null and mtelNo != '' ">
+	AND    MTEL_NO LIKE CONCAT('%', #{mtelNo}, '%')	</if>
+<if test=" mailAddr != null and mailAddr != '' ">
+	AND    MAIL_ADDR LIKE CONCAT('%', #{mailAddr}, '%')	</if>
+<if test=" stdtStatCd != null and stdtStatCd != '' ">
+	AND    STDT_STAT_CD = #{stdtStatCd}		</if>
+    ORDER BY STDT_ID
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<select id="selectToStdtImg" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.STDT_ID
+	      ,A.SEQ
+	      ,A.PROF_IMG_NO
+	      ,B.FILE_PATH
+	      ,B.LGIC_FILE_NM
+	      ,B.PGIC_FILE_NM
+	FROM   TO_STDT_IMG A
+	       INNER JOIN TC_FILE B
+	       ON  B.FILE_NO = A.PROF_IMG_NO
+	WHERE  1 = 1
+	AND    A.STDT_ID = #{stdtId}
+	ORDER BY SEQ
+	</select>
+	
+	<select id="selectStdtProf" parameterType="java.util.Map" resultType="kr.hubble.web.model.TcFileVO">
+	SELECT CAST(A.PROF_IMG_NO AS CHAR) AS FILE_NO
+	      ,B.FILE_PATH
+	      ,B.LGIC_FILE_NM
+	      ,B.PGIC_FILE_NM
+	FROM   TO_STDT_BASE A
+	       LEFT OUTER JOIN TC_FILE B
+	       ON  B.FILE_NO = A.PROF_IMG_NO
+	WHERE  1 = 1
+	AND    STDT_ID = #{stdtId}
+	UNION ALL
+	SELECT CAST(A.PROF_IMG_NO AS CHAR) AS FILE_NO
+	      ,B.FILE_PATH
+	      ,B.LGIC_FILE_NM
+	      ,B.PGIC_FILE_NM
+	FROM   TO_STDT_IMG A
+	       INNER JOIN TC_FILE B
+	       ON  B.FILE_NO = A.PROF_IMG_NO
+	WHERE  1 = 1
+	AND    A.STDT_ID = #{stdtId}
+	ORDER BY FILE_NO
+	</select>	
+	
+	<insert id="insertToStdtBase" parameterType="java.util.Map">
+    INSERT INTO TO_STDT_BASE
+	(
+	    STDT_ID
+	   ,STDT_NM
+	<if test=" telNo != null and telNo != '' ">
+	   ,TEL_NO			</if>
+	<if test=" mtelNo != null and mtelNo != '' ">
+	   ,MTEL_NO			</if>
+	<if test=" profImgNo != null and profImgNo != ''" >
+	   ,PROF_IMG_NO		</if>
+	<if test=" mailAddr != null and mailAddr != '' ">
+	   ,MAIL_ADDR		</if>
+	   ,STDT_STAT_CD
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{stdtId}
+	   ,#{stdtNm}
+	<if test=" telNo != null and telNo != '' ">
+	   ,#{telNo}		</if>
+	<if test=" mtelNo != null and mtelNo != '' ">
+	   ,#{mtelNo}		</if>
+	<if test=" profImgNo != null and profImgNo != ''" >
+	   ,#{profImgNo}	</if>
+	<if test=" mailAddr != null and mailAddr != '' ">
+	   ,#{mailAddr}		</if>
+	   ,#{stdtStatCd}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateToStdtBase" parameterType="java.util.Map">
+	UPDATE TO_STDT_BASE
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+		<if test=" stdtNm != null and stdtNm != '' ">
+	      ,STDT_NM      = #{stdtNm}			</if>
+	    <if test=" telNo != null and telNo != '' ">
+	      ,TEL_NO       = #{telNo}			</if>
+	    <if test=" mtelNo != null and mtelNo != '' ">
+	      ,MTEL_NO      = #{mtelNo}			</if>
+	    <if test=" profImgNo != null and profImgNo != '' ">
+	      ,PROF_IMG_NO  = #{profImgNo}		</if>
+	    <if test=" mailAddr != null and mailAddr != '' ">
+	      ,MAIL_ADDR    = #{mailAddr}		</if>
+	    <if test=" stdtStatCd != null and stdtStatCd != '' ">
+	      ,STDT_STAT_CD = #{stdtStatCd}		</if>
+	WHERE  1 = 1
+	AND    STDT_ID = #{stdtId}
+	</update>
+	
+	<delete id="deleteToStdtBase" parameterType="java.util.Map">
+	DELETE 
+	FROM   TO_STDT_BASE
+	WHERE  STDT_ID = #{stdtId}
+	</delete>
+	
+	<select id="selectLectAttdYn" parameterType="java.util.Map" resultType="String">
+	
+	SELECT CASE WHEN FILE_NO IS NOT NULL THEN 'Y' ELSE 'N' END AS ATTD_YN
+	FROM   TS_TAKE_HIST
+	WHERE  COUS_NO      = #{cousNo}
+	AND    LECT_SEQ     = #{lectSeq}
+	AND    STDT_ID      = #{stdtId}
+	AND    TAKE_EVNT_CD = '18'
+	
+	</select>
+	
+	<insert id="insertToStdtImg" parameterType="java.util.Map">
+	<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+	SELECT CASE WHEN MAX(SEQ) IS NULL THEN 1 ELSE CAST(MAX(SEQ) AS UNSIGNED) + 1 END AS SEQ
+    FROM   TO_STDT_IMG
+    WHERE  STDT_ID = #{stdtId}
+    </selectKey>
+    INSERT INTO TO_STDT_IMG
+	(
+	    STDT_ID
+	   ,SEQ
+	   ,PROF_IMG_NO
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{stdtId}
+	   ,#{seq}
+	   ,#{profImgNo}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<delete id="deleteToStdtImg" parameterType="java.util.Map">
+	DELETE 
+	FROM   TO_STDT_IMG
+	WHERE  STDT_ID = #{stdtId}
+	AND    PROF_IMG_NO = #{profImgNo}
+	</delete>
+	
+</mapper>

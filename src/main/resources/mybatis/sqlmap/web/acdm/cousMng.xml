@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="acdm.cousMng">
+
+	<select id="selectTsCousBase" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.COUS_NO
+	      ,A.COUS_NM
+	      ,A.COUS_DESC
+	      ,A.ACDM_ID
+	      ,C.ACDM_NM
+	      ,A.LCTR_ID
+	      ,B.LCTR_NM
+	      ,A.COUS_STRT_DT
+	      ,A.COUS_END_DT
+		  ,A.STRT_TM
+		  ,A.END_TM
+	      ,A.STDT_LFEE
+	      ,A.COUS_STAT_CD
+	      ,FN_CD_NM('COUS_STAT_CD', A.COUS_STAT_CD) AS COUS_STAT_NM
+	FROM   TS_COUS_BASE A
+	       LEFT OUTER JOIN TO_LCTR_BASE B
+	       ON  B.LCTR_ID = A.LCTR_ID
+	       INNER JOIN TO_ACDM_BASE C
+	       ON  C.ACDM_ID = A.ACDM_ID
+	WHERE  1 = 1
+<if test=" acdmId != null and acdmId != '' ">
+	AND    A.ACDM_ID = #{acdmId}		</if>
+<if test=" acdmNm != null and acdmNm != '' ">
+	AND    C.ACDM_NM LIKE CONCAT('%', #{acdmNm}, '%')		</if>
+<if test=" cousNo != null and cousNo != '' ">
+	AND    A.COUS_NO = #{cousNo}		</if>
+<if test=" cousNm != null and cousNm != '' ">
+	AND    A.COUS_NM LIKE CONCAT('%', #{cousNm}, '%')		</if>
+<if test=" lctrId != null and lctrId != '' ">
+	AND    A.LCTR_ID = #{lctrId}		</if>
+<if test=" lctrNm != null and lctrNm != '' ">
+	AND    B.LCTR_NM LIKE CONCAT('%', #{lctrNm}, '%')		</if>
+<if test=" cousStatCd != null and cousStatCd != '' ">
+	AND    A.COUS_STAT_CD = #{cousStatCd}		</if>
+	ORDER BY A.COUS_NO
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<select id="selectCousNo" parameterType="java.util.Map" resultType="int">
+	SELECT CASE WHEN MAX(COUS_NO) IS NULL THEN 1
+	            ELSE CAST(MAX(COUS_NO) AS UNSIGNED) + 1
+	       END AS COUS_NO
+	FROM   TS_COUS_BASE
+	</select>
+	
+	<insert id="insertTsCousBase" parameterType="java.util.Map">
+    INSERT INTO TS_COUS_BASE
+	(
+	    COUS_NO
+	   ,COUS_NM
+	<if test=" cousDesc != null and cousDesc != '' ">
+	   ,COUS_DESC			</if>
+	<if test=" acdmId != null and acdmId != '' ">
+	   ,ACDM_ID				</if>
+	<if test=" lctrId != null and lctrId != '' ">
+	   ,LCTR_ID				</if>
+	<if test=" cousStrtDt != null and cousStrtDt != '' ">
+	   ,COUS_STRT_DT		</if>
+	<if test=" cousEndDt != null and cousEndDt != '' ">
+	   ,COUS_END_DT			</if>
+	<if test=" stdtLfee != null and stdtLfee != '' ">
+	   ,STDT_LFEE			</if>
+	<if test=" cousStatCd != null and cousStatCd != '' ">
+	   ,COUS_STAT_CD		</if>
+	<if test=" strtTm != null and strtTm != '' ">
+	   ,STRT_TM				</if>
+	<if test=" endTm != null and endTm != '' ">
+	   ,END_TM				</if>
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{cousNo}
+	   ,#{cousNm}
+	<if test=" cousDesc != null and cousDesc != '' ">
+	   ,#{cousDesc}			</if>
+	<if test=" acdmId != null and acdmId != '' ">
+	   ,#{acdmId}			</if>
+	<if test=" lctrId != null and lctrId != '' ">
+	   ,#{lctrId}			</if>
+	<if test=" cousStrtDt != null and cousStrtDt != '' ">
+	   ,#{cousStrtDt}		</if>
+	<if test=" cousEndDt != null and cousEndDt != '' ">
+	   ,#{cousEndDt}		</if>
+	<if test=" stdtLfee != null and stdtLfee != '' ">
+	   ,#{stdtLfee}			</if>
+	<if test=" cousStatCd != null and cousStatCd != '' ">
+	   ,#{cousStatCd}		</if>
+	<if test=" strtTm != null and strtTm != '' ">
+	   ,#{strtTm}			</if>
+	<if test=" endTm != null and endTm != '' ">
+	   ,#{endTm}			</if>
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateTsCousBase" parameterType="java.util.Map">
+	UPDATE TS_COUS_BASE
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+		<if test=" cousNm != null and cousNm != '' ">
+	      ,COUS_NM      = #{cousNm}			</if>
+	    <if test=" cousDesc != null and cousDesc != '' ">
+	      ,COUS_DESC    = #{cousDesc}		</if>
+	    <if test=" acdmId != null and acdmId != '' ">
+	      ,ACDM_ID      = #{acdmId}			</if>
+	    <if test=" lctrId != null and lctrId != '' ">
+	      ,LCTR_ID      = #{lctrId}			</if>
+	    <if test=" cousStrtDt != null and cousStrtDt != '' ">
+	      ,COUS_STRT_DT = #{cousStrtDt}		</if>
+	    <if test=" cousEndDt != null and cousEndDt != '' ">
+	      ,COUS_END_DT  = #{cousEndDt}		</if>
+	    <if test=" stdtLfee != null and stdtLfee != '' ">
+	      ,STDT_LFEE    = #{stdtLfee}		</if>
+	    <if test=" cousStatCd != null and cousStatCd != '' ">
+	      ,COUS_STAT_CD = #{cousStatCd}		</if>
+	    <if test=" strtTm != null and strtTm != '' ">
+	      ,STRT_TM      = #{strtTm}			</if>
+	    <if test=" endTm != null and endTm != '' ">
+	      ,END_TM       = #{endTm}			</if>
+	WHERE  1 = 1
+	AND    COUS_NO = #{cousNo}
+	</update>
+	
+	<delete id="deleteTsCousBase" parameterType="java.util.Map">
+	DELETE 
+	FROM   TS_COUS_BASE
+	WHERE  COUS_NO = #{cousNo}
+	</delete>
+	
+	<select id="searchTsCousStdt" parameterType="java.util.Map" resultType="MybatisMap">
+SELECT A.COUS_NO
+      ,A.STDT_ID
+FROM   TS_COUS_STDT A
+WHERE  1 = 1
+AND    A.COUS_NO           = #{cousNo}
+AND    A.COUS_STDT_STAT_CD = '20'
+	</select>
+	
+</mapper>

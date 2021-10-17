@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clss.waitRoom">
+	
+	<select id="searchApplCous" parameterType="java.util.Map" resultType="MybatisMap">
+SELECT A.COUS_NO
+      ,A.COUS_NM
+FROM   TS_COUS_BASE A
+       INNER JOIN TS_COUS_STDT B
+       ON  B.COUS_NO = A.COUS_NO
+WHERE  1 = 1
+AND    A.COUS_STAT_CD = '10'
+AND    B.STDT_ID = #{stdtId}
+ORDER BY A.COUS_NM
+	</select>
+	
+	
+</mapper>

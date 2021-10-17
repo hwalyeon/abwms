@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clss.clssRoom">
+	
+	<select id="selectTsCousStdt" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.COUS_NO
+	      ,A.STDT_ID
+	      ,B.STDT_NM
+	      ,C.FILE_PATH
+	      ,C.LGIC_FILE_NM
+	      ,C.PGIC_FILE_NM
+	      ,CONCAT(C.FILE_PATH, C.PGIC_FILE_NM) AS STDT_PROF_FILE_NM  
+	      ,A.COUS_STDT_STAT_CD
+	      ,FN_CD_NM('COUS_STDT_STAT_CD', A.COUS_STDT_STAT_CD) AS COUS_STDT_STAT_NM
+	FROM   TS_COUS_STDT A
+	       INNER JOIN TO_STDT_BASE B
+	       ON  B.STDT_ID = A.STDT_ID
+	       LEFT OUTER JOIN TC_FILE C
+	       ON  C.FILE_NO = B.PROF_IMG_NO
+	WHERE  1 = 1
+	AND    A.COUS_STDT_STAT_CD = '20'
+<if test=" cousNo != null and cousNo != '' ">
+    AND    A.COUS_NO = #{cousNo}		</if>
+	ORDER BY A.STDT_ID
+    <if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<select id="selectLectInfo" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT  B.LECT_STRT_DTTM
+		   ,DATE_FORMAT(B.LECT_STRT_DTTM, '%Y%m%d') AS LECT_STRT_DT
+		   ,DATE_FORMAT(B.LECT_STRT_DTTM, '%H%i%s') AS LECT_STRT_TM
+		   ,B.LECT_END_DTTM
+		   ,DATE_FORMAT(B.LECT_END_DTTM , '%Y%m%d') AS LECT_END_DT
+		   ,DATE_FORMAT(B.LECT_END_DTTM , '%H%i%s') AS LECT_END_TM
+	       ,B.LECT_URL
+	       ,D.ATND_YN
+	FROM   TS_COUS_BASE A
+	       INNER JOIN TS_COUS_LECT B
+	       ON  B.COUS_NO = A.COUS_NO
+	       INNER JOIN TS_COUS_STDT C
+	       ON  C.COUS_NO = A.COUS_NO
+	       AND C.COUS_STDT_STAT_CD = '20'
+	       INNER JOIN TS_COUS_TAKE_DETL D
+	       ON  D.COUS_NO  = B.COUS_NO 
+	       AND D.LECT_SEQ = B.LECT_SEQ
+	       AND D.STDT_ID  = C.STDT_ID
+	WHERE  1 = 1
+	AND    B.COUS_NO  = #{cousNo}
+	AND    B.LECT_SEQ = #{lectSeq}
+	AND    C.STDT_ID  = #{stdtId}
+	</select>
+	
+	
+</mapper>

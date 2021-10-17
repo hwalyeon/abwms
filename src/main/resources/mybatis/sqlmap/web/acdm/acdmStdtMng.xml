@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="acdm.acdmStdtMng">
+
+	<select id="searchAcdmStdtList" parameterType="java.util.Map" resultType="MybatisMap">
+SELECT A.ACDM_ID
+      ,(SELECT ACDM_NM
+        FROM   TO_ACDM_BASE
+        WHERE  ACDM_ID = A.ACDM_ID) AS ACDM_NM
+      ,B.STDT_ID
+      ,C.STDT_NM
+      ,C.MTEL_NO
+      ,C.MAIL_ADDR
+      ,COUNT(B.COUS_NO) AS REG_COUS_CNT
+FROM   TS_COUS_BASE A
+       INNER JOIN TS_COUS_STDT B
+       ON  B.COUS_NO = A.COUS_NO
+       INNER JOIN TO_STDT_BASE C
+       ON  C.STDT_ID = B.STDT_ID
+       INNER JOIN TO_ACDM_BASE D
+       ON  D.ACDM_ID = A.ACDM_ID
+WHERE  1 = 1
+<if test=" acdmId != null and acdmId != '' ">
+AND    A.ACDM_ID = #{acdmId}		</if>
+<if test=" acdmNm != null and acdmNm != '' ">
+AND    D.ACDM_NM LIKE CONCAT('%', #{acdmNm}, '%')		</if>
+<if test=" stdtId != null and stdtId != '' ">
+AND    B.STDT_ID = #{stdtId}		</if>
+<if test=" stdtNm != null and stdtNm != '' ">
+AND    C.STDT_NM LIKE CONCAT('%', #{stdtNm}, '%')		</if>
+<if test=" mtelNo != null and mtelNo != '' ">
+AND    C.MTEL_NO LIKE CONCAT('%', #{mtelNo}, '%')		</if>
+GROUP BY A.ACDM_ID, B.STDT_ID       
+ORDER BY D.ACDM_NM, C.STDT_NM
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+		
+	<select id="searchStdtCousList" parameterType="java.util.Map" resultType="MybatisMap">
+SELECT B.ACDM_ID
+      ,A.STDT_ID
+      ,B.COUS_NO
+      ,B.COUS_NM
+      ,B.COUS_STRT_DT
+      ,B.COUS_END_DT
+      ,B.COUS_STAT_CD
+      ,FN_CD_NM('COUS_STAT_CD', B.COUS_STAT_CD) AS COUS_STAT_NM
+      ,A.COUS_STDT_STAT_CD
+      ,FN_CD_NM('COUS_STDT_STAT_CD', A.COUS_STDT_STAT_CD) AS COUS_STDT_STAT_NM
+FROM   TS_COUS_STDT A
+       INNER JOIN TS_COUS_BASE B
+       ON  B.COUS_NO = A.COUS_NO
+WHERE  1 = 1
+AND    B.ACDM_ID = #{acdmId}
+AND    A.STDT_ID = #{stdtId}
+ORDER BY B.COUS_STRT_DT DESC
+<if test=' paging == "Y" '>
+LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<select id="searchSignupList" parameterType="java.util.Map" resultType="MybatisMap">
+SELECT C.ACDM_ID
+      ,C.ACDM_NM
+      ,B.COUS_NO
+      ,B.COUS_NM
+      ,B.COUS_STAT_CD
+      ,FN_CD_NM('COUS_STAT_CD', B.COUS_STAT_CD) AS COUS_STAT_NM
+      ,B.LCTR_ID
+      ,D.LCTR_NM
+      ,B.COUS_STRT_DT
+      ,B.COUS_END_DT
+      ,B.STRT_TM
+      ,B.END_TM
+      ,A.STDT_ID
+      ,E.STDT_NM
+      ,E.MTEL_NO
+      ,E.MAIL_ADDR
+      ,B.STDT_LFEE
+      ,A.COUS_STDT_STAT_CD
+      ,FN_CD_NM('COUS_STDT_STAT_CD', A.COUS_STDT_STAT_CD) AS COUS_STDT_STAT_NM
+FROM   TS_COUS_STDT A
+       INNER JOIN TS_COUS_BASE B
+       ON  B.COUS_NO      = A.COUS_NO
+       INNER JOIN TO_ACDM_BASE C
+       ON  C.ACDM_ID = B.ACDM_ID
+       INNER JOIN TO_LCTR_BASE D
+       ON  D.LCTR_ID = B.LCTR_ID
+       INNER JOIN TO_STDT_BASE E
+       ON  E.STDT_ID = A.STDT_ID
+WHERE  1 = 1
+<if test=" acdmId != null and acdmId != '' ">
+AND    C.ACDM_ID = #{acdmId}		</if>
+<if test=" acdmNm != null and acdmNm != '' ">
+AND    C.ACDM_NM LIKE CONCAT('%', #{acdmNm}, '%')		</if>
+<if test=" lctrId != null and lctrId != '' ">
+AND    D.LCTR_ID = #{lctrId}		</if>
+<if test=" lctrNm != null and lctrNm != '' ">
+AND    D.LCTR_NM LIKE CONCAT('%', #{lctrNm}, '%')		</if>
+<if test=" stdtId != null and stdtId != '' ">
+AND    E.STDT_ID = #{stdtId}		</if>
+<if test=" stdtNm != null and stdtNm != '' ">
+AND    E.STDT_NM LIKE CONCAT('%', #{stdtNm}, '%')		</if>
+<if test=" cousNo != null and cousNo != '' ">
+AND    B.COUS_NO = #{cousNo}		</if>
+<if test=" cousNm != null and cousNm != '' ">
+AND    B.COUS_NM LIKE CONCAT('%', #{cousNm}, '%')		</if>
+<if test=" cousStdtStatCd != null and cousStdtStatCd != '' ">
+AND    A.COUS_STDT_STAT_CD = #{cousStdtStatCd}		</if>
+ORDER BY C.ACDM_NM, B.COUS_STRT_DT, B.COUS_NM, D.LCTR_NM, E.STDT_NM
+<if test=' paging == "Y" '>
+LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	
+	
+	
+</mapper>

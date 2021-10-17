@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lect.lctrMng">
+
+	<select id="selectToLctrBase" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.LCTR_ID
+	      ,A.LCTR_NM
+	      ,A.BIZ_NO
+	      ,MIN(A.TEL_NO) AS TEL_NO
+	      ,MIN(A.MTEL_NO) AS MTEL_NO
+	      ,MIN(A.MAIL_ADDR) AS MAIL_ADDR
+	      ,MIN(A.LCTR_STAT_CD) AS LCTR_STAT_CD
+	      ,MIN(FN_CD_NM('LCTR_STAT_CD', A.LCTR_STAT_CD)) AS LCTR_STAT_NM
+	FROM   TO_LCTR_BASE A
+	       LEFT OUTER JOIN TO_ACDM_LCTR B
+	       ON  B.LCTR_ID = A.LCTR_ID
+	WHERE  1 = 1
+<if test=" acdmId != null and acdmId != '' ">
+	AND    B.ACDM_ID = #{acdmId}		</if>
+<if test=" lctrId != null and lctrId != '' ">
+	AND    A.LCTR_ID = #{lctrId}				</if>
+<if test=" lctrNm != null and lctrNm != '' ">
+	AND    A.LCTR_NM LIKE CONCAT('%', #{lctrNm}, '%')	</if>
+<if test=" lctrStatCd != null and lctrStatCd != '' ">
+	AND    A.LCTR_STAT_CD = #{lctrStatCd}		</if>
+	GROUP BY A.LCTR_ID, A.LCTR_NM, A.BIZ_NO
+    ORDER BY A.LCTR_ID
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+<select id="selectToLctrBasePop" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.LCTR_ID
+	      ,A.LCTR_NM
+	      ,A.BIZ_NO
+	      ,MIN(A.TEL_NO)                                 AS TEL_NO
+	      ,MIN(A.MTEL_NO)                                AS MTEL_NO
+	      ,MIN(A.MAIL_ADDR)                              AS MAIL_ADDR
+	      ,MIN(A.LCTR_STAT_CD)                           AS LCTR_STAT_CD
+	      ,MIN(FN_CD_NM('LCTR_STAT_CD', A.LCTR_STAT_CD)) AS LCTR_STAT_NM
+	      ,COUNT(B.LCTR_ID)                              AS CONT_CNT
+	      ,CASE WHEN DATE_FORMAT(NOW(), '%Y%m%d') BETWEEN MAX(B.CONT_STRT_DT) AND MAX(B.CONT_END_DT) THEN 'Y' ELSE 'N' END AS CONT_YN
+	FROM   TO_LCTR_BASE A
+	       LEFT OUTER JOIN TO_ACDM_LCTR B
+	       ON  B.LCTR_ID      = A.LCTR_ID
+	       AND A.LCTR_STAT_CD = '10'
+	       AND B.ACDM_ID      = #{acdmId}
+	WHERE  1 = 1
+<if test=" lctrId != null and lctrId != '' ">
+	AND    A.LCTR_ID = #{lctrId}				</if>
+<if test=" lctrNm != null and lctrNm != '' ">
+	AND    A.LCTR_NM LIKE CONCAT('%', #{lctrNm}, '%')	</if>
+	GROUP BY A.LCTR_ID, A.LCTR_NM, A.BIZ_NO
+    ORDER BY A.LCTR_ID
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<insert id="insertToLctrBase" parameterType="java.util.Map">
+    INSERT INTO TO_LCTR_BASE
+	(
+	    LCTR_ID
+	   ,LCTR_NM
+	<if test=" bizNo != null and bizNo != '' ">
+	   ,BIZ_NO			</if>
+	<if test=" telNo != null and telNo != '' ">
+	   ,TEL_NO			</if>
+	<if test=" mtelNo != null and mtelNo != '' ">
+	   ,MTEL_NO			</if>
+	<if test=" mailAddr != null and mailAddr != '' ">
+	   ,MAIL_ADDR		</if>
+	   ,LCTR_STAT_CD
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{lctrId}
+	   ,#{lctrNm}
+   	<if test=" bizNo != null and bizNo != '' ">
+	   ,#{bizNo}		</if>
+	<if test=" telNo != null and telNo != '' ">
+	   ,#{telNo}		</if>
+	<if test=" mtelNo != null and mtelNo != '' ">
+	   ,#{mtelNo}		</if>
+	<if test=" mailAddr != null and mailAddr != '' ">
+	   ,#{mailAddr}		</if>
+	   ,#{lctrStatCd}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateToLctrBase" parameterType="java.util.Map">
+	UPDATE TO_LCTR_BASE
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+		<if test=" lctrNm != null and lctrNm != '' ">
+	      ,LCTR_NM      = #{lctrNm}			</if>
+	    <if test=" bizNo != null and bizNo != '' ">
+	      ,BIZ_NO       = #{bizNo}			</if>
+	    <if test=" telNo != null and telNo != '' ">
+	      ,TEL_NO       = #{telNo}			</if>
+	    <if test=" mtelNo != null and mtelNo != '' ">
+	      ,MTEL_NO      = #{mtelNo}			</if>
+	    <if test=" mailAddr != null and mailAddr != '' ">
+	      ,MAIL_ADDR    = #{mailAddr}		</if>
+	    <if test=" lctrStatCd != null and lctrStatCd != '' ">
+	      ,LCTR_STAT_CD = #{lctrStatCd}		</if>
+	WHERE  1 = 1
+	AND    LCTR_ID = #{lctrId}
+	</update>
+	
+	<delete id="deleteToLctrBase" parameterType="java.util.Map">
+	DELETE 
+	FROM   TO_LCTR_BASE
+	WHERE  LCTR_ID = #{lctrId}
+	</delete>
+	
+	<select id="selectToStdtBase" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.STDT_ID
+	      ,A.STDT_NM
+	      ,A.TEL_NO
+	      ,A.MTEL_NO
+	      ,A.MAIL_ADDR
+	      ,A.PROF_IMG_NO
+	      ,B.FILE_PATH
+	      ,B.LGIC_FILE_NM
+	      ,B.PGIC_FILE_NM
+	      ,A.STDT_STAT_CD
+	      ,FN_CD_NM('STDT_STAT_CD', A.STDT_STAT_CD) AS STDT_STAT_NM
+	FROM   TO_STDT_BASE A
+	       LEFT OUTER JOIN TC_FILE B
+	       ON  B.FILE_NO = A.PROF_IMG_NO
+	WHERE  1 = 1
+<if test=" stdtId != null and stdtId != '' ">
+	AND    A.STDT_ID = #{stdtId}				</if>
+<if test=" stdtNm != null and stdtNm != '' ">
+	AND    A.STDT_NM LIKE #{stdtNm} || '%'	</if>
+<if test=" stdtStatCd != null and stdtStatCd != '' ">
+	AND    A.STDT_STAT_CD = #{stdtStatCd}		</if>
+    ORDER BY A.STDT_ID
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<insert id="insertToStdtBase" parameterType="java.util.Map">
+    INSERT INTO TO_STDT_BASE
+	(
+	    STDT_ID
+	   ,STDT_NM
+    <if test=" telNo != null and telNo != '' ">
+	   ,TEL_NO			</if>
+    <if test=" mtelNo != null and mtelNo != '' ">
+	   ,MTEL_NO			</if>
+    <if test=" mailAddr != null and mailAddr != '' ">
+	   ,MAIL_ADDR		</if>
+	<if test=" profStatCd != null and profStatCd != '' ">
+	   ,PROF_IMG_NO		</if>
+	   ,STDT_STAT_CD
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{stdtId}
+	   ,#{stdtNm}
+    <if test=" telNo != null and telNo != '' ">
+	   ,#{telNo}		</if>
+    <if test=" mtelNo != null and mtelNo != '' ">
+	   ,#{mtelNo}		</if>
+    <if test=" mailAddr != null and mailAddr != '' ">
+	   ,#{mailAddr}		</if>
+	<if test=" profStatCd != null and profStatCd != '' ">
+	   ,#{profStatCd}	</if>
+	   ,#{stdtStatCd}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateToStdtBase" parameterType="java.util.Map">
+	UPDATE TO_STDT_BASE
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+		<if test=" stdtNm != null and stdtNm != '' ">
+	      ,STDT_NM      = #{stdtNm}			</if>
+	    <if test=" telNo != null and telNo != '' ">
+	      ,TEL_NO       = #{telNo}			</if>
+	    <if test=" mtelNo != null and mtelNo != '' ">
+	      ,MTEL_NO      = #{mtelNo}			</if>
+	    <if test=" mailAddr != null and mailAddr != '' ">
+	      ,MAIL_ADDR    = #{mailAddr}		</if>
+  	    <if test=" profImgNo != null and profImgNo != '' ">
+	      ,PROF_IMG_NO  = #{profImgNo}			</if>
+	    <if test=" stdtStatCd != null and stdtStatCd != '' ">
+	      ,STDT_STAT_CD = #{stdtStatCd}		</if>
+	WHERE  1 = 1
+	AND    STDT_ID = #{stdtId}
+	</update>
+	
+	<delete id="deleteToStdtBase" parameterType="java.util.Map">
+	DELETE 
+	FROM   TO_STDT_BASE
+	WHERE  STDT_ID = #{stdtId}
+	</delete>
+	
+	<select id="selectFileNo" parameterType="java.util.Map" resultType="int">
+	SELECT CASE WHEN MAX(FILE_NO) IS NULL THEN 1
+	            ELSE CAST(MAX(FILE_NO) AS UNSIGNED) + 1
+	       END AS FILE_NO
+	FROM   TC_FILE
+	</select>
+	
+	<insert id="insertTcFile" parameterType="java.util.Map">
+    INSERT INTO TC_FILE
+	(
+	    FILE_NO
+	   ,FILE_PATH
+	   ,LGIC_FILE_NM
+	   ,PGIC_FILE_NM
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{fileNo}
+	   ,#{filePath}
+	   ,#{lgicFileNm}
+	   ,#{pgicFileNm}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateTcFile" parameterType="java.util.Map">
+	UPDATE TC_FILE
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+		<if test=" filePath != null and filePath != '' ">
+	      ,FILE_PATH    = #{filePath}			</if>
+	    <if test=" lgicFileNm != null and lgicFileNm != '' ">
+	      ,LGIC_FILE_NM = #{lgicFileNm}			</if>
+	    <if test=" pgicFileNm != null and pgicFileNm != '' ">
+	      ,PGIC_FILE_NM = #{pgicFileNm}			</if>
+	WHERE  1 = 1
+	AND    FILE_NO = #{fileNo}
+	</update>
+	
+	<delete id="deleteTcFile" parameterType="java.util.Map">
+	DELETE 
+	FROM   TC_FILE
+	WHERE  FILE_NO = #{fileNo}
+	</delete>
+	
+	<select id="selectTsCousBase" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.COUS_NO
+	      ,A.COUS_NM
+	      ,A.COUS_DESC
+	      ,A.ACDM_ID
+	      ,(SELECT ACDM_NM
+	        FROM   TO_ACDM_BASE
+	        WHERE  ACDM_ID = A.ACDM_ID) AS ACDM_NM
+	      ,A.LCTR_ID
+	      ,(SELECT LCTR_NM
+	        FROM   TO_LCTR_BASE
+	        WHERE  LCTR_ID = A.LCTR_ID) AS LCTR_NM
+	      ,A.COUS_STRT_DT
+	      ,A.COUS_END_DT
+	      ,A.STDT_LFEE
+	      ,A.COUS_STAT_CD
+	      ,FN_CD_NM('COUS_STAT_CD', A.COUS_STAT_CD) AS COUS_STAT_NM
+	      ,A.STRT_TM
+	      ,A.END_TM
+	FROM   TS_COUS_BASE A
+	ORDER BY A.COUS_NO
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<select id="selectCousNo" parameterType="java.util.Map" resultType="int">
+	SELECT CASE WHEN MAX(COUS_NO) IS NULL THEN 1
+	            ELSE CAST(MAX(COUS_NO) AS UNSIGNED) + 1
+	       END AS COUS_NO
+	FROM   TS_COUS_BASE
+	</select>
+	
+	<insert id="insertTsCousBase" parameterType="java.util.Map">
+    INSERT INTO TS_COUS_BASE
+	(
+	    COUS_NO
+	   ,COUS_NM
+	<if test=" cousDesc != null and cousDesc != '' ">
+	   ,COUS_DESC			</if>
+	<if test=" acdmId != null and acdmId != '' ">
+	   ,ACDM_ID				</if>
+	<if test=" lctrId != null and lctrId != '' ">
+	   ,LCTR_ID				</if>
+	<if test=" cousStrtDt != null and cousStrtDt != '' ">
+	   ,COUS_STRT_DT		</if>
+	<if test=" cousEndDt != null and cousEndDt != '' ">
+	   ,COUS_END_DT			</if>
+	<if test=" stdtLfee != null and stdtLfee != '' ">
+	   ,STDT_LFEE			</if>
+	<if test=" cousStatCd != null and cousStatCd != '' ">
+	   ,COUS_STAT_CD		</if>
+	<if test=" strtTm != null and strtTm != '' ">
+	   ,STRT_TM				</if>
+	<if test=" endTm != null and endTm != '' ">
+	   ,END_TM				</if>
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{cousNo}
+	   ,#{cousNm}
+	<if test=" cousDesc != null and cousDesc != '' ">
+	   ,#{cousDesc}			</if>
+	<if test=" acdmId != null and acdmId != '' ">
+	   ,#{acdmId}			</if>
+	<if test=" lctrId != null and lctrId != '' ">
+	   ,#{lctrId}			</if>
+	<if test=" cousStrtDt != null and cousStrtDt != '' ">
+	   ,#{cousStrtDt}		</if>
+	<if test=" cousEndDt != null and cousEndDt != '' ">
+	   ,#{cousEndDt}		</if>
+	<if test=" stdtLfee != null and stdtLfee != '' ">
+	   ,#{stdtLfee}			</if>
+	<if test=" cousStatCd != null and cousStatCd != '' ">
+	   ,#{cousStatCd}		</if>
+	<if test=" strtTm != null and strtTm != '' ">
+	   ,#{strtTm}			</if>
+	<if test=" endTm != null and endTm != '' ">
+	   ,#{endTm}			</if>
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateToCousBase" parameterType="java.util.Map">
+	UPDATE TS_COUS_BASE
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+		<if test=" cousNm != null and cousNm != '' ">
+	      ,COUS_NM      = #{cousNm}			</if>
+	    <if test=" cousDesc != null and cousDesc != '' ">
+	      ,COUS_DESC    = #{cousDesc}		</if>
+	    <if test=" acdmId != null and acdmId != '' ">
+	      ,ACDM_ID      = #{acdmId}			</if>
+	    <if test=" lctrId != null and lctrId != '' ">
+	      ,LCTR_ID      = #{lctrId}			</if>
+	    <if test=" cousStrtDt != null and cousStrtDt != '' ">
+	      ,COUS_STRT_DT = #{cousStrtDt}		</if>
+	    <if test=" cousEndDt != null and cousEndDt != '' ">
+	      ,COUS_END_DT  = #{cousEndDt}		</if>
+	    <if test=" stdtLfee != null and stdtLfee != '' ">
+	      ,STDT_LFEE    = #{stdtLfee}		</if>
+	    <if test=" cousStatCd != null and cousStatCd != '' ">
+	      ,COUS_STAT_CD = #{cousStatCd}		</if>
+	    <if test=" strtTm != null and strtTm != '' ">
+	      ,STRT_TM      = #{strtTm}			</if>
+	    <if test=" endTm != null and endTm != '' ">
+	      ,END_TM       = #{endTm}			</if>
+	WHERE  1 = 1
+	AND    COUS_NO = #{cousNo}
+	</update>
+	
+	<delete id="deleteTsCousBase" parameterType="java.util.Map">
+	DELETE 
+	FROM   TS_COUS_BASE
+	WHERE  COUS_NO = #{cousNo}
+	</delete>
+	
+</mapper>

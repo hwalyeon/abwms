@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="acdm.acdmMng">
+
+	<select id="searchList" parameterType="java.util.Map" resultType="MybatisMap">
+	
+    SELECT   A.ACDM_ID
+			,A.ACDM_NM
+			,A.BIZ_NO
+			,A.COR_NO
+			,A.REPR_NM
+			,A.REPR_TEL_NO
+			,A.PCHRG_NM
+			,A.PCHRG_TEL_NO
+			,A.PCHRG_MAIL_ADDR
+			,A.ACDM_STAT_CD
+			,(SELECT CD_NM FROM TC_CD_SPEC WHERE CD_GRP = 'ACDM_STAT_CD' AND CD_VAL = A.ACDM_STAT_CD) AS ACDM_STAT_NM
+			,A.REG_DT
+			,A.REG_TM
+			,A.REG_USER_ID
+			,A.UPT_DT
+			,A.UPT_TM
+			,A.UPT_USER_ID
+    FROM   TO_ACDM_BASE A
+    WHERE  1 = 1
+    <if test=" acdmId != null and acdmId != '' ">
+    	AND    A.ACDM_ID = #{acdmId}    
+    </if>
+    <if test=" acdmNm != null and acdmNm != '' ">
+    	AND    A.ACDM_NM LIKE concat('%', #{acdmNm}, '%')    
+    </if>
+    <if test=" reprNm != null and reprNm != '' ">
+    	AND    A.REPR_NM LIKE concat('%', #{reprNm}, '%')    
+    </if>
+    <if test=" pchrgNm != null and pchrgNm != '' ">
+    	AND    A.PCHRG_NM LIKE concat('%', #{pchrgNm},'%')
+    </if>
+    <if test=' paging == "Y" '>
+		LIMIT ${rowCount} OFFSET ${currentIndex}
+	 </if>
+	</select>
+	
+	<insert id="insertToAcdmBase" parameterType="java.util.Map">
+		INSERT INTO TO_ACDM_BASE
+		(
+			 ACDM_ID
+			,ACDM_NM
+			,BIZ_NO
+			,COR_NO
+			,REPR_NM
+			,REPR_TEL_NO
+			,PCHRG_NM
+			,PCHRG_TEL_NO
+			,PCHRG_MAIL_ADDR
+			,ACDM_STAT_CD
+			,REG_DT
+			,REG_TM
+			,REG_USER_ID
+			,UPT_DT
+			,UPT_TM
+			,UPT_USER_ID
+		)
+		VALUES
+		(	
+			 #{acdmId}
+			,#{acdmNm}
+			,#{bizNo}
+			,#{corNo}
+			,#{reprNm}
+			,#{reprTelNo}
+			,#{pchrgNm}
+			,#{pchrgTelNo}
+			,#{pchrgMailAddr}
+			,#{acdmStatCd}
+			,DATE_FORMAT(NOW(), '%Y%m%d')
+		    ,DATE_FORMAT(NOW(), '%H%i%s')
+		    ,#{regUserId}
+		    ,DATE_FORMAT(NOW(), '%Y%m%d')
+		    ,DATE_FORMAT(NOW(), '%H%i%s')
+		    ,#{uptUserId}	
+		)
+		
+	</insert>	
+	
+	
+	<update id="updateToAcdmBase" parameterType="java.util.Map">
+		UPDATE TO_ACDM_BASE
+		SET    UPT_DT          = DATE_FORMAT(NOW(), '%Y%m%d')
+			  ,UPT_TM          = DATE_FORMAT(NOW(), '%H%i%s')
+			  ,UPT_USER_ID     = #{uptUserId}
+			 <if test="acdmNm        != null and acdmNm        != ''">  ,ACDM_NM         = #{acdmNm}        </if>
+			 <if test="reprNm        != null and reprNm        != ''">  ,REPR_NM         = #{reprNm}        </if>
+			 <if test="bizNo         != null and bizNo         != ''">  ,BIZ_NO          = #{bizNo}        </if>
+			 <if test="corNo         != null and corNo         != ''">  ,COR_NO          = #{corNo}        </if>			 
+			 <if test="reprTelNo     != null and reprTelNo     != ''">  ,REPR_TEL_NO     = #{reprTelNo}     </if>
+			 <if test="pchrgNm       != null and pchrgNm       != ''">  ,PCHRG_NM        = #{pchrgNm}       </if>
+			 <if test="pchrgTelNo    != null and pchrgTelNo    != ''">  ,PCHRG_TEL_NO    = #{pchrgTelNo}    </if>
+			 <if test="pchrgMailAddr != null and pchrgMailAddr != ''">  ,PCHRG_MAIL_ADDR = #{pchrgMailAddr} </if>
+			 <if test="acdmStatCd    != null and acdmStatCd    != ''">  ,ACDM_STAT_CD    = #{acdmStatCd} </if>
+		WHERE ACDM_ID = #{acdmId}
+	</update>
+
+</mapper>

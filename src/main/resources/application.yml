@@ -1,0 +1,97 @@
+logging: 
+  level:     
+    com.seculink: debug
+
+spring:
+  application:
+    name: abwms
+  datasource: 
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.110.106:3306/untactor?useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: untactor
+    password: untactor1234!
+  redis: 
+    host: localhost
+    port: 16379
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+      
+server:
+  port: 28081
+  
+secret:
+  seed: 
+    key: 3gH3BWwbdYKl2wtREE8fgi1zHTav3NoU
+
+jwt:
+  token:
+    header: Authorization
+    role: USER
+    issuer: hubble-local
+    clientId: untactor-server
+    expirySeconds: 31536000
+
+aws:
+  s3: 
+    accessKeyId: 
+    secretKey: 
+    baseUrl: 
+    bucketNm: hubble-test
+    
+upload:
+  prof: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\
+  event: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\
+  temp: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\temp\\
+  hwork: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\
+
+toast: 
+  sms: 
+    url: 
+    sendNo: '020000000'
+    
+juso: 
+  api: 
+    url: http://www.juso.go.kr/addrlink/addrLinkApi.do
+    key: 
+  coordApi: 
+    url: http://www.juso.go.kr/addrlink/addrCoordApi.do
+    key: 
+
+http: 
+  conn-timeout: 3000
+  read-timeout: 30000
+  max-conn: 200
+  max-conn-per-route: 20
+  
+fcm: 
+  keyFile: /geteyes-30ba7-firebase-adminsdk-rysod-e734dc6a3d.json
+---
+logging: 
+  level:     
+    kr.hubble: debug
+
+spring:
+  profiles: dev
+  
+upload:
+  prof: /app/data/untactor/uploads/
+  event: /app/data/untactor/uploads/
+  temp: /app/data/untactor/uploads/temp/
+  hwork: /app/data/untactor/uploads/uploads/
+ 
+---
+logging: 
+  level:     
+    kr.hubble: debug
+
+spring:
+  profiles: prod
+
+upload:
+  prof: /app/data/untactor/uploads/
+  event: /app/data/untactor/uploads/
+  temp: /app/data/untactor/uploads/temp/
+  hwork: /app/data/untactor/uploads/uploads/

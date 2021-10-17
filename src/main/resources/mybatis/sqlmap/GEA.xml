@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+	GEAMapper
+-->
+<mapper namespace="GEA">
+
+	<select id="GEA0120" parameterType="Map" resultType="kr.hubble.api.domain.vo.auth.GEA0120">
+		/* [GEA0120] 사용자 로그인 */
+		SELECT T1.USER_ID
+		     , T1.USER_NM
+		     , T1.NICK
+		     , T1.EMAL
+		     , T1.HP
+		     , T1.SNS_DIV_CD
+		     , IFNULL(T1.EVNT_NOTI_YN, 'N') AS EVNT_NOTI_YN
+		     , IFNULL(T1.REVW_NOTI_YN, 'N') AS REVW_NOTI_YN
+		     , IFNULL(T1.REPY_NOTI_YN, 'N') AS REPY_NOTI_YN
+		     , IFNULL(T1.ASCT_NOTI_YN, 'N') AS ASCT_NOTI_YN
+		     , (SELECT FILE_URL FROM FILE_BASE WHERE FILE_SEQ = T1.USER_PHOT_FILE) AS PHOT_URL
+		FROM   USER_BASE T1
+		WHERE  T1.USER_ID = #{userId}
+		AND    T1.PASS = #{pass}
+	</select>
+
+	<select id="getJoinSmsCnt" resultType="MybatisMap">
+		/* [getJoinSmsCnt] 회원가입 인증 SMS 횟수 조회 */
+		SELECT COUNT(1) AS D_CNT
+		     , IFNULL(SUM(CASE WHEN SEND_DTTM &gt;= DATE_FORMAT(DATE_ADD(NOW(), INTERVAL -1 MINUTE), '%Y%m%d%H%i%s') THEN 1 ELSE 0 END), 0) AS M_CNT
+		FROM   SMS_SEND_LOG
+		WHERE  RCPT_NO = #{rcptNo}
+		AND    SEND_DTTM LIKE CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '%')
+	</select>
+	
+	<select id="getAuthNo" resultType="String">
+		/* [getAuthNo] 회원가입 SMS 인증번호 조회 */
+		SELECT ETC_TXT AS AUTH_NO
+		FROM   SMS_SEND_LOG
+		WHERE  RCPT_NO = #{rcptNo}
+		AND    SEND_DTTM LIKE CONCAT(DATE_FORMAT(NOW(), '%Y%m%d'), '%')
+		ORDER BY SMS_SEND_SEQ DESC
+		LIMIT 1
+	</select>
+	
+	<select id="GEA0620" parameterType="Map" resultType="kr.hubble.api.domain.vo.auth.GEA0620">
+		/* [GEA0620] SNS 사용자 로그인 */
+		SELECT T1.USER_ID
+		     , T1.USER_NM
+		     , T1.NICK
+		     , T1.EMAL
+		     , T1.HP
+		     , IFNULL(T1.EVNT_NOTI_YN, 'N') AS EVNT_NOTI_YN
+		     , IFNULL(T1.REVW_NOTI_YN, 'N') AS REVW_NOTI_YN
+		     , IFNULL(T1.REPY_NOTI_YN, 'N') AS REPY_NOTI_YN
+		     , IFNULL(T1.ASCT_NOTI_YN, 'N') AS ASCT_NOTI_YN
+		     , T1.SNS_DIV_CD
+		     , (SELECT FILE_URL FROM FILE_BASE WHERE FILE_SEQ = T1.USER_PHOT_FILE) AS PHOT_URL
+		     , T1.SNS_TOKN
+		FROM   USER_BASE T1
+		WHERE  T1.USER_ID = #{userId}
+	</select>
+	
+	<select id="GEA0720" parameterType="String" resultType="kr.hubble.api.domain.vo.auth.GEA0720">
+		/* [GEA.GEA0720] 사용자ID찾기 */
+		SELECT T1.USER_ID
+		     , SUBSTR(T1.JOIN_DTTM, 1, 8) AS JOIN_DT
+		     , T1.SNS_DIV_CD
+		FROM   USER_BASE T1
+		WHERE  T1.USER_NM = #{userNm}
+		AND    T1.HP = #{hp}
+	</select>
+	
+	<select id="GEA0820" parameterType="String" resultType="kr.hubble.api.domain.vo.auth.GEA0820">
+		/* [GEA.GEA0820] 사용자 패스워드 찾기 */
+		SELECT T1.USER_ID
+		     , T1.HP
+		     , T1.SNS_DIV_CD
+		FROM   USER_BASE T1
+		WHERE  T1.USER_ID = #{userId}
+		AND    T1.USER_NM = #{userNm}
+		AND    T1.HP = #{hp}
+	</select>
+</mapper>

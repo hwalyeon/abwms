@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="acdm.acdmLctrMng">
+
+	<select id="selectToAcdmLctr" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.ACDM_ID
+	      ,B.ACDM_NM
+	      ,A.SEQ
+	      ,A.LCTR_ID
+	      ,C.LCTR_NM
+	      ,A.CONT_STRT_DT
+	      ,A.CONT_END_DT
+	      ,A.HIRE_FORM_CD
+	      ,FN_CD_NM('HIRE_FORM_CD', A.HIRE_FORM_CD) AS HIRE_FORM_NM
+	      ,A.CONT_STAT_CD
+	      ,FN_CD_NM('CONT_STAT_CD', A.CONT_STAT_CD) AS CONT_STAT_NM
+	      ,A.LFEE_STLM_DIV_CD
+	      ,FN_CD_NM('STLM_DIV_CD', A.LFEE_STLM_DIV_CD) AS LFEE_STLM_DIV_NM
+	      ,A.MM_LFEE
+	      ,A.PMAN_LFEE_RT
+	      ,A.PMAN_LFEE_AMT
+	FROM   TO_ACDM_LCTR A
+	       INNER JOIN TO_ACDM_BASE B
+	       ON  B.ACDM_ID = A.ACDM_ID
+	       INNER JOIN TO_LCTR_BASE C
+	       ON  C.LCTR_ID = A.LCTR_ID
+	WHERE  1 = 1
+<if test=" acdmId != null and acdmId != '' ">
+    AND    B.ACDM_ID = #{acdmId}		</if>
+<if test=" acdmNm != null and acdmNm != '' ">
+    AND    B.ACDM_NM LIKE CONCAT('%', #{acdmNm}, '%')</if>
+<if test=" lctrId != null and lctrId != '' ">
+    AND    A.LCTR_ID = #{lctrId}		</if>
+<if test=" lctrNm != null and lctrNm != '' ">
+    AND    C.LCTR_NM LIKE CONCAT('%', #{lctrNm}, '%')</if>
+<if test=" hireFormCd != null and hireFormCd != '' ">
+    AND    A.HIRE_FORM_CD = #{hireFormCd}		</if>
+<if test=" contStatCd != null and contStatCd != '' ">
+    AND    A.CONT_STAT_CD = #{contStatCd}		</if>
+<if test=" seq != null and seq != '' ">
+    AND    A.SEQ = #{seq}		</if>
+	ORDER BY A.LCTR_ID
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+		
+	<insert id="insertToAcdmLctr" parameterType="java.util.Map">
+	<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+	SELECT CASE WHEN MAX(SEQ) IS NULL THEN 1 ELSE CAST(MAX(SEQ) AS UNSIGNED) + 1 END AS SEQ
+    FROM   TO_ACDM_LCTR
+    WHERE  ACDM_ID = #{acdmId}
+	</selectKey>
+    INSERT INTO TO_ACDM_LCTR
+	(
+	    ACDM_ID
+	   ,SEQ
+	   ,LCTR_ID
+	<if test=" contStrtDt != null and contStrtDt != '' ">
+	   ,CONT_STRT_DT			</if>
+	<if test=" contEndDt != null and contEndDt != '' ">
+	   ,CONT_END_DT				</if>
+	<if test=" hireFormCd != null and hireFormCd != '' ">
+	   ,HIRE_FORM_CD				</if>
+	   ,CONT_STAT_CD
+	<if test=" lfeeStlmDivCd != null and lfeeStlmDivCd != '' ">
+	   ,LFEE_STLM_DIV_CD			</if>
+	<if test=" mmLfee != null and mmLfee != '' ">
+	   ,MM_LFEE			</if>
+	<if test=" pmanLfeeRt != null and pmanLfeeRt != '' ">
+	   ,PMAN_LFEE_RT		</if>
+	<if test=" pmanLfeeAmt != null and pmanLfeeAmt != '' ">
+	   ,PMAN_LFEE_AMT				</if>
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{acdmId}
+	   ,#{seq}
+	   ,#{lctrId}
+	<if test=" contStrtDt != null and contStrtDt != '' ">
+	   ,#{contStrtDt}			</if>
+	<if test=" contEndDt != null and contEndDt != '' ">
+	   ,#{contEndDt}				</if>
+	<if test=" hireFormCd != null and hireFormCd != '' ">
+	   ,#{hireFormCd}				</if>
+	   ,#{contStatCd}
+	<if test=" lfeeStlmDivCd != null and lfeeStlmDivCd != '' ">
+	   ,#{lfeeStlmDivCd}			</if>
+	<if test=" mmLfee != null and mmLfee != '' ">
+	   ,#{mmLfee}			</if>
+	<if test=" pmanLfeeRt != null and pmanLfeeRt != '' ">
+	   ,#{pmanLfeeRt}		</if>
+	<if test=" pmanLfeeAmt != null and pmanLfeeAmt != '' ">
+	   ,#{pmanLfeeAmt}				</if>
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateToAcdmLctr" parameterType="java.util.Map">
+	UPDATE TO_ACDM_LCTR
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+	<if test=" contStrtDt != null and contStrtDt != '' ">
+	      ,LCTR_ID      = #{lctrId}				</if>
+	<if test=" contStrtDt != null and contStrtDt != '' ">
+	      ,CONT_STRT_DT = #{contStrtDt}			</if>
+	<if test=" contEndDt != null and contEndDt != '' ">
+	      ,CONT_END_DT  = #{contEndDt}			</if>
+	<if test=" hireFormCd != null and hireFormCd != '' ">
+	      ,HIRE_FORM_CD = #{hireFormCd}			</if>
+	<if test=" contStatCd != null and contStatCd != '' ">
+	      ,CONT_STAT_CD = #{contStatCd}	        </if>
+	<if test=" lfeeStlmDivCd != null and lfeeStlmDivCd != '' ">
+	      ,LFEE_STLM_DIV_CD = #{lfeeStlmDivCd}	</if>
+	<if test=" mmLfee != null and mmLfee != '' ">
+	      ,MM_LFEE      = #{mmLfee}				</if>
+	<if test=" pmanLfeeRt != null and pmanLfeeRt != '' ">
+	      ,PMAN_LFEE_RT = #{pmanLfeeRt}			</if>
+	<if test=" pmanLfeeAmt != null and pmanLfeeAmt != '' ">
+	      ,PMAN_LFEE_AMT = #{pmanLfeeAmt}		</if>
+	WHERE  1 = 1
+	AND    ACDM_ID = #{acdmId}
+	AND    SEQ     = #{seq}
+	</update>
+	
+	<delete id="deleteToAcdmLctr" parameterType="java.util.Map">
+	DELETE 
+	FROM   TO_ACDM_LCTR
+	WHERE  1 = 1
+	AND    ACDM_ID = #{acdmId}
+	AND    SEQ     = #{seq}
+	</delete>
+	
+</mapper>

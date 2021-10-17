@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hist.takeDetlMng">
+
+	<select id="selectTsCousLect" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.COUS_NO
+	      ,A.LECT_SEQ
+	      ,(SELECT ACDM_NM
+	        FROM   TO_ACDM_BASE
+	        WHERE  ACDM_ID = B.ACDM_ID)                                                AS ACDM_NM
+	      ,B.COUS_NM
+	      ,A.LECT_NM
+	      ,C.LCTR_NM
+	      ,(SELECT COUNT(STDT_ID)
+	        FROM   TS_COUS_STDT
+	        WHERE  COUS_STDT_STAT_CD = '20' -- 등록
+	        AND    COUS_NO = A.COUS_NO)                                                AS STDT_CNT
+	      ,A.LECT_STRT_DTTM
+	      ,A.LECT_END_DTTM
+	      ,A.LECT_TCNT
+	      ,IFNULL((SELECT SUM(CASE WHEN ATND_YN = 'Y' THEN 1 ELSE 0 END)
+	               FROM   TS_COUS_TAKE_DETL
+	               WHERE  COUS_NO  = A.COUS_NO
+	               AND    LECT_SEQ = A.LECT_SEQ), 0)                                   AS ATND_CNT
+	      ,IFNULL((SELECT SUM(CASE WHEN HWORK_SBMT_DTTM IS NOT NULL THEN 1 ELSE 0 END)
+	               FROM   TS_COUS_TAKE_DETL
+	               WHERE  COUS_NO  = A.COUS_NO
+	               AND    LECT_SEQ = A.LECT_SEQ), 0)                                   AS HWORK_SBMT_CNT
+	FROM   TS_COUS_LECT A
+	       INNER JOIN TS_COUS_BASE B
+	       ON  B.COUS_NO = A.COUS_NO
+	       INNER JOIN TO_LCTR_BASE C
+	       ON  C.LCTR_ID = B.LCTR_ID
+	WHERE  1 = 1
+<if test=" acdmId != null and acdmId != '' ">
+	AND    B.ACDM_ID = #{acdmId}				</if>
+<if test=" cousNo != null and cousNo != '' ">
+	AND    A.COUS_NO = #{cousNo}				</if>
+<if test=" lectSeq != null and lectSeq != '' ">
+	AND    A.LECT_SEQ = #{lectSeq}				</if>	
+<if test=" lectNm != null and lectNm != '' ">
+	AND    A.LECT_NM LIKE CONCAT(#{lectNm}, '%')	</if>
+<if test=" lctrNm != null and lctrNm != '' ">
+	AND    LCTR_NM LIKE CONCAT(#{lctrNm}, '%')	</if>
+<if test=" lectDt != null and lectDt != '' ">
+	AND   #{lectDt}	BETWEEN DATE_FORMAT(A.LECT_STRT_DTTM , '%Y%m%d')  AND DATE_FORMAT(A.LECT_END_DTTM , '%Y%m%d')	</if>
+    ORDER BY A.LECT_STRT_DTTM, B.COUS_NM, C.LCTR_NM
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<select id="selectTsCousTakeDetl" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT A.COUS_NO
+	      ,A.LECT_SEQ
+	      ,A.STDT_ID
+	      ,(SELECT STDT_NM
+	        FROM   TO_STDT_BASE
+	        WHERE  STDT_ID = A.STDT_ID) AS STDT_NM
+	      ,A.ATND_YN
+	      ,A.SWCH_YN
+	      ,A.RWAY_YN
+	      ,A.TAKE_TCNT
+	      ,A.HWORK_SBMT_DTTM
+	      ,A.HWORK_FILE_NO
+	      ,C.FILE_PATH
+	      ,C.LGIC_FILE_NM 
+	      ,C.PGIC_FILE_NM 
+	      ,A.HWORK_EVAL_SCOR
+	      ,A.EVAL_YN
+	FROM   TS_COUS_TAKE_DETL A
+	       INNER JOIN TS_COUS_BASE B
+	       ON  B.COUS_NO = A.COUS_NO
+	       LEFT OUTER JOIN TC_FILE C
+	       ON  C.FILE_NO = A.HWORK_FILE_NO
+	WHERE  1 = 1
+	AND    A.COUS_NO  = #{cousNo}
+	AND    A.LECT_SEQ = #{lectSeq}
+<if test=" acdmId != null and acdmId != '' ">
+    AND    C.ACDM_ID  = #{acdmId}	</if>
+<if test=" lctrId != null and lctrId != '' ">
+    AND    C.LCTR_ID  = #{lctrId}	</if>
+<if test=" stdtId != null and stdtId != '' ">
+    AND    A.STDT_ID  = #{stdtId}	</if>
+	ORDER BY STDT_ID   
+<if test=' paging == "Y" '>
+	LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	
+	<insert id="insertTsCousTakeDetl" parameterType="java.util.Map">
+    INSERT INTO TS_COUS_TAKE_DETL
+	(
+	    COUS_NO
+	   ,LECT_SEQ
+	   ,STDT_ID
+	<if test=" atndYn != null and atndYn != '' ">
+	   ,ATND_YN				</if>
+	<if test=" swchYn != null and swchYn != '' ">
+	   ,SWCH_YN				</if>
+	<if test=" rwayYn != null and rwayYn != '' ">
+	   ,RWAY_YN				</if>
+	<if test=" takeTcnt != null and takeTcnt != '' ">
+	   ,TAKE_TCNT			</if>
+	<if test=" hworkSbmtDttm != null and hworkSbmtDttm != '' ">
+	   ,HWORK_SBMT_DTTM		</if>
+	<if test=" hworkFileNo != null and hworkFileNo != '' ">
+	   ,HWORK_FILE_NO		</if>
+	<if test=" hworkEvalScor != null and hworkEvalScor != '' ">
+	   ,HWORK_EVAL_SCOR		</if>
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{cousNo}
+	   ,#{lectSeq}
+	   ,#{stdtId}
+	<if test=" atndYn != null and atndYn != '' ">
+   	   ,#{atndYn}			</if>
+	<if test=" swchYn != null and swchYn != '' ">
+   	   ,#{swchYn}			</if>
+	<if test=" rwayYn != null and rwayYn != '' ">
+   	   ,#{rwayYn}			</if>
+	<if test=" takeTcnt != null and takeTcnt != '' ">
+   	   ,#{takeTcnt}			</if>
+	<if test=" hworkSbmtDttm != null and hworkSbmtDttm != '' ">
+   	   ,#{hworkSbmtDttm}	</if>
+	<if test=" hworkFileNo != null and hworkFileNo != '' ">
+   	   ,#{hworkFileNo}		</if>
+	<if test=" hworkEvalScor != null and hworkEvalScor != '' ">
+   	   ,#{hworkEvalScor}	</if>
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<update id="updateTsCousTakeDetl" parameterType="java.util.Map">
+	UPDATE TS_COUS_TAKE_DETL
+	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
+	      ,UPT_TM       = DATE_FORMAT(NOW(), '%H%i%s')
+	      ,UPT_USER_ID  = #{uptUserId}
+	<if test=" atndYn != null and atndYn != '' ">
+   	      ,ATND_YN = #{atndYn}			</if>
+	<if test=" swchYn != null and swchYn != '' ">
+   	      ,SWCH_YN = #{swchYn}			</if>
+	<if test=" rwayYn != null and rwayYn != '' ">
+   	      ,RWAY_YN = #{rwayYn}			</if>
+	<if test=" takeTcnt != null and takeTcnt != '' ">
+   	      ,TAKE_TCNT = #{takeTcnt}			</if>
+	<if test=" hworkSbmtDttm != null and hworkSbmtDttm != '' ">
+   	      ,HWORK_SBMT_DTTM = #{hworkSbmtDttm}	</if>
+	<if test=" hworkFileNo != null and hworkFileNo != '' ">
+   	      ,HWORK_FILE_NO = #{hworkFileNo}		</if>
+	<if test=" hworkEvalScor != null and hworkEvalScor != '' ">
+	      ,HWORK_EVAL_SCOR = #{hworkEvalScor}	</if>
+	WHERE  1 = 1
+	AND    COUS_NO  = #{cousNo}
+	AND    LECT_SEQ = #{lectSeq}
+	AND    STDT_ID  = #{stdtId}
+	</update>
+	
+	<delete id="deleteTsCousTakeDetl" parameterType="java.util.Map">
+	DELETE 
+	FROM   TS_COUS_TAKE_DETL
+	WHERE  1 = 1
+	AND    COUS_NO  = #{cousNo}
+	AND    LECT_SEQ = #{lectSeq}
+<if test=" stdtId != null and stdtId != '' ">
+	AND    STDT_ID  = #{stdtId}		</if>
+	</delete>
+	
+	<insert id="insertTsTakeHist" parameterType="java.util.Map">
+	<selectKey keyProperty="seq" resultType="String" order="BEFORE">
+	SELECT CASE WHEN MAX(SEQ) IS NULL THEN 1 ELSE CAST(MAX(SEQ)+1 AS UNSIGNED) END AS SEQ
+    FROM   TS_TAKE_HIST
+    WHERE  COUS_NO  = #{cousNo}
+    AND    LECT_SEQ = #{lectSeq}
+    AND    STDT_ID  = #{stdtId}
+	</selectKey>
+    INSERT INTO TS_TAKE_HIST
+	(
+	    COUS_NO
+	   ,LECT_SEQ
+	   ,STDT_ID
+	   ,SEQ
+	   ,TAKE_EVNT_CD
+	   ,OCCR_DTTM
+	<if test=" fileNo != null and fileNo != '' ">
+	   ,FILE_NO		</if>
+	   ,REG_DT
+	   ,REG_TM
+	   ,REG_USER_ID
+	   ,UPT_DT
+	   ,UPT_TM
+	   ,UPT_USER_ID
+	)
+	VALUES
+	(
+	    #{cousNo}
+	   ,#{lectSeq}
+	   ,#{stdtId}
+   	   ,#{seq}
+   	   ,#{takeEvntCd}
+   	   ,#{occrDttm}
+	<if test=" fileNo != null and fileNo != '' ">
+       ,#{fileNo}		</if>
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{regUserId}
+       ,DATE_FORMAT(NOW(), '%Y%m%d')
+       ,DATE_FORMAT(NOW(), '%H%i%s')
+       ,#{uptUserId}
+    )
+	</insert>
+	
+	<delete id="deleteTsTakeHist" parameterType="java.util.Map">
+	
+	DELETE
+	FROM   TS_TAKE_HIST
+	WHERE  COUS_NO  = #{cousNo}
+	AND    LECT_SEQ = #{lectSeq}
+	</delete>
+	
+</mapper>
