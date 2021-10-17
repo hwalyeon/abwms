@@ -1,16 +1,16 @@
 logging: 
   level:     
-    com.seculink: debug
+    co.kr.seculink: debug
 
 spring:
   application:
     name: abwms
   datasource: 
     hikari:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.110.106:3306/untactor?useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
-    username: untactor
-    password: untactor1234!
+      driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresq://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dif
+    username: masteraccount
+    password: TLZBFLDZM1!
   redis: 
     host: localhost
     port: 16379
@@ -20,7 +20,7 @@ spring:
       max-request-size: 10MB
       
 server:
-  port: 28081
+  port: 8080
   
 secret:
   seed: 
@@ -40,12 +40,6 @@ aws:
     secretKey: 
     baseUrl: 
     bucketNm: hubble-test
-    
-upload:
-  prof: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\
-  event: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\
-  temp: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\temp\\
-  hwork: C:\\project\\workspace\\untactor-front\\src\\main\\resources\\static\\uploads\\
 
 toast: 
   sms: 
@@ -75,12 +69,6 @@ logging:
 
 spring:
   profiles: dev
-  
-upload:
-  prof: /app/data/untactor/uploads/
-  event: /app/data/untactor/uploads/
-  temp: /app/data/untactor/uploads/temp/
-  hwork: /app/data/untactor/uploads/uploads/
  
 ---
 logging: 
@@ -89,9 +77,3 @@ logging:
 
 spring:
   profiles: prod
-
-upload:
-  prof: /app/data/untactor/uploads/
-  event: /app/data/untactor/uploads/
-  temp: /app/data/untactor/uploads/temp/
-  hwork: /app/data/untactor/uploads/uploads/
