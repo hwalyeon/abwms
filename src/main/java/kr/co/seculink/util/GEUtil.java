@@ -18,8 +18,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import kr.hubble.api.model.SessionVo;
-import kr.hubble.exception.SysException;
+import kr.co.seculink.api.model.SessionVo;
+import kr.co.seculink.exception.SysException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

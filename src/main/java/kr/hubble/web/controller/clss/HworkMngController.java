@@ -18,10 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-import kr.hubble.api.model.RtnMsg;
-import kr.hubble.exception.BizException;
-import kr.hubble.util.GEUtil;
-import kr.hubble.util.XUtil;
+import kr.co.seculink.api.model.RtnMsg;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.util.XUtil;
 import kr.hubble.web.model.TcFileVO;
 import kr.hubble.web.service.clss.HworkMngService;
 import kr.hubble.web.service.cmon.FileService;

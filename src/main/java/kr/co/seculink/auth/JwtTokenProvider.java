@@ -26,8 +26,8 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import kr.hubble.exception.SysException;
-import kr.hubble.util.Seed256EncUtil;
+import kr.co.seculink.exception.SysException;
+import kr.co.seculink.util.Seed256EncUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

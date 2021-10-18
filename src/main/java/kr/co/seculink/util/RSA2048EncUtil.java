@@ -19,7 +19,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import kr.hubble.exception.SysException;
+import kr.co.seculink.exception.SysException;
 
 public class RSA2048EncUtil {
 

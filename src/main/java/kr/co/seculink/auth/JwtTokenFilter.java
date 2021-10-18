@@ -22,8 +22,8 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import kr.hubble.config.SecurityConfig;
-import kr.hubble.util.GEUtil;
+import kr.co.seculink.config.SecurityConfig;
+import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

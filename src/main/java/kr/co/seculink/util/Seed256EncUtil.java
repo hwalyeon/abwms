@@ -2,8 +2,8 @@ package kr.co.seculink.util;
 
 import java.util.Random;
 
-import kr.hubble.exception.SysException;
-import kr.hubble.util.seed256.Seed256;
+import kr.co.seculink.exception.SysException;
+import kr.co.seculink.util.seed256.Seed256;
 
 public class Seed256EncUtil {
 

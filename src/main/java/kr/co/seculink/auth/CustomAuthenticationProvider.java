@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import kr.hubble.api.model.SessionVo;
+import kr.co.seculink.api.model.SessionVo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

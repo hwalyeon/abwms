@@ -1,6 +1,6 @@
 package kr.hubble.web.service.cmon;
 
-import kr.hubble.exception.BizException;
+import kr.co.seculink.exception.BizException;
 import kr.hubble.web.model.TcFileVO;
 
 public interface FileService 

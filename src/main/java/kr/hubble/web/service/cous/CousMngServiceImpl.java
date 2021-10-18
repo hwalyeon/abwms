@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
-import kr.hubble.exception.BizException;
-import kr.hubble.util.GEUtil;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
 
 @Service("cousMngService")
 public class CousMngServiceImpl implements CousMngService

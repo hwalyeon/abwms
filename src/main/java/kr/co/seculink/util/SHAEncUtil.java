@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import kr.hubble.exception.SysException;
+import kr.co.seculink.exception.SysException;
 
 public class SHAEncUtil {
 

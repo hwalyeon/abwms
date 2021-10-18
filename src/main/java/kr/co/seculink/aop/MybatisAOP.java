@@ -18,9 +18,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import kr.hubble.api.domain.GEConstant;
-import kr.hubble.api.model.SessionVo;
-import kr.hubble.util.GEUtil;
+import kr.co.seculink.api.domain.GEConstant;
+import kr.co.seculink.api.model.SessionVo;
+import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

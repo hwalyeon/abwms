@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.hubble.exception.BizException;
+import kr.co.seculink.exception.BizException;
 
 public interface UserMngService
 {

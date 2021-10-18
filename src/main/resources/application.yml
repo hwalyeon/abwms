@@ -8,7 +8,7 @@ spring:
   datasource: 
     hikari:
       driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresq://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dif
+    url: jdbc:postgresql://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dif
     username: masteraccount
     password: TLZBFLDZM1!
   redis: 

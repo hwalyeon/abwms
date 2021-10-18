@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.hubble.api.model.RtnMsg;
-import kr.hubble.exception.BizException;
-import kr.hubble.util.GEUtil;
+import kr.co.seculink.api.model.RtnMsg;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
 import kr.hubble.web.excel.ExcelConstant;
 import kr.hubble.web.service.clss.HworkMngService;
 import lombok.extern.slf4j.Slf4j;

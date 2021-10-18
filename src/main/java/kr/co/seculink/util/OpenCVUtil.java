@@ -23,9 +23,9 @@ import org.bytedeco.opencv.opencv_face.FaceRecognizer;
 import org.bytedeco.opencv.opencv_face.LBPHFaceRecognizer;
 import org.bytedeco.opencv.opencv_objdetect.CascadeClassifier;
 
-import kr.hubble.exception.BaseException;
-import kr.hubble.exception.BizException;
-import kr.hubble.exception.SysException;
+import kr.co.seculink.exception.BaseException;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.exception.SysException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

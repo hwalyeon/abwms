@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.hubble.exception.BizException;
-import kr.hubble.util.XUtil;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.XUtil;
 import kr.hubble.web.service.cous.CousMngService;
 import lombok.extern.slf4j.Slf4j;
 

@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.hubble.exception.BizException;
-import kr.hubble.util.GEUtil;
-import kr.hubble.util.XUtil;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.util.XUtil;
 import kr.hubble.web.model.TcFileVO;
 import kr.hubble.web.service.cmon.FileService;
 import lombok.extern.slf4j.Slf4j;

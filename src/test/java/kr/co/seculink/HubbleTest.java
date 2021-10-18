@@ -18,15 +18,15 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kr.hubble.api.service.CommonService;
-import kr.hubble.auth.JwtTokenProvider;
-import kr.hubble.exception.BaseException;
-import kr.hubble.exception.BizException;
-import kr.hubble.exception.SysException;
-import kr.hubble.util.GEUtil;
-import kr.hubble.util.OpenCVUtil;
-import kr.hubble.util.SHAEncUtil;
-import kr.hubble.util.Seed256EncUtil;
+import kr.co.seculink.api.service.CommonService;
+import kr.co.seculink.auth.JwtTokenProvider;
+import kr.co.seculink.exception.BaseException;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.exception.SysException;
+import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.util.OpenCVUtil;
+import kr.co.seculink.util.SHAEncUtil;
+import kr.co.seculink.util.Seed256EncUtil;
 import kr.hubble.web.model.TcFileVO;
 import kr.hubble.web.service.clss.CousTakeService;
 

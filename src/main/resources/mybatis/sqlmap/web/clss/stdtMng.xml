@@ -50,7 +50,7 @@
 	ORDER BY SEQ
 	</select>
 	
-	<select id="selectStdtProf" parameterType="java.util.Map" resultType="kr.hubble.web.model.TcFileVO">
+	<select id="selectStdtProf" parameterType="java.util.Map" resultType="kr.co.seculink.web.model.TcFileVO">
 	SELECT CAST(A.PROF_IMG_NO AS CHAR) AS FILE_NO
 	      ,B.FILE_PATH
 	      ,B.LGIC_FILE_NM

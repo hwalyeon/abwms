@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.hubble.exception.BizException;
+import kr.co.seculink.exception.BizException;
 
 @Service("hworkMngService")
 public class HworkMngServiceImpl implements HworkMngService

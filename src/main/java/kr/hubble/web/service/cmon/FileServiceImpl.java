@@ -18,8 +18,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import kr.hubble.exception.BizException;
-import kr.hubble.util.XUtil;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.XUtil;
 import kr.hubble.web.model.TcFileVO;
 import lombok.extern.slf4j.Slf4j;
 

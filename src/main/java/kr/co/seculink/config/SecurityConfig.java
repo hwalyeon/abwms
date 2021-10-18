@@ -12,8 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import kr.hubble.api.domain.GEConstant.ROLE;
-import kr.hubble.auth.JwtTokenFilter;
+import kr.co.seculink.api.domain.GEConstant.ROLE;
+import kr.co.seculink.auth.JwtTokenFilter;
 
 @Configuration
 @EnableWebSecurity

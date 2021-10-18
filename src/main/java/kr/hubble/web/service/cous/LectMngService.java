@@ -3,7 +3,7 @@ package kr.hubble.web.service.cous;
 import java.util.List;
 import java.util.Map;
 
-import kr.hubble.exception.BizException;
+import kr.co.seculink.exception.BizException;
 
 public interface LectMngService
 {

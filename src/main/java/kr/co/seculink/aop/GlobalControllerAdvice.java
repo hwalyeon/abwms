@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kr.hubble.api.domain.GEConstant.RTN_CD;
-import kr.hubble.api.model.RtnMsg;
-import kr.hubble.exception.BaseException;
-import kr.hubble.exception.BizException;
-import kr.hubble.exception.SysException;
+import kr.co.seculink.api.domain.GEConstant.RTN_CD;
+import kr.co.seculink.api.model.RtnMsg;
+import kr.co.seculink.exception.BaseException;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.exception.SysException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

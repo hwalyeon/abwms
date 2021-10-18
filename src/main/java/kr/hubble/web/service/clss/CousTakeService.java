@@ -2,7 +2,7 @@ package kr.hubble.web.service.clss;
 
 import java.util.Map;
 
-import kr.hubble.exception.BizException;
+import kr.co.seculink.exception.BizException;
 import kr.hubble.web.model.TcFileVO;
 
 public interface CousTakeService

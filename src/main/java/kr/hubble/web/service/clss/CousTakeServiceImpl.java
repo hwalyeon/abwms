@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.hubble.exception.BizException;
-import kr.hubble.exception.SysException;
-import kr.hubble.util.OpenCVUtil;
-import kr.hubble.util.XUtil;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.exception.SysException;
+import kr.co.seculink.util.OpenCVUtil;
+import kr.co.seculink.util.XUtil;
 import kr.hubble.web.model.TcFileVO;
 import kr.hubble.web.service.cmon.FileService;
 import lombok.extern.slf4j.Slf4j;
