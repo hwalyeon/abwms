@@ -9,7 +9,7 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.seculink</groupId>
+	<groupId>kr.co.seculink</groupId>
 	<artifactId>abwms</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
