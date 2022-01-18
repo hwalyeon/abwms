@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import kr.co.seculink.api.model.SessionVo;
+import kr.co.seculink.web.model.cmon.SessionVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -27,7 +27,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 //		log.debug("clientId : {}", clientId);
 //		log.debug("CustomAuthenticationProvider 권한 : " + roleList);
 		
-		SessionVo user = new SessionVo();
+		SessionVO user = new SessionVO();
 		user.setUserId(userId);
 		user.setClntId(clientId);
 		user.setRoleList(roleList);

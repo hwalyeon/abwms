@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import kr.co.seculink.api.domain.GEConstant.RTN_CD;
-import kr.co.seculink.api.model.RtnMsg;
+import kr.co.seculink.domain.GEConstant.RTN_CD;
+import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BaseException;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.exception.SysException;

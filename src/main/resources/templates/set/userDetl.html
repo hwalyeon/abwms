@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:remove="tag">
+<div class="modal fade" id="userDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog-wrap">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 580px; height: 600px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>사용자 정보</h5>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="ibox-content border-style_none">
+						<table class="table table-bordered table_view">
+		                    <colgroup>
+		                        <col class="col-xs-4" />
+		                        <col class="col-xs-8" />
+		                    </colgroup>
+		                    <tbody>
+			                    <tr>
+			                        <th scope="row">사용자ID</th>
+			                        <td>
+			                            <input type="text" name="userId" v-model="userInfo.userId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk"/>
+			                            <button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()"><span>중복조회</span></button>
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <th scope="row">사용자명</th>
+			                        <td>
+			                        	<input type="text" name="userNm" v-model="userInfo.userNm" class="form-control ime-han" />
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <th scope="row">비밀번호</th>
+			                        <td>
+			                        	<input type="password" id="userPw" name="userPw" v-model="userInfo.userPw" class="form-control" />
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <th scope="row">소속</th>
+			                        <td>
+			                        	<input type="text" id="blngNm" name="blngNm" v-model="userInfo.blngNm" class="form-control" />
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <th scope="row">전화번호</th>
+			                        <td>
+			                        	<input type="tel" id="telNo" name="telNo" v-model="userInfo.telNo" class="form-control" />
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <th scope="row">휴대전화번호</th>
+			                        <td>
+			                        	<input type="tel" id="mtelNo" name="mtelNo" v-model="userInfo.mtelNo" class="form-control" />
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                        <th scope="row">이메일</th>
+			                        <td>
+			                        	<input type="email" id="mailAddr" name="mailAddr" v-model="userInfo.mailAddr" class="form-control ime-eng" />
+			                        </td>
+			                    </tr>
+			                    <tr>
+			                    	<th scope="row">사용자구분</th>
+			                    	<td>
+			                    		<div class="width_per_30 float_left">
+				                    		<input type="checkbox" class="width_per_30" v-icheck id="userDiv01" name="userDiv" true-value="Y" false-value="N" v-model="userInfo.acdmYn" :disabled="userInfo.crud!='C'">
+				                    		<label for="userDiv01"> 학원</label>
+			                    		</div>
+			                    		<div class="width_per_30 float_left">
+				                    		<input type="checkbox" class="width_per_30" v-icheck id="userDiv02" name="userDiv" true-value="Y" false-value="N" v-model="userInfo.lctrYn" :disabled="userInfo.crud!='C'">
+				                    		<label for="userDiv02"> 강사</label>
+			                    		</div>
+			                    		<div class="width_per_30 float_left">
+				                    		<input type="checkbox" class="width_per_30" v-icheck id="userDiv03" name="userDiv" true-value="Y" false-value="N" v-model="userInfo.stdtYn" :disabled="userInfo.crud!='C'">
+				                    		<label for="userDiv03"> 학생</label>
+			                    		</div>
+			                    	</td>
+			                    </tr>
+							</tbody>
+		                </table>
+            		</div>
+            	</div>
+            	
+            	<div class="modal-footer">
+					<div class="text-center">
+						<div class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveUser">저장</button>
+						</div>
+						<div v-if="userInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteUser">삭제</button>
+						</div>
+						<div class="disp_in_block width_per_20">
+							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

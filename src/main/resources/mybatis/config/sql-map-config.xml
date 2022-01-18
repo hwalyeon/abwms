@@ -10,7 +10,7 @@
     </settings>
 
      <typeAliases>
-        <typeAlias alias="MybatisMap" type="kr.co.seculink.api.domain.MybatisMap"/>
+        <typeAlias alias="MybatisMap" type="kr.co.seculink.domain.MybatisMap"/>
         <typeAlias alias="Map" type="java.util.Map"/>
         <typeAlias alias="String" type="java.lang.String"/>
     </typeAliases>

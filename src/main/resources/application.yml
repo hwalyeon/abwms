@@ -4,28 +4,26 @@ logging:
 
 spring:
   application:
-    name: abwms
-  datasource: 
-    hikari:
-      driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dsv
-    username: masteraccount
-    password: TLZBFLDZM1!
-  redis: 
-    host: localhost
-    port: 16379
+    name: wms
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-      
+  thymeleaf:     prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+  datasource: 
+    hikari:
+      driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dsv?currentSchema=absv
+    username: masteraccount
+    password: TLZBFLDZM1!
+    
 server:
-  port: 8080
+  port: 28080
   
-secret:
-  seed: 
-    key: 3gH3BWwbdYKl2wtREE8fgi1zHTav3NoU
-
 jwt:
   token:
     header: Authorization
@@ -34,38 +32,16 @@ jwt:
     clientId: untactor-server
     expirySeconds: 31536000
 
-aws:
-  s3: 
-    accessKeyId: 
-    secretKey: 
-    baseUrl: 
-    bucketNm: hubble-test
-
-toast: 
-  sms: 
-    url: 
-    sendNo: '020000000'
-    
-juso: 
-  api: 
-    url: http://www.juso.go.kr/addrlink/addrLinkApi.do
-    key: 
-  coordApi: 
-    url: http://www.juso.go.kr/addrlink/addrCoordApi.do
-    key: 
-
-http: 
-  conn-timeout: 3000
-  read-timeout: 30000
-  max-conn: 200
-  max-conn-per-route: 20
+upload:
+  prof: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\
+  event: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\
+  temp: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\temp\\
+  hwork: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\
   
-fcm: 
-  keyFile: /geteyes-30ba7-firebase-adminsdk-rysod-e734dc6a3d.json
 ---
 logging: 
   level:     
-    kr.hubble: debug
+    kr.co.seculink: debug
 
 spring:
   profiles: dev
@@ -73,7 +49,7 @@ spring:
 ---
 logging: 
   level:     
-    kr.hubble: debug
+    kr.co.seculink: debug
 
 spring:
   profiles: prod

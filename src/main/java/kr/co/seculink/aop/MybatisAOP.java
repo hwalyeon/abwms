@@ -18,9 +18,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import kr.co.seculink.api.domain.GEConstant;
-import kr.co.seculink.api.model.SessionVo;
+import kr.co.seculink.domain.GEConstant;
 import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.web.model.cmon.SessionVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -60,11 +60,11 @@ public class MybatisAOP {
 				
 				Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
 
-				if (details instanceof SessionVo) {
+				if (details instanceof SessionVO) {
 					
 					isLogined = true;
 					
-					SessionVo vo = (SessionVo) details;
+					SessionVO vo = (SessionVO) details;
 					
 					regUserId = vo.getUserId();
 					uptUserId = vo.getUserId();

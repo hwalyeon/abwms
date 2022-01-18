@@ -18,7 +18,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import kr.co.seculink.api.model.SessionVo;
+import kr.co.seculink.web.model.cmon.SessionVO;
 import kr.co.seculink.exception.SysException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,13 +29,13 @@ public class GEUtil {
 	 * SessionVo를 세션에서 취득 없는경우 null
 	 * @return
 	 */
-	public static SessionVo getSessionVo() {
+	public static SessionVO getSessionVo() {
 		
-		SessionVo vo = null;
+		SessionVO vo = null;
 		
 		try {
 		
-			vo = (SessionVo) SecurityContextHolder.getContext().getAuthentication().getDetails();
+			vo = (SessionVO) SecurityContextHolder.getContext().getAuthentication().getDetails();
 		
 		} catch (Exception e) {
 			
@@ -50,7 +50,7 @@ public class GEUtil {
 	 */
 	public static String getSessionUserId() {
 		
-		SessionVo vo = getSessionVo();
+		SessionVO vo = getSessionVo();
 		
 		if (null != vo) {
 			return vo.getUserId();
@@ -63,7 +63,7 @@ public class GEUtil {
 		
 		List<String> rsltList = new ArrayList<>();
 		
-		SessionVo vo = getSessionVo();
+		SessionVO vo = getSessionVo();
 		
 		if (null != vo) {
 			
@@ -82,7 +82,7 @@ public class GEUtil {
 	 * */
 	public static boolean hasRole(String roleCd) {
 		
-		SessionVo vo = getSessionVo();
+		SessionVO vo = getSessionVo();
 		
 		if (null != vo) {
 			
@@ -104,7 +104,7 @@ public class GEUtil {
 	 * */
 	public static boolean isAdmin() {
 		
-		SessionVo vo = getSessionVo();
+		SessionVO vo = getSessionVo();
 		
 		if (null != vo) {
 			

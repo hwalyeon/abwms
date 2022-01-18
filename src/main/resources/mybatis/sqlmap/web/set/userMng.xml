@@ -125,7 +125,7 @@
 	WHERE  USER_ID = #{userId}
 	</delete>
 	
-	<update id="updateAcdmProfImg"  parameterType="kr.co.seculink.web.model.TcFileVO">
+	<update id="updateAcdmProfImg"  parameterType="kr.co.seculink.web.model.cmon.TcFileVO">
 	
 	UPDATE TO_ACDM_BASE
 	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
@@ -137,7 +137,7 @@
 	
 	</update>
 	
-	<update id="updateLctrProfImg"  parameterType="kr.co.seculink.web.model.TcFileVO">
+	<update id="updateLctrProfImg"  parameterType="kr.co.seculink.web.model.cmon.TcFileVO">
 	
 	UPDATE TO_LCTR_BASE
 	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')
@@ -149,7 +149,7 @@
 	
 	</update>
 	
-		<update id="updateStdtProfImg"  parameterType="kr.co.seculink.web.model.TcFileVO">
+	<update id="updateStdtProfImg"  parameterType="kr.co.seculink.web.model.cmon.TcFileVO">
 	
 	UPDATE TO_STDT_BASE
 	SET    UPT_DT       = DATE_FORMAT(NOW(), '%Y%m%d')

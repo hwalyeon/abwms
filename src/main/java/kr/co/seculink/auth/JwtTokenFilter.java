@@ -53,7 +53,7 @@ public class JwtTokenFilter extends GenericFilterBean {
 			//return;
 		}
 		
-		log.debug("token filter : {}", uri);
+//		log.debug("token filter/isSkipAuth : {}, {}", uri, isSkipAuth);
 		
 		String token = this.jwtTokenProvider.getRequestToken((HttpServletRequest) request);
 		

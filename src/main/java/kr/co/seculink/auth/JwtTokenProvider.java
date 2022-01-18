@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+//import org.springframework.data.redis.core.RedisTemplate;
+//import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -46,8 +46,8 @@ public class JwtTokenProvider {
 	@Autowired
 	private LinkedHashSet<String> blackListToken;
 	
-	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+//	@Autowired
+//	private RedisTemplate<String, String> redisTemplate;
 	
 	public Algorithm getAlgorithm(String secret) {
 		return Algorithm.HMAC256(secret);
@@ -83,9 +83,9 @@ public class JwtTokenProvider {
 		dao.update("TOKN_KEY.merge", param);
 		
 		// Redis에도 캐시
-		ValueOperations<String, String> vop = redisTemplate.opsForValue();
-		
-		vop.set(userId + "_" + clientId, encKey);
+//		ValueOperations<String, String> vop = redisTemplate.opsForValue();
+//		
+//		vop.set(userId + "_" + clientId, encKey);
 		
 		return token;
 	}
@@ -143,9 +143,9 @@ public class JwtTokenProvider {
 		String secret = "";
 		
 		// Redis에도 캐시
-		ValueOperations<String, String> vop = redisTemplate.opsForValue();
-		
-		secret = vop.get(userId + "_" + clientId);
+//		ValueOperations<String, String> vop = redisTemplate.opsForValue();
+//		
+//		secret = vop.get(userId + "_" + clientId);
 		
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("userId", userId);
@@ -168,7 +168,7 @@ public class JwtTokenProvider {
 			secret = toknKeyData.get("keyVal");
 			
 			// Redis에 secret 저장
-			vop.set(userId + clientId, secret);
+//			vop.set(userId + clientId, secret);
 		} else {
 			log.debug("redis에 정보 있음 {}", secret);
 		}
@@ -187,7 +187,7 @@ public class JwtTokenProvider {
 			this.dao.delete("TOKN_KEY.delete", param);
 			
 			//Redis 삭제
-			this.redisTemplate.delete(userId + "_" + clientId);
+//			this.redisTemplate.delete(userId + "_" + clientId);
 			
 			this.addBlackListToken(token);
 			

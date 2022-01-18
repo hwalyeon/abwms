@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import kr.co.seculink.api.domain.GEConstant.ROLE;
+import kr.co.seculink.domain.GEConstant.ROLE;
 import kr.co.seculink.auth.JwtTokenFilter;
 
 @Configuration
@@ -24,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     		,"/v1/auth/**", "/v1/home/**"
     		,"/v1/mypage/notiList"
     		,"/v1/mypage/notiDtl"
-    		,"/admin/login/login"
     		,"/v1/ar/**"
     		,"/test/getTokenUser"
     		,"/test/getTokenAdmin"
@@ -38,23 +37,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     		,"/v1/as/srchAsBrnd"
     		,"/v1/common/cd"
     		,"/v1/mypage/allAllc"
-    		,"/astr/astrShar"
     		,"/v1/common/srchCoord"
     		,"/v1/astr/astrShar"
     		// health check
     		,"/v1/home/health"
-    		,"/web/deeplink"
     		,"/v1/crawling/**"
     		,"/"
+    		,"/**/*.pg"
+    		,"/img/**"
     		,"/css/**/*.css"
     		,"/css/**/*.png"
     		,"/js/**/*.js"
+    		,"/fonts/**"
     		,"/font-awesome/**"
-    		,"/m/**"
     		,"/uploads/**"
-    		,"/mobile/cousMng/searchCousList"
-    		,"/cmon/deleteImage"
-    		,"/facebookLoginCallback/**"
 	};
 	
 	@Autowired

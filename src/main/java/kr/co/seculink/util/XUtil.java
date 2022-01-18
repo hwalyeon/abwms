@@ -25,8 +25,8 @@ import java.util.regex.Pattern;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.hubble.web.excel.ExcelConstant;
-import kr.hubble.web.model.ExcelVO;
+import kr.co.seculink.web.excel.ExcelConstant;
+import kr.co.seculink.web.model.cmon.ExcelVO;
 
 
 
@@ -2885,135 +2885,6 @@ public class XUtil {
         return floor( Double.parseDouble( val ), dgtCnt );
     }
     
-    /**
-     * 메소드명 : procSg
-     * 설 명 : 입력받은 숫자값을 끝전처리기준에 맞추어 리턴함
-     * 메소드인수1 : double val - 처리대상 숫자값
-     * 메소드인수1 : String sgProcCd - 끝전처리코드
-     * 메소드리턴값 : String out - 끝전처리결과값
-     */
-    public static String procSg( double val,String sgProcCd ) {
-        String out = "0";
-        
-        double tmp = 0;
-        
-        // 정수미만 절상
-        if ( sgProcCd.equals( NumberConstants.SG_D0_CEIL ) ) {
-            tmp = Math.ceil( val );
-            out = getDecimal( tmp );
-        }
-        
-        // 정수미만 반올림
-        else if ( sgProcCd.equals( NumberConstants.SG_D0_ROUND ) ) {
-            tmp = Math.round( val );
-            out = getDecimal( tmp );
-        }
-        
-        // 정수미만 절사
-        else if ( sgProcCd.equals( NumberConstants.SG_D0_FLOOR ) ) {
-            tmp = Math.floor( val );
-            out = getDecimal( tmp );
-        }
-        
-        // 소숫점 셋째자리 절상
-        else if ( sgProcCd.equals( NumberConstants.SG_D3_CEIL ) ) {
-            out = getDecimal( val, 3, "Y", BigDecimal.ROUND_CEILING );
-        }
-        
-        // 소숫점 세째자리 반올림
-        else if ( sgProcCd.equals( NumberConstants.SG_D3_ROUND ) ) {
-            out = getDecimal( val, 3, "Y", BigDecimal.ROUND_UP );
-        }
-        
-        // 소숫점 세째자리 절사
-        else if ( sgProcCd.equals( NumberConstants.SG_D3_FLOOR ) ) {
-            out = getDecimal( val, 3, "Y", BigDecimal.ROUND_FLOOR );
-        }
-        
-        // 100 단위 절상
-        else if ( sgProcCd.equals( NumberConstants.SG_U2_CEIL ) ) {
-            tmp = Math.ceil( val / 100 ) * 100;
-            out = getDecimal( tmp );
-        }
-        
-        // 100 단위 반올림
-        else if ( sgProcCd.equals( NumberConstants.SG_U2_ROUND ) ) {
-            tmp = Math.round( val / 100 ) * 100;
-            out = getDecimal( tmp );
-        }
-        
-        // 100 단위 절사
-        else if ( sgProcCd.equals( NumberConstants.SG_U2_FLOOR ) ) {
-            tmp = Math.floor( val / 100 ) * 100;
-            out = getDecimal( tmp );
-        }
-        
-        // 10 단위 절상
-        else if ( sgProcCd.equals( NumberConstants.SG_U1_CEIL ) ) {
-            tmp = Math.ceil( val / 10 ) * 10;
-            out = getDecimal( tmp );
-        }
-        
-        // 10 단위 반올림
-        else if ( sgProcCd.equals( NumberConstants.SG_U1_ROUND ) ) {
-            tmp = Math.round( val / 10 ) * 10;
-            out = getDecimal( tmp );
-        }
-        
-        // 10 단위 절사
-        else if ( sgProcCd.equals( NumberConstants.SG_U1_FLOOR ) ) {
-            tmp = Math.floor( val / 10 ) * 10;
-            out = getDecimal( tmp );
-        }
-        
-        // 1,000 단위 절상
-        else if ( sgProcCd.equals( NumberConstants.SG_U3_CEIL ) ) {
-            tmp = Math.ceil( val / 1000 ) * 1000;
-            out = getDecimal( tmp );
-        }
-        
-        // 1,000 단위 반올림
-        else if ( sgProcCd.equals( NumberConstants.SG_U3_ROUND ) ) {
-            tmp = Math.round( val / 1000 ) * 1000;
-            out = getDecimal( tmp );
-        }
-        
-        // 1,000 단위 절사
-        else if ( sgProcCd.equals( NumberConstants.SG_U3_FLOOR ) ) {
-            tmp = Math.floor( val / 1000 ) * 1000;
-            out = getDecimal( tmp );
-        }
-        
-        // 10,000 단위 절상
-        else if ( sgProcCd.equals( NumberConstants.SG_U4_CEIL ) ) {
-            tmp = Math.ceil( val / 10000 ) * 10000;
-            out = getDecimal( tmp );
-        }
-        
-        // 10,000 단위 반올림
-        else if ( sgProcCd.equals( NumberConstants.SG_U4_ROUND ) ) {
-            tmp = Math.round( val / 10000 ) * 10000;
-            out = getDecimal( tmp );
-        }
-        
-        // 10,000 단위 절사
-        else if ( sgProcCd.equals( NumberConstants.SG_U4_FLOOR ) ) {
-            tmp = Math.floor( val / 10000 ) * 10000;
-            out = getDecimal( tmp );
-        }
-        
-        // 소숫점 7번째 반올림
-        else if ( sgProcCd.equals( NumberConstants.SG_D7_ROUND ) ) {
-            out = getDecimal( val, 6, "Y", BigDecimal.ROUND_UP );
-        }
-        
-        return out;
-    }
-
-    // 힙메모리를 계산해서 파라메터에서 지정한 메모리 이하로 떨어지면 TRUE를 리턴함
-    public static boolean isLowMemory()  {
-        return isLowMemory( XdbConstants.MIN_LOW_HEAP_MEMORY);
-    }
     // 힙메모리를 계산해서 파라메터에서 지정한 메모리 이하로 떨어지면 TRUE를 리턴함
     public static boolean isLowMemory( int minMemSize) {
         Runtime runtime = Runtime.getRuntime();
