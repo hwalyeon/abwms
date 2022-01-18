@@ -120,7 +120,7 @@ var index = new Vue({
 //			console.log('newTab');
 			
 			if ( WebUtil.isNull(WebUtil.getStorageData('jwtToken', false)) ) {
-				window.location.href = '/login';
+				window.location.href = '/login.pg';
 			} else {
 				if(this.checkTab(menuId)) {
 			        this.menuList.push({ menuNm: menuNm, menuUrl: menuUrl, menuId: menuId, menuPath: menuPath, interval: null });
@@ -165,7 +165,7 @@ var index = new Vue({
                 	
                 	SessionUtil.initSession();
                 	
-                	window.location.href = "/login";
+                	window.location.href = "/login.pg";
                 },
                 error: function (response) {
                     Swal.alert([response, 'info']);

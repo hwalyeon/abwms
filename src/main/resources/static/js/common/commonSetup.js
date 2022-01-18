@@ -219,7 +219,7 @@ var commonGridOptions = function(rowNumParam, loadonceParam) {
 	var header = {};
 	var token = WebUtil.getStorageData('jwtToken', false);
     if ( WebUtil.isNull(token) ) {
-    	window.location.href = '/login';
+    	window.location.href = '/login.pg';
     }
 	
 	return {
@@ -871,7 +871,7 @@ function parentReload() {
 	if(parent && parent.frames.length > 0) {
 		//alert(parent.frames.length);
 //		parent.location.reload();
-		parent.location.href = "/login";
+		parent.location.href = "/login.pg";
 	}
 
     if(opener) {
