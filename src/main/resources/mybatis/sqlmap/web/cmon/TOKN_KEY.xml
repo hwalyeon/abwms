@@ -63,10 +63,14 @@
 	     user_id
 	    ,clnt_id
 	    ,key_val
+	    ,reg_user_id
+	    ,upt_user_id
 	)
 	select  #{userId}
 	       ,#{clntId}
 	       ,#{keyVal}
+	       ,#{regUserId}
+	       ,#{uptUserId}
     where not exists(select * from upsert)
 	
 	</update>
@@ -78,6 +82,8 @@
 		, CLNT_ID /* CLNT_ID 클라이언트_ID varchar(20) */
 		<if test="keyVal != null">
 		, KEY_VAL /* KEY_VAL 키_값 varchar(32) */
+		, REG_USER_ID
+		,UPT_USER_ID
 		</if>
 		) VALUES (
 		  #{userId} /* USER_ID 사용자_ID varchar(50) */
@@ -85,6 +91,8 @@
 		<if test="keyVal != null">
 		, #{keyVal} /* KEY_VAL 키_값 varchar(32) */
 		</if>
+		,#{regUserId}
+		,#{uptUserId}
 		)
 		ON
 			DUPLICATE KEY

@@ -11,9 +11,11 @@
 	      ,TEL_NO
 	      ,MTEL_NO
 	      ,MAIL_ADDR
+	      <!-- 학원여부, 강사여부, 학생여부 → 가입일자, 해지일자, 사용여부 ...?
 	      ,ACDM_YN
 	      ,LCTR_YN
 	      ,STDT_YN
+	       -->
 	      ,USE_YN
 	FROM   TC_USER_BASE
 	WHERE  1 = 1

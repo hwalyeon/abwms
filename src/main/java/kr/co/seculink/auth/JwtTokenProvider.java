@@ -77,6 +77,8 @@ public class JwtTokenProvider {
 		// 사용자 별 키를 DB에 저장
 		Map<String, String> param = new HashMap<>();
 		param.put("userId", userId);
+	    param.put("regUserId", userId);
+	    param.put("uptUserId", userId);
 		param.put("clntId", clientId);
 		param.put("keyVal", encKey);
 		
