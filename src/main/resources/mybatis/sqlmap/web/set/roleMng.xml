@@ -8,7 +8,6 @@ SELECT ROLE_CD
       ,ROLE_NM
       ,ROLE_DESC
       ,ROLE_DIV_CD
-      ,FN_CD_NM('ROLE_DIV_CD', ROLE_DIV_CD) AS ROLE_DIV_NM
 FROM   TC_ROLE_BASE
 WHERE  1 = 1
 <if test=" roleCd != null and roleCd != '' ">
