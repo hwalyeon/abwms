@@ -41,9 +41,9 @@ let userMng = new Vue({
                 {name: "telNo"      , index: "telNo"      , label: "전화번호"     , width: 80, align: "center"},
                 {name: "mtelNo"     , index: "mtelNo"     , label: "휴대전화번호"  , width: 80, align: "center"},
                 {name: "mailAddr"   , index: "mailAddr"   , label: "이메일"      , width: 80, align: "center"},
-                {name: "acdmYn"     , index: "acdmYn"     , label: "학원여부"     , width: 80, align: "center"},
-                {name: "lctrYn"     , index: "lctrYn"     , label: "강사여부"     , width: 80, align: "center"},
-                {name: "stdtYn"     , index: "stdtYn"     , label: "학생여부"     , width: 80, align: "center"},
+                {name: "entrDt"     , index: "acdmYn"     , label: "가입일자"     , width: 80, align: "center"},
+                {name: "relsDt"     , index: "lctrYn"     , label: "해지일자"     , width: 80, align: "center"},
+                {name: "useYn"     , index: "stdtYn"     , label: "사용여부"     , width: 80, align: "center"},
                 {name: "userDetlPop", index: "userDetlPop", label: "사용자 정보보기", width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="userMng.regUserPop(\'' + rowObject.userId + '\')" value="상세보기" data-toggle="modal" data-target="#userDetlPopup" />';

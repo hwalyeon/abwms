@@ -4,7 +4,7 @@
 <div class="modal fade" id="userDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 580px; height: 600px">
+			<div class="modal-content" style="width: 580px; height: 550px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -62,30 +62,12 @@
 			                        <td>
 			                        	<input type="email" id="mailAddr" name="mailAddr" v-model="userInfo.mailAddr" class="form-control ime-eng" />
 			                        </td>
-			                    </tr>
-			                    <tr>
-			                    	<th scope="row">사용자구분</th>
-			                    	<td>
-			                    		<div class="width_per_30 float_left">
-				                    		<input type="checkbox" class="width_per_30" v-icheck id="userDiv01" name="userDiv" true-value="Y" false-value="N" v-model="userInfo.acdmYn" :disabled="userInfo.crud!='C'">
-				                    		<label for="userDiv01"> 학원</label>
-			                    		</div>
-			                    		<div class="width_per_30 float_left">
-				                    		<input type="checkbox" class="width_per_30" v-icheck id="userDiv02" name="userDiv" true-value="Y" false-value="N" v-model="userInfo.lctrYn" :disabled="userInfo.crud!='C'">
-				                    		<label for="userDiv02"> 강사</label>
-			                    		</div>
-			                    		<div class="width_per_30 float_left">
-				                    		<input type="checkbox" class="width_per_30" v-icheck id="userDiv03" name="userDiv" true-value="Y" false-value="N" v-model="userInfo.stdtYn" :disabled="userInfo.crud!='C'">
-				                    		<label for="userDiv03"> 학생</label>
-			                    		</div>
-			                    	</td>
-			                    </tr>
+			                    </tr>			                    
 							</tbody>
 		                </table>
             		</div>
             	</div>
-            	
-            	<div class="modal-footer">
+            	<div class="modal-footer" style="">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveUser">저장</button>
@@ -97,7 +79,7 @@
 							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
 						</div>
 					</div>
-				</div>
+				</div>			
             </div>
         </div>
     </div>

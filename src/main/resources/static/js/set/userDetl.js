@@ -152,7 +152,7 @@ let userDetl = new Vue({
                 url: "/set/userMng/saveUser.ab",
                 param: $this.roleInfo,
                 success: function(response) {
-                	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#userDetlPopup'));
                 		 roleMng.searchUserList(true);
                 	});                	

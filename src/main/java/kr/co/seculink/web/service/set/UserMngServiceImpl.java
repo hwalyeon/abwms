@@ -334,7 +334,7 @@ public class UserMngServiceImpl implements UserMngService
 			deleteMap.put("userId", params.get("userId"));
 			deleteMap.put("useYn" , "N");
 			
-			saveCnt = dao.delete("set.userMng.updateTcUserBase", deleteMap);
+			saveCnt = dao.delete("set.userMng.deleteTcUserBase", deleteMap);
 			
 			if ( "Y".equals(params.get("acdmYn")) ) {
 				deleteMap.put("acdmId", params.get("userId"));
