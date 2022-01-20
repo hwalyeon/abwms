@@ -7,6 +7,7 @@
 	
 	SELECT A.MENU_NO
 	      ,B.MENU_NM
+	      ,A.MENU_DESC
 	      ,B.UPPR_MENU_NO
 	      ,D.MENU_NM AS UPPR_MENU_NM
 	      ,A.ROLE_CD
@@ -33,6 +34,8 @@
 	(
 	     MENU_NO
 	    ,ROLE_CD
+	    ,MENU_NM
+	    ,MENU_DESC
 	    ,REG_DT
 	    ,REG_TM
 	    ,REG_USER_ID
@@ -44,11 +47,13 @@
 	(
 	     #{menuNo}
 	    ,#{roleCd}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,#{menuNm}
+	    ,#{menuDesc}
+	    ,TO_CHAR(NOW(), 'YYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{regUserId}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,TO_CHAR(NOW(), 'YYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{uptUserId}	
 	)
 	</insert>
@@ -64,6 +69,10 @@
 	AND    MENU_NO = #{menuNo}		</if>
 <if test=" roleCd != null and roleCd != '' ">
 	AND    ROLE_CD = #{roleCd}		</if>	
+<if test=" menuNm != null and menuNm != '' ">
+	AND    MEMU_NM = #{menuNm}		</if>	
+<if test=" menuDesc != null and menuDesc != '' ">
+	AND    MENU_DESC = #{menuDesc}		</if>	
 	</update>
 	
 	<delete id="deleteTcMenuRole" parameterType="java.util.Map">
@@ -74,6 +83,10 @@
 	AND    MENU_NO = #{menuNo}		</if>
 <if test=" roleCd != null and roleCd != '' ">
 	AND    ROLE_CD = #{roleCd}		</if>
+<if test=" menuNm != null and menuNm != '' ">
+	AND    MEMU_NM = #{menuNm}		</if>	
+<if test=" menuDesc != null and menuDesc != '' ">
+	AND    MENU_DESC = #{menuDesc}		</if>	
 	</delete>
 		
 </mapper>

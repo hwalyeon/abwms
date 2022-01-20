@@ -21,6 +21,7 @@ let menuRoleMng = new Vue({
 
         initialize: function() {
         	
+        
         	let $this = this;
         	
         	$this.initCodeList();
@@ -72,6 +73,9 @@ let menuRoleMng = new Vue({
         		{name: "roleNm"      , index: "roleNm"      , label: "역할명"     , width: 80, align: "center", hidden: true},
                 {name: "menuNo"      , index: "menuNo"      , label: "메뉴번호"    , width: 80, align: "center"},
                 {name: "menuNm"      , index: "menuNm"      , label: "메뉴명"     , width: 80, align: "left"},
+              /*추가 시작*/
+                {name: "menuDesc"      , index: "menuDesc"      , label: "메뉴설명"     , width: 80, align: "center"},
+             /*추가 끝*/
                 {name: "upprMenuNo"  , index: "upprMenuNo"  , label: "상위메뉴번호" , width: 80, align: "center", hidden: true},
                 {name: "upprMenuNm"  , index: "upprMenuNm"  , label: "상위메뉴명"  , width: 80, align: "left"}
             ];
@@ -240,6 +244,7 @@ let menuRoleMng = new Vue({
 					let menuRole = {
 						'menuNo' : menuInfo.menuNo,
 						'menuNm' : menuInfo.menuNm,
+						'menuDesc' : menuInfo.menuDesc,
 						'upprMenuNo' : menuInfo.upprMenuNo,
 						'upprMenuNm' : menuInfo.upprMenuNm,
 						'roleCd' : $this.params.roleCd
@@ -276,6 +281,7 @@ let menuRoleMng = new Vue({
 				let menuRole = {
 					'menuNo' : upprMenuInfo.menuNo,
 					'menuNm' : upprMenuInfo.menuNm,
+					'menuDesc' : upprMenuInfo.menuDesc,
 					'upprMenuNo' : upprMenuInfo.upprMenuNo,
 					'upprMenuNm' : upprMenuInfo.upprMenuNm,
 					'roleCd' : $this.params.roleCd
