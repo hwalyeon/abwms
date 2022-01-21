@@ -93,7 +93,7 @@
 												<select v-model="role.roleCd" v-on:change="setRoleCd(index)" class="form-control width_per_80 float_left">
 										            <option v-for="item in code.roleList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 										        </select>
-										        <input type="button" v-show="!!role.roleCd" class="btn btn-outline btn-primary form-control width_40 float_right" v-on:click="delRoleCd(index)" value="-" />
+										        <input type="button" v-show="!!role.roleCd" class="btn btn-outline btn-primary form-control width_40 float_right" v-on:click="delRoleCd(index)" value="X" />
 											</td>
 										</tr>
 									</tbody>

@@ -60,8 +60,8 @@
 	
 	<update id="updateTcMenuRole" parameterType="java.util.Map">
 	UPDATE TC_MENU_ROLE
-	SET    UPT_DT      = DATE_FORMAT(NOW(), '%Y%m%d')
-	      ,UPT_TM      = DATE_FORMAT(NOW(), '%H%i%s')
+	SET    UPT_DT       = TO_CHAR(NOW(), 'YYYYMMDD')
+	      ,UPT_TM         = TO_CHAR(NOW(), 'HH24MISS')
 	      ,UPT_USER_ID = #{uptUserId}
     	<if test="roleCd != null and roleCd != ''">,ROLE_CD = #{roleCd}	</if>
 	WHERE  1 = 1
@@ -70,7 +70,7 @@
 <if test=" roleCd != null and roleCd != '' ">
 	AND    ROLE_CD = #{roleCd}		</if>	
 <if test=" menuNm != null and menuNm != '' ">
-	AND    MEMU_NM = #{menuNm}		</if>	
+	AND    MENU_NM = #{menuNm}		</if>	
 <if test=" menuDesc != null and menuDesc != '' ">
 	AND    MENU_DESC = #{menuDesc}		</if>	
 	</update>
@@ -81,12 +81,6 @@
 	WHERE  1 = 1
 <if test=" menuNo != null and menuNo != '' ">
 	AND    MENU_NO = #{menuNo}		</if>
-<if test=" roleCd != null and roleCd != '' ">
-	AND    ROLE_CD = #{roleCd}		</if>
-<if test=" menuNm != null and menuNm != '' ">
-	AND    MEMU_NM = #{menuNm}		</if>	
-<if test=" menuDesc != null and menuDesc != '' ">
-	AND    MENU_DESC = #{menuDesc}		</if>	
 	</delete>
 		
 </mapper>

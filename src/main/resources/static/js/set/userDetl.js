@@ -10,9 +10,9 @@ let userDetl = new Vue({
     		telNo: '',
     		mtelNo: '',
     		mailAddr: '',
-    		acdmYn: 'N',
-    		lctrYn: 'N',
-    		stdtYn: 'N',
+    		entrDt: '',
+    		relsDt: '',
+    		useYn: '',
     		checkDupUserId: 'N'
     	},
 		code: {
@@ -150,11 +150,11 @@ let userDetl = new Vue({
 			
             AjaxUtil.post({
                 url: "/set/userMng/saveUser.ab",
-                param: $this.roleInfo,
+                param: $this.userInfo,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#userDetlPopup'));
-                		 roleMng.searchUserList(true);
+                		 userMng.searchUserList(true);
                 	});                	
                 },
                 error: function (response) {

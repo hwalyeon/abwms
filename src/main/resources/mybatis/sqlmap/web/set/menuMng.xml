@@ -74,11 +74,11 @@
 	    ,#{menuDesc}
 	    ,#{iconInfo}
 	    ,#{useYn}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
 	    ,#{regUserId}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
 	    ,#{uptUserId}	
 	)
 	
@@ -87,8 +87,8 @@
 	<update id="updateTcMenuBase" parameterType="java.util.Map">
 	
 	UPDATE TC_MENU_BASE
-	SET    UPT_DT      = DATE_FORMAT(NOW(), '%Y%m%d')
-	      ,UPT_TM      = DATE_FORMAT(NOW(), '%H%i%s')
+	SET    UPT_DT      = TO_CHAR(NOW(), 'YYYYMMDD')
+	      ,UPT_TM      = TO_CHAR(NOW(), 'HH24MISS')
 	      ,UPT_USER_ID = #{uptUserId}
     	<if test="upprMenuNo   != null and upprMenuNo   != ''">,UPPR_MENU_NO   = #{upprMenuNo}		</if>
     	<if test="menuUrl      != null and menuUrl      != ''">,MENU_URL       = #{menuUrl}			</if>
@@ -105,6 +105,7 @@
 	DELETE
 	FROM   TC_MENU_BASE
 	WHERE  MENU_NO = #{menuNo}
+	AND      MENU_NM = #{menuNm}
 	
 	</delete>
 	
@@ -143,19 +144,19 @@
 	(
 	     #{menuNo}
 	    ,#{roleCd}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
 	    ,#{regUserId}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
 	    ,#{uptUserId}	
 	)
 	</insert>
 	
 	<update id="updateTcMenuRole" parameterType="java.util.Map">
 	UPDATE TC_MENU_ROLE
-	SET    UPT_DT      = DATE_FORMAT(NOW(), '%Y%m%d')
-	      ,UPT_TM      = DATE_FORMAT(NOW(), '%H%i%s')
+	SET    UPT_DT       = TO_CHAR(NOW(), 'YYYYMMDD')
+	      ,UPT_TM         = TO_CHAR(NOW(), 'HH24MISS')
 	      ,UPT_USER_ID = #{uptUserId}
     	<if test="roleCd != null and roleCd != ''">,ROLE_CD = #{roleCd}	</if>
 	WHERE  MENU_NO = #{menuNo}	

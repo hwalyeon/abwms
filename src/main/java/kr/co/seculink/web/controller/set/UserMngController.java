@@ -96,7 +96,7 @@ public class UserMngController
 	{	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		
+		System.out.println("params" + params);
 		userMngService.saveUser(params);
 		
 		rtnMap.put("result", params);

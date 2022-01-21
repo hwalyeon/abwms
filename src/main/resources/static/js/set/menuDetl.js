@@ -9,7 +9,7 @@ let menuDetl = new Vue({
     		menuNm: '',
     		menuDesc: '',
     		iconInfo: '',
-    		useYn: 'Y',
+    		useYn: '',
     		roleList: []
     	},
     	code : {
@@ -35,6 +35,7 @@ let menuDetl = new Vue({
                 success: function(response) {
                 	
                 	$this.code.upprMenuList = [];
+                	$this.code.useYnList        = [];
                 	if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
                         $.each(response.rtnData.result, function(index, item) {
         					$this.code.upprMenuList.push({'cdVal':item.menuNo, 'cdNm':item.menuNm, 'url':item.menuUrl});
