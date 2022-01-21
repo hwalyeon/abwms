@@ -22,7 +22,6 @@ let cdMng = new Vue({
 			}
 		},
 		code : {
-
 		}
 	},
 	

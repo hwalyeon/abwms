@@ -41,19 +41,19 @@ VALUES
     ,#{roleNm}
     ,#{roleDesc}
     ,#{roleDivCd}
-    ,DATE_FORMAT(NOW(), '%Y%m%d')
-    ,DATE_FORMAT(NOW(), '%H%i%s')
+    ,TO_CHAR(NOW(), 'YYYYMMDD')
+    ,TO_CHAR(NOW(), 'HH24IISS')
     ,#{regUserId}
-    ,DATE_FORMAT(NOW(), '%Y%m%d')
-    ,DATE_FORMAT(NOW(), '%H%i%s')
+    ,TO_CHAR(NOW(), 'YYYYMMDD')
+    ,TO_CHAR(NOW(), 'HH24IISS')
     ,#{uptUserId}	
 )
 	</insert>
 
 	<update id="updateTcRoleBase" parameterType="java.util.Map">
 UPDATE TC_ROLE_BASE
-SET    UPT_DT      = DATE_FORMAT(NOW(), '%Y%m%d')
-      ,UPT_TM      = DATE_FORMAT(NOW(), '%H%i%s')
+SET    UPT_DT      = TO_CHAR(NOW(), 'YYYYMMDD')
+      ,UPT_TM      = TO_CHAR(NOW(), 'HH24IISS')
       ,UPT_USER_ID = #{uptUserId}
 <if test="roleNm     != null and roleNm     != ''">,ROLE_NM      = #{roleNm}		</if>
 <if test="roleDesc   != null and roleDesc   != ''">,ROLE_DESC    = #{roleDesc}		</if>

@@ -14,20 +14,19 @@ let cdSpecDetl = new Vue({
     		useYnList: [
     			{cdVal: 'Y', cdNm: 'Y'},
     			{cdVal: 'N', cdNm: 'N'}
-    		]
+    		],
+    		roleDivList:[]
     	}
 	},
 	
-    methods: {
-
-        initialize: function() {
+    methods:{initialize: function() {
         	
         	let $this = this;
         	
         	$this.initCodeList();
         },
         initCodeList: function() {
-
+        	getCommonCodeList('ROLE_DIV_CD', this.code.roleDivList);
         },
         initPage: function(crud, cdGrp, cdGrpNm, cdVal) {
         	
@@ -116,6 +115,10 @@ let cdSpecDetl = new Vue({
                 	Swal.alert([response, 'error']);
                 }
             });
+		},
+		setCdGrp: function(index){
+			let $this = this;
+			
 		},
 		resetCdSpecInfo: function() {
 			this.cdSpecInfo = {

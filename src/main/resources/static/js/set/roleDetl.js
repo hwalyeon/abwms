@@ -25,7 +25,7 @@ let roleDetl = new Vue({
         initCodeList: function() {
         	
         	getCommonCodeList('ROLE_DIV_CD', this.code.roleDivList);
-        	
+        	        	
         },
         initPage: function(roleCd) {
         	
