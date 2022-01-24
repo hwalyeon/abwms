@@ -73,9 +73,7 @@ let menuRoleMng = new Vue({
         		{name: "roleNm"      , index: "roleNm"      , label: "역할명"     , width: 80, align: "center", hidden: true},
                 {name: "menuNo"      , index: "menuNo"      , label: "메뉴번호"    , width: 80, align: "center"},
                 {name: "menuNm"      , index: "menuNm"      , label: "메뉴명"     , width: 80, align: "left"},
-              /*추가 시작*/
                 {name: "menuDesc"      , index: "menuDesc"      , label: "메뉴설명"     , width: 80, align: "center"},
-             /*추가 끝*/
                 {name: "upprMenuNo"  , index: "upprMenuNo"  , label: "상위메뉴번호" , width: 80, align: "center", hidden: true},
                 {name: "upprMenuNm"  , index: "upprMenuNm"  , label: "상위메뉴명"  , width: 80, align: "left"}
             ];

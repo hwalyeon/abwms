@@ -31,4 +31,4 @@ deploy-D01:      # This job runs in the deploy stage.
     - cd ~gitlab-runner/apps
     - if [ -f run.pid ]; then kill `cat run.pid `; fi
     - sleep 30
-    - nohup java -jar -Dspring.profiles.active=$profile apps.jar >> apps.log 2>&1 & echo $! > run.pid
+    - nohup java -jar -Dspring.profiles.active=$profile apps.jar > apps.log 2>&1 & echo $! > run.pid

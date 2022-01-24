@@ -11,7 +11,7 @@
 	FROM   TC_CD_GRP
 	WHERE 1 = 1
 	<if test=" cdGrp != null and cdGrp != '' ">
-	AND   CD_GRP = #{cdGrp}		</if>
+	AND   CD_GRP LIKE CONCAT('%',#{cdGrp},'%')		</if>
 	<if test=" cdGrpNm != null and cdGrpNm != '' ">
 	AND   CD_GRP_NM LIKE CONCAT('%', #{cdGrpNm}, '%')	</if>
 	ORDER BY CD_GRP
@@ -38,11 +38,11 @@
 	     #{cdGrp}
 	    ,#{cdGrpNm}
 	    ,#{useYn}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+		,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{regUserId}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+		,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{uptUserId}	
 	)
 	
@@ -51,8 +51,8 @@
 	<update id="updateTcCdGrp" parameterType="java.util.Map">
 	
 	UPDATE TC_CD_GRP
-	SET    UPT_DT      = DATE_FORMAT(NOW(), '%Y%m%d')
-	      ,UPT_TM      = DATE_FORMAT(NOW(), '%H%i%s')
+	SET    UPT_DT   = TO_CHAR(NOW(), 'YYYYMMDD')
+	      ,UPT_TM      = TO_CHAR(NOW(), 'HH24IISS')
 	      ,UPT_USER_ID = #{uptUserId}
     	<if test="cdGrpNm != null and cdGrpNm != ''">,CD_GRP_NM = #{cdGrpNm}	</if>
     	<if test="useYn   != null and useYn   != ''">,USE_YN    = #{useYn}		</if>
@@ -112,11 +112,11 @@
 	    ,#{cdNm}
 	    ,#{sortOrd}
 	    ,#{useYn}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{regUserId}
-	    ,DATE_FORMAT(NOW(), '%Y%m%d')
-	    ,DATE_FORMAT(NOW(), '%H%i%s')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{uptUserId}	
 	)
 	
@@ -125,7 +125,7 @@
 	<update id="updateTcCdSpec" parameterType="java.util.Map">
 	
 	UPDATE TC_CD_SPEC
-	SET    UPT_DT      = DATE_FORMAT(NOW(), '%Y%m%d')
+	SET    UPT_DT    = DATE_FORMAT(NOW(), '%Y%m%d')
 	      ,UPT_TM      = DATE_FORMAT(NOW(), '%H%i%s')
 	      ,UPT_USER_ID = #{uptUserId}
     	<if test="cdNm    != null and cdNm    != ''">,CD_NM    = #{cdNm}	</if>

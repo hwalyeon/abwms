@@ -49,10 +49,10 @@
 	    ,#{roleCd}
 	    ,#{menuNm}
 	    ,#{menuDesc}
-	    ,TO_CHAR(NOW(), 'YYMMDD')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
 	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{regUserId}
-	    ,TO_CHAR(NOW(), 'YYMMDD')
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
 	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{uptUserId}	
 	)
