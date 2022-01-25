@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="set.cdMng">
-	
+
+<select id="searchTcCdGrp" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT CD_GRP ,
+	              CD_GRP_NM
+	FROM   TC_CD_GRP
+	WHERE 1=1
+	AND    CD_GRP LIKE CONCAT('%',#{cdGrp},'%') OR   CD_GRP_NM LIKE CONCAT('%',#{cdGrpNm},'%') 
+</select>
+
+
+	<select id="selectCdGrpDivList" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT  CD_GRP
+FROM TC_CD_GRP TCG 
+WHERE 1=1
+   </select>
+   
 	<select id="selectTcCdGrp" parameterType="java.util.Map" resultType="MybatisMap">
 	
 	SELECT CD_GRP
@@ -74,6 +88,10 @@
 	      ,B.CD_GRP_NM
 	      ,A.CD_VAL
 	      ,A.CD_NM
+	      ,A.CD_DESC
+	      ,A.FLTR_VAL_1
+	      ,A.FLTR_VAL_2
+	      ,A.FLTR_VAL_3
 	      ,A.SORT_ORD
 	      ,A.USE_YN
 	FROM   TC_CD_SPEC A
@@ -125,14 +143,16 @@
 	<update id="updateTcCdSpec" parameterType="java.util.Map">
 	
 	UPDATE TC_CD_SPEC
-	SET    UPT_DT    = DATE_FORMAT(NOW(), '%Y%m%d')
-	      ,UPT_TM      = DATE_FORMAT(NOW(), '%H%i%s')
+	SET    UPT_DT    = TO_CHAR(NOW(), 'YYYYMMDD')
+	      ,UPT_TM      = TO_CHAR(NOW(), 'HH24IISS')
 	      ,UPT_USER_ID = #{uptUserId}
+    	<if test="newCdGrp    != null and newCdGrp    != ''">,CD_GRP    = #{newCdGrp}	</if>
+    	<if test="newCdVal    != null and newCdVal    != ''">,CD_VAL    = #{newCdVal}	</if>
     	<if test="cdNm    != null and cdNm    != ''">,CD_NM    = #{cdNm}	</if>
     	<if test="sortOrd != null and sortOrd != ''">,SORT_ORD = #{sortOrd}	</if>
     	<if test="useYn   != null and useYn   != ''">,USE_YN   = #{useYn}	</if>
-	WHERE  CD_GRP = #{cdGrp}
-	AND    CD_VAL = #{cdVal}
+ 	WHERE  CD_GRP = #{oldCdGrp}
+	AND    CD_VAL = #{oldCdVal}
 	
 	</update>
 	

@@ -26,7 +26,70 @@ public class CdMngController
 {
 	@Autowired
 	private SqlSessionTemplate dao;
+
+	@ResponseBody
+	@RequestMapping("/set/cdMng/searchDupCdGrp")
+	public RtnMsg  searchDupUserId(@RequestBody(required=false)Map<String, String> params) throws BizException
+	{	RtnMsg vo = new RtnMsg();
+     	Map<String, String> rtnMap = new HashMap<>();
+     	
+		Map<String, String> result = dao.selectOne("set.cdMng.searchTcCdGrp", params);
 	
+	
+		if ( result == null || GEUtil.isEmpty(result.get("cdGrp"))  && GEUtil.isEmpty(result.get("cdGrpNm"))) {
+			rtnMap.put("existsYn", "N");
+			}
+		else {
+			rtnMap.put("existsYn", "Y");
+		}
+		
+		vo.setRtnData(rtnMap);
+		
+		return vo;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/set/cdMng/searchGrpDivList")
+	public RtnMsg searchGrpDivList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		
+		List<Map<String, String>> result = dao.selectList("set.cdMng.selectTcCdDivGrp", params);
+		rtnMap.put("result", result);
+		
+		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List)dao.selectList("set.cdMng.selectTcCdGrp", params)).size());
+		}
+		
+		vo.setRtnData(rtnMap, params);
+		
+		return vo;
+	}
+	
+
+	@ResponseBody
+	@RequestMapping("/set/cdMng/searchCdGrpDivList")
+	public RtnMsg searchCdGrpDivList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		
+		List<Map<String, String>> result = dao.selectList("set.cdMng.selectCdGrpDivList", params);
+		
+		rtnMap.put("result", result);
+		
+		/*
+		 * if ( !GEUtil.isEmpty(params.get("paging")) ) { params.put("paging", "N");
+		 * vo.setTotalCount(((List)dao.selectList("set.cdMng.selectTcCdGrp",
+		 * params)).size()); }
+		 */
+		vo.setRtnData(rtnMap, params);
+		
+		return vo;
+	}
 	@ResponseBody
 	@RequestMapping("/set/cdMng/searchCdGrpList.ab")
 	public RtnMsg searchCdGrpList(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -63,7 +126,6 @@ public class CdMngController
 		}
 		
 		vo.setRtnData(rtnMap, params);
-		
 		return vo;
 	}
 	

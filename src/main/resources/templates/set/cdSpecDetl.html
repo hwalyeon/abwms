@@ -20,25 +20,18 @@
 		                        <col class="col-xs-8" />
 		                    </colgroup>
 	                    	<tbody>
-		                        <tr>
-		                        <th scope="row">코드그룹</th>
-		                        <td>
-		                        	<select id="codeGrp" name="cdGrp" class="form-control" v-model="cdSpecInfo.cdGrp"  >
-			                        	<option value="">코드그룹</option>
-			                            <option v-for="(item,index) in code.roleDivList" v-bind:value="item.cdVal" v-text="item.cdVal"  v-on:change="setCdGrp(index)"></option>
-			                        </select>
-		                        </td>
-		                       </tr>
-			                    <tr>
-			                        <th scope="row" >코드그룹명</th>
+			                   <tr>
+			                        <th scope="row">코드그룹</th>
 			                        <td>
-			                        	<span  name ="cdGrpNm" v-text="cdSpecInfo.cdGrpNm" v-model="cdSpecInfo.cdGrpNm"></span>
+			                        	<select id="cdGrp" name="cdGrp" class="form-control" v-model="cdSpecInfo.cdGrp" @change="changeCdSpecInfo">
+				                        	<option value="">선택</option>
+				                            <option v-for="item in code.cdGrpDivList" v-bind:value="item.cdVal" v-text="item.cdVal" ></option>
+				                        </select>
 			                        </td>
 			                    </tr>
-			                    <tr>
 			                        <th scope="row">코드값</th>
 			                        <td>
-			                        	<input type="text" name="cdVal" v-model="cdSpecInfo.cdVal" class="form-control" />
+			                        	<input type="text" name="cdVal" v-model="cdSpecInfo.cdVal" class="form-control" @change="changeCdSpecInfo"/>
 			                        </td>
 			                    </tr>
 			                    <tr>

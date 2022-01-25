@@ -4,33 +4,56 @@ let cdSpecDetl = new Vue({
     	cdSpecInfo: {
     		crud: 'C',
     		cdGrp: '',
-    		cdGrpNm: '',
     		cdVal: '',
     		cdNm: '',
     		sortOrd: '',
-    		useYn: ''
+    		useYn: '',
+    		oldCdGrp:'',
+    		oldCdVal:'',
+    		newCdGrp:'',
+    		newCdVal:'',
     	},
     	code : {
     		useYnList: [
     			{cdVal: 'Y', cdNm: 'Y'},
     			{cdVal: 'N', cdNm: 'N'}
     		],
-    		roleDivList:[]
+    		cdGrpDivList:[]
     	}
 	},
 	
-    methods:{initialize: function() {
+    methods: {
+        initialize: function() {
         	
         	let $this = this;
-        	
+        	$
         	$this.initCodeList();
         },
         initCodeList: function() {
-        	getCommonCodeList('ROLE_DIV_CD', this.code.roleDivList);
-        },
-        initPage: function(crud, cdGrp, cdGrpNm, cdVal) {
         	
-        	console.log(crud, cdGrp, cdGrpNm, cdVal);
+        	let $this = this;
+        	let params = {};
+        	AjaxUtil.post({
+                url: "/set/cdMng/searchCdGrpDivList",
+                param: params,
+                success: function(response) {
+                	$this.code.cdGrpDivList = [];
+                	if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
+                		    $.each(response.rtnData.result, function(index, item) {
+        					$this.code.cdGrpDivList.push({'cdVal':item.cdGrp});
+
+        				});
+                    }
+                },
+                error: function (response) {
+                	Swal.alert([response, 'error']);
+                }
+            });
+        	
+        },
+        initPage: function(crud, cdGrp, cdVal) {
+        	
+        	console.log(crud, cdGrp, cdVal);
         	
         	let $this = this;
         	$this.resetCdSpecInfo();
@@ -51,6 +74,8 @@ let cdSpecDetl = new Vue({
                     		$.each(response.rtnData.result[0], function(key, val) {
             					$this.cdSpecInfo[key] = val;
             				});
+                    		   $this.cdSpecInfo.oldCdGrp = $this.cdSpecInfo.cdGrp;
+                    		   $this.cdSpecInfo.oldCdVal = $this.cdSpecInfo.cdVal;
                     	}                    		
                     },
                     error: function (response) {
@@ -61,9 +86,13 @@ let cdSpecDetl = new Vue({
         	else
         	{
         		$this.cdSpecInfo.cdGrp   = cdGrp;
-        		$this.cdSpecInfo.cdGrpNm = cdGrpNm;
         	}
         },
+        changeCdSpecInfo: function(){
+        	let $this = this;
+       		$this.cdSpecInfo.newCdVal = $this.cdSpecInfo.cdVal ;	
+       		$this.cdSpecInfo.newCdGrp = $this.cdSpecInfo.cdGrp ;	
+   },
         isValid: function() {
         	
         	let $this = this;
@@ -106,7 +135,7 @@ let cdSpecDetl = new Vue({
                 url: "/set/cdMng/saveCdSpec.ab",
                 param: $this.cdSpecInfo,
                 success: function(response) {
-                	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#cdSpecDetlPopup'));
                 		 cdMng.searchCdSpecList(true);
                 	});                	
@@ -115,10 +144,6 @@ let cdSpecDetl = new Vue({
                 	Swal.alert([response, 'error']);
                 }
             });
-		},
-		setCdGrp: function(index){
-			let $this = this;
-			
 		},
 		resetCdSpecInfo: function() {
 			this.cdSpecInfo = {

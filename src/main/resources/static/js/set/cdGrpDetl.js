@@ -60,10 +60,50 @@ let cdGrpDetl = new Vue({
         	if ( WebUtil.isNull($this.cdGrpInfo.cdGrp) ) {
         		Swal.alert(['코드그룹을 입력하세요.', 'info']);
         		return false;
-        	}
+        	}else if ( WebUtil.isNull($this.cdGrpInfo.cdGrpNm) ) {
+        		Swal.alert(['코드그룹명을 입력하세요.', 'info']);
+        		return false;
+        	}else if ( WebUtil.isNull($this.cdGrpInfo.useYn) ) {
+        		Swal.alert(['사용여부를 선택하세요.', 'info']);
+        		return false;
+        	}else {
+        			return true;
+        		}
         	
-        	return true;
+        	
+        
         },
+        searchDupUserId: function() {
+        	let $this = this;
+        	
+			if($this.isValid()){
+			
+        	let params =  {'cdGrp' : $this.cdGrpInfo.cdGrp
+        							, 'cdGrpNm' : $this.cdGrpInfo.cdGrpNm}
+      
+			AjaxUtil.post({
+                url: "/set/cdMng/searchDupCdGrp",
+                param: params,
+                success: function(response) {
+                	if ( response.rtnData.existsYn === 'N' )
+                	{
+                		$this.saveCdGrp();
+                	}
+                	else 
+                	{
+                		$this.cdGrpInfo.cdGrp = '';
+                		$this.cdGrpInfo.cdGrpNm = '';
+                		
+                		Swal.alert(['해당 코드그룹은 이미 사용중입니다.', 'info']);
+                	}
+                },
+                error: function (response) {
+                	Swal.alert([response, 'error']);
+                }
+            });
+			}
+        },
+        
 		saveCdGrp: function() {
 			
 			let $this = this;

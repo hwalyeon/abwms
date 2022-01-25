@@ -22,6 +22,7 @@ let cdMng = new Vue({
 			}
 		},
 		code : {
+
 		}
 	},
 	
@@ -47,10 +48,10 @@ let cdMng = new Vue({
 			let $this = this;
 			
 			let cdGrpColModels = [
-                {name: "cdGrp"       , index: "cdGrp"       , label: "코드그룹"  , width: 80 , align: "center"},
+                {name: "cdGrp"       , index: "cdGrp"       , label: "코드그룹"  , width: 100 , align: "center"},
                 {name: "cdGrpNm"     , index: "cdGrpNm"     , label: "코드그룹명" , width: 100, align: "left"  },
-                {name: "useYn"       , index: "useYn"       , label: "사용여부"  , width: 80 , align: "center"},
-                {name: "cdGrpDetlPop", index: "cdGrpDetlPop", label: "코드그룹 정보보기", width: 80, align: "center",
+                {name: "useYn"       , index: "useYn"       , label: "사용여부"  , width: 50 , align: "center"},
+                {name: "cdGrpDetlPop", index: "cdGrpDetlPop", label: "코드그룹 정보보기", width: 70, align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="cdMng.regCdGrpPop(\'' + rowObject.cdGrp + '\')" value="상세보기" data-toggle="modal" data-target="#cdGrpDetlPopup" />';
                     }
@@ -99,13 +100,17 @@ let cdMng = new Vue({
             
   
             let cdSpecColModels = [
-            	{name: "cdGrp"        , index: "cdGrp"        , label: "코드그룹"   , width: 60 , align: "center"},
-                {name: "cdGrpNm"      , index: "cdGrpNm"      , label: "코드그룹명" , width: 100, align: "left"},
-                {name: "cdVal"        , index: "cdVal"        , label: "코드값"    , width: 60 , align: "center"},
-                {name: "cdNm"         , index: "cdNm"         , label: "코드명"    , width: 150, align: "left"  },
-                {name: "sortOrd"      , index: "sortOrd"      , label: "정렬순서"   , width: 80 , align: "center"},
+            	{name: "cdGrp"        , index: "cdGrp"        , label: "코드그룹"   , width: 90 , align: "center"},
+                {name: "cdGrpNm"  , index: "cdGrpNm"      , label: "코드그룹명" , width: 90, align: "left"},
+                {name: "cdVal"        , index: "cdVal"        , label: "코드값"    , width: 90 , align: "center"},
+                {name: "cdNm"         , index: "cdNm"         , label: "코드명"    , width: 90, align: "left"  },
+                {name: "cdDesc"         , index: "cdDesc"         , label: "코드내용"    , width: 100, align: "left"  },
+                {name: "fltrVal1"         , index: "fltrVal1"         , label: "필터값1"    , width: 60, align: "left"  },
+                {name: "fltrVal2"         , index: "fltrVal2"         , label: "필터값2"    , width: 60, align: "left"  },
+                {name: "fltrVal3"         , index: "fltrVal3"         , label: "필터값3"    , width: 60, align: "left"  },
+                {name: "sortOrd"      , index: "sortOrd"      , label: "정렬순서"   , width: 50 , align: "center"},
                 {name: "useYn"        , index: "useYn"        , label: "사용여부"   , width: 50 , align: "center"},
-                {name: "cdSpecDetlPop", index: "cdSpecDetlPop", label: "코드 정보보기", width: 80, align: "center",
+                {name: "cdSpecDetlPop", index: "cdSpecDetlPop", label: "코드 정보보기", width: 70, align: "center",
                     formatter: function(cellValue, options, rowObject) {
                     	return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="cdMng.regCdSpecPop(\'' + rowObject.cdGrp + '\',\'' + rowObject.cdVal + '\')" value="상세보기" data-toggle="modal"/>';
                     }
@@ -255,7 +260,7 @@ let cdMng = new Vue({
 					cdGrpNm = $this.params.cdSpec.cdGrpNm;
 				}
 				$('#cdSpecDetlPopup').modal('show');
-				cdSpecDetl.initPage(crud, cdGrp, cdGrpNm, cdVal);
+				cdSpecDetl.initPage(crud, cdGrp, cdVal);
 			}
 		},
 		resetSearchParam: function() {
