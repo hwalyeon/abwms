@@ -22,9 +22,12 @@
 		                    <tbody>
 			                    <tr>
 			                        <th scope="row">사용자ID</th>
-			                        <td>
+			                        <td v-if="userInfo.crud == 'C'">
 			                            <input type="text" name="userId" v-model="userInfo.userId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk"/>
-			                            <button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()"><span>중복조회</span></button>
+			                            <button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
+			                        </td>
+			                        <td v-else="userInfo.crud == 'U'">
+			                            <input type="text" name="userId" v-model="userInfo.userId" class="form-control" @input="userIdChk"/>			                            
 			                        </td>
 			                    </tr>
 			                    <tr>
@@ -48,13 +51,15 @@
 			                    <tr>
 			                        <th scope="row">전화번호</th>
 			                        <td>
-			                        	<input type="tel" id="telNo" name="telNo" v-model="userInfo.telNo" class="form-control" />
+			                        	<input type="tel" id="telNo" name="telNo" v-model="userInfo.telNo" class="form-control" 
+			                        	  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">휴대전화번호</th>
 			                        <td>
-			                        	<input type="tel" id="mtelNo" name="mtelNo" v-model="userInfo.mtelNo" class="form-control" />
+			                        	<input type="tel" id="mtelNo" name="mtelNo" v-model="userInfo.mtelNo" class="form-control" 
+			                        	  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 			                        </td>
 			                    </tr>
 			                    <tr>

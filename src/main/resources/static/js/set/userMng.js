@@ -35,20 +35,30 @@ let userMng = new Vue({
         	
         },
         initGrid: function() {
-        	
-        	console.log(commonUtil.formatDate(20220125));
-        	
+        	        	        	
         	let colModels = [
                 {name: "userId"     , index: "userId"     , label: "사용자ID"    , width: 80, align: "center"},
                 {name: "userNm"     , index: "userNm"     , label: "사용자명"     , width: 80, align: "center"},
                 {name: "blngNm"     , index: "blngNm"     , label: "소속"        , width: 80, align: "center"},
-                {name: "telNo"      , index: "telNo"      , label: "전화번호"     , width: 80, align: "center"},
-                {name: "mtelNo"     , index: "mtelNo"     , label: "휴대전화번호"  , width: 80, align: "center"},
+                {name: "telNo"      , index: "telNo"      , label: "전화번호"     , width: 80, align: "center"
+                	,formatter:function(cellValue, options, rowObject){
+                		console.log(phoneFormatter(cellValue));
+                		return phoneFormatter(cellValue);
+                	}
+                },
+                {name: "mtelNo"     , index: "mtelNo"     , label: "휴대전화번호"  , width: 80, align: "center"
+                	,formatter:function(cellValue, options, rowObject){
+                		console.log(phoneFormatter(cellValue));
+                		return phoneFormatter(cellValue);
+                	}
+                },
                 {name: "mailAddr"   , index: "mailAddr"   , label: "이메일"      , width: 80, align: "center"},
                 {name: "entrDt"     , index: "acdmYn"     , label: "가입일자"     , width: 80, align: "center"
                 	,formatter: function(cellValue, options, rowObject) {
-                        return moment(cellValue, 'YYYYMMDD').format("YYYY-MM-DD");                        
-                	}},
+                		console.log(formatDate(cellValue));
+                		return formatDate(cellValue);
+                	}
+                },
                 {name: "relsDt"     , index: "lctrYn"     , label: "해지일자"     , width: 80, align: "center"
                 	,formatter: function(cellValue, options, rowObject) {
                     return moment(cellValue, 'YYYYMMDD').format("YYYY-MM-DD");
@@ -79,7 +89,7 @@ let userMng = new Vue({
                 }
             }));
 
-            resizeJqGridWidth("user_list", "user_list_wrapper");
+            resizeJqGridWidth("user_list", "user_list_wrapper");                        
         },
         searchUserList: function(isSearch) {
 			

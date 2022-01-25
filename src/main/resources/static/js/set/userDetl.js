@@ -26,7 +26,8 @@ let userDetl = new Vue({
         	
         	let $this = this;
         	
-        	$this.initCodeList();        	
+        	$this.initCodeList();      
+        	        	
         },
         initCodeList: function() {
         	
@@ -37,6 +38,7 @@ let userDetl = new Vue({
         	
         	let $this = this;
         	$this.resetUserInfo();
+
         	
         	if ( !WebUtil.isNull(userId) )
     		{
@@ -126,7 +128,17 @@ let userDetl = new Vue({
 	        		Swal.alert(['ID 중복체크를 하세요.', 'info']);
 	        		return false;
 	        	}
+	            if ( isValidPhoneNumber($this.userInfo.telNo)==false) {
+	            	Swal.alert(['전화번호를 형식에 맞춰 입력 하세요','info']);
+	            	return false;
+	            }	            	
+	            if ( isValidEmail($this.userInfo.mailAddr)==false){
+	            	Swal.alert(['이메일을 형식에 맞춰 입력 하세요','info']);
+	            	return false;
+	            }
             }
+            
+
             
 			AjaxUtil.post({
                 url: "/set/userMng/saveUser.ab",
