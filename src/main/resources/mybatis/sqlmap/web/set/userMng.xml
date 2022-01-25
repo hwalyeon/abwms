@@ -30,12 +30,8 @@
 	AND   MTEL_NO LIKE CONCAT ('%', #{mtelNo}, '%')		</if>
 	<if test=" mailAddr != null and mailAddr != '' ">
 	AND   MAIL_ADDR LIKE CONCAT ('%', #{mailAddr}, '%')		</if>
-	<if test=" acdmYn != null and acdmYn != 'N' ">
-	AND   ACDM_YN = #{acdmYn}		</if>
-	<if test=" lctrYn != null and lctrYn != 'N' ">
-	AND   LCTR_YN = #{lctrYn}		</if>
-	<if test=" stdtYn != null and stdtYn != 'N' ">
-	AND   STDT_YN = #{stdtYn}		</if>
+	<if test=" useYn != null and useYn != '' ">
+	AND   USE_YN LIKE CONCAT('%',#{useYn},'%')</if>
 	ORDER BY USER_ID
 	<if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex} </if>
@@ -80,7 +76,7 @@
 	    ,#{mailAddr}		</if>
 	    ,TO_CHAR(NOW(), 'YYYYMMDD')	  
 	    ,''
-	    ,'Y'
+	    ,#{useYn}
 	    ,TO_CHAR(NOW(), 'YYYYMMDD')
 	    ,TO_CHAR(NOW(), 'HH24MISS')
 	    ,#{regUserId}

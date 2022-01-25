@@ -8,6 +8,7 @@ let userMng = new Vue({
     		telNo: '',
     		mtelNo: '',
     		mailAddr: '',
+    		useYn:'Y',
     		paging: 'Y',
     		totalCount: 0,
             rowCount: 30,
@@ -27,12 +28,15 @@ let userMng = new Vue({
         	$this.initGrid();
         	
         	$this.searchUserList(true);
+
         	
         },
         initCodeList: function() {
         	
         },
         initGrid: function() {
+        	
+        	console.log(commonUtil.formatDate(20220125));
         	
         	let colModels = [
                 {name: "userId"     , index: "userId"     , label: "사용자ID"    , width: 80, align: "center"},
@@ -41,8 +45,14 @@ let userMng = new Vue({
                 {name: "telNo"      , index: "telNo"      , label: "전화번호"     , width: 80, align: "center"},
                 {name: "mtelNo"     , index: "mtelNo"     , label: "휴대전화번호"  , width: 80, align: "center"},
                 {name: "mailAddr"   , index: "mailAddr"   , label: "이메일"      , width: 80, align: "center"},
-                {name: "entrDt"     , index: "acdmYn"     , label: "가입일자"     , width: 80, align: "center"},
-                {name: "relsDt"     , index: "lctrYn"     , label: "해지일자"     , width: 80, align: "center"},
+                {name: "entrDt"     , index: "acdmYn"     , label: "가입일자"     , width: 80, align: "center"
+                	,formatter: function(cellValue, options, rowObject) {
+                        return moment(cellValue, 'YYYYMMDD').format("YYYY-MM-DD");                        
+                	}},
+                {name: "relsDt"     , index: "lctrYn"     , label: "해지일자"     , width: 80, align: "center"
+                	,formatter: function(cellValue, options, rowObject) {
+                    return moment(cellValue, 'YYYYMMDD').format("YYYY-MM-DD");
+                }},
                 {name: "useYn"     , index: "stdtYn"     , label: "사용여부"     , width: 80, align: "center"},
                 {name: "userDetlPop", index: "userDetlPop", label: "사용자 정보보기", width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {

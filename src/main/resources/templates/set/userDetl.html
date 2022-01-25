@@ -4,7 +4,7 @@
 <div class="modal fade" id="userDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 580px; height: 550px">
+			<div class="modal-content" style="width: 580px; height: 600px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -63,6 +63,13 @@
 			                        	<input type="email" id="mailAddr" name="mailAddr" v-model="userInfo.mailAddr" class="form-control ime-eng" />
 			                        </td>
 			                    </tr>			                    
+			                    <tr>
+			                        <th scope="row">사용여부</th>
+			                        <td>
+			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="Y" />Y&nbsp
+			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="N"/>N			                        	
+			                        </td>
+			                    </tr>
 							</tbody>
 		                </table>
             		</div>

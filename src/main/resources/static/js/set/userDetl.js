@@ -26,7 +26,7 @@ let userDetl = new Vue({
         	
         	let $this = this;
         	
-        	$this.initCodeList();
+        	$this.initCodeList();        	
         },
         initCodeList: function() {
         	

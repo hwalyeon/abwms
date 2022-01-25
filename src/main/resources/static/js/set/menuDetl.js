@@ -25,6 +25,9 @@ let menuDetl = new Vue({
         	
         	let $this = this;
         	$this.initCodeList();
+        	console.log("꾸에에엙");
+        	console.log($this.menuInfo.readonly);
+        	
         },
         initCodeList: function() {
         	
@@ -71,11 +74,16 @@ let menuDetl = new Vue({
         	
         	let $this = this;
         	$this.resetMenuInfo();
+        	console.log("menuDetl.js/initPage");
+        	
+        	console.log(menuNo);
+        	
         	
         	if ( !WebUtil.isNull(menuNo) )
     		{
         		let params = {
         			'menuNo' : menuNo
+        			
         		}
         		
         		AjaxUtil.post({
@@ -86,14 +94,14 @@ let menuDetl = new Vue({
                     		$this.menuInfo.crud = 'U';
                     		$.each(response.rtnData.result, function(key, val) {
             					$this.menuInfo[key] = val;
+            					console.log(menuNo);
             				});
                     	}
                     	
                     	if ( !!response.rtnData.roleList && response.rtnData.roleList.length > 0 ) {
                     		$this.menuInfo.roleList = response.rtnData.roleList;
                     	}
-                    	
-                    	$this.menuInfo.roleList.push($this.addRoleCd());
+                    	                    	$this.menuInfo.roleList.push($this.addRoleCd());
                     },
                     error: function (response) {
                     	Swal.alert([response, 'error']);

@@ -26,15 +26,16 @@
 					                        <th scope="row">상위 메뉴</th>
 					                        <td>
 					                        	<select id="upprMenuNo" name="upprMenuNo" class="form-control" v-model="menuInfo.upprMenuNo" v-on:change="changeUpprMenuNo">
-						                        	<option value=""disabled>선택</option>
-						                            <option v-for="item in code.upprMenuList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+						                        	<option value="" :disabled="menuInfo.crud=='U'">선택</option>
+						                            <option v-for="item in code.upprMenuList" v-bind:value="item.cdVal" v-text="item.cdNm" :disabled="menuInfo.crud=='U'"></option>
 						                        </select>
 					                        </td>
 					                    </tr>
 					                    <tr>
 					                        <th scope="row">메뉴번호</th>
 					                        <td>
-					                            <input type="text" name="menuNo" v-model="menuInfo.menuNo" class="form-control" />
+					                            <input type="text" name="menuNo" v-model="menuInfo.menuNo" class="form-control"  :disabled="menuInfo.crud == 'U'" />					
+					                            <h2>{{menuInfo.readonly}}</h2>                            
 					                        </td>
 					                    </tr>
 					                    <tr>

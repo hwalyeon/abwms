@@ -129,6 +129,7 @@ let menuMng = new Vue({
 		},
 		regMenuPop: function(menuNo) {
 			menuDetl.initPage(menuNo);
+			console.log(menuNo);			
 		},
 		resetSearchParam: function() {
 			let $this = this;
