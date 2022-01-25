@@ -4,19 +4,17 @@
     var dataPickerFormat = "YYYY-MM-DD";
 
     formatTimestamp = function(date){
-    	if(value == null) return value;
-    	if(isNaN(value)) return value;
-    	//value -= serverTime;
-    	return moment(value).format(timestampFormatPattern);
+    	if(WebUtil.isNull(date)) return '';
+    	return moment(date).format(timestampFormatPattern);
     }
 
     formatDate = function(date){
-    	if(date == null) return ;
+    	if(WebUtil.isNull(date)) return '';
     	return moment( date ).format(dateFormatPattern);
     }
 
     formatDatePicker = function(date){
-    	if(date == null) return ;
+    	if(WebUtil.isNull(date)) return '';
     	return moment( date ).format(dataPickerFormat);
     }
 
