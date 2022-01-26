@@ -23,7 +23,7 @@
 			                    <tr>
 			                        <th scope="row">사용자ID</th>
 			                        <td v-if="userInfo.crud == 'C'">
-			                            <input type="text" name="userId" v-model="userInfo.userId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk"/>
+			                            <input type="text" name="userId" v-model="userInfo.userId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk" maxlength="40"/>
 			                            <button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
 			                        </td>
 			                        <td v-else="userInfo.crud == 'U'">
@@ -33,46 +33,46 @@
 			                    <tr>
 			                        <th scope="row">사용자명</th>
 			                        <td>
-			                        	<input type="text" name="userNm" v-model="userInfo.userNm" class="form-control ime-han" />
+			                        	<input type="text" name="userNm" v-model="userInfo.userNm" class="form-control ime-han" maxlength="40"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">비밀번호</th>
 			                        <td>
-			                        	<input type="password" id="userPw" name="userPw" v-model="userInfo.userPw" class="form-control" />
+			                        	<input type="password" id="userPw" name="userPw" v-model="userInfo.userPw" class="form-control" maxlength="100"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">소속</th>
 			                        <td>
-			                        	<input type="text" id="blngNm" name="blngNm" v-model="userInfo.blngNm" class="form-control" />
+			                        	<input type="text" id="blngNm" name="blngNm" v-model="userInfo.blngNm" class="form-control" maxlength="100"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">전화번호</th>
 			                        <td>
-			                        	<input type="tel" id="telNo" name="telNo" v-model="userInfo.telNo" class="form-control" 
+			                        	<input type="tel" id="telNo" name="telNo" v-model="userInfo.telNo" class="form-control" maxlength="20"
 			                        	  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">휴대전화번호</th>
 			                        <td>
-			                        	<input type="tel" id="mtelNo" name="mtelNo" v-model="userInfo.mtelNo" class="form-control" 
+			                        	<input type="tel" id="mtelNo" name="mtelNo" v-model="userInfo.mtelNo" class="form-control" maxlength="20"
 			                        	  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">이메일</th>
 			                        <td>
-			                        	<input type="email" id="mailAddr" name="mailAddr" v-model="userInfo.mailAddr" class="form-control ime-eng" />
+			                        	<input type="email" id="mailAddr" name="mailAddr" v-model="userInfo.mailAddr" class="form-control ime-eng" maxlength="50"/>
 			                        </td>
 			                    </tr>			                    
 			                    <tr>
 			                        <th scope="row">사용여부</th>
 			                        <td>
-			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="Y" />Y&nbsp
-			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="N"/>N			                        	
+			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="Y" />&nbspY
+			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="N"/>&nbspN			                        	
 			                        </td>
 			                    </tr>
 							</tbody>

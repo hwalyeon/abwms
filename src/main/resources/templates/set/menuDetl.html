@@ -34,26 +34,26 @@
 					                    <tr>
 					                        <th scope="row">메뉴번호</th>
 					                        <td>
-					                            <input type="text" name="menuNo" v-model="menuInfo.menuNo" class="form-control"  :disabled="menuInfo.crud == 'U'" />					
+					                            <input type="text" name="menuNo" v-model="menuInfo.menuNo" class="form-control"  :disabled="menuInfo.crud == 'U'" maxlength="200"/>					
 					                            <h2>{{menuInfo.readonly}}</h2>                            
 					                        </td>
 					                    </tr>
 					                    <tr>
 					                        <th scope="row">메뉴명</th>
 					                        <td>
-					                        	<input type="text" name="menuNm" v-model="menuInfo.menuNm" class="form-control" />
+					                        	<input type="text" name="menuNm" v-model="menuInfo.menuNm" class="form-control" maxlength="100"/>
 					                        </td>
 					                    </tr>
 					                    <tr>
 					                        <th scope="row">메뉴 경로</th>
 					                        <td>
-					                        	<input type="text" id="menuUrl" name="menuUrl" v-model="menuInfo.menuUrl" class="form-control" />
+					                        	<input type="text" id="menuUrl" name="menuUrl" v-model="menuInfo.menuUrl" class="form-control" maxlength="200"/>
 					                        </td>
 					                    </tr>
 					                    <tr>
 					                    	<th scope="row">메뉴아이콘</th>
 					                        <td>
-					                        	<input type="text" id="iconInfo" name="iconInfo" v-model="menuInfo.iconInfo" class="form-control" />
+					                        	<input type="text" id="iconInfo" name="iconInfo" v-model="menuInfo.iconInfo" class="form-control" maxelngth="40"/>
 					                        </td>
 					                    </tr>
 					                    <tr>
@@ -69,7 +69,7 @@
 					                    <tr>
 					                    	<th scope="row">메뉴 설명</th>
 					                        <td>
-					                        	<input type="text" id="menuDesc" name="menuDesc" v-model="menuInfo.menuDesc" class="form-control" />
+					                        	<input type="text" id="menuDesc" name="menuDesc" v-model="menuInfo.menuDesc" class="form-control" maxlength="1000"/>
 					                        </td>
 					                    </tr>
 									</tbody>

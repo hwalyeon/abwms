@@ -4,13 +4,18 @@
     var dataPickerFormat = "YYYY-MM-DD";
 
     formatTimestamp = function(date){
-    	if(WebUtil.isNull(date)) return '';
-    	return moment(date).format(timestampFormatPattern);
+    	 if(value == null) return value;
+         if(isNaN(value)) return value;
+         //value -= serverTime;
+         return moment(value).format(timestampFormatPattern);
+         if(WebUtil.isNull(date)) return '';
+         return moment(date).format(timestampFormatPattern);
     }
 
     formatDate = function(date){
-    	if(WebUtil.isNull(date)) return '';
-    	return moment( date ).format(dateFormatPattern);
+    	 if(date == null) return ;
+         if(WebUtil.isNull(date)) return '';
+         return moment( date ).format(dateFormatPattern);
     }
     
     phoneFormatter = function(num,type){
@@ -54,8 +59,9 @@
     }
 
     formatDatePicker = function(date){
-    	if(WebUtil.isNull(date)) return '';
-    	return moment( date ).format(dataPickerFormat);
+    	 if(date == null) return ;
+         if(WebUtil.isNull(date)) return '';
+         return moment( date ).format(dataPickerFormat);
     }
 
     var ValueLabel = function (pvalue, plabel){

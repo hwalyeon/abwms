@@ -25,7 +25,6 @@ let menuDetl = new Vue({
         	
         	let $this = this;
         	$this.initCodeList();
-        	console.log("꾸에에엙");
         	console.log($this.menuInfo.readonly);
         	
         },
