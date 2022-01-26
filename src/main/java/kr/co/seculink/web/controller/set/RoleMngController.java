@@ -28,6 +28,29 @@ public class RoleMngController
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 	
+
+	@ResponseBody
+	@RequestMapping("/set/roleMng/searchDupRoleCd")
+	public RtnMsg  searchDupRoleCd(@RequestBody(required=false)Map<String, String> params) throws BizException
+	{	RtnMsg vo = new RtnMsg();
+     	Map<String, String> rtnMap = new HashMap<>();
+     	
+		List<Map<String, String>> result = dao.selectList("set.roleMng.selectDupRoleCd", params);
+		
+		
+	
+		if ( result.size() == 0) {
+			rtnMap.put("existsYn", "N");
+			}
+		else {
+			rtnMap.put("existsYn", "Y");
+		}
+		
+		vo.setRtnData(rtnMap);
+		
+		return vo;
+	}
+	
 	@ResponseBody
 	@RequestMapping("/set/roleMng/searchRoleList.ab")
 	public RtnMsg searchRoleList(@RequestBody(required=false) Map<String, String> params) throws BizException

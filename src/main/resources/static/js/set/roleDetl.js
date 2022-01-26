@@ -74,7 +74,36 @@ let roleDetl = new Vue({
         	}
         	
         	return true;
+        },   searchDuprRoleCd: function() {
+        	let $this = this;
+        
+			
+        	let params =  {'roleCd' : $this.roleInfo.roleCd
+        							, 'roleNm' : $this.roleInfo.roleNm}
+      
+			AjaxUtil.post({
+                url:"/set/roleMng/searchDupRoleCd",
+                param: params,
+                success: function(response) {
+                	if ( response.rtnData.existsYn === 'N' )
+                	{
+                		$this.saveRole();
+                	}
+                	else 
+                	{
+                		$this.roleInfo.roleCd = '';
+                		$this.roleInfo.roleNm = '';
+                		
+                		Swal.alert(['해당 역할코드는 이미 사용중입니다.', 'info']);
+                	}
+                },
+                error: function (response) {
+                	Swal.alert([response, 'error']);
+                }
+            });
+			
         },
+        
 		saveRole: function() {
 			
 			let $this = this;

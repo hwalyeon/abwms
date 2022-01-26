@@ -104,7 +104,7 @@ let cdMng = new Vue({
                 {name: "cdGrpNm"  , index: "cdGrpNm"      , label: "코드그룹명" , width: 90, align: "left"},
                 {name: "cdVal"        , index: "cdVal"        , label: "코드값"    , width: 90 , align: "center"},
                 {name: "cdNm"         , index: "cdNm"         , label: "코드명"    , width: 90, align: "left"  },
-                {name: "cdDesc"         , index: "cdDesc"         , label: "코드내용"    , width: 100, align: "left"  },
+                {name: "cdDesc"         , index: "cdDesc"         , 상label: "코드내용"    , width: 100, align: "left"  },
                 {name: "fltrVal1"         , index: "fltrVal1"         , label: "필터값1"    , width: 60, align: "left"  },
                 {name: "fltrVal2"         , index: "fltrVal2"         , label: "필터값2"    , width: 60, align: "left"  },
                 {name: "fltrVal3"         , index: "fltrVal3"         , label: "필터값3"    , width: 60, align: "left"  },

@@ -296,7 +296,7 @@ let menuRoleMng = new Vue({
 		removeMenu: function() {
             let menuRoleList = $('#menuRole_list');
             let selectedRow = menuRoleList.jqGrid('getGridParam', 'selarrrow'); // 선택된 ROW
-            console.log(selectedRow);
+            /*console.log(selectedRow);*/
             if ( !selectedRow || selectedRow.length == 0 ) {
                 Swal.alert(['선택된 메뉴가 없습니다.', 'warning']);
                 return false;

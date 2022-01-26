@@ -6,12 +6,17 @@ let cdSpecDetl = new Vue({
     		cdGrp: '',
     		cdVal: '',
     		cdNm: '',
+    		cdDesc: '',
+    		fltrVal1: '',
+    		fltrVal2: '',
+    		fltrVal3: '',
     		sortOrd: '',
     		useYn: '',
     		oldCdGrp:'',
     		oldCdVal:'',
     		newCdGrp:'',
     		newCdVal:'',
+    		dataCk:'Y',
     	},
     	code : {
     		useYnList: [
@@ -53,7 +58,6 @@ let cdSpecDetl = new Vue({
         },
         initPage: function(crud, cdGrp, cdVal) {
         	
-        	console.log(crud, cdGrp, cdVal);
         	
         	let $this = this;
         	$this.resetCdSpecInfo();
@@ -75,8 +79,10 @@ let cdSpecDetl = new Vue({
             					$this.cdSpecInfo[key] = val;
             				});
                     		   $this.cdSpecInfo.oldCdGrp = $this.cdSpecInfo.cdGrp;
-                    		   $this.cdSpecInfo.oldCdVal = $this.cdSpecInfo.cdVal;
-                    	}                    		
+                    		   $this.cdSpecInfo.oldCdVal  = $this.cdSpecInfo.cdVal;
+                    		   $this.cdSpecInfo.newCdGrp = $this.cdSpecInfo.cdGrp;
+                    		   $this.cdSpecInfo.newCdVal  = $this.cdSpecInfo.cdVal;
+                         	}                    		
                     },
                     error: function (response) {
                     	Swal.alert([response, 'error']);
@@ -103,18 +109,62 @@ let cdSpecDetl = new Vue({
         	
         	return true;
         },
+        searchDuprCdSpec: function() {
+        	let $this = this;
+        	
+        	if($this.cdSpecInfo.oldCdVal == $this.cdSpecInfo.newCdVal &&$this.cdSpecInfo.oldCdGrp == $this.cdSpecInfo.newCdGrp  )
+            {
+              		$this.cdSpecInfo.dataCk = 'N';
+            }else {
+            	$this.cdSpecInfo.dataCk = 'Y';
+            }
+        	
+        	let params =  $this.cdSpecInfo;
+        
+			AjaxUtil.post({
+                url:"/set/cdMng/searchDuprCdSpec",
+                param: params,
+                success: function(response) {
+                	if ( response.rtnData.existsYn === 'N' )
+                	{
+                		
+                	
+                			$this.saveCdSpec();
+                
+                	}
+                	else 
+                	{
+                		$this.cdSpecInfo.cdVal = '';
+                		
+                		Swal.alert(['해당 코드는 이미 사용중입니다.', 'info']);
+                		if ( response.rtnData.sortOrdDu == 'Y')
+                		{
+                			$this.cdSpecInfo.sortOrd = '';
+                		}else{
+                			$this.cdSpecInfo.sortOrd =$this.cdSpecInfo.sortOrd ;
+                		}
+                	}
+                },
+                error: function (response) {
+                	Swal.alert([response, 'error']);
+                }
+            });
+			
+        },
+        
 		saveCdSpec: function() {
 			
 			let $this = this;
-			
-            if ( !this.isValid() ) {
+			let params = $this.cdSpecInfo;
+         /*   if ( !this.isValid() ) {
                 return false;
-            }
+            }*/
 			
-			AjaxUtil.post({
+		  	  AjaxUtil.post({
                 url: "/set/cdMng/saveCdSpec.ab",
-                param: $this.cdSpecInfo,
-                success: function(response) {
+                param: params,
+                success: function(response)
+                {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#cdSpecDetlPopup'));
                 		 cdMng.searchCdSpecList(true);
@@ -147,13 +197,17 @@ let cdSpecDetl = new Vue({
 		},
 		resetCdSpecInfo: function() {
 			this.cdSpecInfo = {
-				crud: 'C',
-	    		cdGrp: '',
-	    		cdGrpNm: '',
-	    		cdVal: '',
-	    		cdNm: '',
-	    		sortOrd: '',
-	    		useYn: ''
+					crud: 'C',
+		    		cdGrp: '',
+		    		cdVal: '',
+		    		cdNm: '',
+		    		cdDesc: '',
+		    		fltrVal1: '',
+		    		fltrVal2: '',
+		    		fltrVal3: '',
+		    		sortOrd: '',
+		    		useYn: '',
+
 	    	}
 		}
     },
