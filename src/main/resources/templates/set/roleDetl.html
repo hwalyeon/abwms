@@ -23,19 +23,19 @@
 			                    <tr>
 			                        <th scope="row">역할코드</th>
 			                        <td>
-			                            <input type="text" name="roleCd" v-model="roleInfo.roleCd" class="form-control" />
+			                            <input type="text"  id="roleCd" name="roleCd"  :value="roleInfo.roleCd" v-model="roleInfo.roleCd" class="form-control"  v-on:input="roleDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">역할명</th>
 			                        <td>
-			                        	<input type="text" name="roleNm" v-model="roleInfo.roleNm" class="form-control" />
+			                        	<input type="text" id= "roleNm" name="roleNm" :value="roleInfo.roleNm" v-model="roleInfo.roleNm" class="form-control"  v-on:input="roleDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">역할구분</th>
 			                        <td>			                          	
-			                           <select id="roleDivCd" name="roleDivCd" class="form-control" v-model="roleInfo.roleDivCd">
+			                           <select id="roleDivCd" name="roleDivCd"  class="form-control" v-model="roleInfo.roleDivCd">
 				                        	<option value="">선택</option>
 				                            <option v-for="item in code.roleDivList" v-bind:value="item.cdVal" v-text="item.cdNm" ></option>
 				                        </select> 
@@ -44,7 +44,7 @@
 			                    <tr>
 			                    	<th scope="row">역할 설명</th>
 			                        <td>
-			                        	<textarea id="roleDesc" name="roleDesc" v-model="roleInfo.roleDesc" rows="3" class="form-control" ></textarea>
+			                        	<textarea id="roleDesc"  name="roleDesc"  :value="roleInfo.roleDesc" v-model="roleInfo.roleDesc" rows="3" class="form-control"   v-on:input="roleDetl_typing"></textarea>
 			                        </td>
 			                    </tr>
 							</tbody>

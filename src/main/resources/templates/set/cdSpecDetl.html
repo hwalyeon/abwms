@@ -23,7 +23,7 @@
 			                   <tr>
 			                        <th scope="row">코드그룹</th>
 			                        <td>
-			                        	<select id="cdGrp" name="cdGrp" class="form-control" v-model="cdSpecInfo.cdGrp" @change="changeCdSpecInfo">
+			                        	<select id="cdGrp" name="cdGrp" class="form-control" v-model="cdSpecInfo.cdGrp" @change="changeCdSpecInfo" >
 				                        	<option value="">선택</option>
 				                            <option v-for="item in code.cdGrpDivList" v-bind:value="item.cdVal" v-text="item.cdVal" ></option>
 				                        </select>
@@ -31,47 +31,47 @@
 			                    </tr>
 			                        <th scope="row">코드값</th>
 			                        <td>
-			                        	<input type="text" name="cdVal" v-model="cdSpecInfo.cdVal" class="form-control" @change="changeCdSpecInfo"/>
+			                        	<input type="text" id="cdVal"  name="cdVal" v-model="cdSpecInfo.cdVal"  v-bind:value="cdSpecInfo.cdVal" class="form-control" @change="changeCdSpecInfo"  v-on:input="cdSpecDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">코드명</th>
 			                        <td>
-			                        	<input type="text" id="cdNm" name="cdNm" v-model="cdSpecInfo.cdNm" class="form-control" />
+			                        	<input type="text" id="cdNm" name="cdNm" v-model="cdSpecInfo.cdNm" v-bind:value="cdSpecInfo.cdNm" class="form-control"  v-on:input="cdSpecDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                      <tr>
 			                        <th scope="row">코드내용</th>
 			                        <td>
-			                        	<input type="text" id="cdDesc" name="cdDesc" v-model="cdSpecInfo.cdDesc" class="form-control" />
+			                        	<input type="text" id="cdDesc" name="cdDesc" v-model="cdSpecInfo.cdDesc" v-bind:value="cdSpecInfo.cdDesc" class="form-control"  v-on:input="cdSpecDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                      <tr>
 			                        <th scope="row">필터값1</th>
 			                        <td>
-			                        	<input type="text" id="fltrVal1" name="fltrVal1" v-model="cdSpecInfo.fltrVal1" class="form-control" />
+			                        	<input type="text" id="fltrVal1" name="fltrVal1" v-model="cdSpecInfo.fltrVal1"   v-bind:value="cdSpecInfo.fltrVal1" class="form-control"  v-on:input="cdSpecDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                      <tr>
 			                        <th scope="row">필터값2</th>
 			                        <td>
-			                        	<input type="text" id="fltrVal2" name="fltrVal2" v-model="cdSpecInfo.fltrVal2" class="form-control" />
+			                        	<input type="text" id="fltrVal2" name="fltrVal2" v-model="cdSpecInfo.fltrVal2" v-bind:value="cdSpecInfo.fltrVal2" class="form-control"  v-on:input="cdSpecDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                      <tr>
 			                        <th scope="row">필터값3</th>
 			                        <td>
-			                        	<input type="text" id="fltrVal3" name="fltrVal3" v-model="cdSpecInfo.fltrVal3" class="form-control" />
+			                        	<input type="text" id="fltrVal3" name="fltrVal3" v-model="cdSpecInfo.fltrVal3"  v-bind:value="cdSpecInfo.fltrVal3"class="form-control"  v-on:input="cdSpecDetl_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">정렬순서</th>
 			                        <td>
-			                        	<input type="number" id="sortOrd" name="sortOrd" v-model="cdSpecInfo.sortOrd" class="form-control" />
+			                        	<input type="number" id="sortOrd" name="sortOrd" v-model="cdSpecInfo.sortOrd" v-bind:value="cdSpecInfo.sortOrd" class="form-control"  v-on:input="sortOrd_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>

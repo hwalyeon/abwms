@@ -144,8 +144,9 @@ WHERE 1=1
 	    ,#{fltrVal1}
 	    ,#{fltrVal2}
 	    ,#{fltrVal3}
-       , CAST (#{sortOrd} AS INTEGER)
-	    ,#{useYn}
+       <if test ="sortOrd !=null and sortOrd !='' ">,CAST (#{sortOrd} AS INTEGER)</if>
+       <if test ="sortOrd ==null or sortOrd =='' ">,null</if>
+	   ,#{useYn}
 	    ,TO_CHAR(NOW(), 'YYYYMMDD')
 	    ,TO_CHAR(NOW(), 'HH24IISS')
 	    ,#{regUserId}

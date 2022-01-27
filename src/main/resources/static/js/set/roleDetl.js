@@ -154,7 +154,20 @@ let roleDetl = new Vue({
 	    		roleDivCd: '',
 	    		roleDesc: ''
 	    	}
-		}
+		},
+		  roleDetl_typing : function(e){    	
+	            this.max_length(e, 40, '#roleCd');
+	            this.max_length(e, 100, '#roleNm');
+	            this.max_length(e, 1000, '#roleDesc');
+	        },
+	        max_length : function(e, len,id)
+	        {
+	            var val =  e.target.value;    			
+	            if (val.length > len){    				
+	            	Swal.alert(['최대 글자수를 초과하였습니다.' ]);
+	            	 $(id).val(val.substring(0, len));
+	            	}
+	        }
     },
     computed: {
 
