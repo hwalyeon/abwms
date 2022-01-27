@@ -25,7 +25,7 @@ let menuDetl = new Vue({
         	
         	let $this = this;
         	$this.initCodeList();
-        	console.log($this.menuInfo.readonly);
+
         	
         },
         initCodeList: function() {
@@ -73,11 +73,8 @@ let menuDetl = new Vue({
         	
         	let $this = this;
         	$this.resetMenuInfo();
-        	console.log("menuDetl.js/initPage");
-        	
-        	console.log(menuNo);
-        	
-        	
+
+
         	if ( !WebUtil.isNull(menuNo) )
     		{
         		let params = {
@@ -93,7 +90,7 @@ let menuDetl = new Vue({
                     		$this.menuInfo.crud = 'U';
                     		$.each(response.rtnData.result, function(key, val) {
             					$this.menuInfo[key] = val;
-            					console.log(menuNo);
+
             				});
                     	}
                     	
@@ -116,6 +113,11 @@ let menuDetl = new Vue({
         isValid: function() {
         	
         	let $this = this;
+        	
+        	if(''==''){
+        		console.log($this.menuInfo.menuNo);
+        	}
+        	
         	if ( WebUtil.isNull($this.menuInfo.menuNo) ) {
         		Swal.alert(['메뉴번호를 입력하세요.', 'info']);
         		return false;
@@ -130,6 +132,28 @@ let menuDetl = new Vue({
         		Swal.alert(['상위메뉴를 입력하세요.', 'info']);
         		return false;
         	}
+        	
+        	if ( WebUtil.isNull($this.menuInfo.menuUrl) ) {
+        		Swal.alert(['메뉴경로를 입력하세요.', 'info']);
+        		return false;
+        	}
+
+        	if ( WebUtil.isNull($this.menuInfo.iconInfo) ) {
+        		Swal.alert(['메뉴아이콘을 입력하세요.', 'info']);
+        		return false;
+        	}
+        	
+        	if ( WebUtil.isNull($this.menuInfo.useYn) ) {
+        		Swal.alert(['사용여부를 선택하세요.', 'info']);
+        		return false;
+        	}
+        	
+        	if ( WebUtil.isNull($this.menuInfo.menuDesc) ) {
+        		Swal.alert(['메뉴설명을 입력하세요.', 'info']);
+        		return false;
+        	}
+        	
+        	
         	
         	return true;
         },

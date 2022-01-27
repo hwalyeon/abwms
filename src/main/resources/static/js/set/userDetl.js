@@ -65,7 +65,7 @@ let userDetl = new Vue({
         },
         isValid: function() {
         	
-        	let $this = this;
+        	let $this = this;        	        	
         	
         	if ( WebUtil.isNull($this.userInfo.userId) ) {
         		Swal.alert(['사용자ID를 입력하세요.', 'info']);
@@ -77,11 +77,36 @@ let userDetl = new Vue({
         		return false;
         	}
         	
-        	if ( WebUtil.isNull($this.userInfo.userNm) ) {
-        		Swal.alert(['사용자명을 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.userInfo.userPw) ) {
+        		Swal.alert(['비밀번호를 입력하세요.', 'info']);
         		return false;
         	}
         	
+        	if ( WebUtil.isNull($this.userInfo.blngNm) ) {
+        		Swal.alert(['소속을 입력하세요.', 'info']);
+        		return false;
+        	}
+        	
+        	if ( WebUtil.isNull($this.userInfo.telNo) ) {
+        		Swal.alert(['전화번호를 입력하세요.', 'info']);
+        		return false;
+        	}
+        	
+        	if ( WebUtil.isNull($this.userInfo.mtelNo) ) {
+        		Swal.alert(['휴대전화번호를 입력하세요.', 'info']);
+        		return false;
+        	}
+        	
+        	if ( WebUtil.isNull($this.userInfo.mailAddr) ) {
+        		Swal.alert(['이메일을 입력하세요.', 'info']);
+        		return false;
+        	}
+        	
+        	if ( WebUtil.isNull($this.userInfo.useYn) ) {
+        		Swal.alert(['사용여부를 선택하세요.', 'info']);
+        		return false;
+        	}
+
         	// 학원/강사/학생 여부를 라디오로 변경하고 저장시에 값을 셋팅해주어야 함
         	
         	return true;
