@@ -79,8 +79,7 @@
 	DELETE
 	FROM   TC_MENU_ROLE
 	WHERE  1 = 1
-<if test=" menuNo != null and menuNo != '' ">
-	AND    MENU_NO = #{menuNo}		</if>
+	AND    ROLE_CD = #{roleCd}		
 	</delete>
 		
 </mapper>

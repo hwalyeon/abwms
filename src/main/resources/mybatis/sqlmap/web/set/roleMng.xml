@@ -3,6 +3,14 @@
 
 <mapper namespace="set.roleMng">
 
+<select id="selectDupRoleCd" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT ROLE_CD ,
+	              ROLE_NM
+	FROM   TC_ROLE_BASE
+	WHERE 1=1
+	AND    ROLE_CD LIKE CONCAT('%',#{roleCd},'%') OR   ROLE_NM LIKE CONCAT('%',#{roleNm},'%') 
+</select>
+
 	<select id="searchTcRoleBaseList" parameterType="Map" resultType="MybatisMap">
 SELECT ROLE_CD
       ,ROLE_NM

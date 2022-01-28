@@ -27,16 +27,45 @@ public class CdMngController
 	@Autowired
 	private SqlSessionTemplate dao;
 
+	
+
+	@ResponseBody
+	@RequestMapping("/set/cdMng/searchDuprCdSpec")
+	public RtnMsg  searchDuprCdSpec(@RequestBody(required=false)Map<String, String> params) throws BizException
+	{	RtnMsg vo = new RtnMsg();
+     	Map<String, String> rtnMap = new HashMap<>();
+     	
+    		Map<String, String> result = dao.selectOne("set.cdMng.selectDuprCdSpec", params);
+    	   
+    		
+    
+	    	
+    		if (params.get("dataCk").equals("N") ||  result == null || GEUtil.isEmpty(result.get("cdGrp"))  && GEUtil.isEmpty(result.get("cdGrpNm"))) {
+    			rtnMap.put("existsYn", "N");
+    			
+    			}
+    		else
+    		{
+    			rtnMap.put("existsYn", "Y");		
+    		}
+    		
+    		vo.setRtnData(rtnMap);
+    		
+    		return vo;
+    	
+	}
+	
+	
 	@ResponseBody
 	@RequestMapping("/set/cdMng/searchDupCdGrp")
 	public RtnMsg  searchDupUserId(@RequestBody(required=false)Map<String, String> params) throws BizException
 	{	RtnMsg vo = new RtnMsg();
      	Map<String, String> rtnMap = new HashMap<>();
-     	
+
 		Map<String, String> result = dao.selectOne("set.cdMng.searchTcCdGrp", params);
 	
 	
-		if ( result == null || GEUtil.isEmpty(result.get("cdGrp"))  && GEUtil.isEmpty(result.get("cdGrpNm"))) {
+		if ( result == null || GEUtil.isEmpty(result.get("cdGrp"))  && GEUtil.isEmpty(result.get("cdVal"))) {
 			rtnMap.put("existsYn", "N");
 			}
 		else {
@@ -46,7 +75,7 @@ public class CdMngController
 		vo.setRtnData(rtnMap);
 		
 		return vo;
-	}
+    }
 	
 	
 	@ResponseBody

@@ -168,8 +168,21 @@ let roleMng = new Vue(
 						currentPage : 1,
 						currentIndex : 0
 					}
-				}
+				},
+				   roleMng_typing : function(e){    	
+			            this.max_length(e, 40, '#roleNm');
+			        },
+			        max_length : function(e, len,id)
+			        {
+			            var val =  e.target.value;    			
+			            if (val.length > len){    				
+			            	Swal.alert(['최대 글자수를 초과하였습니다.' ]);
+			            	 $(id).val(val.substring(0, len));
+			            	}
+
+			        }
 			},
+
 			computed : {
 
 			},
@@ -182,4 +195,5 @@ let roleMng = new Vue(
 					self.initialize();
 				});
 			}
+	
 		});

@@ -23,13 +23,13 @@
 			                    <tr>
 			                        <th scope="row">코드그룹</th>
 			                        <td>
-			                        	<input type="text" name="cdGrp" v-model="cdGrpInfo.cdGrp" class="form-control" />
+			                        	<input type="text"  id="cdGrp"  name="cdGrp" class="form-control"   v-model="cdGrpInfo.cdGrp"  :value="cdGrp.cdGrp"   v-on:input="cdGrp_typing"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">코드그룹명</th>
 			                        <td>
-			                        	<input type="text" id="cdGrpNm" name="cdGrpNm" v-model="cdGrpInfo.cdGrpNm" class="form-control" />
+			                        	<input type="text" id="cdGrpNm" name="cdGrpNm" class="form-control"  v-model="cdGrpInfo.cdGrpNm"  :value="cdGrp.cdGrpNm"   v-on:input="cdGrp_typing"  />
 			                        </td>
 			                    </tr>
 			                    <tr>
