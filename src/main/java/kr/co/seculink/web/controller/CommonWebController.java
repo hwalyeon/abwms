@@ -70,40 +70,10 @@ public class CommonWebController
 	//연습종료 시 삭제삭제
 	
 
-	@RequestMapping("/practice/pUserMng.pg")
-	public String getpracticePUserMng()
-	{
-		return "practice/pUserMng";
-	}
-
-	@RequestMapping("/practice/pUserRoleMng.pg")
-	public String getpracticePUserRoleMng()
-	{
-		return "practice/pUserRoleMng";
-	}
 	
-	
-	@RequestMapping("/practice/pRoleMng.pg")
-	public String getpracticePRoleMng()
+	@RequestMapping("/practice/qUserMng.pg")
+	public String getpracticeQUserMng()
 	{
-		return "practice/pRoleMng";
-	}
-	
-	@RequestMapping("/practice/pMenuMng.pg")
-	public String getpracticePMenuMng()
-	{
-		return "practice/pMenuMng";
-	}
-	
-	@RequestMapping("/practice/pMenuRoleMng.pg")
-	public String getpracticePMenuRoleMng()
-	{
-		return "practice/pMenuRoleMng";
-	}
-	
-	@RequestMapping("/practice/pCdMng.pg")
-	public String getpracticePCdMng()
-	{
-		return "practice/pCdMng";
+		return "practice/qUserMng";
 	}
 }
