@@ -68,6 +68,7 @@ let menuRoleMng = new Vue({
         },
         initGrid: function() {
         	
+        	let $this = this;
         	let colModels = [
         		{name: "roleCd"      , index: "roleCd"      , label: "역할코드"    , width: 80, align: "center", hidden: true},
         		{name: "roleNm"      , index: "roleNm"      , label: "역할명"     , width: 80, align: "center", hidden: true},
