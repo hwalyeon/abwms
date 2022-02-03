@@ -66,14 +66,16 @@ public class CommonWebController
 	{
 		return "set/cdMng";
 	}
-	
-	//연습종료 시 삭제삭제
-	
 
-	
-	@RequestMapping("/practice/qUserMng.pg")
-	public String getpracticeQUserMng()
+
+
+	//연습종료 시 삭제삭제
+
+
+
+	@RequestMapping("/practice/pUserMng.pg")
+	public String getpracticePUserMng()
 	{
-		return "practice/qUserMng";
+		return "practice/pUserMng";
 	}
 }
