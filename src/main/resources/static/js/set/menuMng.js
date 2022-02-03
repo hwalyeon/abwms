@@ -51,6 +51,8 @@ let menuMng = new Vue({
         },
         initGrid: function() {
         	
+        	let $this = this;
+        	
         	let colModels = [
                 {name: "menuNo"      , index: "menuNo"      , label: "메뉴번호"   , width: 80, align: "center"},
                 {name: "menuNm"      , index: "menuNm"      , label: "메뉴명"     , width: 100, align: "left"},
@@ -76,7 +78,7 @@ let menuMng = new Vue({
                 pager: '#menu_pager_list',
                 colModel: colModels,
                 onPaging : function(data) {
-                    onPagingCommon(data, this, function(resultMap) {
+                    onPagingCommon(data, this, function(resultMap) {                   	
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
@@ -130,6 +132,7 @@ let menuMng = new Vue({
 		regMenuPop: function(menuNo) {
 			menuDetl.initPage(menuNo);
 			console.log(menuNo);			
+
 		},
 		resetSearchParam: function() {
 			let $this = this;

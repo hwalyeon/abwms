@@ -79,7 +79,7 @@
 	DELETE
 	FROM   TC_MENU_ROLE
 	WHERE  1 = 1
-	AND    ROLE_CD = #{roleCd}		
+	AND    MENU_NO = #{menuNo}	
 	</delete>
 		
 </mapper>

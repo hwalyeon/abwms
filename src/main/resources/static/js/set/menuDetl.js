@@ -12,6 +12,7 @@ let menuDetl = new Vue({
     		useYn: '',
     		roleList: []
     	},
+    	
     	code : {
     		roleList: [],
     		upprMenuList: [],
@@ -160,7 +161,7 @@ let menuDetl = new Vue({
 		saveMenu: function() {
 			
 			let $this = this;
-			
+			console.log("^^^^^^^^^^^^^^ " + $this.menuInfo.roleList.roleCd);
             if ( !this.isValid() ) {
                 return false;
             }
