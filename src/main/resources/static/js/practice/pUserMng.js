@@ -62,11 +62,7 @@ let pUserMng = new Vue({
                 {name: "iconInfo"    , index: "iconInfo"    , label: "아이콘정보"  , width: 80, align: "center"},
                 {name: "useYn"       , index: "useYn"       , label: "사용여부"   , width: 80, align: "center"},
                 {name: "menuDesc"    , index: "menuDesc"    , label: "메뉴설명"   , width: 80, align: "left"},
-                {name: "menuDetlPop" , index: "menuDetlPop" , label: "메뉴 정보보기", width: 80, align: "center",
-                    formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="menuMng.regMenuPop(\'' + rowObject.menuNo + '\')" value="상세보기" data-toggle="modal" data-target="#menuDetlPopup" />';
-                    }
-                }
+                {name: "menuDetlPop" , index: "menuDetlPop" , label: "메뉴 정보보기", width: 80, align: "center"}
             ];
   
             $("#menu_list").jqGrid("GridUnload");
@@ -129,11 +125,7 @@ let pUserMng = new Vue({
                 }
             });
 		},
-		regMenuPop: function(menuNo) {
-			menuDetl.initPage(menuNo);
-			console.log(menuNo);			
 
-		},
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
