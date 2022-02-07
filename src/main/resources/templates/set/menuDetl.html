@@ -4,7 +4,7 @@
 <div class="modal fade" id="menuDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 700px; height: 550px">
+			<div class="modal-content" style="width: 700px; height: 620px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -31,6 +31,15 @@
 						                        </select>
 					                        </td>
 					                    </tr>
+										<tr>
+											<th scope="row">상위 메뉴(중메뉴)</th>
+											<td>
+												<select id="subUpprMenuNo" name="subUpprMenuNo" class="form-control" v-model="menuInfo.subUpprMenuNo" v-on:change="changeSubUpprMenuNo">
+													<option value="" readonly="menuInfo.crud=='U'">선택</option>
+													<option v-for="item in code.subUpprMenuList" v-bind:value="item.cdVal" v-text="item.cdNm" :disabled="menuInfo.crud=='U'"></option>
+												</select>
+											</td>
+										</tr>
 					                    <tr>
 					                        <th scope="row">메뉴번호</th>
 					                        <td>

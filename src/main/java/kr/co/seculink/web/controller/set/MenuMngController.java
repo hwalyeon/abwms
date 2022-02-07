@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.jsoup.internal.StringUtil;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -74,6 +75,11 @@ public class MenuMngController
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
 		int saveCnt = 0;
+
+		if(params.get("subUpprMenuNo") != null && !StringUtil.isBlank(params.get("subUpprMenuNo").toString()) ){
+			String upprMenuNo = params.get("subUpprMenuNo").toString();
+			params.put("upprMenuNo" , upprMenuNo);
+		}
 	
 		if ( "C".equals(params.get("crud")) ) {
 			saveCnt = dao.insert("set.menuMng.insertTcMenuBase", params);
@@ -117,7 +123,7 @@ public class MenuMngController
 	{	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		
+
 		List<Map<String, String>> result = dao.selectList("set.menuMng.searchUpprMenuList", params);
 		
 		rtnMap.put("result", result);
@@ -125,7 +131,7 @@ public class MenuMngController
 				
 		return vo; 
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/set/menuMng/searchMenuList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException

@@ -42,6 +42,9 @@
 	       ) A
 	       INNER JOIN TC_MENU_BASE B
 	       ON B.MENU_NO = A.MENU_NO
+			<if test=" upprMenuNo != null and upprMenuNo != '' ">
+				AND   B.UPPR_MENU_NO = #{upprMenuNo}
+			</if>
 	ORDER BY A.MENU_NO
 
 	</select>

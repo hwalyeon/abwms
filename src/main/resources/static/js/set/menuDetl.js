@@ -5,6 +5,7 @@ let menuDetl = new Vue({
     		crud: 'C',
     		menuNo: '',
     		upprMenuNo: '',
+			subUpprMenuNo : '',
     		menuUrl: '',
     		menuNm: '',
     		menuDesc: '',
@@ -16,6 +17,7 @@ let menuDetl = new Vue({
     	code : {
     		roleList: [],
     		upprMenuList: [],
+			subUpprMenuList: [],
     		useYnList: []
     	}
 	},
@@ -34,7 +36,7 @@ let menuDetl = new Vue({
         	let $this = this;
         	AjaxUtil.post({
                 url: "/set/menuMng/searchUpprMenuList.ab",
-                param: {},
+				param: {"upprMenuNo" : "0"},
                 success: function(response) {
                 	
                 	$this.code.upprMenuList = [];
@@ -165,7 +167,7 @@ let menuDetl = new Vue({
             if ( !this.isValid() ) {
                 return false;
             }
-			
+
 			AjaxUtil.post({
                 url: "/set/menuMng/saveMenu.ab",
                 param: $this.menuInfo,
@@ -208,12 +210,44 @@ let menuDetl = new Vue({
     		
     		this.menuInfo.menuNo  = menu.cdVal;
     		this.menuInfo.menuUrl = menu.url + "/";
+
+
+			AjaxUtil.post({
+				url: "/set/menuMng/searchUpprMenuList.ab",
+				param: {"upprMenuNo" : this.menuInfo.menuNo},
+				success: function(response) {
+
+					$this.code.subUpprMenuList = [];
+					$this.code.useYnList        = [];
+					if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
+						$.each(response.rtnData.result, function(index, item) {
+							$this.code.subUpprMenuList.push({'cdVal':item.menuNo, 'cdNm':item.menuNm, 'url':item.menuUrl});
+						});
+					}
+				},
+				error: function (response) {
+					Swal.alert([response, 'error']);
+				}
+			});
+
 		},
+
+		changeSubUpprMenuNo: function() {
+			let $this = this;
+			let menu = _.filter($this.code.subUpprMenuList, function(item) {
+				return item.cdVal === $this.menuInfo.subUpprMenuNo;
+			})[0];
+
+			this.menuInfo.menuNo  = menu.cdVal;
+			this.menuInfo.menuUrl = menu.url + "/";
+		},
+
 		resetMenuInfo: function() {
 			this.menuInfo = {
 				crud: 'C',
 	    		menuNo: '',
 	    		upprMenuNo: '',
+				subUpprMenuNo: '',
 	    		menuUrl: '',
 	    		menuNm: '',
 	    		menuDesc: '',
