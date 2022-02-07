@@ -26,7 +26,7 @@ public class StrsStndMngController {
 	@Autowired
 	private StrsStndMngService strsStndMngService;
 
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("/svcStnd/strs/searchStrsList.ab")
 	public RtnMsg searchStrsList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
@@ -61,5 +61,5 @@ public class StrsStndMngController {
 		vo.setRtnData(rtnMap);
 
 		return vo;
-	}
+	}*/
 }
