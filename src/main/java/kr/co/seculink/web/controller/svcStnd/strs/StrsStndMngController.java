@@ -24,20 +24,21 @@ public class StrsStndMngController {
 	private SqlSessionTemplate dao;
 
 	@Autowired
-	private UserMngService userMngService;
+	private StrsStndMngService strsStndMngService;
 
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/searchStrsList.ab")
-	public RtnMsg searchUserList(@RequestBody(required = false) Map<String, String> params) throws BizException {
+	public RtnMsg searchStrsList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, String>> result = userMngService.searchStrsList(params);
+		List<Map<String, String>> result = strsStndMngService.searchStrsList(params);
 		rtnMap.put("result", result);
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List) userMngService.searchStrsList(params)).size());
+			vo.setTotalCount(((List) strsStndMngService.searchStrsList(params)).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
@@ -46,12 +47,12 @@ public class StrsStndMngController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/set/userMng/searchUserInfo.ab")
+	@RequestMapping("/svcStnd/strs/searchStrsList.ab")
 	public RtnMsg searchUserInfo(@RequestBody(required = false) Map<String, String> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		Map<String, String> result = userMngService.searchUserInfo(params);
+		Map<String, String> result = strsStndMngService.searchUserInfo(params);
 
 		List<Map<String, String>> roleList = dao.selectList("set.userRoleMng.searchTcUserRoleList", params);
 
