@@ -124,7 +124,7 @@ let userMng = new Vue({
                 url: "/set/userMng/searchUserList/excel.ab",
                 param: params,
                 success: function(response) {
-                	saveFileLocal(response, 'UserMng.xls');
+                	saveFileLocal(response, 'UserMng.xls');3333333333333333333333333333
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
