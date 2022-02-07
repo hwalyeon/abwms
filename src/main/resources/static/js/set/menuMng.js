@@ -57,7 +57,7 @@ let menuMng = new Vue({
                 {name: "menuNo"      , index: "menuNo"      , label: "메뉴번호"   , width: 80, align: "center"},
                 {name: "menuNm"      , index: "menuNm"      , label: "메뉴명"     , width: 100, align: "left"},
                 {name: "upprMenuNo"  , index: "upprMenuNo"  , label: "상위메뉴번호" , width: 80, align: "center"},
-                {name: "upprMenuNm"  , index: "upprMenuNm"  , label: "상위메뉴명"  , width: 100, align: "left"},
+                {name: "upprMenuNm"  , index: "upprMenuNm"  , label: "상위메뉴명1"  , width: 100, align: "left"},
                 {name: "menuUrl"     , index: "menuUrl"     , label: "메뉴경로"   , width: 80, align: "left"},
                 {name: "iconInfo"    , index: "iconInfo"    , label: "아이콘정보"  , width: 80, align: "center"},
                 {name: "useYn"       , index: "useYn"       , label: "사용여부"   , width: 80, align: "center"},
