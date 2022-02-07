@@ -67,7 +67,7 @@ public class CommonWebController
 		return "set/cdMng";
 	}
 
-	@Requestmapping("/svcStnd/strs/strsStndMng.pg")
+	@RequestMapping("/svcStnd/strs/strsStndMng.pg")
 	public String getSetStrsStndMng()
 	{
 		return "svcStnd/strs/strsStndMng";
@@ -75,7 +75,7 @@ public class CommonWebController
 
 
 	//연습종료 시 삭제삭제
-	/@RequestMapping("/practice/test.pg")
+	@RequestMapping("/practice/test.pg")
 	public String getSetTest()
 	{
 		return "practice/test";
