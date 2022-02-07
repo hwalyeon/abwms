@@ -48,42 +48,59 @@ navigation = new Vue({
 	/* Vue Instance 내 method 정의 */
 	methods: {
         getMenuList: function() {
-            if(navigation.searchAuthParam.searchClass == '' || navigation.searchAuthParam.empNo < 0) {
+
+            let $this = this;
+
+            if ( $this.searchAuthParam.searchClass == '' || $this.searchAuthParam.empNo < 0) {
                 return;
 			}
             
             AjaxUtil.post({
                 url: "/cmon/menu/searchMenuList.ab",
-                param: navigation.searchAuthParam,
+                param: $this.searchAuthParam,
                 success: function(response) {
                 	
                 	if ( !!response.rtnData.result ) {
-                		var data = response;
-                        if(response.rtnData) data = response.rtnData.result;
-    					var currentIndex1 = 0;
-                        var currentIndex2 = 0;
-                        var currentMenu;
-                        for ( var i in data )
+
+                		let data = response;
+                        if ( response.rtnData ) {
+                            data = response.rtnData.result;
+                        }
+
+    					let currentIndex1 = 0;
+                        let currentIndex2 = 0;
+                        let currentMenu;
+                        for ( let i in data )
                         {
                             data[i].child = [];
+
 							if ( !!data[i].menuUrl ) {
 								data[i].menuUrl = data[i].menuUrl + '.pg';
 							}
-							
+
+                            // 메뉴가 1뎁스인 경우
                         	if ( data[i].upprMenuNo === '0' )
                         	{
                         		data[i].menuUrl = '';
-                                currentIndex1 = navigation.menuList.push(data[i]);
+                                currentIndex1 = $this.menuList.push(data[i]);
     						}
-                        	
-                            currentMenu = navigation.menuList[currentIndex1 - 1];
-                            
-    						if ( data[i].upprMenuNo === currentMenu.menuNo && currentMenu) {
+
+                            // 현재 1뎁스 메뉴
+                            currentMenu = $this.menuList[currentIndex1 - 1];
+
+                            // 메뉴가 2뎁스인 경우
+    						if ( data[i].upprMenuNo === currentMenu.menuNo && currentMenu ) {
                                 currentIndex2 = currentMenu.child.push(data[i]);
-    						}
-//                            if(data[i].lev == 2 && currentMenu && currentMenu.child[currentIndex2 - 1]) {
-//                                currentMenu.child[currentIndex2 - 1].child.push(data[i])
-//                            }
+    						} else {
+                                // 메뉴가 3뎁스인 경우
+                                for ( let j = 0 ; j < currentMenu.child.length ; j++ )
+                                {
+                                    if ( data[i].upprMenuNo === currentMenu.child[j].menuNo ) {
+                                        currentMenu.child[j].child.push(data[i]);
+                                        j = currentMenu.child[j].length;
+                                    }
+                                }
+                            }
                         }
                 	}                    		
                 },
