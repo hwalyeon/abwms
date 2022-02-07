@@ -67,15 +67,29 @@ public class CommonWebController
 		return "set/cdMng";
 	}
 
+	@Requestmapping("/svcStnd/strs/strsStndMng.pg")
+	public String getSetStrsStndMng()
+	{
+		return "svcStnd/strs/strsStndMng";
+	}
 
 
 	//연습종료 시 삭제삭제
-
-
+	/@RequestMapping("/practice/test.pg")
+	public String getSetTest()
+	{
+		return "practice/test";
+	}
 
 	@RequestMapping("/practice/pUserMng.pg")
-	public String getpracticePUserMng()
+	public String getSetPUserMng()
 	{
 		return "practice/pUserMng";
+	}
+
+	@RequestMapping("/practice/tcCal.pg")
+	public String getSetTcCal()
+	{
+		return "practice/tcCal";
 	}
 }
