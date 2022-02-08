@@ -1,8 +1,9 @@
-let userMng = new Vue({
+let dgemStndMng = new Vue({
     el: "#dgemStndMng",
     data: {
     	params: {
-    		userId: '',
+    		dgemStatCd: '',      //위험감정_상태_코드
+    		dgemStatNm: '',      //위험감정_상태_명
     		userNm: '',
     		blngNm: '',
     		telNo: '',
@@ -14,7 +15,10 @@ let userMng = new Vue({
             rowCount: 30,
             currentPage: 1,
             currentIndex: 0
-    	}
+    	},
+        code:{
+    	    dgemStatCdList : []
+        },
 	},
 	
     methods: {
@@ -31,8 +35,9 @@ let userMng = new Vue({
 
         	
         },
-        initCodeList: function() {
-        	
+        initCodeList : function() {
+            let $this = this;
+            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList);
         },
         initGrid: function() {
         	        	        	
@@ -134,6 +139,10 @@ let userMng = new Vue({
 		regUserPop: function(userId) {
 			userDetl.initPage(userId);
 		},
+        dgemStatNmVal:function(){
+          let $this = this;
+            console.log($this.code.cdGrpDivList.cdNm[cdVal]);
+        },
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {

@@ -1,3 +1,4 @@
+/*
 package kr.co.seculink.web.controller.svcStnd.strs;
 
 import kr.co.seculink.domain.RtnMsg;
@@ -62,4 +63,4 @@ public class StrsStndMngController {
 
 		return vo;
 	}
-}
+}*/

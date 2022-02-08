@@ -8,88 +8,63 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class CommonWebController
-{
+public class CommonWebController {
 	// thymleaf 적용하지 않을경우 static의 index.html로 간다.
-	@GetMapping(path="/")
-	public String index()
-	{
+	@GetMapping(path = "/")
+	public String index() {
 		log.debug("index!!");
 		return "common/main/index";
 	}
-	
-	@GetMapping(path="/login.pg")
-	public String login()
-	{
+
+	@GetMapping(path = "/login.pg")
+	public String login() {
 		return "common/main/login";
 	}
-	
-	@GetMapping(path="/main.pg")
-	public String main()
-	{
+
+	@GetMapping(path = "/main.pg")
+	public String main() {
 		return "common/main/main";
 	}
-	
+
 	@RequestMapping("/set/userMng.pg")
-	public String getSetUserMng()
-	{
+	public String getSetUserMng() {
 		return "set/userMng";
 	}
 
 	@RequestMapping("/set/userRoleMng.pg")
-	public String getSetUserRoleMng()
-	{
+	public String getSetUserRoleMng() {
 		return "set/userRoleMng";
 	}
-	
-	
+
+
 	@RequestMapping("/set/roleMng.pg")
-	public String getSetRoleMng()
-	{
+	public String getSetRoleMng() {
 		return "set/roleMng";
 	}
-	
+
 	@RequestMapping("/set/menuMng.pg")
-	public String getSetMenuMng()
-	{
+	public String getSetMenuMng() {
 		return "set/menuMng";
 	}
-	
+
 	@RequestMapping("/set/menuRoleMng.pg")
-	public String getSetMenuRoleMng()
-	{
+	public String getSetMenuRoleMng() {
 		return "set/menuRoleMng";
 	}
-	
+
 	@RequestMapping("/set/cdMng.pg")
-	public String getSetCdMng()
-	{
+	public String getSetCdMng() {
 		return "set/cdMng";
 	}
 
 	@RequestMapping("/svcStnd/strs/strsStndMng.pg")
-	public String getSetStrsStndMng()
-	{
+	public String getSetStrsStndMng() {
 		return "svcStnd/strs/strsStndMng";
 	}
 
-
-	//연습종료 시 삭제삭제
-	@RequestMapping("/practice/test.pg")
-	public String getSetTest()
-	{
-		return "practice/test";
+	@RequestMapping("/svcStnd/dgem/dgemStndMng.pg")
+	public String getSvcStndDgemDgemStndMng() {
+		return "svcStnd/dgem/dgemStndMng";
 	}
 
-	@RequestMapping("/practice/pUserMng.pg")
-	public String getSetPUserMng()
-	{
-		return "practice/pUserMng";
-	}
-
-	@RequestMapping("/practice/tcCal.pg")
-	public String getSetTcCal()
-	{
-		return "practice/tcCal";
-	}
 }
