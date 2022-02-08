@@ -36,7 +36,9 @@ let dgemStndMng = new Vue({
             },
             initGrid: function()
             {
-                let colModels = [
+            	let $this = this;
+                let colModels =
+                [
                     {name: "dgemStatCd"     , index: "dgemStatCd"     , label: "위험감정상태코드"       , width: 80         , align: "center"},
                     {name: "dgemStatCntn"  , index: "dgemStatCntn"  , label: "위험감정상태내용"       , width: 80         , align: "center"},
                     {name: "regDt"                , index: "regDt"                 , label: "등록일자"                  , width: 80         , align: "center"

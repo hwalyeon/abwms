@@ -66,15 +66,17 @@ let growStndMng = new Vue({
                             });
                         }
                     },
-                    error: function (response) {
+                    error: function (response)
+                    {
                         Swal.alert([response, 'error']);
                     }
                 });
-
             },
             initGrid: function()
-            {
-                let colModels = [
+            {  
+                let $this = this;
+                let colModels =
+                [
                     {name: "growStndVer"     , index: "growStndVer"     , label: "성장기준버전"          , width: 80         , align: "center"},
                     {name: "growStndNo"     , index: "growStndNo"      , label: "성장기준번호"          , width: 80         , align: "center"},
                     {name: "sexCd"                , index: "sexCd"                 , label: "성별코드"                , width: 80          , align: "center",  hidden:true},
@@ -95,15 +97,17 @@ let growStndMng = new Vue({
                 ];
 
                 $("#growStnd_list").jqGrid("GridUnload");
-                $("#growStnd_list").jqGrid($.extend(true, {}, commonGridOptions(), {
-                    datatype: "local",
-                    mtype: 'post',
-                    url: '/svcStnd/grow/growStndMng/searchGrowStndList.ab',
-                    pager: '#growStnd_pager_list',
-                    height: 405,
-                    colModel: colModels,
+                $("#growStnd_list").jqGrid($.extend(true, {}, commonGridOptions(),
+                {
+                    datatype  : "local",
+                    mtype      : 'post',
+                    url            : '/svcStnd/grow/growStndMng/searchGrowStndList.ab',
+                    pager       : '#growStnd_pager_list',
+                    height      : 405,
+                    colModel : colModels,
                     onPaging : function(data) {
-                        onPagingCommon(data, this, function(resultMap) {
+                        onPagingCommon(data, this, function(resultMap)
+                        {
                             $this.params.currentPage  = resultMap.currentPage;
                             $this.params.rowCount     = resultMap.rowCount;
                             $this.params.currentIndex = resultMap.currentIndex;
