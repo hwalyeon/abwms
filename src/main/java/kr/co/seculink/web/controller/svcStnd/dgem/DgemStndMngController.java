@@ -21,7 +21,7 @@ public class DgemStndMngController
 {
 	@Autowired
 	private SqlSessionTemplate dao;
-
+/*
 	
 
 	@ResponseBody
@@ -48,6 +48,6 @@ public class DgemStndMngController
     		
     		return vo;
     	
-	}
+	}*/
 
 }

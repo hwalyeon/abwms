@@ -1,4 +1,4 @@
-package kr.co.seculink.web.service.svcStnd;
+package kr.co.seculink.web.service.svcStnd.dgem;
 
 import kr.co.seculink.exception.BizException;
 import org.springframework.web.multipart.MultipartFile;
