@@ -4,14 +4,14 @@
 
     <!--위험감정기준 목록 조회-->
 	<select id="searchTcDgemStatBase" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT       DGEM_STAT_CD            <!-- 위험감정_상태_코드 -->
-						 , DGEM_STAT_CNTN       <!--  위험감정_상태_내용 -->
-						 , REG_DT                          <!--  등록_일자                 -->
-						 , REG_TM                         <!--  등록_시각                 -->
-		                 , REG_USER_ID                <!--  등록_사용자_ID        -->
-						 , UPT_DT                          <!--  수정_일자                -->
-						 , UPT_TM                         <!--  수정_시각                 -->
-						 , UPT_USER_ID                <!--  수정_사용자_ID        -->
+		SELECT       DGEM_STAT_CD
+						 , DGEM_STAT_CNTN
+						 , REG_DT
+						 , REG_TM
+		                 , REG_USER_ID
+						 , UPT_DT
+						 , UPT_TM
+						 , UPT_USER_ID
 		FROM         TI_DGEM_STND
 		WHERE      1 = 1
 		                   <if test=" dgemStatCd != null and dgemStatCd != '' ">

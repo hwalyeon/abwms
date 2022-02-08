@@ -96,8 +96,7 @@ let dgemStndMng = new Vue({
 			let $this = this;
 			let params = $.extend(true, {}, $this.params);
 			
-			AjaxUtil.post(
-	{
+			AjaxUtil.post({
 				dataType: 'binary',
                 url: "/svcStne/dgem/dgemStndMng/searchDgemList/excel.ab",
                 param: params,
