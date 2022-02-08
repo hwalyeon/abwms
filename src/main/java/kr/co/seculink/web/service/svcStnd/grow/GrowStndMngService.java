@@ -7,24 +7,13 @@ import java.util.Map;
 
 public interface GrowStndMngService
 {
+	//성장_기준_리스트 조회
+	public List<Map<String, String>> growStndList(Map<String, String> params) throws BizException;
+  
+	//성장_기준_버전_리스트 조회	
 	public List<Map<String, String>> growStndVerList(Map<String, String> params) throws BizException;
 
+    //나이_년수_리스트 조회
 	public List<Map<String, String>> ageYcntList(Map<String, String> params) throws BizException;
 
-	public List<Map<String, String>> growStndList(Map<String, String> params) throws BizException;
-
-	/*
-	public Map<String, String> searchUserInfo(Map<String, String> params) throws BizException;
-
-	public void saveAcdm(Map<String, String> params) throws BizException;
-
-	public void saveLctr(MultipartFile uploadImg, Map<String, String> params) throws BizException;
-
-	public void saveStdt(MultipartFile profImg, List<MultipartFile> uploadImgList, List<Map<String, String>> delImgList, Map<String, String> params) throws BizException;
-
-	public void saveUser(Map<String, String> params) throws BizException;
-
-	public void updateUserPw(Map<String, String> params) throws BizException;
-
-	public Map<String, String> searchDupUserId(Map<String, String> params) throws BizException;*/
-}
+	}

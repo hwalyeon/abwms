@@ -19,28 +19,26 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class DgemStndMngController
-{
-	@Resource(name="sqlSessionTemplate")
+public class DgemStndMngController {
+	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
 	@Autowired
 	private DgemStndMngService dgemStndMngService;
 
-	//위험감정기준 목록 조회
+	// 위험_감정_기준 리스트 조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/dgem/dgemStndMng/searchDgemList.ab")
-	public RtnMsg searchDgemList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
+	public RtnMsg searchDgemList(@RequestBody(required = false) Map<String, String> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
 		List<Map<String, String>> result = dgemStndMngService.searchDgemList(params);
 		rtnMap.put("result", result);
 
-		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)dgemStndMngService.searchDgemList(params)).size());
+			vo.setTotalCount(((List) dgemStndMngService.searchDgemList(params)).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
@@ -48,28 +46,25 @@ public class DgemStndMngController
 		return vo;
 	}
 
-
-     //위험감정기준 목록 엑셀다운로드
+	// 위험_감정_기준 리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/svcStne/dgem/dgemStndMng/searchDgemList/excel.ab")
-	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
+	public ModelAndView downloadExcel(@RequestBody(required = false) Map<String, String> params) throws BizException {
+	
 		params.put("paging", "N");
 		List<Map<String, String>> result = dao.selectList("svcStnd.dgem.dgemStndMng.searchTcDgemStatBase", params);
 
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
 
-	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
-	{
-		String [] arrHeader = {"위험감정상태코드","위험감정상태내용"};
+	private Map<String, Object> getExcelMap(List<Map<String, String>> list) {
+		String[] arrHeader = { "위험감정상태코드", "위험감정상태내용" };
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
 		List<String> data;
 
-		for ( Map<String, String> info : list )
-		{
+		for (Map<String, String> info : list) {
 			data = new ArrayList<String>();
 			data.add(info.get("dgemStatCd"));
 			data.add(info.get("dgemStatCntn"));

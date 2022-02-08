@@ -17,23 +17,25 @@ public class GrowStndMngServiceImpl implements GrowStndMngService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 	
+    //성장_기준_리스트 조회
+	public List<Map<String, String>> growStndList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growStndMng.searchGrowStndList", params);
+		return result;
+	}
+    //성장_기준_버전_리스트 조회	
 	public List<Map<String, String>> growStndVerList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growStndMng.searchGrowStndVerList", params);
 		
 		return result;
 	}
-
+    //나이_년수_리스트 조회
 	public List<Map<String, String>> ageYcntList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growStndMng.searchAgeYcntList", params);
 		return result;
 	}
 
-	public List<Map<String, String>> growStndList(Map<String, String> params) throws BizException
-	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growStndMng.searchGrowStndList", params);
-		return result;
-	}
 
 }
