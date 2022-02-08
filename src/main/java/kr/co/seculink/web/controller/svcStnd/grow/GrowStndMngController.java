@@ -26,7 +26,7 @@ public class GrowStndMngController
 	@Autowired
 	private DgemStndMngService dgemStndMngService;
 
-	//위험감정기준 목록 조회
+	//성장기준버전 목록 조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/grow/growStndMng/growStndVerList.ab")
 	public RtnMsg growStndVerList(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -42,6 +42,24 @@ public class GrowStndMngController
 		return vo;
 
 	}
+
+	//나이_년도 목록 조회
+	@ResponseBody
+	@RequestMapping("/svcStnd/grow/growStndMng/ageYcntList.ab")
+	public RtnMsg ageYcntList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> ageResult = dao.selectList("svcStnd.grow.growStndMng.searchAgeYcntList", params);
+
+		rtnMap.put("ageResult", ageResult);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+
+	}
+
 /*
 
 	//위험감정기준 목록 엑셀다운로드

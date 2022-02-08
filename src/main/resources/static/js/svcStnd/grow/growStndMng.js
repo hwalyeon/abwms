@@ -4,9 +4,9 @@ let growStndMng = new Vue({
     {
     	params:
         {
-    		growStndVer : ''  ,     // 성장_기준_버전
-            ageYcnt         : ''  ,     // 나이_년수
-            sexCd            : 'male'  ,     //  성별_코드
+    		growStndVer : ''  ,          // 성장_기준_버전
+            ageYcnt         : ''  ,           // 나이_년수
+            sexCd            : 'male'  ,    //  성별_코드
     		paging          : 'Y',
     		totalCount    : 0  ,
             rowCount     : 30,
@@ -25,14 +25,46 @@ let growStndMng = new Vue({
         initialize: function()
         {
         	let $this = this;
-        	
+
         	$this.initCodeList();
-        	
+
         	$this.initGrid();
-        	
+
         	$this.searchDgemList(true);
         },
         initCodeList : function() {
+            let $this = this;
+            $this.growStndVerList();
+            $this.ageYcntList();
+
+        },
+        // 나이_년수 리스트 조회
+        ageYcntList:function(){
+
+               let $this = this;
+
+               AjaxUtil.post({
+                url: "/svcStnd/grow/growStndMng/ageYcntList.ab",
+                param: {},
+                success: function (response) {
+
+                    $this.code.roleList = [];
+                    if (!!response.rtnData.ageResult && response.rtnData.ageResult.length > 0)
+                    {
+                        $.each(response.rtnData.ageResult, function (index,item)
+                        {
+                            $this.code.growStndVerList.push({'cdVal':item.ageYcntList});
+                            console.log($this.code.ageYcntList);
+                        });
+                    }
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
+        },
+        // 성장기준버전 리스트 조회
+        growStndVerList:function(){
 
             let $this = this;
 
@@ -42,10 +74,12 @@ let growStndMng = new Vue({
                 success: function (response) {
 
                     $this.code.roleList = [];
-                    if (!!response.rtnData.result && response.rtnData.result.length > 0) {
-                        $.each(response.rtnData.result, function (index, item) {
-                            console.loe(result);
-                            $this.code.growStndVerList.push(item);
+                    if (!!response.rtnData.result && response.rtnData.result.length > 0)
+                    {
+                        $.each(response.rtnData.result, function (index,item)
+                        {
+                            $this.code.growStndVerList.push({'cdVal':item.growStndVer});
+                            console.log($this.code.growStndVerList);
                         });
                     }
                 },
