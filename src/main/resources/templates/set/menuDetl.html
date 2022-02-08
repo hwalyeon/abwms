@@ -25,16 +25,16 @@
 					                    <tr>
 					                        <th scope="row">상위 메뉴</th>
 					                        <td>
-					                        	<select id="upprMenuNo" name="upprMenuNo" class="form-control" v-model="menuInfo.upprMenuNo" v-on:change="changeUpprMenuNo">
+					                        	<select id="upprMenuNo" name="upprMenuNo" class="form-control" v-model="menuInfo.upprMenuNo" v-on:change="changeUpprMenuNo" :disabled="menuInfo.crud=='U'">
 						                        	<option value="" readonly="menuInfo.crud=='U'">선택</option>
 						                            <option v-for="item in code.upprMenuList" v-bind:value="item.cdVal" v-text="item.cdNm" :disabled="menuInfo.crud=='U'"></option>
 						                        </select>
 					                        </td>
 					                    </tr>
 										<tr>
-											<th scope="row">상위 메뉴(중메뉴)</th>
+											<th scope="row">중 메뉴</th>
 											<td>
-												<select id="subUpprMenuNo" name="subUpprMenuNo" class="form-control" v-model="menuInfo.subUpprMenuNo" v-on:change="changeSubUpprMenuNo">
+												<select id="subUpprMenuNo" name="subUpprMenuNo" class="form-control" v-model="menuInfo.subUpprMenuNo" v-on:change="changeSubUpprMenuNo" :disabled="menuInfo.crud=='U'">
 													<option value="" readonly="menuInfo.crud=='U'">선택</option>
 													<option v-for="item in code.subUpprMenuList" v-bind:value="item.cdVal" v-text="item.cdNm" :disabled="menuInfo.crud=='U'"></option>
 												</select>

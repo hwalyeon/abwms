@@ -13,6 +13,7 @@
           ,A.MENU_DESC
           ,A.ICON_INFO
           ,A.USE_YN
+          ,(select UPPR_MENU_NO from TC_MENU_BASE where menu_no = A.uppr_menu_no) as MAIN_UPPR_MENU_NO
     FROM  TC_MENU_BASE A
           INNER JOIN TC_MENU_BASE B
           ON  B.MENU_NO = A.UPPR_MENU_NO
