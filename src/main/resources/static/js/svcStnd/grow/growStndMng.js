@@ -4,7 +4,9 @@ let growStndMng = new Vue({
     {
     	params:
         {
-    		dgemStatCd : ''  ,      //위험감정_상태_코드
+    		growStndVer : ''  ,     // 성장_기준_버전
+            ageYcnt         : ''  ,     // 나이_년수
+            sexCd            : 'male'  ,     //  성별_코드
     		paging          : 'Y',
     		totalCount    : 0  ,
             rowCount     : 30,
@@ -13,8 +15,10 @@ let growStndMng = new Vue({
         },
         code:
         {
-    	    dgemStatCdList : []
-        },
+            growStndVerList : [],  // 성장_기준_버전_리스트
+            ageYcntList         : [],  // 나이_년수_리스트
+            sexCdList            :  [{cdVal: 'male', cdNm: '남성'},  {cdVal: 'female', cdNm: '여성'}]
+        }
 	},
     methods:
     {
@@ -28,11 +32,27 @@ let growStndMng = new Vue({
         	
         	$this.searchDgemList(true);
         },
-        initCodeList : function()
-        {
+        initCodeList : function() {
+
             let $this = this;
-            //위험감정상태 코드 목록 조회
-            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList);
+
+            AjaxUtil.post({
+                url: "/svcStnd/grow/growStndMng/growStndVerList.ab",
+                param: {},
+                success: function (response) {
+
+                    $this.code.roleList = [];
+                    if (!!response.rtnData.result && response.rtnData.result.length > 0) {
+                        $.each(response.rtnData.result, function (index, item) {
+                            console.loe(result);
+                            $this.code.growStndVerList.push(item);
+                        });
+                    }
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
         },
         initGrid: function()
         {

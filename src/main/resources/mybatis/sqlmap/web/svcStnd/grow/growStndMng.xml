@@ -4,20 +4,8 @@
 
     <!--성장기준버전 조회-->
 	<select id="searchTIGrowStndVerList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT       DGEM_STAT_CD
-						 , DGEM_STAT_CNTN
-						 , REG_DT
-						 , REG_TM
-		                 , REG_USER_ID
-						 , UPT_DT
-						 , UPT_TM
-						 , UPT_USER_ID
-		FROM         TI_DGEM_STND
-		WHERE      1 = 1
-		                   <if test=" dgemStatCd != null and dgemStatCd != '' ">
-		AND          DGEM_STAT_CD = #{dgemStatCd}</if>
-		ORDER BY DGEM_STAT_CD
-		                  <if test=' paging == "Y" '>
-			              LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+		SELECT      DISTINCT GROW_STND_VER FROM TI_GROW_STND TGS
+        ORDER BY GROW_STND_VER
+
 	</select>
 </mapper>

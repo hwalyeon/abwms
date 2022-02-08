@@ -2,7 +2,6 @@ package kr.co.seculink.web.controller.svcStnd.grow;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.web.excel.ExcelConstant;
 import kr.co.seculink.web.service.svcStnd.dgem.DgemStndMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,10 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -42,7 +42,7 @@ public class GrowStndMngController
 		return vo;
 
 	}
-
+/*
 
 	//위험감정기준 목록 엑셀다운로드
 	@ResponseBody
@@ -76,5 +76,5 @@ public class GrowStndMngController
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
-	}
+	}*/
 }
