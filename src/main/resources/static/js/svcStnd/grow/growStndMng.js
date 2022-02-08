@@ -1,5 +1,5 @@
-let dgemStndMng = new Vue({
-    el: "#dgemStndMng",
+let growStndMng = new Vue({
+    el: "#growStndMng",
     data:
     {
     	params:
@@ -33,9 +33,7 @@ let dgemStndMng = new Vue({
             let $this = this;
             //위험감정상태 코드 목록 조회
             getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList);
-
         },
-
         initGrid: function()
         {
         	let colModels = [
@@ -98,8 +96,7 @@ let dgemStndMng = new Vue({
 			let $this = this;
 			let params = $.extend(true, {}, $this.params);
 			
-			AjaxUtil.post(
-	{
+			AjaxUtil.post({
 				dataType: 'binary',
                 url: "/svcStne/dgem/dgemStndMng/searchDgemList/excel.ab",
                 param: params,

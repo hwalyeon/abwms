@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="svcStnd.grow.growStndMng">
+
+    <!--성장기준버전 조회-->
+	<select id="searchTIGrowStndVerList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT       DGEM_STAT_CD
+						 , DGEM_STAT_CNTN
+						 , REG_DT
+						 , REG_TM
+		                 , REG_USER_ID
+						 , UPT_DT
+						 , UPT_TM
+						 , UPT_USER_ID
+		FROM         TI_DGEM_STND
+		WHERE      1 = 1
+		                   <if test=" dgemStatCd != null and dgemStatCd != '' ">
+		AND          DGEM_STAT_CD = #{dgemStatCd}</if>
+		ORDER BY DGEM_STAT_CD
+		                  <if test=' paging == "Y" '>
+			              LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+</mapper>
