@@ -95,10 +95,10 @@ public class MenuMngController
 		
 		// 메뉴역할 저장
 		List<Map<String, String>> roleList = (List<Map<String, String>>) params.get("roleList");
-		dao.delete("set.menuRoleMng.deleteTcMenuRole", params);
-		
+
 		if ( "C".equals(params.get("crud")) || "U".equals(params.get("crud")) )
 		{
+			dao.delete("set.menuMng.deleteTcMenuRole", params);
 			for ( Map<String, String> role : roleList )
 			{
 				if ( role == null || GEUtil.isEmpty(role.get("roleCd")) ) 

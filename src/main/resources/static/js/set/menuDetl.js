@@ -93,14 +93,20 @@ let menuDetl = new Vue({
                     		$this.menuInfo.crud = 'U';
                     		$.each(response.rtnData.result, function(key, val) {
             					$this.menuInfo[key] = val;
-
             				});
+
+							if($this.menuInfo.upprMenuNo.length != 1 ){
+								$this.selectSubUpprMenuNo($this.menuInfo.mainUpprMenuNo);
+								let subUpprMenuNo = $this.menuInfo.upprMenuNo;
+								$this.menuInfo.upprMenuNo =$this.menuInfo.mainUpprMenuNo;
+								$this.menuInfo.subUpprMenuNo = subUpprMenuNo;
+							}
                     	}
                     	
                     	if ( !!response.rtnData.roleList && response.rtnData.roleList.length > 0 ) {
                     		$this.menuInfo.roleList = response.rtnData.roleList;
                     	}
-                    	                    	$this.menuInfo.roleList.push($this.addRoleCd());
+  						$this.menuInfo.roleList.push($this.addRoleCd());
                     },
                     error: function (response) {
                     	Swal.alert([response, 'error']);
@@ -135,7 +141,7 @@ let menuDetl = new Vue({
         		Swal.alert(['상위메뉴를 입력하세요.', 'info']);
         		return false;
         	}
-        	
+        	/*
         	if ( WebUtil.isNull($this.menuInfo.menuUrl) ) {
         		Swal.alert(['메뉴경로를 입력하세요.', 'info']);
         		return false;
@@ -145,7 +151,7 @@ let menuDetl = new Vue({
         		Swal.alert(['메뉴아이콘을 입력하세요.', 'info']);
         		return false;
         	}
-        	
+        	*/
         	if ( WebUtil.isNull($this.menuInfo.useYn) ) {
         		Swal.alert(['사용여부를 선택하세요.', 'info']);
         		return false;
@@ -211,10 +217,16 @@ let menuDetl = new Vue({
     		this.menuInfo.menuNo  = menu.cdVal;
     		this.menuInfo.menuUrl = menu.url + "/";
 
+    		this.selectSubUpprMenuNo(this.menuInfo.menuNo);
+
+		},
+
+		selectSubUpprMenuNo : function (menuNo){
+        	let $this = this;
 
 			AjaxUtil.post({
 				url: "/set/menuMng/searchUpprMenuList.ab",
-				param: {"upprMenuNo" : this.menuInfo.menuNo},
+				param: {"upprMenuNo" : menuNo},
 				success: function(response) {
 
 					$this.code.subUpprMenuList = [];

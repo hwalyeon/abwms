@@ -6,7 +6,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import kr.co.seculink.web.service.svcStnd.strs.StrsStndMngService;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ public class UserRoleMngController
 {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
-	
+
 	@ResponseBody
 	@RequestMapping("/set/userRoleMng/searchUserRoleList.ab")
 	public RtnMsg searchUserRoleList(@RequestBody(required=false) Map<String, String> params) throws BizException

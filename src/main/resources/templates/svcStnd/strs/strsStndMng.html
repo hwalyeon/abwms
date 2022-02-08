@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-	<div class="wrapper-content" id="dgemStndMng">
+	<div class="wrapper-content" id="strsStndMng">
 	
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
@@ -24,45 +24,29 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">사용자ID</label>
+						<label class="col-xs-1 control-label">select option test</label>
 						<div class="col-xs-2">
-							<input type="text" name="userId" class="form-control" v-model="params.userId">
+							<select id="mentStrsStatCd" name="mentStrsStatCd" class="form-control" v-model="params.mentStrsStatCd" v-on:click="mentStrsStatNmVal()">
+								<option value="">전체</option>
+								<option v-for="item in code.mentStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+							</select>
 						</div>
-						<label class="col-xs-1 control-label">사용자명</label>
+						<label class="col-xs-1 control-label">정신적 스트레스 상태코드</label>
 						<div class="col-xs-2">
-							<input type="text" name="userNm" class="form-control" v-model="params.userNm">
+							<input type="text" name="mentStrsStatCd" class="form-control" v-model="params.mentStrsStatCd">
 						</div>
-						<label class="col-xs-1 control-label">소속</label>
+						<label class="col-xs-1 control-label">신체적 스트레스 상태코드</label>
 						<div class="col-xs-2">
-							<input type="text" name="blngNm" class="form-control" v-model="params.blngNm">
-						</div>
-						<label class="col-xs-1 control-label">전화번호</label>
-						<div class="col-xs-2">
-							<input type="number" name="telNo" class="form-control" v-model="params.telNo">							
+							<input type="text" name="physStrsStatCd" class="form-control" v-model="params.physStrsStatCd">
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-xs-1 control-label">휴대전화번호</label>
-						<div class="col-xs-2">
-							<input type="number" name="mtelNo" class="form-control" v-model="params.mtelNo">
-						</div>
-						<label class="col-xs-1 control-label">이메일</label>
-						<div class="col-xs-2">
-							<input type="text" name="mailAddr" class="form-control" v-model="params.mailAddr">
-						</div>
-						<label class="col-xs-1 control-label">사용여부</label>
-						<div class="col-xs-2" style="padding: 5px 0;">
-								<input type="radio" name="uesYn"  v-model="params.useYn" value="Y" checked="checked">&nbsp;Y
-								<input type="radio" name="uesYn"  v-model="params.useYn" value="N">&nbsp;N
-						</div>
-					</div>
-					
+
 					<div class="form-group mg_none">
 						<div class="text-center">
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchUserList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchStrsList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -83,8 +67,8 @@
 				<!--	<div class="float_right">
 						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#userDetlPopup" v-on:click="regUserPop()">&nbsp;사용자등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
-					</div>
-					<div class="clear_both"></div>-->
+					</div>-->
+					<div class="clear_both"></div>
 				</div>
 				<div class="form-group">
 					<div id="user_list_wrapper">
@@ -98,7 +82,7 @@
 <!--    <div th:insert="~{set/userDetl :: body}"></div>-->
 </div>
 <section layout:fragment="user_script">
-	<script type="text/javascript" th:src="@{/js/svcStnd/dgem/dgemStndMng.js}"></script>
+	<script type="text/javascript" th:src="@{/js/svcStnd/strs/strsStndMng.js}"></script>
 </section>
 </body>
 </html>
