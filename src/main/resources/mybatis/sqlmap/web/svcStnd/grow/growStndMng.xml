@@ -2,12 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="svcStnd.grow.growStndMng">
 
+    <!--성장기준 리스트 조회-->
+	<select id="searchGrowStndList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      GROW_STND_VER
+	                    , GROW_STND_NO
+		                , SEX_CD
+		                , AGE_YCNT
+		                , AGE_MCNT
+		                , P3_GIDX
+		                , P50_GIDX
+		                , P97_GIDX
+		                , REG_DT
+		                , REG_TM
+                  		, REG_USER_ID
+		                , UPT_DT
+		                , UPT_TM
+		                , UPT_USER_ID
+		                ,fn_getCdNm('SEX_CD', SEX_CD)
+		FROM        TI_GROW_STND
+		WHERE      1 = 1
+		<if test=" growStndVer != null and growStndVer != '' ">
+			AND          GROW_STND_VER = #{growStndVer}</if>
+		<if test=" ageYcnt != null and ageYcnt != '' ">
+			AND          AGE_YCNT = CAST (#{ageYcnt} AS INTEGER)</if>
+		<if test=" sexCd != null and sexCd != '' ">
+			AND          SEX_CD = #{sexCd}</if>
+		ORDER BY GROW_STND_VER, GROW_STND_NO, SEX_CD
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+
     <!--성장기준버전 리스트 조회-->
-	<select id="searchTIGrowStndVerList" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="searchGrowStndVerList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT      DISTINCT GROW_STND_VER FROM TI_GROW_STND TGS
         ORDER BY GROW_STND_VER
 	</select>
-
 
 	<!--나이년도 리스트 조회-->
 	<select id="searchAgeYcntList" parameterType="java.util.Map" resultType="MybatisMap">
