@@ -17,6 +17,12 @@
          if(WebUtil.isNull(date)) return '';
          return moment( date ).format(dateFormatPattern);
     }
+
+    formatTime = function (date) {
+        if(date == null) return ;
+        if(WebUtil.isNull(date)) return '';
+        return moment( date,  'HHmmss' ).format(timeFormatPattern);
+    }
     
     phoneFormatter = function(num,type){
     	var formatNum = '';
@@ -887,4 +893,28 @@
         obj.value = obj.value.slice(0, obj.maxLength);
       }
     }
- 
+
+
+    // 그리드 selectbox 형식으로 데이터 변환
+    function commonGridCmonCd(cdList)
+    {
+        var selObj = "";
+
+        if (WebUtil.isNull(cdList) == true)
+        {
+            return null;
+        }
+        else
+        {
+            for ( var ix = 0 ; ix < cdList.length ; ix ++ )
+            {
+                var cd = cdList[ix];
+                if(selObj != "")
+                {
+                    selObj += ";";
+                }
+                selObj += cd.cdVal+":"+cd.cdNm;
+            }
+        }
+        return selObj;
+    }
