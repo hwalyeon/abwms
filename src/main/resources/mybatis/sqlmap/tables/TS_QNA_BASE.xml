@@ -7,277 +7,340 @@
 -->
 <mapper namespace="TS_QNA_BASE">
 
-	<select id="select" resultMap="SYS.defaultMap">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo" resultType="kr.co.seculink.domain.vo.TsQnaBaseVo">
 		/* Generated SQL SQL ID : ts_qna_base.select */
-		SELECT 
-               qna_no /* qna_no 질의응답_번호 numeric */
-             , qust_guar_no /* qust_guar_no 질문_보호자_번호 numeric */
-             , qust_dt /* qust_dt 질문_일자 character(8) */
-             , qust_tm /* qust_tm 질문_시각 character(6) */
-             , qust_titl /* qust_titl 질문_제목 character varying(200) */
-             , qust_cntn /* qust_cntn 질문_내용 text */
-             , answer_user_id /* answer_user_id 답변_사용자_ID character varying(40) */
-             , answer_dt /* answer_dt 답변_일자 character(8) */
-             , answer_tm /* answer_tm 답변_시각 character(6) */
-             , answer_cntn /* answer_cntn 답변_내용 text */
-             , reg_dt /* reg_dt 등록_일자 character(8) */
-             , reg_tm /* reg_tm 등록_시각 character(6) */
-             , reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-             , upt_dt /* upt_dt 수정_일자 character(8) */
-             , upt_tm /* upt_tm 수정_시각 character(6) */
-             , upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+        SELECT  qna_no /* qna_no 질의응답_번호 numeric */
+               ,qust_guar_no /* qust_guar_no 질문_보호자_번호 numeric */
+               ,qust_dt /* qust_dt 질문_일자 character(8) */
+               ,qust_tm /* qust_tm 질문_시각 character(6) */
+               ,qust_titl /* qust_titl 질문_제목 character varying(200) */
+               ,qust_cntn /* qust_cntn 질문_내용 text */
+               ,answer_user_id /* answer_user_id 답변_사용자_ID character varying(40) */
+               ,answer_dt /* answer_dt 답변_일자 character(8) */
+               ,answer_tm /* answer_tm 답변_시각 character(6) */
+               ,answer_cntn /* answer_cntn 답변_내용 text */
+               ,reg_dt /* reg_dt 등록_일자 character(8) */
+               ,reg_tm /* reg_tm 등록_시각 character(6) */
+               ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+               ,upt_dt /* upt_dt 수정_일자 character(8) */
+               ,upt_tm /* upt_tm 수정_시각 character(6) */
+               ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ts_qna_base
-		WHERE
-		       qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
+		WHERE  1 = 1
+		AND    qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
 		/* Generated SQL SQL ID : ts_qna_base.insert */
-		INSERT INTO ts_qna_base (
-		  qna_no /* qna_no 질의응답_번호 numeric */
+		INSERT INTO ts_qna_base
+		(
+		     qna_no /* qna_no 질의응답_번호 numeric */
 		<if test="qustGuarNo != null">
-		, qust_guar_no /* qust_guar_no 질문_보호자_번호 numeric */
+		    ,qust_guar_no /* qust_guar_no 질문_보호자_번호 numeric */
 		</if>
 		<if test="qustDt != null">
-		, qust_dt /* qust_dt 질문_일자 character(8) */
+		    ,qust_dt /* qust_dt 질문_일자 character(8) */
 		</if>
 		<if test="qustTm != null">
-		, qust_tm /* qust_tm 질문_시각 character(6) */
+		    ,qust_tm /* qust_tm 질문_시각 character(6) */
 		</if>
 		<if test="qustTitl != null">
-		, qust_titl /* qust_titl 질문_제목 character varying(200) */
+		    ,qust_titl /* qust_titl 질문_제목 character varying(200) */
 		</if>
 		<if test="qustCntn != null">
-		, qust_cntn /* qust_cntn 질문_내용 text */
+		    ,qust_cntn /* qust_cntn 질문_내용 text */
 		</if>
 		<if test="answerUserId != null">
-		, answer_user_id /* answer_user_id 답변_사용자_ID character varying(40) */
+		    ,answer_user_id /* answer_user_id 답변_사용자_ID character varying(40) */
 		</if>
 		<if test="answerDt != null">
-		, answer_dt /* answer_dt 답변_일자 character(8) */
+		    ,answer_dt /* answer_dt 답변_일자 character(8) */
 		</if>
 		<if test="answerTm != null">
-		, answer_tm /* answer_tm 답변_시각 character(6) */
+		    ,answer_tm /* answer_tm 답변_시각 character(6) */
 		</if>
 		<if test="answerCntn != null">
-		, answer_cntn /* answer_cntn 답변_내용 text */
+		    ,answer_cntn /* answer_cntn 답변_내용 text */
 		</if>
-		, reg_dt /* reg_dt 등록_일자 character(8) */
-		, reg_tm /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, upt_dt /* upt_dt 수정_일자 character(8) */
-		, upt_tm /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,upt_dt /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
-		) VALUES (
-		  #{qnaNo} /* qna_no 질의응답_번호 numeric */
+		)
+		VALUES
+		(
+		     #{qnaNo} /* qna_no 질의응답_번호 numeric */
 		<if test="qustGuarNo != null">
-		, #{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
+		    ,#{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
 		</if>
 		<if test="qustDt != null">
-		, #{qustDt} /* qust_dt 질문_일자 character(8) */
+		    ,#{qustDt} /* qust_dt 질문_일자 character(8) */
 		</if>
 		<if test="qustTm != null">
-		, #{qustTm} /* qust_tm 질문_시각 character(6) */
+		    ,#{qustTm} /* qust_tm 질문_시각 character(6) */
 		</if>
 		<if test="qustTitl != null">
-		, #{qustTitl} /* qust_titl 질문_제목 character varying(200) */
+		    ,#{qustTitl} /* qust_titl 질문_제목 character varying(200) */
 		</if>
 		<if test="qustCntn != null">
-		, #{qustCntn} /* qust_cntn 질문_내용 text */
+		    ,#{qustCntn} /* qust_cntn 질문_내용 text */
 		</if>
 		<if test="answerUserId != null">
-		, #{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
+		    ,#{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
 		</if>
 		<if test="answerDt != null">
-		, #{answerDt} /* answer_dt 답변_일자 character(8) */
+		    ,#{answerDt} /* answer_dt 답변_일자 character(8) */
 		</if>
 		<if test="answerTm != null">
-		, #{answerTm} /* answer_tm 답변_시각 character(6) */
+		    ,#{answerTm} /* answer_tm 답변_시각 character(6) */
 		</if>
 		<if test="answerCntn != null">
-		, #{answerCntn} /* answer_cntn 답변_내용 text */
+		    ,#{answerCntn} /* answer_cntn 답변_내용 text */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
-		, to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
-		, to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
 	</insert>
 	
-	<update id="update" >
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
 		/* Generated SQL SQL ID : ts_qna_base.update */
 		UPDATE ts_qna_base
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="qustGuarNo != null">
-		, qust_guar_no = #{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
+		    ,qust_guar_no = #{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
 		</if>
 		<if test="qustDt != null">
-		, qust_dt = #{qustDt} /* qust_dt 질문_일자 character(8) */
+		    ,qust_dt = #{qustDt} /* qust_dt 질문_일자 character(8) */
 		</if>
 		<if test="qustTm != null">
-		, qust_tm = #{qustTm} /* qust_tm 질문_시각 character(6) */
+		    ,qust_tm = #{qustTm} /* qust_tm 질문_시각 character(6) */
 		</if>
 		<if test="qustTitl != null">
-		, qust_titl = #{qustTitl} /* qust_titl 질문_제목 character varying(200) */
+		    ,qust_titl = #{qustTitl} /* qust_titl 질문_제목 character varying(200) */
 		</if>
 		<if test="qustCntn != null">
-		, qust_cntn = #{qustCntn} /* qust_cntn 질문_내용 text */
+		    ,qust_cntn = #{qustCntn} /* qust_cntn 질문_내용 text */
 		</if>
 		<if test="answerUserId != null">
-		, answer_user_id = #{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
+		    ,answer_user_id = #{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
 		</if>
 		<if test="answerDt != null">
-		, answer_dt = #{answerDt} /* answer_dt 답변_일자 character(8) */
+		    ,answer_dt = #{answerDt} /* answer_dt 답변_일자 character(8) */
 		</if>
 		<if test="answerTm != null">
-		, answer_tm = #{answerTm} /* answer_tm 답변_시각 character(6) */
+		    ,answer_tm = #{answerTm} /* answer_tm 답변_시각 character(6) */
 		</if>
 		<if test="answerCntn != null">
-		, answer_cntn = #{answerCntn} /* answer_cntn 답변_내용 text */
+		    ,answer_cntn = #{answerCntn} /* answer_cntn 답변_내용 text */
 		</if>
-		, upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-		, upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
+		<if test="regUserId != null">
+		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
+		<if test="uptDt != null">
+		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
-		WHERE
-		qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
+		WHERE  1 = 1
+		AND    qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
 		/* Generated SQL SQL ID : ts_qna_base.merge */
-		INSERT INTO ts_qna_base (
-		  qna_no /* qna_no 질의응답_번호 numeric */
+		INSERT INTO ts_qna_base
+		(
+		     qna_no /* qna_no 질의응답_번호 numeric */
 		<if test="qustGuarNo != null">
-		, qust_guar_no /* qust_guar_no 질문_보호자_번호 numeric */
+		    ,qust_guar_no /* qust_guar_no 질문_보호자_번호 numeric */
 		</if>
 		<if test="qustDt != null">
-		, qust_dt /* qust_dt 질문_일자 character(8) */
+		    ,qust_dt /* qust_dt 질문_일자 character(8) */
 		</if>
 		<if test="qustTm != null">
-		, qust_tm /* qust_tm 질문_시각 character(6) */
+		    ,qust_tm /* qust_tm 질문_시각 character(6) */
 		</if>
 		<if test="qustTitl != null">
-		, qust_titl /* qust_titl 질문_제목 character varying(200) */
+		    ,qust_titl /* qust_titl 질문_제목 character varying(200) */
 		</if>
 		<if test="qustCntn != null">
-		, qust_cntn /* qust_cntn 질문_내용 text */
+		    ,qust_cntn /* qust_cntn 질문_내용 text */
 		</if>
 		<if test="answerUserId != null">
-		, answer_user_id /* answer_user_id 답변_사용자_ID character varying(40) */
+		    ,answer_user_id /* answer_user_id 답변_사용자_ID character varying(40) */
 		</if>
 		<if test="answerDt != null">
-		, answer_dt /* answer_dt 답변_일자 character(8) */
+		    ,answer_dt /* answer_dt 답변_일자 character(8) */
 		</if>
 		<if test="answerTm != null">
-		, answer_tm /* answer_tm 답변_시각 character(6) */
+		    ,answer_tm /* answer_tm 답변_시각 character(6) */
 		</if>
 		<if test="answerCntn != null">
-		, answer_cntn /* answer_cntn 답변_내용 text */
+		    ,answer_cntn /* answer_cntn 답변_내용 text */
 		</if>
-		, reg_dt /* reg_dt 등록_일자 character(8) */
-		, reg_tm /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, upt_dt /* upt_dt 수정_일자 character(8) */
-		, upt_tm /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,upt_dt /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
-		) VALUES (
-		  #{qnaNo} /* qna_no 질의응답_번호 numeric */
+		)
+		VALUES
+		(
+		     #{qnaNo} /* qna_no 질의응답_번호 numeric */
 		<if test="qustGuarNo != null">
-		, #{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
+		    ,#{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
 		</if>
 		<if test="qustDt != null">
-		, #{qustDt} /* qust_dt 질문_일자 character(8) */
+		    ,#{qustDt} /* qust_dt 질문_일자 character(8) */
 		</if>
 		<if test="qustTm != null">
-		, #{qustTm} /* qust_tm 질문_시각 character(6) */
+		    ,#{qustTm} /* qust_tm 질문_시각 character(6) */
 		</if>
 		<if test="qustTitl != null">
-		, #{qustTitl} /* qust_titl 질문_제목 character varying(200) */
+		    ,#{qustTitl} /* qust_titl 질문_제목 character varying(200) */
 		</if>
 		<if test="qustCntn != null">
-		, #{qustCntn} /* qust_cntn 질문_내용 text */
+		    ,#{qustCntn} /* qust_cntn 질문_내용 text */
 		</if>
 		<if test="answerUserId != null">
-		, #{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
+		    ,#{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
 		</if>
 		<if test="answerDt != null">
-		, #{answerDt} /* answer_dt 답변_일자 character(8) */
+		    ,#{answerDt} /* answer_dt 답변_일자 character(8) */
 		</if>
 		<if test="answerTm != null">
-		, #{answerTm} /* answer_tm 답변_시각 character(6) */
+		    ,#{answerTm} /* answer_tm 답변_시각 character(6) */
 		</if>
 		<if test="answerCntn != null">
-		, #{answerCntn} /* answer_cntn 답변_내용 text */
+		    ,#{answerCntn} /* answer_cntn 답변_내용 text */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
-		, to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-		, to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
 		ON CONFLICT
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
 		<if test="qustGuarNo != null">
-		, qust_guar_no = #{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
+		    ,qust_guar_no = #{qustGuarNo} /* qust_guar_no 질문_보호자_번호 numeric */
 		</if>
 		<if test="qustDt != null">
-		, qust_dt = #{qustDt} /* qust_dt 질문_일자 character(8) */
+		    ,qust_dt = #{qustDt} /* qust_dt 질문_일자 character(8) */
 		</if>
 		<if test="qustTm != null">
-		, qust_tm = #{qustTm} /* qust_tm 질문_시각 character(6) */
+		    ,qust_tm = #{qustTm} /* qust_tm 질문_시각 character(6) */
 		</if>
 		<if test="qustTitl != null">
-		, qust_titl = #{qustTitl} /* qust_titl 질문_제목 character varying(200) */
+		    ,qust_titl = #{qustTitl} /* qust_titl 질문_제목 character varying(200) */
 		</if>
 		<if test="qustCntn != null">
-		, qust_cntn = #{qustCntn} /* qust_cntn 질문_내용 text */
+		    ,qust_cntn = #{qustCntn} /* qust_cntn 질문_내용 text */
 		</if>
 		<if test="answerUserId != null">
-		, answer_user_id = #{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
+		    ,answer_user_id = #{answerUserId} /* answer_user_id 답변_사용자_ID character varying(40) */
 		</if>
 		<if test="answerDt != null">
-		, answer_dt = #{answerDt} /* answer_dt 답변_일자 character(8) */
+		    ,answer_dt = #{answerDt} /* answer_dt 답변_일자 character(8) */
 		</if>
 		<if test="answerTm != null">
-		, answer_tm = #{answerTm} /* answer_tm 답변_시각 character(6) */
+		    ,answer_tm = #{answerTm} /* answer_tm 답변_시각 character(6) */
 		</if>
 		<if test="answerCntn != null">
-		, answer_cntn = #{answerCntn} /* answer_cntn 답변_내용 text */
+		    ,answer_cntn = #{answerCntn} /* answer_cntn 답변_내용 text */
 		</if>
-		, upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-		, upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
+		<if test="regUserId != null">
+		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
+		<if test="uptDt != null">
+		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
 	</update>
 	
-	<delete id="delete" >
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
 		/* Generated SQL SQL ID : ts_qna_base.delete */
 		DELETE FROM ts_qna_base
-		WHERE
-		qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
+		WHERE  1 = 1
+		AND    qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
 	</delete>
 </mapper>

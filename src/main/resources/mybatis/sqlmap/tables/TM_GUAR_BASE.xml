@@ -7,433 +7,496 @@
 -->
 <mapper namespace="TM_GUAR_BASE">
 
-	<select id="select" resultMap="SYS.defaultMap">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo" resultType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.select */
-		SELECT 
-               guar_no /* guar_no 보호자_번호 numeric */
-             , guar_nm /* guar_nm 보호자_명 character varying(20) */
-             , guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
-             , guar_pw /* guar_pw 보호자_비밀번호 character varying(1000) */
-             , self_cert_dttm /* self_cert_dttm 본인_인증_일시 character(14) */
-             , race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
-             , sex_cd /* sex_cd 성별_코드 character varying(20) */
-             , hght_val /* hght_val 키_값 numeric */
-             , wght_val /* wght_val 체중_값 numeric */
-             , bmi_val /* bmi_val BMI_값 numeric */
-             , spos_no /* spos_no 배우자_번호 numeric */
-             , dzone_moin_alam_yn /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
-             , dzone_mout_alam_yn /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
-             , szone_moin_alam_yn /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
-             , szone_mout_alam_yn /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
-             , fall_occr_alam_yn /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
-             , strs_abnm_alam_yn /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
-             , entr_dt /* entr_dt 가입_일자 character(8) */
-             , rels_dt /* rels_dt 해지_일자 character(8) */
-             , rels_resn_cd /* rels_resn_cd 해지_사유_코드 character varying(20) */
-             , rels_resn_cntn /* rels_resn_cntn 해지_사유_내용 character varying(400) */
-             , entr_stat_cd /* entr_stat_cd 가입_상태_코드 character varying(20) */
-             , reg_dt /* reg_dt 등록_일자 character(8) */
-             , reg_tm /* reg_tm 등록_시각 character(6) */
-             , reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-             , upt_dt /* upt_dt 수정_일자 character(8) */
-             , upt_tm /* upt_tm 수정_시각 character(6) */
-             , upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+        SELECT  guar_no /* guar_no 보호자_번호 numeric */
+               ,guar_nm /* guar_nm 보호자_명 character varying(20) */
+               ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+               ,guar_pw /* guar_pw 보호자_비밀번호 character varying(1000) */
+               ,self_cert_dttm /* self_cert_dttm 본인_인증_일시 character(14) */
+               ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+               ,sex_cd /* sex_cd 성별_코드 character varying(20) */
+               ,hght_val /* hght_val 키_값 numeric */
+               ,wght_val /* wght_val 체중_값 numeric */
+               ,bmi_val /* bmi_val BMI_값 numeric */
+               ,spos_no /* spos_no 배우자_번호 numeric */
+               ,dzone_moin_alam_yn /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
+               ,dzone_mout_alam_yn /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
+               ,szone_moin_alam_yn /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
+               ,szone_mout_alam_yn /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
+               ,fall_occr_alam_yn /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
+               ,strs_abnm_alam_yn /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
+               ,entr_dt /* entr_dt 가입_일자 character(8) */
+               ,rels_dt /* rels_dt 해지_일자 character(8) */
+               ,rels_resn_cd /* rels_resn_cd 해지_사유_코드 character varying(20) */
+               ,rels_resn_cntn /* rels_resn_cntn 해지_사유_내용 character varying(400) */
+               ,entr_stat_cd /* entr_stat_cd 가입_상태_코드 character varying(20) */
+               ,reg_dt /* reg_dt 등록_일자 character(8) */
+               ,reg_tm /* reg_tm 등록_시각 character(6) */
+               ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+               ,upt_dt /* upt_dt 수정_일자 character(8) */
+               ,upt_tm /* upt_tm 수정_시각 character(6) */
+               ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   tm_guar_base
-		WHERE
-		       guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
+		WHERE  1 = 1
+		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.insert */
-		INSERT INTO tm_guar_base (
-		  guar_no /* guar_no 보호자_번호 numeric */
+		INSERT INTO tm_guar_base
+		(
+		     guar_no /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		, guar_nm /* guar_nm 보호자_명 character varying(20) */
+		    ,guar_nm /* guar_nm 보호자_명 character varying(20) */
 		</if>
 		<if test="guarTelNo != null">
-		, guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		</if>
 		<if test="guarPw != null">
-		, guar_pw /* guar_pw 보호자_비밀번호 character varying(1000) */
+		    ,guar_pw /* guar_pw 보호자_비밀번호 character varying(1000) */
 		</if>
 		<if test="selfCertDttm != null">
-		, self_cert_dttm /* self_cert_dttm 본인_인증_일시 character(14) */
+		    ,self_cert_dttm /* self_cert_dttm 본인_인증_일시 character(14) */
 		</if>
 		<if test="raceDivCd != null">
-		, race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+		    ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
 		<if test="sexCd != null">
-		, sex_cd /* sex_cd 성별_코드 character varying(20) */
+		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		</if>
-		, hght_val /* hght_val 키_값 numeric */
-		, wght_val /* wght_val 체중_값 numeric */
-		, bmi_val /* bmi_val BMI_값 numeric */
+		    ,hght_val /* hght_val 키_값 numeric */
+		    ,wght_val /* wght_val 체중_값 numeric */
+		    ,bmi_val /* bmi_val BMI_값 numeric */
 		<if test="sposNo != null">
-		, spos_no /* spos_no 배우자_번호 numeric */
+		    ,spos_no /* spos_no 배우자_번호 numeric */
 		</if>
-		, dzone_moin_alam_yn /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
-		, dzone_mout_alam_yn /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
-		, szone_moin_alam_yn /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
-		, szone_mout_alam_yn /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
-		, fall_occr_alam_yn /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
-		, strs_abnm_alam_yn /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
+		    ,dzone_moin_alam_yn /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
+		    ,dzone_mout_alam_yn /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
+		    ,szone_moin_alam_yn /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
+		    ,szone_mout_alam_yn /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
+		    ,fall_occr_alam_yn /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
+		    ,strs_abnm_alam_yn /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
 		<if test="entrDt != null">
-		, entr_dt /* entr_dt 가입_일자 character(8) */
+		    ,entr_dt /* entr_dt 가입_일자 character(8) */
 		</if>
 		<if test="relsDt != null">
-		, rels_dt /* rels_dt 해지_일자 character(8) */
+		    ,rels_dt /* rels_dt 해지_일자 character(8) */
 		</if>
 		<if test="relsResnCd != null">
-		, rels_resn_cd /* rels_resn_cd 해지_사유_코드 character varying(20) */
+		    ,rels_resn_cd /* rels_resn_cd 해지_사유_코드 character varying(20) */
 		</if>
 		<if test="relsResnCntn != null">
-		, rels_resn_cntn /* rels_resn_cntn 해지_사유_내용 character varying(400) */
+		    ,rels_resn_cntn /* rels_resn_cntn 해지_사유_내용 character varying(400) */
 		</if>
 		<if test="entrStatCd != null">
-		, entr_stat_cd /* entr_stat_cd 가입_상태_코드 character varying(20) */
+		    ,entr_stat_cd /* entr_stat_cd 가입_상태_코드 character varying(20) */
 		</if>
-		, reg_dt /* reg_dt 등록_일자 character(8) */
-		, reg_tm /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, upt_dt /* upt_dt 수정_일자 character(8) */
-		, upt_tm /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,upt_dt /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
-		) VALUES (
-		  #{guarNo} /* guar_no 보호자_번호 numeric */
+		)
+		VALUES
+		(
+		     #{guarNo} /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		, #{guarNm} /* guar_nm 보호자_명 character varying(20) */
+		    ,#{guarNm} /* guar_nm 보호자_명 character varying(20) */
 		</if>
 		<if test="guarTelNo != null">
-		, #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		</if>
 		<if test="guarPw != null">
-		, #{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
+		    ,#{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
 		</if>
 		<if test="selfCertDttm != null">
-		, #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
+		    ,#{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
 		</if>
 		<if test="raceDivCd != null">
-		, #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+		    ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
 		<if test="sexCd != null">
-		, #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
-		, #{hghtVal} /* hght_val 키_값 numeric */
-		, #{wghtVal} /* wght_val 체중_값 numeric */
-		, #{bmiVal} /* bmi_val BMI_값 numeric */
+		    ,#{hghtVal} /* hght_val 키_값 numeric */
+		    ,#{wghtVal} /* wght_val 체중_값 numeric */
+		    ,#{bmiVal} /* bmi_val BMI_값 numeric */
 		<if test="sposNo != null">
-		, #{sposNo} /* spos_no 배우자_번호 numeric */
+		    ,#{sposNo} /* spos_no 배우자_번호 numeric */
 		</if>
-		, #{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
-		, #{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
-		, #{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
-		, #{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
-		, #{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
-		, #{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
+		    ,#{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
+		    ,#{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
+		    ,#{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
+		    ,#{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
+		    ,#{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
+		    ,#{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
 		<if test="entrDt != null">
-		, #{entrDt} /* entr_dt 가입_일자 character(8) */
+		    ,#{entrDt} /* entr_dt 가입_일자 character(8) */
 		</if>
 		<if test="relsDt != null">
-		, #{relsDt} /* rels_dt 해지_일자 character(8) */
+		    ,#{relsDt} /* rels_dt 해지_일자 character(8) */
 		</if>
 		<if test="relsResnCd != null">
-		, #{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
+		    ,#{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
 		</if>
 		<if test="relsResnCntn != null">
-		, #{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
+		    ,#{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
 		</if>
 		<if test="entrStatCd != null">
-		, #{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
+		    ,#{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
-		, to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
-		, to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
 	</insert>
 	
-	<update id="update" >
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.update */
 		UPDATE tm_guar_base
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="guarNm != null">
-		, guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(20) */
+		    ,guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(20) */
 		</if>
 		<if test="guarTelNo != null">
-		, guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		</if>
 		<if test="guarPw != null">
-		, guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
+		    ,guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
 		</if>
 		<if test="selfCertDttm != null">
-		, self_cert_dttm = #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
+		    ,self_cert_dttm = #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
 		</if>
 		<if test="raceDivCd != null">
-		, race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+		    ,race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
 		<if test="sexCd != null">
-		, sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		    ,sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
 		<if test="hghtVal != null">
-		, hght_val = #{hghtVal} /* hght_val 키_값 numeric */
+		    ,hght_val = #{hghtVal} /* hght_val 키_값 numeric */
 		</if>
 		<if test="wghtVal != null">
-		, wght_val = #{wghtVal} /* wght_val 체중_값 numeric */
+		    ,wght_val = #{wghtVal} /* wght_val 체중_값 numeric */
 		</if>
 		<if test="bmiVal != null">
-		, bmi_val = #{bmiVal} /* bmi_val BMI_값 numeric */
+		    ,bmi_val = #{bmiVal} /* bmi_val BMI_값 numeric */
 		</if>
 		<if test="sposNo != null">
-		, spos_no = #{sposNo} /* spos_no 배우자_번호 numeric */
+		    ,spos_no = #{sposNo} /* spos_no 배우자_번호 numeric */
 		</if>
 		<if test="dzoneMoinAlamYn != null">
-		, dzone_moin_alam_yn = #{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
+		    ,dzone_moin_alam_yn = #{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
 		</if>
 		<if test="dzoneMoutAlamYn != null">
-		, dzone_mout_alam_yn = #{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
+		    ,dzone_mout_alam_yn = #{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
 		</if>
 		<if test="szoneMoinAlamYn != null">
-		, szone_moin_alam_yn = #{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
+		    ,szone_moin_alam_yn = #{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
 		</if>
 		<if test="szoneMoutAlamYn != null">
-		, szone_mout_alam_yn = #{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
+		    ,szone_mout_alam_yn = #{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
 		</if>
 		<if test="fallOccrAlamYn != null">
-		, fall_occr_alam_yn = #{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
+		    ,fall_occr_alam_yn = #{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
 		</if>
 		<if test="strsAbnmAlamYn != null">
-		, strs_abnm_alam_yn = #{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
+		    ,strs_abnm_alam_yn = #{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
 		</if>
 		<if test="entrDt != null">
-		, entr_dt = #{entrDt} /* entr_dt 가입_일자 character(8) */
+		    ,entr_dt = #{entrDt} /* entr_dt 가입_일자 character(8) */
 		</if>
 		<if test="relsDt != null">
-		, rels_dt = #{relsDt} /* rels_dt 해지_일자 character(8) */
+		    ,rels_dt = #{relsDt} /* rels_dt 해지_일자 character(8) */
 		</if>
 		<if test="relsResnCd != null">
-		, rels_resn_cd = #{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
+		    ,rels_resn_cd = #{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
 		</if>
 		<if test="relsResnCntn != null">
-		, rels_resn_cntn = #{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
+		    ,rels_resn_cntn = #{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
 		</if>
 		<if test="entrStatCd != null">
-		, entr_stat_cd = #{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
+		    ,entr_stat_cd = #{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
 		</if>
-		, upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-		, upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
+		<if test="regUserId != null">
+		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
+		<if test="uptDt != null">
+		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
-		WHERE
-		guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
+		WHERE  1 = 1
+		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.merge */
-		INSERT INTO tm_guar_base (
-		  guar_no /* guar_no 보호자_번호 numeric */
+		INSERT INTO tm_guar_base
+		(
+		     guar_no /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		, guar_nm /* guar_nm 보호자_명 character varying(20) */
+		    ,guar_nm /* guar_nm 보호자_명 character varying(20) */
 		</if>
 		<if test="guarTelNo != null">
-		, guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		</if>
 		<if test="guarPw != null">
-		, guar_pw /* guar_pw 보호자_비밀번호 character varying(1000) */
+		    ,guar_pw /* guar_pw 보호자_비밀번호 character varying(1000) */
 		</if>
 		<if test="selfCertDttm != null">
-		, self_cert_dttm /* self_cert_dttm 본인_인증_일시 character(14) */
+		    ,self_cert_dttm /* self_cert_dttm 본인_인증_일시 character(14) */
 		</if>
 		<if test="raceDivCd != null">
-		, race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+		    ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
 		<if test="sexCd != null">
-		, sex_cd /* sex_cd 성별_코드 character varying(20) */
+		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		</if>
-		, hght_val /* hght_val 키_값 numeric */
-		, wght_val /* wght_val 체중_값 numeric */
-		, bmi_val /* bmi_val BMI_값 numeric */
+		    ,hght_val /* hght_val 키_값 numeric */
+		    ,wght_val /* wght_val 체중_값 numeric */
+		    ,bmi_val /* bmi_val BMI_값 numeric */
 		<if test="sposNo != null">
-		, spos_no /* spos_no 배우자_번호 numeric */
+		    ,spos_no /* spos_no 배우자_번호 numeric */
 		</if>
-		, dzone_moin_alam_yn /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
-		, dzone_mout_alam_yn /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
-		, szone_moin_alam_yn /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
-		, szone_mout_alam_yn /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
-		, fall_occr_alam_yn /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
-		, strs_abnm_alam_yn /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
+		    ,dzone_moin_alam_yn /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
+		    ,dzone_mout_alam_yn /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
+		    ,szone_moin_alam_yn /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
+		    ,szone_mout_alam_yn /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
+		    ,fall_occr_alam_yn /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
+		    ,strs_abnm_alam_yn /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
 		<if test="entrDt != null">
-		, entr_dt /* entr_dt 가입_일자 character(8) */
+		    ,entr_dt /* entr_dt 가입_일자 character(8) */
 		</if>
 		<if test="relsDt != null">
-		, rels_dt /* rels_dt 해지_일자 character(8) */
+		    ,rels_dt /* rels_dt 해지_일자 character(8) */
 		</if>
 		<if test="relsResnCd != null">
-		, rels_resn_cd /* rels_resn_cd 해지_사유_코드 character varying(20) */
+		    ,rels_resn_cd /* rels_resn_cd 해지_사유_코드 character varying(20) */
 		</if>
 		<if test="relsResnCntn != null">
-		, rels_resn_cntn /* rels_resn_cntn 해지_사유_내용 character varying(400) */
+		    ,rels_resn_cntn /* rels_resn_cntn 해지_사유_내용 character varying(400) */
 		</if>
 		<if test="entrStatCd != null">
-		, entr_stat_cd /* entr_stat_cd 가입_상태_코드 character varying(20) */
+		    ,entr_stat_cd /* entr_stat_cd 가입_상태_코드 character varying(20) */
 		</if>
-		, reg_dt /* reg_dt 등록_일자 character(8) */
-		, reg_tm /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, upt_dt /* upt_dt 수정_일자 character(8) */
-		, upt_tm /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,upt_dt /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
-		) VALUES (
-		  #{guarNo} /* guar_no 보호자_번호 numeric */
+		)
+		VALUES
+		(
+		     #{guarNo} /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		, #{guarNm} /* guar_nm 보호자_명 character varying(20) */
+		    ,#{guarNm} /* guar_nm 보호자_명 character varying(20) */
 		</if>
 		<if test="guarTelNo != null">
-		, #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		</if>
 		<if test="guarPw != null">
-		, #{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
+		    ,#{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
 		</if>
 		<if test="selfCertDttm != null">
-		, #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
+		    ,#{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
 		</if>
 		<if test="raceDivCd != null">
-		, #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+		    ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
 		<if test="sexCd != null">
-		, #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
-		, #{hghtVal} /* hght_val 키_값 numeric */
-		, #{wghtVal} /* wght_val 체중_값 numeric */
-		, #{bmiVal} /* bmi_val BMI_값 numeric */
+		    ,#{hghtVal} /* hght_val 키_값 numeric */
+		    ,#{wghtVal} /* wght_val 체중_값 numeric */
+		    ,#{bmiVal} /* bmi_val BMI_값 numeric */
 		<if test="sposNo != null">
-		, #{sposNo} /* spos_no 배우자_번호 numeric */
+		    ,#{sposNo} /* spos_no 배우자_번호 numeric */
 		</if>
-		, #{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
-		, #{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
-		, #{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
-		, #{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
-		, #{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
-		, #{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
+		    ,#{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
+		    ,#{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
+		    ,#{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
+		    ,#{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
+		    ,#{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
+		    ,#{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
 		<if test="entrDt != null">
-		, #{entrDt} /* entr_dt 가입_일자 character(8) */
+		    ,#{entrDt} /* entr_dt 가입_일자 character(8) */
 		</if>
 		<if test="relsDt != null">
-		, #{relsDt} /* rels_dt 해지_일자 character(8) */
+		    ,#{relsDt} /* rels_dt 해지_일자 character(8) */
 		</if>
 		<if test="relsResnCd != null">
-		, #{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
+		    ,#{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
 		</if>
 		<if test="relsResnCntn != null">
-		, #{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
+		    ,#{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
 		</if>
 		<if test="entrStatCd != null">
-		, #{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
+		    ,#{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
-		, to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		<if test="regDt != null">
+		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
 		<if test="regUserId != null">
-		, #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		, to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-		, to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptDt != null">
+		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
 		ON CONFLICT
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
 		<if test="guarNm != null">
-		, guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(20) */
+		    ,guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(20) */
 		</if>
 		<if test="guarTelNo != null">
-		, guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		</if>
 		<if test="guarPw != null">
-		, guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
+		    ,guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(1000) */
 		</if>
 		<if test="selfCertDttm != null">
-		, self_cert_dttm = #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
+		    ,self_cert_dttm = #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
 		</if>
 		<if test="raceDivCd != null">
-		, race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+		    ,race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
 		<if test="sexCd != null">
-		, sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		    ,sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
 		<if test="hghtVal != null">
-		, hght_val = #{hghtVal} /* hght_val 키_값 numeric */
+		    ,hght_val = #{hghtVal} /* hght_val 키_값 numeric */
 		</if>
 		<if test="wghtVal != null">
-		, wght_val = #{wghtVal} /* wght_val 체중_값 numeric */
+		    ,wght_val = #{wghtVal} /* wght_val 체중_값 numeric */
 		</if>
 		<if test="bmiVal != null">
-		, bmi_val = #{bmiVal} /* bmi_val BMI_값 numeric */
+		    ,bmi_val = #{bmiVal} /* bmi_val BMI_값 numeric */
 		</if>
 		<if test="sposNo != null">
-		, spos_no = #{sposNo} /* spos_no 배우자_번호 numeric */
+		    ,spos_no = #{sposNo} /* spos_no 배우자_번호 numeric */
 		</if>
 		<if test="dzoneMoinAlamYn != null">
-		, dzone_moin_alam_yn = #{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
+		    ,dzone_moin_alam_yn = #{dzoneMoinAlamYn} /* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
 		</if>
 		<if test="dzoneMoutAlamYn != null">
-		, dzone_mout_alam_yn = #{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
+		    ,dzone_mout_alam_yn = #{dzoneMoutAlamYn} /* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
 		</if>
 		<if test="szoneMoinAlamYn != null">
-		, szone_moin_alam_yn = #{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
+		    ,szone_moin_alam_yn = #{szoneMoinAlamYn} /* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
 		</if>
 		<if test="szoneMoutAlamYn != null">
-		, szone_mout_alam_yn = #{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
+		    ,szone_mout_alam_yn = #{szoneMoutAlamYn} /* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
 		</if>
 		<if test="fallOccrAlamYn != null">
-		, fall_occr_alam_yn = #{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
+		    ,fall_occr_alam_yn = #{fallOccrAlamYn} /* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
 		</if>
 		<if test="strsAbnmAlamYn != null">
-		, strs_abnm_alam_yn = #{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
+		    ,strs_abnm_alam_yn = #{strsAbnmAlamYn} /* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
 		</if>
 		<if test="entrDt != null">
-		, entr_dt = #{entrDt} /* entr_dt 가입_일자 character(8) */
+		    ,entr_dt = #{entrDt} /* entr_dt 가입_일자 character(8) */
 		</if>
 		<if test="relsDt != null">
-		, rels_dt = #{relsDt} /* rels_dt 해지_일자 character(8) */
+		    ,rels_dt = #{relsDt} /* rels_dt 해지_일자 character(8) */
 		</if>
 		<if test="relsResnCd != null">
-		, rels_resn_cd = #{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
+		    ,rels_resn_cd = #{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
 		</if>
 		<if test="relsResnCntn != null">
-		, rels_resn_cntn = #{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
+		    ,rels_resn_cntn = #{relsResnCntn} /* rels_resn_cntn 해지_사유_내용 character varying(400) */
 		</if>
 		<if test="entrStatCd != null">
-		, entr_stat_cd = #{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
+		    ,entr_stat_cd = #{entrStatCd} /* entr_stat_cd 가입_상태_코드 character varying(20) */
 		</if>
-		, upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-		, upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="regDt != null">
+		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
+		</if>
+		<if test="regTm != null">
+		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
+		</if>
+		<if test="regUserId != null">
+		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
+		<if test="uptDt != null">
+		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
+		</if>
+		<if test="uptTm != null">
+		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
+		</if>
 		<if test="uptUserId != null">
-		, upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
 	</update>
 	
-	<delete id="delete" >
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.delete */
 		DELETE FROM tm_guar_base
-		WHERE
-		guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
+		WHERE  1 = 1
+		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</delete>
 </mapper>
