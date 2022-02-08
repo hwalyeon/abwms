@@ -58,7 +58,7 @@ public class CommonWebController {
 	}
 
 	@RequestMapping("/svcStnd/strs/strsStndMng.pg")
-	public String getSetStrsStndMng() {
+	public String getSvsStndStrsStrsStndMng() {
 		return "svcStnd/strs/strsStndMng";
 	}
 

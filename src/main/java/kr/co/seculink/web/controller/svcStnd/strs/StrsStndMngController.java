@@ -3,7 +3,6 @@ package kr.co.seculink.web.controller.svcStnd.strs;
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.web.service.set.UserMngService;
 import kr.co.seculink.web.service.svcStnd.strs.StrsStndMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -20,26 +19,31 @@ import java.util.Map;
 
 @Slf4j
 @Controller
-public class StrsStndMngController {
+public class StrsStndMngController
+{
+
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	@Autowired
-	private StrsStndMngService strsStndMngService;
-
 	@ResponseBody
-	@RequestMapping("/svcStnd/strs/searchStrsList.ab")
+	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsList.ab")
+
 	public RtnMsg searchStrsList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
+		System.out.println("test1");
 		RtnMsg vo = new RtnMsg();
+		System.out.println("test2");
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		System.out.println("test3");
 
-		List<Map<String, String>> result = strsStndMngService.searchStrsList(params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
+		System.out.println("test4");
 		rtnMap.put("result", result);
+		System.out.println("test5");
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List) strsStndMngService.searchStrsList(params)).size());
+			vo.setTotalCount(((List)dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params)).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
