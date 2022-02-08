@@ -5,7 +5,9 @@
 <select id="searchStrsList" parameterType="java.util.Map" resultType="MybatisMap">
 	SELECT
                ment_strs_stat_cd /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+             , fn_getCdNm('STRS_STAT_CD', ment_strs_stat_cd) AS MENT_STRS_STAT_NM
              , phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+             , fn_getCdNm('STRS_STAT_CD', phys_strs_stat_cd) AS PHYS_STRS_STAT_NM
              , strs_judg_cntn /* strs_judg_cntn 스트레스_판정_내용 text */
              , reg_dt /* reg_dt 등록_일자 character(8) */
              , reg_tm /* reg_tm 등록_시각 character(6) */
@@ -15,8 +17,8 @@
              , upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ti_strs_stnd
 		WHERE
-		       ment_strs_stat_cd LIKE CONCAT ('%', #{mentStrsStatCd}, '%') /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
-		AND    phys_strs_stat_cd LIKE CONCAT ('%', #{physStrsStatCd}, '%') /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+		       ment_strs_stat_cd LIKE CONCAT (#{mentStrsStatCd}, '%') /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+		AND    phys_strs_stat_cd LIKE CONCAT (#{physStrsStatCd}, '%') /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 
 </select>
 

@@ -24,20 +24,19 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">select option test</label>
+						<label class="col-xs-1 control-label">정신적 스트레스 상태코드</label>
 						<div class="col-xs-2">
 							<select id="mentStrsStatCd" name="mentStrsStatCd" class="form-control" v-model="params.mentStrsStatCd" v-on:click="mentStrsStatNmVal()">
 								<option value="">전체</option>
 								<option v-for="item in code.mentStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label">정신적 스트레스 상태코드</label>
-						<div class="col-xs-2">
-							<input type="text" name="mentStrsStatCd" class="form-control" v-model="params.mentStrsStatCd">
-						</div>
 						<label class="col-xs-1 control-label">신체적 스트레스 상태코드</label>
 						<div class="col-xs-2">
-							<input type="text" name="physStrsStatCd" class="form-control" v-model="params.physStrsStatCd">
+							<select id="physStrsStatCd" name="physStrsStatCd" class="form-control" v-model="params.physStrsStatCd" v-on:click="mentStrsStatNmVal()">
+								<option value="">전체</option>
+								<option v-for="item in code.mentStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+							</select>
 						</div>
 					</div>
 
@@ -64,10 +63,10 @@
 							<h5>사용자 목록</h5>
 						</div>
 					</div>
-				<!--	<div class="float_right">
-						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#userDetlPopup" v-on:click="regUserPop()">&nbsp;사용자등록</button>
+					<div class="float_right">
+						<!--<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#userDetlPopup" v-on:click="regUserPop()">&nbsp;사용자등록</button> -->
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
-					</div>-->
+					</div>
 					<div class="clear_both"></div>
 				</div>
 				<div class="form-group">

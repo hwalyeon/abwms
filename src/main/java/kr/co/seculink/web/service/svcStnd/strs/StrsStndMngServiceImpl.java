@@ -29,7 +29,7 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 	
 	public List<Map<String, String>> searchStrsList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchTiStrsStnd", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
 
 		return result;
 	}
