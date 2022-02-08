@@ -24,20 +24,12 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">위험상태코드</label>
+						<label class="col-xs-1 control-label">위험감정상태명</label>
 						<div class="col-xs-2">
-							<select id="dgemStatCd" name="dgemStatCd" class="form-control" v-model="params.dgemStatCd" v-on:change="dgemStatNmVal()">
+							<select id="dgemStatCd" name="dgemStatCd" class="form-control" v-model="params.dgemStatCd"  v-on:change="searchDgemList(true)">
 								<option value="">전체</option>
-								<option v-for="(item,i) in code.dgemStatCdList" v-bind:value="item.cdVal" v-text="item.cdVal"></option>
+								<option v-for="item in code.dgemStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" ></option>
 							</select>
-						</div>
-						<label class="col-xs-1 control-label">위험상태명</label>
-						<div class="col-xs-2">
-							<input type="text" id="dgemStatNm" name="dgemStatNm" class="form-control"  :value="params.dgemStatNm" v-model="params.dgemStatNm">
-							<!--<select id="dgemStatCd" name="dgemStatCd" class="form-control" v-model="params.dgemStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.dgemStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-							</select>-->
 						</div>
 					</div>
 					<div class="form-group mg_none">
@@ -45,7 +37,7 @@
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchUserList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchDgemList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -60,7 +52,7 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>사용자 목록</h5>
+							<h5>위험감정기준 목록</h5>
 						</div>
 					</div>
 					<div class="float_right">
@@ -71,9 +63,9 @@
 					<div class="clear_both"></div>
 				</div>
 				<div class="form-group">
-					<div id="user_list_wrapper">
-						<table id="user_list"></table>
-						<div id="user_pager_list"></div>
+					<div id="dgem_list_wrapper">
+						<table id="dgem_list"></table>
+						<div id="degm_pager_list"></div>
 					</div>
 				</div>
 			</div>
