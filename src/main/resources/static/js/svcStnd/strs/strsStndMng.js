@@ -17,8 +17,12 @@ let strsStndMng = new Vue({
             rowCount: 30,
             currentPage: 1,
             currentIndex: 0
-    	}
+    	},
+        code:{
+            mentStrsStatCdList : []
+        },
 	},
+
 	
     methods: {
 
@@ -35,6 +39,8 @@ let strsStndMng = new Vue({
         	
         },
         initCodeList: function() {
+            let $this = this;
+            getCommonCodeList('MENT_STRS_STAT_CD',$this.code.mentStrsStatCdList);
         	
         },
         initGrid: function() {
@@ -96,6 +102,9 @@ let strsStndMng = new Vue({
             }).trigger("reloadGrid");
             console.log("5");
 		},
+        mentStrsStatNmVal:function(){
+            let $this = this;
+        },
 
 
 		resetSearchParam: function() {
