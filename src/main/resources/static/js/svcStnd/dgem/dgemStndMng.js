@@ -141,7 +141,7 @@ let dgemStndMng = new Vue({
 		},
         dgemStatNmVal:function(){
           let $this = this;
-            console.log($this.code.cdGrpDivList.cdNm[cdVal]);
+            console.log(index);
         },
 		resetSearchParam: function() {
 			let $this = this;
