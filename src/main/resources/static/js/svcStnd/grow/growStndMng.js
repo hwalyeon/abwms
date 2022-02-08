@@ -1,5 +1,5 @@
-let dgemStndMng = new Vue({
-    el: "#dgemStndMng",
+let growStndMng = new Vue({
+    el: "#growStndMng",
     data:
     {
     	params:
@@ -33,24 +33,16 @@ let dgemStndMng = new Vue({
             let $this = this;
             //위험감정상태 코드 목록 조회
             getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList);
-
         },
-
         initGrid: function()
         {
         	let colModels = [
                 {name: "dgemStatCd"     , index: "dgemStatCd"     , label: "위험감정상태코드"    , width: 80         , align: "center"},
                 {name: "dgemStatCntn"  , index: "dgemStatCntn"  , label: "위험감정상태내용"    , width: 80         , align: "center"},
-                {name: "regDt"                , index: "regDt"                 , label: "등록일자"                  , width: 80          , align: "center"
-                 ,formatter: function(cellValue, options, rowObject) {return formatDate(cellValue);}
-                },
-                {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"
-                 ,formatTime: function(cellValue, options, rowObject) {return formatTime(cellValue);}
-                },
+                {name: "regDt"                , index: "regDt"                 , label: "등록일자"                  , width: 80          , align: "center"},
+                {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"},
                 {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"            , width: 80          , align: "center"},
-                {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                    , width: 80          , align: "center"
-                    ,formatter: function(cellValue, options, rowObject) {return formatDate(cellValue);}
-                },
+                {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                    , width: 80          , align: "center"},
                 {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"},
                 {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
             ];
@@ -104,8 +96,7 @@ let dgemStndMng = new Vue({
 			let $this = this;
 			let params = $.extend(true, {}, $this.params);
 			
-			AjaxUtil.post(
-	{
+			AjaxUtil.post({
 				dataType: 'binary',
                 url: "/svcStne/dgem/dgemStndMng/searchDgemList/excel.ab",
                 param: params,
