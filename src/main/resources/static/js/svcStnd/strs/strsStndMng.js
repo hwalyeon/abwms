@@ -40,14 +40,15 @@ let strsStndMng = new Vue({
         },
         initCodeList: function() {
             let $this = this;
-            getCommonCodeList('MENT_STRS_STAT_CD',$this.code.mentStrsStatCdList);
-        	
+            getCommonCodeList('STRS_STAT_CD',$this.code.mentStrsStatCdList);
         },
         initGrid: function() {
         	        	        	
         	let colModels = [
                 {name: "mentStrsStatCd"     , index: "mentStrsStatCd"   , label: "정신적스트레스상태코드"   , width: 80, align: "center"},
+                {name: "mentStrsStatNm"     , index: "mentStrsStatNm"   , label: "정신적스트레스상태명"   , width: 80, align: "center"},
                 {name: "physStrsStatCd"     , index: "physStrsStatCd"   , label: "신체적스트레스상태코드"   , width: 80, align: "center"},
+                {name: "physStrsStatNm"     , index: "physStrsStatNm"   , label: "신체적스트레스상태명"   , width: 80, align: "center"},
                 {name: "strsJudgCntn"       , index: "strsJudgCntn"     , label: "스트레스판정내용"        , width: 80, align: "center"},
                 {name: "regDt"              , index: "regDt"            , label: "등록일자"              , width: 80, align: "center"},
                 {name: "regTm"              , index: "regTm"            , label: "등록시각"              , width: 80, align: "center"},
@@ -55,6 +56,7 @@ let strsStndMng = new Vue({
                 {name: "uptDt"              , index: "uptDt"            , label: "수정일자"              , width: 80, align: "center"},
                 {name: "uptTm"              , index: "uptTm"            , label: "수정시각"              , width: 80, align: "center"},
                 {name: "uptUserId"          , index: "uptUserId"        , label: "수정사용자ID"          , width: 80, align: "center"}
+
             ];
 
         	console.log("1");
@@ -105,13 +107,36 @@ let strsStndMng = new Vue({
         mentStrsStatNmVal:function(){
             let $this = this;
         },
+        physStrsStatNmVal:function(){
+            let $this = this;
+        },
+
+        downloadExcel : function()
+        {
+            let $this = this;
+            let params = $.extend(true, {}, $this.params);
+
+            AjaxUtil.post({
+                dataType: 'binary',
+                url: "/svcStnd/strs/strsStndMng/searchStrsList/excel.ab",
+                param: params,
+                success: function(response)
+                {
+                    saveFileLocal(response, 'strsStndMng.xls');
+                },
+                error: function (response)
+                {
+                    Swal.alert([response, 'error']);
+                }
+            });
+        },
 
 
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
-				userId: '',
-	    		userNm: '',
+                mentStrsStatCd:'',
+                physStrsStatCd:'',
 	    		blngNm: '',
 	    		telNo: '',
 	    		mtelNo: '',
