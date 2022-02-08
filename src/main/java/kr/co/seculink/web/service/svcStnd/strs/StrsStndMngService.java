@@ -1,4 +1,3 @@
-/*
 package kr.co.seculink.web.service.svcStnd.strs;
 
 import kr.co.seculink.exception.BizException;
@@ -25,4 +24,4 @@ public interface StrsStndMngService
 
 	public Map<String, String> searchDupUserId(Map<String, String> params) throws BizException;
 }
-*/
+

@@ -1,4 +1,3 @@
-/*
 package kr.co.seculink.web.service.svcStnd.strs;
 
 import kr.co.seculink.exception.BizException;
@@ -21,8 +20,7 @@ import java.util.Map;
 @Slf4j
 @Service("strsStndMngService")
 public class StrsStndMngServiceImpl implements StrsStndMngService
-{*/
-/*
+{
 	@Autowired
 	private FileService fileService;
 	
@@ -406,7 +404,7 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 			throw new BizException("ECOM999", new String[] {"파일 구분이 없습니다."});
 		}
 
-	}*//*
+	}
 
 }
-*/
+

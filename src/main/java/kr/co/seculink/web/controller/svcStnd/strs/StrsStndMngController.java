@@ -1,10 +1,10 @@
-/*
 package kr.co.seculink.web.controller.svcStnd.strs;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.service.set.UserMngService;
+import kr.co.seculink.web.service.svcStnd.strs.StrsStndMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,21 +46,4 @@ public class StrsStndMngController {
 
 		return vo;
 	}
-
-	@ResponseBody
-	@RequestMapping("/svcStnd/strs/searchStrsList.ab")
-	public RtnMsg searchUserInfo(@RequestBody(required = false) Map<String, String> params) throws BizException {
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		Map<String, String> result = strsStndMngService.searchUserInfo(params);
-
-		List<Map<String, String>> roleList = dao.selectList("set.userRoleMng.searchTcUserRoleList", params);
-
-		rtnMap.put("result", result);
-		rtnMap.put("roleList", roleList);
-		vo.setRtnData(rtnMap);
-
-		return vo;
-	}
-}*/
+}
