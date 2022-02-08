@@ -1,87 +1,58 @@
 let dgemStndMng = new Vue({
     el: "#dgemStndMng",
-    data: {
-    	params: {
-    		dgemStatCd: '',      //위험감정_상태_코드
-    		dgemStatNm: '',      //위험감정_상태_명
-    		userNm: '',
-    		blngNm: '',
-    		telNo: '',
-    		mtelNo: '',
-    		mailAddr: '',
-    		useYn:'Y',
-    		paging: 'Y',
-    		totalCount: 0,
-            rowCount: 30,
-            currentPage: 1,
+    data:
+    {
+    	params:
+        {
+    		dgemStatCd : ''  ,      //위험감정_상태_코드
+    		paging          : 'Y',
+    		totalCount    : 0  ,
+            rowCount     : 30,
+            currentPage : 1  ,
             currentIndex: 0
-    	},
-        code:{
+        },
+        code:
+        {
     	    dgemStatCdList : []
         },
 	},
-	
-    methods: {
-
-        initialize: function() {
-        	
+    methods:
+    {
+        initialize: function()
+        {
         	let $this = this;
         	
         	$this.initCodeList();
         	
         	$this.initGrid();
         	
-        	$this.searchUserList(true);
-
-        	
+        	$this.searchDgemList(true);
         },
-        initCodeList : function() {
+        initCodeList : function()
+        {
             let $this = this;
+            //위험감정상태 코드 목록 조회
             getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList);
         },
-        initGrid: function() {
-        	        	        	
+        initGrid: function()
+        {
         	let colModels = [
-                {name: "userId"     , index: "userId"     , label: "사용자ID"    , width: 80, align: "center"},
-                {name: "userNm"     , index: "userNm"     , label: "사용자명"     , width: 80, align: "center"},
-                {name: "blngNm"     , index: "blngNm"     , label: "소속"        , width: 80, align: "center"},
-                {name: "telNo"      , index: "telNo"      , label: "전화번호"     , width: 80, align: "center"
-                	,formatter:function(cellValue, options, rowObject){
-                		console.log(phoneFormatter(cellValue));
-                		return phoneFormatter(cellValue);
-                	}
-                },
-                {name: "mtelNo"     , index: "mtelNo"     , label: "휴대전화번호"  , width: 80, align: "center"
-                	,formatter:function(cellValue, options, rowObject){
-                		console.log(phoneFormatter(cellValue));
-                		return phoneFormatter(cellValue);
-                	}
-                },
-                {name: "mailAddr"   , index: "mailAddr"   , label: "이메일"      , width: 80, align: "center"},
-                {name: "entrDt"     , index: "acdmYn"     , label: "가입일자"     , width: 80, align: "center"
-                	,formatter: function(cellValue, options, rowObject) {
-                		console.log(formatDate(cellValue));
-                		return formatDate(cellValue);
-                	}
-                },
-                {name: "relsDt"     , index: "lctrYn"     , label: "해지일자"     , width: 80, align: "center"
-                	,formatter: function(cellValue, options, rowObject) {
-                    return moment(cellValue, 'YYYYMMDD').format("YYYY-MM-DD");
-                }},
-                {name: "useYn"     , index: "stdtYn"     , label: "사용여부"     , width: 80, align: "center"},
-                {name: "userDetlPop", index: "userDetlPop", label: "사용자 정보보기", width: 80, align: "center",
-                    formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="userMng.regUserPop(\'' + rowObject.userId + '\')" value="상세보기" data-toggle="modal" data-target="#userDetlPopup" />';
-                    }
-                }
+                {name: "dgemStatCd"     , index: "dgemStatCd"     , label: "위험감정상태코드"    , width: 80         , align: "center"},
+                {name: "dgemStatCntn"  , index: "dgemStatCntn"  , label: "위험감정상태내용"    , width: 80         , align: "center"},
+                {name: "regDt"                , index: "regDt"                 , label: "등록일자"                  , width: 80          , align: "center"},
+                {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"},
+                {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"            , width: 80          , align: "center"},
+                {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                    , width: 80          , align: "center"},
+                {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"},
+                {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
             ];
   
-            $("#user_list").jqGrid("GridUnload");
-           	$("#user_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+            $("#dgem_list").jqGrid("GridUnload");
+           	$("#dgem_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-                url: '/set/userMng/searchUserList.ab',
-                pager: '#user_pager_list',
+                url: '/svcStnd/dgem/dgemStndMng/searchDgemList.ab',
+                pager: '#dgem_pager_list',
 				height: 405,
                 colModel: colModels,
                 onPaging : function(data) {
@@ -89,86 +60,80 @@ let dgemStndMng = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchUserList(false);
+                        $this.searchDgemList(false);
                     })
                 }
             }));
-
-            resizeJqGridWidth("user_list", "user_list_wrapper");                        
+            resizeJqGridWidth("dgem_list", "dgem_list_wrapper");
         },
-        searchUserList: function(isSearch) {
-			
+        searchDgemList: function(isSearch)
+        {
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
 			
-            if ( isSearch ) {
+            if ( isSearch )
+            {
                 params.currentPage = 1;
                 params.currentIndex = 0;
             }
             
-			$("#user_list").setGridParam({
+			$("#dgem_list").setGridParam(
+			{
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,
-                loadComplete: function (response) {
-                    console.log(response.rtnData.result);
-                    if ( response.rtnData.result == 0 ) {
+                loadComplete: function (response)
+                {
+                    if ( response.rtnData.result == 0 )
+                    {
                         Swal.alert(['조회할 내용이 없습니다.', "info"]);
                     }
                 }
             }).trigger("reloadGrid");
 		},
-		downloadExcel : function() {
-			
+		downloadExcel : function()
+        {
 			let $this = this;
-			
 			let params = $.extend(true, {}, $this.params);
 			
-			AjaxUtil.post({
+			AjaxUtil.post(
+	{
 				dataType: 'binary',
-                url: "/set/userMng/searchUserList/excel.ab",
+                url: "/svcStne/dgem/dgemStndMng/searchDgemList/excel.ab",
                 param: params,
-                success: function(response) {
-                	saveFileLocal(response, 'UserMng.xls');
+                success: function(response)
+                {
+                	saveFileLocal(response, 'dgemStndMng.xls');
                 },
-                error: function (response) {
+                error: function (response)
+                {
                     Swal.alert([response, 'error']);
                 }
             });
 		},
-		regUserPop: function(userId) {
-			userDetl.initPage(userId);
-		},
-        dgemStatNmVal:function(){
-          let $this = this;
-            console.log(index);
-        },
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
-				userId: '',
-	    		userNm: '',
-	    		blngNm: '',
-	    		telNo: '',
-	    		mtelNo: '',
-	    		mailAddr: '',
-	    		paging: 'Y',
-	    		totalCount: 0,
-	            rowCount: 30,
-	            currentPage: 1,
-	            currentIndex: 0
+                dgemStatCd: '',      //위험감정_상태_코드
+                paging: 'Y',
+                totalCount: 0,
+                rowCount: 30,
+                currentPage: 1,
+                currentIndex: 0
 	    	}
 		}
     },
-    computed: {
-
+    computed:
+    {
     },
-    watch: {
-
+    watch:
+    {
     },
-    mounted: function() {
+    mounted: function()
+    {
         let self = this;
-        $(document).ready(function() {
+        $(document).ready(function()
+        {
             self.initialize();
         });
     }
