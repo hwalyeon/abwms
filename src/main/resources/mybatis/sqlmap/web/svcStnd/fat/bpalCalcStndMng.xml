@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="svcStnd.fat.bpalCalcStndMng">
+
+    <!--휴식대사량_계산_기준 리스트 조회-->
+	<select id="searchBpalCalcStndList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      SEX_CD
+		                , AGE_YCNT_FR
+		                , AGE_YCNT_TO
+                        , CALC_FRML
+                        , REG_DT
+                        , REG_TM
+                        , REG_USER_ID
+                        , UPT_DT
+                        , UPT_TM
+                        , UPT_USER_ID
+                        , fn_getCdNm('SEX_CD', SEX_CD)
+		FROM        TI_BPAL_CALC_STND TBCS
+		WHERE     1 = 1
+		<if test=" sexCd != null and sexCd != '' ">
+		AND          SEX_CD = #{sexCd}</if>
+		<if test=" ageYcntFr != null and ageYcntFr != '' ">
+		AND           AGE_YCNT_FR = CAST (#{ageYcntFr} AS INTEGER)</if>
+		ORDER BY SEX_CD, AGE_YCNT_FR
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+
+	<!--나이년도 리스트 조회-->
+	<select id="selectBpalCalcStndList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      DISTINCT AGE_YCNT_FR FROM TI_BPAL_CALC_STND TBCS
+        ORDER BY AGE_YCNT_FR
+
+	</select>
+
+</mapper>
