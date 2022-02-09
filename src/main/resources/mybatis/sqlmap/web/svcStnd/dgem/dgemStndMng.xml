@@ -5,6 +5,7 @@
     <!--위험감정기준 목록 조회-->
 	<select id="searchTcDgemStatBase" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT       DGEM_STAT_CD
+		                 ,fn_getCdNm('DGEM_STAT_CD', DGEM_STAT_CD) AS DGEM_STAT_CD_NM
 						 , DGEM_STAT_CNTN
 						 , REG_DT
 						 , REG_TM
