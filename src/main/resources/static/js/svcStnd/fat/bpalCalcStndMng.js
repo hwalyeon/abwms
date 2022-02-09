@@ -35,14 +35,14 @@ let bpalCalcStndMng = new Vue({
                 let $this = this;
                 // 나이_년수_리스트_조회
                 AjaxUtil.post({
-                    url: "/svcStnd/fat/bpalCalcStndMng/ageYcntFromList.ab",
+                    url: '/svcStnd/fat/bpalCalcStndMng/ageYcntFromList.ab',
                     param: {},
                     success: function(response) {
 
-                        $this.code.ageYcntList = [];
+                        $this.code.ageYcntFrList = [];
                         if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
                             $.each(response.rtnData.result, function(index, item) {
-                                $this.code.ageYcntList.push({'cdVal':item.ageYcntFr});
+                                $this.code.ageYcntFrList.push({'cdVal':item.ageYcntFr});
                             });
                         }
                     },
@@ -58,9 +58,9 @@ let bpalCalcStndMng = new Vue({
                 [
                     {name: "sexCd"               , index: "sexCd"                 , label: "성별코드"                    , width: 80          , align: "center"},
                     {name: "fnGetcdnm"       , index: "fnGetcdnm"        , label: "성별"                            , width: 80         , align: "center"},
-                    {name: "ageYcntFr"         , index: "ageYcntFr"          , label: "나이(FROM)"                 , width: 80         , align: "center"},
-                    {name: "ageYcntTo"        , index: "ageYcntTo"         , label: "나이(TO)"                      , width: 80         , align: "center"},
-                    {name: "ageMcnt"           , index: "ageMcnt"           , label: "계산식        "                 , width: 80         , align: "center"},
+                    {name: "ageYcntFr"         , index: "ageYcntFr"          , label: "나이(FROM)"               , width: 80         , align: "center"},
+                    {name: "ageYcntTo"        , index: "ageYcntTo"         , label: "나이(TO)"                    , width: 80         , align: "center"},
+                    {name: "calcFrml"            , index: "calcFrml"            , label: "계산식        "                , width: 80         , align: "center"},
                     {name: "regDt"                 , index: "regDt"                , label: "등록일자"                    , width: 80         , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                             }},
                     {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80         , align: "center"

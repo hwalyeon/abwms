@@ -69,7 +69,7 @@ public class BpalCalcStndMngController
 	{
 		params.put("paging", "N");
 
-		List<Map<String, String>> result = dao.selectList("svcStnd.fat.bpalCalcStndMng.searchBpalCalcStndList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.bpalCalcStndMng.selectBpalCalcStndList", params);
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
 

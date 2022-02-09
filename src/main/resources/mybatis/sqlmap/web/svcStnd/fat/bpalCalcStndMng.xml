@@ -3,8 +3,9 @@
 <mapper namespace="svcStnd.fat.bpalCalcStndMng">
 
     <!--휴식대사량_계산_기준 리스트 조회-->
-	<select id="searchBpalCalcStndList" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="selectBpalCalcStndList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT      SEX_CD
+	   		            , fn_getCdNm('SEX_CD', SEX_CD)
 		                , AGE_YCNT_FR
 		                , AGE_YCNT_TO
                         , CALC_FRML
@@ -14,7 +15,6 @@
                         , UPT_DT
                         , UPT_TM
                         , UPT_USER_ID
-                        , fn_getCdNm('SEX_CD', SEX_CD)
 		FROM        TI_BPAL_CALC_STND TBCS
 		WHERE     1 = 1
 		<if test=" sexCd != null and sexCd != '' ">
@@ -27,7 +27,7 @@
 	</select>
 
 	<!--나이년도 리스트 조회-->
-	<select id="selectBpalCalcStndList" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="searchAgeYcntFromList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT      DISTINCT AGE_YCNT_FR FROM TI_BPAL_CALC_STND TBCS
         ORDER BY AGE_YCNT_FR
 
