@@ -82,6 +82,10 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/fat/fatStndMng.pg")
 	public String getSvcStndFatFatStndMng() {return "svcStnd/fat/fatStndMng";}
 
+	//비만판정기준
+	@RequestMapping("/svcStnd/fat/fatJudgStndMng.pg")
+	public String getSvcStndFatFatJudgStndMng() {return "svcStnd/fat/fatJudgStndMng";}
+
 	//휴식대사량기준
 	@RequestMapping("/svcStnd/fat/bpalCalcStndMng.pg")
 	public String getSvcStndFatBpalCalcStndMng() {return "svcStnd/fat/bpalCalcStndMng";}

@@ -9,12 +9,12 @@
                ,fidx_to /* fidx_to 비만지수_TO numeric */
                ,curr_eval_cntn /* curr_eval_cntn 현재_평가_내용 character varying(100) */
                ,prdt_eval_cntn /* prdt_eval_cntn 예측_평가_내용 character varying(4000) */
-               ,reg_dt /* reg_dt 등록_일자 character(8) */
-               ,reg_tm /* reg_tm 등록_시각 character(6) */
-               ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-               ,upt_dt /* upt_dt 수정_일자 character(8) */
-               ,upt_tm /* upt_tm 수정_시각 character(6) */
-               ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+               ,trim(reg_dt) /* reg_dt 등록_일자 character(8) */ AS reg_dt
+               ,trim(reg_tm) /* reg_tm 등록_시각 character(6) */ AS reg_tm
+               ,trim(reg_user_id) /* reg_user_id 등록_사용자_ID character varying(20) */ AS reg_user_id
+               ,trim(upt_dt) /* upt_dt 수정_일자 character(8) */ AS upt_dt
+               ,trim(upt_tm) /* upt_tm 수정_시각 character(6) */ AS upt_tm
+               ,trim(upt_user_id) /* upt_user_id 수정_사용자_ID character varying(20) */ AS upt_user_id
         FROM   ti_fat_judg_stnd
 		WHERE
 		       fat_judg_cd LIKE CONCAT (#{fatJudgCd}, '%') /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
