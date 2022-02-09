@@ -28,14 +28,7 @@
 						<div class="col-xs-2">
 							<select id="growJudgCd" name="growJudgCd" class="form-control" v-model="params.growJudgCd" v-on:click="growJudgStndNmVal()">
 								<option value="">전체</option>
-								<option v-for="item in code.searchGrowJudgList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-							</select>
-						</div>
-						<label class="col-xs-1 control-label">성장판정명</label>
-						<div class="col-xs-2">
-							<select id="growJudgNm" name="growJudgNm" class="form-control" v-model="params.growJudgNm" v-on:click="growJudgStndNmVal()">
-								<option value="">전체</option>
-								<option v-for="item in code.searchGrowJudgList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+								<option v-for="item in code.mentGrowJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
 					</div>
@@ -45,7 +38,7 @@
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchStrsList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchGrowJudgList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -60,7 +53,7 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>사용자 목록</h5>
+							<h5>성장판정 기준 목록</h5>
 						</div>
 					</div>
 					<div class="float_right">

@@ -1,4 +1,4 @@
-package kr.co.seculink.web.controller.svcStnd.grow;
+package kr.co.seculink.web.controller.svcStnd.fat;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
@@ -17,16 +17,16 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class GrowJudgStndMngController
+public class BpalCalcStndMngController
 {
 
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
 	@ResponseBody
-	@RequestMapping("/svcStnd/grow/growJudgStndMng/searchGrowJudgList.ab")
+	@RequestMapping("/svcStnd/fat/bpalCalcStndMng/searchBpalCalcList.ab")
 
-	public RtnMsg searchGrowJudgList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	public RtnMsg searchBpalCalcList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 		System.out.println("test1");
 		RtnMsg vo = new RtnMsg();
@@ -34,14 +34,14 @@ public class GrowJudgStndMngController
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		System.out.println("test3");
 
-		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growJudgStndMng.searchGrowJudgList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.bpalCalcStndMng.searchBpalCalcList", params);
 		System.out.println("test4");
 		rtnMap.put("result", result);
 		System.out.println("test5");
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)dao.selectList("svcStnd.grow.growJudgStndMng.searchGrowJudgList", params)).size());
+			vo.setTotalCount(((List)dao.selectList("svcStnd.fat.bpalCalcStndMng.searchBpalCalcList", params)).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
@@ -50,18 +50,18 @@ public class GrowJudgStndMngController
 	}
 
 	@ResponseBody
-	@RequestMapping("/svcStnd/grow/growJudgStndMng/searchGrowJudgList/excel.ab")
+	@RequestMapping("/svcStnd/fat/bpalCalcStndMng/searchBpalCalcList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		params.put("paging", "N");
-		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growJudgStndMng.searchGrowJudgList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.bpalCalcStndMng.searchBpalCalcList", params);
 
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"성장판정코드","성장판정코드명","성장지수_FORM","성장지수_TO","요약내용","상세내용","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
+		String [] arrHeader = {"정신적스트레스상태코드","정신적스트레스상태명","선택적스트레스상태코드","선택적스트레스상태명"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -70,18 +70,10 @@ public class GrowJudgStndMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<String>();
-			data.add(String.valueOf(info.get("growJudgCd")));
-			data.add(String.valueOf(info.get("growJudgNm")));
-			data.add(String.valueOf(info.get("gidxFr")));
-			data.add(String.valueOf(info.get("gidxTo")));
-			data.add(String.valueOf(info.get("smryCntn")));
-			data.add(String.valueOf(info.get("specCntn")));
-			data.add(info.get("regDt"));
-			data.add(info.get("regTm"));
-			data.add(info.get("regUserId"));
-			data.add(info.get("uptDt"));
-			data.add(info.get("uptTm"));
-			data.add(info.get("uptUserId"));
+			data.add(info.get("mentStrsStatCd"));
+			data.add(info.get("mentStrsStatNm"));
+			data.add(info.get("physStrsStatCd"));
+			data.add(info.get("physStrsStatNm"));
 			dataList.add(data);
 		}
 

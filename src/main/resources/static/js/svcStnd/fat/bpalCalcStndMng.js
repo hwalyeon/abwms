@@ -1,14 +1,14 @@
-let growJudgStndMng = new Vue({
-    el: "#growJudgStndMng",
+let bpalCalcStndMng = new Vue({
+    el: "#bpalCalcStndMng",
     data: {
     	params: {
-            growJudgCd:'',
-            gidxFr:'',
-            gidxTo:'',
-            smryCntn:'',
-            regDt:'',
-            regTm:'',
-            regUserId:'',
+            fatJudgCd:'',
+            fnGetCdNm:'',
+            fidxFr:'',
+            fidxTo:'',
+            currEvalCntn:'',
+            prdtEvalCntn:'',
+            prdtEvalCntn:'',
             uptDt:'',
             uptTm:'',
             uptUserId:'',
@@ -20,7 +20,7 @@ let growJudgStndMng = new Vue({
             currentIndex: 0
     	},
         code:{
-            mentGrowJudgCdList : []
+            mentBpalCalcCdList : []
         },
 	},
 
@@ -35,23 +35,23 @@ let growJudgStndMng = new Vue({
         	
         	$this.initGrid();
 
-        	$this.searchGrowJudgList(true);
+        	$this.searchBpalCalcList(true);
 
         	
         },
         initCodeList: function() {
             let $this = this;
-            getCommonCodeList('GROW_JUDG_CD',$this.code.mentGrowJudgCdList);
+            getCommonCodeList('STRS_STAT_CD',$this.code.mentBpalCalcCdList);
         },
         initGrid: function() {
         	        	        	
         	let colModels = [
-                {name: "growJudgCd"         , index: "growJudgCd"       , label: "성장판정코드"   , width: 80, align: "center"},
-                {name: "growJudgNm"         , index: "growJudgNm"       , label: "성장판정코드명"   , width: 80, align: "center"},
-                {name: "gidxFr"             , index: "gidxFr"           , label: "성장지수_FORM"     , width: 80, align: "center"},
-                {name: "gidxTo"             , index: "gidxTo"           , label: "성장지수_TO"   , width: 80, align: "center"},
-                {name: "smryCntn"           , index: "smryCntn"         , label: "요약내용"     , width: 80, align: "center"},
-                {name: "specCntn"           , index: "specCntn"         , label: "상세내용"        , width: 80, align: "center"},
+                {name: "fatJudgCd"          , index: "fatJudgCd"        , label: "비만판정코드"   , width: 80, align: "center"},
+                {name: "fatJudgNm"          , index: "mentStrsStatNm"   , label: "비만판정코드명"   , width: 80, align: "center"},
+                {name: "fidxFr"             , index: "fidxFr"           , label: "비만지수_FORM"   , width: 80, align: "center"},
+                {name: "fidxTo"             , index: "fidxTo"           , label: "비만지수_TO"   , width: 80, align: "center"},
+                {name: "currEvalCntn"       , index: "currEvalCntn"     , label: "현재평가내용"        , width: 80, align: "center"},
+                {name: "prdtEvalCntn"       , index: "prdtEvalCntn"     , label: "예측평가내용"        , width: 80, align: "center"},
                 {name: "regDt"              , index: "regDt"            , label: "등록일자"              , width: 80, align: "center"},
                 {name: "regTm"              , index: "regTm"            , label: "등록시각"              , width: 80, align: "center"},
                 {name: "regUserId"          , index: "regUserId"        , label: "등록사용자ID"          , width: 80, align: "center"},
@@ -67,7 +67,7 @@ let growJudgStndMng = new Vue({
            	$("#user_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-                url: '/svcStnd/grow/growJudgStndMng/searchGrowJudgList.ab',
+                url: '/svcStnd/fat/bpalCalcStndMng/searchBpalCalcList.ab',
                 pager: '#user_pager_list',
 				height: 405,
                 colModel: colModels,
@@ -76,14 +76,14 @@ let growJudgStndMng = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchGrowJudgList(false);
+                        $this.searchBpalCalcList(false);
                     })
                 }
             }));
             console.log("2");
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
         },
-        searchGrowJudgList: function(isSearch) {
+        searchBpalCalcList: function(isSearch) {
             console.log("3");
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
@@ -106,7 +106,7 @@ let growJudgStndMng = new Vue({
             }).trigger("reloadGrid");
             console.log("5");
 		},
-        growJudgStndNmVal:function(){
+        mentBpalCalcNmVal:function(){
             let $this = this;
         },
         physStrsStatNmVal:function(){
@@ -120,11 +120,11 @@ let growJudgStndMng = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/svcStnd/grow/growJudgStndMng/searchGrowJudgList/excel.ab",
+                url: "/svcStnd/fat/bpalCalcStndMng/searchBpalCalcList/excel.ab",
                 param: params,
                 success: function(response)
                 {
-                    saveFileLocal(response, 'growJudgStndMng.xls');
+                    saveFileLocal(response, 'strsStndMng.xls');
                 },
                 error: function (response)
                 {
@@ -137,12 +137,13 @@ let growJudgStndMng = new Vue({
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
-                growJudgCd:'',
-                physStrsStatCd:'',
-	    		blngNm: '',
-	    		telNo: '',
-	    		mtelNo: '',
-	    		mailAddr: '',
+                fatJudgCd:'',
+                fnGetCdNm:'',
+                fidxFr:'',
+                fidxTo:'',
+                currEvalCntn:'',
+                prdtEvalCntn:'',
+                prdtEvalCntn:'',
 	    		paging: 'Y',
 	    		totalCount: 0,
 	            rowCount: 30,
