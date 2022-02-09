@@ -1,13 +1,11 @@
-package kr.co.seculink.web.controller.svcStnd.strs;
+package kr.co.seculink.web.controller.svcStnd.fat;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
-import kr.co.seculink.web.service.svcStnd.strs.StrsStndMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +17,16 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class StrsStndMngController
+public class FatJudgStndMngController
 {
 
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
 	@ResponseBody
-	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsList.ab")
+	@RequestMapping("/svcStnd/fat/fatJudgStndMng/searchFatJudgList.ab")
 
-	public RtnMsg searchStrsList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	public RtnMsg searchFatJudgList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 		System.out.println("test1");
 		RtnMsg vo = new RtnMsg();
@@ -36,14 +34,14 @@ public class StrsStndMngController
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		System.out.println("test3");
 
-		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatJudgStndMng.searchFatJudgList", params);
 		System.out.println("test4");
 		rtnMap.put("result", result);
 		System.out.println("test5");
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params)).size());
+			vo.setTotalCount(((List)dao.selectList("svcStnd.fat.fatJudgStndMng.searchFatJudgList", params)).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
@@ -52,11 +50,11 @@ public class StrsStndMngController
 	}
 
 	@ResponseBody
-	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsList/excel.ab")
+	@RequestMapping("/svcStnd/fat/fatJudgStndMng/searchFatJudgList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		params.put("paging", "N");
-		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatJudgStndMng.searchFatJudgList", params);
 
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}

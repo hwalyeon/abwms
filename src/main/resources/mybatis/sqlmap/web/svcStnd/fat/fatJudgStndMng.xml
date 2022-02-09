@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="svcStnd.fat.bpalCalcStndMng">
+<mapper namespace="svcStnd.fat.fatJudgStndMng">
 
-<select id="searchBpalCalcList" parameterType="java.util.Map" resultType="MybatisMap">
+<select id="searchFatJudgList" parameterType="java.util.Map" resultType="MybatisMap">
 	SELECT 	    fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
 	           ,fn_getCdNm('FAT_JUDG_CD', fat_judg_cd) as fat_judg_nm
                ,fidx_fr /* fidx_fr 비만지수_FROM numeric */

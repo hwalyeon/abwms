@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-	<div class="wrapper-content" id="bpalCalcStndMng">
+	<div class="wrapper-content" id="fatJudgStndMng">
 	
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
@@ -26,9 +26,9 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label">비만 판정 코드</label>
 						<div class="col-xs-2">
-							<select id="fatJudgCd" name="fatJudgCd" class="form-control" v-model="params.fatJudgCd" v-on:click="mentBpalCalcNmVal()">
+							<select id="fatJudgCd" name="fatJudgCd" class="form-control" v-model="params.fatJudgCd" v-on:click="mentJudgStndNmVal()">
 								<option value="">전체</option>
-								<option v-for="item in code.mentBpalCalcCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+								<option v-for="item in code.mentFatJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="mentBpalCalcCdList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchFatJudgList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 <!--    <div th:insert="~{set/userDetl :: body}"></div>-->
 </div>
 <section layout:fragment="user_script">
-	<script type="text/javascript" th:src="@{/js/svcStnd/fat/bpalCalcStndMng.js}"></script>
+	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatJudgStndMng.js}"></script>
 </section>
 </body>
 </html>

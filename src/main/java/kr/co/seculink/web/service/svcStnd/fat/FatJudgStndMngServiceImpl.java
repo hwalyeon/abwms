@@ -1,25 +1,20 @@
-package kr.co.seculink.web.service.svcStnd.strs;
+package kr.co.seculink.web.service.svcStnd.fat;
 
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.util.XUtil;
-import kr.co.seculink.web.model.cmon.TcFileVO;
 import kr.co.seculink.web.service.cmon.FileService;
+import kr.co.seculink.web.service.svcStnd.strs.StrsStndMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service("strsStndMngService")
-public class StrsStndMngServiceImpl implements StrsStndMngService
+@Service("fatJudgStndMngService")
+public class FatJudgStndMngServiceImpl implements FatJudgStndMngService
 {
 	@Autowired
 	private FileService fileService;
@@ -27,9 +22,9 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 	
-	public List<Map<String, String>> searchStrsList(Map<String, String> params) throws BizException
+	public List<Map<String, String>> searchFatJudgList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatJudgStndMng.searchFatJudgList", params);
 
 		return result;
 	}
