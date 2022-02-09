@@ -68,6 +68,8 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/grow/growStndMng.pg")
 	public String getSvcStndGrowGrowStndMng() {return "svcStnd/grow/growStndMng";}
 
+	@RequestMapping("/svcStnd/grow/growJudgStndMng.pg")
+	public String getSvcStndGrowGrowJudgStndMng() {return "svcStnd/grow/growJudgStndMng";}
 
 
 
