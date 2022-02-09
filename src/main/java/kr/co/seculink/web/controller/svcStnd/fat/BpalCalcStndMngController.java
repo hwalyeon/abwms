@@ -85,6 +85,7 @@ public class BpalCalcStndMngController
 		{
 			data = new ArrayList<String>();
 			data.add(info.get("sexCd"));
+			data.add(info.get("fnGetcdnm"));
 			data.add(String.valueOf(info.get("ageYcntFr")));
 			data.add(String.valueOf(info.get("ageYcntTo")));
 			data.add(info.get("calcFrml"));
