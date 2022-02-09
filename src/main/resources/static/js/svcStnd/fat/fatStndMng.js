@@ -83,10 +83,10 @@ let fatStndMng = new Vue({
                     {name: "fnGetcdnm"       , index: "fnGetcdnm"        , label: "성별"                          , width: 80         , align: "center"},
                     {name: "ageYcnt"            , index: "ageYcnt"             , label: "나이(년)"                    , width: 80         , align: "center"},
                     {name: "ageMcnt"           , index: "ageMcnt"           , label: "나이(개월)"                , width: 80          , align: "center"},
-                    {name: "p3Gidx"              , index: "p3Gidx"              , label: "백분위5 비만지수"     , width: 80         , align: "center"},
-                    {name: "p50Gidx"            , index: "p50Gidx"            , label: "백분위50 비만지수"   , width: 80         , align: "center"},
-                    {name: "p97Gidx"            , index: "p97Gidx"            , label: "백분위95 비만지수"   , width: 80         , align: "center"},
-                    {name: "regDt"                , index: "regDt"                , label: "등록일자"                    , width: 80         , align: "center"
+                    {name: "p5Fidx"               , index: "p5Fidx"              , label: "백분위5 비만지수"     , width: 80         , align: "center"},
+                    {name: "p50Fidx"             , index: "p50Fidx"            , label: "백분위50 비만지수"   , width: 80         , align: "center"},
+                    {name: "p95Fidx"             , index: "p95Fidx"            , label: "백분위95 비만지수"   , width: 80         , align: "center"},
+                    {name: "regDt"                 , index: "regDt"                , label: "등록일자"                    , width: 80         , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                             }},
                     {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80         , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                             }},
@@ -130,7 +130,7 @@ let fatStndMng = new Vue({
                     params.currentIndex = 0;
                 }
 
-                $("#FatStnd_list").setGridParam(
+                $("#fatStnd_list").setGridParam(
                     {
                         datatype: "json",
                         postData: JSON.stringify(params),

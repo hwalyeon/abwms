@@ -48,7 +48,7 @@ public class FatStndMngController
 	}
 	//비만_기준_버전_리스트_조회
 	@ResponseBody
-	@RequestMapping("/svcStnd/fat/fatStndMng/searchFatStndList.ab")
+	@RequestMapping("/svcStnd/fat/fatStndMng/fatStndVerList.ab")
 	public RtnMsg fatStndVerList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
@@ -105,9 +105,9 @@ public class FatStndMngController
 			data.add(info.get("fnGetcdnm"));
 			data.add(String.valueOf(info.get("ageYcnt")));
 			data.add(String.valueOf(info.get("ageMcnt")));
-			data.add(String.valueOf(info.get("p3Gidx")));
-			data.add(String.valueOf(info.get("p50Gidx")));
-			data.add(String.valueOf(info.get("p97Gidx")));
+			data.add(String.valueOf(info.get("p5Fidx")));
+			data.add(String.valueOf(info.get("p50Fidx")));
+			data.add(String.valueOf(info.get("p95Fidx")));
 			data.add(info.get("regDt"));
 			data.add(info.get("regTm"));
 			data.add(info.get("regUserId"));
