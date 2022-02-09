@@ -62,15 +62,50 @@ public class CommonWebController {
 		return "svcStnd/strs/strsStndMng";
 	}
 
+	//위험감정기준
 	@RequestMapping("/svcStnd/dgem/dgemStndMng.pg")
 	public String getSvcStndDgemDgemStndMng() {return "svcStnd/dgem/dgemStndMng";}
 
+	//성장기준
 	@RequestMapping("/svcStnd/grow/growStndMng.pg")
 	public String getSvcStndGrowGrowStndMng() {return "svcStnd/grow/growStndMng";}
 
 	@RequestMapping("/svcStnd/grow/growJudgStndMng.pg")
 	public String getSvcStndGrowGrowJudgStndMng() {return "svcStnd/grow/growJudgStndMng";}
 
+	//활동기준
+	@RequestMapping("/svcStnd/grow/actStndMng.pg")
+	public String getSvcStndGrowActStndMng() {return "svcStnd/grow/actStndMng";}
 
+	//비만기준
+	@RequestMapping("/svcStnd/fat/fatStndMng.pg")
+	public String getSvcStndFatFatStndMng() {return "svcStnd/fat/fatStndMng";}
+
+	//휴식대사량기준
+	@RequestMapping("/svcStnd/fat/bpalCalcStndMng.pg")
+	public String getSvcStndFatBpalCalcStndMng() {return "svcStnd/fat/bpalCalcStndMng";}
+
+	//영양소정보
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng.pg")
+	public String getSvcStndNutrNutrInfoMng() {return "svcStnd/nutr/nutrInfoMng";}
+
+/*	//영양섭취기준
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng.pg")
+	public String getSvcStndNutrNutrInfoMng() {return "svcStnd/nutr/nutrInfoMng";}*/
+
+	//일일 영양소섭취기준
+	@RequestMapping("/svcStnd/nutr/ddNutrEatStndMng.pg")
+	public String getSvcStndNutrDdNutrEatStndMng() {return "svcStnd/nutr/ddNutrEatStndMng";}
+
+	//일일 권장섭취량기준
+	@RequestMapping("/svcStnd/nutr/ddRcmdEatStndMng.pg")
+	public String getSvcStndNutrDdRcmdEatStndMng() {return "svcStnd/nutr/ddRcmdEatStndMng";}
+
+	//위치정보
+	@RequestMapping("/svcStnd/loc/locInfoMng")
+	public String getSvcStndLocLocInfoMng() {return "svcStnd/loc/locInfoMng";}
+
+	//교육시설정보보	@RequestMapping("/svcStnd/loc/eorgInfoMng.pg")
+	public String getSvcStndLocEorgInfoMng() {return "svcStnd/loc/eorgInfoMng";}
 
 }
