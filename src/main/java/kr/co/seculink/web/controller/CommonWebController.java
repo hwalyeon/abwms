@@ -110,4 +110,8 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/loc/eorgInfoMng.pg")
 	public String getSvcStndLocEorgInfoMng() {return "svcStnd/loc/eorgInfoMng";}
 
+	//식품정보
+	@RequestMapping("/svcStnd/food/foodInfoMng.pg")
+	public String getSvcStndFoodFoodInfoMng() {return "svcStnd/food/foodInfoMng";}
+
 }
