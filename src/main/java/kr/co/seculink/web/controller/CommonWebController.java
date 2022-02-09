@@ -66,6 +66,7 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/dgem/dgemStndMng.pg")
 	public String getSvcStndDgemDgemStndMng() {return "svcStnd/dgem/dgemStndMng";}
 
+
 	//성장기준
 	@RequestMapping("/svcStnd/grow/growStndMng.pg")
 	public String getSvcStndGrowGrowStndMng() {return "svcStnd/grow/growStndMng";}
@@ -89,10 +90,6 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/nutr/nutrInfoMng.pg")
 	public String getSvcStndNutrNutrInfoMng() {return "svcStnd/nutr/nutrInfoMng";}
 
-/*	//영양섭취기준
-	@RequestMapping("/svcStnd/nutr/nutrInfoMng.pg")
-	public String getSvcStndNutrNutrInfoMng() {return "svcStnd/nutr/nutrInfoMng";}*/
-
 	//일일 영양소섭취기준
 	@RequestMapping("/svcStnd/nutr/ddNutrEatStndMng.pg")
 	public String getSvcStndNutrDdNutrEatStndMng() {return "svcStnd/nutr/ddNutrEatStndMng";}
@@ -102,10 +99,11 @@ public class CommonWebController {
 	public String getSvcStndNutrDdRcmdEatStndMng() {return "svcStnd/nutr/ddRcmdEatStndMng";}
 
 	//위치정보
-	@RequestMapping("/svcStnd/loc/locInfoMng")
+	@RequestMapping("/svcStnd/loc/locInfoMng.pg")
 	public String getSvcStndLocLocInfoMng() {return "svcStnd/loc/locInfoMng";}
 
-	//교육시설정보보	@RequestMapping("/svcStnd/loc/eorgInfoMng.pg")
+	//교육시설정보보
+	@RequestMapping("/svcStnd/loc/eorgInfoMng.pg")
 	public String getSvcStndLocEorgInfoMng() {return "svcStnd/loc/eorgInfoMng";}
 
 }
