@@ -9,15 +9,16 @@
 
 	<select id="select" parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo" resultType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
 		/* Generated SQL SQL ID : ti_dd_pal_blck.select */
-        SELECT  curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+		SELECT  curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
                ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-               ,age_ycnt_fr /* age_ycnt_fr 나이_년수_FROM numeric */
-               ,age_ycnt_to /* age_ycnt_to 나이_년수_TO numeric */
+               ,age_ycnt /* age_ycnt 나이_년수_FROM numeric */
                ,pal_val_fr /* pal_val_fr 신체활동수준_값_FROM numeric */
                ,pal_val_to /* pal_val_to 신체활동수준_값_TO numeric */
                ,dd_cal_qty /* dd_cal_qty 일일_칼로리_량 numeric */
                ,pal_cd /* pal_cd 신체활동수준_코드 character(18) */
+               ,nutr_cd /* nutr_cd 영양소_코드 character(18) */
+               ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character(18) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -29,8 +30,7 @@
 		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
-		AND    age_ycnt_to = #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
+		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수_FROM numeric */
 		AND    pal_val_fr = #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
 	</select>
 

@@ -114,4 +114,8 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/food/foodInfoMng.pg")
 	public String getSvcStndFoodFoodInfoMng() {return "svcStnd/food/foodInfoMng";}
 
+	//일일 신체활동수준
+	@RequestMapping("/svcStnd/fat/ddPalMng.pg")
+	public String getSvcStndFatDdPalMng() {return "svcStnd/fat/ddPalMng";}
+
 }

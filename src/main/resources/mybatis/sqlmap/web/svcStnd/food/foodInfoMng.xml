@@ -21,6 +21,8 @@
 		AND    food_no = CAST(#{foodNo} AS INTEGER)
 		</if>
 		AND    food_nm LIKE  CONCAT('%',#{foodNm},'%') /* food_no 식품_번호 numeric */
+        <if test=' paging == "Y" '>
+        LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 </select>
 
 
