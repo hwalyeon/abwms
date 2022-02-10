@@ -17,6 +17,10 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ti_food_info
 		WHERE  1 = 1
+        <if test=" foodNo != null and foodNo != '' ">
+		AND    food_no = CAST(#{foodNo} AS INTEGER)
+		</if>
+		AND    food_nm LIKE  CONCAT('%',#{foodNm},'%') /* food_no 식품_번호 numeric */
 </select>
 
 

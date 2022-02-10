@@ -63,7 +63,7 @@ public class StrsStndMngController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"정신적스트레스상태코드","정신적스트레스상태명","선택적스트레스상태코드","선택적스트레스상태명"};
+		String [] arrHeader = {"정신적스트레스상태코드","정신적스트레스상태명","선택적스트레스상태코드","선택적스트레스상태명","스트레스판정내용","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -72,10 +72,17 @@ public class StrsStndMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<String>();
-			data.add(info.get("mentStrsStatCd"));
-			data.add(info.get("mentStrsStatNm"));
-			data.add(info.get("physStrsStatCd"));
-			data.add(info.get("physStrsStatNm"));
+			data.add(String.valueOf(info.get("mentStrsStatCd")));
+			data.add(String.valueOf(info.get("mentStrsStatNm")));
+			data.add(String.valueOf(info.get("physStrsStatCd")));
+			data.add(String.valueOf(info.get("physStrsStatNm")));
+			data.add(String.valueOf(info.get("strsJudgCntn")));
+			data.add(info.get("regDt"));
+			data.add(info.get("regTm"));
+			data.add(info.get("regUserId"));
+			data.add(info.get("uptDt"));
+			data.add(info.get("uptTm"));
+			data.add(info.get("uptUserId"));
 			dataList.add(data);
 		}
 
