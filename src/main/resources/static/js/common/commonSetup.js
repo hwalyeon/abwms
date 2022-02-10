@@ -283,6 +283,86 @@ var commonGridOptions = function(rowNumParam, loadonceParam) {
 	}
 };
 
+var commonEditGridOptions = function(rowNumParam, loadonceParam) {
+	var rowNum = 30;
+	var loadonce = false;
+	if(rowNumParam) {
+		rowNum = rowNumParam;
+	}
+
+	if(loadonceParam) {
+		loadonce = loadonceParam;
+	}
+
+	var header = {};
+	var token = WebUtil.getStorageData('jwtToken', false);
+	if ( WebUtil.isNull(token) ) {
+		window.location.href = '/login.pg';
+	}
+
+	return {
+		ajaxGridOptions: { contentType: "application/json;charset=UTF-8" },
+		datatype: "local",
+		height: 455,
+		autowidth: true,
+		shrinkToFit: true,
+		cellEdit : true,
+		cellsubmit : "clientArray",
+		autoencode: false,
+		rowNum: rowNum,
+		rowList: [30, 50, 100, 300 ],
+		//recordtext: "View {0} ~ {1} of {2}",
+		recordtext: '총 {2} 중 {0} - {1} 보기',
+		page: 0,
+		// 정상 Server Response 일 경우 아래 옵션을 처리해야 jqgrid 내부에서 Model Mapping 일 정상 처리됨.
+		jsonReader: {
+			root: 'rtnData.result',
+			records: 'totalCount',
+			total: function (obj) {
+				var totalPage = 0;
+				if(obj) {
+					totalPage = Math.ceil(obj.totalCount / obj.rowCount);
+				}
+				if(obj.totalCount > 0)
+					return totalPage
+			},
+			page: 'currentPage'
+		},
+		loadui: 'disable',
+		loadBeforeSend: function(jqXHR) {
+			jqXHR.setRequestHeader("Authorization", "Bearer " + token.jwtToken);
+		},
+		beforeRequest: function() {
+//        	$(this).jqGrid('getGridParam', 'url')
+			startTime = new Date().getTime();
+			// console.log('startTime : ' + (startTime)/1000);
+			if ($(this).jqGrid("getGridParam", "datatype") == "json") {
+				if (spinner == null) {
+					spinner = new Spinner(spinnerOpts).spin(spinner_div);
+				} else {
+					spinner.spin(spinner_div);
+				}
+			}
+		},
+		loadComplete: function(response) {
+			if ( !!response.rtnCd && response.rtnCd != '00' ) {
+				Swal.alert([response.rtnMsg, 'info']);
+			}
+		},
+		// Server Exception Handling
+		loadError: function(xhr, status, error) {
+			spinner.stop(spinner_div);
+			ajaxErrorHandle(xhr);
+		},
+		cmTemplate: {sortable: false},
+		pager: "#pager_list",
+		viewrecords: true,
+		hidegrid: false,
+		loadonce: loadonce,
+		gridview: true,	// true 설정 시 grid 속도 3~5배 향상됨. 단, treeGrid, subGrid 또는 afterInsertRow 이벤트를 사용할 수 없습니다.
+	}
+};
+
 var commonGridScrollOptions = function(rowNumParam, loadonceParam) {
 	var rowNum = 30;
 	var loadonce = false;
@@ -359,6 +439,64 @@ var commonGridScrollOptions = function(rowNumParam, loadonceParam) {
 		gridview: true,	// true 설정 시 grid 속도 3~5배 향상됨. 단, treeGrid, subGrid 또는 afterInsertRow 이벤트를 사용할 수 없습니다.
 	}
 };
+
+
+
+/**
+ * 그리드 데이터를 얻는다 (multiselect + cellEdit)
+ * @param gridObj
+ * @param 신규/변경/삭제의 데이터만 넘긴다
+ * @returns {Array}
+ */
+function commonGridGetDataNew(gridObj)
+{
+	var arr = [];
+
+	this.commonGridCancelEdit(gridObj);
+
+	var arrChg = gridObj.jqGrid('getRowData');
+
+	for (var ix = 0, _max = arrChg.length ; ix < _max ; ix ++)
+	{
+		var data = arrChg[ix];
+		var crud = data.crud;
+
+		if(crud == "D" ||  crud == "U" ||  crud == "C"){
+			arr.push(data);
+		}
+	}
+	return arr;
+}
+
+
+/**
+ * 셀 변경모드 취소
+ * @param gridObj
+ * @returns
+ */
+function commonGridCancelEdit(gridObj)
+{
+	if (gridObj.jqGrid("getGridParam", "cellEdit") == true)
+	{
+		var rowId = gridObj.jqGrid("getGridParam", "selrow");
+
+		if (rowId)
+		{
+			var colModel = gridObj.jqGrid("getGridParam", "colModel");
+			var iRow = gridObj.jqGrid("getInd", rowId);
+
+			for (var ix = 0, _max = colModel.length ; ix < _max ; ix++ )
+			{
+				if (gridObj.find("tr#" + rowId).find("td:eq(" + (ix + 1) + ")").hasClass("edit-cell") == true)
+				{
+					gridObj.jqGrid("saveCell", iRow, ix + 1);
+				}
+			}
+		}
+	}
+
+	return gridObj;
+}
 
 /**
  * Server Response를 처리 후 정상일 경우 jstree 에 맞게 data filtering

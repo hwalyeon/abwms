@@ -6,6 +6,7 @@ import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
 import kr.co.seculink.web.service.svcStnd.dgem.DgemStndMngService;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.internal.StringUtil;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,7 +49,7 @@ public class DgemStndMngController {
 
 	// 위험_감정_기준 리스트 엑셀다운로드
 	@ResponseBody
-	@RequestMapping("/svcStne/dgem/dgemStndMng/searchDgemList/excel.ab")
+	@RequestMapping("/svcStnd/dgem/dgemStndMng/searchDgemList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required = false) Map<String, String> params) throws BizException {
 	
 		params.put("paging", "N");
@@ -83,5 +84,19 @@ public class DgemStndMngController {
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/dgem/dgemStndMng/saveDgemStnd.ab")
+	public RtnMsg saveDgemStnd(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		dgemStndMngService.saveDgemList(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
 	}
 }
