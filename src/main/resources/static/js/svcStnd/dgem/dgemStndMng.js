@@ -32,16 +32,17 @@ let dgemStndMng = new Vue({
         {
             let $this = this;
             //위험감정상태 코드 목록 조회 공통코드의 경우 1건인 경우
-            // getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList, function() {
-            //     $this.initGrid();
-            //     $this.searchDgemList(true);
-            // });
-
-            //별도 테이블의 경우 - 1건의 경우
-            $this.codeList( $this.code.dgemStatCdList, function() {
+            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList, function() {
                 $this.initGrid();
                 $this.searchDgemList(true);
             });
+
+
+            //별도 테이블의 경우 - 1건의 경우
+            // $this.codeList( $this.code.dgemStatCdList, function() {
+            //     $this.initGrid();
+            //     $this.searchDgemList(true);
+            // });
         },
         initGrid: function()
         {
@@ -49,10 +50,10 @@ let dgemStndMng = new Vue({
             let dgemStatCdList = commonGridCmonCd($this.code.dgemStatCdList);
         	let colModels = [
                 {name: "crud"            , index: "crud"         , label: "crud"          , hidden:true},
-                {name: "dgemStatCd"      , index: "dgemStatCd"   ,label: "위험감정상태코드"  , editable :true	, width: 80    , align: "center"},
+                {name: "dgemStatCd"      , index: "dgemStatCd"   ,label: "위험감정상태코드"  , editable :true	, editrules : {number : true}, width: 80    , align: "center"},
                 {name: "dgemStatCdTemp"      , index: "dgemStatCdTemp"   ,label: "위험감정상태코드"  , hidden:true },
-                //{name: "dgemStatCdTemp"	     , index: "dgemStatCdTemp"	 , label: "위험감정상태코드" , width: 80  	 ,align:"center"
-                 //,edittype:"select"		 , formatter:"select"	 , editable :true		  , editoptions : {value:dgemStatCdList}},
+              //   {name: "dgemStatCdTemp"	     , index: "dgemStatCdTemp"	 , label: "위험감정상태코드" , width: 80  	 ,align:"center"
+              //    ,edittype:"select"		 , formatter:"select"	 , editable :true		  , editoptions : {value:dgemStatCdList}},
                 {name: "dgemStatCntn"    , index: "dgemStatCntn" , label: "위험감정상태내용" , editable :true	 , width: 80         , align: "center"},
                 {name: "regDt"           , index: "regDt"        , label: "등록일자"        , width: 80    , align: "center",formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
                 {name: "regTm"           , index: "regTm"        , label: "등록시각"        , width: 80    , align: "center",formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
@@ -177,6 +178,26 @@ let dgemStndMng = new Vue({
         btnSave  :  function() {
             let $this = this;
             let gridData = commonGridGetDataNew($("#dgem_list"));
+
+            if(gridData.length > 0){
+                for (let data in gridData){
+                    if(gridData[data].crud === 'C' || gridData[data].crud === 'U'){
+                        if(WebUtil.isNull(gridData[data].dgemStatCd)){
+                            Swal.alert(["위험감정상태코드는 필수 입력입니다.", 'warning']);
+                            return false;
+                        }
+
+                        if(WebUtil.isNull(gridData[data].dgemStatCntn)){
+                            Swal.alert(["위험감정상태내용은 필수 입력입니다.", 'warning']);
+                            return false;
+                        }
+                    }
+                }
+
+            }else {
+                Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+                return false;
+            }
 
             let param = { gridList : []}
             param.gridList = gridData;
