@@ -52,7 +52,7 @@ let ddPalMng = new Vue({
             getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList);
         },
         initGrid: function() {
-        	        	        	
+            let $this = this;
         	let colModels = [
                 {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정코드"   , width: 80, align: "center"},
                 {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정코드"     , width: 80, align: "center"},

@@ -9,6 +9,8 @@
                ,age_ycnt /* age_ycnt 나이_년수_FROM numeric */
                ,pal_val_fr /* pal_val_fr 신체활동수준_값_FROM numeric */
                ,pal_val_to /* pal_val_to 신체활동수준_값_TO numeric */
+               ,cal_qty_fr /* cal_qty_fr 칼로리량_FORM numeric */
+               ,cal_qty_to /* cal_qty_to 칼로리량_TO numeric */
                ,dd_cal_qty /* dd_cal_qty 일일_칼로리_량 numeric */
                ,pal_cd /* pal_cd 신체활동수준_코드 character(18) */
                ,nutr_cd /* nutr_cd 영양소_코드 character(18) */
@@ -20,7 +22,11 @@
                ,upt_tm /* upt_tm 수정_시각 character(6) */
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ti_dd_pal_blck
-	WHERE  1 = 1
+		WHERE  1 = 1
+		AND    curr_fat_judg_cd like concat('%',#{currFatJudgCd},'%')
+		AND    prdt_fat_judg_cd like concat('%',#{prdtFatJudgCd},'%')
+        <if test=' paging == "Y" '>
+        LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 
 </select>
 
