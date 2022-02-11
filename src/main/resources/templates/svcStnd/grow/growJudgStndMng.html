@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>사용자</title>
+	<link rel="stylesheet" th:href="@{/css/plugins/summernote/summernote-lite.css}"/>
 </head>
 <body>
 <div layout:fragment="content">
@@ -57,24 +58,29 @@
 						</div>
 					</div>
 					<div class="float_right">
-						<!--<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#userDetlPopup" v-on:click="regUserPop()">&nbsp;사용자등록</button> -->
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#growJudgStndDetlPopup" v-on:click="regGrowJudgStndPop()">&nbsp;성장판정기준 등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
 				</div>
 				<div class="form-group">
-					<div id="user_list_wrapper">
-						<table id="user_list"></table>
-						<div id="user_pager_list"></div>
+					<div id="grid_list_wrapper">
+						<table id="grid_list"></table>
+						<div id="grid_pager_list"></div>
 					</div>
 				</div>
 			</div>
 		</div>
     </div>
-<!--    <div th:insert="~{set/userDetl :: body}"></div>-->
+    <div th:insert="~{svcStnd/grow/growJudgStndDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/plugins/summernote/summernote-lite.js}"></script>
+	<script type="text/javascript" th:src="@{/js/plugins/summernote/summernote-ko-KR.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/editor/summernote.js}"></script>
+
 	<script type="text/javascript" th:src="@{/js/svcStnd/grow/growJudgStndMng.js}"></script>
+	<script type="text/javascript" th:src="@{/js/svcStnd/grow/growJudgStndDetl.js}"></script>
 </section>
 </body>
 </html>

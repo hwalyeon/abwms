@@ -28,16 +28,14 @@ public class GrowJudgStndMngController
 
 	public RtnMsg searchGrowJudgList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
-		System.out.println("test1");
+
 		RtnMsg vo = new RtnMsg();
-		System.out.println("test2");
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("test3");
+
 
 		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growJudgStndMng.searchGrowJudgList", params);
-		System.out.println("test4");
 		rtnMap.put("result", result);
-		System.out.println("test5");
+
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
@@ -90,5 +88,42 @@ public class GrowJudgStndMngController
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/grow/growJudgStndMng/searchGrowJudgStndInfo.ab")
+
+	public RtnMsg searchGrowJudgStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growJudgStndMng.searchGrowJudgList", params);
+
+		if(result.size() > 0 ){
+			rtnMap.put("result", result.get(0));
+		}
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/grow/growJudgStndMng/saveInfo.ab")
+	public RtnMsg saveDgemStnd(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		if("C".equals(params.get("crud"))) dao.insert("svcStnd.grow.growJudgStndMng.insertTiGrowJudgStnd",params);
+		else if("U".equals(params.get("crud"))) dao.insert("svcStnd.grow.growJudgStndMng.updateTiGrowJudgStnd",params);
+		else if("D".equals(params.get("crud"))) dao.insert("svcStnd.grow.growJudgStndMng.deleteTiGrowJudgStnd",params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
 	}
 }

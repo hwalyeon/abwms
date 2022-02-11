@@ -6,13 +6,6 @@ let growJudgStndMng = new Vue({
             gidxFr:'',
             gidxTo:'',
             smryCntn:'',
-            regDt:'',
-            regTm:'',
-            regUserId:'',
-            uptDt:'',
-            uptTm:'',
-            uptUserId:'',
-    		useYn:'Y',
     		paging: 'Y',
     		totalCount: 0,
             rowCount: 30,
@@ -32,7 +25,7 @@ let growJudgStndMng = new Vue({
         	let $this = this;
         	
         	$this.initCodeList();
-        	
+
         	$this.initGrid();
 
         	$this.searchGrowJudgList(true);
@@ -44,11 +37,11 @@ let growJudgStndMng = new Vue({
             getCommonCodeList('GROW_JUDG_CD',$this.code.mentGrowJudgCdList);
         },
         initGrid: function() {
-        	        	        	
+
         	let colModels = [
                 {name: "growJudgCd"         , index: "growJudgCd"       , label: "성장판정코드"   , width: 80, align: "center"},
                 {name: "growJudgNm"         , index: "growJudgNm"       , label: "성장판정코드명"   , width: 80, align: "center"},
-                {name: "gidxFr"             , index: "gidxFr"           , label: "성장지수_FORM"     , width: 80, align: "center"},
+                {name: "gidxFr"             , index: "gidxFr"           , label: "성장지수_FR"     , width: 80, align: "center"},
                 {name: "gidxTo"             , index: "gidxTo"           , label: "성장지수_TO"   , width: 80, align: "center"},
                 {name: "smryCntn"           , index: "smryCntn"         , label: "요약내용"     , width: 80, align: "center"},
                 {name: "specCntn"           , index: "specCntn"         , label: "상세내용"        , width: 80, align: "center"},
@@ -61,14 +54,19 @@ let growJudgStndMng = new Vue({
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
                 {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
+                {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"},
+                {name: "growJudgStndDetlPop" , index: "growJudgStndDetlPop" , label: "상세정보보기", width: 80, align: "center",
+                    formatter: function(cellValue, options, rowObject) {
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="growJudgStndMng.regGrowJudgStndPop(\'' + rowObject.growJudgCd + '\')" value="상세보기" data-toggle="modal" data-target="#growJudgStndDetlPopup" />';
+                    }
+                }
 
             ];
 
-        	console.log("1");
+
   
-            $("#user_list").jqGrid("GridUnload");
-           	$("#user_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+            $("#grid_list").jqGrid("GridUnload");
+           	$("#grid_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
                 url: '/svcStnd/grow/growJudgStndMng/searchGrowJudgList.ab',
@@ -84,31 +82,29 @@ let growJudgStndMng = new Vue({
                     })
                 }
             }));
-            console.log("2");
-            resizeJqGridWidth("user_list", "user_list_wrapper");                        
+
+            resizeJqGridWidth("grid_list", "grid_list_wrapper");
         },
         searchGrowJudgList: function(isSearch) {
-            console.log("3");
+
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
-            console.log("4");
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
             }
             
-			$("#user_list").setGridParam({
+			$("#grid_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,
                 loadComplete: function (response) {
-                    console.log(response.rtnData.result);
                     if ( response.rtnData.result == 0 ) {
                         Swal.alert(['조회할 내용이 없습니다.', "info"]);
                     }
                 }
             }).trigger("reloadGrid");
-            console.log("5");
+
 		},
         growJudgStndNmVal:function(){
             let $this = this;
@@ -116,7 +112,9 @@ let growJudgStndMng = new Vue({
         physStrsStatNmVal:function(){
             let $this = this;
         },
-
+        regGrowJudgStndPop: function(growJudgCd) {
+            growJudgStndDetl.initPage(growJudgCd);
+        },
         downloadExcel : function()
         {
             let $this = this;
@@ -142,11 +140,6 @@ let growJudgStndMng = new Vue({
 			let $this = this;
 			$this.params = {
                 growJudgCd:'',
-                physStrsStatCd:'',
-	    		blngNm: '',
-	    		telNo: '',
-	    		mtelNo: '',
-	    		mailAddr: '',
 	    		paging: 'Y',
 	    		totalCount: 0,
 	            rowCount: 30,
