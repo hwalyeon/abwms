@@ -16,7 +16,6 @@ let actStndMng = new Vue({
             code:
                 {
                     actClssCdList       : [],  // 활동_분류_코드 리스트
-                    actCdNmList       : [],  // 활동_코드_명 리스트
                 },
         },
     methods:
@@ -27,62 +26,65 @@ let actStndMng = new Vue({
 
                 $this.initCodeList();
 
-                $this.initGrid();
+        /*        $this.initGrid();
 
-                $this.searchActStndList(true);
+                $this.searchActStndList(true);*/
             },
-            initCodeList : function()
-            {
+            initCodeList : function() {
 
                 let $this = this;
-                // 활동_분류_코드 리스트_조회
+                $this.codeList( $this.code.actClssCdList, function() {
+                    $this.initGrid();
+                    $this.searchActStndList(true);
+                });
+            },
+            // 활동_분류_코드 리스트_조회
+            codeList : function (arrayObject , callback){
                 AjaxUtil.post({
                     url: "/svcStnd/grow/actStndMng/actClssCdList.ab",
                     param: {},
                     success: function(response) {
+                        var dataList = response.rtnData.result;
 
-                        $this.code.actClssCdList = [];
-                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                            $.each(response.rtnData.result, function(index, item) {
-                                $this.code.actClssCdList.push({'cdVal':item.actClssCd});
-                            });
+                        if (Array.isArray(arrayObject)) {
+                            var dataCnt = dataList.length;
+                            var m = 0;
+
+                            for (m = 0; m < dataCnt; m++) {
+                                arrayObject.push({
+                                    cdVal   : dataList[m].actClssCd,
+                                    cdNm    : dataList[m].actClssCd,
+                                    sortOrd : 0
+                                });
+                            }
+                        }
+
+                        if (typeof callback === "function") {
+                            callback(dataList);
                         }
                     },
                     error: function (response) {
-                        Swal.alert([response, 'error']);
-                    }
-                });
-
-                // 활동_코드_명 리스트_조회
-                AjaxUtil.post({
-                    url: "/svcStnd/grow/actStndMng/actCdNmList.ab",
-                    param: {},
-                    success: function(response) {
-                        $this.code.actCdNmList = [];
-                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                            $.each(response.rtnData.result, function(index, item) {
-                                $this.code.actCdNmList.push({'cdVal':item.actCd, 'cdNm':item.actNm});
-                            });
-                        }
-                    },
-                    error: function (response)
-                    {
-                        Swal.alert([response, 'error']);
+                        alert(response);
                     }
                 });
             },
             initGrid: function()
             {  
                 let $this = this;
+                let selObj = "";
+                let actClssCdList = commonGridCmonCd($this.code.actClssCdList);
                 let colModels =
                 [
-                    {name: "sortOrd"             , index: "sortOrd"             , label: "정렬순서"                    , width: 80          , align: "center"},
-                    {name: "actCd"                 , index: "actCd"               , label: "활동코드"                    , width: 80         , align: "center"},
-                    {name: "actNm"               , index: "actNm"              , label: "활동명"                        , width: 80         , align: "center"},
-                    {name: "actClssCd"          , index: "actClssCd"         , label: "활동분류코드"             , width: 80         , align: "center"},
-                    {name: "actDesc"             , index: "actDesc"            , label: "활동설명"                    , width: 80          , align: "center",  hidden:true},
-                    {name: "metVal"              , index: "metVal"             , label: "MET 값"                        , width: 80          , align: "center"},
-                    {name: "metMinCfct"      , index: "metMinCfct"       , label: "MET 분당 환산계수"   , width: 80          , align: "center"},
+                    {name:"crud"                   , index:"crud"                   , label:"crud"                             ,hidden:true                               },
+                    {name: "sortOrd"             , index: "sortOrd"             , label: "정렬순서"                    , width: 80          , align: "center" , editable:true},
+                    {name: "actCd"                 , index: "actCd"               , label: "활동코드"                    , width: 80         , align: "center" , editable:true},
+                    {name: "actCdTemp"        , index: "actCdTemp"    , label: "활동코드"                    , width: 80         , align: "center", hidden:true},
+                    {name: "actNm"               , index: "actNm"              , label: "활동명"                        , width: 80         , align: "center" , editable:true},
+                    {name: "actClssCd"       , index: "actClssCd"         , label: "활동분류코드"               , width: 80         , align: "center"
+                        ,edittype :"select"  , formatter:"select"    , editable:true              , editoptions:{value:actClssCdList}},
+                    {name: "actDesc"             , index: "actDesc"            , label: "활동설명"                    , width: 80          , align: "center" , editable:true},
+                    {name: "metVal"              , index: "metVal"             , label: "MET 값"                        , width: 80          , align: "center" , editable:true},
+                    {name: "metMinCfct"      , index: "metMinCfct"       , label: "MET 분당 환산계수"   , width: 80          , align: "center" , editable:true},
                     {name: "regDt"                , index: "regDt"                , label: "등록일자"                    , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
                     {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"
@@ -96,7 +98,7 @@ let actStndMng = new Vue({
                 ];
 
                 $("#actStnd_list").jqGrid("GridUnload");
-                $("#actStnd_list").jqGrid($.extend(true, {}, commonGridOptions(),
+                $("#actStnd_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
                 {
                     datatype  : "local",
                     mtype      : 'post',
@@ -142,6 +144,88 @@ let actStndMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
+            /**/
+            btnAddRow  :  function() {
+                var cnt = $("#actStnd_list").jqGrid("getGridParam", "records")+1;
+
+                var addRow = {crud:"C",
+                    actCd        :"",
+                };
+                $("#actStnd_list").addRowData(cnt, addRow);
+
+            },
+            btnDelRow : function() {
+                //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
+                let checkIds = $("#actStnd_list").jqGrid("getGridParam","selrow") + "";  // 단건
+                if ( checkIds == "" )
+                {
+                    alert("삭제할 행을 선택해주십시요.");
+                    return false;
+                }
+
+                let checkId = checkIds.split(",");
+                for ( var i in checkId )
+                {
+                    if ( $("#actStnd_list").getRowData(checkId[i]).crud == "C" )
+                    {
+                        $("#actStnd_list").setRowData(checkId[i], {crud:"N"});
+                        $("#"+checkId[i],"#actStnd_list").css({display:"none"});
+                    }
+                    else
+                    {
+                        $("#actStnd_list").setRowData(checkId[i], {crud:"D"});
+                        $("#"+checkId[i],"#actStnd_list").css({display:"none"});
+                    }
+                }
+            },
+            btnSave  :  function() {
+                let $this = this;
+                let gridData = commonGridGetDataNew($("#actStnd_list"));
+
+                if(gridData.length > 0)
+                {
+                    for (let data in gridData)
+                    {
+                        if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
+                        {
+                            if(WebUtil.isNull(gridData[data].actCd)){
+                                Swal.alert(["활동코드는 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].metVal)){
+                                Swal.alert(["MET값은 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].metMinCfct)){
+                                Swal.alert(["MET 분당 환산계수는 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].sortOrd)){
+                                 Swal.alert(["정렬순서는 필수 입력입니다.", 'warning']);
+                                 return false;
+                        }
+                        }
+                    }
+                }
+                else
+                {
+                    Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+                    return false;
+                }
+                let param = { gridList : []}
+                param.gridList = gridData;
+
+                AjaxUtil.post({
+                    url: "/svcStnd/grow/actStndMng/saveActStnd.ab",
+                    param: param,
+                    success: function(response) {
+                        Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                            $this.searchActStndList(true);
+                        });
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
+            },
+            /**/
             downloadExcel : function()
             {
                 let $this = this;

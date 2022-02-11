@@ -34,10 +34,7 @@
 						</div>-->
 						<label class="col-xs-1 control-label">활동명</label>
 						<div class="col-xs-2">
-							<select id="actCd" name="actCd" class="form-control" v-model="params.actCd" >
-								<option value="">전체</option>
-								<option v-for="item in code.actCdNmList" :value="item.cdVal" v-text="item.cdNm" ></option>
-							</select>
+							<input type="text" name ="actCd" class="form-control" v-model="params.actCd">
 						</div>
 					</div>
 					<div class="form-group mg_none">
@@ -64,7 +61,10 @@
 						</div>
 					</div>
 					<div class="float_right">
-						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+						<button type="button" id="btnAdd" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnAddRow">&nbsp;행추가+</button>
+						<button type="button" id="btnDel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnDelRow">&nbsp;행삭제-</button>
+						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnSave">&nbsp;저장</button>
+						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 
 					<div class="clear_both"></div>

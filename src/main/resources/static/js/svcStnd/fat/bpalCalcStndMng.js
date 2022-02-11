@@ -120,6 +120,98 @@ let bpalCalcStndMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
+            /**/
+            btnAddRow  :  function() {
+                var cnt = $("#growStnd_list").jqGrid("getGridParam", "records")+1;
+
+                var addRow = {crud:"C",
+                    growStndNo        :"",
+                    growStndVer       :"",
+                };
+                $("#growStnd_list").addRowData(cnt, addRow);
+
+            },
+            btnDelRow : function() {
+                //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
+                let checkIds = $("#growStnd_list").jqGrid("getGridParam","selrow") + "";  // 단건
+                if ( checkIds == "" )
+                {
+                    alert("삭제할 행을 선택해주십시요.");
+                    return false;
+                }
+
+                let checkId = checkIds.split(",");
+                for ( var i in checkId )
+                {
+                    if ( $("#growStnd_list").getRowData(checkId[i]).crud == "C" )
+                    {
+                        $("#growStnd_list").setRowData(checkId[i], {crud:"N"});
+                        $("#"+checkId[i],"#growStnd_list").css({display:"none"});
+                    }
+                    else
+                    {
+                        $("#growStnd_list").setRowData(checkId[i], {crud:"D"});
+                        $("#"+checkId[i],"#growStnd_list").css({display:"none"});
+                    }
+                }
+            },
+            btnSave  :  function() {
+                let $this = this;
+                let gridData = commonGridGetDataNew($("#growStnd_list"));
+
+                if(gridData.length > 0)
+                {
+                    for (let data in gridData)
+                    {
+                        if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
+                        {
+                            if(WebUtil.isNull(gridData[data].growStndVer)){
+                                Swal.alert(["성장기준버전 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].growStndNo)){
+                            Swal.alert(["성장기준번호 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].ageYcnt)){
+                            Swal.alert(["나이(년수) 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].ageMcnt)){
+                            Swal.alert(["나이(개월수) 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].p3Gidx)){
+                            Swal.alert(["백분위3 성장지수 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].p50Gidx)){
+                            Swal.alert(["백분위50 성장지수 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].p97Gidx)){
+                            Swal.alert(["백분위97 성장지수 필수 입력입니다.", 'warning']);
+                            return false;
+                        }
+                        }
+                    }
+                }
+                else
+                {
+                    Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+                    return false;
+                }
+                let param = { gridList : []}
+                param.gridList = gridData;
+
+                AjaxUtil.post({
+                    url: "/svcStnd/grow/growStndMng/saveGrowStnd.ab",
+                    param: param,
+                    success: function(response) {
+                        Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                            $this.searchGrowStndList(true);
+                        });
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
+            },
+            /**/
             downloadExcel : function()
             {
                 let $this = this;

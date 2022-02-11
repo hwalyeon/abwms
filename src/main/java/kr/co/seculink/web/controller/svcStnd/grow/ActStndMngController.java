@@ -62,17 +62,16 @@ public class ActStndMngController
 		return vo;
 	}
 
-	// 활동_코드_명 리스트_조회
+	//행추가_행삭제_저장
 	@ResponseBody
-	@RequestMapping("/svcStnd/grow/actStndMng/actCdNmList.ab")
-	public RtnMsg actCdNmList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
+	@RequestMapping("/svcStnd/grow/actStndMng/saveActStnd.ab")
+	public RtnMsg saveActStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, String>> result = actStndMngService.actCdNmList(params);
-		rtnMap.put("result", result);
+		actStndMngService.saveActStnd(params);
 
+		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap, params);
 
 		return vo;

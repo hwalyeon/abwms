@@ -43,14 +43,6 @@ public class GrowStndMngServiceImpl implements GrowStndMngService
 				saveCnt += dao.delete("svcStnd.grow.growStndMng.deleteTiGrowStndList", info);
 			}
 		}
-			/*if("C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.grow.growStndMng.insertTiGrowStndList", info);
-			}else if("U".equals(info.get("crud"))){
-				saveCnt += dao.update("svaStnd.grow,growStndMng.updateTiGrowStndList", info);
-			}else if("D".equals(info.get("crud"))){
-			    saveCnt += dao.delete("svcStnd.grow,growMng.deleteTiGrowStndList", info);
-			}
-		}*/
 		if(saveCnt == 0){
 			throw new BizException("ECOM999", new String[]{"성장기준정보 저장이 실패하였습니다"});
 		}
