@@ -6,6 +6,7 @@
 	<select id="searchFatStndList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT      FAT_STND_VER
 	                    , FAT_STND_NO
+	                    , FAT_STND_NO AS FAT_STND_NO_TEMP
 		                , SEX_CD
 		                , AGE_YCNT
 		                , AGE_MCNT
@@ -18,31 +19,74 @@
                         , UPT_DT
                         , UPT_TM
                         , UPT_USER_ID
-                        , fn_getCdNm('SEX_CD', SEX_CD)
 		FROM        TI_FAT_STND
 		WHERE     1 = 1
 		<if test=" fatStndVer != null and fatStndVer != '' ">
-		AND          FAT_STND_VER = #{fatStndVer}</if>
-		<if test=" ageYcnt != null and ageYcnt != '' ">
-		AND           AGE_YCNT = CAST (#{ageYcnt} AS INTEGER)</if>
-		<if test=" sexCd != null and sexCd != '' ">
-		AND          SEX_CD = #{sexCd}</if>
-		ORDER BY FAT_STND_VER, FAT_STND_NO, SEX_CD
+		AND         FAT_STND_VER LIKE CONCAT('%',#{fatStndVer},'%')   </if>
+		<if test=" fatStndNo != null and fatStndNo != '' ">
+		AND         FAT_STND_NO   = CAST(#{fatStndNo} AS INTEGER)    </if>
+		ORDER BY FAT_STND_VER, FAT_STND_NO
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
-
-    <!--비만기준버전 리스트 조회-->
-	<select id="searchFatStndVerList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT      DISTINCT FAT_STND_VER FROM TI_FAT_STND
-        ORDER BY FAT_STND_VER
-	</select>
-
-	<!--나이년도 리스트 조회-->
-	<select id="searchAgeYcntList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT      DISTINCT AGE_YCNT FROM TI_FAT_STND
-        ORDER BY AGE_YCNT
-
-	</select>
+	<!--행추가_행삭제 인서트-->
+	<insert id="insertTiFatStndList" parameterType="java.util.Map">
+    	INSERT INTO TI_FAT_STND
+    	(
+    	      FAT_STND_VER
+			, FAT_STND_NO
+			, SEX_CD
+			, AGE_YCNT
+			, AGE_MCNT
+			, P5_FIDX
+			, P50_FIDX
+			, P95_FIDX
+			, REG_DT
+			, REG_TM
+			, REG_USER_ID
+			, UPT_DT
+			, UPT_TM
+			, UPT_USER_ID
+    	)
+    	VALUES
+    	(
+    	     #{fatStndVer}
+    	   , CAST(#{fatStndNo} AS INTEGER )
+    	   , #{sexCd}
+    	   , CAST(#{ageYcnt} AS INTEGER)
+    	   , CAST(#{ageMcnt} AS INTEGER)
+    	   , CAST(#{p5Fidx} AS INTEGER)
+    	   , CAST(#{p50Fidx} AS INTEGER)
+    	   , CAST(#{p95Fidx} AS INTEGER)
+	       , TO_CHAR(NOW(), 'YYYYMMDD')
+	       , TO_CHAR(NOW(), 'HH24MISS')
+	       , #{regUserId}
+	       , TO_CHAR(NOW(), 'YYYYMMDD')
+	       , TO_CHAR(NOW(), 'HH24MISS')
+	       , #{uptUserId}
+    	)
+    </insert>
+	<!--행추가_행삭제 업데이트-->
+	<update id="updateTiFatStndList" parameterType="java.util.Map">
+		UPDATE TI_FAT_STND
+		SET         UPT_DT           =  TO_CHAR(NOW(), 'YYYYMMDD')
+		            ,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
+	             	,  UPT_USER_ID  = #{uptUserId}
+		<if test="fatStndVer != null and fatStndVer !=''">  ,FAT_STND_VER = #{fatStndVer}</if>
+		<if test="fatStndNo != null and fatStndNo != ''">  ,FAT_STND_NO = #{fatStndNo}</if>
+		<if test="sexCd != null and sexCd !=''">, SEX_CD = #{sexCd}</if>
+		<if test="ageYcnt != null and ageYcnt != ''">, AGE_YCNT = #{ageYcnt}</if>
+		<if test="ageMcnt !=null and ageMcnt !=''">, AGE_MCNT = #{ageMcnt}</if>
+		<if test="p5Fidx !=null and p5Fidx !=''">, P5_FIDX = #{p5Fidx}></if>
+		<if test="p50Fidx !=null and p50Fidx != ''">, P50_FIDX = #{p50Fidx}</if>
+		<if test="p95Fidx !=null and p95Fidx !=''">, P95_FIDX = #{p95Fidx}</if>
+		WHERE  FAT_STND_NO = #{fatStndNoTemp}
+	</update>
+	<!--행추가_행삭제 삭제-->
+	<delete id ="deleteTiFatStndList" parameterType="java.util.Map">
+        DELETE
+        FROM    TI_FAT_STND
+        WHERE  FAT_STND_NO = CAST(#{fatStndNo} AS INTEGER)
+	</delete>
 
 </mapper>

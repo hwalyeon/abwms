@@ -46,38 +46,20 @@ public class FatStndMngController
 
 		return vo;
 	}
-	//비만_기준_버전_리스트_조회
+	//행추가_행삭제_저장
 	@ResponseBody
-	@RequestMapping("/svcStnd/fat/fatStndMng/fatStndVerList.ab")
-	public RtnMsg fatStndVerList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
+	@RequestMapping("/svcStnd/fat/fatStndMng/saveFatStnd.ab")
+	public RtnMsg saveFatStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, String>> result = fatStndMngService.fatStndVerList(params);
-		rtnMap.put("result", result);
+		fatStndMngService.saveFatStnd(params);
 
+		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap, params);
 
 		return vo;
 	}
-
-	//나이_년수 목록 조회
-	@ResponseBody
-	@RequestMapping("/svcStnd/fat/fatStndMng/ageYcntList.ab")
-	public RtnMsg ageYcntList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		List<Map<String, String>> result = fatStndMngService.ageYcntList(params);
-		rtnMap.put("result", result);
-
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
-
 	//비만_기준_리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/svcStnd/fat/fatStndMng/searchFatStndList/excel.ab")
