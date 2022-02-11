@@ -53,7 +53,7 @@ public class NutrInfoMngServiceImpl implements NutrInfoMngService
 		}
 
 		if ( saveCnt == 0 ) {
-			throw new BizException("ECOM999", new String[]{"위험감정기준 상태 코드 저장이 실패하였습니다."});
+			throw new BizException("ECOM999", new String[]{"영양소정보  저장이 실패하였습니다."});
 		}
 	}
 

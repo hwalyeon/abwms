@@ -4,9 +4,13 @@ let growStndMng = new Vue({
         {
             params:
                 {
-                    growStndVer : ''  ,    // 성장_기준_번호
-                    ageYcnt         : ''  ,     // 나이_년수
-                    sexCd            : ''   ,    // 성별_코드
+                    growStndVer : ''  ,    // 성장_기준_버전
+                    growStndNo : ''  ,    // 성장_기준_번호
+                    ageYcnt         : ''  ,    // 나이_년수
+                    ageMcnt       : ''  ,     // 나이_개월수
+                    p3Gidx          : '' ,     // 백분위_3_성장지수
+                    p50Gidx        : '' ,     // 백분위_50_성장지수
+                    p97Gidx        : '' ,     // 백분위_97_성장지수
                     paging          : 'Y',
                     totalCount    : 0  ,
                     rowCount     : 30,
@@ -15,9 +19,7 @@ let growStndMng = new Vue({
                 },
             code:
                 {
-                    growStndVerList : [],  // 성장_기준_버전_리스트
-                    ageYcntList         : [],  // 나이_년수_리스트
-                    sexCdList             : [{cdVal:'MALE', cdNm:'남성'},{cdVal:'FEMALE', cdNm:'여성'}] // 성별_리스트
+                    sexCdList : []
                 },
         },
     methods:
@@ -27,79 +29,43 @@ let growStndMng = new Vue({
                 let $this = this;
 
                 $this.initCodeList();
-
-                $this.initGrid();
-
-                $this.searchGrowStndList(true);
             },
             initCodeList : function()
             {
-
                 let $this = this;
-                // 나이_년수_리스트_조회
-                AjaxUtil.post({
-                    url: "/svcStnd/grow/growStndMng/ageYcntList.ab",
-                    param: {},
-                    success: function(response) {
-
-                        $this.code.ageYcntList = [];
-                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                            $.each(response.rtnData.result, function(index, item) {
-                                $this.code.ageYcntList.push({'cdVal':item.ageYcnt});
-                            });
-                        }
-                    },
-                    error: function (response) {
-                        Swal.alert([response, 'error']);
-                    }
-                });
-
-                // 성장_기준_버전_리스트_조회
-                AjaxUtil.post({
-                    url: "/svcStnd/grow/growStndMng/growStndVerList.ab",
-                    param: {},
-                    success: function(response) {
-                        $this.code.growStndVerList = [];
-                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                            $.each(response.rtnData.result, function(index, item) {
-                                $this.code.growStndVerList.push({'cdVal':item.growStndVer});
-                            });
-                        }
-                    },
-                    error: function (response)
-                    {
-                        Swal.alert([response, 'error']);
-                    }
-                });
+                getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
+                {
+                    $this.initGrid();
+                    $this.searchGrowStndList(true);
+                })
             },
             initGrid: function()
             {
                 let $this = this;
+                let sexCdList = commonGridCmonCd($this.code.sexCdList);
                 let colModels =
                     [
-                        {name: "growStndVer"     , index: "growStndVer"     , label: "성장기준버전"          , width: 80         , align: "center"},
-                        {name: "growStndNo"     , index: "growStndNo"      , label: "성장기준번호"          , width: 80         , align: "center"},
-                        {name: "sexCd"                , index: "sexCd"                 , label: "성별코드"                  , width: 80          , align: "center",  hidden:true},
-                        {name: "fnGetcdnm"       , index: "fnGetcdnm"         , label: "성별"                          , width: 80          , align: "center"},
-                        {name: "ageYcnt"            , index: "ageYcnt"              , label: "나이(년)"                    , width: 80          , align: "center"},
-                        {name: "ageMcnt"           , index: "ageMcnt"            , label: "나이(개월)"                , width: 80          , align: "center"},
-                        {name: "p3Gidx"              , index: "p3Gidx"              , label: "백분위3 성장지수"     , width: 80          , align: "center"},
-                        {name: "p50Gidx"            , index: "p50Gidx"            , label: "백분위50 성장지수"   , width: 80          , align: "center"},
-                        {name: "p97Gidx"            , index: "p97Gidx"            , label: "백분위97 성장지수"   , width: 80          , align: "center"},
-                        {name: "regDt"                , index: "regDt"                , label: "등록일자"                    , width: 80          , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"            , width: 80          , align: "center"},
-                        {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                   , width: 80          , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
+                        {name:"crud"                    , index: "crud"                   , label:"crud"                        , hidden:true                                                  },
+                        {name: "growStndVer"     , index: "growStndVer"     , label: "성장기준버전"        , width: 80  , align: "center"  , editable: true },
+                        {name: "growStndNo"     , index: "growStndNo"      , label: "성장기준번호"        , width: 80  , align: "center"  , editable: true , editrules:{number:true}},
+                        {name: "growStndNoTemp"     , index: "growStndNoTemp"      , label: "성장기준번호",     hidden:true},
+                        {name: "sexCd"       , index: "sexCd"         , label: "성별"               , width: 80         , align: "center"
+                         ,edittype :"select"  , formatter:"select"    , editable:true              , editoptions:{value:sexCdList}},
+                        {name: "ageYcnt"            , index: "ageYcnt"              , label: "나이(년)"                  , width: 80   , align: "center" , editable: true  , editrules:{number:true}},
+                        {name: "ageMcnt"           , index: "ageMcnt"            , label: "나이(개월)"              , width: 80   , align: "center"  , editable: true  , editrules:{number:true}},
+                        {name: "p3Gidx"              , index: "p3Gidx"              , label: "백분위3 성장지수"   , width: 80   , align: "center"  , editable: true  , editrules:{number:true}},
+                        {name: "p50Gidx"            , index: "p50Gidx"            , label: "백분위50 성장지수" , width: 80   , align: "center"  , editable: true  , editrules:{number:true}},
+                        {name: "p97Gidx"            , index: "p97Gidx"            , label: "백분위97 성장지수" , width: 80   , align: "center"  , editable: true  , editrules:{number:true}},
+                        {name: "regDt"                , index: "regDt"                , label: "등록일자"                  , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
+                        {name: "regTm"               , index: "regTm"               , label: "등록시각"                 , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);  }},
+                        {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"          , width: 80   , align: "center"},
+                        {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                 , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);   }},
+                        {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                 , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);   }},
+                        {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"          , width: 80   , align: "center"}
                     ];
 
                 $("#growStnd_list").jqGrid("GridUnload");
-                $("#growStnd_list").jqGrid($.extend(true, {}, commonGridOptions(),
+                $("#growStnd_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
                     {
                         datatype  : "local",
                         mtype      : 'post',
@@ -145,6 +111,98 @@ let growStndMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
+            /**/
+            btnAddRow  :  function() {
+                var cnt = $("#growStnd_list").jqGrid("getGridParam", "records")+1;
+
+                var addRow = {crud:"C",
+                    growStndNo        :"",
+                    growStndVer       :"",
+                };
+                $("#growStnd_list").addRowData(cnt, addRow);
+
+            },
+            btnDelRow : function() {
+                //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
+                let checkIds = $("#growStnd_list").jqGrid("getGridParam","selrow") + "";  // 단건
+                if ( checkIds == "" )
+                {
+                    alert("삭제할 행을 선택해주십시요.");
+                    return false;
+                }
+
+                let checkId = checkIds.split(",");
+                for ( var i in checkId )
+                {
+                    if ( $("#growStnd_list").getRowData(checkId[i]).crud == "C" )
+                    {
+                        $("#growStnd_list").setRowData(checkId[i], {crud:"N"});
+                        $("#"+checkId[i],"#growStnd_list").css({display:"none"});
+                    }
+                    else
+                    {
+                        $("#growStnd_list").setRowData(checkId[i], {crud:"D"});
+                        $("#"+checkId[i],"#growStnd_list").css({display:"none"});
+                    }
+                }
+            },
+            btnSave  :  function() {
+                let $this = this;
+                let gridData = commonGridGetDataNew($("#growStnd_list"));
+
+                if(gridData.length > 0)
+                {
+                    for (let data in gridData)
+                    {
+                        if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
+                        {
+                            if(WebUtil.isNull(gridData[data].growStndVer)){
+                                Swal.alert(["성장기준버전 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].growStndNo)){
+                                Swal.alert(["성장기준번호 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].ageYcnt)){
+                                Swal.alert(["나이(년수) 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].ageMcnt)){
+                                Swal.alert(["나이(개월수) 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].p3Gidx)){
+                                Swal.alert(["백분위3 성장지수 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].p50Gidx)){
+                                Swal.alert(["백분위50 성장지수 필수 입력입니다.", 'warning']);
+                                return false;
+                            }if(WebUtil.isNull(gridData[data].p97Gidx)){
+                                Swal.alert(["백분위97 성장지수 필수 입력입니다.", 'warning']);
+                                return false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+                    return false;
+                }
+                let param = { gridList : []}
+                param.gridList = gridData;
+
+                AjaxUtil.post({
+                    url: "/svcStnd/grow/growStndMng/saveGrowStnd.ab",
+                    param: param,
+                    success: function(response) {
+                        Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                            $this.searchGrowStndList(true);
+                        });
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
+            },
+            /**/
             downloadExcel : function()
             {
                 let $this = this;

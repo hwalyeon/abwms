@@ -33,7 +33,7 @@
 	    FROM        TI_NUTR_INFO
        ORDER BY NUTR_CD
 	</select>
-	<!--영양소_정보_그리드 생성-->
+	<!--행추가_행삭제 인서트-->
 	<insert id="insertTiNutrCdList" parameterType="java.util.Map">
 	INSERT INTO TI_NUTR_INFO
 	(
@@ -67,7 +67,7 @@
 	)
 	</insert>
 
-	<!--영양소_정보_그리드 수정-->
+	<!--행추가_행삭제 업데이트-->
 	<update id="updateTiNutrCdList" parameterType="java.util.Map">
 		UPDATE TI_NUTR_INFO
 		SET         UPT_DT          = TO_CHAR(NOW(), 'YYYYMMDD')
@@ -82,7 +82,7 @@
 		WHERE  NUTR_CD = #{nutrCdTemp}
 	</update>
 
-	<!--영양소_정보_그리드 삭제-->
+	<!--행추가_행삭제_삭제-->
 	<delete id="deleteTiNutrCdList" parameterType="java.util.Map">
 	DELETE
 	FROM     TI_NUTR_INFO

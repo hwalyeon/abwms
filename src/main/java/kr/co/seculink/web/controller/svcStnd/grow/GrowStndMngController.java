@@ -46,34 +46,16 @@ public class GrowStndMngController
 
 		return vo;
 	}
-	//성장_기준_버전_리스트_조회
+	//행추가_행삭제_저장
 	@ResponseBody
-	@RequestMapping("/svcStnd/grow/growStndMng/growStndVerList.ab")
-	public RtnMsg growStndVerList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
+	@RequestMapping("/svcStnd/grow/growStndMng/saveGrowStnd.ab")
+	public RtnMsg saveGrowStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, String>> result = growStndMngService.growStndVerList(params);
-		rtnMap.put("result", result);
+       growStndMngService.saveGrowStnd(params);
 
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
-
-	//나이_년수 목록 조회
-	@ResponseBody
-	@RequestMapping("/svcStnd/grow/growStndMng/ageYcntList.ab")
-	public RtnMsg ageYcntList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		System.out.println("얍시작이닷");
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		List<Map<String, String>> result = growStndMngService.ageYcntList(params);
-		rtnMap.put("result", result);
-
+		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap, params);
 
 		return vo;
@@ -124,4 +106,6 @@ public class GrowStndMngController
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
 	}
+
+
 }

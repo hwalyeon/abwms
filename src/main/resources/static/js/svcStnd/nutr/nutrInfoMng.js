@@ -115,26 +115,6 @@ let nutrInfoMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
-            downloadExcel : function()
-            {
-                let $this = this;
-                let params = $.extend(true, {}, $this.params);
-
-                AjaxUtil.post(
-                    {
-                        dataType: 'binary',
-                        url: "/svcStnd/nutr/nutrInfoMng/searchNutrInfoList/excel.ab",
-                        param: params,
-                        success: function(response)
-                        {
-                            saveFileLocal(response, 'nutrInfoMng.xls');
-                        },
-                        error: function (response)
-                        {
-                            Swal.alert([response, 'error']);
-                        }
-                    });
-            },
             /**/
         btnAddRow  :  function() {
             var cnt = $("#nutrInfo_list").jqGrid("getGridParam", "records")+1;
@@ -213,6 +193,26 @@ let nutrInfoMng = new Vue({
                 });
             },
         /**/
+            downloadExcel : function()
+            {
+                let $this = this;
+                let params = $.extend(true, {}, $this.params);
+
+                AjaxUtil.post(
+                    {
+                        dataType: 'binary',
+                        url: "/svcStnd/nutr/nutrInfoMng/searchNutrInfoList/excel.ab",
+                        param: params,
+                        success: function(response)
+                        {
+                            saveFileLocal(response, 'nutrInfoMng.xls');
+                        },
+                        error: function (response)
+                        {
+                            Swal.alert([response, 'error']);
+                        }
+                    });
+            },
             resetSearchParam: function()
             {
                 let $this = this;

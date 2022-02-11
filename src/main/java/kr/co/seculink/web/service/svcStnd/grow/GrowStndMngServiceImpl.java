@@ -4,6 +4,7 @@ import kr.co.seculink.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,18 +24,36 @@ public class GrowStndMngServiceImpl implements GrowStndMngService
 		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growStndMng.searchGrowStndList", params);
 		return result;
 	}
-	//성장_기준_버전_리스트 조회
-	public List<Map<String, String>> growStndVerList(Map<String, String> params) throws BizException
+	//행추가_행삭제 저장
+	@Transactional
+	public void saveGrowStnd(Map<String, Object> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growStndMng.searchGrowStndVerList", params);
+		int saveCnt = 0;
 
-		return result;
-	}
-	//나이_년수_리스트 조회
-	public List<Map<String, String>> ageYcntList(Map<String, String> params) throws BizException
-	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growStndMng.searchAgeYcntList", params);
-		return result;
+		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
+
+		for(Map<String,String> info:gridDate){
+			log.debug("crud         : " +  info.get("crud"));
+
+			if( "C".equals(info.get("crud"))){
+				saveCnt += dao.insert("svcStnd.grow.growStndMng.insertTiGrowStndList", info);
+			}else if( "U".equals(info.get("crud"))){
+				saveCnt += dao.update("svcStnd.grow.growStndMng.updateTiGrowStndList", info);
+			}else if( "D".equals(info.get("crud"))){
+				saveCnt += dao.delete("svcStnd.grow.growStndMng.deleteTiGrowStndList", info);
+			}
+		}
+			/*if("C".equals(info.get("crud"))){
+				saveCnt += dao.insert("svcStnd.grow.growStndMng.insertTiGrowStndList", info);
+			}else if("U".equals(info.get("crud"))){
+				saveCnt += dao.update("svaStnd.grow,growStndMng.updateTiGrowStndList", info);
+			}else if("D".equals(info.get("crud"))){
+			    saveCnt += dao.delete("svcStnd.grow,growMng.deleteTiGrowStndList", info);
+			}
+		}*/
+		if(saveCnt == 0){
+			throw new BizException("ECOM999", new String[]{"성장기준정보 저장이 실패하였습니다"});
+		}
 	}
 
 

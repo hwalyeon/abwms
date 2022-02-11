@@ -61,7 +61,20 @@ public class NutrInfoMngController
 
 		return vo;
 	}
+	//행추가_행삭제_저장
+	@ResponseBody
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng/saveNutrInfo.ab")
+	public RtnMsg saveNutrInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
+		nutrInfoMngService.saveNutrInfo(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
+	}
 	//영양소_정보_리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/svcStnd/nutr/nutrInfoMng/searchNutrInfoList/excel.ab")
@@ -106,17 +119,4 @@ public class NutrInfoMngController
 		return map;
 	}
 
-	@ResponseBody
-	@RequestMapping("/svcStnd/nutr/nutrInfoMng/saveNutrInfo.ab")
-	public RtnMsg saveNutrInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		nutrInfoMngService.saveNutrInfo(params);
-
-		rtnMap.put("result", params);
-		vo.setRtnData(rtnMap,null);
-
-		return vo;
-	}
 }
