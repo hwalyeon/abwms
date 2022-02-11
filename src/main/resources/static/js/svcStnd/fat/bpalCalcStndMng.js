@@ -77,7 +77,7 @@ let bpalCalcStndMng = new Vue({
                 $("#bpalCalcStnd_list").jqGrid($.extend(true, {}, commonGridOptions(),
                 {
                     datatype  : "local",
-                    mtype      : 'post',
+                    mtype      : 'post'   ,
                     url            : '/svcStnd/fat/bpalCalcStndMng/searchBpalCalcStndList.ab',
                     pager       : '#bpalCalcStnd_pager_list',
                     height      : 405,

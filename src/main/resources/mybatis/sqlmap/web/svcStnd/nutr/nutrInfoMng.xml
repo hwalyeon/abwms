@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="svcStnd.nutr.nutrInfoMng">
+
+    <!--영양소_정보_리스트 조회-->
+	<select id="searchNutrInfoList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      NUTR_CD
+	                    , NUTR_CD AS NUTR_CD_TEMP
+	   		            , NUTR_NM
+		                , NUTR_UNIT_CD
+		                , GFIX_DIV_CD
+		                ,fn_getCdNm('GFIX_DIV_CD',GFIX_DIV_CD) AS GFIX_DIV_CD_NM
+                        , SORT_ORD
+                        , USE_YN
+                        , REG_DT
+                        , REG_TM
+                        , REG_USER_ID
+                        , UPT_DT
+                        , UPT_TM
+                        , UPT_USER_ID
+		FROM       TI_NUTR_INFO
+		WHERE     1 = 1
+		<if test=" nutrNm != null and nutrNm != '' ">
+		AND          NUTR_NM  LIKE CONCAT('%',#{nutrNm},'%')</if>
+		ORDER BY NUTR_CD
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+	<!--영양소_코드_리스트 조회-->
+	<select id="searchNutrCdList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      NUTR_CD
+		                , NUTR_NM
+	    FROM        TI_NUTR_INFO
+       ORDER BY NUTR_CD
+	</select>
+	<!--영양소_정보_그리드 생성-->
+	<insert id="insertTiNutrCdList" parameterType="java.util.Map">
+	INSERT INTO TI_NUTR_INFO
+	(
+	     NUTR_CD
+	    ,NUTR_NM
+	    ,NUTR_UNIT_CD
+	    ,GFIX_DIV_CD
+	    ,SORT_ORD
+	    ,USE_YN
+	    ,REG_DT
+	    ,REG_TM
+	    ,REG_USER_ID
+	    ,UPT_DT
+	    ,UPT_TM
+	    ,UPT_USER_ID
+	)
+	VALUES
+	(
+	     #{nutrCd}
+	    ,#{nutrNm}
+	    ,#{nutrUnitCd}
+	    ,#{gfixDivCd}
+		,CAST (#{sortOrd} AS INTEGER)
+	    ,#{useYn}
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
+	    ,#{regUserId}
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
+	    ,#{uptUserId}
+	)
+	</insert>
+
+	<!--영양소_정보_그리드 수정-->
+	<update id="updateTiNutrCdList" parameterType="java.util.Map">
+		UPDATE TI_NUTR_INFO
+		SET         UPT_DT          = TO_CHAR(NOW(), 'YYYYMMDD')
+	  	             , UPT_TM          = TO_CHAR(NOW(), 'HH24MISS')
+		             , UPT_USER_ID = #{uptUserId}
+		<if test="nutrCd != null and nutrCd != ''">,NUTR_CD = #{nutrCd}	</if>
+		<if test="nutrNm != null and nutrNm != ''">,NUTR_NM = #{nutrNm}	</if>
+		<if test="nutrUnitCd != null and nutrUnitCd != ''">,NUTR_UNIT_CD = #{nutrUnitCd}	</if>
+		<if test="gfixDivCd != null and gfixDivCd != ''">,GFIX_DIV_CD = #{gfixDivCd}	</if>
+		<if test="sortOrd != null and sortOrd != ''">,SORT_ORD = CAST (#{sortOrd} AS INTEGER)	</if>
+		<if test="useYn != null and useYn != ''">,USE_YN = #{useYn}	</if>
+		WHERE  NUTR_CD = #{nutrCdTemp}
+	</update>
+
+	<!--영양소_정보_그리드 삭제-->
+	<delete id="deleteTiNutrCdList" parameterType="java.util.Map">
+	DELETE
+	FROM     TI_NUTR_INFO
+	WHERE  NUTR_CD = #{nutrCd}
+	</delete>
+
+</mapper>

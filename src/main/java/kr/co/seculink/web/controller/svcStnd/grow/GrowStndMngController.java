@@ -1,13 +1,11 @@
 package kr.co.seculink.web.controller.svcStnd.grow;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
+import kr.co.seculink.domain.RtnMsg;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.web.excel.ExcelConstant;
+import kr.co.seculink.web.service.svcStnd.grow.GrowStndMngService;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.seculink.domain.RtnMsg;
-import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.web.excel.ExcelConstant;
-import kr.co.seculink.web.service.svcStnd.grow.GrowStndMngService;
-import lombok.extern.slf4j.Slf4j;
+import javax.annotation.Resource;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -106,21 +100,21 @@ public class GrowStndMngController
 
 		for ( Map<String, String> info : list )
 		{
-			data = new ArrayList<String>();    
-			data.add(info.get("growStndVer")); 
-			data.add(String.valueOf(info.get("growStndNo"))); 
-			data.add(info.get("fnGetcdnm"));   
-			data.add(String.valueOf(info.get("ageYcnt")));     
-			data.add(String.valueOf(info.get("ageMcnt")));     
-			data.add(String.valueOf(info.get("p3Gidx")));      
-			data.add(String.valueOf(info.get("p50Gidx")));     
-			data.add(String.valueOf(info.get("p97Gidx")));     
-			data.add(info.get("regDt"));       
-			data.add(info.get("regTm"));       
-			data.add(info.get("regUserId"));   
-			data.add(info.get("uptDt"));       
-			data.add(info.get("uptTm"));       
-			data.add(info.get("uptUserId"));   
+			data = new ArrayList<String>();
+			data.add(info.get("growStndVer"));
+			data.add(String.valueOf(info.get("growStndNo")));
+			data.add(info.get("fnGetcdnm"));
+			data.add(String.valueOf(info.get("ageYcnt")));
+			data.add(String.valueOf(info.get("ageMcnt")));
+			data.add(String.valueOf(info.get("p3Gidx")));
+			data.add(String.valueOf(info.get("p50Gidx")));
+			data.add(String.valueOf(info.get("p97Gidx")));
+			data.add(info.get("regDt"));
+			data.add(info.get("regTm"));
+			data.add(info.get("regUserId"));
+			data.add(info.get("uptDt"));
+			data.add(info.get("uptTm"));
+			data.add(info.get("uptUserId"));
 			dataList.add(data);
 		}
 
