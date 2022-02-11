@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     		,"/"
     		,"/**/*.pg"
     		,"/img/**"
+			,"/css/plugins/summernote/font/**"
     		,"/css/**/*.css"
     		,"/css/**/*.png"
     		,"/js/**/*.js"
