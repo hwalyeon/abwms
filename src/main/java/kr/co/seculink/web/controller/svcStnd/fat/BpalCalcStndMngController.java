@@ -46,17 +46,18 @@ public class BpalCalcStndMngController
 
 		return vo;
 	}
-	//나이_년수 리스트 조회
+	//행추가_행삭제_저장
 	@ResponseBody
-	@RequestMapping("/svcStnd/fat/bpalCalcStndMng/ageYcntFromList.ab")
-	public RtnMsg ageYcntFromList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
+	@RequestMapping("/svcStnd/fat/bpalStndMng/saveBpalStnd.ab")
+	public RtnMsg saveBpalStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		System.out.println("파람"+params);
+		bpalCalcStndMngService.saveBpalStnd(params);
 
-		List<Map<String, String>> result = bpalCalcStndMngService.ageYcntFromList(params);
-		rtnMap.put("result", result);
-
+	
+		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap, params);
 
 		return vo;
@@ -75,7 +76,7 @@ public class BpalCalcStndMngController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"성별_코드","성별","나이(FROM)","나이(TO)","계산식","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
+		String [] arrHeader = {"성별","나이(FROM)","나이(TO)","계산식","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -85,7 +86,6 @@ public class BpalCalcStndMngController
 		{
 			data = new ArrayList<String>();
 			data.add(info.get("sexCd"));
-			data.add(info.get("fnGetcdnm"));
 			data.add(String.valueOf(info.get("ageYcntFr")));
 			data.add(String.valueOf(info.get("ageYcntTo")));
 			data.add(info.get("calcFrml"));

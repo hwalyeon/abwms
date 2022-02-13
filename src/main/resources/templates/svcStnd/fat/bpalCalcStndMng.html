@@ -32,11 +32,9 @@
 								<option v-for="item in code.sexCdList" :value="item.cdVal" v-text="item.cdNm" ></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label">나이</label>
+						<label class="col-xs-1 control-label">나이(From)</label>
 						<div class="col-xs-2">
-							<select id="ageYcntFr" name="ageYcntFr" class="form-control" v-model="params.ageYcntFr" >
-								<option value="">전체</option>
-								<option v-for="item in code.ageYcntFrList" :value="item.cdVal" v-text="item.cdVal" ></option>
+						<input type="text" name="ageYcntFr" class="form-control" v-model="params.ageYcntFr">
 							</select>
 						</div>
 					</div>
@@ -60,7 +58,7 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>성장기준 목록</h5>
+							<h5>휴식대사량계산기준 목록</h5>
 						</div>
 					</div>
 					<div class="float_right">
