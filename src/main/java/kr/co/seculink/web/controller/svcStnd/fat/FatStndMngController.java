@@ -84,7 +84,7 @@ public class FatStndMngController
 			data = new ArrayList<String>();
 			data.add(info.get("fatStndVer"));
 			data.add(String.valueOf(info.get("fatStndNo")));
-			data.add(info.get("fnGetcdnm"));
+			data.add(info.get("sexCd"));
 			data.add(String.valueOf(info.get("ageYcnt")));
 			data.add(String.valueOf(info.get("ageMcnt")));
 			data.add(String.valueOf(info.get("p5Fidx")));

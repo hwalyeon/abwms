@@ -50,13 +50,15 @@
 							<h5>영양소정보 목록</h5>
 						</div>
 					</div>
-					<div class="float_right">
-						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
-						<button type="button" id="btnAdd" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnAddRow">&nbsp;행추가+</button>
-						<button type="button" id="btnDel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnDelRow">&nbsp;행삭제-</button>
-						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnSave">&nbsp;저장</button>
-					</div>
 					<div class="clear_both"></div>
+					<div class="float_right">
+						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnSave">&nbsp;저장</button>
+						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+					</div>
+					<div class="float_left" style="margin-top:10px">
+						<button type="button" id="btnAdd" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnAddRow"><span class="glyphicon glyphicon-plus"></span></button>
+						<button type="button" id="btnDel" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnDelRow"><span class="glyphicon glyphicon-minus"></span></button>
+					</div><div class="clear_both"></div>
 				</div>
 				<div class="form-group">
 					<div id="nutrInfo_list_wrapper">

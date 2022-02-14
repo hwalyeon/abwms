@@ -155,13 +155,18 @@ let growStndMng = new Vue({
             btnSave  :  function() {
                 let $this = this;
                 let gridData = commonGridGetDataNew($("#growStnd_list"));
-
                 if(gridData.length > 0)
                 {
                     for (let data in gridData)
                     {
+                        let ageYcnt= gridData[data].ageYcnt;
+                        let ageMcnt = gridData[data].ageMcnt;
                         if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
                         {
+                            if(ageMcnt<ageYcnt*12 || ageMcnt>(ageYcnt*12)+11){
+                                Swal.alert(["정확한 개월수를 입력해야합니다.", 'warning']);
+                                return false;
+                            }
                             if(WebUtil.isNull(gridData[data].growStndVer)){
                                 Swal.alert(["성장기준버전 필수 입력입니다.", 'warning']);
                                 return false;

@@ -21,7 +21,7 @@
 		FROM        TI_ACT_STND
 		WHERE      1 = 1
 		<if test=" actNm != null and actNm != '' ">
-		AND          ACT_NM = #{actNm}</if>
+		AND          ACT_NM LIKE CONCAT ('%',#{actNm},'%')</if>
 		ORDER BY SORT_ORD
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
