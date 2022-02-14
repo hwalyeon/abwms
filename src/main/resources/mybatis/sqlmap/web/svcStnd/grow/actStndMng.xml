@@ -57,9 +57,9 @@
 				  ,#{actClssCd}
 				  ,#{actNm}
 				  ,#{actDesc}
-				  ,CAST(#{metVal} AS INTEGER)
-				  ,CAST(#{metMinCfct} AS INTEGER)
-				  ,CAST(#{sortOrd} AS INTEGER)
+				  ,#{metVal}::NUMERIC
+				  ,#{metMinCfct}::NUMERIC
+				  ,#{sortOrd}::NUMERIC
 				  , TO_CHAR(NOW(), 'YYYYMMDD')
 				  , TO_CHAR(NOW(), 'HH24MISS')
 				  , #{regUserId}
@@ -73,19 +73,19 @@
 		SET         UPT_DT           =  TO_CHAR(NOW(), 'YYYYMMDD')
 	              	,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
 	             	,  UPT_USER_ID  = #{uptUserId}
-		<if test="actCd != null and actCd !=''">  ,GROW_STND_VER = #{actCd}</if>
-		<if test="actClssCd != null and actClssCd != ''">  ,GROW_STND_NO = #{actClssCd}</if>
-		<if test="actNm != null and actNm !=''">, SEX_CD = #{actNm}</if>
-		<if test="actDesc != null and actDesc != ''">, AGE_YCNT = #{actDesc}</if>
-		<if test="metVal !=null and metVal !=''">, AGE_MCNT = #{metVal}</if>
-		<if test="metMinCfct !=null and metMinCfct !=''">, P3_GIDX = #{metMinCfct}></if>
-		<if test="sortOrd !=null and sortOrd != ''">, P50_GIDX = #{sortOrd}</if>
+		<if test="actCd != null and actCd !=''">  ,ACT_CD = #{actCd}</if>
+		<if test="actClssCd != null and actClssCd != ''">  ,ACT_CLSS_CD = #{actClssCd}</if>
+		<if test="actNm != null and actNm !=''">, ACT_NM = #{actNm}</if>
+		<if test="actDesc != null and actDesc != ''">, ACT_DESC = #{actDesc}</if>
+		<if test="metVal !=null and metVal !=''">, MET_VAL = #{metVal}::NUMERIC</if>
+		<if test="metMinCfct !=null and metMinCfct !=''">, MET_MIN_CFCT = #{metMinCfct}::NUMERIC</if>
+		<if test="sortOrd !=null and sortOrd != ''">, SORT_ORD = #{sortOrd}::NUMERIC</if>
 		WHERE  ACT_CD = #{actCdTemp}
 	</update>
 	<!--행추가_행삭제 삭제-->
 	<delete id ="deleteTiActStndList" parameterType="java.util.Map">
         DELETE
         FROM    TI_ACT_STND
-        WHERE  ACT_CD = #{actCd}
+        WHERE  ACT_CD = #{actCdTemp}
 	</delete>
 </mapper>

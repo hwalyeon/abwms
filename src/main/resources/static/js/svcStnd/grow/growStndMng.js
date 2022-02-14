@@ -81,6 +81,12 @@ let growStndMng = new Vue({
                                 $this.params.currentIndex = resultMap.currentIndex;
                                 $this.searchGrowStndList(false);
                             })
+                        },
+                        onCellSelect : function (rowid , colId , val, e ){
+                            // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                            if($("#growStnd_list").getRowData(rowid).crud != "C" && $("#growStnd_list").getRowData(rowid).crud != "D" ) {
+                                $("#growStnd_list").setRowData(rowid, {crud:"U"});
+                            }
                         }
                     }));
                 resizeJqGridWidth("growStnd_list", "growStnd_list_wrapper");

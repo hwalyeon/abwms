@@ -85,6 +85,12 @@ let nutrInfoMng = new Vue({
                         if($("#nutrInfo_list").getRowData(rowid).crud != "C" && $("#nutrInfo_list").getRowData(rowid).crud != "D" ) {
                             $("#nutrInfo_list").setRowData(rowid, {crud:"U"});
                         }
+                    },
+                    onCellSelect : function (rowid , colId , val, e ){
+                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                        if($("#nutrInfo_list").getRowData(rowid).crud != "C" && $("#nutrInfo_list").getRowData(rowid).crud != "D" ) {
+                            $("#nutrInfo_list").setRowData(rowid, {crud:"U"});
+                        }
                     }
                 }));
                 resizeJqGridWidth("nutrInfo_list", "nutrInfo_list_wrapper");

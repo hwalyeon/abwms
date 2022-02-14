@@ -48,18 +48,18 @@ let bpalCalcStndMng = new Vue({
                     {name: "sexCd"                  , index: "sexCd"                    , label: "성별"                 , width: 80       , align: "center", editable: true
                     ,edittype:"select", formatter:"select" ,editoptions:{value:sexCdList}},
                     {name: "ageYcntFr"           , index: "ageYcntFr"             , label: "나이(From)"       , width: 80        , align: "center", editable: true , editrules:{number:true}},
-                    {name: "ageYcntTo"          , index: "ageYcntTo"            , label: "나이(To)"          , width: 80         , align: "center", editable: true, editrules:{number:true}},
-                    {name: "calcFrml"              , index: "calcFrml"               , label: "계산식        "       , width: 80        , align: "center", editable: true},
-                    {name: "regDt"                  , index: "regDt"                    , label: "등록일자"            , width: 80        , align: "center"
+                    {name: "ageYcntTo"          , index: "ageYcntTo"            , label: "나이(To)"           , width: 80         , align: "center", editable: true, editrules:{number:true}},
+                    {name: "calcFrml"              , index: "calcFrml"               , label: "계산식        "      , width: 80        , align: "center", editable: true},
+                    {name: "regDt"                  , index: "regDt"                    , label: "등록일자"          , width: 80        , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                     }},
-                    {name: "regTm"                 , index: "regTm"                   , label: "등록시각"            , width: 80       , align: "center"
+                    {name: "regTm"                 , index: "regTm"                   , label: "등록시각"          , width: 80       , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                     }},
-                    {name: "regUserId"            , index: "regUserId"             , label: "등록사용자ID"      , width: 80        , align: "center"},
-                    {name: "uptDt"                  , index: "uptDt"                    , label: "수정일자"            , width: 80        , align: "center"
+                    {name: "regUserId"            , index: "regUserId"             , label: "등록사용자ID"   , width: 80        , align: "center"},
+                    {name: "uptDt"                  , index: "uptDt"                    , label: "수정일자"          , width: 80        , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                     }},
-                    {name: "uptTm"                 , index: "uptTm"                   , label: "수정시각"           , width: 80         , align: "center"
+                    {name: "uptTm"                 , index: "uptTm"                   , label: "수정시각"          , width: 80         , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                     }},
-                    {name: "uptUserId"            , index: "uptUserId"             , label: "수정사용자ID"     , width: 80         , align: "center"}
+                    {name: "uptUserId"            , index: "uptUserId"             , label: "수정사용자ID"    , width: 80         , align: "center"}
                 ];
 
                 $("#bpalCalcStnd_list").jqGrid("GridUnload");
@@ -79,6 +79,12 @@ let bpalCalcStndMng = new Vue({
                             $this.params.currentIndex = resultMap.currentIndex;
                             $this.searchBpalCalcStndList(false);
                         })
+                    },
+                    onCellSelect : function (rowid , colId , val, e ){
+                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                        if($("#bpalCalcStnd_list").getRowData(rowid).crud != "C" && $("#bpalCalcStnd_list").getRowData(rowid).crud != "D" ) {
+                            $("#bpalCalcStnd_list").setRowData(rowid, {crud:"U"});
+                        }
                     }
                 }));
                 resizeJqGridWidth("bpalCalcStnd_list", "bpalCalcStnd_list_wrapper");
@@ -149,7 +155,6 @@ let bpalCalcStndMng = new Vue({
             btnSave  :  function() {
                 let $this = this;
                 let gridData = commonGridGetDataNew($("#bpalCalcStnd_list"));
-
                 if(gridData.length > 0)
                 {
                     for (let data in gridData)
@@ -185,7 +190,7 @@ let bpalCalcStndMng = new Vue({
                     param: param,
                     success: function(response) {
                         Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                            $this.searchBpalStndList(true);
+                            $this.searchBpalCalcStndList(true);
                         });
                     },
                     error: function (response) {

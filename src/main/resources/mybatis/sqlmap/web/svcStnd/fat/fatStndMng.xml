@@ -24,7 +24,7 @@
 		<if test=" fatStndVer != null and fatStndVer != '' ">
 		AND         FAT_STND_VER LIKE CONCAT('%',#{fatStndVer},'%')   </if>
 		<if test=" fatStndNo != null and fatStndNo != '' ">
-		AND         FAT_STND_NO   = CAST(#{fatStndNo} AS INTEGER)    </if>
+		AND         FAT_STND_NO   = #{fatStndNo}::NUMERIC    </if>
 		ORDER BY FAT_STND_VER, FAT_STND_NO
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
@@ -51,13 +51,13 @@
     	VALUES
     	(
     	     #{fatStndVer}
-    	   , CAST(#{fatStndNo} AS INTEGER )
+    	   , #{fatStndNo}::NUMERIC
     	   , #{sexCd}
-    	   , CAST(#{ageYcnt} AS INTEGER)
-    	   , CAST(#{ageMcnt} AS INTEGER)
-    	   , CAST(#{p5Fidx} AS INTEGER)
-    	   , CAST(#{p50Fidx} AS INTEGER)
-    	   , CAST(#{p95Fidx} AS INTEGER)
+    	   , #{ageYcnt}::NUMERIC
+    	   , #{ageMcnt}::NUMERIC
+    	   , #{p5Fidx}::NUMERIC
+    	   , #{p50Fidx}::NUMERIC
+    	   , #{p95Fidx}::NUMERIC
 	       , TO_CHAR(NOW(), 'YYYYMMDD')
 	       , TO_CHAR(NOW(), 'HH24MISS')
 	       , #{regUserId}
@@ -73,20 +73,20 @@
 		            ,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
 	             	,  UPT_USER_ID  = #{uptUserId}
 		<if test="fatStndVer != null and fatStndVer !=''">  ,FAT_STND_VER = #{fatStndVer}</if>
-		<if test="fatStndNo != null and fatStndNo != ''">  ,FAT_STND_NO = #{fatStndNo}</if>
+		<if test="fatStndNo != null and fatStndNo != ''">  ,FAT_STND_NO = #{fatStndNo}::NUMERIC</if>
 		<if test="sexCd != null and sexCd !=''">, SEX_CD = #{sexCd}</if>
-		<if test="ageYcnt != null and ageYcnt != ''">, AGE_YCNT = #{ageYcnt}</if>
-		<if test="ageMcnt !=null and ageMcnt !=''">, AGE_MCNT = #{ageMcnt}</if>
-		<if test="p5Fidx !=null and p5Fidx !=''">, P5_FIDX = #{p5Fidx}></if>
-		<if test="p50Fidx !=null and p50Fidx != ''">, P50_FIDX = #{p50Fidx}</if>
-		<if test="p95Fidx !=null and p95Fidx !=''">, P95_FIDX = #{p95Fidx}</if>
-		WHERE  FAT_STND_NO = #{fatStndNoTemp}
+		<if test="ageYcnt != null and ageYcnt != ''">, AGE_YCNT = #{ageYcnt}::NUMERIC</if>
+		<if test="ageMcnt !=null and ageMcnt !=''">, AGE_MCNT = #{ageMcnt}::NUMERIC</if>
+		<if test="p5Fidx !=null and p5Fidx !=''">, P5_FIDX = #{p5Fidx}::NUMERIC</if>
+		<if test="p50Fidx !=null and p50Fidx != ''">, P50_FIDX = #{p50Fidx}::NUMERIC</if>
+		<if test="p95Fidx !=null and p95Fidx !=''">, P95_FIDX = #{p95Fidx}::NUMERIC</if>
+		WHERE  FAT_STND_NO = #{fatStndNoTemp}::NUMERIC
 	</update>
 	<!--행추가_행삭제 삭제-->
 	<delete id ="deleteTiFatStndList" parameterType="java.util.Map">
         DELETE
         FROM    TI_FAT_STND
-        WHERE  FAT_STND_NO = CAST(#{fatStndNo} AS INTEGER)
+        WHERE  FAT_STND_NO = #{fatStndNoTemp}::NUMERIC
 	</delete>
 
 </mapper>

@@ -77,6 +77,12 @@ let fatStndMng = new Vue({
                             $this.params.currentIndex = resultMap.currentIndex;
                             $this.searchFatStndList(false);
                         })
+                    },
+                    onCellSelect : function (rowid , colId , val, e ){
+                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                        if($("#fatStnd_list").getRowData(rowid).crud != "C" && $("#fatStnd_list").getRowData(rowid).crud != "D" ) {
+                            $("#fatStnd_list").setRowData(rowid, {crud:"U"});
+                        }
                     }
                 }));
                 resizeJqGridWidth("fatStnd_list", "fatStnd_list_wrapper");

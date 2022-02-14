@@ -19,15 +19,12 @@
 		, UPT_DT
 		, UPT_TM
 		, UPT_USER_ID
-		,fn_getCdNm('SEX_CD', SEX_CD)
 		FROM        TI_GROW_STND
 		WHERE      1 = 1
 		<if test=" growStndVer != null and growStndVer != '' ">
-			AND          GROW_STND_VER = #{growStndVer}</if>
-		<if test=" ageYcnt != null and ageYcnt != '' ">
-			AND          AGE_YCNT = CAST (#{ageYcnt} AS INTEGER)</if>
-		<if test=" sexCd != null and sexCd != '' ">
-			AND          SEX_CD = #{sexCd}</if>
+		AND          GROW_STND_VER LIKE CONCAT('%', #{growStndVer},'%')</if>
+		<if test=" growStndNo != null and growStndNo != '' ">
+		AND          GROW_STND_NO = #{growStndNo}::NUMERIC</if>
 		ORDER BY GROW_STND_VER, GROW_STND_NO
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
@@ -54,13 +51,13 @@
     	VALUES
     	(
     	     #{growStndVer}
-    	   , CAST(#{growStndNo} AS INTEGER )
+    	   , #{growStndNo}::NUMERIC
     	   , #{sexCd}
-    	   , CAST(#{ageYcnt} AS INTEGER)
-    	   , CAST(#{ageMcnt} AS INTEGER)
-    	   , CAST(#{p3Gidx} AS INTEGER)
-    	   , CAST(#{p50Gidx} AS INTEGER)
-    	   , CAST(#{p97Gidx} AS INTEGER)
+    	   , #{ageYcnt}::NUMERIC
+    	   , #{ageMcnt}::NUMERIC
+    	   , #{p3Gidx}::NUMERIC
+    	   , #{p50Gidx}::NUMERIC
+    	   , #{p97Gidx}::NUMERIC
 	       , TO_CHAR(NOW(), 'YYYYMMDD')
 	       , TO_CHAR(NOW(), 'HH24MISS')
 	       , #{regUserId}
@@ -76,19 +73,20 @@
 		            ,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
 		            ,  UPT_USER_ID  = #{uptUserId}
 		<if test="growStndVer != null and growStndVer !=''">  ,GROW_STND_VER = #{growStndVer}</if>
-		<if test="growStndNo != null and growStndNo != ''">  ,GROW_STND_NO = #{growStndNo}</if>
+		<if test="growStndNo != null and growStndNo != ''">  ,GROW_STND_NO = #{growStndNo}::NUMERIC </if>
 		<if test="sexCd != null and sexCd !=''">, SEX_CD = #{sexCd}</if>
-		<if test="ageYcnt != null and ageYcnt != ''">, AGE_YCNT = #{ageYcnt}</if>
-		<if test="ageMcnt !=null and ageMcnt !=''">, AGE_MCNT = #{ageMcnt}</if>
-		<if test="p3Gidx !=null and p3Gidx !=''">, P3_GIDX = #{p3Gidx}></if>
-		<if test="p50Gidx !=null and p50Gidx != ''">, P50_GIDX = #{p50Gidx}</if>
-		<if test="p97Gidx !=null and p97Gidx !=''">, P97_GIDX = #{p97Gidx}</if>
-		WHERE  GROW_STND_NO = #{growStndNoTemp}
+		<if test="ageYcnt != null and ageYcnt != ''">, AGE_YCNT =  #{ageYcnt}::NUMERIC </if>
+		<if test="ageMcnt !=null and ageMcnt !=''">, AGE_MCNT =#{ageMcnt}::NUMERIC </if>
+		<if test="p3Gidx !=null and p3Gidx !=''">, P3_GIDX = #{p3Gidx}::NUMERIC  </if>
+		<if test="p50Gidx !=null and p50Gidx != ''">, P50_GIDX = #{p50Gidx}::NUMERIC  </if>
+		<if test="p97Gidx !=null and p97Gidx !=''">, P97_GIDX = #{p97Gidx}::NUMERIC  </if>
+		WHERE  GROW_STND_NO = #{growStndNoTemp}::NUMERIC
 	</update>
+
 	<!--행추가_행삭제 삭제-->
 	<delete id ="deleteTiGrowStndList" parameterType="java.util.Map">
         DELETE
         FROM    TI_GROW_STND
-        WHERE  GROW_STND_NO = CAST(#{growStndNo} AS INTEGER)
+        WHERE  GROW_STND_NO = #{growStndNoTemp}::NUMERIC
 	</delete>
 </mapper>

@@ -22,7 +22,7 @@
 		<if test=" sexCd != null and sexCd != '' ">
 		AND          SEX_CD = #{sexCd}</if>
 		<if test=" ageYcntFr != null and ageYcntFr != '' ">
-		AND           AGE_YCNT_FR = CAST (#{ageYcntFr} AS INTEGER)</if>
+		AND           AGE_YCNT_FR = #{ageYcntFr}::NUMERIC)</if>
 		ORDER BY SEX_CD, AGE_YCNT_FR
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
@@ -46,8 +46,8 @@
     	VALUES
     	(
     	     #{sexCd}
-    	   , CAST(#{ageYcntFr} AS INTEGER )
-    	   , CAST(#{ageYcntTo} AS INTEGER)
+    	   , #{ageYcntFr}::NUMERIC
+    	   , #{ageYcntTo}::NUMERIC
     	   , #{calcFrml}
 	       , TO_CHAR(NOW(), 'YYYYMMDD')
 	       , TO_CHAR(NOW(), 'HH24MISS')
@@ -65,13 +65,13 @@
 		            ,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
 	             	,  UPT_USER_ID  = #{uptUserId}
 		<if test="sexCd != null and sexCd !=''">  ,SEX_CD = #{sexCd}</if>
-		<if test="ageYcntFr != null and ageYcntFr != ''">  ,AGE_YCNT_FR = #{ageYcntFr}</if>
-		<if test="ageYcntTo != null and ageYcntTo !=''">, AGE_YCNT_TO = #{ageYcntTo}</if>
+		<if test="ageYcntFr != null and ageYcntFr != ''">  ,AGE_YCNT_FR = #{ageYcntFr}::NUMERIC</if>
+		<if test="ageYcntTo != null and ageYcntTo !=''">, AGE_YCNT_TO = #{ageYcntTo}::NUMERIC</if>
 		<if test="calcFrml != null and calcFrml != ''">, CALC_FRML = #{calcFrml}</if>
 		WHERE  1=1
 		AND SEX_CD = #{sexCdTemp}
-		AND AGE_YCNT_FR = #{ageYcntFrTemp}
-		AND AGE_YCNT_TO = #{ageYcntToTemp}
+		AND AGE_YCNT_FR = #{ageYcntFrTemp}::NUMERIC
+		AND AGE_YCNT_TO = #{ageYcntToTemp}::NUMERIC
 	</update>
 	
 	<!--행추가_행삭제 삭제-->
@@ -80,8 +80,8 @@
         FROM    TI_BPAL_CALC_STND TBCS
         WHERE  1=1
         AND SEX_CD = #{sexCdTemp}
-		AND AGE_YCNT_FR = CAST(#{ageYcntFrTemp} AS INTEGER)
-		AND AGE_YCNT_TO = CAST(#{ageYcntToTemp} AS INTEGER)
+		AND AGE_YCNT_FR = #{ageYcntFrTemp}::NUMERIC
+		AND AGE_YCNT_TO = #{ageYcntToTemp}::NUMERIC
 	</delete>
 
 </mapper>
