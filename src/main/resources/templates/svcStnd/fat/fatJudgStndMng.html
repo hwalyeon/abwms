@@ -53,28 +53,31 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>스트레스 기준 목록</h5>
+							<h5>비만판정 기준 목록</h5>
 						</div>
 					</div>
 					<div class="float_right">
-						<!--<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#userDetlPopup" v-on:click="regUserPop()">&nbsp;사용자등록</button> -->
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#fatJudgStndDetlPopup" v-on:click="regFatJudgStndPop()">&nbsp;비만판정기준 등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
 				</div>
 				<div class="form-group">
-					<div id="user_list_wrapper">
-						<table id="user_list"></table>
-						<div id="user_pager_list"></div>
+					<div id="grid_list_wrapper">
+						<table id="grid_list"></table>
+						<div id="grid_pager_list"></div>
 					</div>
 				</div>
 			</div>
 		</div>
     </div>
-<!--    <div th:insert="~{set/userDetl :: body}"></div>-->
+	<div th:insert="~{svcStnd/fat/fatJudgStndDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/editor/summernote.js}"></script>
+
 	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatJudgStndMng.js}"></script>
+	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatJudgStndDetl.js}"></script>
 </section>
 </body>
 </html>

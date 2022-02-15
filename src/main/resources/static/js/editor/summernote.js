@@ -3,7 +3,7 @@
  * */
 
 const summernote = {
-    template: `<textarea class="summernote" :id="id" name="summernote" ref="summernote"></textarea>`,
+    template: `<textarea class="summernote" :id="summerNoteId" name="summerNoteId" ref="summerNoteId"></textarea>`,
     data() {
         return {
             changeValue: '',
@@ -11,6 +11,11 @@ const summernote = {
     },
     props:{
         id: {
+            type: String,
+            required: false,
+            default: 'summernote',
+        },
+        summerNoteId:{
             type: String,
             required: false,
             default: 'summernote',
@@ -39,7 +44,7 @@ const summernote = {
         value: function(value) {
             if(this.changeValue !== value) {
                 //set
-                $('#' + this.id).summernote('code', value);
+                $('#' + this.summerNoteId).summernote('code', value);
             }
         }
     },
@@ -159,7 +164,7 @@ const summernote = {
 
                                 wrapper.appendChild(innerTag);
 
-                                $("#summernote").summernote("insertNode", wrapper);
+                                $("#" + this.summerNoteId).summernote("insertNode", wrapper);
 
                             }).catch(err => {
                                 alert(err.message);
@@ -169,7 +174,7 @@ const summernote = {
                 }
             }
 
-            $('#' + this.id).summernote(options)
+            $('#' + this.summerNoteId).summernote(options)
                 .on('summernote.change', function(we, contents, $editable) {
                     $this.changeValue = contents;
                     $this.$emit("input", $this.changeValue);
@@ -178,7 +183,7 @@ const summernote = {
             // $('#' + this.id).summernote("code", this.value);
 
             // 초기값 가운데 정렬
-            $('#' + this.id).summernote('justifyCenter');
+            $('#' + this.summerNoteId).summernote('justifyCenter');
 
             //youtube 만 입력 가능하도록 변경 ---
             const customVideoDialog = $.summernote.options.modules.videoDialog;
@@ -204,7 +209,7 @@ const summernote = {
 
         },
         focus: function() {
-            this.$refs.summernote.focus();
+            this.$refs.summerNoteId.focus();
         }
     },
     mounted:function () {
@@ -213,7 +218,6 @@ const summernote = {
         });
     }
 };
-
 
 class EditorImageLoader {
     constructor(options = {}) {

@@ -113,7 +113,7 @@ public class GrowJudgStndMngController
 
 	@ResponseBody
 	@RequestMapping("/svcStnd/grow/growJudgStndMng/saveInfo.ab")
-	public RtnMsg saveDgemStnd(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
