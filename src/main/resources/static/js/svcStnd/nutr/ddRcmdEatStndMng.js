@@ -74,6 +74,7 @@ let ddRcmdEatStndMng = new Vue({
                         {name: "ageYcntTemp"  , index: "ageYcntTemp"     , label: "나이(년)"                 , width: 80         , align: "center"       , hidden: true },
                         {name: "nutrCdTemp"     , index: "nutrCdTemp"      , label: "영양소코드"             , width: 80         , align: "center"       , hidden: true },
                         {name: "eatQtyFrTemp"  ,  index: "eatQtyFrTemp"  , label: "섭취량(From)"         , width: 80         , align: "center"       , hidden: true },
+                        {name: "nutrNm"            , index: "nutrNm"              , label: "영양소명"                    , hidden: true        }, //엑셀 다운로드용
                         {name: "sexCd"                , index: "sexCd"                 , label: "성별"                        , width: 80         , align: "center"       , editable: true
                             ,edittype:"select"         , formatter:"select", editoptions:{value:sexCdList}},
                         {name: "ageYcnt"            , index: "ageYcnt"             , label: "나이(년)"                  , width: 80         , align: "center"       , editable: true},

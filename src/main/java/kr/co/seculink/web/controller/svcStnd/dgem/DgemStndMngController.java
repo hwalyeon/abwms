@@ -6,7 +6,6 @@ import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
 import kr.co.seculink.web.service.svcStnd.dgem.DgemStndMngService;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.internal.StringUtil;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +58,7 @@ public class DgemStndMngController {
 	}
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list) {
-		String[] arrHeader = { "위험감정상태코드", "위험감정상태명","위험감정상태내용","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID" };
+		String[] arrHeader = { "위험감정상태명", "위험감정상태내용","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID" };
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -67,7 +66,6 @@ public class DgemStndMngController {
 
 		for (Map<String, String> info : list) {
 			data = new ArrayList<String>();
-			data.add(info.get("dgemStatCd"));
 			data.add(info.get("dgemStatCdNm"));
 			data.add(info.get("dgemStatCntn"));
 			data.add(info.get("regDt"));       

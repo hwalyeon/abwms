@@ -17,8 +17,8 @@
                    , UPT_USER_ID
 		FROM         TI_DGEM_STND
 		WHERE      1 = 1
-        <if test=" dgemStatCd != null and dgemStatCd != '' ">
-		AND DGEM_STAT_CD = #{dgemStatCd}</if>
+        <if test=" dgemStatCdNm != null and dgemStatCdNm != '' ">
+		AND fn_getCdNm('DGEM_STAT_CD', DGEM_STAT_CD) LIKE CONCAT('%',#{dgemStatCdNm},'%')</if>
 		ORDER BY DGEM_STAT_CD
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>

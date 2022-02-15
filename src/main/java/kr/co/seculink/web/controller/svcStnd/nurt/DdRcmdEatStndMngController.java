@@ -89,7 +89,7 @@ public class DdRcmdEatStndMngController
 			data = new ArrayList<String>();
 			data.add(info.get("sexCd"));
 			data.add(String.valueOf(info.get("ageYcnt")));
-			data.add(info.get("nutrCd"));
+			data.add(info.get("nutrNm"));
 			data.add(String.valueOf(info.get("eatQtyFr")));
 			data.add(String.valueOf(info.get("eatQtyTo")));
 			data.add(info.get("nutrStatCd"));

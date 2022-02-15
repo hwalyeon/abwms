@@ -14,7 +14,8 @@ let nutrInfoMng = new Vue({
                 },
             code:
                 {
-                    gfixDivCdList: []
+                    gfixDivCdList : []
+                  , useYnList        : [{'cdVal':'Y', 'cdNm':'Y'},{'cdVal':'N', 'cdNm':'N'}]  //영양상태코드명 리스트
                 },
         },
     methods:
@@ -39,6 +40,7 @@ let nutrInfoMng = new Vue({
             {
                 let $this = this;
                 let gfixDivCdList = commonGridCmonCd($this.code.gfixDivCdList);
+                let useYnList         = commonGridCmonCd($this.code.useYnList);
                 let colModels =
                 [
                     {name: "crud"               , index: "crud"                  , label: "crud"                                   , hidden:true},
@@ -49,7 +51,8 @@ let nutrInfoMng = new Vue({
                     {name: "gfixDivCd"	     , index: "gfixDivCd"	 , label: "성장비만지수 구분" , width: 80  	 ,align:"center"
                     ,edittype:"select"		 , formatter:"select"	 , editable :true		  , editoptions : {value:gfixDivCdList}},
                     {name: "sortOrd"           , index: "sortOrd"             , label: "정렬순서"                         , editable :true	, editrules : {number : true} , width: 80          , align: "center"},
-                    {name: "useYn"              , index: "useYn"                , label: "사용여부"                         , editable :true  , width: 80          , align: "center"},
+                    {name: "useYn"                 , index: "useYn"            , label: "사용여부"                   , width: 80          , align: "center"       , editable: true
+                        , edittype:"select"            , formatter:"select" ,editoptions:{value:useYnList}},
                     {name: "regDt"              , index: "regDt"                , label: "등록일자"                         , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                        }},
                     {name: "regTm"            , index: "regTm"               , label: "등록시각"                          , width: 80          , align: "center"
@@ -79,12 +82,6 @@ let nutrInfoMng = new Vue({
                             $this.params.currentIndex = resultMap.currentIndex;
                             $this.searchNutrInfoList(false);
                         })
-                    },
-                    onCellSelect : function (rowid , colId , val, e ){
-                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
-                        if($("#nutrInfo_list").getRowData(rowid).crud != "C" && $("#nutrInfo_list").getRowData(rowid).crud != "D" ) {
-                            $("#nutrInfo_list").setRowData(rowid, {crud:"U"});
-                        }
                     },
                     onCellSelect : function (rowid , colId , val, e ){
                         // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경

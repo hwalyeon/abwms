@@ -103,7 +103,7 @@ public class DdNutrEatStndMngController
 			data = new ArrayList<String>();
 			data.add(info.get("sexCd"));
 			data.add(String.valueOf(info.get("ageYcnt")));
-			data.add(info.get("nutrCd"));
+			data.add(info.get("nutrNm"));
 			data.add(String.valueOf(info.get("ddRcmdQty")));
 			data.add(String.valueOf(info.get("ddNeedQty")));
 			data.add(info.get("regDt"));

@@ -22,7 +22,7 @@
 		<if test=" sexCd != null and sexCd != '' ">
 		AND          SEX_CD = #{sexCd}</if>
 		<if test=" ageYcntFr != null and ageYcntFr != '' ">
-		AND           AGE_YCNT_FR = #{ageYcntFr}::NUMERIC)</if>
+		AND           AGE_YCNT_FR = #{ageYcntFr}::NUMERIC</if>
 		ORDER BY SEX_CD, AGE_YCNT_FR
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
