@@ -4,6 +4,7 @@ let bpalCalcStndMng = new Vue({
         {
             params:
                 {
+                    userId            : ''  ,
                     sexCd            : ''   ,    // 성별_코드
                     ageYcntFr      : ''  ,     // 나이_년수_FROM
                     paging          : 'Y',
@@ -23,7 +24,13 @@ let bpalCalcStndMng = new Vue({
             {
                 let $this = this;
 
+                $this.initValue();
                 $this.initCodeList();
+            },
+            initValue: function()
+            {
+              let $this = this;
+              $this.userId = SessionUtil.getUserId();
             },
             initCodeList : function()
             {
@@ -116,14 +123,28 @@ let bpalCalcStndMng = new Vue({
                     }).trigger("reloadGrid");
             },
             /**/
-            btnAddRow  :  function() {
+            btnAddRow  :  function()
+            {
+                let $this = this;
+                let date = new Date();
                 var cnt = $("#bpalCalcStnd_list").jqGrid("getGridParam", "records")+1;
 
-                var addRow = {crud:"C",
-                    sexCd          :"",
-                    ageYcntFr   :"",
-                    ageYcntTo  :"",
-                    calcFrml      :"",
+                var addRow =
+                {
+                    crud         	         : "C" ,
+                    sexCdTemp    	     : "" ,
+                    ageYcntFrTemp   : "" ,
+                    ageYcntToTemp	 : "" ,
+                    sexCd                   : "" ,
+                    ageYcntFr    	     : "" ,
+                    ageYcntTo    	   	 : "" ,
+                    calcFrml     	   	     : "" ,
+                    regDt            	     : date  ,
+                    regTm           	     : date  ,
+                    regUserId             : $this.userId  ,
+                    uptDt                   : date  ,
+                    uptTm                  : date  ,
+                    uptUserId         	 : $this.userId
                 };
                 $("#bpalCalcStnd_list").addRowData(cnt, addRow);
 

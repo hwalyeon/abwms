@@ -4,8 +4,9 @@ let ddNutrEatStndMng = new Vue({
         {
             params:
                 {
-                    sexCd            : ''   ,    // 성별_코드
-                    ageYcnt         : ''  ,     // 나이_년수
+                    userId           : '' ,
+                    sexCd           : ''  ,    // 성별_코드
+                    ageYcnt        : ''  ,     // 나이_년수
                     nutrNm         : ''  ,    // 영양소_코드_명
                     paging          : 'Y',
                     totalCount    : 0  ,
@@ -25,7 +26,13 @@ let ddNutrEatStndMng = new Vue({
             {
                 let $this = this;
 
+                $this.initValue();
                 $this.initCodeList();
+            },
+            initValue: function()
+            {
+                let $this = this;
+                $this.userId = SessionUtil.getUserId();
             },
             initCodeList : function()
             {
@@ -72,10 +79,8 @@ let ddNutrEatStndMng = new Vue({
                      ,edittype:"select"           , formatter:"select"           ,editoptions:{value:nutrCdNmList}},
                     {name: "ddRcmdQty"     , index: "ddRcmdQty"       , label: "일일 권장량"              , width: 80          , align: "center"       , editable: true},
                     {name: "ddNeedQty"      , index: "ddNeedQty"       ,  label: "일일 필요량"             , width: 80          , align: "center"       , editable: true},
-                    {name: "regDt"                , index: "regDt"                 , label: "등록일자"                  , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                    {name: "regTm"               , index: "regTm"               , label: "등록시각"                  , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
+                    {name: "regDt"                , index: "regDt"                 , label: "등록일자"                  , width: 80          , align: "center"       , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
+                    {name: "regTm"               , index: "regTm"               , label: "등록시각"                  , width: 80          , align: "center"       , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
                     {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"           , width: 80          , align: "center"},
                     {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                   , width: 80         , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
@@ -138,14 +143,29 @@ let ddNutrEatStndMng = new Vue({
                     }).trigger("reloadGrid");
             },
             /**/
-            btnAddRow  :  function() {
+            btnAddRow  :  function()
+            {
+                let $this = this;
+                let date = new Date();
                 var cnt = $("#ddNutrEatStnd_list").jqGrid("getGridParam", "records")+1;
 
-                var addRow = {crud:"C",
-                    sexCd          :"",
-                    ageYcntFr   :"",
-                    ageYcntTo  :"",
-                    calcFrml      :"",
+                var addRow = {
+                    crud:"C",
+                    sexCdTemp   : "" ,
+                    ageYcntTem  : "" ,
+                    nutrCdTemp  : "" ,
+                    nutrNm          : "" ,
+                    sexCd             : "" ,
+                    ageYcnt          : "" ,
+                    nutrCd            : "" ,
+                    ddRcmdQty   : "" ,
+                    ddNeedQty   : "" ,
+                    regDt             : date  ,
+                    regTm            : date  ,
+                    regUserId       : $this.userId  ,
+                    uptDt             : date  ,
+                    uptTm            : date  ,
+                    uptUserId       : $this.userId
                 };
                 $("#ddNutrEatStnd_list").addRowData(cnt, addRow);
 

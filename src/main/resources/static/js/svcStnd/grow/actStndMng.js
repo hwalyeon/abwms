@@ -4,11 +4,10 @@ let actStndMng = new Vue({
         {
             params:
                 {
-                    actCd            : ''  ,    // 활동_코드
-                    actNm           : ''  ,    // 활동_명
-                    actClssCd      : ''  ,    // 활동_분류_코드
-                    paging          : 'Y',
-                    totalCount    : 0  ,
+                    userId           : ''   ,
+                    actNm          : ''  ,  // 활동_명
+                    paging         : 'Y',
+                    totalCount   : 0  ,
                     rowCount     : 30,
                     currentPage : 1  ,
                     currentIndex: 0
@@ -24,11 +23,13 @@ let actStndMng = new Vue({
             {
                 let $this = this;
 
+                $this.initValue();
                 $this.initCodeList();
+            },
+            initValue: function(){
 
-        /*        $this.initGrid();
-
-                $this.searchActStndList(true);*/
+                let $this = this;
+                $this.userId = SessionUtil.getUserId();
             },
             initCodeList : function() {
 
@@ -75,26 +76,22 @@ let actStndMng = new Vue({
                 let actClssCdList = commonGridCmonCd($this.code.actClssCdList);
                 let colModels =
                 [
-                    {name:"crud"                   , index:"crud"                   , label:"crud"                             ,hidden:true                               },
-                    {name: "sortOrd"             , index: "sortOrd"             , label: "정렬순서"                    , width: 80          , align: "center" , editable:true},
-                    {name: "actCd"                 , index: "actCd"               , label: "활동코드"                    , width: 80         , align: "center" , editable:true},
-                    {name: "actCdTemp"        , index: "actCdTemp"    , label: "활동코드"                    , width: 80         , align: "center", hidden:true},
-                    {name: "actNm"               , index: "actNm"              , label: "활동명"                        , width: 80         , align: "center" , editable:true},
-                    {name: "actClssCd"       , index: "actClssCd"         , label: "활동분류코드"               , width: 80         , align: "center"
-                        ,edittype :"select"  , formatter:"select"    , editable:true              , editoptions:{value:actClssCdList}},
-                    {name: "actDesc"             , index: "actDesc"            , label: "활동설명"                    , width: 80          , align: "center" , editable:true},
-                    {name: "metVal"              , index: "metVal"             , label: "MET 값"                        , width: 80          , align: "center" , editable:true},
-                    {name: "metMinCfct"      , index: "metMinCfct"       , label: "MET 분당 환산계수"   , width: 80          , align: "center" , editable:true},
-                    {name: "regDt"                , index: "regDt"                , label: "등록일자"                    , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                    {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                    {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"            , width: 80          , align: "center"},
-                    {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                    {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                    {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
+                    {name: "crud"              , index: "crud"               , label: "crud"                          , hidden: true  },
+                    {name: "actCdTemp"  , index: "actCdTemp"   , label: "활동코드"                   , width: 80  , align: "center"  , hidden: true  },
+                    {name: "sortOrd"        , index: "sortOrd"          , label: "정렬순서"                   , width: 80  , align: "center"  , editable: true  },
+                    {name: "actCd"           , index: "actCd"             , label: "활동코드"                   , width: 80  , align: "center"  , editable: true  },
+                    {name: "actNm"          , index: "actNm"           , label: "활동명"                       , width: 80  , align: "center"  , editable: true  },
+                    {name: "actClssCd"     , index: "actClssCd"       , label: "활동분류코드"           , width: 80  , align: "center"
+                      ,edittype : "select"    , formatter: "select"      , editable:true                         , editoptions: {value: actClssCdList}  },
+                    {name: "actDesc"        , index: "actDesc"         , label: "활동설명"                  , width: 80  , align: "center"  , editable: true  },
+                    {name: "metVal"         , index: "metVal"          , label: "MET 값"                      , width: 80  , align: "center"  , editable: true  },
+                    {name: "metMinCfct"  , index: "metMinCfct"  , label: "MET 분당 환산계수"  , width: 80  , align: "center"  , editable: true  },
+                    {name: "regDt"            , index: "regDt"            , label: "등록일자"                  , width: 80  , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
+                    {name: "regTm"           , index: "regTm"          , label: "등록시각"                   , width: 80  , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
+                    {name: "regUserId"     , index: "regUserId"      , label: "등록사용자ID"          , width: 80   , align: "center"},
+                    {name: "uptDt"            , index: "uptDt"            , label: "수정일자"                  , width: 80  , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
+                    {name: "uptTm"          , index: "uptTm"            , label: "수정시각"                  , width: 80  , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
+                    {name: "uptUserId"     , index: "uptUserId"      , label: "수정사용자ID"          , width: 80  , align: "center"  }
                 ];
 
                 $("#actStnd_list").jqGrid("GridUnload");
@@ -151,11 +148,30 @@ let actStndMng = new Vue({
                     }).trigger("reloadGrid");
             },
             /**/
-            btnAddRow  :  function() {
+            btnAddRow  :  function()
+            {
+                let  $this = this;
+                let date = new Date();
                 var cnt = $("#actStnd_list").jqGrid("getGridParam", "records")+1;
 
-                var addRow = {crud:"C",
-                    actCd        :"",
+                var addRow =
+                {
+                    crud             : "C",
+                    sortOrd        : "" ,
+                    actCd           : "" ,
+                    actCdTemp  : "" ,
+                    actNm          : "" ,
+                    actClssCd     : "" ,
+                    actDesc        : "" ,
+                    metVal         : "" ,
+                    metMinCfct  : "" ,
+                    regDt            : date  ,
+                    regTm           : date  ,
+                    regUserId     : $this.userId  ,
+                    uptDt            : date  ,
+                    uptTm           : date  ,
+                    uptUserId      : $this.userId
+
                 };
                 $("#actStnd_list").addRowData(cnt, addRow);
 
@@ -252,11 +268,12 @@ let actStndMng = new Vue({
                         }
                     });
             },
-            resetSearchParam: function() {
+            resetSearchParam: function()
+            {
                 let $this = this;
-                $this.params = {
-                    actCd            : ''  ,    // 활동_코드
-                    actClssCd      : ''  ,    // 활동_분류_코드
+                $this.params =
+                {
+                    actNm           : ''  ,   // 활동_명
                     paging          : 'Y',
                     totalCount    : 0  ,
                     rowCount     : 30,

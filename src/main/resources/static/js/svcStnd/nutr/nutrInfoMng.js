@@ -4,6 +4,7 @@ let nutrInfoMng = new Vue({
         {
             params:
                 {
+                    userId            : ''  ,
                     nutrNm          : ''  ,    // 영양소_명
                     gfixDivCd      : ''  ,    // 성장비만지수_구분_코드
                     paging          : 'Y',
@@ -24,7 +25,13 @@ let nutrInfoMng = new Vue({
             {
                 let $this = this;
 
+                $this.initValue();
                 $this.initCodeList();
+            },
+            initValue: function()
+            {
+                 let $this = this;
+                 $this.userId = SessionUtil.getUserId();
             },
             initCodeList : function() {
                 let $this = this;
@@ -119,12 +126,28 @@ let nutrInfoMng = new Vue({
                     }).trigger("reloadGrid");
             },
             /**/
-        btnAddRow  :  function() {
+        btnAddRow  :  function()
+        {
+            let $this = this;
+            let date = new Date();
             var cnt = $("#nutrInfo_list").jqGrid("getGridParam", "records")+1;
 
-            var addRow = {crud:"C",
-                nutrCd          :"",
-                nutrNm          :"",
+            var addRow =
+            {
+                crud	              : "C" ,
+                nutrCd           : "" ,
+                nutrCdTemp  : "" ,
+                nutrNm          : "" ,
+                nutrUnitCd     : "" ,
+                gfixDivCd      : "" ,
+                sortOrd          : "" ,
+                useYn             : "" ,
+                regDt            : date  ,
+                regTm           : date  ,
+                regUserId     : $this.userId  ,
+                uptDt            : date  ,
+                uptTm           : date  ,
+                uptUserId      : $this.userId
             };
             $("#nutrInfo_list").addRowData(cnt, addRow);
 

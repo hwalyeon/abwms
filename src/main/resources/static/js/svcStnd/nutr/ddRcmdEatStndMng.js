@@ -4,6 +4,7 @@ let ddRcmdEatStndMng = new Vue({
         {
             params:
                 {
+                    userId           : ''  ,
                     sexCd           : ''   ,    // 성별_코드
                     ageYcnt        : ''  ,     // 나이_년수
                     nutrNm         : ''  ,    // 영양소_코드_명
@@ -28,7 +29,13 @@ let ddRcmdEatStndMng = new Vue({
             {
                 let $this = this;
 
+                $this.initValue();
                 $this.initCodeList();
+            },
+            initValue: function()
+            {
+              let $this = this;
+              $this.userId = SessionUtil.getUserId();
             },
             initCodeList : function()
             {
@@ -152,14 +159,33 @@ let ddRcmdEatStndMng = new Vue({
                     }).trigger("reloadGrid");
             },
             /**/
-            btnAddRow  :  function() {
+            btnAddRow  :  function()
+            {
+                let $this = this;
+                let date = new Date();
                 var cnt = $("#ddRcmdEatStnd_list").jqGrid("getGridParam", "records")+1;
 
-                var addRow = {crud:"C",
-                    sexCd           : ''   ,    // 성별_코드
-                    ageYcnt        : ''  ,     // 나이_년수
-                    nutrNm         : ''  ,    // 영양소_코드_명
-                    eatQtyRf       : ''  ,     // 섭취_량_From
+                var addRow = {
+                    crud                  : "C" ,
+                    sexCdTemp      : ""  ,
+                    ageYcntTemp   : "" ,
+                    nutrCdTemp     : "" ,
+                    eatQtyFrTemp  : "" ,
+                    nutrNm             : "" ,
+                    sexCd                : "" ,
+                    ageYcnt            : "" ,
+                    nutrCd              : "" ,
+                    eatQtyFr           : "" ,
+                    eatQtyTo          : "" ,
+                    nutrStatCd        : "" ,
+                    useYn                : "" ,
+                    regDt             : date  ,
+                    regTm            : date  ,
+                    regUserId       : $this.userId  ,
+                    uptDt             : date  ,
+                    uptTm            : date  ,
+                    uptUserId       : $this.userId
+
                 };
                 $("#ddRcmdEatStnd_list").addRowData(cnt, addRow);
 

@@ -4,6 +4,7 @@ let fatStndMng = new Vue({
         {
             params:
                 {
+                    userId            : ''  ,
                     fatStndVer     : ''  ,    // 비만_기준_번호
                     ageYcnt         : ''  ,     // 나이_년수
                     sexCd            : ''   ,    // 성별_코드
@@ -24,7 +25,13 @@ let fatStndMng = new Vue({
             {
                 let $this = this;
 
+                $this.initValue();
                 $this.initCodeList();
+            },
+            initValue: function()
+            {
+              let $this = this;
+              $this.userId = SessionUtil.getUserId();
             },
             initCodeList : function()
             {
@@ -113,12 +120,31 @@ let fatStndMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },  /**/
-            btnAddRow  :  function() {
+            btnAddRow  :  function()
+            {
+                let $this = this;
+                let date = new Date();
                 var cnt = $("#fatStnd_list").jqGrid("getGridParam", "records")+1;
 
-                var addRow = {crud:"C",
-                    fatStndVer       :"",
-                    fatStndno       :"",
+                var addRow =
+                {
+                    crud:"C",
+                    fatStndVer            : "",
+                    fatStndNo            : "",
+                    fatStndNoTemp  : "",
+                    sexCd	                 : "",
+                    ageYcnt               : "",
+                    ageMcnt              : "",
+                    p5Fidx                 : "",
+                    p50Fidx               : "",
+                    p95Fidx               : "",
+                    regDt                  : date  ,
+                    regTm                 : date  ,
+                    regUserId            : $this.userId  ,
+                    uptDt                  : date  ,
+                    uptTm                 : date  ,
+                    uptUserId            : $this.userId
+
                 };
                 $("#fatStnd_list").addRowData(cnt, addRow);
 
