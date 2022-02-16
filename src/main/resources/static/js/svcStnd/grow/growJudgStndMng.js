@@ -1,36 +1,36 @@
 let growJudgStndMng = new Vue({
     el: "#growJudgStndMng",
     data: {
-    	params: {
+        params: {
             growJudgCd:'',
             gidxFr:'',
             gidxTo:'',
             smryCntn:'',
-    		paging: 'Y',
-    		totalCount: 0,
+            paging: 'Y',
+            totalCount: 0,
             rowCount: 30,
             currentPage: 1,
             currentIndex: 0
-    	},
+        },
         code:{
             mentGrowJudgCdList : []
         },
-	},
+    },
 
-	
+
     methods: {
 
         initialize: function() {
-        	
-        	let $this = this;
-        	
-        	$this.initCodeList();
 
-        	$this.initGrid();
+            let $this = this;
 
-        	$this.searchGrowJudgList(true);
+            $this.initCodeList();
 
-        	
+            $this.initGrid();
+
+            $this.searchGrowJudgList(true);
+
+
         },
         initCodeList: function() {
             let $this = this;
@@ -38,7 +38,7 @@ let growJudgStndMng = new Vue({
         },
         initGrid: function() {
 
-        	let colModels = [
+            let colModels = [
                 {name: "growJudgCd"         , index: "growJudgCd"       , label: "성장판정코드"   , width: 80, align: "center"},
                 {name: "growJudgNm"         , index: "growJudgNm"       , label: "성장판정코드명"   , width: 80, align: "center"},
                 {name: "gidxFr"             , index: "gidxFr"           , label: "성장지수_FR"     , width: 80, align: "center"},
@@ -64,14 +64,14 @@ let growJudgStndMng = new Vue({
             ];
 
 
-  
+
             $("#grid_list").jqGrid("GridUnload");
-           	$("#grid_list").jqGrid($.extend(true, {}, commonGridOptions(), {
-            	datatype: "local",
-            	mtype: 'post',
+            $("#grid_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+                datatype: "local",
+                mtype: 'post',
                 url: '/svcStnd/grow/growJudgStndMng/searchGrowJudgList.ab',
                 pager: '#user_pager_list',
-				height: 405,
+                height: 405,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
@@ -87,14 +87,14 @@ let growJudgStndMng = new Vue({
         },
         searchGrowJudgList: function(isSearch) {
 
-			let $this = this;
+            let $this = this;
             let params = $.extend(true, {}, $this.params);
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
             }
-            
-			$("#grid_list").setGridParam({
+
+            $("#grid_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,
@@ -105,7 +105,7 @@ let growJudgStndMng = new Vue({
                 }
             }).trigger("reloadGrid");
 
-		},
+        },
         growJudgStndNmVal:function(){
             let $this = this;
         },
@@ -136,17 +136,17 @@ let growJudgStndMng = new Vue({
         },
 
 
-		resetSearchParam: function() {
-			let $this = this;
-			$this.params = {
+        resetSearchParam: function() {
+            let $this = this;
+            $this.params = {
                 growJudgCd:'',
-	    		paging: 'Y',
-	    		totalCount: 0,
-	            rowCount: 30,
-	            currentPage: 1,
-	            currentIndex: 0
-	    	}
-		}
+                paging: 'Y',
+                totalCount: 0,
+                rowCount: 30,
+                currentPage: 1,
+                currentIndex: 0
+            }
+        }
     },
     computed: {
 

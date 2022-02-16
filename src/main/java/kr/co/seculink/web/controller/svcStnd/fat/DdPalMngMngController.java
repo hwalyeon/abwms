@@ -4,8 +4,10 @@ import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
+import kr.co.seculink.web.service.svcStnd.fat.DdPalMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,27 +25,40 @@ public class DdPalMngMngController
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
+	@Autowired
+	private DdPalMngService ddPalMngService;
+
 	@ResponseBody
 	@RequestMapping("/svcStnd/fat/ddPalMng/searchDdPalList.ab")
 
 	public RtnMsg searchDdPalList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
-		System.out.println("test1");
-		RtnMsg vo = new RtnMsg();
-		System.out.println("test2");
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("test3");
 
+		RtnMsg vo = new RtnMsg();
+
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		List<Map<String, String>> result = dao.selectList("svcStnd.fat.ddPalMng.searchDdPalList", params);
-		System.out.println("test4");
 		rtnMap.put("result", result);
-		System.out.println("test5");
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
 			vo.setTotalCount(((List)dao.selectList("svcStnd.fat.ddPalMng.searchDdPalList", params)).size());
 		}
 
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/fat/ddPalMng/saveDdPal.ab")
+	public RtnMsg saveDdPal(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		ddPalMngService.saveDdPal(params);
+
+		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap, params);
 
 		return vo;

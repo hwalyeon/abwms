@@ -9,5 +9,7 @@ import java.util.Map;
 public interface StrsStndMngService
 {
 	public List<Map<String, String>> searchStrsList(Map<String, String> params) throws BizException;
+
+	public void saveStrsList(Map<String, Object> paramhs) throws BizException;
 }
 
