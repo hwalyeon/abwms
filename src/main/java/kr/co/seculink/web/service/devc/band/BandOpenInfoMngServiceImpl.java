@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service("ddRcmdEatStndMngService")
+@Service("bandOpenInfoMngService")
 public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 {
 	
