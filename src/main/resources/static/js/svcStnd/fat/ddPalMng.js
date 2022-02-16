@@ -28,7 +28,8 @@ let ddPalMng = new Vue({
             currentIndex: 0
     	},
         code:{
-            mentDdPalCdList : []
+            mentDdPalCdList : [],
+            sexCdList : []
         },
 	},
 
@@ -40,49 +41,70 @@ let ddPalMng = new Vue({
         	let $this = this;
         	
         	$this.initCodeList();
-        	
-        	$this.initGrid();
 
-        	$this.searchDdPalList(true);
-
-        	
         },
         initCodeList: function() {
             let $this = this;
-            getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList);
+            getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList, function()
+            {
+                $this.initGrid();
+                $this.searchDdPalList(true);
+            }
+            );
+
+            getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
+            {
+                $this.initGrid();
+                $this.searchDdPalList(true);
+            }
+            );
         },
         initGrid: function() {
             let $this = this;
-        	let colModels = [
-                {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정코드"   , width: 80, align: "center"},
-                {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정코드"     , width: 80, align: "center"},
-                {name: "sexCd"             , index: "sexCd"           , label: "성별코드"   , width: 80, align: "center"},
-                {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"     , width: 80, align: "center"},
-                {name: "palValFr"          , index: "palValFr"        , label: "신체활동수준값 FORM"        , width: 80, align: "center"},
-                {name: "palValTo"          , index: "palValTo"        , label: "신체활동수준값 TO"        , width: 80, align: "center"},
-                {name: "calQtyFr"          , index: "calQtyFr"        , label: "칼로리량 FORM"        , width: 80, align: "center"},
-                {name: "calQtyTo"          , index: "calQtyTo"        , label: "칼로리량 TO"        , width: 80, align: "center"},
-                {name: "ddCalQty"          , index: "ddCalQty"        , label: "일일칼로리량"        , width: 80, align: "center"},
-                {name: "palCd"             , index: "palCd"           , label: "신체활동수준코드"        , width: 80, align: "center"},
-                {name: "nutrCd"            , index: "nutrCd"          , label: "영양소코드"        , width: 80, align: "center"},
-                {name: "nutrStatCd"        , index: "nutrStatCd"      , label: "영양섭취상태코드"        , width: 80, align: "center"},
-                {name: "regDt"             , index: "regDt"                , label: "등록일자"                    , width: 80          , align: "center"
+            let mentDdPalCdList = commonGridCmonCd($this.code.mentDdPalCdList);
+            let sexCdList       = commonGridCmonCd($this.code.sexCdList);
+        	let colModels =
+            [
+                {name:"crud"               , index: "crud"            , label:"crud"               , hidden:true},
+                {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정코드"     , width: 80   , align: "center"
+                    ,editable: true ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
+                {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정코드"     , width: 80   , align: "center" , editable: true
+                    ,editable: true ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
+                {name: "sexCd"             , index: "sexCd"           , label: "성별코드"            , width: 80   , align: "center" , editable: true
+                    ,editable: true ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:sexCdList}},
+                {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "palValFr"          , index: "palValFr"        , label: "신체활동수준값 FORM"  , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "palValTo"          , index: "palValTo"        , label: "신체활동수준값 TO"    , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "calQtyFr"          , index: "calQtyFr"        , label: "칼로리량 FORM"       , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "calQtyTo"          , index: "calQtyTo"        , label: "칼로리량 TO"         , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "ddCalQty"          , index: "ddCalQty"        , label: "일일칼로리량"         , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "palCd"             , index: "palCd"           , label: "신체활동수준코드"      , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "nutrCd"            , index: "nutrCd"          , label: "영양소코드"           , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "nutrStatCd"        , index: "nutrStatCd"      , label: "영양섭취상태코드"      , width: 80   , align: "center"
+                    , editable: true , editrules:{number:true}},
+                {name: "regDt"             , index: "regDt"           , label: "등록일자"        , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"
+                {name: "regTm"               , index: "regTm"         , label: "등록시각"       , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"            , width: 80          , align: "center"},
-                {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                   , width: 80          , align: "center"
+                {name: "regUserId"          , index: "regUserId"      , label: "등록사용자ID"      , width: 80          , align: "center"},
+                {name: "uptDt"                , index: "uptDt"        , label: "수정일자"     , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"
+                {name: "uptTm"               , index: "uptTm"         , label: "수정시각"       , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
-
+                {name: "uptUserId"          , index: "uptUserId"      , label: "수정사용자ID"      , width: 80          , align: "center"}
             ];
-
         	console.log("1");
   
             $("#user_list").jqGrid("GridUnload");
-           	$("#user_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+           	$("#user_list").jqGrid($.extend(true, {}, commonEditGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
                 url: '/svcStnd/fat/ddPalMng/searchDdPalList.ab',
@@ -96,16 +118,21 @@ let ddPalMng = new Vue({
                         $this.params.currentIndex = resultMap.currentIndex;
                         $this.searchDdPalList(false);
                     })
+                },
+                onCellSelect : function (rowid, colId, val, e)
+                {
+                    if($("#user_list").getRowData(rowid).crud != "C" && $("#user_list").getRowData(rowid).crud != "D" ) {
+                        $("#user_list").setRowData(rowid, {crud: "U"}
+                        );
+                    }
                 }
             }));
-            console.log("2");
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
         },
         searchDdPalList: function(isSearch) {
-            console.log("3");
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
-            console.log("4");
+
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
@@ -122,7 +149,6 @@ let ddPalMng = new Vue({
                     }
                 }
             }).trigger("reloadGrid");
-            console.log("5");
 		},
         mentDdPalNmVal:function(){
             let $this = this;
@@ -130,6 +156,113 @@ let ddPalMng = new Vue({
         physStrsStatNmVal:function(){
             let $this = this;
         },
+
+        btnAddRow  :  function() {
+            var cnt = $("#user_list").jqGrid("getGridParam", "records")+1;
+
+            var addRow = {crud:"C",
+                currFatJudgCd:'',
+                prdtFatJudgCd:'',
+            };
+            $("#user_list").addRowData(cnt, addRow);
+
+        },
+        btnDelRow : function() {
+            //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
+            let checkIds = $("#user_list").jqGrid("getGridParam","selrow") + "";  // 단건
+            if ( checkIds == "" )
+            {
+                alert("삭제할 행을 선택해주십시요.");
+                return false;
+            }
+
+            let checkId = checkIds.split(",");
+            for ( var i in checkId )
+            {
+                if ( $("#user_list").getRowData(checkId[i]).crud == "C" )
+                {
+                    $("#user_list").setRowData(checkId[i], {crud:"N"});
+                    $("#"+checkId[i],"#user_list").css({display:"none"});
+                }
+                else
+                {
+                    $("#user_list").setRowData(checkId[i], {crud:"D"});
+                    $("#"+checkId[i],"#user_list").css({display:"none"});
+                }
+            }
+        },
+        btnSave  :  function() {
+            let $this = this;
+            let gridData = commonGridGetDataNew($("#user_list"));
+
+            if(gridData.length > 0)
+            {
+                for (let data in gridData)
+                {
+                    if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
+                    {
+                        if(WebUtil.isNull(gridData[data].currFatJudgCd)){
+                            Swal.alert(["현재비만판정코드 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].prdtFatJudgCd)){
+                        Swal.alert(["예측비만판정코드 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].sexCd)){
+                        Swal.alert(["성별 코드 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].ageYcnt)){
+                        Swal.alert(["나이년수 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].palValFr)){
+                        Swal.alert(["신체활동수준 값 FORM 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].palValTo)){
+                        Swal.alert(["신체활동수준 값 TO 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].calQtyFr)){
+                        Swal.alert(["칼로리량 FORM 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].calQtyTo)){
+                        Swal.alert(["칼로리량 TO 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].ddCalQty)){
+                        Swal.alert(["일일 칼로리량 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].palCd)){
+                        Swal.alert(["신체활동수준 코드 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].nutrCd)){
+                        Swal.alert(["영양소 코드 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].nutrStatCd)){
+                        Swal.alert(["영양섭취 상태 코드 필수 입력입니다.", 'warning']);
+                        return false;
+                    }
+                    }
+                }
+            }
+            else
+            {
+                Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+                return false;
+            }
+            let param = { gridList : []}
+            param.gridList = gridData;
+
+            AjaxUtil.post({
+                url: "/svcStnd/fat/ddPalMng/saveDdPal.ab",
+                param: param,
+                success: function(response) {
+                    Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                        $this.searchDdPalList(true);
+                    });
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
+        },
+
 
         downloadExcel : function()
         {

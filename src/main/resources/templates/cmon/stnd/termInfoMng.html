@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-	<div class="wrapper-content" id="growJudgStndMng">
+	<div class="wrapper-content" id="termInfoMng">
 
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
@@ -24,21 +24,20 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">성장판정코드</label>
+						<label class="col-xs-1 control-label">약관구분코드</label>
 						<div class="col-xs-2">
-							<select id="growJudgCd" name="growJudgCd" class="form-control" v-model="params.growJudgCd" v-on:click="growJudgStndNmVal()">
+							<select id="termDivCd" name="termDivCd" class="form-control" v-model="params.termDivCd" v-on:click="termInfoNmVal()">
 								<option value="">전체</option>
-								<option v-for="item in code.mentGrowJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+								<option v-for="item in code.termInfoList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
 					</div>
-
 					<div class="form-group mg_none">
 						<div class="text-center">
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchGrowJudgList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchTermInfoList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -57,7 +56,7 @@
 						</div>
 					</div>
 					<div class="float_right">
-						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#growJudgStndDetlPopup" v-on:click="regGrowJudgStndPop()">&nbsp;성장판정기준 등록</button>
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#termInfoDetlPopup" v-on:click="regTermInfoMngPop()">&nbsp;성장판정기준 등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
@@ -71,13 +70,13 @@
 			</div>
 		</div>
 	</div>
-	<div th:insert="~{svcStnd/grow/growJudgStndDetl :: body}"></div>
+	<div th:insert="~{cmon/stnd/termInfoMngDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/editor/summernote.js}"></script>
 
-	<script type="text/javascript" th:src="@{/js/svcStnd/grow/growJudgStndMng.js}"></script>
-	<script type="text/javascript" th:src="@{/js/svcStnd/grow/growJudgStndDetl.js}"></script>
+	<script type="text/javascript" th:src="@{/js/cmon/stnd/termInfoMng.js}"></script>
+	<script type="text/javascript" th:src="@{/js/cmon/stnd/termInfoDetl.js}"></script>
 </section>
 </body>
 </html>

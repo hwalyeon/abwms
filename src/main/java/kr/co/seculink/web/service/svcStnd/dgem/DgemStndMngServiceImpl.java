@@ -41,7 +41,6 @@ public class DgemStndMngServiceImpl implements DgemStndMngService
 
 
 		List<Map<String, String>> gridData = (List<Map<String, String>>) params.get("gridList");
-
 		for (Map<String, String> info : gridData) {
 			log.debug("crud         : " +  info.get("crud"));
 			log.debug("dgemStatCd   : " +  info.get("dgemStatCd"));

@@ -25,6 +25,9 @@ public class StrsStndMngController
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
+	@Autowired
+	private StrsStndMngService strsStndMngService;
+
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsList.ab")
 
@@ -91,5 +94,20 @@ public class StrsStndMngController
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/saveStrsStnd.ab")
+	public RtnMsg saveStrsStnd(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		strsStndMngService.saveStrsList(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
 	}
 }

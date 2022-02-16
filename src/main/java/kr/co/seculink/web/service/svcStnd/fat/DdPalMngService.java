@@ -8,5 +8,7 @@ import java.util.Map;
 public interface DdPalMngService
 {
 	public List<Map<String, String>> searchDdPalList(Map<String, String> params) throws BizException;
+
+	public void saveDdPal(Map<String,Object> params) throws BizException;
 }
 
