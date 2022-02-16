@@ -35,98 +35,84 @@ let bandOpenInfoMng = new Vue({
                 let $this = this;
 
                 $this.initValue();
-                $this.mmDdListCalc();
-   /*             $this.initCodeList();*/
+                $this.initCodeList();
             },
             initValue: function()
             {
-                let $this = this;
+                let $this    = this;
                 $this.userId = SessionUtil.getUserId();
-
             },
+            //이번달_일수_계산
             mmDdListCalc: function()
             {
-                let date = new Date();
-                console.log(date(2022,2,0).getDate());
+                let $this    = this;
+                let now      = new Date();
+                let lastDate = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate()
+                if( lastDate != null)
+                {
+                   for(var i=1; i<lastDate+1; i++)
+                   {
+                    $this.code.mmDdList.push({'cdVal':i,'cdNm':i+'일'});
+                   }
+                }
             },
             initCodeList : function()
             {
-
                 let $this = this;
 
-                getCommonCodeList('BAND_MDL_CD'      ,$this.code.nutrStatCdList); //밴드_모델_코드_리스트
-                getCommonCodeList('BAND_TTYP_CD'     ,$this.code.nutrStatCdList); //밴드_년식_리스트
-                getCommonCodeList('BAND_OPEN_STAT_CD',$this.code.nutrStatCdList); //밴드_개통_상태_코드_리스트
-
-                AjaxUtil.post(
-                    {
-                        url: "/devc/band/bandOpenInfoMng/searchMmDdList.ab",
-                        param: {},
-                        success: function(response) {
-                            $this.code.nutrCdNmList = [];
-                            if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                                $.each(response.rtnData.result, function(index, item) {
-                                    $this.code.nutrCdNmList.push({'cdVal':item.nutrCd, 'cdNm':item.nutrNm});
-                                });
-                            }
-                        },
-                        error: function (response) {
-                            Swal.alert([response, 'error']);
-                        }
-                    });
-
-                getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
+                $this.mmDdListCalc(); //이번달_일수_계산
+                getCommonCodeList('BAND_MDL_CD'       ,$this.code.bandMdlCdList); //밴드_모델_코드_리스트
+                getCommonCodeList('BAND_TTYP_CD'      ,$this.code.bandYtypCdList); //밴드_년식_리스트
+                getCommonCodeList('BAND_OPEN_STAT_CD' ,$this.code.bandOpenStatCdList,function() //밴드_개통_상태_코드_리스트
                 {
                     $this.initGrid();
-                    $this.searchDdRcmdEatStndList(true);
+                    $this.searchBandOpenInfoList(true);
                 })
             },
             initGrid: function()
             {
-                let $this = this;
-                let sexCdList        = commonGridCmonCd($this.code.sexCdList);
-                let nutrCdNmList = commonGridCmonCd($this.code.nutrCdNmList);
-                let nutrStatCdList = commonGridCmonCd($this.code.nutrStatCdList);
-                let useYnList         = commonGridCmonCd($this.code.useYnList);
+                let $this              = this;
+                let bandYtypCdList     = commonGridCmonCd($this.code.bandYtypCdList);     //밴드_년식_리스트
+                let bandMdlCdList      = commonGridCmonCd($this.code.bandMdlCdList);      //밴드_모델_코드_리스트
+                let bandOpenStatCdList = commonGridCmonCd($this.code.bandOpenStatCdList); //밴드_개통_상태_코드_리스트
                 let colModels =
                     [
-                        {name:"crud"                   , index:"crud"                     , label: "crud"                        , hidden: true                              },
-                        {name: "uptDtFr"             ,  index: "uptDtFr"       , label: "성별"                        , width: 80        , align: "center"       , hidden: true },
-                        {name: "ageYcntTemp"  , index: "ageYcntTemp"     , label: "나이(년)"                 , width: 80         , align: "center"       , hidden: true },
-                        {name: "nutrCdTemp"     , index: "nutrCdTemp"      , label: "영양소코드"             , width: 80         , align: "center"       , hidden: true },
-                        {name: "eatQtyFrTemp"  ,  index: "eatQtyFrTemp"  , label: "섭취량(From)"         , width: 80         , align: "center"       , hidden: true },
-                        {name: "nutrNm"            , index: "nutrNm"              , label: "영양소명"                    , hidden: true        }, //엑셀 다운로드용
-                        {name: "sexCd"                , index: "sexCd"                 , label: "성별"                        , width: 80         , align: "center"       , editable: true
-                            ,edittype:"select"         , formatter:"select", editoptions:{value:sexCdList}},
-                        {name: "ageYcnt"            , index: "ageYcnt"             , label: "나이(년)"                  , width: 80         , align: "center"       , editable: true},
-                        {name: "nutrCd"               , index: "nutrCd"               , label: "영양소명"                , width: 80         , align: "center"       , editable: true
-                            ,edittype:"select"         , formatter:"select"           , editoptions:{value:nutrCdNmList}},
-                        {name: "eatQtyFr"            , index: "eatQtyFr"            , label: "섭취량(From)"         , width: 80          , align: "center"       , editable: true},
-                        {name: "eatQtyTo"           , index: "eatQtyTo"          , label: "섭취량(To)"              , width: 80          , align: "center"       , editable: true},
-                        {name:"nutrStatCd"          , index: "nutrStatCd"        , label: "영양섭취상태"         , width: 80          , align: "center"       , editable: true
-                            ,edittype:"select"          , formatter:"select", editoptions:{value:nutrStatCdList}},
-                        {name: "useYn"                 , index: "useYn"            , label: "사용여부"                   , width: 80          , align: "center"       , editable: true
-                            , edittype:"select"            , formatter:"select" ,editoptions:{value:useYnList}},
-                        {name: "regDt"                 , index: "regDt"                 , label: "등록일자"               , width: 80          , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "regTm"                , index: "regTm"               , label: "등록시각"               , width: 80          , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "regUserId"           , index: "regUserId"         , label: "등록사용자ID"         , width: 80          , align: "center"},
-                        {name: "uptDt"                 , index: "uptDt"                , label: "수정일자"                 , width: 80         , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                 , width: 80         , align: "center"
-                            , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"          , width: 80         , align: "center"}
+                        {name: "crud"           , index: "crud"           , label: "crud"            , hidden: true                                },
+                        {name: "uptDt"          , index: "uptDt"          , label: "기준일자"         , width: 80 , align: "center" , hidden: true  },
+                        {name: "rgeDt"          , index: "rgeDt"          , label: "밴드등록일자"     , width: 80 , align: "center" , hidden: true  },
+                        {name: "bandId"         , index: "bandId"         , label: "밴드ID"           , width: 80 , align: "center" , hidden: true  },
+                        {name: "bandYtypCd"     , index: "bandYtypCd"     , label: "년식"             , width: 80 , align: "center" , editable: true
+                         ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandYtypCdList}},
+                        {name: "bandMdlCd"      , index: "bandMdlCd"      , label: "모델TYPE"         , width: 80 , align: "center" , editable: true
+                         ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandMdlCdList}},
+                        {name: "telNo"          , index: "telNo"          , label: "전화번호"         , width: 80 , align: "center" , editable: true },
+                        {name: "stdtNo"         , index: "stdtNo"         , label: "학생번호"         , width: 80 , align: "center" , editable: true },
+                        {name: "stdtNm"         , index: "stdtNm"         , label: "학생명"           , width: 80 , align: "center" , editable: true },
+                        {name: "guarNo"         , index: "guarNo"         , label: "보호자번호"       , width: 80 , align: "center" , editable: true },
+                        {name: "guarNm"         , index: "guarNm"         , label: "보호자명"         , width: 80 , align: "center" , editable: true },
+                        {name: "guarTelNo"      , index: "guarTelNo"      , label: "보호자전화번호"   , width: 80 , align: "center"  , editable: true },
+                        {name: "bandOpenStatCd" , index: "bandOpenStatCd" , label: "밴드개통상태코드" , width: 80 , align: "center"  , editable: true
+                         ,edittype:"select"     , formatter:"select"      , editoptions:{value:bandOpenStatCdList}},
+                        {name: "openGramNo"     , index: "openGramNo"     , label: "개통전문번호"     , width: 80 , align: "center" },
+                        {name: "blthId"         , index: "blthId"         , label: "블루투스ID"       , width: 80 , align: "center" , editable: true},
+                        {name: "urlSplyYn"      , index: "urlSplyYn"      , label: "URL제공여부"      , width: 80 , align: "center" },
+                        {name: "apiUrlDttm"     , index: "apiUrlDttm"     , label: "URL제공일시"      , width: 80 , align: "center" },
+                        {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
+                        {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
+                        {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"     , width: 80 , align: "center" },
+                        {name: "uptDt"          , index: "uptDt"          , label: "수정일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
+                        {name: "uptTm"          , index: "uptTm"          , label: "수정시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
+                        {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"     , width: 80 , align: "center" }
                     ];
 
-                $("#ddRcmdEatStnd_list").jqGrid("GridUnload");
-                $("#ddRcmdEatStnd_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
+                $("#bandOpenInfo_list").jqGrid("GridUnload");
+                $("#bandOpenInfo_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
                     {
-                        datatype  : "local",
-                        mtype      : 'post',
-                        url            : '/svcStnd/nutr/ddRcmdEatStndMng/searchDdRcmdEatStndList.ab',
-                        pager       : '#ddRcmdEatStnd_pager_list',
-                        height      : 405,
+                        datatype : "local",
+                        mtype    : 'post',
+                        url      : '/devc/band/bandOpenInfoMng/searchBandOpenInfoList.ab',
+                        pager    : '#ddRcmdEatStnd_pager_list',
+                        height   : 405,
                         colModel : colModels,
                         onPaging : function(data) {
                             onPagingCommon(data, this, function(resultMap)
@@ -134,19 +120,19 @@ let bandOpenInfoMng = new Vue({
                                 $this.params.currentPage  = resultMap.currentPage;
                                 $this.params.rowCount     = resultMap.rowCount;
                                 $this.params.currentIndex = resultMap.currentIndex;
-                                $this.searchDdRcmdEatStndList(false);
+                                $this.searchBandOpenInfoList(false);
                             })
                         },
                         onCellSelect : function (rowid , colId , val, e ){
                             // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
-                            if($("#ddRcmdEatStnd_list").getRowData(rowid).crud != "C" && $("#ddRcmdEatStnd_list").getRowData(rowid).crud != "D" ) {
-                                $("#ddRcmdEatStnd_list").setRowData(rowid, {crud:"U"});
+                            if($("#bandOpenInfo_list").getRowData(rowid).crud != "C" && $("#bandOpenInfo_list").getRowData(rowid).crud != "D" ) {
+                                $("#bandOpenInfo_list").setRowData(rowid, {crud:"U"});
                             }
                         }
                     }));
-                resizeJqGridWidth("ddRcmdEatStnd_list", "ddRcmdEatStnd_list_wrapper");
+                resizeJqGridWidth("bandOpenInfo_list", "bandOpenInfo_list_wrapper");
             },
-            searchDdRcmdEatStndList: function(isSearch)
+            searchBandOpenInfoList: function(isSearch)
             {
                 let $this = this;
                 let params = $.extend(true, {}, $this.params);
@@ -157,7 +143,7 @@ let bandOpenInfoMng = new Vue({
                     params.currentIndex = 0;
                 }
 
-                $("#ddRcmdEatStnd_list").setGridParam(
+                $("#bandOpenInfo_list").setGridParam(
                     {
                         datatype: "json",
                         postData: JSON.stringify(params),
@@ -177,36 +163,39 @@ let bandOpenInfoMng = new Vue({
             {
                 let $this = this;
                 let date = new Date();
-                var cnt = $("#ddRcmdEatStnd_list").jqGrid("getGridParam", "records")+1;
+                var cnt = $("#bandOpenInfo_list").jqGrid("getGridParam", "records")+1;
 
                 var addRow = {
-                    crud                  : "C" ,
-                    sexCdTemp      : ""  ,
-                    ageYcntTemp   : "" ,
-                    nutrCdTemp     : "" ,
-                    eatQtyFrTemp  : "" ,
-                    nutrNm             : "" ,
-                    sexCd                : "" ,
-                    ageYcnt            : "" ,
-                    nutrCd              : "" ,
-                    eatQtyFr           : "" ,
-                    eatQtyTo          : "" ,
-                    nutrStatCd        : "" ,
-                    useYn                : "" ,
-                    regDt             : date  ,
-                    regTm            : date  ,
-                    regUserId       : $this.userId  ,
-                    uptDt             : date  ,
-                    uptTm            : date  ,
-                    uptUserId       : $this.userId
-
+                    crud           : "C" ,
+                    uptDt          : "" ,
+                    rgeDt          : "" ,
+                    bandId         : "" ,
+                    bandYtypCd     : "" ,
+                    bandMdlCd      : "" ,
+                    telNo          : "" ,
+                    stdtNo         : "" ,
+                    stdtNm         : "" ,
+                    guarNo         : "" ,
+                    guarNm         : "" ,
+                    guarTelNo      : "" ,
+                    bandOpenStatCd : "" ,
+                    openGramNo     : "" ,
+                    blthId         : "" ,
+                    urlSplyYn      : "" ,
+                    apiUrlDttm     : "" ,
+                    regDt          : date  ,
+                    regTm          : date  ,
+                    regUserId      : $this.userId  ,
+                    uptDt          : date  ,
+                    uptTm          : date  ,
+                    uptUserId      : $this.userId
                 };
-                $("#ddRcmdEatStnd_list").addRowData(cnt, addRow);
+                $("#bandOpenInfo_list").addRowData(cnt, addRow);
 
             },
             btnDelRow : function() {
                 //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
-                let checkIds = $("#ddRcmdEatStnd_list").jqGrid("getGridParam","selrow") + "";  // 단건
+                let checkIds = $("#bandOpenInfo_list").jqGrid("getGridParam","selrow") + "";  // 단건
                 if ( checkIds == "" )
                 {
                     alert("삭제할 행을 선택해주십시요.");
@@ -216,21 +205,21 @@ let bandOpenInfoMng = new Vue({
                 let checkId = checkIds.split(",");
                 for ( var i in checkId )
                 {
-                    if ( $("#ddRcmdEatStnd_list").getRowData(checkId[i]).crud == "C" )
+                    if ( $("#bandOpenInfo_list").getRowData(checkId[i]).crud == "C" )
                     {
-                        $("#ddRcmdEatStnd_list").setRowData(checkId[i], {crud:"N"});
-                        $("#"+checkId[i],"#ddRcmdEatStnd_list").css({display:"none"});
+                        $("#bandOpenInfo_list").setRowData(checkId[i], {crud:"N"});
+                        $("#"+checkId[i],"#bandOpenInfo_list").css({display:"none"});
                     }
                     else
                     {
-                        $("#ddRcmdEatStnd_list").setRowData(checkId[i], {crud:"D"});
-                        $("#"+checkId[i],"#ddRcmdEatStnd_list").css({display:"none"});
+                        $("#bandOpenInfo_list").setRowData(checkId[i], {crud:"D"});
+                        $("#"+checkId[i],"#bandOpenInfo_list").css({display:"none"});
                     }
                 }
             },
             btnSave  :  function() {
                 let $this = this;
-                let gridData = commonGridGetDataNew($("#ddRcmdEatStnd_list"));
+                let gridData = commonGridGetDataNew($("#bandOpenInfo_list"));
                 if(gridData.length > 0)
                 {
                     for (let data in gridData)
@@ -269,11 +258,11 @@ let bandOpenInfoMng = new Vue({
                 param.gridList = gridData;
 
                 AjaxUtil.post({
-                    url: "/svcStnd/nutr/ddRcmdEatStndMng/saveDdRcmdEatStnd.ab",
+                    url: "/devc/band/bandOpenInfoMng/saveBandOpenInfo.ab",
                     param: param,
                     success: function(response) {
                         Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                            $this.searchDdRcmdEatStndList(true);
+                            $this.searchBandOpenInfoList(true);
                         });
                     },
                     error: function (response) {
@@ -290,11 +279,11 @@ let bandOpenInfoMng = new Vue({
                 AjaxUtil.post(
                     {
                         dataType: 'binary',
-                        url: "/svcStnd/nutr/ddRcmdEatStndMng/searchDdRcmdEatStndList/excel.ab",
+                        url: "/devc/band/bandOpenInfoMng/searchBandOpenInfoList/excel.ab",
                         param: params,
                         success: function(response)
                         {
-                            saveFileLocal(response, 'ddRcmdEatStndMng.xls');
+                            saveFileLocal(response, 'bandOpenInfoMng.xls');
                         },
                         error: function (response)
                         {
@@ -302,18 +291,25 @@ let bandOpenInfoMng = new Vue({
                         }
                     });
             },
-            resetSearchParam: function() {
+            resetSearchParam: function()
+            {
                 let $this = this;
-                $this.params = {
-                    sexCd           : ''   ,    // 성별_코드
-                    ageYcnt        : ''  ,     // 나이_년수
-                    nutrNm         : ''  ,    // 영양소_코드_명
-                    eatQtyRf       : ''  ,     // 섭취_량_From
-                    paging          : 'Y',
-                    totalCount    : 0  ,
-                    rowCount     : 30,
-                    currentPage : 1  ,
-                    currentIndex: 0
+                $this.params =
+                {
+                    uptDtFr        : '' ,  //기준_일자From
+                    uptDtTo        : '' ,  //기준_일자To
+                    mmDd           : '' ,  //기준_일자 _이번달
+                    stdtNm         : '' ,  //학생_명
+                    bandTelNo      : '' ,  //밴드_전화_번호
+                    bandId         : '' ,  //밴드_ID
+                    bandOpenStatCd : '' ,  //밴드_개통_상태_코드
+                    guarNm         : '' ,  //보호자_명
+                    guarTelNo      : '' ,  //보호자_전화_번호
+                    paging         : 'Y',
+                    totalCoun      : 0  ,
+                    rowCount       : 30 ,
+                    currentPage    : 1  ,
+                    currentIndex   : 0
                 }
             }
         },

@@ -4,23 +4,23 @@ let ddRcmdEatStndMng = new Vue({
         {
             params:
                 {
-                    userId           : ''  ,
-                    sexCd           : ''   ,    // 성별_코드
-                    ageYcnt        : ''  ,     // 나이_년수
-                    nutrNm         : ''  ,    // 영양소_코드_명
-                    eatQtyRf       : ''  ,     // 섭취_량_From
-                    paging          : 'Y',
-                    totalCount    : 0  ,
-                    rowCount     : 30,
-                    currentPage : 1  ,
-                    currentIndex: 0
+                    userId       : '' ,
+                    sexCd        : '' ,    // 성별_코드
+                    ageYcnt      : '' ,     // 나이_년수
+                    nutrNm       : '' ,    // 영양소_코드_명
+                    eatQtyRf     : '' ,     // 섭취_량_From
+                    paging       : 'Y',
+                    totalCount   : 0  ,
+                    rowCount     : 30 ,
+                    currentPage  : 1  ,
+                    currentIndex : 0
                 },
             code:
                 {
-                     sexCdList           : []
+                      sexCdList      : []
                     , nutrCdNmList   : [] //영양소코드명 리스트
-                    , nutrStatCdList  : []  //영양상태코드명 리스트
-                    , useYnList  : [{'cdVal':'Y', 'cdNm':'Y'},{'cdVal':'N', 'cdNm':'N'}]  //영양상태코드명 리스트
+                    , nutrStatCdList : [] //영양상태코드명 리스트
+                    , useYnList      : [{'cdVal':'Y', 'cdNm':'Y'},{'cdVal':'N', 'cdNm':'N'}]  //영양상태코드명 리스트
                 },
         },
     methods:
@@ -70,10 +70,10 @@ let ddRcmdEatStndMng = new Vue({
             initGrid: function()
             {
                 let $this = this;
-                let sexCdList        = commonGridCmonCd($this.code.sexCdList);
-                let nutrCdNmList = commonGridCmonCd($this.code.nutrCdNmList);
+                let sexCdList      = commonGridCmonCd($this.code.sexCdList);
+                let nutrCdNmList   = commonGridCmonCd($this.code.nutrCdNmList);
                 let nutrStatCdList = commonGridCmonCd($this.code.nutrStatCdList);
-                let useYnList         = commonGridCmonCd($this.code.useYnList);
+                let useYnList      = commonGridCmonCd($this.code.useYnList);
                 let colModels =
                     [
                         {name:"crud"                   , index:"crud"                     , label: "crud"                        , hidden: true                              },
