@@ -7,10 +7,11 @@ let bandOpenInfoMng = new Vue({
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
-                    mmDd           : '' ,  //기준_일자 _이번달
+                    mmDd           : 'THIS_MONTH' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     bandTelNo      : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID
+                    bandYtypCd     : '' ,  //밴드_출고_년월
                     bandOpenStatCd : '' ,  //밴드_개통_상태_코드
                     guarNm         : '' ,  //보호자_명
                     guarTelNo      : '' ,  //보호자_전화_번호
@@ -24,7 +25,7 @@ let bandOpenInfoMng = new Vue({
                 {
                      mmDdList           : [] , //기준_일자_이번달_리스트
                      bandOpenStatCdList : [] , //밴드_개통_상태_코드_리스트
-                     bandYtypCdList     : [] , //밴드_년식_리스트
+                     bandYtypCdList     : [] , //밴드_출고년월_리스트
                      bandMdlCdList      : [] , //밴드_모델_코드_리스트
                 },
         },
@@ -41,48 +42,67 @@ let bandOpenInfoMng = new Vue({
             {
                 let $this    = this;
                 $this.userId = SessionUtil.getUserId();
-            },
-            //이번달_일수_계산
-            mmDdListCalc: function()
+                //출고_년월_값 세팅
+                $this.initBandYtypCdValue();
+                //이번 달 기본 값 세팅
+                $this.code.mmDdList = CodeUtil.getPeriodDateList();
+                const terms = getPeriodDate($this.params.mmDd);
+                this.params.uptDtFr = terms.strDt;
+                this.params.uptDtTo = terms.endDt;
+            }, //기간_선택
+            mmDdSelect: function()
             {
-                let $this    = this;
-                let now      = new Date();
-                let lastDate = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate()
-                if( lastDate != null)
-                {
-                   for(var i=1; i<lastDate+1; i++)
-                   {
-                    $this.code.mmDdList.push({'cdVal':i,'cdNm':i+'일'});
-                   }
-                }
+                let $this = this;
+                const terms = getPeriodDate($this.params.mmDd);
+                this.params.uptDtFr = terms.strDt;
+                this.params.uptDtTo = terms.endDt;
             },
             initCodeList : function()
             {
                 let $this = this;
 
-                $this.mmDdListCalc(); //이번달_일수_계산
-                getCommonCodeList('BAND_MDL_CD'       ,$this.code.bandMdlCdList); //밴드_모델_코드_리스트
-                getCommonCodeList('BAND_TTYP_CD'      ,$this.code.bandYtypCdList); //밴드_년식_리스트
-                getCommonCodeList('BAND_OPEN_STAT_CD' ,$this.code.bandOpenStatCdList,function() //밴드_개통_상태_코드_리스트
+                getCommonCodeList('BAND_MDL_CD', $this.code.bandMdlCdList);  //밴드_모델_코드_리스트
+                getCommonCodeList('BAND_OPEN_STAT_CD', $this.code.bandOpenStatCdList, function () //밴드_개통_상태_코드_리스트
                 {
                     $this.initGrid();
                     $this.searchBandOpenInfoList(true);
                 })
             },
+            //출고_년월_리스트_값 세팅
+             initBandYtypCdValue: function()
+            {
+                let $this = this;
+                for(let i=2022; i<2032; i++){
+                    let cdVal;
+                    let cdNm;
+                    for(let j=1; j<13; j++){
+                        if(j<10){
+                            cdVal = i+'0'+j;
+                            cdNm  = i+'-0'+j;
+                            $this.code.bandYtypCdList.push({'cdVal':cdVal, 'cdNm':cdNm});
+                        }else{
+                            cdVal = String(i)+j;
+                            cdNm  = i+'-'+j;
+                            $this.code.bandYtypCdList.push({'cdVal':cdVal, 'cdNm':cdNm});
+                        }
+                    }
+                }
+            },
             initGrid: function()
             {
                 let $this              = this;
-                let bandYtypCdList     = commonGridCmonCd($this.code.bandYtypCdList);     //밴드_년식_리스트
+                let bandYtypCdList     = commonGridCmonCd($this.code.bandYtypCdList);     //출고_년월_리스트
                 let bandMdlCdList      = commonGridCmonCd($this.code.bandMdlCdList);      //밴드_모델_코드_리스트
                 let bandOpenStatCdList = commonGridCmonCd($this.code.bandOpenStatCdList); //밴드_개통_상태_코드_리스트
                 let colModels =
                     [
                         {name: "crud"           , index: "crud"           , label: "crud"            , hidden: true                                },
-                        {name: "uptDt"          , index: "uptDt"          , label: "기준일자"         , width: 80 , align: "center" , hidden: true  },
-                        {name: "rgeDt"          , index: "rgeDt"          , label: "밴드등록일자"     , width: 80 , align: "center" , hidden: true  },
-                        {name: "bandId"         , index: "bandId"         , label: "밴드ID"           , width: 80 , align: "center" , hidden: true  },
-                        {name: "bandYtypCd"     , index: "bandYtypCd"     , label: "년식"             , width: 80 , align: "center" , editable: true
+                        {name: "uptDt"          , index: "uptDt"          , label: "기준일자"         , width: 80 , align: "center" , editable: true },
+                        {name: "regDt"          , index: "regDt"          , label: "밴드등록일자"     , width: 80 , align: "center" , editable: true },
+                        {name: "bandYtyp"       , index: "bandYtyp"       , label: "출고년월"          , width: 80 , align: "center" , editable: true
                          ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandYtypCdList}},
+                        {name: "bandIdTemp"     , index: "bandIdTemp"     , label: "밴드ID"           , width: 80 , align: "center" , hidden: true  },
+                        {name: "bandId"         , index: "bandId"         , label: "밴드ID"           , width: 80 , align: "center" , editable: true},
                         {name: "bandMdlCd"      , index: "bandMdlCd"      , label: "모델TYPE"         , width: 80 , align: "center" , editable: true
                          ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandMdlCdList}},
                         {name: "telNo"          , index: "telNo"          , label: "전화번호"         , width: 80 , align: "center" , editable: true },
@@ -97,12 +117,12 @@ let bandOpenInfoMng = new Vue({
                         {name: "blthId"         , index: "blthId"         , label: "블루투스ID"       , width: 80 , align: "center" , editable: true},
                         {name: "urlSplyYn"      , index: "urlSplyYn"      , label: "URL제공여부"      , width: 80 , align: "center" },
                         {name: "apiUrlDttm"     , index: "apiUrlDttm"     , label: "URL제공일시"      , width: 80 , align: "center" },
-                        {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"     , width: 80 , align: "center" },
-                        {name: "uptDt"          , index: "uptDt"          , label: "수정일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "uptTm"          , index: "uptTm"          , label: "수정시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"     , width: 80 , align: "center" }
+                        {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
+                        {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
+                        {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"     , width: 80 , align: "center"  , hidden: true},
+                        {name: "uptDt"          , index: "uptDt"          , label: "수정일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
+                        {name: "uptTm"          , index: "uptTm"          , label: "수정시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
+                        {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"     , width: 80 , align: "center"  , hidden: true}
                     ];
 
                 $("#bandOpenInfo_list").jqGrid("GridUnload");

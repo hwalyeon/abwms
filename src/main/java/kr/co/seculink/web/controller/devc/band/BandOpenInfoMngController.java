@@ -3,6 +3,7 @@ package kr.co.seculink.web.controller.devc.band;
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.web.excel.ExcelConstant;
 import kr.co.seculink.web.service.devc.band.BandOpenInfoMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,11 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -46,17 +46,16 @@ public class BandOpenInfoMngController
 		return vo;
 	}
 
-/*
+
 
 	//행추가_행삭제_저장
 	@ResponseBody
-	@RequestMapping("/svcStnd/nutr/ddRcmdEatStndMng/saveDdRcmdEatStnd.ab")
-	public RtnMsg saveDdRcmdEatStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+	@RequestMapping("/devc/band/bandOpenInfoMng/saveBandOpenInfo.ab")
+	public RtnMsg saveBandOpenInfo(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("파람"+params);
-		ddRcmdEatStndMngService.saveDdRcmdEatStnd(params);
+		bandOpenInfoMngService.saveBandOpenInfo(params);
 
 	
 		rtnMap.put("result", params);
@@ -67,12 +66,12 @@ public class BandOpenInfoMngController
 
 	//일일_권장섭취량기준_리스트 엑셀다운로드
 	@ResponseBody
-	@RequestMapping("/svcStnd/nutr/ddRcmdEatStndMng/searchDdRcmdEatStndList/excel.ab")
+	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfoList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		params.put("paging", "N");
 
-		List<Map<String, String>> result = dao.selectList("svcStnd.nutr.ddRcmdEatStndMng.selectDdRcmdEatStndList", params);
+		List<Map<String, String>> result = dao.selectList("devc.band.bandOpenInfoMng.selectBandOpenInfoList", params);
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
 
@@ -108,5 +107,5 @@ public class BandOpenInfoMngController
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
-	}*/
+	}
 }

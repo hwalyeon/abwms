@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="devc.band.bandOpenInfoMng">
-<!--
 
-    &lt;!&ndash;일일_권장_섭취량_기준_리스트 리스트 조회&ndash;&gt;
+    <!--밴드/개통정보_리스트 조회-->
 	<select id="selectBandOpenInfoList" parameterType="java.util.Map" resultType="MybatisMap">
+
 		select TBI.UPT_DT
-		, TBI.REG_DT
-		, TBI.BAND_ID
-		, SUBSTRING(TBI.BAND_ID,1,3) as BAND_YTYP
-		, TBI.BAND_MDL_CD
-		, TSB.STDT_NO  &#45;&#45;학생번호
-		, TBI.TEL_NO
-		, TSB.STDT_NM  &#45;&#45;학생명
-		, TBI.GUAR_TEL_NO
-		, TBI.BAND_OPEN_STAT_CD
-		, TGB.GUAR_NM &#45;&#45;보호자_명
-		, TGB.GUAR_TEL_NO &#45;&#45;보호자_전화번호
-		, TBI.OPEN_GRAM_NO
-		, TBI.BLTH_ID
-		, TBI.API_URL_GRAM_NO &#45;&#45;API URL 제공여부
-		, TBI.API_URL_DTTM
-		from TS_BAND_INFO TBI
-		left outer join TM_STDT_BASE TSB
+			 , TBI.REG_DT
+			 , TBI.BAND_ID AS BAND_ID_TEMP
+			 , TBI.BAND_ID
+		     , case when cast(SUBSTRING(TBI.BAND_ID, 1,1) AS INTEGER)  <![CDATA[<]]> 2
+		       then '203'|| SUBSTRING(TBI.BAND_ID, 1,1)|| SUBSTRING(TBI.BAND_ID, 2,2)
+		       else '202'||SUBSTRING(TBI.BAND_ID, 1,1)|| SUBSTRING(TBI.BAND_ID, 2,2) end as BAND_YTYP
+	   	     , TBI.BAND_MDL_CD
+			 , TSB.STDT_NO  --학생번호
+			 , TBI.TEL_NO
+			 , TSB.STDT_NM  --학생명
+			 , TSB.GUAR_NO
+			 , TBI.BAND_OPEN_STAT_CD
+			 , TGB.GUAR_NM --보호자_명
+			 , TGB.GUAR_TEL_NO --보호자_전화번호
+			 , TBI.OPEN_GRAM_NO
+			 , TBI.BLTH_ID
+			 , TBI.API_URL_GRAM_NO --API URL 제공여부
+			 , TBI.API_URL_DTTM
+		  	 , TBI.REG_DT
+		  	 , TBI.REG_TM
+		 	 , TBI.REG_USER_ID
+			 , TBI.UPT_DT
+			 , TBI.UPT_TM
+			 , TBI.UPT_USER_ID
+		from   TS_BAND_INFO AS TBI
+		left outer join TM_STDT_BASE AS TSB
 		on TBI.BAND_ID = TSB.BAND_ID
-		left outer join TM_GUAR_BASE TGB
+		left outer join TM_GUAR_BASE AS TGB
 		on TSB.GUAR_NO = TGB.GUAR_NO
 		where 1=1
-		<if test= uptDtFr != null && uptDtFr !='' >
+		<if test="uptDtFr != null and uptDtTo != null and uptDtFr !='' and uptDtTo !='' ">
 		and TBI.UPT_DT between #{uptDtFr} and #{uptDtTo}</if>
-	<if test= mmDd != null && mmDd !='' >
-	and TBI.UPT_DT = #{mmDd}</if>
-<if test= stdtNm != null && stdtNm !='' >
-		and TSB.STDT_NM like CONCAT('%',#{stdtNm},'%')
-<if test= bandTelNo != null && bandTelNo !='' >
-		and TBI.TEL_NO   = #{bandTelNo}
-<if test= bandId != null && bandId !='' >
-		and TBI.BAND_ID like CONCAT('%',#{bandId},'%')
-<if test= bandOpenStatCd != null && bandOpenStatCd !='' >
-		and TBI.BAND_OPEN_STAT_CD  = #{bandOpenStatCd}
-<if test= guarNm != null && guarNm !='' >
-		and TGB.GAUR_NM  = #{guarNm}
-<if test= guarTelNo != null && guarTelNo !='' >
-		and TGB.GUAR_TEL_NO  = #{guarTelNo}
-		ORDER BY SEX_CD, AGE_YCNT,NUTR_NM
+	 	<if test=" stdtNm != null and stdtNm !='' ">
+		and TSB.STDT_NM like CONCAT('%',#{stdtNm},'%')</if>
+	 	<if test= "bandTelNo != null and bandTelNo !='' ">
+		and TBI.TEL_NO   = #{bandTelNo}</if>
+		<if test= "bandYtypCd != null and bandYtypCd !='' ">
+		and TBI.BAND_YTYP like CONCAT('%',#{bandYtypCd},'%')</if>
+	 	 <if test= "bandId != null and bandId !='' ">
+		and TBI.BAND_ID like CONCAT('%',#{bandId},'%')</if>
+	 	 <if test= "bandOpenStatCd != null and bandOpenStatCd !='' ">
+		and TBI.BAND_OPEN_STAT_CD  = #{bandOpenStatCd}</if>
+	 	 <if test= "guarNm != null and guarNm !='' ">
+		and TGB.GAUR_NM   like CONCAT('%',#{guarNm},'%')</if>
+	 	 <if test= "guarTelNo != null and guarTelNo !='' ">
+		and TGB.GUAR_TEL_NO  = #{guarTelNo}</if>
+
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 
-	&lt;!&ndash;행추가_행삭제 인서트&ndash;&gt;
-	<insert id="insertTiDdRcmdEatStndList" parameterType="java.util.Map">
-    	INSERT INTO  TI_DD_NUTR_EAT_BLCK
+
+	<insert id="insertTsBandInfoList" parameterType="java.util.Map">
+    /*	INSERT INTO  TI_DD_NUTR_EAT_BLCK
     	(
 		      SEX_CD
 			, AGE_YCNT
@@ -81,12 +90,11 @@
 	       , TO_CHAR(NOW(), 'YYYYMMDD')
 	       , TO_CHAR(NOW(), 'HH24MISS')
 	       , #{uptUserId}
-    	)
+    	)*/
     </insert>
 
-	&lt;!&ndash;행추가_행삭제 업데이트&ndash;&gt;
-	<update id="updateTiDdRcmdEatStndList" parameterType="java.util.Map">
-		UPDATE TI_DD_NUTR_EAT_BLCK
+	<update id="updateTsBandInfoList" parameterType="java.util.Map">
+<!--		UPDATE TI_DD_NUTR_EAT_BLCK
 		SET         UPT_DT           = TO_CHAR(NOW(), 'YYYYMMDD')
 		            ,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
 	             	,  UPT_USER_ID  = #{uptUserId}
@@ -101,19 +109,18 @@
 		AND SEX_CD         = #{sexCdTemp}
 		AND AGE_YCNT    = #{ageYcntTemp}::NUMERIC
 		AND NUTR_CD      = #{nutrCdTemp}
-		AND EAT_QTY_FR  = #{eatQtyFrTemp}::NUMERIC
+		AND EAT_QTY_FR  = #{eatQtyFrTemp}::NUMERIC-->
 	</update>
 
-	&lt;!&ndash;행추가_행삭제 삭제&ndash;&gt;
-	<delete id ="deleteTiDdRcmdEatStndList" parameterType="java.util.Map">
-        DELETE
+	<delete id ="deleteTsBandInfoList" parameterType="java.util.Map">
+/*        DELETE
         FROM    TI_DD_NUTR_EAT_BLCK
         WHERE  1=1
 		AND SEX_CD          = #{sexCdTemp}
 		AND AGE_YCNT     = #{ageYcntTemp}::NUMERIC
 		AND NUTR_CD      = #{nutrCdTemp}
-		AND EAT_QTY_FR = #{eatQtyFrTemp}::NUMERIC
+		AND EAT_QTY_FR = #{eatQtyFrTemp}::NUMERIC*/
 	</delete>
--->
+
 
 </mapper>

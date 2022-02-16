@@ -23,10 +23,9 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		List<Map<String, String>> result = dao.selectList("devc.band.bandOpenInfoMng.selectBandOpenInfoList", params);
 		return result;
 	}
-/*
 
 	//행추가_행삭제 저장
-	public void saveDdRcmdEatStnd(Map<String, Object> params) throws BizException
+	public void saveBandOpenInfo(Map<String, Object> params) throws BizException
 	{
 		int saveCnt = 0;
 
@@ -36,11 +35,11 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 			log.debug("crud         : " +  info.get("crud"));
 
 			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.nutr.ddRcmdEatStndMng.insertTiDdRcmdEatStndList", info);
+				saveCnt += dao.insert("svcStnd.nutr.ddRcmdEatStndMng.insertTsBandInfoList", info);
 			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.nutr.ddRcmdEatStndMng.updateTiDdRcmdEatStndList", info);
+				saveCnt += dao.update("svcStnd.nutr.ddRcmdEatStndMng.updateTsBandInfoList", info);
 			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.nutr.ddRcmdEatStndMng.deleteTiDdRcmdEatStndList", info);
+				saveCnt += dao.delete("svcStnd.nutr.ddRcmdEatStndMng.deleteTsBandInfoList", info);
 			}
 		}
 		if(saveCnt == 0){
@@ -48,7 +47,6 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		}
 	}
 
-*/
 
 	
 }
