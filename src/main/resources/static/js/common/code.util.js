@@ -60,14 +60,16 @@ var CodeUtil = {
      */
     getPeriodDateList: function() {
         return [
-            { value: "TODAY",        text: "오늘" },
-            { value: "YESTERDAY",    text: "어제" },
-            { value: "RECENT_WEEK",  text: "최근한주" },
-            { value: "THIS_WEEK",    text: "이번주" },
-            { value: "LAST_WEEK",    text: "지난주" },
-            { value: "RECENT_MONTH", text: "최근한달" },
-            { value: "THIS_MONTH",   text: "이번달" },
-            { value: "LAST_MONTH",   text: "지난달" }
+            { value: "TODAY",            text: "오늘" },
+            { value: "YESTERDAY",        text: "어제" },
+            { value: "RECENT_WEEK",      text: "최근한주" },
+            { value: "THIS_WEEK",        text: "이번주" },
+            { value: "LAST_WEEK",        text: "지난주" },
+            { value: "RECENT_MONTH",     text: "최근한달" },
+            { value: "THIS_MONTH",       text: "이번달" },
+            { value: "LAST_MONTH",       text: "지난달" },
+            { value: "PRE_THREE_MONTH",  text: "최근3개월" },
+            { value: "PRE_SIX_MONTH",    text: "최근6개월" }
         ];
     },
 
