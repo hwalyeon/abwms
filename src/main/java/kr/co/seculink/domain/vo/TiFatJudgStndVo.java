@@ -10,13 +10,19 @@ public class TiFatJudgStndVo implements Serializable {
 	/* fat_judg_cd 비만_판정_코드 character varying(20) */
 	private String fatJudgCd;
 
+	/* bmi_fr BMI_FROM numeric(null) */
+	private double bmiFr;
+
+	/* bmi_to BMI_TO numeric(null) */
+	private double bmiTo;
+
 	/* fidx_fr 비만지수_FROM numeric(null) */
 	private double fidxFr;
 
 	/* fidx_to 비만지수_TO numeric(null) */
 	private double fidxTo;
 
-	/* curr_eval_cntn 현재_평가_내용 character varying(100) */
+	/* curr_eval_cntn 현재_평가_내용 character varying(4000) */
 	private String currEvalCntn;
 
 	/* prdt_eval_cntn 예측_평가_내용 character varying(4000) */
@@ -57,6 +63,36 @@ public class TiFatJudgStndVo implements Serializable {
 		this.fatJudgCd = fatJudgCd;
 	}
 	/**
+	 * Get bmi_fr BMI_FROM numeric(null)
+	 * @Return double bmiFr
+	 */
+	public double getBmiFr() {
+		return this.bmiFr;
+	}
+	
+	/**
+	 * Set bmi_fr BMI_FROM numeric(null)
+	 * @Param double bmiFr
+	 */
+	public void setBmiFr(double bmiFr) {
+		this.bmiFr = bmiFr;
+	}
+	/**
+	 * Get bmi_to BMI_TO numeric(null)
+	 * @Return double bmiTo
+	 */
+	public double getBmiTo() {
+		return this.bmiTo;
+	}
+	
+	/**
+	 * Set bmi_to BMI_TO numeric(null)
+	 * @Param double bmiTo
+	 */
+	public void setBmiTo(double bmiTo) {
+		this.bmiTo = bmiTo;
+	}
+	/**
 	 * Get fidx_fr 비만지수_FROM numeric(null)
 	 * @Return double fidxFr
 	 */
@@ -87,7 +123,7 @@ public class TiFatJudgStndVo implements Serializable {
 		this.fidxTo = fidxTo;
 	}
 	/**
-	 * Get curr_eval_cntn 현재_평가_내용 character varying(100)
+	 * Get curr_eval_cntn 현재_평가_내용 character varying(4000)
 	 * @Return String currEvalCntn
 	 */
 	public String getCurrEvalCntn() {
@@ -95,7 +131,7 @@ public class TiFatJudgStndVo implements Serializable {
 	}
 	
 	/**
-	 * Set curr_eval_cntn 현재_평가_내용 character varying(100)
+	 * Set curr_eval_cntn 현재_평가_내용 character varying(4000)
 	 * @Param String currEvalCntn
 	 */
 	public void setCurrEvalCntn(String currEvalCntn) {

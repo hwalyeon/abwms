@@ -10,7 +10,7 @@ public class TiNutrStatStndVo implements Serializable {
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
 
-	/* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+	/* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 	private String nutrStatCd;
 
 	/* nutr_rmrk 영양섭취_비고 character varying(4000) */
@@ -51,7 +51,7 @@ public class TiNutrStatStndVo implements Serializable {
 		this.nutrCd = nutrCd;
 	}
 	/**
-	 * Get nutr_stat_cd 영양섭취_상태_코드 character varying(4000)
+	 * Get nutr_stat_cd 영양섭취_상태_코드 character varying(20)
 	 * @Return String nutrStatCd
 	 */
 	public String getNutrStatCd() {
@@ -59,7 +59,7 @@ public class TiNutrStatStndVo implements Serializable {
 	}
 	
 	/**
-	 * Set nutr_stat_cd 영양섭취_상태_코드 character varying(4000)
+	 * Set nutr_stat_cd 영양섭취_상태_코드 character varying(20)
 	 * @Param String nutrStatCd
 	 */
 	public void setNutrStatCd(String nutrStatCd) {

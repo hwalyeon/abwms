@@ -10,8 +10,8 @@ public class TiTermBaseVo implements Serializable {
 	/* term_div_cd 약관_구분_코드 character varying(20) */
 	private String termDivCd;
 
-	/* term_ver 약관_버전 numeric(null) */
-	private double termVer;
+	/* term_ver 약관_버전 character varying(20) */
+	private String termVer;
 
 	/* aply_strt_dt 적용_시작_일자 character(8) */
 	private String aplyStrtDt;
@@ -57,18 +57,18 @@ public class TiTermBaseVo implements Serializable {
 		this.termDivCd = termDivCd;
 	}
 	/**
-	 * Get term_ver 약관_버전 numeric(null)
-	 * @Return double termVer
+	 * Get term_ver 약관_버전 character varying(20)
+	 * @Return String termVer
 	 */
-	public double getTermVer() {
+	public String getTermVer() {
 		return this.termVer;
 	}
 	
 	/**
-	 * Set term_ver 약관_버전 numeric(null)
-	 * @Param double termVer
+	 * Set term_ver 약관_버전 character varying(20)
+	 * @Param String termVer
 	 */
-	public void setTermVer(double termVer) {
+	public void setTermVer(String termVer) {
 		this.termVer = termVer;
 	}
 	/**

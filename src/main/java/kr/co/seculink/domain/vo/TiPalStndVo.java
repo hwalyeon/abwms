@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 public class TiPalStndVo implements Serializable {
 
-	/* pal_cd 신체활동수준_코드 character(18) */
+	/* pal_cd 신체활동수준_코드 character varying(20) */
 	private String palCd;
 
-	/* pal_nm 신체활동수준_명 character varying(40) */
+	/* pal_nm 신체활동수준_명 character varying(30) */
 	private String palNm;
 
 	/* pal_rmrk 신체활동수준_비고 character varying(4000) */
@@ -34,12 +34,9 @@ public class TiPalStndVo implements Serializable {
 	/* upt_user_id 수정_사용자_ID character varying(20) */
 	private String uptUserId;
 
-	/* nutr_stat_cd__96398 null character varying(20) */
-	private String nutrStatCd96398;
-
 
 	/**
-	 * Get pal_cd 신체활동수준_코드 character(18)
+	 * Get pal_cd 신체활동수준_코드 character varying(20)
 	 * @Return String palCd
 	 */
 	public String getPalCd() {
@@ -47,14 +44,14 @@ public class TiPalStndVo implements Serializable {
 	}
 	
 	/**
-	 * Set pal_cd 신체활동수준_코드 character(18)
+	 * Set pal_cd 신체활동수준_코드 character varying(20)
 	 * @Param String palCd
 	 */
 	public void setPalCd(String palCd) {
 		this.palCd = palCd;
 	}
 	/**
-	 * Get pal_nm 신체활동수준_명 character varying(40)
+	 * Get pal_nm 신체활동수준_명 character varying(30)
 	 * @Return String palNm
 	 */
 	public String getPalNm() {
@@ -62,7 +59,7 @@ public class TiPalStndVo implements Serializable {
 	}
 	
 	/**
-	 * Set pal_nm 신체활동수준_명 character varying(40)
+	 * Set pal_nm 신체활동수준_명 character varying(30)
 	 * @Param String palNm
 	 */
 	public void setPalNm(String palNm) {
@@ -172,21 +169,6 @@ public class TiPalStndVo implements Serializable {
 	 */
 	public void setUptUserId(String uptUserId) {
 		this.uptUserId = uptUserId;
-	}
-	/**
-	 * Get nutr_stat_cd__96398 null character varying(20)
-	 * @Return String nutrStatCd96398
-	 */
-	public String getNutrStatCd96398() {
-		return this.nutrStatCd96398;
-	}
-	
-	/**
-	 * Set nutr_stat_cd__96398 null character varying(20)
-	 * @Param String nutrStatCd96398
-	 */
-	public void setNutrStatCd96398(String nutrStatCd96398) {
-		this.nutrStatCd96398 = nutrStatCd96398;
 	}
 
 } // end of class

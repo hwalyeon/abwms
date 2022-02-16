@@ -16,7 +16,7 @@ public class TiGrowJudgStndVo implements Serializable {
 	/* gidx_to 성장지수_TO numeric(null) */
 	private double gidxTo;
 
-	/* smry_cntn 요약_내용 character varying(100) */
+	/* smry_cntn 요약_내용 character varying(1000) */
 	private String smryCntn;
 
 	/* spec_cntn 상세_내용 character varying(4000) */
@@ -87,7 +87,7 @@ public class TiGrowJudgStndVo implements Serializable {
 		this.gidxTo = gidxTo;
 	}
 	/**
-	 * Get smry_cntn 요약_내용 character varying(100)
+	 * Get smry_cntn 요약_내용 character varying(1000)
 	 * @Return String smryCntn
 	 */
 	public String getSmryCntn() {
@@ -95,7 +95,7 @@ public class TiGrowJudgStndVo implements Serializable {
 	}
 	
 	/**
-	 * Set smry_cntn 요약_내용 character varying(100)
+	 * Set smry_cntn 요약_내용 character varying(1000)
 	 * @Param String smryCntn
 	 */
 	public void setSmryCntn(String smryCntn) {

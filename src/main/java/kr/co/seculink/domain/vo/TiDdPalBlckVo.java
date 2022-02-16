@@ -16,11 +16,8 @@ public class TiDdPalBlckVo implements Serializable {
 	/* sex_cd 성별_코드 character varying(20) */
 	private String sexCd;
 
-	/* age_ycnt_fr 나이_년수_FROM numeric(null) */
-	private double ageYcntFr;
-
-	/* age_ycnt_to 나이_년수_TO numeric(null) */
-	private double ageYcntTo;
+	/* age_ycnt 나이_년수 numeric(null) */
+	private double ageYcnt;
 
 	/* pal_val_fr 신체활동수준_값_FROM numeric(null) */
 	private double palValFr;
@@ -28,11 +25,23 @@ public class TiDdPalBlckVo implements Serializable {
 	/* pal_val_to 신체활동수준_값_TO numeric(null) */
 	private double palValTo;
 
+	/* cal_qty_fr 칼로리_량_FROM numeric(null) */
+	private double calQtyFr;
+
+	/* cal_qty_to 칼로리_량_TO numeric(null) */
+	private double calQtyTo;
+
 	/* dd_cal_qty 일일_칼로리_량 numeric(null) */
 	private double ddCalQty;
 
-	/* pal_cd 신체활동수준_코드 character(18) */
+	/* pal_cd 신체활동수준_코드 character varying(20) */
 	private String palCd;
+
+	/* nutr_cd 영양소_코드 character varying(20) */
+	private String nutrCd;
+
+	/* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+	private String nutrStatCd;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -99,34 +108,19 @@ public class TiDdPalBlckVo implements Serializable {
 		this.sexCd = sexCd;
 	}
 	/**
-	 * Get age_ycnt_fr 나이_년수_FROM numeric(null)
-	 * @Return double ageYcntFr
+	 * Get age_ycnt 나이_년수 numeric(null)
+	 * @Return double ageYcnt
 	 */
-	public double getAgeYcntFr() {
-		return this.ageYcntFr;
+	public double getAgeYcnt() {
+		return this.ageYcnt;
 	}
 	
 	/**
-	 * Set age_ycnt_fr 나이_년수_FROM numeric(null)
-	 * @Param double ageYcntFr
+	 * Set age_ycnt 나이_년수 numeric(null)
+	 * @Param double ageYcnt
 	 */
-	public void setAgeYcntFr(double ageYcntFr) {
-		this.ageYcntFr = ageYcntFr;
-	}
-	/**
-	 * Get age_ycnt_to 나이_년수_TO numeric(null)
-	 * @Return double ageYcntTo
-	 */
-	public double getAgeYcntTo() {
-		return this.ageYcntTo;
-	}
-	
-	/**
-	 * Set age_ycnt_to 나이_년수_TO numeric(null)
-	 * @Param double ageYcntTo
-	 */
-	public void setAgeYcntTo(double ageYcntTo) {
-		this.ageYcntTo = ageYcntTo;
+	public void setAgeYcnt(double ageYcnt) {
+		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get pal_val_fr 신체활동수준_값_FROM numeric(null)
@@ -159,6 +153,36 @@ public class TiDdPalBlckVo implements Serializable {
 		this.palValTo = palValTo;
 	}
 	/**
+	 * Get cal_qty_fr 칼로리_량_FROM numeric(null)
+	 * @Return double calQtyFr
+	 */
+	public double getCalQtyFr() {
+		return this.calQtyFr;
+	}
+	
+	/**
+	 * Set cal_qty_fr 칼로리_량_FROM numeric(null)
+	 * @Param double calQtyFr
+	 */
+	public void setCalQtyFr(double calQtyFr) {
+		this.calQtyFr = calQtyFr;
+	}
+	/**
+	 * Get cal_qty_to 칼로리_량_TO numeric(null)
+	 * @Return double calQtyTo
+	 */
+	public double getCalQtyTo() {
+		return this.calQtyTo;
+	}
+	
+	/**
+	 * Set cal_qty_to 칼로리_량_TO numeric(null)
+	 * @Param double calQtyTo
+	 */
+	public void setCalQtyTo(double calQtyTo) {
+		this.calQtyTo = calQtyTo;
+	}
+	/**
 	 * Get dd_cal_qty 일일_칼로리_량 numeric(null)
 	 * @Return double ddCalQty
 	 */
@@ -174,7 +198,7 @@ public class TiDdPalBlckVo implements Serializable {
 		this.ddCalQty = ddCalQty;
 	}
 	/**
-	 * Get pal_cd 신체활동수준_코드 character(18)
+	 * Get pal_cd 신체활동수준_코드 character varying(20)
 	 * @Return String palCd
 	 */
 	public String getPalCd() {
@@ -182,11 +206,41 @@ public class TiDdPalBlckVo implements Serializable {
 	}
 	
 	/**
-	 * Set pal_cd 신체활동수준_코드 character(18)
+	 * Set pal_cd 신체활동수준_코드 character varying(20)
 	 * @Param String palCd
 	 */
 	public void setPalCd(String palCd) {
 		this.palCd = palCd;
+	}
+	/**
+	 * Get nutr_cd 영양소_코드 character varying(20)
+	 * @Return String nutrCd
+	 */
+	public String getNutrCd() {
+		return this.nutrCd;
+	}
+	
+	/**
+	 * Set nutr_cd 영양소_코드 character varying(20)
+	 * @Param String nutrCd
+	 */
+	public void setNutrCd(String nutrCd) {
+		this.nutrCd = nutrCd;
+	}
+	/**
+	 * Get nutr_stat_cd 영양섭취_상태_코드 character varying(20)
+	 * @Return String nutrStatCd
+	 */
+	public String getNutrStatCd() {
+		return this.nutrStatCd;
+	}
+	
+	/**
+	 * Set nutr_stat_cd 영양섭취_상태_코드 character varying(20)
+	 * @Param String nutrStatCd
+	 */
+	public void setNutrStatCd(String nutrStatCd) {
+		this.nutrStatCd = nutrStatCd;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

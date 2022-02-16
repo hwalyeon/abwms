@@ -7,32 +7,50 @@ import java.io.Serializable;
  */
 public class TiEorgBaseVo implements Serializable {
 
-	/* eorg_no 교육시설_번호 numeric(null) */
-	private double eorgNo;
+	/* loc_no 위치_번호 character(18) */
+	private String locNo;
 
-	/* eorg_nm 교육시설_명 character varying(200) */
-	private String eorgNm;
+	/* plc_cd 장소_코드 character varying(100) */
+	private String plcCd;
 
-	/* eorg_tel_no 교육시설_전화_번호 character varying(20) */
-	private String eorgTelNo;
+	/* loc_nm 위치_명 character varying(100) */
+	private String locNm;
 
-	/* cctv_inst_yn CCTV_설치_여부 character(1) */
-	private String cctvInstYn;
+	/* road_addr 도로명_주소 character varying(400) */
+	private String roadAddr;
 
-	/* cctv_inst_cnt CCTV_설치_대수 numeric(null) */
-	private double cctvInstCnt;
+	/* jibn_addr 지번_주소 character varying(400) */
+	private String jibnAddr;
 
-	/* morg_nm 관리기관_명 character varying(100) */
-	private String morgNm;
+	/* lat_val 위도_값 numeric(null) */
+	private double latVal;
 
-	/* morg_tel_no 관리기관_전화_번호 character varying(20) */
-	private String morgTelNo;
+	/* lon_val 경도_값 numeric(null) */
+	private double lonVal;
 
-	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
+	/* mng_orgn_nm 관리_기관_명 character varying(100) */
+	private String mngOrgnNm;
 
-	/* rmrk 비고 character varying(4000) */
-	private String rmrk;
+	/* mng_polc_nm 관할_경찰서_명 character varying(100) */
+	private String mngPolcNm;
+
+	/* cctv_yn CCTV_여부 character(1) */
+	private String cctvYn;
+
+	/* cctv_cnt CCTV_대수 numeric(null) */
+	private double cctvCnt;
+
+	/* road_wdth_desc 도로_넓이_설명 character varying(50) */
+	private String roadWdthDesc;
+
+	/* data_stnd_dt 자료_기준_일자 character(8) */
+	private String dataStndDt;
+
+	/* prov_orgn_cd 제공_기관_코드 character varying(20) */
+	private String provOrgnCd;
+
+	/* prov_orgn_nm 제공_기관_명 character varying(100) */
+	private String provOrgnNm;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -54,139 +72,229 @@ public class TiEorgBaseVo implements Serializable {
 
 
 	/**
-	 * Get eorg_no 교육시설_번호 numeric(null)
-	 * @Return double eorgNo
+	 * Get loc_no 위치_번호 character(18)
+	 * @Return String locNo
 	 */
-	public double getEorgNo() {
-		return this.eorgNo;
-	}
-	
-	/**
-	 * Set eorg_no 교육시설_번호 numeric(null)
-	 * @Param double eorgNo
-	 */
-	public void setEorgNo(double eorgNo) {
-		this.eorgNo = eorgNo;
-	}
-	/**
-	 * Get eorg_nm 교육시설_명 character varying(200)
-	 * @Return String eorgNm
-	 */
-	public String getEorgNm() {
-		return this.eorgNm;
-	}
-	
-	/**
-	 * Set eorg_nm 교육시설_명 character varying(200)
-	 * @Param String eorgNm
-	 */
-	public void setEorgNm(String eorgNm) {
-		this.eorgNm = eorgNm;
-	}
-	/**
-	 * Get eorg_tel_no 교육시설_전화_번호 character varying(20)
-	 * @Return String eorgTelNo
-	 */
-	public String getEorgTelNo() {
-		return this.eorgTelNo;
-	}
-	
-	/**
-	 * Set eorg_tel_no 교육시설_전화_번호 character varying(20)
-	 * @Param String eorgTelNo
-	 */
-	public void setEorgTelNo(String eorgTelNo) {
-		this.eorgTelNo = eorgTelNo;
-	}
-	/**
-	 * Get cctv_inst_yn CCTV_설치_여부 character(1)
-	 * @Return String cctvInstYn
-	 */
-	public String getCctvInstYn() {
-		return this.cctvInstYn;
-	}
-	
-	/**
-	 * Set cctv_inst_yn CCTV_설치_여부 character(1)
-	 * @Param String cctvInstYn
-	 */
-	public void setCctvInstYn(String cctvInstYn) {
-		this.cctvInstYn = cctvInstYn;
-	}
-	/**
-	 * Get cctv_inst_cnt CCTV_설치_대수 numeric(null)
-	 * @Return double cctvInstCnt
-	 */
-	public double getCctvInstCnt() {
-		return this.cctvInstCnt;
-	}
-	
-	/**
-	 * Set cctv_inst_cnt CCTV_설치_대수 numeric(null)
-	 * @Param double cctvInstCnt
-	 */
-	public void setCctvInstCnt(double cctvInstCnt) {
-		this.cctvInstCnt = cctvInstCnt;
-	}
-	/**
-	 * Get morg_nm 관리기관_명 character varying(100)
-	 * @Return String morgNm
-	 */
-	public String getMorgNm() {
-		return this.morgNm;
-	}
-	
-	/**
-	 * Set morg_nm 관리기관_명 character varying(100)
-	 * @Param String morgNm
-	 */
-	public void setMorgNm(String morgNm) {
-		this.morgNm = morgNm;
-	}
-	/**
-	 * Get morg_tel_no 관리기관_전화_번호 character varying(20)
-	 * @Return String morgTelNo
-	 */
-	public String getMorgTelNo() {
-		return this.morgTelNo;
-	}
-	
-	/**
-	 * Set morg_tel_no 관리기관_전화_번호 character varying(20)
-	 * @Param String morgTelNo
-	 */
-	public void setMorgTelNo(String morgTelNo) {
-		this.morgTelNo = morgTelNo;
-	}
-	/**
-	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
-	 */
-	public double getLocNo() {
+	public String getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
-	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
+	 * Set loc_no 위치_번호 character(18)
+	 * @Param String locNo
 	 */
-	public void setLocNo(double locNo) {
+	public void setLocNo(String locNo) {
 		this.locNo = locNo;
 	}
 	/**
-	 * Get rmrk 비고 character varying(4000)
-	 * @Return String rmrk
+	 * Get plc_cd 장소_코드 character varying(100)
+	 * @Return String plcCd
 	 */
-	public String getRmrk() {
-		return this.rmrk;
+	public String getPlcCd() {
+		return this.plcCd;
 	}
 	
 	/**
-	 * Set rmrk 비고 character varying(4000)
-	 * @Param String rmrk
+	 * Set plc_cd 장소_코드 character varying(100)
+	 * @Param String plcCd
 	 */
-	public void setRmrk(String rmrk) {
-		this.rmrk = rmrk;
+	public void setPlcCd(String plcCd) {
+		this.plcCd = plcCd;
+	}
+	/**
+	 * Get loc_nm 위치_명 character varying(100)
+	 * @Return String locNm
+	 */
+	public String getLocNm() {
+		return this.locNm;
+	}
+	
+	/**
+	 * Set loc_nm 위치_명 character varying(100)
+	 * @Param String locNm
+	 */
+	public void setLocNm(String locNm) {
+		this.locNm = locNm;
+	}
+	/**
+	 * Get road_addr 도로명_주소 character varying(400)
+	 * @Return String roadAddr
+	 */
+	public String getRoadAddr() {
+		return this.roadAddr;
+	}
+	
+	/**
+	 * Set road_addr 도로명_주소 character varying(400)
+	 * @Param String roadAddr
+	 */
+	public void setRoadAddr(String roadAddr) {
+		this.roadAddr = roadAddr;
+	}
+	/**
+	 * Get jibn_addr 지번_주소 character varying(400)
+	 * @Return String jibnAddr
+	 */
+	public String getJibnAddr() {
+		return this.jibnAddr;
+	}
+	
+	/**
+	 * Set jibn_addr 지번_주소 character varying(400)
+	 * @Param String jibnAddr
+	 */
+	public void setJibnAddr(String jibnAddr) {
+		this.jibnAddr = jibnAddr;
+	}
+	/**
+	 * Get lat_val 위도_값 numeric(null)
+	 * @Return double latVal
+	 */
+	public double getLatVal() {
+		return this.latVal;
+	}
+	
+	/**
+	 * Set lat_val 위도_값 numeric(null)
+	 * @Param double latVal
+	 */
+	public void setLatVal(double latVal) {
+		this.latVal = latVal;
+	}
+	/**
+	 * Get lon_val 경도_값 numeric(null)
+	 * @Return double lonVal
+	 */
+	public double getLonVal() {
+		return this.lonVal;
+	}
+	
+	/**
+	 * Set lon_val 경도_값 numeric(null)
+	 * @Param double lonVal
+	 */
+	public void setLonVal(double lonVal) {
+		this.lonVal = lonVal;
+	}
+	/**
+	 * Get mng_orgn_nm 관리_기관_명 character varying(100)
+	 * @Return String mngOrgnNm
+	 */
+	public String getMngOrgnNm() {
+		return this.mngOrgnNm;
+	}
+	
+	/**
+	 * Set mng_orgn_nm 관리_기관_명 character varying(100)
+	 * @Param String mngOrgnNm
+	 */
+	public void setMngOrgnNm(String mngOrgnNm) {
+		this.mngOrgnNm = mngOrgnNm;
+	}
+	/**
+	 * Get mng_polc_nm 관할_경찰서_명 character varying(100)
+	 * @Return String mngPolcNm
+	 */
+	public String getMngPolcNm() {
+		return this.mngPolcNm;
+	}
+	
+	/**
+	 * Set mng_polc_nm 관할_경찰서_명 character varying(100)
+	 * @Param String mngPolcNm
+	 */
+	public void setMngPolcNm(String mngPolcNm) {
+		this.mngPolcNm = mngPolcNm;
+	}
+	/**
+	 * Get cctv_yn CCTV_여부 character(1)
+	 * @Return String cctvYn
+	 */
+	public String getCctvYn() {
+		return this.cctvYn;
+	}
+	
+	/**
+	 * Set cctv_yn CCTV_여부 character(1)
+	 * @Param String cctvYn
+	 */
+	public void setCctvYn(String cctvYn) {
+		this.cctvYn = cctvYn;
+	}
+	/**
+	 * Get cctv_cnt CCTV_대수 numeric(null)
+	 * @Return double cctvCnt
+	 */
+	public double getCctvCnt() {
+		return this.cctvCnt;
+	}
+	
+	/**
+	 * Set cctv_cnt CCTV_대수 numeric(null)
+	 * @Param double cctvCnt
+	 */
+	public void setCctvCnt(double cctvCnt) {
+		this.cctvCnt = cctvCnt;
+	}
+	/**
+	 * Get road_wdth_desc 도로_넓이_설명 character varying(50)
+	 * @Return String roadWdthDesc
+	 */
+	public String getRoadWdthDesc() {
+		return this.roadWdthDesc;
+	}
+	
+	/**
+	 * Set road_wdth_desc 도로_넓이_설명 character varying(50)
+	 * @Param String roadWdthDesc
+	 */
+	public void setRoadWdthDesc(String roadWdthDesc) {
+		this.roadWdthDesc = roadWdthDesc;
+	}
+	/**
+	 * Get data_stnd_dt 자료_기준_일자 character(8)
+	 * @Return String dataStndDt
+	 */
+	public String getDataStndDt() {
+		return this.dataStndDt;
+	}
+	
+	/**
+	 * Set data_stnd_dt 자료_기준_일자 character(8)
+	 * @Param String dataStndDt
+	 */
+	public void setDataStndDt(String dataStndDt) {
+		this.dataStndDt = dataStndDt;
+	}
+	/**
+	 * Get prov_orgn_cd 제공_기관_코드 character varying(20)
+	 * @Return String provOrgnCd
+	 */
+	public String getProvOrgnCd() {
+		return this.provOrgnCd;
+	}
+	
+	/**
+	 * Set prov_orgn_cd 제공_기관_코드 character varying(20)
+	 * @Param String provOrgnCd
+	 */
+	public void setProvOrgnCd(String provOrgnCd) {
+		this.provOrgnCd = provOrgnCd;
+	}
+	/**
+	 * Get prov_orgn_nm 제공_기관_명 character varying(100)
+	 * @Return String provOrgnNm
+	 */
+	public String getProvOrgnNm() {
+		return this.provOrgnNm;
+	}
+	
+	/**
+	 * Set prov_orgn_nm 제공_기관_명 character varying(100)
+	 * @Param String provOrgnNm
+	 */
+	public void setProvOrgnNm(String provOrgnNm) {
+		this.provOrgnNm = provOrgnNm;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

@@ -10,17 +10,23 @@ public class TmGuarBaseVo implements Serializable {
 	/* guar_no 보호자_번호 numeric(null) */
 	private double guarNo;
 
-	/* guar_nm 보호자_명 character varying(20) */
+	/* guar_nm 보호자_명 character varying(40) */
 	private String guarNm;
 
 	/* guar_tel_no 보호자_전화_번호 character varying(20) */
 	private String guarTelNo;
 
-	/* guar_pw 보호자_비밀번호 character varying(1000) */
+	/* guar_pw 보호자_비밀번호 character varying(400) */
 	private String guarPw;
 
 	/* self_cert_dttm 본인_인증_일시 character(14) */
 	private String selfCertDttm;
+
+	/* auto_login_yn 자동_로그인_여부 character(1) */
+	private String autoLoginYn;
+
+	/* devc_cert_val 장치_인증_값 character varying(1000) */
+	private String devcCertVal;
 
 	/* race_div_cd 인종_구분_코드 character varying(20) */
 	private String raceDivCd;
@@ -67,7 +73,7 @@ public class TmGuarBaseVo implements Serializable {
 	/* rels_resn_cd 해지_사유_코드 character varying(20) */
 	private String relsResnCd;
 
-	/* rels_resn_cntn 해지_사유_내용 character varying(400) */
+	/* rels_resn_cntn 해지_사유_내용 character varying(4000) */
 	private String relsResnCntn;
 
 	/* entr_stat_cd 가입_상태_코드 character varying(20) */
@@ -108,7 +114,7 @@ public class TmGuarBaseVo implements Serializable {
 		this.guarNo = guarNo;
 	}
 	/**
-	 * Get guar_nm 보호자_명 character varying(20)
+	 * Get guar_nm 보호자_명 character varying(40)
 	 * @Return String guarNm
 	 */
 	public String getGuarNm() {
@@ -116,7 +122,7 @@ public class TmGuarBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set guar_nm 보호자_명 character varying(20)
+	 * Set guar_nm 보호자_명 character varying(40)
 	 * @Param String guarNm
 	 */
 	public void setGuarNm(String guarNm) {
@@ -138,7 +144,7 @@ public class TmGuarBaseVo implements Serializable {
 		this.guarTelNo = guarTelNo;
 	}
 	/**
-	 * Get guar_pw 보호자_비밀번호 character varying(1000)
+	 * Get guar_pw 보호자_비밀번호 character varying(400)
 	 * @Return String guarPw
 	 */
 	public String getGuarPw() {
@@ -146,7 +152,7 @@ public class TmGuarBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set guar_pw 보호자_비밀번호 character varying(1000)
+	 * Set guar_pw 보호자_비밀번호 character varying(400)
 	 * @Param String guarPw
 	 */
 	public void setGuarPw(String guarPw) {
@@ -166,6 +172,36 @@ public class TmGuarBaseVo implements Serializable {
 	 */
 	public void setSelfCertDttm(String selfCertDttm) {
 		this.selfCertDttm = selfCertDttm;
+	}
+	/**
+	 * Get auto_login_yn 자동_로그인_여부 character(1)
+	 * @Return String autoLoginYn
+	 */
+	public String getAutoLoginYn() {
+		return this.autoLoginYn;
+	}
+	
+	/**
+	 * Set auto_login_yn 자동_로그인_여부 character(1)
+	 * @Param String autoLoginYn
+	 */
+	public void setAutoLoginYn(String autoLoginYn) {
+		this.autoLoginYn = autoLoginYn;
+	}
+	/**
+	 * Get devc_cert_val 장치_인증_값 character varying(1000)
+	 * @Return String devcCertVal
+	 */
+	public String getDevcCertVal() {
+		return this.devcCertVal;
+	}
+	
+	/**
+	 * Set devc_cert_val 장치_인증_값 character varying(1000)
+	 * @Param String devcCertVal
+	 */
+	public void setDevcCertVal(String devcCertVal) {
+		this.devcCertVal = devcCertVal;
 	}
 	/**
 	 * Get race_div_cd 인종_구분_코드 character varying(20)
@@ -393,7 +429,7 @@ public class TmGuarBaseVo implements Serializable {
 		this.relsResnCd = relsResnCd;
 	}
 	/**
-	 * Get rels_resn_cntn 해지_사유_내용 character varying(400)
+	 * Get rels_resn_cntn 해지_사유_내용 character varying(4000)
 	 * @Return String relsResnCntn
 	 */
 	public String getRelsResnCntn() {
@@ -401,7 +437,7 @@ public class TmGuarBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set rels_resn_cntn 해지_사유_내용 character varying(400)
+	 * Set rels_resn_cntn 해지_사유_내용 character varying(4000)
 	 * @Param String relsResnCntn
 	 */
 	public void setRelsResnCntn(String relsResnCntn) {

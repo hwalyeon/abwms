@@ -58,7 +58,7 @@ public class TsStdtGfixHistVo implements Serializable {
 	/* guar_bmi_val_2 보호자_BMI_값_2 numeric(null) */
 	private double guarBmiVal2;
 
-	/* grow_stnd_ver 성장_기준_버전 character varying(500) */
+	/* grow_stnd_ver 성장_기준_버전 character varying(20) */
 	private String growStndVer;
 
 	/* grow_stnd_no 성장_기준_번호 numeric(null) */
@@ -70,7 +70,7 @@ public class TsStdtGfixHistVo implements Serializable {
 	/* grow_judg_cd 성장_판정_코드 character varying(20) */
 	private String growJudgCd;
 
-	/* grow_judg_desc 성장_판정_설명 character varying(1000) */
+	/* grow_judg_desc 성장_판정_설명 character varying(20) */
 	private String growJudgDesc;
 
 	/* grow_prdt_idx 성장_예측_지수 numeric(null) */
@@ -79,10 +79,10 @@ public class TsStdtGfixHistVo implements Serializable {
 	/* grow_prdt_cd 성장_예측_코드 character varying(20) */
 	private String growPrdtCd;
 
-	/* grow_prdt_desc 성장_예측_설명 character varying(1000) */
+	/* grow_prdt_desc 성장_예측_설명 character varying(20) */
 	private String growPrdtDesc;
 
-	/* fat_stnd_ver 비만_기준_버전 character varying(500) */
+	/* fat_stnd_ver 비만_기준_버전 character varying(20) */
 	private String fatStndVer;
 
 	/* fat_stnd_no 비만_기준_번호 numeric(null) */
@@ -94,8 +94,11 @@ public class TsStdtGfixHistVo implements Serializable {
 	/* fat_judg_cd 비만_판정_코드 character varying(20) */
 	private String fatJudgCd;
 
-	/* fat_judg_desc 비만_판정_설명 character varying(1000) */
+	/* fat_judg_desc 비만_판정_설명 character varying(20) */
 	private String fatJudgDesc;
+
+	/* prdt_bmi_val 예측_BMI_값 numeric(null) */
+	private double prdtBmiVal;
 
 	/* prdt_fat_idx 예측_비만_지수 numeric(null) */
 	private double prdtFatIdx;
@@ -103,13 +106,13 @@ public class TsStdtGfixHistVo implements Serializable {
 	/* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 	private String prdtFatJudgCd;
 
-	/* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(1000) */
+	/* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(20) */
 	private String prdtFatJudgDesc;
 
 	/* pal_val 신체활동수준_값 numeric(null) */
 	private double palVal;
 
-	/* rmrk 비고 character varying(4000) */
+	/* rmrk 비고 character varying(20) */
 	private String rmrk;
 
 	/* reg_dt 등록_일자 character(8) */
@@ -387,7 +390,7 @@ public class TsStdtGfixHistVo implements Serializable {
 		this.guarBmiVal2 = guarBmiVal2;
 	}
 	/**
-	 * Get grow_stnd_ver 성장_기준_버전 character varying(500)
+	 * Get grow_stnd_ver 성장_기준_버전 character varying(20)
 	 * @Return String growStndVer
 	 */
 	public String getGrowStndVer() {
@@ -395,7 +398,7 @@ public class TsStdtGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set grow_stnd_ver 성장_기준_버전 character varying(500)
+	 * Set grow_stnd_ver 성장_기준_버전 character varying(20)
 	 * @Param String growStndVer
 	 */
 	public void setGrowStndVer(String growStndVer) {
@@ -447,7 +450,7 @@ public class TsStdtGfixHistVo implements Serializable {
 		this.growJudgCd = growJudgCd;
 	}
 	/**
-	 * Get grow_judg_desc 성장_판정_설명 character varying(1000)
+	 * Get grow_judg_desc 성장_판정_설명 character varying(20)
 	 * @Return String growJudgDesc
 	 */
 	public String getGrowJudgDesc() {
@@ -455,7 +458,7 @@ public class TsStdtGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set grow_judg_desc 성장_판정_설명 character varying(1000)
+	 * Set grow_judg_desc 성장_판정_설명 character varying(20)
 	 * @Param String growJudgDesc
 	 */
 	public void setGrowJudgDesc(String growJudgDesc) {
@@ -492,7 +495,7 @@ public class TsStdtGfixHistVo implements Serializable {
 		this.growPrdtCd = growPrdtCd;
 	}
 	/**
-	 * Get grow_prdt_desc 성장_예측_설명 character varying(1000)
+	 * Get grow_prdt_desc 성장_예측_설명 character varying(20)
 	 * @Return String growPrdtDesc
 	 */
 	public String getGrowPrdtDesc() {
@@ -500,14 +503,14 @@ public class TsStdtGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set grow_prdt_desc 성장_예측_설명 character varying(1000)
+	 * Set grow_prdt_desc 성장_예측_설명 character varying(20)
 	 * @Param String growPrdtDesc
 	 */
 	public void setGrowPrdtDesc(String growPrdtDesc) {
 		this.growPrdtDesc = growPrdtDesc;
 	}
 	/**
-	 * Get fat_stnd_ver 비만_기준_버전 character varying(500)
+	 * Get fat_stnd_ver 비만_기준_버전 character varying(20)
 	 * @Return String fatStndVer
 	 */
 	public String getFatStndVer() {
@@ -515,7 +518,7 @@ public class TsStdtGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set fat_stnd_ver 비만_기준_버전 character varying(500)
+	 * Set fat_stnd_ver 비만_기준_버전 character varying(20)
 	 * @Param String fatStndVer
 	 */
 	public void setFatStndVer(String fatStndVer) {
@@ -567,7 +570,7 @@ public class TsStdtGfixHistVo implements Serializable {
 		this.fatJudgCd = fatJudgCd;
 	}
 	/**
-	 * Get fat_judg_desc 비만_판정_설명 character varying(1000)
+	 * Get fat_judg_desc 비만_판정_설명 character varying(20)
 	 * @Return String fatJudgDesc
 	 */
 	public String getFatJudgDesc() {
@@ -575,11 +578,26 @@ public class TsStdtGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set fat_judg_desc 비만_판정_설명 character varying(1000)
+	 * Set fat_judg_desc 비만_판정_설명 character varying(20)
 	 * @Param String fatJudgDesc
 	 */
 	public void setFatJudgDesc(String fatJudgDesc) {
 		this.fatJudgDesc = fatJudgDesc;
+	}
+	/**
+	 * Get prdt_bmi_val 예측_BMI_값 numeric(null)
+	 * @Return double prdtBmiVal
+	 */
+	public double getPrdtBmiVal() {
+		return this.prdtBmiVal;
+	}
+	
+	/**
+	 * Set prdt_bmi_val 예측_BMI_값 numeric(null)
+	 * @Param double prdtBmiVal
+	 */
+	public void setPrdtBmiVal(double prdtBmiVal) {
+		this.prdtBmiVal = prdtBmiVal;
 	}
 	/**
 	 * Get prdt_fat_idx 예측_비만_지수 numeric(null)
@@ -612,7 +630,7 @@ public class TsStdtGfixHistVo implements Serializable {
 		this.prdtFatJudgCd = prdtFatJudgCd;
 	}
 	/**
-	 * Get prdt_fat_judg_desc 예측_비만_판정_설명 character varying(1000)
+	 * Get prdt_fat_judg_desc 예측_비만_판정_설명 character varying(20)
 	 * @Return String prdtFatJudgDesc
 	 */
 	public String getPrdtFatJudgDesc() {
@@ -620,7 +638,7 @@ public class TsStdtGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set prdt_fat_judg_desc 예측_비만_판정_설명 character varying(1000)
+	 * Set prdt_fat_judg_desc 예측_비만_판정_설명 character varying(20)
 	 * @Param String prdtFatJudgDesc
 	 */
 	public void setPrdtFatJudgDesc(String prdtFatJudgDesc) {
@@ -642,7 +660,7 @@ public class TsStdtGfixHistVo implements Serializable {
 		this.palVal = palVal;
 	}
 	/**
-	 * Get rmrk 비고 character varying(4000)
+	 * Get rmrk 비고 character varying(20)
 	 * @Return String rmrk
 	 */
 	public String getRmrk() {
@@ -650,7 +668,7 @@ public class TsStdtGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set rmrk 비고 character varying(4000)
+	 * Set rmrk 비고 character varying(20)
 	 * @Param String rmrk
 	 */
 	public void setRmrk(String rmrk) {

@@ -10,11 +10,8 @@ public class TiDdNutrEatStndVo implements Serializable {
 	/* sex_cd 성별_코드 character varying(20) */
 	private String sexCd;
 
-	/* age_ycnt_fr 나이_년수_FROM numeric(null) */
-	private double ageYcntFr;
-
-	/* age_ycnt_to 나이_년수_TO numeric(null) */
-	private double ageYcntTo;
+	/* age_ycnt 나이_년수 numeric(null) */
+	private double ageYcnt;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
@@ -60,34 +57,19 @@ public class TiDdNutrEatStndVo implements Serializable {
 		this.sexCd = sexCd;
 	}
 	/**
-	 * Get age_ycnt_fr 나이_년수_FROM numeric(null)
-	 * @Return double ageYcntFr
+	 * Get age_ycnt 나이_년수 numeric(null)
+	 * @Return double ageYcnt
 	 */
-	public double getAgeYcntFr() {
-		return this.ageYcntFr;
+	public double getAgeYcnt() {
+		return this.ageYcnt;
 	}
 	
 	/**
-	 * Set age_ycnt_fr 나이_년수_FROM numeric(null)
-	 * @Param double ageYcntFr
+	 * Set age_ycnt 나이_년수 numeric(null)
+	 * @Param double ageYcnt
 	 */
-	public void setAgeYcntFr(double ageYcntFr) {
-		this.ageYcntFr = ageYcntFr;
-	}
-	/**
-	 * Get age_ycnt_to 나이_년수_TO numeric(null)
-	 * @Return double ageYcntTo
-	 */
-	public double getAgeYcntTo() {
-		return this.ageYcntTo;
-	}
-	
-	/**
-	 * Set age_ycnt_to 나이_년수_TO numeric(null)
-	 * @Param double ageYcntTo
-	 */
-	public void setAgeYcntTo(double ageYcntTo) {
-		this.ageYcntTo = ageYcntTo;
+	public void setAgeYcnt(double ageYcnt) {
+		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get nutr_cd 영양소_코드 character varying(20)

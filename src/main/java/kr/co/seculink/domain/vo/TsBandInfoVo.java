@@ -7,11 +7,11 @@ import java.io.Serializable;
  */
 public class TsBandInfoVo implements Serializable {
 
-	/* band_id 밴드_ID character varying(40) */
+	/* band_id 밴드_ID character varying(20) */
 	private String bandId;
 
-	/* mdl_no 모델_번호 character varying(40) */
-	private String mdlNo;
+	/* band_mdl_cd 밴드_모델_코드 character varying(20) */
+	private String bandMdlCd;
 
 	/* tel_no 전화_번호 character varying(20) */
 	private String telNo;
@@ -54,7 +54,7 @@ public class TsBandInfoVo implements Serializable {
 
 
 	/**
-	 * Get band_id 밴드_ID character varying(40)
+	 * Get band_id 밴드_ID character varying(20)
 	 * @Return String bandId
 	 */
 	public String getBandId() {
@@ -62,26 +62,26 @@ public class TsBandInfoVo implements Serializable {
 	}
 	
 	/**
-	 * Set band_id 밴드_ID character varying(40)
+	 * Set band_id 밴드_ID character varying(20)
 	 * @Param String bandId
 	 */
 	public void setBandId(String bandId) {
 		this.bandId = bandId;
 	}
 	/**
-	 * Get mdl_no 모델_번호 character varying(40)
-	 * @Return String mdlNo
+	 * Get band_mdl_cd 밴드_모델_코드 character varying(20)
+	 * @Return String bandMdlCd
 	 */
-	public String getMdlNo() {
-		return this.mdlNo;
+	public String getBandMdlCd() {
+		return this.bandMdlCd;
 	}
 	
 	/**
-	 * Set mdl_no 모델_번호 character varying(40)
-	 * @Param String mdlNo
+	 * Set band_mdl_cd 밴드_모델_코드 character varying(20)
+	 * @Param String bandMdlCd
 	 */
-	public void setMdlNo(String mdlNo) {
-		this.mdlNo = mdlNo;
+	public void setBandMdlCd(String bandMdlCd) {
+		this.bandMdlCd = bandMdlCd;
 	}
 	/**
 	 * Get tel_no 전화_번호 character varying(20)

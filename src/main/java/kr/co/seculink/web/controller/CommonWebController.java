@@ -119,8 +119,8 @@ public class CommonWebController {
 	public String getSvcStndFatDdPalMng() {return "svcStnd/fat/ddPalMng";}
 
 	//밴드/개통정보
-	@RequestMapping("/devc/band/bandIOpenInfoMng.pg")
-	public String getDevcBandBandIOpenInfoMng() {return "devc/band/bandIOpenInfoMng";}
+	@RequestMapping("/devc/band/bandOpenInfoMng.pg")
+	public String getDevcBandBandOpenInfoMng() {return "devc/band/bandOpenInfoMng";}
 
 
 }
