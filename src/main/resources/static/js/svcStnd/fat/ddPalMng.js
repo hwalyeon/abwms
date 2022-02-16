@@ -29,7 +29,8 @@ let ddPalMng = new Vue({
     	},
         code:{
             mentDdPalCdList : [],
-            sexCdList : []
+            sexCdList       : [],
+            nutrStatCdList  : []
         },
 	},
 
@@ -39,12 +40,21 @@ let ddPalMng = new Vue({
         initialize: function() {
         	
         	let $this = this;
-        	
+
+        	$this.initValue();
         	$this.initCodeList();
 
         },
+        initValue: function()
+        {
+            let $this = this;
+            $this.userId = SessionUtil.getUserId();
+        },
         initCodeList: function() {
             let $this = this;
+
+            getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList);
+
             getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList, function()
             {
                 $this.initGrid();
@@ -63,15 +73,22 @@ let ddPalMng = new Vue({
             let $this = this;
             let mentDdPalCdList = commonGridCmonCd($this.code.mentDdPalCdList);
             let sexCdList       = commonGridCmonCd($this.code.sexCdList);
+            let nutrStatCdList  = commonGridCmonCd($this.code.nutrStatCdList);
         	let colModels =
             [
                 {name:"crud"               , index: "crud"            , label:"crud"               , hidden:true},
-                {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정코드"     , width: 80   , align: "center"
-                    ,editable: true ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
-                {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정코드"     , width: 80   , align: "center" , editable: true
-                    ,editable: true ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
-                {name: "sexCd"             , index: "sexCd"           , label: "성별코드"            , width: 80   , align: "center" , editable: true
-                    ,editable: true ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:sexCdList}},
+                {name: "currFatJudgCdTemp" , index: "currFatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center"
+                    , hidden  : true  },
+                {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정"     , width: 80   , align: "center"
+                    , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
+                {name: "prdtFatJudgCdTemp" , index: "prdtFatJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center"
+                    , hidden  : true  },
+                {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정"     , width: 80   , align: "center" , editable: true
+                    , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
+                {name: "sexCdTemp"         , index: "sexCdTemp", label: "성별" , width: 80   , align: "center"
+                    , hidden  : true  },
+                {name: "sexCd"             , index: "sexCd"           , label: "성별"            , width: 80   , align: "center" , editable: true
+                    , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:sexCdList}},
                 {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
                 {name: "palValFr"          , index: "palValFr"        , label: "신체활동수준값 FORM"  , width: 80   , align: "center"
@@ -88,8 +105,10 @@ let ddPalMng = new Vue({
                     , editable: true , editrules:{number:true}},
                 {name: "nutrCd"            , index: "nutrCd"          , label: "영양소코드"           , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
-                {name: "nutrStatCd"        , index: "nutrStatCd"      , label: "영양섭취상태코드"      , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
+                {name: "nutrStatCdTemp"    , index: "nutrStatCdTemp"  , label: "영양섭취상태"           , width: 80   , align: "center"
+                    , hidden  : true},
+                {name: "nutrStatCd"        , index: "nutrStatCd"      , label: "영양섭취상태"      , width: 80   , align: "center"
+                    , editable: true , edittype:"select"	, formatter:"select", editable :true, editoptions : {value:nutrStatCdList}},
                 {name: "regDt"             , index: "regDt"           , label: "등록일자"        , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
                 {name: "regTm"               , index: "regTm"         , label: "등록시각"       , width: 80          , align: "center"
@@ -158,11 +177,29 @@ let ddPalMng = new Vue({
         },
 
         btnAddRow  :  function() {
+            let $this = this;
+            let date  = new Date();
             var cnt = $("#user_list").jqGrid("getGridParam", "records")+1;
 
-            var addRow = {crud:"C",
-                currFatJudgCd:'',
-                prdtFatJudgCd:'',
+            var addRow = {crud:"C"
+                ,currFatJudgCdTemp:""
+                ,prdtFatJudgCdTemp:""
+                ,sexCdTemp:""
+                ,ageYcnt:""
+                ,palValFr:""
+                ,palValTo:""
+                ,calQtyFr:""
+                ,calQtyTo:""
+                ,ddCalQty:""
+                ,palCd:""
+                ,nutrCd:""
+                ,nutrStatCd:""
+                ,regDt:date
+                ,regTm:date
+                ,regUserId:$this.userId
+                ,uptDt:date
+                ,uptTm:date
+                ,uptUserId:$this.userId
             };
             $("#user_list").addRowData(cnt, addRow);
 

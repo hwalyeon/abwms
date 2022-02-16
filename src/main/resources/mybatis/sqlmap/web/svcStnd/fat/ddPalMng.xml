@@ -3,9 +3,9 @@
 <mapper namespace="svcStnd.fat.ddPalMng">
 
        <select id="searchDdPalList" parameterType="java.util.Map" resultType="MybatisMap">
-        SELECT  curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-               ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-               ,sex_cd /* sex_cd 성별_코드 character varying(20) */
+        SELECT  curr_fat_judg_cd AS curr_fat_judg_cd_temp/* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+               ,prdt_fat_judg_cd AS prdt_fat_judg_cd_temp/* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+               ,sex_cd           AS sex_cd_temp/* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt /* age_ycnt 나이_년수_FROM numeric */
                ,pal_val_fr /* pal_val_fr 신체활동수준_값_FROM numeric */
                ,pal_val_to /* pal_val_to 신체활동수준_값_TO numeric */
@@ -14,7 +14,7 @@
                ,dd_cal_qty /* dd_cal_qty 일일_칼로리_량 numeric */
                ,pal_cd /* pal_cd 신체활동수준_코드 character(18) */
                ,nutr_cd /* nutr_cd 영양소_코드 character(18) */
-               ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character(18) */
+               ,nutr_stat_cd     AS nutr_stat_cd_temp/* nutr_stat_cd 영양섭취_상태_코드 character(18) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -78,41 +78,25 @@
        <update id="updateTiDdPalList" parameterType="java.util.Map">
            /* Generated SQL SQL ID : ti_dd_pal_blck.update */
            UPDATE ti_dd_pal_blck
-           <trim prefix="SET" prefixOverrides=",">
-               <if test="palValTo != null">
-                   ,pal_val_to = #{palValTo} /* pal_val_to 신체활동수준_값_TO numeric */
-               </if>
-               <if test="ddCalQty != null">
-                   ,dd_cal_qty = #{ddCalQty} /* dd_cal_qty 일일_칼로리_량 numeric */
-               </if>
-               <if test="palCd != null">
-                   ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character(18) */
-               </if>
-               <if test="regDt != null">
-                   ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-               </if>
-               <if test="regTm != null">
-                   ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-               </if>
-               <if test="regUserId != null">
-                   ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-               </if>
-               <if test="uptDt != null">
-                   ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-               </if>
-               <if test="uptTm != null">
-                   ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-               </if>
-               <if test="uptUserId != null">
-                   ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-               </if>
-           </trim>
-           WHERE  1 = 1
-           AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-           AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-           AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-           AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
-           AND    age_ycnt_to = #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
+           SET      UPT_DT       = TO_CHAR(NOW(), 'YYYYMMDD')
+           ,UPT_TM       = TO_CHAR(NOW(),'HH24MISS')
+           ,UPT_USER_ID  = #{uptUserId}
+           <if test="currFatJudgCd != null and currFatJudgCd !=''">  ,curr_fat_judg_cd = #{currFatJudgCd}</if>
+           <if test="prdtFatJudgCd != null and prdtFatJudgCd != ''">  ,prdt_fat_judg_cd = #{prdtFatJudgCd}</if>
+           <if test="sexCd != null and sexCd != ''">  ,sex_cd = #{sexCd}</if>
+           <if test="ageYcnt != null and ageYcnt != ''">  ,age_ycnt = #{ageYcnt}</if>
+           <if test="palValFr != null and palValFr != ''">  ,pal_val_fr = #{palValFr}</if>
+           <if test="palValTo != null and palValTo != ''">  ,pal_val_to = #{palValTo}</if>
+           <if test="calQtyFr != null and calQtyFr != ''">  ,cal_qty_fr = #{calQtyFr}</if>
+           <if test="calQtyTo != null and calQtyTo != ''">  ,cal_qty_to = #{calQtyTo}</if>
+           <if test="palCd    != null and palCd    != ''">  ,pal_cd     = #{palCd}</if>
+           <if test="nutrCd    != null and nutrCd    != ''">  ,nutr_cd     = #{nutrCd}</if>
+           <if test="nutrStatCd    != null and nutrStatCd    != ''">  ,nutr_stat_cd = #{nutrStatCd}</if>
+           WHERE  1=1
+           AND    curr_fat_judg_cd = #{currFatJudgCdTemp} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+           AND    prdt_fat_judg_cd = #{prdtFatJudgCdTemp} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+           AND    sex_cd = #{sexCdTemp} /* sex_cd 성별_코드 character varying(20) */
+           AND    age_ycnt = #{ageYcnt} /* age_ycnt_fr 나이_년수_FROM numeric */
            AND    pal_val_fr = #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
        </update>
        <!--행추가_행삭제 삭제-->
@@ -120,11 +104,10 @@
         /* Generated SQL SQL ID : ti_dd_pal_blck.delete */
 		DELETE FROM ti_dd_pal_blck
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
-		AND    age_ycnt_to = #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
-		AND    pal_val_fr = #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
+		AND    curr_fat_judg_cd = #{currFatJudgCdTemp} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+		AND    prdt_fat_judg_cd = #{prdtFatJudgCdTemp} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    sex_cd = #{sexCdTemp} /* sex_cd 성별_코드 character varying(20) */
+		AND    age_ycnt = #{ageYcnt} ::NUMERIC /* age_ycnt_fr 나이_년수_FROM numeric */
+		AND    pal_val_fr = #{palValFr} ::NUMERIC /* pal_val_fr 신체활동수준_값_FROM numeric */
 	   </delete>
 </mapper>
