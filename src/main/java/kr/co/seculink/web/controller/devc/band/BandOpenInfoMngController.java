@@ -1,9 +1,9 @@
-package kr.co.seculink.web.controller.devc;
+package kr.co.seculink.web.controller.devc.band;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.web.service.devc.BandOpenInfoMngService;
+import kr.co.seculink.web.service.devc.band.BandOpenInfoMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

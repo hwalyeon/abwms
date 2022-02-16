@@ -1,4 +1,4 @@
-package kr.co.seculink.web.service.devc;
+package kr.co.seculink.web.service.devc.band;
 
 import kr.co.seculink.exception.BizException;
 
