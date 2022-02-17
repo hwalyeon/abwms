@@ -53,10 +53,16 @@
 			                        </td>
 			                    </tr>
 			                    <tr>
-			                        <th scope="row">필수내용</th>
-			                        <td>
-										<textarea id="essnYn" name="essnYn" v-model="termInfoMngInfo.essnYn" class="form-control"></textarea>
-			                        </td>
+									<th scope="row">필수내용</th>
+									<td>
+										<div class="col-xs-2" style="padding: 5px 0;">
+											<input type="radio" name="essnYn"  v-model="termInfoMngInfo.essnYn" value="Y" checked="checked">&nbsp;Y
+											&nbsp;
+											<input type="radio" name="essnYn"  v-model="termInfoMngInfo.essnYn" value="N"> N
+										</div>
+									</td>
+
+
 			                    </tr>
 							</tbody>
 		                </table>

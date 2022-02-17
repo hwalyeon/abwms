@@ -3,6 +3,7 @@ let termInfoMng = new Vue({
     data: {
         params: {
             termDivCd:'',
+            termDivNm:'',
             termVer:'',
             aplyStrtDt:'',
             termCntn:'',
@@ -41,6 +42,7 @@ let termInfoMng = new Vue({
 
             let colModels = [
                 {name: "termDivCd"            , index: "termDivCd"            , label: "약관구분코드"         , width: 80, align: "center"},
+                {name: "termDivNm"            , index: "termDivNm"            , label: "약관구분코드명"       , width: 80, align: "center"},
                 {name: "termVer"              , index: "termVer"              , label: "약관버전"            , width: 80, align: "center"},
                 {name: "aplyStrtDt"           , index: "aplyStrtDt"           , label: "적용시작일자"         , width: 80, align: "center"},
                 {name: "termCntn"             , index: "termCntn"             , label: "약관내용"            , width: 80, align: "center"},
@@ -55,7 +57,7 @@ let termInfoMng = new Vue({
                 {name: "uptDt"                , index: "uptDt"                , label: "수정일자"            , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                               }},
                 {name: "uptUserId"            , index: "uptUserId"            , label: "수정사용자ID"        , width: 80, align: "center"},
-                {name: "termInfoDetlPopup"  , index: "termInfoDetlPopup"      , label: "상세정보보기"        , width: 80, align: "center",
+                {name: "termInfoDetlPop"  , index: "termInfoDetlPop"      , label: "상세정보보기"        , width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="termInfoMng.regTermInfoMngPop(\'' + rowObject.termDivCd + '\')" value="상세보기" data-toggle="modal" data-target="#termInfoDetlPopup" />';
                     }

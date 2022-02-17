@@ -5,6 +5,7 @@
        <select id="searchTermInfoList" parameterType="java.util.Map" resultType="MybatisMap">
 	    /* Generated SQL SQL ID : ti_term_base.select */
         SELECT  term_div_cd /* term_div_cd 약관_구분_코드 character varying(20) */
+               ,fn_getCdNm('TERM_DIV_CD', term_div_cd) as term_div_nm
                ,term_ver /* term_ver 약관_버전 numeric */
                ,aply_strt_dt /* aply_strt_dt 적용_시작_일자 character(8) */
                ,term_cntn /* term_cntn 약관_내용 text */
@@ -17,8 +18,7 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ti_term_base
 		WHERE  1 = 1
-		AND    term_div_cd = #{termDivCd} /* term_div_cd 약관_구분_코드 character varying(20) */
-		AND    term_ver = #{termVer} /* term_ver 약관_버전 numeric */
+		AND    term_div_cd LIKE CONCAT (#{termDivCd},'%') /* term_div_cd 약관_구분_코드 character varying(20) */
         </select>
 
        <insert id="insertTiTermBase"  parameterType="java.util.Map" >
@@ -56,7 +56,7 @@
               VALUES
               (
               #{termDivCd} /* term_div_cd 약관_구분_코드 character varying(20) */
-              #{termVer} /* term_ver 약관_버전 numeric */
+              ,#{termVer} /* term_ver 약관_버전 numeric */
               <if test="aplyStrtDt != null">
                      ,#{aplyStrtDt} /* aply_strt_dt 적용_시작_일자 character(8) */
               </if>
