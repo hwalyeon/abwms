@@ -6,6 +6,12 @@
         SELECT  curr_fat_judg_cd AS curr_fat_judg_cd_temp/* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
                ,prdt_fat_judg_cd AS prdt_fat_judg_cd_temp/* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
                ,sex_cd           AS sex_cd_temp/* sex_cd 성별_코드 character varying(20) */
+               ,age_ycnt         AS age_ycnt_temp
+               ,pal_val_fr       AS pal_val_fr_temp
+               ,curr_fat_judg_cd
+               ,prdt_fat_judg_cd
+               ,sex_cd
+               ,nutr_stat_cd
                ,age_ycnt /* age_ycnt 나이_년수_FROM numeric */
                ,pal_val_fr /* pal_val_fr 신체활동수준_값_FROM numeric */
                ,pal_val_to /* pal_val_to 신체활동수준_값_TO numeric */
@@ -84,11 +90,12 @@
            <if test="currFatJudgCd != null and currFatJudgCd !=''">  ,curr_fat_judg_cd = #{currFatJudgCd}</if>
            <if test="prdtFatJudgCd != null and prdtFatJudgCd != ''">  ,prdt_fat_judg_cd = #{prdtFatJudgCd}</if>
            <if test="sexCd != null and sexCd != ''">  ,sex_cd = #{sexCd}</if>
-           <if test="ageYcnt != null and ageYcnt != ''">  ,age_ycnt = #{ageYcnt}</if>
-           <if test="palValFr != null and palValFr != ''">  ,pal_val_fr = #{palValFr}</if>
-           <if test="palValTo != null and palValTo != ''">  ,pal_val_to = #{palValTo}</if>
-           <if test="calQtyFr != null and calQtyFr != ''">  ,cal_qty_fr = #{calQtyFr}</if>
-           <if test="calQtyTo != null and calQtyTo != ''">  ,cal_qty_to = #{calQtyTo}</if>
+           <if test="ageYcnt != null and ageYcnt != ''">  ,age_ycnt = #{ageYcnt}::NUMERIC</if>
+           <if test="palValFr != null and palValFr != ''">  ,pal_val_fr = #{palValFr}::NUMERIC</if>
+           <if test="palValTo != null and palValTo != ''">  ,pal_val_to = #{palValTo}::NUMERIC</if>
+           <if test="calQtyFr != null and calQtyFr != ''">  ,cal_qty_fr = #{calQtyFr}::NUMERIC</if>
+           <if test="calQtyTo != null and calQtyTo != ''">  ,cal_qty_to = #{calQtyTo}::NUMERIC</if>
+           <if test="ddCalQty != null and ddCalQty != ''">  ,dd_cal_qty = #{ddCalQty}::NUMERIC</if>
            <if test="palCd    != null and palCd    != ''">  ,pal_cd     = #{palCd}</if>
            <if test="nutrCd    != null and nutrCd    != ''">  ,nutr_cd     = #{nutrCd}</if>
            <if test="nutrStatCd    != null and nutrStatCd    != ''">  ,nutr_stat_cd = #{nutrStatCd}</if>
@@ -96,8 +103,8 @@
            AND    curr_fat_judg_cd = #{currFatJudgCdTemp} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
            AND    prdt_fat_judg_cd = #{prdtFatJudgCdTemp} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
            AND    sex_cd = #{sexCdTemp} /* sex_cd 성별_코드 character varying(20) */
-           AND    age_ycnt = #{ageYcnt} /* age_ycnt_fr 나이_년수_FROM numeric */
-           AND    pal_val_fr = #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
+           AND    age_ycnt = #{ageYcntTemp}::NUMERIC /* age_ycnt_fr 나이_년수_FROM numeric */
+           AND    pal_val_fr = #{palValFrTemp}::NUMERIC /* pal_val_fr 신체활동수준_값_FROM numeric */
        </update>
        <!--행추가_행삭제 삭제-->
        <delete id ="deleteTiDdPalList" parameterType="java.util.Map">

@@ -80,17 +80,21 @@ let ddPalMng = new Vue({
                 {name: "currFatJudgCdTemp" , index: "currFatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center"
                     , hidden  : true  },
                 {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정"     , width: 80   , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
+                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
                 {name: "prdtFatJudgCdTemp" , index: "prdtFatJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center"
                     , hidden  : true  },
                 {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정"     , width: 80   , align: "center" , editable: true
                     , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
-                {name: "sexCdTemp"         , index: "sexCdTemp", label: "성별" , width: 80   , align: "center"
+                {name: "sexCdTemp"         , index: "sexCdTemp"       , label: "성별"            , width: 80   , align: "center"
                     , hidden  : true  },
                 {name: "sexCd"             , index: "sexCd"           , label: "성별"            , width: 80   , align: "center" , editable: true
                     , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:sexCdList}},
+                {name: "ageYcntTemp"       , index: "ageYcntTemp"     , label: "나이년수"         , width: 80   , align: "center"
+                    , hidden  : true  },
                 {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
+                {name: "palValFrTemp"       , index: "palValFrTemp"   , label: "신체활동수준값 FORM"  , width: 80   , align: "center"
+                    , hidden  : true  },
                 {name: "palValFr"          , index: "palValFr"        , label: "신체활동수준값 FORM"  , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
                 {name: "palValTo"          , index: "palValTo"        , label: "신체활동수준값 TO"    , width: 80   , align: "center"
