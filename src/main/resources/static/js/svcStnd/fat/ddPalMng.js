@@ -142,7 +142,7 @@ let ddPalMng = new Vue({
                         $this.searchDdPalList(false);
                     })
                 },
-                onCellSelect : function (rowid, colId, val, e)
+                afterSaveCell : function (rowid, colId, val, e)
                 {
                     if($("#user_list").getRowData(rowid).crud != "C" && $("#user_list").getRowData(rowid).crud != "D" ) {
                         $("#user_list").setRowData(rowid, {crud: "U"}

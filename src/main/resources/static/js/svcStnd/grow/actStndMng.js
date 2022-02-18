@@ -112,8 +112,7 @@ let actStndMng = new Vue({
                             $this.searchActStndList(false);
                         })
                     },
-                    onCellSelect : function (rowid , colId , val, e ){
-                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                    afterSaveCell : function (rowid , colId , val, e ){
                         if($("#actStnd_list").getRowData(rowid).crud != "C" && $("#actStnd_list").getRowData(rowid).crud != "D" ) {
                             $("#actStnd_list").setRowData(rowid, {crud:"U"});
                         }

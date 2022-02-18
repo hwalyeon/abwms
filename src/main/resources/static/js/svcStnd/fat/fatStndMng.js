@@ -85,8 +85,7 @@ let fatStndMng = new Vue({
                             $this.searchFatStndList(false);
                         })
                     },
-                    onCellSelect : function (rowid , colId , val, e ){
-                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                    afterSaveCell : function (rowid , colId , val, e ){
                         if($("#fatStnd_list").getRowData(rowid).crud != "C" && $("#fatStnd_list").getRowData(rowid).crud != "D" ) {
                             $("#fatStnd_list").setRowData(rowid, {crud:"U"});
                         }
