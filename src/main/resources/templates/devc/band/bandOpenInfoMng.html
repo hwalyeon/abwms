@@ -43,7 +43,7 @@
 							</div>
 							<label class="col-xs-1 control-label">밴드전화번호</label>
 							<div class="col-xs-2">
-								<input type="text" name="bandTelNo" class="form-control" v-model="params.bandTelNo">
+								<input type="text" name="telNo" class="form-control" v-model="params.telNo">
 							</div>
 						<div class="clear_both"></div>
 						<label class="col-xs-1 control-label">출고년월</label>
@@ -93,13 +93,14 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>일일 영양소섭취기준 목록</h5>
+							<h5>밴드/개통정보 목록</h5>
 						</div>
 					</div>
 					<div class="clear_both"></div>
 					<div class="float_right">
-						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnSave">&nbsp;저장</button>
-						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" v-on:click="regBandOpenInfoPop()">&nbsp;밴드등록</button>
+						<button type="button" id="btnDownloadExcel"
+								class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="float_left" style="margin-top:10px">
 						<button type="button" id="btnAdd" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnAddRow"><span class="glyphicon glyphicon-plus"></span></button>
@@ -116,10 +117,11 @@
 			</div>
 		</div>
 	</div>
-	<!--    <div th:insert="~{set/userDetl :: body}"></div>-->
+	<div th:insert="~{devc/band/bandOpenInfoDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoMng.js}"></script>
+	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}"></script>
 </section>
 </body>
 </html>

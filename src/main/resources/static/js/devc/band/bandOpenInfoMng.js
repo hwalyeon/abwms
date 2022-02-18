@@ -2,6 +2,7 @@ let bandOpenInfoMng = new Vue({
     el: "#bandOpenInfoMng",
     data:
         {
+            codeCount : 0,
             params:
                 {
                     userId         : '' ,
@@ -9,7 +10,7 @@ let bandOpenInfoMng = new Vue({
                     uptDtTo        : '' ,  //기준_일자To
                     mmDd           : 'THIS_MONTH' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
-                    bandTelNo      : '' ,  //밴드_전화_번호
+                    telNo          : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID
                     bandYtypCd     : '' ,  //밴드_출고_년월
                     bandOpenStatCd : '' ,  //밴드_개통_상태_코드
@@ -61,12 +62,8 @@ let bandOpenInfoMng = new Vue({
             {
                 let $this = this;
 
-                getCommonCodeList('BAND_MDL_CD', $this.code.bandMdlCdList);  //밴드_모델_코드_리스트
-                getCommonCodeList('BAND_OPEN_STAT_CD', $this.code.bandOpenStatCdList, function () //밴드_개통_상태_코드_리스트
-                {
-                    $this.initGrid();
-                    $this.searchBandOpenInfoList(true);
-                })
+                getCommonCodeList('BAND_MDL_CD', $this.code.bandMdlCdList, function (){ $this.codeCount += 1; });  //밴드_모델_코드_리스트
+                getCommonCodeList('BAND_OPEN_STAT_CD', $this.code.bandOpenStatCdList, function (){$this.codeCount += 1;})//밴드_개통_상태_코드_리스트
             },
             //출고_년월_리스트_값 세팅
              initBandYtypCdValue: function()
@@ -87,6 +84,7 @@ let bandOpenInfoMng = new Vue({
                         }
                     }
                 }
+                $this.codeCount += 1;
             },
             initGrid: function()
             {
@@ -97,25 +95,25 @@ let bandOpenInfoMng = new Vue({
                 let colModels =
                     [
                         {name: "crud"           , index: "crud"           , label: "crud"            , hidden: true                                },
+                        {name: "bandIdTemp"     , index: "bandIdTemp"     , label: "밴드ID"           , width: 80 , align: "center" , hidden: true  },
                         {name: "uptDt"          , index: "uptDt"          , label: "기준일자"         , width: 80 , align: "center" , editable: true },
                         {name: "regDt"          , index: "regDt"          , label: "밴드등록일자"     , width: 80 , align: "center" , editable: true },
-                        {name: "bandYtyp"       , index: "bandYtyp"       , label: "출고년월"          , width: 80 , align: "center" , editable: true
+                        {name: "bandYtyp"       , index: "bandYtyp"       , label: "출고년월"         , width: 80 , align: "center" , editable: true
                          ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandYtypCdList}},
-                        {name: "bandIdTemp"     , index: "bandIdTemp"     , label: "밴드ID"           , width: 80 , align: "center" , hidden: true  },
-                        {name: "bandId"         , index: "bandId"         , label: "밴드ID"           , width: 80 , align: "center" , editable: true},
                         {name: "bandMdlCd"      , index: "bandMdlCd"      , label: "모델TYPE"         , width: 80 , align: "center" , editable: true
                          ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandMdlCdList}},
-                        {name: "telNo"          , index: "telNo"          , label: "전화번호"         , width: 80 , align: "center" , editable: true },
-                        {name: "stdtNo"         , index: "stdtNo"         , label: "학생번호"         , width: 80 , align: "center" , editable: true },
-                        {name: "stdtNm"         , index: "stdtNm"         , label: "학생명"           , width: 80 , align: "center" , editable: true },
-                        {name: "guarNo"         , index: "guarNo"         , label: "보호자번호"       , width: 80 , align: "center" , editable: true },
-                        {name: "guarNm"         , index: "guarNm"         , label: "보호자명"         , width: 80 , align: "center" , editable: true },
+                        {name: "bandId"         , index: "bandId"         , label: "밴드ID"           , width: 80 , align: "center" , editable: true},
+                        {name: "telNo"          , index: "telNo"          , label: "전화번호"         , width: 80 , align: "center" , editable: true},
+                        {name: "stdtNo"         , index: "stdtNo"         , label: "학생번호"         , width: 80 , align: "center"  },
+                        {name: "stdtNm"         , index: "stdtNm"         , label: "학생명"           , width: 80 , align: "center"  },
+                        {name: "guarNo"         , index: "guarNo"         , label: "보호자번호"       , width: 80 , align: "center"  },
+                        {name: "guarNm"         , index: "guarNm"         , label: "보호자명"         , width: 80 , align: "center"  },
                         {name: "guarTelNo"      , index: "guarTelNo"      , label: "보호자전화번호"   , width: 80 , align: "center"  , editable: true },
                         {name: "bandOpenStatCd" , index: "bandOpenStatCd" , label: "밴드개통상태코드" , width: 80 , align: "center"  , editable: true
                          ,edittype:"select"     , formatter:"select"      , editoptions:{value:bandOpenStatCdList}},
                         {name: "openGramNo"     , index: "openGramNo"     , label: "개통전문번호"     , width: 80 , align: "center" },
                         {name: "blthId"         , index: "blthId"         , label: "블루투스ID"       , width: 80 , align: "center" , editable: true},
-                        {name: "urlSplyYn"      , index: "urlSplyYn"      , label: "URL제공여부"      , width: 80 , align: "center" },
+                        {name: "apiUrlYn"       , index: "apiUrlYn"       , label: "URL제공여부"      , width: 80 , align: "center" },
                         {name: "apiUrlDttm"     , index: "apiUrlDttm"     , label: "URL제공일시"      , width: 80 , align: "center" },
                         {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
                         {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
@@ -238,7 +236,7 @@ let bandOpenInfoMng = new Vue({
                 }
             },
             btnSave  :  function() {
-                let $this = this;
+               /* let $this = this;
                 let gridData = commonGridGetDataNew($("#bandOpenInfo_list"));
                 if(gridData.length > 0)
                 {
@@ -288,7 +286,7 @@ let bandOpenInfoMng = new Vue({
                     error: function (response) {
                         Swal.alert([response, 'error']);
                     }
-                });
+                });*/
             },
             /**/
             downloadExcel : function()
@@ -311,17 +309,22 @@ let bandOpenInfoMng = new Vue({
                         }
                     });
             },
+            regBandOpenInfoPop: function(bandId) {
+                bandOpenInfoDetl.initPage(bandId);
+            },
             resetSearchParam: function()
             {
                 let $this = this;
                 $this.params =
                 {
+                    userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
-                    mmDd           : '' ,  //기준_일자 _이번달
+                    mmDd           : 'THIS_MONTH' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     bandTelNo      : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID
+                    bandYtypCd     : '' ,  //밴드_출고_년월
                     bandOpenStatCd : '' ,  //밴드_개통_상태_코드
                     guarNm         : '' ,  //보호자_명
                     guarTelNo      : '' ,  //보호자_전화_번호
@@ -338,6 +341,13 @@ let bandOpenInfoMng = new Vue({
         },
     watch:
         {
+            'codeCount' : function (value){
+                let $this = this;
+                if(value ===  3){
+                    $this.initGrid();
+                    $this.searchBandOpenInfoList(true);
+                }
+            }
         },
     mounted: function()
     {

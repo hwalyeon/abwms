@@ -110,4 +110,38 @@ public class BandOpenInfoMngController
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
 	}
+
+	//밴드ID 중복 조회
+	@ResponseBody
+	@RequestMapping("/devc/band/bandOpenInfoMng/searchDupBandId.ab")
+	public RtnMsg searchDupBandId(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, String> result = bandOpenInfoMngService.searchDupBandId(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
+
+	//밴드ID 채번
+	@ResponseBody
+	@RequestMapping("/devc/band/bandOpenInfoMng/numberingBandId.ab")
+	public RtnMsg numberingBandId(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, String> result = bandOpenInfoMngService.searchDupBandId(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
+
+
 }

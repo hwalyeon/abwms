@@ -1,11 +1,13 @@
 package kr.co.seculink.web.service.devc.band;
 
 import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +23,7 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 	public List<Map<String, String>> searchBandOpenInfoList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("devc.band.bandOpenInfoMng.selectBandOpenInfoList", params);
+
 		return result;
 	}
 
@@ -47,7 +50,33 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		}
 	}
 
+	//밴드ID 중복 조회
+	public Map<String, String> searchDupBandId(Map<String, String> params) throws BizException
+	{
+		Map<String, String> result = dao.selectOne("devc.band.bandOpenInfoMng.selectBandId", params);
 
+		Map<String, String> rtnMap = new HashMap<>();
+		if ( result == null || GEUtil.isEmpty(result.get("bandId")) ) {
+			rtnMap.put("existsYn", "N");
+		} else {
+			rtnMap.put("existsYn", "Y");
+		}
+
+		return rtnMap;
+	}
+	//밴드ID 채번
+	public Map<String, Object> numberingBandId(Map<String, String> params) throws BizException
+	{
+		Map<String, String> result = dao.selectOne("devc.band.bandOpenInfoMng.numberingBandId", params);
+
+		Map<String, Object> rtnMap = new HashMap<>();
+
+
+		rtnMap.put("result", result);
+
+
+		return rtnMap;
+	}
 	
 }
 	
