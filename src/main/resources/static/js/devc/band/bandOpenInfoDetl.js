@@ -186,12 +186,13 @@ let bandOpenInfoDetl = new Vue({
 		numberingBandId: function()
 		{
 			let $this = this;
+
 			AjaxUtil.post({
 				url: "/devc/band/bandOpenInfoMng/numberingBandId.ab",
 				param: $this.params,
 				success: function(response) {
 					if ( !!response.rtnData.result ) {
-						$this.params.bandId = response.rtnData.result.bandId;
+						console.log(response.rtnData.result.bandId);
 					}
 				},
 				error: function (response) {

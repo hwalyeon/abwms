@@ -135,7 +135,7 @@ public class BandOpenInfoMngController
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		Map<String, String> result = bandOpenInfoMngService.searchDupBandId(params);
+		Map<String, Object> result = bandOpenInfoMngService.numberingBandId(params);
 
 		rtnMap.put("result", result);
 		vo.setRtnData(rtnMap);

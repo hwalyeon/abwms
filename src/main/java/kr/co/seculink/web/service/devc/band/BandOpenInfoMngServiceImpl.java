@@ -67,6 +67,8 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 	//밴드ID 채번
 	public Map<String, Object> numberingBandId(Map<String, String> params) throws BizException
 	{
+
+
 		Map<String, String> result = dao.selectOne("devc.band.bandOpenInfoMng.numberingBandId", params);
 
 		Map<String, Object> rtnMap = new HashMap<>();

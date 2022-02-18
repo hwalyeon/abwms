@@ -140,13 +140,12 @@
 	</select>
 
 	<!--밴드_ID_채번 -->
-	<select id="selectBandId" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="numberingBandId" parameterType="java.util.Map" resultType="MybatisMap">
+	SELECT
+	#{bandYtypCd} || #{bandMdlCd}|| to_char(coalesce(cast(max(substring(band_id ,5,6)) AS INTEGER) , 0) + 1  , 'FM000000') as bandId
+	FROM TS_BAND_INFO
+	WHERE SUBSTRING(BAND_ID, 1, 4) = #{bandYtypCd}||#{bandMdlCd}
 
-	select
-	#{bandYtypCd} || #{bandMdlCd}|| to_char(coalesce(cast(max(substring(band_id ,5,6)) as integer) , 0) + 1  , 'FM000000')
-	from TS_BAND_INFO
-	where SUBSTRING(BAND_ID, 1, 4) = #{bandYtypCd}||#{bandMdlCd}
-	;
 	</select>
 
 </mapper>
