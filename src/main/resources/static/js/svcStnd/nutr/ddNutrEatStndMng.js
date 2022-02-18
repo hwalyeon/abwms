@@ -8,9 +8,9 @@ let ddNutrEatStndMng = new Vue({
                     sexCd           : ''  ,    // 성별_코드
                     ageYcnt        : ''  ,     // 나이_년수
                     nutrNm         : ''  ,    // 영양소_코드_명
-                    paging          : 'Y',
+                    paging          : 'N',
                     totalCount    : 0  ,
-                    rowCount     : 30,
+                    rowCount     : 3000,
                     currentPage : 1  ,
                     currentIndex: 0
                 },
@@ -64,56 +64,64 @@ let ddNutrEatStndMng = new Vue({
             {  
                 let $this = this;
                 let sexCdList        = commonGridCmonCd($this.code.sexCdList);
-                let nutrCdNmList = commonGridCmonCd($this.code.nutrCdNmList);
                 let colModels =
                 [
-                    {name:"crud"                   , index:"crud"                     , label: "crud"                         , hidden: true                              },
-                    {name: "sexCdTemp"      ,  index: "sexCdTemp"       , label: "성별"                         , width: 80          , align: "center"       , hidden: true },
-                    {name: "ageYcntTemp"  , index: "ageYcntTemp"     , label: "나이(년)"                   , width: 80          , align: "center"       , hidden: true },
-                    {name: "nutrCdTemp"    , index: "nutrCdTemp"        , label: "영양소코드"             , width: 80          , align: "center"       , hidden: true },
-                    {name: "nutrNm"            , index: "nutrNm"              , label: "영양소명"                    , hidden: true        }, //엑셀 다운로드용
-                    {name: "sexCd"               , index: "sexCd"                  , label: "성별"                         , width: 80          , align: "center"       , editable: true
-                     ,edittype:"select"           , formatter:"select", editoptions:{value:sexCdList}},
-                    {name: "ageYcnt"            , index: "ageYcnt"              , label: "나이(년)"                   , width: 80          , align: "center"       , editable: true},
-                    {name: "nutrCd"           , index: "nutrCd"               , label: "영양소명"                      , width: 80         , align: "center"       , editable: true
-                     ,edittype:"select"           , formatter:"select"           ,editoptions:{value:nutrCdNmList}},
-                    {name: "ddRcmdQty"     , index: "ddRcmdQty"       , label: "일일 권장량"              , width: 80          , align: "center"       , editable: true},
-                    {name: "ddNeedQty"      , index: "ddNeedQty"       ,  label: "일일 필요량"             , width: 80          , align: "center"       , editable: true},
-                    {name: "regDt"                , index: "regDt"                 , label: "등록일자"                  , width: 80          , align: "center"       , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                    {name: "regTm"               , index: "regTm"               , label: "등록시각"                  , width: 80          , align: "center"       , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                    {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"           , width: 80          , align: "center"},
-                    {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                   , width: 80         , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                    {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80         , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                    {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80         , align: "center"}
+                    {name:"crud"       , index:"crud"                     , label: "crud"                  , hidden: true  , frozen:true},
+                    {name: "sexCd"     , index: "sexCd"                  , label: "성별"                    , width: 80          , align: "center"  ,  fixed: true    , formatter:"select", editoptions:{value:sexCdList}},
+                    {name: "ageYcnt"   , index: "ageYcnt"              , label: "나이(년)"                   , width: 80          , align: "center"     ,  fixed: true  ,frozen:true}
                 ];
 
+                if($this.code.nutrCdNmList.length > 0){
+                    for(var i in $this.code.nutrCdNmList ){
+                        var data = $this.code.nutrCdNmList[i];
+                        if(data.cdVal === 'VIT_B' || data.cdVal === 'AMNO' || data.cdVal==='EPA_DHA'){
+                            colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")" , editable :false , width: 80 ,  fixed: true } );
+                        }else {
+                            colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")" , editable :true , width: 80 ,  fixed: true } );
+                        }
+                    }
+                }
+
                 $("#ddNutrEatStnd_list").jqGrid("GridUnload");
-                $("#ddNutrEatStnd_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
+                $("#ddNutrEatStnd_list").jqGrid($.extend(true, {}, commonEditGridOptions(3000,''),
                 {
                     datatype  : "local",
                     mtype      : 'post',
                     url            : '/svcStnd/nutr/ddNutrEatStndMng/searchDdNutrEatStndList.ab',
                     pager       : '#ddNutrEatStnd_pager_list',
                     height      : 405,
+                    autowidth: false,
                     colModel : colModels,
-                    onPaging : function(data) {
-                        onPagingCommon(data, this, function(resultMap)
-                        {
-                            $this.params.currentPage  = resultMap.currentPage;
-                            $this.params.rowCount     = resultMap.rowCount;
-                            $this.params.currentIndex = resultMap.currentIndex;
-                            $this.searchDdNutrEatStndList(false);
-                        })
-                    },
-                    onCellSelect : function (rowid , colId , val, e ){
-                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                    afterSaveCell : function (rowid , colId , val, e ){
+                        let rowData = $("#ddNutrEatStnd_list").getRowData(rowid);
                         if($("#ddNutrEatStnd_list").getRowData(rowid).crud != "C" && $("#ddNutrEatStnd_list").getRowData(rowid).crud != "D" ) {
                             $("#ddNutrEatStnd_list").setRowData(rowid, {crud:"U"});
                         }
-                    }
+
+                        if(colId === 'vitB1' || colId === 'vitB2' || colId === 'nia' || colId === 'dfe' || colId === 'vitB12'){
+                            let vaiBTemp = parseFloat(WebUtil.nvl(rowData.vitB1 , '0')) + parseFloat(WebUtil.nvl(rowData.vitB2, '0')) +parseFloat(WebUtil.nvl(rowData.nia, '0'))+ (WebUtil.nvl(parseFloat(rowData.dfe, '0')) / 1000) + (WebUtil.nvl(parseFloat(rowData.vitB12, '0')) / 1000);
+                            $("#ddNutrEatStnd_list").setRowData(rowid, {vitB: Math.round(vaiBTemp * 10)/10});
+                        }else if(colId === 'ile' || colId === 'leu' || colId === 'val'){
+                            let amnoTemp = parseFloat(WebUtil.nvl(rowData.ile, '0')) + parseFloat(WebUtil.nvl(rowData.leu, '0')) +parseFloat(WebUtil.nvl(rowData.val, '0'));
+                            $("#ddNutrEatStnd_list").setRowData(rowid, {amno: Math.round(amnoTemp * 10)/10});
+                        }else if(colId === 'epa' || colId === 'dha'){
+                            let epaDhaTemp = parseFloat(WebUtil.nvl(rowData.epa, '0')) + parseFloat(WebUtil.nvl(rowData.dha, '0'));
+                            $("#ddNutrEatStnd_list").setRowData(rowid, {epaDha: Math.round(epaDhaTemp * 10)/10});
+                        }
+                    },
                 }));
+
+                $("#ddNutrEatStnd_list").jqGrid("setGroupHeaders",{
+                    useColSpanStyle: true,
+                    groupHeaders: [
+                        {startColumnName: 'vitB', numberOfColumns: 6, titleText: '비타민_B(비타민B1,B2,B12,나이아신,엽산)'},
+                        {startColumnName: 'amno', numberOfColumns: 4, titleText: '아미노산'},
+                        {startColumnName: 'epa', numberOfColumns: 3, titleText: 'EPA+DHA'}
+                    ]
+                });
+
+                $("#ddNutrEatStnd_list").jqGrid("setFrozenColumns");
+
                 resizeJqGridWidth("ddNutrEatStnd_list", "ddNutrEatStnd_list_wrapper");
             },
             searchDdNutrEatStndList: function(isSearch)
@@ -142,86 +150,22 @@ let ddNutrEatStndMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
-            /**/
-            btnAddRow  :  function()
-            {
-                let $this = this;
-                let date = new Date();
-                var cnt = $("#ddNutrEatStnd_list").jqGrid("getGridParam", "records")+1;
 
-                var addRow = {
-                    crud:"C",
-                    sexCdTemp   : "" ,
-                    ageYcntTem  : "" ,
-                    nutrCdTemp  : "" ,
-                    nutrNm          : "" ,
-                    sexCd             : "" ,
-                    ageYcnt          : "" ,
-                    nutrCd            : "" ,
-                    ddRcmdQty   : "" ,
-                    ddNeedQty   : "" ,
-                    regDt             : date  ,
-                    regTm            : date  ,
-                    regUserId       : $this.userId  ,
-                    uptDt             : date  ,
-                    uptTm            : date  ,
-                    uptUserId       : $this.userId
-                };
-                $("#ddNutrEatStnd_list").addRowData(cnt, addRow);
-
-            },
-            btnDelRow : function() {
-                //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
-                let checkIds = $("#ddNutrEatStnd_list").jqGrid("getGridParam","selrow") + "";  // 단건
-                if ( checkIds == "" )
-                {
-                    alert("삭제할 행을 선택해주십시요.");
-                    return false;
-                }
-
-                let checkId = checkIds.split(",");
-                for ( var i in checkId )
-                {
-                    if ( $("#ddNutrEatStnd_list").getRowData(checkId[i]).crud == "C" )
-                    {
-                        $("#ddNutrEatStnd_list").setRowData(checkId[i], {crud:"N"});
-                        $("#"+checkId[i],"#ddNutrEatStnd_list").css({display:"none"});
-                    }
-                    else
-                    {
-                        $("#ddNutrEatStnd_list").setRowData(checkId[i], {crud:"D"});
-                        $("#"+checkId[i],"#ddNutrEatStnd_list").css({display:"none"});
-                    }
-                }
-            },
             btnSave  :  function() {
                 let $this = this;
                 let gridData = commonGridGetDataNew($("#ddNutrEatStnd_list"));
+                let gridColModel = $("#ddNutrEatStnd_list").jqGrid("getGridParam","colModel");
+
                 if(gridData.length > 0)
                 {
-                    for (let data in gridData)
-                    {
-                        if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
-                        {
-                            if(WebUtil.isNull(gridData[data].sexCd))
-                            {
-                                Swal.alert(["성별은 필수 입력입니다.", 'warning']);
-                                return false;
-                            }if(WebUtil.isNull(gridData[data].ageYcnt))
-                            {
-                                Swal.alert(["나이(년수)는 필수 입력입니다.", 'warning']);
-                                return false;
-                            }if(WebUtil.isNull(gridData[data].nutrCd))
-                            {
-                                Swal.alert(["영양소명은 필수 입력입니다.", 'warning']);
-                                return false;
-                            }if(WebUtil.isNull(gridData[data].ddRcmdQty))
-                            {
-                                Swal.alert(["일일 권장량은 필수 입력입니다.", 'warning']);
-                                return false;
-                            }if(WebUtil.isNull(gridData[data].ddNeedQty))
-                            {
-                                Swal.alert(["일일 필요량은 필수 입력입니다.", 'warning']);
+                    for (let data in gridData) {
+                        for(let key in gridData[data]){
+                            if(WebUtil.isNull(gridData[data][key])){
+                                var keyCol = gridColModel.filter(col => {
+                                    return col.name == key;
+                                })
+                                var keyLabel = keyCol[0].label;
+                                Swal.alert([keyLabel + "의 섭취기준을 입력하여 주시기 바랍니다.", 'warning']);
                                 return false;
                             }
                         }
