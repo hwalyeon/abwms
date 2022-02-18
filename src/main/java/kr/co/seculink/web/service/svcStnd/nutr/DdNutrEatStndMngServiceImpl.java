@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
+
 
 @Slf4j
 @Service("ddNutrEatStndMngService")
@@ -37,20 +40,23 @@ public class DdNutrEatStndMngServiceImpl implements DdNutrEatStndMngService
 		int saveCnt = 0;
 
 		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
+		Map<String, String> keyValue = new HashMap<String , String>();
 
 		for(Map<String,String> info:gridDate){
-			log.debug("crud         : " +  info.get("crud"));
-
-			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.nutr.ddNutrEatStndMng.insertTiDdNutrEatStndList", info);
-			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.nutr.ddNutrEatStndMng.updateTiDdNutrEatStndList", info);
-			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.nutr.ddNutrEatStndMng.deleteTiDdNutrEatStndList", info);
+			Iterator iterator = info.entrySet().iterator();
+			for(String key : info.keySet()){
+				String sexCd = info.get("sexCd");
+				String ageYcnt = info.get("ageYcnt");
+				if(!"sexCd".equals(key) && !"ageYcnt".equals(key) && !"crud".equals(key) ) {
+					keyValue = new HashMap<String, String>();
+					keyValue.put("sexCd", sexCd);
+					keyValue.put("ageYcnt", ageYcnt);
+					keyValue.put("nutrCd", key);
+					keyValue.put("ddRcmdQty", info.get(key));
+					keyValue.put("ddNeedQty", info.get(key));
+					saveCnt += dao.update("svcStnd.nutr.ddNutrEatStndMng.updateTiDdNutrEatStndList", keyValue);
+				}
 			}
-		}
-		if(saveCnt == 0){
-			throw new BizException("ECOM999", new String[]{"비만기준정보 저장이 실패하였습니다"});
 		}
 	}
 

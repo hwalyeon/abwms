@@ -70,7 +70,7 @@ public class DdNutrEatStndMngController
 	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("파람"+params);
+
 		ddNutrEatStndMngService.saveDdNutrEatStnd(params);
 
 	
@@ -86,14 +86,25 @@ public class DdNutrEatStndMngController
 	{
 		params.put("paging", "N");
 
+		List<Map<String, String>> resultHeader = ddNutrEatStndMngService.searchNutrCdNmList(params);
+
 		List<Map<String, String>> result = dao.selectList("svcStnd.nutr.ddNutrEatStndMng.selectDdNutrEatStndList", params);
-		return new ModelAndView("excelXlsView", getExcelMap(result));
+		return new ModelAndView("excelXlsView", getExcelMap(result,resultHeader ));
 	}
 
-	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
+	private Map<String, Object> getExcelMap(List<Map<String, String>> list, List<Map<String, String>> header)
 	{
-		String [] arrHeader = {"성별","나이(년수)","영양소명", "일일 권장량","일일 필요량","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
-		List<String> headerList = Arrays.asList(arrHeader);
+		//String [] arrHeader = {"성별","나이(년수)"};
+
+		List<String> headerList = new ArrayList<>();
+		headerList.add("성별");
+		headerList.add("나이(년수)");
+		if(header.size() > 0){
+			for(Map<String, String> headerInfo : header){
+				headerList.add(headerInfo.get("nutrNm") + " ( " +  headerInfo.get("nutrCd") + " )");
+			}
+		}
+
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
 		List<String> data;
@@ -103,15 +114,33 @@ public class DdNutrEatStndMngController
 			data = new ArrayList<String>();
 			data.add(info.get("sexCd"));
 			data.add(String.valueOf(info.get("ageYcnt")));
-			data.add(info.get("nutrNm"));
-			data.add(String.valueOf(info.get("ddRcmdQty")));
-			data.add(String.valueOf(info.get("ddNeedQty")));
-			data.add(info.get("regDt"));
-			data.add(info.get("regTm"));
-			data.add(info.get("regUserId"));
-			data.add(info.get("uptDt"));
-			data.add(info.get("uptTm"));
-			data.add(info.get("uptUserId"));
+			data.add(String.valueOf(info.get("cal")));
+			data.add(String.valueOf(info.get("prtn")));
+			data.add(String.valueOf(info.get("fidx")));
+			data.add(String.valueOf(info.get("carb")));
+			data.add(String.valueOf(info.get("dfib")));
+			data.add(String.valueOf(info.get("ca")));
+			data.add(String.valueOf(info.get("fe")));
+			data.add(String.valueOf(info.get("mg")));
+			data.add(String.valueOf(info.get("na")));
+			data.add(String.valueOf(info.get("zn")));
+			data.add(String.valueOf(info.get("vitD3")));
+			data.add(String.valueOf(info.get("vitB")));
+			data.add(String.valueOf(info.get("vitB1")));
+			data.add(String.valueOf(info.get("vitB2")));
+			data.add(String.valueOf(info.get("nia")));
+			data.add(String.valueOf(info.get("dfe")));
+			data.add(String.valueOf(info.get("vitB12")));
+			data.add(String.valueOf(info.get("amno")));
+			data.add(String.valueOf(info.get("ile")));
+			data.add(String.valueOf(info.get("leu")));
+			data.add(String.valueOf(info.get("val")));
+			data.add(String.valueOf(info.get("chl")));
+			data.add(String.valueOf(info.get("fapu")));
+			data.add(String.valueOf(info.get("epa")));
+			data.add(String.valueOf(info.get("dha")));
+			data.add(String.valueOf(info.get("epaDha")));
+
 			dataList.add(data);
 		}
 
