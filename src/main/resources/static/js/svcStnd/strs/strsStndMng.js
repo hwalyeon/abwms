@@ -85,8 +85,7 @@ let strsStndMng = new Vue({
                         $this.searchStrsList(false);
                     })
                 },
-                onCellSelect : function (rowid , colId , val, e ){
-                    // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                afterSaveCell : function (rowid , colId , val, e ){
                     if($("#user_list").getRowData(rowid).crud != "C" && $("#user_list").getRowData(rowid).crud != "D" ) {
                         $("#user_list").setRowData(rowid, {crud:"U"});
                     }

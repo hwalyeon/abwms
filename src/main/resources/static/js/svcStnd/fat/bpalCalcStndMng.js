@@ -87,8 +87,7 @@ let bpalCalcStndMng = new Vue({
                             $this.searchBpalCalcStndList(false);
                         })
                     },
-                    onCellSelect : function (rowid , colId , val, e ){
-                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                    afterSaveCell : function (rowid , colId , val, e ){
                         if($("#bpalCalcStnd_list").getRowData(rowid).crud != "C" && $("#bpalCalcStnd_list").getRowData(rowid).crud != "D" ) {
                             $("#bpalCalcStnd_list").setRowData(rowid, {crud:"U"});
                         }

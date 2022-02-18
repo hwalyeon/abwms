@@ -85,9 +85,9 @@ let dgemStndMng = new Vue({
                         $this.searchDgemList(false);
                     })
                 },
-                onCellSelect : function (rowid , colId , val, e )
+                afterSaveCell : function (rowid , colId , val, e )
                 {
-                    // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+
                     if($("#dgem_list").getRowData(rowid).crud != "C" && $("#dgem_list").getRowData(rowid).crud != "D" )
                     {
                         $("#dgem_list").setRowData(rowid, {crud:"U"});
