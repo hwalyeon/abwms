@@ -19,4 +19,11 @@ public interface BandOpenInfoMngService
 	//밴드ID 채번
 	public Map<String, Object> numberingBandId(Map<String, String> params) throws BizException;
 
+	//밴드_정보_저장
+	public void saveBandOpenInfoDetl(Map<String, Object> params) throws BizException;
+
+	//밴드_정보_상세보기
+	public Map<String, Object> searchBandOpenInfo(Map<String, String> params) throws BizException;
+
+	
 }

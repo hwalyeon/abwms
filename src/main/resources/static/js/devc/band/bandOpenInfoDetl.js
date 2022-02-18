@@ -4,12 +4,17 @@ let bandOpenInfoDetl = new Vue({
     	params: {
     		crud           : 'C',
 			userId         : '' ,
+			bandIdTemp     : '' ,
 			bandId         : '' ,  //밴드_ID
 			bandYtypCd     : '' ,  //밴드_출고_년월
 			bandMdlCd      : '' ,  //밴드_모델_코드
 			telNo          : '' ,  //밴드_전화_번호
 			guarTelNo      : '' ,  //보호자_전화_번호
 			bandOpenStatCd : '' ,  //밴드_개통_상태_코드
+			blthId         : '' ,  //블루투스_ID
+			apiUrlGramNo   : '' ,  //API_URL_전문_번호
+			apiUrlDttm     : '' ,  //API_URL_일시
+			openGramNo     : '' ,  //개통_전문_번호
 			checkDupBandId : '' ,  //밴드ID_확인_여부
 			paging         : 'Y',
 			totalCoun      : 0  ,
@@ -49,33 +54,34 @@ let bandOpenInfoDetl = new Vue({
 
 			let $this = this;
 			$this.resetBandOpenInfo();
-        	/*
 
+			if ( !WebUtil.isNull(bandId) )
+			{
+				let params = {
+					'bandId' : bandId
+				}
+				AjaxUtil.post({
+					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab",
+					param: params,
+					success: function(response) {
+						if ( !!response.rtnData.result )
+						{
+							$this.params.crud = 'U';
 
-        	
-        	if ( !WebUtil.isNull(userId) )
-    		{
-        		let params = {
-        			'userId' : userId
-        		}
-        		
-        		AjaxUtil.post({
-                    url: "/set/userMng/searchBandOpenInfo.ab",
-                    param: params,
-                    success: function(response) {
-                    	if ( !!response.rtnData.result ) {
-                    		$this.params.crud = 'U';
-                    		$.each(response.rtnData.result, function(key, val) {
-            					$this.params[key] = val;
-            				});
-                    	}                    		
-                    },
-                    error: function (response) {
-                    	Swal.alert([response, 'error']);
-                    }
-                });
-    		}*/
-        },
+							$.each(response.rtnData.result.result, function(key, val) {
+								$this.params[key] = val;
+
+							});
+							console.log(response.rtnData.result.result.bandYtypCd);
+							console.log(response.rtnData.result.result.bandMdlCd);
+						}
+					},
+					error: function (response) {
+						Swal.alert([response, 'error']);
+					}
+				});
+			}
+		},
 
 		//출고_년월_리스트_값 세팅
 		initBandYtypCdValue: function() {
@@ -97,51 +103,15 @@ let bandOpenInfoDetl = new Vue({
 			}
 		},
 			isValid: function() {
-        /*
+
         	let $this = this;        	        	
         	
-        	if ( WebUtil.isNull($this.params.userId) ) {
-        		Swal.alert(['사용자ID를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.params.bandId) ) {
+        		Swal.alert(['밴드ID는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	
-        	if ( WebUtil.isNull($this.params.userNm) ) {
-        		Swal.alert(['사용자명을 입력하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.userPw) ) {
-        		Swal.alert(['비밀번호를 입력하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.blngNm) ) {
-        		Swal.alert(['소속을 입력하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.telNo) ) {
-        		Swal.alert(['전화번호를 입력하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.mtelNo) ) {
-        		Swal.alert(['휴대전화번호를 입력하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.mailAddr) ) {
-        		Swal.alert(['이메일을 입력하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.useYn) ) {
-        		Swal.alert(['사용여부를 선택하세요.', 'info']);
-        		return false;
-        	}
-*/
-        	// 학원/강사/학생 여부를 라디오로 변경하고 저장시에 값을 셋팅해주어야 함
-        	
+
+
         	return true;
         },
 		//밴드 ID 중복 검사
@@ -150,7 +120,9 @@ let bandOpenInfoDetl = new Vue({
 
         	let $this = this;
 
-			let bandIdStr = $this.params.bandId.substr(1,1);
+			let bandIdStr2 = $this.params.bandId.substr(1,1);
+			let bandIdStr3 = $this.params.bandId.substr(2,1);
+
 
         	if ( WebUtil.isNull($this.params.bandId) ) {
         		Swal.alert(['밴드ID를 입력하세요.', 'info']);
@@ -158,22 +130,27 @@ let bandOpenInfoDetl = new Vue({
         	}if($this.params.bandId.length != 10) {
         		Swal.alert(['밴드ID의 자리수는 10자리입니다.', 'info']);
         		return false;
-        	}if(bandIdStr != 0 && bandIdStr != 1 ) {
-				Swal.alert(['밴드ID의 2번째 자리는 0,1 중 선택해야 합니다.', 'info']);
+        	}if(bandIdStr2 != 0 && bandIdStr2 != 1 ) {
+				Swal.alert(['ID의 2번째 자리는 0,1 중 선택해야 합니다.', 'info']);
 				return false;
 			}
-        	let params = {
-        		bandId : $this.params.bandId
-        	}
+			if(bandIdStr2 == 0 && bandIdStr3 == 0 ) {
+				Swal.alert(['ID의 2번째, 3번째 자리에 동시에 0을 입력할 수 없습니다.', 'info']);
+				return false;
+			}
+
 			AjaxUtil.post({
                 url: "/devc/band/bandOpenInfoMng/searchDupBandId.ab",
                 param: $this.params,
                 success: function(response) {
                 	if ( response.rtnData.result.existsYn === 'N' ) {
                 		$this.params.checkDupBandId = 'Y';
+                		 $this.params.bandIdTemp = $this.params.bandId;
                 		Swal.alert(['해당 아이디는 사용할 수 있습니다.', 'success']);
+
+
                 	} else {
-                		$this.params.userId = '';
+                		$this.params.BandId = '';
                 		Swal.alert(['해당 아이디는 이미 사용중입니다.', 'info']);
                 	}
                 },
@@ -182,18 +159,32 @@ let bandOpenInfoDetl = new Vue({
                 }
             });
         },
+		numberingSelect: function(){
+        let $this =this;
+        $this.params.bandId = '';
+		},
 		//밴드ID 채번
 		numberingBandId: function()
 		{
 			let $this = this;
+
+			if ( WebUtil.isNull($this.params.bandYtypCd) ) {
+				Swal.alert(['출고년월을 선택하세요.', 'info']);
+				return false;
+			}if ( WebUtil.isNull($this.params.bandMdlCd) ) {
+				Swal.alert(['모델타입을 선택하세요.', 'info']);
+				return false;
+			}
+			$this.params.checkDupBandId = 'N';
 
 			AjaxUtil.post({
 				url: "/devc/band/bandOpenInfoMng/numberingBandId.ab",
 				param: $this.params,
 				success: function(response) {
 					if ( !!response.rtnData.result ) {
-						console.log(response.rtnData.result.bandId);
-					}
+						$this.params.bandId = response.rtnData.result.result.bandId;
+
+					}console.log($this.params.bandId );
 				},
 				error: function (response) {
 					Swal.alert([response, 'error']);
@@ -206,11 +197,24 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 
 			let name  = event.target.name;
-
+			let cdNm;
 			if(isNaN($this.params[name])){
 
+				if(name=='telNo'){
+					cdNm='전화 번호';
+				}else if(name=='guarTelNo'){
+					cdNm='보호자 전화번호';
+				}else{
+					cdNm='밴드ID';
+				}
+
 				this.params[name] = this.params[name].replace(/\D/g,'');
-				Swal.alert(["숫자를 입력해주세요.", 'info']);
+				Swal.alert([cdNm+"는 숫자만 사용 가능합니다.", 'info']);
+			}
+
+			if(name=='bandId'){
+				$this.params.bandYtypCd ='';
+				$this.params.bandMdlCd  ='';
 			}
 		},
 		saveBandOpenInfoDetl: function() {
@@ -220,31 +224,32 @@ let bandOpenInfoDetl = new Vue({
             if ( !this.isValid() ) {
                 return false;
             }
-			
             if ( $this.params.crud === 'C' ) {
 	            if ( $this.params.checkDupBandId != 'Y' ) {
 	        		Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
 	        		return false;
 	        	}
-	            if ( isValidPhoneNumber($this.params.telNo)==false) {
-	            	Swal.alert(['전화번호를 형식에 맞춰 입력 하세요','info']);
-	            	return false;
-	            }
+				if($this.params.bandId != $this.params.bandIdTemp) {
+						Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
+						return false;
+				}
             }
-/*
+
+            $this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
+
 			AjaxUtil.post({
-                url: "/set/userMng/saveUser.ab",
+                url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#userDetlPopup'));
-               		 	userMng.searchUserList(true);
+                		closeModal($('#bandOpenInfoDetlPopup'));
+						bandOpenInfoMng.searchBandOpenInfoList(true);
                 	});                	
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);
                 }
-            });*/
+            });
 		},
 
 		deleteUser: function() {
@@ -254,13 +259,13 @@ let bandOpenInfoDetl = new Vue({
 			$this.params.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/set/userMng/saveUser.ab",
+                url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#userDetlPopup'));
-                		 userMng.searchUserList(true);
-                	});                	
+                		 closeModal($('#bandOpenInfoDetlPopup'));
+						bandOpenInfoMng.searchBandOpenInfoList(true);
+                	});
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);
@@ -282,7 +287,7 @@ let bandOpenInfoDetl = new Vue({
 				rowCount       : 30 ,
 				currentPage    : 1  ,
 				currentIndex   : 0 ,
-	    		checkDupUserId: 'N'
+	    		checkDupBandId: 'N'
 	    	}
 		},
     },
@@ -291,28 +296,9 @@ let bandOpenInfoDetl = new Vue({
     },
     watch: {
     	'params.bandId': function(newVal, oldVal) {
-    		this.params.checkDupUserId = 'N';
+    		this.params.checkDupBandId = 'N';
 		},
 
-		'params.bandId':function(){
-    		if(this.params.bandId != null)
-    		{
-    			this.params.bandYtypCd = '';
-    			this.params.bandMdlCd = '';
-
-			}},
-		'params.bandYtypCd' :function(){
-		if(this.params.bandYtypCd != null)
-			{
-				this.params.bandId = '';
-			}
-		},
-		'params.bandMdlCd' :function(){
-		if(this.params.bandMdlCd != null)
-			{
-				this.params.bandId = '';
-			}
-		}
 
     },
     mounted: function() {

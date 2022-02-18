@@ -89,32 +89,32 @@ let bandOpenInfoMng = new Vue({
             initGrid: function()
             {
                 let $this              = this;
-                let bandYtypCdList     = commonGridCmonCd($this.code.bandYtypCdList);     //출고_년월_리스트
-                let bandMdlCdList      = commonGridCmonCd($this.code.bandMdlCdList);      //밴드_모델_코드_리스트
-                let bandOpenStatCdList = commonGridCmonCd($this.code.bandOpenStatCdList); //밴드_개통_상태_코드_리스트
                 let colModels =
                     [
                         {name: "crud"           , index: "crud"           , label: "crud"            , hidden: true                                },
                         {name: "bandIdTemp"     , index: "bandIdTemp"     , label: "밴드ID"           , width: 80 , align: "center" , hidden: true  },
-                        {name: "uptDt"          , index: "uptDt"          , label: "기준일자"         , width: 80 , align: "center" , editable: true },
-                        {name: "regDt"          , index: "regDt"          , label: "밴드등록일자"     , width: 80 , align: "center" , editable: true },
-                        {name: "bandYtyp"       , index: "bandYtyp"       , label: "출고년월"         , width: 80 , align: "center" , editable: true
-                         ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandYtypCdList}},
-                        {name: "bandMdlCd"      , index: "bandMdlCd"      , label: "모델TYPE"         , width: 80 , align: "center" , editable: true
-                         ,edittype:"select"     , formatter:"select"      , editoptions: {value: bandMdlCdList}},
-                        {name: "bandId"         , index: "bandId"         , label: "밴드ID"           , width: 80 , align: "center" , editable: true},
-                        {name: "telNo"          , index: "telNo"          , label: "전화번호"         , width: 80 , align: "center" , editable: true},
-                        {name: "stdtNo"         , index: "stdtNo"         , label: "학생번호"         , width: 80 , align: "center"  },
-                        {name: "stdtNm"         , index: "stdtNm"         , label: "학생명"           , width: 80 , align: "center"  },
-                        {name: "guarNo"         , index: "guarNo"         , label: "보호자번호"       , width: 80 , align: "center"  },
-                        {name: "guarNm"         , index: "guarNm"         , label: "보호자명"         , width: 80 , align: "center"  },
-                        {name: "guarTelNo"      , index: "guarTelNo"      , label: "보호자전화번호"   , width: 80 , align: "center"  , editable: true },
-                        {name: "bandOpenStatCd" , index: "bandOpenStatCd" , label: "밴드개통상태코드" , width: 80 , align: "center"  , editable: true
-                         ,edittype:"select"     , formatter:"select"      , editoptions:{value:bandOpenStatCdList}},
+                        {name: "uptDt"          , index: "uptDt"          , label: "기준일자"         , width: 80 , align: "center" },
+                        {name: "regDt"          , index: "regDt"          , label: "밴드등록일자"     , width: 80 , align: "center" },
+                        {name: "bandYtyp"       , index: "bandYtyp"       , label: "출고년월"         , width: 80 , align: "center" },
+                        {name: "bandMdlCd"      , index: "bandMdlCd"      , label: "모델TYPE"         , width: 80 , align: "center" },
+                        {name: "bandId"         , index: "bandId"         , label: "밴드ID"           , width: 80 , align: "center" },
+                        {name: "telNo"          , index: "telNo"          , label: "전화번호"         , width: 80 , align: "center" },
+                        {name: "stdtNo"         , index: "stdtNo"         , label: "학생번호"         , width: 80 , align: "center" },
+                        {name: "stdtNm"         , index: "stdtNm"         , label: "학생명"           , width: 80 , align: "center" },
+                        {name: "guarNo"         , index: "guarNo"         , label: "보호자번호"       , width: 80 , align: "center" },
+                        {name: "guarNm"         , index: "guarNm"         , label: "보호자명"         , width: 80 , align: "center" },
+                        {name: "guarTelNo"      , index: "guarTelNo"      , label: "보호자전화번호"   , width: 80 , align: "center" },
+                        {name: "blthId"         , index: "blthId"         , label: "블루투스ID"       , width: 80 , align: "center" },
+                        {name: "bandOpenStatCd" , index: "bandOpenStatCd" , label: "밴드개통상태코드" , width: 80 , align: "center"  },
+                        {name: "apiUrlGramNo"   , index: "apiUrlGramNo"   , label: "개통URL전문번호"     , width: 80 , align: "center" },
                         {name: "openGramNo"     , index: "openGramNo"     , label: "개통전문번호"     , width: 80 , align: "center" },
-                        {name: "blthId"         , index: "blthId"         , label: "블루투스ID"       , width: 80 , align: "center" , editable: true},
                         {name: "apiUrlYn"       , index: "apiUrlYn"       , label: "URL제공여부"      , width: 80 , align: "center" },
                         {name: "apiUrlDttm"     , index: "apiUrlDttm"     , label: "URL제공일시"      , width: 80 , align: "center" },
+                        {name: "fatJudgStndDetlPop" , index: "fatJudgStndDetlPop" , label: "상세정보보기", width: 80, align: "center",
+                            formatter: function(cellValue, options, rowObject) {
+                                return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regBandOpenInfoDetlPopup(\'' + rowObject.bandId + '\')" value="상세보기" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" />';
+                            }
+                        },
                         {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
                         {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
                         {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"     , width: 80 , align: "center"  , hidden: true},
@@ -124,7 +124,7 @@ let bandOpenInfoMng = new Vue({
                     ];
 
                 $("#bandOpenInfo_list").jqGrid("GridUnload");
-                $("#bandOpenInfo_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
+                $("#bandOpenInfo_list").jqGrid($.extend(true, {}, commonGridOptions(),
                     {
                         datatype : "local",
                         mtype    : 'post',
@@ -175,119 +175,6 @@ let bandOpenInfoMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
-            /**/
-            btnAddRow  :  function()
-            {
-                let $this = this;
-                let date = new Date();
-                var cnt = $("#bandOpenInfo_list").jqGrid("getGridParam", "records")+1;
-
-                var addRow = {
-                    crud           : "C" ,
-                    uptDt          : "" ,
-                    rgeDt          : "" ,
-                    bandId         : "" ,
-                    bandYtypCd     : "" ,
-                    bandMdlCd      : "" ,
-                    telNo          : "" ,
-                    stdtNo         : "" ,
-                    stdtNm         : "" ,
-                    guarNo         : "" ,
-                    guarNm         : "" ,
-                    guarTelNo      : "" ,
-                    bandOpenStatCd : "" ,
-                    openGramNo     : "" ,
-                    blthId         : "" ,
-                    urlSplyYn      : "" ,
-                    apiUrlDttm     : "" ,
-                    regDt          : date  ,
-                    regTm          : date  ,
-                    regUserId      : $this.userId  ,
-                    uptDt          : date  ,
-                    uptTm          : date  ,
-                    uptUserId      : $this.userId
-                };
-                $("#bandOpenInfo_list").addRowData(cnt, addRow);
-
-            },
-            btnDelRow : function() {
-                //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
-                let checkIds = $("#bandOpenInfo_list").jqGrid("getGridParam","selrow") + "";  // 단건
-                if ( checkIds == "" )
-                {
-                    alert("삭제할 행을 선택해주십시요.");
-                    return false;
-                }
-
-                let checkId = checkIds.split(",");
-                for ( var i in checkId )
-                {
-                    if ( $("#bandOpenInfo_list").getRowData(checkId[i]).crud == "C" )
-                    {
-                        $("#bandOpenInfo_list").setRowData(checkId[i], {crud:"N"});
-                        $("#"+checkId[i],"#bandOpenInfo_list").css({display:"none"});
-                    }
-                    else
-                    {
-                        $("#bandOpenInfo_list").setRowData(checkId[i], {crud:"D"});
-                        $("#"+checkId[i],"#bandOpenInfo_list").css({display:"none"});
-                    }
-                }
-            },
-            btnSave  :  function() {
-               /* let $this = this;
-                let gridData = commonGridGetDataNew($("#bandOpenInfo_list"));
-                if(gridData.length > 0)
-                {
-                    for (let data in gridData)
-                    {
-                        if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
-                        {
-                            if(WebUtil.isNull(gridData[data].sexCd))
-                            {
-                                Swal.alert(["성별은 필수 입력입니다.", 'warning']);
-                                return false;
-                            }if(WebUtil.isNull(gridData[data].ageYcnt))
-                        {
-                            Swal.alert(["나이(년수)는 필수 입력입니다.", 'warning']);
-                            return false;
-                        }if(WebUtil.isNull(gridData[data].nutrCd))
-                        {
-                            Swal.alert(["영양소명은 필수 입력입니다.", 'warning']);
-                            return false;
-                        }if(WebUtil.isNull(gridData[data].eatQtyFr))
-                        {
-                            Swal.alert(["섭취량(From)은 필수 입력입니다.", 'warning']);
-                            return false;
-                        }if(WebUtil.isNull(gridData[data].useYn)){
-                            Swal.alert(["사용여부는 필수 입력입니다.", 'warning']);
-                            return false;
-                        }
-                        }
-                    }
-                }
-                else
-                {
-                    Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
-                    return false;
-                }
-                let param = { gridList : []}
-                param.gridList = gridData;
-
-                AjaxUtil.post({
-                    url: "/devc/band/bandOpenInfoMng/saveBandOpenInfo.ab",
-                    param: param,
-                    success: function(response) {
-                        Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                            $this.searchBandOpenInfoList(true);
-                        });
-                    },
-                    error: function (response) {
-                        Swal.alert([response, 'error']);
-                    }
-                });*/
-            },
-            /**/
             downloadExcel : function()
             {
                 let $this = this;
@@ -308,7 +195,7 @@ let bandOpenInfoMng = new Vue({
                         }
                     });
             },
-            regBandOpenInfoPop: function(bandId) {
+            regBandOpenInfoDetlPopup: function(bandId) {
                 bandOpenInfoDetl.initPage(bandId);
             },
             resetSearchParam: function()

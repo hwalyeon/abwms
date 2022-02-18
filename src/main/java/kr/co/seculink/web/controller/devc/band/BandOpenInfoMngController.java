@@ -49,24 +49,7 @@ public class BandOpenInfoMngController
 	}
 
 
-
-	//행추가_행삭제_저장
-	@ResponseBody
-	@RequestMapping("/devc/band/bandOpenInfoMng/saveBandOpenInfo.ab")
-	public RtnMsg saveBandOpenInfo(@RequestBody(required = false)Map<String,Object>params)throws BizException {
-	
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		bandOpenInfoMngService.saveBandOpenInfo(params);
-
-	
-		rtnMap.put("result", params);
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
-
-	//일일_권장섭취량기준_리스트 엑셀다운로드
+	//밴드/개통 정보 목록_리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfoList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -79,7 +62,7 @@ public class BandOpenInfoMngController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"성별","나이(년수)","영양소 명","섭취량(From)", "섭취량(To)","영양섭취 상태","사용여부","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
+		String [] arrHeader = {"기준일자","나이(년수)","영양소 명","섭취량(From)", "섭취량(To)","영양섭취 상태","사용여부","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -88,13 +71,23 @@ public class BandOpenInfoMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<String>();
-			data.add(info.get("sexCd"));
-			data.add(String.valueOf(info.get("ageYcnt")));
-			data.add(info.get("nutrNm"));
-			data.add(String.valueOf(info.get("eatQtyFr")));
-			data.add(String.valueOf(info.get("eatQtyTo")));
-			data.add(info.get("nutrStatCd"));
-			data.add(info.get("useYn"));
+			data.add(info.get("uptDt"));
+			data.add(info.get("regDt"));
+			data.add(info.get("bandYtyp"));
+			data.add(info.get("bandMdlCd"));
+			data.add(info.get("bandId"));
+			data.add(info.get("telNo"));
+			data.add(info.get("stdtNo"));
+			data.add(info.get("stdtNm"));
+			data.add(info.get("guarNo"));
+			data.add(info.get("guarNm"));
+			data.add(info.get("guarTelNo"));
+			data.add(info.get("blthId"));
+			data.add(info.get("bandOpenStatCd"));
+			data.add(String.valueOf(info.get("apiUrlGramNo")));
+			data.add(String.valueOf(info.get("openGramNo")));
+			data.add(info.get("apiUrlYn"));
+			data.add(info.get("apiUrlDttm"));
 			data.add(info.get("regDt"));
 			data.add(info.get("regTm"));
 			data.add(info.get("regUserId"));
@@ -143,5 +136,38 @@ public class BandOpenInfoMngController
 		return vo;
 	}
 
+	//밴드정보 저장
+	@ResponseBody
+	@RequestMapping("/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab")
+	public RtnMsg saveBandOpenInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		bandOpenInfoMngService.saveBandOpenInfoDetl(params);
+
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+
+
+	//밴드_정보_상세보기
+	@ResponseBody
+	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab")
+	public RtnMsg searchBandOpenInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, Object> result = bandOpenInfoMngService.searchBandOpenInfo(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
 
 }
