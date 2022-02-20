@@ -62,7 +62,7 @@ public class BandOpenInfoMngController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"기준일자","나이(년수)","영양소 명","섭취량(From)", "섭취량(To)","영양섭취 상태","사용여부","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
+		String [] arrHeader = {"기준일자","밴드등록일자","출고년월","모델TYPE", "밴드ID","전화번호","학생번호","학생명","보호자번호","보호자명","보호자전화번호","블루투스ID","밴드개통상태코드","밴드개통상태코드명","개통URL전문번호","개통전문번호","URL제공여부","URL제공일시"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -77,23 +77,23 @@ public class BandOpenInfoMngController
 			data.add(info.get("bandMdlCd"));
 			data.add(info.get("bandId"));
 			data.add(info.get("telNo"));
-			data.add(info.get("stdtNo"));
+			data.add(String.valueOf(info.get("stdtNo")));		
 			data.add(info.get("stdtNm"));
-			data.add(info.get("guarNo"));
+			data.add(String.valueOf(info.get("guarNo")));				
 			data.add(info.get("guarNm"));
 			data.add(info.get("guarTelNo"));
 			data.add(info.get("blthId"));
 			data.add(info.get("bandOpenStatCd"));
+			data.add(info.get("bandOpenStatCdNm"));
 			data.add(String.valueOf(info.get("apiUrlGramNo")));
 			data.add(String.valueOf(info.get("openGramNo")));
 			data.add(info.get("apiUrlYn"));
 			data.add(info.get("apiUrlDttm"));
-			data.add(info.get("regDt"));
-			data.add(info.get("regTm"));
-			data.add(info.get("regUserId"));
-			data.add(info.get("uptDt"));
-			data.add(info.get("uptTm"));
-			data.add(info.get("uptUserId"));
+			/*
+			 * data.add(info.get("regDt")); data.add(info.get("regTm"));
+			 * data.add(info.get("regUserId")); data.add(info.get("uptDt"));
+			 * data.add(info.get("uptTm")); data.add(info.get("uptUserId"));
+			 */
 			dataList.add(data);
 		}
 
