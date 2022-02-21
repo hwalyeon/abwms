@@ -1,5 +1,5 @@
-let bandOpenInfoDetl = new Vue({
-    el: "#bandOpenInfoDetlPopup",
+let prntInfoDetl = new Vue({
+    el: "#prntInfoDetlPopup",
     data: {
     	params: {
     		crud           : 'C',
