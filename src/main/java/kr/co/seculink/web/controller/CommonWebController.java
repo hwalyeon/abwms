@@ -131,6 +131,6 @@ public class CommonWebController {
 
 	//밴드/개통정보
 	@RequestMapping("/user/prnt/prntInfoMng.pg")
-	public String geUserPrntPrntInfoMng() {return "user/prnt/prntInfoMng";}
+	public String getUserPrntPrntInfoMng() {return "user/prnt/prntInfoMng";}
 
 }
