@@ -66,7 +66,6 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/dgem/dgemStndMng.pg")
 	public String getSvcStndDgemDgemStndMng() {return "svcStnd/dgem/dgemStndMng";}
 
-
 	//성장기준
 	@RequestMapping("/svcStnd/grow/growStndMng.pg")
 	public String getSvcStndGrowGrowStndMng() {return "svcStnd/grow/growStndMng";}
@@ -129,5 +128,9 @@ public class CommonWebController {
 	//고객지원센터
 	@RequestMapping("/cmon/stnd/csInfoMng.pg")
 	public String getCmonStndCsInfoMng() {return "cmon/stnd/csInfoMng";}
+
+	//보호자 상세(등록)
+	@RequestMapping("/user/prnt/prntInfoMng.pg")
+	public String getUserPrntPrntInfoMng() {return "user/prnt/prntInfoMng";}
 
 }

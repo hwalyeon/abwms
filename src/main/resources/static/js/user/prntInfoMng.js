@@ -1,21 +1,10 @@
-let prntInfoMng = new Vue({
-    el: "#prntInfoMng",
+let bandOpenInfoMng = new Vue({
+    el: "#bandOpenInfoMng",
     data:
         {
             codeCount : 0,
             params:
                 {
-
-                    entrDt         : '' ,  //가입일자
-                    stdtNo         : '' ,  //학생_번호
-                    stdtNm         : '' ,  //학생_명
-                    telNo          : '' ,  //전화_번호
-                    bandId         : '' ,  //밴드_ID
-                    guarNo         : '' ,  //학부모_번호
-                    guarNm         : '' ,  //학부모_명
-                    guarTelNo      : '' ,  //학부모_전화_번호
-
-
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To

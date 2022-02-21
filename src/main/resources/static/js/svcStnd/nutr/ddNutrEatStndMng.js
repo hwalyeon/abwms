@@ -2,6 +2,7 @@ let ddNutrEatStndMng = new Vue({
     el: "#ddNutrEatStndMng",
     data:
         {
+            codeCnt : 0,
             params:
                 {
                     userId           : '' ,
@@ -49,16 +50,13 @@ let ddNutrEatStndMng = new Vue({
                                 $this.code.nutrCdNmList.push({'cdVal':item.nutrCd, 'cdNm':item.nutrNm});
                             });
                         }
+                        $this.codeCnt += 1;
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
                     }
                 });
-                getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
-                {
-                    $this.initGrid();
-                    $this.searchDdNutrEatStndList(true);
-                })
+                getCommonCodeList('SEX_CD',$this.code.sexCdList, function() { $this.codeCnt += 1; })
             },
             initGrid: function()
             {  
@@ -232,6 +230,13 @@ let ddNutrEatStndMng = new Vue({
         },
     watch:
         {
+            'codeCnt' : function (value){
+                let $this = this;
+                if(value ===  2){
+                    $this.initGrid();
+                    $this.searchDdNutrEatStndList(true);
+                }
+            }
         },
     mounted: function()
     {
