@@ -45,10 +45,12 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 
 
 		List<Map<String, String>> gridData = (List<Map<String, String>>) params.get("gridList");
+
 		for (Map<String, String> info : gridData) {
 			log.debug("crud         : " +  info.get("crud"));
 			log.debug("strsStndCd   : " +  info.get("strsStndCd"));
 			log.debug("strsStndCntn : " +  info.get("strsStndCntn"));
+
 
 			if( "C".equals(info.get("crud"))){
 				saveCnt += dao.insert("svcStnd.strs.strsStndMng.insertTiStrsStnd", info);
@@ -62,6 +64,21 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 		if ( saveCnt == 0 ) {
 			throw new BizException("ECOM999", new String[]{"스트레스 상태 코드 저장이 실패하였습니다."});
 		}
+	}
+
+
+	public Map<String, String> searchmentphysCd(Map<String, String> params) throws BizException
+	{
+		Map<String, String> result = dao.selectOne("svcStnd.strs.strsStndMng.mentphysCd", params);
+
+		Map<String, String> rtnMap = new HashMap<>();
+		if ( result == null || GEUtil.isEmpty(result.get("mentStrsStatCd")) ) {
+			rtnMap.put("existsYn", "N");
+		} else {
+			rtnMap.put("existsYn", "Y");
+		}
+
+		return rtnMap;
 	}
 
 }

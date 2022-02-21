@@ -19,6 +19,7 @@
 		WHERE
 		       ment_strs_stat_cd LIKE CONCAT (#{mentStrsStatCd}, '%') /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
 		AND    phys_strs_stat_cd LIKE CONCAT (#{physStrsStatCd}, '%') /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+		order  by MENT_STRS_STAT_NM
 
 </select>
 
@@ -70,5 +71,15 @@
 	    ,#{uptUserId}
 	)
 	</insert>
+
+	<select id="mentphysCd" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT  ment_strs_stat_cd
+	           ,phys_strs_stat_cd
+		FROM ti_strs_stnd
+		WHERE 1=1
+		AND ment_strs_stat_cd = #{mentStrsStatCd}
+		and phys_strs_stat_cd = #{physStrsStatCd}
+	</select>
+
 
 </mapper>

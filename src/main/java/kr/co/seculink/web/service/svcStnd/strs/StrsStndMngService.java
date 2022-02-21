@@ -11,5 +11,7 @@ public interface StrsStndMngService
 	public List<Map<String, String>> searchStrsList(Map<String, String> params) throws BizException;
 
 	public void saveStrsList(Map<String, Object> paramhs) throws BizException;
+
+	public Map<String, String> searchmentphysCd(Map<String, String> params) throws BizException;
 }
 

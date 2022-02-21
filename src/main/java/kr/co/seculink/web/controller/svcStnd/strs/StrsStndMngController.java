@@ -110,4 +110,19 @@ public class StrsStndMngController
 
 		return vo;
 	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/searchmentphysCd.ab")
+	public RtnMsg searchmentphysCd(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, String> result = strsStndMngService.searchmentphysCd(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
 }

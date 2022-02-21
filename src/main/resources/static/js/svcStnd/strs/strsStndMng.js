@@ -48,13 +48,13 @@ let strsStndMng = new Vue({
         	let colModels = [
                 {name: "crud"               , index: "crud"             , label: "crud"                  , hidden:true},
                 //   {name: "mentStrsStatCd"     , index: "mentStrsStatCd"   , label: "정신적스트레스상태코드"    , editable :true , editrules : {number : true}, width: 80, align: "center"},
-                {name: "mentStrsStatCd"	     , index: "mentStrsStatCd"	 , label: "정신적스트레스상태명" , width: 80  	 ,align:"center" },
-                    //,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentStrsStatNmList}},
+                {name: "mentStrsStatCd"	     , index: "mentStrsStatCd"	 , label: "정신적스트레스상태명" , width: 80  	 ,align:"center"
+                    ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentStrsStatNmList}},
                 {name: "mentStrsStatCdTemp"      , index: "mentStrsStatCdTemp"   ,label: "정신적스트레스상태명"  , hidden:true },
-                {name: "physStrsStatCd"	     , index: "physStrsStatCd"	 , label: "신체적스트레스상태명" , width: 80  	 ,align:"center" },
-                    //,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentStrsStatNmList}},
+                {name: "physStrsStatCd"	     , index: "physStrsStatCd"	 , label: "신체적스트레스상태명" , width: 80  	 ,align:"center"
+                    ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentStrsStatNmList}},
                 {name: "physStrsStatTemp"      , index: "physStrsStatTemp"   ,label: "신체적스트레스상태명"  , hidden:true },
-                {name: "strsJudgCntn"       , index: "strsJudgCntn"     , label: "스트레스판정내용"         , editable :true , editrules : {number : true}, width: 80, align: "center"},
+                {name: "strsJudgCntn"       , index: "strsJudgCntn"     , label: "스트레스판정내용"         , editable :true , editrules : {text : true}, width: 80, align: "center"},
                 {name: "regDt"              , index: "regDt"            , label: "등록일자"                , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue); }},
                 {name: "regTm"               , index: "regTm"               , label: "등록시각"            , width: 80, align: "center"
@@ -191,6 +191,8 @@ let strsStndMng = new Vue({
             let $this = this;
             let gridData = commonGridGetDataNew($("#user_list"));
 
+
+
             if(gridData.length > 0){
                 for (let data in gridData){
                     if(gridData[data].crud === 'C' || gridData[data].crud === 'U'){
@@ -201,6 +203,10 @@ let strsStndMng = new Vue({
 
                         if(WebUtil.isNull(gridData[data].physStrsStatCd)){
                             Swal.alert(["위험감정상태내용은 필수 입력입니다.", 'warning']);
+                            return false;
+                        }
+                        if(!$this.searchmentphysCd()){
+                            Swal.alert(["이미 등록된 코드 입니다.", 'warning']);
                             return false;
                         }
                     }
@@ -221,12 +227,37 @@ let strsStndMng = new Vue({
                     Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                         $this.searchStrsList(true);
                     });
+
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
                 }
             });
 
+        },
+
+        searchmentphysCd: function()
+        {
+
+            let $this = this;
+            let gridData = commonGridGetDataNew($("#user_list"));
+            let param = { gridList : []}
+            param.gridList = gridData;
+
+            AjaxUtil.post({
+                url: "/svcStnd/strs/strsStndMng/searchmentphysCd.ab",
+                param: $this.params,
+                success: function(response) {
+                    if ( response.rtnData.result.existsYn === 'Y' ) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
         },
 
 
