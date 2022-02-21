@@ -26,7 +26,7 @@
               /* Generated SQL SQL ID : ts_cs_info.insert */
               INSERT INTO ts_cs_info
               (
-              reg_no /* reg_no 등록_번호 numeric */
+                      reg_no /* reg_no 등록_번호 numeric */
               <if test="csTelNo != null">
                      ,cs_tel_no /* cs_tel_no 고객지원_전화_번호 character varying(20) */
               </if>
@@ -36,7 +36,7 @@
               <if test="csUrl != null">
                      ,cs_url /* cs_url 고객지원_URL character varying(4000) */
               </if>
-              ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL numeric */
+                     ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL numeric */
               <if test="regDt != null">
                      ,reg_dt /* reg_dt 등록_일자 character(8) */
               </if>
@@ -58,9 +58,9 @@
               )
               VALUES
               (
-              #{regNo} /* reg_no 등록_번호 numeric */
+                      #{regNo}::NUMERIC  /* reg_no 등록_번호 numeric */
               <if test="csTelNo != null">
-                     ,#{csTelNo} /* cs_tel_no 고객지원_전화_번호 character varying(20) */
+                     ,#{csTelNo}/* cs_tel_no 고객지원_전화_번호 character varying(20) */
               </if>
               <if test="csMailAddr != null">
                      ,#{csMailAddr} /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
@@ -68,7 +68,7 @@
               <if test="csUrl != null">
                      ,#{csUrl} /* cs_url 고객지원_URL character varying(4000) */
               </if>
-              ,#{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL numeric */
+                     ,#{bandHpgeUrl}::NUMERIC /* band_hpge_url 밴드_홈페이지_URL numeric */
               <if test="regDt != null">
                      ,#{regDt} /* reg_dt 등록_일자 character(8) */
               </if>

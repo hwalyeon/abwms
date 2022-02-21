@@ -4,7 +4,7 @@ let csInfoMng = new Vue({
         params: {
             regNo:'',
             csTelNo:'',
-            csmailAddr:'',
+            csMailAddr:'',
             csUrl:'',
             bandHpgeUrl:'',
             regDT:'',
@@ -41,14 +41,13 @@ let csInfoMng = new Vue({
         },
         initCodeList: function() {
             let $this = this;
-            getCommonCodeList('TERM_DIV_CD',$this.code.termInfoList);
         },
         initGrid: function() {
 
             let colModels = [
                 {name: "regNo"                , index: "regNo"                , label: "등록번호"            , width: 80, align: "center"},
                 {name: "csTelNo"              , index: "csTelNo"              , label: "고객지원 전화번호"     , width: 80, align: "center"},
-                {name: "csmailAddr"           , index: "csmailAddr"           , label: "고객지원 메일주소"     , width: 80, align: "center"},
+                {name: "csMailAddr"           , index: "csMailAddr"           , label: "고객지원 메일주소"     , width: 80, align: "center"},
                 {name: "csUrl"                , index: "csUrl"                , label: "고객지원 URL"        , width: 80, align: "center"},
                 {name: "bandHpgeUrl"          , index: "bandHpgeUrl"          , label: "밴드 홈페이지 URL"    , width: 80, align: "center"},
                 {name: "regDt"                , index: "regDt"                , label: "등록일자"            , width: 80, align: "center"
@@ -63,7 +62,7 @@ let csInfoMng = new Vue({
                 {name: "uptUserId"            , index: "uptUserId"            , label: "수정사용자ID"        , width: 80, align: "center"},
                 {name: "csInfoDetlPopup"      , index: "csInfoDetlPopup"      , label: "상세정보보기"         , width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="termInfoMng.regCsInfoMngPop(\'' + rowObject.termDivCd + '\')" value="상세보기" data-toggle="modal" data-target="#termInfoDetlPopup" />';
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="csInfoMng.regCsInfoMngPop(\'' + rowObject.regNo + '\')" value="상세보기" data-toggle="modal" data-target="#csInfoDetlPopup" />';
                     }
                 }
             ];
@@ -140,7 +139,7 @@ let csInfoMng = new Vue({
             $this.params = {
                 regNo:'',
                 csTelNo:'',
-                csmailAddr:'',
+                csMailAddr:'',
                 csUrl:'',
                 bandHpgeUrl:'',
                 regDT:'',

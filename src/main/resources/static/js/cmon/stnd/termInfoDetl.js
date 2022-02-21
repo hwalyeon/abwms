@@ -20,19 +20,21 @@ let termInfoDetl = new Vue({
         	
         	let $this = this;
         	
-        	$this.initCodeList();      
+        	$this.initCodeList();
         	        	
         },
         initCodeList: function() {
         	let $this = this;
 			getCommonCodeList('TERM_DIV_CD',$this.code.termInfoList);
-        	
+
         },
         initPage: function(termDivCd) {
         	
         	let $this = this;
         	$this.resetTermInfo();
-
+			console.log("termInfoMngInfo" + $this.termInfoMngInfo.termVer);
+			console.log($this.code.termInfoList);
+			console.log($this.termInfoMngInfo);
         	
         	if ( !WebUtil.isNull(termDivCd) )
     		{
@@ -56,6 +58,7 @@ let termInfoDetl = new Vue({
                     }
                 });
     		}
+
         },
         isValid: function() {
         	

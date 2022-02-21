@@ -5,7 +5,7 @@ let csInfoDetl = new Vue({
     		crud: 'C',
 			regNo:'',
 			csTelNo:'',
-			csmailAddr:'',
+			csMailAddr:'',
 			csUrl:'',
 			bandHpgeUrl:''
     	},
@@ -25,19 +25,18 @@ let csInfoDetl = new Vue({
         },
         initCodeList: function() {
         	let $this = this;
-			getCommonCodeList('TERM_DIV_CD',$this.code.termInfoList);
-
         },
-        initPage: function(termDivCd) {
+        initPage: function(regNo) {
         	
         	let $this = this;
-        	$this.resetTermInfo();
+        	$this.resetCsInfo();
+        	console.log($this.csInfoMngInfo);
 
         	
-        	if ( !WebUtil.isNull(termDivCd) )
+        	if ( !WebUtil.isNull(regNo) )
     		{
         		let params = {
-        			'termDivCd' : termDivCd
+        			'regNo' : regNo
         		}
         		
         		AjaxUtil.post({
@@ -61,28 +60,28 @@ let csInfoDetl = new Vue({
         	
         	let $this = this;        	        	
         	
-        	if ( WebUtil.isNull($this.termInfoMngInfo.termDivCd) ) {
-        		Swal.alert(['성장판정코드 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.csInfoMngInfo.regNo) ) {
+        		Swal.alert(['등록번호를 입력하세요.', 'info']);
         		return false;
         	}
         	
-        	if ( WebUtil.isNull($this.termInfoMngInfo.termVer) ) {
-        		Swal.alert(['성장지수_FR를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.csInfoMngInfo.csTelNo) ) {
+        		Swal.alert(['고객지원 전화번호를 입력하세요.', 'info']);
         		return false;
         	}
         	
-        	if ( WebUtil.isNull($this.termInfoMngInfo.aplyStrtDt) ) {
-        		Swal.alert(['성장지수_TO를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.csInfoMngInfo.csMailAddr) ) {
+        		Swal.alert(['고객지원 메일주소를 입력하세요.', 'info']);
         		return false;
         	}
 
-			if ( WebUtil.isNull($this.termInfoMngInfo.termCntn) ) {
-				Swal.alert(['요약내용를 입력하세요.', 'info']);
+			if ( WebUtil.isNull($this.csInfoMngInfo.csUrl) ) {
+				Swal.alert(['고객지원 URL을 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.termInfoMngInfo.essnYn) ) {
-				Swal.alert(['상세내용를 입력하세요.', 'info']);
+			if ( WebUtil.isNull($this.csInfoMngInfo.bandHpgeUrl) ) {
+				Swal.alert(['밴드 홈페이지 URL을 입력하세요.', 'info']);
 				return false;
 			}
         	return true;
@@ -97,12 +96,12 @@ let csInfoDetl = new Vue({
             }
 
 			AjaxUtil.post({
-                url: "/cmon/stnd/termInfoMng/saveInfo.ab",
-                param: $this.termInfoMngInfo,
+                url: "/cmon/stnd/csInfoMng/saveInfo.ab",
+                param: $this.csInfoMngInfo,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#termInfoDetlPopup'));
-						termInfoMng.searchTermInfoList(true);
+                		closeModal($('#csInfoDetlPopup'));
+						csInfoMng.searchCsInfoList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -115,15 +114,15 @@ let csInfoDetl = new Vue({
 			
 			let $this = this;
 			
-			$this.termInfoMngInfo.crud = 'D';
+			$this.csInfoMngInfo.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/cmon/stnd/termInfoMng/saveInfo.ab",
-                param: $this.termInfoMngInfo,
+                url: "/cmon/stnd/csInfoMng/saveInfo.ab",
+                param: $this.csInfoMngInfo,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#termInfoDetlPopup'));
-						termInfoMng.searchTermInfoList(true);
+                		 closeModal($('#csInfoDetlPopup'));
+						csInfoMng.searchCsInfoList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -131,14 +130,14 @@ let csInfoDetl = new Vue({
                 }
             });
 		},
-		resetTermInfo: function() {
-			this.termInfoMngInfo = {
+		resetCsInfo: function() {
+			this.csInfoMngInfo = {
 				crud: 'C',
-				termDivCd:'',
-				termVer:'',
-				aplyStrtDt:'',
-				termCntn:'',
-				essnYn:''
+				regNo:'',
+				csTelNo:'',
+				csmailAddr:'',
+				csUrl:'',
+				bandHpgeUrl:''
 	    	}
 		}
     },
