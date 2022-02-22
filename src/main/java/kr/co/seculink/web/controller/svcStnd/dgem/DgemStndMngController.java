@@ -83,6 +83,24 @@ public class DgemStndMngController {
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
 	}
+	
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/dgem/dgemStndMng/searchDgemStndInfo.ab")
+
+	public RtnMsg searchDgemStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.dgem.dgemStndMng.searchTcDgemStatBase", params);
+		
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
 
 	@ResponseBody
 	@RequestMapping("/svcStnd/dgem/dgemStndMng/saveDgemStnd.ab")

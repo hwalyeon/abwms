@@ -85,7 +85,7 @@ let dgemStndMng = new Vue({
                 {name: "uptUserId"    , index: "uptUserId"    , label: "수정사용자ID"	  , width: 50 , align: "center"  },
                 {name: "dgemStndDetlPop" , index: "dgemStndDetlPop" , label: "상세정보보기", width: 50, align: "center",
                     formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemStndMng.regDgemStndDetlPop(\'' + rowObject.actDivCd + '\')" value="상세보기" data-toggle="modal" data-target="#dgemStndDetlPopup" />';
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemStndMng.regDgemStndDetlPop(\'' + rowObject.actDivCd + '\',\'' + rowObject.hbitStatCd + '\',\'' + rowObject.plcClssCd + '\',\'' + rowObject.tempStatCd + '\',\'' + rowObject.dgemStatCd + '\')" value="상세보기" data-toggle="modal" data-target="#dgemStndDetlPopup" />';
                     }
                 }
                 
@@ -95,11 +95,11 @@ let dgemStndMng = new Vue({
            	$("#dgem_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
             {
             	datatype : "local",
-            	mtype     : 'post'  ,
-                url           : '/svcStnd/dgem/dgemStndMng/searchDgemList.ab',
-                pager      : '#dgem_pager_list',
-				height     : 405     ,
-                colModel: colModels,
+            	mtype    : 'post'  ,
+                url      : '/svcStnd/dgem/dgemStndMng/searchDgemList.ab',
+                pager    : '#dgem_pager_list',
+				height   : 405     ,
+                colModel : colModels,
                 onPaging : function(data)
                 {
                     onPagingCommon(data, this, function(resultMap)
@@ -146,8 +146,8 @@ let dgemStndMng = new Vue({
                 }
             }).trigger("reloadGrid");
 		},
-		regDgemStndDetlPop: function(actDivCd) {
-            dgemStndDetl.initPage(actDivCd);
+		regDgemStndDetlPop: function(actDivCd, hbitStatCd, plcClssCd, tempStatCd, dgemStatCd) {
+			dgemStndDetl.initPage(actDivCd, hbitStatCd, plcClssCd, tempStatCd, dgemStatCd);
         },
 		downloadExcel : function()
         {
@@ -169,103 +169,6 @@ let dgemStndMng = new Vue({
                 }
             });
 		},
-        btnAddRow  :  function()
-        {
-            let $this = this;
-            let date = new Date(); //현재 날짜
-            let cnt    = $("#dgem_list").jqGrid("getGridParam", "records")+1;
-
-            if(WebUtil.isNotNull(this.dgemStatCd)) tempDgemStatCd = this.dgemStatCd;
-
-            var addRow =
-            {
-                crud                        : "C",
-                dgemStatCdTemp : ""  ,
-                dgemStatCdNm    : ""  ,
-                dgemStatCd          : ""  ,
-                dgemStatCntn       : ""  ,
-                regDt                     : date  ,
-                regTm                    : date  ,
-                regUserId               : $this.userId  ,
-                uptDt                     : date ,
-                uptTm                    : date ,
-                uptUserId               : $this.userId  ,
-            };
-            $("#dgem_list").addRowData(cnt, addRow);
-            //$("#dgem_list").jqGrid('setColProp', 'dgemStatCd', {editable:true});
-            //$("#dgem_list").getCell(cnt, 2).setEditOptions({editable:true});
-
-        },
-        btnDelRow : function()
-        {
-            //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
-            var checkIds = $("#dgem_list").jqGrid("getGridParam","selrow") + "";  // 단건
-            if ( checkIds == "" )
-            {
-                alert("삭제할 행을 선택해주십시요.");
-                return false;
-            }
-
-            var checkId = checkIds.split(",");
-            for ( var i in checkId )
-            {
-                if ( $("#dgem_list").getRowData(checkId[i]).crud == "C" )
-                {
-                    $("#dgem_list").setRowData(checkId[i], {crud:"N"});
-                    $("#"+checkId[i],"#dgem_list").css({display:"none"});
-                }
-                else
-                {
-                    $("#dgem_list").setRowData(checkId[i], {crud:"D"});
-                    $("#"+checkId[i],"#dgem_list").css({display:"none"});
-                }
-            }
-
-        },
-        btnSave  :  function()
-        {
-            let $this = this;
-            let gridData = commonGridGetDataNew($("#dgem_list"));
-
-            if(gridData.length > 0)
-            {
-                for (let data in gridData)
-                {
-                    if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
-                    {
-                        if(WebUtil.isNull(gridData[data].dgemStatCd))
-                        {
-                            Swal.alert(["위험감정상태코드는 필수 입력입니다.", 'warning']);
-                            return false;
-                        }
-                    }
-                }
-            }else
-            {
-                Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
-                return false;
-            }
-
-            let param = { gridList : []}
-            param.gridList = gridData;
-
-            AjaxUtil.post(
-            {
-                url: "/svcStnd/dgem/dgemStndMng/saveDgemStnd.ab",
-                param: param,
-                success: function(response)
-                {
-                    Swal.alert(['저장이 완료되었습니다.', 'success']).then(function()
-                    {
-                        $this.searchDgemList(true);
-                    });
-                },
-                error: function (response)
-                {
-                    Swal.alert([response, 'error']);
-                }
-            });
-        },
         /*codeList : function (arrayObject , callback)
         {
             AjaxUtil.post({
