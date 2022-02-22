@@ -24,10 +24,42 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">위험감정상태명</label>
+						<label class="col-xs-1 control-label">활동 구분</label>
 						<div class="col-xs-2">
-							<input type ="text" name="dgemStatCdNm" class="form-control" v-model="params.dgemStatCdNm">
+							<select id="actDivCd" namd="actDivCd" class="form-control" v-model="params.actDivCd">
+								<option value="">전체</option>
+								<option v-for="item in code.actDivCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
+							</select>
 						</div>
+						<label class="col-xs-1 control-label">심박 상태</label>
+						<div class="col-xs-2">
+							<select id="hbitStatCd" namd="hbitStatCd" class="form-control" v-model="params.hbitStatCd">
+								<option value="">전체</option>
+								<option v-for="item in code.hbitStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">장소 분류</label>
+						<div class="col-xs-2">
+							<select id="plcClssCd" namd="plcClssCd" class="form-control" v-model="params.plcClssCd">
+								<option value="">전체</option>
+								<option v-for="item in code.plcClssCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">체온 상태</label>
+						<div class="col-xs-2">
+							<select id="tempStatCd" namd="tempStatCd" class="form-control" v-model="params.tempStatCd">
+								<option value="">전체</option>
+								<option v-for="item in code.tempStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">위험감정 상태</label>
+						<div class="col-xs-2">
+							<select id="dgemStatCd" namd="dgemStatCd" class="form-control" v-model="params.dgemStatCd">
+								<option value="">전체</option>
+								<option v-for="item in code.dgemStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
+							</select>
+						</div>
+						
 					</div>
 					<div class="form-group mg_none">
 						<div class="text-center">
@@ -54,12 +86,9 @@
 					</div>
 					<div class="clear_both"></div>
 					<div class="float_right">
-						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnSave">&nbsp;저장</button>
+<!-- 						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnSave">&nbsp;저장</button> -->
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#dgemStndDetlPopup" v-on:click="regDgemStndPop()">&nbsp;위험감정기준 등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
-					</div>
-					<div class="float_left" style="margin-top:10px">
-						<button type="button" id="btnAdd" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnAddRow"><span class="glyphicon glyphicon-plus"></span></button>
-						<button type="button" id="btnDel" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnDelRow"><span class="glyphicon glyphicon-minus"></span></button>
 					</div>
 					<div class="clear_both"></div>
 				</div>
@@ -72,10 +101,12 @@
 			</div>
 		</div>
     </div>
-<!--    <div th:insert="~{set/userDetl :: body}"></div>-->
+   	<div th:insert="~{svcStnd/dgem/dgemStndDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/editor/summernote.js}"></script>
 	<script type="text/javascript" th:src="@{/js/svcStnd/dgem/dgemStndMng.js}"></script>
+	<script type="text/javascript" th:src="@{/js/svcStnd/dgem/dgemStndDetl.js}"></script>
 </section>
 </body>
 </html>

@@ -4,17 +4,25 @@ let dgemStndMng = new Vue({
     {
     	params:
         {
-            userId                  : ''   ,
-            dgemStatCdNm : ''   ,  //위험감정_상태_코드_명
-    		paging                : 'Y' ,
-    		totalCount          : 0   ,
-            rowCount           : 30 ,
-            currentPage       : 1   ,
-            currentIndex      : 0
+            userId       : ''  ,
+            actDivCd     : ''  , //활동_구분_코드
+            hbitStatCd   : ''  , //심박_상태_코드
+            plcClssCd    : ''  , //장소_구분_코드
+            tempStatCd   : ''  , //체온_상태_코드
+            dgemStatCd   : ''  , //위험감정_상태_코드
+    		paging       : 'Y' ,
+    		totalCount   : 0   ,
+            rowCount     : 30  ,
+            currentPage  : 1   ,
+            currentIndex : 0
         },
-            code:
+        code:
         {
-            dgemStatCdList : []  //위험감정_상태_코드_리스트
+            actDivCdList   : [] , //활동_구분_코드_리스트
+        	hbitStatCdList : [] , //심박_상태_코드_리스트
+            plcClssCdList  : [] , //장소_구분_코드_리스트
+        	tempStatCdList : [] , //체온_상태_코드_리스트
+            dgemStatCdList : [] , //위험감정_상태_코드_리스트
         },
 	},
     methods:
@@ -25,6 +33,8 @@ let dgemStndMng = new Vue({
 
             $this.initValue();
         	$this.initCodeList();
+        	$this.initGrid();
+            $this.searchDgemList(true);
         },
         initValue: function()
         {
@@ -34,12 +44,14 @@ let dgemStndMng = new Vue({
         initCodeList : function()
         {
             let $this = this;
+           
+            getCommonCodeList('ACT_DIV_CD'  , $this.code.actDivCdList);   //활동_구분_코드_리스트          
+            getCommonCodeList('HBIT_STAT_CD', $this.code.hbitStatCdList); //심박_상태_코드_리스트          
+            getCommonCodeList('PLC_CLSS_CD' , $this.code.plcClssCdList);  //장소_구분_코드_리스트          
+            getCommonCodeList('TEMP_STAT_CD', $this.code.tempStatCdList); //체온_상태_코드_리스트          
+            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList); //위험감정_상태_코드_리스트        
+          
             //위험감정상태 코드 목록 조회 공통코드의 경우 1건인 경우
-            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList, function()
-            {
-                $this.initGrid();
-                $this.searchDgemList(true);
-            });
 
             //별도 테이블의 경우 - 1건의 경우
             // $this.codeList( $this.code.dgemStatCdList, function() {
@@ -49,21 +61,34 @@ let dgemStndMng = new Vue({
         },
         initGrid: function()
         {
-            let $this = this;
-            let dgemStatCdList = commonGridCmonCd($this.code.dgemStatCdList); //위험감정_상태_코드_리스트
+        	 let $this = this;				                                                             
+             
         	let colModels = [
-                {name: "crud"                         , index: "crud"                         , label: "crud"                             , hidden: true  },
-                {name: "dgemStatCdTemp"  , index: "dgemStatCdTemp"  , label: "위험감정상태코드"      , hidden: true  }, //update.delete 조건 값
-                {name: "dgemStatCdNm"     , index: "dgemStatCdNm"      , label: "위험감정상태코드명"  , hidden: true  }, //엑셀다운로드에 필요
-                {name: "dgemStatCd"           , index: "dgemStatCd"            , label: "위험감정상태코드"      , width: 80  , align: "center"  , editable: true
-                 ,edittype:"select"                  , formatter:"select"                  , editoptions: {value: dgemStatCdList}  },
-                {name: "dgemStatCntn"        , index: "dgemStatCntn"         , label: "위험감정상태내용"     , width: 80   , align: "center"  , editable: true  },
-                {name: "regDt"                      , index: "regDt"                       , label: "등록일자"                     , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
-                {name: "regTm"                     , index: "regTm"                      , label: "등록시각"                    , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
-                {name: "regUserId"               , index: "regUserId"                 , label: "등록사용자ID"             , width: 80   , align: "center"  },
-                {name: "uptDt"                      , index: "uptDt"                       , label: "수정일자"                     , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
-                {name: "uptTm"                     , index: "uptTm"                     , label: "수정시각"                     , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
-                {name: "uptUserId"                , index: "uptUserId"                , label: "수정사용자ID"             , width: 80   , align: "center"  }
+                {name: "crud"         , index: "crud"         , label: "crud"         , hidden: true },
+                {name: "actDivCd"     , index: "actDivCd"     , label: "활동 구분 코드" 	  , hidden: true },
+                {name: "hbitStatCd"   , index: "hbitStatCd"   , label: "심박 상태 코드" 	  , hidden: true }, 
+                {name: "plcClssCd"    , index: "plcClssCd"    , label: "장소 분류 코드" 	  , hidden: true },
+                {name: "tempStatCd"   , index: "tempStatCd"   , label: "체온 상태 코드" 	  , hidden: true },
+                {name: "dgemStatCd"   , index: "dgemStatCd"   , label: "위험감정 상태 코드" , hidden: true },
+                {name: "actDivCdNm"   , index: "actDivCdNm"   , label: "활동 구분" 	  , width: 50 , align: "center" },
+                {name: "hbitStatCdNm" , index: "hbitStatCdNm" , label: "심박 상태" 	  , width: 50 , align: "center" },
+                {name: "plcClssCdNm"  , index: "plcClssCdNm"  , label: "장소 분류" 	  , width: 50 , align: "center" },
+                {name: "tempStatCdNm" , index: "tempStatCdNm" , label: "체온 상태" 	  , width: 50 , align: "center" },
+                {name: "dgemIdx" 	  , index: "dgemIdx" 	  , label: "위험 감정 지수" 	  , width: 50 , align: "center" },
+                {name: "dgemStatCdNm" , index: "dgemStatCdNm" , label: "위험감정 상태"    , width: 50 , align: "center" }, 
+                {name: "dgemSmryCntn" , index: "dgemSmryCntn" , label: "위험감정 요약내용" , width: 80 , align: "center" 	}, 
+                {name: "regDt"        , index: "regDt"        , label: "등록일자"   	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
+                {name: "regTm"        , index: "regTm"        , label: "등록시각"   	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
+                {name: "regUserId"    , index: "regUserId"    , label: "등록사용자ID"	  , width: 50 , align: "center"  },
+                {name: "uptDt"        , index: "uptDt"        , label: "수정일자"    	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
+                {name: "uptTm"        , index: "uptTm"        , label: "수정시각"    	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
+                {name: "uptUserId"    , index: "uptUserId"    , label: "수정사용자ID"	  , width: 50 , align: "center"  },
+                {name: "dgemStndDetlPop" , index: "dgemStndDetlPop" , label: "상세정보보기", width: 50, align: "center",
+                    formatter: function(cellValue, options, rowObject) {
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemStndMng.regDgemStndDetlPop(\'' + rowObject.actDivCd + '\')" value="상세보기" data-toggle="modal" data-target="#dgemStndDetlPopup" />';
+                    }
+                }
+                
             ];
   
             $("#dgem_list").jqGrid("GridUnload");
@@ -121,6 +146,9 @@ let dgemStndMng = new Vue({
                 }
             }).trigger("reloadGrid");
 		},
+		regDgemStndDetlPop: function(actDivCd) {
+            dgemStndDetl.initPage(actDivCd);
+        },
 		downloadExcel : function()
         {
 			let $this = this;
