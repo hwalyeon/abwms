@@ -1,21 +1,10 @@
-let prntInfoMng = new Vue({
-    el: "#prntInfoMng",
+let bandOpenInfoMng = new Vue({
+    el: "#bandOpenInfoMng",
     data:
         {
             codeCount : 0,
             params:
                 {
-
-                    entrDt         : '' ,  //가입일자
-                    stdtNo         : '' ,  //학생_번호
-                    stdtNm         : '' ,  //학생_명
-                    telNo          : '' ,  //전화_번호
-                    bandId         : '' ,  //밴드_ID
-                    guarNo         : '' ,  //학부모_번호
-                    guarNm         : '' ,  //학부모_명
-                    guarTelNo      : '' ,  //학부모_전화_번호
-
-
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
@@ -122,7 +111,7 @@ let prntInfoMng = new Vue({
                         {name: "openGramNo"       , index: "openGramNo"       , label: "개통전문번호"		, width: 80 , align: "center" },
                         {name: "apiUrlYn"         , index: "apiUrlYn"         , label: "URL제공여부"		, width: 80 , align: "center" },
                         {name: "apiUrlDttm"       , index: "apiUrlDttm"       , label: "URL제공일시"		, width: 80 , align: "center" },
-                        {name: "fatJudgStndDetlPop" , index: "fatJudgStndDetlPop" , label: "상세정보보기", width: 80, align: "center",
+                        {name: "bandOpenInfoDetlPopup" , index: "bandOpenInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center",
                             formatter: function(cellValue, options, rowObject) {
                                 return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regBandOpenInfoDetlPopup(\'' + rowObject.bandId + '\')" value="상세보기" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" />';
                             }

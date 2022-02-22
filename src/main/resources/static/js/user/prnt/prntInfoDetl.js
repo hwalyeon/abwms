@@ -1,8 +1,9 @@
-let bandOpenInfoDetl = new Vue({
-    el: "#bandOpenInfoDetlPopup",
+let prntInfoDetl = new Vue({
+    el: "#prntInfoDetlPopup",
     data: {
     	params: {
     		crud           : 'C',
+			guarNo         : '' ,
 			userId         : '' ,
 			bandIdTemp     : '' ,
 			bandId         : '' ,  //밴드_ID
