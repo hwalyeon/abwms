@@ -75,12 +75,12 @@ let dgemStndMng = new Vue({
                 {name: "plcClssCd"      , index: "plcClssCd"      , label: "장소 분류 코드" 	  , hidden: true },
                 {name: "tempStatCd"     , index: "tempStatCd"     , label: "체온 상태 코드" 	  , hidden: true },
                 {name: "dgemStatCd"     , index: "dgemStatCd"     , label: "위험감정 상태 코드" , hidden: true },
-                {name: "actDivCdNm"     , index: "actDivCdNm"     , label: "활동 구분" 	  , width: 50 , align: "center" },
-                {name: "hbitStatCdNm"   , index: "hbitStatCdNm"   , label: "심박 상태" 	  , width: 50 , align: "center" },
-                {name: "plcClssCdNm"    , index: "plcClssCdNm"    , label: "장소 분류" 	  , width: 50 , align: "center" },
-                {name: "tempStatCdNm"   , index: "tempStatCdNm"   , label: "체온 상태" 	  , width: 50 , align: "center" },
+                {name: "actDivCdNm"     , index: "actDivCdNm"     , label: "활동 구분 명" 	  , width: 50 , align: "center" },
+                {name: "hbitStatCdNm"   , index: "hbitStatCdNm"   , label: "심박 상태 명" 	  , width: 50 , align: "center" },
+                {name: "plcClssCdNm"    , index: "plcClssCdNm"    , label: "장소 분류 명" 	  , width: 50 , align: "center" },
+                {name: "tempStatCdNm"   , index: "tempStatCdNm"   , label: "체온 상태 명" 	  , width: 50 , align: "center" },
                 {name: "dgemIdx" 	    , index: "dgemIdx" 	      , label: "위험감정 지수" 	  , width: 50 , align: "center" },
-                {name: "dgemStatCdNm"   , index: "dgemStatCdNm"   , label: "위험감정 상태"    , width: 50 , align: "center" }, 
+                {name: "dgemStatCdNm"   , index: "dgemStatCdNm"   , label: "위험감정 상태 명"    , width: 50 , align: "center" }, 
                 {name: "dgemSmryCntn"   , index: "dgemSmryCntn"   , label: "위험감정 요약내용" , width: 80 , align: "center" 	}, 
                 {name: "regDt"          , index: "regDt"          , label: "등록일자"   	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
                 {name: "regTm"          , index: "regTm"          , label: "등록시각"   	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
@@ -209,12 +209,17 @@ let dgemStndMng = new Vue({
 			let $this = this;
 			$this.params =
             {
-                dgemStatCdNm:  ''  ,  //위험감정_상태_코드_명
-                paging               : 'Y' ,
-                totalCount         : 0   ,
-                rowCount           : 30 ,
-                currentPage       : 1   ,
-                currentIndex      : 0
+		            userId       : ''  ,
+		            actDivCd     : ''  , //활동_구분_코드
+		            hbitStatCd   : ''  , //심박_상태_코드
+		            plcClssCd    : ''  , //장소_구분_코드
+		            tempStatCd   : ''  , //체온_상태_코드
+		            dgemStatCd   : ''  , //위험감정_상태_코드
+		    		paging       : 'Y' ,
+		    		totalCount   : 0   ,
+		            rowCount     : 30  ,
+		            currentPage  : 1   ,
+		            currentIndex : 0
 	    	}
 		}
     },

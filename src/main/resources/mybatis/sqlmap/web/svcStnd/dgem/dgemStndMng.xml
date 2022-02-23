@@ -92,10 +92,13 @@
 			, HBIT_STAT_CD
 			, PLC_CLSS_CD
 			, TEMP_STAT_CD
-			, DGEM_IDX
+		 	 <if test="dgemIdx != null">
+			, DGEM_IDX</if>
 		    , DGEM_STAT_CD
-		    , DGEM_SMRY_CNTN
-		    , DGEM_STAT_CNTN
+		     <if test="dgemSmryCntn != null">
+		    , DGEM_SMRY_CNTN</if>
+		     <if test="dgemStatCntn != null">
+		    , DGEM_STAT_CNTN</if>
 		    , REG_DT
 		    , REG_TM
 		    , REG_USER_ID
@@ -105,28 +108,23 @@
 		)
 		VALUES
 		(
-		      <if test="actDivCd != null and actDivCd != ''">
-	          ACT_DIV_CD = #{actDivCd}	</if>
-	         <if test="hbitStatCd != null and hbitStatCd != ''">
-	          ,HBIT_STAT_CD = #{hbitStatCd}	</if>
-	         <if test="plcClssCd != null and plcClssCd != ''">
-	          ,PLC_CLSS_CD = #{plcClssCd}	</if>
-	         <if test="tempStatCd != null and tempStatCd != ''">
-	          ,TEMP_STAT_CD = #{tempStatCd}	</if>
+		     #{actDivCd}
+	       , #{hbitStatCd}
+	       , #{plcClssCd}
+	       , #{tempStatCd}
 	         <if test="dgemIdx != null and dgemIdx != ''">
-	          ,DGEM_IDX = #{dgemIdx}::NUMERIC	</if>
-	         <if test="dgemStatCd != null and dgemStatCd != ''">
-	          ,DGEM_STAT_CD = #{dgemStatCd}	</if>
+	       , #{dgemIdx}::NUMERIC	</if>
+	       , #{dgemStatCd}
 			 <if test="dgemSmryCntn != null and dgemSmryCntn != ''">
-			  ,DGEM_SMRY_CNTN = #{dgemSmryCntn}	</if>
+		   , #{dgemSmryCntn}	</if>
 			 <if test="dgemStatCntn != null and dgemStatCntn != ''">
-			  ,DGEM_STAT_CNTN = #{dgemStatCntn}	</if>
-		    ,TO_CHAR(NOW(), 'YYYYMMDD')
-		    ,TO_CHAR(NOW(), 'HH24MISS')
-		    ,#{regUserId}
-		    ,TO_CHAR(NOW(), 'YYYYMMDD')
-		    ,TO_CHAR(NOW(), 'HH24MISS')
-		    ,#{uptUserId}
+		   , #{dgemStatCntn}	</if>
+		   ,TO_CHAR(NOW(), 'YYYYMMDD')
+		   ,TO_CHAR(NOW(), 'HH24MISS')
+		   ,#{regUserId}
+		   ,TO_CHAR(NOW(), 'YYYYMMDD')
+		   ,TO_CHAR(NOW(), 'HH24MISS')
+		   ,#{uptUserId}
 		)
 	</insert>
 </mapper>
