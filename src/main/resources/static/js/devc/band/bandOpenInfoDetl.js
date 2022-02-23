@@ -55,11 +55,10 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 			$this.resetBandOpenInfo();
 
-			if ( !WebUtil.isNull(bandId,guarNo) )
+			if ( !WebUtil.isNull(bandId) )
 			{
 				let params = {
-					'bandId' : bandId ,
-					'guarNo' : guarNo
+					'bandId' : bandId
 				}
 				AjaxUtil.post({
 					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab",

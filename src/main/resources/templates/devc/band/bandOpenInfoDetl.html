@@ -4,7 +4,7 @@
 <div class="modal fade" id="bandOpenInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 580px; height: 510px">
+			<div class="modal-content" style="width: 580px; height: 550px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -48,9 +48,15 @@
 									</td>
 			                    </tr>
 								<tr>
-									<th scope="row">보호자 전화번호</th>
+									<th scope="row">보호자 전화번호1</th>
 									<td>
-										<input type="text" name="guarTelNo" v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)" maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
+										<input type="text" name="guarTelNo" v-model="params.guarTelNo1" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)" maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">보호자 전화번호2</th>
+									<td>
+										<input type="text" name="guarTelNo" v-model="params.guarTelNo2" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)" maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
 									</td>
 								</tr>
 								<tr>
