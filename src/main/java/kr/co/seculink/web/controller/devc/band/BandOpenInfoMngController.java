@@ -37,7 +37,6 @@ public class BandOpenInfoMngController
 
 		List<Map<String, String>> result = bandOpenInfoMngService.searchBandOpenInfoList(params);
 
-		System.out.println("모델 값은?"+result);
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
 			vo.setTotalCount(((List)bandOpenInfoMngService.searchBandOpenInfoList(params)).size());

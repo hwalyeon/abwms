@@ -1,5 +1,5 @@
-let prntInfoDetl = new Vue({
-    el: "#prntInfoDetlPopup",
+let bandOpenInfoDetl = new Vue({
+    el: "#bandOpenInfoDetlPopup",
     data: {
     	params: {
     		crud           : 'C',
@@ -50,15 +50,16 @@ let prntInfoDetl = new Vue({
 			let $this = this;
 			$this.initBandYtypCdValue();
 		},
-        initPage: function(bandId) {
+        initPage: function(bandId, guarNo) {
 
 			let $this = this;
 			$this.resetBandOpenInfo();
 
-			if ( !WebUtil.isNull(bandId) )
+			if ( !WebUtil.isNull(bandId,guarNo) )
 			{
 				let params = {
-					'bandId' : bandId
+					'bandId' : bandId ,
+					'guarNo' : guarNo
 				}
 				AjaxUtil.post({
 					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab",

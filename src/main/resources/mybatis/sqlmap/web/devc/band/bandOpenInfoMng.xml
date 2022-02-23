@@ -28,11 +28,12 @@
 		, TSB.STDT_NO --학생번호
 		, TBI.TEL_NO
 		, TSB.STDT_NM --학생명
-		, TSB.GUAR_NO
+		, TGB.GUAR_NO
 		, TBI.BAND_OPEN_STAT_CD
 		, fn_getCdNm('BAND_OPEN_STAT_CD',band_open_stat_cd) as BAND_OPEN_STAT_CD_NM
 		, TGB.GUAR_NM --보호자_명
-		, TBI.GUAR_TEL_NO --보호자_전화번호
+		, TBI.GUAR_TEL_NO_1
+		, TBI.GUAR_TEL_NO_2
 		, TBI.OPEN_GRAM_NO
 		, TBI.BLTH_ID
 		, TBI.API_URL_GRAM_NO --API URL 제공여부
@@ -45,17 +46,15 @@
 		, TBI.UPT_TM
 		, TBI.UPT_USER_ID
 		from TS_BAND_INFO AS TBI
-		left outer join TM_STDT_BASE
-		AS TSB
+		left outer join TM_STDT_BASE AS TSB
 		on TBI.BAND_ID = TSB.BAND_ID
 		left outer join TM_GUAR_BASE AS TGB
-		on TSB.GUAR_NO = TGB.GUAR_NO
+		on (TSB.GUAR_NO_1 = TGB.GUAR_NO OR TSB.GUAR_NO_2 = TGB.GUAR_NO)
 		left outer join BAND_YTYP_WITH AS T1
 		on
 		TBI.BAND_ID = T1.BAND_ID
 		where 1=1
-		<if
-			test="uptDtFr != null and uptDtTo != null and uptDtFr !='' and uptDtTo !='' ">
+		<if test="uptDtFr != null and uptDtTo != null and uptDtFr !='' and uptDtTo !='' ">
 			and TBI.UPT_DT between #{uptDtFr} and #{uptDtTo}</if>
 		<if test=" stdtNm != null and stdtNm !='' ">
 			and TSB.STDT_NM like CONCAT('%',#{stdtNm},'%')</if>
@@ -158,8 +157,7 @@
 
 	</select>
 	<!--밴드_정보_상세보기 -->
-	<select id="selectBandOpenInfo" parameterType="java.util.Map"
-		resultType="MybatisMap">
+	<select id="selectBandOpenInfo" parameterType="java.util.Map" resultType="MybatisMap">
 		with BAND_YTYP_WITH as
 		(
 		select TBI.BAND_ID
@@ -176,7 +174,7 @@
 		, T1.BAND_YTYP_CD
 		, TBI.BAND_MDL_CD
 		, TBI.TEL_NO
-		, TSB.GUAR_NO
+		, TGB.GUAR_NO
 		, TBI.BAND_OPEN_STAT_CD
 		, TBI.BLTH_ID
 		from TS_BAND_INFO AS TBI
@@ -184,13 +182,13 @@
 		TSB
 		on TBI.BAND_ID = TSB.BAND_ID
 		left outer join TM_GUAR_BASE AS TGB
-		on
-		TSB.GUAR_NO = TGB.GUAR_NO
+		on (TSB.GUAR_NO_1 = TGB.GUAR_NO OR TSB.GUAR_NO_2 = TGB.GUAR_NO)
 		left outer join BAND_YTYP_WITH AS T1
 		on
 		TBI.BAND_ID = T1.BAND_ID
 		where 1=1
 		and TBI.BAND_ID = #{bandId}
+		and TGB.GUAT_NO = #{guarNo}
 
 	</select>
 
