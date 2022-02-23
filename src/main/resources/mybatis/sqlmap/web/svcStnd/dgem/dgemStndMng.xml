@@ -44,6 +44,22 @@
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
+	<!--중복 조회 -->
+	<select id="searchDupCdCk" parameterType="java.util.Map"
+		resultType="MybatisMap">
+		SELECT ACT_DIV_CD
+		     , HBIT_STAT_CD
+		     , PLC_CLSS_CD
+		     , PLC_CLSS_CD
+		     , DGEM_STAT_CD
+		FROM TI_DGEM_STND
+		WHERE 1=1
+		AND ACT_DIV_CD = #{actDivCd}
+		AND HBIT_STAT_CD = #{hbitStatCd}
+		AND PLC_CLSS_CD = #{plcClssCd}
+		AND TEMP_STAT_CD = #{tempStatCd}	
+		AND DGEM_STAT_CD = #{dgemStatCd}
+	</select>
 
     <update id="updateTiDgemStnd" parameterType="java.util.Map">
         UPDATE TI_DGEM_STND

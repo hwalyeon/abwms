@@ -60,4 +60,19 @@ public class DgemStndMngServiceImpl implements DgemStndMngService
 		}
 	}
 
+
+	//중복 조회
+	public Map<String, String> searchDupCdCk(Map<String, String> params) throws BizException
+	{
+		Map<String, String> result = dao.selectOne("svcStnd.dgem.dgemStndMng.searchDupCdCk", params);
+
+		Map<String, String> rtnMap = new HashMap<>();
+		if ( result == null || GEUtil.isEmpty(result.get("actDivCd")) ) {
+			rtnMap.put("existsYn", "N");
+		} else {
+			rtnMap.put("existsYn", "Y");
+		}
+
+		return rtnMap;
+	}
 }

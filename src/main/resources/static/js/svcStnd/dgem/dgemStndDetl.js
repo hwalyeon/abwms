@@ -117,6 +117,10 @@ let dgemStndDetl = new Vue({
             if ( !this.isValid() ) {
                 return false;
             }
+            if(!$this.searchDupCdCk()){
+                Swal.alert(["이미 등록된 코드 입니다.", 'warning']);
+                return false;
+            }
 
 			AjaxUtil.post({
                 url: "/svcStnd/dgem/dgemStndMng/saveInfo.ab",
@@ -133,6 +137,28 @@ let dgemStndDetl = new Vue({
             });
 
 		},
+		searchDupCdCk: function()
+        {
+
+            let $this = this;
+            let param = $this.params
+
+            AjaxUtil.post({
+                url: "/svcStnd/dgem/dgemStndMng/searchDupCdCk.ab",
+                param: $this.params,
+                success: function(response) {
+                    if ( response.rtnData.result.existsYn === 'Y' ) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
+        },
+
 		deleteInfo: function() {
 			
 			let $this = this;

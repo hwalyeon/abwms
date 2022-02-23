@@ -122,4 +122,18 @@ public class DgemStndMngController {
 
 		return vo;
 	}
+	@ResponseBody
+	@RequestMapping("/svcStnd/dgem/dgemStndMng/searchDupCdCk.ab")
+	public RtnMsg searchDupCdCk(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, String> result = dgemStndMngService.searchDupCdCk(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
 }

@@ -11,5 +11,7 @@ public interface DgemStndMngService
 	public List<Map<String, String>> searchDgemList(Map<String, String> params) throws BizException;
 
 	public void saveDgemList(Map<String, Object> params) throws BizException;
+	//중복 조회
+	public Map<String, String> searchDupCdCk(Map<String, String> params) throws BizException;
 
 }
