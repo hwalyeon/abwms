@@ -4,7 +4,7 @@
 <div class="modal fade" id="dgemStndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 850px; height: 780px;">
+			<div class="modal-content" style="width: 850px; height: 800px;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -78,15 +78,22 @@
 											<summer-note
 													v-model="params.dgemSmryCntn"
 													ref="dgemSmryCntn"
-													:options="{height:70, notUseVideo:true, maxImageWidth: 1280}"/>
+													:summer-note-id="summerNoteId1"
+													:options="{height:50, notUseVideo:true, maxImageWidth: 1280}"/>
 										</div>
 			                        </td>
 			                    </tr>
-			                    <tr style="width:100%;height:110px;">
+			                    <tr>
 			                        <th scope="row">상세내용</th>
-			                        <td style="height:100%">
-										<textarea  style="height:90px;" id="dgemStatCntn" name="dgemStatCntn" v-model="params.dgemStatCntn" class="form-control"></textarea>
-			                        </td>
+			                        <td>
+			                        	<div class="mg_top_10">
+											<summer-note
+													v-model="params.dgemStatCntn"
+													ref="dgemStatCntn"
+													:summer-note-id="summerNoteId2"
+													:options="{height:50, notUseVideo:true, maxImageWidth: 1280}"/>
+										</div>
+									</td>
 			                    </tr>
 							</tbody>
 		                </table>
