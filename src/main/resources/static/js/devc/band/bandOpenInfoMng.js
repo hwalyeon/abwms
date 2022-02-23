@@ -16,7 +16,7 @@ let bandOpenInfoMng = new Vue({
                     bandOpenStatCd : '' ,  //밴드_개통_상태_코드
                     guarNm         : '' ,  //보호자_명
                     guarTelNo      : '' ,  //보호자_전화_번호
-                    paging         : 'Y',
+                    paging         : 'Y',//
                     totalCoun      : 0  ,
                     rowCount       : 30 ,
                     currentPage    : 1  ,

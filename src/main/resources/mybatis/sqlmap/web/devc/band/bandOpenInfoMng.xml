@@ -33,7 +33,7 @@
 		, fn_getCdNm('BAND_OPEN_STAT_CD',band_open_stat_cd) as BAND_OPEN_STAT_CD_NM
 		, TGB.GUAR_NM --보호자_명
 		, TBI.GUAR_TEL_NO_1
-		, TBI.GUAR_TEL_NO_2
+		, TBI.GUAR_TEL_NO_2--
 		, TBI.OPEN_GRAM_NO
 		, TBI.BLTH_ID
 		, TBI.API_URL_GRAM_NO --API URL 제공여부

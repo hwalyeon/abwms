@@ -1,4 +1,4 @@
-package kr.co.seculink.web.service.devc.band;
+package kr.co.seculink.web.service.devc.band;//
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
