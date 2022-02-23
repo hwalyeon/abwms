@@ -103,12 +103,14 @@ public class DgemStndMngController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/svcStnd/dgem/dgemStndMng/saveDgemStnd.ab")
-	public RtnMsg saveDgemStnd(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+	@RequestMapping("/svcStnd/dgem/dgemStndMng/saveInfo.ab")
+	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		dgemStndMngService.saveDgemList(params);
+		if("C".equals(params.get("crud"))) dao.insert("svcStnd.dgem.dgemStndMng.insertTiDgemStnd",params);
+		else if("U".equals(params.get("crud"))) dao.insert("svcStnd.dgem.dgemStndMng.updateTiDgemStnd",params);
+		else if("D".equals(params.get("crud"))) dao.insert("svcStnd.dgem.dgemStndMng.deleteTiDgemStnd",params);
 
 		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap,null);

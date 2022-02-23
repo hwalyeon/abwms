@@ -4,7 +4,12 @@
 
     <!--위험감정기준 목록 조회-->
 	<select id="searchTcDgemStatBase" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT       ACT_DIV_CD
+		SELECT       ACT_DIV_CD    AS ACT_DIV_CD_TEMP
+		           , HBIT_STAT_CD  AS HBIT_STAT_CD_TEMP
+		           , PLC_CLSS_CD   AS PLC_CLSS_CD_TEMP
+		           , TEMP_STAT_CD  AS TEMP_STAT_CD_TEMP
+		           , DGEM_STAT_CD  AS DGEM_STAT_CD_TEMP
+		       	   , ACT_DIV_CD
 		           , HBIT_STAT_CD
 		           , PLC_CLSS_CD
 		           , TEMP_STAT_CD
@@ -43,41 +48,85 @@
     <update id="updateTiDgemStnd" parameterType="java.util.Map">
         UPDATE TI_DGEM_STND
         SET   UPT_DT       = TO_CHAR(NOW(), 'YYYYMMDD')
-             ,UPT_TM         = TO_CHAR(NOW(), 'HH24MISS')
-             ,UPT_USER_ID = #{uptUserId}
-        <if test="dgemStatCntn != null and dgemStatCntn != ''">,DGEM_STAT_CNTN = #{dgemStatCntn}	</if>
-		<if test="dgemStatCd != null and dgemStatCd != ''">,DGEM_STAT_CD = #{dgemStatCd}	</if>
-		WHERE  DGEM_STAT_CD = #{dgemStatCdTemp}
+             ,UPT_TM       = TO_CHAR(NOW(), 'HH24MISS')
+             ,UPT_USER_ID  = #{uptUserId}
+	         <if test="actDivCd != null and actDivCd != ''">
+	          ,ACT_DIV_CD = #{actDivCd}	</if>
+	         <if test="hbitStatCd != null and hbitStatCd != ''">
+	          ,HBIT_STAT_CD = #{hbitStatCd}	</if>
+	         <if test="plcClssCd != null and plcClssCd != ''">
+	          ,PLC_CLSS_CD = #{plcClssCd}	</if>
+	         <if test="tempStatCd != null and tempStatCd != ''">
+	          ,TEMP_STAT_CD = #{tempStatCd}	</if>
+	         <if test="dgemIdx != null and dgemIdx != ''">
+	          ,DGEM_IDX = #{dgemIdx}::NUMERIC	</if>
+	         <if test="dgemStatCd != null and dgemStatCd != ''">
+	          ,DGEM_STAT_CD = #{dgemStatCd}	</if>
+			 <if test="dgemSmryCntn != null and dgemSmryCntn != ''">
+			  ,DGEM_SMRY_CNTN = #{dgemSmryCntn}	</if>
+			 <if test="dgemStatCntn != null and dgemStatCntn != ''">
+			  ,DGEM_STAT_CNTN = #{dgemStatCntn}	</if>
+				WHERE 1=1
+			 AND   ACT_DIV_CD   = #{actDivCdTemp}
+			 AND   HBIT_STAT_CD = #{hbitStatCdTemp}
+			 AND   PLC_CLSS_CD  = #{plcClssCdTemp}
+			 AND   TEMP_STAT_CD = #{tempStatCdTemp}
+			 AND   DGEM_STAT_CD = #{dgemStatCdTemp}
     </update>
 
     <delete id="deleteTiDgemStnd" parameterType="java.util.Map">
-	DELETE
-	FROM   TI_DGEM_STND
-	WHERE  DGEM_STAT_CD = #{dgemStatCd}
+		DELETE
+		FROM  TI_DGEM_STND
+		WHERE 1=1
+		AND   ACT_DIV_CD   = #{actDivCdTemp}
+		AND   HBIT_STAT_CD = #{hbitStatCdTemp}
+		AND   PLC_CLSS_CD  = #{plcClssCdTemp}
+		AND   TEMP_STAT_CD = #{tempStatCdTemp}
+		AND   DGEM_STAT_CD = #{dgemStatCdTemp}
 	</delete>
 
     <insert id="insertTiDgemStnd" parameterType="java.util.Map">
-	INSERT INTO TI_DGEM_STND
-	(
-	     DGEM_STAT_CD
-	    ,DGEM_STAT_CNTN
-	    ,REG_DT
-	    ,REG_TM
-	    ,REG_USER_ID
-	    ,UPT_DT
-	    ,UPT_TM
-	    ,UPT_USER_ID
-	)
-	VALUES
-	(
-	     #{dgemStatCd}
-	    ,#{dgemStatCntn}
-	    ,TO_CHAR(NOW(), 'YYYYMMDD')
-	    ,TO_CHAR(NOW(), 'HH24MISS')
-	    ,#{regUserId}
-	    ,TO_CHAR(NOW(), 'YYYYMMDD')
-	    ,TO_CHAR(NOW(), 'HH24MISS')
-	    ,#{uptUserId}
-	)
+		INSERT INTO TI_DGEM_STND
+		(
+		      ACT_DIV_CD
+			, HBIT_STAT_CD
+			, PLC_CLSS_CD
+			, TEMP_STAT_CD
+			, DGEM_IDX
+		    , DGEM_STAT_CD
+		    , DGEM_SMRY_CNTN
+		    , DGEM_STAT_CNTN
+		    , REG_DT
+		    , REG_TM
+		    , REG_USER_ID
+		    , UPT_DT
+		    , UPT_TM
+		    , UPT_USER_ID
+		)
+		VALUES
+		(
+		      <if test="actDivCd != null and actDivCd != ''">
+	          ACT_DIV_CD = #{actDivCd}	</if>
+	         <if test="hbitStatCd != null and hbitStatCd != ''">
+	          ,HBIT_STAT_CD = #{hbitStatCd}	</if>
+	         <if test="plcClssCd != null and plcClssCd != ''">
+	          ,PLC_CLSS_CD = #{plcClssCd}	</if>
+	         <if test="tempStatCd != null and tempStatCd != ''">
+	          ,TEMP_STAT_CD = #{tempStatCd}	</if>
+	         <if test="dgemIdx != null and dgemIdx != ''">
+	          ,DGEM_IDX = #{dgemIdx}::NUMERIC	</if>
+	         <if test="dgemStatCd != null and dgemStatCd != ''">
+	          ,DGEM_STAT_CD = #{dgemStatCd}	</if>
+			 <if test="dgemSmryCntn != null and dgemSmryCntn != ''">
+			  ,DGEM_SMRY_CNTN = #{dgemSmryCntn}	</if>
+			 <if test="dgemStatCntn != null and dgemStatCntn != ''">
+			  ,DGEM_STAT_CNTN = #{dgemStatCntn}	</if>
+		    ,TO_CHAR(NOW(), 'YYYYMMDD')
+		    ,TO_CHAR(NOW(), 'HH24MISS')
+		    ,#{regUserId}
+		    ,TO_CHAR(NOW(), 'YYYYMMDD')
+		    ,TO_CHAR(NOW(), 'HH24MISS')
+		    ,#{uptUserId}
+		)
 	</insert>
 </mapper>
