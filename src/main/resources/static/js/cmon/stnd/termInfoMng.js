@@ -32,20 +32,20 @@ let termInfoMng = new Vue({
 
             $this.searchTermInfoList(true);
 
-
         },
         initCodeList: function() {
             let $this = this;
             getCommonCodeList('TERM_DIV_CD',$this.code.termInfoList);
         },
         initGrid: function() {
-
+            let $this = this;
             let colModels = [
                 {name: "termDivCd"            , index: "termDivCd"            , label: "약관구분코드"         , width: 80, align: "center"},
                 {name: "termDivNm"            , index: "termDivNm"            , label: "약관구분코드명"       , width: 80, align: "center"},
                 {name: "termVer"              , index: "termVer"              , label: "약관버전"            , width: 80, align: "center"},
                 {name: "aplyStrtDt"           , index: "aplyStrtDt"           , label: "적용시작일자"         , width: 80, align: "center"},
-                {name: "termCntn"             , index: "termCntn"             , label: "약관내용"            , width: 80, align: "center"},
+                {name: "termCntnTemp"             , index: "termCntnTemp"             , label: "약관내용"            , width: 300, align: "center"},
+                {name: "termCntn"             , index: "termCntn"             , label: "약관내용"            , width: 300, align: "center", hidden:true},
                 {name: "essnYn"               , index: "essnYn"               , label: "필수여부"            , width: 80, align: "center"},
                 {name: "regDt"                , index: "regDt"                , label: "등록일자"            , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                               }},
@@ -71,7 +71,7 @@ let termInfoMng = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 url: '/cmon/stnd/termInfoMng/searchTermInfoList.ab',
-                pager: '#user_pager_list',
+                pager: '#grid_pager_list',
                 height: 405,
                 colModel: colModels,
                 onPaging : function(data) {

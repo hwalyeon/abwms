@@ -8,6 +8,7 @@
                ,fn_getCdNm('TERM_DIV_CD', term_div_cd) as term_div_nm
                ,term_ver /* term_ver 약관_버전 numeric */
                ,aply_strt_dt /* aply_strt_dt 적용_시작_일자 character(8) */
+               ,substring(term_cntn, 0, 200 )    as  term_cntn_temp/* term_cntn 약관_내용 text */
                ,term_cntn /* term_cntn 약관_내용 text */
                ,essn_yn /* essn_yn 필수_여부 character(1) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
