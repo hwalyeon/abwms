@@ -117,9 +117,13 @@ let dgemStndDetl = new Vue({
             if ( !this.isValid() ) {
                 return false;
             }
-            if(!$this.searchDupCdCk()){
+            if($this.params.crud=='C'){
+            	if(!$this.searchDupCdCk()){
+            
                 Swal.alert(["이미 등록된 코드 입니다.", 'warning']);
                 return false;
+            
+            	}
             }
 
 			AjaxUtil.post({

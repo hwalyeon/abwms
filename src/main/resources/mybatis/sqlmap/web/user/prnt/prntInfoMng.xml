@@ -25,7 +25,7 @@
 		from TM_GUAR_BASE TGB
 		left outer join
 		TM_STDT_BASE TSB
-		on TGB.GUAR_NO = TSB.GUAR_NO
+		on TGB.GUAR_NO = TSB.GUAR_NO_1 or TGB.GUAR_NO = TSB.GUAR_NO_2
 		left outer JOIN
 		TM_SPOS_BASE TSB2
 		on TGB.SPOS_NO = TSB2.SPOS_NO
@@ -55,10 +55,11 @@
 			and TGB.GUAR_NM like CONCAT('%',#{guarNm},'%')</if>
 		<if test=" guarTelNo != null and guarTelNo !='' ">
 			and TGB.GUAR_TEL_NO = #{guarTelNo}</if>
+		ORDER BY TSB.STDT_NO, TSB.STDT_NM, TSB.EORG_LOC_NO, TBI.BAND_ID , TGB.SPOS_NO, TGB.GUAR_NM
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex}
 		</if>
-
+		
 	</select>
 
 

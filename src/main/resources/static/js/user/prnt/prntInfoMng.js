@@ -46,18 +46,21 @@ let prntInfoInfoMng = new Vue({
                 let $this              = this;
                 let colModels =
                     [
-                        {name: "crud"             , index: "crud"             , label: "crud"		 	    , hidden: true                                },
+                        {name: "crud"             , index: "crud"             , label: "crud"		 	, hidden: true                                },
                         {name: "guarNoTemp"       , index: "guarNoTemp"       , label: "보호자번호"			, width: 80 , align: "center" , hidden: true  },
                         {name: "entrDt"           , index: "entrDt"           , label: "가입일자"		 	, width: 80 , align: "center" },
                         {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		 	, width: 80 , align: "center" },
-                        {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		    	, width: 80 , align: "center" },
+                        {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		    , width: 80 , align: "center" },
                         {name: "telNo"            , index: "telNo"            , label: "전화번호"			, width: 80 , align: "center" },
                         {name: "eorgLocNo"        , index: "eorgLocNo"        , label: "학교(학원)명"		, width: 80 , align: "center" },
-                        {name: "bandId"           , index: "bandId"           , label: "밴드ID"		    	, width: 80 , align: "center" },
+                        {name: "bandId"           , index: "bandId"           , label: "밴드ID"		    , width: 80 , align: "center" },
                         {name: "guarNo"           , index: "guarNo"           , label: "보호자번호"		 	, width: 80 , align: "center" },
                         {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	 	, width: 80 , align: "center" },
                         {name: "guarTelNo"        , index: "guarTelNo"        , label: "보호자전화번호" 	 	, width: 80 , align: "center" },
-                        {name: "termDivCd"        , index: "termDivCd"        , label: "약관구분명" 	 	    , width: 80 , align: "center" },
+                        {name: "sposNo"           , index: "sposNo"           , label: "배우자번호"		 	, width: 80 , align: "center" },
+                        {name: "sposNm"           , index: "sposNm"           , label: "배우자명"	 	 	, width: 80 , align: "center" },
+                        {name: "sposTelNo"        , index: "sposTelNo"        , label: "배우자전화번호" 	 	, width: 80 , align: "center" },
+                        {name: "termDivCd"        , index: "termDivCd"        , label: "약관구분명" 	 	, width: 80 , align: "center" },
                         {name: "termAgreYn"       , index: "termAgreYn"       , label: "약관동의여부" 	 	, width: 80 , align: "center" },
                         {name: "prntInfoDetlPopup" , index: "prntInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center",
                             formatter: function(cellValue, options, rowObject) {

@@ -22,7 +22,7 @@
 	      , TSB.STDT_NO --학생번호
 	      , TBI.TEL_NO
 	      , TSB.STDT_NM --학생명
-	      , coalesce (TGB_SUB.GUAR_NO , TMSB.spos_no ) as GUAR_NO_SUB--보호자_번호
+	      , TGB_SUB.GUAR_NO  as GUAR_NO_SUB--보호자_번호
 	      , TGB.GUAR_NO
 	      , TBI.BAND_OPEN_STAT_CD
 	      , fn_getCdNm('BAND_OPEN_STAT_CD',band_open_stat_cd) as BAND_OPEN_STAT_CD_NM
@@ -82,7 +82,8 @@
 		, BAND_MDL_CD
 		, TEL_NO
 		, BLTH_ID
-		, GUAR_TEL_NO
+		, GUAR_TEL_NO_1
+		, GUAR_TEL_NO_2
 		, API_URL_GRAM_NO
 		, API_URL_DTTM
 		, OPEN_GRAM_NO
@@ -100,7 +101,8 @@
 		, #{bandMdlCd}
 		, #{telNo}
 		, #{blthId}
-		, #{guarTelNo}
+		, #{guarTelNo1}
+		, #{guarTelNo2}
 		, #{apiUrlGramNo}
 		, #{apiUrlDttm}
 		, #{openGramNo}
@@ -120,7 +122,8 @@
 		, UPT_TM = TO_CHAR(NOW(),'HH24MISS')
 		, UPT_USER_ID = #{uptUserId}
 		<if test="telNo != null and telNo !=''"> ,TEL_NO = #{telNo}</if>
-		<if test="guarTelNo != null and guarTelNo != ''"> ,GUAR_TEL_NO = #{guarTelNo}</if>
+		<if test="guarTelNo1 != null and guarTelNo1 != ''"> ,GUAR_TEL_NO_1 = #{guarTelNo1}</if>
+		<if test="guarTelNo2 != null and guarTelNo2 != ''"> ,GUAR_TEL_NO_2 = #{guarTelNo2}</if>
 		<if test="bandOpenStatCd != null and bandOpenStatCd != ''"> ,BAND_OPEN_STAT_CD = #{bandOpenStatCd}</if>
 		<if test="blthId != null and blthId != ''"> ,BLTH_ID = #{blthId}</if>
 		WHERE 1=1
