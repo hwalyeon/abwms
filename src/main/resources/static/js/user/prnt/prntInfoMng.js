@@ -48,9 +48,9 @@ let prntInfoInfoMng = new Vue({
                     [
                         {name: "crud"             , index: "crud"             , label: "crud"		 	, hidden: true                                },
                         {name: "guarNoTemp"       , index: "guarNoTemp"       , label: "보호자번호"			, width: 80 , align: "center" , hidden: true  },
-                        {name: "entrDt"           , index: "entrDt"           , label: "가입일자"		 	, width: 80 , align: "center" },
                         {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		 	, width: 80 , align: "center" },
                         {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		    , width: 80 , align: "center" },
+                        {name: "entrDt"           , index: "entrDt"           , label: "가입일자"		 	, width: 80 , align: "center" },
                         {name: "telNo"            , index: "telNo"            , label: "전화번호"			, width: 80 , align: "center" },
                         {name: "eorgLocNo"        , index: "eorgLocNo"        , label: "학교(학원)명"		, width: 80 , align: "center" },
                         {name: "bandId"           , index: "bandId"           , label: "밴드ID"		    , width: 80 , align: "center" },
@@ -196,3 +196,4 @@ let prntInfoInfoMng = new Vue({
         });
     }
 });
+
