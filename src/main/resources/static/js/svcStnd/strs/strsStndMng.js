@@ -31,9 +31,14 @@ let strsStndMng = new Vue({
         	let $this = this;
         	
         	$this.initCodeList();
-
-        	
+        	$this.initValue();
         },
+        initValue: function()
+        {
+            let $this = this;
+            $this.userId = SessionUtil.getUserId();
+        },
+
         initCodeList: function() {
             let $this = this;
             getCommonCodeList('STRS_STAT_CD',$this.code.mentStrsStatNmList, function(){
@@ -144,15 +149,27 @@ let strsStndMng = new Vue({
             });
         },
 
-        btnAddRow  :  function() {
+        btnAddRow  :  function()
+        {
+            let $this = this;
+            let date  = new Date();
             var cnt = $("#user_list").jqGrid("getGridParam", "records")+1;
             var tempStrsStndCd = "";
 
             if(WebUtil.isNotNull(this.strsStndCd)) tempStrsStndCd = this.strsStndCd;
 
-            var addRow = {crud:"C",
-                strsStndCd          :"",
-                strsJudgCntn        :""
+            var addRow =
+            {
+                crud:"C",
+                mentStrsStatCd:"",
+                physStrsStatCd:"",
+                strsJudgCntn:"",
+                regDt:date,
+                regTm:date,
+                regUserId:$this.userId,
+                uptDt:date,
+                uptTm:date,
+                uptUserId: $this.userId
             };
             $("#user_list").addRowData(cnt, addRow);
             //$("#user_list").jqGrid('setColProp', 'strsStndCd', {editable:true});
@@ -192,7 +209,6 @@ let strsStndMng = new Vue({
             let gridData = commonGridGetDataNew($("#user_list"));
 
 
-
             if(gridData.length > 0){
                 for (let data in gridData){
                     if(gridData[data].crud === 'C' || gridData[data].crud === 'U'){
@@ -203,10 +219,6 @@ let strsStndMng = new Vue({
 
                         if(WebUtil.isNull(gridData[data].physStrsStatCd)){
                             Swal.alert(["위험감정상태내용은 필수 입력입니다.", 'warning']);
-                            return false;
-                        }
-                        if(!$this.searchmentphysCd()){
-                            Swal.alert(["이미 등록된 코드 입니다.", 'warning']);
                             return false;
                         }
                     }
@@ -227,7 +239,6 @@ let strsStndMng = new Vue({
                     Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                         $this.searchStrsList(true);
                     });
-
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
@@ -235,31 +246,6 @@ let strsStndMng = new Vue({
             });
 
         },
-
-        searchmentphysCd: function()
-        {
-
-            let $this = this;
-            let gridData = commonGridGetDataNew($("#user_list"));
-            let param = { gridList : []}
-            param.gridList = gridData;
-
-            AjaxUtil.post({
-                url: "/svcStnd/strs/strsStndMng/searchmentphysCd.ab",
-                param: $this.params,
-                success: function(response) {
-                    if ( response.rtnData.result.existsYn === 'Y' ) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                },
-                error: function (response) {
-                    Swal.alert([response, 'error']);
-                }
-            });
-        },
-
 
 		resetSearchParam: function() {
 			let $this = this;

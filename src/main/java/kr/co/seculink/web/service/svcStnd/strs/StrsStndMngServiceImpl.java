@@ -47,12 +47,16 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 		List<Map<String, String>> gridData = (List<Map<String, String>>) params.get("gridList");
 
 		for (Map<String, String> info : gridData) {
-			log.debug("crud         : " +  info.get("crud"));
-			log.debug("strsStndCd   : " +  info.get("strsStndCd"));
-			log.debug("strsStndCntn : " +  info.get("strsStndCntn"));
-
 
 			if( "C".equals(info.get("crud"))){
+				Map<String, String> rtnData = this.searchmentphysCd(info);
+				if("Y".equals(rtnData.get("existsYn"))){
+					throw new BizException("ECOM999", new String[]{"정신적 스트레스 코드 : " + rtnData.get("mentStrsStatNm") + ""
+							+ "\n 신체적 스트레스 코드 : " +rtnData.get("physStrsStatNm")
+							+ "\n 스트레스판정내용"+info.get("strsJudgCntn")
+							+ "\n 은 이미 등록 된 코드 입니다."}
+							);
+				}
 				saveCnt += dao.insert("svcStnd.strs.strsStndMng.insertTiStrsStnd", info);
 			}else if( "U".equals(info.get("crud"))){
 				saveCnt += dao.update("svcStnd.strs.strsStndMng.updateTiStrsStnd", info);
@@ -69,13 +73,17 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 
 	public Map<String, String> searchmentphysCd(Map<String, String> params) throws BizException
 	{
+
 		Map<String, String> result = dao.selectOne("svcStnd.strs.strsStndMng.mentphysCd", params);
 
 		Map<String, String> rtnMap = new HashMap<>();
+
 		if ( result == null || GEUtil.isEmpty(result.get("mentStrsStatCd")) ) {
 			rtnMap.put("existsYn", "N");
 		} else {
 			rtnMap.put("existsYn", "Y");
+			rtnMap.put("mentStrsStatNm", result.get("mentStrsStatNm"));
+			rtnMap.put("physStrsStatNm", result.get("physStrsStatNm"));
 		}
 
 		return rtnMap;

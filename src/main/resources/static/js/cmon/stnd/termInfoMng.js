@@ -8,6 +8,7 @@ let termInfoMng = new Vue({
             aplyStrtDt:'',
             termCntn:'',
             essnYn:'',
+            sortOrd:'',
             paging: 'Y',
             totalCount: 0,
             rowCount: 30,
@@ -47,6 +48,7 @@ let termInfoMng = new Vue({
                 {name: "termCntnTemp"             , index: "termCntnTemp"             , label: "약관내용"            , width: 300, align: "center"},
                 {name: "termCntn"             , index: "termCntn"             , label: "약관내용"            , width: 300, align: "center", hidden:true},
                 {name: "essnYn"               , index: "essnYn"               , label: "필수여부"            , width: 80, align: "center"},
+                {name: "sortOrd"              , index: "sortOrd"              , label: "정렬순서"            , width: 80, align: "center"},
                 {name: "regDt"                , index: "regDt"                , label: "등록일자"            , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                               }},
                 {name: "regTm"                , index: "regTm"                , label: "등록시각"            , width: 80, align: "center"
@@ -139,6 +141,7 @@ let termInfoMng = new Vue({
                 aplyStrtDt:'',
                 termCntn:'',
                 essnYn:'',
+                sortOrd:'',
                 paging: 'Y',
                 totalCount: 0,
                 rowCount: 30,
