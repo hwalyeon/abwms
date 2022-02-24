@@ -11,6 +11,7 @@
                ,substring(term_cntn, 0, 200 )    as  term_cntn_temp/* term_cntn 약관_내용 text */
                ,term_cntn /* term_cntn 약관_내용 text */
                ,essn_yn /* essn_yn 필수_여부 character(1) */
+               ,sort_ord /* sort_ord 정렬_순서 character(1) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */

@@ -74,7 +74,9 @@
 
 	<select id="mentphysCd" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT  ment_strs_stat_cd
+	           ,fn_getcdnm('STRS_STAT_CD', ment_strs_stat_cd) as ment_strs_stat_nm
 	           ,phys_strs_stat_cd
+		       ,fn_getcdnm('STRS_STAT_CD', phys_strs_stat_cd) as phys_strs_stat_nm
 		FROM ti_strs_stnd
 		WHERE 1=1
 		AND ment_strs_stat_cd = #{mentStrsStatCd}

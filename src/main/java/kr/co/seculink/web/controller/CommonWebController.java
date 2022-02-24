@@ -133,4 +133,8 @@ public class CommonWebController {
 	@RequestMapping("/user/prnt/prntInfoMng.pg")
 	public String getUserPrntPrntInfoMng() {return "user/prnt/prntInfoMng";}
 
+	//학생정보
+	@RequestMapping("/user/stdt/stdtInfoMng.pg")
+	public String getUserStdtStdtInfoMng() {return "user/stdt/stdtInfoMng";}
+
 }
