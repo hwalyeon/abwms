@@ -3,14 +3,27 @@ let prntInfoDetl = new Vue({
     data: {
     	params: {
     		crud           : 'C',
-			guarNo         : '' ,
-			userId         : '' ,
-			bandIdTemp     : '' ,
-			bandId         : '' ,  //밴드_ID
-			bandYtypCd     : '' ,  //밴드_출고_년월
-			bandMdlCd      : '' ,  //밴드_모델_코드
-			telNo          : '' ,  //밴드_전화_번호
-			guarTelNo      : '' ,  //보호자_전화_번호
+    		userId         : '' ,
+    		guarNo         : '' , //보호자_번호
+    		guarNm         : '' , //보호자_명
+			guarTelNo      : '' , //보호자_전화_번호    		
+    		guarPw         : '' , //보호자_비밀번호
+			selfCertDttm   : '' , //본인_인증_일시
+			autoLoginYn    : '' , //자동_로그인_여부
+			devcCertVal    : '' , //장치_인증_값
+    		raceDivCd      : '' , //인종_구분_코드
+    		sexCd          : '' , //성별_코드
+    		hghtCd
+    		wghtCd
+    		bmiVal
+    		sposNo
+    		dZoneMoinAlamYn
+    		dZoneMoutAlamYn
+    		sZoneMoinAlamYn
+    		sZoneMoutAlamYn
+    		fallOccrAlamYn
+    		strsAbnmAlamYn
+    		
 			bandOpenStatCd : '' ,  //밴드_개통_상태_코드
 			blthId         : '' ,  //블루투스_ID
 			apiUrlGramNo   : '' ,  //API_URL_전문_번호
