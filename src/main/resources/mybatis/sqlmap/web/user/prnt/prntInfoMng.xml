@@ -12,7 +12,7 @@
 		, TSB.STDT_NM      -- 학생_명		  
 		, TGB.ENTR_DT      -- 가입_일자
 		, TBI.TEL_NO       -- BAND전화_번호		
-		, TEB.LOC_NM       -- 위치_명		
+		, LIB.LOC_NM       -- 위치_명		
 		, TBI.BAND_ID      -- 밴드ID		
 		, TGB.GUAR_NO      -- 보호자_번호
 		, TGB.GUAR_NM      -- 보호자_명
@@ -31,8 +31,8 @@
 		TM_SPOS_BASE TSB2
 		on TGB.SPOS_NO = TSB2.SPOS_NO
 		left outer JOIN
-		TI_EORG_BASE TEB
-		on TSB.EORG_LOC_NO = TEB.LOC_NO
+		TS_LOC_INFO_BASE LIB
+		on TSB.EORG_LOC_NO = LIB.LOC_NO
 		left outer JOIN
 		TM_TERM_AGRE_DETL TTAD
 		on TGB.GUAR_NO = TTAD.GUAR_NO
@@ -40,8 +40,8 @@
 		TS_BAND_INFO TBI
 		on TSB.BAND_ID = TBI.BAND_ID
 		where 1=1
-		<if test="entrFr != null and entrFr != null and entrTo !='' and entrTo !='' ">
-			and TGB.ENTR_DT between #{entrFr} and #{entrTo}</if>
+		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
+			and TGB.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>
 		<if test=" stdtNo != null and stdtNo !='' ">
 			and TSB.STDT_NO = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">
@@ -56,7 +56,7 @@
 			and TGB.GUAR_NM like CONCAT('%',#{guarNm},'%')</if>
 		<if test=" guarTelNo != null and guarTelNo !='' ">
 			and TGB.GUAR_TEL_NO = #{guarTelNo}</if>
-		ORDER BY TSB.STDT_NO, TSB.STDT_NM, TGB.ENTR_DT, TEB.LOC_NM, TBI.BAND_ID, TGB.GUAR_NO,TGB.GUAR_NM, TGB.SPOS_NO , TSB2.SPOS_NM , TSB2.SPOS_TEL_NO
+		ORDER BY TSB.STDT_NO, TSB.STDT_NM, TGB.ENTR_DT, LIB.LOC_NM, TBI.BAND_ID, TGB.GUAR_NO,TGB.GUAR_NM, TGB.SPOS_NO , TSB2.SPOS_NM , TSB2.SPOS_TEL_NO
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex}
 		</if>

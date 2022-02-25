@@ -21,40 +21,57 @@
 		                    </colgroup>
 		                    <tbody>
 			                    <tr>
-			                        <th scope="row">밴드 ID
-										<td>
-											<div><input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_60 ime-eng"  v-on:input="nanCk(event)" maxlength="10" :readonly="params.crud=='U'"/>
-												<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupBandId"  :disabled="params.crud=='U'" ><span>ID 확인</span></button>
-											</div>
-									<div class="clear_both" style="width:100%; height:5px;"></div>
-											<div>
-												<select id="bandYtypCd" namd="bandYtypCd" class="form-control float_left width_per_30 ime-eng" v-model="params.bandYtypCd" v-on:change="numberingSelect" :disabled="params.crud=='U'">
-													<option value="">출고년월</option>
-													<option v-for="item in code.bandYtypCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-												</select>
-												<select id="bandMdlCd" namd="bandMdlCd" class="form-control float_left ime-eng" style="margin-left:5px; width:97px;" v-model="params.bandMdlCd" v-on:change="numberingSelect" :disabled="params.crud=='U'">
-													<option value="">모델타입</option>
-													<option v-for="item in code.bandMdlCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-												</select>
-												<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="numberingBandId"  :disabled="params.crud=='U'"><span>ID 채번</span></button>
-											</div>
-										</td>
-									</th>
+			                        <th scope="row">보호자 번호</th>
+									<td>
+										<div>
+											<input type="text" name="guarNo" v-model="params.guarNo" class="form-control float_left width_per_60 ime-eng" :readonly="params.crud=='U'"/>
+										</div>
+									</td>
+								</tr>
+			                    <tr>
+			                        <th scope="row">보호자 이름</th>
+									<td>
+										<div>
+											<input type="text" name="guarNm" v-model="params.guarNm" class="form-control float_left width_per_60 ime-eng" :readonly="params.crud=='U'"/>
+										</div>
+									</td>
 								</tr>
 								<tr>
-									<th scope="row">전화 번호</th>
+									<th scope="row">보호자 전화 번호</th>
 									<td>
-										<input type="text" name="telNo" v-model="params.telNo" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)" maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
+										<input type="text" name=guarTelNo v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)" maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
 									</td>
 			                    </tr>
 								<tr>
-									<th scope="row">보호자 전화번호</th>
+									<th scope="row">보호자 비밀번호</th>
 									<td>
-										<input type="text" name="guarTelNo" v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)" maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
+										<input type="text" name="guarPw" v-model="params.guarPw" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)"/>
 									</td>
 								</tr>
 								<tr>
-									<th scope="row">개통 상태</th>
+									<th scope="row">본인 인증 일시</th>
+									<td>
+										<input type="text" name="selfCertDttm" v-model="params.selfCertDttm" class="form-control float_left width_per_100 ime-eng"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">자동 로그인 여부</th>
+									<td>
+										<select id="autoLoginYn" namd="autoLoginYn" class="form-control" v-model="params.autoLoginYn">
+											<option value="">선택</option>
+											<option v-for="item in code.autoLoginYnList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
+										<input type="text" name="autoLoginYn" v-model="params.autoLoginYn" class="form-control float_left width_per_100 ime-eng"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">장치 인증 값</th>
+									<td>
+										<input type="text" name="selfCertDttm" v-model="params.selfCertDttm" class="form-control float_left width_per_100 ime-eng"/>
+									</td>
+								</tr>								
+								<tr>
+									<th scope="row">인종 구분 코드</th>
 									<td>
 										<select id="bandYtypCd2" namd="bandOpenStatCd" class="form-control float_left width_per_100 ime-eng" v-model="params.bandOpenStatCd">
 											<option value="">선택</option>
@@ -63,7 +80,28 @@
 									</td>
 								</tr>
 								<tr>
-									<th scope="row">블루투스 ID</th>
+									<th scope="row">성별 코드</th>
+									<td>
+										<select id="bandYtypCd2" namd="bandOpenStatCd" class="form-control float_left width_per_100 ime-eng" v-model="params.bandOpenStatCd">
+											<option value="">선택</option>
+											<option v-for="item in code.bandOpenStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">키</th>
+									<td>
+										<input type="text" name="blthId" v-model="params.blthId" class="form-control float_left width_per_100 ime-eng" maxlength="10"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">체중</th>
+									<td>
+										<input type="text" name="blthId" v-model="params.blthId" class="form-control float_left width_per_100 ime-eng" maxlength="10"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">BMI</th>
 									<td>
 										<input type="text" name="blthId" v-model="params.blthId" class="form-control float_left width_per_100 ime-eng" maxlength="10"/>
 									</td>

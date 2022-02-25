@@ -91,44 +91,40 @@ let bandOpenInfoMng = new Vue({
                 let $this              = this;
                 let colModels =
                     [
-                        {name: "crud"             , index: "crud"             , label: "crud"		 	, hidden: true                                },
-                        {name: "bandIdTemp"       , index: "bandIdTemp"       , label: "밴드ID"			, width: 80 , align: "center" , hidden: true  },
-                        {name: "uptDt"            , index: "uptDt"            , label: "기준일자"		 	, width: 80 , align: "center" },
-                        {name: "regDt"            , index: "regDt"            , label: "밴드등록일자"		, width: 80 , align: "center" },
-                        {name: "bandYtyp"         , index: "bandYtyp"         , label: "출고년월"			, width: 80 , align: "center" },
-                        {name: "bandMdlCd"        , index: "bandMdlCd"        , label: "모델TYPE"			, width: 80 , align: "center" },
-                        {name: "bandId"           , index: "bandId"           , label: "밴드ID"		    , width: 80 , align: "center" },
-                        {name: "telNo"            , index: "telNo"            , label: "전화번호"			, width: 80 , align: "center" 
-                         ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
-                        {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		 	, width: 80 , align: "center" },
-                        {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		    , width: 80 , align: "center" },
-                        {name: "guarNo"           , index: "guarNo"           , label: "보호자번호1"		, width: 80 , align: "center" },
-                        {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	 	, width: 80 , align: "center" },
-                        {name: "guarTelNo1"       , index: "guarTelNo1"       , label: "보호자전화번호1"	 	, width: 80 , align: "center" 
-                         ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
-                        {name: "guarNoSub"        , index: "guarNoSub"        , label: "보호자번호2"		, width: 80 , align: "center" },
-                        {name: "guarNmSub"        , index: "guarNmSub"        , label: "보호자명"	 	 	, width: 80 , align: "center" },
-                        {name: "guarTelNo2"       , index: "guarTelNo2"       , label: "보호자전화번호2"	 	, width: 80 , align: "center" 
-                         ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},	
-                        {name: "blthId"           , index: "blthId"           , label: "블루투스ID"		, width: 80 , align: "center" },
-                        {name: "bandOpenStatCd"   , index: "bandOpenStatCd"   , label: "밴드개통상태코드"	, width: 80 , align: "center" },
-                        {name: "bandOpenStatCdNm" , index: "bandOpenStatCdNm" , label: "밴드개통상태코드명"	, width: 80 , align: "center" },
-                        {name: "apiUrlGramNo"     , index: "apiUrlGramNo"     , label: "개통URL전문번호"	, width: 80 , align: "center" },
-                        {name: "openGramNo"       , index: "openGramNo"       , label: "개통전문번호"		, width: 80 , align: "center" },
-                        {name: "apiUrlYn"         , index: "apiUrlYn"         , label: "URL제공여부"		, width: 80 , align: "center" },
-                        {name: "apiUrlDttm"       , index: "apiUrlDttm"       , label: "URL제공일시"		, width: 80 , align: "center" },
-                        {name: "bandOpenInfoDetlPopup" , index: "bandOpenInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center",
-                            formatter: function(cellValue, options, rowObject) {
-                                return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regBandOpenInfoDetlPopup(\'' + rowObject.bandId + '\')" value="상세보기" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" />';
-                            }
-                        },
-                        {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
-                        {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
-                        {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"     , width: 80 , align: "center"  , hidden: true},
-                        {name: "uptDt"          , index: "uptDt"          , label: "수정일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
-                        {name: "uptTm"          , index: "uptTm"          , label: "수정시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
-                        {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"     , width: 80 , align: "center"  , hidden: true}
-                    ];
+                        {name: "crud"             , index: "crud"             , label: "crud"		 	, hidden: true                                 },
+                        {name: "bandIdTemp"       , index: "bandIdTemp"       , label: "밴드ID"			, hidden: true  },
+                        {name: "uptDt"            , index: "uptDt"            , label: "기준일자"		 	, width: 400 , align: "center" },
+                        {name: "regDt"            , index: "regDt"            , label: "밴드등록일자"		, width: 400 , align: "center" },
+                        {name: "bandYtyp"         , index: "bandYtyp"         , label: "출고년월"			, width: 400 , align: "center" },
+                        {name: "bandMdlCd"        , index: "bandMdlCd"        , label: "모델TYPE"			, width: 400 , align: "center" },
+                        {name: "bandId"           , index: "bandId"           , label: "밴드ID"		    , width: 400 , align: "center" },
+                        {name: "telNo"            , index: "telNo"            , label: "전화번호"			, width: 400 , align: "center"  ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
+                        {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		 	, width: 400 , align: "center" },
+                        {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		    , width: 400 , align: "center" },
+                        {name: "guarNo"           , index: "guarNo"           , label: "보호자번호1"		, width: 400 , align: "center" },
+                        {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	 	, width: 400 , align: "center" },
+                        {name: "guarTelNo1"       , index: "guarTelNo1"       , label: "보호자전화번호1"	 	, width: 400 , align: "center"  ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
+                        {name: "guarNoSub"        , index: "guarNoSub"        , label: "보호자번호2"		, width: 400 , align: "center" },
+                        {name: "guarNmSub"        , index: "guarNmSub"        , label: "보호자명"	 	 	, width: 400 , align: "center" },
+                        {name: "guarTelNo2"       , index: "guarTelNo2"       , label: "보호자전화번호2"	 	, width: 400 , align: "center"  ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},	
+                        {name: "blthId"           , index: "blthId"           , label: "블루투스ID"		, width: 400 , align: "center" },
+                        {name: "bandOpenStatCd"   , index: "bandOpenStatCd"   , label: "밴드개통상태코드"	, width: 400 , align: "center" },
+                        {name: "bandOpenStatCdNm" , index: "bandOpenStatCdNm" , label: "밴드개통상태코드명"	, width: 400 , align: "center" },
+                        {name: "apiUrlGramNo"     , index: "apiUrlGramNo"     , label: "개통URL전문번호"	, width: 400 , align: "center" },
+                        {name: "openGramNo"       , index: "openGramNo"       , label: "개통전문번호"		, width: 400 , align: "center" },
+                        {name: "apiUrlYn"         , index: "apiUrlYn"         , label: "URL제공여부"		, width: 400 , align: "center" },
+                        {name: "apiUrlDttm"       , index: "apiUrlDttm"       , label: "URL제공일시"		, width: 400 , align: "center" },
+                        {name: "regDt"            , index: "regDt"            , label: "등록일자"			, width: 400 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                        {name: "regTm"            , index: "regTm"            , label: "등록시각"			, width: 400 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
+                        {name: "regUserId"        , index: "regUserId"        , label: "등록사용자ID"      , width: 400 , align: "center" },
+                        {name: "uptDt"            , index: "uptDt"            , label: "수정일자"			, width: 400 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                        {name: "uptTm"            , index: "uptTm"            , label: "수정시각"			, width: 400 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
+                        {name: "uptUserId"        , index: "uptUserId"        , label: "수정사용자ID"		, width: 400 , align: "center" },
+                        {name: "bandOpenInfoDetlPopup" , index: "bandOpenInfoDetlPopup" , label: "상세정보보기", width: 400, align: "center"
+                         ,formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success"'
+                         +' onclick="bandOpenInfoMng.regBandOpenInfoDetlPopup(\'' + rowObject.bandId + '\')" value="상세보기" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" />';}}
+                          
+                        ];
 
                 $("#bandOpenInfo_list").jqGrid("GridUnload");
                 $("#bandOpenInfo_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -138,6 +134,7 @@ let bandOpenInfoMng = new Vue({
                         url      : '/devc/band/bandOpenInfoMng/searchBandOpenInfoList.ab',
                         pager    : '#bandOpenInfo_pager_list',
                         height   : 405,
+                        autowidth: false,
                         colModel : colModels,
                         onPaging : function(data) {
                             onPagingCommon(data, this, function(resultMap)
