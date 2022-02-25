@@ -47,7 +47,7 @@ let nutrInfoMng = new Vue({
             {
                 let $this = this;
                 let gfixDivCdList = commonGridCmonCd($this.code.gfixDivCdList);
-                let useYnList         = commonGridCmonCd($this.code.useYnList);
+                let useYnList     = commonGridCmonCd($this.code.useYnList);
                 let colModels =
                 [
                     {name: "crud"               , index: "crud"                  , label: "crud"                                   , hidden:true},
@@ -70,6 +70,17 @@ let nutrInfoMng = new Vue({
                     {name: "uptTm"            , index: "uptTm"               , label: "수정시각"                         , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                       }},
                     {name: "uptUserId"       , index: "uptUserId"         , label: "수정사용자ID"                  , width: 80          , align: "center"}
+                    ,{name: "nutrStatStndDetlPopup" , index: "nutrStatStndDetlPopup" , label: "영양소상태기준", width: 80, align: "center",
+                        formatter: function(cellValue, options, rowObject) {
+                            return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrStatStndPop(\'' + rowObject.nutrCd + '\')" value="상세보기" data-toggle="modal" data-target="#nutrStatStndDetlPopup" />';
+                        }
+                    }
+                    ,{name: "nutrEatStndDetlPopup" , index: "nutrEatStndDetlPopup" , label: "영양소섭취기준", width: 80, align: "center",
+                    formatter: function(cellValue, options, rowObject) {
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrEatStndPop(\'' + rowObject.nutrCd + '\' , \'' + rowObject.nutrNm + '\' )" value="상세보기" data-toggle="modal" data-target="#nutrEatStndDetlPopup" />';
+                     }
+                    }
+                    ,{name: "nutrEatBlckDetlPopup" , index: "nutrEatBlckDetlPopup" , label: "영양소섭취구간", width: 80, align: "center"}
                 ];
 
                 $("#nutrInfo_list").jqGrid("GridUnload");
@@ -90,8 +101,7 @@ let nutrInfoMng = new Vue({
                             $this.searchNutrInfoList(false);
                         })
                     },
-                    onCellSelect : function (rowid , colId , val, e ){
-                        // 행의 컬럼을 하나라도 클릭했을 경우 수정으로변경
+                    afterSaveCell : function (rowid , colId , val, e ){
                         if($("#nutrInfo_list").getRowData(rowid).crud != "C" && $("#nutrInfo_list").getRowData(rowid).crud != "D" ) {
                             $("#nutrInfo_list").setRowData(rowid, {crud:"U"});
                         }
@@ -134,8 +144,8 @@ let nutrInfoMng = new Vue({
 
             var addRow =
             {
-                crud	              : "C" ,
-                nutrCd           : "" ,
+                crud	    : "C" ,
+                nutrCd      : "" ,
                 nutrCdTemp  : "" ,
                 nutrNm          : "" ,
                 nutrUnitCd     : "" ,
@@ -177,82 +187,88 @@ let nutrInfoMng = new Vue({
                 }
             }
         },
-            btnSave  :  function() {
-                let $this = this;
-                let gridData = commonGridGetDataNew($("#nutrInfo_list"));
+        btnSave  :  function() {
+            let $this = this;
+            let gridData = commonGridGetDataNew($("#nutrInfo_list"));
 
-                if(gridData.length > 0){
-                    for (let data in gridData){
-                        if(gridData[data].crud === 'C' || gridData[data].crud === 'U'){
-                            if(WebUtil.isNull(gridData[data].nutrCd)){
-                                Swal.alert(["영양소코드는 필수 입력입니다.", 'warning']);
-                                return false;
-                            }
-                            if(WebUtil.isNull(gridData[data].sortOrd)){
-                                Swal.alert(["정렬순서는 필수 입력입니다.", 'warning']);
-                                return false;
-                            }
-                            if(WebUtil.isNull(gridData[data].useYn)){
-                                Swal.alert(["사용여부는 필수 입력입니다.", 'warning']);
-                                return false;
-                            }
+            if(gridData.length > 0){
+                for (let data in gridData){
+                    if(gridData[data].crud === 'C' || gridData[data].crud === 'U'){
+                        if(WebUtil.isNull(gridData[data].nutrCd)){
+                            Swal.alert(["영양소코드는 필수 입력입니다.", 'warning']);
+                            return false;
+                        }
+                        if(WebUtil.isNull(gridData[data].sortOrd)){
+                            Swal.alert(["정렬순서는 필수 입력입니다.", 'warning']);
+                            return false;
+                        }
+                        if(WebUtil.isNull(gridData[data].useYn)){
+                            Swal.alert(["사용여부는 필수 입력입니다.", 'warning']);
+                            return false;
                         }
                     }
-                }else {
-                    Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
-                    return false;
                 }
-                let param = { gridList : []}
-                param.gridList = gridData;
+            }else {
+                Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+                return false;
+            }
+            let param = { gridList : []}
+            param.gridList = gridData;
 
-                AjaxUtil.post({
-                    url: "/svcStnd/nutr/nutrInfoMng/saveNutrInfo.ab",
-                    param: param,
-                    success: function(response) {
-                        Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                            $this.searchNutrInfoList(true);
-                        });
+            AjaxUtil.post({
+                url: "/svcStnd/nutr/nutrInfoMng/saveNutrInfo.ab",
+                param: param,
+                success: function(response) {
+                    Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                        $this.searchNutrInfoList(true);
+                    });
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
+        },
+        /**/
+        downloadExcel : function()
+        {
+            let $this = this;
+            let params = $.extend(true, {}, $this.params);
+
+            AjaxUtil.post(
+                {
+                    dataType: 'binary',
+                    url: "/svcStnd/nutr/nutrInfoMng/searchNutrInfoList/excel.ab",
+                    param: params,
+                    success: function(response)
+                    {
+                        saveFileLocal(response, 'nutrInfoMng.xls');
                     },
-                    error: function (response) {
+                    error: function (response)
+                    {
                         Swal.alert([response, 'error']);
                     }
                 });
-            },
-        /**/
-            downloadExcel : function()
-            {
-                let $this = this;
-                let params = $.extend(true, {}, $this.params);
-
-                AjaxUtil.post(
-                    {
-                        dataType: 'binary',
-                        url: "/svcStnd/nutr/nutrInfoMng/searchNutrInfoList/excel.ab",
-                        param: params,
-                        success: function(response)
-                        {
-                            saveFileLocal(response, 'nutrInfoMng.xls');
-                        },
-                        error: function (response)
-                        {
-                            Swal.alert([response, 'error']);
-                        }
-                    });
-            },
-            resetSearchParam: function()
-            {
-                let $this = this;
-                $this.params =
-                {
-                    nutrNm          : ''  ,    // 영양소_명
-                    paging          : 'Y',
-                    totalCount    : 0  ,
-                    rowCount     : 30,
-                    currentPage : 1  ,
-                    currentIndex: 0
-                }
-            }
         },
+        regNutrStatStndPop : function (nutrCd){
+            nutrStatStndDetl.initPage(nutrCd);
+        },
+        regNutrEatStndPop : function (nutrCd, nutrNm){
+            nutrEatStndDetl.initPage(nutrCd, nutrNm);
+        },
+        resetSearchParam: function()
+        {
+            let $this = this;
+            $this.params =
+            {
+                nutrNm          : ''  ,    // 영양소_명
+                paging          : 'Y',
+                totalCount    : 0  ,
+                rowCount     : 30,
+                currentPage : 1  ,
+                currentIndex: 0
+            }
+        }
+    },
     computed:
         {
         },
