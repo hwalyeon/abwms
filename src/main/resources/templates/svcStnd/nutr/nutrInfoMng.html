@@ -69,9 +69,15 @@
 			</div>
 		</div>
 	</div>
-	<!--    <div th:insert="~{set/userDetl :: body}"></div>-->
+	<div th:insert="~{svcStnd/nutr/nutrStatStndDetl :: body}"></div>
+	<div th:insert="~{svcStnd/nutr/nutrEatStndDetl :: body}"></div>
+
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/editor/summernote.js}"></script>
+
+	<script type="text/javascript" th:src="@{/js/svcStnd/nutr/nutrStatStndDetl.js}"></script>
+	<script type="text/javascript" th:src="@{/js/svcStnd/nutr/nutrEatStndDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/svcStnd/nutr/nutrInfoMng.js}"></script>
 </section>
 </body>

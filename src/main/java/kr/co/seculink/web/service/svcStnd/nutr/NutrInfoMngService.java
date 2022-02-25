@@ -15,4 +15,8 @@ public interface NutrInfoMngService
 
 	//행추가,행삭제 저장
 	public void saveNutrInfo(Map<String, Object> params) throws BizException;
-	}
+
+	public void saveNutrStatStndInfo(Map<String, String> params)throws BizException;
+
+	public void saveNutrEatStndInfo(Map<String, Object> params) throws BizException;
+}

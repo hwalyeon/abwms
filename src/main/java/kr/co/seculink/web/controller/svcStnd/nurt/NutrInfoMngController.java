@@ -119,4 +119,102 @@ public class NutrInfoMngController
 		return map;
 	}
 
+	//영양소_코드_정보_리스트 조회
+	@ResponseBody
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng/searchNutrCodeList.ab")
+	public RtnMsg searchNutrCodeList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.nutr.nutrInfoMng.searchNutrCodeList", params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	//영양소_코드_정보_리스트 조회
+	@ResponseBody
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng/searchNutrEatStndList.ab")
+	public RtnMsg searchNutrEatStndList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.nutr.nutrInfoMng.searchNutrEatStndList", params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	//영양소_상태기준_정보_리스트 조회
+	@ResponseBody
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng/searchNutrStatStndInfoList.ab")
+	public RtnMsg searchNutrStatStndInfoList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.nutr.nutrInfoMng.searchNutrStatStndInfoList", params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	//영양소 상태기준 저장
+	@ResponseBody
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng/saveNutrStatStndInfo.ab")
+	public RtnMsg saveNutrStatStndInfo(@RequestBody(required=false) Map<String, String> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		nutrInfoMngService.saveNutrStatStndInfo(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
+	}
+
+	//영양소_섭취기준_정보_리스트 조회
+	@ResponseBody
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng/searchNutrEatStndInfoList.ab")
+	public RtnMsg searchNutrEatStndInfoList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.nutr.nutrInfoMng.searchNutrEatStndInfoList", params);
+
+		params.put("paging", "N");
+		vo.setTotalCount(result.size());
+
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	//영양소 섭취기준 저장
+	@ResponseBody
+	@RequestMapping("/svcStnd/nutr/nutrInfoMng/saveNutrEatStndInfo.ab")
+	public RtnMsg saveNutrEatStndInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		nutrInfoMngService.saveNutrEatStndInfo(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
+	}
+
 }
