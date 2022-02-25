@@ -62,11 +62,12 @@ let ddNutrEatStndMng = new Vue({
             {  
                 let $this = this;
                 let sexCdList        = commonGridCmonCd($this.code.sexCdList);
+                // , frozen:true
                 let colModels =
                 [
-                    {name:"crud"       , index:"crud"                     , label: "crud"                  , hidden: true  , frozen:true},
+                    {name:"crud"       , index:"crud"                     , label: "crud"                  , hidden: true },
                     {name: "sexCd"     , index: "sexCd"                  , label: "성별"                    , width: 80          , align: "center"  ,  fixed: true    , formatter:"select", editoptions:{value:sexCdList}},
-                    {name: "ageYcnt"   , index: "ageYcnt"              , label: "나이(년)"                   , width: 80          , align: "center"     ,  fixed: true  ,frozen:true}
+                    {name: "ageYcnt"   , index: "ageYcnt"              , label: "나이(년)"                   , width: 80          , align: "center"     ,  fixed: true  }
                 ];
 
                 if($this.code.nutrCdNmList.length > 0){
@@ -118,7 +119,7 @@ let ddNutrEatStndMng = new Vue({
                     ]
                 });
 
-                $("#ddNutrEatStnd_list").jqGrid("setFrozenColumns");
+//                $("#ddNutrEatStnd_list").jqGrid("setFrozenColumns");
 
                 resizeJqGridWidth("ddNutrEatStnd_list", "ddNutrEatStnd_list_wrapper");
             },
@@ -133,20 +134,19 @@ let ddNutrEatStndMng = new Vue({
                     params.currentIndex = 0;
                 }
 
-                $("#ddNutrEatStnd_list").setGridParam(
-                    {
-                        datatype: "json",
-                        postData: JSON.stringify(params),
-                        page: 1,
-                        loadComplete: function (response)
+                $("#ddNutrEatStnd_list").setGridParam({
+                    datatype: "json",
+                    postData: JSON.stringify(params),
+                    page: 1,
+                    loadComplete: function (response)
 
+                    {
+                        if ( response.rtnData.result == 0 )
                         {
-                            if ( response.rtnData.result == 0 )
-                            {
-                                Swal.alert(['조회할 내용이 없습니다.', "info"]);
-                            }
+                            Swal.alert(['조회할 내용이 없습니다.', "info"]);
                         }
-                    }).trigger("reloadGrid");
+                    }
+                }).trigger("reloadGrid");
             },
 
             btnSave  :  function() {
