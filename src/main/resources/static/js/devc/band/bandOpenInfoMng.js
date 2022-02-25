@@ -205,7 +205,7 @@ let bandOpenInfoMng = new Vue({
             resetSearchParam: function()
             {
                 let $this = this;
-                $this.params =
+                $this.params = 
                 {
             		 userId         : '' ,
                      uptDtFr        : '' ,  //기준_일자From
