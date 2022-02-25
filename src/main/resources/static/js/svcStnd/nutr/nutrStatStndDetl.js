@@ -72,10 +72,10 @@ let nutrStatStndDetl = new Vue({
             $("#nutrStat_list").jqGrid("GridUnload");
             $("#nutrStat_list").jqGrid($.extend(true, {}, commonGridOptions(),
             {
-                data: [],
-                datatype: 'clientSide',
+                datatype  : "local",
+                mtype     : 'post',
+                url         : '/svcStnd/nutr/nutrInfoMng/searchNutrStatStndInfoList.ab',
                 shrinkToFit: true,
-//                url         : '/svcStnd/nutr/nutrInfoMng/searchNutrStatStndInfoList.ab',
                 pager       : '#nutrStat_pager_list',
                 height      : 150,
                 colModel : colModels,
@@ -125,24 +125,19 @@ let nutrStatStndDetl = new Vue({
         {
             const $this = this;
 
-
-
-            //주문정보 조회
-            AjaxUtil.post({
-                url: '/svcStnd/nutr/nutrInfoMng/searchNutrStatStndInfoList.ab',
-                reqType: 'json',
-                param: $this.params,
-                success: function(res) {
-                    if (res) {
-                        // 주문할인정보
-                        $this.nutrStatStndList = res.rtnData.result;
-                        $("#nutrStat_list").jqGrid('setGridParam', {
-                            data: $this.nutrStatStndList,
-                            page: 1
-                        }).trigger('reloadGrid');
+            $("#nutrStat_list").setGridParam(
+            {
+                datatype: "json",
+                postData: JSON.stringify( $this.params),
+                page: 1,
+                loadComplete: function (response)
+                {
+                    if ( response.rtnData.result == 0 )
+                    {
+                        Swal.alert(['조회할 내용이 없습니다.', "info"]);
                     }
                 }
-            });
+            }).trigger("reloadGrid");
         },
 
 
@@ -165,7 +160,6 @@ let nutrStatStndDetl = new Vue({
                 success: function(response) {
                     Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                         $this.btnNew();
-                        $("#nutrStat_list").jqGrid('clearGridData', true);
                         $this.searchNutrStatInfoList(true);
                     });
                 },
@@ -186,7 +180,6 @@ let nutrStatStndDetl = new Vue({
                 success: function(response) {
                     Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                         $this.btnNew();
-                        $("#nutrStat_list").jqGrid('clearGridData', true);
                         $this.searchNutrStatInfoList(true);
                     });
                 },
