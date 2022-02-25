@@ -34,31 +34,32 @@ let nutrEatStndDetl = new Vue({
         initGrid: function()
         {
             let colModels =
-                [
-                    {name: "crud"             , index: "crud"         , label: "crud"        , hidden:true},
-                    {name: "sexCd"            , index: "sexCd"        , label: "성별코드"      , width: 50        , align: "center", hidden:true},
-                    {name: "sexNm"            , index: "sexNm"        , label: "성별"         , width: 50        , align: "center"},
-                    {name: "ageYcnt"          , index: "ageYcnt"      , label: "나이년수"      , width: 50        , align: "center"},
-                    {name: "nutrCd"           , index: "nutrCd"       , label: "영양소코드"    , width: 50        , align: "center"},
-                    {name: "nutrNm"           , index: "nutrNm"       , label: "영양소명"      , width: 50        , align: "center"},
-                    {name: "ddRcmdQty"        , index: "ddRcmdQty"    , label: "일권장량"      , width: 50        , align: "center", editable :true, editrules:{number:true}},
-                    {name: "ddNeedQty"        , index: "ddNeedQty"    , label: "일필요량"      , width: 50        , align: "center", hidden:true}
-                ];
+            [
+                {name: "crud"             , index: "crud"         , label: "crud"        , hidden:true},
+                {name: "sexCd"            , index: "sexCd"        , label: "성별코드"      , width: 50        , align: "center", hidden:true},
+                {name: "sexNm"            , index: "sexNm"        , label: "성별"         , width: 50        , align: "center"},
+                {name: "ageYcnt"          , index: "ageYcnt"      , label: "나이년수"      , width: 50        , align: "center"},
+                {name: "nutrCd"           , index: "nutrCd"       , label: "영양소코드"    , width: 50        , align: "center"},
+                {name: "nutrNm"           , index: "nutrNm"       , label: "영양소명"      , width: 50        , align: "center"},
+                {name: "ddRcmdQty"        , index: "ddRcmdQty"    , label: "일권장량"      , width: 50        , align: "center", editable :true, editrules:{number:true}},
+                {name: "ddNeedQty"        , index: "ddNeedQty"    , label: "일필요량"      , width: 50        , align: "center", hidden:true}
+            ];
 
             $("#nutrEat_list").jqGrid("GridUnload");
             $("#nutrEat_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
-                {
-                    data: [],
-                    datatype: 'clientSide',
-                    shrinkToFit: true,
-                    pager       : '#nutrEat_pager_list',
-                    pgbuttons : false,
-                    pginput : false,
-                    rowList : [100,200,300,400],
-                    height      : 400,
-                    colModel : colModels,
-                    rowNum : 3000
-                }));
+            {
+                datatype  : "local",
+                mtype     : 'post',
+                url       : '/svcStnd/nutr/nutrInfoMng/searchNutrEatStndInfoList.ab',
+                shrinkToFit: true,
+                pager       : '#nutrEat_pager_list',
+                pgbuttons : false,
+                pginput : false,
+                rowList : [100,200,300,400],
+                height      : 400,
+                colModel : colModels,
+                rowNum : 3000
+            }));
             resizeJqGridWidth("nutrStat_list", "nutrStat_list_wrapper");
         },
 
@@ -79,28 +80,21 @@ let nutrEatStndDetl = new Vue({
         {
             const $this = this;
 
-            //주문정보 조회
-            AjaxUtil.post({
-                url: '/svcStnd/nutr/nutrInfoMng/searchNutrEatStndInfoList.ab',
-                reqType: 'json',
-                param: $this.params,
-                success: function(res) {
-                    if (res) {
-                        if(res.rtnData.result.length > 0){
-                            $this.nutrEatStndList = [];
-                            // 주문할인정보
-                            $this.nutrEatStndList = res.rtnData.result;
-                            $("#nutrEat_list").jqGrid('setGridParam', {
-                                data: $this.nutrEatStndList,
-                                page: 1
-                            }).trigger('reloadGrid');
-                        }else {
-                            $this.newList();
-                        }
+            $("#nutrEat_list").setGridParam(
+            {
+                datatype: "json",
+                postData: JSON.stringify( $this.params),
+                page: 1,
+                loadComplete: function (response)
+                {
+                    if ( response.rtnData.result == 0 )
+                    {
+                        $this.newList();
                     }
                 }
-            });
+            }).trigger("reloadGrid");
         },
+
 
         newList : function ()
         {
@@ -110,6 +104,7 @@ let nutrEatStndDetl = new Vue({
             var addRow = {};
             var sexCd = "";
             var sexNm = "";
+            var cnt = 0;
             for (var i = 0 ; i < 2 ; i ++){
                 if(i===0){
                     sexCd = "FEMALE";
@@ -131,15 +126,10 @@ let nutrEatStndDetl = new Vue({
                         ddRcmdQty    : '' ,
                         ddNeedQty    : '' ,
                     };
-                    $this.nutrEatStndList.push(addRow);
+                    cnt ++;
+                    $("#nutrEat_list").addRowData(cnt, addRow);
                 }
             }
-
-            $("#nutrEat_list").jqGrid('setGridParam', {
-                data: $this.nutrEatStndList,
-                page: 1,
-                rowNum : 3000
-            }).trigger('reloadGrid');
         },
 
         saveInfo  :  function() {
