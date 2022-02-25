@@ -2,6 +2,7 @@ let ddRcmdEatStndMng = new Vue({
     el: "#ddRcmdEatStndMng",
     data:
         {
+            codeCnt : 1,
             params:
                 {
                     userId       : '' ,
@@ -42,7 +43,7 @@ let ddRcmdEatStndMng = new Vue({
 
                 let $this = this;
 
-                getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList);
+                getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList, function (){ $this.codeCnt += 1;});
 
                 AjaxUtil.post(
                     {
@@ -55,6 +56,7 @@ let ddRcmdEatStndMng = new Vue({
                                     $this.code.nutrCdNmList.push({'cdVal':item.nutrCd, 'cdNm':item.nutrNm});
                                 });
                             }
+                            $this.codeCnt += 1;
                         },
                         error: function (response) {
                             Swal.alert([response, 'error']);
@@ -63,8 +65,7 @@ let ddRcmdEatStndMng = new Vue({
 
                 getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
                 {
-                    $this.initGrid();
-                    $this.searchDdRcmdEatStndList(true);
+                    $this.codeCnt += 1;
                 })
             },
             initGrid: function()
@@ -307,6 +308,13 @@ let ddRcmdEatStndMng = new Vue({
         },
     watch:
         {
+            'codeCnt' : function (value){
+                let $this = this;
+                if(value ===  4){
+                    $this.initGrid();
+                    $this.searchDdRcmdEatStndList(true);
+                }
+            }
         },
     mounted: function()
     {
