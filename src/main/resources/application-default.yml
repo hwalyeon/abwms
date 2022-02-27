@@ -5,8 +5,6 @@ logging:
 
 # spring profile
 spring:
-  application:
-    name: wms
   servlet:
     multipart:
       max-file-size: 10MB
