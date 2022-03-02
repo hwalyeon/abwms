@@ -59,36 +59,48 @@ let stdtInfoMng = new Vue({
             let $this = this;
             getCommonCodeList('GROW_JUDG_CD',$this.code.mentGrowJudgCdList);
         },
-        initGrid: function() {
-
+        initGrid: function()
+        {
+            let $this = this;
             let colModels = [
-                {name: "crud"             , index: "crud"             , label: "crud"		 	, hidden: true                                },
-                {name: "guarNoTemp"       , index: "guarNoTemp"       , label: "보호자번호"			, width: 80 , align: "center" , hidden: true  },
-                {name: "entrDt"           , index: "entrDt"           , label: "가입일자"		 	, width: 80 , align: "center" },
-                {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		 	, width: 80 , align: "center" },
-                {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		    , width: 80 , align: "center" },
-                {name: "telNo"            , index: "telNo"            , label: "전화번호"			, width: 80 , align: "center" },
-                {name: "eorgLocNo"        , index: "eorgLocNo"        , label: "학교(학원)명"		, width: 80 , align: "center" },
-                {name: "bandId"           , index: "bandId"           , label: "밴드ID"		    , width: 80 , align: "center" },
-                {name: "guarNo"           , index: "guarNo"           , label: "보호자번호"		 	, width: 80 , align: "center" },
-                {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	 	, width: 80 , align: "center" },
-                {name: "guarTelNo"        , index: "guarTelNo"        , label: "보호자전화번호" 	 	, width: 80 , align: "center" },
-                {name: "sposNo"           , index: "sposNo"           , label: "배우자번호"		 	, width: 80 , align: "center" },
-                {name: "sposNm"           , index: "sposNm"           , label: "배우자명"	 	 	, width: 80 , align: "center" },
-                {name: "sposTelNo"        , index: "sposTelNo"        , label: "배우자전화번호" 	 	, width: 80 , align: "center" },
-                {name: "termDivCd"        , index: "termDivCd"        , label: "약관구분명" 	 	, width: 80 , align: "center" },
-                {name: "termAgreYn"       , index: "termAgreYn"       , label: "약관동의여부" 	 	, width: 80 , align: "center" },
-                {name: "prntInfoDetlPopup" , index: "prntInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center",
+                {name: "crud"              , index: "crud"              , label: "crud"		 	    , hidden: true                },
+                {name: "guarNoTemp"        , index: "guarNoTemp"        , label: "보호자번호"			, width: 80 , align: "center" , hidden: true},
+                {name: "entrDt"            , index: "entrDt"            , label: "가입일자"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "guarNo"            , index: "guarNo"            , label: "학부모번호"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "guarNm"            , index: "guarNm"            , label: "학부모명"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "sposNm"            , index: "sposNm"            , label: "학부모명(배우자)" 	, width: 100 , align: "center" , fixed: true},
+                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "plcClssCd"         , index: "plcClssCd"         , label: "현재위치분류"		, width: 80 , align: "center" , fixed: true},
+                {name: "locNm"             , index: "locNm"             , label: "현재위치(주소)"	 	, width: 100 , align: "center" , fixed: true},
+                {name: "dgemStatCd"        , index: "dgemStatCd"        , label: "위험감정상태"	 	, width: 80 , align: "center" , fixed: true},
+                {name: "strsIdx"           , index: "strsIdx"           , label: "스트레스상태"   	, width: 80 , align: "center" , fixed: true},
+                {name: "growIdx"           , index: "growIdx"           , label: "성장상태"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "fatIdx"            , index: "fatIdx"            , label: "비만상태"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "bandId"            , index: "bandId"            , label: "밴드ID"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "telNo"             , index: "telNo"             , label: "전화번호"		 	, width: 100 , align: "center" , fixed: true},
+                {name: "blthId"            , index: "blthId"            , label: "블루투스ID"	 	, width: 100 , align: "center" , fixed: true},
+                {name: "sexCd"             , index: "sexCd"             , label: "성별"  		 	, width: 80 , align: "center" , fixed: true},
+                {name: "bithDt"            , index: "bithDt"            , label: "생년월일"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "locNo"             , index: "locNo"             , label: "소속학교번호"	 	, width: 100 , align: "center" , fixed: true},
+                {name: "locNm"             , index: "locNm"             , label: "소속학교명"		 	, width: 100 , align: "center" , fixed: true},
+                {name: "bithDt"            , index: "bithDt"            , label: "나이"  		 	, width: 80 , align: "center" , fixed: true},
+                {name: "bandStatCd"        , index: "bandStatCd"        , label: "밴드상태"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "mentStrsStatCd"    , index: "mentStrsStatCd"    , label: "신체적스트레스상태" 	, width: 110 , align: "center" , fixed: true},
+                {name: "physStrsStatCd"    , index: "physStrsStatCd"    , label: "정신적스트레스상태" 	, width: 110 , align: "center" , fixed: true},
+                {name: "useCbeeAmt"        , index: "useCbeeAmt"        , label: "기간내캐시비사용금액"	, width: 125 , align: "center" , fixed: true},
+                {name: "cbeeBal"           , index: "cbeeBal"           , label: "총 캐시비사용금액" 	, width: 110 , align: "center" , fixed: true},
+                {name: "regDt"             , index: "regDt"             , label: "등록일자"           , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
+                {name: "regTm"             , index: "regTm"             , label: "등록시각"           , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
+                {name: "regUserId"         , index: "regUserId"         , label: "등록사용자ID"       , width: 80 , align: "center"  , hidden: true},
+                {name: "uptDt"             , index: "uptDt"             , label: "수정일자"           , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
+                {name: "uptTm"             , index: "uptTm"             , label: "수정시각"           , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
+                {name: "uptUserId"         , index: "uptUserId"         , label: "수정사용자ID"       , width: 80 , align: "center"  , hidden: true},
+                {name: "prntInfoDetlPopup" , index: "prntInfoDetlPopup" , label: "상세정보보기"       , width: 80 , align: "center"  ,  fixed: true ,
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="prntInfoMng.regPrntInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="상세보기" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
                     }
-                },
-                {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
-                {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
-                {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"     , width: 80 , align: "center"  , hidden: true},
-                {name: "uptDt"          , index: "uptDt"          , label: "수정일자"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
-                {name: "uptTm"          , index: "uptTm"          , label: "수정시각"         , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
-                {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"     , width: 80 , align: "center"  , hidden: true}
+                }
 
             ];
 
