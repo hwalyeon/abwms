@@ -11,22 +11,27 @@
               ,A.STDT_NM/*학생명*/
               ,I.TEL_NO/*전화번호*/
               ,fn_getCdNm('PLC_CLSS_CD',D.plc_clss_cd)as plc_clss_cd/*현재위치분류*/
-              ,concat('(',D.pstno,')',D.addr_base,D.addr_spec) as LOC_NM
-              ,H.DGEM_STAT_CD/*위험감정상태*/
+              ,concat('(',D.pstno,')',D.addr_base,D.addr_spec) as CURR_LOC
+              ,H.DGEM_STAT_CD as DGEM_STAT_CD_TEMP/*위험감정상태*/
+              ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_CD
               ,F.STRS_IDX/*스트레스상태*/
               ,G.GROW_IDX/*성장상태*/
               ,G.FAT_IDX/*비만상태*/
               ,I.BAND_ID/*밴드ID*/
               ,I.TEL_NO/*전화번호*/
               ,I.BLTH_ID/*블루투스 ID*/
-              ,A.SEX_CD/*성별*/
+              ,A.SEX_CD as SEX_CD_TEMP/*성별*/
+              ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_CD
               ,A.BITH_DT/*생년월일*/
               ,D.LOC_NO/*소속학교번호*/
               ,D.LOC_NM/*소속학교명*/
               ,A.BITH_DT/*나이*/
-              ,A.BAND_STAT_CD/*현재상태*/
-              ,F.MENT_STRS_STAT_CD/*현재상태*/
-              ,F.PHYS_STRS_STAT_CD/*현재상태*/
+              ,A.BAND_STAT_CD as BAND_STAT_CD_TEMP/*현재상태*/
+              ,fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) as BAND_STAT_CD
+              ,ment_strs_stat_cd as MENT_STRS_STAT_CD_TEMP/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+              ,fn_getCdNm('STRS_STAT_CD', F.MENT_STRS_STAT_CD) AS MENT_STRS_STAT_CD
+              ,phys_strs_stat_cd as PHYS_STRS_STAT_CD_TEMP/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+              ,fn_getCdNm('STRS_STAT_CD', F.PHYS_STRS_STAT_CD) AS PHYS_STRS_STAT_CD
               ,(select SUM(USE_CBEE_AMT)
               from   TS_STDT_CBEE_HIST X
               where  X.STDT_NO = A.STDT_NO

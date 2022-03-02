@@ -91,7 +91,7 @@ let stdtInfoMng = new Vue({
                 {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 	, width: 80 , align: "center" , fixed: true},
                 {name: "telNo"             , index: "telNo"             , label: "전화번호"		 	, width: 100 , align: "center" , fixed: true},
                 {name: "plcClssCd"         , index: "plcClssCd"         , label: "현재위치분류"		, width: 80 , align: "center" , fixed: true},
-                {name: "locNm"             , index: "locNm"             , label: "현재위치(주소)"	 	, width: 250 , align: "center" , fixed: true},
+                {name: "currLoc"           , index: "currLoc"           , label: "현재위치(주소)"	    , width: 250 , align: "center" , fixed: true},
                 {name: "dgemStatCd"        , index: "dgemStatCd"        , label: "위험감정상태"	 	, width: 80 , align: "center" , fixed: true},
                 {name: "strsIdx"           , index: "strsIdx"           , label: "스트레스상태"   	, width: 80 , align: "center" , fixed: true},
                 {name: "growIdx"           , index: "growIdx"           , label: "성장상태"		 	, width: 80 , align: "center" , fixed: true},
