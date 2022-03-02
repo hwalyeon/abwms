@@ -7,6 +7,7 @@ let stdtInfoMng = new Vue({
             entrDt:'',
             guarNo:'',
             guarNm:'',
+            telNo:'',
             sposNm:'',
             stdtNo:'',
             stdtNm:'',
@@ -29,6 +30,7 @@ let stdtInfoMng = new Vue({
             physStrsStatCd:'',
             useCbeeAmt:'',
             cbeeBal:'',
+            mmDd:'THIS_MONTH',
             paging: 'Y',
             totalCount: 0,
             rowCount: 30,
@@ -36,7 +38,8 @@ let stdtInfoMng = new Vue({
             currentIndex: 0
         },
         code:{
-            mentGrowJudgCdList : []
+            mentGrowJudgCdList : [],
+            mmDdList :           []
         },
     },
 
@@ -47,13 +50,28 @@ let stdtInfoMng = new Vue({
 
             let $this = this;
 
+            $this.initValue();
+
             $this.initCodeList();
 
             $this.initGrid();
 
             $this.searchGrowJudgList(true);
 
-
+        },
+        initValue: function() {
+            let $this = this;
+            $this.code.mmDdList = CodeUtil.getPeriodDateList();
+            const terms = getPeriodDate($this.params.mmDd);
+            this.params.entrDtFr = terms.strDt;
+            this.params.entrDtTo = terms.endDt;
+        },
+        mmDdSelect: function()
+        {
+            let $this = this;
+            const terms = getPeriodDate($this.params.mmDd);
+            this.params.entrDtFr = terms.strDt;
+            this.params.entrDtTo = terms.endDt;
         },
         initCodeList: function() {
             let $this = this;
@@ -71,8 +89,9 @@ let stdtInfoMng = new Vue({
                 {name: "sposNm"            , index: "sposNm"            , label: "학부모명(배우자)" 	, width: 100 , align: "center" , fixed: true},
                 {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80 , align: "center" , fixed: true},
                 {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "telNo"             , index: "telNo"             , label: "전화번호"		 	, width: 100 , align: "center" , fixed: true},
                 {name: "plcClssCd"         , index: "plcClssCd"         , label: "현재위치분류"		, width: 80 , align: "center" , fixed: true},
-                {name: "locNm"             , index: "locNm"             , label: "현재위치(주소)"	 	, width: 100 , align: "center" , fixed: true},
+                {name: "locNm"             , index: "locNm"             , label: "현재위치(주소)"	 	, width: 250 , align: "center" , fixed: true},
                 {name: "dgemStatCd"        , index: "dgemStatCd"        , label: "위험감정상태"	 	, width: 80 , align: "center" , fixed: true},
                 {name: "strsIdx"           , index: "strsIdx"           , label: "스트레스상태"   	, width: 80 , align: "center" , fixed: true},
                 {name: "growIdx"           , index: "growIdx"           , label: "성장상태"		 	, width: 80 , align: "center" , fixed: true},
@@ -88,8 +107,9 @@ let stdtInfoMng = new Vue({
                 {name: "bandStatCd"        , index: "bandStatCd"        , label: "밴드상태"		 	, width: 80 , align: "center" , fixed: true},
                 {name: "mentStrsStatCd"    , index: "mentStrsStatCd"    , label: "신체적스트레스상태" 	, width: 110 , align: "center" , fixed: true},
                 {name: "physStrsStatCd"    , index: "physStrsStatCd"    , label: "정신적스트레스상태" 	, width: 110 , align: "center" , fixed: true},
-                {name: "useCbeeAmt"        , index: "useCbeeAmt"        , label: "기간내캐시비사용금액"	, width: 125 , align: "center" , fixed: true},
-                {name: "cbeeBal"           , index: "cbeeBal"           , label: "총 캐시비사용금액" 	, width: 110 , align: "center" , fixed: true},
+                {name: "useTotal"          , index: "useTotal"          , label: "캐시비 적립 총액"	, width: 125 , align: "center" , fixed: true},
+                {name: "saveTotal"         , index: "saveTotal"         , label: "캐시비 사용 금액" 	, width: 110 , align: "center" , fixed: true},
+                {name: "cbeeBal"           , index: "cbeeBal"           , label: "캐시비 현재 잔액" 	, width: 110 , align: "center" , fixed: true},
                 {name: "regDt"             , index: "regDt"             , label: "등록일자"           , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
                 {name: "regTm"             , index: "regTm"             , label: "등록시각"           , width: 80 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
                 {name: "regUserId"         , index: "regUserId"         , label: "등록사용자ID"       , width: 80 , align: "center"  , hidden: true},
@@ -181,6 +201,7 @@ let stdtInfoMng = new Vue({
             let $this = this;
             $this.params = {
                 growJudgCd:'',
+                mmDd:'THIS_MONTH',
                 paging: 'Y',
                 totalCount: 0,
                 rowCount: 30,

@@ -9,8 +9,9 @@
               ,C.SPOS_NM/*학부모명(배우자)*/
               ,A.STDT_NO/*학생번호*/
               ,A.STDT_NM/*학생명*/
+              ,I.TEL_NO/*전화번호*/
               ,fn_getCdNm('PLC_CLSS_CD',D.plc_clss_cd)as plc_clss_cd/*현재위치분류*/
-              ,D.LOC_NM/*현재위치(주소)*/
+              ,concat('(',D.pstno,')',D.addr_base,D.addr_spec) as LOC_NM
               ,H.DGEM_STAT_CD/*위험감정상태*/
               ,F.STRS_IDX/*스트레스상태*/
               ,G.GROW_IDX/*성장상태*/
@@ -20,14 +21,20 @@
               ,I.BLTH_ID/*블루투스 ID*/
               ,A.SEX_CD/*성별*/
               ,A.BITH_DT/*생년월일*/
-              ,J.LOC_NO/*소속학교번호*/
-              ,J.LOC_NM/*소속학교명*/
+              ,D.LOC_NO/*소속학교번호*/
+              ,D.LOC_NM/*소속학교명*/
               ,A.BITH_DT/*나이*/
               ,A.BAND_STAT_CD/*현재상태*/
               ,F.MENT_STRS_STAT_CD/*현재상태*/
               ,F.PHYS_STRS_STAT_CD/*현재상태*/
-              ,1 as USE_CBEE_AMT /*기간내 캐시비 사용금액*/
-              ,K.USE_CBEE_AMT/*총 캐시비 사용금액*/
+              ,(select SUM(USE_CBEE_AMT)
+              from   TS_STDT_CBEE_HIST X
+              where  X.STDT_NO = A.STDT_NO
+              and    X.CBEE_USE_CD = 'SAVE') as SAVE_TOTAL /*적립 캐시비 사용금액*/
+              ,(select SUM(USE_CBEE_AMT)
+              from   TS_STDT_CBEE_HIST X
+              where  X.STDT_NO = A.STDT_NO
+              and    X.CBEE_USE_CD = 'USE')  as USE_TOTAL /*사용 사용금액*/
               ,K.CBEE_BAL/*캐시비 잔액*/
               from     TM_STDT_BASE A
               left outer join
@@ -58,14 +65,11 @@
               TS_BAND_INFO I
               on		 A.BAND_ID     = I.BAND_ID
               left outer join
-              TI_EORG_BASE J
-              on	     A.EORG_LOC_NO = J.LOC_NO
-              left outer join
               TS_STDT_CBEE_HIST K
-              on		 A.STDT_NO = K.STDT_NO
+              on		 A.CBEE_HIST_NO = K.CBEE_HIST_NO
               where    1=1
-        <if test="entrFr != null and entrFr != null and entrTo !='' and entrTo !='' ">
-        and B.ENTR_DT between #{entrFr} and #{entrTo}</if>
+       <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
+        and B.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>
         <if test=" stdtNo != null and stdtNo !='' ">
         and      A.STDT_NO     = #{stdtNo}::numeric</if>
         <if test=" stdtNm != null and stdtNm !='' ">
@@ -81,7 +85,7 @@
         <if test=" guarTelNo != null and guarTelNo !='' ">
         and      B.GUAR_TEL_NO like concat('%',#{guarTelNo},'%')</if>
         <if test=" locNm != null and locNm !='' ">
-        and      J.LOC_NM      like concat('%',#{locNm},'%')</if>
+        and      D.LOC_NM      like concat('%',#{locNm},'%')</if>
         <if test=' paging == "Y" '>
         LIMIT ${rowCount} OFFSET ${currentIndex}
         </if>

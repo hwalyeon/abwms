@@ -93,12 +93,6 @@ let ddPalMng = new Vue({
                     , hidden  : true  },
                 {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
-                {name: "palValFrTemp"       , index: "palValFrTemp"   , label: "신체활동수준값 FORM"  , width: 80   , align: "center"
-                    , hidden  : true  },
-                {name: "palValFr"          , index: "palValFr"        , label: "신체활동수준값 FORM"  , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "palValTo"          , index: "palValTo"        , label: "신체활동수준값 TO"    , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
                 {name: "calQtyFr"          , index: "calQtyFr"        , label: "칼로리량 FORM"       , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
                 {name: "calQtyTo"          , index: "calQtyTo"        , label: "칼로리량 TO"         , width: 80   , align: "center"
@@ -253,12 +247,6 @@ let ddPalMng = new Vue({
                         return false;
                     }if(WebUtil.isNull(gridData[data].ageYcnt)){
                         Swal.alert(["나이년수 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].palValFr)){
-                        Swal.alert(["신체활동수준 값 FORM 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].palValTo)){
-                        Swal.alert(["신체활동수준 값 TO 필수 입력입니다.", 'warning']);
                         return false;
                     }if(WebUtil.isNull(gridData[data].calQtyFr)){
                         Swal.alert(["칼로리량 FORM 필수 입력입니다.", 'warning']);
