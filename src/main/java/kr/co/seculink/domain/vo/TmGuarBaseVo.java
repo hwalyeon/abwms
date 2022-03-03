@@ -46,23 +46,38 @@ public class TmGuarBaseVo implements Serializable {
 	/* spos_no 배우자_번호 numeric(null) */
 	private double sposNo;
 
-	/* dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1) */
-	private String dzoneMoinAlamYn;
+	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
+	private String dzoneAlamYn;
 
-	/* dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1) */
-	private String dzoneMoutAlamYn;
+	/* szone_alam_yn 세 이프존_알림_여부 character(1) */
+	private String szoneAlamYn;
 
-	/* szone_moin_alam_yn 세이프존_진입_알림_여부 character(1) */
-	private String szoneMoinAlamYn;
+	/* fall_alam_yn 낙상_알림_여부 character(1) */
+	private String fallAlamYn;
 
-	/* szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1) */
-	private String szoneMoutAlamYn;
+	/* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
+	private String hbitAbnmAlamYn;
 
-	/* fall_occr_alam_yn 낙상_발생_알림_여부 character(1) */
-	private String fallOccrAlamYn;
+	/* temp_abnm_alam_yn 체온_이상_알림_여부 character(1) */
+	private String tempAbnmAlamYn;
 
-	/* strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1) */
-	private String strsAbnmAlamYn;
+	/* body_hist_alam_yn 신체_기록_알림_여부 character(1) */
+	private String bodyHistAlamYn;
+
+	/* meal_noin_alam_yn 식사_미입력_알림_여부 character(1) */
+	private String mealNoinAlamYn;
+
+	/* excs_noin_alam_yn 운동_미입력_알림_여부 character(1) */
+	private String excsNoinAlamYn;
+
+	/* cbee_use_alam_yn 캐시비_사용_알림_여부 character(1) */
+	private String cbeeUseAlamYn;
+
+	/* batr_lack_alam_yn 배터리_부족_알림_여부 character(1) */
+	private String batrLackAlamYn;
+
+	/* ltrm_nuse_alam_yn 장기_미사용_알림_여부 character(1) */
+	private String ltrmNuseAlamYn;
 
 	/* entr_dt 가입_일자 character(8) */
 	private String entrDt;
@@ -294,94 +309,169 @@ public class TmGuarBaseVo implements Serializable {
 		this.sposNo = sposNo;
 	}
 	/**
-	 * Get dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1)
-	 * @Return String dzoneMoinAlamYn
+	 * Get dzone_alam_yn 위험지역_알림_여부 character(1)
+	 * @Return String dzoneAlamYn
 	 */
-	public String getDzoneMoinAlamYn() {
-		return this.dzoneMoinAlamYn;
+	public String getDzoneAlamYn() {
+		return this.dzoneAlamYn;
 	}
 	
 	/**
-	 * Set dzone_moin_alam_yn 위험지역_진입_알림_여부 character(1)
-	 * @Param String dzoneMoinAlamYn
+	 * Set dzone_alam_yn 위험지역_알림_여부 character(1)
+	 * @Param String dzoneAlamYn
 	 */
-	public void setDzoneMoinAlamYn(String dzoneMoinAlamYn) {
-		this.dzoneMoinAlamYn = dzoneMoinAlamYn;
+	public void setDzoneAlamYn(String dzoneAlamYn) {
+		this.dzoneAlamYn = dzoneAlamYn;
 	}
 	/**
-	 * Get dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1)
-	 * @Return String dzoneMoutAlamYn
+	 * Get szone_alam_yn 세이프존_알림_여부 character(1)
+	 * @Return String szoneAlamYn
 	 */
-	public String getDzoneMoutAlamYn() {
-		return this.dzoneMoutAlamYn;
-	}
-	
-	/**
-	 * Set dzone_mout_alam_yn 위험지역_이탈_알림_여부 character(1)
-	 * @Param String dzoneMoutAlamYn
-	 */
-	public void setDzoneMoutAlamYn(String dzoneMoutAlamYn) {
-		this.dzoneMoutAlamYn = dzoneMoutAlamYn;
-	}
-	/**
-	 * Get szone_moin_alam_yn 세이프존_진입_알림_여부 character(1)
-	 * @Return String szoneMoinAlamYn
-	 */
-	public String getSzoneMoinAlamYn() {
-		return this.szoneMoinAlamYn;
+	public String getSzoneAlamYn() {
+		return this.szoneAlamYn;
 	}
 	
 	/**
-	 * Set szone_moin_alam_yn 세이프존_진입_알림_여부 character(1)
-	 * @Param String szoneMoinAlamYn
+	 * Set szone_alam_yn 세이프존_알림_여부 character(1)
+	 * @Param String szoneAlamYn
 	 */
-	public void setSzoneMoinAlamYn(String szoneMoinAlamYn) {
-		this.szoneMoinAlamYn = szoneMoinAlamYn;
+	public void setSzoneAlamYn(String szoneAlamYn) {
+		this.szoneAlamYn = szoneAlamYn;
 	}
 	/**
-	 * Get szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1)
-	 * @Return String szoneMoutAlamYn
+	 * Get fall_alam_yn 낙상_알림_여부 character(1)
+	 * @Return String fallAlamYn
 	 */
-	public String getSzoneMoutAlamYn() {
-		return this.szoneMoutAlamYn;
-	}
-	
-	/**
-	 * Set szone_mout_alam_yn 세이프존_이탈_알림_여부 character(1)
-	 * @Param String szoneMoutAlamYn
-	 */
-	public void setSzoneMoutAlamYn(String szoneMoutAlamYn) {
-		this.szoneMoutAlamYn = szoneMoutAlamYn;
-	}
-	/**
-	 * Get fall_occr_alam_yn 낙상_발생_알림_여부 character(1)
-	 * @Return String fallOccrAlamYn
-	 */
-	public String getFallOccrAlamYn() {
-		return this.fallOccrAlamYn;
+	public String getFallAlamYn() {
+		return this.fallAlamYn;
 	}
 	
 	/**
-	 * Set fall_occr_alam_yn 낙상_발생_알림_여부 character(1)
-	 * @Param String fallOccrAlamYn
+	 * Set fall_alam_yn 낙상_알림_여부 character(1)
+	 * @Param String fallAlamYn
 	 */
-	public void setFallOccrAlamYn(String fallOccrAlamYn) {
-		this.fallOccrAlamYn = fallOccrAlamYn;
+	public void setFallAlamYn(String fallAlamYn) {
+		this.fallAlamYn = fallAlamYn;
 	}
 	/**
-	 * Get strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1)
-	 * @Return String strsAbnmAlamYn
+	 * Get hbit_abnm_alam_yn 심박_이상_알림_여부 character(1)
+	 * @Return String hbitAbnmAlamYn
 	 */
-	public String getStrsAbnmAlamYn() {
-		return this.strsAbnmAlamYn;
+	public String getHbitAbnmAlamYn() {
+		return this.hbitAbnmAlamYn;
 	}
 	
 	/**
-	 * Set strs_abnm_alam_yn 스트레스_이상_알림_여부 character(1)
-	 * @Param String strsAbnmAlamYn
+	 * Set hbit_abnm_alam_yn 심박_이상_알림_여부 character(1)
+	 * @Param String hbitAbnmAlamYn
 	 */
-	public void setStrsAbnmAlamYn(String strsAbnmAlamYn) {
-		this.strsAbnmAlamYn = strsAbnmAlamYn;
+	public void setHbitAbnmAlamYn(String hbitAbnmAlamYn) {
+		this.hbitAbnmAlamYn = hbitAbnmAlamYn;
+	}
+	/**
+	 * Get temp_abnm_alam_yn 체온_이상_알림_여부 character(1)
+	 * @Return String tempAbnmAlamYn
+	 */
+	public String getTempAbnmAlamYn() {
+		return this.tempAbnmAlamYn;
+	}
+	
+	/**
+	 * Set temp_abnm_alam_yn 체온_이상_알림_여부 character(1)
+	 * @Param String tempAbnmAlamYn
+	 */
+	public void setTempAbnmAlamYn(String tempAbnmAlamYn) {
+		this.tempAbnmAlamYn = tempAbnmAlamYn;
+	}
+	/**
+	 * Get body_hist_alam_yn 신체_기록_알림_여부 character(1)
+	 * @Return String bodyHistAlamYn
+	 */
+	public String getBodyHistAlamYn() {
+		return this.bodyHistAlamYn;
+	}
+	
+	/**
+	 * Set body_hist_alam_yn 신체_기록_알림_여부 character(1)
+	 * @Param String bodyHistAlamYn
+	 */
+	public void setBodyHistAlamYn(String bodyHistAlamYn) {
+		this.bodyHistAlamYn = bodyHistAlamYn;
+	}
+	/**
+	 * Get meal_noin_alam_yn 식사_미입력_알림_여부 character(1)
+	 * @Return String mealNoinAlamYn
+	 */
+	public String getMealNoinAlamYn() {
+		return this.mealNoinAlamYn;
+	}
+	
+	/**
+	 * Set meal_noin_alam_yn 식사_미입력_알림_여부 character(1)
+	 * @Param String mealNoinAlamYn
+	 */
+	public void setMealNoinAlamYn(String mealNoinAlamYn) {
+		this.mealNoinAlamYn = mealNoinAlamYn;
+	}
+	/**
+	 * Get excs_noin_alam_yn 운동_미입력_알림_여부 character(1)
+	 * @Return String excsNoinAlamYn
+	 */
+	public String getExcsNoinAlamYn() {
+		return this.excsNoinAlamYn;
+	}
+	
+	/**
+	 * Set excs_noin_alam_yn 운동_미입력_알림_여부 character(1)
+	 * @Param String excsNoinAlamYn
+	 */
+	public void setExcsNoinAlamYn(String excsNoinAlamYn) {
+		this.excsNoinAlamYn = excsNoinAlamYn;
+	}
+	/**
+	 * Get cbee_use_alam_yn 캐시비_사용_알림_여부 character(1)
+	 * @Return String cbeeUseAlamYn
+	 */
+	public String getCbeeUseAlamYn() {
+		return this.cbeeUseAlamYn;
+	}
+	
+	/**
+	 * Set cbee_use_alam_yn 캐시비_사용_알림_여부 character(1)
+	 * @Param String cbeeUseAlamYn
+	 */
+	public void setCbeeUseAlamYn(String cbeeUseAlamYn) {
+		this.cbeeUseAlamYn = cbeeUseAlamYn;
+	}
+	/**
+	 * Get batr_lack_alam_yn 배터리_부족_알림_여부 character(1)
+	 * @Return String batrLackAlamYn
+	 */
+	public String getBatrLackAlamYn() {
+		return this.batrLackAlamYn;
+	}
+	
+	/**
+	 * Set batr_lack_alam_yn 배터리_부족_알림_여부 character(1)
+	 * @Param String batrLackAlamYn
+	 */
+	public void setBatrLackAlamYn(String batrLackAlamYn) {
+		this.batrLackAlamYn = batrLackAlamYn;
+	}
+	/**
+	 * Get ltrm_nuse_alam_yn 장기_미사용_알림_여부 character(1)
+	 * @Return String ltrmNuseAlamYn
+	 */
+	public String getLtrmNuseAlamYn() {
+		return this.ltrmNuseAlamYn;
+	}
+	
+	/**
+	 * Set ltrm_nuse_alam_yn 장기_미사용_알림_여부 character(1)
+	 * @Param String ltrmNuseAlamYn
+	 */
+	public void setLtrmNuseAlamYn(String ltrmNuseAlamYn) {
+		this.ltrmNuseAlamYn = ltrmNuseAlamYn;
 	}
 	/**
 	 * Get entr_dt 가입_일자 character(8)

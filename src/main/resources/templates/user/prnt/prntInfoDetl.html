@@ -4,7 +4,7 @@
 <div class="modal fade" id="prntInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 900px; height: 800px">
+			<div class="modal-content" style="width: 900px; height: 850px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -26,19 +26,21 @@
 											<th scope="row">보호자 번호</th>
 											<td>
 												<div>
-
-													<input type="text" name="guarNo" v-model="params.guarNo" class="form-control float_left width_per_40 ime-eng" :readonly="params.crud=='U'" v-on:input="nanCk(event)"/>
-													<button type="button" class="btn btn-w-s btn-primary float_right" v-on:click="searchDupGuarNo"  :disabled="params.crud=='U'"><span>번호 확인</span></button>
-													<button type="button" class="btn btn-w-s btn-primary float_right" v-on:click="numberingGuarNo"  :disabled="params.crud=='U'" style="margin-right:3px"><span>번호 채번</span></button>
+													<input type="text" name="guarNo" v-model="params.guarNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
 												</div>
 											</td>
-
+										</tr>
+										<tr>
+											<th scope="row">배우자 번호</th>
+											<td>
+												<input type="text" name="sposNo" v-model="params.sposNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
+											</td>
 										</tr>
 										<tr>
 											<th scope="row">보호자 이름</th>
 											<td>
 												<div>
-													<input type="text" name="guarNm" v-model="params.guarNm" class="form-control float_left width_per_100 ime-eng" :readonly="params.crud=='U'"/>
+													<input type="text" name="guarNm" v-model="params.guarNm" class="form-control float_left width_per_100 ime-eng"/>
 												</div>
 											</td>
 										</tr>
@@ -51,15 +53,16 @@
 										<tr>
 											<th scope="row">보호자 비밀번호</th>
 											<td>
-												<input type="text" name="guarPw" v-model="params.guarPw" class="form-control float_left width_per_100 ime-eng"/>
+												<input type="text" name="guarPw" v-model="params.guarPw" class="form-control float_left width_per_70 ime-eng"/>
+												<button type="button" class="btn btn-w-s btn-primary float_right" v-on:click=""  :disabled="params.crud=='C'" ><span>초기화</span></button>
 											</td>
 										</tr>
-										<tr>
+<!--									<tr>
 											<th scope="row">본인 인증 일시</th>
 											<td>
-												<input type="date" name="selfCertDttm" v-model="params.selfCertDttm" class="form-control float_left width_per_100 ime-eng"/>
+												<input type="text" name="selfCertDttm" v-model="params.selfCertDttm" class="form-control float_left width_per_100 ime-eng"/>
 											</td>
-										</tr>
+										</tr>-->
 										<tr>
 											<th scope="row">자동 로그인 여부</th>
 											<td>
@@ -122,37 +125,17 @@
 									</colgroup>
 									<tbody>
 										<tr>
-											<th scope="row">배우자 번호</th>
-											<td>
-												<input type="text" name="sposNo" v-model="params.sposNo" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)"/>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row">위험지역 진입 알림 여부</th>
+											<th scope="row">위험지역 알림 여부</th>
 											<td>
 												<input type="radio" name="dzoneMoinAlamYn" v-model="params.dzoneMoinAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
 												<input type="radio" name="dzoneMoinAlamYn" v-model="params.dzoneMoinAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
-											<th scope="row">위험지역 이탈 알림 여부</th>
-											<td>
-												<input type="radio" name="dzoneMoutAlamYn" v-model="params.dzoneMoutAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="dzoneMoutAlamYn" v-model="params.dzoneMoutAlamYn" value="N"/><span>&nbspN</span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row">세이프존 진입 알림 여부</th>
+											<th scope="row">세이프존 알림 여부</th>
 											<td>
 												<input type="radio" name="szoneMoinAlamYn" v-model="params.szoneMoinAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
 												<input type="radio" name="szoneMoinAlamYn" v-model="params.szoneMoinAlamYn" value="N"/><span>&nbspN</span>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row">세이프존 이탈 알림 여부</th>
-											<td>
-												<input type="radio" name="szoneMoutAlamYn" v-model="params.szoneMoutAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="szoneMoutAlamYn" v-model="params.szoneMoutAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
@@ -163,46 +146,96 @@
 											</td>
 										</tr>
 										<tr>
-											<th scope="row">스트레스 이상 알림 여부</th>
+											<th scope="row">심박 이상 알림 여부</th>
 											<td>
-												<input type="radio" name="strsAbnmAlamYn" v-model="params.strsAbnmAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="strsAbnmAlamYn" v-model="params.strsAbnmAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" name="hbitAbnmAlamYn" v-model="params.hbitAbnmAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="hbitAbnmAlamYn" v-model="params.hbitAbnmAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">체온 이상 알림 여부</th>
+											<td>
+												<input type="radio" name="tempAbnmAlamYn" v-model="params.tempAbnmAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="tempAbnmAlamYn" v-model="params.tempAbnmAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">신체 기록 알림 여부</th>
+											<td>
+												<input type="radio" name="bodyHistAlamYn" v-model="params.bodyHistAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="bodyHistAlamYn" v-model="params.bodyHistAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">식사 미입력 알림 여부</th>
+											<td>
+												<input type="radio" name="mealNoinAlamYn" v-model="params.mealNoinAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="mealNoinAlamYn" v-model="params.mealNoinAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">운동 미입력 알림 여부</th>
+											<td>
+												<input type="radio" name="excsNoinAlamYn" v-model="params.excsNoinAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="excsNoinAlamYn" v-model="params.excsNoinAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">캐시비 사용 알림 여부</th>
+											<td>
+												<input type="radio" name="cbeeUseAlamYn" v-model="params.cbeeUseAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="cbeeUseAlamYn" v-model="params.cbeeUseAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">배터리 부족 알림 여부</th>
+											<td>
+												<input type="radio" name="batrLackAlamYn" v-model="params.batrLackAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="batrLackAlamYn" v-model="params.batrLackAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">장기 미사용 알림 여부</th>
+											<td>
+												<input type="radio" name="ltrmNuseAlamYn" v-model="params.ltrmNuseAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="ltrmNuseAlamYn" v-model="params.ltrmNuseAlamYn" value="N"/><span>&nbspN</span>
+											</td>
+										</tr>
+
+											<th scope="row">가입 상태</th>
+											<td>
+												<select id="entrStatCd" name="entrStatCd" class="form-control width_per_100 ime-eng" v-model="params.entrStatCd">
+													<oprion value="">선택</oprion>
+													<option v-for="item in code.entrStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+
+												</select>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">가입 일자</th>
 											<td>
-												<input type="date" name="selfCertDttm" v-model="params.selfCertDttm" class="form-control float_left width_per_100 ime-eng"/>
+												<input type="date" name="entrDt" v-model="params.entrDt" class="form-control float_left width_per_100 ime-eng"/>
 											</td>
 										</tr>
-										<tr>
+										<tr v-if="params.entrStatCd=='90'">
 											<th scope="row">해지 일자</th>
 											<td>
-												<input type="date" name="selfCertDttm" v-model="params.selfCertDttm" class="form-control float_left width_per_100 ime-eng"/>
+												<input type="date" name="relsDt" v-model="params.relsDt" class="form-control float_left width_per_100 ime-eng"/>
 											</td>
 										</tr>
-										<tr>
+										<tr v-if="params.entrStatCd=='90'">
 											<th scope="row">해지 사유</th>
 											<td>
 												<select id="relsResnCd" name="relsResnCd" class="form-control width_per_100 ime-eng" v-model="params.relsResnCd">
 													<oprion value="">선택</oprion>
-													<option v-for="item in code.entrStatCdList" bind:value="item.cdVal" v-text="item.cdNm"></option>
+													<option v-for="item in code.relsResnCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 												</select>
 											</td>
 										</tr>
-										<tr>
+										<tr v-if="params.entrStatCd=='90'">
 											<th scope="row">해지 사유 내용</th>
 											<td>
 												<input type="text" name="relsResnCntn" v-model="params.relsResnCntn" class="form-control float_left width_per_100 ime-eng"/>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row">가입 상태</th>
-											<td>
-												<select id="relsResnCntn" name="relsResnCd" class="form-control width_per_100 ime-eng" v-model="params.relsResnCd">
-													<oprion value="">선택</oprion>
-													<option v-for="item in code.entrStatCdList" bind:value="item.cdVal" v-text="item.cdNm"></option>
-												</select>
 											</td>
 										</tr>
 									</tbody>

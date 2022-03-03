@@ -97,19 +97,29 @@ let bandOpenInfoMng = new Vue({
                         {name: "regDt"            , index: "regDt"            , label: "밴드등록일자"	    , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
                         {name: "bandYtyp"         , index: "bandYtyp"         , label: "출고년월"		    , width: 80  , align: "center" , fixed: true },
                         {name: "bandMdlCd"        , index: "bandMdlCd"        , label: "모델TYPE"		    , width: 80  , align: "center" , fixed: true },
-                        {name: "bandId"           , index: "bandId"           , label: "밴드ID"		        , width: 120 , align: "center" , fixed: true },
-                        {name: "telNo"            , index: "telNo"            , label: "전화번호"		    , width: 120 , align: "center" , fixed: true  ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
+                        {name: "bandId"           , index: "bandId"           , label: "밴드ID"		        , width: 120 , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
+                          return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
+                        {name: "telNo"            , index: "telNo"            , label: "전화번호"		    , width: 120 , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
+                          let telNoTemp = phoneFormatter(cellValue);
+                          return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${telNoTemp}" data-band-id="${rowObject.bandid}">${telNoTemp}</a>`;}},
                         {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		    , width: 80  , align: "center" , fixed: true },
                         {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		        , width: 80  , align: "center" , fixed: true },
-                        {name: "guarNo"           , index: "guarNo"           , label: "보호자번호1"	  	    , width: 80  , align: "center" , fixed: true },
-                        {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	    , width: 80  , align: "center" , fixed: true },
-                        {name: "guarTelNo1"       , index: "guarTelNo1"       , label: "보호자전화번호1"	    , width: 120 , align: "center" , fixed: true  ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
+                        {name: "guarNo"           , index: "guarNo"           , label: "보호자번호1"	  	    , width: 80  , align: "center" , fixed: true , formatter: function(cellValue, options, rowObject) {
+                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	    , width: 80  , align: "center" , fixed: true , formatter: function(cellValue, options, rowObject) {
+                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        {name: "guarTelNo1"       , index: "guarTelNo1"       , label: "보호자전화번호1"	    , width: 120 , align: "center" , fixed: true  ,formatter: function(cellValue, options, rowObject) {
+                          let guarTelNo1Temp = phoneFormatter(cellValue);
+                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${guarTelNo1Temp}" data-guar-no="${rowObject.guarNo}">${guarTelNo1Temp}</a>`;}},
                         {name: "guarNoSub"        , index: "guarNoSub"        , label: "보호자번호2"		    , width: 80  , align: "center" , fixed: true },
                         {name: "guarNmSub"        , index: "guarNmSub"        , label: "보호자명"	 	    , width: 80  , align: "center" , fixed: true },
-                        {name: "guarTelNo2"       , index: "guarTelNo2"       , label: "보호자전화번호2"     , width: 120 , align: "center" , fixed: true  ,formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
-                        {name: "blthId"           , index: "blthId"           , label: "블루투스ID"         , width: 120 , align: "center" , fixed: true },
-                        {name: "bandOpenStatCd"   , index: "bandOpenStatCd"   , label: "밴드개통상태코드"    , width: 80  , align: "center" , fixed: true },
-                        {name: "bandOpenStatCdNm" , index: "bandOpenStatCdNm" , label: "밴드개통상태코드명"  , width: 80  , align: "center" , fixed: true },
+                        {name: "guarTelNo2"       , index: "guarTelNo2"       , label: "보호자전화번호2"     , width: 120 , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {return phoneFormatter(cellValue);}},
+                        {name: "blthId"           , index: "blthId"           , label: "블루투스ID"         , width: 120 , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
+                                return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
+                        {name: "bandOpenStatCd"   , index: "bandOpenStatCd"   , label: "밴드개통상태코드"    , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
+                                return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
+                        {name: "bandOpenStatCdNm" , index: "bandOpenStatCdNm" , label: "밴드개통상태코드명"  , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
+                                return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
                         {name: "apiUrlGramNo"     , index: "apiUrlGramNo"     , label: "개통URL전문번호"    , width: 80  , align: "center" , fixed: true },
                         {name: "openGramNo"       , index: "openGramNo"       , label: "개통전문번호"       , width: 80  , align: "center" , fixed: true },
                         {name: "apiUrlYn"         , index: "apiUrlYn"         , label: "URL제공여부"        , width: 80  , align: "center" , fixed: true },
@@ -120,11 +130,7 @@ let bandOpenInfoMng = new Vue({
                         {name: "uptDt"            , index: "uptDt"            , label: "수정일자"           , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
                         {name: "uptTm"            , index: "uptTm"            , label: "수정시각"           , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
                         {name: "uptUserId"        , index: "uptUserId"        , label: "수정사용자ID"       , width: 80  , align: "center" , fixed: true },
-                        {name: "bandOpenInfoDetlPopup" , index: "bandOpenInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center", fixed: true 
-                         ,formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success"'
-                         +' onclick="bandOpenInfoMng.regBandOpenInfoDetlPopup(\'' + rowObject.bandId + '\')" value="상세보기" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" />';}}
-                          
-                        ];
+                    ];
 
                 $("#bandOpenInfo_list").jqGrid("GridUnload");
                 $("#bandOpenInfo_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -147,8 +153,16 @@ let bandOpenInfoMng = new Vue({
                         },
                         afterSaveCell : function (rowid , colId , val, e ){
                             if($("#bandOpenInfo_list").getRowData(rowid).crud != "C" && $("#bandOpenInfo_list").getRowData(rowid).crud != "D" ) {
-                                $("#bandOpenInfo_list").setRowData(rowid, {crud:"U"});
+                               $("#bandOpenInfo_list").setRowData(rowid, {crud:"U"});
                             }
+                        },
+                        gridComplete: function () {
+                            $("#bandOpenInfo_list").find('A.links[data-guar]').on('click', function(e) {
+                                bandOpenInfoMng.regPrntInfoDetlPopup($(e.target).data('guar-no'))
+                            });
+                            $("#bandOpenInfo_list").find('A.links[data-band]').on('click', function(e) {
+                                bandOpenInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
+                            });
                         }
                     }));
                 resizeJqGridWidth("bandOpenInfo_list", "bandOpenInfo_list_wrapper");
@@ -201,6 +215,10 @@ let bandOpenInfoMng = new Vue({
             },
             regBandOpenInfoDetlPopup: function(bandId) {
                 bandOpenInfoDetl.initPage(bandId);
+            },
+            regPrntInfoDetlPopup: function(guarNo) {
+                console.log(guarNo);
+                prntInfoDetl.initPage(guarNo);
             },
             resetSearchParam: function()
             {

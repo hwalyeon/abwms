@@ -63,40 +63,6 @@ public class PrntInfoMngController
 		return vo;
 	}
 
-
-	//보호자(사용자)_번호_확인
-	@ResponseBody
-	@RequestMapping("/user/prnt/prntInfoMng/searchDupGuarNo.ab")
-	public RtnMsg searchDupGuarNo(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		Map<String, String> result = prntInfoMngService.searchDupGuarNo(params);
-
-		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap);
-
-		return vo;
-	}
-
-	//보호자(사용자)_번호_채번
-	@ResponseBody
-	@RequestMapping("/user/prnt/pantInfoMng/numberingGuarNo.ab")
-	public RtnMsg numberingGuarNo(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		Map<String, Object> result = prntInfoMngService.numberingGuarNo(params);
-
-		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap);
-
-		return vo;
-	}
-
-
 	//밴드정보 저장
 	@ResponseBody
 	@RequestMapping("/user/prnt/prntInfoMng/savePrntInfoDetl.ab")

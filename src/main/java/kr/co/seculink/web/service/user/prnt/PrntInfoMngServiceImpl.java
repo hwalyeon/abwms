@@ -2,7 +2,6 @@ package kr.co.seculink.web.service.user.prnt;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
@@ -40,32 +39,6 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 		rtnMap.put("result", result);
 
 		return rtnMap;
-	}
-
-
-	//보호자(사용자)_번호_확인
-	public Map<String, String> searchDupGuarNo(Map<String, String> params) throws BizException
-	{
-		Map<String, String> result = dao.selectOne("user.prnt.prntInfoMng.selectGuarNo", params);
-
-		Map<String, String> rtnMap = new HashMap<>();
-		if ( result == null || GEUtil.isEmpty(String.valueOf((result.get("guarNo"))))) {
-			rtnMap.put("existsYn", "N");
-		} else {
-			rtnMap.put("existsYn", "Y");
-		}
-
-		return rtnMap;
-	}
-
-	//보호자(사용자)_번호_채번
-	public Map<String, Object> numberingGuarNo(Map<String, String> params) throws BizException
-	{
-
-		Map<String, Object> result = dao.selectOne("user.prnt.prntInfoMng.selectNumberingGuarNo", params);
-
-
-		return result;
 	}
 
 
