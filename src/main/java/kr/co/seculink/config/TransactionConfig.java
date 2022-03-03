@@ -6,6 +6,7 @@ import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -30,12 +31,24 @@ public class TransactionConfig {
 	private static final String AOP_POINTCUT_EXPRESSION = "execution(* kr.co.seculink..*ServiceImpl.*(..))";
 
 	@Autowired
-	private PlatformTransactionManager transactionManager;
+	@Qualifier("writerPlatformTransactionManager")
+	private PlatformTransactionManager writerTransactionManager;
 
 	@Bean
-	public PlatformTransactionManager transactionManager(DataSource dataSource) {
+	@Qualifier("writerPlatformTransactionManager")
+	public PlatformTransactionManager writerTransactionManager(@Qualifier("writerDataSource") DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
+
+//	@Autowired
+//	@Qualifier("readerPlatformTransactionManager")
+//	private PlatformTransactionManager readerTransactionManager;
+//
+//	@Bean
+//	@Qualifier("readerPlatformTransactionManager")
+//	public PlatformTransactionManager readerTransactionManager(@Qualifier("readerDataSource") DataSource dataSource) {
+//		return new DataSourceTransactionManager(dataSource);
+//	}
 
 	@Bean
 	public TransactionInterceptor txAdvice() {
@@ -49,13 +62,11 @@ public class TransactionConfig {
 		rollbackRules.add(new RollbackRuleAttribute(Exception.class));
 
 		/** If need to add additionall exceptio, add here **/
-		DefaultTransactionAttribute readOnlyAttribute = new DefaultTransactionAttribute(
-				TransactionDefinition.PROPAGATION_REQUIRED);
+		DefaultTransactionAttribute readOnlyAttribute = new DefaultTransactionAttribute(TransactionDefinition.PROPAGATION_REQUIRED);
 		readOnlyAttribute.setReadOnly(true);
 		readOnlyAttribute.setTimeout(TX_METHOD_TIMEOUT);
 
-		RuleBasedTransactionAttribute writeAttribute = new RuleBasedTransactionAttribute(
-				TransactionDefinition.PROPAGATION_REQUIRED, rollbackRules);
+		RuleBasedTransactionAttribute writeAttribute = new RuleBasedTransactionAttribute(TransactionDefinition.PROPAGATION_REQUIRED, rollbackRules);
 		writeAttribute.setTimeout(TX_METHOD_TIMEOUT);
 
 		String readOnlyTransactionAttributesDefinition = readOnlyAttribute.toString();
@@ -78,7 +89,7 @@ public class TransactionConfig {
 		txAttributes.setProperty("proc*", writeTransactionAttributesDefinition);
 
 		txAdvice.setTransactionAttributes(txAttributes);
-		txAdvice.setTransactionManager(transactionManager);
+		txAdvice.setTransactionManager(writerTransactionManager);
 
 		return txAdvice;
 

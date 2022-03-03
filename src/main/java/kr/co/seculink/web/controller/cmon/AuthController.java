@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,9 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.annotations.ApiOperation;
-import kr.co.seculink.domain.GEConstant;
 import kr.co.seculink.domain.GEConstant.API_DIV;
-import kr.co.seculink.domain.GEConstant.ROLE;
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.web.model.cmon.SessionVO;
 import kr.co.seculink.web.service.cmon.AuthService;
@@ -39,7 +35,6 @@ import kr.co.seculink.exception.BaseException;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.exception.SysException;
 import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.util.SHAEncUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
