@@ -50,7 +50,7 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 			$this.initBandYtypCdValue();
 		},
-        initPage: function(bandId, guarNo) {
+        initPage: function(bandId) {
 
 			let $this = this;
 			$this.resetBandOpenInfo();
@@ -72,8 +72,6 @@ let bandOpenInfoDetl = new Vue({
 								$this.params[key] = val;
 
 							});
-							console.log(response.rtnData.result.result.bandYtypCd);
-							console.log(response.rtnData.result.result.bandMdlCd);
 						}
 					},
 					error: function (response) {

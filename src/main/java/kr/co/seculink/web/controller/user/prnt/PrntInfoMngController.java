@@ -47,6 +47,73 @@ public class PrntInfoMngController
 		return vo;
 	}
 
+	//보호자(사용자)_정보_상세보기
+	@ResponseBody
+	@RequestMapping("/user/prnt/prntInfoMng/searchPrntInfo.ab")
+	public RtnMsg searchPrntInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, Object> result = prntInfoMngService.searchPrntInfo(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
+
+
+	//보호자(사용자)_번호_확인
+	@ResponseBody
+	@RequestMapping("/user/prnt/prntInfoMng/searchDupGuarNo.ab")
+	public RtnMsg searchDupGuarNo(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, String> result = prntInfoMngService.searchDupGuarNo(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
+
+	//보호자(사용자)_번호_채번
+	@ResponseBody
+	@RequestMapping("/user/prnt/pantInfoMng/numberingGuarNo.ab")
+	public RtnMsg numberingGuarNo(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		Map<String, Object> result = prntInfoMngService.numberingGuarNo(params);
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap);
+
+		return vo;
+	}
+
+
+	//밴드정보 저장
+	@ResponseBody
+	@RequestMapping("/user/prnt/prntInfoMng/savePrntInfoDetl.ab")
+	public RtnMsg savePrntInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		prntInfoMngService.savePrntInfoDetl(params);
+
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+
 /*
 	//밴드/개통 정보 목록_리스트 엑셀다운로드
 	@ResponseBody
@@ -103,70 +170,8 @@ public class PrntInfoMngController
 		return map;
 	}
 
-	//밴드ID 중복 조회
-	@ResponseBody
-	@RequestMapping("/devc/band/bandOpenInfoMng/searchDupBandId.ab")
-	public RtnMsg searchDupBandId(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		Map<String, String> result = bandOpenInfoMngService.searchDupBandId(params);
+*/
 
-		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap);
-
-		return vo;
-	}
-
-	//밴드ID 채번
-	@ResponseBody
-	@RequestMapping("/devc/band/bandOpenInfoMng/numberingBandId.ab")
-	public RtnMsg numberingBandId(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		Map<String, Object> result = bandOpenInfoMngService.numberingBandId(params);
-
-		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap);
-
-		return vo;
-	}
-
-	//밴드정보 저장
-	@ResponseBody
-	@RequestMapping("/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab")
-	public RtnMsg saveBandOpenInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
-
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		bandOpenInfoMngService.saveBandOpenInfoDetl(params);
-
-
-		rtnMap.put("result", params);
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
-
-
-
-	//밴드_정보_상세보기
-	@ResponseBody
-	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab")
-	public RtnMsg searchBandOpenInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		Map<String, Object> result = bandOpenInfoMngService.searchBandOpenInfo(params);
-
-		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap);
-
-		return vo;
-	}*/
 
 }

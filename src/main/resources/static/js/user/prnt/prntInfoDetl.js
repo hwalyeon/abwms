@@ -13,23 +13,23 @@ let prntInfoDetl = new Vue({
 			devcCertVal    : '' , //장치_인증_값
     		raceDivCd      : '' , //인종_구분_코드
     		sexCd          : '' , //성별_코드
-    		hghtCd
-    		wghtCd
-    		bmiVal
-    		sposNo
-    		dZoneMoinAlamYn
-    		dZoneMoutAlamYn
-    		sZoneMoinAlamYn
-    		sZoneMoutAlamYn
-    		fallOccrAlamYn
-    		strsAbnmAlamYn
-    		
-			bandOpenStatCd : '' ,  //밴드_개통_상태_코드
-			blthId         : '' ,  //블루투스_ID
-			apiUrlGramNo   : '' ,  //API_URL_전문_번호
-			apiUrlDttm     : '' ,  //API_URL_일시
-			openGramNo     : '' ,  //개통_전문_번호
-			checkDupBandId : '' ,  //밴드ID_확인_여부
+			hghtVal        : '' , //키_값
+			wghtVal		   : '' , //체중_값
+			bmiVal		   : '' , //BMI_값
+			sposNo		   : '' , //배우자_번호
+			dzoneMoinAlamYn: '' , //위험지역_진입_알림_여부
+			dzoneMoutAlamYn: '' , //위험지역_이탈_알림_여부
+			szoneMoinAlamYn: '' , //세이프존_진입_알림_여부
+			szoneMoutAlamYn: '' , //세이프존_이탈_알림_여부
+			fallOccrAlamYn : '' , //낙상_발생_알림_여부
+			strsAbnmAlamYn : '' , //스트레스_이상_알림_여부
+			selfCertDttm   : '' , //가입_일자
+			relsResnCntn   : '' , //해지_일자
+			relsResnCd     : '' , //해지_사유_코드
+			relsResnCntn   : '' , //해지_사유_내용
+			entrStatCd     : '' , //가입_상태_코드
+			checkDupGuarNo : '' , //보호자_번호_확인_여부
+			existsYn       : '' , //중복_여부
 			paging         : 'Y',
 			totalCoun      : 0  ,
 			rowCount       : 30 ,
@@ -37,9 +37,9 @@ let prntInfoDetl = new Vue({
 			currentIndex   : 0
     	},
 		code: {
-			bandOpenStatCdList : [] , //밴드_개통_상태_코드_리스트
-			bandYtypCdList     : [] , //밴드_출고년월_리스트
-			bandMdlCdList      : [] , //밴드_모델_코드_리스트
+			sexCdList      : [] , //성별_코드_리스트
+			raceDivCdList  : [] , //인종_구분_코드_리스트
+			entrStatCdList : []   //인종_구분_코드_리스트
 		}
 	},
     methods: {
@@ -55,27 +55,28 @@ let prntInfoDetl = new Vue({
         initCodeList: function() {
 
         	let $this = this;
-			getCommonCodeList('BAND_MDL_CD', $this.code.bandMdlCdList);  //밴드_모델_코드_리스트
-			getCommonCodeList('BAND_OPEN_STAT_CD', $this.code.bandOpenStatCdList);//밴드_개통_상태_코드_리스트
+			getCommonCodeList('SEX_CD', $this.code.sexCdList);          //성별_코드_리스트
+			getCommonCodeList('RACE_DIV_CD', $this.code.raceDivCdList); //인종_구분_코드_리스트
+			getCommonCodeList('ENTR_STAT_CD', $this.code.entrStatCdList);   //가입_상태_코드_리스트
 
 		},
 		initValue()
 		{
 			let $this = this;
-			$this.initBandYtypCdValue();
+			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(bandId) {
+        initPage: function(guarNo) {
 
 			let $this = this;
-			$this.resetBandOpenInfo();
+			$this.resetPrntDetlInfo();
 
-			if ( !WebUtil.isNull(bandId) )
+			if ( !WebUtil.isNull(guarNo) )
 			{
 				let params = {
-					'bandId' : bandId
+					'guarNo' : guarNo
 				}
 				AjaxUtil.post({
-					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab",
+					url: "/user/prnt/prntInfoMng/searchPrntInfo.ab",
 					param: params,
 					success: function(response) {
 						if ( !!response.rtnData.result )
@@ -86,8 +87,6 @@ let prntInfoDetl = new Vue({
 								$this.params[key] = val;
 
 							});
-							console.log(response.rtnData.result.result.bandYtypCd);
-							console.log(response.rtnData.result.result.bandMdlCd);
 						}
 					},
 					error: function (response) {
@@ -97,75 +96,79 @@ let prntInfoDetl = new Vue({
 			}
 		},
 
-		//출고_년월_리스트_값 세팅
-		initBandYtypCdValue: function() {
-			let $this = this;
-			for (let i = 2022; i < 2032; i++) {
-				let cdVal;
-				let cdNm;
-				for (let j = 1; j < 13; j++) {
-					if (j < 10) {
-						cdVal = i + '0' + j;
-						cdNm = i + '-0' + j;
-						$this.code.bandYtypCdList.push({'cdVal': cdVal, 'cdNm': cdNm});
-					} else {
-						cdVal = String(i) + j;
-						cdNm = i + '-' + j;
-						$this.code.bandYtypCdList.push({'cdVal': cdVal, 'cdNm': cdNm});
-					}
-				}
-			}
-		},
 			isValid: function() {
 
         	let $this = this;        	        	
         	
-        	if ( WebUtil.isNull($this.params.bandId) ) {
-        		Swal.alert(['밴드ID는 필수 입력 값입니다.', 'info']);
+        	if ( WebUtil.isNull($this.params.guarNo) ) {
+        		Swal.alert(['보호자 번호는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.autoLoginYn) ) {
+        		Swal.alert(['자동로그인 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.hghtVal) ) {
+        		Swal.alert(['키값은 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.wghtVal) ) {
+        		Swal.alert(['체중값은 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.bmiVal) ) {
+        		Swal.alert(['BMI값은 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.dzoneMoinAlamYn) ) {
+        		Swal.alert(['위험지역 진입 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.dzoneMoutAlamYn) ) {
+        		Swal.alert(['위험지역 이탈 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.szoneMoinAlamYn) ) {
+        		Swal.alert(['세이프존 진입 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.szoneMoutAlamYn) ) {
+        		Swal.alert(['세이프존 이탈 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.fallOccrAlamYn) ) {
+        		Swal.alert(['낙상 발생 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.strsAbnmAlamYn) ) {
+        		Swal.alert(['스트레스 이상 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
 
 
+
         	return true;
         },
-		//밴드 ID 중복 검사
-		searchDupBandId: function()
+		//보호자(사용자)_번호_확인
+		searchDupGuarNo: function()
 		{
-
         	let $this = this;
 
-			let bandIdStr2 = $this.params.bandId.substr(1,1);
-			let bandIdStr3 = $this.params.bandId.substr(2,1);
-
-
-        	if ( WebUtil.isNull($this.params.bandId) ) {
-        		Swal.alert(['밴드ID를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.params.guarNo) ) {
+        		Swal.alert(['보호자 번호를 입력하세요.', 'info']);
         		return false;
-        	}if($this.params.bandId.length != 10) {
-        		Swal.alert(['밴드ID의 자리수는 10자리입니다.', 'info']);
-        		return false;
-        	}if(bandIdStr2 != 0 && bandIdStr2 != 1 ) {
-				Swal.alert(['ID의 2번째 자리는 0,1 중 선택해야 합니다.', 'info']);
-				return false;
-			}
-			if(bandIdStr2 == 0 && bandIdStr3 == 0 ) {
-				Swal.alert(['ID의 2번째, 3번째 자리에 동시에 0을 입력할 수 없습니다.', 'info']);
-				return false;
-			}
+        	}
 
 			AjaxUtil.post({
-                url: "/devc/band/bandOpenInfoMng/searchDupBandId.ab",
+                url: "/user/prnt/prntInfoMng/searchDupGuarNo.ab",
                 param: $this.params,
                 success: function(response) {
                 	if ( response.rtnData.result.existsYn === 'N' ) {
-                		$this.params.checkDupBandId = 'Y';
-                		 $this.params.bandIdTemp = $this.params.bandId;
-                		Swal.alert(['해당 아이디는 사용할 수 있습니다.', 'success']);
-
-
+                		$this.params.checkDupGuarNo = 'Y';
+                		Swal.alert(['해당 번호는 사용할 수 있습니다.', 'success']);
                 	} else {
-                		$this.params.BandId = '';
-                		Swal.alert(['해당 아이디는 이미 사용중입니다.', 'info']);
+                		$this.params.guarNo = '';
+                		Swal.alert(['해당 번호는 이미 사용중입니다.', 'info']);
                 	}
                 },
                 error: function (response) {
@@ -177,28 +180,20 @@ let prntInfoDetl = new Vue({
         let $this =this;
         $this.params.bandId = '';
 		},
-		//밴드ID 채번
-		numberingBandId: function()
+		//보호자(사용자)_번호_채번
+		numberingGuarNo: function()
 		{
 			let $this = this;
-
-			if ( WebUtil.isNull($this.params.bandYtypCd) ) {
-				Swal.alert(['출고년월을 선택하세요.', 'info']);
-				return false;
-			}if ( WebUtil.isNull($this.params.bandMdlCd) ) {
-				Swal.alert(['모델타입을 선택하세요.', 'info']);
-				return false;
-			}
-			$this.params.checkDupBandId = 'N';
+			$this.params.checkDupGuarNo = 'N';
+			$this.params.guarNo = '';
 
 			AjaxUtil.post({
-				url: "/devc/band/bandOpenInfoMng/numberingBandId.ab",
+				url: "/user/prnt/pantInfoMng/numberingGuarNo.ab",
 				param: $this.params,
 				success: function(response) {
-					if ( !!response.rtnData.result ) {
-						$this.params.bandId = response.rtnData.result.result.bandId;
-
-					}console.log($this.params.bandId );
+					if ( !!response.rtnData.result) {
+					$this.params.guarNo = response.rtnData.result.guarNo;
+					}
 				},
 				error: function (response) {
 					Swal.alert([response, 'error']);
@@ -214,12 +209,20 @@ let prntInfoDetl = new Vue({
 			let cdNm;
 			if(isNaN($this.params[name])){
 
-				if(name=='telNo'){
-					cdNm='전화 번호';
+				if(name=='guarNo'){
+					cdNm='보호자 번호';
 				}else if(name=='guarTelNo'){
 					cdNm='보호자 전화번호';
-				}else{
-					cdNm='밴드ID';
+				}else if(name=='selfCertDttm'){
+					cdNm='본인 인증 일시';
+				}else if(name=='hghtVal'){
+					cdNm='키';
+				}else if(name=='wghtVal'){
+					cdNm='몸무게';
+				}else if(name=='bmiVal'){
+					cdNm='BMI';
+				}else if(name=='sposNo'){
+					cdNm='배우자 번호';
 				}
 
 				this.params[name] = this.params[name].replace(/\D/g,'');
@@ -231,7 +234,7 @@ let prntInfoDetl = new Vue({
 				$this.params.bandMdlCd  ='';
 			}
 		},
-		saveBandOpenInfoDetl: function() {
+		saveprntInfoDetl: function() {
 			
 			let $this = this;
 			
@@ -239,25 +242,23 @@ let prntInfoDetl = new Vue({
                 return false;
             }
             if ( $this.params.crud === 'C' ) {
-	            if ( $this.params.checkDupBandId != 'Y' ) {
-	        		Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
+	            if ( $this.params.checkDupGuarNo != 'Y' ) {
+	        		Swal.alert(['보호자 번호 확인을 하지 않았습니다.', 'info']);
 	        		return false;
 	        	}
-				if($this.params.bandId != $this.params.bandIdTemp) {
-						Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
+				if($this.params.guarNo == $this.params.guarNoTemp) {
+					Swal.alert(['보호자 번호 확인을 하지 않았습니다.', 'info']);
 						return false;
 				}
             }
 
-            $this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
-
 			AjaxUtil.post({
-                url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
+                url: "/user/prnt/prntInfoMng/savePrntInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#bandOpenInfoDetlPopup'));
-						bandOpenInfoMng.searchBandOpenInfoList(true);
+                		closeModal($('#prntInfoDetlPopup'));
+						prntInfoMng.searchPrntInfoList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -273,7 +274,7 @@ let prntInfoDetl = new Vue({
 			$this.params.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
+                url: "/user/prnt/prntInfoMng/saveBandOpenInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
@@ -286,22 +287,21 @@ let prntInfoDetl = new Vue({
                 }
             });
 		},
-		resetBandOpenInfo: function() {
+		resetPrntDetlInfo: function() {
 			this.params = {
 				crud           : 'C',
 				userId         : '' ,
-				bandId         : '' ,  //밴드_ID
-				bandYtypCd     : '' ,  //밴드_출고_년월
-				bandMdlCd      : '' ,  //밴드_모델_코드
-				telNo          : '' ,  //밴드_전화_번호
-				guarTelNo      : '' ,  //보호자_전화_번호
-				bandOpenStatCd : 'STBY' ,  //밴드_개통_상태_코드
-				paging         : 'Y',
-				totalCoun      : 0  ,
-				rowCount       : 30 ,
-				currentPage    : 1  ,
-				currentIndex   : 0 ,
-	    		checkDupBandId: 'N'
+				guarNo         : '' , //보호자_번호
+				guarNm         : '' , //보호자_명
+				guarTelNo      : '' , //보호자_전화_번호
+				guarPw         : '' , //보호자_비밀번호
+				selfCertDttm   : '' , //본인_인증_일시
+				autoLoginYn    : '' , //자동_로그인_여부
+				devcCertVal    : '' , //장치_인증_값
+				raceDivCd      : '' , //인종_구분_코드
+				sexCd          : '' , //성별_코드
+				checkDupGuarNo : '' , //밴드ID_확인_여부
+
 	    	}
 		},
     },
@@ -310,7 +310,7 @@ let prntInfoDetl = new Vue({
     },
     watch: {
     	'params.bandId': function(newVal, oldVal) {
-    		this.params.checkDupBandId = 'N';
+    		this.params.checkDupGuarNo = 'N';
 		},
 
 
