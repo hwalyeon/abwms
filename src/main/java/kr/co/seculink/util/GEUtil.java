@@ -225,7 +225,7 @@ public class GEUtil {
 	public static String emptyToString(String str, String replaceStr) {
 		String rtnStr = str;
 		
-		if (StringUtils.isEmpty(str)) {
+		if (XUtil.isEmpty(str)) {
 			rtnStr = replaceStr;
 		}
 		

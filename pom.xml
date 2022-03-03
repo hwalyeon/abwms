@@ -174,8 +174,8 @@
 			<version>6.15.0</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>jstl</artifactId> 
-			</dependency> <dependency> <groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-jasper</artifactId> 
+		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>jstl</artifactId>
+			</dependency> <dependency> <groupId>org.apache.tomcat.embed</groupId> <artifactId>tomcat-embed-jasper</artifactId>
 			</dependency> -->
 		<!-- https://mvnrepository.com/artifact/org.locationtech.proj4j/proj4j -->
 		<dependency>

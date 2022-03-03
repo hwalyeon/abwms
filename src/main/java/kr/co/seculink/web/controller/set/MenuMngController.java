@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.jsoup.internal.StringUtil;
+import kr.co.seculink.util.XUtil;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,7 +76,7 @@ public class MenuMngController
 		
 		int saveCnt = 0;
 
-		if(params.get("subUpprMenuNo") != null && !StringUtil.isBlank(params.get("subUpprMenuNo").toString()) ){
+		if(params.get("subUpprMenuNo") != null && !XUtil.isEmpty(params.get("subUpprMenuNo").toString()) ){
 			String upprMenuNo = params.get("subUpprMenuNo").toString();
 			params.put("upprMenuNo" , upprMenuNo);
 		}
