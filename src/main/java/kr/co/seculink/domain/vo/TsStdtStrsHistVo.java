@@ -43,11 +43,14 @@ public class TsStdtStrsHistVo implements Serializable {
 	/* avg_hbit_cnt 평균_심박_수 numeric(null) */
 	private double avgHbitCnt;
 
-	/* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
-	private String avgHbitStatCd;
-
 	/* abnm_hbit_cnt 이상_심박_수 numeric(null) */
 	private double abnmHbitCnt;
+
+	/* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+	private String strsStatCd;
+
+	/* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
+	private String strsProcStatCd;
 
 	/* judg_no 판정_번호 numeric(null) */
 	private double judgNo;
@@ -252,21 +255,6 @@ public class TsStdtStrsHistVo implements Serializable {
 		this.avgHbitCnt = avgHbitCnt;
 	}
 	/**
-	 * Get avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20)
-	 * @Return String avgHbitStatCd
-	 */
-	public String getAvgHbitStatCd() {
-		return this.avgHbitStatCd;
-	}
-	
-	/**
-	 * Set avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20)
-	 * @Param String avgHbitStatCd
-	 */
-	public void setAvgHbitStatCd(String avgHbitStatCd) {
-		this.avgHbitStatCd = avgHbitStatCd;
-	}
-	/**
 	 * Get abnm_hbit_cnt 이상_심박_수 numeric(null)
 	 * @Return double abnmHbitCnt
 	 */
@@ -280,6 +268,36 @@ public class TsStdtStrsHistVo implements Serializable {
 	 */
 	public void setAbnmHbitCnt(double abnmHbitCnt) {
 		this.abnmHbitCnt = abnmHbitCnt;
+	}
+	/**
+	 * Get strs_stat_cd 스트레스_상태_코드 character varying(20)
+	 * @Return String strsStatCd
+	 */
+	public String getStrsStatCd() {
+		return this.strsStatCd;
+	}
+	
+	/**
+	 * Set strs_stat_cd 스트레스_상태_코드 character varying(20)
+	 * @Param String strsStatCd
+	 */
+	public void setStrsStatCd(String strsStatCd) {
+		this.strsStatCd = strsStatCd;
+	}
+	/**
+	 * Get strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20)
+	 * @Return String strsProcStatCd
+	 */
+	public String getStrsProcStatCd() {
+		return this.strsProcStatCd;
+	}
+	
+	/**
+	 * Set strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20)
+	 * @Param String strsProcStatCd
+	 */
+	public void setStrsProcStatCd(String strsProcStatCd) {
+		this.strsProcStatCd = strsProcStatCd;
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)

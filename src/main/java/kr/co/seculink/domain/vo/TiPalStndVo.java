@@ -13,8 +13,14 @@ public class TiPalStndVo implements Serializable {
 	/* pal_nm 신체활동수준_명 character varying(30) */
 	private String palNm;
 
-	/* pal_rmrk 신체활동수준_비고 character varying(4000) */
-	private String palRmrk;
+	/* pal_val_fr 신체활동수준_값_FROM numeric(null) */
+	private double palValFr;
+
+	/* pal_val_to 신체활동수준_값_TO numeric(null) */
+	private double palValTo;
+
+	/* pal_eat_rmrk 신체활동수준_섭취_비고 character varying(4000) */
+	private String palEatRmrk;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -66,19 +72,49 @@ public class TiPalStndVo implements Serializable {
 		this.palNm = palNm;
 	}
 	/**
-	 * Get pal_rmrk 신체활동수준_비고 character varying(4000)
-	 * @Return String palRmrk
+	 * Get pal_val_fr 신체활동수준_값_FROM numeric(null)
+	 * @Return double palValFr
 	 */
-	public String getPalRmrk() {
-		return this.palRmrk;
+	public double getPalValFr() {
+		return this.palValFr;
 	}
 	
 	/**
-	 * Set pal_rmrk 신체활동수준_비고 character varying(4000)
-	 * @Param String palRmrk
+	 * Set pal_val_fr 신체활동수준_값_FROM numeric(null)
+	 * @Param double palValFr
 	 */
-	public void setPalRmrk(String palRmrk) {
-		this.palRmrk = palRmrk;
+	public void setPalValFr(double palValFr) {
+		this.palValFr = palValFr;
+	}
+	/**
+	 * Get pal_val_to 신체활동수준_값_TO numeric(null)
+	 * @Return double palValTo
+	 */
+	public double getPalValTo() {
+		return this.palValTo;
+	}
+	
+	/**
+	 * Set pal_val_to 신체활동수준_값_TO numeric(null)
+	 * @Param double palValTo
+	 */
+	public void setPalValTo(double palValTo) {
+		this.palValTo = palValTo;
+	}
+	/**
+	 * Get pal_eat_rmrk 신체활동수준_섭취_비고 character varying(4000)
+	 * @Return String palEatRmrk
+	 */
+	public String getPalEatRmrk() {
+		return this.palEatRmrk;
+	}
+	
+	/**
+	 * Set pal_eat_rmrk 신체활동수준_섭취_비고 character varying(4000)
+	 * @Param String palEatRmrk
+	 */
+	public void setPalEatRmrk(String palEatRmrk) {
+		this.palEatRmrk = palEatRmrk;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

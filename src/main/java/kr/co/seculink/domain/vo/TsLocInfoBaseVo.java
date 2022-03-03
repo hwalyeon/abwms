@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 public class TsLocInfoBaseVo implements Serializable {
 
-	/* loc_no 위치_번호 character(18) */
-	private String locNo;
+	/* loc_no 위치_번호 numeric(null) */
+	private double locNo;
 
-	/* loc_nm 위치_명 character(18) */
+	/* loc_nm 위치_명 character varying(100) */
 	private String locNm;
 
 	/* plc_cd 장소_코드 character varying(20) */
@@ -43,10 +43,10 @@ public class TsLocInfoBaseVo implements Serializable {
 	/* pstno 우편번호 character varying(10) */
 	private String pstno;
 
-	/* addr_base 주소_기본 character varying(200) */
+	/* addr_base 주소_기본 character varying(400) */
 	private String addrBase;
 
-	/* addr_spec 주소_상세 character varying(100) */
+	/* addr_spec 주소_상세 character varying(200) */
 	private String addrSpec;
 
 	/* reg_dt 등록_일자 character(8) */
@@ -69,22 +69,22 @@ public class TsLocInfoBaseVo implements Serializable {
 
 
 	/**
-	 * Get loc_no 위치_번호 character(18)
-	 * @Return String locNo
+	 * Get loc_no 위치_번호 numeric(null)
+	 * @Return double locNo
 	 */
-	public String getLocNo() {
+	public double getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
-	 * Set loc_no 위치_번호 character(18)
-	 * @Param String locNo
+	 * Set loc_no 위치_번호 numeric(null)
+	 * @Param double locNo
 	 */
-	public void setLocNo(String locNo) {
+	public void setLocNo(double locNo) {
 		this.locNo = locNo;
 	}
 	/**
-	 * Get loc_nm 위치_명 character(18)
+	 * Get loc_nm 위치_명 character varying(100)
 	 * @Return String locNm
 	 */
 	public String getLocNm() {
@@ -92,7 +92,7 @@ public class TsLocInfoBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set loc_nm 위치_명 character(18)
+	 * Set loc_nm 위치_명 character varying(100)
 	 * @Param String locNm
 	 */
 	public void setLocNm(String locNm) {
@@ -249,7 +249,7 @@ public class TsLocInfoBaseVo implements Serializable {
 		this.pstno = pstno;
 	}
 	/**
-	 * Get addr_base 주소_기본 character varying(200)
+	 * Get addr_base 주소_기본 character varying(400)
 	 * @Return String addrBase
 	 */
 	public String getAddrBase() {
@@ -257,14 +257,14 @@ public class TsLocInfoBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set addr_base 주소_기본 character varying(200)
+	 * Set addr_base 주소_기본 character varying(400)
 	 * @Param String addrBase
 	 */
 	public void setAddrBase(String addrBase) {
 		this.addrBase = addrBase;
 	}
 	/**
-	 * Get addr_spec 주소_상세 character varying(100)
+	 * Get addr_spec 주소_상세 character varying(200)
 	 * @Return String addrSpec
 	 */
 	public String getAddrSpec() {
@@ -272,7 +272,7 @@ public class TsLocInfoBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set addr_spec 주소_상세 character varying(100)
+	 * Set addr_spec 주소_상세 character varying(200)
 	 * @Param String addrSpec
 	 */
 	public void setAddrSpec(String addrSpec) {

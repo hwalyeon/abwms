@@ -21,8 +21,9 @@
                ,cabl_strs_pnt /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
                ,cabl_strs_stat_cd /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
                ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
-               ,avg_hbit_stat_cd /* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
                ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
+               ,strs_stat_cd /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+               ,strs_proc_stat_cd /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
                ,judg_no /* judg_no 판정_번호 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -56,28 +57,23 @@
 		    ,cabl_strs_stat_cd /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
-		<if test="avgHbitStatCd != null">
-		    ,avg_hbit_stat_cd /* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
-		</if>
 		    ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
+		<if test="strsStatCd != null">
+		    ,strs_stat_cd /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsProcStatCd != null">
+		    ,strs_proc_stat_cd /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
+		</if>
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -100,28 +96,23 @@
 		    ,#{cablStrsStatCd} /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,#{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
-		<if test="avgHbitStatCd != null">
-		    ,#{avgHbitStatCd} /* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
-		</if>
 		    ,#{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
+		<if test="strsStatCd != null">
+		    ,#{strsStatCd} /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsProcStatCd != null">
+		    ,#{strsProcStatCd} /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
+		</if>
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -162,30 +153,20 @@
 		<if test="avgHbitCnt != null">
 		    ,avg_hbit_cnt = #{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
 		</if>
-		<if test="avgHbitStatCd != null">
-		    ,avg_hbit_stat_cd = #{avgHbitStatCd} /* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
-		</if>
 		<if test="abnmHbitCnt != null">
 		    ,abnm_hbit_cnt = #{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
+		</if>
+		<if test="strsStatCd != null">
+		    ,strs_stat_cd = #{strsStatCd} /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsProcStatCd != null">
+		    ,strs_proc_stat_cd = #{strsProcStatCd} /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
 		</if>
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -215,28 +196,23 @@
 		    ,cabl_strs_stat_cd /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
-		<if test="avgHbitStatCd != null">
-		    ,avg_hbit_stat_cd /* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
-		</if>
 		    ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
+		<if test="strsStatCd != null">
+		    ,strs_stat_cd /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsProcStatCd != null">
+		    ,strs_proc_stat_cd /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
+		</if>
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -259,28 +235,23 @@
 		    ,#{cablStrsStatCd} /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,#{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
-		<if test="avgHbitStatCd != null">
-		    ,#{avgHbitStatCd} /* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
-		</if>
 		    ,#{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
+		<if test="strsStatCd != null">
+		    ,#{strsStatCd} /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsProcStatCd != null">
+		    ,#{strsProcStatCd} /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
+		</if>
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -318,30 +289,20 @@
 		<if test="avgHbitCnt != null">
 		    ,avg_hbit_cnt = #{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
 		</if>
-		<if test="avgHbitStatCd != null">
-		    ,avg_hbit_stat_cd = #{avgHbitStatCd} /* avg_hbit_stat_cd 평균_심박_상태_코드 character varying(20) */
-		</if>
 		<if test="abnmHbitCnt != null">
 		    ,abnm_hbit_cnt = #{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
+		</if>
+		<if test="strsStatCd != null">
+		    ,strs_stat_cd = #{strsStatCd} /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsProcStatCd != null">
+		    ,strs_proc_stat_cd = #{strsProcStatCd} /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
 		</if>
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>

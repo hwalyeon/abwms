@@ -10,17 +10,20 @@ public class TmStdtBaseVo implements Serializable {
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
-	/* stdt_nm 학생_명 character varying(20) */
+	/* stdt_nm 학생_명 character varying(40) */
 	private String stdtNm;
 
-	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	/* guar_no_1 보호자_번호_1 numeric(null) */
+	private double guarNo1;
 
-	/* schl_eorg_no 학교_교육시설_번호 numeric(null) */
-	private double schlEorgNo;
+	/* guar_no_2 보호자_번호_2 numeric(null) */
+	private double guarNo2;
 
-	/* band_id 밴드_ID character varying(40) */
+	/* band_id 밴드_ID character varying(20) */
 	private String bandId;
+
+	/* eorg_loc_no 교육시설_위치_번호 numeric(null) */
+	private double eorgLocNo;
 
 	/* sgrd_cd 학년_코드 character varying(20) */
 	private String sgrdCd;
@@ -49,20 +52,20 @@ public class TmStdtBaseVo implements Serializable {
 	/* dact_judg_no 위험활동_판정_번호 numeric(null) */
 	private double dactJudgNo;
 
-	/* dgem_hist_seq 위험감정_이력_순번 character(18) */
-	private String dgemHistSeq;
+	/* dgem_hist_seq 위험감정_이력_순번 numeric(null) */
+	private double dgemHistSeq;
 
 	/* strs_hist_seq 스트레스_이력_순번 numeric(null) */
 	private double strsHistSeq;
 
-	/* loc_hist_no 위치_이력_번호 character(18) */
-	private String locHistNo;
+	/* loc_hist_no 위치_이력_번호 numeric(null) */
+	private double locHistNo;
 
-	/* cbee_hist_no 캐시비_이력_번호 character(18) */
-	private String cbeeHistNo;
+	/* cbee_hist_no 캐시비_이력_번호 numeric(null) */
+	private double cbeeHistNo;
 
-	/* gfix_dt 성장비만지수_일자 numeric(null) */
-	private double gfixDt;
+	/* gfix_dt 성장비만지수_일자 character(8) */
+	private String gfixDt;
 
 	/* ambr_yn 미아_여부 character(1) */
 	private String ambrYn;
@@ -105,7 +108,7 @@ public class TmStdtBaseVo implements Serializable {
 		this.stdtNo = stdtNo;
 	}
 	/**
-	 * Get stdt_nm 학생_명 character varying(20)
+	 * Get stdt_nm 학생_명 character varying(40)
 	 * @Return String stdtNm
 	 */
 	public String getStdtNm() {
@@ -113,44 +116,44 @@ public class TmStdtBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set stdt_nm 학생_명 character varying(20)
+	 * Set stdt_nm 학생_명 character varying(40)
 	 * @Param String stdtNm
 	 */
 	public void setStdtNm(String stdtNm) {
 		this.stdtNm = stdtNm;
 	}
 	/**
-	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * Get guar_no_1 보호자_번호_1 numeric(null)
+	 * @Return double guarNo1
 	 */
-	public double getGuarNo() {
-		return this.guarNo;
+	public double getGuarNo1() {
+		return this.guarNo1;
 	}
 	
 	/**
-	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * Set guar_no_1 보호자_번호_1 numeric(null)
+	 * @Param double guarNo1
 	 */
-	public void setGuarNo(double guarNo) {
-		this.guarNo = guarNo;
+	public void setGuarNo1(double guarNo1) {
+		this.guarNo1 = guarNo1;
 	}
 	/**
-	 * Get schl_eorg_no 학교_교육시설_번호 numeric(null)
-	 * @Return double schlEorgNo
+	 * Get guar_no_2 보호자_번호_2 numeric(null)
+	 * @Return double guarNo2
 	 */
-	public double getSchlEorgNo() {
-		return this.schlEorgNo;
+	public double getGuarNo2() {
+		return this.guarNo2;
 	}
 	
 	/**
-	 * Set schl_eorg_no 학교_교육시설_번호 numeric(null)
-	 * @Param double schlEorgNo
+	 * Set guar_no_2 보호자_번호_2 numeric(null)
+	 * @Param double guarNo2
 	 */
-	public void setSchlEorgNo(double schlEorgNo) {
-		this.schlEorgNo = schlEorgNo;
+	public void setGuarNo2(double guarNo2) {
+		this.guarNo2 = guarNo2;
 	}
 	/**
-	 * Get band_id 밴드_ID character varying(40)
+	 * Get band_id 밴드_ID character varying(20)
 	 * @Return String bandId
 	 */
 	public String getBandId() {
@@ -158,11 +161,26 @@ public class TmStdtBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set band_id 밴드_ID character varying(40)
+	 * Set band_id 밴드_ID character varying(20)
 	 * @Param String bandId
 	 */
 	public void setBandId(String bandId) {
 		this.bandId = bandId;
+	}
+	/**
+	 * Get eorg_loc_no 교육시설_위치_번호 numeric(null)
+	 * @Return double eorgLocNo
+	 */
+	public double getEorgLocNo() {
+		return this.eorgLocNo;
+	}
+	
+	/**
+	 * Set eorg_loc_no 교육시설_위치_번호 numeric(null)
+	 * @Param double eorgLocNo
+	 */
+	public void setEorgLocNo(double eorgLocNo) {
+		this.eorgLocNo = eorgLocNo;
 	}
 	/**
 	 * Get sgrd_cd 학년_코드 character varying(20)
@@ -300,18 +318,18 @@ public class TmStdtBaseVo implements Serializable {
 		this.dactJudgNo = dactJudgNo;
 	}
 	/**
-	 * Get dgem_hist_seq 위험감정_이력_순번 character(18)
-	 * @Return String dgemHistSeq
+	 * Get dgem_hist_seq 위험감정_이력_순번 numeric(null)
+	 * @Return double dgemHistSeq
 	 */
-	public String getDgemHistSeq() {
+	public double getDgemHistSeq() {
 		return this.dgemHistSeq;
 	}
 	
 	/**
-	 * Set dgem_hist_seq 위험감정_이력_순번 character(18)
-	 * @Param String dgemHistSeq
+	 * Set dgem_hist_seq 위험감정_이력_순번 numeric(null)
+	 * @Param double dgemHistSeq
 	 */
-	public void setDgemHistSeq(String dgemHistSeq) {
+	public void setDgemHistSeq(double dgemHistSeq) {
 		this.dgemHistSeq = dgemHistSeq;
 	}
 	/**
@@ -330,48 +348,48 @@ public class TmStdtBaseVo implements Serializable {
 		this.strsHistSeq = strsHistSeq;
 	}
 	/**
-	 * Get loc_hist_no 위치_이력_번호 character(18)
-	 * @Return String locHistNo
+	 * Get loc_hist_no 위치_이력_번호 numeric(null)
+	 * @Return double locHistNo
 	 */
-	public String getLocHistNo() {
+	public double getLocHistNo() {
 		return this.locHistNo;
 	}
 	
 	/**
-	 * Set loc_hist_no 위치_이력_번호 character(18)
-	 * @Param String locHistNo
+	 * Set loc_hist_no 위치_이력_번호 numeric(null)
+	 * @Param double locHistNo
 	 */
-	public void setLocHistNo(String locHistNo) {
+	public void setLocHistNo(double locHistNo) {
 		this.locHistNo = locHistNo;
 	}
 	/**
-	 * Get cbee_hist_no 캐시비_이력_번호 character(18)
-	 * @Return String cbeeHistNo
+	 * Get cbee_hist_no 캐시비_이력_번호 numeric(null)
+	 * @Return double cbeeHistNo
 	 */
-	public String getCbeeHistNo() {
+	public double getCbeeHistNo() {
 		return this.cbeeHistNo;
 	}
 	
 	/**
-	 * Set cbee_hist_no 캐시비_이력_번호 character(18)
-	 * @Param String cbeeHistNo
+	 * Set cbee_hist_no 캐시비_이력_번호 numeric(null)
+	 * @Param double cbeeHistNo
 	 */
-	public void setCbeeHistNo(String cbeeHistNo) {
+	public void setCbeeHistNo(double cbeeHistNo) {
 		this.cbeeHistNo = cbeeHistNo;
 	}
 	/**
-	 * Get gfix_dt 성장비만지수_일자 numeric(null)
-	 * @Return double gfixDt
+	 * Get gfix_dt 성장비만지수_일자 character(8)
+	 * @Return String gfixDt
 	 */
-	public double getGfixDt() {
+	public String getGfixDt() {
 		return this.gfixDt;
 	}
 	
 	/**
-	 * Set gfix_dt 성장비만지수_일자 numeric(null)
-	 * @Param double gfixDt
+	 * Set gfix_dt 성장비만지수_일자 character(8)
+	 * @Param String gfixDt
 	 */
-	public void setGfixDt(double gfixDt) {
+	public void setGfixDt(String gfixDt) {
 		this.gfixDt = gfixDt;
 	}
 	/**

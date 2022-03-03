@@ -19,11 +19,8 @@ public class TiDdPalBlckVo implements Serializable {
 	/* age_ycnt 나이_년수 numeric(null) */
 	private double ageYcnt;
 
-	/* pal_val_fr 신체활동수준_값_FROM numeric(null) */
-	private double palValFr;
-
-	/* pal_val_to 신체활동수준_값_TO numeric(null) */
-	private double palValTo;
+	/* pal_cd 신체활동수준_코드 character varying(20) */
+	private String palCd;
 
 	/* cal_qty_fr 칼로리_량_FROM numeric(null) */
 	private double calQtyFr;
@@ -33,9 +30,6 @@ public class TiDdPalBlckVo implements Serializable {
 
 	/* dd_cal_qty 일일_칼로리_량 numeric(null) */
 	private double ddCalQty;
-
-	/* pal_cd 신체활동수준_코드 character varying(20) */
-	private String palCd;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
@@ -123,34 +117,19 @@ public class TiDdPalBlckVo implements Serializable {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
-	 * Get pal_val_fr 신체활동수준_값_FROM numeric(null)
-	 * @Return double palValFr
+	 * Get pal_cd 신체활동수준_코드 character varying(20)
+	 * @Return String palCd
 	 */
-	public double getPalValFr() {
-		return this.palValFr;
+	public String getPalCd() {
+		return this.palCd;
 	}
 	
 	/**
-	 * Set pal_val_fr 신체활동수준_값_FROM numeric(null)
-	 * @Param double palValFr
+	 * Set pal_cd 신체활동수준_코드 character varying(20)
+	 * @Param String palCd
 	 */
-	public void setPalValFr(double palValFr) {
-		this.palValFr = palValFr;
-	}
-	/**
-	 * Get pal_val_to 신체활동수준_값_TO numeric(null)
-	 * @Return double palValTo
-	 */
-	public double getPalValTo() {
-		return this.palValTo;
-	}
-	
-	/**
-	 * Set pal_val_to 신체활동수준_값_TO numeric(null)
-	 * @Param double palValTo
-	 */
-	public void setPalValTo(double palValTo) {
-		this.palValTo = palValTo;
+	public void setPalCd(String palCd) {
+		this.palCd = palCd;
 	}
 	/**
 	 * Get cal_qty_fr 칼로리_량_FROM numeric(null)
@@ -196,21 +175,6 @@ public class TiDdPalBlckVo implements Serializable {
 	 */
 	public void setDdCalQty(double ddCalQty) {
 		this.ddCalQty = ddCalQty;
-	}
-	/**
-	 * Get pal_cd 신체활동수준_코드 character varying(20)
-	 * @Return String palCd
-	 */
-	public String getPalCd() {
-		return this.palCd;
-	}
-	
-	/**
-	 * Set pal_cd 신체활동수준_코드 character varying(20)
-	 * @Param String palCd
-	 */
-	public void setPalCd(String palCd) {
-		this.palCd = palCd;
 	}
 	/**
 	 * Get nutr_cd 영양소_코드 character varying(20)

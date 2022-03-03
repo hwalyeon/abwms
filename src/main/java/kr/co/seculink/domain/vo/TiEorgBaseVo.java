@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 public class TiEorgBaseVo implements Serializable {
 
-	/* loc_no 위치_번호 character(18) */
-	private String locNo;
+	/* loc_no 위치_번호 numeric(null) */
+	private double locNo;
 
-	/* plc_cd 장소_코드 character varying(100) */
+	/* plc_cd 장소_코드 character varying(20) */
 	private String plcCd;
 
 	/* loc_nm 위치_명 character varying(100) */
@@ -72,22 +72,22 @@ public class TiEorgBaseVo implements Serializable {
 
 
 	/**
-	 * Get loc_no 위치_번호 character(18)
-	 * @Return String locNo
+	 * Get loc_no 위치_번호 numeric(null)
+	 * @Return double locNo
 	 */
-	public String getLocNo() {
+	public double getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
-	 * Set loc_no 위치_번호 character(18)
-	 * @Param String locNo
+	 * Set loc_no 위치_번호 numeric(null)
+	 * @Param double locNo
 	 */
-	public void setLocNo(String locNo) {
+	public void setLocNo(double locNo) {
 		this.locNo = locNo;
 	}
 	/**
-	 * Get plc_cd 장소_코드 character varying(100)
+	 * Get plc_cd 장소_코드 character varying(20)
 	 * @Return String plcCd
 	 */
 	public String getPlcCd() {
@@ -95,7 +95,7 @@ public class TiEorgBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set plc_cd 장소_코드 character varying(100)
+	 * Set plc_cd 장소_코드 character varying(20)
 	 * @Param String plcCd
 	 */
 	public void setPlcCd(String plcCd) {

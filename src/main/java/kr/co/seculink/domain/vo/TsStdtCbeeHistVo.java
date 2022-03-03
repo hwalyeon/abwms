@@ -7,23 +7,23 @@ import java.io.Serializable;
  */
 public class TsStdtCbeeHistVo implements Serializable {
 
-	/* cbee_hist_no 캐시비_이력_번호 character(18) */
-	private String cbeeHistNo;
+	/* cbee_hist_no 캐시비_이력_번호 numeric(null) */
+	private double cbeeHistNo;
 
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
-	/* cbee_use_cd 캐시비_사용_코드 character(18) */
+	/* cbee_use_cd 캐시비_사용_코드 character varying(20) */
 	private String cbeeUseCd;
 
 	/* occr_dttm 발생_일시 character(14) */
 	private String occrDttm;
 
-	/* use_cbee_amt 사용_캐시비_금액 character(18) */
-	private String useCbeeAmt;
+	/* use_cbee_amt 사용_캐시비_금액 numeric(null) */
+	private double useCbeeAmt;
 
-	/* cbee_bal 캐시비_잔액 character(18) */
-	private String cbeeBal;
+	/* cbee_bal 캐시비_잔액 numeric(null) */
+	private double cbeeBal;
 
 	/* gram_no 전문_번호 numeric(null) */
 	private double gramNo;
@@ -48,18 +48,18 @@ public class TsStdtCbeeHistVo implements Serializable {
 
 
 	/**
-	 * Get cbee_hist_no 캐시비_이력_번호 character(18)
-	 * @Return String cbeeHistNo
+	 * Get cbee_hist_no 캐시비_이력_번호 numeric(null)
+	 * @Return double cbeeHistNo
 	 */
-	public String getCbeeHistNo() {
+	public double getCbeeHistNo() {
 		return this.cbeeHistNo;
 	}
 	
 	/**
-	 * Set cbee_hist_no 캐시비_이력_번호 character(18)
-	 * @Param String cbeeHistNo
+	 * Set cbee_hist_no 캐시비_이력_번호 numeric(null)
+	 * @Param double cbeeHistNo
 	 */
-	public void setCbeeHistNo(String cbeeHistNo) {
+	public void setCbeeHistNo(double cbeeHistNo) {
 		this.cbeeHistNo = cbeeHistNo;
 	}
 	/**
@@ -78,7 +78,7 @@ public class TsStdtCbeeHistVo implements Serializable {
 		this.stdtNo = stdtNo;
 	}
 	/**
-	 * Get cbee_use_cd 캐시비_사용_코드 character(18)
+	 * Get cbee_use_cd 캐시비_사용_코드 character varying(20)
 	 * @Return String cbeeUseCd
 	 */
 	public String getCbeeUseCd() {
@@ -86,7 +86,7 @@ public class TsStdtCbeeHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set cbee_use_cd 캐시비_사용_코드 character(18)
+	 * Set cbee_use_cd 캐시비_사용_코드 character varying(20)
 	 * @Param String cbeeUseCd
 	 */
 	public void setCbeeUseCd(String cbeeUseCd) {
@@ -108,33 +108,33 @@ public class TsStdtCbeeHistVo implements Serializable {
 		this.occrDttm = occrDttm;
 	}
 	/**
-	 * Get use_cbee_amt 사용_캐시비_금액 character(18)
-	 * @Return String useCbeeAmt
+	 * Get use_cbee_amt 사용_캐시비_금액 numeric(null)
+	 * @Return double useCbeeAmt
 	 */
-	public String getUseCbeeAmt() {
+	public double getUseCbeeAmt() {
 		return this.useCbeeAmt;
 	}
 	
 	/**
-	 * Set use_cbee_amt 사용_캐시비_금액 character(18)
-	 * @Param String useCbeeAmt
+	 * Set use_cbee_amt 사용_캐시비_금액 numeric(null)
+	 * @Param double useCbeeAmt
 	 */
-	public void setUseCbeeAmt(String useCbeeAmt) {
+	public void setUseCbeeAmt(double useCbeeAmt) {
 		this.useCbeeAmt = useCbeeAmt;
 	}
 	/**
-	 * Get cbee_bal 캐시비_잔액 character(18)
-	 * @Return String cbeeBal
+	 * Get cbee_bal 캐시비_잔액 numeric(null)
+	 * @Return double cbeeBal
 	 */
-	public String getCbeeBal() {
+	public double getCbeeBal() {
 		return this.cbeeBal;
 	}
 	
 	/**
-	 * Set cbee_bal 캐시비_잔액 character(18)
-	 * @Param String cbeeBal
+	 * Set cbee_bal 캐시비_잔액 numeric(null)
+	 * @Param double cbeeBal
 	 */
-	public void setCbeeBal(String cbeeBal) {
+	public void setCbeeBal(double cbeeBal) {
 		this.cbeeBal = cbeeBal;
 	}
 	/**

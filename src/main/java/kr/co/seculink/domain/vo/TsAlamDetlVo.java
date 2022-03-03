@@ -16,10 +16,10 @@ public class TsAlamDetlVo implements Serializable {
 	/* alam_type_cd 알림_유형_코드 character varying(20) */
 	private String alamTypeCd;
 
-	/* alam_titl 알림_제목 character varying(100) */
+	/* alam_titl 알림_제목 character varying(200) */
 	private String alamTitl;
 
-	/* alam_cntn 알림_내용 character varying(4000) */
+	/* alam_cntn 알림_내용 text(null) */
 	private String alamCntn;
 
 	/* send_yn 발송_여부 character(1) */
@@ -93,7 +93,7 @@ public class TsAlamDetlVo implements Serializable {
 		this.alamTypeCd = alamTypeCd;
 	}
 	/**
-	 * Get alam_titl 알림_제목 character varying(100)
+	 * Get alam_titl 알림_제목 character varying(200)
 	 * @Return String alamTitl
 	 */
 	public String getAlamTitl() {
@@ -101,14 +101,14 @@ public class TsAlamDetlVo implements Serializable {
 	}
 	
 	/**
-	 * Set alam_titl 알림_제목 character varying(100)
+	 * Set alam_titl 알림_제목 character varying(200)
 	 * @Param String alamTitl
 	 */
 	public void setAlamTitl(String alamTitl) {
 		this.alamTitl = alamTitl;
 	}
 	/**
-	 * Get alam_cntn 알림_내용 character varying(4000)
+	 * Get alam_cntn 알림_내용 text(null)
 	 * @Return String alamCntn
 	 */
 	public String getAlamCntn() {
@@ -116,7 +116,7 @@ public class TsAlamDetlVo implements Serializable {
 	}
 	
 	/**
-	 * Set alam_cntn 알림_내용 character varying(4000)
+	 * Set alam_cntn 알림_내용 text(null)
 	 * @Param String alamCntn
 	 */
 	public void setAlamCntn(String alamCntn) {

@@ -19,8 +19,11 @@ public class TsBandInfoVo implements Serializable {
 	/* blth_id 블루투스_ID character varying(40) */
 	private String blthId;
 
-	/* guar_tel_no 보호자_전화_번호 character varying(20) */
-	private String guarTelNo;
+	/* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
+	private String guarTelNo1;
+
+	/* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
+	private String guarTelNo2;
 
 	/* api_url_gram_no API_URL_전문_번호 numeric(null) */
 	private double apiUrlGramNo;
@@ -114,19 +117,34 @@ public class TsBandInfoVo implements Serializable {
 		this.blthId = blthId;
 	}
 	/**
-	 * Get guar_tel_no 보호자_전화_번호 character varying(20)
-	 * @Return String guarTelNo
+	 * Get guar_tel_no_1 보호자_전화_번호_1 character varying(20)
+	 * @Return String guarTelNo1
 	 */
-	public String getGuarTelNo() {
-		return this.guarTelNo;
+	public String getGuarTelNo1() {
+		return this.guarTelNo1;
 	}
 	
 	/**
-	 * Set guar_tel_no 보호자_전화_번호 character varying(20)
-	 * @Param String guarTelNo
+	 * Set guar_tel_no_1 보호자_전화_번호_1 character varying(20)
+	 * @Param String guarTelNo1
 	 */
-	public void setGuarTelNo(String guarTelNo) {
-		this.guarTelNo = guarTelNo;
+	public void setGuarTelNo1(String guarTelNo1) {
+		this.guarTelNo1 = guarTelNo1;
+	}
+	/**
+	 * Get guar_tel_no_2 보호자_전화_번호_2 character varying(20)
+	 * @Return String guarTelNo2
+	 */
+	public String getGuarTelNo2() {
+		return this.guarTelNo2;
+	}
+	
+	/**
+	 * Set guar_tel_no_2 보호자_전화_번호_2 character varying(20)
+	 * @Param String guarTelNo2
+	 */
+	public void setGuarTelNo2(String guarTelNo2) {
+		this.guarTelNo2 = guarTelNo2;
 	}
 	/**
 	 * Get api_url_gram_no API_URL_전문_번호 numeric(null)

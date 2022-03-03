@@ -10,13 +10,13 @@ public class TmGuarApntPlcVo implements Serializable {
 	/* guar_no 보호자_번호 numeric(null) */
 	private double guarNo;
 
-	/* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(20) */
+	/* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
 	private String guarApntPlcNm;
 
-	/* loc_no 위치_번호 character(18) */
-	private String locNo;
+	/* loc_no 위치_번호 numeric(null) */
+	private double locNo;
 
-	/* rmrk 비고 character varying(20) */
+	/* rmrk 비고 character varying(4000) */
 	private String rmrk;
 
 	/* reg_dt 등록_일자 character(8) */
@@ -54,7 +54,7 @@ public class TmGuarApntPlcVo implements Serializable {
 		this.guarNo = guarNo;
 	}
 	/**
-	 * Get guar_apnt_plc_nm 보호자_지정_장소_명 character varying(20)
+	 * Get guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100)
 	 * @Return String guarApntPlcNm
 	 */
 	public String getGuarApntPlcNm() {
@@ -62,29 +62,29 @@ public class TmGuarApntPlcVo implements Serializable {
 	}
 	
 	/**
-	 * Set guar_apnt_plc_nm 보호자_지정_장소_명 character varying(20)
+	 * Set guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100)
 	 * @Param String guarApntPlcNm
 	 */
 	public void setGuarApntPlcNm(String guarApntPlcNm) {
 		this.guarApntPlcNm = guarApntPlcNm;
 	}
 	/**
-	 * Get loc_no 위치_번호 character(18)
-	 * @Return String locNo
+	 * Get loc_no 위치_번호 numeric(null)
+	 * @Return double locNo
 	 */
-	public String getLocNo() {
+	public double getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
-	 * Set loc_no 위치_번호 character(18)
-	 * @Param String locNo
+	 * Set loc_no 위치_번호 numeric(null)
+	 * @Param double locNo
 	 */
-	public void setLocNo(String locNo) {
+	public void setLocNo(double locNo) {
 		this.locNo = locNo;
 	}
 	/**
-	 * Get rmrk 비고 character varying(20)
+	 * Get rmrk 비고 character varying(4000)
 	 * @Return String rmrk
 	 */
 	public String getRmrk() {
@@ -92,7 +92,7 @@ public class TmGuarApntPlcVo implements Serializable {
 	}
 	
 	/**
-	 * Set rmrk 비고 character varying(20)
+	 * Set rmrk 비고 character varying(4000)
 	 * @Param String rmrk
 	 */
 	public void setRmrk(String rmrk) {

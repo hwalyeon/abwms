@@ -41,26 +41,22 @@
 		<if test="sexCd != null">
 		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,hght_val /* hght_val 키_값 numeric */
+		</if>
+		<if test="wghtVal != null">
 		    ,wght_val /* wght_val 체중_값 numeric */
+		</if>
 		<if test="raceDivCd != null">
 		    ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -77,26 +73,22 @@
 		<if test="sexCd != null">
 		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,#{hghtVal} /* hght_val 키_값 numeric */
+		</if>
+		<if test="wghtVal != null">
 		    ,#{wghtVal} /* wght_val 체중_값 numeric */
+		</if>
 		<if test="raceDivCd != null">
 		    ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -125,21 +117,8 @@
 		<if test="raceDivCd != null">
 		    ,race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -162,26 +141,22 @@
 		<if test="sexCd != null">
 		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,hght_val /* hght_val 키_값 numeric */
+		</if>
+		<if test="wghtVal != null">
 		    ,wght_val /* wght_val 체중_값 numeric */
+		</if>
 		<if test="raceDivCd != null">
 		    ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -198,26 +173,22 @@
 		<if test="sexCd != null">
 		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,#{hghtVal} /* hght_val 키_값 numeric */
+		</if>
+		<if test="wghtVal != null">
 		    ,#{wghtVal} /* wght_val 체중_값 numeric */
+		</if>
 		<if test="raceDivCd != null">
 		    ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -243,21 +214,8 @@
 		<if test="raceDivCd != null">
 		    ,race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>

@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class TsStdtLocHistVo implements Serializable {
 
-	/* loc_hist_no 위치_이력_번호 character(18) */
-	private String locHistNo;
+	/* loc_hist_no 위치_이력_번호 numeric(null) */
+	private double locHistNo;
 
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
@@ -60,18 +60,18 @@ public class TsStdtLocHistVo implements Serializable {
 
 
 	/**
-	 * Get loc_hist_no 위치_이력_번호 character(18)
-	 * @Return String locHistNo
+	 * Get loc_hist_no 위치_이력_번호 numeric(null)
+	 * @Return double locHistNo
 	 */
-	public String getLocHistNo() {
+	public double getLocHistNo() {
 		return this.locHistNo;
 	}
 	
 	/**
-	 * Set loc_hist_no 위치_이력_번호 character(18)
-	 * @Param String locHistNo
+	 * Set loc_hist_no 위치_이력_번호 numeric(null)
+	 * @Param double locHistNo
 	 */
-	public void setLocHistNo(String locHistNo) {
+	public void setLocHistNo(double locHistNo) {
 		this.locHistNo = locHistNo;
 	}
 	/**

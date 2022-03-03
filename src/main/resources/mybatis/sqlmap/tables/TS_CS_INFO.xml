@@ -12,8 +12,8 @@
         SELECT  reg_no /* reg_no 등록_번호 numeric */
                ,cs_tel_no /* cs_tel_no 고객지원_전화_번호 character varying(20) */
                ,cs_mail_addr /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
-               ,cs_url /* cs_url 고객지원_URL character varying(4000) */
-               ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL numeric */
+               ,cs_url /* cs_url 고객지원_URL character varying(200) */
+               ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL character varying(200) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -37,24 +37,18 @@
 		    ,cs_mail_addr /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
 		</if>
 		<if test="csUrl != null">
-		    ,cs_url /* cs_url 고객지원_URL character varying(4000) */
+		    ,cs_url /* cs_url 고객지원_URL character varying(200) */
 		</if>
-		    ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL numeric */
-		<if test="regDt != null">
+		<if test="bandHpgeUrl != null">
+		    ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL character varying(200) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -69,24 +63,18 @@
 		    ,#{csMailAddr} /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
 		</if>
 		<if test="csUrl != null">
-		    ,#{csUrl} /* cs_url 고객지원_URL character varying(4000) */
+		    ,#{csUrl} /* cs_url 고객지원_URL character varying(200) */
 		</if>
-		    ,#{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL numeric */
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		<if test="bandHpgeUrl != null">
+		    ,#{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL character varying(200) */
 		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -104,26 +92,13 @@
 		    ,cs_mail_addr = #{csMailAddr} /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
 		</if>
 		<if test="csUrl != null">
-		    ,cs_url = #{csUrl} /* cs_url 고객지원_URL character varying(4000) */
+		    ,cs_url = #{csUrl} /* cs_url 고객지원_URL character varying(200) */
 		</if>
 		<if test="bandHpgeUrl != null">
-		    ,band_hpge_url = #{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL numeric */
+		    ,band_hpge_url = #{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL character varying(200) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -144,24 +119,18 @@
 		    ,cs_mail_addr /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
 		</if>
 		<if test="csUrl != null">
-		    ,cs_url /* cs_url 고객지원_URL character varying(4000) */
+		    ,cs_url /* cs_url 고객지원_URL character varying(200) */
 		</if>
-		    ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL numeric */
-		<if test="regDt != null">
+		<if test="bandHpgeUrl != null">
+		    ,band_hpge_url /* band_hpge_url 밴드_홈페이지_URL character varying(200) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -176,24 +145,18 @@
 		    ,#{csMailAddr} /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
 		</if>
 		<if test="csUrl != null">
-		    ,#{csUrl} /* cs_url 고객지원_URL character varying(4000) */
+		    ,#{csUrl} /* cs_url 고객지원_URL character varying(200) */
 		</if>
-		    ,#{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL numeric */
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		<if test="bandHpgeUrl != null">
+		    ,#{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL character varying(200) */
 		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -208,26 +171,13 @@
 		    ,cs_mail_addr = #{csMailAddr} /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
 		</if>
 		<if test="csUrl != null">
-		    ,cs_url = #{csUrl} /* cs_url 고객지원_URL character varying(4000) */
+		    ,cs_url = #{csUrl} /* cs_url 고객지원_URL character varying(200) */
 		</if>
 		<if test="bandHpgeUrl != null">
-		    ,band_hpge_url = #{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL numeric */
+		    ,band_hpge_url = #{bandHpgeUrl} /* band_hpge_url 밴드_홈페이지_URL character varying(200) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>

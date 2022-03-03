@@ -10,7 +10,7 @@
 	<select id="select" parameterType="kr.co.seculink.domain.vo.TiNutrStatStndVo" resultType="kr.co.seculink.domain.vo.TiNutrStatStndVo">
 		/* Generated SQL SQL ID : ti_nutr_stat_stnd.select */
         SELECT  nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
-               ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+               ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
                ,nutr_rmrk /* nutr_rmrk 영양섭취_비고 character varying(4000) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -21,7 +21,7 @@
         FROM   ti_nutr_stat_stnd
 		WHERE  1 = 1
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
-		AND    nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+		AND    nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 	</select>
 
 	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiNutrStatStndVo">
@@ -29,54 +29,30 @@
 		INSERT INTO ti_nutr_stat_stnd
 		(
 		     nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
-		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		<if test="nutrRmrk != null">
 		    ,nutr_rmrk /* nutr_rmrk 영양섭취_비고 character varying(4000) */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
-		     #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+		     #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		<if test="nutrRmrk != null">
 		    ,#{nutrRmrk} /* nutr_rmrk 영양섭취_비고 character varying(4000) */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -87,28 +63,15 @@
 		<if test="nutrRmrk != null">
 		    ,nutr_rmrk = #{nutrRmrk} /* nutr_rmrk 영양섭취_비고 character varying(4000) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
 		WHERE  1 = 1
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
-		AND    nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+		AND    nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 	</update>
 	
 	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiNutrStatStndVo">
@@ -116,54 +79,30 @@
 		INSERT INTO ti_nutr_stat_stnd
 		(
 		     nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
-		     nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+		     nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		<if test="nutrRmrk != null">
 		    ,nutr_rmrk /* nutr_rmrk 영양섭취_비고 character varying(4000) */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
-		     #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+		     #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		<if test="nutrRmrk != null">
 		    ,#{nutrRmrk} /* nutr_rmrk 영양섭취_비고 character varying(4000) */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT
 		DO UPDATE
@@ -171,21 +110,8 @@
 		<if test="nutrRmrk != null">
 		    ,nutr_rmrk = #{nutrRmrk} /* nutr_rmrk 영양섭취_비고 character varying(4000) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -197,6 +123,6 @@
 		DELETE FROM ti_nutr_stat_stnd
 		WHERE  1 = 1
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
-		AND    nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
+		AND    nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 	</delete>
 </mapper>

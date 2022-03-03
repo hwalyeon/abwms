@@ -9,7 +9,7 @@
 
 	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo" resultType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.select */
-        SELECT  loc_hist_no /* loc_hist_no 위치_이력_번호 character(18) */
+        SELECT  loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
                ,stdt_no /* stdt_no 학생_번호 numeric */
                ,occr_dttm /* occr_dttm 발생_일시 character(14) */
                ,lat_val /* lat_val 위도_값 numeric */
@@ -28,14 +28,14 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ts_stdt_loc_hist
 		WHERE  1 = 1
-		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 character(18) */
+		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 	</select>
 
 	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.insert */
 		INSERT INTO ts_stdt_loc_hist
 		(
-		     loc_hist_no /* loc_hist_no 위치_이력_번호 character(18) */
+		     loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="stdtNo != null">
 		    ,stdt_no /* stdt_no 학생_번호 numeric */
 		</if>
@@ -62,28 +62,16 @@
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
-		     #{locHistNo} /* loc_hist_no 위치_이력_번호 character(18) */
+		     #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="stdtNo != null">
 		    ,#{stdtNo} /* stdt_no 학생_번호 numeric */
 		</if>
@@ -110,24 +98,12 @@
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -165,34 +141,21 @@
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 character(18) */
+		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 	</update>
 	
 	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.merge */
 		INSERT INTO ts_stdt_loc_hist
 		(
-		     loc_hist_no /* loc_hist_no 위치_이력_번호 character(18) */
+		     loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="stdtNo != null">
 		    ,stdt_no /* stdt_no 학생_번호 numeric */
 		</if>
@@ -219,28 +182,16 @@
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
-		     #{locHistNo} /* loc_hist_no 위치_이력_번호 character(18) */
+		     #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="stdtNo != null">
 		    ,#{stdtNo} /* stdt_no 학생_번호 numeric */
 		</if>
@@ -267,24 +218,12 @@
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
-		<if test="uptUserId != null">
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT
 		DO UPDATE
@@ -319,21 +258,8 @@
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -344,6 +270,6 @@
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.delete */
 		DELETE FROM ts_stdt_loc_hist
 		WHERE  1 = 1
-		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 character(18) */
+		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 	</delete>
 </mapper>

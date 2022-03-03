@@ -9,16 +9,16 @@
 
 	<select id="select" parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo" resultType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
 		/* Generated SQL SQL ID : ti_dd_pal_blck.select */
-		SELECT  curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+        SELECT  curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
                ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-               ,age_ycnt /* age_ycnt 나이_년수_FROM numeric */
-               ,pal_val_fr /* pal_val_fr 신체활동수준_값_FROM numeric */
-               ,pal_val_to /* pal_val_to 신체활동수준_값_TO numeric */
+               ,age_ycnt /* age_ycnt 나이_년수 numeric */
+               ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
+               ,cal_qty_fr /* cal_qty_fr 칼로리_량_FROM numeric */
+               ,cal_qty_to /* cal_qty_to 칼로리_량_TO numeric */
                ,dd_cal_qty /* dd_cal_qty 일일_칼로리_량 numeric */
-               ,pal_cd /* pal_cd 신체활동수준_코드 character(18) */
-               ,nutr_cd /* nutr_cd 영양소_코드 character(18) */
-               ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character(18) */
+               ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
+               ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -30,8 +30,10 @@
 		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수_FROM numeric */
-		AND    pal_val_fr = #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
+		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
+		AND    cal_qty_fr = #{calQtyFr} /* cal_qty_fr 칼로리_량_FROM numeric */
+		AND    cal_qty_to = #{calQtyTo} /* cal_qty_to 칼로리_량_TO numeric */
 	</select>
 
 	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
@@ -41,27 +43,24 @@
 		     curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		    ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-		    ,age_ycnt_fr /* age_ycnt_fr 나이_년수_FROM numeric */
-		    ,age_ycnt_to /* age_ycnt_to 나이_년수_TO numeric */
-		    ,pal_val_fr /* pal_val_fr 신체활동수준_값_FROM numeric */
-		    ,pal_val_to /* pal_val_to 신체활동수준_값_TO numeric */
+		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
+		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
+		    ,cal_qty_fr /* cal_qty_fr 칼로리_량_FROM numeric */
+		    ,cal_qty_to /* cal_qty_to 칼로리_량_TO numeric */
 		    ,dd_cal_qty /* dd_cal_qty 일일_칼로리_량 numeric */
-		    ,pal_cd /* pal_cd 신체활동수준_코드 character(18) */
-		<if test="regDt != null">
+		<if test="nutrCd != null">
+		    ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
+		</if>
+		<if test="nutrStatCd != null">
+		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -71,27 +70,24 @@
 		     #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		     #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
-		     #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
-		     #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
-		    ,#{palValTo} /* pal_val_to 신체활동수준_값_TO numeric */
+		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		     #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
+		     #{calQtyFr} /* cal_qty_fr 칼로리_량_FROM numeric */
+		     #{calQtyTo} /* cal_qty_to 칼로리_량_TO numeric */
 		    ,#{ddCalQty} /* dd_cal_qty 일일_칼로리_량 numeric */
-		    ,#{palCd} /* pal_cd 신체활동수준_코드 character(18) */
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		<if test="nutrCd != null">
+		    ,#{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
+		<if test="nutrStatCd != null">
+		    ,#{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -102,30 +98,17 @@
 		/* Generated SQL SQL ID : ti_dd_pal_blck.update */
 		UPDATE ti_dd_pal_blck
 		<trim prefix="SET" prefixOverrides=",">
-		<if test="palValTo != null">
-		    ,pal_val_to = #{palValTo} /* pal_val_to 신체활동수준_값_TO numeric */
-		</if>
 		<if test="ddCalQty != null">
 		    ,dd_cal_qty = #{ddCalQty} /* dd_cal_qty 일일_칼로리_량 numeric */
 		</if>
-		<if test="palCd != null">
-		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character(18) */
+		<if test="nutrCd != null">
+		    ,nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
+		<if test="nutrStatCd != null">
+		    ,nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -134,9 +117,10 @@
 		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
-		AND    age_ycnt_to = #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
-		AND    pal_val_fr = #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
+		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
+		AND    cal_qty_fr = #{calQtyFr} /* cal_qty_fr 칼로리_량_FROM numeric */
+		AND    cal_qty_to = #{calQtyTo} /* cal_qty_to 칼로리_량_TO numeric */
 	</update>
 	
 	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
@@ -146,27 +130,24 @@
 		     curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		     prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		     sex_cd /* sex_cd 성별_코드 character varying(20) */
-		     age_ycnt_fr /* age_ycnt_fr 나이_년수_FROM numeric */
-		     age_ycnt_to /* age_ycnt_to 나이_년수_TO numeric */
-		     pal_val_fr /* pal_val_fr 신체활동수준_값_FROM numeric */
-		    ,pal_val_to /* pal_val_to 신체활동수준_값_TO numeric */
+		     age_ycnt /* age_ycnt 나이_년수 numeric */
+		     pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
+		     cal_qty_fr /* cal_qty_fr 칼로리_량_FROM numeric */
+		     cal_qty_to /* cal_qty_to 칼로리_량_TO numeric */
 		    ,dd_cal_qty /* dd_cal_qty 일일_칼로리_량 numeric */
-		    ,pal_cd /* pal_cd 신체활동수준_코드 character(18) */
-		<if test="regDt != null">
+		<if test="nutrCd != null">
+		    ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
+		</if>
+		<if test="nutrStatCd != null">
+		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -176,27 +157,24 @@
 		     #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		     #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
-		     #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
-		     #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
-		    ,#{palValTo} /* pal_val_to 신체활동수준_값_TO numeric */
+		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		     #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
+		     #{calQtyFr} /* cal_qty_fr 칼로리_량_FROM numeric */
+		     #{calQtyTo} /* cal_qty_to 칼로리_량_TO numeric */
 		    ,#{ddCalQty} /* dd_cal_qty 일일_칼로리_량 numeric */
-		    ,#{palCd} /* pal_cd 신체활동수준_코드 character(18) */
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
+		<if test="nutrCd != null">
+		    ,#{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
+		<if test="nutrStatCd != null">
+		    ,#{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -204,30 +182,17 @@
 		ON CONFLICT
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
-		<if test="palValTo != null">
-		    ,pal_val_to = #{palValTo} /* pal_val_to 신체활동수준_값_TO numeric */
-		</if>
 		<if test="ddCalQty != null">
 		    ,dd_cal_qty = #{ddCalQty} /* dd_cal_qty 일일_칼로리_량 numeric */
 		</if>
-		<if test="palCd != null">
-		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character(18) */
+		<if test="nutrCd != null">
+		    ,nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
+		<if test="nutrStatCd != null">
+		    ,nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -241,8 +206,9 @@
 		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
 		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
-		AND    age_ycnt_to = #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
-		AND    pal_val_fr = #{palValFr} /* pal_val_fr 신체활동수준_값_FROM numeric */
+		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
+		AND    cal_qty_fr = #{calQtyFr} /* cal_qty_fr 칼로리_량_FROM numeric */
+		AND    cal_qty_to = #{calQtyTo} /* cal_qty_to 칼로리_량_TO numeric */
 	</delete>
 </mapper>

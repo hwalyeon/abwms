@@ -198,11 +198,11 @@
 		    ,#{yearWeekSeq} /* year_week_seq 년별_주차 numeric */
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
 		    ,#{weekSeq} /* week_seq 주차 numeric */
-		    ,to_char(now(), 'YYYYMMDD') /* regi_dt 등록_일자 character(8) */ 
-		    ,to_char(now(), 'HH24MISS') /* regi_tm 등록_시각 character(6) */
+		    ,#{regiDt} /* regi_dt 등록_일자 character(8) */
+		    ,#{regiTm} /* regi_tm 등록_시각 character(6) */
 		    ,#{regiUserId} /* regi_user_id 등록_사용자_ID character varying(20) */
-		    ,to_char(now(), 'YYYYMMDD') /* updt_dt 수정_일자 character(8) */ 
-		    ,to_char(now(), 'HH24MISS') /* updt_tm 수정_시각 character(6) */
+		    ,#{updtDt} /* updt_dt 수정_일자 character(8) */
+		    ,#{updtTm} /* updt_tm 수정_시각 character(6) */
 		    ,#{updtUserId} /* updt_user_id 수정_사용자_ID character varying(20) */
 		)
 	</insert>
@@ -289,8 +289,21 @@
 		<if test="weekSeq != null">
 		    ,week_seq = #{weekSeq} /* week_seq 주차 numeric */
 		</if>
-		    ,updt_dt = to_char(now(), 'YYYYMMDD') /* updt_dt 수정_일자 character(8) */
-		    ,updt_tm = to_char(now(), 'HH24MISS') /* updt_tm 수정_시각 character(6) */
+		<if test="regiDt != null">
+		    ,regi_dt = #{regiDt} /* regi_dt 등록_일자 character(8) */
+		</if>
+		<if test="regiTm != null">
+		    ,regi_tm = #{regiTm} /* regi_tm 등록_시각 character(6) */
+		</if>
+		<if test="regiUserId != null">
+		    ,regi_user_id = #{regiUserId} /* regi_user_id 등록_사용자_ID character varying(20) */
+		</if>
+		<if test="updtDt != null">
+		    ,updt_dt = #{updtDt} /* updt_dt 수정_일자 character(8) */
+		</if>
+		<if test="updtTm != null">
+		    ,updt_tm = #{updtTm} /* updt_tm 수정_시각 character(6) */
+		</if>
 		<if test="updtUserId != null">
 		    ,updt_user_id = #{updtUserId} /* updt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -450,11 +463,11 @@
 		    ,#{yearWeekSeq} /* year_week_seq 년별_주차 numeric */
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
 		    ,#{weekSeq} /* week_seq 주차 numeric */
-		    ,to_char(now(), 'YYYYMMDD') /* regi_dt 등록_일자 character(8) */
-		    ,to_char(now(), 'HH24MISS') /* regi_tm 등록_시각 character(6) */
+		    ,#{regiDt} /* regi_dt 등록_일자 character(8) */
+		    ,#{regiTm} /* regi_tm 등록_시각 character(6) */
 		    ,#{regiUserId} /* regi_user_id 등록_사용자_ID character varying(20) */
-		    ,to_char(now(), 'YYYYMMDD') /* updt_dt 수정_일자 character(8) */
-		    ,to_char(now(), 'HH24MISS') /* updt_tm 수정_시각 character(6) */
+		    ,#{updtDt} /* updt_dt 수정_일자 character(8) */
+		    ,#{updtTm} /* updt_tm 수정_시각 character(6) */
 		    ,#{updtUserId} /* updt_user_id 수정_사용자_ID character varying(20) */
 		)
 		ON CONFLICT
@@ -538,8 +551,21 @@
 		<if test="weekSeq != null">
 		    ,week_seq = #{weekSeq} /* week_seq 주차 numeric */
 		</if>
-		    ,updt_dt = to_char(now(), 'YYYYMMDD') /* updt_dt 수정_일자 character(8) */
-		    ,updt_tm = to_char(now(), 'HH24MISS') /* updt_tm 수정_시각 character(6) */
+		<if test="regiDt != null">
+		    ,regi_dt = #{regiDt} /* regi_dt 등록_일자 character(8) */
+		</if>
+		<if test="regiTm != null">
+		    ,regi_tm = #{regiTm} /* regi_tm 등록_시각 character(6) */
+		</if>
+		<if test="regiUserId != null">
+		    ,regi_user_id = #{regiUserId} /* regi_user_id 등록_사용자_ID character varying(20) */
+		</if>
+		<if test="updtDt != null">
+		    ,updt_dt = #{updtDt} /* updt_dt 수정_일자 character(8) */
+		</if>
+		<if test="updtTm != null">
+		    ,updt_tm = #{updtTm} /* updt_tm 수정_시각 character(6) */
+		</if>
 		<if test="updtUserId != null">
 		    ,updt_user_id = #{updtUserId} /* updt_user_id 수정_사용자_ID character varying(20) */
 		</if>

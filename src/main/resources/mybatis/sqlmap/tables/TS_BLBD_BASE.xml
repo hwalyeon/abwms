@@ -10,8 +10,8 @@
 	<select id="select" parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo" resultType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
 		/* Generated SQL SQL ID : ts_blbd_base.select */
         SELECT  blbd_no /* blbd_no 게시_번호 numeric */
-               ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character varying(20) */
-               ,blbd_expr_dt /* blbd_expr_dt 게시_만기_일자 character varying(20) */
+               ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character(8) */
+               ,blbd_expr_dt /* blbd_expr_dt 게시_만기_일자 character(8) */
                ,blbd_type_cd /* blbd_type_cd 게시_유형_코드 character varying(20) */
                ,blbd_titl /* blbd_titl 게시_제목 character varying(100) */
                ,blbd_cntn /* blbd_cntn 게시_내용 text */
@@ -33,10 +33,10 @@
 		(
 		     blbd_no /* blbd_no 게시_번호 numeric */
 		<if test="blbdStrtDt != null">
-		    ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character varying(20) */
+		    ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character(8) */
 		</if>
 		<if test="blbdExprDt != null">
-		    ,blbd_expr_dt /* blbd_expr_dt 게시_만기_일자 character varying(20) */
+		    ,blbd_expr_dt /* blbd_expr_dt 게시_만기_일자 character(8) */
 		</if>
 		<if test="blbdTypeCd != null">
 		    ,blbd_type_cd /* blbd_type_cd 게시_유형_코드 character varying(20) */
@@ -48,21 +48,13 @@
 		    ,blbd_cntn /* blbd_cntn 게시_내용 text */
 		</if>
 		    ,srch_cnt /* srch_cnt 조회_건수 numeric */
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -71,10 +63,10 @@
 		(
 		     #{blbdNo} /* blbd_no 게시_번호 numeric */
 		<if test="blbdStrtDt != null">
-		    ,#{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character varying(20) */
+		    ,#{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character(8) */
 		</if>
 		<if test="blbdExprDt != null">
-		    ,#{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character varying(20) */
+		    ,#{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character(8) */
 		</if>
 		<if test="blbdTypeCd != null">
 		    ,#{blbdTypeCd} /* blbd_type_cd 게시_유형_코드 character varying(20) */
@@ -86,21 +78,13 @@
 		    ,#{blbdCntn} /* blbd_cntn 게시_내용 text */
 		</if>
 		    ,#{srchCnt} /* srch_cnt 조회_건수 numeric */
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -112,10 +96,10 @@
 		UPDATE ts_blbd_base
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="blbdStrtDt != null">
-		    ,blbd_strt_dt = #{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character varying(20) */
+		    ,blbd_strt_dt = #{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character(8) */
 		</if>
 		<if test="blbdExprDt != null">
-		    ,blbd_expr_dt = #{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character varying(20) */
+		    ,blbd_expr_dt = #{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character(8) */
 		</if>
 		<if test="blbdTypeCd != null">
 		    ,blbd_type_cd = #{blbdTypeCd} /* blbd_type_cd 게시_유형_코드 character varying(20) */
@@ -129,21 +113,8 @@
 		<if test="srchCnt != null">
 		    ,srch_cnt = #{srchCnt} /* srch_cnt 조회_건수 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -158,10 +129,10 @@
 		(
 		     blbd_no /* blbd_no 게시_번호 numeric */
 		<if test="blbdStrtDt != null">
-		    ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character varying(20) */
+		    ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character(8) */
 		</if>
 		<if test="blbdExprDt != null">
-		    ,blbd_expr_dt /* blbd_expr_dt 게시_만기_일자 character varying(20) */
+		    ,blbd_expr_dt /* blbd_expr_dt 게시_만기_일자 character(8) */
 		</if>
 		<if test="blbdTypeCd != null">
 		    ,blbd_type_cd /* blbd_type_cd 게시_유형_코드 character varying(20) */
@@ -173,21 +144,13 @@
 		    ,blbd_cntn /* blbd_cntn 게시_내용 text */
 		</if>
 		    ,srch_cnt /* srch_cnt 조회_건수 numeric */
-		<if test="regDt != null">
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		</if>
 		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		</if>
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -196,10 +159,10 @@
 		(
 		     #{blbdNo} /* blbd_no 게시_번호 numeric */
 		<if test="blbdStrtDt != null">
-		    ,#{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character varying(20) */
+		    ,#{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character(8) */
 		</if>
 		<if test="blbdExprDt != null">
-		    ,#{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character varying(20) */
+		    ,#{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character(8) */
 		</if>
 		<if test="blbdTypeCd != null">
 		    ,#{blbdTypeCd} /* blbd_type_cd 게시_유형_코드 character varying(20) */
@@ -211,21 +174,13 @@
 		    ,#{blbdCntn} /* blbd_cntn 게시_내용 text */
 		</if>
 		    ,#{srchCnt} /* srch_cnt 조회_건수 numeric */
-		<if test="regDt != null">
-		    ,#{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,#{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
 		</if>
-		<if test="uptDt != null">
-		    ,#{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,#{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
@@ -234,10 +189,10 @@
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
 		<if test="blbdStrtDt != null">
-		    ,blbd_strt_dt = #{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character varying(20) */
+		    ,blbd_strt_dt = #{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character(8) */
 		</if>
 		<if test="blbdExprDt != null">
-		    ,blbd_expr_dt = #{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character varying(20) */
+		    ,blbd_expr_dt = #{blbdExprDt} /* blbd_expr_dt 게시_만기_일자 character(8) */
 		</if>
 		<if test="blbdTypeCd != null">
 		    ,blbd_type_cd = #{blbdTypeCd} /* blbd_type_cd 게시_유형_코드 character varying(20) */
@@ -251,21 +206,8 @@
 		<if test="srchCnt != null">
 		    ,srch_cnt = #{srchCnt} /* srch_cnt 조회_건수 numeric */
 		</if>
-		<if test="regDt != null">
-		    ,reg_dt = #{regDt} /* reg_dt 등록_일자 character(8) */
-		</if>
-		<if test="regTm != null">
-		    ,reg_tm = #{regTm} /* reg_tm 등록_시각 character(6) */
-		</if>
-		<if test="regUserId != null">
-		    ,reg_user_id = #{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
-		<if test="uptDt != null">
-		    ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-		</if>
-		<if test="uptTm != null">
-		    ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-		</if>
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>

@@ -28,8 +28,8 @@ public class TcApiStndVo implements Serializable {
 	/* rdet_base_cycl 정기판정_기본_주기 numeric(null) */
 	private double rdetBaseCycl;
 
-	/* led_slep_tcnt LED_슬립_시간 character(18) */
-	private String ledSlepTcnt;
+	/* led_slep_tcnt LED_슬립_시간 numeric(null) */
+	private double ledSlepTcnt;
 
 	/* msor_ssng_levl 모션센서_감지_레벨 numeric(null) */
 	private double msorSsngLevl;
@@ -39,6 +39,24 @@ public class TcApiStndVo implements Serializable {
 
 	/* tsor_isng_cycl 체온센서_내부감지_주기 numeric(null) */
 	private double tsorIsngCycl;
+
+	/* tsor_evnt_minval 체온센서_이벤트_하한값 numeric(null) */
+	private double tsorEvntMinval;
+
+	/* tsor_evnt_maxval 체온센서_이벤트_상한값 numeric(null) */
+	private double tsorEvntMaxval;
+
+	/* hbitcnt_mdan_minval 심박수_중간값_하한값 numeric(null) */
+	private double hbitcntMdanMinval;
+
+	/* hbitcnt_mdan_maxval 심박수_중간값_상한값 numeric(null) */
+	private double hbitcntMdanMaxval;
+
+	/* msor_evnt_minval 모션센서_이벤트_하한값 numeric(null) */
+	private double msorEvntMinval;
+
+	/* msor_evnt_maxval 모션센서_이벤트_상한값 numeric(null) */
+	private double msorEvntMaxval;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -165,18 +183,18 @@ public class TcApiStndVo implements Serializable {
 		this.rdetBaseCycl = rdetBaseCycl;
 	}
 	/**
-	 * Get led_slep_tcnt LED_슬립_시간 character(18)
-	 * @Return String ledSlepTcnt
+	 * Get led_slep_tcnt LED_슬립_시간 numeric(null)
+	 * @Return double ledSlepTcnt
 	 */
-	public String getLedSlepTcnt() {
+	public double getLedSlepTcnt() {
 		return this.ledSlepTcnt;
 	}
 	
 	/**
-	 * Set led_slep_tcnt LED_슬립_시간 character(18)
-	 * @Param String ledSlepTcnt
+	 * Set led_slep_tcnt LED_슬립_시간 numeric(null)
+	 * @Param double ledSlepTcnt
 	 */
-	public void setLedSlepTcnt(String ledSlepTcnt) {
+	public void setLedSlepTcnt(double ledSlepTcnt) {
 		this.ledSlepTcnt = ledSlepTcnt;
 	}
 	/**
@@ -223,6 +241,96 @@ public class TcApiStndVo implements Serializable {
 	 */
 	public void setTsorIsngCycl(double tsorIsngCycl) {
 		this.tsorIsngCycl = tsorIsngCycl;
+	}
+	/**
+	 * Get tsor_evnt_minval 체온센서_이벤트_하한값 numeric(null)
+	 * @Return double tsorEvntMinval
+	 */
+	public double getTsorEvntMinval() {
+		return this.tsorEvntMinval;
+	}
+	
+	/**
+	 * Set tsor_evnt_minval 체온센서_이벤트_하한값 numeric(null)
+	 * @Param double tsorEvntMinval
+	 */
+	public void setTsorEvntMinval(double tsorEvntMinval) {
+		this.tsorEvntMinval = tsorEvntMinval;
+	}
+	/**
+	 * Get tsor_evnt_maxval 체온센서_이벤트_상한값 numeric(null)
+	 * @Return double tsorEvntMaxval
+	 */
+	public double getTsorEvntMaxval() {
+		return this.tsorEvntMaxval;
+	}
+	
+	/**
+	 * Set tsor_evnt_maxval 체온센서_이벤트_상한값 numeric(null)
+	 * @Param double tsorEvntMaxval
+	 */
+	public void setTsorEvntMaxval(double tsorEvntMaxval) {
+		this.tsorEvntMaxval = tsorEvntMaxval;
+	}
+	/**
+	 * Get hbitcnt_mdan_minval 심박수_중간값_하한값 numeric(null)
+	 * @Return double hbitcntMdanMinval
+	 */
+	public double getHbitcntMdanMinval() {
+		return this.hbitcntMdanMinval;
+	}
+	
+	/**
+	 * Set hbitcnt_mdan_minval 심박수_중간값_하한값 numeric(null)
+	 * @Param double hbitcntMdanMinval
+	 */
+	public void setHbitcntMdanMinval(double hbitcntMdanMinval) {
+		this.hbitcntMdanMinval = hbitcntMdanMinval;
+	}
+	/**
+	 * Get hbitcnt_mdan_maxval 심박수_중간값_상한값 numeric(null)
+	 * @Return double hbitcntMdanMaxval
+	 */
+	public double getHbitcntMdanMaxval() {
+		return this.hbitcntMdanMaxval;
+	}
+	
+	/**
+	 * Set hbitcnt_mdan_maxval 심박수_중간값_상한값 numeric(null)
+	 * @Param double hbitcntMdanMaxval
+	 */
+	public void setHbitcntMdanMaxval(double hbitcntMdanMaxval) {
+		this.hbitcntMdanMaxval = hbitcntMdanMaxval;
+	}
+	/**
+	 * Get msor_evnt_minval 모션센서_이벤트_하한값 numeric(null)
+	 * @Return double msorEvntMinval
+	 */
+	public double getMsorEvntMinval() {
+		return this.msorEvntMinval;
+	}
+	
+	/**
+	 * Set msor_evnt_minval 모션센서_이벤트_하한값 numeric(null)
+	 * @Param double msorEvntMinval
+	 */
+	public void setMsorEvntMinval(double msorEvntMinval) {
+		this.msorEvntMinval = msorEvntMinval;
+	}
+	/**
+	 * Get msor_evnt_maxval 모션센서_이벤트_상한값 numeric(null)
+	 * @Return double msorEvntMaxval
+	 */
+	public double getMsorEvntMaxval() {
+		return this.msorEvntMaxval;
+	}
+	
+	/**
+	 * Set msor_evnt_maxval 모션센서_이벤트_상한값 numeric(null)
+	 * @Param double msorEvntMaxval
+	 */
+	public void setMsorEvntMaxval(double msorEvntMaxval) {
+		this.msorEvntMaxval = msorEvntMaxval;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

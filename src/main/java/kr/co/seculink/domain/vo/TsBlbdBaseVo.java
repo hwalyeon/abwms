@@ -10,10 +10,10 @@ public class TsBlbdBaseVo implements Serializable {
 	/* blbd_no 게시_번호 numeric(null) */
 	private double blbdNo;
 
-	/* blbd_strt_dt 게시_시작_일자 character varying(20) */
+	/* blbd_strt_dt 게시_시작_일자 character(8) */
 	private String blbdStrtDt;
 
-	/* blbd_expr_dt 게시_만기_일자 character varying(20) */
+	/* blbd_expr_dt 게시_만기_일자 character(8) */
 	private String blbdExprDt;
 
 	/* blbd_type_cd 게시_유형_코드 character varying(20) */
@@ -63,7 +63,7 @@ public class TsBlbdBaseVo implements Serializable {
 		this.blbdNo = blbdNo;
 	}
 	/**
-	 * Get blbd_strt_dt 게시_시작_일자 character varying(20)
+	 * Get blbd_strt_dt 게시_시작_일자 character(8)
 	 * @Return String blbdStrtDt
 	 */
 	public String getBlbdStrtDt() {
@@ -71,14 +71,14 @@ public class TsBlbdBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set blbd_strt_dt 게시_시작_일자 character varying(20)
+	 * Set blbd_strt_dt 게시_시작_일자 character(8)
 	 * @Param String blbdStrtDt
 	 */
 	public void setBlbdStrtDt(String blbdStrtDt) {
 		this.blbdStrtDt = blbdStrtDt;
 	}
 	/**
-	 * Get blbd_expr_dt 게시_만기_일자 character varying(20)
+	 * Get blbd_expr_dt 게시_만기_일자 character(8)
 	 * @Return String blbdExprDt
 	 */
 	public String getBlbdExprDt() {
@@ -86,7 +86,7 @@ public class TsBlbdBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set blbd_expr_dt 게시_만기_일자 character varying(20)
+	 * Set blbd_expr_dt 게시_만기_일자 character(8)
 	 * @Param String blbdExprDt
 	 */
 	public void setBlbdExprDt(String blbdExprDt) {

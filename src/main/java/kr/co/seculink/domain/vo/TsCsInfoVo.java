@@ -16,11 +16,11 @@ public class TsCsInfoVo implements Serializable {
 	/* cs_mail_addr 고객지원_메일_주소 character varying(100) */
 	private String csMailAddr;
 
-	/* cs_url 고객지원_URL character varying(4000) */
+	/* cs_url 고객지원_URL character varying(200) */
 	private String csUrl;
 
-	/* band_hpge_url 밴드_홈페이지_URL numeric(null) */
-	private double bandHpgeUrl;
+	/* band_hpge_url 밴드_홈페이지_URL character varying(200) */
+	private String bandHpgeUrl;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -87,7 +87,7 @@ public class TsCsInfoVo implements Serializable {
 		this.csMailAddr = csMailAddr;
 	}
 	/**
-	 * Get cs_url 고객지원_URL character varying(4000)
+	 * Get cs_url 고객지원_URL character varying(200)
 	 * @Return String csUrl
 	 */
 	public String getCsUrl() {
@@ -95,25 +95,25 @@ public class TsCsInfoVo implements Serializable {
 	}
 	
 	/**
-	 * Set cs_url 고객지원_URL character varying(4000)
+	 * Set cs_url 고객지원_URL character varying(200)
 	 * @Param String csUrl
 	 */
 	public void setCsUrl(String csUrl) {
 		this.csUrl = csUrl;
 	}
 	/**
-	 * Get band_hpge_url 밴드_홈페이지_URL numeric(null)
-	 * @Return double bandHpgeUrl
+	 * Get band_hpge_url 밴드_홈페이지_URL character varying(200)
+	 * @Return String bandHpgeUrl
 	 */
-	public double getBandHpgeUrl() {
+	public String getBandHpgeUrl() {
 		return this.bandHpgeUrl;
 	}
 	
 	/**
-	 * Set band_hpge_url 밴드_홈페이지_URL numeric(null)
-	 * @Param double bandHpgeUrl
+	 * Set band_hpge_url 밴드_홈페이지_URL character varying(200)
+	 * @Param String bandHpgeUrl
 	 */
-	public void setBandHpgeUrl(double bandHpgeUrl) {
+	public void setBandHpgeUrl(String bandHpgeUrl) {
 		this.bandHpgeUrl = bandHpgeUrl;
 	}
 	/**
