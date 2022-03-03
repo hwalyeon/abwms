@@ -27,11 +27,9 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 		return result;
 	}
 
-
 	//보호자(사용자)_정보_상세보기
 	public Map<String, Object> searchPrntInfo(Map<String, String> params) throws BizException
 	{
-
 		Map<String, String> result = dao.selectOne("user.prnt.prntInfoMng.selectPrntInfoDetl", params);
 
 		Map<String, Object> rtnMap = new HashMap<>();
@@ -40,7 +38,6 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 
 		return rtnMap;
 	}
-
 
 	//밴드_정보 저장
 	public void savePrntInfoDetl(Map<String, Object> params) throws BizException {
@@ -64,36 +61,18 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 		}
 
 	}
-/*
 
-	//행추가_행삭제 저장
-	public void saveBandOpenInfo(Map<String, Object> params) throws BizException
+	//배우자_정보_상세보기
+	public Map<String, Object> searchSposInfo(Map<String, String> params) throws BizException
 	{
+		Map<String, String> result = dao.selectOne("user.prnt.prntInfoMng.selectSposInfoDetl", params);
 
-		int saveCnt = 0;
+		Map<String, Object> rtnMap = new HashMap<>();
 
-		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
+		rtnMap.put("result", result);
 
-		for(Map<String,String> info:gridDate){
-			log.debug("crud         : " +  info.get("crud"));
-
-			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.nutr.bandOpenInfoMng.insertTsBandInfoList", info);
-			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.nutr.bandOpenInfoMng.updateTsBandInfoList", info);
-			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.nutr.bandOpenInfoMng.deleteTsBandInfoList", info);
-			}
-		}
-		if(saveCnt == 0){
-			throw new BizException("ECOM999", new String[]{"비만기준정보 저장이 실패하였습니다"});
-		}
-
+		return rtnMap;
 	}
-
-
-
-	*/
 
 
 

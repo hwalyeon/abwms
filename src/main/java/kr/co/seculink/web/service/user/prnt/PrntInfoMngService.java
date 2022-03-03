@@ -16,12 +16,8 @@ public interface PrntInfoMngService
 	//밴드_정보_저장
 	public void savePrntInfoDetl(Map<String, Object> params) throws BizException;
 
-/*	//행추가_행삭제_저장
-	public void saveBandOpenInfo(Map<String, Object> params) throws BizException;
-
-
-
- */
+	//배우자_정보_상세보기
+	public Map<String, Object> searchSposInfo(Map<String, String> params) throws BizException;
 
 
 }

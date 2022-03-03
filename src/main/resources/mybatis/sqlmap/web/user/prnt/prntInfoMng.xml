@@ -31,10 +31,10 @@
 		left outer JOIN  TM_TERM_AGRE_DETL TTAD
 		on TGB.GUAR_NO = TTAD.GUAR_NO
 		left outer JOIN  TS_BAND_INFO TBI
-		on TSB.BAND_ID = TBI.BAND_ID
+		on TGB.GUAR_TEL_NO = TBI.GUAR_TEL_NO_1 OR TGB.GUAR_TEL_NO = TBI.GUAR_TEL_NO_2
 		where 1=1
 		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-			and TGB.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>
+			and TGB.ENTR_DT between replace(#{entrDtFr},'-','') and replace(#{entrDtTo},'-','')</if>
 		<if test=" stdtNo != null and stdtNo !='' ">
 			and TSB.STDT_NO = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">
@@ -56,7 +56,7 @@
 		
 	</select>
 
-
+	<!--보호자(사용자)_정보_삽입 -->
 	<insert id="insertTsPrntInfoList" parameterType="java.util.Map">
 		<selectKey keyProperty="guarNo" resultType="int" order="BEFORE">
 			select nextval('absv.tm_guar_base_seq')
@@ -150,6 +150,7 @@
 		)
 	</insert>
 
+	<!--보호자(사용자)_정보_갱신 -->
 	<update id="updateTsPrntInfoList" parameterType="java.util.Map">
 		UPDATE TM_GUAR_BASE
 		SET    UPT_DT = TO_CHAR(NOW(), 'YYYYMMDD')
@@ -188,6 +189,7 @@
 		AND GUAR_NO = #{guarNoTemp}
 	</update>
 
+	<!--보호자(사용자)_정보_삭제 -->
 	<delete id="deleteTsPrntInfoList" parameterType="java.util.Map">
 		DELETE
 		FROM TM_GUAR_BASE
@@ -238,6 +240,30 @@
 		FROM   tm_guar_base
 		WHERE  1 = 1
 		AND    guar_no = #{guarNo}::NUMERIC  /* guar_no 보호자_번호 numeric */
+
+	</select>
+
+
+	<!--배우자_정보_상세보기 -->
+	<select id="selectSposInfoDetl" parameterType="java.util.Map" resultType="MybatisMap">
+		/* Generated SQL SQL ID : tm_guar_base.select */
+		/* Generated SQL SQL ID : tm_spos_base.select */
+        SELECT  spos_no /* spos_no 배우자_번호 numeric */
+               ,spos_nm /* spos_nm 배우자_명 character varying(20) */
+               ,spos_tel_no /* spos_tel_no 배우자_전화_번호 character varying(20) */
+               ,sex_cd /* sex_cd 성별_코드 character varying(20) */
+               ,hght_val /* hght_val 키_값 numeric */
+               ,wght_val /* wght_val 체중_값 numeric */
+               ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+               ,reg_dt /* reg_dt 등록_일자 character(8) */
+               ,reg_tm /* reg_tm 등록_시각 character(6) */
+               ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+               ,upt_dt /* upt_dt 수정_일자 character(8) */
+               ,upt_tm /* upt_tm 수정_시각 character(6) */
+               ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+        FROM   tm_spos_base
+		WHERE  1 = 1
+		AND    spos_no = #{sposNo}::NUMERIC /* spos_no 배우자_번호 numeric */
 
 	</select>
 

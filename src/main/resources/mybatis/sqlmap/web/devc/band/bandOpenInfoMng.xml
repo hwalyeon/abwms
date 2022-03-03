@@ -45,9 +45,9 @@
 	      left outer join TM_STDT_BASE AS TSB
 	      on TBI.BAND_ID = TSB.BAND_ID
 	      left outer join TM_GUAR_BASE AS TGB
-	      on TSB.GUAR_NO_1 = TGB.GUAR_NO 
-	      left outer join TM_GUAR_BASE AS TGB_SUB
-	      on  TSB.GUAR_NO_2 = TGB_SUB.GUAR_NO
+	      on TBI.GUAR_TEL_NO_1 = TGB.GUAR_TEL_NO
+		  left outer join TM_GUAR_BASE AS TGB_SUB
+		  on TBI.GUAR_TEL_NO_2 = TGB.GUAR_TEL_NO
 	      left outer join TM_SPOS_BASE AS TMSB
 	      on  TGB.SPOS_NO = TMSB.SPOS_NO
 	      left outer join BAND_YTYP_WITH AS T1

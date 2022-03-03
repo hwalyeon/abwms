@@ -78,12 +78,13 @@ let prntInfoMng = new Vue({
                         {name: "guarTelNo"  , index: "guarTelNo"  , label: "보호자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                           let guarTelNoTemp = phoneFormatter(cellValue);
                           return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup"  data-guar  data-placement="bottom" title="${guarTelNoTemp}" data-guar-no="${rowObject.guarNo}">${guarTelNoTemp}</a>`;}},
-                        {name: "sposNo"     , index: "sposNo"     , label: "배우자번호"		, width: 40     , align: "center" },
-                        {name: "sposNm"     , index: "sposNm"     , label: "배우자명"	 	, width: 80     , align: "center" },
-                        {name: "sposTelNo"  , index: "sposTelNo"  , label: "배우자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
-                        {name: "bandOpenInfoDetlPopup" , index: "bandOpenInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center", fixed: true
-                            ,formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success"'
-                                +' onclick="prntInfoMng.regBandOpenInfoDetlPopup(\'' + rowObject.bandId + '\')" value="밴드/개통" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" />';}},
+                        {name: "sposNo"     , index: "sposNo"     , label: "배우자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-spos-no="${rowObject.sposNo}">${cellValue}</a>`;}},
+                        {name: "sposNm"     , index: "sposNm"     , label: "배우자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-spos-no="${rowObject.sposNo}">${cellValue}</a>`;}},
+                        {name: "sposTelNo"  , index: "sposTelNo"  , label: "배우자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          let sposTelNoTemp = phoneFormatter(cellValue);
+                          return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${sposTelNoTemp}" data-spos-no="${rowObject.sposNo}">${sposTelNoTemp}</a>`;}},
                         {name: "regDt"      , index: "regDt"      , label: "등록일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
                         {name: "regTm"      , index: "regTm"      , label: "등록시각"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
                         {name: "regUserId"  , index: "regUserId"  , label: "등록사용자ID"	, width: 80     , align: "center"  , hidden: true},
@@ -121,6 +122,9 @@ let prntInfoMng = new Vue({
                             });
                             $("#prntInfo_list").find('A.links[data-band]').on('click', function(e) {
                                 prntInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
+                            });
+                            $("#prntInfo_list").find('A.links[data-spos]').on('click', function(e) {
+                                prntInfoMng.regSposInfoDetlPopup($(e.target).data('spos-no'))
                             });
                         }
                     }));
@@ -172,7 +176,7 @@ let prntInfoMng = new Vue({
                         param: params,
                         success: function(response)
                         {
-                            saveFileLocal(response, 'bandOpenInfoMng.xls');
+                            saveFileLocal(response, 'prntInfoMng.xls');
                         },
                         error: function (response)
                         {
@@ -185,6 +189,9 @@ let prntInfoMng = new Vue({
             },
             regBandOpenInfoDetlPopup: function(bandId) {
                 bandOpenInfoDetl.initPage(bandId);
+            },
+            regSposInfoDetlPopup: function(sposNo) {
+                sposInfoDetl.initPage(sposNo);
             },
             resetSearchParam: function()
             {

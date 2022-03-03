@@ -115,11 +115,13 @@
 	</div>
 	<div th:insert="~{devc/band/bandOpenInfoDetl :: body}"></div>
 	<div th:insert="~{user/prnt/prntInfoDetl :: body}"></div>
+	<div th:insert="~{user/prnt/sposInfoDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
-	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}"></script>
+	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}"></script> <!--밴드/개통 정보 상세      -->
 	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoDetl.js}">    </script> <!--보호자(사용자)정보 상세  -->
 	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoMng.js}">     </script> <!--보호자(사용자)정보       -->
+	<script type="text/javascript" th:src="@{/js/user/prnt/sposInfoDetl.js}">     </script> <!--배우자 정보 상세         -->
 
 </section>
 </body>
