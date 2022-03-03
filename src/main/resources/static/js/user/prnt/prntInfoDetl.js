@@ -19,7 +19,7 @@ let prntInfoDetl = new Vue({
 			sposNo		      : '' , //배우자_번호
 			dzoneAlamYn       : '' , //위험지역_알림_여부
 			szoneAlamYn       : '' , //세이프존_알림_여부
-			fallOccrAlamYn	  : '' , //낙상_발생_알림_여부
+			fallAlamYn	      : '' , //낙상_발생_알림_여부
 			hbitAbnmAlamYn	  : '' , //심박_이상_알림_여부
 			tempAbnmAlamYn    : '' , //체온_이상_알림_여부
 			bodyHistAlamYn    : '' , //신체_기록_알림_여부
@@ -110,42 +110,61 @@ let prntInfoDetl = new Vue({
         		return false;
         	}
         	if ( WebUtil.isNull($this.params.hghtVal) ) {
-        		Swal.alert(['키값은 필수 입력 값입니다.', 'info']);
+        		Swal.alert(['키는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
         	if ( WebUtil.isNull($this.params.wghtVal) ) {
-        		Swal.alert(['체중값은 여부는 필수 입력 값입니다.', 'info']);
+        		Swal.alert(['체중은 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
         	if ( WebUtil.isNull($this.params.bmiVal) ) {
-        		Swal.alert(['BMI값은 필수 입력 값입니다.', 'info']);
+        		Swal.alert(['BMI는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.dzoneMoinAlamYn) ) {
-        		Swal.alert(['위험지역 진입 알림 여부는 필수 입력 값입니다.', 'info']);
+        	if ( WebUtil.isNull($this.params.dzoneAlamYn) ) {
+        		Swal.alert(['위험지역 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.dzoneMoutAlamYn) ) {
+        	if ( WebUtil.isNull($this.params.szoneAlamYn) ) {
         		Swal.alert(['위험지역 이탈 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.szoneMoinAlamYn) ) {
-        		Swal.alert(['세이프존 진입 알림 여부는 필수 입력 값입니다.', 'info']);
+        	if ( WebUtil.isNull($this.params.fallAlamYn) ) {
+        		Swal.alert(['낙상 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.szoneMoutAlamYn) ) {
-        		Swal.alert(['세이프존 이탈 알림 여부는 필수 입력 값입니다.', 'info']);
+        	if ( WebUtil.isNull($this.params.hbitAbnmAlamYn) ) {
+        		Swal.alert(['심박 이상 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.fallOccrAlamYn) ) {
-        		Swal.alert(['낙상 발생 알림 여부는 필수 입력 값입니다.', 'info']);
+        	if ( WebUtil.isNull($this.params.tempAbnmAlamYn) ) {
+        		Swal.alert(['체온 이상 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.strsAbnmAlamYn) ) {
-        		Swal.alert(['스트레스 이상 알림 여부는 필수 입력 값입니다.', 'info']);
+        	if ( WebUtil.isNull($this.params.bodyHistAlamYn) ) {
+        		Swal.alert(['신체 기록 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-
+        	if ( WebUtil.isNull($this.params.mealNoinAlamYn) ) {
+        		Swal.alert(['식사 미입력 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.excsNoinAlamYn) ) {
+        		Swal.alert(['운동 미입력 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.cbeeUseAlamYn) ) {
+        		Swal.alert(['캐시비 사용 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.batrLackAlamYn) ) {
+        		Swal.alert(['베터리 부족 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
+        	if ( WebUtil.isNull($this.params.ltrmNuseAlamYn) ) {
+        		Swal.alert(['장기 미사용 알림 여부는 필수 입력 값입니다.', 'info']);
+        		return false;
+        	}
 
 
         	return true;
