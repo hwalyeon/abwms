@@ -60,39 +60,36 @@ let prntInfoMng = new Vue({
                 let $this              = this;
                 let colModels =
                     [
-                        {name: "crud"       , index: "crud"       , label: "crud"		, hidden: true                                },
+                        {name: "crud"       , index: "crud"       , label: "crud"		    , hidden: true                                },
                         {name: "guarNoTemp" , index: "guarNoTemp" , label: "보호자번호"		, hidden: true },
-                        {name: "stdtNo"     , index: "stdtNo"     , label: "학생번호"		, width: 40 , align: "center" },
-                        {name: "stdtNm"     , index: "stdtNm"     , label: "학생명"		, width: 80 , align: "center" },
-                        {name: "entrDt"     , index: "entrDt"     , label: "가입일자"		, width: 80 , align: "center"  , formatter:function(cellValue, options, rowObject){return formatDate(cellValue);}},
-                        {name: "telNo"      , index: "telNo"      , label: "전화번호"		, width: 80 , align: "center"  , formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
-                        {name: "locNm"      , index: "locNm"      , label: "학교(학원)명"	, width: 80 , align: "center" },
-                        {name: "bandId"     , index: "bandId"     , label: "밴드ID"		, width: 80 , align: "center" },
-                        {name: "guarNo"     , index: "guarNo"     , label: "보호자번호"		, width: 40 , align: "center" },
-                        {name: "guarNm"     , index: "guarNm"     , label: "보호자명"	 	, width: 80 , align: "center",
-                            formatter: function(cellValue, options, rowObject) {
-                                return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup"  data-guar  data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;
-                            }
-                        },
-                        {name: "guarTelNo"  , index: "guarTelNo"  , label: "보호자전화번호" 	, width: 80 , align: "center"  , formatter:function(cellValue, options, rowObject){
-                            let guarTelNoTemp = phoneFormatter(cellValue);
-                            return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup"  data-guar  data-placement="bottom" title="${guarTelNoTemp}" data-guar-no="${rowObject.guarNo}">${guarTelNoTemp}</a>`;
-                        }},
-                        {name: "sposNo"     , index: "sposNo"     , label: "배우자번호"		, width: 40 , align: "center" },
-                        {name: "sposNm"     , index: "sposNm"     , label: "배우자명"	 	, width: 80 , align: "center" }, 
-                        {name: "sposTelNo"  , index: "sposTelNo"  , label: "배우자전화번호" 	, width: 80 , align: "center"  , formatter:function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
-                        {name: "prntInfoDetlPopup" , index: "prntInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center", fixed: true
-                            ,formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success"'
-                                +' onclick="prntInfoMng.regPrntInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="보호자" data-toggle="modal" data-target="#prntInfoDetlPopup" />';}},
+                        {name: "stdtNo"     , index: "stdtNo"     , label: "학생번호"		, width: 40     , align: "center" },
+                        {name: "stdtNm"     , index: "stdtNm"     , label: "학생명"		    , width: 80     , align: "center" },
+                        {name: "entrDt"     , index: "entrDt"     , label: "가입일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){return formatDate(cellValue);}},
+                        {name: "telNo"      , index: "telNo"      , label: "밴드전화번호"	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          let phonNoTemp =  phoneFormatter(cellValue);
+                          return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${phonNoTemp}" data-band-id="${rowObject.bandId}">${phonNoTemp}</a>`;}},
+                        {name: "locNm"      , index: "locNm"      , label: "학교(학원)명"	, width: 80     , align: "center" },
+                        {name: "bandId"     , index: "bandId"     , label: "밴드ID"		    , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
+                        {name: "guarNo"     , index: "guarNo"     , label: "보호자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        {name: "guarNm"     , index: "guarNm"     , label: "보호자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        {name: "guarTelNo"  , index: "guarTelNo"  , label: "보호자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          let guarTelNoTemp = phoneFormatter(cellValue);
+                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup"  data-guar  data-placement="bottom" title="${guarTelNoTemp}" data-guar-no="${rowObject.guarNo}">${guarTelNoTemp}</a>`;}},
+                        {name: "sposNo"     , index: "sposNo"     , label: "배우자번호"		, width: 40     , align: "center" },
+                        {name: "sposNm"     , index: "sposNm"     , label: "배우자명"	 	, width: 80     , align: "center" },
+                        {name: "sposTelNo"  , index: "sposTelNo"  , label: "배우자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){return phoneFormatter(cellValue);}},
                         {name: "bandOpenInfoDetlPopup" , index: "bandOpenInfoDetlPopup" , label: "상세정보보기", width: 80, align: "center", fixed: true
                             ,formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success"'
                                 +' onclick="prntInfoMng.regBandOpenInfoDetlPopup(\'' + rowObject.bandId + '\')" value="밴드/개통" data-toggle="modal" data-target="#bandOpenInfoDetlPopup" />';}},
-                        {name: "regDt"      , index: "regDt"      , label: "등록일자"		, width: 80 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
-                        {name: "regTm"      , index: "regTm"      , label: "등록시각"		, width: 80 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
-                        {name: "regUserId"  , index: "regUserId"  , label: "등록사용자ID"	, width: 80 , align: "center"  , hidden: true},
-                        {name: "uptDt"      , index: "uptDt"      , label: "수정일자"		, width: 80 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
-                        {name: "uptTm"      , index: "uptTm"      , label: "수정시각"		, width: 80 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
-                        {name: "uptUserId"  , index: "uptUserId"  , label: "수정사용자ID"	, width: 80 , align: "center"  , hidden: true}
+                        {name: "regDt"      , index: "regDt"      , label: "등록일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
+                        {name: "regTm"      , index: "regTm"      , label: "등록시각"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
+                        {name: "regUserId"  , index: "regUserId"  , label: "등록사용자ID"	, width: 80     , align: "center"  , hidden: true},
+                        {name: "uptDt"      , index: "uptDt"      , label: "수정일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
+                        {name: "uptTm"      , index: "uptTm"      , label: "수정시각"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
+                        {name: "uptUserId"  , index: "uptUserId"  , label: "수정사용자ID"	, width: 80     , align: "center"  , hidden: true}
                     ];
 
                 $("#prntInfo_list").jqGrid("GridUnload");
@@ -121,6 +118,9 @@ let prntInfoMng = new Vue({
                         gridComplete: function () {
                             $("#prntInfo_list").find('A.links[data-guar]').on('click', function(e) {
                                 prntInfoMng.regPrntInfoDetlPopup($(e.target).data('guar-no'))
+                            });
+                            $("#prntInfo_list").find('A.links[data-band]').on('click', function(e) {
+                                prntInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
                             });
                         }
                     }));
