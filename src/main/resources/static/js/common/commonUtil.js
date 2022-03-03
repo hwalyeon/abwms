@@ -23,6 +23,15 @@
         if(WebUtil.isNull(date)) return '';
         return moment( date,  'HHmmss' ).format(timeFormatPattern);
     }
+
+    numberFormat = function (value) {
+        var num = parseInt(value);
+        if( isNaN(num) ) return "0";
+        var reg = /(^[+-]?\d+)(\d{3})/;
+        var n = (value + '');
+        while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+        return n;
+    }
     
     phoneFormatter = function(num,type){
     	var formatNum = '';
