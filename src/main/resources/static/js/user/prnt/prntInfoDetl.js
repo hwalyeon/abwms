@@ -59,8 +59,8 @@ let prntInfoDetl = new Vue({
         initCodeList: function() {
 
         	let $this = this;
-			getCommonCodeList('SEX_CD', $this.code.sexCdList);            //성별_코드_리스트
-			getCommonCodeList('RACE_DIV_CD', $this.code.raceDivCdList);   //인종_구분_코드_리스트
+			getCommonCodeList('SEX_CD'      , $this.code.sexCdList);      //성별_코드_리스트
+			getCommonCodeList('RACE_DIV_CD' , $this.code.raceDivCdList);  //인종_구분_코드_리스트
 			getCommonCodeList('ENTR_STAT_CD', $this.code.entrStatCdList); //가입_상태_코드_리스트
 			getCommonCodeList('RELS_RESN_CD', $this.code.relsResnCdList); //해지_사유_코드_리스트
 
@@ -74,7 +74,6 @@ let prntInfoDetl = new Vue({
 
 			let $this = this;
 			$this.resetPrntDetlInfo();
-
 			if ( !WebUtil.isNull(guarNo) )
 			{
 				let params = {
@@ -86,6 +85,7 @@ let prntInfoDetl = new Vue({
 					success: function(response) {
 						if ( !!response.rtnData.result )
 						{
+							console.log(response.rtnData.result.result);
 							$this.params.crud = 'U';
 
 							$.each(response.rtnData.result.result, function(key, val) {

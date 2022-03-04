@@ -54,7 +54,7 @@ public class PrntInfoMngController
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
+		System.out.println("파람"+params);
 		Map<String, Object> result = prntInfoMngService.searchPrntInfo(params);
 
 		rtnMap.put("result", result);

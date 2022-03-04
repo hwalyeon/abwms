@@ -9,7 +9,7 @@ let prntInfoMng = new Vue({
                     entrDtFr       : '' ,  //가입_일자_From
                     entrDtTo       : '' ,  //가입_일자_To
                     entrDt         : '' ,  //가입_일자
-                    mmDd           : '' ,  //이번_달
+                    mmDd           : 'THIS_MONTH' ,  //기준_일자 _이번달
                     stdtNo         : '' ,  //학생_번호
                     stdtNm         : '' ,  //학생_명
                     telNo          : '' ,  //전화_번호
@@ -26,7 +26,7 @@ let prntInfoMng = new Vue({
                 },
             code:
                 {
-            	mmDdList           : [] , //기준_일자_이번달_리스트
+            	    mmDdList        : [] , //기준_일자_이번달_리스트
                 },
         },
     methods:
@@ -72,7 +72,7 @@ let prntInfoMng = new Vue({
                         {name: "locNm"      , index: "locNm"      , label: "학교(학원)명"	, width: 80     , align: "center" },
                         {name: "bandId"     , index: "bandId"     , label: "밴드ID"		    , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                           return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
-                        {name: "guarNo"     , index: "guarNo"     , label: "보호자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                          {name: "guarNo"     , index: "guarNo"     , label: "보호자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
                           return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
                         {name: "guarNm"     , index: "guarNm"     , label: "보호자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                           return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
@@ -143,14 +143,12 @@ let prntInfoMng = new Vue({
                     params.currentPage = 1;
                     params.currentIndex = 0;
                 }
-
                 $("#prntInfo_list").setGridParam(
                     {
                         datatype: "json",
                         postData: JSON.stringify(params),
                         page: 1,
                         loadComplete: function (response)
-
                         {
                             if ( response.rtnData.result == 0 )
                             {
@@ -207,7 +205,7 @@ let prntInfoMng = new Vue({
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
-                    mmDd           : 'THIS_MONTH' ,  //기준_일자 _이번달
+                    mmDd           : '' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     bandTelNo      : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID

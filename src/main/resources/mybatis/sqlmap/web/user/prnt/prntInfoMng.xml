@@ -224,7 +224,7 @@
 				, upt_user_id 		 /* upt_user_id 수정_사용자_ID character varying(20) */
 		FROM      tm_guar_base
 		WHERE     1 = 1
-		AND       guar_no = #{guarNoTemp}::NUMERIC  /* guar_no 보호자_번호 numeric */
+		AND       guar_no = #{guarNo}::NUMERIC  /* guar_no 보호자_번호 numeric */
 
 	</select>
 
