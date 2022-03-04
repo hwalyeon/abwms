@@ -23,6 +23,7 @@ let termAgreYnInfoDetl = new Vue({
     	},
 		code: {
 			termDivCdList  : [] , //약관_구분_코드_리스트
+			agreYnList      : [{'cdVal':'Y', 'cdNm':'Y'},{'cdVal':'N', 'cdNm':'N'}]  // 여부_리스트
 		}
 	},
     methods: {
@@ -58,7 +59,7 @@ let termAgreYnInfoDetl = new Vue({
 		initGrid: function()
 		{
 			let $this = this;
-
+			let agreYnList = commonGridCmonCd($this.code.agreYnList);
 			let colModels = [
 				{name: "crud"      		, index: "crud"       	  , label: "crud"		      , hidden: true },
 				{name: "guarNoTemp"		, index: "guarNoTemp"	  , label: "보호자번호"		  , hidden: true },
@@ -66,10 +67,9 @@ let termAgreYnInfoDetl = new Vue({
 				{name: "guarNo"         , index: "guarNo"         , label: "보호자번호" 	      , width: 50 , align: "center" },
 				{name: "termVer"        , index: "termVer"        , label: "약관버전" 	      , width: 30 , align: "center" },
 				{name: "termDivCdNm"    , index: "termDivCdNm"    , label: "약관 구분 코드명"  , width: 70 , align: "center" },
-				{name: "termAgreYn"     , index: "termAgreYn"     , label: "약관 동의 여부" 	  , width: 30 , align: "center" },
-				{name: "termAgreDttm" 	, index: "termAgreDttm"   , label: "약관 동의 일시" 	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}}
+				{name: "termAgreYn"     , index: "termAgreYn"     , label: "약관 동의 여부" 	  , width: 30 , align: "center"  , edittype : "select", formatter: "select", editable: true, editoptions: {value: agreYnList} },
+				{name: "termAgreDttm" 	, index: "termAgreDttm"   , label: "약관 동의 일시" 	  , width: 50 , align: "center"  }
 			];
-
 			$("#termAgreYnInfoDetl_list").jqGrid("GridUnload");
 			$("#termAgreYnInfoDetl_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
 				{
