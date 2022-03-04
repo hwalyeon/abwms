@@ -55,6 +55,25 @@ public class StrsStndMngController
 	}
 
 	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/searchCdSpecList.ab")
+	public RtnMsg searchCdSpecList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.selectTcCdSpec", params);
+		rtnMap.put("result", result);
+
+		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List)dao.selectList("svcStnd.strs.strsStndMng.selectTcCdSpec", params)).size());
+		}
+
+		vo.setRtnData(rtnMap, params);
+		return vo;
+	}
+
+	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
@@ -96,7 +115,7 @@ public class StrsStndMngController
 		return map;
 	}
 
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/saveStrsStnd.ab")
 	public RtnMsg saveStrsStnd(@RequestBody(required=false) Map<String, Object> params) throws BizException {
 
@@ -109,5 +128,5 @@ public class StrsStndMngController
 		vo.setRtnData(rtnMap,null);
 
 		return vo;
-	}
+	}*/
 }

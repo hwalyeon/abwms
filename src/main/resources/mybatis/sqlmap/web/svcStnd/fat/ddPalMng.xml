@@ -8,6 +8,7 @@
            ,sex_cd           AS sex_cd_temp/* sex_cd 성별_코드 character varying(20) */
            ,age_ycnt         AS age_ycnt_temp
            ,nutr_stat_cd     AS nutr_stat_cd_temp
+           ,nutr_cd          AS nutr_cd_temp
            ,curr_fat_judg_cd
            ,prdt_fat_judg_cd
            ,sex_cd

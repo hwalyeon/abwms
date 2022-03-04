@@ -137,26 +137,26 @@ public class CdMngController
 		vo.setRtnData(rtnMap, params);
 		
 		return vo;
+	}@ResponseBody
+@RequestMapping("/set/cdMng/searchCdSpecList.ab")
+public RtnMsg searchCdSpecList(@RequestBody(required=false) Map<String, String> params) throws BizException
+{
+	RtnMsg vo = new RtnMsg();
+	Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+	List<Map<String, String>> result = dao.selectList("set.cdMng.selectTcCdSpec", params);
+	rtnMap.put("result", result);
+
+	if ( !GEUtil.isEmpty(params.get("paging")) ) {
+		params.put("paging", "N");
+		vo.setTotalCount(((List)dao.selectList("set.cdMng.selectTcCdSpec", params)).size());
 	}
+
+	vo.setRtnData(rtnMap, params);
+	return vo;
+}
 	
-	@ResponseBody
-	@RequestMapping("/set/cdMng/searchCdSpecList.ab")
-	public RtnMsg searchCdSpecList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		
-		List<Map<String, String>> result = dao.selectList("set.cdMng.selectTcCdSpec", params);
-		rtnMap.put("result", result);
-		
-		if ( !GEUtil.isEmpty(params.get("paging")) ) {
-			params.put("paging", "N");
-			vo.setTotalCount(((List)dao.selectList("set.cdMng.selectTcCdSpec", params)).size());
-		}
-		
-		vo.setRtnData(rtnMap, params);
-		return vo;
-	}
+
 	
 	@ResponseBody
 	@RequestMapping("/set/cdMng/saveCdGrp.ab")

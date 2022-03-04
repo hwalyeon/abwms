@@ -30,7 +30,9 @@ let ddPalMng = new Vue({
         code:{
             mentDdPalCdList : [],
             sexCdList       : [],
-            nutrStatCdList  : []
+            nutrStatCdList  : [],
+            palCdList       : [],
+            nutrCdList      : []
         },
 	},
 
@@ -53,7 +55,12 @@ let ddPalMng = new Vue({
         initCodeList: function() {
             let $this = this;
 
-            getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList);
+            getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList, function()
+            {
+                $this.initGrid();
+                $this.searchDdPalList(true);
+            }
+            );
 
             getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList, function()
             {
@@ -68,6 +75,8 @@ let ddPalMng = new Vue({
                 $this.searchDdPalList(true);
             }
             );
+
+
         },
         initGrid: function() {
             let $this = this;
@@ -77,20 +86,16 @@ let ddPalMng = new Vue({
         	let colModels =
             [
                 {name:"crud"               , index: "crud"            , label:"crud"               , hidden:true},
-                {name: "currFatJudgCdTemp" , index: "currFatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center"
-                    , hidden  : true  },
+                {name: "currFatJudgCdTemp" , index: "currFatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center", hidden  : true  },
                 {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정"     , width: 80   , align: "center"
                     , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
-                {name: "prdtFatJudgCdTemp" , index: "prdtFatJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center"
-                    , hidden  : true  },
+                {name: "prdtFatJudgCdTemp" , index: "prdtFatJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center", hidden  : true  },
                 {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정"     , width: 80   , align: "center" , editable: true
-                    , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:mentDdPalCdList}},
-                {name: "sexCdTemp"         , index: "sexCdTemp"       , label: "성별"            , width: 80   , align: "center"
-                    , hidden  : true  },
+                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
+                {name: "sexCdTemp"         , index: "sexCdTemp"       , label: "성별"            , width: 80   , align: "center", hidden  : true  },
                 {name: "sexCd"             , index: "sexCd"           , label: "성별"            , width: 80   , align: "center" , editable: true
                     , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:sexCdList}},
-                {name: "ageYcntTemp"       , index: "ageYcntTemp"     , label: "나이년수"         , width: 80   , align: "center"
-                    , hidden  : true  },
+                {name: "ageYcntTemp"       , index: "ageYcntTemp"     , label: "나이년수"         , width: 80   , align: "center", hidden  : true  },
                 {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
                 {name: "calQtyFr"          , index: "calQtyFr"        , label: "칼로리량 FORM"       , width: 80   , align: "center"

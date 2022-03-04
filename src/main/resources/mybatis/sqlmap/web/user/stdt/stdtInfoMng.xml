@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user.stdt.stdtInfoMng">
 
+
        <select id="searchStdtInfoList" parameterType="java.util.Map" resultType="MybatisMap">
+
               select   B.ENTR_DT/*가입일자*/
               ,B.GUAR_NO/*학부모번호*/
               ,B.GUAR_NM/*학부모명*/
@@ -25,7 +27,7 @@
               ,A.BITH_DT/*생년월일*/
               ,D.LOC_NO/*소속학교번호*/
               ,D.LOC_NM/*소속학교명*/
-              ,A.BITH_DT/*나이*/
+              ,fn_getage(A.BITH_DT) as AGE/*나이*/
               ,A.BAND_STAT_CD as BAND_STAT_CD_TEMP/*현재상태*/
               ,fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) as BAND_STAT_CD
               ,ment_strs_stat_cd as MENT_STRS_STAT_CD_TEMP/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
