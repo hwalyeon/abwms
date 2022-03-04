@@ -45,7 +45,7 @@ let sposInfoDetl = new Vue({
         initPage: function(sposNo) {
 
 			let $this = this;
-			$this.resetPrntDetlInfo();
+			$this.resetSposDetlInfo();
 
 			if ( !WebUtil.isNull(sposNo) )
 			{
@@ -99,7 +99,7 @@ let sposInfoDetl = new Vue({
 			}
 
 		},
-		saveprntInfoDetl: function() {
+		saveSposInfoDetl: function() {
 			
 			let $this = this;
 			
@@ -108,11 +108,11 @@ let sposInfoDetl = new Vue({
             }
 
 			AjaxUtil.post({
-                url: "/user/prnt/prntInfoMng/savePrntInfoDetl.ab",
+                url: "/user/prnt/prntInfoMng/saveSposInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#prntInfoDetlPopup'));
+                		closeModal($('#sposInfoDetlPopup'));
 						prntInfoMng.searchPrntInfoList(true);
                 	});                	
                 },
@@ -129,11 +129,11 @@ let sposInfoDetl = new Vue({
 			$this.params.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/user/prnt/prntInfoMng/savePrntInfoDetl.ab",
+                url: "/user/prnt/prntInfoMng/saveSposInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#prntInfoDetlPopup'));
+                		 closeModal($('#sposInfoDetlPopup'));
 						prntInfoMng.searchPrntInfoList(true);
                 	});
                 },
@@ -142,7 +142,7 @@ let sposInfoDetl = new Vue({
                 }
             });
 		},
-		resetPrntDetlInfo: function() {
+		resetSposDetlInfo: function() {
 			this.params = {
 				crud              : 'C',
 				userId            : '' ,

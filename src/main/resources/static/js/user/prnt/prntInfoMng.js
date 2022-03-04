@@ -60,8 +60,9 @@ let prntInfoMng = new Vue({
                 let $this              = this;
                 let colModels =
                     [
-                        {name: "crud"       , index: "crud"       , label: "crud"		    , hidden: true                                },
+                        {name: "crud"       , index: "crud"       , label: "crud"		    , hidden: true },
                         {name: "guarNoTemp" , index: "guarNoTemp" , label: "보호자번호"		, hidden: true },
+                        {name: "sposNoTemp" , index: "sposNoTemp" , label: "배우자번호"		, hidden: true },
                         {name: "stdtNo"     , index: "stdtNo"     , label: "학생번호"		, width: 40     , align: "center" },
                         {name: "stdtNm"     , index: "stdtNm"     , label: "학생명"		    , width: 80     , align: "center" },
                         {name: "entrDt"     , index: "entrDt"     , label: "가입일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){return formatDate(cellValue);}},
@@ -85,6 +86,8 @@ let prntInfoMng = new Vue({
                         {name: "sposTelNo"  , index: "sposTelNo"  , label: "배우자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                           let sposTelNoTemp = phoneFormatter(cellValue);
                           return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${sposTelNoTemp}" data-spos-no="${rowObject.sposNo}">${sposTelNoTemp}</a>`;}},
+                        {name: "termAgreYnInfoDetlPopup"  , index: "termAgreYnInfoDetlPopup" , label: "약관동의여부" , width: 80, align: "center", formatter: function(cellValue, options, rowObject) {
+                          return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="prntInfoMng.regTermAgreYnInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="상세보기" data-toggle="modal" data-target="#termAgreYnInfoDetlPopup" />'; }},
                         {name: "regDt"      , index: "regDt"      , label: "등록일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
                         {name: "regTm"      , index: "regTm"      , label: "등록시각"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
                         {name: "regUserId"  , index: "regUserId"  , label: "등록사용자ID"	, width: 80     , align: "center"  , hidden: true},
@@ -192,6 +195,9 @@ let prntInfoMng = new Vue({
             },
             regSposInfoDetlPopup: function(sposNo) {
                 sposInfoDetl.initPage(sposNo);
+            },
+            regTermAgreYnInfoDetlPopup: function(guarNo){
+                termAgreYnInfoDetl.initPage(guarNo);
             },
             resetSearchParam: function()
             {

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-	<div class="wrapper-content" id="prntInfoMng">
+	<div class="wrapper-content" id="termAgreYnInfoDetl">
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
 			<div class="ibox-title">
@@ -99,6 +99,7 @@
 					<div class="clear_both"></div>
 					<div class="float_right">
 						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#prntInfoDetlPopup" v-on:click="regPrntInfoDetlPopup()">&nbsp;보호자등록</button>
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#sposInfoDetlPopup" v-on:click="regSposInfoDetlPopup()">&nbsp;배우자등록</button>
 						<button type="button" id="btnDownloadExcel"
 								class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
@@ -116,12 +117,14 @@
 	<div th:insert="~{devc/band/bandOpenInfoDetl :: body}"></div>
 	<div th:insert="~{user/prnt/prntInfoDetl :: body}"></div>
 	<div th:insert="~{user/prnt/sposInfoDetl :: body}"></div>
+	<div th:insert="~{user/prnt/termAgreYnInfoDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
-	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}"></script> <!--밴드/개통 정보 상세      -->
-	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoDetl.js}">    </script> <!--보호자(사용자)정보 상세  -->
-	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoMng.js}">     </script> <!--보호자(사용자)정보       -->
-	<script type="text/javascript" th:src="@{/js/user/prnt/sposInfoDetl.js}">     </script> <!--배우자 정보 상세         -->
+	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoDetl.js}">      </script> <!--보호자(사용자)정보 상세  -->
+	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoMng.js}">       </script> <!--보호자(사용자)정보       -->
+	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}">  </script> <!--밴드/개통정보 상세      -->
+	<script type="text/javascript" th:src="@{/js/user/prnt/sposInfoDetl.js}">      </script> <!--배우자정보 상세         -->
+	<script type="text/javascript" th:src="@{/js/user/prnt/termAgreYnInfoDetl.js}"></script> <!--약관동의여부 상세         -->
 
 </section>
 </body>

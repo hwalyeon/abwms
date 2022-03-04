@@ -27,7 +27,7 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 		return result;
 	}
 
-	//보호자(사용자)_정보_상세보기
+	//보호자(사용자)_정보 상세보기
 	public Map<String, Object> searchPrntInfo(Map<String, String> params) throws BizException
 	{
 		Map<String, String> result = dao.selectOne("user.prnt.prntInfoMng.selectPrntInfoDetl", params);
@@ -39,30 +39,27 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 		return rtnMap;
 	}
 
-	//밴드_정보 저장
-	public void savePrntInfoDetl(Map<String, Object> params) throws BizException {
-
+	//보호자(사용자)_정보 저장
+	public void savePrntInfoDetl(Map<String, Object> params) throws BizException
+	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
 		int saveCnt = 0;
 
-
-		if ("C".equals(params.get("crud"))) {
-			saveCnt += dao.insert("user.prnt.prntInfoMng.insertTsPrntInfoList", params);
+		if ("C".equals(params.get("crud"))){
+			saveCnt += dao.insert("user.prnt.prntInfoMng.insertTmGuarInfoList", params);
 		} else if ("U".equals(params.get("crud"))) {
-			saveCnt += dao.update("user.prnt.prntInfoMng.updateTsPrntInfoList", params);
+			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmGuarInfoList", params);
 		} else if ("D".equals(params.get("crud"))) {
-			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTsPrntInfoList", params);
+			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTmGuarInfoList", params);
 		}
-
 		if (saveCnt == 0) {
 			throw new BizException("ECOM999", new String[]{"공통코드 저장이 실패하였습니다."});
 		}
-
 	}
 
-	//배우자_정보_상세보기
+	//배우자_정보 상세보기
 	public Map<String, Object> searchSposInfo(Map<String, String> params) throws BizException
 	{
 		Map<String, String> result = dao.selectOne("user.prnt.prntInfoMng.selectSposInfoDetl", params);
@@ -74,6 +71,33 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 		return rtnMap;
 	}
 
+	//배우자_정보 저장
+	public void saveSposInfoDetl(Map<String, Object> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		int saveCnt = 0;
+
+		if ("C".equals(params.get("crud"))){
+			saveCnt += dao.insert("user.prnt.prntInfoMng.insertTmSposInfoList", params);
+		} else if ("U".equals(params.get("crud"))) {
+			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmSposInfoList", params);
+		} else if ("D".equals(params.get("crud"))) {
+			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTmSposInfoList", params);
+		}
+		if (saveCnt == 0) {
+			throw new BizException("ECOM999", new String[]{"공통코드 저장이 실패하였습니다."});
+		}
+	}
+
+	//약관동의여부_정보_상세보기
+	public List<Map<String, Object>> searchTermAgreYnInfoDetlList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, Object>> result = dao.selectList("user.prnt.prntInfoMng.selectTermAgreYnInfoDetl", params);
+
+		return result;
+	}
 
 
 }

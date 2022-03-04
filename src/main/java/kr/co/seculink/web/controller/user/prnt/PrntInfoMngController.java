@@ -63,7 +63,7 @@ public class PrntInfoMngController
 		return vo;
 	}
 
-	//밴드정보 저장
+	//보호자(사용자)_정보 저장
 	@ResponseBody
 	@RequestMapping("/user/prnt/prntInfoMng/savePrntInfoDetl.ab")
 	public RtnMsg savePrntInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
@@ -79,9 +79,7 @@ public class PrntInfoMngController
 		return vo;
 	}
 
-
-
-	//보호자(사용자) 정보 목록_리스트 엑셀다운로드
+	//보호자(사용자)_정보_리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/user/prnt/prntInfoMng/searchPrntInfoList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -125,8 +123,7 @@ public class PrntInfoMngController
 		return map;
 	}
 
-
-	//배우자_정보_상세보기
+	//배우자_정보 상세보기
 	@ResponseBody
 	@RequestMapping("/user/prnt/prntInfoMng/searchSposInfo.ab")
 	public RtnMsg searchSposInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -140,6 +137,44 @@ public class PrntInfoMngController
 		vo.setRtnData(rtnMap);
 
 		return vo;
+	}
+
+	//배우자_정보 저장
+	@ResponseBody
+	@RequestMapping("/user/prnt/prntInfoMng/saveSposInfoDetl.ab")
+	public RtnMsg saveSposInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		prntInfoMngService.saveSposInfoDetl(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	//약관동의여부_정보 상세보기
+
+	@ResponseBody
+	@RequestMapping("/user/prnt/prntInfoMng/searchTermAgreYnInfoDetlList.ab")
+	public RtnMsg searchTermAgreYnInfoDetlList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+
+		List<Map<String, Object>> result = prntInfoMngService.searchTermAgreYnInfoDetlList(params);
+
+		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List)prntInfoMngService.searchTermAgreYnInfoDetlList(params)).size());
+		}
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+
 	}
 
 }
