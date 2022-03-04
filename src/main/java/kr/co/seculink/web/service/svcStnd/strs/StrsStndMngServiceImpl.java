@@ -38,7 +38,14 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 		return result;
 	}
 
-	@Transactional
+	public List<Map<String, String>> searchCdSpecList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchCdSpecList", params);
+
+		return result;
+	}
+
+	/*@Transactional
 	public void saveStrsList(Map<String, Object> params) throws BizException
 	{
 		int saveCnt = 0;
@@ -68,7 +75,7 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 		if ( saveCnt == 0 ) {
 			throw new BizException("ECOM999", new String[]{"스트레스 상태 코드 저장이 실패하였습니다."});
 		}
-	}
+	}*/
 
 
 	public Map<String, String> searchmentphysCd(Map<String, String> params) throws BizException

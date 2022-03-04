@@ -19,7 +19,7 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class DdPalMngMngController
+public class DdPalMngController
 {
 
 	@Resource(name = "sqlSessionTemplate")
@@ -77,8 +77,8 @@ public class DdPalMngMngController
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
 		String [] arrHeader =
-				{"현재비만판정코드","예측비만판정코드","성별코드","나이년수","신체활동수준값FORM","신체활동수준값TO","칼로리량FORM",
-				 "칼로리량TO","일일칼로리량","신체활동수준코드","영양소코드","영양섭취상태코드","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
+				{"현재비만판정코드","예측비만판정코드","성별코드","나이년수","칼로리량FORM","칼로리량TO","일일칼로리량",
+				 "신체활동수준코드","영양소코드","영양섭취상태코드","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -91,8 +91,6 @@ public class DdPalMngMngController
 			data.add(String.valueOf(info.get("prdtFatJudgCd")));
 			data.add(String.valueOf(info.get("sexCd")));
 			data.add(String.valueOf(info.get("ageYcnt")));
-			data.add(String.valueOf(info.get("palValFr")));
-			data.add(String.valueOf(info.get("palValTo")));
 			data.add(String.valueOf(info.get("calQtyFr")));
 			data.add(String.valueOf(info.get("calQtyTo")));
 			data.add(String.valueOf(info.get("ddCalQty")));

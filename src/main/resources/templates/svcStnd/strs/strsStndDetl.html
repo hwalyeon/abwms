@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:remove="tag">
-<div class="modal fade" id="fatJudgStndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="strsStndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content" style="width: 850px; height: 700px">
@@ -9,7 +9,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>비만판정기준 정보</h5>
+						<h5>스트레스 현황 정보</h5>
 					</div>
 				</div><div class="modal-body">
 					<div class="ibox-content border-style_none">
@@ -22,34 +22,23 @@
 		                    </colgroup>
 		                    <tbody>
 			                    <tr>
-			                        <th scope="row">비만판정코드</th>
+			                        <th scope="row">정신적스트레스상태</th>
 			                        <td colspan="3">
-										<select id="fatJudgCd" name="growJudgCd" class="form-control" v-model="fatJudgStndInfo.fatJudgCd" :disabled="fatJudgStndInfo.crud=='U'">
+										<select id="mentStrsStatCd" name="mentStrsStatCd" class="form-control" v-model="fatJudgStndInfo.mentStrsStatCd" :disabled="fatJudgStndInfo.crud=='U'">
 											<option value="">선택</option>
-											<option v-for="item in code.mentFatJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+											<option v-for="item in code.strsStatList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 										</select>
 			                        </td>
 			                    </tr>
-			                    <tr>
-			                        <th scope="row">BMI_FR</th>
-			                        <td>
-			                        	<input type="number" id="bmiFr" name="bmiFr" v-model="fatJudgStndInfo.bmiFr" class="form-control" maxlength="10"/>
-			                        </td>
-									<th scope="row">BMI_TO</th>
-									<td>
-										<input type="number" id="bmiTo" name="bmiTo" v-model="fatJudgStndInfo.bmiTo" class="form-control" maxlength="10"/>
+								<tr>
+									<th scope="row">신체적스트레스상태</th>
+									<td colspan="3">
+										<select id="physStrsStatCd" name="physStrsStatCd" class="form-control" v-model="fatJudgStndInfo.physStrsStatCd" :disabled="fatJudgStndInfo.crud=='U'">
+											<option value="">선택</option>
+											<option v-for="item in code.strsStatList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
 									</td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">비만지수_FR</th>
-			                        <td>
-			                        	<input type="number" id="fidxFr" name="fidxFr" v-model="fatJudgStndInfo.fidxFr" class="form-control" maxlength="10"/>
-			                        </td>
-									<th scope="row">비만지수_TO</th>
-									<td>
-										<input type="number" id="fidxTo" name="fidxTo" v-model="fatJudgStndInfo.fidxTo" class="form-control" maxlength="10"/>
-									</td>
-			                    </tr>
+								</tr>
 			                    <tr>
 			                        <th scope="row">현재평가내용</th>
 			                        <td colspan="3">
@@ -61,18 +50,6 @@
 													:options="{height:80, notUseVideo:true, maxImageWidth: 1280}"/>
 										</div>
 			                        </td>
-			                    </tr>
-			                    <tr>
-									<th scope="row">예측평가내용</th>
-									<td colspan="3">
-										<div class="mg_top_10">
-											<summer-note
-													v-model="fatJudgStndInfo.prdtEvalCntn"
-													ref="prdtEvalCntn"
-													:summer-note-id="summerNoteId2"
-													:options="{height:80, notUseVideo:true, maxImageWidth: 1280}"/>
-										</div>
-									</td>
 			                    </tr>
 							</tbody>
 		                </table>

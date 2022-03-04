@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="svcStnd.strs.strsStndMng">
 
-<select id="searchStrsList" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="searchStrsList" parameterType="java.util.Map" resultType="MybatisMap">
 	SELECT
                ment_strs_stat_cd /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
              , fn_getCdNm('STRS_STAT_CD', ment_strs_stat_cd) AS MENT_STRS_STAT_NM
@@ -21,7 +21,28 @@
 		AND    phys_strs_stat_cd LIKE CONCAT (#{physStrsStatCd}, '%') /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 		order  by MENT_STRS_STAT_NM
 
-</select>
+	</select>
+
+	<select id="selectTcCdSpec" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT B.CD_GRP
+		,B.CD_GRP_NM
+		,A.CD_VAL
+		,A.CD_NM
+		,A.CD_DESC
+		,A.FLTR_VAL_1
+		,A.FLTR_VAL_2
+		,A.FLTR_VAL_3
+		,A.SORT_ORD
+		,A.USE_YN
+		FROM   TC_CD_SPEC A
+		INNER JOIN TC_CD_GRP B
+		ON  B.CD_GRP = A.CD_GRP
+		WHERE 1 = 1
+		AND   A.CD_GRP = 'STRS_STAT_CD'
+		ORDER BY A.CD_GRP, A.SORT_ORD
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
 
     <update id="updateTiStrsStnd" parameterType="java.util.Map">
         UPDATE ti_strs_stnd
