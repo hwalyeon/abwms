@@ -106,7 +106,6 @@ let sposInfoDetl = new Vue({
             if ( !this.isValid() ) {
                 return false;
             }
-
 			AjaxUtil.post({
                 url: "/user/prnt/prntInfoMng/saveSposInfoDetl.ab",
                 param: $this.params,

@@ -23,7 +23,7 @@ let termAgreYnInfoDetl = new Vue({
     	},
 		code: {
 			termDivCdList  : [] , //약관_구분_코드_리스트
-			agreYnList      : [{'cdVal':'Y', 'cdNm':'Y'},{'cdVal':'N', 'cdNm':'N'}]  // 여부_리스트
+			agreYnList     : [{'cdVal':'Y', 'cdNm':'Y'},{'cdVal':'N', 'cdNm':'N'}]  // 여부_리스트
 		}
 	},
     methods: {
@@ -52,9 +52,8 @@ let termAgreYnInfoDetl = new Vue({
 
 			setTimeout(function() {
 				$this.initGrid();
-				$this.searctTermAgreYnInfoList(true);
-			}, 500);
-
+				$this.searchTermAgreYnInfoList(true);
+			}, 300);
 		},
 		initGrid: function()
 		{
@@ -62,21 +61,20 @@ let termAgreYnInfoDetl = new Vue({
 			let agreYnList = commonGridCmonCd($this.code.agreYnList);
 			let colModels = [
 				{name: "crud"      		, index: "crud"       	  , label: "crud"		      , hidden: true },
-				{name: "guarNoTemp"		, index: "guarNoTemp"	  , label: "보호자번호"		  , hidden: true },
 				{name: "termDivCd"      , index: "termDivCd"      , label: "약관 구분 코드" 	  , hidden: true },
 				{name: "guarNo"         , index: "guarNo"         , label: "보호자번호" 	      , width: 50 , align: "center" },
 				{name: "termVer"        , index: "termVer"        , label: "약관버전" 	      , width: 30 , align: "center" },
 				{name: "termDivCdNm"    , index: "termDivCdNm"    , label: "약관 구분 코드명"  , width: 70 , align: "center" },
-				{name: "termAgreYn"     , index: "termAgreYn"     , label: "약관 동의 여부" 	  , width: 30 , align: "center"  , edittype : "select", formatter: "select", editable: true, editoptions: {value: agreYnList} },
-				{name: "termAgreDttm" 	, index: "termAgreDttm"   , label: "약관 동의 일시" 	  , width: 50 , align: "center"  }
+				{name: "termAgreYn"     , index: "termAgreYn"     , label: "약관 동의 여부" 	  , width: 30 , align: "center" },
+				{name: "termAgreDttm" 	, index: "termAgreDttm"   , label: "약관 동의 일시" 	  , width: 50 , align: "center" }
 			];
 			$("#termAgreYnInfoDetl_list").jqGrid("GridUnload");
-			$("#termAgreYnInfoDetl_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
+			$("#termAgreYnInfoDetl_list").jqGrid($.extend(true, {}, commonGridOptions(),
 				{
 					datatype : "local",
 					mtype    : 'post'  ,
 					url      : '/user/prnt/prntInfoMng/searchTermAgreYnInfoDetlList.ab',
-					pager    : '#dgem_pager_list',
+					pager    : '#termAgreYnInfoDetl_pager_list',
 					colModel : colModels,
 					onPaging : function(data)
 					{
@@ -91,7 +89,7 @@ let termAgreYnInfoDetl = new Vue({
 					afterSaveCell : function (rowid , colId , val, e )
 					{
 
-						if($("#termAgreYnInfoDetl_list").getRowData(rowid).crud != "C" && $("#termAgreYnInfoDetl_list").getRowData(rowid).crud != "D" )
+						if($("#termAgreYnInfoDetl_list").getRowData(rowid).crud != "C")
 						{
 							$("#termAgreYnInfoDetl_list").setRowData(rowid, {crud:"U"});
 						}
@@ -99,7 +97,7 @@ let termAgreYnInfoDetl = new Vue({
 				}));
 			resizeJqGridWidth("termAgreYnInfoDetl_list", "termAgreYnInfoDetl_list_wrapper");
 		},
-		searctTermAgreYnInfoList: function(isSearch)
+		searchTermAgreYnInfoList: function(isSearch)
 		{
 			let $this     = this;
 			let params = $.extend(true, {}, $this.params);
@@ -130,49 +128,28 @@ let termAgreYnInfoDetl = new Vue({
         	let $this = this;
         	return true;
         },
-		saveTermAgreYnInfoDetl: function() {
-
+		/*saveTermAgreYnInfoDetl: function()
+		{
 			let $this = this;
-
+			let gridData = commonGridGetDataNew($("#termAgreYnInfoDetl_list"));
+			let params = { gridList : []}
+			params.gridList = gridData;
             if ( !this.isValid() ) {
                 return false;
             }
-
 			AjaxUtil.post({
                 url: "/user/prnt/prntInfoMng/saveTermAgreYnInfoDetl.ab",
-                param: $this.params,
+                param: params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#termAgreYnInfoDetlPopup'));
-						prntInfoMng.searchPrntInfoList(true);
                 	});
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);
                 }
             });
-		},
-
-		deleteUser: function() {
-
-			let $this = this;
-
-			$this.params.crud = 'D';
-
-            AjaxUtil.post({
-                url: "/user/prnt/prntInfoMng/saveTermAgreYnInfoDetl.ab",
-                param: $this.params,
-                success: function(response) {
-                	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#termAgreYnInfoDetlPopup'));
-						prntInfoMng.searchPrntInfoList(true);
-                	});
-                },
-                error: function (response) {
-                	Swal.alert([response, 'error']);
-                }
-            });
-		},
+		},*/
 		resetTermAgreYnInfoDetl: function() {
 			this.params = {
 				crud           : 'C',

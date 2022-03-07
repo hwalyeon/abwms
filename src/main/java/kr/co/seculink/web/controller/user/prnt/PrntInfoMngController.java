@@ -54,7 +54,6 @@ public class PrntInfoMngController
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("파람"+params);
 		Map<String, Object> result = prntInfoMngService.searchPrntInfo(params);
 
 		rtnMap.put("result", result);
@@ -71,7 +70,6 @@ public class PrntInfoMngController
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		prntInfoMngService.savePrntInfoDetl(params);
-
 
 		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap, params);
@@ -155,14 +153,12 @@ public class PrntInfoMngController
 	}
 
 	//약관동의여부_정보 상세보기
-
 	@ResponseBody
 	@RequestMapping("/user/prnt/prntInfoMng/searchTermAgreYnInfoDetlList.ab")
 	public RtnMsg searchTermAgreYnInfoDetlList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
 
 		List<Map<String, Object>> result = prntInfoMngService.searchTermAgreYnInfoDetlList(params);
 
@@ -174,7 +170,21 @@ public class PrntInfoMngController
 		vo.setRtnData(rtnMap, params);
 
 		return vo;
-
 	}
+/*
+	//약관동의여부_정보 저장
+	@ResponseBody
+	@RequestMapping("/user/prnt/prntInfoMng/saveTermAgreYnInfoDetl.ab")
+	public RtnMsg saveTermAgreYnInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		prntInfoMngService.saveTermAgreYnInfoDetl(params);
+
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}*/
 }

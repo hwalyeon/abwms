@@ -22,6 +22,7 @@ let bandOpenInfoDetl = new Vue({
 			currentPage    : 1  ,
 			currentIndex   : 0
     	},
+		callBack : null,
 		code: {
 			bandOpenStatCdList : [] , //밴드_개통_상태_코드_리스트
 			bandYtypCdList     : [] , //밴드_출고년월_리스트
@@ -50,9 +51,13 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 			$this.initBandYtypCdValue();
 		},
-        initPage: function(bandId) {
+        initPage: function(bandId, callback) {
 
 			let $this = this;
+			if(typeof callback === 'function'){
+				$this.callBack = callback;
+			}
+
 			$this.resetBandOpenInfo();
 
 			if ( !WebUtil.isNull(bandId) )
@@ -241,7 +246,9 @@ let bandOpenInfoDetl = new Vue({
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#bandOpenInfoDetlPopup'));
-						bandOpenInfoMng.searchBandOpenInfoList(true);
+                		if($this.callBack != null ) $this.callBack();
+                		//if($this.mngId === 'bandOpenInfoMng') bandOpenInfoMng.searchBandOpenInfoList(true);
+						//else if ($this.mngId === 'prntInfoMng') prntInfoMng.searchPrntInfoList(true);
                 	});                	
                 },
                 error: function (response) {

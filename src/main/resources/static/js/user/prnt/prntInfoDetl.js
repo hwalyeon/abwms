@@ -4,6 +4,8 @@ let prntInfoDetl = new Vue({
     	params: {
     		crud              : 'C',
     		userId            : '' ,
+    		stdtNo            : '' , //학생_번호
+    		stdtNm            : '' , //학생_명
     		guarNo            : '' , //보호자_번호
     		guarNm            : '' , //보호자_명
 			guarTelNo         : '' , //보호자_전화_번호
@@ -70,27 +72,28 @@ let prntInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(guarNo) {
-
+        initPage: function(guarNo,stdtNo) {
+			console.log(guarNo, stdtNo);
 			let $this = this;
-			$this.resetPrntDetlInfo();
-			if ( !WebUtil.isNull(guarNo) )
+
+			if (!WebUtil.isNull(guarNo))
 			{
 				let params = {
-					'guarNo' : guarNo
+					'guarNo' : guarNo ,
+					'stdtNo' : stdtNo
 				}
+				console.log(params);
+
 				AjaxUtil.post({
 					url: "/user/prnt/prntInfoMng/searchPrntInfo.ab",
 					param: params,
 					success: function(response) {
 						if ( !!response.rtnData.result )
 						{
-							console.log(response.rtnData.result.result);
 							$this.params.crud = 'U';
 
 							$.each(response.rtnData.result.result, function(key, val) {
 								$this.params[key] = val;
-
 							});
 						}
 					},
@@ -100,7 +103,6 @@ let prntInfoDetl = new Vue({
 				});
 			}
 		},
-
 			isValid: function() {
 
         	let $this = this;        	        	
@@ -242,6 +244,8 @@ let prntInfoDetl = new Vue({
 			this.params = {
 				crud           : 'C',
 				userId         : '' ,
+				stdtNo         : '' , //학생_번호
+				stdtNm         : '' , //학생_명
 				guarNo         : '' , //보호자_번호
 				guarNm         : '' , //보호자_명
 				guarTelNo      : '' , //보호자_전화_번호

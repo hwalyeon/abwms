@@ -55,7 +55,7 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTmGuarInfoList", params);
 		}
 		if (saveCnt == 0) {
-			throw new BizException("ECOM999", new String[]{"공통코드 저장이 실패하였습니다."});
+			throw new BizException("ECOM999", new String[]{"보호자(사용자) 정보 저장이 실패하였습니다."});
 		}
 	}
 
@@ -87,18 +87,44 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTmSposInfoList", params);
 		}
 		if (saveCnt == 0) {
-			throw new BizException("ECOM999", new String[]{"공통코드 저장이 실패하였습니다."});
+			throw new BizException("ECOM999", new String[]{"배우자 정보 저장이 실패하였습니다."});
 		}
 	}
 
-	//약관동의여부_정보_상세보기
+	//약관동의여부_정보 상세보기
 	public List<Map<String, Object>> searchTermAgreYnInfoDetlList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, Object>> result = dao.selectList("user.prnt.prntInfoMng.selectTermAgreYnInfoDetl", params);
 
 		return result;
 	}
+/*
 
+	//약관동의여부_정보 저장
+	public void saveTermAgreYnInfoDetl(Map<String, Object> params) throws BizException {
+
+		int saveCnt = 0;
+
+		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
+
+
+		for(Map<String,String> info:gridDate) {
+
+			log.debug("crud : " + info.get("crud"));
+			Map<String, Object> result = dao.selectOne("user.prnt.prntInfoMng.searchDupCdCk", info);
+
+			if (result == null) {
+				saveCnt += dao.insert("user.prnt.prntInfoMng.insertTmTermAgreDetlInfoList", info);
+			} else {
+				saveCnt += dao.update("user.prnt.prntInfoMng.updateTmTermAgreDetlInfoList", info);
+			}
+
+		}
+		if (saveCnt == 0) {
+			throw new BizException("ECOM999", new String[]{"약관동의여부 정보 저장이 실패하였습니다."});
+		}
+	}
+*/
 
 }
 	

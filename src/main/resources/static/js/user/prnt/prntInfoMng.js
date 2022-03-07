@@ -63,6 +63,13 @@ let prntInfoMng = new Vue({
                         {name: "crud"       , index: "crud"       , label: "crud"		    , hidden: true },
                         {name: "guarNoTemp" , index: "guarNoTemp" , label: "보호자번호"		, hidden: true },
                         {name: "sposNoTemp" , index: "sposNoTemp" , label: "배우자번호"		, hidden: true },
+                        {name: "guarNo"     , index: "guarNo"     , label: "보호자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                                return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
+                        {name: "guarNm"     , index: "guarNm"     , label: "보호자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                                return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo},${rowObject.stdtNo}">${cellValue}</a>`;}},
+                        {name: "guarTelNo"  , index: "guarTelNo"  , label: "보호자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                                let guarTelNoTemp = phoneFormatter(cellValue);
+                                return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup"  data-guar  data-placement="bottom" title="${guarTelNoTemp}" data-guar-no="${rowObject.guarNo},${rowObject.stdtNo}">${guarTelNoTemp}</a>`;}},
                         {name: "stdtNo"     , index: "stdtNo"     , label: "학생번호"		, width: 40     , align: "center" },
                         {name: "stdtNm"     , index: "stdtNm"     , label: "학생명"		    , width: 80     , align: "center" },
                         {name: "entrDt"     , index: "entrDt"     , label: "가입일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){return formatDate(cellValue);}},
@@ -72,13 +79,6 @@ let prntInfoMng = new Vue({
                         {name: "locNm"      , index: "locNm"      , label: "학교(학원)명"	, width: 80     , align: "center" },
                         {name: "bandId"     , index: "bandId"     , label: "밴드ID"		    , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                           return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
-                          {name: "guarNo"     , index: "guarNo"     , label: "보호자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
-                        {name: "guarNm"     , index: "guarNm"     , label: "보호자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
-                        {name: "guarTelNo"  , index: "guarTelNo"  , label: "보호자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                          let guarTelNoTemp = phoneFormatter(cellValue);
-                          return `<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup"  data-guar  data-placement="bottom" title="${guarTelNoTemp}" data-guar-no="${rowObject.guarNo}">${guarTelNoTemp}</a>`;}},
                         {name: "sposNo"     , index: "sposNo"     , label: "배우자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
                           return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-spos-no="${rowObject.sposNo}">${cellValue}</a>`;}},
                         {name: "sposNm"     , index: "sposNm"     , label: "배우자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
@@ -121,7 +121,7 @@ let prntInfoMng = new Vue({
                         },
                         gridComplete: function () {
                             $("#prntInfo_list").find('A.links[data-guar]').on('click', function(e) {
-                                prntInfoMng.regPrntInfoDetlPopup($(e.target).data('guar-no'))
+                                prntInfoMng.regPrntInfoDetlPopup($(e.target).data('guar-no'),$(e.target).data('stdt-no'))
                             });
                             $("#prntInfo_list").find('A.links[data-band]').on('click', function(e) {
                                 prntInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
@@ -185,11 +185,11 @@ let prntInfoMng = new Vue({
                         }
                     });
             },
-            regPrntInfoDetlPopup: function(guarNo) {
-                prntInfoDetl.initPage(guarNo);
+            regPrntInfoDetlPopup: function(guarNo,stdtNo) {
+                prntInfoDetl.initPage(guarNo,stdtNo);
             },
             regBandOpenInfoDetlPopup: function(bandId) {
-                bandOpenInfoDetl.initPage(bandId);
+                bandOpenInfoDetl.initPage(bandId, function(){  prntInfoMng.searchPrntInfoList(true) });
             },
             regSposInfoDetlPopup: function(sposNo) {
                 sposInfoDetl.initPage(sposNo);

@@ -23,17 +23,27 @@
 									</colgroup>
 									<tbody>
 										<tr>
+											<th scope="row">학생 번호</th>
+											<td>
+												<div>
+													<input type="text" name="stdtNo" v-model="params.stdtNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">학생 이름</th>
+											<td>
+												<div>
+													<input type="text" name="stdtNm" v-model="params.stdtNm" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
+												</div>
+											</td>
+										</tr>
+										<tr>
 											<th scope="row">보호자 번호</th>
 											<td>
 												<div>
 													<input type="text" name="guarNo" v-model="params.guarNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
 												</div>
-											</td>
-										</tr>
-										<tr>
-											<th scope="row">배우자 번호</th>
-											<td>
-												<input type="text" name="sposNo" v-model="params.sposNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
 											</td>
 										</tr>
 										<tr>
@@ -48,6 +58,12 @@
 											<th scope="row">보호자 전화 번호</th>
 											<td>
 												<input type="text" name=guarTelNo v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)" maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
+											</td>
+										</tr>
+										<tr>
+											<th scope="row">배우자 번호</th>
+											<td>
+												<input type="text" name="sposNo" v-model="params.sposNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
 											</td>
 										</tr>
 										<tr>
