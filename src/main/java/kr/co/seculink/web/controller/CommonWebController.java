@@ -137,4 +137,8 @@ public class CommonWebController {
 	@RequestMapping("/user/stdt/stdtInfoMng.pg")
 	public String getUserStdtStdtInfoMng() {return "user/stdt/stdtInfoMng";}
 
+	//신체활동수준 기준
+	@RequestMapping("/svcStnd/act/palStndMng.pg")
+	public String getSvcStndActPalStndMng() {return "svcStnd/act/palStndMng";}
+
 }

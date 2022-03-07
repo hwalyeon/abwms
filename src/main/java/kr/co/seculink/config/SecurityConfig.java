@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     		,"/fonts/**"
     		,"/font-awesome/**"
     		,"/uploads/**"
+    		,"/common/v1/heartbeat"
 	};
 	
 	@Autowired

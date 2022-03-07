@@ -47,23 +47,22 @@ let growStndMng = new Vue({
                 let sexCdList = commonGridCmonCd($this.code.sexCdList);
                 let colModels =
                     [
-                        {name: "crud"                         , index: "crud"                         , label: "crud"                           , hidden: true  },
-                        {name: "growStndNoTemp"  , index: "growStndNoTemp"  , label: "성장기준번호"           , hidden: true  },
-                        {name: "growStndVer"           , index: "growStndVer"           , label: "성장기준버전"           , width: 80  , align: "center"  , editable: true  },
-                        {name: "growStndNo"           , index: "growStndNo"            , label: "성장기준번호"           , width: 80  , align: "center"  , editable: true  , editrules: {number:true}  },
-                        {name: "sexCd"                      , index: "sexCd"                       , label: "성별"                          , width: 80   , align: "center"
-                         ,edittype : "select"                , formatter: "select"                 , editable: true                        , editoptions: {value: sexCdList}  },
-                        {name: "ageYcnt"                  , index: "ageYcnt"                    , label: "나이(년)"                    , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
-                        {name: "ageMcnt"                 , index: "ageMcnt"                   , label: "나이(개월)"                , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
-                        {name: "p3Gidx"                    , index: "p3Gidx"                     , label: "백분위3 성장지수"    , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
-                        {name: "p50Gidx"                  , index: "p50Gidx"                   , label: "백분위50 성장지수"  , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
-                        {name: "p97Gidx"                  , index: "p97Gidx"                   , label: "백분위97 성장지수"  , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
-                        {name: "regDt"                      , index: "regDt"                       , label: "등록일자"                   , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
-                        {name: "regTm"                     , index: "regTm"                      , label: "등록시각"                  , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
-                        {name: "regUserId"                , index: "regUserId"                , label: "등록사용자ID"           , width: 80   , align: "center"  },
-                        {name: "uptDt"                      , index: "uptDt"                       , label: "수정일자"                  , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
-                        {name: "uptTm"                     , index: "uptTm"                      , label: "수정시각"                  , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
-                        {name: "uptUserId"                , index: "uptUserId"                , label: "수정사용자ID"           , width: 80   , align: "center"  }
+                        {name: "crud"           , index: "crud"           , label: "crud"              , hidden: true  },
+                        {name: "growStndNoTemp" , index: "growStndNoTemp" , label: "성장기준번호"       , hidden: true  },
+                        {name: "growStndVer"    , index: "growStndVer"    , label: "성장기준버전"       , width: 80  , align: "center"  , editable: true  },
+                        {name: "growStndNo"     , index: "growStndNo"     , label: "성장기준번호"       , width: 80  , align: "center"  , editable: true  , editrules: {number:true}  },
+                        {name: "sexCd"          , index: "sexCd"          , label: "성별"              , width: 80   , align: "center"  , edittype : "select", formatter: "select", editable: true, editoptions: {value: sexCdList}  },
+                        {name: "ageYcnt"        , index: "ageYcnt"        , label: "나이(년)"          , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
+                        {name: "ageMcnt"        , index: "ageMcnt"        , label: "나이(개월)"        , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
+                        {name: "p3Gidx"         , index: "p3Gidx"         , label: "백분위3 성장지수"  , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
+                        {name: "p50Gidx"        , index: "p50Gidx"        , label: "백분위50 성장지수" , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
+                        {name: "p97Gidx"        , index: "p97Gidx"        , label: "백분위97 성장지수" , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
+                        {name: "regDt"          , index: "regDt"          , label: "등록일자"          , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
+                        {name: "regTm"          , index: "regTm"          , label: "등록시각"          , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
+                        {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"      , width: 80   , align: "center"  },
+                        {name: "uptDt"          , index: "uptDt"          , label: "수정일자"          , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
+                        {name: "uptTm"          , index: "uptTm"          , label: "수정시각"          , width: 80   , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
+                        {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"      , width: 80   , align: "center"  }
                     ];
 
                 $("#growStnd_list").jqGrid("GridUnload");
