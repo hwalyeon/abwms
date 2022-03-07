@@ -84,8 +84,7 @@ let palStndDetl = new Vue({
 				Swal.alert(['신체활동수준 섭취 비고를 입력하세요.', 'info']);
 				return false;
 			}
-
-			if ($this.palStndInfo.palValFr > $this.palStndInfo.palValTo) {
+			if (Number($this.palStndInfo.palValFr) > Number($this.palStndInfo.palValTo)) {
 				Swal.alert(['신체활동수준 값 From이 TO 보다 큽니다.', 'info']);
 				return false;
 			}
