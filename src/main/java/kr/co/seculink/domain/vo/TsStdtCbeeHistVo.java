@@ -28,9 +28,6 @@ public class TsStdtCbeeHistVo implements Serializable {
 	/* gram_no 전문_번호 numeric(null) */
 	private double gramNo;
 
-	/* cbee_alam_no 캐시비_알림_번호 numeric(null) */
-	private double cbeeAlamNo;
-
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -154,21 +151,6 @@ public class TsStdtCbeeHistVo implements Serializable {
 	 */
 	public void setGramNo(double gramNo) {
 		this.gramNo = gramNo;
-	}
-	/**
-	 * Get cbee_alam_no 캐시비_알림_번호 numeric(null)
-	 * @Return double cbeeAlamNo
-	 */
-	public double getCbeeAlamNo() {
-		return this.cbeeAlamNo;
-	}
-	
-	/**
-	 * Set cbee_alam_no 캐시비_알림_번호 numeric(null)
-	 * @Param double cbeeAlamNo
-	 */
-	public void setCbeeAlamNo(double cbeeAlamNo) {
-		this.cbeeAlamNo = cbeeAlamNo;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

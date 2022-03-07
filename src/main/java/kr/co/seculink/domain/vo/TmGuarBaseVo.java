@@ -28,9 +28,6 @@ public class TmGuarBaseVo implements Serializable {
 	/* devc_cert_val 장치_인증_값 character varying(1000) */
 	private String devcCertVal;
 
-	/* fcm_tokn_val FCM_토큰_값 character varying(100) */
-	private String fcmToknVal;
-
 	/* race_div_cd 인종_구분_코드 character varying(20) */
 	private String raceDivCd;
 
@@ -52,7 +49,7 @@ public class TmGuarBaseVo implements Serializable {
 	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
 	private String dzoneAlamYn;
 
-	/* szone_alam_yn 세이프존_알림_여부 character(1) */
+	/* szone_alam_yn 세 이프존_알림_여부 character(1) */
 	private String szoneAlamYn;
 
 	/* fall_alam_yn 낙상_알림_여부 character(1) */
@@ -220,21 +217,6 @@ public class TmGuarBaseVo implements Serializable {
 	 */
 	public void setDevcCertVal(String devcCertVal) {
 		this.devcCertVal = devcCertVal;
-	}
-	/**
-	 * Get fcm_tokn_val FCM_토큰_값 character varying(100)
-	 * @Return String fcmToknVal
-	 */
-	public String getFcmToknVal() {
-		return this.fcmToknVal;
-	}
-	
-	/**
-	 * Set fcm_tokn_val FCM_토큰_값 character varying(100)
-	 * @Param String fcmToknVal
-	 */
-	public void setFcmToknVal(String fcmToknVal) {
-		this.fcmToknVal = fcmToknVal;
 	}
 	/**
 	 * Get race_div_cd 인종_구분_코드 character varying(20)

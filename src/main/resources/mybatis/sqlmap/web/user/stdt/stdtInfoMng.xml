@@ -4,7 +4,8 @@
 
 
        <select id="searchStdtInfoList" parameterType="java.util.Map" resultType="MybatisMap">
-              select         B.ENTR_DT/*가입일자*/
+
+              select   B.ENTR_DT/*가입일자*/
               ,B.GUAR_NO/*학부모번호*/
               ,B.GUAR_NM/*학부모명*/
               ,C.SPOS_NM/*학부모명(배우자)*/
@@ -50,28 +51,29 @@
               TM_SPOS_BASE C
               on		 B.SPOS_NO   = C.SPOS_NO
               left outer join
+              TM_GUAR_APNT_PLC DD
+              on       B.GUAR_NO   = DD.GUAR_NO
+              left outer join
               TS_LOC_INFO_BASE D
-              on	     A.EORG_LOC_NO   = D.LOC_NO
+              on		 DD.LOC_NO   = D.LOC_NO
               left outer join
               TS_STDT_STRS_HIST F
-              on		 A.STDT_NO       = F.STDT_NO
-              and        A.STRS_HIST_SEQ = F.STRS_HIST_SEQ
+              on		 A.STDT_NO   = F.STDT_NO
               left outer join
               TS_STDT_DGEM_HIST H
-              on	     A.STDT_NO       = H.STDT_NO
-              and        A.DGEM_HIST_SEQ = H.DGEM_HIST_SEQ
-              and        A.LOC_HIST_NO   = H.LOC_HIST_NO
+              on	     A.STDT_NO   = H.STDT_NO
+              left outer join
+              TI_DGEM_STND E
+              on		 H.ACT_DIV_CD = E.ACT_DIV_CD
               left outer join
               TS_GFIX_HIST G
               on  	 A.STDT_NO     = G.STDT_NO
-              and    A.GFIX_DT     = G.GFIX_DT
               left outer join
               TS_BAND_INFO I
               on		 A.BAND_ID     = I.BAND_ID
               left outer join
               TS_STDT_CBEE_HIST K
               on		 A.CBEE_HIST_NO = K.CBEE_HIST_NO
-              and        A.STDT_NO      = K.STDT_NO
               where    1=1
        <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
         and B.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>

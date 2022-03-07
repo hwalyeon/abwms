@@ -10,6 +10,9 @@ public class TsStdtGrowHistVo implements Serializable {
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
+	/* grow_hist_seq 성장_기록_순번 numeric(null) */
+	private double growHistSeq;
+
 	/* mesu_dt 측정_일자 character(8) */
 	private String mesuDt;
 
@@ -64,6 +67,21 @@ public class TsStdtGrowHistVo implements Serializable {
 	 */
 	public void setStdtNo(double stdtNo) {
 		this.stdtNo = stdtNo;
+	}
+	/**
+	 * Get grow_hist_seq 성장_기록_순번 numeric(null)
+	 * @Return double growHistSeq
+	 */
+	public double getGrowHistSeq() {
+		return this.growHistSeq;
+	}
+	
+	/**
+	 * Set grow_hist_seq 성장_기록_순번 numeric(null)
+	 * @Param double growHistSeq
+	 */
+	public void setGrowHistSeq(double growHistSeq) {
+		this.growHistSeq = growHistSeq;
 	}
 	/**
 	 * Get mesu_dt 측정_일자 character(8)

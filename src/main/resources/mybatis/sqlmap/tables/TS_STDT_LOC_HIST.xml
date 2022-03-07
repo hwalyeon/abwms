@@ -17,8 +17,8 @@
                ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
                ,near_loc_no /* near_loc_no 인근_위치_번호 numeric */
                ,enl_div_cd /* enl_div_cd 등하원_구분_코드 character varying(20) */
-               ,ble_id /* ble_id BLE_ID character varying(40) */
-               ,loc_alam_no /* loc_alam_no 위치_알림_번호 numeric */
+               ,ble_id /* ble_id BLE_ID character varying(200) */
+               ,alam_no /* alam_no 알림_번호 numeric */
                ,judg_no /* judg_no 판정_번호 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -54,24 +54,20 @@
 		    ,enl_div_cd /* enl_div_cd 등하원_구분_코드 character varying(20) */
 		</if>
 		<if test="bleId != null">
-		    ,ble_id /* ble_id BLE_ID character varying(40) */
+		    ,ble_id /* ble_id BLE_ID character varying(200) */
 		</if>
-		<if test="locAlamNo != null">
-		    ,loc_alam_no /* loc_alam_no 위치_알림_번호 numeric */
+		<if test="alamNo != null">
+		    ,alam_no /* alam_no 알림_번호 numeric */
 		</if>
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -94,24 +90,20 @@
 		    ,#{enlDivCd} /* enl_div_cd 등하원_구분_코드 character varying(20) */
 		</if>
 		<if test="bleId != null">
-		    ,#{bleId} /* ble_id BLE_ID character varying(40) */
+		    ,#{bleId} /* ble_id BLE_ID character varying(200) */
 		</if>
-		<if test="locAlamNo != null">
-		    ,#{locAlamNo} /* loc_alam_no 위치_알림_번호 numeric */
+		<if test="alamNo != null">
+		    ,#{alamNo} /* alam_no 알림_번호 numeric */
 		</if>
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -141,10 +133,10 @@
 		    ,enl_div_cd = #{enlDivCd} /* enl_div_cd 등하원_구분_코드 character varying(20) */
 		</if>
 		<if test="bleId != null">
-		    ,ble_id = #{bleId} /* ble_id BLE_ID character varying(40) */
+		    ,ble_id = #{bleId} /* ble_id BLE_ID character varying(200) */
 		</if>
-		<if test="locAlamNo != null">
-		    ,loc_alam_no = #{locAlamNo} /* loc_alam_no 위치_알림_번호 numeric */
+		<if test="alamNo != null">
+		    ,alam_no = #{alamNo} /* alam_no 알림_번호 numeric */
 		</if>
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
@@ -182,24 +174,20 @@
 		    ,enl_div_cd /* enl_div_cd 등하원_구분_코드 character varying(20) */
 		</if>
 		<if test="bleId != null">
-		    ,ble_id /* ble_id BLE_ID character varying(40) */
+		    ,ble_id /* ble_id BLE_ID character varying(200) */
 		</if>
-		<if test="locAlamNo != null">
-		    ,loc_alam_no /* loc_alam_no 위치_알림_번호 numeric */
+		<if test="alamNo != null">
+		    ,alam_no /* alam_no 알림_번호 numeric */
 		</if>
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -222,24 +210,20 @@
 		    ,#{enlDivCd} /* enl_div_cd 등하원_구분_코드 character varying(20) */
 		</if>
 		<if test="bleId != null">
-		    ,#{bleId} /* ble_id BLE_ID character varying(40) */
+		    ,#{bleId} /* ble_id BLE_ID character varying(200) */
 		</if>
-		<if test="locAlamNo != null">
-		    ,#{locAlamNo} /* loc_alam_no 위치_알림_번호 numeric */
+		<if test="alamNo != null">
+		    ,#{alamNo} /* alam_no 알림_번호 numeric */
 		</if>
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT
 		DO UPDATE
@@ -266,10 +250,10 @@
 		    ,enl_div_cd = #{enlDivCd} /* enl_div_cd 등하원_구분_코드 character varying(20) */
 		</if>
 		<if test="bleId != null">
-		    ,ble_id = #{bleId} /* ble_id BLE_ID character varying(40) */
+		    ,ble_id = #{bleId} /* ble_id BLE_ID character varying(200) */
 		</if>
-		<if test="locAlamNo != null">
-		    ,loc_alam_no = #{locAlamNo} /* loc_alam_no 위치_알림_번호 numeric */
+		<if test="alamNo != null">
+		    ,alam_no = #{alamNo} /* alam_no 알림_번호 numeric */
 		</if>
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */

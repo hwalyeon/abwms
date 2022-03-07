@@ -10,6 +10,7 @@
 	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo" resultType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
 		/* Generated SQL SQL ID : ts_stdt_grow_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
+               ,grow_hist_seq /* grow_hist_seq 성장_기록_순번 numeric */
                ,mesu_dt /* mesu_dt 측정_일자 character(8) */
                ,hght_unit_cd /* hght_unit_cd 키_단위_코드 character varying(20) */
                ,hght_val /* hght_val 키_값 numeric */
@@ -26,7 +27,7 @@
         FROM   ts_stdt_grow_hist
 		WHERE  1 = 1
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
-		AND    mesu_dt = #{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		AND    grow_hist_seq = #{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
 	</select>
 
 	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
@@ -34,7 +35,10 @@
 		INSERT INTO ts_stdt_grow_hist
 		(
 		     stdt_no /* stdt_no 학생_번호 numeric */
+		    ,grow_hist_seq /* grow_hist_seq 성장_기록_순번 numeric */
+		<if test="mesuDt != null">
 		    ,mesu_dt /* mesu_dt 측정_일자 character(8) */
+		</if>
 		<if test="hghtUnitCd != null">
 		    ,hght_unit_cd /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
@@ -49,19 +53,18 @@
 		    ,wast_val /* wast_val 허리_값 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		     #{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
+		<if test="mesuDt != null">
+		    ,#{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		</if>
 		<if test="hghtUnitCd != null">
 		    ,#{hghtUnitCd} /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
@@ -76,14 +79,10 @@
 		    ,#{wastVal} /* wast_val 허리_값 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -91,6 +90,9 @@
 		/* Generated SQL SQL ID : ts_stdt_grow_hist.update */
 		UPDATE ts_stdt_grow_hist
 		<trim prefix="SET" prefixOverrides=",">
+		<if test="mesuDt != null">
+		    ,mesu_dt = #{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		</if>
 		<if test="hghtUnitCd != null">
 		    ,hght_unit_cd = #{hghtUnitCd} /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
@@ -117,7 +119,7 @@
 		</trim>
 		WHERE  1 = 1
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
-		AND    mesu_dt = #{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		AND    grow_hist_seq = #{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
 	</update>
 	
 	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
@@ -125,7 +127,10 @@
 		INSERT INTO ts_stdt_grow_hist
 		(
 		     stdt_no /* stdt_no 학생_번호 numeric */
-		     mesu_dt /* mesu_dt 측정_일자 character(8) */
+		     grow_hist_seq /* grow_hist_seq 성장_기록_순번 numeric */
+		<if test="mesuDt != null">
+		    ,mesu_dt /* mesu_dt 측정_일자 character(8) */
+		</if>
 		<if test="hghtUnitCd != null">
 		    ,hght_unit_cd /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
@@ -140,19 +145,18 @@
 		    ,wast_val /* wast_val 허리_값 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		     #{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
+		<if test="mesuDt != null">
+		    ,#{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		</if>
 		<if test="hghtUnitCd != null">
 		    ,#{hghtUnitCd} /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
@@ -167,18 +171,17 @@
 		    ,#{wastVal} /* wast_val 허리_값 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
+		<if test="mesuDt != null">
+		    ,mesu_dt = #{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		</if>
 		<if test="hghtUnitCd != null">
 		    ,hght_unit_cd = #{hghtUnitCd} /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
@@ -210,6 +213,6 @@
 		DELETE FROM ts_stdt_grow_hist
 		WHERE  1 = 1
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
-		AND    mesu_dt = #{mesuDt} /* mesu_dt 측정_일자 character(8) */
+		AND    grow_hist_seq = #{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
 	</delete>
 </mapper>

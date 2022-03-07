@@ -46,11 +46,8 @@ public class TmStdtBaseVo implements Serializable {
 	/* band_chrg_qty 밴드_충전_량 numeric(null) */
 	private double bandChrgQty;
 
-	/* band_alam_no 밴드_알림_번호 numeric(null) */
-	private double bandAlamNo;
-
-	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	/* grow_hist_seq 성장_기록_순번 numeric(null) */
+	private double growHistSeq;
 
 	/* dact_judg_no 위험활동_판정_번호 numeric(null) */
 	private double dactJudgNo;
@@ -69,9 +66,6 @@ public class TmStdtBaseVo implements Serializable {
 
 	/* gfix_dt 성장비만지수_일자 character(8) */
 	private String gfixDt;
-
-	/* grow_mesu_dt 성장_측정_일자 character(8) */
-	private String growMesuDt;
 
 	/* ambr_yn 미아_여부 character(1) */
 	private String ambrYn;
@@ -294,34 +288,19 @@ public class TmStdtBaseVo implements Serializable {
 		this.bandChrgQty = bandChrgQty;
 	}
 	/**
-	 * Get band_alam_no 밴드_알림_번호 numeric(null)
-	 * @Return double bandAlamNo
+	 * Get grow_hist_seq 성장_기록_순번 numeric(null)
+	 * @Return double growHistSeq
 	 */
-	public double getBandAlamNo() {
-		return this.bandAlamNo;
+	public double getGrowHistSeq() {
+		return this.growHistSeq;
 	}
 	
 	/**
-	 * Set band_alam_no 밴드_알림_번호 numeric(null)
-	 * @Param double bandAlamNo
+	 * Set grow_hist_seq 성장_기록_순번 numeric(null)
+	 * @Param double growHistSeq
 	 */
-	public void setBandAlamNo(double bandAlamNo) {
-		this.bandAlamNo = bandAlamNo;
-	}
-	/**
-	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
-	 */
-	public double getJudgNo() {
-		return this.judgNo;
-	}
-	
-	/**
-	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
-	 */
-	public void setJudgNo(double judgNo) {
-		this.judgNo = judgNo;
+	public void setGrowHistSeq(double growHistSeq) {
+		this.growHistSeq = growHistSeq;
 	}
 	/**
 	 * Get dact_judg_no 위험활동_판정_번호 numeric(null)
@@ -412,21 +391,6 @@ public class TmStdtBaseVo implements Serializable {
 	 */
 	public void setGfixDt(String gfixDt) {
 		this.gfixDt = gfixDt;
-	}
-	/**
-	 * Get grow_mesu_dt 성장_측정_일자 character(8)
-	 * @Return String growMesuDt
-	 */
-	public String getGrowMesuDt() {
-		return this.growMesuDt;
-	}
-	
-	/**
-	 * Set grow_mesu_dt 성장_측정_일자 character(8)
-	 * @Param String growMesuDt
-	 */
-	public void setGrowMesuDt(String growMesuDt) {
-		this.growMesuDt = growMesuDt;
 	}
 	/**
 	 * Get ambr_yn 미아_여부 character(1)

@@ -7,81 +7,69 @@ import java.io.Serializable;
  */
 public class TsStdtDgemHistVo implements Serializable {
 
-	/* stdt_no 학생_번호 numeric(null) */
+	/* stdt_no null numeric(null) */
 	private double stdtNo;
 
-	/* dgem_hist_seq 위험감정_이력_순번 numeric(null) */
+	/* dgem_hist_seq null numeric(null) */
 	private double dgemHistSeq;
 
-	/* dgem_dttm 위험감정_일시 character(14) */
-	private String dgemDttm;
-
-	/* dgem_idx 위험감정_지수 numeric(null) */
-	private double dgemIdx;
-
-	/* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
-	private String dgemStatCd;
-
-	/* dgem_smry_cntn 위험감정_요약_내용 character varying(200) */
-	private String dgemSmryCntn;
-
-	/* dgem_stat_cntn 위험감정_상태_내용 text(null) */
-	private String dgemStatCntn;
-
-	/* loc_hist_no 위치_이력_번호 numeric(null) */
+	/* loc_hist_no null numeric(null) */
 	private double locHistNo;
 
-	/* curr_lat_val 현재_위도_값 numeric(null) */
+	/* curr_lat_val null numeric(null) */
 	private double currLatVal;
 
-	/* curr_lon_val 현재_경도_값 numeric(null) */
+	/* curr_lon_val null numeric(null) */
 	private double currLonVal;
 
-	/* loc_mesu_dttm 위치_측정_일시 character(14) */
+	/* loc_mesu_dttm null character(14) */
 	private String locMesuDttm;
 
-	/* act_div_cd 활동_구분_코드 character varying(20) */
+	/* dgem_idx null numeric(null) */
+	private double dgemIdx;
+
+	/* dgem_stat_cd null character varying(20) */
+	private String dgemStatCd;
+
+	/* act_div_cd null character varying(20) */
 	private String actDivCd;
 
-	/* hbit_stat_cd 심박_상태_코드 character varying(20) */
+	/* hbit_stat_cd null character varying(20) */
 	private String hbitStatCd;
 
-	/* plc_clss_cd 장소_분류_코드 character varying(20) */
+	/* plc_clss_cd null character varying(20) */
 	private String plcClssCd;
 
-	/* temp_stat_cd 체온_상태_코드 character varying(20) */
+	/* temp_stat_cd null character varying(20) */
 	private String tempStatCd;
 
-	/* judg_no 판정_번호 numeric(null) */
+	/* judg_no null numeric(null) */
 	private double judgNo;
 
-	/* rmrk 비고 character varying(4000) */
+	/* rmrk null character varying(4000) */
 	private String rmrk;
 
-	/* dgem_alam_no 위험감정_알림_번호 numeric(null) */
-	private double dgemAlamNo;
-
-	/* reg_dt 등록_일자 character(8) */
+	/* reg_dt null character(8) */
 	private String regDt;
 
-	/* reg_tm 등록_시각 character(6) */
+	/* reg_tm null character(6) */
 	private String regTm;
 
-	/* reg_user_id 등록_사용자_ID character varying(20) */
+	/* reg_user_id null character varying(20) */
 	private String regUserId;
 
-	/* upt_dt 수정_일자 character(8) */
+	/* upt_dt null character(8) */
 	private String uptDt;
 
-	/* upt_tm 수정_시각 character(6) */
+	/* upt_tm null character(6) */
 	private String uptTm;
 
-	/* upt_user_id 수정_사용자_ID character varying(20) */
+	/* upt_user_id null character varying(20) */
 	private String uptUserId;
 
 
 	/**
-	 * Get stdt_no 학생_번호 numeric(null)
+	 * Get stdt_no null numeric(null)
 	 * @Return double stdtNo
 	 */
 	public double getStdtNo() {
@@ -89,14 +77,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set stdt_no 학생_번호 numeric(null)
+	 * Set stdt_no null numeric(null)
 	 * @Param double stdtNo
 	 */
 	public void setStdtNo(double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
-	 * Get dgem_hist_seq 위험감정_이력_순번 numeric(null)
+	 * Get dgem_hist_seq null numeric(null)
 	 * @Return double dgemHistSeq
 	 */
 	public double getDgemHistSeq() {
@@ -104,89 +92,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set dgem_hist_seq 위험감정_이력_순번 numeric(null)
+	 * Set dgem_hist_seq null numeric(null)
 	 * @Param double dgemHistSeq
 	 */
 	public void setDgemHistSeq(double dgemHistSeq) {
 		this.dgemHistSeq = dgemHistSeq;
 	}
 	/**
-	 * Get dgem_dttm 위험감정_일시 character(14)
-	 * @Return String dgemDttm
-	 */
-	public String getDgemDttm() {
-		return this.dgemDttm;
-	}
-	
-	/**
-	 * Set dgem_dttm 위험감정_일시 character(14)
-	 * @Param String dgemDttm
-	 */
-	public void setDgemDttm(String dgemDttm) {
-		this.dgemDttm = dgemDttm;
-	}
-	/**
-	 * Get dgem_idx 위험감정_지수 numeric(null)
-	 * @Return double dgemIdx
-	 */
-	public double getDgemIdx() {
-		return this.dgemIdx;
-	}
-	
-	/**
-	 * Set dgem_idx 위험감정_지수 numeric(null)
-	 * @Param double dgemIdx
-	 */
-	public void setDgemIdx(double dgemIdx) {
-		this.dgemIdx = dgemIdx;
-	}
-	/**
-	 * Get dgem_stat_cd 위험감정_상태_코드 character varying(20)
-	 * @Return String dgemStatCd
-	 */
-	public String getDgemStatCd() {
-		return this.dgemStatCd;
-	}
-	
-	/**
-	 * Set dgem_stat_cd 위험감정_상태_코드 character varying(20)
-	 * @Param String dgemStatCd
-	 */
-	public void setDgemStatCd(String dgemStatCd) {
-		this.dgemStatCd = dgemStatCd;
-	}
-	/**
-	 * Get dgem_smry_cntn 위험감정_요약_내용 character varying(200)
-	 * @Return String dgemSmryCntn
-	 */
-	public String getDgemSmryCntn() {
-		return this.dgemSmryCntn;
-	}
-	
-	/**
-	 * Set dgem_smry_cntn 위험감정_요약_내용 character varying(200)
-	 * @Param String dgemSmryCntn
-	 */
-	public void setDgemSmryCntn(String dgemSmryCntn) {
-		this.dgemSmryCntn = dgemSmryCntn;
-	}
-	/**
-	 * Get dgem_stat_cntn 위험감정_상태_내용 text(null)
-	 * @Return String dgemStatCntn
-	 */
-	public String getDgemStatCntn() {
-		return this.dgemStatCntn;
-	}
-	
-	/**
-	 * Set dgem_stat_cntn 위험감정_상태_내용 text(null)
-	 * @Param String dgemStatCntn
-	 */
-	public void setDgemStatCntn(String dgemStatCntn) {
-		this.dgemStatCntn = dgemStatCntn;
-	}
-	/**
-	 * Get loc_hist_no 위치_이력_번호 numeric(null)
+	 * Get loc_hist_no null numeric(null)
 	 * @Return double locHistNo
 	 */
 	public double getLocHistNo() {
@@ -194,14 +107,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set loc_hist_no 위치_이력_번호 numeric(null)
+	 * Set loc_hist_no null numeric(null)
 	 * @Param double locHistNo
 	 */
 	public void setLocHistNo(double locHistNo) {
 		this.locHistNo = locHistNo;
 	}
 	/**
-	 * Get curr_lat_val 현재_위도_값 numeric(null)
+	 * Get curr_lat_val null numeric(null)
 	 * @Return double currLatVal
 	 */
 	public double getCurrLatVal() {
@@ -209,14 +122,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set curr_lat_val 현재_위도_값 numeric(null)
+	 * Set curr_lat_val null numeric(null)
 	 * @Param double currLatVal
 	 */
 	public void setCurrLatVal(double currLatVal) {
 		this.currLatVal = currLatVal;
 	}
 	/**
-	 * Get curr_lon_val 현재_경도_값 numeric(null)
+	 * Get curr_lon_val null numeric(null)
 	 * @Return double currLonVal
 	 */
 	public double getCurrLonVal() {
@@ -224,14 +137,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set curr_lon_val 현재_경도_값 numeric(null)
+	 * Set curr_lon_val null numeric(null)
 	 * @Param double currLonVal
 	 */
 	public void setCurrLonVal(double currLonVal) {
 		this.currLonVal = currLonVal;
 	}
 	/**
-	 * Get loc_mesu_dttm 위치_측정_일시 character(14)
+	 * Get loc_mesu_dttm null character(14)
 	 * @Return String locMesuDttm
 	 */
 	public String getLocMesuDttm() {
@@ -239,14 +152,44 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set loc_mesu_dttm 위치_측정_일시 character(14)
+	 * Set loc_mesu_dttm null character(14)
 	 * @Param String locMesuDttm
 	 */
 	public void setLocMesuDttm(String locMesuDttm) {
 		this.locMesuDttm = locMesuDttm;
 	}
 	/**
-	 * Get act_div_cd 활동_구분_코드 character varying(20)
+	 * Get dgem_idx null numeric(null)
+	 * @Return double dgemIdx
+	 */
+	public double getDgemIdx() {
+		return this.dgemIdx;
+	}
+	
+	/**
+	 * Set dgem_idx null numeric(null)
+	 * @Param double dgemIdx
+	 */
+	public void setDgemIdx(double dgemIdx) {
+		this.dgemIdx = dgemIdx;
+	}
+	/**
+	 * Get dgem_stat_cd null character varying(20)
+	 * @Return String dgemStatCd
+	 */
+	public String getDgemStatCd() {
+		return this.dgemStatCd;
+	}
+	
+	/**
+	 * Set dgem_stat_cd null character varying(20)
+	 * @Param String dgemStatCd
+	 */
+	public void setDgemStatCd(String dgemStatCd) {
+		this.dgemStatCd = dgemStatCd;
+	}
+	/**
+	 * Get act_div_cd null character varying(20)
 	 * @Return String actDivCd
 	 */
 	public String getActDivCd() {
@@ -254,14 +197,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set act_div_cd 활동_구분_코드 character varying(20)
+	 * Set act_div_cd null character varying(20)
 	 * @Param String actDivCd
 	 */
 	public void setActDivCd(String actDivCd) {
 		this.actDivCd = actDivCd;
 	}
 	/**
-	 * Get hbit_stat_cd 심박_상태_코드 character varying(20)
+	 * Get hbit_stat_cd null character varying(20)
 	 * @Return String hbitStatCd
 	 */
 	public String getHbitStatCd() {
@@ -269,14 +212,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set hbit_stat_cd 심박_상태_코드 character varying(20)
+	 * Set hbit_stat_cd null character varying(20)
 	 * @Param String hbitStatCd
 	 */
 	public void setHbitStatCd(String hbitStatCd) {
 		this.hbitStatCd = hbitStatCd;
 	}
 	/**
-	 * Get plc_clss_cd 장소_분류_코드 character varying(20)
+	 * Get plc_clss_cd null character varying(20)
 	 * @Return String plcClssCd
 	 */
 	public String getPlcClssCd() {
@@ -284,14 +227,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set plc_clss_cd 장소_분류_코드 character varying(20)
+	 * Set plc_clss_cd null character varying(20)
 	 * @Param String plcClssCd
 	 */
 	public void setPlcClssCd(String plcClssCd) {
 		this.plcClssCd = plcClssCd;
 	}
 	/**
-	 * Get temp_stat_cd 체온_상태_코드 character varying(20)
+	 * Get temp_stat_cd null character varying(20)
 	 * @Return String tempStatCd
 	 */
 	public String getTempStatCd() {
@@ -299,14 +242,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set temp_stat_cd 체온_상태_코드 character varying(20)
+	 * Set temp_stat_cd null character varying(20)
 	 * @Param String tempStatCd
 	 */
 	public void setTempStatCd(String tempStatCd) {
 		this.tempStatCd = tempStatCd;
 	}
 	/**
-	 * Get judg_no 판정_번호 numeric(null)
+	 * Get judg_no null numeric(null)
 	 * @Return double judgNo
 	 */
 	public double getJudgNo() {
@@ -314,14 +257,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set judg_no 판정_번호 numeric(null)
+	 * Set judg_no null numeric(null)
 	 * @Param double judgNo
 	 */
 	public void setJudgNo(double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**
-	 * Get rmrk 비고 character varying(4000)
+	 * Get rmrk null character varying(4000)
 	 * @Return String rmrk
 	 */
 	public String getRmrk() {
@@ -329,29 +272,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set rmrk 비고 character varying(4000)
+	 * Set rmrk null character varying(4000)
 	 * @Param String rmrk
 	 */
 	public void setRmrk(String rmrk) {
 		this.rmrk = rmrk;
 	}
 	/**
-	 * Get dgem_alam_no 위험감정_알림_번호 numeric(null)
-	 * @Return double dgemAlamNo
-	 */
-	public double getDgemAlamNo() {
-		return this.dgemAlamNo;
-	}
-	
-	/**
-	 * Set dgem_alam_no 위험감정_알림_번호 numeric(null)
-	 * @Param double dgemAlamNo
-	 */
-	public void setDgemAlamNo(double dgemAlamNo) {
-		this.dgemAlamNo = dgemAlamNo;
-	}
-	/**
-	 * Get reg_dt 등록_일자 character(8)
+	 * Get reg_dt null character(8)
 	 * @Return String regDt
 	 */
 	public String getRegDt() {
@@ -359,14 +287,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set reg_dt 등록_일자 character(8)
+	 * Set reg_dt null character(8)
 	 * @Param String regDt
 	 */
 	public void setRegDt(String regDt) {
 		this.regDt = regDt;
 	}
 	/**
-	 * Get reg_tm 등록_시각 character(6)
+	 * Get reg_tm null character(6)
 	 * @Return String regTm
 	 */
 	public String getRegTm() {
@@ -374,14 +302,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set reg_tm 등록_시각 character(6)
+	 * Set reg_tm null character(6)
 	 * @Param String regTm
 	 */
 	public void setRegTm(String regTm) {
 		this.regTm = regTm;
 	}
 	/**
-	 * Get reg_user_id 등록_사용자_ID character varying(20)
+	 * Get reg_user_id null character varying(20)
 	 * @Return String regUserId
 	 */
 	public String getRegUserId() {
@@ -389,14 +317,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set reg_user_id 등록_사용자_ID character varying(20)
+	 * Set reg_user_id null character varying(20)
 	 * @Param String regUserId
 	 */
 	public void setRegUserId(String regUserId) {
 		this.regUserId = regUserId;
 	}
 	/**
-	 * Get upt_dt 수정_일자 character(8)
+	 * Get upt_dt null character(8)
 	 * @Return String uptDt
 	 */
 	public String getUptDt() {
@@ -404,14 +332,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set upt_dt 수정_일자 character(8)
+	 * Set upt_dt null character(8)
 	 * @Param String uptDt
 	 */
 	public void setUptDt(String uptDt) {
 		this.uptDt = uptDt;
 	}
 	/**
-	 * Get upt_tm 수정_시각 character(6)
+	 * Get upt_tm null character(6)
 	 * @Return String uptTm
 	 */
 	public String getUptTm() {
@@ -419,14 +347,14 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set upt_tm 수정_시각 character(6)
+	 * Set upt_tm null character(6)
 	 * @Param String uptTm
 	 */
 	public void setUptTm(String uptTm) {
 		this.uptTm = uptTm;
 	}
 	/**
-	 * Get upt_user_id 수정_사용자_ID character varying(20)
+	 * Get upt_user_id null character varying(20)
 	 * @Return String uptUserId
 	 */
 	public String getUptUserId() {
@@ -434,7 +362,7 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set upt_user_id 수정_사용자_ID character varying(20)
+	 * Set upt_user_id null character varying(20)
 	 * @Param String uptUserId
 	 */
 	public void setUptUserId(String uptUserId) {

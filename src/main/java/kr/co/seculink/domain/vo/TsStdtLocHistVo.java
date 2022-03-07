@@ -31,11 +31,11 @@ public class TsStdtLocHistVo implements Serializable {
 	/* enl_div_cd 등하원_구분_코드 character varying(20) */
 	private String enlDivCd;
 
-	/* ble_id BLE_ID character varying(40) */
+	/* ble_id BLE_ID character varying(200) */
 	private String bleId;
 
-	/* loc_alam_no 위치_알림_번호 numeric(null) */
-	private double locAlamNo;
+	/* alam_no 알림_번호 numeric(null) */
+	private double alamNo;
 
 	/* judg_no 판정_번호 numeric(null) */
 	private double judgNo;
@@ -180,7 +180,7 @@ public class TsStdtLocHistVo implements Serializable {
 		this.enlDivCd = enlDivCd;
 	}
 	/**
-	 * Get ble_id BLE_ID character varying(40)
+	 * Get ble_id BLE_ID character varying(200)
 	 * @Return String bleId
 	 */
 	public String getBleId() {
@@ -188,26 +188,26 @@ public class TsStdtLocHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set ble_id BLE_ID character varying(40)
+	 * Set ble_id BLE_ID character varying(200)
 	 * @Param String bleId
 	 */
 	public void setBleId(String bleId) {
 		this.bleId = bleId;
 	}
 	/**
-	 * Get loc_alam_no 위치_알림_번호 numeric(null)
-	 * @Return double locAlamNo
+	 * Get alam_no 알림_번호 numeric(null)
+	 * @Return double alamNo
 	 */
-	public double getLocAlamNo() {
-		return this.locAlamNo;
+	public double getAlamNo() {
+		return this.alamNo;
 	}
 	
 	/**
-	 * Set loc_alam_no 위치_알림_번호 numeric(null)
-	 * @Param double locAlamNo
+	 * Set alam_no 알림_번호 numeric(null)
+	 * @Param double alamNo
 	 */
-	public void setLocAlamNo(double locAlamNo) {
-		this.locAlamNo = locAlamNo;
+	public void setAlamNo(double alamNo) {
+		this.alamNo = alamNo;
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)

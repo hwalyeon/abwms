@@ -49,9 +49,6 @@ public class TsLocInfoBaseVo implements Serializable {
 	/* addr_spec 주소_상세 character varying(200) */
 	private String addrSpec;
 
-	/* del_yn 삭제_여부 character(1) */
-	private String delYn;
-
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -280,21 +277,6 @@ public class TsLocInfoBaseVo implements Serializable {
 	 */
 	public void setAddrSpec(String addrSpec) {
 		this.addrSpec = addrSpec;
-	}
-	/**
-	 * Get del_yn 삭제_여부 character(1)
-	 * @Return String delYn
-	 */
-	public String getDelYn() {
-		return this.delYn;
-	}
-	
-	/**
-	 * Set del_yn 삭제_여부 character(1)
-	 * @Param String delYn
-	 */
-	public void setDelYn(String delYn) {
-		this.delYn = delYn;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

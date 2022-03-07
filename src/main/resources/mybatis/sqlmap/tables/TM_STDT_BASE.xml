@@ -22,15 +22,13 @@
                ,band_stat_cd /* band_stat_cd 밴드_상태_코드 character varying(20) */
                ,band_comm_dttm /* band_comm_dttm 밴드_통신_일시 character(14) */
                ,band_chrg_qty /* band_chrg_qty 밴드_충전_량 numeric */
-               ,band_alam_no /* band_alam_no 밴드_알림_번호 numeric */
-               ,judg_no /* judg_no 판정_번호 numeric */
+               ,grow_hist_seq /* grow_hist_seq 성장_기록_순번 numeric */
                ,dact_judg_no /* dact_judg_no 위험활동_판정_번호 numeric */
                ,dgem_hist_seq /* dgem_hist_seq 위험감정_이력_순번 numeric */
                ,strs_hist_seq /* strs_hist_seq 스트레스_이력_순번 numeric */
                ,loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
                ,cbee_hist_no /* cbee_hist_no 캐시비_이력_번호 numeric */
                ,gfix_dt /* gfix_dt 성장비만지수_일자 character(8) */
-               ,grow_mesu_dt /* grow_mesu_dt 성장_측정_일자 character(8) */
                ,ambr_yn /* ambr_yn 미아_여부 character(1) */
                ,ambr_dtct_dttm /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -83,11 +81,8 @@
 		    ,band_comm_dttm /* band_comm_dttm 밴드_통신_일시 character(14) */
 		</if>
 		    ,band_chrg_qty /* band_chrg_qty 밴드_충전_량 numeric */
-		<if test="bandAlamNo != null">
-		    ,band_alam_no /* band_alam_no 밴드_알림_번호 numeric */
-		</if>
-		<if test="judgNo != null">
-		    ,judg_no /* judg_no 판정_번호 numeric */
+		<if test="growHistSeq != null">
+		    ,grow_hist_seq /* grow_hist_seq 성장_기록_순번 numeric */
 		</if>
 		<if test="dactJudgNo != null">
 		    ,dact_judg_no /* dact_judg_no 위험활동_판정_번호 numeric */
@@ -107,12 +102,7 @@
 		<if test="gfixDt != null">
 		    ,gfix_dt /* gfix_dt 성장비만지수_일자 character(8) */
 		</if>
-		<if test="growMesuDt != null">
-		    ,grow_mesu_dt /* grow_mesu_dt 성장_측정_일자 character(8) */
-		</if>
-		<if test="ambrYn != null">
 		    ,ambr_yn /* ambr_yn 미아_여부 character(1) */
-		</if>
 		<if test="ambrDtctDttm != null">
 		    ,ambr_dtct_dttm /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
@@ -164,11 +154,8 @@
 		    ,#{bandCommDttm} /* band_comm_dttm 밴드_통신_일시 character(14) */
 		</if>
 		    ,#{bandChrgQty} /* band_chrg_qty 밴드_충전_량 numeric */
-		<if test="bandAlamNo != null">
-		    ,#{bandAlamNo} /* band_alam_no 밴드_알림_번호 numeric */
-		</if>
-		<if test="judgNo != null">
-		    ,#{judgNo} /* judg_no 판정_번호 numeric */
+		<if test="growHistSeq != null">
+		    ,#{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
 		</if>
 		<if test="dactJudgNo != null">
 		    ,#{dactJudgNo} /* dact_judg_no 위험활동_판정_번호 numeric */
@@ -188,12 +175,7 @@
 		<if test="gfixDt != null">
 		    ,#{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
 		</if>
-		<if test="growMesuDt != null">
-		    ,#{growMesuDt} /* grow_mesu_dt 성장_측정_일자 character(8) */
-		</if>
-		<if test="ambrYn != null">
 		    ,#{ambrYn} /* ambr_yn 미아_여부 character(1) */
-		</if>
 		<if test="ambrDtctDttm != null">
 		    ,#{ambrDtctDttm} /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
@@ -250,11 +232,8 @@
 		<if test="bandChrgQty != null">
 		    ,band_chrg_qty = #{bandChrgQty} /* band_chrg_qty 밴드_충전_량 numeric */
 		</if>
-		<if test="bandAlamNo != null">
-		    ,band_alam_no = #{bandAlamNo} /* band_alam_no 밴드_알림_번호 numeric */
-		</if>
-		<if test="judgNo != null">
-		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
+		<if test="growHistSeq != null">
+		    ,grow_hist_seq = #{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
 		</if>
 		<if test="dactJudgNo != null">
 		    ,dact_judg_no = #{dactJudgNo} /* dact_judg_no 위험활동_판정_번호 numeric */
@@ -273,9 +252,6 @@
 		</if>
 		<if test="gfixDt != null">
 		    ,gfix_dt = #{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
-		</if>
-		<if test="growMesuDt != null">
-		    ,grow_mesu_dt = #{growMesuDt} /* grow_mesu_dt 성장_측정_일자 character(8) */
 		</if>
 		<if test="ambrYn != null">
 		    ,ambr_yn = #{ambrYn} /* ambr_yn 미아_여부 character(1) */
@@ -332,11 +308,8 @@
 		    ,band_comm_dttm /* band_comm_dttm 밴드_통신_일시 character(14) */
 		</if>
 		    ,band_chrg_qty /* band_chrg_qty 밴드_충전_량 numeric */
-		<if test="bandAlamNo != null">
-		    ,band_alam_no /* band_alam_no 밴드_알림_번호 numeric */
-		</if>
-		<if test="judgNo != null">
-		    ,judg_no /* judg_no 판정_번호 numeric */
+		<if test="growHistSeq != null">
+		    ,grow_hist_seq /* grow_hist_seq 성장_기록_순번 numeric */
 		</if>
 		<if test="dactJudgNo != null">
 		    ,dact_judg_no /* dact_judg_no 위험활동_판정_번호 numeric */
@@ -356,12 +329,7 @@
 		<if test="gfixDt != null">
 		    ,gfix_dt /* gfix_dt 성장비만지수_일자 character(8) */
 		</if>
-		<if test="growMesuDt != null">
-		    ,grow_mesu_dt /* grow_mesu_dt 성장_측정_일자 character(8) */
-		</if>
-		<if test="ambrYn != null">
 		    ,ambr_yn /* ambr_yn 미아_여부 character(1) */
-		</if>
 		<if test="ambrDtctDttm != null">
 		    ,ambr_dtct_dttm /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
@@ -413,11 +381,8 @@
 		    ,#{bandCommDttm} /* band_comm_dttm 밴드_통신_일시 character(14) */
 		</if>
 		    ,#{bandChrgQty} /* band_chrg_qty 밴드_충전_량 numeric */
-		<if test="bandAlamNo != null">
-		    ,#{bandAlamNo} /* band_alam_no 밴드_알림_번호 numeric */
-		</if>
-		<if test="judgNo != null">
-		    ,#{judgNo} /* judg_no 판정_번호 numeric */
+		<if test="growHistSeq != null">
+		    ,#{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
 		</if>
 		<if test="dactJudgNo != null">
 		    ,#{dactJudgNo} /* dact_judg_no 위험활동_판정_번호 numeric */
@@ -437,12 +402,7 @@
 		<if test="gfixDt != null">
 		    ,#{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
 		</if>
-		<if test="growMesuDt != null">
-		    ,#{growMesuDt} /* grow_mesu_dt 성장_측정_일자 character(8) */
-		</if>
-		<if test="ambrYn != null">
 		    ,#{ambrYn} /* ambr_yn 미아_여부 character(1) */
-		</if>
 		<if test="ambrDtctDttm != null">
 		    ,#{ambrDtctDttm} /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
@@ -496,11 +456,8 @@
 		<if test="bandChrgQty != null">
 		    ,band_chrg_qty = #{bandChrgQty} /* band_chrg_qty 밴드_충전_량 numeric */
 		</if>
-		<if test="bandAlamNo != null">
-		    ,band_alam_no = #{bandAlamNo} /* band_alam_no 밴드_알림_번호 numeric */
-		</if>
-		<if test="judgNo != null">
-		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
+		<if test="growHistSeq != null">
+		    ,grow_hist_seq = #{growHistSeq} /* grow_hist_seq 성장_기록_순번 numeric */
 		</if>
 		<if test="dactJudgNo != null">
 		    ,dact_judg_no = #{dactJudgNo} /* dact_judg_no 위험활동_판정_번호 numeric */
@@ -519,9 +476,6 @@
 		</if>
 		<if test="gfixDt != null">
 		    ,gfix_dt = #{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
-		</if>
-		<if test="growMesuDt != null">
-		    ,grow_mesu_dt = #{growMesuDt} /* grow_mesu_dt 성장_측정_일자 character(8) */
 		</if>
 		<if test="ambrYn != null">
 		    ,ambr_yn = #{ambrYn} /* ambr_yn 미아_여부 character(1) */

@@ -34,11 +34,11 @@ public class TsStdtStrsHistVo implements Serializable {
 	/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	private String physStrsStatCd;
 
-	/* strs_cope_pnt 스트레스_대처_점수 numeric(null) */
-	private double strsCopePnt;
+	/* cabl_strs_pnt 대처능력_스트레스_점수 numeric(null) */
+	private double cablStrsPnt;
 
-	/* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
-	private String strsCopeStatCd;
+	/* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
+	private String cablStrsStatCd;
 
 	/* avg_hbit_cnt 평균_심박_수 numeric(null) */
 	private double avgHbitCnt;
@@ -210,34 +210,34 @@ public class TsStdtStrsHistVo implements Serializable {
 		this.physStrsStatCd = physStrsStatCd;
 	}
 	/**
-	 * Get strs_cope_pnt 스트레스_대처_점수 numeric(null)
-	 * @Return double strsCopePnt
+	 * Get cabl_strs_pnt 대처능력_스트레스_점수 numeric(null)
+	 * @Return double cablStrsPnt
 	 */
-	public double getStrsCopePnt() {
-		return this.strsCopePnt;
+	public double getCablStrsPnt() {
+		return this.cablStrsPnt;
 	}
 	
 	/**
-	 * Set strs_cope_pnt 스트레스_대처_점수 numeric(null)
-	 * @Param double strsCopePnt
+	 * Set cabl_strs_pnt 대처능력_스트레스_점수 numeric(null)
+	 * @Param double cablStrsPnt
 	 */
-	public void setStrsCopePnt(double strsCopePnt) {
-		this.strsCopePnt = strsCopePnt;
+	public void setCablStrsPnt(double cablStrsPnt) {
+		this.cablStrsPnt = cablStrsPnt;
 	}
 	/**
-	 * Get strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20)
-	 * @Return String strsCopeStatCd
+	 * Get cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20)
+	 * @Return String cablStrsStatCd
 	 */
-	public String getStrsCopeStatCd() {
-		return this.strsCopeStatCd;
+	public String getCablStrsStatCd() {
+		return this.cablStrsStatCd;
 	}
 	
 	/**
-	 * Set strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20)
-	 * @Param String strsCopeStatCd
+	 * Set cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20)
+	 * @Param String cablStrsStatCd
 	 */
-	public void setStrsCopeStatCd(String strsCopeStatCd) {
-		this.strsCopeStatCd = strsCopeStatCd;
+	public void setCablStrsStatCd(String cablStrsStatCd) {
+		this.cablStrsStatCd = cablStrsStatCd;
 	}
 	/**
 	 * Get avg_hbit_cnt 평균_심박_수 numeric(null)

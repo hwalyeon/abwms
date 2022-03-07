@@ -124,7 +124,7 @@
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    spos_no = #{sposNo} /* spos_no 배우자_번호 numeric */
+		AND    spos_no = #{sposNo} /* spos_no 배우자_번호 num\eric */
 	</update>
 	
 	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">

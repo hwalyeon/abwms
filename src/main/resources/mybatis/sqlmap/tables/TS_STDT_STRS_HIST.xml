@@ -18,8 +18,8 @@
                ,ment_strs_stat_cd /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
                ,phys_strs_pnt /* phys_strs_pnt 신체적_스트레스_점수 numeric */
                ,phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-               ,strs_cope_pnt /* strs_cope_pnt 스트레스_대처_점수 numeric */
-               ,strs_cope_stat_cd /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+               ,cabl_strs_pnt /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
+               ,cabl_strs_stat_cd /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
                ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
                ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
                ,strs_stat_cd /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
@@ -52,9 +52,9 @@
 		    ,ment_strs_stat_cd /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
 		    ,phys_strs_pnt /* phys_strs_pnt 신체적_스트레스_점수 numeric */
 		    ,phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-		    ,strs_cope_pnt /* strs_cope_pnt 스트레스_대처_점수 numeric */
-		<if test="strsCopeStatCd != null">
-		    ,strs_cope_stat_cd /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+		    ,cabl_strs_pnt /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
+		<if test="cablStrsStatCd != null">
+		    ,cabl_strs_stat_cd /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
 		    ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
@@ -91,9 +91,9 @@
 		    ,#{mentStrsStatCd} /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
 		    ,#{physStrsPnt} /* phys_strs_pnt 신체적_스트레스_점수 numeric */
 		    ,#{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-		    ,#{strsCopePnt} /* strs_cope_pnt 스트레스_대처_점수 numeric */
-		<if test="strsCopeStatCd != null">
-		    ,#{strsCopeStatCd} /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+		    ,#{cablStrsPnt} /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
+		<if test="cablStrsStatCd != null">
+		    ,#{cablStrsStatCd} /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,#{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
 		    ,#{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
@@ -144,11 +144,11 @@
 		<if test="physStrsStatCd != null">
 		    ,phys_strs_stat_cd = #{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 		</if>
-		<if test="strsCopePnt != null">
-		    ,strs_cope_pnt = #{strsCopePnt} /* strs_cope_pnt 스트레스_대처_점수 numeric */
+		<if test="cablStrsPnt != null">
+		    ,cabl_strs_pnt = #{cablStrsPnt} /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
 		</if>
-		<if test="strsCopeStatCd != null">
-		    ,strs_cope_stat_cd = #{strsCopeStatCd} /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+		<if test="cablStrsStatCd != null">
+		    ,cabl_strs_stat_cd = #{cablStrsStatCd} /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		<if test="avgHbitCnt != null">
 		    ,avg_hbit_cnt = #{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
@@ -191,9 +191,9 @@
 		    ,ment_strs_stat_cd /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
 		    ,phys_strs_pnt /* phys_strs_pnt 신체적_스트레스_점수 numeric */
 		    ,phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-		    ,strs_cope_pnt /* strs_cope_pnt 스트레스_대처_점수 numeric */
-		<if test="strsCopeStatCd != null">
-		    ,strs_cope_stat_cd /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+		    ,cabl_strs_pnt /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
+		<if test="cablStrsStatCd != null">
+		    ,cabl_strs_stat_cd /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
 		    ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
@@ -230,9 +230,9 @@
 		    ,#{mentStrsStatCd} /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
 		    ,#{physStrsPnt} /* phys_strs_pnt 신체적_스트레스_점수 numeric */
 		    ,#{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-		    ,#{strsCopePnt} /* strs_cope_pnt 스트레스_대처_점수 numeric */
-		<if test="strsCopeStatCd != null">
-		    ,#{strsCopeStatCd} /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+		    ,#{cablStrsPnt} /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
+		<if test="cablStrsStatCd != null">
+		    ,#{cablStrsStatCd} /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		    ,#{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
 		    ,#{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
@@ -280,11 +280,11 @@
 		<if test="physStrsStatCd != null">
 		    ,phys_strs_stat_cd = #{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 		</if>
-		<if test="strsCopePnt != null">
-		    ,strs_cope_pnt = #{strsCopePnt} /* strs_cope_pnt 스트레스_대처_점수 numeric */
+		<if test="cablStrsPnt != null">
+		    ,cabl_strs_pnt = #{cablStrsPnt} /* cabl_strs_pnt 대처능력_스트레스_점수 numeric */
 		</if>
-		<if test="strsCopeStatCd != null">
-		    ,strs_cope_stat_cd = #{strsCopeStatCd} /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+		<if test="cablStrsStatCd != null">
+		    ,cabl_strs_stat_cd = #{cablStrsStatCd} /* cabl_strs_stat_cd 대처능력_스트레스_상태_코드 character varying(20) */
 		</if>
 		<if test="avgHbitCnt != null">
 		    ,avg_hbit_cnt = #{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
