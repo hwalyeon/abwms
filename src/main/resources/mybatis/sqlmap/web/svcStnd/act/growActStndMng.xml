@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="svcStnd.act.growActStndMng">
+
+	<!-- 성장활동 기준 리스트 조회-->
+	<select id="searchGrowActStndList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT		GROW_JUDG_CD,
+					fn_getCdNm('GROW_JUDG_CD', GROW_JUDG_CD) AS GROW_JUDG_NM,
+					PAL_CD,
+					fn_getCdNm('ACT_LEVL_CD', PAL_CD) AS PAL_NM,
+					GROW_ACT_RMRK,
+					REG_DT,
+					REG_TM,
+					REG_USER_ID,
+					UPT_DT,
+					UPT_TM,
+					UPT_USER_ID
+		FROM        TI_GROW_ACT_STND
+		WHERE     	1 = 1
+		<if test=" growJudgCd != null and growJudgCd != '' ">
+			AND         GROW_JUDG_CD = #{growJudgCd}   </if>
+		<if test=" palCd != null and palCd != '' ">
+			AND         PAL_CD = #{palCd}  </if>
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+
+	<!--행추가_행삭제 인서트-->
+	<insert id="insertTiGrowActStndList" parameterType="java.util.Map">
+		INSERT INTO TI_GROW_ACT_STND
+		(
+			GROW_JUDG_CD,
+			PAL_CD,
+			GROW_ACT_RMRK,
+			REG_DT,
+			REG_TM,
+			REG_USER_ID,
+			UPT_DT,
+			UPT_TM,
+			UPT_USER_ID
+		)
+		VALUES
+			(
+			  #{growJudgCd}
+			, #{palCd}
+			, #{growActRmrk}
+			, TO_CHAR(NOW(), 'YYYYMMDD')
+			, TO_CHAR(NOW(), 'HH24MISS')
+			, #{regUserId}
+			, TO_CHAR(NOW(), 'YYYYMMDD')
+			, TO_CHAR(NOW(), 'HH24MISS')
+			, #{uptUserId}
+			)
+	</insert>
+
+	<!--행추가_행삭제 업데이트-->
+	<update id="updateTiGrowActStndList" parameterType="java.util.Map">
+		UPDATE	TI_GROW_ACT_STND
+		SET		UPT_DT           	= TO_CHAR(NOW(), 'YYYYMMDD')
+				, UPT_TM			= TO_CHAR(NOW(),'HH24MISS')
+				, UPT_USER_ID 		= #{uptUserId}
+		<if test="growActRmrk != null and growActRmrk != ''">	, GROW_ACT_RMRK = #{growActRmrk}</if>
+		WHERE	GROW_JUDG_CD		= #{growJudgCd}
+		AND 	PAL_CD 				= #{palCd}
+	</update>
+
+	<!--행추가_행삭제 삭제-->
+	<delete id ="deleteTiGrowActStndList" parameterType="java.util.Map">
+		DELETE
+		FROM    TI_GROW_ACT_STND
+		WHERE	GROW_JUDG_CD		= #{growJudgCd}
+		AND 	PAL_CD 				= #{palCd}
+	</delete>
+
+	<!--성장활동 코드 조회-->
+	<select id="searchGrowJudgCdChk" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      GROW_JUDG_CD,
+		    		PAL_CD
+		FROM        TI_GROW_ACT_STND
+		WHERE		GROW_JUDG_CD		= #{growJudgCd}
+		AND 		PAL_CD 				= #{palCd}
+	</select>
+
+</mapper>
