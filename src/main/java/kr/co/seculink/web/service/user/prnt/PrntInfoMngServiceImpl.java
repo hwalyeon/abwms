@@ -51,6 +51,15 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 			saveCnt += dao.insert("user.prnt.prntInfoMng.insertTmGuarInfoList", params);
 		} else if ("U".equals(params.get("crud"))) {
 			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmGuarInfoList", params);
+			//배우자 번호 가져오기
+			Map<String, Object> result = dao.selectOne("user.prnt.prntInfoMng.selectSposNo",params);
+
+			Object sposNo = result.get("sposNo");
+
+			params.put("sposNo",sposNo);
+			params.put("sposNm", params.get("guarNm"));
+
+			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmSposInfoList", params);
 		} else if ("D".equals(params.get("crud"))) {
 			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTmGuarInfoList", params);
 		}
@@ -84,6 +93,17 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmGuarInfoList", params);
 		} else if ("U".equals(params.get("crud"))) {
 			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmSposInfoList", params);
+
+			//보호자 번호 가져오기
+			Map<String, Object> result = dao.selectOne("user.prnt.prntInfoMng.selectGuarNo",params);
+
+			Object guarNo = result.get("guarNo");
+			params.put("guarNo",guarNo);
+			params.put("sposNo","");
+			params.put("guarNm", params.get("sposNm"));
+			params.put("guarTelNo", params.get("sposTelNo"));
+			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmGuarInfoList", params);
+
 		} else if ("D".equals(params.get("crud"))) {
 			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTmSposInfoList", params);
 		}

@@ -1,11 +1,10 @@
 package kr.co.seculink.web.controller.set;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import kr.co.seculink.domain.RtnMsg;
+import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.web.excel.ExcelConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.seculink.domain.RtnMsg;
-import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.web.excel.ExcelConstant;
-import lombok.extern.slf4j.Slf4j;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -259,7 +254,7 @@ public RtnMsg searchCdSpecList(@RequestBody(required=false) Map<String, String> 
 	
 	private Map<String, Object> getExcelMapCdSpec(List<Map<String, String>> list)
     {
-        String [] arrHeader = {"코드그룹","코드그룹명","코드값","코드명","정렬순서","사용여부"};
+        String [] arrHeader = {"코드그룹","코드그룹명","코드값","코드명","코드내용","필터값1","필터값2","필터값3","정렬순서","사용여부"};
         List<String> headerList = Arrays.asList(arrHeader);
 
         List<List<String>> dataList = new ArrayList<List<String>>();
@@ -272,7 +267,11 @@ public RtnMsg searchCdSpecList(@RequestBody(required=false) Map<String, String> 
             data.add(info.get("cdGrpNm"));
             data.add(info.get("cdVal"));
             data.add(info.get("cdNm"));
-            data.add(info.get("sortOrd"));
+            data.add(info.get("cdDesc"));
+            data.add(info.get("fltrVal1"));
+            data.add(info.get("fltrVal2"));
+            data.add(info.get("fltrVal3"));
+            data.add(String.valueOf(info.get("sortOrd")));
             data.add(info.get("useYn"));
             dataList.add(data);
         }

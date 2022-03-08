@@ -345,6 +345,69 @@
 	</if>
 	</select>
 
+	<!--보호자 정보 수정 시 배우자정보 테이블의 보호자 정보 수정용 배우자 번호 가져오기 -->
+	<select id="selectSposNo" parameterType="java.util.Map" resultType="MybatisMap">
+	 	select b.spos_no
+	 	     , a.guar_no
+		from   tm_guar_base a
+			   inner join tm_spos_base b
+			   on  b.spos_no = a.spos_no
+			   inner join ts_band_info c
+			   on (a.guar_tel_no = c.guar_tel_no_1
+				   or
+				   a.guar_tel_no = c.guar_tel_no_2)
+			   and c.band_open_stat_cd = 'NORM'
+		where  1 = 1
+		and    a.entr_stat_cd != '90' -- 해제
+		and    a.rels_dt is null
+		and    a.rels_resn_cd is null
+		and    exists(select 1
+					  from   ts_band_info x
+							 inner join tm_guar_base y
+							 on (y.guar_tel_no = x.guar_tel_no_1
+								 or
+								 y.guar_tel_no = x.guar_tel_no_2)
+							 and y.entr_stat_cd != '90' -- 해제
+							 and y.rels_dt is null
+							 and y.rels_resn_cd is null
+					  where  x.band_open_stat_cd = 'NORM'
+					  and    c.band_id           = x.band_id
+					  and    y.guar_no           = ${guarNo}::NUMERIC)
+		and    a.guar_no != ${guarNo}::NUMERIC
+	</select>
+
+
+
+	<!--배우자 정보 수정 시 보호자정보 테이블의 정보 수정용 보호자 번호 가져오기 -->
+	<select id="selectGuarNo" parameterType="java.util.Map" resultType="MybatisMap">
+	 	    select a.guar_no
+			from   TM_GUAR_BASE a
+				   inner join
+				   TM_SPOS_BASE b
+				   on a.SPOS_NO = b.SPOS_NO
+				   inner join ts_band_info c
+				   on (a.guar_tel_no = c.guar_tel_no_1
+					   or
+					   a.guar_tel_no = c.guar_tel_no_2)
+				   and c.band_open_stat_cd = 'NORM'
+			where 1=1
+			and    exists(select 1
+						  from   ts_band_info x
+								 inner join tm_guar_base y
+								 on (y.guar_tel_no = x.guar_tel_no_1
+									 or
+									 y.guar_tel_no = x.guar_tel_no_2)
+									 and y.entr_stat_cd != '90' -- 해제
+						  and y.rels_dt is null
+						  and y.rels_resn_cd is null
+						  where  x.band_open_stat_cd = 'NORM'
+						  and    c.band_id           = x.band_id
+						  and    y.guar_no           = ${guarNo}::NUMERIC)
+			and    a.guar_no != ${guarNo}::NUMERIC
+	</select>
+
+
+
 <!--	&lt;!&ndash;약관동의여부_정보 삽입 &ndash;&gt;-->
 <!--	<insert id="insertTmTermAgreDetlInfoList" parameterType="java.util.Map">-->
 <!--		INSERT INTO tm_term_agre_detl-->
