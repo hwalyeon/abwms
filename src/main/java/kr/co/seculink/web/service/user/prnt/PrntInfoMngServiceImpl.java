@@ -81,6 +81,7 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 
 		if ("C".equals(params.get("crud"))){
 			saveCnt += dao.insert("user.prnt.prntInfoMng.insertTmSposInfoList", params);
+			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmGuarInfoList", params);
 		} else if ("U".equals(params.get("crud"))) {
 			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmSposInfoList", params);
 		} else if ("D".equals(params.get("crud"))) {

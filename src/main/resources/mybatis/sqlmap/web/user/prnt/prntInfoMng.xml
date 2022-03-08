@@ -18,6 +18,10 @@
 				, TGB.SPOS_NO      -- 배우자_번호
 				, TSB2.SPOS_NM     -- 배우자_명
 				, TSB2.SPOS_TEL_NO -- 배우자_전화_번호
+				, TSB2.SEX_CD      -- 배우자_성별_코드
+				, TSB2.HGHT_VAL   -- 배우자_키_값
+				, TSB2.WGHT_VAL    -- 배우자_몸무게_값
+				, TSB2.RACE_DIV_CD      -- 배우자_인종_코드
 				, TSB.EORG_LOC_NO  -- 교육시설_위치_번호
 		from      TM_GUAR_BASE TGB
 		left outer join  TM_STDT_BASE TSB
@@ -171,7 +175,7 @@
 		<if test="relsResnCntn   != null and relsResnCntn    !=''"> , rels_resn_cntn    = #{relsResnCntn}			  </if>
 		<if test="entrStatCd     != null and entrStatCd      !=''"> , entr_stat_cd 	   = #{entrStatCd}				  </if>
 		WHERE 1=1
-		AND GUAR_NO = #{guarNoTemp}::NUMERIC
+		AND GUAR_NO = #{guarNo}::NUMERIC
 	</update>
 
 	<!--보호자(사용자)_정보_삭제 -->
@@ -309,7 +313,7 @@
 		<if test="wghtVal   != null"> , wght_val    = #{wghtVal}::NUMERIC   /* wght_val 체중_값 numeric */   		    			</if>
 		<if test="raceDivCd != null"> ,race_div_cd  = #{raceDivCd}          /* race_div_cd 인종_구분_코드 character varying(20) */	</if>
 		WHERE 1=1
-		AND SPOS_NO = #{sposNoTemp}::NUMERIC
+		AND SPOS_NO = #{sposNo}::NUMERIC
 	</update>
 
 	<!--배우자_정보 삭제 -->
@@ -317,7 +321,7 @@
 		DELETE
 		FROM   tm_spos_base
 		WHERE  1=1
-		AND    SPOS_NO = #{sposNoTemp}::NUMERIC
+		AND    SPOS_NO = #{sposNo}::NUMERIC
 
 	</delete>
 

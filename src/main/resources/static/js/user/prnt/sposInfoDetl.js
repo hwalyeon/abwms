@@ -4,6 +4,8 @@ let sposInfoDetl = new Vue({
     	params: {
     		crud              : 'C',
     		userId            : '' ,
+			guarNo            : '' , //보호자_번호
+			guarNm            : '' , //보호자_명
     		sposNo            : '' , //배우자_번호
     		sposNm            : '' , //배우자_명
 			sposTelNo         : '' , //배우_전화_번호
@@ -42,28 +44,28 @@ let sposInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(sposNo) {
+        initPage: function(guarNo) {
 
 			let $this = this;
 			$this.resetSposDetlInfo();
 
-			if ( !WebUtil.isNull(sposNo) )
+			if ( !WebUtil.isNull(guarNo) )
 			{
 				let params = {
-					'sposNo' : sposNo
+					'guarNo' : guarNo
 				}
 				AjaxUtil.post({
-					url: "/user/prnt/prntInfoMng/searchSposInfo.ab",
+					url: "/user/prnt/prntInfoMng/searchPrntInfoList.ab",
 					param: params,
 					success: function(response) {
-						if ( !!response.rtnData.result )
+						if ( !!response.rtnData.result)
 						{
+							$.each(response.rtnData.result[0], function(key, val) {
+								$this.params[key] = val;});
+
+							if(response.rtnData.result[0].sposNo != null){
 							$this.params.crud = 'U';
-
-							$.each(response.rtnData.result.result, function(key, val) {
-								$this.params[key] = val;
-
-							});
+							}
 						}
 					},
 					error: function (response) {
@@ -145,6 +147,8 @@ let sposInfoDetl = new Vue({
 			this.params = {
 				crud              : 'C',
 				userId            : '' ,
+				guarNo            : '' , //보호자_번호
+				guarNm            : '' , //보호자_명
 				sposNo            : '' , //배우자_번호
 				sposNm            : '' , //배우자_명
 				sposTelNo         : '' , //배우_전화_번호
