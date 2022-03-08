@@ -137,4 +137,16 @@ public class CommonWebController {
 	@RequestMapping("/user/stdt/stdtInfoMng.pg")
 	public String getUserStdtStdtInfoMng() {return "user/stdt/stdtInfoMng";}
 
+	//신체활동수준 기준
+	@RequestMapping("/svcStnd/act/palStndMng.pg")
+	public String getSvcStndActPalStndMng() {return "svcStnd/act/palStndMng";}
+
+	//성장활동 기준
+	@RequestMapping("/svcStnd/act/growActStndMng.pg")
+	public String getSvcStndActGrowActStndMng() {return "svcStnd/act/growActStndMng";}
+
+	//비만활동 기준
+	@RequestMapping("/svcStnd/act/fatActStndMng.pg")
+	public String getSvcStndActFatActStndMng() {return "svcStnd/act/fatActStndMng";}
+
 }
