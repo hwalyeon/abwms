@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_TERM_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiTermBaseVo" resultType="kr.co.seculink.domain.vo.TiTermBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiTermBaseVo">
 		/* Generated SQL SQL ID : ti_term_base.select */
         SELECT  term_div_cd /* term_div_cd 약관_구분_코드 character varying(20) */
                ,term_ver /* term_ver 약관_버전 character varying(20) */
@@ -27,7 +27,7 @@
 		AND    term_ver = #{termVer} /* term_ver 약관_버전 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiTermBaseVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_term_base.insert */
 		INSERT INTO ti_term_base
 		(
@@ -77,7 +77,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiTermBaseVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_term_base.update */
 		UPDATE ti_term_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -104,7 +104,7 @@
 		AND    term_ver = #{termVer} /* term_ver 약관_버전 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiTermBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_term_base.merge */
 		INSERT INTO ti_term_base
 		(
@@ -175,7 +175,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiTermBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_term_base.delete */
 		DELETE FROM ti_term_base
 		WHERE  1 = 1

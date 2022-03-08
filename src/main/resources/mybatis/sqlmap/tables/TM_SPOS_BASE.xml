@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_SPOS_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TmSposBaseVo" resultType="kr.co.seculink.domain.vo.TmSposBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TmSposBaseVo">
 		/* Generated SQL SQL ID : tm_spos_base.select */
         SELECT  spos_no /* spos_no 배우자_번호 numeric */
                ,spos_nm /* spos_nm 배우자_명 character varying(20) */
@@ -27,7 +27,7 @@
 		AND    spos_no = #{sposNo} /* spos_no 배우자_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : tm_spos_base.insert */
 		INSERT INTO tm_spos_base
 		(
@@ -95,7 +95,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
+	<update id="update">
 		/* Generated SQL SQL ID : tm_spos_base.update */
 		UPDATE tm_spos_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -124,10 +124,10 @@
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    spos_no = #{sposNo} /* spos_no 배우자_번호 num\eric */
+		AND    spos_no = #{sposNo} /* spos_no 배우자_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tm_spos_base.merge */
 		INSERT INTO tm_spos_base
 		(
@@ -222,7 +222,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tm_spos_base.delete */
 		DELETE FROM tm_spos_base
 		WHERE  1 = 1

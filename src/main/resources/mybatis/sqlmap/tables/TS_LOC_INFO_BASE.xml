@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_LOC_INFO_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo" resultType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
 		/* Generated SQL SQL ID : ts_loc_info_base.select */
         SELECT  loc_no /* loc_no 위치_번호 numeric */
                ,loc_nm /* loc_nm 위치_명 character varying(100) */
@@ -23,6 +23,7 @@
                ,pstno /* pstno 우편번호 character varying(10) */
                ,addr_base /* addr_base 주소_기본 character varying(400) */
                ,addr_spec /* addr_spec 주소_상세 character varying(200) */
+               ,del_yn /* del_yn 삭제_여부 character(1) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -34,7 +35,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ts_loc_info_base.insert */
 		INSERT INTO ts_loc_info_base
 		(
@@ -64,6 +65,7 @@
 		<if test="addrSpec != null">
 		    ,addr_spec /* addr_spec 주소_상세 character varying(200) */
 		</if>
+		    ,del_yn /* del_yn 삭제_여부 character(1) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -103,6 +105,7 @@
 		<if test="addrSpec != null">
 		    ,#{addrSpec} /* addr_spec 주소_상세 character varying(200) */
 		</if>
+		    ,#{delYn} /* del_yn 삭제_여부 character(1) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -116,7 +119,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ts_loc_info_base.update */
 		UPDATE ts_loc_info_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -159,6 +162,9 @@
 		<if test="addrSpec != null">
 		    ,addr_spec = #{addrSpec} /* addr_spec 주소_상세 character varying(200) */
 		</if>
+		<if test="delYn != null">
+		    ,del_yn = #{delYn} /* del_yn 삭제_여부 character(1) */
+		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
@@ -169,7 +175,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_loc_info_base.merge */
 		INSERT INTO ts_loc_info_base
 		(
@@ -199,6 +205,7 @@
 		<if test="addrSpec != null">
 		    ,addr_spec /* addr_spec 주소_상세 character varying(200) */
 		</if>
+		    ,del_yn /* del_yn 삭제_여부 character(1) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -238,6 +245,7 @@
 		<if test="addrSpec != null">
 		    ,#{addrSpec} /* addr_spec 주소_상세 character varying(200) */
 		</if>
+		    ,#{delYn} /* del_yn 삭제_여부 character(1) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -291,6 +299,9 @@
 		<if test="addrSpec != null">
 		    ,addr_spec = #{addrSpec} /* addr_spec 주소_상세 character varying(200) */
 		</if>
+		<if test="delYn != null">
+		    ,del_yn = #{delYn} /* del_yn 삭제_여부 character(1) */
+		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
@@ -299,7 +310,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_loc_info_base.delete */
 		DELETE FROM ts_loc_info_base
 		WHERE  1 = 1

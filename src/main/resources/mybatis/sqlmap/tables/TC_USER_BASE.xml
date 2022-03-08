@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_USER_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TcUserBaseVo" resultType="kr.co.seculink.domain.vo.TcUserBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TcUserBaseVo">
 		/* Generated SQL SQL ID : tc_user_base.select */
         SELECT  user_id /* user_id 사용자_ID character varying(40) */
                ,user_pw /* user_pw 사용자_암호 character varying(100) */
@@ -30,7 +30,7 @@
 		AND    user_id = #{userId} /* user_id 사용자_ID character varying(40) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcUserBaseVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : tc_user_base.insert */
 		INSERT INTO tc_user_base
 		(
@@ -104,7 +104,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TcUserBaseVo">
+	<update id="update">
 		/* Generated SQL SQL ID : tc_user_base.update */
 		UPDATE tc_user_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -145,7 +145,7 @@
 		AND    user_id = #{userId} /* user_id 사용자_ID character varying(40) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcUserBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tc_user_base.merge */
 		INSERT INTO tc_user_base
 		(
@@ -255,7 +255,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcUserBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tc_user_base.delete */
 		DELETE FROM tc_user_base
 		WHERE  1 = 1

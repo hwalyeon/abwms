@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_PAL_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiPalStndVo" resultType="kr.co.seculink.domain.vo.TiPalStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiPalStndVo">
 		/* Generated SQL SQL ID : ti_pal_stnd.select */
         SELECT  pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
                ,pal_nm /* pal_nm 신체활동수준_명 character varying(30) */
@@ -25,7 +25,7 @@
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_pal_stnd.insert */
 		INSERT INTO ti_pal_stnd
 		(
@@ -73,7 +73,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_pal_stnd.update */
 		UPDATE ti_pal_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -99,7 +99,7 @@
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_pal_stnd.merge */
 		INSERT INTO ti_pal_stnd
 		(
@@ -168,7 +168,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_pal_stnd.delete */
 		DELETE FROM ti_pal_stnd
 		WHERE  1 = 1

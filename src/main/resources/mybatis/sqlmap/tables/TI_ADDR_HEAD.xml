@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_ADDR_HEAD">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiAddrHeadVo" resultType="kr.co.seculink.domain.vo.TiAddrHeadVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiAddrHeadVo">
 		/* Generated SQL SQL ID : ti_addr_head.select */
         SELECT  word_head_1 /* word_head_1 단어_헤더_1 character varying(30) */
                ,word_head_2 /* word_head_2 단어_헤더_2 character varying(30) */
@@ -23,7 +23,7 @@
 		AND    word_head_2 = #{wordHead2} /* word_head_2 단어_헤더_2 character varying(30) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiAddrHeadVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_addr_head.insert */
 		INSERT INTO ti_addr_head
 		(
@@ -57,7 +57,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiAddrHeadVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_addr_head.update */
 		UPDATE ti_addr_head
 		<trim prefix="SET" prefixOverrides=",">
@@ -72,7 +72,7 @@
 		AND    word_head_2 = #{wordHead2} /* word_head_2 단어_헤더_2 character varying(30) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiAddrHeadVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_addr_head.merge */
 		INSERT INTO ti_addr_head
 		(
@@ -115,7 +115,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiAddrHeadVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_addr_head.delete */
 		DELETE FROM ti_addr_head
 		WHERE  1 = 1

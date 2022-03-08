@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_GFIX_SPEC">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsGfixSpecVo" resultType="kr.co.seculink.domain.vo.TsGfixSpecVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsGfixSpecVo">
 		/* Generated SQL SQL ID : ts_gfix_spec.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,gfix_dt /* gfix_dt 성장비만지수_일자 character(8) */
@@ -31,7 +31,7 @@
 		AND    growfat_div_cd = #{growfatDivCd} /* growfat_div_cd 성장비만_구분_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsGfixSpecVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ts_gfix_spec.insert */
 		INSERT INTO ts_gfix_spec
 		(
@@ -91,7 +91,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsGfixSpecVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ts_gfix_spec.update */
 		UPDATE ts_gfix_spec
 		<trim prefix="SET" prefixOverrides=",">
@@ -125,7 +125,7 @@
 		AND    growfat_div_cd = #{growfatDivCd} /* growfat_div_cd 성장비만_구분_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsGfixSpecVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_gfix_spec.merge */
 		INSERT INTO ts_gfix_spec
 		(
@@ -212,7 +212,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsGfixSpecVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_gfix_spec.delete */
 		DELETE FROM ts_gfix_spec
 		WHERE  1 = 1

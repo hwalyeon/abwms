@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_ACT_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdActHistVo" resultType="kr.co.seculink.domain.vo.TsDdActHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdActHistVo">
 		/* Generated SQL SQL ID : ts_dd_act_hist.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 numeric */
                ,stdt_no /* stdt_no 학생_번호 numeric */
@@ -29,7 +29,7 @@
 		AND    act_cd = #{actCd} /* act_cd 활동_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ts_dd_act_hist.insert */
 		INSERT INTO ts_dd_act_hist
 		(
@@ -69,7 +69,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ts_dd_act_hist.update */
 		UPDATE ts_dd_act_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -97,7 +97,7 @@
 		AND    act_cd = #{actCd} /* act_cd 활동_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_dd_act_hist.merge */
 		INSERT INTO ts_dd_act_hist
 		(
@@ -158,7 +158,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_dd_act_hist.delete */
 		DELETE FROM ts_dd_act_hist
 		WHERE  1 = 1

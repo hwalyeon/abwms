@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_NUTR_INFO">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiNutrInfoVo" resultType="kr.co.seculink.domain.vo.TiNutrInfoVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiNutrInfoVo">
 		/* Generated SQL SQL ID : ti_nutr_info.select */
         SELECT  nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
                ,nutr_nm /* nutr_nm 영양소_명 character varying(40) */
@@ -26,7 +26,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiNutrInfoVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_nutr_info.insert */
 		INSERT INTO ti_nutr_info
 		(
@@ -72,7 +72,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiNutrInfoVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_nutr_info.update */
 		UPDATE ti_nutr_info
 		<trim prefix="SET" prefixOverrides=",">
@@ -101,7 +101,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiNutrInfoVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_nutr_info.merge */
 		INSERT INTO ti_nutr_info
 		(
@@ -171,7 +171,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiNutrInfoVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_nutr_info.delete */
 		DELETE FROM ti_nutr_info
 		WHERE  1 = 1

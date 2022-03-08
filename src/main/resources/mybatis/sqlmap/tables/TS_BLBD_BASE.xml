@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_BLBD_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo" resultType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
 		/* Generated SQL SQL ID : ts_blbd_base.select */
         SELECT  blbd_no /* blbd_no 게시_번호 numeric */
                ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character(8) */
@@ -27,7 +27,7 @@
 		AND    blbd_no = #{blbdNo} /* blbd_no 게시_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ts_blbd_base.insert */
 		INSERT INTO ts_blbd_base
 		(
@@ -91,7 +91,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ts_blbd_base.update */
 		UPDATE ts_blbd_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -123,7 +123,7 @@
 		AND    blbd_no = #{blbdNo} /* blbd_no 게시_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_blbd_base.merge */
 		INSERT INTO ts_blbd_base
 		(
@@ -214,7 +214,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_blbd_base.delete */
 		DELETE FROM ts_blbd_base
 		WHERE  1 = 1

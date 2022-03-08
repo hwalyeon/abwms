@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_GUAR_APNT_PLC">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo" resultType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.select */
         SELECT  guar_no /* guar_no 보호자_번호 numeric */
                ,guar_apnt_plc_nm /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
@@ -25,7 +25,7 @@
 		AND    guar_apnt_plc_nm = #{guarApntPlcNm} /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.insert */
 		INSERT INTO tm_guar_apnt_plc
 		(
@@ -67,7 +67,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
+	<update id="update">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.update */
 		UPDATE tm_guar_apnt_plc
 		<trim prefix="SET" prefixOverrides=",">
@@ -88,7 +88,7 @@
 		AND    guar_apnt_plc_nm = #{guarApntPlcNm} /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.merge */
 		INSERT INTO tm_guar_apnt_plc
 		(
@@ -145,7 +145,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.delete */
 		DELETE FROM tm_guar_apnt_plc
 		WHERE  1 = 1

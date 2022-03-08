@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_EAT_SPEC">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdEatSpecVo" resultType="kr.co.seculink.domain.vo.TsDdEatSpecVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdEatSpecVo">
 		/* Generated SQL SQL ID : ts_dd_eat_spec.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,gfix_dt /* gfix_dt 성장비만지수_일자 character(8) */
@@ -26,7 +26,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdEatSpecVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ts_dd_eat_spec.insert */
 		INSERT INTO ts_dd_eat_spec
 		(
@@ -64,7 +64,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdEatSpecVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ts_dd_eat_spec.update */
 		UPDATE ts_dd_eat_spec
 		<trim prefix="SET" prefixOverrides=",">
@@ -83,7 +83,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdEatSpecVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_dd_eat_spec.merge */
 		INSERT INTO ts_dd_eat_spec
 		(
@@ -133,7 +133,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdEatSpecVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_dd_eat_spec.delete */
 		DELETE FROM ts_dd_eat_spec
 		WHERE  1 = 1

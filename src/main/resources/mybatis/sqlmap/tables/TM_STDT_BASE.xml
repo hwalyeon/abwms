@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_STDT_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo" resultType="kr.co.seculink.domain.vo.TmStdtBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TmStdtBaseVo">
 		/* Generated SQL SQL ID : tm_stdt_base.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,stdt_nm /* stdt_nm 학생_명 character varying(40) */
@@ -44,7 +44,7 @@
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : tm_stdt_base.insert */
 		INSERT INTO tm_stdt_base
 		(
@@ -210,7 +210,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
+	<update id="update">
 		/* Generated SQL SQL ID : tm_stdt_base.update */
 		UPDATE tm_stdt_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -293,7 +293,7 @@
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tm_stdt_base.merge */
 		INSERT INTO tm_stdt_base
 		(
@@ -537,7 +537,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tm_stdt_base.delete */
 		DELETE FROM tm_stdt_base
 		WHERE  1 = 1

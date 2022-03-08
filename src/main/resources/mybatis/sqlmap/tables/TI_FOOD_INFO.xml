@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FOOD_INFO">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFoodInfoVo" resultType="kr.co.seculink.domain.vo.TiFoodInfoVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiFoodInfoVo">
 		/* Generated SQL SQL ID : ti_food_info.select */
         SELECT  food_no /* food_no 식품_번호 numeric */
                ,food_lcls_nm /* food_lcls_nm 식품_대분류_명 character varying(100) */
@@ -26,7 +26,7 @@
 		AND    food_no = #{foodNo} /* food_no 식품_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFoodInfoVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_food_info.insert */
 		INSERT INTO ti_food_info
 		(
@@ -76,7 +76,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFoodInfoVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_food_info.update */
 		UPDATE ti_food_info
 		<trim prefix="SET" prefixOverrides=",">
@@ -105,7 +105,7 @@
 		AND    food_no = #{foodNo} /* food_no 식품_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFoodInfoVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_food_info.merge */
 		INSERT INTO ti_food_info
 		(
@@ -179,7 +179,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFoodInfoVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_food_info.delete */
 		DELETE FROM ti_food_info
 		WHERE  1 = 1

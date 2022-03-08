@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_BPAL_CALC_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo" resultType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.select */
         SELECT  sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt_fr /* age_ycnt_fr 나이_년수_FROM numeric */
@@ -25,7 +25,7 @@
 		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.insert */
 		INSERT INTO ti_bpal_calc_stnd
 		(
@@ -59,7 +59,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.update */
 		UPDATE ti_bpal_calc_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -80,7 +80,7 @@
 		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.merge */
 		INSERT INTO ti_bpal_calc_stnd
 		(
@@ -129,7 +129,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.delete */
 		DELETE FROM ti_bpal_calc_stnd
 		WHERE  1 = 1

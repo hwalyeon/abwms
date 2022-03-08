@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_DD_NUTR_EAT_BLCK">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo" resultType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.select */
         SELECT  sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
@@ -30,7 +30,7 @@
 		AND    eat_qty_fr = #{eatQtyFr} /* eat_qty_fr 섭취_량_FROM numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.insert */
 		INSERT INTO ti_dd_nutr_eat_blck
 		(
@@ -74,7 +74,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.update */
 		UPDATE ti_dd_nutr_eat_blck
 		<trim prefix="SET" prefixOverrides=",">
@@ -100,7 +100,7 @@
 		AND    eat_qty_fr = #{eatQtyFr} /* eat_qty_fr 섭취_량_FROM numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.merge */
 		INSERT INTO ti_dd_nutr_eat_blck
 		(
@@ -162,7 +162,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.delete */
 		DELETE FROM ti_dd_nutr_eat_blck
 		WHERE  1 = 1

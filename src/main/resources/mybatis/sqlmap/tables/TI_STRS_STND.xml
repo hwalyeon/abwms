@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_STRS_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiStrsStndVo" resultType="kr.co.seculink.domain.vo.TiStrsStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiStrsStndVo">
 		/* Generated SQL SQL ID : ti_strs_stnd.select */
         SELECT  ment_strs_stat_cd /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
                ,phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
@@ -24,7 +24,7 @@
 		AND    phys_strs_stat_cd = #{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_strs_stnd.insert */
 		INSERT INTO ti_strs_stnd
 		(
@@ -56,7 +56,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_strs_stnd.update */
 		UPDATE ti_strs_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -74,7 +74,7 @@
 		AND    phys_strs_stat_cd = #{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_strs_stnd.merge */
 		INSERT INTO ti_strs_stnd
 		(
@@ -118,7 +118,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_strs_stnd.delete */
 		DELETE FROM ti_strs_stnd
 		WHERE  1 = 1

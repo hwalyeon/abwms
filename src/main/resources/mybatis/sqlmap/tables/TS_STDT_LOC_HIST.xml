@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_STDT_LOC_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo" resultType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.select */
         SELECT  loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
                ,stdt_no /* stdt_no 학생_번호 numeric */
@@ -31,7 +31,7 @@
 		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.insert */
 		INSERT INTO ts_stdt_loc_hist
 		(
@@ -115,7 +115,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.update */
 		UPDATE ts_stdt_loc_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -159,7 +159,7 @@
 		AND    loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.merge */
 		INSERT INTO ts_stdt_loc_hist
 		(
@@ -282,7 +282,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.delete */
 		DELETE FROM ts_stdt_loc_hist
 		WHERE  1 = 1

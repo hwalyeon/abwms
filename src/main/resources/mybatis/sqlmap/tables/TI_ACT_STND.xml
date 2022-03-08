@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_ACT_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiActStndVo" resultType="kr.co.seculink.domain.vo.TiActStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiActStndVo">
 		/* Generated SQL SQL ID : ti_act_stnd.select */
         SELECT  act_cd /* act_cd 활동_코드 character varying(20) */
                ,act_clss_cd /* act_clss_cd 활동_분류_코드 character varying(20) */
@@ -27,7 +27,7 @@
 		AND    act_cd = #{actCd} /* act_cd 활동_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiActStndVo">
+	<insert id="insert" >
 		/* Generated SQL SQL ID : ti_act_stnd.insert */
 		INSERT INTO ti_act_stnd
 		(
@@ -75,7 +75,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiActStndVo">
+	<update id="update">
 		/* Generated SQL SQL ID : ti_act_stnd.update */
 		UPDATE ti_act_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -107,7 +107,7 @@
 		AND    act_cd = #{actCd} /* act_cd 활동_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiActStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_act_stnd.merge */
 		INSERT INTO ti_act_stnd
 		(
@@ -182,7 +182,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiActStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_act_stnd.delete */
 		DELETE FROM ti_act_stnd
 		WHERE  1 = 1
