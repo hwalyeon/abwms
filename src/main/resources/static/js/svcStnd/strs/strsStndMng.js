@@ -33,6 +33,7 @@ let strsStndMng = new Vue({
         	$this.initCodeList();
 
         	$this.initValue();
+
         },
         initValue: function()
         {
@@ -42,6 +43,7 @@ let strsStndMng = new Vue({
 
         initCodeList: function() {
             let $this = this;
+            $this.code.strsStatList = [];
             getCommonCodeList('STRS_STAT_CD',$this.code.strsStatList, function(){
                 $this.initGrid();
                 $this.searchStrsList(true);
@@ -51,20 +53,19 @@ let strsStndMng = new Vue({
         },
         initGrid: function() {
             let $this = this;
-            let strsStatList = commonGridCmonCd($this.code.strsStatList);             
+            let strsStatList = commonGridCmonCd($this.code.strsStatList);
         	let colModels = [
                 {name: "crud"               , index: "crud"             , label: "crud"                  , hidden:true},
-                //   {name: "mentStrsStatCd"     , index: "mentStrsStatCd"   , label: "정신적스트레스상태코드"    , editable :true , editrules : {number : true}, width: 80, align: "center"},
                 {name: "mentStrsStatCd"	     , index: "mentStrsStatCd"	 , label: "정신적스트레스상태명" , width: 80  	 ,align:"center"
                     ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:strsStatList}},
                 {name: "mentStrsStatCdTemp"      , index: "mentStrsStatCdTemp"   ,label: "정신적스트레스상태명"  , hidden:true },
                 {name: "physStrsStatCd"	     , index: "physStrsStatCd"	 , label: "신체적스트레스상태명" , width: 80  	 ,align:"center"
                     ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:strsStatList}},
                 {name: "physStrsStatTemp"      , index: "physStrsStatTemp"   ,label: "신체적스트레스상태명"  , hidden:true },
-                {name: "strsJudgCntn"       , index: "strsJudgCntn"     , label: "스트레스판정내용"         , editable :true , editrules : {text : true}, width: 80, align: "center"},
-                {name: "cdSpecDetlPop", index: "cdSpecDetlPop", label: "코드 정보보기", width: 70, align: "center",
+                {name: "strsJudgCntn"       , index: "strsJudgCntn"     , label: "스트레스판정내용"           , width: 80, align: "center"},
+                {name: "strsStndDetlPop", index: "strsStndDetlPop", label: "코드 정보보기", width: 70, align: "center",
                     formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="strsStndMng.regStrsStndPop(\'' + rowObject.mentStrsStatCd + '\',\'' + rowObject.cdVal + '\')" value="상세보기" data-toggle="modal"/>';
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" ' + 'onclick="strsStndMng.regStrsStndPop(\'' + rowObject.mentStrsStatCd + '\',\''+ rowObject.physStrsStatCd + '\')" value="상세보기" data-toggle="modal" data-target="#strsStndDetlPopup"/>';
                     }
                 }
 
@@ -98,7 +99,7 @@ let strsStndMng = new Vue({
                 {name: "useYn"        , index: "useYn"        , label: "사용여부"    , width: 50 , align: "center"},
                 {name: "cdSpecDetlPop", index: "cdSpecDetlPop", label: "코드 정보보기", width: 70 , align: "center",
                     formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="strsStndMng.regStrsStndPop(\'' + rowObject.cdGrp + '\',\'' + rowObject.cdVal + '\')" value="상세보기" data-toggle="modal"/>';
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="strsStndMng.regStrsStndCdPop(\'' + rowObject.cdVal + '\')" value="상세보기" data-toggle="modal" data-target="#strsStndCdDetlPopup"/>';
                     }
                 }
             ];
@@ -135,6 +136,7 @@ let strsStndMng = new Vue({
         searchStrsList: function(isSearch) {
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
+
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
@@ -181,11 +183,36 @@ let strsStndMng = new Vue({
         physStrsStatNmVal:function(){
             let $this = this;
         },
-        regStrsStndPop: function(mentStrsStatCd){
-            strsStndDetl.initPage(mentStrsStatCd);
+        regStrsStndPop: function(mentStrsStatCd,physStrsStatCd){
+            strsStndDetl.initPage(mentStrsStatCd,physStrsStatCd);
+        },
+        regStrsStndCdPop: function(cdGrp){
+            strsStndCdDetl.initPage(cdGrp , function(){
+                strsStndMng.initCodeList(true);
+            });
         },
 
         downloadExcel : function()
+        {
+            let $this = this;
+            let params = $.extend(true, {}, $this.params);
+
+            AjaxUtil.post({
+                dataType: 'binary',
+                url: "/svcStnd/strs/strsStndMng/searchStrsList/excel.ab",
+                param: params,
+                success: function(response)
+                {
+                    saveFileLocal(response, 'strsStndMng.xls');
+                },
+                error: function (response)
+                {
+                    Swal.alert([response, 'error']);
+                }
+            });
+        },
+
+        downloadCdExcel : function()
         {
             let $this = this;
             let params = $.extend(true, {}, $this.params);

@@ -1,15 +1,18 @@
-let strsStndDetl = new Vue({
-    el: "#strsStndDetlPopup",
+let strsStndCdDetl = new Vue({
+    el: "#strsStndCdDetlPopup",
     data: {
-    	strsStndInfo: {
+		strsStndCdInfo: {
     		crud: 'C',
-			mentStrsStatCd:'',
-			physStrsStatCd:'',
-			strsJudgCntn:''
+			cdVal:'',
+			cdNm:'',
+			cdDesc:'',
+			sortOrd:'',
+			useYn:''
     	},
-		summerNoteId1 : 'summerNoteId1',
+		summerNoteId2 : 'summerNoteId2',
+		callBack      : null,
  		code: {
-			mentStrsStatCdList: []
+			useYnList: []
 		}
 	},
 
@@ -25,29 +28,31 @@ let strsStndDetl = new Vue({
         },
         initCodeList: function() {
         	let $this = this;
-			getCommonCodeList('STRS_STAT_CD',$this.code.mentStrsStatCdList);
+			getCommonCodeList('USE_YN', this.code.useYnList);
         },
-        initPage: function(mentStrsStatCd, physStrsStatCd) {
+        initPage: function(cdVal, callback) {
         	
         	let $this = this;
+        	if(typeof callback === 'function'){
+        		$this.callBack = callback;
+			}
         	$this.resetstrsStndInfo();
 
         	
-        	if ( !WebUtil.isNull(mentStrsStatCd) || !WebUtil.isNull(physStrsStatCd))
+        	if ( !WebUtil.isNull(cdVal))
     		{
         		let params = {
-        			'mentStrsStatCd' : mentStrsStatCd ,
-					'physStrsStatCd' : physStrsStatCd
+        			'cdVal' : cdVal
         		}
         		
         		AjaxUtil.post({
-                    url: "/svcStnd/strs/strsStndMng/searchStrsStndInfo.ab",
+                    url: "/svcStnd/strs/strsStndMng/searchStrsStndCdInfo.ab",
                     param: params,
                     success: function(response) {
                     	if ( !!response.rtnData.result ) {
-                    		$this.strsStndInfo.crud = 'U';
+                    		$this.strsStndCdInfo.crud = 'U';
                     		$.each(response.rtnData.result, function(key, val) {
-            					$this.strsStndInfo[key] = val;
+            					$this.strsStndCdInfo[key] = val;
             				});
                     	}                    		
                     },
@@ -61,20 +66,26 @@ let strsStndDetl = new Vue({
         	
         	let $this = this;
         	
-        	if ( WebUtil.isNull($this.strsStndInfo.mentStrsStatCd) ) {
-        		Swal.alert(['정신적스트레스상태를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.strsStndCdInfo.cdVal) ) {
+        		Swal.alert(['코드값을 입력하세요.', 'info']);
         		return false;
         	}
         	
-        	if ( WebUtil.isNull($this.strsStndInfo.physStrsStatCd) ) {
-        		Swal.alert(['신체적스트레스상태를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.strsStndCdInfo.cdNm) ) {
+        		Swal.alert(['코드명을 입력하세요.', 'info']);
         		return false;
         	}
 
-			if ( WebUtil.isNull($this.strsStndInfo.strsJudgCntn) ) {
-				Swal.alert(['현재평가내용을 입력하세요.', 'info']);
+			if ( WebUtil.isNull($this.strsStndCdInfo.useYn) ) {
+				Swal.alert(['사용여부를 입력하세요.', 'info']);
 				return false;
 			}
+
+			if ( WebUtil.isNull($this.strsStndCdInfo.cdDesc) ) {
+				Swal.alert(['코드내용을 입력하세요.', 'info']);
+				return false;
+			}
+
         	return true;
         },
 
@@ -87,12 +98,13 @@ let strsStndDetl = new Vue({
             }
 
 			AjaxUtil.post({
-                url: "/svcStnd/strs/strsStndMng/saveInfo.ab",
-                param: $this.strsStndInfo,
+                url: "/svcStnd/strs/strsStndMng/saveCdInfo.ab",
+                param: $this.strsStndCdInfo,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#strsStndDetlPopup'));
-						strsStndMng.searchStrsList(true);
+                		closeModal($('#strsStndCdDetlPopup'));
+						strsStndMng.searchCdSpecList(true);
+						if($this.callBack != null ) $this.callBack();
                 	});                	
                 },
                 error: function (response) {
@@ -105,16 +117,17 @@ let strsStndDetl = new Vue({
 			
 			let $this = this;
 			
-			$this.strsStndInfo.crud = 'D';
+			$this.strsStndCdInfo.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/svcStnd/strs/strsStndMng/saveInfo.ab",
-                param: $this.strsStndInfo,
+                url: "/svcStnd/strs/strsStndMng/saveCdInfo.ab",
+                param: $this.strsStndCdInfo,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#strsStndDetlPopup'));
-						 strsStndMng.searchStrsList(true);
-                	});                	
+                		 closeModal($('#strsStndCdDetlPopup'));
+						 strsStndMng.searchCdSpecList(true);
+						 if($this.callBack != null ) $this.callBack();
+					});
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);
@@ -122,11 +135,11 @@ let strsStndDetl = new Vue({
             });
 		},
 		resetstrsStndInfo: function() {
-			this.strsStndInfo = {
+			this.strsStndCdInfo = {
 				crud: 'C',
-				mentStrsStatCd: '',
-				physStrsStatCd: '',
-				fatJudgNm: ''
+				cdVal:'',
+				cdNm:'',
+				cdDesc:''
 	    	}
 		}
     },

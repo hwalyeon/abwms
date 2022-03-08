@@ -142,7 +142,7 @@ let stdtInfoMng = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 url: '/user/stdt/stdtInfoMng/searchStdtInfoList.ab',
-                pager: '#user_pager_list',
+                pager: '#grid_pager_list',
                 height: 405,
                 colModel: colModels,
                 onPaging : function(data) {

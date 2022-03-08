@@ -33,16 +33,11 @@ public class StrsStndMngController
 
 	public RtnMsg searchStrsList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
-		System.out.println("test1");
 		RtnMsg vo = new RtnMsg();
-		System.out.println("test2");
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("test3");
 
 		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
-		System.out.println("test4");
 		rtnMap.put("result", result);
-		System.out.println("test5");
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
@@ -61,12 +56,12 @@ public class StrsStndMngController
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.selectTcCdSpec", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchCdSpecList", params);
 		rtnMap.put("result", result);
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)dao.selectList("svcStnd.strs.strsStndMng.selectTcCdSpec", params)).size());
+			vo.setTotalCount(((List)dao.selectList("svcStnd.strs.strsStndMng.searchCdSpecList", params)).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
@@ -81,6 +76,16 @@ public class StrsStndMngController
 		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
 
 		return new ModelAndView("excelXlsView", getExcelMap(result));
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/searchCdSpecList/excel.ab")
+	public ModelAndView downloadCdExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		params.put("paging", "N");
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchCdSpecList", params);
+
+		return new ModelAndView("excelXlsView", getExcelCdMap(result));
 	}
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
@@ -115,18 +120,99 @@ public class StrsStndMngController
 		return map;
 	}
 
-	/*@ResponseBody
-	@RequestMapping("/svcStnd/strs/strsStndMng/saveStrsStnd.ab")
-	public RtnMsg saveStrsStnd(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+	private Map<String, Object> getExcelCdMap(List<Map<String, String>> list)
+	{
+		String [] arrHeader = {"코드값","코드명","코드내용","정렬순서","사용여부"};
+		List<String> headerList = Arrays.asList(arrHeader);
 
+		List<List<String>> dataList = new ArrayList<List<String>>();
+		List<String> data;
+
+		for ( Map<String, String> info : list )
+		{
+			data = new ArrayList<String>();
+			data.add(String.valueOf(info.get("cdVal")));
+			data.add(String.valueOf(info.get("cdNm")));
+			data.add(String.valueOf(info.get("cdDesc")));
+			data.add(String.valueOf(info.get("sortOrd")));
+			data.add(String.valueOf(info.get("uesYn")));
+			dataList.add(data);
+		}
+
+		Map<String, Object> map = new HashMap<>();
+		map.put(ExcelConstant.FILE_NAME, "excel");
+		map.put(ExcelConstant.HEAD, headerList);
+		map.put(ExcelConstant.BODY, dataList);
+		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsStndInfo.ab")
+
+	public RtnMsg searchStrsStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		strsStndMngService.saveStrsList(params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
+
+		if(result.size() > 0 ){
+			rtnMap.put("result", result.get(0));
+		}
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsStndCdInfo.ab")
+
+	public RtnMsg searchStrsStndCdInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchCdSpecList", params);
+
+		if(result.size() > 0 ){
+			rtnMap.put("result", result.get(0));
+		}
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/saveInfo.ab")
+	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		if("C".equals(params.get("crud"))) dao.insert("svcStnd.strs.strsStndMng.insertTiStrsStnd",params);
+		else if("U".equals(params.get("crud"))) dao.insert("svcStnd.strs.strsStndMng.updateTiStrsStnd",params);
+		else if("D".equals(params.get("crud"))) dao.insert("svcStnd.strs.strsStndMng.deleteTiStrsStnd",params);
 
 		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap,null);
 
 		return vo;
-	}*/
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/strs/strsStndMng/saveCdInfo.ab")
+	public RtnMsg saveCdInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		if("C".equals(params.get("crud"))) dao.insert("svcStnd.strs.strsStndMng.insertTiStrsStndCd",params);
+		else if("U".equals(params.get("crud"))) dao.insert("svcStnd.strs.strsStndMng.updateTiStrsStndCd",params);
+		else if("D".equals(params.get("crud"))) dao.insert("svcStnd.strs.strsStndMng.deleteTiStrsStndCd",params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
+	}
 }

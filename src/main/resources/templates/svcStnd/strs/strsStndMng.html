@@ -39,7 +39,6 @@
 							</select>
 						</div>
 					</div>
-
 					<div class="form-group mg_none">
 						<div class="text-center">
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
@@ -60,7 +59,7 @@
 					<i class="fa fa-title-bar"></i>
 					<h5>스트레스 현황</h5>
 					<div class="float_right">
-						<button type="button" id="btnCdGrpReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#cdGrpDetlPopup" v-on:click="regStrsStndPop()">&nbsp;스트레스현황 등록</button>
+						<button type="button" id="btnCdGrpReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#strsStndDetlPopup" v-on:click="regStrsStndPop()">&nbsp;스트레스현황 등록</button>
 						<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 				</div>
@@ -79,8 +78,8 @@
 						<i class="fa fa-title-bar"></i>
 						<h5>스트레스 코드 현황</h5>
 						<div class="float_right">
-							<button type="button" id="btnCdSpecReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="regCdSpecPop()">&nbsp;코드등록</button>
-							<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+							<button type="button" id="btnCdSpecReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#strsStndCdDetlPopup" v-on:click="regStrsStndCdPop()">&nbsp;코드등록</button>
+							<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadCdExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 						</div>
 					</div>
 					<div class="ibox-content">
@@ -95,11 +94,14 @@
 			</div>
 		</div>
     </div>
-    <div th:insert="~{svcStnd/strs/strsStndDetl :: body}"></div>
+    <div th:insert="~{svcStnd/strs/strsStndDetl   :: body}"></div>
+	<div th:insert="~{svcStnd/strs/strsStndCdDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/editor/summernote.js}"></script>
 	<script type="text/javascript" th:src="@{/js/svcStnd/strs/strsStndMng.js}"></script>
 	<script type="text/javascript" th:src="@{/js/svcStnd/strs/strsStndDetl.js}"></script>
+	<script type="text/javascript" th:src="@{/js/svcStnd/strs/strsStndCdDetl.js}"></script>
 </section>
 </body>
 </html>

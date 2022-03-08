@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:remove="tag">
-<div class="modal fade" id="strsStndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="strsStndCdDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 850px; height: 550px">
+			<div class="modal-content" style="width: 850px; height: 680px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>스트레스 현황 정보</h5>
+						<h5>스트레스 코드 현황 정보</h5>
 					</div>
 				</div><div class="modal-body">
 					<div class="ibox-content border-style_none">
 						<table class="table table-bordered table_view">
 		                    <colgroup>
-		                        <col class="col-xs-2" />
 		                        <col class="col-xs-4" />
-								<col class="col-xs-2" />
-								<col class="col-xs-4" />
+		                        <col class="col-xs-8" />
 		                    </colgroup>
 		                    <tbody>
 			                    <tr>
-			                        <th scope="row">정신적스트레스상태</th>
+			                        <th scope="row">코드값</th>
 			                        <td colspan="3">
-										<select id="mentStrsStatCd" name="mentStrsStatCd" class="form-control" v-model="strsStndInfo.mentStrsStatCd" :disabled="strsStndInfo.crud=='U'">
-											<option value="">선택</option>
-											<option v-for="item in code.mentStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-										</select>
+										<input type="text" id="cdVal" name="cdVal" v-model="strsStndCdInfo.cdVal" class="form-control" maxlength="30" :disabled="strsStndCdInfo.crud=='U'"/>
 			                        </td>
 			                    </tr>
 								<tr>
-									<th scope="row">신체적스트레스상태</th>
+									<th scope="row">코드명</th>
 									<td colspan="3">
-										<select id="physStrsStatCd" name="physStrsStatCd" class="form-control" v-model="strsStndInfo.physStrsStatCd" :disabled="strsStndInfo.crud=='U'">
-											<option value="">선택</option>
-											<option v-for="item in code.mentStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-										</select>
+										<input type="text" id="cdNm" name="cdNm" v-model="strsStndCdInfo.cdNm" class="form-control" maxlength="30"/>
 									</td>
 								</tr>
 			                    <tr>
-			                        <th scope="row">스트레스판정내용</th>
+			                        <th scope="row">코드내용</th>
 			                        <td colspan="3">
 										<div class="mg_top_10">
 											<summer-note
-													v-model="strsStndInfo.strsJudgCntn"
-													ref="strsJudgCntn"
-													:summer-note-id="summerNoteId1"
+													v-model="strsStndCdInfo.cdDesc"
+													ref="cdDesc"
+													:summer-note-id="summerNoteId2"
 													:options="{height:130, notUseVideo:true, maxImageWidth: 1280}"/>
 										</div>
 			                        </td>
 			                    </tr>
+								<tr>
+									<th scope="row">정렬순서</th>
+									<td>
+										<input type="text" id="sortOrd" name="sortOrd" v-model="strsStndCdInfo.sortOrd" class="form-control" maxlength="30"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">사용여부</th>
+									<td>
+										<select id="useYn" name="useYn" class="form-control" v-model="strsStndCdInfo.useYn">
+											<option value="" disabled>선택</option>
+											<option value="Y">Y</option>
+											<option value="N">N</option>
+										</select>
+									</td>
+								</tr>
 							</tbody>
 		                </table>
             		</div>
@@ -60,7 +68,7 @@
 						<div class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveInfo">저장</button>
 						</div>
-						<div v-if="strsStndInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
+						<div v-if="strsStndCdInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteInfo">삭제</button>
 						</div>
 						<div class="disp_in_block width_per_20">

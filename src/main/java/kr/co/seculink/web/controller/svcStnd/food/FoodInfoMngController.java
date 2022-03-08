@@ -28,16 +28,11 @@ public class FoodInfoMngController
 
 	public RtnMsg searchFoodInfoList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
-		System.out.println("test1");
 		RtnMsg vo = new RtnMsg();
-		System.out.println("test2");
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("test3");
 
 		List<Map<String, String>> result = dao.selectList("svcStnd.food.foodInfoMng.searchFoodInfoList", params);
-		System.out.println("test4");
 		rtnMap.put("result", result);
-		System.out.println("test5");
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");

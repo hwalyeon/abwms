@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="svcStnd.strs.strsStndMng">
 
+	<!--스트레스 현황 SELECT-->
 	<select id="searchStrsList" parameterType="java.util.Map" resultType="MybatisMap">
 	SELECT
                ment_strs_stat_cd /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
@@ -20,30 +21,11 @@
 		       ment_strs_stat_cd LIKE CONCAT (#{mentStrsStatCd}, '%') /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
 		AND    phys_strs_stat_cd LIKE CONCAT (#{physStrsStatCd}, '%') /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 		order  by MENT_STRS_STAT_NM
-
-	</select>
-
-	<select id="selectTcCdSpec" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT B.CD_GRP
-		,B.CD_GRP_NM
-		,A.CD_VAL
-		,A.CD_NM
-		,A.CD_DESC
-		,A.FLTR_VAL_1
-		,A.FLTR_VAL_2
-		,A.FLTR_VAL_3
-		,A.SORT_ORD
-		,A.USE_YN
-		FROM   TC_CD_SPEC A
-		INNER JOIN TC_CD_GRP B
-		ON  B.CD_GRP = A.CD_GRP
-		WHERE 1 = 1
-		AND   A.CD_GRP = 'STRS_STAT_CD'
-		ORDER BY A.CD_GRP, A.SORT_ORD
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 
+	<!--스트레스 현황 UPDATE-->
     <update id="updateTiStrsStnd" parameterType="java.util.Map">
         UPDATE ti_strs_stnd
         SET	REG_DT       = TO_CHAR(NOW(), 'YYYYMMDD')
@@ -55,10 +37,11 @@
         <if test="mentStrsStatCd != null and mentStrsStatCd != ''">,ment_strs_stat_cd = #{mentStrsStatCd}	</if>
         <if test="physStrsStatCd != null and physStrsStatCd != ''">,phys_strs_stat_cd = #{physStrsStatCd}	</if>
 		<if test="strsJudgCntn != null and strsJudgCntn != ''">,strs_judg_cntn = #{strsJudgCntn}	</if>
-        WHERE  ment_strs_stat_cd = #{mentStrsStatCd}
+        WHERE  ment_strs_stat_cd  = #{mentStrsStatCd}
         AND    phys_strs_stat_cd  = #{physStrsStatCd}
     </update>
 
+	<!--스트레스 현황 DELETE-->
     <delete id="deleteTiStrsStnd" parameterType="java.util.Map">
 	DELETE
 	FROM   ti_strs_stnd
@@ -66,6 +49,7 @@
     AND    phys_strs_stat_cd  = #{physStrsStatCd}
 	</delete>
 
+	<!--스트레스 현황 INSERT-->
     <insert id="insertTiStrsStnd" parameterType="java.util.Map">
 	INSERT INTO ti_strs_stnd
 	(
@@ -93,6 +77,98 @@
 	)
 	</insert>
 
+	<!--스트레스 코드 현황 SELECT-->
+	<select id="searchCdSpecList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT B.CD_GRP
+		,B.CD_GRP_NM
+		,A.CD_VAL
+		,A.CD_NM
+		,A.CD_DESC
+		,A.FLTR_VAL_1
+		,A.FLTR_VAL_2
+		,A.FLTR_VAL_3
+		,A.SORT_ORD
+		,A.USE_YN
+		FROM   TC_CD_SPEC A
+		INNER JOIN TC_CD_GRP B
+		ON  B.CD_GRP = A.CD_GRP
+		WHERE 1 = 1
+		AND   A.CD_GRP = 'STRS_STAT_CD'
+		<if test=" cdVal != null and cdVal !='' ">
+			AND   A.CD_VAL LIKE CONCAT (#{cdVal}, '%')
+		</if>
+		ORDER BY A.CD_GRP, A.SORT_ORD
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+
+	<!--스트레스 코드 현황 UPDATE-->
+	<update id="updateTiStrsStndCd" parameterType="java.util.Map">
+		UPDATE TC_CD_SPEC
+		SET	REG_DT      = TO_CHAR(NOW(), 'YYYYMMDD')
+		,REG_TM         = TO_CHAR(NOW(), 'HH24MISS')
+		,REG_USER_ID    = #{regUserId}
+		,UPT_DT         = TO_CHAR(NOW(), 'YYYYMMDD')
+		,UPT_TM         = TO_CHAR(NOW(), 'HH24MISS')
+		,UPT_USER_ID = #{uptUserId}
+		<if test="cdVal   != null and cdVal   != ''">,CD_VAL   = #{cdVal}			 </if>
+		<if test="cdNm    != null and cdNm    != ''">,CD_NM    = #{cdNm}			 </if>
+		<if test="cdDesc  != null and cdDesc  != ''">,CD_DESC  = #{cdDesc}			 </if>
+		<if test="sortOrd != null and sortOrd != ''">,SORT_ORD = #{sortOrd} ::numeric</if>
+		<if test="useYn   != null and useYn   != ''">,USE_YN   = #{useYn}			 </if>
+		WHERE  CD_VAL = #{cdVal}
+		AND    CD_GRP = 'STRS_STAT_CD'
+	</update>
+
+	<!--스트레스 코드 현황 DELETE-->
+	<delete id="deleteTiStrsStndCd" parameterType="java.util.Map">
+	DELETE
+	FROM   TC_CD_SPEC
+	WHERE  CD_VAL  = #{cdVal}
+	AND    CD_GRP = 'STRS_STAT_CD'
+	</delete>
+
+	<!--스트레스 코드 현황 INSERT-->
+	<insert id="insertTiStrsStndCd" parameterType="java.util.Map">
+	insert into TC_CD_SPEC
+	(
+		 cd_grp
+		,cd_val
+		,cd_nm
+		,cd_desc
+		,fltr_val_1
+		,fltr_val_2
+		,fltr_val_3
+		,sort_ord
+		,use_yn
+		,reg_dt
+		,reg_tm
+		,reg_user_id
+		,upt_dt
+		,upt_tm
+		,upt_user_id
+	)
+	values
+	(
+		 'STRS_STAT_CD'
+		,#{cdVal}
+		,#{cdNm}
+		,#{cdDesc}
+		,null
+		,null
+		,null
+		,#{sortOrd} ::numeric
+		,#{useYn}
+		,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
+	    ,#{regUserId}
+	    ,TO_CHAR(NOW(), 'YYYYMMDD')
+	    ,TO_CHAR(NOW(), 'HH24MISS')
+	    ,#{uptUserId}
+	)
+	;
+	</insert>
+
 	<select id="mentphysCd" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT  ment_strs_stat_cd
 	           ,fn_getcdnm('STRS_STAT_CD', ment_strs_stat_cd) as ment_strs_stat_nm
@@ -101,7 +177,7 @@
 		FROM ti_strs_stnd
 		WHERE 1=1
 		AND ment_strs_stat_cd = #{mentStrsStatCd}
-		and phys_strs_stat_cd = #{physStrsStatCd}
+		AND phys_strs_stat_cd = #{physStrsStatCd}
 	</select>
 
 
