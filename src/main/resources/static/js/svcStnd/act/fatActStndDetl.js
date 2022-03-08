@@ -28,8 +28,8 @@ let fatActStndDetl = new Vue({
         },
         initCodeList: function() {
         	let $this = this;
-			getCommonCodeList('FAT_JUDG_CD',$this.code.fatJudgCdList);
-			getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList);
+			getCommonCodeList('FAT_JUDG_CD',$this.code.fatJudgCdList,'');
+			getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList,'');
         	
         },
         initPage: function(currFatJudgCd, prdtFatJudgCd, palCd) {
@@ -48,9 +48,9 @@ let fatActStndDetl = new Vue({
                     url: "/svcStnd/act/fatActStndMng/searchFatActStndInfo.ab",
                     param: params,
                     success: function(response) {
-                    	if ( !!response.rtnData.result ) {
+                    	if ( !!response["rtnData"].result ) {
                     		$this.fatActStndInfo.crud = 'U';
-                    		$.each(response.rtnData.result, function(key, val) {
+                    		$.each(response["rtnData"].result, function(key, val) {
             					$this.fatActStndInfo[key] = val;
             				});
                     	}                    		
@@ -114,7 +114,7 @@ let fatActStndDetl = new Vue({
 			AjaxUtil.post({
                 url: "/svcStnd/act/fatActStndMng/saveFatActStndInfo.ab",
                 param: $this.fatActStndInfo,
-                success: function(response) {
+                success: function() {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#fatActStndDetlPopup'));
 						fatActStndMng.searchFatActStndList(true);
@@ -135,7 +135,7 @@ let fatActStndDetl = new Vue({
             AjaxUtil.post({
                 url: "/svcStnd/act/fatActStndMng/saveFatActStndInfo.ab",
                 param: $this.fatActStndInfo,
-                success: function(response) {
+                success: function() {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#fatActStndDetlPopup'));
 						fatActStndMng.searchFatActStndList(true);

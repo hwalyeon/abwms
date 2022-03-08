@@ -31,16 +31,16 @@ public class GrowActStndMngController
 	// 성장활동_기준_리스트_조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/growActStndMng/searchGrowActStndList.ab")
-	public RtnMsg searchGrowActStndList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	public RtnMsg<Map<String, Object>> searchGrowActStndList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		List<Map<String, String>> result = growActStndMngService.searchGrowActStndList(params);
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)growActStndMngService.searchGrowActStndList(params)).size());
+			vo.setTotalCount(growActStndMngService.searchGrowActStndList(params).size());
 		}
 		rtnMap.put("result", result);
 		vo.setRtnData(rtnMap, params);
@@ -64,12 +64,12 @@ public class GrowActStndMngController
 		String [] arrHeader = {"성장판정코드","성장판정명","신체활동수준코드","신체활동수준명","성장활동 비고","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
-		List<List<String>> dataList = new ArrayList<List<String>>();
+		List<List<String>> dataList = new ArrayList<>();
 		List<String> data;
 
 		for ( Map<String, String> info : list )
 		{
-			data = new ArrayList<String>();
+			data = new ArrayList<>();
 			data.add(info.get("growJudgCd"));
 			data.add(info.get("growJudgNm"));
 			data.add(info.get("palCd"));
@@ -94,10 +94,10 @@ public class GrowActStndMngController
 	//상세보기_조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/growActStndMng/searchGrowActStndInfo.ab")
-	public RtnMsg searchGrowActStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	public RtnMsg<Map<String, Object>> searchGrowActStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		List<Map<String, String>> result = growActStndMngService.searchGrowActStndList(params);
 
@@ -113,9 +113,9 @@ public class GrowActStndMngController
 	//상세보기_저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/growActStndMng/saveGrowActStndInfo.ab")
-	public RtnMsg saveGrowActStndInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+	public RtnMsg<Map<String, Object>> saveGrowActStndInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 		growActStndMngService.saveGrowActStndInfo(params);
 
 		rtnMap.put("result", params);

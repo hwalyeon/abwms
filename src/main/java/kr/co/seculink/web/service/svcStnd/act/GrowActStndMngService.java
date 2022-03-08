@@ -8,9 +8,9 @@ import java.util.Map;
 public interface GrowActStndMngService
 {
 	//성장활동_기준_리스트 조회
-	public List<Map<String, String>> searchGrowActStndList(Map<String, String> params) throws BizException;
+	List<Map<String, String>> searchGrowActStndList(Map<String, String> params) throws BizException;
 
 	//상세보기_저장
-	public void saveGrowActStndInfo(Map<String,Object> params) throws BizException;
+	void saveGrowActStndInfo(Map<String,Object> params) throws BizException;
 
 }

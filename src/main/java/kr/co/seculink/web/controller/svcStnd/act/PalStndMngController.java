@@ -30,16 +30,16 @@ public class PalStndMngController
 	//신체활동수준_기준_리스트_조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/palStndMng/searchPalStndList.ab")
-	public RtnMsg searchPalStndList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	public RtnMsg<Map<String, Object>> searchPalStndList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		List<Map<String, String>> result = palStndMngService.searchPalStndList(params);
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)palStndMngService.searchPalStndList(params)).size());
+			vo.setTotalCount(palStndMngService.searchPalStndList(params).size());
 		}
 		rtnMap.put("result", result);
 		vo.setRtnData(rtnMap, params);
@@ -51,9 +51,9 @@ public class PalStndMngController
 	//행추가_행삭제_저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/palStndMng/savePalStnd.ab")
-	public RtnMsg savePalStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+	public RtnMsg<Map<String, Object>> savePalStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		palStndMngService.savePalStnd(params);
 
@@ -79,12 +79,12 @@ public class PalStndMngController
 		String [] arrHeader = {"신체활동수준코드","신체활동수준명","신체활동수준값From","신체활동수준값To","신체활동수준 섭취 비고","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
-		List<List<String>> dataList = new ArrayList<List<String>>();
+		List<List<String>> dataList = new ArrayList<>();
 		List<String> data;
 
 		for ( Map<String, String> info : list )
 		{
-			data = new ArrayList<String>();
+			data = new ArrayList<>();
 			data.add(info.get("palCd"));
 			data.add(info.get("palNm"));
 			data.add(String.valueOf(info.get("palValFr")));
@@ -109,10 +109,10 @@ public class PalStndMngController
 	//상세보기_조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/palStndMng/searchPalStndInfo.ab")
-	public RtnMsg searchPalStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	public RtnMsg<Map<String, Object>> searchPalStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		List<Map<String, String>> result = palStndMngService.searchPalStndList(params);
 
@@ -128,9 +128,9 @@ public class PalStndMngController
 	//상세보기_저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/palStndMng/savePalStndInfo.ab")
-	public RtnMsg savePalStndInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+	public RtnMsg<Map<String, Object>> savePalStndInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		palStndMngService.savePalStndInfo(params);
 

@@ -41,7 +41,7 @@ let fatActStndMng = new Vue({
             initCodeList : function()
             {
                 let $this = this;
-                getCommonCodeList('FAT_JUDG_CD',$this.code.fatJudgCdList);
+                getCommonCodeList('FAT_JUDG_CD',$this.code.fatJudgCdList, '');
                 getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList, function()
                 {
                     $this.initGrid();
@@ -51,7 +51,6 @@ let fatActStndMng = new Vue({
             initGrid: function()
             {  
                 let $this = this;
-                let palCdList = commonGridCmonCd($this.code.palCdList);
                 let colModels =
                 [
                     {name: "crud"               , index: "crud"                 , label:"crud"                          , hidden:true},
@@ -62,11 +61,11 @@ let fatActStndMng = new Vue({
                     {name: "palCd"              , index: "palCd"                , label: "신체활동수준 코드"               , width: 80        , align: "center"  , editable: false},
                     {name: "palNm"              , index: "palNm"                , label: "신체활동수준 명"                 , width: 80       , align: "center"   , editable: false},
                     {name: "fatActRmrk"         , index: "fatActRmrk"           , label: "비만활동 비고"                  , width: 500       , align: "center"  , editable: false},
-                    {name: "regDt"              , index: "regDt"                , label: "등록일자"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
-                    {name: "regTm"              , index: "regTm"                , label: "등록시각"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);  }},
+                    {name: "regDt"              , index: "regDt"                , label: "등록일자"                       , width: 80       , align: "center"  , formatter: function(cellValue) { return formatDate(cellValue);  }},
+                    {name: "regTm"              , index: "regTm"                , label: "등록시각"                       , width: 80       , align: "center"  , formatter: function(cellValue) { return formatTime(cellValue);  }},
                     {name: "regUserId"          , index: "regUserId"            , label: "등록사용자 ID"                  , width: 80        , align: "center"}  ,
-                    {name: "uptDt"              , index: "uptDt"                , label: "수정일자"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);   }},
-                    {name: "uptTm"              , index: "uptTm"                , label: "수정시각"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);   }},
+                    {name: "uptDt"              , index: "uptDt"                , label: "수정일자"                       , width: 80       , align: "center"  , formatter: function(cellValue) { return formatDate(cellValue);   }},
+                    {name: "uptTm"              , index: "uptTm"                , label: "수정시각"                       , width: 80       , align: "center"  , formatter: function(cellValue) { return formatTime(cellValue);   }},
                     {name: "uptUserId"          , index: "uptUserId"            , label: "수정사용자 ID"                  , width: 80        , align: "center"} ,
                     {name: "fatActStndPop"     , index: "fatActStndPop"         , label: "상세정보 보기"                   , width: 80       , align: "center"  ,
                         formatter: function(cellValue, options, rowObject) {
@@ -94,7 +93,7 @@ let fatActStndMng = new Vue({
                         })
                     },
                     afterSaveCell : function (rowid , colId , val, e ){
-                        if($("#fatActStnd_list").getRowData(rowid).crud != "C" && $("#fatActStnd_list").getRowData(rowid).crud != "D" ) {
+                        if("C" !== $("#fatActStnd_list").getRowData(rowid).crud && "D" !== $("#fatActStnd_list").getRowData(rowid).crud) {
                             $("#fatActStnd_list").setRowData(rowid, {crud:"U"});
                         }
                     }
@@ -120,7 +119,7 @@ let fatActStndMng = new Vue({
                         loadComplete: function (response)
 
                         {
-                            if ( response.rtnData.result == 0 )
+                            if (0 === response["rtnData"].result)
                             {
                                 Swal.alert(['조회할 내용이 없습니다.', "info"]);
                             }

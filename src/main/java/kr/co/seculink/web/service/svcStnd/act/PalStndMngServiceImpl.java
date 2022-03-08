@@ -1,17 +1,12 @@
 package kr.co.seculink.web.service.svcStnd.act;
 
-import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.util.XUtil;
-import kr.co.seculink.web.service.svcStnd.act.PalStndMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +19,8 @@ public class PalStndMngServiceImpl implements PalStndMngService
 	private SqlSessionTemplate dao;
 	
     //신체활동수준_기준_리스트 조회
-	public List<Map<String, String>> searchPalStndList(Map<String, String> params) throws BizException
-	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.act.palStndMng.searchPalStndList", params);
-		return result;
+	public List<Map<String, String>> searchPalStndList(Map<String, String> params) {
+		return dao.selectList("svcStnd.act.palStndMng.searchPalStndList", params);
 	}
 
 	//행추가_행삭제 저장
@@ -93,7 +86,7 @@ public class PalStndMngServiceImpl implements PalStndMngService
 		boolean chkRtn = true;
 		Map<String, String> result = dao.selectOne("svcStnd.act.palStndMng.searchPalCdChk", params);
 
-		if(null != result && !"".equals(result)){
+		if(null != result){
 			throw new BizException("ECOM999", new String[]{"이미 등록된 신체활동수준 코드입니다."});
 		}
 		return chkRtn;

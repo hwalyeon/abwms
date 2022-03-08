@@ -31,16 +31,16 @@ public class FatActStndMngController
 	// 비만활동_기준_리스트_조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/fatActStndMng/searchFatActStndList.ab")
-	public RtnMsg searchFatActStndList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	public RtnMsg<Map<String, Object>> searchFatActStndList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		List<Map<String, String>> result = fatActStndMngService.searchFatActStndList(params);
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)fatActStndMngService.searchFatActStndList(params)).size());
+			vo.setTotalCount(fatActStndMngService.searchFatActStndList(params).size());
 		}
 		rtnMap.put("result", result);
 		vo.setRtnData(rtnMap, params);
@@ -64,12 +64,12 @@ public class FatActStndMngController
 		String [] arrHeader = {"현재비만판정코드","현재비만판정명","예측비만판정코드","예측비만판정명","신체활동수준코드","신체활동수준명","비만활동비고","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
-		List<List<String>> dataList = new ArrayList<List<String>>();
+		List<List<String>> dataList = new ArrayList<>();
 		List<String> data;
 
 		for ( Map<String, String> info : list )
 		{
-			data = new ArrayList<String>();
+			data = new ArrayList<>();
 			data.add(info.get("currFatJudgCd"));
 			data.add(info.get("currFatJudgNm"));
 			data.add(info.get("prdtFatJudgCd"));
@@ -96,10 +96,10 @@ public class FatActStndMngController
 	//상세보기_조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/fatActStndMng/searchFatActStndInfo.ab")
-	public RtnMsg searchFatActStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	public RtnMsg<Map<String, Object>> searchFatActStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 
 		List<Map<String, String>> result = fatActStndMngService.searchFatActStndList(params);
 
@@ -115,9 +115,9 @@ public class FatActStndMngController
 	//상세보기_저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/act/fatActStndMng/saveFatActStndInfo.ab")
-	public RtnMsg saveFatActStndInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
+	public RtnMsg<Map<String, Object>> saveFatActStndInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
 		fatActStndMngService.saveFatActStndInfo(params);
 
 		rtnMap.put("result", params);

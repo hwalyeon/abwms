@@ -19,10 +19,8 @@ public class FatActStndMngServiceImpl implements FatActStndMngService
 	private SqlSessionTemplate dao;
 	
     //비만활동_기준_리스트 조회
-	public List<Map<String, String>> searchFatActStndList(Map<String, String> params) throws BizException
-	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.act.fatActStndMng.searchFatActStndList", params);
-		return result;
+	public List<Map<String, String>> searchFatActStndList(Map<String, String> params) {
+		return dao.selectList("svcStnd.act.fatActStndMng.searchFatActStndList", params);
 	}
 
 	//상세보기_저장
@@ -52,7 +50,7 @@ public class FatActStndMngServiceImpl implements FatActStndMngService
 		boolean chkRtn = true;
 		Map<String, String> result = dao.selectOne("svcStnd.act.fatActStndMng.searchFatJudgCdChk", params);
 
-		if(null != result && !"".equals(result)){
+		if(null != result){
 			throw new BizException("ECOM999", new String[]{"이미 등록된 비만활동 및 신체활동수준 코드입니다."});
 		}
 		return chkRtn;

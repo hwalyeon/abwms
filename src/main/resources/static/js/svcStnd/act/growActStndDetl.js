@@ -26,8 +26,8 @@ let growActStndDetl = new Vue({
         },
         initCodeList: function() {
         	let $this = this;
-			getCommonCodeList('GROW_JUDG_CD',$this.code.growJudgCdList);
-			getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList);
+			getCommonCodeList('GROW_JUDG_CD',$this.code.growJudgCdList, '');
+			getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList, '');
         	
         },
         initPage: function(growJudgCd, palCd) {
@@ -46,9 +46,9 @@ let growActStndDetl = new Vue({
                     url: "/svcStnd/act/growActStndMng/searchGrowActStndInfo.ab",
                     param: params,
                     success: function(response) {
-                    	if ( !!response.rtnData.result ) {
+                    	if ( !!response["rtnData"].result ) {
                     		$this.growActStndInfo.crud = 'U';
-                    		$.each(response.rtnData.result, function(key, val) {
+                    		$.each(response["rtnData"].result, function(key, val) {
             					$this.growActStndInfo[key] = val;
             				});
                     	}                    		
@@ -102,7 +102,7 @@ let growActStndDetl = new Vue({
 			AjaxUtil.post({
                 url: "/svcStnd/act/growActStndMng/saveGrowActStndInfo.ab",
                 param: $this.growActStndInfo,
-                success: function(response) {
+                success: function() {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#growActStndDetlPopup'));
 						growActStndMng.searchGrowActStndList(true);
@@ -123,7 +123,7 @@ let growActStndDetl = new Vue({
             AjaxUtil.post({
                 url: "/svcStnd/act/growActStndMng/saveGrowActStndInfo.ab",
                 param: $this.growActStndInfo,
-                success: function(response) {
+                success: function() {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#growActStndDetlPopup'));
                 		 growActStndMng.searchGrowActStndList(true);
