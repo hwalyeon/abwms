@@ -90,7 +90,7 @@ public class PrntInfoMngController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"학생번호","학생명","가입일자","밴드전화번호","학교(학원)명", "밴드ID", "보호자번호","보호자명","보호자전화번호","배우자번호","배우자명","배우자전화번호"};
+		String [] arrHeader = {"보호자번호","보호자명","보호자전화번호","학생번호","학생명","가입일자","밴드전화번호","학교(학원)명", "밴드ID", "배우자번호","배우자명","배우자전화번호"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -99,15 +99,15 @@ public class PrntInfoMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<String>();
+			data.add(String.valueOf(info.get("guarNo")));
+			data.add(info.get("guarNm"));
+			data.add(info.get("guarTelNo"));
 			data.add(String.valueOf(info.get("stdtNo")));
 			data.add(info.get("stdtNm"));
 			data.add(info.get("entrDt"));
 			data.add(info.get("telNo"));
 			data.add(info.get("locNm"));
 			data.add(info.get("bandId"));
-			data.add(String.valueOf(info.get("guarNo")));
-			data.add(info.get("guarNm"));
-			data.add(info.get("guarTelNo"));
 			data.add(String.valueOf(info.get("sposNo")));
 			data.add(info.get("sposNm"));
 			data.add(info.get("sposTelNo"));
