@@ -13,8 +13,6 @@
                ,band_mdl_cd /* band_mdl_cd 밴드_모델_코드 character varying(20) */
                ,tel_no /* tel_no 전화_번호 character varying(20) */
                ,blth_id /* blth_id 블루투스_ID character varying(40) */
-               ,guar_tel_no_1 /* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
-               ,guar_tel_no_2 /* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
                ,api_url_gram_no /* api_url_gram_no API_URL_전문_번호 numeric */
                ,api_url_dttm /* api_url_dttm API_URL_일시 character(14) */
                ,open_gram_no /* open_gram_no 개통_전문_번호 numeric */
@@ -43,12 +41,6 @@
 		</if>
 		<if test="blthId != null">
 		    ,blth_id /* blth_id 블루투스_ID character varying(40) */
-		</if>
-		<if test="guarTelNo1 != null">
-		    ,guar_tel_no_1 /* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
-		</if>
-		<if test="guarTelNo2 != null">
-		    ,guar_tel_no_2 /* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
 		</if>
 		<if test="apiUrlGramNo != null">
 		    ,api_url_gram_no /* api_url_gram_no API_URL_전문_번호 numeric */
@@ -84,12 +76,6 @@
 		</if>
 		<if test="blthId != null">
 		    ,#{blthId} /* blth_id 블루투스_ID character varying(40) */
-		</if>
-		<if test="guarTelNo1 != null">
-		    ,#{guarTelNo1} /* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
-		</if>
-		<if test="guarTelNo2 != null">
-		    ,#{guarTelNo2} /* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
 		</if>
 		<if test="apiUrlGramNo != null">
 		    ,#{apiUrlGramNo} /* api_url_gram_no API_URL_전문_번호 numeric */
@@ -129,12 +115,6 @@
 		<if test="blthId != null">
 		    ,blth_id = #{blthId} /* blth_id 블루투스_ID character varying(40) */
 		</if>
-		<if test="guarTelNo1 != null">
-		    ,guar_tel_no_1 = #{guarTelNo1} /* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
-		</if>
-		<if test="guarTelNo2 != null">
-		    ,guar_tel_no_2 = #{guarTelNo2} /* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
-		</if>
 		<if test="apiUrlGramNo != null">
 		    ,api_url_gram_no = #{apiUrlGramNo} /* api_url_gram_no API_URL_전문_번호 numeric */
 		</if>
@@ -171,12 +151,6 @@
 		<if test="blthId != null">
 		    ,blth_id /* blth_id 블루투스_ID character varying(40) */
 		</if>
-		<if test="guarTelNo1 != null">
-		    ,guar_tel_no_1 /* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
-		</if>
-		<if test="guarTelNo2 != null">
-		    ,guar_tel_no_2 /* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
-		</if>
 		<if test="apiUrlGramNo != null">
 		    ,api_url_gram_no /* api_url_gram_no API_URL_전문_번호 numeric */
 		</if>
@@ -212,12 +186,6 @@
 		<if test="blthId != null">
 		    ,#{blthId} /* blth_id 블루투스_ID character varying(40) */
 		</if>
-		<if test="guarTelNo1 != null">
-		    ,#{guarTelNo1} /* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
-		</if>
-		<if test="guarTelNo2 != null">
-		    ,#{guarTelNo2} /* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
-		</if>
 		<if test="apiUrlGramNo != null">
 		    ,#{apiUrlGramNo} /* api_url_gram_no API_URL_전문_번호 numeric */
 		</if>
@@ -252,12 +220,6 @@
 		</if>
 		<if test="blthId != null">
 		    ,blth_id = #{blthId} /* blth_id 블루투스_ID character varying(40) */
-		</if>
-		<if test="guarTelNo1 != null">
-		    ,guar_tel_no_1 = #{guarTelNo1} /* guar_tel_no_1 보호자_전화_번호_1 character varying(20) */
-		</if>
-		<if test="guarTelNo2 != null">
-		    ,guar_tel_no_2 = #{guarTelNo2} /* guar_tel_no_2 보호자_전화_번호_2 character varying(20) */
 		</if>
 		<if test="apiUrlGramNo != null">
 		    ,api_url_gram_no = #{apiUrlGramNo} /* api_url_gram_no API_URL_전문_번호 numeric */

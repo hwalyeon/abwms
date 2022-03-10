@@ -11,8 +11,6 @@
 		/* Generated SQL SQL ID : tm_stdt_base.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,stdt_nm /* stdt_nm 학생_명 character varying(40) */
-               ,guar_no_1 /* guar_no_1 보호자_번호_1 numeric */
-               ,guar_no_2 /* guar_no_2 보호자_번호_2 numeric */
                ,band_id /* band_id 밴드_ID character varying(20) */
                ,eorg_loc_no /* eorg_loc_no 교육시설_위치_번호 numeric */
                ,sgrd_cd /* sgrd_cd 학년_코드 character varying(20) */
@@ -51,12 +49,6 @@
 		     stdt_no /* stdt_no 학생_번호 numeric */
 		<if test="stdtNm != null">
 		    ,stdt_nm /* stdt_nm 학생_명 character varying(40) */
-		</if>
-		<if test="guarNo1 != null">
-		    ,guar_no_1 /* guar_no_1 보호자_번호_1 numeric */
-		</if>
-		<if test="guarNo2 != null">
-		    ,guar_no_2 /* guar_no_2 보호자_번호_2 numeric */
 		</if>
 		<if test="bandId != null">
 		    ,band_id /* band_id 밴드_ID character varying(20) */
@@ -132,12 +124,6 @@
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
 		<if test="stdtNm != null">
 		    ,#{stdtNm} /* stdt_nm 학생_명 character varying(40) */
-		</if>
-		<if test="guarNo1 != null">
-		    ,#{guarNo1} /* guar_no_1 보호자_번호_1 numeric */
-		</if>
-		<if test="guarNo2 != null">
-		    ,#{guarNo2} /* guar_no_2 보호자_번호_2 numeric */
 		</if>
 		<if test="bandId != null">
 		    ,#{bandId} /* band_id 밴드_ID character varying(20) */
@@ -217,12 +203,6 @@
 		<if test="stdtNm != null">
 		    ,stdt_nm = #{stdtNm} /* stdt_nm 학생_명 character varying(40) */
 		</if>
-		<if test="guarNo1 != null">
-		    ,guar_no_1 = #{guarNo1} /* guar_no_1 보호자_번호_1 numeric */
-		</if>
-		<if test="guarNo2 != null">
-		    ,guar_no_2 = #{guarNo2} /* guar_no_2 보호자_번호_2 numeric */
-		</if>
 		<if test="bandId != null">
 		    ,band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
 		</if>
@@ -301,12 +281,6 @@
 		<if test="stdtNm != null">
 		    ,stdt_nm /* stdt_nm 학생_명 character varying(40) */
 		</if>
-		<if test="guarNo1 != null">
-		    ,guar_no_1 /* guar_no_1 보호자_번호_1 numeric */
-		</if>
-		<if test="guarNo2 != null">
-		    ,guar_no_2 /* guar_no_2 보호자_번호_2 numeric */
-		</if>
 		<if test="bandId != null">
 		    ,band_id /* band_id 밴드_ID character varying(20) */
 		</if>
@@ -382,12 +356,6 @@
 		<if test="stdtNm != null">
 		    ,#{stdtNm} /* stdt_nm 학생_명 character varying(40) */
 		</if>
-		<if test="guarNo1 != null">
-		    ,#{guarNo1} /* guar_no_1 보호자_번호_1 numeric */
-		</if>
-		<if test="guarNo2 != null">
-		    ,#{guarNo2} /* guar_no_2 보호자_번호_2 numeric */
-		</if>
 		<if test="bandId != null">
 		    ,#{bandId} /* band_id 밴드_ID character varying(20) */
 		</if>
@@ -462,12 +430,6 @@
 		<trim prefix="" prefixOverrides=",">
 		<if test="stdtNm != null">
 		    ,stdt_nm = #{stdtNm} /* stdt_nm 학생_명 character varying(40) */
-		</if>
-		<if test="guarNo1 != null">
-		    ,guar_no_1 = #{guarNo1} /* guar_no_1 보호자_번호_1 numeric */
-		</if>
-		<if test="guarNo2 != null">
-		    ,guar_no_2 = #{guarNo2} /* guar_no_2 보호자_번호_2 numeric */
 		</if>
 		<if test="bandId != null">
 		    ,band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
