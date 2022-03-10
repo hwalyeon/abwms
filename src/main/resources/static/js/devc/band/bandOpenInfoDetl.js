@@ -9,7 +9,6 @@ let bandOpenInfoDetl = new Vue({
 			bandYtypCd     : '' ,  //밴드_출고_년월
 			bandMdlCd      : '' ,  //밴드_모델_코드
 			telNo          : '' ,  //밴드_전화_번호
-			guarTelNo      : '' ,  //보호자_전화_번호
 			bandOpenStatCd : '' ,  //밴드_개통_상태_코드
 			blthId         : '' ,  //블루투스_ID
 			apiUrlGramNo   : '' ,  //API_URL_전문_번호
@@ -54,26 +53,26 @@ let bandOpenInfoDetl = new Vue({
         initPage: function(bandId, callback) {
 
 			let $this = this;
-			if(typeof callback === 'function'){
-				$this.callBack = callback;
-			}
 
 			$this.resetBandOpenInfo();
 
+			if(typeof callback === 'function'){
+				$this.callBack = callback;
+			}
 			if ( !WebUtil.isNull(bandId) )
 			{
 				let params = {
 					'bandId' : bandId
 				}
 				AjaxUtil.post({
-					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab",
+					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfoList.ab",
 					param: params,
 					success: function(response) {
 						if ( !!response.rtnData.result )
 						{
 							$this.params.crud = 'U';
 
-							$.each(response.rtnData.result.result, function(key, val) {
+							$.each(response.rtnData.result[0], function(key, val) {
 								$this.params[key] = val;
 
 							});
@@ -84,8 +83,67 @@ let bandOpenInfoDetl = new Vue({
 					}
 				});
 			}
+			setTimeout(function() {
+				$this.initGrid();
+				$this.searchGuarTelNoList(true);
+			},300);
 		},
+		initGrid: function()
+		{
+			let $this = this;
+			let colModels = [
+				{name: "crud"      , index: "crud"      , label: "crud"		      , hidden: true                },
+				{name: "guarNo"    , index: "guarNo"    , label: "보호자 번호" 	  , width: 50 , align: "center" },
+				{name: "guarNm"    , index: "guarNm"    , label: "보호자 이름" 	  , width: 50 , align: "center" },
+				{name: "guarTelNo" , index: "guarTelNo" , label: "보호자 전화번호" , width: 80 , align: "center" }
+			];
+			$("#guarTelNo_list").jqGrid("GridUnload");
+			$("#guarTelNo_list").jqGrid($.extend(true, {}, commonGridOptions(),
+				{
+					datatype : "local",
+					mtype    : 'post'  ,
+					url      : '/devc/band/bandOpenInfoMng/searchBandOpenInfoList.ab',
+					pager    : '#guarTelNo_pager_list',
+					colModel : colModels,
+					height   : 150,
+					onPaging : function(data)
+					{
+						onPagingCommon(data, this, function(resultMap)
+						{
+							$this.params.currentPage  = resultMap.currentPage;
+							$this.params.rowCount     = resultMap.rowCount;
+							$this.params.currentIndex = resultMap.currentIndex;
+							$this.searchGuarTelNoList(false);
+						})
+					}
+				}));
+			resizeJqGridWidth("guarTelNo_list", "guarTelNo_list_wrapper");
+		},
+		searchGuarTelNoList: function(isSearch)
+		{
+			let $this     = this;
+			let params = {'bandId': $this.params.bandId};
 
+			if ( isSearch )
+			{
+				params.currentPage = 1;
+				params.currentIndex = 0;
+			}
+
+			$("#guarTelNo_list").setGridParam(
+				{
+					datatype: "json",
+					postData: JSON.stringify(params),
+					page: 1,
+					loadComplete: function (response)
+					{
+						if ( response.rtnData.result == 0 )
+						{
+							Swal.alert(['조회할 내용이 없습니다.', "info"]);
+						}
+					}
+				}).trigger("reloadGrid");
+		},
 		//출고_년월_리스트_값 세팅
 		initBandYtypCdValue: function() {
 			let $this = this;
@@ -194,32 +252,6 @@ let bandOpenInfoDetl = new Vue({
 				}
 			});
 		},
-		//숫자타입 체크
-		nanCk : function(event)
-		{
-			let $this = this;
-
-			let name  = event.target.name;
-			let cdNm;
-			if(isNaN($this.params[name])){
-
-				if(name=='telNo'){
-					cdNm='전화 번호';
-				}else if(name=='guarTelNo'){
-					cdNm='보호자 전화번호';
-				}else{
-					cdNm='밴드ID';
-				}
-
-				this.params[name] = this.params[name].replace(/\D/g,'');
-				Swal.alert([cdNm+"는 숫자만 사용 가능합니다.", 'info']);
-			}
-
-			if(name=='bandId'){
-				$this.params.bandYtypCd ='';
-				$this.params.bandMdlCd  ='';
-			}
-		},
 		saveBandOpenInfoDetl: function() {
 			
 			let $this = this;
@@ -281,18 +313,22 @@ let bandOpenInfoDetl = new Vue({
 			this.params = {
 				crud           : 'C',
 				userId         : '' ,
+				bandIdTemp     : '' ,
 				bandId         : '' ,  //밴드_ID
 				bandYtypCd     : '' ,  //밴드_출고_년월
 				bandMdlCd      : '' ,  //밴드_모델_코드
 				telNo          : '' ,  //밴드_전화_번호
-				guarTelNo      : '' ,  //보호자_전화_번호
-				bandOpenStatCd : 'STBY' ,  //밴드_개통_상태_코드
+				bandOpenStatCd : '' ,  //밴드_개통_상태_코드
+				blthId         : '' ,  //블루투스_ID
+				apiUrlGramNo   : '' ,  //API_URL_전문_번호
+				apiUrlDttm     : '' ,  //API_URL_일시
+				openGramNo     : '' ,  //개통_전문_번호
+				checkDupBandId : '' ,  //밴드ID_확인_여부
 				paging         : 'Y',
 				totalCoun      : 0  ,
 				rowCount       : 30 ,
 				currentPage    : 1  ,
-				currentIndex   : 0 ,
-	    		checkDupBandId: 'N'
+				currentIndex   : 0
 	    	}
 		},
     },
