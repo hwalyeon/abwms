@@ -7,11 +7,8 @@ import java.io.Serializable;
  */
 public class TmGuarApntPlcVo implements Serializable {
 
-	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
-
-	/* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
-	private String guarApntPlcNm;
+	/* stdt_no 학생_번호 numeric(null) */
+	private double stdtNo;
 
 	/* loc_no 위치_번호 numeric(null) */
 	private double locNo;
@@ -39,34 +36,19 @@ public class TmGuarApntPlcVo implements Serializable {
 
 
 	/**
-	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * Get stdt_no 학생_번호 numeric(null)
+	 * @Return double stdtNo
 	 */
-	public double getGuarNo() {
-		return this.guarNo;
+	public double getStdtNo() {
+		return this.stdtNo;
 	}
 	
 	/**
-	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * Set stdt_no 학생_번호 numeric(null)
+	 * @Param double stdtNo
 	 */
-	public void setGuarNo(double guarNo) {
-		this.guarNo = guarNo;
-	}
-	/**
-	 * Get guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100)
-	 * @Return String guarApntPlcNm
-	 */
-	public String getGuarApntPlcNm() {
-		return this.guarApntPlcNm;
-	}
-	
-	/**
-	 * Set guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100)
-	 * @Param String guarApntPlcNm
-	 */
-	public void setGuarApntPlcNm(String guarApntPlcNm) {
-		this.guarApntPlcNm = guarApntPlcNm;
+	public void setStdtNo(double stdtNo) {
+		this.stdtNo = stdtNo;
 	}
 	/**
 	 * Get loc_no 위치_번호 numeric(null)

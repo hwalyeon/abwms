@@ -31,14 +31,11 @@ public class TmGuarBaseVo implements Serializable {
 	/* fcm_tokn_val FCM_토큰_값 character varying(100) */
 	private String fcmToknVal;
 
-	/* sex_cd 성별_코드 character varying(20) */
-	private String sexCd;
+	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
+	private String dzoneAlamYn;
 
 	/* prnt_no 학부모_번호 numeric(null) */
 	private double prntNo;
-
-	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
-	private String dzoneAlamYn;
 
 	/* szone_alam_yn 세이프존_알림_여부 character(1) */
 	private String szoneAlamYn;
@@ -225,19 +222,19 @@ public class TmGuarBaseVo implements Serializable {
 		this.fcmToknVal = fcmToknVal;
 	}
 	/**
-	 * Get sex_cd 성별_코드 character varying(20)
-	 * @Return String sexCd
+	 * Get dzone_alam_yn 위험지역_알림_여부 character(1)
+	 * @Return String dzoneAlamYn
 	 */
-	public String getSexCd() {
-		return this.sexCd;
+	public String getDzoneAlamYn() {
+		return this.dzoneAlamYn;
 	}
 	
 	/**
-	 * Set sex_cd 성별_코드 character varying(20)
-	 * @Param String sexCd
+	 * Set dzone_alam_yn 위험지역_알림_여부 character(1)
+	 * @Param String dzoneAlamYn
 	 */
-	public void setSexCd(String sexCd) {
-		this.sexCd = sexCd;
+	public void setDzoneAlamYn(String dzoneAlamYn) {
+		this.dzoneAlamYn = dzoneAlamYn;
 	}
 	/**
 	 * Get prnt_no 학부모_번호 numeric(null)
@@ -253,21 +250,6 @@ public class TmGuarBaseVo implements Serializable {
 	 */
 	public void setPrntNo(double prntNo) {
 		this.prntNo = prntNo;
-	}
-	/**
-	 * Get dzone_alam_yn 위험지역_알림_여부 character(1)
-	 * @Return String dzoneAlamYn
-	 */
-	public String getDzoneAlamYn() {
-		return this.dzoneAlamYn;
-	}
-	
-	/**
-	 * Set dzone_alam_yn 위험지역_알림_여부 character(1)
-	 * @Param String dzoneAlamYn
-	 */
-	public void setDzoneAlamYn(String dzoneAlamYn) {
-		this.dzoneAlamYn = dzoneAlamYn;
 	}
 	/**
 	 * Get szone_alam_yn 세이프존_알림_여부 character(1)

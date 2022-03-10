@@ -9,8 +9,7 @@
 
 	<select id="select" resultType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.select */
-        SELECT  guar_no /* guar_no 보호자_번호 numeric */
-               ,guar_apnt_plc_nm /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
+        SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,loc_no /* loc_no 위치_번호 numeric */
                ,rmrk /* rmrk 비고 character varying(4000) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -21,16 +20,15 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   tm_guar_apnt_plc
 		WHERE  1 = 1
-		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
-		AND    guar_apnt_plc_nm = #{guarApntPlcNm} /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
+		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
+		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
 	<insert id="insert" >
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.insert */
 		INSERT INTO tm_guar_apnt_plc
 		(
-		     guar_no /* guar_no 보호자_번호 numeric */
-		    ,guar_apnt_plc_nm /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
+		     stdt_no /* stdt_no 학생_번호 numeric */
 		    ,loc_no /* loc_no 위치_번호 numeric */
 		<if test="rmrk != null">
 		    ,rmrk /* rmrk 비고 character varying(4000) */
@@ -48,9 +46,8 @@
 		)
 		VALUES
 		(
-		     #{guarNo} /* guar_no 보호자_번호 numeric */
-		     #{guarApntPlcNm} /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
-		    ,#{locNo} /* loc_no 위치_번호 numeric */
+		     #{stdtNo} /* stdt_no 학생_번호 numeric */
+		     #{locNo} /* loc_no 위치_번호 numeric */
 		<if test="rmrk != null">
 		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -71,9 +68,6 @@
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.update */
 		UPDATE tm_guar_apnt_plc
 		<trim prefix="SET" prefixOverrides=",">
-		<if test="locNo != null">
-		    ,loc_no = #{locNo} /* loc_no 위치_번호 numeric */
-		</if>
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -84,17 +78,16 @@
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
-		AND    guar_apnt_plc_nm = #{guarApntPlcNm} /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
+		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
+		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
 	<update id="merge" >
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.merge */
 		INSERT INTO tm_guar_apnt_plc
 		(
-		     guar_no /* guar_no 보호자_번호 numeric */
-		     guar_apnt_plc_nm /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
-		    ,loc_no /* loc_no 위치_번호 numeric */
+		     stdt_no /* stdt_no 학생_번호 numeric */
+		     loc_no /* loc_no 위치_번호 numeric */
 		<if test="rmrk != null">
 		    ,rmrk /* rmrk 비고 character varying(4000) */
 		</if>
@@ -111,9 +104,8 @@
 		)
 		VALUES
 		(
-		     #{guarNo} /* guar_no 보호자_번호 numeric */
-		     #{guarApntPlcNm} /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
-		    ,#{locNo} /* loc_no 위치_번호 numeric */
+		     #{stdtNo} /* stdt_no 학생_번호 numeric */
+		     #{locNo} /* loc_no 위치_번호 numeric */
 		<if test="rmrk != null">
 		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -131,9 +123,6 @@
 		ON CONFLICT
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
-		<if test="locNo != null">
-		    ,loc_no = #{locNo} /* loc_no 위치_번호 numeric */
-		</if>
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -149,7 +138,7 @@
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.delete */
 		DELETE FROM tm_guar_apnt_plc
 		WHERE  1 = 1
-		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
-		AND    guar_apnt_plc_nm = #{guarApntPlcNm} /* guar_apnt_plc_nm 보호자_지정_장소_명 character varying(100) */
+		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
+		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</delete>
 </mapper>
