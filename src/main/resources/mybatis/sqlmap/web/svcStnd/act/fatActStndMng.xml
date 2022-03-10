@@ -10,7 +10,7 @@
 					fn_getCdNm('FAT_JUDG_CD', PRDT_FAT_JUDG_CD) AS PRDT_FAT_JUDG_NM,
 					PAL_CD,
 					fn_getCdNm('ACT_LEVL_CD', PAL_CD) AS PAL_NM,
-					FAT_ACT_RMRK,
+					SUBSTRING(FAT_ACT_RMRK,0,100) AS FAT_ACT_RMRK,
 					REG_DT,
 					REG_TM,
 					REG_USER_ID,
@@ -89,6 +89,33 @@
 		WHERE		CURR_FAT_JUDG_CD	= #{currFatJudgCd}
 		AND			PRDT_FAT_JUDG_CD	= #{prdtFatJudgCd}
 		AND 		PAL_CD 				= #{palCd}
+	</select>
+
+	<!-- 비만활동 기준 상세보기 조회-->
+	<select id="searchFatActStndInfo" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT		CURR_FAT_JUDG_CD,
+		fn_getCdNm('FAT_JUDG_CD', CURR_FAT_JUDG_CD) AS CURR_FAT_JUDG_NM,
+		PRDT_FAT_JUDG_CD,
+		fn_getCdNm('FAT_JUDG_CD', PRDT_FAT_JUDG_CD) AS PRDT_FAT_JUDG_NM,
+		PAL_CD,
+		fn_getCdNm('ACT_LEVL_CD', PAL_CD) AS PAL_NM,
+		FAT_ACT_RMRK,
+		REG_DT,
+		REG_TM,
+		REG_USER_ID,
+		UPT_DT,
+		UPT_TM,
+		UPT_USER_ID
+		FROM        TI_FAT_ACT_STND
+		WHERE     	1 = 1
+		<if test=" currFatJudgCd != null and currFatJudgCd != '' ">
+			AND         CURR_FAT_JUDG_CD = #{currFatJudgCd}   </if>
+		<if test=" prdtFatJudgCd != null and prdtFatJudgCd != '' ">
+			AND         PRDT_FAT_JUDG_CD = #{prdtFatJudgCd}   </if>
+		<if test=" palCd != null and palCd != '' ">
+			AND         PAL_CD = #{palCd}  </if>
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 
 </mapper>

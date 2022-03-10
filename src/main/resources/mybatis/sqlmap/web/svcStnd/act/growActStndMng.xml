@@ -8,7 +8,7 @@
 					fn_getCdNm('GROW_JUDG_CD', GROW_JUDG_CD) AS GROW_JUDG_NM,
 					PAL_CD,
 					fn_getCdNm('ACT_LEVL_CD', PAL_CD) AS PAL_NM,
-					GROW_ACT_RMRK,
+					SUBSTRING(REPLACE(GROW_ACT_RMRK,'&lt;BR&gt;', '') , 0, 80) AS GROW_ACT_RMRK,
 					REG_DT,
 					REG_TM,
 					REG_USER_ID,
@@ -79,6 +79,29 @@
 		FROM        TI_GROW_ACT_STND
 		WHERE		GROW_JUDG_CD		= #{growJudgCd}
 		AND 		PAL_CD 				= #{palCd}
+	</select>
+
+	<!-- 성장활동 기준 상세보기 조회-->
+	<select id="searchGrowActStndInfo" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT		GROW_JUDG_CD,
+		fn_getCdNm('GROW_JUDG_CD', GROW_JUDG_CD) AS GROW_JUDG_NM,
+		PAL_CD,
+		fn_getCdNm('ACT_LEVL_CD', PAL_CD) AS PAL_NM,
+		GROW_ACT_RMRK,
+		REG_DT,
+		REG_TM,
+		REG_USER_ID,
+		UPT_DT,
+		UPT_TM,
+		UPT_USER_ID
+		FROM        TI_GROW_ACT_STND
+		WHERE     	1 = 1
+		<if test=" growJudgCd != null and growJudgCd != '' ">
+			AND         GROW_JUDG_CD = #{growJudgCd}   </if>
+		<if test=" palCd != null and palCd != '' ">
+			AND         PAL_CD = #{palCd}  </if>
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 
 </mapper>

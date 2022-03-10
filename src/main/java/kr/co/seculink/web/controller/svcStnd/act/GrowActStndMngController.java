@@ -99,7 +99,7 @@ public class GrowActStndMngController
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		List<Map<String, String>> result = growActStndMngService.searchGrowActStndList(params);
+		List<Map<String, String>> result = growActStndMngService.searchGrowActStndInfo(params);
 
 		if(result.size() > 0 ){
 			rtnMap.put("result", result.get(0));

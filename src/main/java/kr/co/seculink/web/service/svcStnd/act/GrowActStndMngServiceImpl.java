@@ -23,6 +23,11 @@ public class GrowActStndMngServiceImpl implements GrowActStndMngService
 		return dao.selectList("svcStnd.act.growActStndMng.searchGrowActStndList", params);
 	}
 
+	//성장활동_기준_상세보기 조회
+	public List<Map<String, String>> searchGrowActStndInfo(Map<String, String> params) {
+		return dao.selectList("svcStnd.act.growActStndMng.searchGrowActStndInfo", params);
+	}
+
 	//상세보기_저장
 	@Transactional
 	public void saveGrowActStndInfo(Map<String, Object> params) throws BizException

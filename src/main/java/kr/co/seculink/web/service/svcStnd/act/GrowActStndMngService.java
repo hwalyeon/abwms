@@ -10,6 +10,9 @@ public interface GrowActStndMngService
 	//성장활동_기준_리스트 조회
 	List<Map<String, String>> searchGrowActStndList(Map<String, String> params) throws BizException;
 
+	//성장활동_기준_상세보기 조회
+	List<Map<String, String>> searchGrowActStndInfo(Map<String, String> params) throws BizException;
+
 	//상세보기_저장
 	void saveGrowActStndInfo(Map<String,Object> params) throws BizException;
 
