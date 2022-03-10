@@ -10,6 +10,9 @@ public class TsStdtLocHistVo implements Serializable {
 	/* loc_hist_no 위치_이력_번호 numeric(null) */
 	private double locHistNo;
 
+	/* loc_nm 위치_명 character varying(200) */
+	private String locNm;
+
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
@@ -73,6 +76,21 @@ public class TsStdtLocHistVo implements Serializable {
 	 */
 	public void setLocHistNo(double locHistNo) {
 		this.locHistNo = locHistNo;
+	}
+	/**
+	 * Get loc_nm 위치_명 character varying(200)
+	 * @Return String locNm
+	 */
+	public String getLocNm() {
+		return this.locNm;
+	}
+	
+	/**
+	 * Set loc_nm 위치_명 character varying(200)
+	 * @Param String locNm
+	 */
+	public void setLocNm(String locNm) {
+		this.locNm = locNm;
 	}
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
