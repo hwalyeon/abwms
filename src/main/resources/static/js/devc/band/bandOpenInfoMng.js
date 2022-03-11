@@ -120,13 +120,7 @@ let bandOpenInfoMng = new Vue({
                         {name: "apiUrlGramNo"     , index: "apiUrlGramNo"     , label: "개통URL전문번호"    , width: 80  , align: "center" , fixed: true },
                         {name: "openGramNo"       , index: "openGramNo"       , label: "개통전문번호"       , width: 80  , align: "center" , fixed: true },
                         {name: "apiUrlYn"         , index: "apiUrlYn"         , label: "URL제공여부"        , width: 80  , align: "center" , fixed: true },
-                        {name: "apiUrlDttm"       , index: "apiUrlDttm"       , label: "URL제공일시"        , width: 120 , align: "center" , fixed: true },
-                        {name: "regDt"            , index: "regDt"            , label: "등록일자"           , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
-                        {name: "regTm"            , index: "regTm"            , label: "등록시각"           , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
-                        {name: "regUserId"        , index: "regUserId"        , label: "등록사용자ID"       , width: 80  , align: "center" , fixed: true },
-                        {name: "uptDt"            , index: "uptDt"            , label: "수정일자"           , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
-                        {name: "uptTm"            , index: "uptTm"            , label: "수정시각"           , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
-                        {name: "uptUserId"        , index: "uptUserId"        , label: "수정사용자ID"       , width: 80  , align: "center" , fixed: true },
+                        {name: "apiUrlDttm"       , index: "apiUrlDttm"       , label: "URL제공일시"        , width: 120 , align: "center" , fixed: true }
                     ];
 
                 $("#bandOpenInfo_list").jqGrid("GridUnload");
@@ -154,6 +148,13 @@ let bandOpenInfoMng = new Vue({
                             }
                         },
                         gridComplete: function () {
+                            let grid = this;
+
+                            $(grid).tableRowSpan(["uptDt","regDt","bandYtyp","bandMdlCd","bandId", "telNo","blthId", "bandOpenStatCd","bandOpenStatCdNm","apiUrlGramNo","openGramNo","apiUrlYn","apiUrlDttm"], "bandId");
+
+                            $(grid).tableRowSpan(["stdtNo", "stdtNm"], "stdtNo");
+
+
                             $("#bandOpenInfo_list").find('A.links[data-guar]').on('click', function(e) {
                                 bandOpenInfoMng.regPrntInfoDetlPopup($(e.target).data('guar-no'))
                             });

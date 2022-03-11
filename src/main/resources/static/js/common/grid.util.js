@@ -242,3 +242,51 @@ var GridUtil = {
     }
 
 };
+
+/**
+ * jqGrid 의 컬럼을 rowspan 처리
+ * @param colIndexs, rowspan 대상 컬럼 index, array
+ * @param compareColId, rowspan 기준 컬럼 index
+ * @returns {jQuery}
+ */
+$.fn.tableRowSpan = function(colIndexs, compareColId) {
+    return $(this).each(function() {
+        //var indexs  = eval("([" + colIndexs + "])");
+        const indexs = colIndexs;
+        const girdId = $(this).attr("id");
+        for (let i = 0; i < indexs.length; i++) {
+            const colIdx = indexs[i];
+            let that;
+            let thatVal = "";
+            let cColId = "";
+            $('tbody tr', $(this)).each(function(row) {
+                $("#"+girdId + " [aria-describedby=" +girdId + "_" + colIdx + "]").eq(row).filter(':visible').each(function(col) {
+                    if( compareColId == "" || compareColId == null || compareColId == undefined || ( compareColId != null && typeof compareColId == "object" && !Object.keys(compareColId).length ) ){
+                        cColId = colIdx;
+                    }else{
+                        cColId = compareColId;
+                    }
+
+                    const thisVal = $("#"+girdId + " [aria-describedby=" +girdId + "_" + cColId + "]").eq(row).html();
+
+                    if (that != null && thisVal == thatVal) {
+
+                        let rowspan = $(that).attr("rowSpan");
+                        if (rowspan == undefined) {
+
+                            $(that).attr("rowSpan", 1);
+                            rowspan = $(that).attr("rowSpan");
+                        }
+                        rowspan = Number(rowspan) + 1;
+                        $(that).attr("rowSpan", rowspan); // rowspan을 해준다
+                        $(this).hide(); // rowspan 당한 컬럼을 숨긴다.
+                    } else {
+                        that  = this;
+                        thatVal = thisVal;
+                    }
+                });
+
+            });
+        }
+    });
+};
