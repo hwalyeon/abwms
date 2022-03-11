@@ -65,6 +65,8 @@ let strsStndCdDetl = new Vue({
         isValid: function() {
         	
         	let $this = this;
+
+        	let vueCommon = this;
         	
         	if ( WebUtil.isNull($this.strsStndCdInfo.cdVal) ) {
         		Swal.alert(['코드값을 입력하세요.', 'info']);
@@ -90,8 +92,6 @@ let strsStndCdDetl = new Vue({
 				Swal.alert(['사용여부를 입력하세요.', 'info']);
 				return false;
 			}
-
-
 
         	return true;
         },

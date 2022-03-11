@@ -100,8 +100,6 @@ let stdtInfoMng = new Vue({
                 {name: "growIdx"           , index: "growIdx"           , label: "성장상태"		 	, width: 80  , align: "center" , fixed: true},
                 {name: "fatIdx"            , index: "fatIdx"            , label: "비만상태"		 	, width: 80  , align: "center" , fixed: true},
                 {name: "bandId"            , index: "bandId"            , label: "밴드ID"		 	, width: 80  , align: "center" , fixed: true},
-                {name: "telNo"             , index: "telNo"             , label: "전화번호"		 	, width: 100 , align: "center"
-                    ,formatter:function(cellValue, options, rowObject)   { return phoneFormatter(cellValue);}    , fixed: true},
                 {name: "blthId"            , index: "blthId"            , label: "블루투스ID"	 	, width: 100 , align: "center" , fixed: true},
                 {name: "sexCd"             , index: "sexCd"             , label: "성별"  		 	, width: 80  , align: "center" , fixed: true},
                 {name: "bithDt"            , index: "bithDt"            , label: "생년월일"		 	, width: 80  , align: "center"
@@ -153,6 +151,13 @@ let stdtInfoMng = new Vue({
                         $this.params.currentIndex = resultMap.currentIndex;
                         $this.searchStdtInfoList(false);
                     })
+                },
+                gridComplete: function() {
+                    let grid = this;
+
+                    $(grid).tableRowSpan(["prntNm","prntNm2","stdtNo","stdtNm","telNo","plcClssCd","currLoc","dgemStatCd","strsIdx","growIdx","fatIdx","bandId","blthId","sexCd","bithDt","locNo","locNm","age","bandStatCd","mentStrsStatCd","physStrsStatCd","useTotal","saveTotal","cbeeBal","prntInfoDetlPopup"], "stdtNo");
+
+
                 }
             }));
 
