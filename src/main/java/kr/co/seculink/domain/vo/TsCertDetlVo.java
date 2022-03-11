@@ -3,18 +3,24 @@ package kr.co.seculink.domain.vo;
 import java.io.Serializable;
 
 /**
- * tm_guar_apnt_plc Value Object
+ * ts_cert_detl Value Object
  */
-public class TmGuarApntPlcVo implements Serializable {
+public class TsCertDetlVo implements Serializable {
 
-	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	/* cert_seq 인증_순번 numeric(null) */
+	private double certSeq;
 
-	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
+	/* gen_dttm 생성_일시 character(14) */
+	private String genDttm;
 
-	/* rmrk 비고 character varying(4000) */
-	private String rmrk;
+	/* cert_no 인증_번호 character varying(10) */
+	private String certNo;
+
+	/* guar_no 보호자_번호 numeric(null) */
+	private double guarNo;
+
+	/* alam_no 알림_번호 numeric(null) */
+	private double alamNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -36,49 +42,79 @@ public class TmGuarApntPlcVo implements Serializable {
 
 
 	/**
-	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * Get cert_seq 인증_순번 numeric(null)
+	 * @Return double certSeq
 	 */
-	public double getStdtNo() {
-		return this.stdtNo;
+	public double getCertSeq() {
+		return this.certSeq;
 	}
 	
 	/**
-	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * Set cert_seq 인증_순번 numeric(null)
+	 * @Param double certSeq
 	 */
-	public void setStdtNo(double stdtNo) {
-		this.stdtNo = stdtNo;
+	public void setCertSeq(double certSeq) {
+		this.certSeq = certSeq;
 	}
 	/**
-	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
+	 * Get gen_dttm 생성_일시 character(14)
+	 * @Return String genDttm
 	 */
-	public double getLocNo() {
-		return this.locNo;
-	}
-	
-	/**
-	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
-	 */
-	public void setLocNo(double locNo) {
-		this.locNo = locNo;
-	}
-	/**
-	 * Get rmrk 비고 character varying(4000)
-	 * @Return String rmrk
-	 */
-	public String getRmrk() {
-		return this.rmrk;
+	public String getGenDttm() {
+		return this.genDttm;
 	}
 	
 	/**
-	 * Set rmrk 비고 character varying(4000)
-	 * @Param String rmrk
+	 * Set gen_dttm 생성_일시 character(14)
+	 * @Param String genDttm
 	 */
-	public void setRmrk(String rmrk) {
-		this.rmrk = rmrk;
+	public void setGenDttm(String genDttm) {
+		this.genDttm = genDttm;
+	}
+	/**
+	 * Get cert_no 인증_번호 character varying(10)
+	 * @Return String certNo
+	 */
+	public String getCertNo() {
+		return this.certNo;
+	}
+	
+	/**
+	 * Set cert_no 인증_번호 character varying(10)
+	 * @Param String certNo
+	 */
+	public void setCertNo(String certNo) {
+		this.certNo = certNo;
+	}
+	/**
+	 * Get guar_no 보호자_번호 numeric(null)
+	 * @Return double guarNo
+	 */
+	public double getGuarNo() {
+		return this.guarNo;
+	}
+	
+	/**
+	 * Set guar_no 보호자_번호 numeric(null)
+	 * @Param double guarNo
+	 */
+	public void setGuarNo(double guarNo) {
+		this.guarNo = guarNo;
+	}
+	/**
+	 * Get alam_no 알림_번호 numeric(null)
+	 * @Return double alamNo
+	 */
+	public double getAlamNo() {
+		return this.alamNo;
+	}
+	
+	/**
+	 * Set alam_no 알림_번호 numeric(null)
+	 * @Param double alamNo
+	 */
+	public void setAlamNo(double alamNo) {
+		this.alamNo = alamNo;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

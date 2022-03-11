@@ -3,18 +3,15 @@ package kr.co.seculink.domain.vo;
 import java.io.Serializable;
 
 /**
- * tm_guar_apnt_plc Value Object
+ * ts_band_spec Value Object
  */
-public class TmGuarApntPlcVo implements Serializable {
+public class TsBandSpecVo implements Serializable {
 
-	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	/* band_id 밴드_ID character varying(20) */
+	private String bandId;
 
-	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
-
-	/* rmrk 비고 character varying(4000) */
-	private String rmrk;
+	/* guar_tel_no 보호자_전화_번호 character varying(20) */
+	private String guarTelNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -36,49 +33,34 @@ public class TmGuarApntPlcVo implements Serializable {
 
 
 	/**
-	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * Get band_id 밴드_ID character varying(20)
+	 * @Return String bandId
 	 */
-	public double getStdtNo() {
-		return this.stdtNo;
+	public String getBandId() {
+		return this.bandId;
 	}
 	
 	/**
-	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * Set band_id 밴드_ID character varying(20)
+	 * @Param String bandId
 	 */
-	public void setStdtNo(double stdtNo) {
-		this.stdtNo = stdtNo;
+	public void setBandId(String bandId) {
+		this.bandId = bandId;
 	}
 	/**
-	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
+	 * Get guar_tel_no 보호자_전화_번호 character varying(20)
+	 * @Return String guarTelNo
 	 */
-	public double getLocNo() {
-		return this.locNo;
-	}
-	
-	/**
-	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
-	 */
-	public void setLocNo(double locNo) {
-		this.locNo = locNo;
-	}
-	/**
-	 * Get rmrk 비고 character varying(4000)
-	 * @Return String rmrk
-	 */
-	public String getRmrk() {
-		return this.rmrk;
+	public String getGuarTelNo() {
+		return this.guarTelNo;
 	}
 	
 	/**
-	 * Set rmrk 비고 character varying(4000)
-	 * @Param String rmrk
+	 * Set guar_tel_no 보호자_전화_번호 character varying(20)
+	 * @Param String guarTelNo
 	 */
-	public void setRmrk(String rmrk) {
-		this.rmrk = rmrk;
+	public void setGuarTelNo(String guarTelNo) {
+		this.guarTelNo = guarTelNo;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

@@ -23,6 +23,11 @@ public class PalStndMngServiceImpl implements PalStndMngService
 		return dao.selectList("svcStnd.act.palStndMng.searchPalStndList", params);
 	}
 
+	//신체활동수준_기준_상세보기 조회
+	public List<Map<String, String>> searchPalStndInfo(Map<String, String> params) {
+		return dao.selectList("svcStnd.act.palStndMng.searchPalStndInfo", params);
+	}
+
 	//행추가_행삭제 저장
 	@Transactional
 	public void savePalStnd(Map<String, Object> params) throws BizException

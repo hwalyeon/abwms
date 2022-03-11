@@ -26,8 +26,6 @@
                ,guar_hght_val_2 /* guar_hght_val_2 보호자_키_값_2 numeric */
                ,guar_wght_val_2 /* guar_wght_val_2 보호자_몸무게_값_2 numeric */
                ,guar_bmi_val_2 /* guar_bmi_val_2 보호자_BMI_값_2 numeric */
-               ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
-               ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
                ,grow_idx /* grow_idx 성장_지수 numeric */
                ,grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
                ,grow_judg_desc /* grow_judg_desc 성장_판정_설명 character varying(4000) */
@@ -44,6 +42,7 @@
                ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
                ,prdt_fat_judg_desc /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
                ,pal_val /* pal_val 신체활동수준_값 numeric */
+               ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
                ,rmrk /* rmrk 비고 character varying(4000) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -80,12 +79,6 @@
 		    ,guar_hght_val_2 /* guar_hght_val_2 보호자_키_값_2 numeric */
 		    ,guar_wght_val_2 /* guar_wght_val_2 보호자_몸무게_값_2 numeric */
 		    ,guar_bmi_val_2 /* guar_bmi_val_2 보호자_BMI_값_2 numeric */
-		<if test="growStndVer != null">
-		    ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
-		</if>
-		<if test="growStndNo != null">
-		    ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
-		</if>
 		    ,grow_idx /* grow_idx 성장_지수 numeric */
 		<if test="growJudgCd != null">
 		    ,grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
@@ -122,6 +115,9 @@
 		    ,prdt_fat_judg_desc /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
+		<if test="calNutrStatCd != null">
+		    ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
 		<if test="rmrk != null">
 		    ,rmrk /* rmrk 비고 character varying(4000) */
 		</if>
@@ -157,12 +153,6 @@
 		    ,#{guarHghtVal2} /* guar_hght_val_2 보호자_키_값_2 numeric */
 		    ,#{guarWghtVal2} /* guar_wght_val_2 보호자_몸무게_값_2 numeric */
 		    ,#{guarBmiVal2} /* guar_bmi_val_2 보호자_BMI_값_2 numeric */
-		<if test="growStndVer != null">
-		    ,#{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
-		</if>
-		<if test="growStndNo != null">
-		    ,#{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
-		</if>
 		    ,#{growIdx} /* grow_idx 성장_지수 numeric */
 		<if test="growJudgCd != null">
 		    ,#{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
@@ -199,6 +189,9 @@
 		    ,#{prdtFatJudgDesc} /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
+		<if test="calNutrStatCd != null">
+		    ,#{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
 		<if test="rmrk != null">
 		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -264,12 +257,6 @@
 		<if test="guarBmiVal2 != null">
 		    ,guar_bmi_val_2 = #{guarBmiVal2} /* guar_bmi_val_2 보호자_BMI_값_2 numeric */
 		</if>
-		<if test="growStndVer != null">
-		    ,grow_stnd_ver = #{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
-		</if>
-		<if test="growStndNo != null">
-		    ,grow_stnd_no = #{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
-		</if>
 		<if test="growIdx != null">
 		    ,grow_idx = #{growIdx} /* grow_idx 성장_지수 numeric */
 		</if>
@@ -318,6 +305,9 @@
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
 		</if>
+		<if test="calNutrStatCd != null">
+		    ,cal_nutr_stat_cd = #{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -355,12 +345,6 @@
 		    ,guar_hght_val_2 /* guar_hght_val_2 보호자_키_값_2 numeric */
 		    ,guar_wght_val_2 /* guar_wght_val_2 보호자_몸무게_값_2 numeric */
 		    ,guar_bmi_val_2 /* guar_bmi_val_2 보호자_BMI_값_2 numeric */
-		<if test="growStndVer != null">
-		    ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
-		</if>
-		<if test="growStndNo != null">
-		    ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
-		</if>
 		    ,grow_idx /* grow_idx 성장_지수 numeric */
 		<if test="growJudgCd != null">
 		    ,grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
@@ -397,6 +381,9 @@
 		    ,prdt_fat_judg_desc /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
+		<if test="calNutrStatCd != null">
+		    ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
 		<if test="rmrk != null">
 		    ,rmrk /* rmrk 비고 character varying(4000) */
 		</if>
@@ -432,12 +419,6 @@
 		    ,#{guarHghtVal2} /* guar_hght_val_2 보호자_키_값_2 numeric */
 		    ,#{guarWghtVal2} /* guar_wght_val_2 보호자_몸무게_값_2 numeric */
 		    ,#{guarBmiVal2} /* guar_bmi_val_2 보호자_BMI_값_2 numeric */
-		<if test="growStndVer != null">
-		    ,#{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
-		</if>
-		<if test="growStndNo != null">
-		    ,#{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
-		</if>
 		    ,#{growIdx} /* grow_idx 성장_지수 numeric */
 		<if test="growJudgCd != null">
 		    ,#{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
@@ -474,6 +455,9 @@
 		    ,#{prdtFatJudgDesc} /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
+		<if test="calNutrStatCd != null">
+		    ,#{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
 		<if test="rmrk != null">
 		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -536,12 +520,6 @@
 		<if test="guarBmiVal2 != null">
 		    ,guar_bmi_val_2 = #{guarBmiVal2} /* guar_bmi_val_2 보호자_BMI_값_2 numeric */
 		</if>
-		<if test="growStndVer != null">
-		    ,grow_stnd_ver = #{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
-		</if>
-		<if test="growStndNo != null">
-		    ,grow_stnd_no = #{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
-		</if>
 		<if test="growIdx != null">
 		    ,grow_idx = #{growIdx} /* grow_idx 성장_지수 numeric */
 		</if>
@@ -589,6 +567,9 @@
 		</if>
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
+		</if>
+		<if test="calNutrStatCd != null">
+		    ,cal_nutr_stat_cd = #{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
 		</if>
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */

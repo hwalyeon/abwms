@@ -3,18 +3,15 @@ package kr.co.seculink.domain.vo;
 import java.io.Serializable;
 
 /**
- * tm_guar_apnt_plc Value Object
+ * tm_stdt_guar_conn Value Object
  */
-public class TmGuarApntPlcVo implements Serializable {
+public class TmStdtGuarConnVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
-	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
-
-	/* rmrk 비고 character varying(4000) */
-	private String rmrk;
+	/* guar_no 보호자_번호 numeric(null) */
+	private double guarNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -51,34 +48,19 @@ public class TmGuarApntPlcVo implements Serializable {
 		this.stdtNo = stdtNo;
 	}
 	/**
-	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
+	 * Get guar_no 보호자_번호 numeric(null)
+	 * @Return double guarNo
 	 */
-	public double getLocNo() {
-		return this.locNo;
+	public double getGuarNo() {
+		return this.guarNo;
 	}
 	
 	/**
-	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
+	 * Set guar_no 보호자_번호 numeric(null)
+	 * @Param double guarNo
 	 */
-	public void setLocNo(double locNo) {
-		this.locNo = locNo;
-	}
-	/**
-	 * Get rmrk 비고 character varying(4000)
-	 * @Return String rmrk
-	 */
-	public String getRmrk() {
-		return this.rmrk;
-	}
-	
-	/**
-	 * Set rmrk 비고 character varying(4000)
-	 * @Param String rmrk
-	 */
-	public void setRmrk(String rmrk) {
-		this.rmrk = rmrk;
+	public void setGuarNo(double guarNo) {
+		this.guarNo = guarNo;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

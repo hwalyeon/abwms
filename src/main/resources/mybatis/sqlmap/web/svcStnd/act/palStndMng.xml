@@ -8,7 +8,7 @@
 					PAL_NM,
 					PAL_VAL_FR,
 					PAL_VAL_TO,
-					PAL_EAT_RMRK,
+					SUBSTRING(PAL_EAT_RMRK, 0, 100) AS PAL_EAT_RMRK,
 					REG_DT,
 					REG_TM,
 					REG_USER_ID,
@@ -92,6 +92,29 @@
 		AND			PAL_CD != #{palCd}
 		AND        	(#{palValFr}::NUMERIC BETWEEN PAL_VAL_FR AND PAL_VAL_TO
 		OR 			#{palValTo}::NUMERIC BETWEEN PAL_VAL_FR AND PAL_VAL_TO)
+	</select>
+
+	<!--신체활동수준 기준 상세보기 조회-->
+	<select id="searchPalStndInfo" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      PAL_CD,
+		PAL_NM,
+		PAL_VAL_FR,
+		PAL_VAL_TO,
+		PAL_EAT_RMRK,
+		REG_DT,
+		REG_TM,
+		REG_USER_ID,
+		UPT_DT,
+		UPT_TM,
+		UPT_USER_ID
+		FROM        TI_PAL_STND
+		WHERE     	1 = 1
+		<if test=" palCd != null and palCd != '' ">
+			AND         PAL_CD LIKE UPPER(CONCAT('%',#{palCd},'%'))   </if>
+		<if test=" palNm != null and palNm != '' ">
+			AND         PAL_NM LIKE CONCAT('%',#{palNm},'%')   </if>
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 
 </mapper>

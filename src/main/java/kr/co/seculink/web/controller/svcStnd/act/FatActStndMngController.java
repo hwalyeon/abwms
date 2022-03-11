@@ -101,7 +101,7 @@ public class FatActStndMngController
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		List<Map<String, String>> result = fatActStndMngService.searchFatActStndList(params);
+		List<Map<String, String>> result = fatActStndMngService.searchFatActStndInfo(params);
 
 		if(result.size() > 0 ){
 			rtnMap.put("result", result.get(0));

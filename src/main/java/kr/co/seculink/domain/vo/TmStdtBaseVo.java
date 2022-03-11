@@ -13,12 +13,6 @@ public class TmStdtBaseVo implements Serializable {
 	/* stdt_nm 학생_명 character varying(40) */
 	private String stdtNm;
 
-	/* guar_no_1 보호자_번호_1 numeric(null) */
-	private double guarNo1;
-
-	/* guar_no_2 보호자_번호_2 numeric(null) */
-	private double guarNo2;
-
 	/* band_id 밴드_ID character varying(20) */
 	private String bandId;
 
@@ -127,36 +121,6 @@ public class TmStdtBaseVo implements Serializable {
 	 */
 	public void setStdtNm(String stdtNm) {
 		this.stdtNm = stdtNm;
-	}
-	/**
-	 * Get guar_no_1 보호자_번호_1 numeric(null)
-	 * @Return double guarNo1
-	 */
-	public double getGuarNo1() {
-		return this.guarNo1;
-	}
-	
-	/**
-	 * Set guar_no_1 보호자_번호_1 numeric(null)
-	 * @Param double guarNo1
-	 */
-	public void setGuarNo1(double guarNo1) {
-		this.guarNo1 = guarNo1;
-	}
-	/**
-	 * Get guar_no_2 보호자_번호_2 numeric(null)
-	 * @Return double guarNo2
-	 */
-	public double getGuarNo2() {
-		return this.guarNo2;
-	}
-	
-	/**
-	 * Set guar_no_2 보호자_번호_2 numeric(null)
-	 * @Param double guarNo2
-	 */
-	public void setGuarNo2(double guarNo2) {
-		this.guarNo2 = guarNo2;
 	}
 	/**
 	 * Get band_id 밴드_ID character varying(20)

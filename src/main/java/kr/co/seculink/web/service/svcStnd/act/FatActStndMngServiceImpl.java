@@ -23,6 +23,11 @@ public class FatActStndMngServiceImpl implements FatActStndMngService
 		return dao.selectList("svcStnd.act.fatActStndMng.searchFatActStndList", params);
 	}
 
+	//비만활동_기준_상세보기 조회
+	public List<Map<String, String>> searchFatActStndInfo(Map<String, String> params) {
+		return dao.selectList("svcStnd.act.fatActStndMng.searchFatActStndInfo", params);
+	}
+
 	//상세보기_저장
 	@Transactional
 	public void saveFatActStndInfo(Map<String, Object> params) throws BizException

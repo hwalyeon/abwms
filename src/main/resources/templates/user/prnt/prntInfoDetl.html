@@ -63,7 +63,7 @@
 										<tr>
 											<th scope="row">보호자 전화 번호</th>
 											<td>
-												<input type="text" name=guarTelNo v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
+												<input type="text" name=guarTelNo v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" :readonly="params.crud=='U'"/>
 											</td>
 										</tr>
 										<tr>

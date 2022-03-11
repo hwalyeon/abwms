@@ -31,26 +31,11 @@ public class TmGuarBaseVo implements Serializable {
 	/* fcm_tokn_val FCM_토큰_값 character varying(100) */
 	private String fcmToknVal;
 
-	/* race_div_cd 인종_구분_코드 character varying(20) */
-	private String raceDivCd;
-
-	/* sex_cd 성별_코드 character varying(20) */
-	private String sexCd;
-
-	/* hght_val 키_값 numeric(null) */
-	private double hghtVal;
-
-	/* wght_val 체중_값 numeric(null) */
-	private double wghtVal;
-
-	/* bmi_val BMI_값 numeric(null) */
-	private double bmiVal;
-
-	/* spos_no 배우자_번호 numeric(null) */
-	private double sposNo;
-
 	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
 	private String dzoneAlamYn;
+
+	/* prnt_no 학부모_번호 numeric(null) */
+	private double prntNo;
 
 	/* szone_alam_yn 세이프존_알림_여부 character(1) */
 	private String szoneAlamYn;
@@ -67,11 +52,11 @@ public class TmGuarBaseVo implements Serializable {
 	/* body_hist_alam_yn 신체_기록_알림_여부 character(1) */
 	private String bodyHistAlamYn;
 
-	/* meal_noin_alam_yn 식사_미입력_알림_여부 character(1) */
-	private String mealNoinAlamYn;
+	/* meal_ninp_alam_yn 식사_미입력_알림_여부 character(1) */
+	private String mealNinpAlamYn;
 
-	/* excs_noin_alam_yn 운동_미입력_알림_여부 character(1) */
-	private String excsNoinAlamYn;
+	/* excs_ninp_alam_yn 운동_미입력_알림_여부 character(1) */
+	private String excsNinpAlamYn;
 
 	/* cbee_use_alam_yn 캐시비_사용_알림_여부 character(1) */
 	private String cbeeUseAlamYn;
@@ -237,96 +222,6 @@ public class TmGuarBaseVo implements Serializable {
 		this.fcmToknVal = fcmToknVal;
 	}
 	/**
-	 * Get race_div_cd 인종_구분_코드 character varying(20)
-	 * @Return String raceDivCd
-	 */
-	public String getRaceDivCd() {
-		return this.raceDivCd;
-	}
-	
-	/**
-	 * Set race_div_cd 인종_구분_코드 character varying(20)
-	 * @Param String raceDivCd
-	 */
-	public void setRaceDivCd(String raceDivCd) {
-		this.raceDivCd = raceDivCd;
-	}
-	/**
-	 * Get sex_cd 성별_코드 character varying(20)
-	 * @Return String sexCd
-	 */
-	public String getSexCd() {
-		return this.sexCd;
-	}
-	
-	/**
-	 * Set sex_cd 성별_코드 character varying(20)
-	 * @Param String sexCd
-	 */
-	public void setSexCd(String sexCd) {
-		this.sexCd = sexCd;
-	}
-	/**
-	 * Get hght_val 키_값 numeric(null)
-	 * @Return double hghtVal
-	 */
-	public double getHghtVal() {
-		return this.hghtVal;
-	}
-	
-	/**
-	 * Set hght_val 키_값 numeric(null)
-	 * @Param double hghtVal
-	 */
-	public void setHghtVal(double hghtVal) {
-		this.hghtVal = hghtVal;
-	}
-	/**
-	 * Get wght_val 체중_값 numeric(null)
-	 * @Return double wghtVal
-	 */
-	public double getWghtVal() {
-		return this.wghtVal;
-	}
-	
-	/**
-	 * Set wght_val 체중_값 numeric(null)
-	 * @Param double wghtVal
-	 */
-	public void setWghtVal(double wghtVal) {
-		this.wghtVal = wghtVal;
-	}
-	/**
-	 * Get bmi_val BMI_값 numeric(null)
-	 * @Return double bmiVal
-	 */
-	public double getBmiVal() {
-		return this.bmiVal;
-	}
-	
-	/**
-	 * Set bmi_val BMI_값 numeric(null)
-	 * @Param double bmiVal
-	 */
-	public void setBmiVal(double bmiVal) {
-		this.bmiVal = bmiVal;
-	}
-	/**
-	 * Get spos_no 배우자_번호 numeric(null)
-	 * @Return double sposNo
-	 */
-	public double getSposNo() {
-		return this.sposNo;
-	}
-	
-	/**
-	 * Set spos_no 배우자_번호 numeric(null)
-	 * @Param double sposNo
-	 */
-	public void setSposNo(double sposNo) {
-		this.sposNo = sposNo;
-	}
-	/**
 	 * Get dzone_alam_yn 위험지역_알림_여부 character(1)
 	 * @Return String dzoneAlamYn
 	 */
@@ -340,6 +235,21 @@ public class TmGuarBaseVo implements Serializable {
 	 */
 	public void setDzoneAlamYn(String dzoneAlamYn) {
 		this.dzoneAlamYn = dzoneAlamYn;
+	}
+	/**
+	 * Get prnt_no 학부모_번호 numeric(null)
+	 * @Return double prntNo
+	 */
+	public double getPrntNo() {
+		return this.prntNo;
+	}
+	
+	/**
+	 * Set prnt_no 학부모_번호 numeric(null)
+	 * @Param double prntNo
+	 */
+	public void setPrntNo(double prntNo) {
+		this.prntNo = prntNo;
 	}
 	/**
 	 * Get szone_alam_yn 세이프존_알림_여부 character(1)
@@ -417,34 +327,34 @@ public class TmGuarBaseVo implements Serializable {
 		this.bodyHistAlamYn = bodyHistAlamYn;
 	}
 	/**
-	 * Get meal_noin_alam_yn 식사_미입력_알림_여부 character(1)
-	 * @Return String mealNoinAlamYn
+	 * Get meal_ninp_alam_yn 식사_미입력_알림_여부 character(1)
+	 * @Return String mealNinpAlamYn
 	 */
-	public String getMealNoinAlamYn() {
-		return this.mealNoinAlamYn;
+	public String getMealNinpAlamYn() {
+		return this.mealNinpAlamYn;
 	}
 	
 	/**
-	 * Set meal_noin_alam_yn 식사_미입력_알림_여부 character(1)
-	 * @Param String mealNoinAlamYn
+	 * Set meal_ninp_alam_yn 식사_미입력_알림_여부 character(1)
+	 * @Param String mealNinpAlamYn
 	 */
-	public void setMealNoinAlamYn(String mealNoinAlamYn) {
-		this.mealNoinAlamYn = mealNoinAlamYn;
+	public void setMealNinpAlamYn(String mealNinpAlamYn) {
+		this.mealNinpAlamYn = mealNinpAlamYn;
 	}
 	/**
-	 * Get excs_noin_alam_yn 운동_미입력_알림_여부 character(1)
-	 * @Return String excsNoinAlamYn
+	 * Get excs_ninp_alam_yn 운동_미입력_알림_여부 character(1)
+	 * @Return String excsNinpAlamYn
 	 */
-	public String getExcsNoinAlamYn() {
-		return this.excsNoinAlamYn;
+	public String getExcsNinpAlamYn() {
+		return this.excsNinpAlamYn;
 	}
 	
 	/**
-	 * Set excs_noin_alam_yn 운동_미입력_알림_여부 character(1)
-	 * @Param String excsNoinAlamYn
+	 * Set excs_ninp_alam_yn 운동_미입력_알림_여부 character(1)
+	 * @Param String excsNinpAlamYn
 	 */
-	public void setExcsNoinAlamYn(String excsNoinAlamYn) {
-		this.excsNoinAlamYn = excsNoinAlamYn;
+	public void setExcsNinpAlamYn(String excsNinpAlamYn) {
+		this.excsNinpAlamYn = excsNinpAlamYn;
 	}
 	/**
 	 * Get cbee_use_alam_yn 캐시비_사용_알림_여부 character(1)

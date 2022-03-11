@@ -114,7 +114,7 @@ public class PalStndMngController
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		List<Map<String, String>> result = palStndMngService.searchPalStndList(params);
+		List<Map<String, String>> result = palStndMngService.searchPalStndInfo(params);
 
 		if(result.size() > 0 ){
 			rtnMap.put("result", result.get(0));
