@@ -11,7 +11,7 @@ public interface BandOpenInfoMngService
 	public List<Map<String, String>> searchBandOpenInfoList(Map<String, String> params) throws BizException;
 
 	//행추가_행삭제_저장
-	public void saveBandOpenInfo(Map<String, Object> params) throws BizException;
+	public void saveBandOpenDetlGuarTelNo(Map<String, Object> params) throws BizException;
 
 	//밴드ID 중복 조회
 	public Map<String, String> searchDupBandId(Map<String, String> params) throws BizException;
@@ -24,6 +24,8 @@ public interface BandOpenInfoMngService
 
 	//밴드_정보_상세보기
 	public Map<String, Object> searchBandOpenInfo(Map<String, String> params) throws BizException;
+
+
 
 	
 }

@@ -71,12 +71,10 @@
 	<insert id="insertTsBandInfoList" parameterType="java.util.Map">
 		INSERT INTO TS_BAND_INFO
 		(
-		BAND_ID
+		  BAND_ID
 		, BAND_MDL_CD
 		, TEL_NO
 		, BLTH_ID
-		, GUAR_TEL_NO_1
-		, GUAR_TEL_NO_2
 		, API_URL_GRAM_NO
 		, API_URL_DTTM
 		, OPEN_GRAM_NO
@@ -94,8 +92,6 @@
 		, #{bandMdlCd}
 		, #{telNo}
 		, #{blthId}
-		, #{guarTelNo1}
-		, #{guarTelNo2}
 		, #{apiUrlGramNo}
 		, #{apiUrlDttm}
 		, #{openGramNo}
@@ -115,8 +111,6 @@
 		, UPT_TM = TO_CHAR(NOW(),'HH24MISS')
 		, UPT_USER_ID = #{uptUserId}
 		<if test="telNo != null and telNo !=''"> ,TEL_NO = #{telNo}</if>
-		<if test="guarTelNo1 != null and guarTelNo1 != ''"> ,GUAR_TEL_NO_1 = #{guarTelNo1}</if>
-		<if test="guarTelNo2 != null and guarTelNo2 != ''"> ,GUAR_TEL_NO_2 = #{guarTelNo2}</if>
 		<if test="bandOpenStatCd != null and bandOpenStatCd != ''"> ,BAND_OPEN_STAT_CD = #{bandOpenStatCd}</if>
 		<if test="blthId != null and blthId != ''"> ,BLTH_ID = #{blthId}</if>
 		WHERE 1=1
@@ -141,8 +135,7 @@
 	</select>
 
 	<!--밴드_ID_채번 -->
-	<select id="numberingBandId" parameterType="java.util.Map"
-		resultType="MybatisMap">
+	<select id="numberingBandId" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT
 		#{bandYtypCd} || #{bandMdlCd}|| to_char(coalesce(cast(max(substring(band_id ,5,6))
 		AS INTEGER) , 0) + 1 , 'FM000000') as BAND_ID
@@ -205,5 +198,53 @@
 
 	</select>
 
+	<insert id="insertTmBandSpecList" parameterType="java.util.Map">
+		/* Generated SQL SQL ID : ts_band_spec.insert */
+		INSERT INTO ts_band_spec
+		(
+		band_id /* band_id 밴드_ID character varying(20) */
+		,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		,reg_dt /* reg_dt 등록_일자 character(8) */
+		,reg_tm /* reg_tm 등록_시각 character(6) */
+		,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		,upt_dt /* upt_dt 수정_일자 character(8) */
+		,upt_tm /* upt_tm 수정_시각 character(6) */
+		,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		)
+		VALUES
+		(
+		#{bandId} /* band_id 밴드_ID character varying(20) */
+		#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		, TO_CHAR(NOW(), 'YYYYMMDD')
+		, TO_CHAR(NOW(), 'HH24MISS')
+		, #{regUserId}
+		, TO_CHAR(NOW(), 'YYYYMMDD')
+		, TO_CHAR(NOW(), 'HH24MISS')
+		, #{uptUserId}
+		)
+	</insert>
+
+	<update id="updateTmBandSpecList"  parameterType="java.util.Map">
+		/* Generated SQL SQL ID : ts_band_spec.update */
+		UPDATE ts_band_spec
+		<trim prefix="SET" prefixOverrides=",">
+			,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+			,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+			<if test="uptUserId != null">
+				,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+			</if>
+		</trim>
+		WHERE  1 = 1
+		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
+		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+	</update>
+
+	<delete id="deleteTmBandSpecList"  parameterType="java.util.Map">
+		/* Generated SQL SQL ID : ts_band_spec.delete */
+		DELETE FROM ts_band_spec
+		WHERE  1 = 1
+		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
+		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+	</delete>
 
 </mapper>

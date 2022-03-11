@@ -28,29 +28,6 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		return result;
 	}
 
-	//행추가_행삭제 저장
-	public void saveBandOpenInfo(Map<String, Object> params) throws BizException
-	{/*
-		int saveCnt = 0;
-
-		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
-
-		for(Map<String,String> info:gridDate){
-			log.debug("crud         : " +  info.get("crud"));
-
-			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.nutr.bandOpenInfoMng.insertTsBandInfoList", info);
-			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.nutr.bandOpenInfoMng.updateTsBandInfoList", info);
-			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.nutr.bandOpenInfoMng.deleteTsBandInfoList", info);
-			}
-		}
-		if(saveCnt == 0){
-			throw new BizException("ECOM999", new String[]{"비만기준정보 저장이 실패하였습니다"});
-		}*/
-	}
-
 	//밴드ID 중복 조회
 	public Map<String, String> searchDupBandId(Map<String, String> params) throws BizException
 	{
@@ -83,6 +60,29 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 	}
 
 
+	//행추가_행삭제 저장
+	public void saveBandOpenDetlGuarTelNo(Map<String, Object> params) throws BizException
+	{
+		int saveCnt = 0;
+
+		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
+
+		for(Map<String,String> info:gridDate){
+			log.debug("crud         : " +  info.get("crud"));
+
+			if( "C".equals(info.get("crud"))){
+				saveCnt += dao.insert("svcStnd.nutr.bandOpenInfoMng.insertTmBandSpecList", info);
+			}else if( "U".equals(info.get("crud"))){
+				saveCnt += dao.update("svcStnd.nutr.bandOpenInfoMng.updateTmBandSpecList", info);
+			}else if( "D".equals(info.get("crud"))){
+				saveCnt += dao.delete("svcStnd.nutr.bandOpenInfoMng.deleteTmBandSpecList", info);
+			}
+		}
+		if(saveCnt == 0){
+			throw new BizException("ECOM999", new String[]{"밴드정보정보 저장이 실패하였습니다"});
+		}
+	}
+
 	//밴드_정보 저장
 	public void saveBandOpenInfoDetl(Map<String, Object> params) throws BizException {
 
@@ -90,18 +90,16 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
 		int saveCnt = 0;
-
-
-		if ("C".equals(params.get("crud"))) {
-			saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTsBandInfoList", params);
-		} else if ("U".equals(params.get("crud"))) {
-			saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTsBandInfoList", params);
-		} else if ("D".equals(params.get("crud"))) {
-			saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTsBandInfoList", params);
-		}
-
+		
+			if ("C".equals(params.get("crud"))) {
+				saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTsBandInfoList", params);
+			} else if ("U".equals(params.get("crud"))) {
+				saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTsBandInfoList", params);
+			} else if ("D".equals(params.get("crud"))) {
+				saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTsBandInfoList", params);
+			}
 		if (saveCnt == 0) {
-			throw new BizException("ECOM999", new String[]{"공통코드 저장이 실패하였습니다."});
+			throw new BizException("ECOM999", new String[]{"밴드정보 저장이 실패하였습니다."});
 		}
 
 	}

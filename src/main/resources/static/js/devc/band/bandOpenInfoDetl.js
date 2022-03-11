@@ -20,7 +20,6 @@ let bandOpenInfoDetl = new Vue({
 			rowCount       : 30 ,
 			currentPage    : 1  ,
 			currentIndex   : 0 ,
-			gridData       : []
     	},
 		callBack : null,
 		code: {
@@ -149,6 +148,83 @@ let bandOpenInfoDetl = new Vue({
 					}
 				}).trigger("reloadGrid");
 		},
+		btnAddRow  :  function()
+		{
+			let $this = this;
+			let date = new Date(); //현재 날짜
+			var cnt = $("#guarTelNo_list").jqGrid("getGridParam", "records")+1;
+
+			var addRow =
+				{
+					crud           : "C"   ,
+					guarNo         : ""    ,
+					guarTelNo      : ""    ,
+					guarNm         : ""    ,
+					regDt          : date  ,
+					regTm          : date  ,
+					regUserId      : $this.userId  ,
+					uptDt          : date  ,
+					uptTm          : date  ,
+					uptUserId      : $this.userId
+				};
+			$("#guarTelNo_list").addRowData(cnt, addRow);
+		},
+		btnDelRow : function()
+		{
+			let checkIds = $("#guarTelNo_list").jqGrid("getGridParam","selrow") + "";  // 단건
+			if ( checkIds == "" )
+			{
+				alert("삭제할 행을 선택해주십시요.");
+				return false;
+			}
+			let checkId = checkIds.split(",");
+			for ( var i in checkId )
+			{
+				if ( $("#guarTelNo_list").getRowData(checkId[i]).crud == "C" )
+				{
+					$("#guarTelNo_list").setRowData(checkId[i], {crud: "N"});
+					$("#"+checkId[i],"#bandOpenInfo_list").css({display: "none"});
+				}
+				else
+				{
+					$("#guarTelNo_list").setRowData(checkId[i], {crud: "D"});
+					$("#"+checkId[i],"#guarTelNo_list").css({display: "none"});
+				}
+			}
+		},   btnSave  :  function()
+		{
+			let $this = this;
+			let gridData = commonGridGetDataNew($("#guarTelNo_list"));
+			if(gridData.length > 0)
+			{
+				for (let data in gridData)
+				{
+					//보호자 전화번호가 있으면 이미 저장된 번호입니다 알람
+				}
+			}
+			else
+			{
+				Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+				return false;
+			}
+
+			let params = { gridList : []}
+
+			params.gridList = gridData;
+
+			AjaxUtil.post(
+				{
+					url    : "/devc/band/bandOpeninfoMng/saveBandOpenDetlGuarTelNo.ab",
+					param  : params,
+					success: function(response)
+					{
+					},
+					error: function (response)
+					{
+						Swal.alert([response, 'error']);
+					}
+				});
+		},
 		//출고_년월_리스트_값 세팅
 		initBandYtypCdValue: function() {
 			let $this = this;
@@ -260,7 +336,8 @@ let bandOpenInfoDetl = new Vue({
 		saveBandOpenInfoDetl: function() {
 			
 			let $this = this;
-			
+
+			$this.btnSave();
             if ( !this.isValid() ) {
                 return false;
             }
@@ -274,8 +351,6 @@ let bandOpenInfoDetl = new Vue({
 						return false;
 				}
             }
-
-			$this.params.gridData = commonGridGetDataNew($("#growStnd_list"));
 
             $this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
 
@@ -295,7 +370,6 @@ let bandOpenInfoDetl = new Vue({
                 }
             });
 		},
-
 		deleteUser: function() {
 			
 			let $this = this;
