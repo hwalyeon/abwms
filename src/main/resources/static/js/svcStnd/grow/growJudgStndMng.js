@@ -70,7 +70,7 @@ let growJudgStndMng = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 url: '/svcStnd/grow/growJudgStndMng/searchGrowJudgList.ab',
-                pager: '#user_pager_list',
+                pager: '#grid_pager_list',
                 height: 405,
                 colModel: colModels,
                 onPaging : function(data) {

@@ -56,7 +56,7 @@ let stdtInfoMng = new Vue({
 
             $this.initGrid();
 
-            $this.searchGrowJudgList(true);
+            $this.searchStdtInfoList(true);
 
         },
         initValue: function() {
@@ -85,9 +85,10 @@ let stdtInfoMng = new Vue({
                 {name: "guarNoTemp"        , index: "guarNoTemp"        , label: "보호자번호"			, width: 80 , align: "center" , hidden: true},
                 {name: "entrDt"            , index: "entrDt"            , label: "가입일자"		 	, width: 80 , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}, fixed: true},
-                {name: "guarNo"            , index: "guarNo"            , label: "학부모번호"		 	, width: 80 , align: "center" , fixed: true},
-                {name: "guarNm"            , index: "guarNm"            , label: "학부모명"		 	, width: 80 , align: "center" , fixed: true},
-                {name: "sposNm"            , index: "sposNm"            , label: "학부모명(배우자)" 	, width: 100 , align: "center" , fixed: true},
+                {name: "guarNo"            , index: "guarNo"            , label: "보호자번호"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "guarNm"            , index: "guarNm"            , label: "보호자명"		 	, width: 80 , align: "center" , fixed: true},
+                {name: "prntNm"            , index: "prntNm"            , label: "학부모명1" 	    , width: 100 , align: "center" , fixed: true},
+                {name: "prntNm2"           , index: "prntNm2"           , label: "학부모명2" 	    , width: 100 , align: "center" , fixed: true},
                 {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80 , align: "center" , fixed: true},
                 {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 	, width: 80 , align: "center" , fixed: true},
                 {name: "telNo"             , index: "telNo"             , label: "전화번호"		 	, width: 100 , align: "center"
@@ -150,14 +151,14 @@ let stdtInfoMng = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchGrowJudgList(false);
+                        $this.searchStdtInfoList(false);
                     })
                 }
             }));
 
             resizeJqGridWidth("grid_list", "grid_list_wrapper");
         },
-        searchGrowJudgList: function(isSearch) {
+        searchStdtInfoList: function(isSearch) {
 
             let $this = this;
             let params = $.extend(true, {}, $this.params);

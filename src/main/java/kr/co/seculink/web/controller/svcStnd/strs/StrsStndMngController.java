@@ -135,7 +135,7 @@ public class StrsStndMngController
 			data.add(String.valueOf(info.get("cdNm")));
 			data.add(String.valueOf(info.get("cdDesc")));
 			data.add(String.valueOf(info.get("sortOrd")));
-			data.add(String.valueOf(info.get("uesYn")));
+			data.add(String.valueOf(info.get("useYn")));
 			dataList.add(data);
 		}
 

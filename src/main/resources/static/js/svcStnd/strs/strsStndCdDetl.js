@@ -76,15 +76,22 @@ let strsStndCdDetl = new Vue({
         		return false;
         	}
 
+			if ( WebUtil.isNull($this.strsStndCdInfo.cdDesc) ) {
+				Swal.alert(['코드내용을 입력하세요.', 'info']);
+				return false;
+			}
+
+			if ( WebUtil.isNull($this.strsStndCdInfo.sortOrd) ) {
+				Swal.alert(['정렬순서를 입력하세요.', 'info']);
+				return false;
+			}
+
 			if ( WebUtil.isNull($this.strsStndCdInfo.useYn) ) {
 				Swal.alert(['사용여부를 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.strsStndCdInfo.cdDesc) ) {
-				Swal.alert(['코드내용을 입력하세요.', 'info']);
-				return false;
-			}
+
 
         	return true;
         },

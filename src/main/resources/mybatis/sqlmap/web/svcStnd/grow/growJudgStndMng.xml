@@ -20,6 +20,9 @@
 		WHERE  1 = 1
 		AND    grow_judg_cd LIKE CONCAT (#{growJudgCd}, '%') /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		order by grow_judg_cd
+        <if test=' paging == "Y" '>
+        LIMIT ${rowCount} OFFSET ${currentIndex}
+        </if>
         </select>
 
        <insert id="insertTiGrowJudgStnd"  parameterType="java.util.Map" >

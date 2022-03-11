@@ -103,7 +103,7 @@ let stdtInfoDetl = new Vue({
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#growJudgStndDetlPopup'));
-						growJudgStndMng.searchGrowJudgList(true);
+						growJudgStndMng.searchStdtInfoList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -124,7 +124,7 @@ let stdtInfoDetl = new Vue({
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#growJudgStndDetlPopup'));
-                		 growJudgStndMng.searchGrowJudgList(true);
+                		 growJudgStndMng.searchStdtInfoList(true);
                 	});                	
                 },
                 error: function (response) {

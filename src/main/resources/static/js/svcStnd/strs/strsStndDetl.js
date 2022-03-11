@@ -25,6 +25,7 @@ let strsStndDetl = new Vue({
         },
         initCodeList: function() {
         	let $this = this;
+			$this.code.mentStrsStatCdList = [];
 			getCommonCodeList('STRS_STAT_CD',$this.code.mentStrsStatCdList);
         },
         initPage: function(mentStrsStatCd, physStrsStatCd) {
@@ -75,6 +76,8 @@ let strsStndDetl = new Vue({
 				Swal.alert(['현재평가내용을 입력하세요.', 'info']);
 				return false;
 			}
+
+
         	return true;
         },
 

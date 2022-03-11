@@ -114,9 +114,9 @@ let strsStndMng = new Vue({
                 colModel: strsCdGrpModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
-                        $this.params.cdSpec.currentPage  = resultMap.currentPage;
-                        $this.params.cdSpec.rowCount     = resultMap.rowCount;
-                        $this.params.cdSpec.currentIndex = resultMap.currentIndex;
+                        $this.params.currentPage  = resultMap.currentPage;
+                        $this.params.rowCount     = resultMap.rowCount;
+                        $this.params.currentIndex = resultMap.currentIndex;
                         $this.searchCdSpecList(false);
                     })
                 },
@@ -189,6 +189,7 @@ let strsStndMng = new Vue({
         regStrsStndCdPop: function(cdGrp){
             strsStndCdDetl.initPage(cdGrp , function(){
                 strsStndMng.initCodeList(true);
+                strsStndDetl.initCodeList(true);
             });
         },
 
@@ -219,11 +220,11 @@ let strsStndMng = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/svcStnd/strs/strsStndMng/searchStrsList/excel.ab",
+                url: "/svcStnd/strs/strsStndMng/searchCdSpecList/excel.ab",
                 param: params,
                 success: function(response)
                 {
-                    saveFileLocal(response, 'strsStndMng.xls');
+                    saveFileLocal(response, 'strsStndCdMng.xls');
                 },
                 error: function (response)
                 {
