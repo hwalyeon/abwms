@@ -1,5 +1,5 @@
-let bandOpenInfoDetl = new Vue({
-    el: "#bandOpenInfoDetlPopup",
+let bandSpecDetl = new Vue({
+    el: "#bandSpecDetlPopup",
     data: {
     	params: {
     		crud           : 'C',
@@ -51,8 +51,8 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 			$this.initBandYtypCdValue();
 		},
-        initPage: function(bandId, callback) {
-
+        initPage: function(bandId,guarTelNo, callback) {
+			console.log(guarTelNo);
 			let $this = this;
 
 			$this.resetBandOpenInfo();
@@ -63,7 +63,8 @@ let bandOpenInfoDetl = new Vue({
 			if ( !WebUtil.isNull(bandId) )
 			{
 				let params = {
-					'bandId' : bandId
+					'bandId'    : bandId ,
+					'guarTelNo' : guarTelNo
 				}
 				AjaxUtil.post({
 					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfoList.ab",

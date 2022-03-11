@@ -73,7 +73,7 @@ let termAgreYnInfoDetl = new Vue({
 				{
 					datatype : "local",
 					mtype    : 'post'  ,
-					url      : '/user/prnt/prntInfoMng/searchTermAgreYnInfoDetlList.ab',
+					url      : '/user/guar/guarInfoMng/searchTermAgreYnInfoDetlList.ab',
 					pager    : '#termAgreYnInfoDetl_pager_list',
 					colModel : colModels,
 					onPaging : function(data)
@@ -138,7 +138,7 @@ let termAgreYnInfoDetl = new Vue({
                 return false;
             }
 			AjaxUtil.post({
-                url: "/user/prnt/prntInfoMng/saveTermAgreYnInfoDetl.ab",
+                url: "/user/guar/guarInfoMng/saveTermAgreYnInfoDetl.ab",
                 param: params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {

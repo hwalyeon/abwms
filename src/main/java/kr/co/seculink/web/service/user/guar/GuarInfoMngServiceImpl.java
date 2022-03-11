@@ -1,4 +1,4 @@
-package kr.co.seculink.web.service.user.prnt;
+package kr.co.seculink.web.service.user.guar;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
@@ -12,25 +12,25 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service("prntInfoMngService")
-public class PrntInfoMngServiceImpl implements PrntInfoMngService
+@Service("guarInfoMngService")
+public class GuarInfoMngServiceImpl implements GuarInfoMngService
 {
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
 	//보호자(사용자)_정보_리스트 조회
-	public List<Map<String, String>> searchPrntInfoList(Map<String, String> params) throws BizException
+	public List<Map<String, String>> searchGuarInfoList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("user.guar.guarInfoMng.selectPrntInfoList", params);
+		List<Map<String, String>> result = dao.selectList("user.guar.guarInfoMng.selectGuarInfoList", params);
 
 		return result;
 	}
 
 	//보호자(사용자)_정보 상세보기
-	public Map<String, Object> searchPrntInfo(Map<String, String> params) throws BizException
+	public Map<String, Object> searchGuarInfo(Map<String, String> params) throws BizException
 	{
-		Map<String, String> result = dao.selectOne("user.guar.guarInfoMng.selectPrntInfoDetl", params);
+		Map<String, String> result = dao.selectOne("user.guar.guarInfoMng.selectGuarInfoDetl", params);
 
 		Map<String, Object> rtnMap = new HashMap<>();
 
@@ -40,7 +40,7 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 	}
 
 	//보호자(사용자)_정보 저장
-	public void savePrntInfoDetl(Map<String, Object> params) throws BizException
+	public void saveGuarInfoDetl(Map<String, Object> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();

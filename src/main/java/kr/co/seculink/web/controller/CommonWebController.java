@@ -129,9 +129,9 @@ public class CommonWebController {
 	@RequestMapping("/cmon/stnd/csInfoMng.pg")
 	public String getCmonStndCsInfoMng() {return "cmon/stnd/csInfoMng";}
 
-	//보호자 상세(등록)
-	@RequestMapping("/user/prnt/prntInfoMng.pg")
-	public String getUserPrntPrntInfoMng() {return "user/prnt/prntInfoMng";}
+	//보호자(사용자)정보
+	@RequestMapping("/user/guar/guarInfoMng.pg")
+	public String getUserGuarGuarInfoMng() {return "user/guar/guarInfoMng";}
 
 	//학생정보
 	@RequestMapping("/user/stdt/stdtInfoMng.pg")
