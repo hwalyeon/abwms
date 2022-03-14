@@ -25,8 +25,8 @@ public class TsStdtCbeeHistVo implements Serializable {
 	/* cbee_bal 캐시비_잔액 numeric(null) */
 	private double cbeeBal;
 
-	/* gram_no 전문_번호 numeric(null) */
-	private double gramNo;
+	/* judg_no 판정_번호 numeric(null) */
+	private double judgNo;
 
 	/* cbee_alam_no 캐시비_알림_번호 numeric(null) */
 	private double cbeeAlamNo;
@@ -141,19 +141,19 @@ public class TsStdtCbeeHistVo implements Serializable {
 		this.cbeeBal = cbeeBal;
 	}
 	/**
-	 * Get gram_no 전문_번호 numeric(null)
-	 * @Return double gramNo
+	 * Get judg_no 판정_번호 numeric(null)
+	 * @Return double judgNo
 	 */
-	public double getGramNo() {
-		return this.gramNo;
+	public double getJudgNo() {
+		return this.judgNo;
 	}
 	
 	/**
-	 * Set gram_no 전문_번호 numeric(null)
-	 * @Param double gramNo
+	 * Set judg_no 판정_번호 numeric(null)
+	 * @Param double judgNo
 	 */
-	public void setGramNo(double gramNo) {
-		this.gramNo = gramNo;
+	public void setJudgNo(double judgNo) {
+		this.judgNo = judgNo;
 	}
 	/**
 	 * Get cbee_alam_no 캐시비_알림_번호 numeric(null)

@@ -15,7 +15,7 @@
                ,occr_dttm /* occr_dttm 발생_일시 character(14) */
                ,use_cbee_amt /* use_cbee_amt 사용_캐시비_금액 numeric */
                ,cbee_bal /* cbee_bal 캐시비_잔액 numeric */
-               ,gram_no /* gram_no 전문_번호 numeric */
+               ,judg_no /* judg_no 판정_번호 numeric */
                ,cbee_alam_no /* cbee_alam_no 캐시비_알림_번호 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -42,8 +42,8 @@
 		</if>
 		    ,use_cbee_amt /* use_cbee_amt 사용_캐시비_금액 numeric */
 		    ,cbee_bal /* cbee_bal 캐시비_잔액 numeric */
-		<if test="gramNo != null">
-		    ,gram_no /* gram_no 전문_번호 numeric */
+		<if test="judgNo != null">
+		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
 		<if test="cbeeAlamNo != null">
 		    ,cbee_alam_no /* cbee_alam_no 캐시비_알림_번호 numeric */
@@ -71,8 +71,8 @@
 		</if>
 		    ,#{useCbeeAmt} /* use_cbee_amt 사용_캐시비_금액 numeric */
 		    ,#{cbeeBal} /* cbee_bal 캐시비_잔액 numeric */
-		<if test="gramNo != null">
-		    ,#{gramNo} /* gram_no 전문_번호 numeric */
+		<if test="judgNo != null">
+		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
 		<if test="cbeeAlamNo != null">
 		    ,#{cbeeAlamNo} /* cbee_alam_no 캐시비_알림_번호 numeric */
@@ -109,8 +109,8 @@
 		<if test="cbeeBal != null">
 		    ,cbee_bal = #{cbeeBal} /* cbee_bal 캐시비_잔액 numeric */
 		</if>
-		<if test="gramNo != null">
-		    ,gram_no = #{gramNo} /* gram_no 전문_번호 numeric */
+		<if test="judgNo != null">
+		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
 		<if test="cbeeAlamNo != null">
 		    ,cbee_alam_no = #{cbeeAlamNo} /* cbee_alam_no 캐시비_알림_번호 numeric */
@@ -139,8 +139,8 @@
 		</if>
 		    ,use_cbee_amt /* use_cbee_amt 사용_캐시비_금액 numeric */
 		    ,cbee_bal /* cbee_bal 캐시비_잔액 numeric */
-		<if test="gramNo != null">
-		    ,gram_no /* gram_no 전문_번호 numeric */
+		<if test="judgNo != null">
+		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
 		<if test="cbeeAlamNo != null">
 		    ,cbee_alam_no /* cbee_alam_no 캐시비_알림_번호 numeric */
@@ -168,8 +168,8 @@
 		</if>
 		    ,#{useCbeeAmt} /* use_cbee_amt 사용_캐시비_금액 numeric */
 		    ,#{cbeeBal} /* cbee_bal 캐시비_잔액 numeric */
-		<if test="gramNo != null">
-		    ,#{gramNo} /* gram_no 전문_번호 numeric */
+		<if test="judgNo != null">
+		    ,#{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
 		<if test="cbeeAlamNo != null">
 		    ,#{cbeeAlamNo} /* cbee_alam_no 캐시비_알림_번호 numeric */
@@ -203,8 +203,8 @@
 		<if test="cbeeBal != null">
 		    ,cbee_bal = #{cbeeBal} /* cbee_bal 캐시비_잔액 numeric */
 		</if>
-		<if test="gramNo != null">
-		    ,gram_no = #{gramNo} /* gram_no 전문_번호 numeric */
+		<if test="judgNo != null">
+		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
 		<if test="cbeeAlamNo != null">
 		    ,cbee_alam_no = #{cbeeAlamNo} /* cbee_alam_no 캐시비_알림_번호 numeric */
