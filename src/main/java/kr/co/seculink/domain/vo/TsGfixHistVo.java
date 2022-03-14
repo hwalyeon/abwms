@@ -58,12 +58,6 @@ public class TsGfixHistVo implements Serializable {
 	/* guar_bmi_val_2 보호자_BMI_값_2 numeric(null) */
 	private double guarBmiVal2;
 
-	/* grow_stnd_ver 성장_기준_버전 character varying(20) */
-	private String growStndVer;
-
-	/* grow_stnd_no 성장_기준_번호 numeric(null) */
-	private double growStndNo;
-
 	/* grow_idx 성장_지수 numeric(null) */
 	private double growIdx;
 
@@ -111,6 +105,9 @@ public class TsGfixHistVo implements Serializable {
 
 	/* pal_val 신체활동수준_값 numeric(null) */
 	private double palVal;
+
+	/* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+	private String calNutrStatCd;
 
 	/* rmrk 비고 character varying(4000) */
 	private String rmrk;
@@ -390,36 +387,6 @@ public class TsGfixHistVo implements Serializable {
 		this.guarBmiVal2 = guarBmiVal2;
 	}
 	/**
-	 * Get grow_stnd_ver 성장_기준_버전 character varying(20)
-	 * @Return String growStndVer
-	 */
-	public String getGrowStndVer() {
-		return this.growStndVer;
-	}
-	
-	/**
-	 * Set grow_stnd_ver 성장_기준_버전 character varying(20)
-	 * @Param String growStndVer
-	 */
-	public void setGrowStndVer(String growStndVer) {
-		this.growStndVer = growStndVer;
-	}
-	/**
-	 * Get grow_stnd_no 성장_기준_번호 numeric(null)
-	 * @Return double growStndNo
-	 */
-	public double getGrowStndNo() {
-		return this.growStndNo;
-	}
-	
-	/**
-	 * Set grow_stnd_no 성장_기준_번호 numeric(null)
-	 * @Param double growStndNo
-	 */
-	public void setGrowStndNo(double growStndNo) {
-		this.growStndNo = growStndNo;
-	}
-	/**
 	 * Get grow_idx 성장_지수 numeric(null)
 	 * @Return double growIdx
 	 */
@@ -658,6 +625,21 @@ public class TsGfixHistVo implements Serializable {
 	 */
 	public void setPalVal(double palVal) {
 		this.palVal = palVal;
+	}
+	/**
+	 * Get cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20)
+	 * @Return String calNutrStatCd
+	 */
+	public String getCalNutrStatCd() {
+		return this.calNutrStatCd;
+	}
+	
+	/**
+	 * Set cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20)
+	 * @Param String calNutrStatCd
+	 */
+	public void setCalNutrStatCd(String calNutrStatCd) {
+		this.calNutrStatCd = calNutrStatCd;
 	}
 	/**
 	 * Get rmrk 비고 character varying(4000)
