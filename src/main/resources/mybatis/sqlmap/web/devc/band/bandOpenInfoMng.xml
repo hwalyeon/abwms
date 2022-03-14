@@ -50,8 +50,8 @@
 		and       TBI.UPT_DT between #{uptDtFr} and #{uptDtTo}</if>
 		          <if test=" stdtNm != null and stdtNm !='' ">
 		and       TSB.STDT_NM like CONCAT('%',#{stdtNm},'%')</if>
-		          <if test="bandTelNo != null and bandTelNo !='' ">
-		and       TBI.TEL_NO = #{bandTelNo}</if>
+		          <if test="telNo != null and telNo !='' ">
+		and       TBI.TEL_NO = #{telNo}</if>
 		          <if test="bandYtypCd != null and bandYtypCd !='' ">
 		and       T1.BAND_YTYP like CONCAT('%',#{bandYtypCd},'%')</if>
 		          <if test="bandId != null and bandId !='' ">
