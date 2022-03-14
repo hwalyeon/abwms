@@ -1,6 +1,7 @@
 package kr.co.seculink.web.service.devc.band;//
 
 import kr.co.seculink.domain.RtnMsg;
+import kr.co.seculink.domain.vo.TsBandSpecVo;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -63,7 +64,6 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 	public void saveBandOpenInfoDetl(Map<String, Object> params) throws BizException {
 
 		int saveCnt = 0;
-
 		RtnMsg vo = new RtnMsg();
 
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
@@ -78,15 +78,21 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 
 			info.put("bandId",bandId);
 
-			if ("C".equals(info.get("crud"))) {
-				saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
+			if ("C".equals(info.get("crud")))
+			{
+				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
+				if ( exists == null ) {
+					saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
+				} else{
+					throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
+				}
 			} else if ("U".equals(info.get("crud"))) {
 				saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", info);
 			} else if ("D".equals(info.get("crud"))) {
 				saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", info);
 			}
 		}
-		log.debug("crud         : " + params.get("crud"));
+
 		if ("C".equals(params.get("crud"))) {
 			saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTsBandInfoList", params);
 		} else if ("U".equals(params.get("crud"))) {

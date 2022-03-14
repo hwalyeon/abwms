@@ -102,7 +102,7 @@ let bandOpenInfoDetl = new Vue({
 				{name: "guarNm"     , index: "guarNm"    , label: "보호자 이름" 	  , width: 50 , align: "center", formatter: function(cellValue, options, rowObject){
 						if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoDetl.regGuarInfoDetlPopup(\'' + rowObject.guarTelNo + '\',\'' + rowObject.bandId + '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
 						else return cellValue}},
-				{name: "guarTelNo"  , index: "guarTelNo" , label: "보호자 전화번호" , width: 80 , align: "center", editable:true }
+				{name: "guarTelNo"  , index: "guarTelNo" , label: "보호자 전화번호" , width: 80 , align: "center", editable:true , editrules:{number:true}}
 			];
 			$("#guarTelNo_list").jqGrid("GridUnload");
 			$("#guarTelNo_list").jqGrid($.extend(true, {}, commonEditGridOptions(),
@@ -316,11 +316,13 @@ let bandOpenInfoDetl = new Vue({
 
 			$this.params.gridData = commonGridGetDataNew($("#guarTelNo_list"));
 
+
 			if ( !this.isValid() ) {
                 return false;
             }
             if ( $this.params.crud === 'C' ) {
 	            if ( $this.params.checkDupBandId != 'Y' ) {
+
 	        		Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
 	        		return false;
 	        	}
