@@ -59,45 +59,41 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		return rtnMap;
 	}
 
-
-	//행추가_행삭제 저장
-	public void saveBandOpenDetlGuarTelNo(Map<String, Object> params) throws BizException
-	{
-		int saveCnt = 0;
-
-		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
-
-		for(Map<String,String> info:gridDate){
-			log.debug("crud         : " +  info.get("crud"));
-
-			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.nutr.bandOpenInfoMng.insertTmBandSpecList", info);
-			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.nutr.bandOpenInfoMng.updateTmBandSpecList", info);
-			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.nutr.bandOpenInfoMng.deleteTmBandSpecList", info);
-			}
-		}
-		if(saveCnt == 0){
-			throw new BizException("ECOM999", new String[]{"밴드정보정보 저장이 실패하였습니다"});
-		}
-	}
-
 	//밴드_정보 저장
 	public void saveBandOpenInfoDetl(Map<String, Object> params) throws BizException {
 
+		int saveCnt = 0;
+
 		RtnMsg vo = new RtnMsg();
+
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		int saveCnt = 0;
-		
-			if ("C".equals(params.get("crud"))) {
-				saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTsBandInfoList", params);
-			} else if ("U".equals(params.get("crud"))) {
-				saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTsBandInfoList", params);
-			} else if ("D".equals(params.get("crud"))) {
-				saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTsBandInfoList", params);
+		List<Map<String, Object>> gridData = (List<Map<String, Object>>) params.get("gridData");
+
+		Object bandId = params.get("bandId");
+
+
+		for(Map<String,Object> info:gridData) {
+			log.debug("crud         : " + info.get("crud"));
+
+			info.put("bandId",bandId);
+
+			if ("C".equals(info.get("crud"))) {
+				saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
+			} else if ("U".equals(info.get("crud"))) {
+				saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", info);
+			} else if ("D".equals(info.get("crud"))) {
+				saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", info);
 			}
+		}
+		log.debug("crud         : " + params.get("crud"));
+		if ("C".equals(params.get("crud"))) {
+			saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTsBandInfoList", params);
+		} else if ("U".equals(params.get("crud"))) {
+			saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTsBandInfoList", params);
+		} else if ("D".equals(params.get("crud"))) {
+			saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTsBandInfoList", params);
+		}
 		if (saveCnt == 0) {
 			throw new BizException("ECOM999", new String[]{"밴드정보 저장이 실패하였습니다."});
 		}

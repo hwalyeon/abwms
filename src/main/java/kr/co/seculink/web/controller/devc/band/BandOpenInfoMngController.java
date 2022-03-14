@@ -46,21 +46,6 @@ public class BandOpenInfoMngController
 
 		return vo;
 	}
-	//행추가_행삭제_저장
-	@ResponseBody
-	@RequestMapping("/devc/band/bandOpeninfoMng/saveBandOpenDetlGuarTelNo.ab")
-	public RtnMsg saveGrowStnd(@RequestBody(required = false)Map<String,Object>params)throws BizException {
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		bandOpenInfoMngService.saveBandOpenDetlGuarTelNo(params);
-
-		rtnMap.put("result", params);
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
-
 
 	//밴드/개통 정보 목록_리스트 엑셀다운로드
 	@ResponseBody
