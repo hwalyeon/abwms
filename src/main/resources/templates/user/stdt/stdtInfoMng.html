@@ -112,11 +112,12 @@
 			</div>
 		</div>
 	</div>
+	<div th:insert="~{devc/band/bandOpenInfoDetl :: body}"></div>
 	<div th:insert="~{user/stdt/stdtInfoDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/editor/summernote.js}"></script>
-
+	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoMng.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoDetl.js}"></script>
 </section>
