@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user.stdt.stdtInfoMng">
 
-
+       <!-- 학생정보 리스트 조회 -->
        <select id="searchStdtInfoList" parameterType="java.util.Map" resultType="MybatisMap">
               select   	   B.ENTR_DT/*가입일자*/
               ,B.GUAR_NO/*학부모번호*/
@@ -12,8 +12,8 @@
               ,A.STDT_NO/*학생번호*/
               ,A.STDT_NM/*학생명*/
               ,I.TEL_NO/*전화번호*/
-              ,fn_getCdNm('PLC_CLSS_CD',D.plc_clss_cd)as plc_clss_cd/*현재위치분류*/
-              ,concat('(',D.pstno,')',D.addr_base,D.addr_spec) as CURR_LOC
+              ,fn_getCdNm('PLC_CLSS_CD',DDD.plc_clss_cd)as plc_clss_cd/*현재위치분류*/
+              ,concat('(',DDD.pstno,')',DDD.addr_base,DDD.addr_spec) as CURR_LOC
               ,H.DGEM_STAT_CD as DGEM_STAT_CD_TEMP/*위험감정상태*/
               ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_CD
               ,F.STRS_IDX/*스트레스상태*/
@@ -45,6 +45,9 @@
               ,K.CBEE_BAL/*캐시비 잔액*/
               from     TM_STDT_BASE A
               left outer join
+              TS_STDT_LOC_HIST HI
+              on       A.loc_hist_no = HI.LOC_HIST_NO
+              left outer join
               TM_STDT_GUAR_CONN AA
               on       A.STDT_NO  = AA.STDT_NO
               left outer join
@@ -59,11 +62,11 @@
               on         B.PRNT_NO   = CC.PRNT_NO
               and        CC.SEX_CD   = 'FEMALE'
               left outer join
-              TM_GUAR_APNT_PLC DD
-              on       A.STDT_NO   = DD.STDT_NO
+              TI_EORG_BASE D
+              on       A.EORG_LOC_NO = D.LOC_NO
               left outer join
-              TS_LOC_INFO_BASE D
-              on		 DD.LOC_NO   = D.LOC_NO
+              TS_LOC_INFO_BASE DDD
+              on       HI.NEAR_LOC_NO = DDD.LOC_NO
               left outer join
               TS_STDT_STRS_HIST F
               on		 A.STDT_NO   = F.STDT_NO
@@ -112,6 +115,7 @@
         </if>
         </select>
 
+       <!--학생정보 insert -->
        <insert id="insertTmStdtBase"  parameterType="java.util.Map" >
               /* insertTiGrowJudgStnd */
               INSERT INTO ti_grow_judg_stnd
@@ -152,6 +156,7 @@
               )
        </insert>
 
+       <!--학생정보 update -->
        <update id="updateTmStdtBase"  parameterType="java.util.Map" >
               /* updateTiGrowJudgStnd */
               UPDATE ti_grow_judg_stnd
@@ -176,12 +181,137 @@
               AND    grow_judg_cd = #{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
        </update>
 
+       <!--학생정보 delete -->
        <delete id="deleteTmStdtBase"  parameterType="java.util.Map" >
 		/* deleteTiGrowJudgStnd */
 		DELETE FROM ti_grow_judg_stnd
 		WHERE  1 = 1
 		AND    grow_judg_cd = #{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
 	   </delete>
+
+       <!--밴드_ID_중복 조회 -->
+       <select id="selectBandId" parameterType="java.util.Map"
+               resultType="MybatisMap">
+		SELECT BAND_ID
+		FROM TS_BAND_INFO
+		WHERE 1=1
+		AND BAND_ID = #{bandId}
+	   </select>
+
+       <!--밴드_ID_채번 -->
+       <select id="numberingBandId" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT
+		#{bandYtypCd} || #{bandMdlCd}|| to_char(coalesce(cast(max(substring(band_id ,5,6))
+		AS INTEGER) , 0) + 1 , 'FM000000') as BAND_ID
+		FROM TS_BAND_INFO
+		WHERE SUBSTRING(BAND_ID, 1, 4) = #{bandYtypCd}||#{bandMdlCd}
+	   </select>
+
+       <!--밴드_ID update -->
+       <update id="updateTmBandSpecList"  parameterType="java.util.Map">
+              /* Generated SQL SQL ID : ts_band_spec.update */
+              UPDATE ts_band_spec
+              <trim prefix="SET" prefixOverrides=",">
+                     ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+                     ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+                     <if test="uptUserId != null">
+                            ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+                     </if>
+              </trim>
+              WHERE  1 = 1
+              AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
+              AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+       </update>
+
+       <!--밴드_ID delete -->
+       <delete id="deleteTmBandSpecList"  parameterType="java.util.Map">
+		/* Generated SQL SQL ID : ts_band_spec.delete */
+		DELETE FROM ts_band_spec
+		WHERE  1 = 1
+		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
+		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+	</delete>
+
+       <!--밴드_정보_상세보기 -->
+       <select id="selectBandOpenInfo" parameterType="java.util.Map" resultType="MybatisMap">
+		with BAND_YTYP_WITH as
+	      (
+	      select TBI.BAND_ID
+	      , case when cast(SUBSTRING(TBI.BAND_ID, 1,1) AS INTEGER) <![CDATA[<]]> 2
+	      then '203'|| SUBSTRING(TBI.BAND_ID, 1,1) || SUBSTRING(TBI.BAND_ID, 2,2) else '202'|| SUBSTRING(TBI.BAND_ID, 1,1) || SUBSTRING(TBI.BAND_ID, 2,2) end AS BAND_YTYP
+	      , case when TBI.API_URL_DTTM is not null then 'Y' else 'N' end as API_URL_YN --URL제공여부
+	      from TS_BAND_INFO as TBI
+	      )
+	      select TBI.BAND_ID as
+	        BAND_ID_TEMP
+	      , TBI.UPT_DT
+	      , TBI.REG_DT
+	      , TBI.BAND_ID
+	      , T1.BAND_YTYP
+	      , TBI.BAND_MDL_CD
+	      , TSB.STDT_NO --학생번호
+	      , TBI.TEL_NO
+	      , TSB.STDT_NM --학생명
+	      , coalesce (TGB_SUB.GUAR_NO , TMSB.spos_no ) as GUAR_NO_SUB--보호자_명
+	      , TGB.GUAR_NO
+	      , TBI.BAND_OPEN_STAT_CD
+	      , fn_getCdNm('BAND_OPEN_STAT_CD',band_open_stat_cd) as BAND_OPEN_STAT_CD_NM
+	      , TGB.GUAR_NM --보호자_명
+	      , coalesce (TGB_SUB.GUAR_NM , TMSB.spos_nm ) as GUAR_NM_SUB--보호자_명
+	      , TBI.GUAR_TEL_NO_1
+	      , TBI.GUAR_TEL_NO_2
+	      , TBI.OPEN_GRAM_NO
+	      , TBI.BLTH_ID
+	      , TBI.API_URL_GRAM_NO --API URL 제공여부
+	      , TBI.API_URL_DTTM
+	      , T1.API_URL_YN
+	      , TBI.REG_DT
+	      , TBI.REG_TM
+	      , TBI.REG_USER_ID
+	      , TBI.UPT_DT
+	      , TBI.UPT_TM
+	      , TBI.UPT_USER_ID
+	      from TS_BAND_INFO AS TBI
+	      left outer join TM_STDT_BASE AS TSB
+	      on TBI.BAND_ID = TSB.BAND_ID
+	      left outer join TM_GUAR_BASE AS TGB
+	      on TSB.GUAR_NO_1 = TGB.GUAR_NO
+	      left outer join TM_GUAR_BASE AS TGB_SUB
+	      on  TSB.GUAR_NO_2 = TGB_SUB.GUAR_NO
+	      left outer join TM_SPOS_BASE AS TMSB
+	      on  TGB.SPOS_NO = TMSB.SPOS_NO
+	      left outer join BAND_YTYP_WITH AS T1
+	      on TBI.BAND_ID = T1.BAND_ID
+	      where 1=1
+		and TBI.BAND_ID = #{bandId}
+
+	</select>
+
+       <insert id="insertTmBandSpecList" parameterType="java.util.Map">
+		/* Generated SQL SQL ID : ts_band_spec.insert */
+		INSERT INTO ts_band_spec
+		(
+		band_id /* band_id 밴드_ID character varying(20) */
+		,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		,reg_dt /* reg_dt 등록_일자 character(8) */
+		,reg_tm /* reg_tm 등록_시각 character(6) */
+		,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		,upt_dt /* upt_dt 수정_일자 character(8) */
+		,upt_tm /* upt_tm 수정_시각 character(6) */
+		,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		)
+		VALUES
+		(
+		#{bandId} /* band_id 밴드_ID character varying(20) */
+		#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		, TO_CHAR(NOW(), 'YYYYMMDD')
+		, TO_CHAR(NOW(), 'HH24MISS')
+		, #{regUserId}
+		, TO_CHAR(NOW(), 'YYYYMMDD')
+		, TO_CHAR(NOW(), 'HH24MISS')
+		, #{uptUserId}
+		)
+	</insert>
 
 
 </mapper>
