@@ -70,7 +70,9 @@
 		    ,fcm_tokn_val /* fcm_tokn_val FCM_토큰_값 character varying(100) */
 		</if>
 		    ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
+		<if test="prntNo != null">
 		    ,prnt_no /* prnt_no 학부모_번호 numeric */
+		</if>
 		    ,szone_alam_yn /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,fall_alam_yn /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,hbit_abnm_alam_yn /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -130,7 +132,9 @@
 		    ,#{fcmToknVal} /* fcm_tokn_val FCM_토큰_값 character varying(100) */
 		</if>
 		    ,#{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
+		<if test="prntNo != null">
 		    ,#{prntNo} /* prnt_no 학부모_번호 numeric */
+		</if>
 		    ,#{szoneAlamYn} /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,#{fallAlamYn} /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,#{hbitAbnmAlamYn} /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -280,7 +284,9 @@
 		    ,fcm_tokn_val /* fcm_tokn_val FCM_토큰_값 character varying(100) */
 		</if>
 		    ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
+		<if test="prntNo != null">
 		    ,prnt_no /* prnt_no 학부모_번호 numeric */
+		</if>
 		    ,szone_alam_yn /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,fall_alam_yn /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,hbit_abnm_alam_yn /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -340,7 +346,9 @@
 		    ,#{fcmToknVal} /* fcm_tokn_val FCM_토큰_값 character varying(100) */
 		</if>
 		    ,#{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
+		<if test="prntNo != null">
 		    ,#{prntNo} /* prnt_no 학부모_번호 numeric */
+		</if>
 		    ,#{szoneAlamYn} /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,#{fallAlamYn} /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,#{hbitAbnmAlamYn} /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */

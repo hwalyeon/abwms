@@ -7,11 +7,11 @@ import java.io.Serializable;
  */
 public class TsDdHbitHistVo implements Serializable {
 
-	/* stnd_dt 기준_일자 character(8) */
-	private String stndDt;
-
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
+
+	/* stnd_dt 기준_일자 character(8) */
+	private String stndDt;
 
 	/* mesu_cnt 측정_건수 numeric(null) */
 	private double mesuCnt;
@@ -72,21 +72,6 @@ public class TsDdHbitHistVo implements Serializable {
 
 
 	/**
-	 * Get stnd_dt 기준_일자 character(8)
-	 * @Return String stndDt
-	 */
-	public String getStndDt() {
-		return this.stndDt;
-	}
-	
-	/**
-	 * Set stnd_dt 기준_일자 character(8)
-	 * @Param String stndDt
-	 */
-	public void setStndDt(String stndDt) {
-		this.stndDt = stndDt;
-	}
-	/**
 	 * Get stdt_no 학생_번호 numeric(null)
 	 * @Return double stdtNo
 	 */
@@ -100,6 +85,21 @@ public class TsDdHbitHistVo implements Serializable {
 	 */
 	public void setStdtNo(double stdtNo) {
 		this.stdtNo = stdtNo;
+	}
+	/**
+	 * Get stnd_dt 기준_일자 character(8)
+	 * @Return String stndDt
+	 */
+	public String getStndDt() {
+		return this.stndDt;
+	}
+	
+	/**
+	 * Set stnd_dt 기준_일자 character(8)
+	 * @Param String stndDt
+	 */
+	public void setStndDt(String stndDt) {
+		this.stndDt = stndDt;
 	}
 	/**
 	 * Get mesu_cnt 측정_건수 numeric(null)

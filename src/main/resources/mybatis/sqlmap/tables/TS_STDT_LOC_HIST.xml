@@ -10,7 +10,7 @@
 	<select id="select" resultType="kr.co.seculink.domain.vo.TsStdtLocHistVo">
 		/* Generated SQL SQL ID : ts_stdt_loc_hist.select */
         SELECT  loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
-               ,loc_nm /* loc_nm 위치_명 character varying(200) */
+               ,loc_nm /* loc_nm 위치_명 character varying(100) */
                ,stdt_no /* stdt_no 학생_번호 numeric */
                ,occr_dttm /* occr_dttm 발생_일시 character(14) */
                ,lat_val /* lat_val 위도_값 numeric */
@@ -38,7 +38,7 @@
 		(
 		     loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="locNm != null">
-		    ,loc_nm /* loc_nm 위치_명 character varying(200) */
+		    ,loc_nm /* loc_nm 위치_명 character varying(100) */
 		</if>
 		<if test="stdtNo != null">
 		    ,stdt_no /* stdt_no 학생_번호 numeric */
@@ -81,7 +81,7 @@
 		(
 		     #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="locNm != null">
-		    ,#{locNm} /* loc_nm 위치_명 character varying(200) */
+		    ,#{locNm} /* loc_nm 위치_명 character varying(100) */
 		</if>
 		<if test="stdtNo != null">
 		    ,#{stdtNo} /* stdt_no 학생_번호 numeric */
@@ -127,7 +127,7 @@
 		UPDATE ts_stdt_loc_hist
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="locNm != null">
-		    ,loc_nm = #{locNm} /* loc_nm 위치_명 character varying(200) */
+		    ,loc_nm = #{locNm} /* loc_nm 위치_명 character varying(100) */
 		</if>
 		<if test="stdtNo != null">
 		    ,stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
@@ -175,7 +175,7 @@
 		(
 		     loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="locNm != null">
-		    ,loc_nm /* loc_nm 위치_명 character varying(200) */
+		    ,loc_nm /* loc_nm 위치_명 character varying(100) */
 		</if>
 		<if test="stdtNo != null">
 		    ,stdt_no /* stdt_no 학생_번호 numeric */
@@ -218,7 +218,7 @@
 		(
 		     #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 		<if test="locNm != null">
-		    ,#{locNm} /* loc_nm 위치_명 character varying(200) */
+		    ,#{locNm} /* loc_nm 위치_명 character varying(100) */
 		</if>
 		<if test="stdtNo != null">
 		    ,#{stdtNo} /* stdt_no 학생_번호 numeric */
@@ -261,7 +261,7 @@
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
 		<if test="locNm != null">
-		    ,loc_nm = #{locNm} /* loc_nm 위치_명 character varying(200) */
+		    ,loc_nm = #{locNm} /* loc_nm 위치_명 character varying(100) */
 		</if>
 		<if test="stdtNo != null">
 		    ,stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */

@@ -89,7 +89,7 @@ public class DgemStndMngController {
 		return map;
 	}
 	
-
+	//위험_감정_기준_상세 조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/dgem/dgemStndMng/searchDgemStndInfo.ab")
 

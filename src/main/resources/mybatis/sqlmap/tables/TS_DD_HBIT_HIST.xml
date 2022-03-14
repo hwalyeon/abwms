@@ -9,8 +9,8 @@
 
 	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdHbitHistVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_hist.select */
-        SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
-               ,stdt_no /* stdt_no 학생_번호 numeric */
+        SELECT  stdt_no /* stdt_no 학생_번호 numeric */
+               ,stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,mesu_cnt /* mesu_cnt 측정_건수 numeric */
                ,max_hbit_cnt /* max_hbit_cnt 최대_심박_수 numeric */
                ,min_hbit_cnt /* min_hbit_cnt 최소_심박_수 numeric */
@@ -32,16 +32,16 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ts_dd_hbit_hist
 		WHERE  1 = 1
-		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
+		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</select>
 
 	<insert id="insert" >
 		/* Generated SQL SQL ID : ts_dd_hbit_hist.insert */
 		INSERT INTO ts_dd_hbit_hist
 		(
-		     stnd_dt /* stnd_dt 기준_일자 character(8) */
-		    ,stdt_no /* stdt_no 학생_번호 numeric */
+		     stdt_no /* stdt_no 학생_번호 numeric */
+		    ,stnd_dt /* stnd_dt 기준_일자 character(8) */
 		    ,mesu_cnt /* mesu_cnt 측정_건수 numeric */
 		    ,max_hbit_cnt /* max_hbit_cnt 최대_심박_수 numeric */
 		    ,min_hbit_cnt /* min_hbit_cnt 최소_심박_수 numeric */
@@ -76,8 +76,8 @@
 		)
 		VALUES
 		(
-		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
+		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		    ,#{mesuCnt} /* mesu_cnt 측정_건수 numeric */
 		    ,#{maxHbitCnt} /* max_hbit_cnt 최대_심박_수 numeric */
 		    ,#{minHbitCnt} /* min_hbit_cnt 최소_심박_수 numeric */
@@ -162,16 +162,16 @@
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
+		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</update>
 	
 	<update id="merge" >
 		/* Generated SQL SQL ID : ts_dd_hbit_hist.merge */
 		INSERT INTO ts_dd_hbit_hist
 		(
-		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		     stdt_no /* stdt_no 학생_번호 numeric */
+		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		    ,mesu_cnt /* mesu_cnt 측정_건수 numeric */
 		    ,max_hbit_cnt /* max_hbit_cnt 최대_심박_수 numeric */
 		    ,min_hbit_cnt /* min_hbit_cnt 최소_심박_수 numeric */
@@ -206,8 +206,8 @@
 		)
 		VALUES
 		(
-		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
+		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		    ,#{mesuCnt} /* mesu_cnt 측정_건수 numeric */
 		    ,#{maxHbitCnt} /* max_hbit_cnt 최대_심박_수 numeric */
 		    ,#{minHbitCnt} /* min_hbit_cnt 최소_심박_수 numeric */
@@ -294,7 +294,7 @@
 		/* Generated SQL SQL ID : ts_dd_hbit_hist.delete */
 		DELETE FROM ts_dd_hbit_hist
 		WHERE  1 = 1
-		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
+		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</delete>
 </mapper>

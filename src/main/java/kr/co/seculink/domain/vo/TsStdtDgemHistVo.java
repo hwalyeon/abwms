@@ -13,8 +13,11 @@ public class TsStdtDgemHistVo implements Serializable {
 	/* dgem_hist_seq 위험감정_이력_순번 numeric(null) */
 	private double dgemHistSeq;
 
-	/* dgem_dttm 위험감정_일시 character(14) */
-	private String dgemDttm;
+	/* dgem_dt 위험감정_일자 character(8) */
+	private String dgemDt;
+
+	/* dgem_tm 위험감정_시각 character(6) */
+	private String dgemTm;
 
 	/* dgem_idx 위험감정_지수 numeric(null) */
 	private double dgemIdx;
@@ -111,19 +114,34 @@ public class TsStdtDgemHistVo implements Serializable {
 		this.dgemHistSeq = dgemHistSeq;
 	}
 	/**
-	 * Get dgem_dttm 위험감정_일시 character(14)
-	 * @Return String dgemDttm
+	 * Get dgem_dt 위험감정_일자 character(8)
+	 * @Return String dgemDt
 	 */
-	public String getDgemDttm() {
-		return this.dgemDttm;
+	public String getDgemDt() {
+		return this.dgemDt;
 	}
 	
 	/**
-	 * Set dgem_dttm 위험감정_일시 character(14)
-	 * @Param String dgemDttm
+	 * Set dgem_dt 위험감정_일자 character(8)
+	 * @Param String dgemDt
 	 */
-	public void setDgemDttm(String dgemDttm) {
-		this.dgemDttm = dgemDttm;
+	public void setDgemDt(String dgemDt) {
+		this.dgemDt = dgemDt;
+	}
+	/**
+	 * Get dgem_tm 위험감정_시각 character(6)
+	 * @Return String dgemTm
+	 */
+	public String getDgemTm() {
+		return this.dgemTm;
+	}
+	
+	/**
+	 * Set dgem_tm 위험감정_시각 character(6)
+	 * @Param String dgemTm
+	 */
+	public void setDgemTm(String dgemTm) {
+		this.dgemTm = dgemTm;
 	}
 	/**
 	 * Get dgem_idx 위험감정_지수 numeric(null)

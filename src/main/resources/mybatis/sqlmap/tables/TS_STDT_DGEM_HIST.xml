@@ -11,7 +11,8 @@
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,dgem_hist_seq /* dgem_hist_seq 위험감정_이력_순번 numeric */
-               ,dgem_dttm /* dgem_dttm 위험감정_일시 character(14) */
+               ,dgem_dt /* dgem_dt 위험감정_일자 character(8) */
+               ,dgem_tm /* dgem_tm 위험감정_시각 character(6) */
                ,dgem_idx /* dgem_idx 위험감정_지수 numeric */
                ,dgem_stat_cd /* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
                ,dgem_smry_cntn /* dgem_smry_cntn 위험감정_요약_내용 character varying(200) */
@@ -45,8 +46,11 @@
 		(
 		     stdt_no /* stdt_no 학생_번호 numeric */
 		    ,dgem_hist_seq /* dgem_hist_seq 위험감정_이력_순번 numeric */
-		<if test="dgemDttm != null">
-		    ,dgem_dttm /* dgem_dttm 위험감정_일시 character(14) */
+		<if test="dgemDt != null">
+		    ,dgem_dt /* dgem_dt 위험감정_일자 character(8) */
+		</if>
+		<if test="dgemTm != null">
+		    ,dgem_tm /* dgem_tm 위험감정_시각 character(6) */
 		</if>
 		    ,dgem_idx /* dgem_idx 위험감정_지수 numeric */
 		<if test="dgemStatCd != null">
@@ -102,8 +106,11 @@
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
 		     #{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
-		<if test="dgemDttm != null">
-		    ,#{dgemDttm} /* dgem_dttm 위험감정_일시 character(14) */
+		<if test="dgemDt != null">
+		    ,#{dgemDt} /* dgem_dt 위험감정_일자 character(8) */
+		</if>
+		<if test="dgemTm != null">
+		    ,#{dgemTm} /* dgem_tm 위험감정_시각 character(6) */
 		</if>
 		    ,#{dgemIdx} /* dgem_idx 위험감정_지수 numeric */
 		<if test="dgemStatCd != null">
@@ -161,8 +168,11 @@
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.update */
 		UPDATE ts_stdt_dgem_hist
 		<trim prefix="SET" prefixOverrides=",">
-		<if test="dgemDttm != null">
-		    ,dgem_dttm = #{dgemDttm} /* dgem_dttm 위험감정_일시 character(14) */
+		<if test="dgemDt != null">
+		    ,dgem_dt = #{dgemDt} /* dgem_dt 위험감정_일자 character(8) */
+		</if>
+		<if test="dgemTm != null">
+		    ,dgem_tm = #{dgemTm} /* dgem_tm 위험감정_시각 character(6) */
 		</if>
 		<if test="dgemIdx != null">
 		    ,dgem_idx = #{dgemIdx} /* dgem_idx 위험감정_지수 numeric */
@@ -226,8 +236,11 @@
 		(
 		     stdt_no /* stdt_no 학생_번호 numeric */
 		     dgem_hist_seq /* dgem_hist_seq 위험감정_이력_순번 numeric */
-		<if test="dgemDttm != null">
-		    ,dgem_dttm /* dgem_dttm 위험감정_일시 character(14) */
+		<if test="dgemDt != null">
+		    ,dgem_dt /* dgem_dt 위험감정_일자 character(8) */
+		</if>
+		<if test="dgemTm != null">
+		    ,dgem_tm /* dgem_tm 위험감정_시각 character(6) */
 		</if>
 		    ,dgem_idx /* dgem_idx 위험감정_지수 numeric */
 		<if test="dgemStatCd != null">
@@ -283,8 +296,11 @@
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
 		     #{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
-		<if test="dgemDttm != null">
-		    ,#{dgemDttm} /* dgem_dttm 위험감정_일시 character(14) */
+		<if test="dgemDt != null">
+		    ,#{dgemDt} /* dgem_dt 위험감정_일자 character(8) */
+		</if>
+		<if test="dgemTm != null">
+		    ,#{dgemTm} /* dgem_tm 위험감정_시각 character(6) */
 		</if>
 		    ,#{dgemIdx} /* dgem_idx 위험감정_지수 numeric */
 		<if test="dgemStatCd != null">
@@ -339,8 +355,11 @@
 		ON CONFLICT
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
-		<if test="dgemDttm != null">
-		    ,dgem_dttm = #{dgemDttm} /* dgem_dttm 위험감정_일시 character(14) */
+		<if test="dgemDt != null">
+		    ,dgem_dt = #{dgemDt} /* dgem_dt 위험감정_일자 character(8) */
+		</if>
+		<if test="dgemTm != null">
+		    ,dgem_tm = #{dgemTm} /* dgem_tm 위험감정_시각 character(6) */
 		</if>
 		<if test="dgemIdx != null">
 		    ,dgem_idx = #{dgemIdx} /* dgem_idx 위험감정_지수 numeric */

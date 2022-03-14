@@ -16,8 +16,11 @@ public class TdJudgBaseVo implements Serializable {
 	/* band_id 밴드_ID character varying(20) */
 	private String bandId;
 
-	/* occr_dttm 발생_일시 character(18) */
-	private String occrDttm;
+	/* judg_dt 판정_일자 character(8) */
+	private String judgDt;
+
+	/* judg_tm 판정_시각 character(6) */
+	private String judgTm;
 
 	/* lat_val 위도_값 numeric(null) */
 	private double latVal;
@@ -40,8 +43,8 @@ public class TdJudgBaseVo implements Serializable {
 	/* abnm_hbit_cnt 이상_심박_수 numeric(null) */
 	private double abnmHbitCnt;
 
-	/* min1_hbit_cntn 1분_심박_내용 numeric(null) */
-	private double min1HbitCntn;
+	/* min1_hbit_cntn 1분_심박_내용 character varying(4000) */
+	private String min1HbitCntn;
 
 	/* temp_val 체온_값 numeric(null) */
 	private double tempVal;
@@ -63,9 +66,6 @@ public class TdJudgBaseVo implements Serializable {
 
 	/* gram_no 전문_번호 numeric(null) */
 	private double gramNo;
-
-	/* alam_no 알림_번호 numeric(null) */
-	private double alamNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -132,19 +132,34 @@ public class TdJudgBaseVo implements Serializable {
 		this.bandId = bandId;
 	}
 	/**
-	 * Get occr_dttm 발생_일시 character(18)
-	 * @Return String occrDttm
+	 * Get judg_dt 판정_일자 character(8)
+	 * @Return String judgDt
 	 */
-	public String getOccrDttm() {
-		return this.occrDttm;
+	public String getJudgDt() {
+		return this.judgDt;
 	}
 	
 	/**
-	 * Set occr_dttm 발생_일시 character(18)
-	 * @Param String occrDttm
+	 * Set judg_dt 판정_일자 character(8)
+	 * @Param String judgDt
 	 */
-	public void setOccrDttm(String occrDttm) {
-		this.occrDttm = occrDttm;
+	public void setJudgDt(String judgDt) {
+		this.judgDt = judgDt;
+	}
+	/**
+	 * Get judg_tm 판정_시각 character(6)
+	 * @Return String judgTm
+	 */
+	public String getJudgTm() {
+		return this.judgTm;
+	}
+	
+	/**
+	 * Set judg_tm 판정_시각 character(6)
+	 * @Param String judgTm
+	 */
+	public void setJudgTm(String judgTm) {
+		this.judgTm = judgTm;
 	}
 	/**
 	 * Get lat_val 위도_값 numeric(null)
@@ -252,18 +267,18 @@ public class TdJudgBaseVo implements Serializable {
 		this.abnmHbitCnt = abnmHbitCnt;
 	}
 	/**
-	 * Get min1_hbit_cntn 1분_심박_내용 numeric(null)
-	 * @Return double min1HbitCntn
+	 * Get min1_hbit_cntn 1분_심박_내용 character varying(4000)
+	 * @Return String min1HbitCntn
 	 */
-	public double getMin1HbitCntn() {
+	public String getMin1HbitCntn() {
 		return this.min1HbitCntn;
 	}
 	
 	/**
-	 * Set min1_hbit_cntn 1분_심박_내용 numeric(null)
-	 * @Param double min1HbitCntn
+	 * Set min1_hbit_cntn 1분_심박_내용 character varying(4000)
+	 * @Param String min1HbitCntn
 	 */
-	public void setMin1HbitCntn(double min1HbitCntn) {
+	public void setMin1HbitCntn(String min1HbitCntn) {
 		this.min1HbitCntn = min1HbitCntn;
 	}
 	/**
@@ -370,21 +385,6 @@ public class TdJudgBaseVo implements Serializable {
 	 */
 	public void setGramNo(double gramNo) {
 		this.gramNo = gramNo;
-	}
-	/**
-	 * Get alam_no 알림_번호 numeric(null)
-	 * @Return double alamNo
-	 */
-	public double getAlamNo() {
-		return this.alamNo;
-	}
-	
-	/**
-	 * Set alam_no 알림_번호 numeric(null)
-	 * @Param double alamNo
-	 */
-	public void setAlamNo(double alamNo) {
-		this.alamNo = alamNo;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)
