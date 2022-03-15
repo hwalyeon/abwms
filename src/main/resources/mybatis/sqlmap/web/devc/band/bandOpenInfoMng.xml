@@ -30,6 +30,7 @@
 		        , TBS.GUAR_TEL_NO     AS GUAR_TEL_NO_TEMP-- 보호자_전화_번호
 	            , TBI.API_URL_GRAM_NO -- API URL 제공여부
 	            , TBI.API_URL_DTTM    -- URL_제공_일시
+	            , TBI.OPEN_GRAM_NO    -- 개통_전문_번호
 	            , T1.API_URL_YN       -- URL_제공_여부
 	            , TBI.REG_DT
 	            , TBI.REG_TM
