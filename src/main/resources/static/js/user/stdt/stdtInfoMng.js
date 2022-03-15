@@ -130,9 +130,9 @@ let stdtInfoMng = new Vue({
                 {name: "uptTm"             , index: "uptTm"             , label: "수정시각"           , width: 80 , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);} , hidden: true },
                 {name: "uptUserId"         , index: "uptUserId"         , label: "수정사용자ID"       , width: 80 , align: "center"  , hidden: true},
-                {name: "prntInfoDetlPopup" , index: "prntInfoDetlPopup" , label: "상세정보보기"       , width: 80 , align: "center"  ,  fixed: true ,
+                {name: "stdtInfoDetlPopup" , index: "stdtInfoDetlPopup" , label: "상세정보보기"        , width: 80, align: "center",fixed: true,
                     formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="prntInfoMng.regPrntInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="상세보기" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="stdtInfoMng.stdtInfoDetlPopup(\'' + rowObject.stdtNo + '\' , \'' + rowObject.guarNo + '\' )" value="상세보기" data-toggle="modal" data-target="#stdtInfoDetlPopup" />';
                     }
                 }
 
@@ -146,7 +146,7 @@ let stdtInfoMng = new Vue({
                 mtype: 'post',
                 url: '/user/stdt/stdtInfoMng/searchStdtInfoList.ab',
                 pager: '#grid_pager_list',
-                height: 405,
+                height: 450,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
@@ -198,14 +198,9 @@ let stdtInfoMng = new Vue({
             }).trigger("reloadGrid");
 
         },
-        growJudgStndNmVal:function(){
-            let $this = this;
-        },
-        physStrsStatNmVal:function(){
-            let $this = this;
-        },
-        regGrowJudgStndPop: function(growJudgCd) {
-            growJudgStndDetl.initPage(growJudgCd);
+
+        stdtInfoDetlPopup: function(stdtNo, guarNo) {
+            stdtInfoDetl.initPage(stdtNo, guarNo);
         },
         regBandOpenInfoDetlPopup: function(bandId) {
             bandOpenInfoDetl.initPage(bandId, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
@@ -241,7 +236,7 @@ let stdtInfoMng = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                growJudgCd:'',
+                stdtNo:'',
                 mmDd:'THIS_MONTH',
                 paging: 'Y',
                 totalCount: 0,

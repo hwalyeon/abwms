@@ -4,77 +4,271 @@
 <div class="modal fade" id="stdtInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 850px; height: 630px">
+			<div class="modal-content" style="width: 1600px; height: 850px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>성장판정기준 정보</h5>
+						<h5>학생정보</h5>
 					</div>
 				</div>
 				<div class="modal-body">
 					<div class="ibox-content border-style_none">
 						<table class="table table-bordered table_view">
 		                    <colgroup>
-		                        <col class="col-xs-2" />
-		                        <col class="col-xs-10" />
+		                        <col class="col-xs-1" />
+								<col class="col-xs-5" />
+								<col class="col-xs-1" />
+								<col class="col-xs-5" />
 		                    </colgroup>
 		                    <tbody>
-			                    <tr>
-			                        <th scope="row">성장판정코드</th>
-			                        <td>
-										<select id="growJudgCd" name="growJudgCd" class="form-control" v-model="growJudgStndInfo.growJudgCd" :disabled="growJudgStndInfo.crud=='U'">
-											<option value="">선택</option>
-											<option v-for="item in code.mentGrowJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-										</select>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">성장지수_FR</th>
-			                        <td>
-			                        	<input type="number" id="gidxFr" name="gidxFr" v-model="growJudgStndInfo.gidxFr" class="form-control" maxlength="10"/>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">성장지수_TO</th>
-			                        <td>
-			                        	<input type="number" id="gidxTo" name="gidxTo" v-model="growJudgStndInfo.gidxTo" class="form-control" maxlength="10"/>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">요약내용</th>
-			                        <td colspan="3">
-										<div class="mg_top_10">
-											<summer-note
-													v-model="growJudgStndInfo.smryCntn"
-													ref="smryCntn"
-													:options="{height:100, notUseVideo:true, maxImageWidth: 1280}"/>
+								<tr>
+									<th scope="row">기본정보</th>
+									<td colspan="3">
+										<div class="form-horizontal">
+											<div class="form-group">
+												<label class="col-xs-1 control-label">학생번호</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.stdtNo" class="form-control" :readonly="stdtInfo.crud=='U'"/>
+												</div>
+												<label class="col-xs-1 control-label">학생명</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.stdtNm" class="form-control" />
+												</div>
+												<label class="col-xs-1 control-label">학교명</label>
+												<div class="col-xs-2"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.eorgLocNm" class="form-control float_left width_per_70 ime-eng"/>
+													<button type="button" class="btn btn-outline btn-primary float_right" v-on:click="">검색</button>
+												</div>
+												<label class="col-xs-1 control-label">학년</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<select id="sgrdCd" name="sgrdCd" class="form-control" v-model="stdtInfo.sgrdCd">
+														<option value="">선택</option>
+														<option v-for="item in code.sgrdCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+													</select>
+												</div>
+												<label class="col-xs-1 control-label">생일</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.bithDt" class="form-control"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-xs-1 control-label">인종</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<select id="raceDivCd" name="raceDivCd" class="form-control" v-model="stdtInfo.raceDivCd">
+														<option value="">선택</option>
+														<option v-for="item in code.raceDivCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+													</select>
+												</div>
+												<label class="col-xs-1 control-label">성별</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<select id="sexCd" name="sexCd" class="form-control" v-model="stdtInfo.sexCd">
+														<option value="">선택</option>
+														<option v-for="item in code.sexCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+													</select>
+												</div>
+												<label class="col-xs-1 control-label">키</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.hghtVal" class="form-control"/>
+												</div>
+												<div class="col-xs-1"  style="padding:0px">
+												</div>
+												<label class="col-xs-1 control-label">몸무게</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.wghtVal" class="form-control"/>
+												</div>
+												<label class="col-xs-1 control-label">허리</label>
+												<div class="col-xs-1"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.wastVal" class="form-control"/>
+												</div>
+												<button type="button" class="btn btn-outline btn-primary float_right" style="margin-right: 20px" v-on:click="saveStdtDetlInfo">저장</button>
+											</div>
 										</div>
-			                        </td>
-			                    </tr>
+									</td>
+								</tr>
 			                    <tr>
-			                        <th scope="row">상세내용</th>
-			                        <td>
-										<textarea id="specCntn" name="specCntn" v-model="growJudgStndInfo.specCntn" class="form-control"></textarea>
-			                        </td>
+									<th scope="row">보호자 및 학부모정보</th>
+									<td>
+										<div class="form-horizontal">
+											<div class="form-group">
+												<label class="col-xs-2 control-label">보호자번호</label>
+												<div class="col-xs-2"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.guarNo" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												</div>
+												<label class="col-xs-2 control-label">학부모번호</label>
+												<div class="col-xs-2"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.prntNo" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-xs-2 control-label">보호자명</label>
+												<div class="col-xs-2"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.guarNm" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												</div>
+												<label class="col-xs-2 control-label">학부모_남자</label>
+												<div class="col-xs-2"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.prntMale" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-xs-2 control-label">보호자전화번호</label>
+												<div class="col-xs-2"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.guarTelNo" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												</div>
+												<label class="col-xs-2 control-label">학부모_여자</label>
+												<div class="col-xs-2"  style="padding:0px">
+													<input type="text" name="" v-model="stdtInfo.prntFemale" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												</div>
+											</div>
+										</div>
+									</td>
+			                        <th scope="row">밴드상태</th>
+									<td>
+										<div id="chartBand" class ="float_left">
+											<canvas id="bandStatChart" width="120" height="100">
+												<span>정상</span>
+											</canvas>
+										</div>
+										<div id="bandDetl">
+											<label class="col-xs-2 control-label">밴드ID</label>
+											<input type="text" name="" v-model="stdtInfo.bandId" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">밴드전화번호</label>
+											<input type="text" name="" v-model="stdtInfo.bandTelNo" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">밴드상태</label>
+											<input type="text" name="" v-model="stdtInfo.bandStatNm" class="" :readonly="stdtInfo.crud=='U'"/></br>
+
+											<label class="col-xs-2 control-label">최근통신</label>
+											<input type="text" name="" v-model="stdtInfo.bandCommDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+										</div>
+									</td>
 			                    </tr>
+								<tr>
+									<th scope="row">학생위치</th>
+									<td>
+										<div id=chartLoc  class ="float_left">
+											<canvas id="stdtLocChart" width="120" height="100">
+
+											</canvas>
+										</div>
+										<div id="locDetl">
+											<label class="col-xs-2 control-label">위치분류</label>
+											<input type="text" name="" v-model="stdtInfo.plcClssNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">위치명</label>
+											<input type="text" name="" v-model="stdtInfo.locNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">위도/경도</label>
+											<input type="text" name="" v-model="stdtInfo.latLonVal" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">최근통신</label>
+											<input type="text" name="" v-model="stdtInfo.occrDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+										</div>
+									</td>
+									<th scope="row">위험감정지수</th>
+									<td>
+										<div id="chartDgem" class ="float_left">
+											<canvas id="dgemChart" width="120" height="100">
+
+											</canvas>
+										</div>
+										<div class="">
+											<div id="dgemDetl">
+												<p class="level_tit mt60"><span style="font-size: 15px;" >{{stdtInfo.dgemStatNm}}</span></p>
+												<div id="dgemCntn"></div></br>
+												<label class="col-xs-2 control-label">최근통신</label>
+												<input type="text" name="" v-model="stdtInfo.locMesuDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">성장지수</th>
+									<td>
+										<div id=chartGrow class ="float_left">
+											<canvas id="growChart" width="120" height="100">
+
+											</canvas>
+										</div>
+										<div id="growDetl">
+											<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.growJudgNm}}</span></p>
+											<div id="growCntn"></div></br>
+											<label class="col-xs-2 control-label">최근통신</label>
+											<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+										</div>
+									</td>
+									<th scope="row">비만지수</th>
+									<td>
+										<div id="chartFat" class ="float_left">
+											<canvas id="fatChart" width="120" height="100">
+
+											</canvas>
+										</div>
+										<div id="fatDetl">
+											<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.fatJudgNm}} -> {{stdtInfo.prdtFatJudgNm}}</span></p>
+											<div id="fatCntn"></div></br>
+											<label class="col-xs-2 control-label">최근통신</label>
+											<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">영양섭취/운동(칼로리)</th>
+									<td>
+										<div id="nutrEatDetl">
+											<label class="col-xs-2 control-label">일 평균 섭취량</label>
+											<input type="text" name="" v-model="stdtInfo.calEatQty" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">영양섭취상태</label>
+											<input type="text" name="" v-model="stdtInfo.calNutrStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">일 평균 운동량</label>
+											<input type="text" name="" v-model="stdtInfo.calCsumQty" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">PAL</label>
+											<input type="text" name="" v-model="stdtInfo.palVal" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-2 control-label">최근통신</label>
+											<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+										</div>
+									</td>
+									<th scope="row">스트레스(정신적/신체적)</th>
+									<td>
+										<div id="chartStrs" class ="float_left">
+											<canvas id="strsChart" width="120" height="100">
+
+											</canvas>
+										</div>
+										<div id="strsDetl">
+											<label class="col-xs-3 control-label">평균심박</label>
+											<input type="text" name="" v-model="stdtInfo.avgHbitCnt" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-3 control-label">정신적스트레스</label>
+											<input type="text" name="" v-model="stdtInfo.mentStrsStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-3 control-label">신체적스트레스</label>
+											<input type="text" name="" v-model="stdtInfo.physStrsStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-3 control-label">대처능력</label>
+											<input type="text" name="" v-model="stdtInfo.strsCopeStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+
+											<label class="col-xs-3 control-label">최근통신</label>
+											<input type="text" name="" v-model="stdtInfo.strsUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+										</div>
+									</td>
+								</tr>
 							</tbody>
-		                </table>
-            		</div>
-            	</div>
-            	<div class="modal-footer" style="">
-					<div class="text-center">
-						<div class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveInfo">저장</button>
-						</div>
-						<div v-if="growJudgStndInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteInfo">삭제</button>
-						</div>
-						<div class="disp_in_block width_per_20">
-							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+						</table>
+					</div>
+					<div class="modal-footer" style="">
+						<div class="text-center">
+							<div class="disp_in_block width_per_20">
+								<input type="button" data-dismiss="modal"  class="form-control" th:value="닫기">
+							</div>
 						</div>
 					</div>
-				</div>			
+				</div>
             </div>
         </div>
     </div>

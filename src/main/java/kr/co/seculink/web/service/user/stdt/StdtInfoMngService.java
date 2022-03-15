@@ -7,7 +7,10 @@ import java.util.Map;
 
 public interface StdtInfoMngService
 {
-	//학생정보 리스트 조회
 	public List<Map<String, String>> searchStdtInfoList(Map<String, String> params) throws BizException;
+
+	public Map<String, Object> searchStdtDetlInfo(Map<String, String> params) throws BizException;
+
+
 }
 

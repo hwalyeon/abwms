@@ -31,6 +31,7 @@ public class StdtInfoMngController
 	//학생정보 리스트 조회
 	@ResponseBody
 	@RequestMapping("/user/stdt/stdtInfoMng/searchStdtInfoList.ab")
+
 	public RtnMsg searchStdtInfoList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
@@ -94,5 +95,65 @@ public class StdtInfoMngController
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
+	}
+
+	//학생정보 상세화면 리스트 조회
+	@ResponseBody
+	@RequestMapping("/user/stdt/stdtInfoMng/searchStdtInfo.ab")
+
+	public RtnMsg searchStdtInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+
+		List<Map<String, String>> result = dao.selectList("user.stdt.stdtInfoMng.searchStdtInfoList", params);
+
+		if(result.size() > 0 ){
+			rtnMap.put("result", result.get(0));
+		}
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	//학생정보 저장
+	@ResponseBody
+	@RequestMapping("/user/stdt/stdtInfoMng/saveInfo.ab")
+	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		if     ("C".equals(params.get("crud"))) dao.insert("user.stdt.stdtInfoMng.insertTmStdtBase",params);
+		else if("U".equals(params.get("crud"))) dao.insert("user.stdt.stdtInfoMng.updateTmStdtBase",params);
+		else if("D".equals(params.get("crud"))) dao.insert("user.stdt.stdtInfoMng.deleteTmStdtBase",params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
+	}
+
+
+
+	@ResponseBody
+	@RequestMapping("/user/stdt/stdtInfoMng/searchStdtDetlInfo.ab")
+	public RtnMsg searchStdtDetlInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+
+		//Map<String, String> result = dao.selectOne("user.stdt.stdtInfoMng.searchStdtDetlInfo", params);
+		Map<String, Object> result = stdtInfoMngService.searchStdtDetlInfo(params);
+
+		rtnMap.put("result", result);
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
 	}
 }
