@@ -17,6 +17,7 @@
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,bith_dt /* bith_dt 생일_일자 character(8) */
                ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+               ,prnt_no /* prnt_no 학부모_번호 numeric */
                ,band_stat_cd /* band_stat_cd 밴드_상태_코드 character varying(20) */
                ,band_comm_dttm /* band_comm_dttm 밴드_통신_일시 character(14) */
                ,band_chrg_qty /* band_chrg_qty 밴드_충전_량 numeric */
@@ -31,6 +32,8 @@
                ,grow_mesu_dt /* grow_mesu_dt 성장_측정_일자 character(8) */
                ,ambr_yn /* ambr_yn 미아_여부 character(1) */
                ,ambr_dtct_dttm /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
+               ,del_dt /* del_dt 삭제_일자 character(8) */
+               ,del_yn /* del_yn 삭제_여부 character(1) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -67,6 +70,9 @@
 		</if>
 		<if test="raceDivCd != null">
 		    ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+		</if>
+		<if test="prntNo != null">
+		    ,prnt_no /* prnt_no 학부모_번호 numeric */
 		</if>
 		<if test="bandStatCd != null">
 		    ,band_stat_cd /* band_stat_cd 밴드_상태_코드 character varying(20) */
@@ -108,6 +114,10 @@
 		<if test="ambrDtctDttm != null">
 		    ,ambr_dtct_dttm /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
+		<if test="delDt != null">
+		    ,del_dt /* del_dt 삭제_일자 character(8) */
+		</if>
+		    ,del_yn /* del_yn 삭제_여부 character(1) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -142,6 +152,9 @@
 		</if>
 		<if test="raceDivCd != null">
 		    ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+		</if>
+		<if test="prntNo != null">
+		    ,#{prntNo} /* prnt_no 학부모_번호 numeric */
 		</if>
 		<if test="bandStatCd != null">
 		    ,#{bandStatCd} /* band_stat_cd 밴드_상태_코드 character varying(20) */
@@ -183,6 +196,10 @@
 		<if test="ambrDtctDttm != null">
 		    ,#{ambrDtctDttm} /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
+		<if test="delDt != null">
+		    ,#{delDt} /* del_dt 삭제_일자 character(8) */
+		</if>
+		    ,#{delYn} /* del_yn 삭제_여부 character(1) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -221,6 +238,9 @@
 		<if test="raceDivCd != null">
 		    ,race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
 		</if>
+		<if test="prntNo != null">
+		    ,prnt_no = #{prntNo} /* prnt_no 학부모_번호 numeric */
+		</if>
 		<if test="bandStatCd != null">
 		    ,band_stat_cd = #{bandStatCd} /* band_stat_cd 밴드_상태_코드 character varying(20) */
 		</if>
@@ -263,6 +283,12 @@
 		<if test="ambrDtctDttm != null">
 		    ,ambr_dtct_dttm = #{ambrDtctDttm} /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
+		<if test="delDt != null">
+		    ,del_dt = #{delDt} /* del_dt 삭제_일자 character(8) */
+		</if>
+		<if test="delYn != null">
+		    ,del_yn = #{delYn} /* del_yn 삭제_여부 character(1) */
+		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
@@ -298,6 +324,9 @@
 		</if>
 		<if test="raceDivCd != null">
 		    ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+		</if>
+		<if test="prntNo != null">
+		    ,prnt_no /* prnt_no 학부모_번호 numeric */
 		</if>
 		<if test="bandStatCd != null">
 		    ,band_stat_cd /* band_stat_cd 밴드_상태_코드 character varying(20) */
@@ -339,6 +368,10 @@
 		<if test="ambrDtctDttm != null">
 		    ,ambr_dtct_dttm /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
+		<if test="delDt != null">
+		    ,del_dt /* del_dt 삭제_일자 character(8) */
+		</if>
+		    ,del_yn /* del_yn 삭제_여부 character(1) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -373,6 +406,9 @@
 		</if>
 		<if test="raceDivCd != null">
 		    ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+		</if>
+		<if test="prntNo != null">
+		    ,#{prntNo} /* prnt_no 학부모_번호 numeric */
 		</if>
 		<if test="bandStatCd != null">
 		    ,#{bandStatCd} /* band_stat_cd 밴드_상태_코드 character varying(20) */
@@ -414,6 +450,10 @@
 		<if test="ambrDtctDttm != null">
 		    ,#{ambrDtctDttm} /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 		</if>
+		<if test="delDt != null">
+		    ,#{delDt} /* del_dt 삭제_일자 character(8) */
+		</if>
+		    ,#{delYn} /* del_yn 삭제_여부 character(1) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -448,6 +488,9 @@
 		</if>
 		<if test="raceDivCd != null">
 		    ,race_div_cd = #{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+		</if>
+		<if test="prntNo != null">
+		    ,prnt_no = #{prntNo} /* prnt_no 학부모_번호 numeric */
 		</if>
 		<if test="bandStatCd != null">
 		    ,band_stat_cd = #{bandStatCd} /* band_stat_cd 밴드_상태_코드 character varying(20) */
@@ -490,6 +533,12 @@
 		</if>
 		<if test="ambrDtctDttm != null">
 		    ,ambr_dtct_dttm = #{ambrDtctDttm} /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
+		</if>
+		<if test="delDt != null">
+		    ,del_dt = #{delDt} /* del_dt 삭제_일자 character(8) */
+		</if>
+		<if test="delYn != null">
+		    ,del_yn = #{delYn} /* del_yn 삭제_여부 character(1) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */

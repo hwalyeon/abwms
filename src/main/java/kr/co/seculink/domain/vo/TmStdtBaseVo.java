@@ -31,6 +31,9 @@ public class TmStdtBaseVo implements Serializable {
 	/* race_div_cd 인종_구분_코드 character varying(20) */
 	private String raceDivCd;
 
+	/* prnt_no 학부모_번호 numeric(null) */
+	private double prntNo;
+
 	/* band_stat_cd 밴드_상태_코드 character varying(20) */
 	private String bandStatCd;
 
@@ -72,6 +75,12 @@ public class TmStdtBaseVo implements Serializable {
 
 	/* ambr_dtct_dttm 미아_탐지_일시 character(14) */
 	private String ambrDtctDttm;
+
+	/* del_dt 삭제_일자 character(8) */
+	private String delDt;
+
+	/* del_yn 삭제_여부 character(1) */
+	private String delYn;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -211,6 +220,21 @@ public class TmStdtBaseVo implements Serializable {
 	 */
 	public void setRaceDivCd(String raceDivCd) {
 		this.raceDivCd = raceDivCd;
+	}
+	/**
+	 * Get prnt_no 학부모_번호 numeric(null)
+	 * @Return double prntNo
+	 */
+	public double getPrntNo() {
+		return this.prntNo;
+	}
+	
+	/**
+	 * Set prnt_no 학부모_번호 numeric(null)
+	 * @Param double prntNo
+	 */
+	public void setPrntNo(double prntNo) {
+		this.prntNo = prntNo;
 	}
 	/**
 	 * Get band_stat_cd 밴드_상태_코드 character varying(20)
@@ -421,6 +445,36 @@ public class TmStdtBaseVo implements Serializable {
 	 */
 	public void setAmbrDtctDttm(String ambrDtctDttm) {
 		this.ambrDtctDttm = ambrDtctDttm;
+	}
+	/**
+	 * Get del_dt 삭제_일자 character(8)
+	 * @Return String delDt
+	 */
+	public String getDelDt() {
+		return this.delDt;
+	}
+	
+	/**
+	 * Set del_dt 삭제_일자 character(8)
+	 * @Param String delDt
+	 */
+	public void setDelDt(String delDt) {
+		this.delDt = delDt;
+	}
+	/**
+	 * Get del_yn 삭제_여부 character(1)
+	 * @Return String delYn
+	 */
+	public String getDelYn() {
+		return this.delYn;
+	}
+	
+	/**
+	 * Set del_yn 삭제_여부 character(1)
+	 * @Param String delYn
+	 */
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)
