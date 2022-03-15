@@ -62,7 +62,7 @@ let guarInfoMng = new Vue({
                     [
                         {name: "crud"       , index: "crud"       , label: "crud"		    , hidden: true },
                         {name: "guarNoTemp" , index: "guarNoTemp" , label: "보호자번호"		, hidden: true },
-                        {name: "sposNoTemp" , index: "sposNoTemp" , label: "배우자번호"		, hidden: true },
+                        {name: "prntNoTemp" , index: "prntNoTemp" , label: "학부모번호"		, hidden: true },
                         {name: "guarNo"     , index: "guarNo"     , label: "보호자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
                                 return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
                         {name: "guarNm"     , index: "guarNm"     , label: "보호자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
@@ -79,16 +79,9 @@ let guarInfoMng = new Vue({
                         {name: "locNm"      , index: "locNm"      , label: "학교(학원)명"	, width: 80     , align: "center" },
                         {name: "bandId"     , index: "bandId"     , label: "밴드ID"		    , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                                 return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
-                        {name: "sposNo"     , index: "sposNo"     , label: "배우자번호"		, width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regSposInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="신규" data-toggle="modal" data-target="#sposInfoDetlPopup" />';
-                                else return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
-                        {name: "sposNm"     , index: "sposNm"     , label: "배우자명"	 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regSposInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="신규" data-toggle="modal" data-target="#sposInfoDetlPopup" />';
-                                else return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;
-                        }},
-                        {name: "sposTelNo"  , index: "sposTelNo"  , label: "배우자전화번호" 	, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                          let sposTelNoTemp = phoneFormatter(cellValue);
-                          return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${sposTelNoTemp}" data-guar-no="${rowObject.guarNo}">${sposTelNoTemp}</a>`;}},
+                        {name: "prntNo"     , index: "prntNo"     , label: "학부모번호"		, width: 40     , align: "center" },
+                        {name: "prntMale"   , index: "prntMale"   , label: "남자학부모"	 	, width: 80     , align: "center" },
+                        {name: "prntFemale" , index: "prntFemale" , label: "여자학부모" 	 	, width: 80     , align: "center" },
                         {name: "termAgreYnInfoDetlPopup"  , index: "termAgreYnInfoDetlPopup" , label: "약관동의여부" , width: 80, align: "center", formatter: function(cellValue, options, rowObject) {
                           return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regTermAgreYnInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="상세보기" data-toggle="modal" data-target="#termAgreYnInfoDetlPopup" />'; }},
                         {name: "regDt"      , index: "regDt"      , label: "등록일자"		, width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);} , hidden: true },
