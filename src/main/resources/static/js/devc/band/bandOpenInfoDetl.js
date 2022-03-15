@@ -1,7 +1,9 @@
 let bandOpenInfoDetl = new Vue({
-    el: "#bandOpenInfoDetlPopup",
-    data: {
-    	params: {
+    el  : "#bandOpenInfoDetlPopup",
+    data:
+	{
+    	params:
+		{
     		crud           : 'C',
 			userId         : '' ,
 			bandIdTemp     : '' ,
@@ -23,68 +25,75 @@ let bandOpenInfoDetl = new Vue({
 			gridData       : []
     	},
 		callBack : null,
-		code: {
+		code:
+		{
 			bandOpenStatCdList : [] , //밴드_개통_상태_코드_리스트
 			bandYtypCdList     : [] , //밴드_출고년월_리스트
 			bandMdlCdList      : [] , //밴드_모델_코드_리스트
 		}
 	},
-    methods: {
-
-        initialize: function() {
-        	
+    methods:
+	{
+        initialize: function()
+		{
         	let $this = this;
 
         	$this.initValue();
         	$this.initCodeList();      
-        	        	
         },
-        initCodeList: function() {
-
+        initCodeList: function()
+		{
         	let $this = this;
+
 			getCommonCodeList('BAND_MDL_CD', $this.code.bandMdlCdList);  //밴드_모델_코드_리스트
 			getCommonCodeList('BAND_OPEN_STAT_CD', $this.code.bandOpenStatCdList);//밴드_개통_상태_코드_리스트
-
 		},
-		initValue()
+		initValue: function()
 		{
 			let $this = this;
-			$this.initBandYtypCdValue();
-		},
-        initPage: function(bandId, callback) {
 
+			$this.initBandYtypCdValue();
+			$this.userId = SessionUtil.getUserId();
+		},
+        initPage: function(bandId, callback)
+		{
 			let $this = this;
 
 			$this.resetBandOpenInfo();
 
-			if(typeof callback === 'function'){
+			if(typeof callback === 'function')
+			{
 				$this.callBack = callback;
 			}
-			if ( !WebUtil.isNull(bandId) )
+			if (!WebUtil.isNull(bandId))
 			{
-				let params = {
+				let params =
+				{
 					'bandId' : bandId
 				}
 				AjaxUtil.post({
 					url: "/devc/band/bandOpenInfoMng/searchBandOpenInfoList.ab",
 					param: params,
-					success: function(response) {
-						if ( !!response.rtnData.result )
+					success: function(response)
+					{
+						if (!!response.rtnData.result)
 						{
 							$this.params.crud = 'U';
 
-							$.each(response.rtnData.result[0], function(key, val) {
+							$.each(response.rtnData.result[0], function(key, val)
+							{
 								$this.params[key] = val;
-
 							});
 						}
 					},
-					error: function (response) {
+					error: function (response)
+					{
 						Swal.alert([response, 'error']);
 					}
 				});
 			}
-			setTimeout(function() {
+			setTimeout(function()
+			{
 				$this.initGrid();
 				$this.searchGuarTelNoList(true);
 			},300);
@@ -96,9 +105,9 @@ let bandOpenInfoDetl = new Vue({
 				{name: "crud"           , index: "crud"           , label: "crud"		    , hidden: true },
 				{name: "bandId"         , index: "bandId"         , label: "밴드ID"         , hidden: true },
 				{name: "guarTelNoTemp"  , index: "guarTelNoTemp"  , label: "보호자 전화번호" , hidden: true },
-				{name: "guarNo"         , index: "guarNo"         , label: "보호자 번호"     , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject){
-				 if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoDetl.regGuarInfoDetlPopup(\'' + rowObject.guarTelNo + '\',\'' + rowObject.bandId + '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
-				 else return cellValue}},
+				{name: "guarNo"         , index: "guarNo"         , label: "보호자 번호"     , width: 50     , align: "center"  , formatter: function(cellValue, options, rowObject){
+				        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoDetl.regGuarInfoDetlPopup(\'' + rowObject.guarTelNo + '\',\'' + rowObject.bandId + '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
+				        else return cellValue}},
 				{name: "guarNm"     , index: "guarNm"    , label: "보호자 이름" 	  , width: 50 , align: "center", formatter: function(cellValue, options, rowObject){
 						if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoDetl.regGuarInfoDetlPopup(\'' + rowObject.guarTelNo + '\',\'' + rowObject.bandId + '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
 						else return cellValue}},
@@ -127,7 +136,7 @@ let bandOpenInfoDetl = new Vue({
 					{
 						if($("#guarTelNo_list").getRowData(rowid).crud != "C" && $("#guarTelNo_list").getRowData(rowid).crud != "D" )
 						{
-							$("#guarTelNo_list").setRowData(rowid, {crud:"U"});
+						   $("#guarTelNo_list").setRowData(rowid, {crud:"U"});
 						}
 					}
 				}));
@@ -135,7 +144,7 @@ let bandOpenInfoDetl = new Vue({
 		},
 		searchGuarTelNoList: function(isSearch)
 		{
-			let $this     = this;
+			let $this  = this;
 			let params = {'bandId': $this.params.bandId};
 
 			if ( isSearch )
@@ -143,15 +152,14 @@ let bandOpenInfoDetl = new Vue({
 				params.currentPage = 1;
 				params.currentIndex = 0;
 			}
-
 			$("#guarTelNo_list").setGridParam(
 				{
-					datatype: "json",
-					postData: JSON.stringify(params),
-					page: 1,
+					datatype    : "json",
+					postData    : JSON.stringify(params),
+					page        : 1,
 					loadComplete: function (response)
 					{
-						if ( response.rtnData.result == 0 )
+						if (response.rtnData.result == 0)
 						{
 							Swal.alert(['조회할 내용이 없습니다.', "info"]);
 						}
@@ -160,10 +168,9 @@ let bandOpenInfoDetl = new Vue({
 		},
 		btnAddRow  :  function()
 		{
-			let $this = this;
-			let date = new Date(); //현재 날짜
-			var cnt = $("#guarTelNo_list").jqGrid("getGridParam", "records")+1;
-
+			let $this  = this;
+			let date   = new Date(); //현재 날짜
+			var cnt    = $("#guarTelNo_list").jqGrid("getGridParam", "records")+1;
 			var addRow =
 				{
 					crud           : "C"   ,
@@ -203,36 +210,42 @@ let bandOpenInfoDetl = new Vue({
 			}
 		},
 		//출고_년월_리스트_값 세팅
-		initBandYtypCdValue: function() {
+		initBandYtypCdValue: function()
+		{
 			let $this = this;
-			for (let i = 2022; i < 2032; i++) {
+			for (let i = 2022; i < 2032; i++)
+			{
 				let cdVal;
 				let cdNm;
-				for (let j = 1; j < 13; j++) {
-					if (j < 10) {
-						cdVal = i + '0' + j;
-						cdNm = i + '-0' + j;
+				for (let j = 1; j < 13; j++)
+				{
+					if (j < 10)
+					{
+						cdVal = i + '0'  + j;
+						cdNm  = i + '-0' + j;
 						$this.code.bandYtypCdList.push({'cdVal': cdVal, 'cdNm': cdNm});
-					} else {
+					}else
+					{
 						cdVal = String(i) + j;
-						cdNm = i + '-' + j;
+						cdNm  = i  + '-'  + j;
 						$this.code.bandYtypCdList.push({'cdVal': cdVal, 'cdNm': cdNm});
 					}
 				}
 			}
 		},
-			isValid: function() {
+		isValid: function()
+		{
+			let $this = this;
 
-        	let $this = this;        	        	
-        	
-        	if ( WebUtil.isNull($this.params.bandId) ) {
-        		Swal.alert(['밴드ID는 필수 입력 값입니다.', 'info']);
-        		return false;
-        	}
-
-
-        	return true;
-        },
+			if ( WebUtil.isNull($this.params.bandId)) {
+				Swal.alert(['밴드ID는 필수 입력 값입니다.', 'info']);
+				return false;
+			}if ( WebUtil.isNull($this.params.guarTelNo)) {
+					Swal.alert(['보호자 전화번호는 필수 입력 값입니다.', 'info']);
+					return false;
+			}
+			return true;
+		},
 		//밴드 ID 중복 검사
 		searchDupBandId: function()
 		{
@@ -241,7 +254,6 @@ let bandOpenInfoDetl = new Vue({
 
 			let bandIdStr2 = $this.params.bandId.substr(1,1);
 			let bandIdStr3 = $this.params.bandId.substr(2,1);
-
 
         	if ( WebUtil.isNull($this.params.bandId) ) {
         		Swal.alert(['밴드ID를 입력하세요.', 'info']);
@@ -258,17 +270,21 @@ let bandOpenInfoDetl = new Vue({
 				return false;
 			}
 
+			let params = {
+				bandId : $this.params.bandId
+			};
 			AjaxUtil.post({
-                url: "/devc/band/bandOpenInfoMng/searchDupBandId.ab",
-                param: $this.params,
-                success: function(response) {
-                	if ( response.rtnData.result.existsYn === 'N' ) {
+                url    : "/devc/band/bandOpenInfoMng/searchDupBandId.ab",
+                param  : params,
+                success: function(response)
+				{
+                	if ( response.rtnData.result.existsYn === 'N' )
+                	{
                 		$this.params.checkDupBandId = 'Y';
-                		 $this.params.bandIdTemp = $this.params.bandId;
+                		$this.params.bandIdTemp = $this.params.bandId;
                 		Swal.alert(['해당 아이디는 사용할 수 있습니다.', 'success']);
-
-
-                	} else {
+                	} else
+                	{
                 		$this.params.BandId = '';
                 		Swal.alert(['해당 아이디는 이미 사용중입니다.', 'info']);
                 	}
@@ -278,8 +294,19 @@ let bandOpenInfoDetl = new Vue({
                 }
             });
         },
-		numberingSelect: function(){
-        let $this =this;
+		//밴드ID 입력 시 출고 년월,밴드 모델 코드 NULL
+		bandIdInput: function()
+		{
+        	let $this = this;
+
+			$this.params.bandYtypCd = '';   //출고_년월_코드
+        	$this.params.bandMdlCd  = '';   //밴드_모델_코드
+		},
+		//출고 년월,밴드 모델 코드 선택 시 밴드ID NULL
+		numberingSelect: function()
+		{
+        let $this = this;
+
         $this.params.bandId = '';
 		},
 		//밴드ID 채번
@@ -297,8 +324,8 @@ let bandOpenInfoDetl = new Vue({
 			$this.params.checkDupBandId = 'N';
 
 			AjaxUtil.post({
-				url: "/devc/band/bandOpenInfoMng/numberingBandId.ab",
-				param: $this.params,
+				url    : "/devc/band/bandOpenInfoMng/numberingBandId.ab",
+				param  : $this.params,
 				success: function(response) {
 					if ( !!response.rtnData.result ) {
 						$this.params.bandId = response.rtnData.result.result.bandId;
@@ -315,32 +342,29 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 
 			$this.params.gridData = commonGridGetDataNew($("#guarTelNo_list"));
-
-
-			if ( !this.isValid() ) {
+			if (!this.isValid()) {
                 return false;
             }
             if ( $this.params.crud === 'C' ) {
 	            if ( $this.params.checkDupBandId != 'Y' ) {
-
 	        		Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
 	        		return false;
 	        	}
 				if($this.params.bandId != $this.params.bandIdTemp) {
-						Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
-						return false;
+					Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
+					return false;
 				}
             }
-
             $this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
 
 			AjaxUtil.post({
-                url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
-                param: $this.params,
-                success: function(response) {
-                	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#bandOpenInfoDetlPopup'));
-                		if($this.callBack != null ) $this.callBack();
+                url     : "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
+                param   : $this.params,
+                success : function(response) {
+                	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function()
+					{
+                		 closeModal($('#bandOpenInfoDetlPopup'));
+                	 	 if($this.callBack != null ) $this.callBack();
                 	});                	
                 },
                 error: function (response) {
@@ -348,20 +372,22 @@ let bandOpenInfoDetl = new Vue({
                 }
             });
 		},
-		deleteUser: function() {
-			
+		deleteUser: function()
+		{
 			let $this = this;
+
 			$this.params.gridData = commonGridGetDataNew($("#growStnd_list"));
-			$this.params.crud = 'D';
+			$this.params.crud     = 'D';
 			
             AjaxUtil.post({
                 url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
-                	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#bandOpenInfoDetlPopup'));
-						bandOpenInfoMng.searchBandOpenInfoList(true);
-                	});
+                	 Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function()
+					 {
+                		  closeModal($('#bandOpenInfoDetlPopup'));
+					      bandOpenInfoMng.searchBandOpenInfoList(true);
+                	 });
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);
@@ -391,19 +417,18 @@ let bandOpenInfoDetl = new Vue({
 	    	}
 		},
     },
-    computed: {
-
+    computed:
+	{
     },
     watch: {
     	'params.bandId': function(newVal, oldVal) {
     		this.params.checkDupBandId = 'N';
 		},
-
-
     },
     mounted: function() {
         let self = this;
-        $(document).ready(function() {
+        $(document).ready(function()
+		{
             self.initialize();
         });
     }

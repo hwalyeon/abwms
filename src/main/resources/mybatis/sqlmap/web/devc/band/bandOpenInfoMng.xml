@@ -72,37 +72,37 @@
 	<insert id="insertTsBandInfoList" parameterType="java.util.Map">
 		INSERT INTO TS_BAND_INFO
 		(
-		  BAND_ID
-		, BAND_MDL_CD
-		, TEL_NO
-		, BLTH_ID
-		, API_URL_GRAM_NO
-		, API_URL_DTTM
-		, OPEN_GRAM_NO
-		, BAND_OPEN_STAT_CD
-		, REG_DT
-		, REG_TM
-		, REG_USER_ID
-		, UPT_DT
-		, UPT_TM
-		, UPT_USER_ID
+		    BAND_ID
+		  , BAND_MDL_CD
+		  , TEL_NO
+		  , BLTH_ID
+		  <if test="apiUrlGramNo   != null and apiUrlGramNo !='' ">, API_URL_GRAM_NO          </if>
+		  , API_URL_DTTM
+		  <if test="openGramNo     != null and openGramNo   !='' ">, OPEN_GRAM_NO             </if>
+		  , BAND_OPEN_STAT_CD
+		  , REG_DT
+		  , REG_TM
+		  , REG_USER_ID
+		  , UPT_DT
+		  , UPT_TM
+		  , UPT_USER_ID
 		)
 		VALUES
 		(
-		#{bandId}
-		, #{bandMdlCd}
-		, #{telNo}
-		, #{blthId}
-		, #{apiUrlGramNo}
-		, #{apiUrlDttm}
-		, #{openGramNo}
-		, #{bandOpenStatCd}
-		, TO_CHAR(NOW(), 'YYYYMMDD')
-		, TO_CHAR(NOW(), 'HH24MISS')
-		, #{regUserId}
-		, TO_CHAR(NOW(), 'YYYYMMDD')
-		, TO_CHAR(NOW(), 'HH24MISS')
-		, #{uptUserId}
+		    #{bandId}
+		  , #{bandMdlCd}
+		  , #{telNo}
+		  , #{blthId}
+		  <if test="apiUrlGramNo   != null and apiUrlGramNo !='' ">, #{apiUrlGramNo}::NUMERIC </if>
+		  , #{apiUrlDttm}
+		  <if test="openGramNo     != null and openGramNo   !='' ">, #{openGramNo}::NUMERIC   </if>
+		  , #{bandOpenStatCd}
+		  , TO_CHAR(NOW(), 'YYYYMMDD')
+		  , TO_CHAR(NOW(), 'HH24MISS')
+		  , #{regUserId}
+		  , TO_CHAR(NOW(), 'YYYYMMDD')
+		  , TO_CHAR(NOW(), 'HH24MISS')
+		  , #{uptUserId}
 		)
 	</insert>
 
@@ -126,14 +126,6 @@
 		AND BAND_ID = #{bandId}
 
 	</delete>
-	<!--밴드_ID_중복 조회 -->
-	<select id="selectBandId" parameterType="java.util.Map"
-		resultType="MybatisMap">
-		SELECT BAND_ID
-		FROM TS_BAND_INFO
-		WHERE 1=1
-		AND BAND_ID = #{bandId}
-	</select>
 
 	<!--밴드_ID_채번 -->
 	<select id="numberingBandId" parameterType="java.util.Map" resultType="MybatisMap">

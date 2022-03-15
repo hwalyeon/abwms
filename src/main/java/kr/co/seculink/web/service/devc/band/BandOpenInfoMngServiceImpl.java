@@ -1,9 +1,9 @@
 package kr.co.seculink.web.service.devc.band;
 
 import kr.co.seculink.domain.RtnMsg;
+import kr.co.seculink.domain.vo.TsBandInfoVo;
 import kr.co.seculink.domain.vo.TsBandSpecVo;
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
@@ -32,10 +32,11 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 	//밴드ID 중복 조회
 	public Map<String, String> searchDupBandId(Map<String, String> params) throws BizException
 	{
-		Map<String, String> result = dao.selectOne("devc.band.bandOpenInfoMng.selectBandId", params);
-
 		Map<String, String> rtnMap = new HashMap<>();
-		if ( result == null || GEUtil.isEmpty(result.get("bandId")) ) {
+
+		TsBandInfoVo result = dao.selectOne("TS_BAND_INFO.select", params);
+
+		if ( result == null) {
 			rtnMap.put("existsYn", "N");
 		} else {
 			rtnMap.put("existsYn", "Y");
@@ -69,28 +70,40 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
 		List<Map<String, Object>> gridData = (List<Map<String, Object>>) params.get("gridData");
-
-		Object bandId = params.get("bandId");
-
-
-		for(Map<String,Object> info:gridData) {
-			log.debug("crud         : " + info.get("crud"));
-
-			info.put("bandId",bandId);
-
-			if ("C".equals(info.get("crud")))
-			{
-				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
-				if ( exists == null ) {
-					saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
-				} else{
-					throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
-				}
-			} else if ("U".equals(info.get("crud"))) {
-				saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", info);
-			} else if ("D".equals(info.get("crud"))) {
-				saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", info);
+		//그리드 값 없을 시
+		if(gridData.isEmpty())
+		{
+			//보호자 전화번호 중복 검사
+			TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", params);
+			if ( exists == null ){
+				saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", params);
+			} else{
+				throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
 			}
+		}else {
+			for(Map<String,Object> info:gridData)
+			{
+				log.debug("crud         : " + info.get("crud"));
+
+				Object bandId = params.get("bandId");
+				info.put("bandId",bandId);
+
+				if ("C".equals(info.get("crud")))
+				{
+					//보호자 전화번호 중복 검사
+					TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
+					if ( exists == null ) {
+						saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
+					} else{
+						throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
+					}
+				} else if ("U".equals(info.get("crud"))) {
+					saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", info);
+				} else if ("D".equals(info.get("crud"))) {
+					saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", info);
+				}
+			}
+
 		}
 
 		if ("C".equals(params.get("crud"))) {

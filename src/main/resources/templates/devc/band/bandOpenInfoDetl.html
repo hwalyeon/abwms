@@ -23,7 +23,7 @@
 			                    <tr>
 			                        <th scope="row">밴드 ID
 										<td>
-											<div><input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_60 ime-eng"  v-on:input="nanCk(event)" maxlength="10" :readonly="params.crud=='U'"/>
+											<div><input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_60 ime-eng"  v-on:input="bandIdInput" maxlength="10" :readonly="params.crud=='U'"/>
 												<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupBandId"  :disabled="params.crud=='U'" ><span>ID 확인</span></button>
 											</div>
 									<div class="clear_both" style="width:100%; height:5px;"></div>
@@ -44,7 +44,7 @@
 								<tr>
 									<th scope="row">전화 번호</th>
 									<td>
-										<input type="text" name="telNo" v-model="params.telNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
+										<input type="text" name="telNo" v-model="params.telNo" class="form-control float_left width_per_100 ime-eng" :readonly="params.crud=='U'"/>
 									</td>
 			                    </tr>
 								<tr>
@@ -62,7 +62,12 @@
 										<input type="text" name="blthId" v-model="params.blthId" class="form-control float_left width_per_100 ime-eng" maxlength="10"/>
 									</td>
 								</tr>
-
+								<tr v-if="params.crud=='C'">
+									<th scope="row">보호자 전화번호</th>
+									<td>
+										<input type="text" name="guarTelNo" v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng"  maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
+									</td>
+								</tr>
 							</tbody>
 		                </table>
             		</div>
