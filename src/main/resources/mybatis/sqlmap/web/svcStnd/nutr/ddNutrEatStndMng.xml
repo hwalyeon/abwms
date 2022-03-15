@@ -10,7 +10,7 @@
 		      ,TDNES.age_ycnt
 		      ,case when TDNES.nutr_cd = 'CAL' then TDNES.dd_rcmd_qty   end  as  CAL
 		      ,case when TDNES.nutr_cd = 'PRTN' then TDNES.dd_rcmd_qty  end  as PRTN
-		      ,case when TDNES.nutr_cd = 'FIDX' then TDNES.dd_rcmd_qty  end  as FIDX
+		      ,case when TDNES.nutr_cd = 'FAT' then TDNES.dd_rcmd_qty  end  as FAT
 		      ,case when TDNES.nutr_cd = 'CARB' then TDNES.dd_rcmd_qty  end  as CARB
 		      ,case when TDNES.nutr_cd = 'DFIB' then TDNES.dd_rcmd_qty  end  as DFIB
 		      ,case when TDNES.nutr_cd = 'CA' then TDNES.dd_rcmd_qty  end  as CA
@@ -43,7 +43,7 @@
 		      ,age_ycnt
 		      ,MAX(CAL) AS  CAL
 		      ,MAX(PRTN) AS PRTN
-		      ,MAX(FIDX) AS FIDX
+		      ,MAX(FAT) AS FAT
 		      ,MAX(CARB) AS CARB
 		      ,MAX(DFIB) AS DFIB
 		      ,MAX(CA) AS CA
