@@ -454,6 +454,21 @@
 		return re.test(str);
 	}
 
+    function isValidEngNum(str) {
+        var re = /^[A-Za-z0-9+]*$/;
+        return re.test(str);
+    }
+
+    function isValidEng(str) {
+        var re = /^[A-Za-z+]*$/;
+        return re.test(str);
+    }
+
+    function isValidNum(str) {
+        var re = /^[0-9+]*$/;
+        return re.test(str);
+    }
+
 	//입력값 검사(비밀번호)
 	function checkPassword(fromName) {
 		var tmpform = eval("document.frm."+fromName);
