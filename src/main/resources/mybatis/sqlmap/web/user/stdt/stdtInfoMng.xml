@@ -12,28 +12,28 @@
               ,A.STDT_NO/*학생번호*/
               ,A.STDT_NM/*학생명*/
               ,I.TEL_NO/*전화번호*/
-              ,fn_getCdNm('PLC_CLSS_CD',DDD.plc_clss_cd)as plc_clss_cd/*현재위치분류*/
+              ,fn_getCdNm('PLC_CLSS_CD',DDD.plc_clss_cd)as PLC_CLSS_NM/*현재위치분류*/
               ,concat('(',DDD.pstno,')',DDD.addr_base,DDD.addr_spec) as CURR_LOC
-              ,H.DGEM_STAT_CD as DGEM_STAT_CD_TEMP/*위험감정상태*/
-              ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_CD
+              ,H.DGEM_STAT_CD/*위험감정상태*/
+              ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
               ,F.STRS_IDX/*스트레스상태*/
               ,G.GROW_IDX/*성장상태*/
               ,G.FAT_IDX/*비만상태*/
               ,I.BAND_ID/*밴드ID*/
               ,I.TEL_NO/*전화번호*/
               ,I.BLTH_ID/*블루투스 ID*/
-              ,A.SEX_CD as SEX_CD_TEMP/*성별*/
-              ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_CD
+              ,A.SEX_CD/*성별*/
+              ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_NM
               ,A.BITH_DT/*생년월일*/
               ,D.LOC_NO/*소속학교번호*/
               ,D.LOC_NM/*소속학교명*/
               ,fn_getage(A.BITH_DT) as AGE/*나이*/
-              ,A.BAND_STAT_CD as BAND_STAT_CD_TEMP/*현재상태*/
-              ,fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) as BAND_STAT_CD
-              ,ment_strs_stat_cd as MENT_STRS_STAT_CD_TEMP/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
-              ,fn_getCdNm('STRS_STAT_CD', F.MENT_STRS_STAT_CD) AS MENT_STRS_STAT_CD
-              ,phys_strs_stat_cd as PHYS_STRS_STAT_CD_TEMP/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-              ,fn_getCdNm('STRS_STAT_CD', F.PHYS_STRS_STAT_CD) AS PHYS_STRS_STAT_CD
+              ,A.BAND_STAT_CD/*현재상태*/
+              ,fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) as BAND_STAT_NM
+              ,ment_strs_stat_cd/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+              ,fn_getCdNm('STRS_STAT_CD', F.MENT_STRS_STAT_CD) AS MENT_STRS_STAT_NM
+              ,phys_strs_stat_cd/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+              ,fn_getCdNm('STRS_STAT_CD', F.PHYS_STRS_STAT_CD) AS PHYS_STRS_STAT_NM
               ,(select SUM(USE_CBEE_AMT)
               from   TS_STDT_CBEE_HIST X
               where  X.STDT_NO = A.STDT_NO
@@ -104,8 +104,6 @@
         and      I.BAND_ID     like concat('%',#{bandId},'%')</if>
         <if test=" guarNo != null and guarNo !='' ">
         and      B.GUAR_NO     = #{guarNo}::numeric</if>
-        <if test=" sposNm != null and sposNm !='' ">
-        and      C.SPOS_NM 	   like concat('%',#{sposNm},'%')</if>
         <if test=" guarTelNo != null and guarTelNo !='' ">
         and      B.GUAR_TEL_NO like concat('%',#{guarTelNo},'%')</if>
         <if test=" locNm != null and locNm !='' ">
@@ -114,204 +112,4 @@
         LIMIT ${rowCount} OFFSET ${currentIndex}
         </if>
         </select>
-
-       <!--학생정보 insert -->
-       <insert id="insertTmStdtBase"  parameterType="java.util.Map" >
-              /* insertTiGrowJudgStnd */
-              INSERT INTO ti_grow_judg_stnd
-              (
-              grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
-              ,gidx_fr /* gidx_fr 성장지수_FROM numeric */
-              ,gidx_to /* gidx_to 성장지수_TO numeric */
-              <if test="smryCntn != null">
-                     ,smry_cntn /* smry_cntn 요약_내용 character varying(100) */
-              </if>
-              <if test="specCntn != null">
-                     ,spec_cntn /* spec_cntn 상세_내용 character varying(4000) */
-              </if>
-              ,reg_dt /* reg_dt 등록_일자 character(8) */
-              ,reg_tm /* reg_tm 등록_시각 character(6) */
-              ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-              ,upt_dt /* upt_dt 수정_일자 character(8) */
-              ,upt_tm /* upt_tm 수정_시각 character(6) */
-              ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-              )
-              VALUES
-              (
-              #{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
-              ,CAST(#{gidxFr} as integer) /* gidx_fr 성장지수_FROM numeric */
-              ,CAST(#{gidxTo} as integer) /* gidx_to 성장지수_TO numeric */
-              <if test="smryCntn != null">
-                     ,#{smryCntn} /* smry_cntn 요약_내용 character varying(100) */
-              </if>
-              <if test="specCntn != null">
-                     ,#{specCntn} /* spec_cntn 상세_내용 character varying(4000) */
-              </if>
-              ,TO_CHAR(NOW(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
-              ,TO_CHAR(NOW(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-              ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-              ,TO_CHAR(NOW(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-              ,TO_CHAR(NOW(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-              ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-              )
-       </insert>
-
-       <!--학생정보 update -->
-       <update id="updateTmStdtBase"  parameterType="java.util.Map" >
-              /* updateTiGrowJudgStnd */
-              UPDATE ti_grow_judg_stnd
-              <trim prefix="SET" prefixOverrides=",">
-                     <if test="gidxFr != null">
-                            ,gidx_fr = #{gidxFr} /* gidx_fr 성장지수_FROM numeric */
-                     </if>
-                     <if test="gidxTo != null">
-                            ,gidx_to = #{gidxTo} /* gidx_to 성장지수_TO numeric */
-                     </if>
-                     <if test="smryCntn != null">
-                            ,smry_cntn = #{smryCntn} /* smry_cntn 요약_내용 character varying(100) */
-                     </if>
-                     <if test="specCntn != null">
-                            ,spec_cntn = #{specCntn} /* spec_cntn 상세_내용 character varying(4000) */
-                     </if>
-                     ,upt_dt = #{uptDt} /* upt_dt 수정_일자 character(8) */
-                     ,upt_tm = #{uptTm} /* upt_tm 수정_시각 character(6) */
-                     ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-              </trim>
-              WHERE  1 = 1
-              AND    grow_judg_cd = #{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
-       </update>
-
-       <!--학생정보 delete -->
-       <delete id="deleteTmStdtBase"  parameterType="java.util.Map" >
-		/* deleteTiGrowJudgStnd */
-		DELETE FROM ti_grow_judg_stnd
-		WHERE  1 = 1
-		AND    grow_judg_cd = #{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
-	   </delete>
-
-       <!--밴드_ID_중복 조회 -->
-       <select id="selectBandId" parameterType="java.util.Map"
-               resultType="MybatisMap">
-		SELECT BAND_ID
-		FROM TS_BAND_INFO
-		WHERE 1=1
-		AND BAND_ID = #{bandId}
-	   </select>
-
-       <!--밴드_ID_채번 -->
-       <select id="numberingBandId" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT
-		#{bandYtypCd} || #{bandMdlCd}|| to_char(coalesce(cast(max(substring(band_id ,5,6))
-		AS INTEGER) , 0) + 1 , 'FM000000') as BAND_ID
-		FROM TS_BAND_INFO
-		WHERE SUBSTRING(BAND_ID, 1, 4) = #{bandYtypCd}||#{bandMdlCd}
-	   </select>
-
-       <!--밴드_ID update -->
-       <update id="updateTmBandSpecList"  parameterType="java.util.Map">
-              /* Generated SQL SQL ID : ts_band_spec.update */
-              UPDATE ts_band_spec
-              <trim prefix="SET" prefixOverrides=",">
-                     ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-                     ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-                     <if test="uptUserId != null">
-                            ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-                     </if>
-              </trim>
-              WHERE  1 = 1
-              AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
-              AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
-       </update>
-
-       <!--밴드_ID delete -->
-       <delete id="deleteTmBandSpecList"  parameterType="java.util.Map">
-		/* Generated SQL SQL ID : ts_band_spec.delete */
-		DELETE FROM ts_band_spec
-		WHERE  1 = 1
-		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
-		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
-	</delete>
-
-       <!--밴드_정보_상세보기 -->
-       <select id="selectBandOpenInfo" parameterType="java.util.Map" resultType="MybatisMap">
-		with BAND_YTYP_WITH as
-	      (
-	      select TBI.BAND_ID
-	      , case when cast(SUBSTRING(TBI.BAND_ID, 1,1) AS INTEGER) <![CDATA[<]]> 2
-	      then '203'|| SUBSTRING(TBI.BAND_ID, 1,1) || SUBSTRING(TBI.BAND_ID, 2,2) else '202'|| SUBSTRING(TBI.BAND_ID, 1,1) || SUBSTRING(TBI.BAND_ID, 2,2) end AS BAND_YTYP
-	      , case when TBI.API_URL_DTTM is not null then 'Y' else 'N' end as API_URL_YN --URL제공여부
-	      from TS_BAND_INFO as TBI
-	      )
-	      select TBI.BAND_ID as
-	        BAND_ID_TEMP
-	      , TBI.UPT_DT
-	      , TBI.REG_DT
-	      , TBI.BAND_ID
-	      , T1.BAND_YTYP
-	      , TBI.BAND_MDL_CD
-	      , TSB.STDT_NO --학생번호
-	      , TBI.TEL_NO
-	      , TSB.STDT_NM --학생명
-	      , coalesce (TGB_SUB.GUAR_NO , TMSB.spos_no ) as GUAR_NO_SUB--보호자_명
-	      , TGB.GUAR_NO
-	      , TBI.BAND_OPEN_STAT_CD
-	      , fn_getCdNm('BAND_OPEN_STAT_CD',band_open_stat_cd) as BAND_OPEN_STAT_CD_NM
-	      , TGB.GUAR_NM --보호자_명
-	      , coalesce (TGB_SUB.GUAR_NM , TMSB.spos_nm ) as GUAR_NM_SUB--보호자_명
-	      , TBI.GUAR_TEL_NO_1
-	      , TBI.GUAR_TEL_NO_2
-	      , TBI.OPEN_GRAM_NO
-	      , TBI.BLTH_ID
-	      , TBI.API_URL_GRAM_NO --API URL 제공여부
-	      , TBI.API_URL_DTTM
-	      , T1.API_URL_YN
-	      , TBI.REG_DT
-	      , TBI.REG_TM
-	      , TBI.REG_USER_ID
-	      , TBI.UPT_DT
-	      , TBI.UPT_TM
-	      , TBI.UPT_USER_ID
-	      from TS_BAND_INFO AS TBI
-	      left outer join TM_STDT_BASE AS TSB
-	      on TBI.BAND_ID = TSB.BAND_ID
-	      left outer join TM_GUAR_BASE AS TGB
-	      on TSB.GUAR_NO_1 = TGB.GUAR_NO
-	      left outer join TM_GUAR_BASE AS TGB_SUB
-	      on  TSB.GUAR_NO_2 = TGB_SUB.GUAR_NO
-	      left outer join TM_SPOS_BASE AS TMSB
-	      on  TGB.SPOS_NO = TMSB.SPOS_NO
-	      left outer join BAND_YTYP_WITH AS T1
-	      on TBI.BAND_ID = T1.BAND_ID
-	      where 1=1
-		and TBI.BAND_ID = #{bandId}
-
-	</select>
-
-       <insert id="insertTmBandSpecList" parameterType="java.util.Map">
-		/* Generated SQL SQL ID : ts_band_spec.insert */
-		INSERT INTO ts_band_spec
-		(
-		band_id /* band_id 밴드_ID character varying(20) */
-		,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
-		,reg_dt /* reg_dt 등록_일자 character(8) */
-		,reg_tm /* reg_tm 등록_시각 character(6) */
-		,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		,upt_dt /* upt_dt 수정_일자 character(8) */
-		,upt_tm /* upt_tm 수정_시각 character(6) */
-		,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		)
-		VALUES
-		(
-		#{bandId} /* band_id 밴드_ID character varying(20) */
-		#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
-		, TO_CHAR(NOW(), 'YYYYMMDD')
-		, TO_CHAR(NOW(), 'HH24MISS')
-		, #{regUserId}
-		, TO_CHAR(NOW(), 'YYYYMMDD')
-		, TO_CHAR(NOW(), 'HH24MISS')
-		, #{uptUserId}
-		)
-	</insert>
-
-
 </mapper>

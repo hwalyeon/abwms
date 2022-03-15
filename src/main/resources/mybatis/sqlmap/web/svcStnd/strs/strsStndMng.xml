@@ -179,6 +179,4 @@
 		AND ment_strs_stat_cd = #{mentStrsStatCd}
 		AND phys_strs_stat_cd = #{physStrsStatCd}
 	</select>
-
-
 </mapper>

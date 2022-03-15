@@ -91,6 +91,10 @@ let strsStndCdDetl = new Vue({
 				return false;
 			}
 
+			// $this.strsStndCdInfo.cdVal = engNumCheck($this.strsStndCdInfo.cdVal);
+
+
+
         	return true;
         },
 
