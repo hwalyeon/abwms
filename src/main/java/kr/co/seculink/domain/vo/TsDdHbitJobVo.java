@@ -28,17 +28,17 @@ public class TsDdHbitJobVo implements Serializable {
 	/* uppr_stnd_val 상위_기준_값 numeric(null) */
 	private double upprStndVal;
 
-	/* bot_blck_val 최하위_구간_값 character(18) */
-	private String botBlckVal;
+	/* bot_blck_val 최하위_구간_값 numeric(null) */
+	private double botBlckVal;
 
-	/* down_blck_val 하위_구간_값 character(18) */
-	private String downBlckVal;
+	/* down_blck_val 하위_구간_값 numeric(null) */
+	private double downBlckVal;
 
-	/* uppr_blck_val 상위_구간_값 character(18) */
-	private String upprBlckVal;
+	/* uppr_blck_val 상위_구간_값 numeric(null) */
+	private double upprBlckVal;
 
-	/* top_blck_val 최상위_구간_값 character(18) */
-	private String topBlckVal;
+	/* top_blck_val 최상위_구간_값 numeric(null) */
+	private double topBlckVal;
 
 
 	/**
@@ -147,63 +147,63 @@ public class TsDdHbitJobVo implements Serializable {
 		this.upprStndVal = upprStndVal;
 	}
 	/**
-	 * Get bot_blck_val 최하위_구간_값 character(18)
-	 * @Return String botBlckVal
+	 * Get bot_blck_val 최하위_구간_값 numeric(null)
+	 * @Return double botBlckVal
 	 */
-	public String getBotBlckVal() {
+	public double getBotBlckVal() {
 		return this.botBlckVal;
 	}
 	
 	/**
-	 * Set bot_blck_val 최하위_구간_값 character(18)
-	 * @Param String botBlckVal
+	 * Set bot_blck_val 최하위_구간_값 numeric(null)
+	 * @Param double botBlckVal
 	 */
-	public void setBotBlckVal(String botBlckVal) {
+	public void setBotBlckVal(double botBlckVal) {
 		this.botBlckVal = botBlckVal;
 	}
 	/**
-	 * Get down_blck_val 하위_구간_값 character(18)
-	 * @Return String downBlckVal
+	 * Get down_blck_val 하위_구간_값 numeric(null)
+	 * @Return double downBlckVal
 	 */
-	public String getDownBlckVal() {
+	public double getDownBlckVal() {
 		return this.downBlckVal;
 	}
 	
 	/**
-	 * Set down_blck_val 하위_구간_값 character(18)
-	 * @Param String downBlckVal
+	 * Set down_blck_val 하위_구간_값 numeric(null)
+	 * @Param double downBlckVal
 	 */
-	public void setDownBlckVal(String downBlckVal) {
+	public void setDownBlckVal(double downBlckVal) {
 		this.downBlckVal = downBlckVal;
 	}
 	/**
-	 * Get uppr_blck_val 상위_구간_값 character(18)
-	 * @Return String upprBlckVal
+	 * Get uppr_blck_val 상위_구간_값 numeric(null)
+	 * @Return double upprBlckVal
 	 */
-	public String getUpprBlckVal() {
+	public double getUpprBlckVal() {
 		return this.upprBlckVal;
 	}
 	
 	/**
-	 * Set uppr_blck_val 상위_구간_값 character(18)
-	 * @Param String upprBlckVal
+	 * Set uppr_blck_val 상위_구간_값 numeric(null)
+	 * @Param double upprBlckVal
 	 */
-	public void setUpprBlckVal(String upprBlckVal) {
+	public void setUpprBlckVal(double upprBlckVal) {
 		this.upprBlckVal = upprBlckVal;
 	}
 	/**
-	 * Get top_blck_val 최상위_구간_값 character(18)
-	 * @Return String topBlckVal
+	 * Get top_blck_val 최상위_구간_값 numeric(null)
+	 * @Return double topBlckVal
 	 */
-	public String getTopBlckVal() {
+	public double getTopBlckVal() {
 		return this.topBlckVal;
 	}
 	
 	/**
-	 * Set top_blck_val 최상위_구간_값 character(18)
-	 * @Param String topBlckVal
+	 * Set top_blck_val 최상위_구간_값 numeric(null)
+	 * @Param double topBlckVal
 	 */
-	public void setTopBlckVal(String topBlckVal) {
+	public void setTopBlckVal(double topBlckVal) {
 		this.topBlckVal = topBlckVal;
 	}
 

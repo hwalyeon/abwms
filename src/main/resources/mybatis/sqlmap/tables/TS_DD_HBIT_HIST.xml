@@ -20,10 +20,10 @@
                ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
                ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
                ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
-               ,bot_blck_val /* bot_blck_val 최하위_구간_값 character(18) */
-               ,down_blck_val /* down_blck_val 하위_구간_값 character(18) */
-               ,uppr_blck_val /* uppr_blck_val 상위_구간_값 character(18) */
-               ,top_blck_val /* top_blck_val 최상위_구간_값 character(18) */
+               ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
+               ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
+               ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
+               ,top_blck_val /* top_blck_val 최상위_구간_값 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -51,18 +51,10 @@
 		    ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
 		    ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,down_blck_val /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,top_blck_val /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
+		    ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
+		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
+		    ,top_blck_val /* top_blck_val 최상위_구간_값 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -87,18 +79,10 @@
 		    ,#{accuSdevVal} /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,#{downStndVal} /* down_stnd_val 하위_기준_값 numeric */
 		    ,#{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
+		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
+		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
+		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -144,16 +128,16 @@
 		    ,uppr_stnd_val = #{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
 		</if>
 		<if test="botBlckVal != null">
-		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
+		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
 		</if>
 		<if test="downBlckVal != null">
-		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
+		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
 		</if>
 		<if test="upprBlckVal != null">
-		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
+		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
 		</if>
 		<if test="topBlckVal != null">
-		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
+		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
@@ -181,18 +165,10 @@
 		    ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
 		    ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,down_blck_val /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,top_blck_val /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
+		    ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
+		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
+		    ,top_blck_val /* top_blck_val 최상위_구간_값 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -217,18 +193,10 @@
 		    ,#{accuSdevVal} /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,#{downStndVal} /* down_stnd_val 하위_기준_값 numeric */
 		    ,#{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
+		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
+		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
+		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -271,16 +239,16 @@
 		    ,uppr_stnd_val = #{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
 		</if>
 		<if test="botBlckVal != null">
-		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
+		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
 		</if>
 		<if test="downBlckVal != null">
-		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
+		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
 		</if>
 		<if test="upprBlckVal != null">
-		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
+		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
 		</if>
 		<if test="topBlckVal != null">
-		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
+		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */

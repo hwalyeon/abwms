@@ -16,10 +16,10 @@
                ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
                ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
                ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
-               ,bot_blck_val /* bot_blck_val 최하위_구간_값 character(18) */
-               ,down_blck_val /* down_blck_val 하위_구간_값 character(18) */
-               ,uppr_blck_val /* uppr_blck_val 상위_구간_값 character(18) */
-               ,top_blck_val /* top_blck_val 최상위_구간_값 character(18) */
+               ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
+               ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
+               ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
+               ,top_blck_val /* top_blck_val 최상위_구간_값 numeric */
         FROM   ts_dd_hbit_job
 		WHERE  1 = 1
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
@@ -37,18 +37,10 @@
 		    ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
 		    ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,down_blck_val /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,top_blck_val /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
+		    ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
+		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
+		    ,top_blck_val /* top_blck_val 최상위_구간_값 numeric */
 		)
 		VALUES
 		(
@@ -59,18 +51,10 @@
 		    ,#{accuSdevVal} /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,#{downStndVal} /* down_stnd_val 하위_기준_값 numeric */
 		    ,#{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
+		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
+		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
+		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		)
 	</insert>
 	
@@ -94,16 +78,16 @@
 		    ,uppr_stnd_val = #{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
 		</if>
 		<if test="botBlckVal != null">
-		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
+		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
 		</if>
 		<if test="downBlckVal != null">
-		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
+		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
 		</if>
 		<if test="upprBlckVal != null">
-		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
+		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
 		</if>
 		<if test="topBlckVal != null">
-		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
+		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		</if>
 		</trim>
 		WHERE  1 = 1
@@ -122,18 +106,10 @@
 		    ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
 		    ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,down_blck_val /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,top_blck_val /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
+		    ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
+		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
+		    ,top_blck_val /* top_blck_val 최상위_구간_값 numeric */
 		)
 		VALUES
 		(
@@ -144,18 +120,10 @@
 		    ,#{accuSdevVal} /* accu_sdev_val 누적_표준편차_값 numeric */
 		    ,#{downStndVal} /* down_stnd_val 하위_기준_값 numeric */
 		    ,#{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
-		<if test="botBlckVal != null">
-		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
-		</if>
-		<if test="downBlckVal != null">
-		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
-		</if>
-		<if test="upprBlckVal != null">
-		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
-		</if>
-		<if test="topBlckVal != null">
-		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
-		</if>
+		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
+		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
+		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
+		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		)
 		ON CONFLICT
 		DO UPDATE
@@ -176,16 +144,16 @@
 		    ,uppr_stnd_val = #{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
 		</if>
 		<if test="botBlckVal != null">
-		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 character(18) */
+		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
 		</if>
 		<if test="downBlckVal != null">
-		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 character(18) */
+		    ,down_blck_val = #{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
 		</if>
 		<if test="upprBlckVal != null">
-		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 character(18) */
+		    ,uppr_blck_val = #{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
 		</if>
 		<if test="topBlckVal != null">
-		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 character(18) */
+		    ,top_blck_val = #{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		</if>
 		</trim>
 	</update>
