@@ -52,11 +52,11 @@
 								<tr>
 									<th scope="row">사용여부</th>
 									<td>
-										<select id="useYn" name="useYn" class="form-control" v-model="strsStndCdInfo.useYn">
-											<option value="" disabled>선택</option>
-											<option value="Y">Y</option>
-											<option value="N">N</option>
-										</select>
+										<div class="col-xs-2" style="padding: 5px 0;">
+											<input type="radio" name="useYn"  v-model="strsStndCdInfo.useYn" value="Y" checked="checked">&nbsp;Y
+											&nbsp;
+											<input type="radio" name="useYn"  v-model="strsStndCdInfo.useYn" value="N"> N
+										</div>
 									</td>
 								</tr>
 							</tbody>

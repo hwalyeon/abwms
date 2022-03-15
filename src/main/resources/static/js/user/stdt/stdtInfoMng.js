@@ -85,10 +85,18 @@ let stdtInfoMng = new Vue({
                 {name: "guarNoTemp"        , index: "guarNoTemp"        , label: "보호자번호"			, width: 80 , align: "center" , hidden: true},
                 {name: "entrDt"            , index: "entrDt"            , label: "가입일자"		 	, width: 80 , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}, fixed: true},
-                {name: "guarNo"            , index: "guarNo"            , label: "보호자번호"		 	, width: 80 , align: "center" , fixed: true},
-                {name: "guarNm"            , index: "guarNm"            , label: "보호자명"		 	, width: 80 , align: "center" , fixed: true},
-                {name: "prntNm"            , index: "prntNm"            , label: "학부모명1" 	    , width: 100 , align: "center" , fixed: true},
-                {name: "prntNm2"           , index: "prntNm2"           , label: "학부모명2" 	    , width: 100 , align: "center" , fixed: true},
+                {name: "guarNo"           , index: "guarNo"           , label: "보호자번호"	  	     , width: 80  , align: "center" , fixed: true , formatter: function(cellValue, options, rowObject) {
+                        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regGuarInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
+                        else return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	     , width: 80  , align: "center" , fixed: true , formatter: function(cellValue, options, rowObject) {
+                        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regGuarInfoDetlPopup(\'' + rowObject.bandId + '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
+                        else return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
+                {name: "prntNm"            , index: "prntNm"            , label: "학부모명1" 	    , width: 100 , align: "center"  , fixed: true ,formatter: function(cellValue, options, rowObject){
+                        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regSposInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="신규" data-toggle="modal" data-target="#sposInfoDetlPopup" />';
+                        else return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "prntNm2"           , index: "prntNm2"           , label: "학부모명2" 	    , width: 100 , align: "center"  , fixed: true ,formatter: function(cellValue, options, rowObject){
+                        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regSposInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="신규" data-toggle="modal" data-target="#sposInfoDetlPopup" />';
+                        else return `<a data-toggle="modal" class="links" data-target="#sposInfoDetlPopup" data-spos data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80 , align: "center" , fixed: true},
                 {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 	, width: 80 , align: "center" , fixed: true},
                 {name: "telNo"            , index: "telNo"              , label: "전화번호"		    , width: 100 , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
@@ -161,16 +169,17 @@ let stdtInfoMng = new Vue({
 
                     $(grid).tableRowSpan(["prntNm","prntNm2","stdtNo","locNo","stdtNm","telNo","plcClssNm","currLoc","dgemStatNm","strsIdx","growIdx","fatIdx","bandId","blthId","sexNm","bithDt","locNm","age","bandStatNm","mentStrsStatNm","physStrsStatNm","useTotal","saveTotal","cbeeBal","prntInfoDetlPopup"], "stdtNo");
 
+                    //밴드 상세 팝업 생성
                     $("#grid_list").find('A.links[data-band]').on('click', function(e) {
                         stdtInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
                     });
-
-                    $("#grid_list").find('A.links[data-band-spec]').on('click', function(e) {
-                        stdtInfoMng.regBandSpecDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-tel-no'))
-                    });
-
+                    //보호자 상세 팝업 생성
                     $("#bandOpenInfo_list").find('A.links[data-guar-tel]').on('click', function(e) {
                         bandOpenInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-tel-no'))
+                    });
+                    //학부모 상세 팝업 생성
+                    $("#grid_list").find('A.links[data-spos]').on('click', function(e) {
+                        guarInfoMng.regSposInfoDetlPopup($(e.target).data('guar-no'))
                     });
                 }
             }));
@@ -203,14 +212,14 @@ let stdtInfoMng = new Vue({
             stdtInfoDetl.initPage(stdtNo, guarNo);
         },
         regBandOpenInfoDetlPopup: function(bandId) {
-            bandOpenInfoDetl.initPage(bandId, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
+            bandOpenInfoDetl.initPage(bandId, function(){  stdtInfoMng.searchStdtInfoList(true) });
         },
-        regBandSpecDetlPopup: function(bandId,guarTelNo) {
-            console.log(bandId+"번호"+guarTelNo);
-            bandSpecDetl.initPage(bandId, guarTelNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
+        regSposInfoDetlPopup: function(guarNo) {
+            prntInfoDetl.initPage(guarNo);
         },
+        //보호자 팝업
         regGuarInfoDetlPopup: function(guarNo) {
-            guarInfoDetl.initPage(guarNo, function(){bandOpenInfoMng.searchBandOpenInfoList});
+            guarInfoDetl.initPage(guarNo, function(){ bandOpenInfoMng.searchBandOpenInfoList});
         },
         downloadExcel : function()
         {
@@ -231,7 +240,6 @@ let stdtInfoMng = new Vue({
                 }
             });
         },
-
 
         resetSearchParam: function() {
             let $this = this;

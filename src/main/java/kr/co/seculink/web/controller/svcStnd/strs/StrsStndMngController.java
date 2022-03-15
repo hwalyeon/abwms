@@ -28,9 +28,9 @@ public class StrsStndMngController
 	@Autowired
 	private StrsStndMngService strsStndMngService;
 
+	//스트레스 리스트 조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsList.ab")
-
 	public RtnMsg searchStrsList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
@@ -49,6 +49,7 @@ public class StrsStndMngController
 		return vo;
 	}
 
+	//스트레스 코드 리스트 조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchCdSpecList.ab")
 	public RtnMsg searchCdSpecList(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -68,6 +69,7 @@ public class StrsStndMngController
 		return vo;
 	}
 
+	//스트레스 엑셀 다운로드
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -78,6 +80,7 @@ public class StrsStndMngController
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
 
+	//스트레스 코드 엑셀 다운로드
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchCdSpecList/excel.ab")
 	public ModelAndView downloadCdExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -146,9 +149,9 @@ public class StrsStndMngController
 		return map;
 	}
 
+	//스트레스 상세화면
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsStndInfo.ab")
-
 	public RtnMsg searchStrsStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
@@ -165,9 +168,9 @@ public class StrsStndMngController
 		return vo;
 	}
 
+	//스트레스 코드 상세화면
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/searchStrsStndCdInfo.ab")
-
 	public RtnMsg searchStrsStndCdInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
@@ -184,6 +187,7 @@ public class StrsStndMngController
 		return vo;
 	}
 
+	//스트레스 저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/saveInfo.ab")
 	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
@@ -200,6 +204,7 @@ public class StrsStndMngController
 		return vo;
 	}
 
+	//스트레스 코드 저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/strs/strsStndMng/saveCdInfo.ab")
 	public RtnMsg saveCdInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {

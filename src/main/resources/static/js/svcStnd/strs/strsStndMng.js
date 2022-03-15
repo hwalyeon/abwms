@@ -4,19 +4,19 @@ let strsStndMng = new Vue({
     	params: {
             mentStrsStatCd:'',
             physStrsStatCd:'',
-            strsJudgCntn:'',
-            regDt:'',
-            regTm:'',
-            regUserId:'',
-            uptDt:'',
-            uptTm:'',
-            uptUserId:'',
-    		useYn:'Y',
-    		paging: 'Y',
-    		totalCount: 0,
-            rowCount: 30,
-            currentPage: 1,
-            currentIndex: 0
+            strsJudgCntn  :'',
+            regDt         :'',
+            regTm         :'',
+            regUserId     :'',
+            uptDt         :'',
+            uptTm         :'',
+            uptUserId     :'',
+    		useYn         :'Y',
+    		paging        :'Y',
+    		totalCount    :0,
+            rowCount      :30,
+            currentPage   :1,
+            currentIndex  :0
     	},
         code:{
             strsStatList : []
@@ -27,20 +27,14 @@ let strsStndMng = new Vue({
     methods: {
 
         initialize: function() {
-        	
         	let $this = this;
-        	
         	$this.initCodeList();
-
         	$this.initValue();
-
         },
-        initValue: function()
-        {
+        initValue: function() {
             let $this = this;
             $this.userId = SessionUtil.getUserId();
         },
-
         initCodeList: function() {
             let $this = this;
             $this.code.strsStatList = [];
@@ -55,15 +49,15 @@ let strsStndMng = new Vue({
             let $this = this;
             let strsStatList = commonGridCmonCd($this.code.strsStatList);
         	let colModels = [
-                {name: "crud"               , index: "crud"             , label: "crud"                  , hidden:true},
-                {name: "mentStrsStatCd"	     , index: "mentStrsStatCd"	 , label: "정신적스트레스상태명" , width: 80  	 ,align:"center"
-                    ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:strsStatList}},
-                {name: "mentStrsStatCdTemp"      , index: "mentStrsStatCdTemp"   ,label: "정신적스트레스상태명"  , hidden:true },
-                {name: "physStrsStatCd"	     , index: "physStrsStatCd"	 , label: "신체적스트레스상태명" , width: 80  	 ,align:"center"
-                    ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:strsStatList}},
-                {name: "physStrsStatTemp"      , index: "physStrsStatTemp"   ,label: "신체적스트레스상태명"  , hidden:true },
-                {name: "strsJudgCntn"       , index: "strsJudgCntn"     , label: "스트레스판정내용"           , width: 80, align: "center"},
-                {name: "strsStndDetlPop", index: "strsStndDetlPop", label: "코드 정보보기", width: 70, align: "center",
+                {name: "crud"               , index: "crud"               , label: "crud"              , hidden:true},
+                {name: "mentStrsStatCd"	    , index: "mentStrsStatCd"	  , label: "정신적스트레스상태명"  , width: 80   ,align:"center"
+                    ,edittype:"select"	    , formatter:"select"          , editable :true             , editoptions : {value:strsStatList}},
+                {name: "mentStrsStatCdTemp" , index: "mentStrsStatCdTemp" , label: "정신적스트레스상태명"  , hidden:true},
+                {name: "physStrsStatCd"	    , index: "physStrsStatCd"	  , label: "신체적스트레스상태명"  , width: 80   ,align:"center"
+                    ,edittype:"select"	    , formatter:"select"          , editable :true             , editoptions : {value:strsStatList}},
+                {name: "physStrsStatTemp"   , index: "physStrsStatTemp"   , label: "신체적스트레스상태명"  , hidden:true},
+                {name: "strsJudgCntn"       , index: "strsJudgCntn"       , label: "스트레스판정내용"     , width: 80   , align: "center"},
+                {name: "strsStndDetlPop"    , index: "strsStndDetlPop"    , label: "코드 정보보기"       , width: 70   , align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" ' + 'onclick="strsStndMng.regStrsStndPop(\'' + rowObject.mentStrsStatCd + '\',\''+ rowObject.physStrsStatCd + '\')" value="상세보기" data-toggle="modal" data-target="#strsStndDetlPopup"/>';
                     }
@@ -92,12 +86,12 @@ let strsStndMng = new Vue({
             resizeJqGridWidth("strsStnd_list", "strsStnd_list_wrapper");
 
             let strsCdGrpModels = [
-                {name: "cdVal"        , index: "cdVal"        , label: "코드값"      , width: 90 , align: "center"},
-                {name: "cdNm"         , index: "cdNm"         , label: "코드명"      , width: 90 , align: "left"  },
-                {name: "cdDesc"       , index: "cdDesc"       , label: "코드내용"    , width: 100, align: "left"  },
-                {name: "sortOrd"      , index: "sortOrd"      , label: "정렬순서"    , width: 50 , align: "center"},
-                {name: "useYn"        , index: "useYn"        , label: "사용여부"    , width: 50 , align: "center"},
-                {name: "cdSpecDetlPop", index: "cdSpecDetlPop", label: "코드 정보보기", width: 70 , align: "center",
+                {name: "cdVal"        , index: "cdVal"        , label: "코드값"      , width: 90  , align: "center"},
+                {name: "cdNm"         , index: "cdNm"         , label: "코드명"      , width: 90  , align: "left"  },
+                {name: "cdDesc"       , index: "cdDesc"       , label: "코드내용"    , width: 100 , align: "left"  },
+                {name: "sortOrd"      , index: "sortOrd"      , label: "정렬순서"    , width: 50  , align: "center"},
+                {name: "useYn"        , index: "useYn"        , label: "사용여부"    , width: 50  , align: "center"},
+                {name: "cdSpecDetlPop", index: "cdSpecDetlPop", label: "코드 정보보기", width: 70  , align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="strsStndMng.regStrsStndCdPop(\'' + rowObject.cdVal + '\')" value="상세보기" data-toggle="modal" data-target="#strsStndCdDetlPopup"/>';
                     }
@@ -176,13 +170,6 @@ let strsStndMng = new Vue({
                 }
             }).trigger("reloadGrid");
         },
-
-        mentStrsStatNmVal:function(){
-            let $this = this;
-        },
-        physStrsStatNmVal:function(){
-            let $this = this;
-        },
         regStrsStndPop: function(mentStrsStatCd,physStrsStatCd){
             strsStndDetl.initPage(mentStrsStatCd,physStrsStatCd);
         },
@@ -192,7 +179,6 @@ let strsStndMng = new Vue({
                 strsStndDetl.initCodeList(true);
             });
         },
-
         downloadExcel : function()
         {
             let $this = this;
@@ -238,15 +224,15 @@ let strsStndMng = new Vue({
 			$this.params = {
                 mentStrsStatCd:'',
                 physStrsStatCd:'',
-	    		blngNm: '',
-	    		telNo: '',
-	    		mtelNo: '',
-	    		mailAddr: '',
-	    		paging: 'Y',
-	    		totalCount: 0,
-	            rowCount: 30,
-	            currentPage: 1,
-	            currentIndex: 0
+	    		blngNm        :'',
+	    		telNo         :'',
+	    		mtelNo        :'',
+	    		mailAddr      :'',
+	    		paging        :'Y',
+	    		totalCount    :0,
+	            rowCount      :30,
+	            currentPage   :1,
+	            currentIndex  :0
 	    	}
 		}
     },

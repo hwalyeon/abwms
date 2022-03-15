@@ -7,6 +7,7 @@ import java.util.Map;
 
 public interface FatJudgStndMngService
 {
+	//비만판정기준 리스트 조회
 	public List<Map<String, String>> searchFatJudgList(Map<String, String> params) throws BizException;
 }
 

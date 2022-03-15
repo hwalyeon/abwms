@@ -30,7 +30,8 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
-	
+
+	//스트레스 리스트 조회
 	public List<Map<String, String>> searchStrsList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchStrsList", params);
@@ -38,30 +39,12 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 		return result;
 	}
 
+	//스트레스 코드 리스트 조회
 	public List<Map<String, String>> searchCdSpecList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("svcStnd.strs.strsStndMng.searchCdSpecList", params);
 
 		return result;
 	}
-
-	public Map<String, String> searchmentphysCd(Map<String, String> params) throws BizException
-	{
-
-		Map<String, String> result = dao.selectOne("svcStnd.strs.strsStndMng.mentphysCd", params);
-
-		Map<String, String> rtnMap = new HashMap<>();
-
-		if ( result == null || GEUtil.isEmpty(result.get("mentStrsStatCd")) ) {
-			rtnMap.put("existsYn", "N");
-		} else {
-			rtnMap.put("existsYn", "Y");
-			rtnMap.put("mentStrsStatNm", result.get("mentStrsStatNm"));
-			rtnMap.put("physStrsStatNm", result.get("physStrsStatNm"));
-		}
-
-		return rtnMap;
-	}
-
 }
 

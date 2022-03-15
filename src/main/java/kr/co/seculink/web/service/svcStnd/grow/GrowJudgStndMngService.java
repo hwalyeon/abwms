@@ -7,6 +7,7 @@ import java.util.Map;
 
 public interface GrowJudgStndMngService
 {
+	//성장판정기준 리스트 조회
 	public List<Map<String, String>> searchGrowJudgList(Map<String, String> params) throws BizException;
 }
 
