@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -18,15 +17,11 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 	private SqlSessionTemplate dao;
 
 	//보호자(사용자)_정보 상세보기
-	public Map<String, Object> searchPrntInfo(Map<String, String> params) throws BizException
+	public Map<String, Object> searchPrntInfo(Map<String, Object> params) throws BizException
 	{
-		Map<String, String> result = dao.selectOne("user.prnt.prntInfoMng.selectPrntInfoDetl", params);
+		Map<String, Object> result = dao.selectOne("user.prnt.prntInfoMng.selectPrntInfoDetl", params);
 
-		Map<String, Object> rtnMap = new HashMap<>();
-
-		rtnMap.put("result", result);
-
-		return rtnMap;
+		return result;
 	}
 /*
 	//보호자(사용자)_정보 저장

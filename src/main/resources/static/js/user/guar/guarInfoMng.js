@@ -29,6 +29,12 @@ let guarInfoMng = new Vue({
                 {
             	    mmDdList        : [] , //기준_일자_이번달_리스트
                 },
+            popParams :{
+                stdtNo         : '' ,  //학생_번호
+                bandId         : '' ,  //밴드_ID
+                prntNo         : '' ,  //보호자_번호
+                stdtNm         : ''   //학생_명
+            }
         },
     methods:
         {
@@ -83,9 +89,11 @@ let guarInfoMng = new Vue({
                                 return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${phonNoTemp}" data-band-id="${rowObject.bandId}">${phonNoTemp}</a>`;}},
                         {name: "prntNo"       , index: "prntNo"       , label: "학부모번호"	 , width: 40     , align: "center" },
                         {name: "prntNmMale"   , index: "prntNmMale"   , label: "남자학부모"	 , width: 80     , align: "center" , formatter: function(cellValue, options, rowObject){
-                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regPrntInfoDetlPopup(\'' + rowObject.prntNo + '\',\'' + 'MALE' + '\')" value="신규" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
-                                else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="MALE">${cellValue}</a>`;}},
-                        {name: "prntNmFemale" , index: "prntNmFemale" , label: "여자학부모" 	 , width: 80     , align: "center" },
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regPrntInfoDetlPopup(\'' + rowObject.bandId + '\', \'' + rowObject.stdtNo + '\',\'' + 'MALE' + '\')" value="신규" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
+                                else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-no="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="MALE">${cellValue}</a>`;}},
+                        {name: "prntNmFemale" , index: "prntNmFemale" , label: "여자학부모" 	 , width: 80     , align: "center" , formatter: function(cellValue, options, rowObject){
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regPrntInfoDetlPopup(\'' + rowObject.bandId + '\', \'' + rowObject.stdtNo + '\',\'' + 'FEMALE' + '\')" value="신규" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
+                                else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-no="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="FEMALE">${cellValue}</a>`;}},
                         {name: "termAgreYnInfoDetlPopup"  , index: "termAgreYnInfoDetlPopup" , label: "약관동의여부" , width: 80, align: "center", formatter: function(cellValue, options, rowObject) {
                           return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regTermAgreYnInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="상세보기" data-toggle="modal" data-target="#termAgreYnInfoDetlPopup" />'; }}
                     ];
@@ -124,7 +132,7 @@ let guarInfoMng = new Vue({
                             });
                             //학부모정보 상세 팝업
                             $("#guarInfo_list").find('A.links[data-prnt]').on('click', function(e) {
-                                guarInfoMng.regPrntInfoDetlPopup($(e.target).data('prnt-no'),$(e.target).data('sex-cd'))
+                                guarInfoMng.regPrntInfoDetlPopup($(e.target).data('band-no'),$(e.target).data('prnt-no'),$(e.target).data('sex-cd'))
                             });
                         }
                     }));
@@ -188,9 +196,8 @@ let guarInfoMng = new Vue({
             regBandOpenInfoDetlPopup: function(bandId) {
                 bandOpenInfoDetl.initPage(bandId, function(){  guarInfoMng.searchGuarInfoList(true) });
             },
-            regPrntInfoDetlPopup: function(prntNo, sexCd) {
-                alert("sexCd " + sexCd);
-                prntInfoDetl.initPage(prntNo,sexCd);
+            regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
+                prntInfoDetl.initPage(bandId, prntNo, sexCd);
             },
             regTermAgreYnInfoDetlPopup: function(guarNo){
                 termAgreYnInfoDetl.initPage(guarNo);

@@ -7,7 +7,7 @@ import java.util.Map;
 public interface PrntInfoMngService
 {
 	//학부모정보 조회
-	public Map<String, Object> searchPrntInfo(Map<String, String> params) throws BizException;
+	public Map<String, Object> searchPrntInfo(Map<String, Object> params) throws BizException;
 
 	/*
 	//보호자(사용자)_정보 상세보기

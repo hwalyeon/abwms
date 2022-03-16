@@ -28,7 +28,7 @@ public class PrntInfoMngController
 	//학부모정보 상세보기
 	@ResponseBody
 	@RequestMapping("/user/prnt/prntInfoMng/searchPrntInfo.ab")
-	public RtnMsg searchPrntInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
+	public RtnMsg searchPrntInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();

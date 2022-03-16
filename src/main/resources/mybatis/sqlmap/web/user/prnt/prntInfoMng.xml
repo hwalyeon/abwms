@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user.prnt.prntInfoMng">
-
 	<!--보호자(사용자)_정보_상세보기 -->
 	<select id="selectPrntInfoDetl" parameterType="java.util.Map" resultType="MybatisMap">
 		/* Generated SQL SQL ID : tm_prnt_base.select */
-        select  TPB.prnt_no /* prnt_no 학부모_번호 numeric */
-               ,TPB.sex_cd /* sex_cd 성별_코드 character varying(20) */
-               ,TPB.prnt_nm /* prnt_nm 학부모_명 character varying(40) */
-               ,TPB.hght_val /* hght_val 키_값 numeric */
-               ,TPB.wght_val /* wght_val 체중_값 numeric */
-               ,TPB.bmi_val /* bmi_val BMI_값 numeric */
-               ,TPB.race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
-               ,TPB.reg_dt /* reg_dt 등록_일자 character(8) */
-               ,TPB.reg_tm /* reg_tm 등록_시각 character(6) */
-               ,TPB.reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-               ,TPB.upt_dt /* upt_dt 수정_일자 character(8) */
-               ,TPB.upt_tm /* upt_tm 수정_시각 character(6) */
-               ,TPB.upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-        FROM   TM_PRNT_BASE TPB
-               inner join TM_GUAR_BASE TGB
-               on TPB.PRNT_NO = TGB.PRNT_NO
-        WHERE  1=1
-        and    TPB.PRNT_NO = #{prnoNo}::NUMERIC
-        and    TPB.SEX_CD  = #{sexCd}
-        group by TPB.PRNT_NO, TPB.SEX_CD
+        select   TBI.BAND_ID     /* band_id 밴드_ID character varying(20) */
+               , TSB.STDT_NO     /* stdt_no 학생_번호 numeric */
+               , TSB.STDT_NM     /* stdt_nm 학생_명 character varying(20) */
+               , TPB.PRNT_NO     /* prnt_no 학부모_번호 numeric */
+               , TPB.SEX_CD      /* sex_cd 성별_코드 character varying(20) */
+               , TPB.PRNT_NM     /* prnt_nm 학부모_명 character varying(40) */
+               , TPB.HGHT_VAL    /* hght_val 키_값 numeric */
+               , TPB.WGHT_VAL    /* wght_val 체중_값 numeric */
+               , TPB.BMI_VAL    /* bmi_val BMI_값 numeric */
+               , TPB.RACE_DIV_CD /* race_div_cd 인종_구분_코드 character varying(20) */
+        from     TS_BAND_INFO TBI
+                 inner join   TS_BAND_SPEC TBS
+                 on TBI.BAND_ID = TBS.BAND_ID
+                 inner join   TM_GUAR_BASE TGB
+                 on TBS.GUAR_TEL_NO = TGB.GUAR_TEL_NO
+                 left outer join  TM_PRNT_BASE TPB
+                 on TGB.PRNT_NO = TPB.PRNT_NO
+                 left outer join TM_STDT_BASE TSB
+                 on TBI.BAND_ID = TBS.BAND_ID
+                 and TSB.PRNT_NO = TPB.PRNT_NO
+        WHERE    1=1
+        and      TBI.BAND_ID = #{bandId}
+        and      TPB.SEX_CD  = #{sexCd}
+        <if test="prntNo != null and prntNo != '' ">AND TPB.PRNT_NO = #{prntNo}::NUMERIC</if>
+        group by TBI.BAND_ID, TSB.STDT_NO, TPB.PRNT_NO, TPB.SEX_CD
 	</select>
-
-
-
 </mapper>

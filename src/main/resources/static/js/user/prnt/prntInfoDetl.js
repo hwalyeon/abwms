@@ -4,6 +4,7 @@ let prntInfoDetl = new Vue({
     	params: {
     		crud              : 'C',
     		userId            : '' ,
+    		bandId            : '' ,
 			stdtNo            : '' , //학생_번호
 			stdtNm            : '' , //학생_이름
 			guarNo            : '' , //보호자_번호
@@ -15,11 +16,6 @@ let prntInfoDetl = new Vue({
 			wghtVal		      : '' , //체중_값
 			BMIVal		      : '' , //BMI_값
 			raceDivCd         : '' , //인종_구분_코드
-			paging            : 'Y',
-			totalCoun         : 0  ,
-			rowCount          : 30 ,
-			currentPage       : 1  ,
-			currentIndex      : 0
     	},
 		code: {
 			sexCdList      : [] , //성별_코드_리스트
@@ -46,27 +42,29 @@ let prntInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(prntNo,sexCd) {
-			alert("initPage도착"+"prntNo: "+prntNo+"sexCd: "+sexCd);
+        initPage: function(bandId, prntNo, sexCd) {
 			let $this = this;
 			$this.resetPrntDetlInfo();
 
-			if ( !WebUtil.isNull(prntNo) )
+			if (!WebUtil.isNull(sexCd))
 			{
-				let params = {
-					'prntNo' : prntNo,
-					'sexCd'  : sexCd
-				}
+				let params =
+					{
+						'bandId' : bandId ,
+						'prntNo' : prntNo ,
+						'sexCd'  : sexCd
+					}
 				AjaxUtil.post({
-					url: "/user/prnt/pantInfoMng/searchPrntInfo.ab",
+					url: "/user/prnt/prntInfoMng/searchPrntInfo.ab",
 					param: params,
 					success: function(response) {
-						if ( !!response.rtnData.result)
+						if (!!response.rtnData.result)
 						{
-							$.each(response.rtnData.result[0], function(key, val) {
+							console.log(response.rtnData.result);
+							$.each(response.rtnData.result, function(key, val) {
 								$this.params[key] = val;});
 
-							if(response.rtnData.result[0].sposNo != null){
+							if(response.rtnData.result.prntNo != null){
 							$this.params.crud = 'U';
 							}
 						}
@@ -82,28 +80,6 @@ let prntInfoDetl = new Vue({
         	let $this = this;
         	return true;
         },
-		//숫자타입 체크
-		nanCk : function(event)
-		{
-			let $this = this;
-
-			let name  = event.target.name;
-			let cdNm;
-			if(isNaN($this.params[name])){
-
-				if(name=='sposTelNo'){
-					cdNm='보호자 전화번호';
-				}else if(name=='hghtVal'){
-					cdNm='키';
-				}else if(name=='wghtVal'){
-					cdNm='몸무게';
-				}
-
-				this.params[name] = this.params[name].replace(/\D/g,'');
-				Swal.alert([cdNm+"는 숫자만 입력 가능합니다.", 'info']);
-			}
-
-		},
 		saveSposInfoDetl: function() {
 			
 			let $this = this;
@@ -116,7 +92,7 @@ let prntInfoDetl = new Vue({
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#sposInfoDetlPopup'));
+                		closeModal($('#prntInfoDetlPopup'));
 						guarInfoMng.searchPrntInfoList(true);
                 	});                	
                 },
@@ -137,7 +113,7 @@ let prntInfoDetl = new Vue({
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#sposInfoDetlPopup'));
+                		 closeModal($('#prntInfoDetlPopup'));
 						guarInfoMng.searchPrntInfoList(true);
                 	});
                 },
@@ -161,11 +137,6 @@ let prntInfoDetl = new Vue({
 				wghtVal		      : '' , //체중_값
 				BMIVal		      : '' , //BMI_값
 				raceDivCd         : '' , //인종_구분_코드
-				paging            : 'Y',
-				totalCoun         : 0  ,
-				rowCount          : 30 ,
-				currentPage       : 1  ,
-				currentIndex      : 0
 	    	}
 		},
     },

@@ -4,12 +4,12 @@
 <div class="modal fade" id="prntInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 580px; height: 630px">
+			<div class="modal-content" style="width: 580px; padding-bottom: 20px;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>배우자 정보</h5>
+						<h5>학부모 정보</h5>
 					</div>
 				</div>
 				<div class="modal-body">
@@ -21,18 +21,10 @@
 							</colgroup>
 							<tbody>
 								<tr>
-									<th scope="row">보호자 번호</th>
+									<th scope="row">밴드ID</th>
 									<td>
 										<div>
-											<input type="text" name="guarNo" v-model="params.guarNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">보호자 이름</th>
-									<td>
-										<div>
-											<input type="text" name="guarNm" v-model="params.guarNm" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
+											<input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
 										</div>
 									</td>
 								</tr>
@@ -46,7 +38,7 @@
 									<th scope="row">학생 이름</th>
 									<td>
 										<div>
-											<input type="text" name="stdtNm" v-model="params.stdtNm" class="form-control float_left width_per_100 ime-eng"/>
+											<input type="text" name="stdtNm" v-model="params.stdtNm" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
 										</div>
 									</td>
 								</tr>
@@ -66,7 +58,7 @@
 								<tr>
 									<th scope="row">성별 코드</th>
 									<td>
-										<select id="sexCd" name="sexCd" class="form-control float_left width_per_100 ime-eng" v-model="params.sexCd">
+										<select id="sexCd" name="sexCd" class="form-control float_left width_per_100 ime-eng" v-model="params.sexCd"  :disabled="params.crud=='U'">
 											<option value="">선택</option>
 											<option v-for="item in code.sexCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 										</select>
@@ -85,6 +77,13 @@
 									</td>
 								</tr>
 								<tr>
+								<tr>
+									<th scope="row">BMI</th>
+									<td>
+										<input type="text" name="bmiVal" v-model="params.bmiVal" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)"/>
+									</td>
+								</tr>
+								<tr>
 									<th scope="row">인종 구분 코드</th>
 									<td>
 										<select id="raceDivCd" name="raceDivCd" class="form-control float_left width_per_100 ime-eng" v-model="params.raceDivCd">
@@ -100,7 +99,7 @@
             	<div class="modal-footer">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="savePrntInfoDetl">저장</button>
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="">저장</button>
 						</div>
 						<div v-if="params.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteUser">삭제</button>
