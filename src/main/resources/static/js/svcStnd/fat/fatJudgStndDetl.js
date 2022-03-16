@@ -2,13 +2,13 @@ let fatJudgStndDetl = new Vue({
     el: "#fatJudgStndDetlPopup",
     data: {
     	fatJudgStndInfo: {
-    		crud: 'C',
-			fatJudgCd: '',
-			fatJudgNm: '',
-			bmiFr: '',
-			bmiTo: '',
-			fidxFr: '',
-			fidxTo: '',
+    		crud     :'C',
+			fatJudgCd:'',
+			fatJudgNm:'',
+			bmiFr    :'',
+			bmiTo    :'',
+			fidxFr   :'',
+			fidxTo   :'',
 			currEvalCntn: '',
 			prdtEvalCntn: ''
     	},

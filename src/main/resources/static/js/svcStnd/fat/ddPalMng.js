@@ -32,7 +32,8 @@ let ddPalMng = new Vue({
             sexCdList       : [],
             nutrStatCdList  : [],
             palCdList       : [],
-            nutrCdList      : []
+            nutrCdList      : [],
+            nutrCdNmList    : []
         },
 	},
 
@@ -54,28 +55,52 @@ let ddPalMng = new Vue({
         },
         initCodeList: function() {
             let $this = this;
-
+            //신체활동수준코드
+            getCommonCodeList('PAL_CD',$this.code.palCdList, function()
+            {
+                $this.initGrid();
+                $this.searchDdPalList(true);
+            }
+            );
+            //영양섭취상태
             getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList, function()
             {
                 $this.initGrid();
                 $this.searchDdPalList(true);
             }
             );
-
+            //현재비만판정,예측비만판정
             getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList, function()
             {
                 $this.initGrid();
                 $this.searchDdPalList(true);
             }
             );
-
+            //성별
             getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
             {
                 $this.initGrid();
                 $this.searchDdPalList(true);
             }
             );
-
+            //영양섭취상태
+            AjaxUtil.post(
+                {
+                    url: "/svcStnd/nutr/ddNutrEatStndMng/searchNutrCdNmList.ab",
+                    param: {},
+                    success: function(response) {
+                        $this.code.nutrCdNmList = [];
+                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
+                            $.each(response.rtnData.result, function(index, item) {
+                                $this.code.nutrCdNmList.push({'cdVal':item.nutrCd, 'cdNm':item.nutrNm});
+                            });
+                        }
+                        $this.codeCnt += 1;
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
 
         },
         initGrid: function() {
@@ -83,6 +108,8 @@ let ddPalMng = new Vue({
             let mentDdPalCdList = commonGridCmonCd($this.code.mentDdPalCdList);
             let sexCdList       = commonGridCmonCd($this.code.sexCdList);
             let nutrStatCdList  = commonGridCmonCd($this.code.nutrStatCdList);
+            let palCdList       = commonGridCmonCd($this.code.palCdList);
+            let nutrCdNmList    = commonGridCmonCd($this.code.nutrCdNmList);
         	let colModels =
             [
                 {name:"crud"               , index: "crud"            , label:"crud"               , hidden:true},
@@ -94,7 +121,7 @@ let ddPalMng = new Vue({
                     , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
                 {name: "sexCdTemp"         , index: "sexCdTemp"       , label: "성별"            , width: 80   , align: "center", hidden  : true  },
                 {name: "sexCd"             , index: "sexCd"           , label: "성별"            , width: 80   , align: "center" , editable: true
-                    , editable: true  ,edittype:"select"	, formatter:"select", editable :true, editoptions : {value:sexCdList}},
+                    , editable: true  ,edittype:"select"	, formatter:"select", editoptions : {value:sexCdList}},
                 {name: "ageYcntTemp"       , index: "ageYcntTemp"     , label: "나이년수"         , width: 80   , align: "center", hidden  : true  },
                 {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
@@ -105,13 +132,13 @@ let ddPalMng = new Vue({
                 {name: "ddCalQty"          , index: "ddCalQty"        , label: "일일칼로리량"         , width: 80   , align: "center"
                     , editable: true , editrules:{number:true}},
                 {name: "palCd"             , index: "palCd"           , label: "신체활동수준코드"      , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
+                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:palCdList}},
                 {name: "nutrCd"            , index: "nutrCd"          , label: "영양소코드"           , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
+                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:nutrCdNmList}},
                 {name: "nutrStatCdTemp"    , index: "nutrStatCdTemp"  , label: "영양섭취상태"           , width: 80   , align: "center"
                     , hidden  : true},
                 {name: "nutrStatCd"        , index: "nutrStatCd"      , label: "영양섭취상태"      , width: 80   , align: "center"
-                    , editable: true , edittype:"select"	, formatter:"select", editable :true, editoptions : {value:nutrStatCdList}},
+                    , editable: true , edittype:"select"	, formatter:"select", editoptions : {value:nutrStatCdList}},
                 {name: "regDt"             , index: "regDt"           , label: "등록일자"        , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
                 {name: "regTm"               , index: "regTm"         , label: "등록시각"       , width: 80          , align: "center"

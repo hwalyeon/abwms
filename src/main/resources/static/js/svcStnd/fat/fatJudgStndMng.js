@@ -2,23 +2,23 @@ let fatJudgStndMng = new Vue({
     el: "#fatJudgStndMng",
     data: {
         params: {
-            fatJudgCd:'',
-            fatJudgNm:'',
-            fidxFr:'',
-            fidxTo:'',
+            fatJudgCd   :'',
+            fatJudgNm   :'',
+            fidxFr      :'',
+            fidxTo      :'',
             currEvalCntn:'',
             prdtEvalCntn:'',
-            regDt:'',
-            regTm:'',
-            regUserId:'',
-            uptDt:'',
-            uptTm:'',
-            uptUserId:'',
-            useYn:'Y',
-            paging: 'Y',
-            totalCount: 0,
-            rowCount: 30,
-            currentPage: 1,
+            regDt       :'',
+            regTm       :'',
+            regUserId   :'',
+            uptDt       :'',
+            uptTm       :'',
+            uptUserId   :'',
+            useYn       :'Y',
+            paging      :'Y',
+            totalCount  : 0,
+            rowCount    : 30,
+            currentPage : 1,
             currentIndex: 0
         },
         code:{
@@ -39,7 +39,6 @@ let fatJudgStndMng = new Vue({
 
             $this.searchFatJudgList(true);
 
-
         },
         initCodeList: function() {
             let $this = this;
@@ -50,30 +49,27 @@ let fatJudgStndMng = new Vue({
             let colModels = [
                 {name: "fatJudgCd"          , index: "fatJudgCd"        , label: "비만판정코드"           , width: 80, align: "center"},
                 {name: "fatJudgNm"          , index: "fatJudgNm"        , label: "비만판정코드명"         , width: 80, align: "center"},
-                {name: "bmiFr"              , index: "bmiFr"            , label: "BMI_FR"          , width: 80, align: "center"},
-                {name: "bmiTo"              , index: "bmiTo"            , label: "BMI_TO"            , width: 80, align: "center"},
-                {name: "fidxFr"             , index: "fidxFr"           , label: "비만지수_FR"          , width: 80, align: "center"},
-                {name: "fidxTo"             , index: "fidxTo"           , label: "비만지수_TO"            , width: 80, align: "center"},
+                {name: "bmiFr"              , index: "bmiFr"            , label: "BMI_FR"              , width: 80, align: "center"},
+                {name: "bmiTo"              , index: "bmiTo"            , label: "BMI_TO"              , width: 80, align: "center"},
+                {name: "fidxFr"             , index: "fidxFr"           , label: "비만지수_FR"           , width: 80, align: "center"},
+                {name: "fidxTo"             , index: "fidxTo"           , label: "비만지수_TO"           , width: 80, align: "center"},
                 {name: "currEvalCntn"       , index: "currEvalCntn"     , label: "현재평가내용"           , width: 80, align: "center"},
                 {name: "prdtEvalCntn"       , index: "prdtEvalCntn"     , label: "예측평가내용"           , width: 80, align: "center"},
                 {name: "regDt"              , index: "regDt"            , label: "등록일자"              , width: 80, align: "center", formatter: function(cellValue, options, rowObject)
                     { return formatDate(cellValue); }},
-                {name: "regTm", index: "regTm", label: "등록시각", width: 80, align: "center", formatter: function(cellValue, options, rowObject)
+                {name: "regTm"              , index: "regTm"            , label: "등록시각", width: 80, align: "center", formatter: function(cellValue, options, rowObject)
                     { return formatTime(cellValue); }},
                 {name: "regUserId"          , index: "regUserId"        , label: "등록사용자ID"          , width: 80, align: "center"},
-                {name: "uptDt", index: "uptDt", label: "수정일자", width: 80, align: "center", formatter: function(cellValue, options, rowObject)
+                {name: "uptDt"              , index: "uptDt"            , label: "수정일자", width: 80, align: "center", formatter: function(cellValue, options, rowObject)
                     { return formatDate(cellValue); }},
-                {name: "uptTm", index: "uptTm", label: "수정시각", width: 80, align: "center", formatter: function(cellValue, options, rowObject)
+                {name: "uptTm"              , index: "uptTm"            , label: "수정시각", width: 80, align: "center", formatter: function(cellValue, options, rowObject)
                     { return formatTime(cellValue); }},
                 {name: "uptUserId"          , index: "uptUserId"        , label: "수정사용자ID"          , width: 80, align: "center"},
-                {name: "fatJudgStndDetlPop" , index: "fatJudgStndDetlPop" , label: "상세정보보기", width: 80, align: "center",
+                {name: "fatJudgStndDetlPop" , index: "fatJudgStndDetlPop", label: "상세정보보기", width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="fatJudgStndMng.regFatJudgStndPop(\'' + rowObject.fatJudgCd + '\')" value="상세보기" data-toggle="modal" data-target="#fatJudgStndDetlPopup" />';
                     }
                 }
-
-
-
             ];
 
             $("#grid_list").jqGrid("GridUnload");
@@ -152,15 +148,15 @@ let fatJudgStndMng = new Vue({
             $this.params = {
                 mentStrsStatCd:'',
                 physStrsStatCd:'',
-                blngNm: '',
-                telNo: '',
-                mtelNo: '',
-                mailAddr: '',
-                paging: 'Y',
-                totalCount: 0,
-                rowCount: 30,
-                currentPage: 1,
-                currentIndex: 0
+                blngNm        :'',
+                telNo         :'',
+                mtelNo        :'',
+                mailAddr      : '',
+                paging        :'Y',
+                totalCount    :0,
+                rowCount      :30,
+                currentPage   :1,
+                currentIndex  :0
             }
         }
     },
