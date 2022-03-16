@@ -6,8 +6,9 @@ let guarInfoDetl = new Vue({
     		userId            : '' ,
     		stdtNo            : '' , //학생_번호
     		stdtNm            : '' , //학생_명
-    		guarNo            : '' , //보호자_번호
-    		guarNm            : '' , //보호자_명
+			prntNo            : '' , //학부모_번호
+			guarNo            : '' , //보호자_번호
+			guarNm            : '' , //보호자_명
 			guarTelNo         : '' , //보호자_전화_번호
     		guarPw            : '' , //보호자_비밀번호
 			selfCertDttm      : '' , //본인_인증_일시
@@ -18,8 +19,8 @@ let guarInfoDetl = new Vue({
 			hbitAbnmAlamYn	  : '' , //심박_이상_알림_여부
 			tempAbnmAlamYn    : '' , //체온_이상_알림_여부
 			bodyHistAlamYn    : '' , //신체_기록_알림_여부
-			mealNoinAlamYn    : '' , //식사_미입력_알림_여부
-			excsNoinAlamYn    : '' , //운동_미입력_알림_여부
+			mealNinpAlamYn    : '' , //식사_미입력_알림_여부
+			excsNinpAlamYn    : '' , //운동_미입력_알림_여부
 			cbeeUseAlamYn     : '' , //캐시비_사용_알림_여부
 			batrLackAlamYn    : '' , //배터리_부족_알림_여부
 			ltrmNuseAlamYn    : '' , //장기_미사용_알림_여부
@@ -104,18 +105,6 @@ let guarInfoDetl = new Vue({
         		Swal.alert(['자동로그인 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.hghtVal) ) {
-        		Swal.alert(['키는 필수 입력 값입니다.', 'info']);
-        		return false;
-        	}
-        	if ( WebUtil.isNull($this.params.wghtVal) ) {
-        		Swal.alert(['체중은 여부는 필수 입력 값입니다.', 'info']);
-        		return false;
-        	}
-        	if ( WebUtil.isNull($this.params.bmiVal) ) {
-        		Swal.alert(['BMI는 필수 입력 값입니다.', 'info']);
-        		return false;
-        	}
         	if ( WebUtil.isNull($this.params.dzoneAlamYn) ) {
         		Swal.alert(['위험지역 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
@@ -140,11 +129,11 @@ let guarInfoDetl = new Vue({
         		Swal.alert(['신체 기록 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.mealNoinAlamYn) ) {
+        	if ( WebUtil.isNull($this.params.mealNinpAlamYn) ) {
         		Swal.alert(['식사 미입력 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-        	if ( WebUtil.isNull($this.params.excsNoinAlamYn) ) {
+        	if ( WebUtil.isNull($this.params.excsNinpAlamYn) ) {
         		Swal.alert(['운동 미입력 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
@@ -160,36 +149,8 @@ let guarInfoDetl = new Vue({
         		Swal.alert(['장기 미사용 알림 여부는 필수 입력 값입니다.', 'info']);
         		return false;
         	}
-
-
         	return true;
         },
-		//숫자타입 체크
-		nanCk : function(event)
-		{
-			let $this = this;
-
-			let name  = event.target.name;
-			let cdNm;
-			if(isNaN($this.params[name])){
-
-				if(name=='guarTelNo'){
-					cdNm='보호자 전화번호';
-				}else if(name=='selfCertDttm'){
-					cdNm='본인 인증 일시';
-				}else if(name=='hghtVal'){
-					cdNm='키';
-				}else if(name=='wghtVal'){
-					cdNm='몸무게';
-				}else if(name=='bmiVal'){
-					cdNm='BMI';
-				}
-
-				this.params[name] = this.params[name].replace(/\D/g,'');
-				Swal.alert([cdNm+"는 숫자만 사용 가능합니다.", 'info']);
-			}
-
-		},
 		saveguarInfoDetl: function() {
 			
 			let $this = this;

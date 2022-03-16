@@ -92,6 +92,7 @@ let bandOpenInfoMng = new Vue({
                 let colModels =
                     [
                         {name: "crud"             , index: "crud"             , label: "crud"		 	     , hidden: true },
+                        {name: "stdtKeyNo"        , index: "stdtKeyNo"        , label: "학생key"    	     , hidden: true },
                         {name: "bandIdTemp"       , index: "bandIdTemp"       , label: "밴드ID"			     , hidden: true },
                         {name: "bandOpenStatCd"   , index: "bandOpenStatCd"   , label: "밴드개통상태코드"     , hidden: true },
                         {name: "uptDt"            , index: "uptDt"            , label: "기준일자"		     , width: 80  , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
@@ -163,7 +164,7 @@ let bandOpenInfoMng = new Vue({
 
                             $(grid).tableRowSpan(["uptDt","regDt","bandYtyp","bandMdlCd","bandId", "telNo","blthId", "bandOpenStatCd","bandOpenStatCdNm","apiUrlGramNo","openGramNo","apiUrlYn","apiUrlDttm"], "bandId");
 
-                            $(grid).tableRowSpan(["stdtNo", "stdtNm"], "stdtNo");
+                            $(grid).tableRowSpan(["stdtNo", "stdtNm"], "stdtKeyNo");
 
 
                             $("#bandOpenInfo_list").find('A.links[data-band]').on('click', function(e) {

@@ -38,6 +38,7 @@
 	            , TBI.UPT_DT
 	            , TBI.UPT_TM
 	            , TBI.UPT_USER_ID
+		        , coalesce(TSB.STDT_NO , cast(TBI.BAND_ID as numeric)) as stdt_key_no         -- 학생_번호
 		from      TS_BAND_INFO TBI
 			      inner join TS_BAND_SPEC TBS
 			      on TBI.BAND_ID = TBS.BAND_ID

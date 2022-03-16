@@ -51,15 +51,6 @@ public class GuarInfoMngServiceImpl implements GuarInfoMngService
 			saveCnt += dao.insert("user.guar.guarInfoMng.insertTmGuarInfoList", params);
 		} else if ("U".equals(params.get("crud"))) {
 			saveCnt += dao.update("user.guar.guarInfoMng.updateTmGuarInfoList", params);
-			//배우자 번호 가져오기
-			Map<String, Object> result = dao.selectOne("user.guar.guarInfoMng.selectSposNo",params);
-
-			Object sposNo = result.get("sposNo");
-
-			params.put("sposNo",sposNo);
-			params.put("sposNm", params.get("guarNm"));
-
-			saveCnt += dao.update("user.guar.guarInfoMng.updateTmSposInfoList", params);
 		} else if ("D".equals(params.get("crud"))) {
 			saveCnt += dao.delete("user.guar.guarInfoMng.deleteTmGuarInfoList", params);
 		}

@@ -47,6 +47,14 @@
 											</td>
 										</tr>
 										<tr>
+											<th scope="row">학부모 번호</th>
+											<td>
+												<div>
+													<input type="text" name="prntNo" v-model="params.prntNo" class="form-control float_left width_per_100 ime-eng" />
+												</div>
+											</td>
+										</tr>
+										<tr>
 											<th scope="row">보호자 이름</th>
 											<td>
 												<div>
@@ -181,15 +189,15 @@
 										<tr>
 											<th scope="row">식사 미입력 알림 여부</th>
 											<td>
-												<input type="radio" name="mealNoinAlamYn" v-model="params.mealNoinAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="mealNoinAlamYn" v-model="params.mealNoinAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" name="mealNinpAlamYn" v-model="params.mealNinpAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="mealNinpAlamYn" v-model="params.mealNinpAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">운동 미입력 알림 여부</th>
 											<td>
-												<input type="radio" name="excsNoinAlamYn" v-model="params.excsNoinAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="excsNoinAlamYn" v-model="params.excsNoinAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" name="excsNinpAlamYn" v-model="params.excsNinpAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" name="excsNinpAlamYn" v-model="params.excsNinpAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
