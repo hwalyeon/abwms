@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:remove="tag">
-<div class="modal fade" id="sposInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="prntInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 580px; height: 650px">
+			<div class="modal-content" style="width: 580px; height: 630px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -37,23 +37,30 @@
 									</td>
 								</tr>
 								<tr>
-									<th scope="row">배우자 번호</th>
+									<th scope="row">학생 번호</th>
 									<td>
-										<input type="text" name="sposNo" v-model="params.sposNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
+										<input type="text" name="stdtNo" v-model="params.stdtNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
 									</td>
 								</tr>
 								<tr>
-									<th scope="row">배우자 이름</th>
+									<th scope="row">학생 이름</th>
 									<td>
 										<div>
-											<input type="text" name="sposNm" v-model="params.sposNm" class="form-control float_left width_per_100 ime-eng"/>
+											<input type="text" name="stdtNm" v-model="params.stdtNm" class="form-control float_left width_per_100 ime-eng"/>
 										</div>
 									</td>
 								</tr>
 								<tr>
-									<th scope="row">배우자 전화 번호</th>
+									<th scope="row">학부모 번호</th>
 									<td>
-										<input type="text" name=sposTelNo v-model="params.sposTelNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
+										<input type="text" name=prntNo v-model="params.prntNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
+									</td>
+								</tr>
+								<tr>
+								<tr>
+									<th scope="row">학부모 이름</th>
+									<td>
+										<input type="text" name=prntNm v-model="params.prntNm" class="form-control float_left width_per_100 ime-eng"/>
 									</td>
 								</tr>
 								<tr>
@@ -62,15 +69,6 @@
 										<select id="sexCd" name="sexCd" class="form-control float_left width_per_100 ime-eng" v-model="params.sexCd">
 											<option value="">선택</option>
 											<option v-for="item in code.sexCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">인종 구분 코드</th>
-									<td>
-										<select id="raceDivCd" name="raceDivCd" class="form-control float_left width_per_100 ime-eng" v-model="params.raceDivCd">
-											<option value="">선택</option>
-											<option v-for="item in code.raceDivCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 										</select>
 									</td>
 								</tr>
@@ -86,6 +84,15 @@
 										<input type="text" name="wghtVal" v-model="params.wghtVal" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)"/>
 									</td>
 								</tr>
+								<tr>
+									<th scope="row">인종 구분 코드</th>
+									<td>
+										<select id="raceDivCd" name="raceDivCd" class="form-control float_left width_per_100 ime-eng" v-model="params.raceDivCd">
+											<option value="">선택</option>
+											<option v-for="item in code.raceDivCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -93,7 +100,7 @@
             	<div class="modal-footer">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveSposInfoDetl">저장</button>
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="savePrntInfoDetl">저장</button>
 						</div>
 						<div v-if="params.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteUser">삭제</button>

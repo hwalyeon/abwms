@@ -2,14 +2,14 @@ package kr.co.seculink.web.service.user.prnt;
 
 import kr.co.seculink.exception.BizException;
 
-import java.util.List;
 import java.util.Map;
 
 public interface PrntInfoMngService
 {
-	//보호자(사용자)_정보_리스트 조회
-	public List<Map<String, String>> searchPrntInfoList(Map<String, String> params) throws BizException;
+	//학부모정보 조회
+	public Map<String, Object> searchPrntInfo(Map<String, String> params) throws BizException;
 
+	/*
 	//보호자(사용자)_정보 상세보기
 	public Map<String, Object> searchPrntInfo(Map<String, String> params) throws BizException;
 

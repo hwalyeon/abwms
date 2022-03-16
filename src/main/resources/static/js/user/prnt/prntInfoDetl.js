@@ -1,17 +1,19 @@
 let prntInfoDetl = new Vue({
-    el: "#sposInfoDetlPopup",
+    el: "#prntInfoDetlPopup",
     data: {
     	params: {
     		crud              : 'C',
     		userId            : '' ,
+			stdtNo            : '' , //학생_번호
+			stdtNm            : '' , //학생_이름
 			guarNo            : '' , //보호자_번호
-			guarNm            : '' , //보호자_명
-    		sposNo            : '' , //배우자_번호
-    		sposNm            : '' , //배우자_명
-			sposTelNo         : '' , //배우_전화_번호
+			guarNm            : '' , //보호자_이름
+			prntNo            : '' , //학부모_번호
+    		prntNm            : '' , //학부모_명
     		sexCd             : '' , //성별_코드
 			hghtVal           : '' , //키_값
 			wghtVal		      : '' , //체중_값
+			BMIVal		      : '' , //BMI_값
 			raceDivCd         : '' , //인종_구분_코드
 			paging            : 'Y',
 			totalCoun         : 0  ,
@@ -44,18 +46,19 @@ let prntInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(guarNo) {
-
+        initPage: function(prntNo,sexCd) {
+			alert("initPage도착"+"prntNo: "+prntNo+"sexCd: "+sexCd);
 			let $this = this;
-			$this.resetSposDetlInfo();
+			$this.resetPrntDetlInfo();
 
-			if ( !WebUtil.isNull(guarNo) )
+			if ( !WebUtil.isNull(prntNo) )
 			{
 				let params = {
-					'guarNo' : guarNo
+					'prntNo' : prntNo,
+					'sexCd'  : sexCd
 				}
 				AjaxUtil.post({
-					url: "/user/guar/guarInfoMng/searchPrntInfoList.ab",
+					url: "/user/prnt/pantInfoMng/searchPrntInfo.ab",
 					param: params,
 					success: function(response) {
 						if ( !!response.rtnData.result)
@@ -143,18 +146,20 @@ let prntInfoDetl = new Vue({
                 }
             });
 		},
-		resetSposDetlInfo: function() {
+		resetPrntDetlInfo: function() {
 			this.params = {
 				crud              : 'C',
 				userId            : '' ,
+				stdtNo            : '' , //학생_번호
+				stdtNm            : '' , //학생_이름
 				guarNo            : '' , //보호자_번호
-				guarNm            : '' , //보호자_명
-				sposNo            : '' , //배우자_번호
-				sposNm            : '' , //배우자_명
-				sposTelNo         : '' , //배우_전화_번호
+				guarNm            : '' , //보호자_이름
+				prntNo            : '' , //학부모_번호
+				prntNm            : '' , //학부모_명
 				sexCd             : '' , //성별_코드
 				hghtVal           : '' , //키_값
 				wghtVal		      : '' , //체중_값
+				BMIVal		      : '' , //BMI_값
 				raceDivCd         : '' , //인종_구분_코드
 				paging            : 'Y',
 				totalCoun         : 0  ,

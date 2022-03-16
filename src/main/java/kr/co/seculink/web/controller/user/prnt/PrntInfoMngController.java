@@ -2,8 +2,6 @@ package kr.co.seculink.web.controller.user.prnt;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.web.excel.ExcelConstant;
 import kr.co.seculink.web.service.user.prnt.PrntInfoMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -27,29 +25,9 @@ public class PrntInfoMngController
 	@Autowired
 	private PrntInfoMngService prntInfoMngService;
 
-	//보호자(사용자)정보_리스트 조회
+	//학부모정보 상세보기
 	@ResponseBody
-	@RequestMapping("/user/guar/guarInfoMng/searchPrntInfoList.ab")
-	public RtnMsg searchPrntInfoList(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		List<Map<String, String>> result = prntInfoMngService.searchPrntInfoList(params);
-
-		if ( !GEUtil.isEmpty(params.get("paging")) ) {
-			params.put("paging", "N");
-			vo.setTotalCount(((List)prntInfoMngService.searchPrntInfoList(params)).size());
-		}
-		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
-
-	//보호자(사용자)_정보_상세보기
-	@ResponseBody
-	@RequestMapping("/user/guar/guarInfoMng/searchPrntInfo.ab")
+	@RequestMapping("/user/prnt/prntInfoMng/searchPrntInfo.ab")
 	public RtnMsg searchPrntInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
@@ -61,7 +39,7 @@ public class PrntInfoMngController
 
 		return vo;
 	}
-
+/*
 	//보호자(사용자)_정보 저장
 	@ResponseBody
 	@RequestMapping("/user/guar/guarInfoMng/savePrntInfoDetl.ab")
@@ -120,23 +98,23 @@ public class PrntInfoMngController
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
 	}
-/*
+
 	//배우자_정보 상세보기
 	@ResponseBody
-	@RequestMapping("/user/guar/guarInfoMng/searchSposInfo.ab")
+	@RequestMapping("/user/prnt/prntInfoMng/searchPrntInfo.ab")
 	public RtnMsg searchSposInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		Map<String, Object> result = prntInfoMngService.searchSposInfo(params);
+		Map<String, Object> result = prntInfoMngService.searchPrntInfo(params);
 
 		rtnMap.put("result", result);
 		vo.setRtnData(rtnMap);
 
 		return vo;
-	}
-
+	}*/
+/*
 	//배우자_정보 저장
 	@ResponseBody
 	@RequestMapping("/user/guar/guarInfoMng/saveSposInfoDetl.ab")
