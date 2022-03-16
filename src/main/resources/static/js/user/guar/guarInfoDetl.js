@@ -212,8 +212,8 @@ let guarInfoDetl = new Vue({
 				hbitAbnmAlamYn	  : '' , //심박_이상_알림_여부
 				tempAbnmAlamYn    : '' , //체온_이상_알림_여부
 				bodyHistAlamYn    : '' , //신체_기록_알림_여부
-				mealNoinAlamYn    : '' , //식사_미입력_알림_여부
-				excsNoinAlamYn    : '' , //운동_미입력_알림_여부
+				mealNinpAlamYn    : '' , //식사_미입력_알림_여부
+				excsNinpAlamYn    : '' , //운동_미입력_알림_여부
 				cbeeUseAlamYn     : '' , //캐시비_사용_알림_여부
 				batrLackAlamYn    : '' , //배터리_부족_알림_여부
 				ltrmNuseAlamYn    : '' , //장기_미사용_알림_여부

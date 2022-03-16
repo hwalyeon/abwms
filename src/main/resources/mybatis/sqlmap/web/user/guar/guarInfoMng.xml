@@ -76,20 +76,14 @@
 			                                      , self_cert_dttm 	   /* self_cert_dttm 본인_인증_일시 character(14) */
 			                                      , auto_login_yn      /* auto_login_yn 자동_로그인_여부 bpchar(1)*/
 			                                      , devc_cert_val      /* devc_cert_val 장치_인증_값*/
-			                                      , race_div_cd 	   /* race_div_cd 인종_구분_코드 character varying(20) */
-			                                      , sex_cd 			   /* sex_cd 성별_코드 character varying(20) */
-			                                      , hght_val 		   /* hght_val 키_값 numeric */
-			                                      , wght_val		   /* wght_val 체중_값 numeric */
-			                                      , bmi_val 		   /* bmi_val BMI_값 numeric */
-		<if test="sposNo != null and sposNo !=''">, spos_no            /* spos_no 배우자_번호 numeric */	</if>
 			                                      , dzone_alam_yn      /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 			                                      , szone_alam_yn      /* szone_alam_yn 세이프존_알림_여부 character(1) */
 			                                      , fall_alam_yn       /* fall_alam_yn 낙상_알림_여부 character(1) */
 			                                      , hbit_abnm_alam_yn  /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
 			                                      , temp_abnm_alam_yn  /* temp_abnm_alam_yn 체온_이상_알림_여부 character(1) */
 			                                      , body_hist_alam_yn  /* body_hist_alam_yn 신체_기록_알림_여부 character(1) */
-			                                      , meal_noin_alam_yn  /* meal_noin_alam_yn 식사_미입력_알림_여부 character(1) */
-			                                      , excs_noin_alam_yn  /* excs_noin_alam_yn 운동_미입력_알림_여부 character(1) */
+			                                      , meal_ninp_alam_yn  /* meal_noin_alam_yn 식사_미입력_알림_여부 character(1) */
+			                                      , excs_ninp_alam_yn  /* excs_noin_alam_yn 운동_미입력_알림_여부 character(1) */
 			                                      , cbee_use_alam_yn   /* cbee_use_alam_yn 캐시비_사용_알림_여부 character(1) */
 			                                      , batr_lack_alam_yn  /* batr_lack_alam_yn 배터리_부족_알림_여부 character(1) */
 			                                      , ltrm_nuse_alam_yn  /* ltrm_nuse_alam_yn 장기_미사용_알림_여부 character(1) */
@@ -109,25 +103,19 @@
 		(
 		 	                                         #{guarNo}
 			                                       , #{guarNm}
-			                                       , #{guarTelNo}
+			                                       , replace(#{guarTelNo} , '-','')
 			                                       , #{guarPw}
 			                                       , #{selfCertDttm}
 			                                       , #{autoLoginYn}
 			                                       , #{devcCertVal}
-			                                       , #{raceDivCd}
-			                                       , #{sexCd}
-			                                       , #{hghtVal}::numeric
-			                                       , #{wghtVal}::numeric
-			                                       , #{bmiVal}::numeric
-		<if test="sposNo != null and sposNo !=''"> , #{sposNo}::numeric          </if>
 			                                       , #{dzoneAlamYn}
 			                                       , #{szoneAlamYn}
 			                                       , #{fallAlamYn}
 			                                       , #{hbitAbnmAlamYn}
 			                                       , #{tempAbnmAlamYn}
 			                                       , #{bodyHistAlamYn}
-			                                       , #{mealNoinAlamYn}
-			                                       , #{excsNoinAlamYn}
+			                                       , #{mealNinpAlamYn}
+			                                       , #{excsNinpAlamYn}
 			                                       , #{cbeeUseAlamYn}
 			                                       , #{batrLackAlamYn}
 			                                       , #{ltrmNuseAlamYn}
