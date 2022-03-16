@@ -12,13 +12,6 @@ let guarInfoDetl = new Vue({
     		guarPw            : '' , //보호자_비밀번호
 			selfCertDttm      : '' , //본인_인증_일시
 			autoLoginYn       : '' , //자동_로그인_여부
-			devcCertVal       : '' , //장치_인증_값
-    		raceDivCd         : '' , //인종_구분_코드
-    		sexCd             : '' , //성별_코드
-			hghtVal           : '' , //키_값
-			wghtVal		      : '' , //체중_값
-			bmiVal		      : '' , //BMI_값
-			sposNo		      : '' , //배우자_번호
 			dzoneAlamYn       : '' , //위험지역_알림_여부
 			szoneAlamYn       : '' , //세이프존_알림_여부
 			fallAlamYn	      : '' , //낙상_발생_알림_여부
@@ -51,7 +44,7 @@ let guarInfoDetl = new Vue({
     methods: {
 
         initialize: function() {
-        	
+
         	let $this = this;
 
         	$this.initValue();
@@ -72,20 +65,18 @@ let guarInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(guarNo,stdtNo) {
-			console.log(guarNo, stdtNo);
-			let $this = this;
+        initPage: function(guarNo, stdtNo) {
 
+			let $this = this;
+			$this.resetGuarDetlInfo();
 			if (!WebUtil.isNull(guarNo))
 			{
 				let params = {
 					'guarNo' : guarNo ,
 					'stdtNo' : stdtNo
 				}
-				console.log(params);
-
 				AjaxUtil.post({
-					url: "/user/guar/guarInfoMng/searchGuarInfoList.ab",
+					url: "/user/guar/guarInfoMng/searchGuarInfo.ab",
 					param: params,
 					success: function(response) {
 						if ( !!response.rtnData.result )
@@ -96,6 +87,8 @@ let guarInfoDetl = new Vue({
 								$this.params[key] = val;
 							});
 						}
+						$this.params.entrDt = formatDate($this.params.entrDt);
+						$this.params.relsDt = formatDate($this.params.relsDt);
 					},
 					error: function (response) {
 						Swal.alert([response, 'error']);
@@ -242,39 +235,37 @@ let guarInfoDetl = new Vue({
 		},
 		resetGuarDetlInfo: function() {
 			this.params = {
-				crud           : 'C',
-				userId         : '' ,
-				stdtNo         : '' , //학생_번호
-				stdtNm         : '' , //학생_명
-				guarNo         : '' , //보호자_번호
-				guarNm         : '' , //보호자_명
-				guarTelNo      : '' , //보호자_전화_번호
-				guarPw         : '' , //보호자_비밀번호
-				selfCertDttm   : '' , //본인_인증_일시
-				autoLoginYn    : '' , //자동_로그인_여부
-				devcCertVal    : '' , //장치_인증_값
-				raceDivCd      : '' , //인종_구분_코드
-				sexCd          : '' , //성별_코드
-				hghtVal        : '' , //키_값
-				wghtVal		   : '' , //체중_값
-				bmiVal		   : '' , //BMI_값
-				sposNo		   : '' , //배우자_번호
-				dzoneMoinAlamYn: '' , //위험지역_진입_알림_여부
-				dzoneMoutAlamYn: '' , //위험지역_이탈_알림_여부
-				szoneMoinAlamYn: '' , //세이프존_진입_알림_여부
-				szoneMoutAlamYn: '' , //세이프존_이탈_알림_여부
-				fallOccrAlamYn : '' , //낙상_발생_알림_여부
-				strsAbnmAlamYn : '' , //스트레스_이상_알림_여부
-				selfCertDttm   : '' , //가입_일자
-				relsResnCntn   : '' , //해지_일자
-				relsResnCd     : '' , //해지_사유_코드
-				relsResnCntn   : '' , //해지_사유_내용
-				entrStatCd     : '' , //가입_상태_코드
-				paging         : 'Y',
-				totalCoun      : 0  ,
-				rowCount       : 30 ,
-				currentPage    : 1  ,
-				currentIndex   : 0
+				crud              : 'C',
+				userId            : '' ,
+				stdtNo            : '' , //학생_번호
+				stdtNm            : '' , //학생_명
+				guarNo            : '' , //보호자_번호
+				guarNm            : '' , //보호자_명
+				guarTelNo         : '' , //보호자_전화_번호
+				guarPw            : '' , //보호자_비밀번호
+				selfCertDttm      : '' , //본인_인증_일시
+				autoLoginYn       : '' , //자동_로그인_여부
+				dzoneAlamYn       : '' , //위험지역_알림_여부
+				szoneAlamYn       : '' , //세이프존_알림_여부
+				fallAlamYn	      : '' , //낙상_발생_알림_여부
+				hbitAbnmAlamYn	  : '' , //심박_이상_알림_여부
+				tempAbnmAlamYn    : '' , //체온_이상_알림_여부
+				bodyHistAlamYn    : '' , //신체_기록_알림_여부
+				mealNoinAlamYn    : '' , //식사_미입력_알림_여부
+				excsNoinAlamYn    : '' , //운동_미입력_알림_여부
+				cbeeUseAlamYn     : '' , //캐시비_사용_알림_여부
+				batrLackAlamYn    : '' , //배터리_부족_알림_여부
+				ltrmNuseAlamYn    : '' , //장기_미사용_알림_여부
+				entrDt            : '' , //가입_일자
+				relsDt            : '' , //해지_일자
+				relsResnCd        : '' , //해지_사유_코드
+				relsResnCntn      : '' , //해지_사유_내용
+				entrStatCd        : '' , //가입_상태_코드
+				paging            : 'Y',
+				totalCoun         : 0  ,
+				rowCount          : 30 ,
+				currentPage       : 1  ,
+				currentIndex      : 0
 	    	}
 		},
     },
