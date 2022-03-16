@@ -2,14 +2,14 @@ let strsStndCdDetl = new Vue({
     el: "#strsStndCdDetlPopup",
     data: {
 		strsStndCdInfo: {
-    		crud: 'C',
-			cdVal:'',
-			cdNm:'',
-			cdDesc:'',
+    		crud   :'C',
+			cdVal  :'',
+			cdNm   :'',
+			cdDesc :'',
 			sortOrd:'',
-			useYn:''
+			useYn  :''
     	},
-		summerNoteId2 : 'summerNoteId2',
+		summerNoteId2 :'summerNoteId2',
 		callBack      : null,
  		code: {
 			useYnList: []
@@ -91,11 +91,15 @@ let strsStndCdDetl = new Vue({
 				return false;
 			}
 
-			// $this.strsStndCdInfo.cdVal = engNumCheck($this.strsStndCdInfo.cdVal);
-
-
-
-        	return true;
+			//코드값 Valid 체크(영어 혹은 숫자만 사용 가능)
+			var cdValCheck = isValidEngNum($this.strsStndCdInfo.cdVal);
+        	if (cdValCheck == false){
+        		Swal.alert(['코드값은 영어 혹은 숫자만 가능합니다.', 'info']);
+        		$this.strsStndCdInfo.cdVal = '';
+			}
+        	else{
+        		return true;
+			}
         },
 
 		saveInfo: function() {
@@ -145,18 +149,14 @@ let strsStndCdDetl = new Vue({
 		},
 		resetstrsStndInfo: function() {
 			this.strsStndCdInfo = {
-				crud: 'C',
-				cdVal:'',
-				cdNm:'',
-				cdDesc:''
+				crud   :'C',
+				cdVal  :'',
+				cdNm   :'',
+				cdDesc :'',
+				sortOrd:'',
+				useYn  :''
 	    	}
 		}
-    },
-    computed: {
-
-    },
-    watch: {
-
     },
     mounted: function() {
         let self = this;

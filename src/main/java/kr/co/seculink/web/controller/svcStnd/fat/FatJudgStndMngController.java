@@ -23,9 +23,9 @@ public class FatJudgStndMngController
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
+	//비만판정기준 리스트 조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/fat/fatJudgStndMng/searchFatJudgList.ab")
-
 	public RtnMsg searchFatJudgList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
@@ -47,6 +47,7 @@ public class FatJudgStndMngController
 		return vo;
 	}
 
+	//비만판정 엑셀 다운로드
 	@ResponseBody
 	@RequestMapping("/svcStnd/fat/fatJudgStndMng/searchFatJudgList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -90,11 +91,9 @@ public class FatJudgStndMngController
 		return map;
 	}
 
-
-
+	//비만판정기준 상세화면
 	@ResponseBody
 	@RequestMapping("/svcStnd/fat/fatJudgStndMng/searchFatJudgStndInfo.ab")
-
 	public RtnMsg searchFatJudgStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
@@ -112,6 +111,7 @@ public class FatJudgStndMngController
 		return vo;
 	}
 
+	//비만판정기준 저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/fat/fatJudgStndMng/saveInfo.ab")
 	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {

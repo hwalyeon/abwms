@@ -21,7 +21,8 @@ public class FatJudgStndMngServiceImpl implements FatJudgStndMngService
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
-	
+
+	//비만판정기준 리스트 조회
 	public List<Map<String, String>> searchFatJudgList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatJudgStndMng.searchFatJudgList", params);

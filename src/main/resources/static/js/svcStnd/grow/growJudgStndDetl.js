@@ -86,7 +86,26 @@ let growJudgStndDetl = new Vue({
 				Swal.alert(['상세내용를 입력하세요.', 'info']);
 				return false;
 			}
-        	return true;
+
+			//성장지수 FR Valid 체크
+			var gidxToCheck = isValidNum($this.growJudgStndInfo.gidxTo);
+			if (gidxFrCheck == false){
+				Swal.alert(['성장지수_FR은 숫자 입력만 가능합니다.','info']);
+				$this.growJudgStndInfo.gidxFr = '';
+			}
+			else{
+				return true;
+			}
+			//성장지수 TO Valid 체크
+			var gidxFrCheck = isValidNum($this.growJudgStndInfo.gidxFr);
+			if (gidxToCheck == false){
+				Swal.alert(['성장지수_TO는 숫자 입력만 가능합니다.','info']);
+				$this.growJudgStndInfo.gidxTo = '';
+			}
+			else{
+				return true;
+			}
+
         },
 
 		saveInfo: function() {

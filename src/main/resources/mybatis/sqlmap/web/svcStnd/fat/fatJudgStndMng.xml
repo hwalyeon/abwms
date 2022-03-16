@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="svcStnd.fat.fatJudgStndMng">
 
+    <!-- 비만판정기준 select -->
     <select id="searchFatJudgList" parameterType="java.util.Map" resultType="MybatisMap">
         SELECT 	    fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
                    ,fn_getCdNm('FAT_JUDG_CD', fat_judg_cd) as fat_judg_nm
@@ -21,6 +22,8 @@
         WHERE
             fat_judg_cd LIKE CONCAT (#{fatJudgCd}, '%') /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
     </select>
+
+    <!-- 비만판정기준 insert -->
     <insert id="insertTiFatJudgStnd"  parameterType="java.util.Map">
         /* insertTiFatJudgStnd */
         INSERT INTO ti_fat_judg_stnd
@@ -65,6 +68,7 @@
         )
     </insert>
 
+    <!-- 비만판정기준 update -->
     <update id="updateTiFatJudgStnd" parameterType="java.util.Map">
         /* updateTiFatJudgStnd */
         UPDATE ti_fat_judg_stnd
@@ -95,6 +99,7 @@
         AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
     </update>
 
+    <!-- 비만판정기준 delete -->
     <delete id="deleteTiFatJudgStnd"  parameterType="java.util.Map" >
 		/* deleteTiFatJudgStnd */
 		DELETE FROM ti_fat_judg_stnd

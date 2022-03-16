@@ -229,12 +229,15 @@ let bandOpenInfoMng = new Vue({
                         }
                     });
             },
+
             regGuarInfoDetlPopup: function(guarNo) {
                 guarInfoDetl.initPage(guarNo, function(){bandOpenInfoMng.searchBandOpenInfoList});
             },
+
             regBandOpenInfoDetlPopup: function(bandId) {
                 bandOpenInfoDetl.initPage(bandId, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
+
             regBandSpecDetlPopup: function(bandId,guarTelNo) {
                 console.log(bandId+"번호"+guarTelNo);
                 bandSpecDetl.initPage(bandId, guarTelNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });

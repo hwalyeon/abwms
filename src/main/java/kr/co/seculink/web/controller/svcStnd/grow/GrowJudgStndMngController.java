@@ -23,9 +23,9 @@ public class GrowJudgStndMngController
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
+	//성장판정기준 리스트 조회
 	@ResponseBody
 	@RequestMapping("/svcStnd/grow/growJudgStndMng/searchGrowJudgList.ab")
-
 	public RtnMsg searchGrowJudgList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
@@ -47,6 +47,7 @@ public class GrowJudgStndMngController
 		return vo;
 	}
 
+	//성장판정기준 엑셀 다운로드
 	@ResponseBody
 	@RequestMapping("/svcStnd/grow/growJudgStndMng/searchGrowJudgList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
@@ -90,9 +91,9 @@ public class GrowJudgStndMngController
 		return map;
 	}
 
+	//성장판정기준 상세화면
 	@ResponseBody
 	@RequestMapping("/svcStnd/grow/growJudgStndMng/searchGrowJudgStndInfo.ab")
-
 	public RtnMsg searchGrowJudgStndInfo(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
@@ -111,6 +112,7 @@ public class GrowJudgStndMngController
 		return vo;
 	}
 
+	//성장판정기준 저장
 	@ResponseBody
 	@RequestMapping("/svcStnd/grow/growJudgStndMng/saveInfo.ab")
 	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {

@@ -22,12 +22,12 @@ public class GrowJudgStndMngServiceImpl implements GrowJudgStndMngService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
+	//성장판정기준 리스트 조회
 	public List<Map<String, String>> searchGrowJudgList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("svcStnd.grow.growJudgStndMng.searchGrowJudgList", params);
 
 		return result;
 	}
-
 }
 
