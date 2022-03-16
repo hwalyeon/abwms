@@ -12,8 +12,8 @@
               ,A.STDT_NO/*학생번호*/
               ,A.STDT_NM/*학생명*/
               ,I.TEL_NO/*전화번호*/
-              ,fn_getCdNm('PLC_CLSS_CD',DDD.plc_clss_cd)as PLC_CLSS_NM/*현재위치분류*/
-              ,concat('(',DDD.pstno,')',DDD.addr_base,DDD.addr_spec) as CURR_LOC
+              ,fn_getCdNm('PLC_CLSS_CD',HI.PLC_CLSS_CD)as PLC_CLSS_NM/*현재위치분류*/
+              ,HI.LOC_NM as CURR_LOC_NM/*현재위치*/
               ,H.DGEM_STAT_CD/*위험감정상태*/
               ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
               ,F.STRS_IDX/*스트레스상태*/
@@ -68,9 +68,6 @@
               TI_EORG_BASE D
               on       A.EORG_LOC_NO = D.LOC_NO
               left outer join
-              TS_LOC_INFO_BASE DDD
-              on       HI.NEAR_LOC_NO = DDD.LOC_NO
-              left outer join
               TS_STDT_STRS_HIST F
               on		 A.STDT_NO   = F.STDT_NO
               left outer join
@@ -109,7 +106,9 @@
         <if test=" guarTelNo != null and guarTelNo !='' ">
         and      B.GUAR_TEL_NO like concat('%',#{guarTelNo},'%')</if>
         <if test=" locNm != null and locNm !='' ">
-        and      D.LOC_NM      like concat('%',#{locNm},'%')</if>
+        and      D.LOC_NM      like concat('%',#{locNm},'%')
+        </if>
+        ORDER BY A.STDT_NO
         <if test=' paging == "Y" '>
         LIMIT ${rowCount} OFFSET ${currentIndex}
         </if>

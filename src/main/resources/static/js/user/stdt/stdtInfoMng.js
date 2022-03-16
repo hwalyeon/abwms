@@ -4,38 +4,39 @@ let stdtInfoMng = new Vue({
         params: {
             entrDtFr       : '' ,  //가입_일자_From
             entrDtTo       : '' ,  //가입_일자_To
-            entrDt:'',
-            guarNo:'',
-            guarNm:'',
-            telNo:'',
-            sposNm:'',
-            stdtNo:'',
-            stdtNm:'',
-            plcClssNm:'',
-            locNm:'',
-            dgemStatNm:'',
-            strsIdx:'',
-            growIdx:'',
-            fatIdx:'',
-            bandId:'',
-            telNo:'',
-            blthId:'',
-            sexNm:'',
-            bithDt:'',
-            locNo:'',
-            locNm:'',
-            bithDt:'',
-            bandStatNm:'',
-            mentStrsStatNm:'',
-            physStrsStatNm:'',
-            useCbeeAmt:'',
-            cbeeBal:'',
-            mmDd:'THIS_MONTH',
-            paging: 'Y',
-            totalCount: 0,
-            rowCount: 30,
-            currentPage: 1,
-            currentIndex: 0
+            entrDt         :'',
+            guarNo         :'',
+            guarNm         :'',
+            currLocNm      : '',
+            telNo          :'',
+            sposNm         :'',
+            stdtNo         :'',
+            stdtNm         :'',
+            plcClssNm      :'',
+            locNm          :'',
+            dgemStatNm     :'',
+            strsIdx        :'',
+            growIdx        :'',
+            fatIdx         :'',
+            bandId         :'',
+            telNo          :'',
+            blthId         :'',
+            sexNm          :'',
+            bithDt         :'',
+            locNo          :'',
+            locNm          :'',
+            bithDt         :'',
+            bandStatNm     :'',
+            mentStrsStatNm :'',
+            physStrsStatNm :'',
+            useCbeeAmt     :'',
+            cbeeBal        :'',
+            mmDd           :'THIS_MONTH',
+            paging         :'Y',
+            totalCount     : 0,
+            rowCount       : 30,
+            currentPage    : 1,
+            currentIndex   : 0
         },
         code:{
             mentGrowJudgCdList : [],
@@ -103,7 +104,7 @@ let stdtInfoMng = new Vue({
                         let telNoTemp = phoneFormatter(cellValue);
                         return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${telNoTemp}" data-band-id="${rowObject.bandId}">${telNoTemp}</a>`;}},
                 {name: "plcClssNm"         , index: "plcClssNm"         , label: "현재위치분류"		, width: 80  , align: "center" , fixed: true},
-                {name: "currLoc"           , index: "currLoc"           , label: "현재위치(주소)"	    , width: 250 , align: "center" , fixed: true},
+                {name: "currLocNm"         , index: "currLocNm"         , label: "현재위치(주소)"	    , width: 250 , align: "center" , fixed: true},
                 {name: "dgemStatNm"        , index: "dgemStatNm"        , label: "위험감정상태"	 	, width: 80  , align: "center" , fixed: true},
                 {name: "strsIdx"           , index: "strsIdx"           , label: "스트레스상태"   	, width: 80  , align: "center" , fixed: true},
                 {name: "growIdx"           , index: "growIdx"           , label: "성장상태"		 	, width: 80  , align: "center" , fixed: true},
@@ -167,7 +168,7 @@ let stdtInfoMng = new Vue({
                 gridComplete: function() {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["prntNm","prntNm2","stdtNo","locNo","stdtNm","telNo","plcClssNm","currLoc","dgemStatNm","strsIdx","growIdx","fatIdx","bandId","blthId","sexNm","bithDt","locNm","age","bandStatNm","mentStrsStatNm","physStrsStatNm","useTotal","saveTotal","cbeeBal","prntInfoDetlPopup"], "stdtNo");
+                    $(grid).tableRowSpan(["prntNm","prntNm2","stdtNo","locNo","stdtNm","telNo","plcClssNm","currLoc","currLocNm","dgemStatNm","strsIdx","growIdx","fatIdx","bandId","blthId","sexNm","bithDt","locNm","age","bandStatNm","mentStrsStatNm","physStrsStatNm","useTotal","saveTotal","cbeeBal","prntInfoDetlPopup"], "stdtNo");
 
                     //밴드 상세 팝업 생성
                     $("#grid_list").find('A.links[data-band]').on('click', function(e) {
