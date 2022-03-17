@@ -78,7 +78,7 @@
 											<th scope="row">가입 상태</th>
 											<td>
 												<select id="entrStatCd" name="entrStatCd" class="form-control width_per_100 ime-eng" v-model="params.entrStatCd">
-													<oprion value="">선택</oprion>
+													<option value="">선택</option>
 													<option v-for="item in code.entrStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 
 												</select>
@@ -100,7 +100,7 @@
 											<th scope="row">해지 사유</th>
 											<td>
 												<select id="relsResnCd" name="relsResnCd" class="form-control width_per_100 ime-eng" v-model="params.relsResnCd" :readonly="params.entrStatCd !='90'">
-													<oprion value="">선택</oprion>
+													<option value="">선택</option>
 													<option v-for="item in code.relsResnCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 												</select>
 											</td>

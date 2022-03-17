@@ -46,7 +46,6 @@ let prntInfoDetl = new Vue({
 		{
 			let $this = this;
 
-			$this.params.sexCd = sexCd;
 			$this.resetPrntDetlInfo();
 
 			if (!WebUtil.isNull(sexCd))
@@ -126,7 +125,7 @@ let prntInfoDetl = new Vue({
             });
 		},
 		resetPrntDetlInfo: function() {
-
+			let $this =this;
 			let sexCd = $this.params.sexCd;
 
 			this.params = {

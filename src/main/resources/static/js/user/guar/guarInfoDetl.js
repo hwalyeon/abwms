@@ -66,13 +66,15 @@ let guarInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(guarNo, stdtNo) {
+        initPage: function(bandId, guarNo, stdtNo) {
 
 			let $this = this;
+
 			$this.resetGuarDetlInfo();
 			if (!WebUtil.isNull(guarNo))
 			{
 				let params = {
+					'bandId' : bandId ,
 					'guarNo' : guarNo ,
 					'stdtNo' : stdtNo
 				}
@@ -82,8 +84,9 @@ let guarInfoDetl = new Vue({
 					success: function(response) {
 						if ( !!response.rtnData.result )
 						{
-							$this.params.crud = 'U';
-
+							if(response.rtnData.result.guarNo != null){
+								$this.params.crud = 'U';
+							}
 							$.each(response.rtnData.result.result, function(key, val) {
 								$this.params[key] = val;
 							});
@@ -200,6 +203,7 @@ let guarInfoDetl = new Vue({
 				userId            : '' ,
 				stdtNo            : '' , //학생_번호
 				stdtNm            : '' , //학생_명
+				prntNo            : '' , //학부모_번호
 				guarNo            : '' , //보호자_번호
 				guarNm            : '' , //보호자_명
 				guarTelNo         : '' , //보호자_전화_번호

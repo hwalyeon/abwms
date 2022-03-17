@@ -386,8 +386,8 @@ let bandOpenInfoDetl = new Vue({
                 	 Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function()
 					 {
                 		  closeModal($('#bandOpenInfoDetlPopup'));
-					      bandOpenInfoMng.searchBandOpenInfoList(true);
-                	 });
+						  if($this.callBack != null ) $this.callBack();
+					 });
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);
