@@ -78,9 +78,11 @@ let guarInfoMng = new Vue({
                                 let guarTelNoTemp = phoneFormatter(cellValue);
                                 return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup"  data-guar  data-placement="bottom" title="${guarTelNoTemp}" data-guar-no="${rowObject.guarNo}"data-stdt-no="${rowObject.stdtNo}">${guarTelNoTemp}</a>`;}},
                         {name: "stdtNo"       , index: "stdtNo"       , label: "학생번호"	 , width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regStdtInfoDetlPopup(\'' + rowObject.guarNo + '\', \'' + rowObject.stdtNo + '\')" value="신규" data-toggle="modal" data-target="#stdtInfoDetlPopup" />';
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regStdtInfoDetlPopup(\'' + rowObject.guarNo + '\', \'' + rowObject.stdtNo + '\')" value="신규" data-toggle="modal" data-target="#stdtRegDetlPopup" />';
                                 else return`<a data-toggle="modal" class="links" data-target="#stdtInfoDetlPopup" data-stdt data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
-                        {name: "stdtNm"       , index: "stdtNm"       , label: "학생명"	     , width: 80     , align: "center" },
+                        {name: "stdtNm"       , index: "stdtNm"       , label: "학생명"	     , width: 80     , align: "center" , formatter: function(cellValue, options, rowObject){
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regStdtInfoDetlPopup(\'' + rowObject.guarNo + '\', \'' + rowObject.stdtNo + '\')" value="신규" data-toggle="modal" data-target="#stdtRegDetlPopup" />';
+                                else return`<a data-toggle="modal" class="links" data-target="#stdtInfoDetlPopup" data-stdt data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
                         {name: "entrDt"       , index: "entrDt"       , label: "가입일자"	 , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){return formatDate(cellValue);}},
                         {name: "entrStatCdNm" , index: "entrStatCdNm" , label: "가입상태"	 , width: 80     , align: "center" },
                         {name: "locNm"        , index: "locNm"        , label: "학교(학원)명", width: 80     , align: "center" },
