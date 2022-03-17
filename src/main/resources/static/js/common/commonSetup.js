@@ -834,9 +834,12 @@ var getCommonCodeList = function(cdGrp, arrayObject, callback) {
 
 				for (m = 0; m < dataCnt; m++) {
 					arrayObject.push({
-						cdVal   : dataList[m].cdVal, 
-						cdNm    : dataList[m].cdNm,
-						sortOrd : dataList[m].sortOrd
+						cdVal    : dataList[m].cdVal,
+						cdNm     : dataList[m].cdNm,
+						fltrVal1 : dataList[m].fltrVal1,
+						fltrVal2 : dataList[m].fltrVal2,
+						fltrVal3 : dataList[m].fltrVal3,
+						sortOrd  : dataList[m].sortOrd
 					});
 				}
 			}

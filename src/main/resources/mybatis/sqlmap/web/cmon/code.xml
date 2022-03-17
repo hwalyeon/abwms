@@ -7,6 +7,9 @@
 	
 SELECT B.CD_VAL
       ,B.CD_NM
+      ,B.FLTR_VAL_1
+      ,B.FLTR_VAL_2
+      ,B.FLTR_VAL_3
       ,B.SORT_ORD
 FROM   TC_CD_GRP A
        INNER JOIN TC_CD_SPEC B
