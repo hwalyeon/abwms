@@ -1,132 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user.stdt.stdtInfoMng">
+    <!-- 학생정보 리스트 조회 -->
+    <select id="searchStdtInfoList" parameterType="java.util.Map" resultType="MybatisMap">
+           select   	   B.ENTR_DT/*가입일자*/
+          ,B.GUAR_NO/*학부모번호*/
+          ,B.GUAR_NM/*학부모명*/
+          ,C.PRNT_NM/*학부모1*/
+          ,CC.PRNT_NM as prnt_nm2/*학부모2*/
+          ,A.STDT_NO/*학생번호*/
+          ,A.STDT_NM/*학생명*/
+          ,I.TEL_NO/*전화번호*/
+          ,fn_getCdNm('PLC_CLSS_CD',HI.PLC_CLSS_CD)as PLC_CLSS_NM/*현재위치분류*/
+          ,HI.LOC_NM as CURR_LOC_NM/*현재위치*/
+          ,H.DGEM_STAT_CD/*위험감정상태*/
+          ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
+          ,F.STRS_IDX/*스트레스상태*/
+          ,G.GROW_IDX/*성장상태*/
+          ,G.FAT_IDX/*비만상태*/
+          ,I.BAND_ID/*밴드ID*/
+          ,I.TEL_NO/*전화번호*/
+          ,I.BLTH_ID/*블루투스 ID*/
+          ,A.SEX_CD/*성별*/
+          ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_NM
+          ,A.BITH_DT/*생년월일*/
+          ,D.LOC_NO/*소속학교번호*/
+          ,D.LOC_NM/*소속학교명*/
+          ,fn_getage(A.BITH_DT) as AGE/*나이*/
+          ,A.BAND_STAT_CD/*현재상태*/
+          ,fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) as BAND_STAT_NM
+          ,ment_strs_stat_cd/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+          ,fn_getCdNm('STRS_STAT_CD', F.MENT_STRS_STAT_CD) AS MENT_STRS_STAT_NM
+          ,phys_strs_stat_cd/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+          ,fn_getCdNm('STRS_STAT_CD', F.PHYS_STRS_STAT_CD) AS PHYS_STRS_STAT_NM
+          ,(select SUM(USE_CBEE_AMT)
+          from   TS_STDT_CBEE_HIST X
+          where  X.STDT_NO = A.STDT_NO
+          and    X.CBEE_USE_CD = 'SAVE') as SAVE_TOTAL /*적립 캐시비 사용금액*/
+          ,(select SUM(USE_CBEE_AMT)
+          from   TS_STDT_CBEE_HIST X
+          where  X.STDT_NO = A.STDT_NO
+          and    X.CBEE_USE_CD = 'USE')  as USE_TOTAL /*사용 사용금액*/
+          ,K.CBEE_BAL/*캐시비 잔액*/
+          from     TM_STDT_BASE A
+          inner join
+          TS_BAND_INFO I
+          on		 A.BAND_ID     = I.BAND_ID
+          left outer join
+          TS_STDT_LOC_HIST HI
+          on       A.loc_hist_no = HI.LOC_HIST_NO
+          left outer join
+          TM_STDT_GUAR_CONN AA
+          on       A.STDT_NO  = AA.STDT_NO
+          left outer join
+          TM_GUAR_BASE B
+          on       AA.GUAR_NO = B.GUAR_NO
+          left outer join
+          TM_PRNT_BASE C
+          on		 B.PRNT_NO   = C.PRNT_NO
+          and        C.SEX_CD    = 'MALE'
+          left outer join
+          TM_PRNT_BASE CC
+          on         B.PRNT_NO   = CC.PRNT_NO
+          and        CC.SEX_CD   = 'FEMALE'
+          left outer join
+          TI_EORG_BASE D
+          on       A.EORG_LOC_NO = D.LOC_NO
+          left outer join
+          TS_STDT_STRS_HIST F
+          on		 A.STDT_NO   = F.STDT_NO
+          left outer join
+          TS_STDT_DGEM_HIST H
+          on	     A.STDT_NO   = H.STDT_NO
+          and        A.DGEM_HIST_SEQ = H.DGEM_HIST_SEQ
+          left outer join
+          TI_DGEM_STND E
+          on		 H.ACT_DIV_CD   = E.ACT_DIV_CD
+          and        H.HBIT_STAT_CD = E.HBIT_STAT_CD
+          and        H.DGEM_STAT_CD = E.DGEM_STAT_CD
+          and        H.PLC_CLSS_CD  = E.PLC_CLSS_CD
+          and        H.TEMP_STAT_CD = E.TEMP_STAT_CD
+          left outer join
+          TS_GFIX_HIST G
+          on  	 A.STDT_NO     = G.STDT_NO
+          left outer join
+          TS_STDT_CBEE_HIST K
+          on		 A.CBEE_HIST_NO = K.CBEE_HIST_NO
+          and        A.STDT_NO      = K.STDT_NO
+          where      1=1
+    <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
+    and B.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>
+    <if test=" stdtNo != null and stdtNo !='' ">
+    and      A.STDT_NO     = #{stdtNo}::numeric</if>
+    <if test=" stdtNm != null and stdtNm !='' ">
+    and      A.STDT_NM     like concat('%',#{stdtNm},'%')</if>
+    <if test=" telNo != null and telNo !='' ">
+    and      I.TEL_NO      like concat('%',#{telNo},'%')</if>
+    <if test=" bandId != null and bandId !='' ">
+    and      I.BAND_ID     like concat('%',#{bandId},'%')</if>
+    <if test=" guarNo != null and guarNo !='' ">
+    and      B.GUAR_NO     = #{guarNo}::numeric</if>
+    <if test=" sposNm != null and sposNm !='' ">
+    and      C.SPOS_NM 	   like concat('%',#{sposNm},'%')</if>
+    <if test=" guarTelNo != null and guarTelNo !='' ">
+    and      B.GUAR_TEL_NO like concat('%',#{guarTelNo},'%')</if>
+    <if test=" locNm != null and locNm !='' ">
+    and      D.LOC_NM      like concat('%',#{locNm},'%')</if>
+    ORDER BY A.STDT_NO
+    <if test=' paging == "Y" '>
+    LIMIT ${rowCount} OFFSET ${currentIndex}
+    </if>
+    </select>
 
-       <!-- 학생정보 리스트 조회 -->
-       <select id="searchStdtInfoList" parameterType="java.util.Map" resultType="MybatisMap">
-              select   	   B.ENTR_DT/*가입일자*/
-              ,B.GUAR_NO/*학부모번호*/
-              ,B.GUAR_NM/*학부모명*/
-              ,C.PRNT_NM/*학부모1*/
-              ,CC.PRNT_NM as prnt_nm2/*학부모2*/
-              ,A.STDT_NO/*학생번호*/
-              ,A.STDT_NM/*학생명*/
-              ,I.TEL_NO/*전화번호*/
-              ,fn_getCdNm('PLC_CLSS_CD',HI.PLC_CLSS_CD)as PLC_CLSS_NM/*현재위치분류*/
-              ,HI.LOC_NM as CURR_LOC_NM/*현재위치*/
-              ,H.DGEM_STAT_CD/*위험감정상태*/
-              ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
-              ,F.STRS_IDX/*스트레스상태*/
-              ,G.GROW_IDX/*성장상태*/
-              ,G.FAT_IDX/*비만상태*/
-              ,I.BAND_ID/*밴드ID*/
-              ,I.TEL_NO/*전화번호*/
-              ,I.BLTH_ID/*블루투스 ID*/
-              ,A.SEX_CD/*성별*/
-              ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_NM
-              ,A.BITH_DT/*생년월일*/
-              ,D.LOC_NO/*소속학교번호*/
-              ,D.LOC_NM/*소속학교명*/
-              ,fn_getage(A.BITH_DT) as AGE/*나이*/
-              ,A.BAND_STAT_CD/*현재상태*/
-              ,fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) as BAND_STAT_NM
-              ,ment_strs_stat_cd/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
-              ,fn_getCdNm('STRS_STAT_CD', F.MENT_STRS_STAT_CD) AS MENT_STRS_STAT_NM
-              ,phys_strs_stat_cd/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-              ,fn_getCdNm('STRS_STAT_CD', F.PHYS_STRS_STAT_CD) AS PHYS_STRS_STAT_NM
-              ,(select SUM(USE_CBEE_AMT)
-              from   TS_STDT_CBEE_HIST X
-              where  X.STDT_NO = A.STDT_NO
-              and    X.CBEE_USE_CD = 'SAVE') as SAVE_TOTAL /*적립 캐시비 사용금액*/
-              ,(select SUM(USE_CBEE_AMT)
-              from   TS_STDT_CBEE_HIST X
-              where  X.STDT_NO = A.STDT_NO
-              and    X.CBEE_USE_CD = 'USE')  as USE_TOTAL /*사용 사용금액*/
-              ,K.CBEE_BAL/*캐시비 잔액*/
-              from     TM_STDT_BASE A
-              inner join
-              TS_BAND_INFO I
-              on		 A.BAND_ID     = I.BAND_ID
-              left outer join
-              TS_STDT_LOC_HIST HI
-              on       A.loc_hist_no = HI.LOC_HIST_NO
-              left outer join
-              TM_STDT_GUAR_CONN AA
-              on       A.STDT_NO  = AA.STDT_NO
-              left outer join
-              TM_GUAR_BASE B
-              on       AA.GUAR_NO = B.GUAR_NO
-              left outer join
-              TM_PRNT_BASE C
-              on		 B.PRNT_NO   = C.PRNT_NO
-              and        C.SEX_CD    = 'MALE'
-              left outer join
-              TM_PRNT_BASE CC
-              on         B.PRNT_NO   = CC.PRNT_NO
-              and        CC.SEX_CD   = 'FEMALE'
-              left outer join
-              TI_EORG_BASE D
-              on       A.EORG_LOC_NO = D.LOC_NO
-              left outer join
-              TS_STDT_STRS_HIST F
-              on		 A.STDT_NO   = F.STDT_NO
-              left outer join
-              TS_STDT_DGEM_HIST H
-              on	     A.STDT_NO   = H.STDT_NO
-              and        A.DGEM_HIST_SEQ = H.DGEM_HIST_SEQ
-              left outer join
-              TI_DGEM_STND E
-              on		 H.ACT_DIV_CD   = E.ACT_DIV_CD
-              and        H.HBIT_STAT_CD = E.HBIT_STAT_CD
-              and        H.DGEM_STAT_CD = E.DGEM_STAT_CD
-              and        H.PLC_CLSS_CD  = E.PLC_CLSS_CD
-              and        H.TEMP_STAT_CD = E.TEMP_STAT_CD
-              left outer join
-              TS_GFIX_HIST G
-              on  	 A.STDT_NO     = G.STDT_NO
-              left outer join
-              TS_STDT_CBEE_HIST K
-              on		 A.CBEE_HIST_NO = K.CBEE_HIST_NO
-              and        A.STDT_NO      = K.STDT_NO
-              where      1=1
-       <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-        and B.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>
-        <if test=" stdtNo != null and stdtNo !='' ">
-        and      A.STDT_NO     = #{stdtNo}::numeric</if>
-        <if test=" stdtNm != null and stdtNm !='' ">
-        and      A.STDT_NM     like concat('%',#{stdtNm},'%')</if>
-        <if test=" telNo != null and telNo !='' ">
-        and      I.TEL_NO      like concat('%',#{telNo},'%')</if>
-        <if test=" bandId != null and bandId !='' ">
-        and      I.BAND_ID     like concat('%',#{bandId},'%')</if>
-        <if test=" guarNo != null and guarNo !='' ">
-        and      B.GUAR_NO     = #{guarNo}::numeric</if>
-        <if test=" sposNm != null and sposNm !='' ">
-        and      C.SPOS_NM 	   like concat('%',#{sposNm},'%')</if>
-        <if test=" guarTelNo != null and guarTelNo !='' ">
-        and      B.GUAR_TEL_NO like concat('%',#{guarTelNo},'%')</if>
-        <if test=" locNm != null and locNm !='' ">
-        and      D.LOC_NM      like concat('%',#{locNm},'%')
-        </if>
-        ORDER BY A.STDT_NO
-        <if test=' paging == "Y" '>
-        LIMIT ${rowCount} OFFSET ${currentIndex}
-        </if>
-        </select>
+   <!--학생정보 insert -->
+   <insert id="insertTmStdtBase"  parameterType="java.util.Map" >
+       <selectKey keyProperty="stdtNo" resultType="int" order="BEFORE">
+           select nextval('tm_stdt_base_seq')
+       </selectKey>
+   /* insertTmStdtBase */
+   INSERT INTO tm_stdt_base
+   (
+        stdt_no /* stdt_no 학생_번호 numeric */
+       ,stdt_nm /* stdt_nm 학생_명 character varying(40) */
+       ,band_id /* band_id 밴드_ID character varying(20) */
+       ,eorg_loc_no /* eorg_loc_no 교육시설_위치_번호 numeric */
+       ,sgrd_cd /* sgrd_cd 학년_코드 character varying(20) */
+       ,sex_cd /* sex_cd 성별_코드 character varying(20) */
+       ,bith_dt /* bith_dt 생일_일자 character(8) */
+       ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+       ,grow_mesu_dt
+       ,reg_dt /* reg_dt 등록_일자 character(8) */
+       ,reg_tm /* reg_tm 등록_시각 character(6) */
+       ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+       ,upt_dt /* upt_dt 수정_일자 character(8) */
+       ,upt_tm /* upt_tm 수정_시각 character(6) */
+       ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+   )
+   VALUES
+   (
+        #{stdtNo}  /* stdt_no 학생_번호 numeric */
+       ,#{stdtNm} /* stdt_nm 학생_명 character varying(40) */
+       ,#{bandId} /* band_id 밴드_ID character varying(20) */
+       ,${eorgLocNo} /* eorg_loc_no 교육시설_위치_번호 numeric */
+       ,#{sgrdCd} /* sgrd_cd 학년_코드 character varying(20) */
+       ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
+       ,replace(#{bithDt} , '-' , '') /* bith_dt 생일_일자 character(8) */
+       ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+       ,TO_CHAR(NOW(), 'YYYYMMDD')
+       ,TO_CHAR(NOW(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+       ,TO_CHAR(NOW(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+       ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+       ,TO_CHAR(NOW(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+       ,TO_CHAR(NOW(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+       ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+   )
+   </insert>
 
-       <!--학생정보 insert -->
-       <insert id="insertTmStdtBase"  parameterType="java.util.Map" >
-       /* insertTmStdtBase */
-       INSERT INTO tm_stdt_base
+    <!--학생정보 insert -->
+    <insert id="insertTsStdtGrowHist"  parameterType="java.util.Map" >
+       /* insertTsStdtGrowHist */
+       INSERT INTO ts_stdt_grow_hist
        (
             stdt_no /* stdt_no 학생_번호 numeric */
-           ,stdt_nm /* stdt_nm 학생_명 character varying(40) */
-           ,band_id /* band_id 밴드_ID character varying(20) */
-           ,eorg_loc_no /* eorg_loc_no 교육시설_위치_번호 numeric */
-           ,sgrd_cd /* sgrd_cd 학년_코드 character varying(20) */
-           ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-           ,bith_dt /* bith_dt 생일_일자 character(8) */
-           ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+           ,mesu_dt
+           ,hght_unit_cd
+           ,hght_val
+           ,wght_unit_cd
+           ,wght_val
+           ,wast_unit_cd
+           ,wast_val
            ,reg_dt /* reg_dt 등록_일자 character(8) */
            ,reg_tm /* reg_tm 등록_시각 character(6) */
            ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -136,14 +178,14 @@
        )
        VALUES
        (
-            stdt_no /* stdt_no 학생_번호 numeric */
-           ,#{stdtNm} /* stdt_nm 학생_명 character varying(40) */
-           ,#{bandId} /* band_id 밴드_ID character varying(20) */
-           ,#{eorgLocNo} /* eorg_loc_no 교육시설_위치_번호 numeric */
-           ,#{sgrdCd} /* sgrd_cd 학년_코드 character varying(20) */
-           ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
-           ,#{bithDt} /* bith_dt 생일_일자 character(8) */
-           ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+            #{stdtNo}
+           ,TO_CHAR(NOW(), 'YYYYMMDD')
+           ,'CM'
+           ,${hghtVal}
+           ,'KG'
+           ,${wghtVal}
+           ,'INCH'
+           ,${wastVal}
            ,TO_CHAR(NOW(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
            ,TO_CHAR(NOW(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
            ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -151,290 +193,401 @@
            ,TO_CHAR(NOW(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
            ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
        )
-       </insert>
+   </insert>
 
-       <!--학생정보 update -->
-       <update id="updateTmStdtBase"  parameterType="java.util.Map" >
-              /* updateTiGrowJudgStnd */
-              UPDATE tm_stdt_base
-              <trim prefix="SET" prefixOverrides=",">
-                <if test="stdtNm != null">
-                    ,stdt_nm = #{stdtNm}
-                </if>
-                <if test="bandId != null">
-                    ,band_id = #{bandId}
-                </if>
-                <if test="eorgLocNo != null">
-                    ,eorg_loc_no = #{eorgLocNo}
-                </if>
-                <if test="sgrdCd != null">
-                    ,sgrd_cd = #{sgrdCd}
-                </if>
-                <if test="sexCd != null">
-                    ,sex_cd = #{sexCd}
-                </if>
-                <if test="bithDt != null">
-                    ,bith_dt = #{bithDt}
-                </if>
-                <if test="raceDivCd != null">
-                    ,race_div_cd = #{raceDivCd}
-                </if>
-                ,upt_dt = TO_CHAR(NOW(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
-                ,upt_tm = TO_CHAR(NOW(), 'HH24MISS')  /* upt_tm 수정_시각 character(6) */
-                ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-              </trim>
-              WHERE  1 = 1
-              AND    stdt_no = #{stdtNo}
-       </update>
-
-       <!--학생정보 delete -->
-       <delete id="deleteTmStdtBase"  parameterType="java.util.Map" >
-		/* deleteTmStdtBase */
-		update FROM tm_stdt_base
-		set del_yn ='Y'
-		   ,del_dt = TO_CHAR(NOW(), 'YYYYMMDD')
-		WHERE  1 = 1
-		AND    stdt_no = #{stdtNo} /* grow_judg_cd 성장_판정_코드 character varying(20) */
-	   </delete>
-
+    <insert id="insertTsDdHbitHist"  parameterType="java.util.Map" >
+       /* insertTsDdHbitHist */
+       insert into ts_dd_hbit_hist
+       (
+             stdt_no
+            ,stnd_dt
+            ,vald_yn
+            ,bot_blck_val
+            ,down_blck_val
+            ,uppr_blck_val
+            ,top_blck_val
+            ,reg_dt /* reg_dt 등록_일자 character(8) */
+            ,reg_tm /* reg_tm 등록_시각 character(6) */
+            ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+            ,upt_dt /* upt_dt 수정_일자 character(8) */
+            ,upt_tm /* upt_tm 수정_시각 character(6) */
+            ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+       )
+       select
+             ${stdtNo}                                                         as stdt_no
+            ,to_char(now(), 'YYYYMMDD')                                        as stnd_dt
+            ,'N'                                                               as vald_yn
+            ,max(case when hbit_stat_cd = 'LOW'   then hbit_cnt_fr else 0 end) as bot_blck_val
+            ,max(case when hbit_stat_cd = 'NORM'  then hbit_cnt_fr else 0 end) as down_blck_val
+            ,max(case when hbit_stat_cd = 'HIGH'  then hbit_cnt_fr else 0 end) as uppr_blck_val
+            ,max(case when hbit_stat_cd = 'VHIGH' then hbit_cnt_fr else 0 end) as top_blck_val
+            ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+            ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+            ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+            ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+            ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+            ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+       from   ti_hbit_stat_stnd a
+       where  1 = 1
+       and    hbit_stat_cd != 'VLOW'
+       and    exists(select 1
+                      from   tm_stdt_base
+                      where  1 = 1
+                      and    a.sex_cd   = sex_cd
+                      and    a.age_ycnt = fn_getAge(bith_dt)
+                      and    stdt_no    = ${stdtNo})
+    </insert>
 
 
-        <select id="searchStdtDetlInfo" parameterType="java.util.Map" resultType="MybatisMap">
-        with stdt_info as (
-	          select
-		            tsb.stdt_no
-		           ,tsb.stdt_nm
-		           ,tsgc.guar_no
-		           ,tsb.band_id
-		           ,tsb.eorg_loc_no
-		           ,(select loc_nm from ti_eorg_base where loc_no = tsb.eorg_loc_no limit 1) as eorg_loc_nm
-		           ,tsb.sgrd_cd
-		           ,fn_getcdnm('SGRD_CD',tsb.sgrd_cd) as sgrd_nm
-		           ,tsb.sex_cd
-		           ,fn_getcdnm('SEX_CD' ,tsb.sex_cd) as sex_nm
-		           ,tsb.bith_dt
-		           ,tsb.race_div_cd
-		           ,fn_getcdnm('RACE_DIV_CD' ,tsb.race_div_cd) as race_div_nm
-		           ,tsb.band_stat_cd
-		           ,fn_getcdnm('BAND_STAT_CD' ,tsb.band_stat_cd) as band_stat_nm
-		           ,to_char(to_timestamp(tsb.band_comm_dttm , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as band_comm_dttm
-		           ,tsb.band_chrg_qty
-		           ,tsb.grow_mesu_dt
-		           ,tsb.dact_judg_no
-		           ,tsb.dgem_hist_seq
-		           ,tsb.strs_hist_seq
-		           ,tsb.loc_hist_no
-		           ,tsb.cbee_hist_no
-		           ,tsb.gfix_dt
-		           ,tgb.guar_nm
-		           ,tgb.guar_tel_no
-		           ,tsgh.hght_val
-		           ,tsgh.wght_val
-		           ,tsgh.wast_val
-		           ,tgb.prnt_no
-	         from tm_stdt_base tsb                 /* 학생 */
-	         inner join tm_stdt_guar_conn tsgc
-   	           on tsb.stdt_no = tsgc.stdt_no
-             inner join tm_guar_base tgb           /* 보호자 */
-               on tsgc.guar_no = tgb.guar_no
-             left outer join ts_stdt_grow_hist tsgh /*학생 성장기록*/
-               on tsb.stdt_no  = tsgh.stdt_no
-              and tsb.grow_mesu_dt  = tsgh.mesu_dt
-	         where tsb.stdt_no = #{stdtNo}::numeric
-	          and  tgb.guar_no = #{guarNo}::numeric
-        )
-        , prnt_info as (
-            select prnt_no
-                  ,max(prnt_male) as prnt_male
-                  ,max(prnt_female) as prnt_female
-            from
-	        	(
-	        	select
-	        	     tpb.prnt_no
-	        	     ,case when tpb.sex_cd = 'MALE' then tpb.prnt_nm else '' end as prnt_male
-	        	     ,case when tpb.sex_cd = 'FEMALE' then tpb.prnt_nm else '' end as prnt_female
-	        	from stdt_info stdt
-	        	inner join tm_prnt_base tpb
-        		on stdt.prnt_no = tpb.prnt_no
-        		) as prnt
-        	group by prnt_no
-        )
-        , loc_list as (
-          /* 위치 */
-             select
-                   tslh.stdt_no
-	              ,tslh.loc_hist_no
-	              ,tslh.plc_clss_cd
-	              ,fn_getcdnm('PLC_CLSS_CD'               ,tslh.plc_clss_cd) as plc_clss_nm
-	              ,tlib.loc_nm
-	              ,tslh.lat_val
-	              ,tslh.lon_val
-	              ,to_char(to_timestamp(tslh.occr_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as occr_dttm
-            from ts_stdt_loc_hist tslh
-            inner join stdt_info stdt
-               on tslh.stdt_no = stdt.stdt_no
-              and tslh.loc_hist_no = stdt.loc_hist_no
-            inner join ts_loc_info_base tlib
-               on tslh.near_loc_no = tlib.loc_no
-        )
-        , grow_stat_list as (
-        /* 위험감정 */
-             select
-                  tsdh.stdt_no
-	             ,tsdh.dgem_hist_seq
-	             ,tds.dgem_smry_cntn
-	             ,tds.dgem_stat_cntn
-                 ,tslh.plc_clss_cd
-	             ,fn_getcdnm('PLC_CLSS_CD' ,tslh.plc_clss_cd) as plc_clss_nm
-	             ,tlib.loc_nm
-	             ,tlib.plc_cd
-	             ,fn_getcdnm('PLC_CD' , tlib.plc_cd) as plc_nm
-	             ,tjb.hbit_mdan
-	             ,tsdh.hbit_stat_cd
-	             ,fn_getcdnm('HBIT_STAT_CD' , tsdh.hbit_stat_cd) as hbit_stat_nm
-	             ,tjb.temp_val
-	             ,fn_getcdnm('TEMP_STAT_CD' , tsdh.temp_stat_cd) as temp_stat_nm
-	             ,to_char(to_timestamp(tsdh.loc_mesu_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as loc_mesu_dttm
-	             ,tsdh.dgem_idx
-	             ,tsdh.dgem_stat_cd
-	             ,fn_getcdnm('DGEM_STAT_CD' , tsdh.dgem_stat_cd) as dgem_stat_nm
-             from ts_stdt_dgem_hist tsdh      /* 학생위험상태 */
-             inner join stdt_info stdt
-               on tsdh.stdt_no = stdt.stdt_no
-              and tsdh.dgem_hist_seq = stdt.dgem_hist_seq
-             inner join ti_dgem_stnd tds
-               on tsdh.act_div_cd = tds.act_div_cd
-              and tsdh.hbit_stat_cd = tds.hbit_stat_cd
-              and tsdh.plc_clss_cd = tds.plc_clss_cd
-              and tsdh.temp_stat_cd = tds.temp_stat_cd
-             inner join ts_stdt_loc_hist tslh
-               on  tsdh.stdt_no = tslh.stdt_no
-              and tsdh.loc_hist_no = tslh.loc_hist_no
-             inner join ts_loc_info_base tlib
-               on tslh.near_loc_no = tlib.loc_no
-             inner join td_judg_base tjb
-               on tsdh.judg_no = tjb.judg_no
-        )
-       , gfix_list as (
-        /* 성장,비만지수 */
+
+   <!--학생정보 update -->
+   <update id="updateTmStdtBase"  parameterType="java.util.Map" >
+          /* updateTiGrowJudgStnd */
+          UPDATE tm_stdt_base
+          <trim prefix="SET" prefixOverrides=",">
+            <if test="stdtNm != null">
+                ,stdt_nm = #{stdtNm}
+            </if>
+            <if test="bandId != null">
+                ,band_id = #{bandId}
+            </if>
+            <if test="eorgLocNo != null">
+                ,eorg_loc_no = #{eorgLocNo}
+            </if>
+            <if test="sgrdCd != null">
+                ,sgrd_cd = #{sgrdCd}
+            </if>
+            <if test="sexCd != null">
+                ,sex_cd = #{sexCd}
+            </if>
+            <if test="bithDt != null">
+                ,bith_dt = #{bithDt}
+            </if>
+            <if test="raceDivCd != null">
+                ,race_div_cd = #{raceDivCd}
+            </if>
+            ,upt_dt = TO_CHAR(NOW(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+            ,upt_tm = TO_CHAR(NOW(), 'HH24MISS')  /* upt_tm 수정_시각 character(6) */
+            ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+          </trim>
+          WHERE  1 = 1
+          AND    stdt_no = #{stdtNo}
+   </update>
+
+    <!--학생정보 update -->
+    <update id="updateTsStdtGrowHist"  parameterType="java.util.Map" >
+        /* updateTsStdtGrowHist */
+        UPDATE ts_stdt_grow_hist
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="hghtVal != null">
+                ,hght_val = #{hghtVal}
+            </if>
+            <if test="wghtVal != null">
+                ,wght_val = #{wghtVal}
+            </if>
+            <if test="wastVal != null">
+                ,wast_val = #{wastVal}
+            </if>
+            ,upt_dt = TO_CHAR(NOW(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+            ,upt_tm = TO_CHAR(NOW(), 'HH24MISS')  /* upt_tm 수정_시각 character(6) */
+            ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+        </trim>
+        WHERE  1 = 1
+        AND    stdt_no = #{stdtNo}
+        AND    mesu_dt = #{growMesuDt}
+    </update>
+
+   <!--학생정보 delete -->
+   <delete id="deleteTmStdtBase"  parameterType="java.util.Map" >
+    /* deleteTmStdtBase */
+    update FROM tm_stdt_base
+    set del_yn ='Y'
+       ,del_dt = TO_CHAR(NOW(), 'YYYYMMDD')
+    WHERE  1 = 1
+    AND    stdt_no = #{stdtNo} /* grow_judg_cd 성장_판정_코드 character varying(20) */
+   </delete>
+
+    <select id="searchStdtDetlInfo" parameterType="java.util.Map" resultType="MybatisMap">
+    with stdt_info as (
+          select
+                tsb.stdt_no
+               ,tsb.stdt_nm
+               ,tsgc.guar_no
+               ,tsb.band_id
+               ,tsb.eorg_loc_no
+               ,(select loc_nm from ti_eorg_base where loc_no = tsb.eorg_loc_no limit 1) as eorg_loc_nm
+               ,tsb.sgrd_cd
+               ,fn_getcdnm('SGRD_CD',tsb.sgrd_cd) as sgrd_nm
+               ,tsb.sex_cd
+               ,fn_getcdnm('SEX_CD' ,tsb.sex_cd) as sex_nm
+               ,tsb.bith_dt
+               ,tsb.race_div_cd
+               ,fn_getcdnm('RACE_DIV_CD' ,tsb.race_div_cd) as race_div_nm
+               ,tsb.band_stat_cd
+               ,fn_getcdnm('BAND_STAT_CD' ,tsb.band_stat_cd) as band_stat_nm
+               ,to_char(to_timestamp(tsb.band_comm_dttm , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as band_comm_dttm
+               ,tsb.band_chrg_qty
+               ,tsb.grow_mesu_dt
+               ,tsb.dact_judg_no
+               ,tsb.dgem_hist_seq
+               ,tsb.strs_hist_seq
+               ,tsb.loc_hist_no
+               ,tsb.cbee_hist_no
+               ,tsb.gfix_dt
+               ,tgb.guar_nm
+               ,tgb.guar_tel_no
+               ,tsgh.hght_val
+               ,tsgh.wght_val
+               ,tsgh.wast_val
+               ,tgb.prnt_no
+         from tm_stdt_base tsb                 /* 학생 */
+         inner join tm_stdt_guar_conn tsgc
+           on tsb.stdt_no = tsgc.stdt_no
+         inner join tm_guar_base tgb           /* 보호자 */
+           on tsgc.guar_no = tgb.guar_no
+         left outer join ts_stdt_grow_hist tsgh /*학생 성장기록*/
+           on tsb.stdt_no  = tsgh.stdt_no
+          and tsb.grow_mesu_dt  = tsgh.mesu_dt
+         where tsb.stdt_no = #{stdtNo}::numeric
+          and  tgb.guar_no = #{guarNo}::numeric
+    )
+    , prnt_info as (
+        select prnt_no
+              ,max(prnt_male) as prnt_male
+              ,max(prnt_female) as prnt_female
+        from
+            (
             select
-                  tgh.stdt_no
-                 ,tgh.gfix_dt
-                 ,tgh.grow_idx
-                 ,tgh.grow_judg_cd
-                 ,fn_getcdnm('GROW_JUDG_CD' , tgh.grow_judg_cd) as grow_judg_nm
-                 ,tgh.fat_idx
-                 ,tgjs.smry_cntn
-                 ,tgjs.spec_cntn
-                 ,fn_getcdnm('FAT_JUDG_CD' , tgh.fat_judg_cd) as fat_judg_nm
-                 ,tfjs.curr_eval_cntn
-                 ,fn_getcdnm('FAT_JUDG_CD' , tgh.prdt_fat_judg_cd) as prdt_fat_judg_nm
-                 ,tgh.cal_eat_qty
-                 ,tgh.cal_csum_qty
-                 ,tgh.pal_val
-                 ,tgh.cal_nutr_stat_cd
-                 ,fn_getcdnm('NUTR_STAT_CD' , tgh.cal_nutr_stat_cd) as cal_nutr_stat_nm
-                 ,to_char(to_timestamp(tgh.upt_dt||tgh.upt_tm ,'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') as gfix_upt_dttm
-            from ts_gfix_hist tgh /* 성장이력 */
-            inner join stdt_info stdt
-               on tgh.stdt_no = tgh.stdt_no
-              and tgh.gfix_dt = stdt.gfix_dt
-            inner join ti_grow_judg_stnd tgjs
-               on tgh.grow_judg_cd = tgjs.grow_judg_cd
-            inner join ti_fat_judg_stnd tfjs
-               on tgh.fat_judg_cd = tfjs.fat_judg_cd
-        )
-        , strs_list as (
-        /* 스트레스 */
-            select
-                  tssh.stdt_no
-                 ,tssh.strs_hist_seq
-                 ,tssh.hbit_mdan  as strt_hbit_mdan
-                 ,tssh.avg_hbit_cnt
-                 ,tssh.ment_strs_pnt
-                 ,tssh.ment_strs_stat_cd
-                 ,fn_getcdnm('STRS_STAT_CD' , tssh.ment_strs_stat_cd) as ment_strs_stat_nm
-                 ,tssh.phys_strs_pnt
-                 ,tssh.phys_strs_stat_cd
-                 ,fn_getcdnm('STRS_STAT_CD' , tssh.phys_strs_stat_cd) as phys_strs_stat_nm
-                 ,tssh.strs_cope_pnt
-                 ,tssh.strs_cope_stat_cd
-                 ,fn_getcdnm('STRS_COPE_STAT_CD' , tssh.strs_cope_stat_cd) as strs_cope_stat_nm
-                 ,to_char(to_timestamp(tssh.upt_dt||tssh.upt_tm ,'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') as strs_upt_dttm
-            from ts_stdt_strs_hist tssh
-            inner join stdt_info stdt
-               on tssh.stdt_no = stdt.stdt_no
-            and tssh.strs_hist_seq = stdt.strs_hist_seq
-        )
+                 tpb.prnt_no
+                 ,case when tpb.sex_cd = 'MALE' then tpb.prnt_nm else '' end as prnt_male
+                 ,case when tpb.sex_cd = 'FEMALE' then tpb.prnt_nm else '' end as prnt_female
+            from stdt_info stdt
+            inner join tm_prnt_base tpb
+            on stdt.prnt_no = tpb.prnt_no
+            ) as prnt
+        group by prnt_no
+    )
+    , loc_list as (
+      /* 위치 */
+         select
+               tslh.stdt_no
+              ,tslh.loc_hist_no
+              ,tslh.plc_clss_cd
+              ,fn_getcdnm('PLC_CLSS_CD'               ,tslh.plc_clss_cd) as plc_clss_nm
+              ,tlib.loc_nm
+              ,tslh.lat_val
+              ,tslh.lon_val
+              ,to_char(to_timestamp(tslh.occr_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as occr_dttm
+        from ts_stdt_loc_hist tslh
+        inner join stdt_info stdt
+           on tslh.stdt_no = stdt.stdt_no
+          and tslh.loc_hist_no = stdt.loc_hist_no
+        inner join ts_loc_info_base tlib
+           on tslh.near_loc_no = tlib.loc_no
+    )
+    , grow_stat_list as (
+    /* 위험감정 */
+         select
+              tsdh.stdt_no
+             ,tsdh.dgem_hist_seq
+             ,tds.dgem_smry_cntn
+             ,tds.dgem_stat_cntn
+             ,tslh.plc_clss_cd
+             ,fn_getcdnm('PLC_CLSS_CD' ,tslh.plc_clss_cd) as plc_clss_nm
+             ,tlib.loc_nm
+             ,tlib.plc_cd
+             ,fn_getcdnm('PLC_CD' , tlib.plc_cd) as plc_nm
+             ,tjb.hbit_mdan
+             ,tsdh.hbit_stat_cd
+             ,fn_getcdnm('HBIT_STAT_CD' , tsdh.hbit_stat_cd) as hbit_stat_nm
+             ,tjb.temp_val
+             ,fn_getcdnm('TEMP_STAT_CD' , tsdh.temp_stat_cd) as temp_stat_nm
+             ,to_char(to_timestamp(tsdh.loc_mesu_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as loc_mesu_dttm
+             ,tsdh.dgem_idx
+             ,tsdh.dgem_stat_cd
+             ,fn_getcdnm('DGEM_STAT_CD' , tsdh.dgem_stat_cd) as dgem_stat_nm
+         from ts_stdt_dgem_hist tsdh      /* 학생위험상태 */
+         inner join stdt_info stdt
+           on tsdh.stdt_no = stdt.stdt_no
+          and tsdh.dgem_hist_seq = stdt.dgem_hist_seq
+         inner join ti_dgem_stnd tds
+           on tsdh.act_div_cd = tds.act_div_cd
+          and tsdh.hbit_stat_cd = tds.hbit_stat_cd
+          and tsdh.plc_clss_cd = tds.plc_clss_cd
+          and tsdh.temp_stat_cd = tds.temp_stat_cd
+         inner join ts_stdt_loc_hist tslh
+           on  tsdh.stdt_no = tslh.stdt_no
+          and tsdh.loc_hist_no = tslh.loc_hist_no
+         inner join ts_loc_info_base tlib
+           on tslh.near_loc_no = tlib.loc_no
+         inner join td_judg_base tjb
+           on tsdh.judg_no = tjb.judg_no
+    )
+   , gfix_list as (
+    /* 성장,비만지수 */
         select
-              stdt.*
-             ,tbi.band_id
-             ,tbi.tel_no  as band_tel_no
-	         ,loc.plc_clss_cd
-	         ,loc.plc_clss_nm
-	         ,loc.loc_nm
-	         ,loc.lat_val
-	         ,loc.lon_val
-	         ,loc.lat_val || ' / ' || loc.lon_val as lat_lon_val
-	         ,loc.occr_dttm
-	         ,grow.dgem_smry_cntn
-	         ,grow.dgem_stat_cntn
-	         ,grow.plc_clss_cd as grow_plc_clss_cd
-	         ,grow.plc_clss_nm as grow_plc_clss_nm
-	         ,grow.loc_nm as grow_loc_nm
-	         ,grow.plc_cd
-	         ,grow.plc_nm
-	         ,grow.hbit_mdan
-	         ,grow.hbit_stat_cd
-	         ,grow.hbit_stat_nm
-	         ,grow.temp_val
-	         ,grow.dgem_idx
-	         ,grow.temp_stat_nm
-	         ,grow.dgem_stat_cd
-	         ,grow.dgem_stat_nm
-	         ,grow.loc_mesu_dttm
-	         ,gfix.grow_idx
-	         ,gfix.grow_judg_cd
-	         ,gfix.grow_judg_nm
-	         ,gfix.smry_cntn
-	         ,gfix.spec_cntn
-	         ,gfix.fat_idx
-	         ,gfix.fat_judg_nm
-	         ,gfix.curr_eval_cntn
-	         ,gfix.prdt_fat_judg_nm
-	         ,strs.avg_hbit_cnt
-	         ,strs.ment_strs_pnt
-             ,strs.ment_strs_stat_cd
-             ,strs.ment_strs_stat_nm
-             ,strs.phys_strs_pnt
-             ,strs.phys_strs_stat_cd
-             ,strs.phys_strs_stat_nm
-             ,strs.strs_cope_pnt
-             ,strs.strs_cope_stat_cd
-             ,strs.strs_cope_stat_nm
-             ,strs.strs_upt_dttm
-             ,prnt.prnt_female
-             ,prnt.prnt_male
-             ,gfix.cal_eat_qty
-             ,gfix.cal_csum_qty
-             ,gfix.pal_val
-             ,gfix.cal_nutr_stat_cd
-             ,gfix.cal_nutr_stat_nm
-             ,gfix.gfix_upt_dttm
-        from stdt_info stdt
-        inner join prnt_info prnt
-          on stdt.prnt_no = prnt.prnt_no
-        inner join  ts_band_info tbi
-          on stdt.band_id = tbi.band_id
-        left outer join loc_list loc
-          on stdt.stdt_no = loc.stdt_no
-        left outer join grow_stat_list grow
-          on stdt.stdt_no = grow.stdt_no
-        left outer join gfix_list gfix
-          on stdt.stdt_no = gfix.stdt_no
-        left outer join strs_list strs
-          on stdt.stdt_no = strs.stdt_no
-        </select>
+              tgh.stdt_no
+             ,tgh.gfix_dt
+             ,tgh.grow_idx
+             ,tgh.grow_judg_cd
+             ,fn_getcdnm('GROW_JUDG_CD' , tgh.grow_judg_cd) as grow_judg_nm
+             ,tgh.fat_idx
+             ,tgjs.smry_cntn
+             ,tgjs.spec_cntn
+             ,fn_getcdnm('FAT_JUDG_CD' , tgh.fat_judg_cd) as fat_judg_nm
+             ,tfjs.curr_eval_cntn
+             ,fn_getcdnm('FAT_JUDG_CD' , tgh.prdt_fat_judg_cd) as prdt_fat_judg_nm
+             ,tgh.cal_eat_qty
+             ,tgh.cal_csum_qty
+             ,tgh.pal_val
+             ,tgh.cal_nutr_stat_cd
+             ,fn_getcdnm('NUTR_STAT_CD' , tgh.cal_nutr_stat_cd) as cal_nutr_stat_nm
+             ,to_char(to_timestamp(tgh.upt_dt||tgh.upt_tm ,'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') as gfix_upt_dttm
+        from ts_gfix_hist tgh /* 성장이력 */
+        inner join stdt_info stdt
+           on tgh.stdt_no = tgh.stdt_no
+          and tgh.gfix_dt = stdt.gfix_dt
+        inner join ti_grow_judg_stnd tgjs
+           on tgh.grow_judg_cd = tgjs.grow_judg_cd
+        inner join ti_fat_judg_stnd tfjs
+           on tgh.fat_judg_cd = tfjs.fat_judg_cd
+    )
+    , strs_list as (
+    /* 스트레스 */
+        select
+              tssh.stdt_no
+             ,tssh.strs_hist_seq
+             ,tssh.hbit_mdan  as strt_hbit_mdan
+             ,tssh.avg_hbit_cnt
+             ,tssh.ment_strs_pnt
+             ,tssh.ment_strs_stat_cd
+             ,fn_getcdnm('STRS_STAT_CD' , tssh.ment_strs_stat_cd) as ment_strs_stat_nm
+             ,tssh.phys_strs_pnt
+             ,tssh.phys_strs_stat_cd
+             ,fn_getcdnm('STRS_STAT_CD' , tssh.phys_strs_stat_cd) as phys_strs_stat_nm
+             ,tssh.strs_cope_pnt
+             ,tssh.strs_cope_stat_cd
+             ,fn_getcdnm('STRS_COPE_STAT_CD' , tssh.strs_cope_stat_cd) as strs_cope_stat_nm
+             ,to_char(to_timestamp(tssh.upt_dt||tssh.upt_tm ,'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') as strs_upt_dttm
+        from ts_stdt_strs_hist tssh
+        inner join stdt_info stdt
+           on tssh.stdt_no = stdt.stdt_no
+        and tssh.strs_hist_seq = stdt.strs_hist_seq
+    )
+    select
+          stdt.*
+         ,tbi.band_id
+         ,tbi.tel_no  as band_tel_no
+         ,loc.plc_clss_cd
+         ,loc.plc_clss_nm
+         ,loc.loc_nm
+         ,loc.lat_val
+         ,loc.lon_val
+         ,loc.lat_val || ' / ' || loc.lon_val as lat_lon_val
+         ,loc.occr_dttm
+         ,grow.dgem_smry_cntn
+         ,grow.dgem_stat_cntn
+         ,grow.plc_clss_cd as grow_plc_clss_cd
+         ,grow.plc_clss_nm as grow_plc_clss_nm
+         ,grow.loc_nm as grow_loc_nm
+         ,grow.plc_cd
+         ,grow.plc_nm
+         ,grow.hbit_mdan
+         ,grow.hbit_stat_cd
+         ,grow.hbit_stat_nm
+         ,grow.temp_val
+         ,grow.dgem_idx
+         ,grow.temp_stat_nm
+         ,grow.dgem_stat_cd
+         ,grow.dgem_stat_nm
+         ,grow.loc_mesu_dttm
+         ,gfix.grow_idx
+         ,gfix.grow_judg_cd
+         ,gfix.grow_judg_nm
+         ,gfix.smry_cntn
+         ,gfix.spec_cntn
+         ,gfix.fat_idx
+         ,gfix.fat_judg_nm
+         ,gfix.curr_eval_cntn
+         ,gfix.prdt_fat_judg_nm
+         ,strs.avg_hbit_cnt
+         ,strs.ment_strs_pnt
+         ,strs.ment_strs_stat_cd
+         ,strs.ment_strs_stat_nm
+         ,strs.phys_strs_pnt
+         ,strs.phys_strs_stat_cd
+         ,strs.phys_strs_stat_nm
+         ,strs.strs_cope_pnt
+         ,strs.strs_cope_stat_cd
+         ,strs.strs_cope_stat_nm
+         ,strs.strs_upt_dttm
+         ,prnt.prnt_female
+         ,prnt.prnt_male
+         ,gfix.cal_eat_qty
+         ,gfix.cal_csum_qty
+         ,gfix.pal_val
+         ,gfix.cal_nutr_stat_cd
+         ,gfix.cal_nutr_stat_nm
+         ,gfix.gfix_upt_dttm
+    from stdt_info stdt
+    inner join prnt_info prnt
+      on stdt.prnt_no = prnt.prnt_no
+    inner join  ts_band_info tbi
+      on stdt.band_id = tbi.band_id
+    left outer join loc_list loc
+      on stdt.stdt_no = loc.stdt_no
+    left outer join grow_stat_list grow
+      on stdt.stdt_no = grow.stdt_no
+    left outer join gfix_list gfix
+      on stdt.stdt_no = gfix.stdt_no
+    left outer join strs_list strs
+      on stdt.stdt_no = strs.stdt_no
+    </select>
+
+    <select id="searchBandGuarTelNo" parameterType="java.util.Map" resultType="MybatisMap">
+        select
+            count(tgb.guar_no) as guar_no_cnt
+        from ts_band_spec tbs
+        inner join tm_guar_base tgb
+        on tbs.guar_tel_no = tgb.guar_tel_no
+        where tbs.band_id = #{bandId}
+    </select>
+
+
+    <insert id="insertTmStdtGuarConn" parameterType="java.util.Map">
+        insert into tm_stdt_guar_conn
+        (
+             stdt_no
+            ,guar_no
+            ,reg_dt
+            ,reg_tm
+            ,reg_user_id
+            ,upt_dt
+            ,upt_tm
+            ,upt_user_id
+        )
+        select c.stdt_no
+              ,d.guar_no
+              ,to_char(now(), 'YYYYMMDD')
+              ,to_char(now(), 'HH24MISS')
+              ,#{regUserId}
+              ,to_char(now(), 'YYYYMMDD')
+              ,to_char(now(), 'HH24MISS')
+              ,#{uptUserId}
+        from   ts_band_info a
+        inner join ts_band_spec b
+        on  b.band_id = a.band_id
+        inner join tm_stdt_base c
+        on  c.band_id = a.band_id
+        inner join tm_guar_base d
+        on  d.guar_tel_no = b.guar_tel_no
+        where  1 = 1
+        and    c.stdt_no = ${stdtNo}
+        and    not exists(select 1
+                          from   tm_stdt_guar_conn
+                          where  stdt_no = c.stdt_no
+                          and    guar_no = d.guar_no)
+    </insert>
 
 
 </mapper>

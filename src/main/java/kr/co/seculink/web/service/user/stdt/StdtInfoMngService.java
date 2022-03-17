@@ -12,5 +12,6 @@ public interface StdtInfoMngService
 	public Map<String, Object> searchStdtDetlInfo(Map<String, String> params) throws BizException;
 
 
+	public void saveStdtInfo(Map<String, Object> params) throws BizException;
 }
 

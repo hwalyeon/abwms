@@ -74,5 +74,37 @@ public class StdtInfoMngServiceImpl implements StdtInfoMngService
 		return stdtDetl;
 	}
 
+	public void saveStdtInfo(Map<String, Object> params) throws BizException
+	{
+
+		if ("C".equals(params.get("crud"))) {
+			Map<String, Object> guarInfo = dao.selectOne("user.stdt.stdtInfoMng.searchBandGuarTelNo", params);
+
+			if(guarInfo == null || (guarInfo != null && Integer.valueOf(guarInfo.get("guarNoCnt").toString()) == 0 )){
+				throw new BizException("등록 된 보호자 정보가 없습니다. 보호자 등록 후 진행하여 주시기 바랍니다.");
+			}
+
+			// 학생 저장
+			dao.insert("user.stdt.stdtInfoMng.insertTmStdtBase",params);
+
+			// 학생 성장 저장
+			dao.insert("user.stdt.stdtInfoMng.insertTsStdtGrowHist",params);
+
+			// 학생
+			dao.insert("user.stdt.stdtInfoMng.insertTsDdHbitHist",params);
+
+			// 학생 보호자 저장
+			dao.insert("user.stdt.stdtInfoMng.insertTmStdtGuarConn",params);
+		}
+		else if("U".equals(params.get("crud"))){
+			dao.update("user.stdt.stdtInfoMng.updateTmStdtBase",params);
+			dao.update("user.stdt.stdtInfoMng.updateTsStdtGrowHist",params);
+		}
+		else if("D".equals(params.get("crud"))) {
+			dao.insert("user.stdt.stdtInfoMng.deleteTmStdtBase",params);
+		}
+
+	}
+
 }
 

@@ -212,6 +212,10 @@ let stdtInfoMng = new Vue({
         stdtInfoDetlPopup: function(stdtNo, guarNo) {
             stdtInfoDetl.initPage(stdtNo, guarNo);
         },
+
+        stdtRegDetlPopup: function() {
+            stdtRegDetl.initPage();
+        },
         regBandOpenInfoDetlPopup: function(bandId) {
             bandOpenInfoDetl.initPage(bandId, function(){  stdtInfoMng.searchStdtInfoList(true) });
         },

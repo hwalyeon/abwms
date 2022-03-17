@@ -98,7 +98,7 @@
 						</div>
 					</div>
 					<div class="float_right">
-						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="" v-on:click="">학생등록</button>
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#stdtRegDetlPopup" v-on:click="stdtRegDetlPopup">학생등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
@@ -114,6 +114,7 @@
 	</div>
 	<div th:insert="~{devc/band/bandOpenInfoDetl :: body}"></div>
 	<div th:insert="~{user/stdt/stdtInfoDetl :: body}"></div>
+	<div th:insert="~{user/stdt/stdtRegDetl :: body}"></div>
 	<div th:insert="~{user/guar/guarInfoDetl :: body}"></div>
 	<div th:insert="~{user/prnt/prntInfoDetl :: body}"></div>
 </div>
@@ -121,6 +122,7 @@
 	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoMng.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoDetl.js}"></script>
+	<script type="text/javascript" th:src="@{/js/user/stdt/stdtRegDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/guar/guarInfoDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoDetl.js}"></script>
 </section>

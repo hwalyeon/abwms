@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:remove="tag">
+<div class="modal fade" id="stdtRegDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog-wrap">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 580px; height: 650px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>학생 정보</h5>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="ibox-content border-style_none">
+						<table class="table table-bordered table_view">
+							<colgroup>
+								<col class="col-xs-2" />
+								<col class="col-xs-4" />
+								<col class="col-xs-2" />
+								<col class="col-xs-4" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">학생 이름</th>
+									<td>
+										<div>
+											<input type="text" name="guarNm" v-model="params.stdtNm" class="form-control float_left width_per_100 ime-eng"/>
+										</div>
+									</td>
+									<th scope="row">밴드 ID</th>
+									<td>
+										<input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_100 ime-eng"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">교육시설</th>
+									<td>
+										<div>
+											<input type="text" name="eorgLocNo" v-model="params.eorgLocNo" class="form-control float_left width_per_100 ime-eng" readonly="true"/>
+										</div>
+										<div>
+											<input type="text" name="eorgLocNm" v-model="params.eorgLocNm" class="form-control float_left width_per_100 ime-eng" readonly="true"/>
+											<button type="button" class="btn btn-outline btn-primary float_right" v-on:click="">검색</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">학년</th>
+									<td>
+										<select id="sgrdCd" name="sgrdCd" class="form-control float_left width_per_100 ime-eng" v-model="params.sgrdCd">
+											<option value="">선택</option>
+											<option v-for="item in code.sgrdCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
+									</td>
+									<th scope="row">생년월일</th>
+									<td>
+										<input type="date" name="bithDt" :value="params.bithDt"  v-model="params.bithDt" class="form-control float_left width_per_100 ime-eng"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">성별 코드</th>
+									<td>
+										<select id="sexCd" name="sexCd" class="form-control float_left width_per_100 ime-eng" v-model="params.sexCd">
+											<option value="">선택</option>
+											<option v-for="item in code.sexCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
+									</td>
+									<th scope="row">인종 구분 코드</th>
+									<td>
+										<select id="raceDivCd" name="raceDivCd" class="form-control float_left width_per_100 ime-eng" v-model="params.raceDivCd">
+											<option value="">선택</option>
+											<option v-for="item in code.raceDivCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">키</th>
+									<td>
+										<input type="text" name="hghtVal" v-model="params.hghtVal" class="form-control float_left width_per_100 ime-eng" v-digitonly.number/>
+									</td>
+									<th scope="row">체중</th>
+									<td>
+										<input type="text" name="wghtVal" v-model="params.wghtVal" class="form-control float_left width_per_100 ime-eng" v-digitonly.number/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">허리</th>
+									<td>
+										<input type="text" name="wghtVal" v-model="params.wastVal" class="form-control float_left width_per_100 ime-eng" v-digitonly.number/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+            	</div>
+            	<div class="modal-footer">
+					<div class="text-center">
+						<div class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveStdtRegInfo">저장</button>
+						</div>
+						<div class="disp_in_block width_per_20">
+							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+						</div>
+					</div>
+				</div>			
+            </div>
+        </div>
+    </div>
+</div>

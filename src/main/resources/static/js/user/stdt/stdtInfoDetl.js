@@ -367,8 +367,8 @@ let stdtInfoDetl = new Vue({
 				param: $this.stdtInfo,
 				success: function(response) {
 					Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-						closeModal($('#dgemStndDetlPopup'));
-						dgemStndMng.searchDgemList(true);
+						closeModal($('#stdtInfoDetlPopup'));
+						stdtInfoMng.searchStdtInfoList(true);
 					});
 				},
 				error: function (response) {

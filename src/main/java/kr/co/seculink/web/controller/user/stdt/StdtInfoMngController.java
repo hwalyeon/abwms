@@ -121,14 +121,13 @@ public class StdtInfoMngController
 
 	//학생정보 저장
 	@ResponseBody
-	@RequestMapping("/user/stdt/stdtInfoMng/saveInfo.ab")
+	@RequestMapping("/user/stdt/stdtInfoMng/saveStdtInfo.ab")
 	public RtnMsg saveInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		if     ("C".equals(params.get("crud"))) dao.insert("user.stdt.stdtInfoMng.insertTmStdtBase",params);
-		else if("U".equals(params.get("crud"))) dao.insert("user.stdt.stdtInfoMng.updateTmStdtBase",params);
-		else if("D".equals(params.get("crud"))) dao.insert("user.stdt.stdtInfoMng.deleteTmStdtBase",params);
+		stdtInfoMngService.saveStdtInfo(params);
+
 
 		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap,null);
