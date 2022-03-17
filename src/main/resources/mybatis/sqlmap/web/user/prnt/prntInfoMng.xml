@@ -22,10 +22,10 @@
                  left outer join  TM_PRNT_BASE TPB
                  on TGB.PRNT_NO = TPB.PRNT_NO
                  left outer join TM_STDT_BASE TSB
-                 on TBI.BAND_ID = TBS.BAND_ID
+                 on TBI.BAND_ID = TSB.BAND_ID
                  and TSB.PRNT_NO = TPB.PRNT_NO
         WHERE    1=1
-        and      TBI.BAND_ID = #{bandId}
+        and      TBI.BAND_ID = cast(#{bandId} as varchar)
         and      TPB.SEX_CD  = #{sexCd}
         <if test="prntNo != null and prntNo != '' ">AND TPB.PRNT_NO = #{prntNo}::NUMERIC</if>
         group by TBI.BAND_ID, TSB.STDT_NO, TPB.PRNT_NO, TPB.SEX_CD

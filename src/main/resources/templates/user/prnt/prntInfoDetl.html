@@ -58,10 +58,7 @@
 								<tr>
 									<th scope="row">성별 코드</th>
 									<td>
-										<select id="sexCd" name="sexCd" class="form-control float_left width_per_100 ime-eng" v-model="params.sexCd"  :disabled="params.crud=='U'">
-											<option value="">선택</option>
-											<option v-for="item in code.sexCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-										</select>
+										<input type="text" name="sexCd" v-model="params.sexCd"  class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
 									</td>
 								</tr>
 								<tr>

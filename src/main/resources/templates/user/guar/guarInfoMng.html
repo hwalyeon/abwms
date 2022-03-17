@@ -114,17 +114,19 @@
 			</div>
 		</div>
 	</div>
-	<div th:insert="~{devc/band/bandOpenInfoDetl :: body}"></div>
-	<div th:insert="~{user/guar/guarInfoDetl :: body}"></div>
-	<div th:insert="~{user/prnt/prntInfoDetl :: body}"></div>
-	<div th:insert="~{user/guar/termAgreYnInfoDetl :: body}"></div>
+	<div th:insert="~{user/guar/guarInfoDetl :: body}">      </div>  <!--보호자(사용자)정보 상세  -->
+	<div th:insert="~{devc/band/bandOpenInfoDetl :: body}">  </div>  <!--밴드/개통정보 상세       -->
+	<div th:insert="~{user/prnt/prntInfoDetl :: body}">      </div>  <!--학부모정보 상세          -->
+	<div th:insert="~{user/guar/termAgreYnInfoDetl :: body}"></div>  <!--약관동의여부 상세        -->
+	<div th:insert="~{user/stdt/stdtInfoDetl :: body}">      </div>  <!--학생정보 상세            -->
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/user/guar/guarInfoMng.js}">       </script> <!--보호자(사용자)정보       -->
 	<script type="text/javascript" th:src="@{/js/user/guar/guarInfoDetl.js}">      </script> <!--보호자(사용자)정보 상세  -->
-	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}">  </script> <!--밴드/개통정보 상세      -->
-	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoDetl.js}">      </script> <!--학부모정보 상세         -->
-	<script type="text/javascript" th:src="@{/js/user/guar/termAgreYnInfoDetl.js}"></script> <!--약관동의여부 상세         -->
+	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}">  </script> <!--밴드/개통정보 상세       -->
+	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoDetl.js}">      </script> <!--학부모정보 상세          -->
+	<script type="text/javascript" th:src="@{/js/user/guar/termAgreYnInfoDetl.js}"></script> <!--약관동의여부 상세        -->
+	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoDetl.js}">      </script> <!--학생정보 상세            -->
 
 </section>
 </body>

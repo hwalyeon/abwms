@@ -42,8 +42,11 @@ let prntInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(bandId, prntNo, sexCd) {
+        initPage: function(bandId, prntNo, sexCd)
+		{
 			let $this = this;
+
+			$this.params.sexCd = sexCd;
 			$this.resetPrntDetlInfo();
 
 			if (!WebUtil.isNull(sexCd))
@@ -65,7 +68,7 @@ let prntInfoDetl = new Vue({
 								$this.params[key] = val;});
 
 							if(response.rtnData.result.prntNo != null){
-							$this.params.crud = 'U';
+								$this.params.crud = 'U';
 							}
 						}
 					},
@@ -123,6 +126,9 @@ let prntInfoDetl = new Vue({
             });
 		},
 		resetPrntDetlInfo: function() {
+
+			let sexCd = $this.params.sexCd;
+
 			this.params = {
 				crud              : 'C',
 				userId            : '' ,
@@ -132,7 +138,7 @@ let prntInfoDetl = new Vue({
 				guarNm            : '' , //보호자_이름
 				prntNo            : '' , //학부모_번호
 				prntNm            : '' , //학부모_명
-				sexCd             : '' , //성별_코드
+				sexCd             : sexCd , //성별_코드
 				hghtVal           : '' , //키_값
 				wghtVal		      : '' , //체중_값
 				BMIVal		      : '' , //BMI_값

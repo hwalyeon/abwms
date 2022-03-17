@@ -77,7 +77,9 @@ let guarInfoMng = new Vue({
                         {name: "guarTelNo"    , index: "guarTelNo"    , label: "보호자전화번호" , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                                 let guarTelNoTemp = phoneFormatter(cellValue);
                                 return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup"  data-guar  data-placement="bottom" title="${guarTelNoTemp}" data-guar-no="${rowObject.guarNo}"data-stdt-no="${rowObject.stdtNo}">${guarTelNoTemp}</a>`;}},
-                        {name: "stdtNo"       , index: "stdtNo"       , label: "학생번호"	 , width: 40     , align: "center" },
+                        {name: "stdtNo"       , index: "stdtNo"       , label: "학생번호"	 , width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regStdtInfoDetlPopup(\'' + rowObject.guarNo + '\', \'' + rowObject.stdtNo + '\')" value="신규" data-toggle="modal" data-target="#stdtInfoDetlPopup" />';
+                                else return`<a data-toggle="modal" class="links" data-target="#stdtInfoDetlPopup" data-stdt data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
                         {name: "stdtNm"       , index: "stdtNm"       , label: "학생명"	     , width: 80     , align: "center" },
                         {name: "entrDt"       , index: "entrDt"       , label: "가입일자"	 , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){return formatDate(cellValue);}},
                         {name: "entrStatCdNm" , index: "entrStatCdNm" , label: "가입상태"	 , width: 80     , align: "center" },
@@ -90,10 +92,10 @@ let guarInfoMng = new Vue({
                         {name: "prntNo"       , index: "prntNo"       , label: "학부모번호"	 , width: 40     , align: "center" },
                         {name: "prntNmMale"   , index: "prntNmMale"   , label: "남자학부모"	 , width: 80     , align: "center" , formatter: function(cellValue, options, rowObject){
                                 if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regPrntInfoDetlPopup(\'' + rowObject.bandId + '\', \'' + rowObject.stdtNo + '\',\'' + 'MALE' + '\')" value="신규" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
-                                else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-no="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="MALE">${cellValue}</a>`;}},
+                                else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="MALE">${cellValue}</a>`;}},
                         {name: "prntNmFemale" , index: "prntNmFemale" , label: "여자학부모" 	 , width: 80     , align: "center" , formatter: function(cellValue, options, rowObject){
                                 if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regPrntInfoDetlPopup(\'' + rowObject.bandId + '\', \'' + rowObject.stdtNo + '\',\'' + 'FEMALE' + '\')" value="신규" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
-                                else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-no="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="FEMALE">${cellValue}</a>`;}},
+                                else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="FEMALE">${cellValue}</a>`;}},
                         {name: "termAgreYnInfoDetlPopup"  , index: "termAgreYnInfoDetlPopup" , label: "약관동의여부" , width: 80, align: "center", formatter: function(cellValue, options, rowObject) {
                           return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regTermAgreYnInfoDetlPopup(\'' + rowObject.guarNo + '\')" value="상세보기" data-toggle="modal" data-target="#termAgreYnInfoDetlPopup" />'; }}
                     ];
@@ -132,7 +134,11 @@ let guarInfoMng = new Vue({
                             });
                             //학부모정보 상세 팝업
                             $("#guarInfo_list").find('A.links[data-prnt]').on('click', function(e) {
-                                guarInfoMng.regPrntInfoDetlPopup($(e.target).data('band-no'),$(e.target).data('prnt-no'),$(e.target).data('sex-cd'))
+                                guarInfoMng.regPrntInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('prnt-no'),$(e.target).data('sex-cd'))
+                            });
+                            //학생정보 상세 팝업
+                            $("#guarInfo_list").find('A.links[data-stdt]').on('click', function(e) {
+                                guarInfoMng.regStdtInfoDetlPopup($(e.target).data('guar-no'),$(e.target).data('stdt-no'))
                             });
                         }
                     }));
@@ -190,17 +196,25 @@ let guarInfoMng = new Vue({
                         }
                     });
             },
+            //보호자(사용자)정보 상세 팝업
             regGuarInfoDetlPopup: function(guarNo,stdtNo) {
                 guarInfoDetl.initPage(guarNo,stdtNo);
             },
+            //밴드/개통정보 상세 팝업
             regBandOpenInfoDetlPopup: function(bandId) {
                 bandOpenInfoDetl.initPage(bandId, function(){  guarInfoMng.searchGuarInfoList(true) });
             },
+            //학부모정보 상세 팝업
             regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
                 prntInfoDetl.initPage(bandId, prntNo, sexCd);
             },
+            //약관동의여부정보상세 팝업
             regTermAgreYnInfoDetlPopup: function(guarNo){
                 termAgreYnInfoDetl.initPage(guarNo);
+            },
+            //학생정보상세 팝업
+            regStdtInfoDetlPopup: function(guarNo, stdtNo){
+                stdtInfoDetl.initPage(guarNo, stdtNo);
             },
             resetSearchParam: function()
             {

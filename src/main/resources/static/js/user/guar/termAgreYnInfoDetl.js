@@ -71,8 +71,9 @@ let termAgreYnInfoDetl = new Vue({
 			$("#termAgreYnInfoDetl_list").jqGrid("GridUnload");
 			$("#termAgreYnInfoDetl_list").jqGrid($.extend(true, {}, commonGridOptions(),
 				{
-					datatype : "local",
+					datatype : "local" ,
 					mtype    : 'post'  ,
+					height   :  200    ,
 					url      : '/user/guar/guarInfoMng/searchTermAgreYnInfoDetlList.ab',
 					pager    : '#termAgreYnInfoDetl_pager_list',
 					colModel : colModels,
