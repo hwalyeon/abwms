@@ -77,33 +77,33 @@ let ddRcmdEatStndMng = new Vue({
                 let useYnList      = commonGridCmonCd($this.code.useYnList);
                 let colModels =
                     [
-                        {name:"crud"                   , index:"crud"                     , label: "crud"                        , hidden: true                              },
-                        {name: "sexCdTemp"      ,  index: "sexCdTemp"       , label: "성별"                        , width: 80        , align: "center"       , hidden: true },
-                        {name: "ageYcntTemp"  , index: "ageYcntTemp"     , label: "나이(년)"                 , width: 80         , align: "center"       , hidden: true },
-                        {name: "nutrCdTemp"     , index: "nutrCdTemp"      , label: "영양소코드"             , width: 80         , align: "center"       , hidden: true },
-                        {name: "eatQtyFrTemp"  ,  index: "eatQtyFrTemp"  , label: "섭취량(From)"         , width: 80         , align: "center"       , hidden: true },
-                        {name: "nutrNm"            , index: "nutrNm"              , label: "영양소명"                    , hidden: true        }, //엑셀 다운로드용
-                        {name: "sexCd"                , index: "sexCd"                 , label: "성별"                        , width: 80         , align: "center"       , editable: true
-                            ,edittype:"select"         , formatter:"select", editoptions:{value:sexCdList}},
-                        {name: "ageYcnt"            , index: "ageYcnt"             , label: "나이(년)"                  , width: 80         , align: "center"       , editable: true},
-                        {name: "nutrCd"               , index: "nutrCd"               , label: "영양소명"                , width: 80         , align: "center"       , editable: true
-                            ,edittype:"select"         , formatter:"select"           , editoptions:{value:nutrCdNmList}},
-                        {name: "eatQtyFr"            , index: "eatQtyFr"            , label: "섭취량(From)"         , width: 80          , align: "center"       , editable: true},
-                        {name: "eatQtyTo"           , index: "eatQtyTo"          , label: "섭취량(To)"              , width: 80          , align: "center"       , editable: true},
-                        {name:"nutrStatCd"          , index: "nutrStatCd"        , label: "영양섭취상태"         , width: 80          , align: "center"       , editable: true
-                            ,edittype:"select"          , formatter:"select", editoptions:{value:nutrStatCdList}},
-                        {name: "useYn"                 , index: "useYn"            , label: "사용여부"                   , width: 80          , align: "center"       , editable: true
-                         , edittype:"select"            , formatter:"select" ,editoptions:{value:useYnList}},
-                        {name: "regDt"                 , index: "regDt"                 , label: "등록일자"               , width: 80          , align: "center"
+                        {name:"crud"               , index:"crud"            , label: "crud"                , hidden: true                              },
+                        {name: "sexCdTemp"         ,  index: "sexCdTemp"     , label: "성별"                 , width: 80          , align: "center"       , hidden: true },
+                        {name: "ageYcntTemp"       , index: "ageYcntTemp"    , label: "나이(년)"             , width: 80          , align: "center"       , hidden: true },
+                        {name: "nutrCdTemp"        , index: "nutrCdTemp"     , label: "영양소코드"            , width: 80          , align: "center"       , hidden: true },
+                        {name: "eatQtyFrTemp"      ,  index: "eatQtyFrTemp"  , label: "섭취량(From)"         , width: 80          , align: "center"       , hidden: true },
+                        {name: "nutrNm"            , index: "nutrNm"         , label: "영양소명"              , hidden: true        }, //엑셀 다운로드용
+                        {name: "sexCd"             , index: "sexCd"          , label: "성별"                 , width: 80          , align: "center"       , editable: true
+                            ,edittype:"select"     , formatter:"select", editoptions:{value:sexCdList}},
+                        {name: "ageYcnt"           , index: "ageYcnt"        , label: "나이(년)"             , width: 80           , align: "center"       , editable: true},
+                        {name: "nutrCd"            , index: "nutrCd"         , label: "영양소명"              , width: 80          , align: "center"       , editable: true
+                            ,edittype:"select"     , formatter:"select"      , editoptions:{value:nutrCdNmList}},
+                        {name: "eatQtyFr"          , index: "eatQtyFr"       , label: "섭취량(From)"          , width: 80          , align: "center"       , editable: true},
+                        {name: "eatQtyTo"          , index: "eatQtyTo"       , label: "섭취량(To)"            , width: 80          , align: "center"       , editable: true},
+                        {name:"nutrStatCd"         , index: "nutrStatCd"     , label: "영양섭취상태"           , width: 80          , align: "center"       , editable: true
+                            ,edittype:"select"     , formatter:"select", editoptions:{value:nutrStatCdList}},
+                        {name: "useYn"             , index: "useYn"          , label: "사용여부"               , width: 80         , align: "center"       , editable: true
+                         , edittype:"select"       , formatter:"select" ,editoptions:{value:useYnList}},
+                        {name: "regDt"             , index: "regDt"          , label: "등록일자"               , width: 80         , align: "center"
                             , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "regTm"                , index: "regTm"               , label: "등록시각"               , width: 80          , align: "center"
+                        {name: "regTm"             , index: "regTm"          , label: "등록시각"               , width: 80         , align: "center"
                             , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "regUserId"           , index: "regUserId"         , label: "등록사용자ID"         , width: 80          , align: "center"},
-                        {name: "uptDt"                 , index: "uptDt"                , label: "수정일자"                 , width: 80         , align: "center"
+                        {name: "regUserId"         , index: "regUserId"      , label: "등록사용자ID"           , width: 80          , align: "center"},
+                        {name: "uptDt"             , index: "uptDt"          , label: "수정일자"               , width: 80         , align: "center"
                             , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                        {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                 , width: 80         , align: "center"
+                        {name: "uptTm"             , index: "uptTm"          , label: "수정시각"               , width: 80         , align: "center"
                             , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                        {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"          , width: 80         , align: "center"}
+                        {name: "uptUserId"         , index: "uptUserId"      , label: "수정사용자ID"           , width: 80         , align: "center"}
                     ];
 
                 $("#ddRcmdEatStnd_list").jqGrid("GridUnload");

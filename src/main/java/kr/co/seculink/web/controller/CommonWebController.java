@@ -36,7 +36,6 @@ public class CommonWebController {
 		return "set/userRoleMng";
 	}
 
-
 	@RequestMapping("/set/roleMng.pg")
 	public String getSetRoleMng() {
 		return "set/roleMng";
@@ -65,6 +64,10 @@ public class CommonWebController {
 	//위험감정기준
 	@RequestMapping("/svcStnd/dgem/dgemStndMng.pg")
 	public String getSvcStndDgemDgemStndMng() {return "svcStnd/dgem/dgemStndMng";}
+
+	//심박상태 기준
+	@RequestMapping("/svcStnd/dgem/hbitStatStndMng.pg")
+	public String getSvcStndDgemHbitStatStndMng() {return "svcStnd/dgem/hbitStatStndMng";}
 
 	//성장기준
 	@RequestMapping("/svcStnd/grow/growStndMng.pg")

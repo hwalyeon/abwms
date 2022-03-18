@@ -1,39 +1,30 @@
-let ddPalMng = new Vue({
-    el: "#ddPalMng",
+let hbitStatStndMng = new Vue({
+    el: "#hbitStatStndMng",
     data: {
     	params: {
-            currFatJudgCd:'',
-            prdtFatJudgCd:'',
-            sexCd:'',
-            ageYcnt:'',
-            palValFr:'',
-            palValTo:'',
-            calQtyFr:'',
-            calQtyTo:'',
-            ddCalQty:'',
-            palCd:'',
-            nutrCd:'',
-            nutrStatCd:'',
-            regDt:'',
-            regTm:'',
-            regUserId:'',
-            uptDt:'',
-            uptTm:'',
-            uptUserId:'',
-    		useYn:'Y',
-    		paging: 'Y',
-    		totalCount: 0,
-            rowCount: 30,
-            currentPage: 1,
-            currentIndex: 0
+    	     sexCdTemp    :''
+    	    ,ageYcntTemp  :''
+    	    ,hbitCntFrTemp:''
+    	    ,sex_cd		  :''
+            ,age_ycnt     :''
+            ,hbit_cnt_fr  :''
+            ,hbit_cnt_to  :''
+            ,hbit_stat_cd :''
+            ,reg_dt		  :''
+            ,reg_tm		  :''
+            ,reg_user_id  :''
+            ,upt_dt		  :''
+            ,upt_tm		  :''
+            ,upt_user_id  :''
+    		,paging       :'Y'
+    		,totalCount   :0
+            ,rowCount     :30
+            ,currentPage  :1
+            ,currentIndex :0
     	},
         code:{
-            mentDdPalCdList : [],
             sexCdList       : [],
-            nutrStatCdList  : [],
-            palCdList       : [],
-            nutrCdList      : [],
-            nutrCdNmList    : []
+            hbitStatCdList  : []
         },
 	},
 
@@ -55,110 +46,58 @@ let ddPalMng = new Vue({
         },
         initCodeList: function() {
             let $this = this;
-            //신체활동수준코드
-            getCommonCodeList('PAL_CD',$this.code.palCdList, function()
-            {
-                $this.initGrid();
-                $this.searchDdPalList(true);
-            }
-            );
-            //영양섭취상태
-            getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList, function()
-            {
-                $this.initGrid();
-                $this.searchDdPalList(true);
-            }
-            );
-            //현재비만판정,예측비만판정
-            getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList, function()
-            {
-                $this.initGrid();
-                $this.searchDdPalList(true);
-            }
-            );
             //성별
             getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
             {
                 $this.initGrid();
-                $this.searchDdPalList(true);
+                $this.searchHbitStatStndList(true);
             }
             );
-            //영양섭취상태
-            AjaxUtil.post(
-                {
-                    url: "/svcStnd/nutr/ddNutrEatStndMng/searchNutrCdNmList.ab",
-                    param: {},
-                    success: function(response) {
-                        $this.code.nutrCdNmList = [];
-                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                            $.each(response.rtnData.result, function(index, item) {
-                                $this.code.nutrCdNmList.push({'cdVal':item.nutrCd, 'cdNm':item.nutrNm});
-                            });
-                        }
-                        $this.codeCnt += 1;
-                        $this.initGrid();
-                        $this.searchDdPalList(true);
-                    },
-                    error: function (response) {
-                        Swal.alert([response, 'error']);
-                    }
-                });
-
+            //심박상태코드
+            getCommonCodeList('HBIT_STAT_CD',$this.code.hbitStatCdList, function()
+            {
+                $this.initGrid();
+                $this.searchHbitStatStndList(true);
+            }
+            );
         },
         initGrid: function() {
             let $this = this;
-            let mentDdPalCdList = commonGridCmonCd($this.code.mentDdPalCdList);
             let sexCdList       = commonGridCmonCd($this.code.sexCdList);
-            let nutrStatCdList  = commonGridCmonCd($this.code.nutrStatCdList);
-            let palCdList       = commonGridCmonCd($this.code.palCdList);
-            let nutrCdNmList    = commonGridCmonCd($this.code.nutrCdNmList);
+            let hbitStatCdList  = commonGridCmonCd($this.code.hbitStatCdList);
         	let colModels =
             [
-                {name:"crud"               , index: "crud"            , label:"crud"               , hidden:true},
-                {name: "currFatJudgCdTemp" , index: "currFatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center", hidden  : true  },
-                {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정"     , width: 80   , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
-                {name: "prdtFatJudgCdTemp" , index: "prdtFatJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center", hidden  : true  },
-                {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정"     , width: 80   , align: "center" , editable: true
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
-                {name: "sexCdTemp"         , index: "sexCdTemp"       , label: "성별"            , width: 80   , align: "center", hidden  : true  },
-                {name: "sexCd"             , index: "sexCd"           , label: "성별"            , width: 80   , align: "center" , editable: true
+                {name:"crud"               , index: "crud"             , label:"crud"               , hidden:true},
+                {name:"sexCdTemp"          , index: "sexCdTemp"        , label: "성별코드"            , width: 50         , align: "center", hidden:true},
+                {name:"ageYcntTemp"        , index: "ageYcntTemp"      , label: "나이년수"            , width: 50         , align: "center", hidden:true},
+                {name:"hbitCntFrTemp"      , index: "hbitCntFrTemp"    , label: "심박수 FORM"         , width: 50        , align: "center", hidden:true},
+                {name: "sexCd"             , index: "sexCd"            , label: "성별"               , width: 80         , align: "center" , editable: true
                     , editable: true  ,edittype:"select"	, formatter:"select", editoptions : {value:sexCdList}},
-                {name: "ageYcntTemp"       , index: "ageYcntTemp"     , label: "나이년수"         , width: 80   , align: "center", hidden  : true  },
-                {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
+                {name: "ageYcnt"           , index: "ageYcnt"          , label: "나이년수"            , width: 80        , align: "center"
                     , editable: true , editrules:{number:true}},
-                {name: "calQtyFr"          , index: "calQtyFr"        , label: "칼로리량 FORM"       , width: 80   , align: "center"
+                {name: "hbitCntFr"          , index: "hbitCntFr"       , label: "심박수 FORM"         , width: 80        , align: "center"
                     , editable: true , editrules:{number:true}},
-                {name: "calQtyTo"          , index: "calQtyTo"        , label: "칼로리량 TO"         , width: 80   , align: "center"
+                {name: "hbitCntTo"          , index: "hbitCntTo"       , label: "심박수 TO"           , width: 80        , align: "center"
                     , editable: true , editrules:{number:true}},
-                {name: "ddCalQty"          , index: "ddCalQty"        , label: "일일칼로리량"         , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "palCd"             , index: "palCd"           , label: "신체활동수준코드"      , width: 80   , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:palCdList}},
-                {name: "nutrCd"            , index: "nutrCd"          , label: "영양소코드"           , width: 80   , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:nutrCdNmList}},
-                {name: "nutrStatCdTemp"    , index: "nutrStatCdTemp"  , label: "영양섭취상태"           , width: 80   , align: "center"
-                    , hidden  : true},
-                {name: "nutrStatCd"        , index: "nutrStatCd"      , label: "영양섭취상태"      , width: 80   , align: "center"
-                    , editable: true , edittype:"select"	, formatter:"select", editoptions : {value:nutrStatCdList}},
-                {name: "regDt"             , index: "regDt"           , label: "등록일자"        , width: 80          , align: "center"
+                {name: "hbitStatCd"         , index: "hbitStatCd"      , label: "심박상태 코드"         , width: 80       , align: "center"
+                    , editable: true  ,edittype:"select"	, formatter:"select", editoptions : {value:hbitStatCdList}},
+                {name: "regDt"              , index: "regDt"           , label: "등록일자"            , width: 80         , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "regTm"               , index: "regTm"         , label: "등록시각"       , width: 80          , align: "center"
+                {name: "regTm"              , index: "regTm"           , label: "등록시각"            , width: 80         , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "regUserId"          , index: "regUserId"      , label: "등록사용자ID"      , width: 80          , align: "center"},
-                {name: "uptDt"                , index: "uptDt"        , label: "수정일자"     , width: 80          , align: "center"
+                {name: "regUserId"          , index: "regUserId"       , label: "등록사용자ID"         , width: 80        , align: "center"},
+                {name: "uptDt"              , index: "uptDt"           , label: "수정일자"             , width: 80        , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "uptTm"               , index: "uptTm"         , label: "수정시각"       , width: 80          , align: "center"
+                {name: "uptTm"              , index: "uptTm"           , label: "수정시각"             , width: 80        , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "uptUserId"          , index: "uptUserId"      , label: "수정사용자ID"      , width: 80          , align: "center"}
+                {name: "uptUserId"          , index: "uptUserId"       , label: "수정사용자ID"         , width: 80        , align: "center"}
             ];
-        	console.log("1");
   
             $("#user_list").jqGrid("GridUnload");
            	$("#user_list").jqGrid($.extend(true, {}, commonEditGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-                url: '/svcStnd/fat/ddPalMng/searchDdPalList.ab',
+                url: '/svcStnd/dgem/hbitStatStndMng/searchHbitStatStndList.ab',
                 pager: '#user_pager_list',
 				height: 405,
                 colModel: colModels,
@@ -167,7 +106,7 @@ let ddPalMng = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchDdPalList(false);
+                        $this.searchHbitStatStndList(false);
                     })
                 },
                 afterSaveCell : function (rowid, colId, val, e)
@@ -180,7 +119,7 @@ let ddPalMng = new Vue({
             }));
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
         },
-        searchDdPalList: function(isSearch) {
+        searchHbitStatStndList: function(isSearch) {
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
 
@@ -201,31 +140,22 @@ let ddPalMng = new Vue({
                 }
             }).trigger("reloadGrid");
 		},
-        mentDdPalNmVal:function(){
-            let $this = this;
-        },
-        physStrsStatNmVal:function(){
-            let $this = this;
-        },
 
         btnAddRow  :  function() {
             let $this = this;
             let date  = new Date();
             var cnt = $("#user_list").jqGrid("getGridParam", "records")+1;
 
-            var addRow = {crud:"C"
-                ,currFatJudgCdTemp:""
-                ,prdtFatJudgCdTemp:""
-                ,sexCdTemp:""
-                ,ageYcnt:""
-                ,palValFr:""
-                ,palValTo:""
-                ,calQtyFr:""
-                ,calQtyTo:""
-                ,ddCalQty:""
-                ,palCd:""
-                ,nutrCd:""
-                ,nutrStatCd:""
+            var addRow = {
+                 crud:"C"
+                ,sexCdTemp    :""
+                ,ageYcntTemp  :""
+                ,hbitCntFrTemp:""
+                ,sex_cd		  :""
+                ,age_ycnt     :""
+                ,hbit_cnt_fr  :""
+                ,hbit_cnt_to  :""
+                ,hbit_stat_cd :""
                 ,regDt:date
                 ,regTm:date
                 ,regUserId:$this.userId
@@ -266,14 +196,14 @@ let ddPalMng = new Vue({
 
             if(gridData.length > 0)
             {
-                for (let data in gridData)
+                /*for (let data in gridData)
                 {
                     if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
                     {
-                        if(WebUtil.isNull(gridData[data].currFatJudgCd)){
-                            Swal.alert(["현재비만판정코드 필수 입력입니다.", 'warning']);
-                            return false;
-                        }if(WebUtil.isNull(gridData[data].prdtFatJudgCd)){
+                    if(WebUtil.isNull(gridData[data].currFatJudgCd)){
+                        Swal.alert(["현재비만판정코드 필수 입력입니다.", 'warning']);
+                        return false;
+                    }if(WebUtil.isNull(gridData[data].prdtFatJudgCd)){
                         Swal.alert(["예측비만판정코드 필수 입력입니다.", 'warning']);
                         return false;
                     }if(WebUtil.isNull(gridData[data].sexCd)){
@@ -302,7 +232,7 @@ let ddPalMng = new Vue({
                         return false;
                     }
                     }
-                }
+                }*/
             }
             else
             {
@@ -313,11 +243,11 @@ let ddPalMng = new Vue({
             param.gridList = gridData;
 
             AjaxUtil.post({
-                url: "/svcStnd/fat/ddPalMng/saveDdPal.ab",
+                url: "/svcStnd/dgem/hbitStatStndMng/saveHbitStatStnd.ab",
                 param: param,
                 success: function(response) {
                     Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                        $this.searchDdPalList(true);
+                        $this.searchHbitStatStndList(true);
                     });
                 },
                 error: function (response) {
@@ -334,7 +264,7 @@ let ddPalMng = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/svcStnd/fat/ddPalMng/searchDdPalList/excel.ab",
+                url: "/svcStnd/dgem/hbitStatStndMng/searchHbitStatStndList/excel.ab",
                 param: params,
                 success: function(response)
                 {
@@ -351,23 +281,14 @@ let ddPalMng = new Vue({
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
-                currFatJudgCd:'',
-                prdtFatJudgCd:'',
-                sexCd:'',
-                ageYcnt:'',
-                palValFr:'',
-                palValTo:'',
-                calQtyFr:'',
-                calQtyTo:'',
-                ddCalQty:'',
-                palCd:'',
-                nutrCd:'',
-                nutrStatCd:'',
-	    		paging: 'Y',
-	    		totalCount: 0,
-	            rowCount: 30,
-	            currentPage: 1,
-	            currentIndex: 0
+                 sexCd		 :''
+                ,ageYcnt     :''
+                ,hbitStatCd  :''
+	    		,paging      :'Y'
+	    		,totalCount  :0
+	            ,rowCount    :30
+	            ,currentPage :1
+	            ,currentIndex:0
 	    	}
 		}
     },

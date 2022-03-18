@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="svcStnd.dgem.hbitStatStndMng">
+
+       <select id="searchHbitStatStndList" parameterType="java.util.Map" resultType="MybatisMap">
+        select
+         sex_cd      as sex_cd_temp
+        ,age_ycnt    as age_ycnt_temp
+        ,hbit_cnt_fr as hbit_cnt_fr_temp
+        ,sex_cd
+        ,age_ycnt
+        ,hbit_cnt_fr
+        ,hbit_cnt_to
+        ,hbit_stat_cd
+        ,reg_dt
+        ,reg_tm
+        ,reg_user_id
+        ,upt_dt
+        ,upt_tm
+        ,upt_user_id
+        from    ti_hbit_stat_stnd
+        where   1=1
+        <if test="sexCd != null">
+        and     sex_cd       like concat ('%',#{sexCd} ,'%')
+        </if>
+        <if test="ageYcnt != null and ageYcnt != ''">
+        and     age_ycnt = #{ageYcnt} ::numeric
+        </if>
+        <if test="hbitStatCd != null">
+        and     hbit_stat_cd like concat ('%',#{hbitStatCd},'%')
+        </if>
+        order by age_ycnt
+        <if test=' paging == "Y" '>
+        LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+        </select>
+       <!--행추가_행삭제 인서트-->
+       <insert id="insertHbitStatList" parameterType="java.util.Map">
+        insert into ti_hbit_stat_stnd
+        (
+         sex_cd
+        ,age_ycnt
+        ,hbit_cnt_fr
+        ,hbit_cnt_to
+        ,hbit_stat_cd
+        ,reg_dt
+        ,reg_tm
+        ,reg_user_id
+        ,upt_dt
+        ,upt_tm
+        ,upt_user_id
+        )
+        values
+        (
+         #{sexCd}
+        ,#{ageYcnt}  ::numeric
+        ,#{hbitCntFr}::numeric
+        ,#{hbitCntTo}::numeric
+        ,#{hbitStatCd}
+        ,TO_CHAR(NOW(), 'YYYYMMDD')
+        ,TO_CHAR(NOW(), 'HH24MISS')
+        ,#{regUserId}
+        ,TO_CHAR(NOW(), 'YYYYMMDD')
+        ,TO_CHAR(NOW(), 'HH24MISS')
+        ,#{uptUserId}
+        )
+        </insert>
+       <!--행추가_행삭제 업데이트-->
+       <update id="updateHbitStatList" parameterType="java.util.Map">
+           update ti_hbit_stat_stnd
+           set
+            UPT_DT       = TO_CHAR(NOW(), 'YYYYMMDD')
+           ,UPT_TM       = TO_CHAR(NOW(),'HH24MISS')
+           ,UPT_USER_ID  = #{uptUserId}
+           <if test="sexCd      != null and sexCd      !=''"> ,sex_cd        = #{sexCd}              </if>
+           <if test="ageYcnt    != null and ageYcnt    !=''"> ,age_ycnt      = #{ageYcnt}  ::numeric </if>
+           <if test="hbitCntFr  != null and hbitCntFr  !=''"> ,hbit_cnt_fr   = #{hbitCntFr}::numeric </if>
+           <if test="hbitCntTo  != null and hbitCntTo  !=''"> ,hbit_cnt_to   = #{hbitCntTo}::numeric </if>
+           <if test="hbitStatCd != null and hbitStatCd !=''"> ,hbit_stat_cd  = #{hbitStatCd}         </if>
+           where  1=1
+           and    sex_cd      = #{sexCdTemp}
+           and    age_ycnt    = #{ageYcntTemp}::numeric
+           and    hbit_cnt_fr = #{hbitCntFrTemp}::numeric
+       </update>
+       <!--행추가_행삭제 삭제-->
+       <delete id ="deleteHbitStatList" parameterType="java.util.Map">
+        /* Generated SQL SQL ID : ti_dd_pal_blck.delete */
+		DELETE FROM ti_hbit_stat_stnd
+		WHERE  1 = 1
+		AND    sex_cd      = #{sexCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+		AND    age_ycnt    = #{ageYcnt}::numeric /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    hbit_cnt_fr = #{hbitCntFr}::numeric /* sex_cd 성별_코드 character varying(20) */
+	   </delete>
+</mapper>
