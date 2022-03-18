@@ -70,30 +70,8 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
 		List<Map<String, Object>> gridData = (List<Map<String, Object>>) params.get("gridData");
-		//그리드 값 없을 시
-		if(gridData.isEmpty())
-		{
-			if ("C".equals(params.get("crud"))) {
-				//보호자 전화번호 중복 검사
-				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", params);
-				if (exists == null) {
-					saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", params);
-				} else {
-					throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
-				}
-			}else if ("U".equals(params.get("crud"))) {
-				//보호자 전화번호 중복 검사
-				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", params);
-				if (exists == null) {
-					saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", params);
-				} else {
-					throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
-				}
-			} else if ("D".equals(params.get("crud"))) {
-				saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", params);
-			}
-		}else {
-			for(Map<String,Object> info:gridData)
+
+		for(Map<String,Object> info:gridData)
 			{
 				log.debug("crud         : " + info.get("crud"));
 
@@ -102,7 +80,7 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 
 				if ("C".equals(info.get("crud")))
 				{
-					//보호자 전화번호 중복 검사
+					//밴드_상세 - 밴드ID,보호자전화번호 기준 중복 검사
 					TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
 					if ( exists == null ) {
 						saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
@@ -116,7 +94,7 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 				}
 			}
 
-		}
+
 
 		if ("C".equals(params.get("crud"))) {
 			saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTsBandInfoList", params);

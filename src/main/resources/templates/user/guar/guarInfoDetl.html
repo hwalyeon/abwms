@@ -22,7 +22,7 @@
 										<col class="col-xs-8" />
 									</colgroup>
 									<tbody>
-										<tr>
+										<tr v-if="params.stdtNo != '' ">
 											<th scope="row">학생 번호</th>
 											<td>
 												<div>
@@ -30,7 +30,7 @@
 												</div>
 											</td>
 										</tr>
-										<tr>
+										<tr v-if="params.stdtNo != '' ">
 											<th scope="row">학생 이름</th>
 											<td>
 												<div>
@@ -38,7 +38,7 @@
 												</div>
 											</td>
 										</tr>
-										<tr>
+										<tr v-if="params.guarNo != '' ">
 											<th scope="row">보호자 번호</th>
 											<td>
 												<div>

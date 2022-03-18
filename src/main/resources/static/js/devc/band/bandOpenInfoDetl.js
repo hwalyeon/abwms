@@ -60,7 +60,6 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 
 			$this.resetBandOpenInfo();
-
 			if(typeof callback === 'function')
 			{
 				$this.callBack = callback;
@@ -85,6 +84,8 @@ let bandOpenInfoDetl = new Vue({
 								$this.params[key] = val;
 							});
 						}
+
+						console.log($this.params.crud);
 					},
 					error: function (response)
 					{
@@ -94,6 +95,7 @@ let bandOpenInfoDetl = new Vue({
 			}
 			setTimeout(function()
 			{
+
 				$this.initGrid();
 				$this.searchGuarTelNoList(true);
 			},300);
@@ -152,8 +154,9 @@ let bandOpenInfoDetl = new Vue({
 				params.currentPage = 1;
 				params.currentIndex = 0;
 			}
-			$("#guarTelNo_list").setGridParam(
-				{
+			if($this.params.crud != 'C')
+			{
+				$("#guarTelNo_list").setGridParam({
 					datatype    : "json",
 					postData    : JSON.stringify(params),
 					page        : 1,
@@ -165,6 +168,9 @@ let bandOpenInfoDetl = new Vue({
 						}
 					}
 				}).trigger("reloadGrid");
+			}else{
+				return false;
+			}
 		},
 		btnAddRow  :  function()
 		{
@@ -200,7 +206,7 @@ let bandOpenInfoDetl = new Vue({
 				if ( $("#guarTelNo_list").getRowData(checkId[i]).crud == "C" )
 				{
 					$("#guarTelNo_list").setRowData(checkId[i], {crud: "N"});
-					$("#"+checkId[i],"#bandOpenInfo_list").css({display: "none"});
+					$("#"+checkId[i],"#guarTelNo_list").css({display: "none"});
 				}
 				else
 				{
@@ -237,12 +243,25 @@ let bandOpenInfoDetl = new Vue({
 		{
 			let $this = this;
 
-			if ( WebUtil.isNull($this.params.bandId)) {
-				Swal.alert(['밴드ID는 필수 입력 값입니다.', 'info']);
-				return false;
-			}if ( WebUtil.isNull($this.params.guarTelNo)) {
-					Swal.alert(['보호자 전화번호는 필수 입력 값입니다.', 'info']);
+			if ( $this.params.crud === 'C' ) {
+				if ( $this.params.checkDupBandId != 'Y' ) {
+					Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
 					return false;
+				}
+				if($this.params.bandId != $this.params.bandIdTemp) {
+					Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
+					return false;
+				}
+				if ( WebUtil.isNull($this.params.bandId)) {
+					Swal.alert(['밴드ID는 필수 입력 값입니다.', 'info']);
+					return false;
+				}
+			}
+
+			let gridData = $this.params.gridData;
+			if (gridData.length < 0 ) {
+				Swal.alert(['보호자 전화번호는 필수 입력 값입니다.', 'info']);
+				return false;
 			}
 			return true;
 		},
@@ -338,23 +357,19 @@ let bandOpenInfoDetl = new Vue({
 			});
 		},
 		saveBandOpenInfoDetl: function() {
-			
+
 			let $this = this;
 
+			//guarGridData 변경 없을 시
 			$this.params.gridData = commonGridGetDataNew($("#guarTelNo_list"));
+
+			if($this.params.gridData.length == 0){
+				$this.params.gridData = [{'crud':'N'}];
+			}
 			if (!this.isValid()) {
                 return false;
             }
-            if ( $this.params.crud === 'C' ) {
-	            if ( $this.params.checkDupBandId != 'Y' ) {
-	        		Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
-	        		return false;
-	        	}
-				if($this.params.bandId != $this.params.bandIdTemp) {
-					Swal.alert(['ID 확인을 하지 않았습니다.', 'info']);
-					return false;
-				}
-            }
+
             $this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
 
 			AjaxUtil.post({
@@ -376,7 +391,7 @@ let bandOpenInfoDetl = new Vue({
 		{
 			let $this = this;
 
-			$this.params.gridData = commonGridGetDataNew($("#growStnd_list"));
+			$this.params.gridData = commonGridGetDataNew($("#guarTelNo_list"));
 			$this.params.crud     = 'D';
 			
             AjaxUtil.post({
@@ -403,7 +418,7 @@ let bandOpenInfoDetl = new Vue({
 				bandYtypCd     : '' ,  //밴드_출고_년월
 				bandMdlCd      : '' ,  //밴드_모델_코드
 				telNo          : '' ,  //밴드_전화_번호
-				bandOpenStatCd : '' ,  //밴드_개통_상태_코드
+				bandOpenStatCd : 'OPEN' ,  //밴드_개통_상태_코드
 				blthId         : '' ,  //블루투스_ID
 				apiUrlGramNo   : '' ,  //API_URL_전문_번호
 				apiUrlDttm     : '' ,  //API_URL_일시

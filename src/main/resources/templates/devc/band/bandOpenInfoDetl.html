@@ -42,7 +42,7 @@
 									</th>
 								</tr>
 								<tr>
-									<th scope="row">전화 번호</th>
+									<th scope="row">밴드 전화 번호</th>
 									<td>
 										<input type="text" name="telNo" v-model="params.telNo" class="form-control float_left width_per_100 ime-eng" :readonly="params.crud=='U'"/>
 									</td>
@@ -61,31 +61,29 @@
 									<td>
 										<input type="text" name="blthId" v-model="params.blthId" class="form-control float_left width_per_100 ime-eng" maxlength="10"/>
 									</td>
-								</tr>
-								<tr v-if="params.crud=='C'">
+								</tr><!--
+								<tr v-if="params.crud==''">
 									<th scope="row">보호자 전화번호</th>
 									<td>
 										<input type="text" name="guarTelNo" v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng"  maxlength="11" placeholder=" '-' 를 제외하고 입력해주세요"/>
 									</td>
-								</tr>
+								</tr>-->
 							</tbody>
 		                </table>
             		</div>
-					<div v-if="params.crud=='U'">
-						<div style="width:100px; margin-top:15px; margin-left:15px; float:left;" >
-							<h5 style="height: 15px;">보호자 목록</h5>
-						</div>
-						<div class="float_right" style=" margin:15px 15px 10px 0px;">
-							<button type="button" id="btnAdd" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnAddRow"><span class="glyphicon glyphicon-plus"></span></button>
-							<button type="button" id="btnDel" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnDelRow"><span class="glyphicon glyphicon-minus"></span></button>
-						</div>
-						<div class="clear_both"></div>
-						<div class="ibox-content border-style_none" style="height: 200px; padding-top:0px;margin-bottom: 20px;">
-							<div class="form-group" style="height: 200px">
-								<div id="guarTelNo_list_wrapper" >
-									<table id="guarTelNo_list"></table>
-									<div id="guarTelNo_pager_list"></div>
-								</div>
+					<div style="width:100px; margin-top:15px; margin-left:15px; float:left;" >
+						<h5 style="height: 15px;">보호자 목록</h5>
+					</div>
+					<div class="float_right" style=" margin:15px 15px 10px 0px;">
+						<button type="button" id="btnAdd" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnAddRow"><span class="glyphicon glyphicon-plus"></span></button>
+						<button type="button" id="btnDel" class="btn btn-primary btn-xs" data-style="zoom-in" data-toggle="modal" v-on:click="btnDelRow"><span class="glyphicon glyphicon-minus"></span></button>
+					</div>
+					<div class="clear_both"></div>
+					<div class="ibox-content border-style_none" style="height: 200px; padding-top:0px;margin-bottom: 20px;">
+						<div class="form-group" style="height: 200px">
+							<div id="guarTelNo_list_wrapper" >
+								<table id="guarTelNo_list"></table>
+								<div id="guarTelNo_pager_list"></div>
 							</div>
 						</div>
 					</div>
