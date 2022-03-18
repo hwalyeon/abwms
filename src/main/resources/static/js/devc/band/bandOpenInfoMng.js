@@ -231,7 +231,6 @@ let bandOpenInfoMng = new Vue({
             },
             //밴드/개통정보(개별 보호자전화번호)수정,삭제
             regBandSpecDetlPopup: function(bandId,guarTelNo) {
-                console.log(bandId+"번호"+guarTelNo);
                 bandSpecDetl.initPage(bandId, guarTelNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
             resetSearchParam: function()

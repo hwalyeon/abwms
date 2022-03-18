@@ -84,8 +84,6 @@ let bandOpenInfoDetl = new Vue({
 								$this.params[key] = val;
 							});
 						}
-
-						console.log($this.params.crud);
 					},
 					error: function (response)
 					{

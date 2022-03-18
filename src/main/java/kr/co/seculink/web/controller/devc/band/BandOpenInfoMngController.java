@@ -153,20 +153,5 @@ public class BandOpenInfoMngController
 		return vo;
 	}
 
-	//밴드_정보_상세보기
-	@ResponseBody
-	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab")
-	public RtnMsg searchBandOpenInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-		Map<String, Object> result = bandOpenInfoMngService.searchBandOpenInfo(params);
-
-		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap);
-
-		return vo;
-	}
 
 }

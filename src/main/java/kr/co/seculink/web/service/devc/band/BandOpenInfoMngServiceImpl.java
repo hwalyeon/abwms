@@ -106,22 +106,6 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		if (saveCnt == 0) {
 			throw new BizException("ECOM999", new String[]{"밴드정보 저장이 실패하였습니다."});
 		}
-
 	}
-
-	//밴드_정보_상세보기
-	public Map<String, Object> searchBandOpenInfo(Map<String, String> params) throws BizException
-	{
-
-		Map<String, String> result = dao.selectOne("devc.band.bandOpenInfoMng.selectBandOpenInfo", params);
-
-		Map<String, Object> rtnMap = new HashMap<>();
-
-		rtnMap.put("result", result);
-
-		return rtnMap;
-	}
-
-
 }
 	

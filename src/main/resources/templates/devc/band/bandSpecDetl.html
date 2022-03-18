@@ -24,20 +24,20 @@
 			                        <th scope="row">밴드 ID
 										<td>
 											<div>
-												<input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_60 ime-eng"  v-on:input="nanCk(event)" maxlength="10" :readonly="params.crud=='U'"/>
-												<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupBandId"  :disabled="params.crud=='U'" ><span>ID 확인</span></button>
+												<input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_60 ime-eng"   maxlength="10" :readonly="params.crud=='U'"/>
+												<button type="button" class="btn btn-w-m btn-primary float_right" :disabled="params.crud=='U'" ><span>ID 확인</span></button>
 											</div>
 										    <div class="clear_both" style="width:100%; height:5px;"></div>
 											<div>
-												<select id="bandYtypCd" namd="bandYtypCd" class="form-control float_left width_per_30 ime-eng" v-model="params.bandYtypCd" v-on:change="numberingSelect" :disabled="params.crud=='U'">
+												<select id="bandYtypCd" namd="bandYtypCd" class="form-control float_left width_per_30 ime-eng" v-model="params.bandYtypCd":disabled="params.crud=='U'">
 													<option value="">출고년월</option>
 													<option v-for="item in code.bandYtypCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 												</select>
-												<select id="bandMdlCd" namd="bandMdlCd" class="form-control float_left ime-eng" style="margin-left:5px; width:97px;" v-model="params.bandMdlCd" v-on:change="numberingSelect" :disabled="params.crud=='U'">
+												<select id="bandMdlCd" namd="bandMdlCd" class="form-control float_left ime-eng" style="margin-left:5px; width:97px;" v-model="params.bandMdlCd"  :disabled="params.crud=='U'">
 													<option value="">모델타입</option>
 													<option v-for="item in code.bandMdlCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 												</select>
-												<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="numberingBandId"  :disabled="params.crud=='U'"><span>ID 채번</span></button>
+												<button type="button" class="btn btn-w-m btn-primary float_right"  :disabled="params.crud=='U'"><span>ID 채번</span></button>
 											</div>
 										</td>
 									</th>
