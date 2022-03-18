@@ -153,8 +153,6 @@ public class BandOpenInfoMngController
 		return vo;
 	}
 
-
-
 	//밴드_정보_상세보기
 	@ResponseBody
 	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfo.ab")

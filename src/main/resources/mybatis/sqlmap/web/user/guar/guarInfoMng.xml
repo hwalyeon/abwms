@@ -13,7 +13,8 @@
 			 , TSB.STDT_NO                    -- 학생_번호
 			 , TSB.STDT_NM                    -- 학생_명
 			 , TGB.ENTR_DT                    -- 가입_일자(보호자)
-			 , fn_getCdNm('ENTR_STAT_CD',ENTR_STAT_CD)  as ENTR_STAT_CD_NM-- 가입_상태_코드
+			 , fn_getCdNm('ENTR_STAT_CD',ENTR_STAT_CD)  as ENTR_STAT_CD_NM-- 가입_상태_코드_명
+			 , TGB.ENTR_STAT_CD               -- 가입_상태_코드
 			 , TBI.TEL_NO                     -- 전화_번호(밴드)
 			 , TEB.LOC_NM                     -- 위치_명(학교,학원_명)
 			 , TBI.BAND_ID                    -- 밴드_ID
@@ -57,7 +58,7 @@
 		<if test=" locNm != null and locNm !='' ">
 			and TEB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		group by TGB.GUAR_NO, TBS.GUAR_TEL_NO, TBI.BAND_ID, TSB.STDT_NO, TEB.LOC_NM, TPB.PRNT_NO, TPB.PRNT_NM, TPB2.PRNT_NM
-		order by TGB.GUAR_NO, TGB.GUAR_NM, TSB.STDT_NO, TGB.ENTR_DT, TEB.LOC_NM, TBI.BAND_ID
+		order by ENTR_STAT_CD_NM, TGB.GUAR_NO, TGB.GUAR_NM, TSB.STDT_NO, TGB.ENTR_DT, TEB.LOC_NM, TBI.BAND_ID
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex}
 		</if>
