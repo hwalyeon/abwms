@@ -10,7 +10,10 @@ let bandSpecDetl = new Vue({
 			bandMdlCd      : '' ,  //밴드_모델_코드
 			telNo          : '' ,  //밴드_전화_번호
 			bandOpenStatCd : '' ,  //밴드_개통_상태_코드
-			blthId         : ''    //블루투스_ID
+			blthId         : '' ,  //블루투스_ID
+			guarTelNo      : '' ,  //보호자_전화_번호
+			guarTelNoTemp  : '' ,  //보호자_전화_번호_임시
+			gridData       : []
     	},
 		callBack : null,
 		code: {
@@ -60,7 +63,6 @@ let bandSpecDetl = new Vue({
 					success: function(response) {
 						if ( !!response.rtnData.result )
 						{
-							console.log(response.rtnData.result);
 							$this.params.crud = 'U';
 
 							$.each(response.rtnData.result[0], function(key, val) {
@@ -79,8 +81,8 @@ let bandSpecDetl = new Vue({
 			
 			let $this = this;
 
-			$this.params.gridData = commonGridGetDataNew($("#growStnd_list"));
-
+			$this.params.gridData = [{'crud'      :'U',
+				                      'guarTelNo' : $this.params.guarTelNo},];
 
 			AjaxUtil.post({
                 url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
@@ -92,27 +94,6 @@ let bandSpecDetl = new Vue({
                 		//팝업 호출한 화면으로 돌아가서 함수 실행
                 		if($this.callBack != null ) $this.callBack();
                 	});                	
-                },
-                error: function (response) {
-                	Swal.alert([response, 'error']);
-                }
-            });
-		},
-
-		deleteUser: function() {
-			
-			let $this = this;
-			
-			$this.params.crud = 'D';
-			
-            AjaxUtil.post({
-                url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
-                param: $this.params,
-                success: function(response) {
-                	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#bandSpecDetlPopup'));
-						if($this.callBack != null ) $this.callBack();
-                	});
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);

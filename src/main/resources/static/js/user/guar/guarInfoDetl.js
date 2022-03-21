@@ -67,10 +67,9 @@ let guarInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(guarNo, guarTelNo, stdtNo, stdtNm) {
+        initPage: function(bandId, guarNo, guarTelNo, stdtNo, stdtNm) {
 
 			let $this = this;
-
 			if(typeof callback === 'function')
 			{
 				$this.callBack = callback;
@@ -80,6 +79,7 @@ let guarInfoDetl = new Vue({
 			if (!WebUtil.isNull(guarNo))
 			{
 				let params = {
+					'bandId'    : bandId    ,
 					'guarNo'    : guarNo    ,
 					'guarTelNo' : guarTelNo ,
 					'stdtNo'    : stdtNo    ,

@@ -317,9 +317,14 @@
                   left outer JOIN
                   TM_STDT_BASE TSB
                   on TSGC.STDT_NO = TSB.STDT_NO
+                  left outer join
+                  ts_band_spec TBS
+                  ON TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
         WHERE     1 = 1
 		AND       TGB.guar_tel_no = #{guarTelNo}
-        <if test="stdtNo != null and stdtNo !='' ">AND  TSB.stdt_no = #{stdtNo}::NUMERIC</if>
+		AND       TSB.band_id     = #{bandId}
+		<if test="stdtNo != null and stdtNo !='' ">AND  TSB.stdt_no = #{stdtNo}::NUMERIC</if>
+		group by TGB.guar_no ,TSB.stdt_no
 	</select>
 
 

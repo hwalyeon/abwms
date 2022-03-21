@@ -78,7 +78,6 @@ let bandOpenInfoDetl = new Vue({
 						if (!!response.rtnData.result)
 						{
 							$this.params.crud = 'U';
-
 							$.each(response.rtnData.result[0], function(key, val)
 							{
 								$this.params[key] = val;

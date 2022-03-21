@@ -50,7 +50,7 @@
 											<th scope="row">학부모 번호</th>
 											<td>
 												<div>
-													<input type="text" name="prntNo" v-model="params.prntNo" class="form-control float_left width_per_100 ime-eng" />
+													<input type="text" name="prntNo" v-model="params.prntNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
 												</div>
 											</td>
 										</tr>
@@ -65,14 +65,14 @@
 										<tr>
 											<th scope="row">보호자 전화 번호</th>
 											<td>
-												<input type="text" name=guarTelNo v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" :readonly="params.crud=='U'"/>
+												<input type="text" name=guarTelNo v-model="params.guarTelNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly"/>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">보호자 비밀번호</th>
 											<td>
-												<input type="text" name="guarPw" v-model="params.guarPw" class="form-control float_left width_per_60 ime-eng"/>
-												<button type="button" class="btn btn-w-s btn-primary float_right" v-on:click=""  :disabled="params.crud=='C'" ><span>초기화</span></button>
+												<!--<input type="text" name="guarPw" v-model="params.guarPw" class="form-control float_left width_per_60 ime-eng"/>-->
+												<button type="button" class="btn btn-w-m btn-primary" v-on:click=""  :disabled="params.crud=='C'" ><span>초기화</span></button>
 											</td>
 										</tr>
 											<th scope="row">가입 상태</th>

@@ -77,24 +77,28 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 
 				Object bandId = params.get("bandId");
 				info.put("bandId",bandId);
+				Object guarTelNoTemp = params.get("guarTelNoTemp");
+				info.put("guarTelNoTemp",guarTelNoTemp);
 
-				if ("C".equals(info.get("crud")))
-				{
-					//밴드_상세 - 밴드ID,보호자전화번호 기준 중복 검사
-					TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
-					if ( exists == null ) {
-						saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
-					} else{
+
+				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
+
+				if("C".equals(info.get("crud"))){
+					if (exists == null ) {
+						info.put("crud","C");
+					}else{
 						throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
 					}
+				}
+				if ("C".equals(info.get("crud")))
+				{
+					saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
 				} else if ("U".equals(info.get("crud"))) {
 					saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", info);
 				} else if ("D".equals(info.get("crud"))) {
 					saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", info);
 				}
 			}
-
-
 
 		if ("C".equals(params.get("crud"))) {
 			saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTsBandInfoList", params);
