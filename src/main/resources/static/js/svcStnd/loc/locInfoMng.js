@@ -54,14 +54,15 @@ let locInfoMng = new Vue({
             currentPage: 1,
             currentIndex: 0
         },
+        map: null,
+        currLat: 37.48170530421067,
+        currLng:126.88481997057949,
         mapCont: {
             draggable: 'false',
-            mapContainer:[],
-            map:[],
-            marker:[],
-            geocoder:[],
-            mouseEvent:[],
-            detailAddr:[],
+            marker:null,
+            geocoder:null,
+            mouseEvent:null,
+            detailAddr:null,
             result:[],
             searchSpecFg:''
         },
@@ -104,121 +105,102 @@ let locInfoMng = new Vue({
         initialize: function() {
             let $this = this;
 
-            $this.createMap();
+            $this.initMapPosition();
             $this.initCodeList();
+            $this.createMap();
             $this.initGrid();
             $this.searchLocInfoList(true);
+        },
+        initMapPosition : function() {
+            let $this = this;
+
+            // jcw :: 크롬브라우저는 https 통신일때만 허용하기 때문에 http 통신일땐 먹통 되므로 프토토콜 체크
+            // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+            if (navigator.geolocation && window.location.protocol=== 'https:') {
+                // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    $this.currLat = position.coords.latitude; // 위도
+                    $this.currLng = position.coords.longitude; // 경도
+                });
+            } else {
+                if( !WebUtil.isNull($this.locInfoSpec.latVal) ) {
+                    $this.currLat = $this.locInfoSpec.latVal;
+                    $this.currLng = $this.locInfoSpec.lonVal;
+                }
+            }
         },
         createMap : function() {
             let $this = this;
 
-            var latVal;
-            var lonVal;
-
-            // // jcw :: 크롬브라우저는 https 통신일때만 허용하기 때문에 http 통신일땐 먹통 되므로 프토토콜 체크
-            // // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
-            // if (navigator.geolocation && window.location.protocol=== 'https:') {
-            //     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-            //     navigator.geolocation.getCurrentPosition(function(position) {
-            //         latVal = position.coords.latitude; // 위도
-            //         lonVal = position.coords.longitude; // 경도
-            //     });
-            // } else {
-                if( WebUtil.isNull($this.locInfoSpec.latVal) ) {
-                    latVal = 33.450701;
-                    lonVal = 126.570667;
-                } else {
-                    latVal = $this.locInfoSpec.latVal;
-                    lonVal = $this.locInfoSpec.lonVal;
-                }
-            // }
-
-            $this.mapCont.mapContainer = document.getElementById('locInfoMngMap'), // 지도를 표시할 div
-                mapOption = {
-                    center: new kakao.maps.LatLng(latVal, lonVal), // 지도의 중심좌표 37.48170530421067, 126.88481997057949
+            if ( !$this.map ) {
+                $this.map = new kakao.maps.Map(this.getContainer(), {
+                    center: $this.getLatLng($this.currLat, $this.currLng), // 지도의 중심좌표 37.48170530421067, 126.88481997057949
                     draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소 제어
                     level: 3 // 지도의 확대 레벨
-                };
+                });
+            } else {
+                $this.map.setCenter($this.getLatLng($this.locInfoSpec.latVal, $this.locInfoSpec.lonVal));
+            }
 
-            $this.mapCont.map = new kakao.maps.Map($this.mapCont.mapContainer, mapOption); // 지도를 생성합니다
+            $this.map.setDraggable(true);
+            $this.map.setZoomable(true);
 
-            $this.mapCont.map.setDraggable(true);
-            $this.mapCont.map.setZoomable(true);
+            if ( !$this.mapCont.geocoder ) {
+                // 주소-좌표 변환 객체를 생성합니다
+                var geocoder = new kakao.maps.services.Geocoder();
+                $this.mapCont.geocoder = geocoder;
+            }
+            if ( !$this.mapCont.marker ) {
+                $this.mapCont.marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+                    infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+            }
 
-            // 주소-좌표 변환 객체를 생성합니다
-            var geocoder = new kakao.maps.services.Geocoder();
-            $this.mapCont.geocoder = geocoder;
-
-            $this.mapCont.marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-                infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-
-            // 지도에 표시할 사각형을 생성합니다
-            $this.draw.rectangle = new kakao.maps.Rectangle({
-                //bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
-                strokeWeight: 1, // 선의 두께입니다
-                strokeColor: '#39f', // 선의 색깔입니다
-                strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                strokeStyle: 'shortdashdot', // 선의 스타일입니다
-                fillColor: '#39f', // 채우기 색깔입니다
-                fillOpacity: 0.4 // 채우기 불투명도 입니다
-            });
+            $this.draw.cntrPos = $this.map.getCenter();
 
             // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-            searchAddrFromCoords($this.mapCont.map.getCenter(), displayCenterInfo);
+            searchAddrFromCoords($this.map.getCenter(), displayCenterInfo);
 
             // 지도에 클릭 이벤트를 등록합니다
             // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
             // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-            kakao.maps.event.addListener($this.mapCont.map, 'click', function(mouseEvent) {
+            kakao.maps.event.addListener($this.map, 'click', function(mouseEvent) {
 
-                $this.mapCont.mouseEvent = [];
                 $this.mapCont.mouseEvent = mouseEvent;
 
                 if($this.mapCont.draggable === 'true') {
                     searchDetailAddrFromCoords($this.mapCont.mouseEvent.latLng, function(result, status) {
                         $this.mapCont.result = result;
                         if (status === kakao.maps.services.Status.OK) {
-                            var detailAddr = !!$this.mapCont.result[0].road_address ? '<div>도로명주소 : ' + $this.mapCont.result[0].road_address.address_name + '</div>' : '';
+                            var detailAddr = !!$this.mapCont.result[0].road_address ? '<div>도로명 : ' + $this.mapCont.result[0].road_address.address_name + '</div>' : '';
 
                             // $this.mapCont.detailAddr = [];
                             $this.mapCont.detailAddr = detailAddr;
-                            $this.mapCont.detailAddr += '<div>지번 주소 : ' + $this.mapCont.result[0].address.address_name + '</div>';
+                            $this.mapCont.detailAddr += '<div>지번 : ' + $this.mapCont.result[0].address.address_name + '</div>';
 
                             var content = '<div class="bAddr">' +
                                 '<span class="title">법정동 주소정보</span>' +
                                 $this.mapCont.detailAddr +
                                 '</div>';
 
-                            $this.draw.cntrPos = $this.mapCont.mouseEvent.latLng;
-                            // 마커를 클릭한 위치에 표시합니다
-                            $this.mapCont.marker.setPosition($this.mapCont.mouseEvent.latLng);
-                            $this.mapCont.marker.setMap($this.mapCont.map);
-
-                            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                            infowindow.setContent(content);
-                            infowindow.open($this.mapCont.map, $this.mapCont.marker);
-                            $this.locInfoSpec.addrBase = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.address_name : $this.mapCont.result[0].address.address_name;
-                            $this.locInfoSpec.pstno = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.zone_no : $this.mapCont.result[0].address.zip_code;
-
                             // 클릭한 위도, 경도 정보를 가져옵니다
                             var latlng = $this.mapCont.mouseEvent.latLng;
                             $this.locInfoSpec.latVal = latlng.getLat();
                             $this.locInfoSpec.lonVal = latlng.getLng();
 
-                            $this.locInfoSpec.valdRngeDist = $this.draw.dist;
-                            $this.getRectBound();
+                            $this.draw.cntrPos = latlng;
+                            // 마커를 클릭한 위치에 표시합니다
+                            $this.mapCont.marker.setPosition(latlng);
+                            $this.mapCont.marker.setMap($this.map);
 
-                            var sw, ne;
-                            sw = new kakao.maps.LatLng($this.locInfoSpec.swstLatVal, $this.locInfoSpec.swstLonVal);
-                            ne = new kakao.maps.LatLng($this.locInfoSpec.nestLatVal, $this.locInfoSpec.nestLonVal); // 사각형 영역의 북동쪽 좌표
+                            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+                            infowindow.setContent(content);
+                            infowindow.open($this.map, $this.mapCont.marker);
 
-                            // 사각형을 구성하는 영역정보를 생성합니다
-                            // 사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
-                            var rectangleBounds = new kakao.maps.LatLngBounds(sw, ne);
+                            $this.locInfoSpec.pstno     = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.zone_no : $this.mapCont.result[0].address.zip_code;
+                            $this.locInfoSpec.addrBase  = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.address_name : $this.mapCont.result[0].address.address_name;
+                            $this.locInfoSpec.addrSpec  = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.building_name : $this.mapCont.result[0].address.building_name;
 
-                            $this.draw.rectangle.setBounds(rectangleBounds);
-                            // 지도에 사각형을 표시합니다
-                            $this.draw.rectangle.setMap($this.mapCont.map);
+                            $this.setRectangle();
                         }
                     });
                 }
@@ -226,21 +208,37 @@ let locInfoMng = new Vue({
 
             if($this.mapCont.searchSpecFg === 'Y') {
 
-                $this.mapCont.detailAddr = !!$this.locInfoSpec.addrBase ? '<div>도로명주소 : ' + $this.locInfoSpec.addrBase + '</div>' : '';
+                if ($this.locInfoSpec.valdRngeDist < 50) {
+                    $this.map.setLevel(2);
+                } else if ($this.locInfoSpec.valdRngeDist < 200) {
+                    $this.map.setLevel(3);
+                } else if ($this.locInfoSpec.valdRngeDist < 500) {
+                    $this.map.setLevel(4);
+                } else if ($this.locInfoSpec.valdRngeDist < 1000) {
+                    $this.map.setLevel(5);
+                } else if ($this.locInfoSpec.valdRngeDist < 1600) {
+                    $this.map.setLevel(6);
+                } else {
+                    $this.map.setLevel(7);
+                }
+                $this.draw.dist = $this.locInfoSpec.valdRngeDist;
 
-                var contentA = '<div class="bAddr">' +
+                $this.mapCont.detailAddr = !!$this.locInfoSpec.addrBase ? '<div>도로명 : ' + $this.locInfoSpec.addrBase + '</div>' : '';
+                $this.mapCont.detailAddr += !!$this.locInfoSpec.addrSpec ? '<div>상세 : ' + $this.locInfoSpec.addrSpec + '</div>' : '';
+
+                var content = '<div class="bAddr">' +
                     '<span class="title">법정동 주소정보</span>' +
                     $this.mapCont.detailAddr +
                     '</div>';
 
-                var markerPosition  = new kakao.maps.LatLng($this.locInfoSpec.latVal, $this.locInfoSpec.lonVal);
+                var markerPosition  = $this.getLatLng($this.locInfoSpec.latVal, $this.locInfoSpec.lonVal);
 
                 $this.mapCont.marker.setPosition(markerPosition);
-                $this.mapCont.marker.setMap($this.mapCont.map);
+                $this.mapCont.marker.setMap($this.map);
 
                 // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                infowindow.setContent(contentA);
-                infowindow.open($this.mapCont.map, $this.mapCont.marker);
+                infowindow.setContent(content);
+                infowindow.open($this.map, $this.mapCont.marker);
 
                 $this.setRectangle();
 
@@ -248,8 +246,8 @@ let locInfoMng = new Vue({
             }
 
             // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-            kakao.maps.event.addListener($this.mapCont.map, 'idle', function() {
-                searchAddrFromCoords($this.mapCont.map.getCenter(), displayCenterInfo);
+            kakao.maps.event.addListener($this.map, 'idle', function() {
+                searchAddrFromCoords($this.map.getCenter(), displayCenterInfo);
             });
 
             function searchAddrFromCoords(coords, callback) {
@@ -264,18 +262,7 @@ let locInfoMng = new Vue({
 
             // 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
             function displayCenterInfo(result, status) {
-                // if (status === kakao.maps.services.Status.OK) {
-                //     //var infoDiv = document.getElementById('centerAddr');
-                //
-                //     for(var i = 0; i < result.length; i++) {
-                //         // 행정동의 region_type 값은 'H' 이므로
-                //         if (result[i].region_type === 'H') {
-                //             //infoDiv.innerHTML = result[i].address_name;
-                //             //$this.locInfoSpec.addrBase = result[i].address_name;
-                //             break;
-                //         }
-                //     }
-                // }
+
             }
         },
         getLatPerMeter: function() {
@@ -333,26 +320,51 @@ let locInfoMng = new Vue({
         },
         setRectangle : function() {
             let $this = this;
-            var sw = new kakao.maps.LatLng($this.locInfoSpec.swstLatVal, $this.locInfoSpec.swstLonVal), // 사각형 영역의 남서쪽 좌표
-                ne = new kakao.maps.LatLng($this.locInfoSpec.nestLatVal,  $this.locInfoSpec.nestLonVal); // 사각형 영역의 북동쪽 좌표
 
             // 사각형을 구성하는 영역정보를 생성합니다
             // 사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
-            var rectangleBounds = new kakao.maps.LatLngBounds(sw, ne);
+            var rectangleBounds = $this.getRectBound();
 
             // 지도에 표시할 사각형을 생성합니다
-            $this.draw.rectangle = new kakao.maps.Rectangle({
-                bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
-                strokeWeight: 1, // 선의 두께입니다
-                strokeColor: '#39f', // 선의 색깔입니다
-                strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                strokeStyle: 'shortdashdot', // 선의 스타일입니다
-                fillColor: '#39f', // 채우기 색깔입니다
-                fillOpacity: 0.4 // 채우기 불투명도 입니다
-            });
+            if ( !$this.draw.rectangle ) {
+                $this.draw.rectangle = new kakao.maps.Rectangle({
+                    bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
+                    strokeWeight: 1, // 선의 두께입니다
+                    strokeColor: '#39f', // 선의 색깔입니다
+                    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                    strokeStyle: 'shortdashdot', // 선의 스타일입니다
+                    fillColor: '#39f', // 채우기 색깔입니다
+                    fillOpacity: 0.4 // 채우기 불투명도 입니다
+                });
+            }
 
+            $this.draw.rectangle.setBounds(rectangleBounds);
             // 지도에 사각형을 표시합니다
-            $this.draw.rectangle.setMap($this.mapCont.map);
+            $this.draw.rectangle.setMap($this.map);
+        },
+        setMarking : function() {
+            let $this = this;
+            let draggable;
+
+            if($this.mapCont.draggable === 'false'){
+                $this.mapCont.draggable = 'true';
+                draggable = true;
+                $("#btnLocMark").text(' 마킹종료');
+            } else {
+                $this.mapCont.draggable = 'false';
+                draggable = false;
+                $("#btnLocMark").text(' 마킹시작');
+            }
+            // 마우스 드래그로 지도 이동 가능여부를 설정합니다
+            $this.map.setDraggable(true);
+            $this.map.setZoomable(true);
+        },
+        getContainer: function(mapId) {
+            let id = '';
+            if ( WebUtil.isNull(mapId) ) {
+                id = 'locInfoMngMap';
+            }
+            return document.getElementById(id);
         },
         initCodeList : function() {
             let $this = this;
@@ -402,7 +414,7 @@ let locInfoMng = new Vue({
                         $this.locInfo.locNm      = item.locNm;
                         $this.locInfo.stdtNo     = item.stdtNo;
                         $this.mapCont.draggable  = 'true';
-                        $this.setDraggable();
+                        $this.setMarking();
                         $this.searchLocInfoSpec(true);
                     }
                 },
@@ -431,9 +443,8 @@ let locInfoMng = new Vue({
             }
             // jcw :: 조회 버튼 클릭 시 맵 컨트롤 잠금
             $this.mapCont.draggable  = 'true';
-            $this.setDraggable();
+            $this.setMarking();
 
-            // jcw temp
             $this.locInfoSpec = {
                 crud:'C',
                 rdPublGuarDivSpec: '',
@@ -544,24 +555,24 @@ let locInfoMng = new Vue({
                     if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 ) {
                         $.each(response["rtnData"].result, function(index, item) {
                             $this.locInfoSpec.crud = 'U',
-                            $this.locInfoSpec.rdPublGuarDivSpec = item.rdPublGuarDiv,
-                            $this.locInfoSpec.prntNo = item.prntNo,
-                            $this.locInfoSpec.stdtNo = item.stdtNo,
-                            $this.locInfoSpec.locNo = item.locNo,
-                            $this.locInfoSpec.locNm = item.locNm,
-                            $this.locInfoSpec.plcClssCd = item.plcClssCd,
-                            $this.locInfoSpec.plcCd = item.plcCd,
-                            $this.locInfoSpec.latVal = item.latVal,
-                            $this.locInfoSpec.lonVal = item.lonVal,
-                            $this.locInfoSpec.valdRngeDist = item.valdRngeDist,
-                            $this.locInfoSpec.swstLatVal = item.swstLatVal,
-                            $this.locInfoSpec.swstLonVal = item.swstLonVal,
-                            $this.locInfoSpec.nestLatVal = item.nestLatVal,
-                            $this.locInfoSpec.nestLonVal = item.nestLonVal,
-                            $this.locInfoSpec.pstno = item.pstno,
-                            $this.locInfoSpec.addrBase = item.addrBase,
-                            $this.locInfoSpec.addrSpec = item.addrSpec,
-                            $this.locInfoSpec.delYn = item.delYn
+                                $this.locInfoSpec.rdPublGuarDivSpec = item.rdPublGuarDiv,
+                                $this.locInfoSpec.prntNo = item.prntNo,
+                                $this.locInfoSpec.stdtNo = item.stdtNo,
+                                $this.locInfoSpec.locNo = item.locNo,
+                                $this.locInfoSpec.locNm = item.locNm,
+                                $this.locInfoSpec.plcClssCd = item.plcClssCd,
+                                $this.locInfoSpec.plcCd = item.plcCd,
+                                $this.locInfoSpec.latVal = item.latVal,
+                                $this.locInfoSpec.lonVal = item.lonVal,
+                                $this.locInfoSpec.valdRngeDist = item.valdRngeDist,
+                                $this.locInfoSpec.swstLatVal = item.swstLatVal,
+                                $this.locInfoSpec.swstLonVal = item.swstLonVal,
+                                $this.locInfoSpec.nestLatVal = item.nestLatVal,
+                                $this.locInfoSpec.nestLonVal = item.nestLonVal,
+                                $this.locInfoSpec.pstno = item.pstno,
+                                $this.locInfoSpec.addrBase = item.addrBase,
+                                $this.locInfoSpec.addrSpec = item.addrSpec,
+                                $this.locInfoSpec.delYn = item.delYn
                         });
 
                         $this.changePrntNoSpec();
@@ -640,6 +651,13 @@ let locInfoMng = new Vue({
                 currentPage: 1,
                 currentIndex: 0
             }
+
+            // $this.currLat = 37.48170530421067;
+            // $this.currLng = 126.88481997057949;
+            // $this.mapCont.marker.setMap(null);
+            // $this.draw.rectangle.setMap(null);
+            // $this.initMapPosition();
+            // $this.createMap();
         },
         regLocInfoSpec : function () {
             let $this = this;
@@ -745,7 +763,7 @@ let locInfoMng = new Vue({
             }
 
             if ( WebUtil.isNull($this.locInfoSpec.swstLatVal) || WebUtil.isNull($this.locInfoSpec.swstLonVal) ||
-                 WebUtil.isNull($this.locInfoSpec.nestLatVal) || WebUtil.isNull($this.locInfoSpec.nestLonVal)) {
+                WebUtil.isNull($this.locInfoSpec.nestLatVal) || WebUtil.isNull($this.locInfoSpec.nestLonVal)) {
                 Swal.alert(['장소를 마킹하여 범위를 지정해주세요.', 'info']);
                 return false;
             }
@@ -855,23 +873,6 @@ let locInfoMng = new Vue({
                 }
             })
         },
-        setDraggable : function() {
-            let $this = this;
-            let draggable;
-
-            if($this.mapCont.draggable === 'false'){
-                $this.mapCont.draggable = 'true';
-                draggable = true;
-                $("#btnLocMark").text(' 마킹종료');
-            } else {
-                $this.mapCont.draggable = 'false';
-                draggable = false;
-                $("#btnLocMark").text(' 마킹시작');
-            }
-            // 마우스 드래그로 지도 이동 가능여부를 설정합니다
-            $this.mapCont.map.setDraggable(true);
-            $this.mapCont.map.setZoomable(true);
-        },
         // jcw :: input 데이터 자리수 제한
         input_lenth : function(e){
             this.max_length(e, 200, '#addrSpec');
@@ -901,9 +902,24 @@ let locInfoMng = new Vue({
                     $this.draw.rectangle.setBounds(rectangleBounds);
 
                     // 지도에 사각형을 표시합니다
-                    $this.draw.rectangle.setMap($this.mapCont.map);
+                    $this.draw.rectangle.setMap($this.map);
                 }
                 $this.locInfoSpec.valdRngeDist = $this.draw.dist;
+
+                // 넓은 범위로 확대된 맵으로 디테일하게 이용하고 싶을 수 있으니 주석..
+                // if ($this.locInfoSpec.valdRngeDist < 150) {
+                //     $this.map.setLevel(2);
+                // } else if ($this.locInfoSpec.valdRngeDist < 250) {
+                //     $this.map.setLevel(3);
+                // } else if ($this.locInfoSpec.valdRngeDist < 500) {
+                //     $this.map.setLevel(4);
+                // } else if ($this.locInfoSpec.valdRngeDist < 1000) {
+                //     $this.map.setLevel(5);
+                // } else if ($this.locInfoSpec.valdRngeDist < 1700) {
+                //     $this.map.setLevel(6);
+                // } else {
+                //     $this.map.setLevel(7);
+                // }
             }
         }
     },

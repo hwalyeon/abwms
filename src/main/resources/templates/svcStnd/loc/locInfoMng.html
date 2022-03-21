@@ -136,7 +136,7 @@
 							<button class="btn btn-secondary" v-on:click="resetSearchParamSpec()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 상세정보초기화</span>
 							</button>
-							<button type="button" id="btnLocMark" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="setDraggable()"> 장소마킹</button>
+							<button type="button" id="btnLocMark" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="setMarking()"> 장소마킹</button>
 							<button type="button" id="btnLocInfoSpecReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="regLocInfoSpec()">&nbsp;&nbsp;&nbsp;&nbsp;저장&nbsp;&nbsp;&nbsp;</button>
 							<button type="button" id="btnLocInfoSpecDel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="delLocInfoSpec()">&nbsp;&nbsp;&nbsp;&nbsp;삭제&nbsp;&nbsp;&nbsp;</button>
 						</div>
@@ -175,7 +175,7 @@
 							</div>
 							<div id="locInfoMngMap" style="width:650px;height:470px;"></div>
 							<div class="button-group">
-								<input type="range" class="prog" v-show="draw.cntrPos!==null" v-model="draw.dist" min="50" max="2000" style="width:650px;height:50px; background-color: #434343;"/>
+								<input type="range" class="prog" v-show="draw.cntrPos!==null" v-model="draw.dist" min="20" max="2000" style="width:650px;height:50px; background-color: #434343;"/>
 								<div v-show="draw.cntrPos!==null">{{draw.dist}}m</div>
 							</div>
 						</div>
@@ -187,14 +187,9 @@
 	</div>
 </div>
 <section layout:fragment="user_script">
-	<!-- services 라이브러리 불러오기 -->
+	<!-- kakaoMap services 라이브러리 불러오기 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9404310d886e0de8d93c2409516f9c0&libraries=services"></script>
-<!--	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9404310d886e0de8d93c2409516f9c0&libraries=LIBRARY"></script>-->
-	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-<!--	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9404310d886e0de8d93c2409516f9c0&libraries=services,clusterer,drawing"></script>-->
-
 	<script type="text/javascript" th:src="@{/js/svcStnd/loc/locInfoMng.js}"></script>
-<!--	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9404310d886e0de8d93c2409516f9c0"></script>-->
 </section>
 </body>
 </html>
