@@ -3,9 +3,9 @@ package kr.co.seculink.domain.vo;
 import java.io.Serializable;
 
 /**
- * tt_alam_stss Value Object
+ * tt_cbee_stss Value Object
  */
-public class TtAlamStssVo implements Serializable {
+public class TtCbeeStssVo implements Serializable {
 
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
@@ -16,8 +16,8 @@ public class TtAlamStssVo implements Serializable {
 	/* age_ycnt 나이_년수 numeric(null) */
 	private double ageYcnt;
 
-	/* act_cd 알림_유형_코드 character varying(20) */
-	private String actCd;
+	/* cbee_use_cd 캐시비_사용_코드 character varying(20) */
+	private String cbeeUseCd;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
@@ -28,11 +28,8 @@ public class TtAlamStssVo implements Serializable {
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
-	/* obj_cnt 대상_건수 numeric(null) */
-	private double objCnt;
-
-	/* neat_cnt 결식_건수 numeric(null) */
-	private double neatCnt;
+	/* cbee_amt 캐시비_금액 numeric(null) */
+	private double cbeeAmt;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -99,19 +96,19 @@ public class TtAlamStssVo implements Serializable {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
-	 * Get act_cd 알림_유형_코드 character varying(20)
-	 * @Return String actCd
+	 * Get cbee_use_cd 캐시비_사용_코드 character varying(20)
+	 * @Return String cbeeUseCd
 	 */
-	public String getActCd() {
-		return this.actCd;
+	public String getCbeeUseCd() {
+		return this.cbeeUseCd;
 	}
 	
 	/**
-	 * Set act_cd 알림_유형_코드 character varying(20)
-	 * @Param String actCd
+	 * Set cbee_use_cd 캐시비_사용_코드 character varying(20)
+	 * @Param String cbeeUseCd
 	 */
-	public void setActCd(String actCd) {
-		this.actCd = actCd;
+	public void setCbeeUseCd(String cbeeUseCd) {
+		this.cbeeUseCd = cbeeUseCd;
 	}
 	/**
 	 * Get stnd_yymm 기준_년월 character(6)
@@ -159,34 +156,19 @@ public class TtAlamStssVo implements Serializable {
 		this.weekNm = weekNm;
 	}
 	/**
-	 * Get obj_cnt 대상_건수 numeric(null)
-	 * @Return double objCnt
+	 * Get cbee_amt 캐시비_금액 numeric(null)
+	 * @Return double cbeeAmt
 	 */
-	public double getObjCnt() {
-		return this.objCnt;
+	public double getCbeeAmt() {
+		return this.cbeeAmt;
 	}
 	
 	/**
-	 * Set obj_cnt 대상_건수 numeric(null)
-	 * @Param double objCnt
+	 * Set cbee_amt 캐시비_금액 numeric(null)
+	 * @Param double cbeeAmt
 	 */
-	public void setObjCnt(double objCnt) {
-		this.objCnt = objCnt;
-	}
-	/**
-	 * Get neat_cnt 결식_건수 numeric(null)
-	 * @Return double neatCnt
-	 */
-	public double getNeatCnt() {
-		return this.neatCnt;
-	}
-	
-	/**
-	 * Set neat_cnt 결식_건수 numeric(null)
-	 * @Param double neatCnt
-	 */
-	public void setNeatCnt(double neatCnt) {
-		this.neatCnt = neatCnt;
+	public void setCbeeAmt(double cbeeAmt) {
+		this.cbeeAmt = cbeeAmt;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

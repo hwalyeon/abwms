@@ -10,6 +10,12 @@ public class TtFoodEatStssVo implements Serializable {
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
 
+	/* sex_cd 성별_코드 character varying(20) */
+	private String sexCd;
+
+	/* age_ycnt 나이_년수 numeric(null) */
+	private double ageYcnt;
+
 	/* food_no 식품_번호 numeric(null) */
 	private double foodNo;
 
@@ -21,12 +27,6 @@ public class TtFoodEatStssVo implements Serializable {
 
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
-
-	/* sex_cd 성별_코드 character varying(20) */
-	private String sexCd;
-
-	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
 
 	/* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null) */
 	private double avgCalEatQty;
@@ -64,6 +64,36 @@ public class TtFoodEatStssVo implements Serializable {
 	 */
 	public void setStndDt(String stndDt) {
 		this.stndDt = stndDt;
+	}
+	/**
+	 * Get sex_cd 성별_코드 character varying(20)
+	 * @Return String sexCd
+	 */
+	public String getSexCd() {
+		return this.sexCd;
+	}
+	
+	/**
+	 * Set sex_cd 성별_코드 character varying(20)
+	 * @Param String sexCd
+	 */
+	public void setSexCd(String sexCd) {
+		this.sexCd = sexCd;
+	}
+	/**
+	 * Get age_ycnt 나이_년수 numeric(null)
+	 * @Return double ageYcnt
+	 */
+	public double getAgeYcnt() {
+		return this.ageYcnt;
+	}
+	
+	/**
+	 * Set age_ycnt 나이_년수 numeric(null)
+	 * @Param double ageYcnt
+	 */
+	public void setAgeYcnt(double ageYcnt) {
+		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get food_no 식품_번호 numeric(null)
@@ -124,36 +154,6 @@ public class TtFoodEatStssVo implements Serializable {
 	 */
 	public void setWeekNm(String weekNm) {
 		this.weekNm = weekNm;
-	}
-	/**
-	 * Get sex_cd 성별_코드 character varying(20)
-	 * @Return String sexCd
-	 */
-	public String getSexCd() {
-		return this.sexCd;
-	}
-	
-	/**
-	 * Set sex_cd 성별_코드 character varying(20)
-	 * @Param String sexCd
-	 */
-	public void setSexCd(String sexCd) {
-		this.sexCd = sexCd;
-	}
-	/**
-	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
-	 */
-	public double getAgeYcnt() {
-		return this.ageYcnt;
-	}
-	
-	/**
-	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
-	 */
-	public void setAgeYcnt(double ageYcnt) {
-		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)

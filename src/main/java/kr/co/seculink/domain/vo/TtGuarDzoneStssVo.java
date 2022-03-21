@@ -3,36 +3,33 @@ package kr.co.seculink.domain.vo;
 import java.io.Serializable;
 
 /**
- * tt_alam_stss Value Object
+ * tt_guar_dzone_stss Value Object
  */
-public class TtAlamStssVo implements Serializable {
+public class TtGuarDzoneStssVo implements Serializable {
 
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
 
-	/* sex_cd 성별_코드 character varying(20) */
-	private String sexCd;
+	/* plc_clss_cd 장소_분류_코드 character varying(20) */
+	private String plcClssCd;
 
-	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	/* lat_val 위도_값 numeric(null) */
+	private double latVal;
 
-	/* act_cd 알림_유형_코드 character varying(20) */
-	private String actCd;
+	/* lon_val 경도_값 numeric(null) */
+	private double lonVal;
 
-	/* stnd_yymm 기준_년월 character(6) */
-	private String stndYymm;
+	/* addr_head_1 주소_헤더_1 character varying(30) */
+	private String addrHead1;
 
-	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	/* addr_head_2 주소_헤더_2 character varying(30) */
+	private String addrHead2;
 
-	/* week_nm 요일_명 character varying(10) */
-	private String weekNm;
+	/* near_addr 인근_주소 character varying(200) */
+	private String nearAddr;
 
-	/* obj_cnt 대상_건수 numeric(null) */
-	private double objCnt;
-
-	/* neat_cnt 결식_건수 numeric(null) */
-	private double neatCnt;
+	/* dup_apnt_cnt 중복_지정_건수 numeric(null) */
+	private double dupApntCnt;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -69,124 +66,109 @@ public class TtAlamStssVo implements Serializable {
 		this.stndDt = stndDt;
 	}
 	/**
-	 * Get sex_cd 성별_코드 character varying(20)
-	 * @Return String sexCd
+	 * Get plc_clss_cd 장소_분류_코드 character varying(20)
+	 * @Return String plcClssCd
 	 */
-	public String getSexCd() {
-		return this.sexCd;
+	public String getPlcClssCd() {
+		return this.plcClssCd;
 	}
 	
 	/**
-	 * Set sex_cd 성별_코드 character varying(20)
-	 * @Param String sexCd
+	 * Set plc_clss_cd 장소_분류_코드 character varying(20)
+	 * @Param String plcClssCd
 	 */
-	public void setSexCd(String sexCd) {
-		this.sexCd = sexCd;
+	public void setPlcClssCd(String plcClssCd) {
+		this.plcClssCd = plcClssCd;
 	}
 	/**
-	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * Get lat_val 위도_값 numeric(null)
+	 * @Return double latVal
 	 */
-	public double getAgeYcnt() {
-		return this.ageYcnt;
-	}
-	
-	/**
-	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
-	 */
-	public void setAgeYcnt(double ageYcnt) {
-		this.ageYcnt = ageYcnt;
-	}
-	/**
-	 * Get act_cd 알림_유형_코드 character varying(20)
-	 * @Return String actCd
-	 */
-	public String getActCd() {
-		return this.actCd;
+	public double getLatVal() {
+		return this.latVal;
 	}
 	
 	/**
-	 * Set act_cd 알림_유형_코드 character varying(20)
-	 * @Param String actCd
+	 * Set lat_val 위도_값 numeric(null)
+	 * @Param double latVal
 	 */
-	public void setActCd(String actCd) {
-		this.actCd = actCd;
+	public void setLatVal(double latVal) {
+		this.latVal = latVal;
 	}
 	/**
-	 * Get stnd_yymm 기준_년월 character(6)
-	 * @Return String stndYymm
+	 * Get lon_val 경도_값 numeric(null)
+	 * @Return double lonVal
 	 */
-	public String getStndYymm() {
-		return this.stndYymm;
-	}
-	
-	/**
-	 * Set stnd_yymm 기준_년월 character(6)
-	 * @Param String stndYymm
-	 */
-	public void setStndYymm(String stndYymm) {
-		this.stndYymm = stndYymm;
-	}
-	/**
-	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
-	 */
-	public double getMnthWeekSeq() {
-		return this.mnthWeekSeq;
+	public double getLonVal() {
+		return this.lonVal;
 	}
 	
 	/**
-	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * Set lon_val 경도_값 numeric(null)
+	 * @Param double lonVal
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
-		this.mnthWeekSeq = mnthWeekSeq;
+	public void setLonVal(double lonVal) {
+		this.lonVal = lonVal;
 	}
 	/**
-	 * Get week_nm 요일_명 character varying(10)
-	 * @Return String weekNm
+	 * Get addr_head_1 주소_헤더_1 character varying(30)
+	 * @Return String addrHead1
 	 */
-	public String getWeekNm() {
-		return this.weekNm;
-	}
-	
-	/**
-	 * Set week_nm 요일_명 character varying(10)
-	 * @Param String weekNm
-	 */
-	public void setWeekNm(String weekNm) {
-		this.weekNm = weekNm;
-	}
-	/**
-	 * Get obj_cnt 대상_건수 numeric(null)
-	 * @Return double objCnt
-	 */
-	public double getObjCnt() {
-		return this.objCnt;
+	public String getAddrHead1() {
+		return this.addrHead1;
 	}
 	
 	/**
-	 * Set obj_cnt 대상_건수 numeric(null)
-	 * @Param double objCnt
+	 * Set addr_head_1 주소_헤더_1 character varying(30)
+	 * @Param String addrHead1
 	 */
-	public void setObjCnt(double objCnt) {
-		this.objCnt = objCnt;
+	public void setAddrHead1(String addrHead1) {
+		this.addrHead1 = addrHead1;
 	}
 	/**
-	 * Get neat_cnt 결식_건수 numeric(null)
-	 * @Return double neatCnt
+	 * Get addr_head_2 주소_헤더_2 character varying(30)
+	 * @Return String addrHead2
 	 */
-	public double getNeatCnt() {
-		return this.neatCnt;
+	public String getAddrHead2() {
+		return this.addrHead2;
 	}
 	
 	/**
-	 * Set neat_cnt 결식_건수 numeric(null)
-	 * @Param double neatCnt
+	 * Set addr_head_2 주소_헤더_2 character varying(30)
+	 * @Param String addrHead2
 	 */
-	public void setNeatCnt(double neatCnt) {
-		this.neatCnt = neatCnt;
+	public void setAddrHead2(String addrHead2) {
+		this.addrHead2 = addrHead2;
+	}
+	/**
+	 * Get near_addr 인근_주소 character varying(200)
+	 * @Return String nearAddr
+	 */
+	public String getNearAddr() {
+		return this.nearAddr;
+	}
+	
+	/**
+	 * Set near_addr 인근_주소 character varying(200)
+	 * @Param String nearAddr
+	 */
+	public void setNearAddr(String nearAddr) {
+		this.nearAddr = nearAddr;
+	}
+	/**
+	 * Get dup_apnt_cnt 중복_지정_건수 numeric(null)
+	 * @Return double dupApntCnt
+	 */
+	public double getDupApntCnt() {
+		return this.dupApntCnt;
+	}
+	
+	/**
+	 * Set dup_apnt_cnt 중복_지정_건수 numeric(null)
+	 * @Param double dupApntCnt
+	 */
+	public void setDupApntCnt(double dupApntCnt) {
+		this.dupApntCnt = dupApntCnt;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

@@ -3,9 +3,9 @@ package kr.co.seculink.domain.vo;
 import java.io.Serializable;
 
 /**
- * tt_alam_stss Value Object
+ * tt_zone_dtct_stss Value Object
  */
-public class TtAlamStssVo implements Serializable {
+public class TtZoneDtctStssVo implements Serializable {
 
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
@@ -16,23 +16,20 @@ public class TtAlamStssVo implements Serializable {
 	/* age_ycnt 나이_년수 numeric(null) */
 	private double ageYcnt;
 
-	/* act_cd 알림_유형_코드 character varying(20) */
-	private String actCd;
+	/* loc_apnt_cd 위치_지정_코드 character varying(20) */
+	private String locApntCd;
 
-	/* stnd_yymm 기준_년월 character(6) */
-	private String stndYymm;
+	/* plc_clss_cd 장소_분류_코드 character varying(20) */
+	private String plcClssCd;
 
-	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	/* loc_no 위치_번호 numeric(null) */
+	private double locNo;
 
-	/* week_nm 요일_명 character varying(10) */
-	private String weekNm;
+	/* occr_cnt 발생_건수 numeric(null) */
+	private double occrCnt;
 
-	/* obj_cnt 대상_건수 numeric(null) */
-	private double objCnt;
-
-	/* neat_cnt 결식_건수 numeric(null) */
-	private double neatCnt;
+	/* stdt_cnt 학생_수 numeric(null) */
+	private double stdtCnt;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -99,94 +96,79 @@ public class TtAlamStssVo implements Serializable {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
-	 * Get act_cd 알림_유형_코드 character varying(20)
-	 * @Return String actCd
+	 * Get loc_apnt_cd 위치_지정_코드 character varying(20)
+	 * @Return String locApntCd
 	 */
-	public String getActCd() {
-		return this.actCd;
+	public String getLocApntCd() {
+		return this.locApntCd;
 	}
 	
 	/**
-	 * Set act_cd 알림_유형_코드 character varying(20)
-	 * @Param String actCd
+	 * Set loc_apnt_cd 위치_지정_코드 character varying(20)
+	 * @Param String locApntCd
 	 */
-	public void setActCd(String actCd) {
-		this.actCd = actCd;
+	public void setLocApntCd(String locApntCd) {
+		this.locApntCd = locApntCd;
 	}
 	/**
-	 * Get stnd_yymm 기준_년월 character(6)
-	 * @Return String stndYymm
+	 * Get plc_clss_cd 장소_분류_코드 character varying(20)
+	 * @Return String plcClssCd
 	 */
-	public String getStndYymm() {
-		return this.stndYymm;
-	}
-	
-	/**
-	 * Set stnd_yymm 기준_년월 character(6)
-	 * @Param String stndYymm
-	 */
-	public void setStndYymm(String stndYymm) {
-		this.stndYymm = stndYymm;
-	}
-	/**
-	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
-	 */
-	public double getMnthWeekSeq() {
-		return this.mnthWeekSeq;
+	public String getPlcClssCd() {
+		return this.plcClssCd;
 	}
 	
 	/**
-	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * Set plc_clss_cd 장소_분류_코드 character varying(20)
+	 * @Param String plcClssCd
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
-		this.mnthWeekSeq = mnthWeekSeq;
+	public void setPlcClssCd(String plcClssCd) {
+		this.plcClssCd = plcClssCd;
 	}
 	/**
-	 * Get week_nm 요일_명 character varying(10)
-	 * @Return String weekNm
+	 * Get loc_no 위치_번호 numeric(null)
+	 * @Return double locNo
 	 */
-	public String getWeekNm() {
-		return this.weekNm;
-	}
-	
-	/**
-	 * Set week_nm 요일_명 character varying(10)
-	 * @Param String weekNm
-	 */
-	public void setWeekNm(String weekNm) {
-		this.weekNm = weekNm;
-	}
-	/**
-	 * Get obj_cnt 대상_건수 numeric(null)
-	 * @Return double objCnt
-	 */
-	public double getObjCnt() {
-		return this.objCnt;
+	public double getLocNo() {
+		return this.locNo;
 	}
 	
 	/**
-	 * Set obj_cnt 대상_건수 numeric(null)
-	 * @Param double objCnt
+	 * Set loc_no 위치_번호 numeric(null)
+	 * @Param double locNo
 	 */
-	public void setObjCnt(double objCnt) {
-		this.objCnt = objCnt;
+	public void setLocNo(double locNo) {
+		this.locNo = locNo;
 	}
 	/**
-	 * Get neat_cnt 결식_건수 numeric(null)
-	 * @Return double neatCnt
+	 * Get occr_cnt 발생_건수 numeric(null)
+	 * @Return double occrCnt
 	 */
-	public double getNeatCnt() {
-		return this.neatCnt;
+	public double getOccrCnt() {
+		return this.occrCnt;
 	}
 	
 	/**
-	 * Set neat_cnt 결식_건수 numeric(null)
-	 * @Param double neatCnt
+	 * Set occr_cnt 발생_건수 numeric(null)
+	 * @Param double occrCnt
 	 */
-	public void setNeatCnt(double neatCnt) {
-		this.neatCnt = neatCnt;
+	public void setOccrCnt(double occrCnt) {
+		this.occrCnt = occrCnt;
+	}
+	/**
+	 * Get stdt_cnt 학생_수 numeric(null)
+	 * @Return double stdtCnt
+	 */
+	public double getStdtCnt() {
+		return this.stdtCnt;
+	}
+	
+	/**
+	 * Set stdt_cnt 학생_수 numeric(null)
+	 * @Param double stdtCnt
+	 */
+	public void setStdtCnt(double stdtCnt) {
+		this.stdtCnt = stdtCnt;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

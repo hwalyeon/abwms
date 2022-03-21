@@ -4,16 +4,16 @@
 	<!--보호자(사용자)_정보_상세보기 -->
 	<select id="selectPrntInfoDetl" parameterType="java.util.Map" resultType="MybatisMap">
 		/* Generated SQL SQL ID : tm_prnt_base.select */
-        select   TBI.BAND_ID     /* band_id 밴드_ID character varying(20) */
-               , TSB.STDT_NO     /* stdt_no 학생_번호 numeric */
-               , TSB.STDT_NM     /* stdt_nm 학생_명 character varying(20) */
-               , TPB.PRNT_NO     /* prnt_no 학부모_번호 numeric */
-               , TPB.SEX_CD      /* sex_cd 성별_코드 character varying(20) */
-               , TPB.PRNT_NM     /* prnt_nm 학부모_명 character varying(40) */
-               , TPB.HGHT_VAL    /* hght_val 키_값 numeric */
-               , TPB.WGHT_VAL    /* wght_val 체중_값 numeric */
-               , TPB.BMI_VAL    /* bmi_val BMI_값 numeric */
-               , TPB.RACE_DIV_CD /* race_div_cd 인종_구분_코드 character varying(20) */
+        select   TBI.BAND_ID       /* band_id 밴드_ID character varying(20) */
+               , TSB.STDT_NO       /* stdt_no 학생_번호 numeric */
+               , TSB.STDT_NM       /* stdt_nm 학생_명 character varying(20) */
+               , TPB.PRNT_NO       /* prnt_no 학부모_번호 numeric */
+               , TPB.SEX_CD        /* sex_cd 성별_코드 character varying(20) */
+               , TPB.PRNT_NM       /* prnt_nm 학부모_명 character varying(40) */
+               , TPB.HGHT_VAL      /* hght_val 키_값 numeric */
+               , TPB.WGHT_VAL      /* wght_val 체중_값 numeric */
+               , TPB.BMI_VAL       /* bmi_val BMI_값             numeric */
+               , TPB.RACE_DIV_CD   /* race_div_cd 인종_구분_코드 character varying(20) */
         from     TS_BAND_INFO TBI
                  inner join   TS_BAND_SPEC TBS
                  on TBI.BAND_ID = TBS.BAND_ID

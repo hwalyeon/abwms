@@ -10,11 +10,11 @@
 	<select id="select" resultType="kr.co.seculink.domain.vo.TtFatIdxStssVo">
 		/* Generated SQL SQL ID : tt_fat_idx_stss.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
+               ,sex_cd /* sex_cd 성별_코드 character varying(20) */
+               ,age_ycnt /* age_ycnt 나이_년수 numeric */
                ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
                ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
                ,week_nm /* week_nm 요일_명 character varying(10) */
-               ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-               ,age_ycnt /* age_ycnt 나이_년수 numeric */
                ,avg_bmi_val /* avg_bmi_val 평균_BMI_값 numeric */
                ,avg_fat_idx /* avg_fat_idx 평균_비만_지수 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -26,6 +26,8 @@
         FROM   tt_fat_idx_stss
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
+		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 	</select>
 
 	<insert id="insert" >
@@ -33,6 +35,8 @@
 		INSERT INTO tt_fat_idx_stss
 		(
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
+		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
+		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -40,10 +44,6 @@
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="sexCd != null">
-		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-		</if>
-		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
 		    ,avg_bmi_val /* avg_bmi_val 평균_BMI_값 numeric */
 		    ,avg_fat_idx /* avg_fat_idx 평균_비만_지수 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -60,6 +60,8 @@
 		VALUES
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
+		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -67,10 +69,6 @@
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="sexCd != null">
-		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		</if>
-		    ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		    ,#{avgBmiVal} /* avg_bmi_val 평균_BMI_값 numeric */
 		    ,#{avgFatIdx} /* avg_fat_idx 평균_비만_지수 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
@@ -99,12 +97,6 @@
 		<if test="weekNm != null">
 		    ,week_nm = #{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="sexCd != null">
-		    ,sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		</if>
-		<if test="ageYcnt != null">
-		    ,age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		</if>
 		<if test="avgBmiVal != null">
 		    ,avg_bmi_val = #{avgBmiVal} /* avg_bmi_val 평균_BMI_값 numeric */
 		</if>
@@ -119,6 +111,8 @@
 		</trim>
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
+		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 	</update>
 	
 	<update id="merge" >
@@ -126,6 +120,8 @@
 		INSERT INTO tt_fat_idx_stss
 		(
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
+		     sex_cd /* sex_cd 성별_코드 character varying(20) */
+		     age_ycnt /* age_ycnt 나이_년수 numeric */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -133,10 +129,6 @@
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="sexCd != null">
-		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-		</if>
-		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
 		    ,avg_bmi_val /* avg_bmi_val 평균_BMI_값 numeric */
 		    ,avg_fat_idx /* avg_fat_idx 평균_비만_지수 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -153,6 +145,8 @@
 		VALUES
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
+		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -160,10 +154,6 @@
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="sexCd != null">
-		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		</if>
-		    ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		    ,#{avgBmiVal} /* avg_bmi_val 평균_BMI_값 numeric */
 		    ,#{avgFatIdx} /* avg_fat_idx 평균_비만_지수 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
@@ -189,12 +179,6 @@
 		<if test="weekNm != null">
 		    ,week_nm = #{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="sexCd != null">
-		    ,sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		</if>
-		<if test="ageYcnt != null">
-		    ,age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		</if>
 		<if test="avgBmiVal != null">
 		    ,avg_bmi_val = #{avgBmiVal} /* avg_bmi_val 평균_BMI_값 numeric */
 		</if>
@@ -214,5 +198,7 @@
 		DELETE FROM tt_fat_idx_stss
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
+		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 	</delete>
 </mapper>
