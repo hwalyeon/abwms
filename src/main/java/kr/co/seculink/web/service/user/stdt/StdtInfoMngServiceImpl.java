@@ -84,6 +84,12 @@ public class StdtInfoMngServiceImpl implements StdtInfoMngService
 				throw new BizException("등록 된 보호자 정보가 없습니다. 보호자 등록 후 진행하여 주시기 바랍니다.");
 			}
 
+			if(guarInfo == null || (guarInfo != null && Integer.valueOf(guarInfo.get("prntNoCnt").toString()) == 0 )){
+				throw new BizException("등록 된 학부모 정보가 없습니다. 학부모 등록 후 진행하여 주시기 바랍니다.");
+			}
+
+			params.put("prntNo" , guarInfo.get("prntNo").toString());
+
 			// 학생 저장
 			dao.insert("user.stdt.stdtInfoMng.insertTmStdtBase",params);
 
@@ -105,6 +111,5 @@ public class StdtInfoMngServiceImpl implements StdtInfoMngService
 		}
 
 	}
-
 }
 

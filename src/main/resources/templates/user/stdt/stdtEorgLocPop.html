@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="search">
+	<!-- 학생 Modal -->
+	<div id="stdtEorgLocPopup" class="modal fade" role="dialog" tabindex="-1">
+		<div class="modal-dialog-wrap">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" style="width:650px;">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<div class="modal-title">
+							<i class="fa fa-title-bar"></i>
+							<h5>교육시설조회</h5>
+						</div>
+					</div>
+					<div class="modal-body pd_15">
+						<!-- 검색조건 -->
+						<div class="form-horizontal">
+							<div class="form-group">
+								<label class="col-sm-2 control-label pd_right_none">교육 시설 명</label>
+								<div class="col-sm-4">
+									<input type="text" v-model="params.locNm" class="form-control"/>
+								</div>
+								<label class="col-sm-2 control-label pd_right_none">주소</label>
+								<div class="col-sm-4">
+									<input type="text" v-model="params.roadAddr" class="form-control"/>
+								</div>
+							</div>
+							<div class="form-group mg_btm_10">
+								<div class="text-center">
+									<button type="button" class="btn btn-secondary" v-on:click="initParam">
+										<span class="glyphicon glyphicon-refresh">&nbsp;초기화</span>
+									</button>
+									<button type="button" class="btn btn-w-m btn-primary mg_left_5" v-on:click="searchList(true)">검색</button>
+								</div>
+							</div>
+						</div>
+						<!-- //검색조건 -->
+
+						<!-- 그리드 -->
+						<div id="stdtEorgLocPopup_jqGrid_wrapper">
+							<table id="stdtEorgLocPopup_list"></table>
+							<div id="stdtEorgLocPopup_pager_list"></div>
+						</div>
+						<!-- //그리드 -->
+					</div>
+					<div class="modal-footer">
+						<div class="text-center">
+							<div class="disp_in_block width_per_20 mg_right_15" v-show="callback != null">
+								<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="chooseRow">적용</button>
+							</div>
+							<div class="disp_in_block width_per_20">
+								<button type="button" class="btn btn-outline btn-default form-control" data-dismiss="modal">닫기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

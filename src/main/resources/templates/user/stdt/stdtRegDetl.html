@@ -31,7 +31,8 @@
 									</td>
 									<th scope="row">밴드 ID</th>
 									<td>
-										<input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_100 ime-eng"/>
+										<input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_65 ime-eng" readonly="true"/>
+										<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#bandPopup" v-on:click="bandListPop()">검색</button>
 									</td>
 								</tr>
 								<tr>
@@ -40,9 +41,11 @@
 										<div>
 											<input type="text" name="eorgLocNo" v-model="params.eorgLocNo" class="form-control float_left width_per_100 ime-eng" readonly="true"/>
 										</div>
+									</td>
+									<td scope="row" colspan="2">
 										<div>
-											<input type="text" name="eorgLocNm" v-model="params.eorgLocNm" class="form-control float_left width_per_100 ime-eng" readonly="true"/>
-											<button type="button" class="btn btn-outline btn-primary float_right" v-on:click="">검색</button>
+											<input type="text" name="eorgLocNm" v-model="params.eorgLocNm" class="form-control float_left width_per_75 ime-eng" readonly="true"/>
+											<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#stdtEorgLocPopup" v-on:click="eorgLocPop()">검색</button>
 										</div>
 									</td>
 								</tr>
