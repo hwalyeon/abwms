@@ -115,15 +115,15 @@ let locInfoMng = new Vue({
             var latVal;
             var lonVal;
 
-            // jcw :: 크롬브라우저는 https 통신일때만 허용하기 때문에 http 통신일땐 먹통 되므로 프토토콜 체크
-            // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
-            if (navigator.geolocation && window.location.protocol=== 'https:') {
-                // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    latVal = position.coords.latitude; // 위도
-                    lonVal = position.coords.longitude; // 경도
-                });
-            } else {
+            // // jcw :: 크롬브라우저는 https 통신일때만 허용하기 때문에 http 통신일땐 먹통 되므로 프토토콜 체크
+            // // HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+            // if (navigator.geolocation && window.location.protocol=== 'https:') {
+            //     // GeoLocation을 이용해서 접속 위치를 얻어옵니다
+            //     navigator.geolocation.getCurrentPosition(function(position) {
+            //         latVal = position.coords.latitude; // 위도
+            //         lonVal = position.coords.longitude; // 경도
+            //     });
+            // } else {
                 if( WebUtil.isNull($this.locInfoSpec.latVal) ) {
                     latVal = 33.450701;
                     lonVal = 126.570667;
@@ -131,7 +131,7 @@ let locInfoMng = new Vue({
                     latVal = $this.locInfoSpec.latVal;
                     lonVal = $this.locInfoSpec.lonVal;
                 }
-            }
+            // }
 
             $this.mapCont.mapContainer = document.getElementById('locInfoMngMap'), // 지도를 표시할 div
                 mapOption = {
