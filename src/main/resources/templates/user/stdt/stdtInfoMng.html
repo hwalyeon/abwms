@@ -118,6 +118,7 @@
 	<div th:insert="~{user/guar/guarInfoDetl :: body}"></div>
 	<div th:insert="~{user/prnt/prntInfoDetl :: body}"></div>
 	<div th:insert="~{user/stdt/stdtEorgLocPop :: body}"></div>
+	<div th:insert="~{user/guar/termAgreYnInfoDetl :: body}"></div>  <!--약관동의여부 상세        -->
 	<div th:insert="~{user/stdt/bandPop :: body}"></div>
 </div>
 <section layout:fragment="user_script">
@@ -129,6 +130,8 @@
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtRegDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/guar/guarInfoDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/prnt/prntInfoDetl.js}"></script>
+	<script type="text/javascript" th:src="@{/js/user/guar/guarInfoMng.js}">       </script> <!--보호자(사용자)정보       -->
+	<script type="text/javascript" th:src="@{/js/user/guar/termAgreYnInfoDetl.js}"></script> <!--약관동의여부 상세        -->
 </section>
 </body>
 </html>

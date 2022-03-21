@@ -7,6 +7,8 @@
          sex_cd      as sex_cd_temp
         ,age_ycnt    as age_ycnt_temp
         ,hbit_cnt_fr as hbit_cnt_fr_temp
+        ,fn_getCdNm('SEX_CD',sex_cd) as sex_nm
+        ,fn_getCdNm('HBIT_STAT_CD',hbit_stat_cd) as hbit_stat_nm
         ,sex_cd
         ,age_ycnt
         ,hbit_cnt_fr

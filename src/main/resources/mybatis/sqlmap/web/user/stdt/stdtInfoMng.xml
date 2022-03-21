@@ -6,7 +6,9 @@
            select   	   B.ENTR_DT/*가입일자*/
           ,B.GUAR_NO/*학부모번호*/
           ,B.GUAR_NM/*학부모명*/
+          ,B.PRNT_NO/*학부모번호*/
           ,C.PRNT_NM/*학부모1*/
+          ,C.PRNT_NM as PRNT_NM_MALE
           ,CC.PRNT_NM as prnt_nm2/*학부모2*/
           ,A.STDT_NO/*학생번호*/
           ,A.STDT_NM/*학생명*/

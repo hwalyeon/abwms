@@ -69,6 +69,10 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/dgem/hbitStatStndMng.pg")
 	public String getSvcStndDgemHbitStatStndMng() {return "svcStnd/dgem/hbitStatStndMng";}
 
+	//체온상태 기준
+	@RequestMapping("/svcStnd/dgem/tempStatStndMng.pg")
+	public String getSvcStndDgemTempStatStndMng() {return "svcStnd/dgem/tempStatStndMng";}
+
 	//성장기준
 	@RequestMapping("/svcStnd/grow/growStndMng.pg")
 	public String getSvcStndGrowGrowStndMng() {return "svcStnd/grow/growStndMng";}
