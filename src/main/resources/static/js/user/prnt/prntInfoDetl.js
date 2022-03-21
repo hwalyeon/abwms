@@ -17,6 +17,7 @@ let prntInfoDetl = new Vue({
 			BMIVal		      : '' , //BMI_값
 			raceDivCd         : '' , //인종_구분_코드
     	},
+		callBack : null,
 		code: {
 			sexCdList      : [] , //성별_코드_리스트
 			raceDivCdList  : [] , //인종_구분_코드_리스트
@@ -45,6 +46,11 @@ let prntInfoDetl = new Vue({
         initPage: function(bandId, prntNo, sexCd)
 		{
 			let $this = this;
+
+			if(typeof callback === 'function')
+			{
+				$this.callBack = callback;
+			}
 
 			$this.resetPrntDetlInfo();
 
@@ -95,7 +101,7 @@ let prntInfoDetl = new Vue({
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#prntInfoDetlPopup'));
-						guarInfoMng.searchPrntInfoList(true);
+						if($this.callBack != null ) $this.callBack();
                 	});                	
                 },
                 error: function (response) {
@@ -116,7 +122,7 @@ let prntInfoDetl = new Vue({
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#prntInfoDetlPopup'));
-						guarInfoMng.searchPrntInfoList(true);
+						if($this.callBack != null ) $this.callBack();
                 	});
                 },
                 error: function (response) {

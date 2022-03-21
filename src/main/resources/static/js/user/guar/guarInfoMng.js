@@ -200,7 +200,7 @@ let guarInfoMng = new Vue({
             },
             //보호자(사용자)정보 상세 팝업
             regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-                guarInfoDetl.initPage(bandId,guarNo,stdtNo);
+                guarInfoDetl.initPage(bandId,guarNo,stdtNo, function(){ guarInfoMng.searchGuarInfoList(true) });
             },
             //밴드/개통정보 상세 팝업
             regBandOpenInfoDetlPopup: function(bandId) {
@@ -208,7 +208,7 @@ let guarInfoMng = new Vue({
             },
             //학부모정보 상세 팝업
             regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-                prntInfoDetl.initPage(bandId, prntNo, sexCd);
+                prntInfoDetl.initPage(bandId, prntNo, sexCd, function(){ guarInfoMng.searchGuarInfoList(true) });
             },
             //약관동의여부정보상세 팝업
             regTermAgreYnInfoDetlPopup: function(guarNo){
@@ -216,7 +216,7 @@ let guarInfoMng = new Vue({
             },
             //학생정보상세 팝업
             regStdtInfoDetlPopup: function(guarNo, stdtNo){
-                stdtInfoDetl.initPage(guarNo, stdtNo);
+                stdtInfoDetl.initPage(guarNo, stdtNo, function(){ guarInfoMng.searchGuarInfoList(true) });
             },
             resetSearchParam: function()
             {

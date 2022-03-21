@@ -318,7 +318,7 @@
                   TM_STDT_BASE TSB
                   on TSGC.STDT_NO = TSB.STDT_NO
         WHERE     1 = 1
-		<if test="guarNo != null and guarNo !='' ">AND  TGB.guar_no = #{guarNo}::NUMERIC</if>
+		AND       TGB.guar_tel_no = #{guarTelNo}
         <if test="stdtNo != null and stdtNo !='' ">AND  TSB.stdt_no = #{stdtNo}::NUMERIC</if>
 	</select>
 

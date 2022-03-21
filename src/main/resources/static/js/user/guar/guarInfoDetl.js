@@ -35,6 +35,7 @@ let guarInfoDetl = new Vue({
 			currentPage       : 1  ,
 			currentIndex      : 0
     	},
+		callBack : null,
 		code: {
 			sexCdList      : [] , //성별_코드_리스트
 			raceDivCdList  : [] , //인종_구분_코드_리스트
@@ -66,17 +67,23 @@ let guarInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(bandId, guarNo, stdtNo) {
+        initPage: function(guarNo, guarTelNo, stdtNo, stdtNm) {
 
 			let $this = this;
+
+			if(typeof callback === 'function')
+			{
+				$this.callBack = callback;
+			}
 
 			$this.resetGuarDetlInfo();
 			if (!WebUtil.isNull(guarNo))
 			{
 				let params = {
-					'bandId' : bandId ,
-					'guarNo' : guarNo ,
-					'stdtNo' : stdtNo
+					'guarNo'    : guarNo    ,
+					'guarTelNo' : guarTelNo ,
+					'stdtNo'    : stdtNo    ,
+					'stdtNm'    : stdtNm
 				}
 				AjaxUtil.post({
 					url: "/user/guar/guarInfoMng/searchGuarInfo.ab",
@@ -98,6 +105,13 @@ let guarInfoDetl = new Vue({
 						Swal.alert([response, 'error']);
 					}
 				});
+				if(!WebUtil.isNull(stdtNo)){
+
+					$this.params.stdtNo    = stdtNo;
+					$this.params.stdtNm    = stdtNm;
+					$this.params.guarTelNo = guarTelNo;
+
+				}
 			}
 		},
 			isValid: function() {
@@ -168,7 +182,7 @@ let guarInfoDetl = new Vue({
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#guarInfoDetlPopup'));
-						guarInfoMng.searchGuarInfoList(true);
+						if($this.callBack != null ) $this.callBack();
                 	});                	
                 },
                 error: function (response) {
@@ -189,7 +203,7 @@ let guarInfoDetl = new Vue({
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#guarInfoDetlPopup'));
-						guarInfoMng.searchGuarInfoList(true);
+						if($this.callBack != null ) $this.callBack();
                 	});
                 },
                 error: function (response) {

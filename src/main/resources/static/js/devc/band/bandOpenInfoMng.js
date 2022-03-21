@@ -104,14 +104,18 @@ let bandOpenInfoMng = new Vue({
                         {name: "telNo"            , index: "telNo"            , label: "밴드전화번호"		     , width: 100 , align: "center"  , formatter: function(cellValue, options, rowObject) {
                           let telNoTemp = phoneFormatter(cellValue);
                           return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${telNoTemp}" data-band-id="${rowObject.bandId}">${telNoTemp}</a>`;}},
-                        {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		     , width: 80  , align: "center" },
-                        {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		         , width: 80  , align: "center" },
+                        {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호"		     , width: 80  , align: "center"  , formatter: function(cellValue, options, rowObject){
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regStdtInfoDetlPopup(\'' + rowObject.guarNo + '\', \'' + rowObject.stdtNo + '\')" value="신규" data-toggle="modal" data-target="#stdtRegDetlPopup" />';
+                                else return`<a data-toggle="modal" class="links" data-target="#stdtInfoDetlPopup" data-stdt data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
+                        {name: "stdtNm"           , index: "stdtNm"           , label: "학생명"		         , width: 80  , align: "center"  , formatter: function(cellValue, options, rowObject){
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regStdtInfoDetlPopup(\'' + rowObject.guarNo + '\', \'' + rowObject.stdtNo + '\')" value="신규" data-toggle="modal" data-target="#stdtRegDetlPopup" />';
+                                else return`<a data-toggle="modal" class="links" data-target="#stdtInfoDetlPopup" data-stdt data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
                         {name: "guarNo"           , index: "guarNo"           , label: "보호자번호"	  	     , width: 80  , align: "center" , formatter: function(cellValue, options, rowObject) {
-                          if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regGuarInfoDetlPopup(\'' + rowObject.bandId+ '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
-                          else return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
+                          if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regGuarInfoDetlPopup(\'' + rowObject.guarNo+ '\',\'' + rowObject.guarTelNo+ '\',\'' + rowObject.stdtNo+ '\',\'' + rowObject.stdtNm+ '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
+                          else return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}", data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
                         {name: "guarNm"           , index: "guarNm"           , label: "보호자명"	 	     , width: 80  , align: "center" , formatter: function(cellValue, options, rowObject) {
-                          if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regGuarInfoDetlPopup(\'' + rowObject.bandId +'\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
-                          else return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
+                                if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regGuarInfoDetlPopup(\'' + rowObject.guarNo+ '\',\'' + rowObject.guarTelNo+ '\',\'' + rowObject.stdtNo+ '\',\'' + rowObject.stdtNm+ '\')" value="신규" data-toggle="modal" data-target="#guarInfoDetlPopup" />';
+                                else return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}", data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
                         {name: "guarTelNo"        , index: "guarTelNo"       , label: "보호자전화번호(밴드상세)"	     , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject)   {
                           let guarTelNoTemp = phoneFormatter(cellValue);
                           if(WebUtil.isNull(guarTelNoTemp)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bandOpenInfoMng.regBandSpecDetlPopup(\'' + rowObject.bandId + '\',\'' + rowObject.guarTelNo + '\')" value="신규" data-toggle="modal" data-target="#bandSpecDetlPopup" />';
@@ -163,13 +167,16 @@ let bandOpenInfoMng = new Vue({
                             });
                             //보호자(사용자)정보 상세
                             $("#bandOpenInfo_list").find('A.links[data-guar]').on('click', function(e) {
-                                bandOpenInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-no'),$(e.target).data('stdt-no'));
+                                bandOpenInfoMng.regGuarInfoDetlPopup($(e.target).data('guar-no'),$(e.target).data('guar-tel-no')),$(e.target).data('stdt-no'),$(e.target).data('stdt-nm');
                             });
                             //밴드/개통정보-보호자 개별 전화번호 수정,삭제
                             $("#bandOpenInfo_list").find('A.links[data-band-spec]').on('click', function(e) {
                                 bandOpenInfoMng.regBandSpecDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-tel-no'))
                             });
-
+                            //학생정보 상세 팝업
+                            $("#guarInfo_list").find('A.links[data-stdt]').on('click', function(e) {
+                                guarInfoMng.regStdtInfoDetlPopup($(e.target).data('guar-no'),$(e.target).data('stdt-no'))
+                            });
 
                         }
                     }));
@@ -222,8 +229,8 @@ let bandOpenInfoMng = new Vue({
                     });
             },
             //보호자(사용자)정보 상세
-            regGuarInfoDetlPopup: function(bandId, guarNo, stdtNo) {
-                guarInfoDetl.initPage(bandId, guarNo, stdtNo, function(){bandOpenInfoMng.searchBandOpenInfoList});
+            regGuarInfoDetlPopup: function(guarNo, guarTelNo, stdtNo, stdtNm) {
+                guarInfoDetl.initPage(guarNo, guarTelNo, stdtNo, stdtNm, function(){bandOpenInfoMng.searchBandOpenInfoList});
             },
             //밴드/개통정보 상세
             regBandOpenInfoDetlPopup: function(bandId) {
@@ -232,6 +239,10 @@ let bandOpenInfoMng = new Vue({
             //밴드/개통정보(개별 보호자전화번호)수정,삭제
             regBandSpecDetlPopup: function(bandId,guarTelNo) {
                 bandSpecDetl.initPage(bandId, guarTelNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
+            },
+            //학생정보상세 팝업
+            regStdtInfoDetlPopup: function(guarNo, stdtNo){
+                stdtInfoDetl.initPage(guarNo, stdtNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
             resetSearchParam: function()
             {
