@@ -49,6 +49,21 @@ let stdtRegDetl = new Vue({
         	let $this = this;
         },
 
+		eorgLocPop : function (){
+        	let $this = this;
+			stdtEorgLocPop.initPage( { callback : function(rowData) {
+					$this.params.eorgLocNo = rowData.locNo;
+					$this.params.eorgLocNm = rowData.locNm;
+			}});
+		},
+
+		bandListPop : function (){
+			let $this = this;
+			bandPop.initPage( { callback : function(rowData) {
+					$this.params.bandId = rowData.bandId;
+			}});
+		},
+
 		saveStdtRegInfo : function (){
         	let $this = this;
 
