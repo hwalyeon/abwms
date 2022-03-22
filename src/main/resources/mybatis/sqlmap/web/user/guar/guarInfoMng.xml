@@ -411,6 +411,7 @@
 
 
 
+
 <!--	&lt;!&ndash;약관동의여부_정보 삽입 &ndash;&gt;-->
 <!--	<insert id="insertTmTermAgreDetlInfoList" parameterType="java.util.Map">-->
 <!--		INSERT INTO tm_term_agre_detl-->

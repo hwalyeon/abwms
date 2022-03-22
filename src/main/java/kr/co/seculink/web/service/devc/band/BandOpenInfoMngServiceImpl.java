@@ -80,21 +80,24 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 				Object guarTelNoTemp = params.get("guarTelNoTemp");
 				info.put("guarTelNoTemp",guarTelNoTemp);
 
+               System.out.println("gridData: "+gridData);
+
 
 				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
 
-				if("C".equals(info.get("crud"))){
-					if (exists == null ) {
-						info.put("crud","C");
-					}else{
-						throw new BizException("ECOM999", new String[]{"이미 등록된 번호입니다."});
-					}
-				}
 				if ("C".equals(info.get("crud")))
 				{
-					saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
+					if (exists == null ) {
+						saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
+					}else{
+						throw new BizException("ECOM999", new String[]{"이미 등록된 보호자 번호입니다."});
+					}
 				} else if ("U".equals(info.get("crud"))) {
-					saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", info);
+					if (exists == null ) {
+						saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTmBandSpecList", info);
+					}else{
+						throw new BizException("ECOM999", new String[]{"이미 등록된 보호자 번호입니다."});
+					}
 				} else if ("D".equals(info.get("crud"))) {
 					saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", info);
 				}
