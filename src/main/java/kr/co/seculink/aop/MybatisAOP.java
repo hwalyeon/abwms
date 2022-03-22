@@ -39,7 +39,7 @@ public class MybatisAOP {
         // mybatis의 경우 0번째는 sqlId
 		String sqlId = args[0] + "";
 		
-		log.debug("### SQL ID : {}", sqlId);
+//		log.debug("### SQL ID : {}", sqlId);
 		
 		SqlSessionTemplate sqlSessionTemplate = (SqlSessionTemplate) joinPoint.getTarget();
 		
@@ -102,7 +102,7 @@ public class MybatisAOP {
 				BoundSql bSql = stmt.getBoundSql(param);
 				List<ParameterMapping> params = bSql.getParameterMappings();
 				
-				log.debug("params {} ", params);
+//				log.debug("params {} ", params);
 				
 				rSql = bSql.getSql();
 				
@@ -175,13 +175,13 @@ public class MybatisAOP {
 				}
 			}
 			
-			log.debug("### SQL Parameter : {}", args[1]);
+//			log.debug("### SQL Parameter : {}", args[1]);
 		} else {
 			dSql = stmt.getBoundSql(null).getSql();
 			
 			
 		}
         
-		log.debug("### SQL : {}", dSql);
+//		log.debug("### SQL : {}", dSql);
     }
 }

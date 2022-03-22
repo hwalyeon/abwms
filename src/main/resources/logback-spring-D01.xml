@@ -17,6 +17,33 @@
             <customFields>{"appname":"abD01Wms","profile":"D01"}</customFields>
         </encoder>
     </appender>
+
+
+    <!-- query log -->
+    <logger name="jdbc.connection" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="jdbc.audit" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="jdbc.sqlonly" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="jdbc.sqltiming" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="jdbc.resultset" level="WARN" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="jdbc.resultsettable" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
     <root level="info">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="LOGSTASH" />
