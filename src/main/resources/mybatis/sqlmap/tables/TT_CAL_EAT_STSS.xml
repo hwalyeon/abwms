@@ -15,13 +15,13 @@
                ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
                ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
                ,week_nm /* week_nm 요일_명 character varying(10) */
-               ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
                ,upt_dt /* upt_dt 수정_일자 character(8) */
                ,upt_tm /* upt_tm 수정_시각 character(6) */
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+               ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
         FROM   tt_cal_eat_stss
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
@@ -43,7 +43,6 @@
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
-		    ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -54,6 +53,7 @@
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
+		    ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		)
 		VALUES
 		(
@@ -67,7 +67,6 @@
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		    ,#{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -78,6 +77,7 @@
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
+		    ,#{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		)
 	</insert>
 	
@@ -94,13 +94,13 @@
 		<if test="weekNm != null">
 		    ,week_nm = #{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="avgCalEatQty != null">
-		    ,avg_cal_eat_qty = #{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
-		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
+		<if test="avgCalEatQty != null">
+		    ,avg_cal_eat_qty = #{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		</if>
 		</trim>
 		WHERE  1 = 1
@@ -123,7 +123,6 @@
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
-		    ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -134,6 +133,7 @@
 		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
+		    ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		)
 		VALUES
 		(
@@ -147,7 +147,6 @@
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		    ,#{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -158,6 +157,7 @@
 		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
+		    ,#{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		)
 		ON CONFLICT
 		DO UPDATE
@@ -171,13 +171,13 @@
 		<if test="weekNm != null">
 		    ,week_nm = #{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
-		<if test="avgCalEatQty != null">
-		    ,avg_cal_eat_qty = #{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
-		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
+		<if test="avgCalEatQty != null">
+		    ,avg_cal_eat_qty = #{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
 		</if>
 		</trim>
 	</update>

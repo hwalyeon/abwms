@@ -70,6 +70,9 @@ public class TmStdtBaseVo implements Serializable {
 	/* grow_mesu_dt 성장_측정_일자 character(8) */
 	private String growMesuDt;
 
+	/* act_stnd_dt 활동_기준_일자 character(8) */
+	private String actStndDt;
+
 	/* ambr_yn 미아_여부 character(1) */
 	private String ambrYn;
 
@@ -415,6 +418,21 @@ public class TmStdtBaseVo implements Serializable {
 	 */
 	public void setGrowMesuDt(String growMesuDt) {
 		this.growMesuDt = growMesuDt;
+	}
+	/**
+	 * Get act_stnd_dt 활동_기준_일자 character(8)
+	 * @Return String actStndDt
+	 */
+	public String getActStndDt() {
+		return this.actStndDt;
+	}
+	
+	/**
+	 * Set act_stnd_dt 활동_기준_일자 character(8)
+	 * @Param String actStndDt
+	 */
+	public void setActStndDt(String actStndDt) {
+		this.actStndDt = actStndDt;
 	}
 	/**
 	 * Get ambr_yn 미아_여부 character(1)

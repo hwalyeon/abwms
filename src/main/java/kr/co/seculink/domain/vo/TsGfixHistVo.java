@@ -58,6 +58,12 @@ public class TsGfixHistVo implements Serializable {
 	/* guar_bmi_val_2 보호자_BMI_값_2 numeric(null) */
 	private double guarBmiVal2;
 
+	/* grow_stnd_ver 성장_기준_버전 character varying(20) */
+	private String growStndVer;
+
+	/* grow_stnd_no 성장_기준_번호 numeric(null) */
+	private double growStndNo;
+
 	/* grow_idx 성장_지수 numeric(null) */
 	private double growIdx;
 
@@ -385,6 +391,36 @@ public class TsGfixHistVo implements Serializable {
 	 */
 	public void setGuarBmiVal2(double guarBmiVal2) {
 		this.guarBmiVal2 = guarBmiVal2;
+	}
+	/**
+	 * Get grow_stnd_ver 성장_기준_버전 character varying(20)
+	 * @Return String growStndVer
+	 */
+	public String getGrowStndVer() {
+		return this.growStndVer;
+	}
+	
+	/**
+	 * Set grow_stnd_ver 성장_기준_버전 character varying(20)
+	 * @Param String growStndVer
+	 */
+	public void setGrowStndVer(String growStndVer) {
+		this.growStndVer = growStndVer;
+	}
+	/**
+	 * Get grow_stnd_no 성장_기준_번호 numeric(null)
+	 * @Return double growStndNo
+	 */
+	public double getGrowStndNo() {
+		return this.growStndNo;
+	}
+	
+	/**
+	 * Set grow_stnd_no 성장_기준_번호 numeric(null)
+	 * @Param double growStndNo
+	 */
+	public void setGrowStndNo(double growStndNo) {
+		this.growStndNo = growStndNo;
 	}
 	/**
 	 * Get grow_idx 성장_지수 numeric(null)

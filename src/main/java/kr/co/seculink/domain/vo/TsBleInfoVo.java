@@ -16,11 +16,11 @@ public class TsBleInfoVo implements Serializable {
 	/* ble_inst_tm BLE_설치_시각 character(6) */
 	private String bleInstTm;
 
-	/* rmrk 비고 character varying(2000) */
-	private String rmrk;
+	/* loc_no 위치_번호 numeric(null) */
+	private double locNo;
 
-	/* eorg_no 교육시설_번호 numeric(null) */
-	private double eorgNo;
+	/* rmrk 비고 character varying(4000) */
+	private String rmrk;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -87,7 +87,22 @@ public class TsBleInfoVo implements Serializable {
 		this.bleInstTm = bleInstTm;
 	}
 	/**
-	 * Get rmrk 비고 character varying(2000)
+	 * Get loc_no 위치_번호 numeric(null)
+	 * @Return double locNo
+	 */
+	public double getLocNo() {
+		return this.locNo;
+	}
+	
+	/**
+	 * Set loc_no 위치_번호 numeric(null)
+	 * @Param double locNo
+	 */
+	public void setLocNo(double locNo) {
+		this.locNo = locNo;
+	}
+	/**
+	 * Get rmrk 비고 character varying(4000)
 	 * @Return String rmrk
 	 */
 	public String getRmrk() {
@@ -95,26 +110,11 @@ public class TsBleInfoVo implements Serializable {
 	}
 	
 	/**
-	 * Set rmrk 비고 character varying(2000)
+	 * Set rmrk 비고 character varying(4000)
 	 * @Param String rmrk
 	 */
 	public void setRmrk(String rmrk) {
 		this.rmrk = rmrk;
-	}
-	/**
-	 * Get eorg_no 교육시설_번호 numeric(null)
-	 * @Return double eorgNo
-	 */
-	public double getEorgNo() {
-		return this.eorgNo;
-	}
-	
-	/**
-	 * Set eorg_no 교육시설_번호 numeric(null)
-	 * @Param double eorgNo
-	 */
-	public void setEorgNo(double eorgNo) {
-		this.eorgNo = eorgNo;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

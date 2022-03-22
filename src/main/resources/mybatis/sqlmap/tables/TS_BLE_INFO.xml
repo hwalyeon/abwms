@@ -12,8 +12,8 @@
         SELECT  ble_id /* ble_id BLE_ID character varying(40) */
                ,ble_inst_dt /* ble_inst_dt BLE_설치_일자 character(8) */
                ,ble_inst_tm /* ble_inst_tm BLE_설치_시각 character(6) */
-               ,rmrk /* rmrk 비고 character varying(2000) */
-               ,eorg_no /* eorg_no 교육시설_번호 numeric */
+               ,loc_no /* loc_no 위치_번호 numeric */
+               ,rmrk /* rmrk 비고 character varying(4000) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -36,16 +36,22 @@
 		<if test="bleInstTm != null">
 		    ,ble_inst_tm /* ble_inst_tm BLE_설치_시각 character(6) */
 		</if>
-		<if test="rmrk != null">
-		    ,rmrk /* rmrk 비고 character varying(2000) */
+		<if test="locNo != null">
+		    ,loc_no /* loc_no 위치_번호 numeric */
 		</if>
-		    ,eorg_no /* eorg_no 교육시설_번호 numeric */
+		<if test="rmrk != null">
+		    ,rmrk /* rmrk 비고 character varying(4000) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
 		)
 		VALUES
 		(
@@ -56,16 +62,22 @@
 		<if test="bleInstTm != null">
 		    ,#{bleInstTm} /* ble_inst_tm BLE_설치_시각 character(6) */
 		</if>
-		<if test="rmrk != null">
-		    ,#{rmrk} /* rmrk 비고 character varying(2000) */
+		<if test="locNo != null">
+		    ,#{locNo} /* loc_no 위치_번호 numeric */
 		</if>
-		    ,#{eorgNo} /* eorg_no 교육시설_번호 numeric */
+		<if test="rmrk != null">
+		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
 		)
 	</insert>
 	
@@ -79,11 +91,11 @@
 		<if test="bleInstTm != null">
 		    ,ble_inst_tm = #{bleInstTm} /* ble_inst_tm BLE_설치_시각 character(6) */
 		</if>
-		<if test="rmrk != null">
-		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(2000) */
+		<if test="locNo != null">
+		    ,loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 		</if>
-		<if test="eorgNo != null">
-		    ,eorg_no = #{eorgNo} /* eorg_no 교육시설_번호 numeric */
+		<if test="rmrk != null">
+		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
@@ -106,16 +118,22 @@
 		<if test="bleInstTm != null">
 		    ,ble_inst_tm /* ble_inst_tm BLE_설치_시각 character(6) */
 		</if>
-		<if test="rmrk != null">
-		    ,rmrk /* rmrk 비고 character varying(2000) */
+		<if test="locNo != null">
+		    ,loc_no /* loc_no 위치_번호 numeric */
 		</if>
-		    ,eorg_no /* eorg_no 교육시설_번호 numeric */
+		<if test="rmrk != null">
+		    ,rmrk /* rmrk 비고 character varying(4000) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
 		)
 		VALUES
 		(
@@ -126,16 +144,22 @@
 		<if test="bleInstTm != null">
 		    ,#{bleInstTm} /* ble_inst_tm BLE_설치_시각 character(6) */
 		</if>
-		<if test="rmrk != null">
-		    ,#{rmrk} /* rmrk 비고 character varying(2000) */
+		<if test="locNo != null">
+		    ,#{locNo} /* loc_no 위치_번호 numeric */
 		</if>
-		    ,#{eorgNo} /* eorg_no 교육시설_번호 numeric */
+		<if test="rmrk != null">
+		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
 		)
 		ON CONFLICT
 		DO UPDATE
@@ -146,11 +170,11 @@
 		<if test="bleInstTm != null">
 		    ,ble_inst_tm = #{bleInstTm} /* ble_inst_tm BLE_설치_시각 character(6) */
 		</if>
-		<if test="rmrk != null">
-		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(2000) */
+		<if test="locNo != null">
+		    ,loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 		</if>
-		<if test="eorgNo != null">
-		    ,eorg_no = #{eorgNo} /* eorg_no 교육시설_번호 numeric */
+		<if test="rmrk != null">
+		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */

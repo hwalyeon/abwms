@@ -9,7 +9,7 @@
 
 	<select id="select" resultType="kr.co.seculink.domain.vo.TcJobHistVo">
 		/* Generated SQL SQL ID : tc_job_hist.select */
-        SELECT  job_hist_no /* job_hist_no 작업_이력_번호 character varying(20) */
+        SELECT  job_hist_no /* job_hist_no 작업_이력_번호 numeric */
                ,job_id /* job_id 작업_ID character varying(200) */
                ,strt_dt /* strt_dt 시작_일자 character(8) */
                ,strt_tm /* strt_tm 시작_시각 character(6) */
@@ -26,14 +26,14 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   tc_job_hist
 		WHERE  1 = 1
-		AND    job_hist_no = #{jobHistNo} /* job_hist_no 작업_이력_번호 character varying(20) */
+		AND    job_hist_no = #{jobHistNo} /* job_hist_no 작업_이력_번호 numeric */
 	</select>
 
 	<insert id="insert" >
 		/* Generated SQL SQL ID : tc_job_hist.insert */
 		INSERT INTO tc_job_hist
 		(
-		     job_hist_no /* job_hist_no 작업_이력_번호 character varying(20) */
+		     job_hist_no /* job_hist_no 작업_이력_번호 numeric */
 		<if test="jobId != null">
 		    ,job_id /* job_id 작업_ID character varying(200) */
 		</if>
@@ -69,7 +69,7 @@
 		)
 		VALUES
 		(
-		     #{jobHistNo} /* job_hist_no 작업_이력_번호 character varying(20) */
+		     #{jobHistNo} /* job_hist_no 작업_이력_번호 numeric */
 		<if test="jobId != null">
 		    ,#{jobId} /* job_id 작업_ID character varying(200) */
 		</if>
@@ -140,14 +140,14 @@
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    job_hist_no = #{jobHistNo} /* job_hist_no 작업_이력_번호 character varying(20) */
+		AND    job_hist_no = #{jobHistNo} /* job_hist_no 작업_이력_번호 numeric */
 	</update>
 	
 	<update id="merge" >
 		/* Generated SQL SQL ID : tc_job_hist.merge */
 		INSERT INTO tc_job_hist
 		(
-		     job_hist_no /* job_hist_no 작업_이력_번호 character varying(20) */
+		     job_hist_no /* job_hist_no 작업_이력_번호 numeric */
 		<if test="jobId != null">
 		    ,job_id /* job_id 작업_ID character varying(200) */
 		</if>
@@ -183,7 +183,7 @@
 		)
 		VALUES
 		(
-		     #{jobHistNo} /* job_hist_no 작업_이력_번호 character varying(20) */
+		     #{jobHistNo} /* job_hist_no 작업_이력_번호 numeric */
 		<if test="jobId != null">
 		    ,#{jobId} /* job_id 작업_ID character varying(200) */
 		</if>
@@ -256,6 +256,6 @@
 		/* Generated SQL SQL ID : tc_job_hist.delete */
 		DELETE FROM tc_job_hist
 		WHERE  1 = 1
-		AND    job_hist_no = #{jobHistNo} /* job_hist_no 작업_이력_번호 character varying(20) */
+		AND    job_hist_no = #{jobHistNo} /* job_hist_no 작업_이력_번호 numeric */
 	</delete>
 </mapper>

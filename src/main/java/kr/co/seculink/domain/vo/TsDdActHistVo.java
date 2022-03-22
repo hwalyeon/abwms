@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class TsDdActHistVo implements Serializable {
 
-	/* stnd_dt 기준_일자 numeric(null) */
-	private double stndDt;
+	/* stnd_dt 기준_일자 character(8) */
+	private String stndDt;
 
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
@@ -21,6 +21,9 @@ public class TsDdActHistVo implements Serializable {
 
 	/* rpet_act_cnt 반복_활동_수 numeric(null) */
 	private double rpetActCnt;
+
+	/* bmr_val 기초에너지소모량_값 numeric(null) */
+	private double bmrVal;
 
 	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
 	private double calCsumQty;
@@ -48,18 +51,18 @@ public class TsDdActHistVo implements Serializable {
 
 
 	/**
-	 * Get stnd_dt 기준_일자 numeric(null)
-	 * @Return double stndDt
+	 * Get stnd_dt 기준_일자 character(8)
+	 * @Return String stndDt
 	 */
-	public double getStndDt() {
+	public String getStndDt() {
 		return this.stndDt;
 	}
 	
 	/**
-	 * Set stnd_dt 기준_일자 numeric(null)
-	 * @Param double stndDt
+	 * Set stnd_dt 기준_일자 character(8)
+	 * @Param String stndDt
 	 */
-	public void setStndDt(double stndDt) {
+	public void setStndDt(String stndDt) {
 		this.stndDt = stndDt;
 	}
 	/**
@@ -121,6 +124,21 @@ public class TsDdActHistVo implements Serializable {
 	 */
 	public void setRpetActCnt(double rpetActCnt) {
 		this.rpetActCnt = rpetActCnt;
+	}
+	/**
+	 * Get bmr_val 기초에너지소모량_값 numeric(null)
+	 * @Return double bmrVal
+	 */
+	public double getBmrVal() {
+		return this.bmrVal;
+	}
+	
+	/**
+	 * Set bmr_val 기초에너지소모량_값 numeric(null)
+	 * @Param double bmrVal
+	 */
+	public void setBmrVal(double bmrVal) {
+		this.bmrVal = bmrVal;
 	}
 	/**
 	 * Get cal_csum_qty 칼로리_소모_량 numeric(null)

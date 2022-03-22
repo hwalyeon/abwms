@@ -16,8 +16,8 @@ public class TcJobBaseVo implements Serializable {
 	/* rmrk 비고 text(null) */
 	private String rmrk;
 
-	/* job_hist_no 작업_이력_번호 character varying(20) */
-	private String jobHistNo;
+	/* job_hist_no 작업_이력_번호 numeric(null) */
+	private double jobHistNo;
 
 	/* reg_dt 등록_일자 character(18) */
 	private String regDt;
@@ -84,18 +84,18 @@ public class TcJobBaseVo implements Serializable {
 		this.rmrk = rmrk;
 	}
 	/**
-	 * Get job_hist_no 작업_이력_번호 character varying(20)
-	 * @Return String jobHistNo
+	 * Get job_hist_no 작업_이력_번호 numeric(null)
+	 * @Return double jobHistNo
 	 */
-	public String getJobHistNo() {
+	public double getJobHistNo() {
 		return this.jobHistNo;
 	}
 	
 	/**
-	 * Set job_hist_no 작업_이력_번호 character varying(20)
-	 * @Param String jobHistNo
+	 * Set job_hist_no 작업_이력_번호 numeric(null)
+	 * @Param double jobHistNo
 	 */
-	public void setJobHistNo(String jobHistNo) {
+	public void setJobHistNo(double jobHistNo) {
 		this.jobHistNo = jobHistNo;
 	}
 	/**
