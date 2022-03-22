@@ -2,7 +2,7 @@ let stdtInfoDetl = new Vue({
     el: "#stdtInfoDetlPopup",
     data: {
 		stdtInfo: {
-    		crud: 'C'
+    		crud: 'U'
     	},
 		code: {
 			 sexCdList: []
@@ -377,10 +377,18 @@ let stdtInfoDetl = new Vue({
 			});
 		},
 
+		stdtInfoEorgLocPop : function (){
+			let $this = this;
+			stdtEorgLocPop.initPage( { callback : function(rowData) {
+					$this.stdtInfo.eorgLocNo = rowData.locNo;
+					$this.stdtInfo.eorgLocNm = rowData.locNm;
+			}});
+		},
+
 		resetParam: function() {
 			let $this = this;
 			$this.stdtInfo = {
-				crud : 'C'
+				crud: 'U'
 			}
 		}
 

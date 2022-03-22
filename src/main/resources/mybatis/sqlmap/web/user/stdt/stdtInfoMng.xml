@@ -256,7 +256,7 @@
                 ,band_id = #{bandId}
             </if>
             <if test="eorgLocNo != null">
-                ,eorg_loc_no = #{eorgLocNo}
+                ,eorg_loc_no = cast(#{eorgLocNo} as integer)
             </if>
             <if test="sgrdCd != null">
                 ,sgrd_cd = #{sgrdCd}
