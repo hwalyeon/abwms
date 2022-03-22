@@ -36,7 +36,7 @@ let palStndMng = new Vue({
             initCodeList : function()
             {
                 let $this = this;
-                getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList, function()
+                getCommonCodeList('PAL_CD',$this.code.palCdList, function()
                 {
                     $this.initGrid();
                     $this.searchPalStndList(true);

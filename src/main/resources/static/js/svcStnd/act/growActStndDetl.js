@@ -27,7 +27,7 @@ let growActStndDetl = new Vue({
         initCodeList: function() {
         	let $this = this;
 			getCommonCodeList('GROW_JUDG_CD',$this.code.growJudgCdList, '');
-			getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList, '');
+			getCommonCodeList('PAL_CD',$this.code.palCdList, '');
         	
         },
         initPage: function(growJudgCd, palCd) {

@@ -40,7 +40,7 @@ let growActStndMng = new Vue({
             {
                 let $this = this;
                 getCommonCodeList('GROW_JUDG_CD',$this.code.growJudgCdList);
-                getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList, function()
+                getCommonCodeList('PAL_CD',$this.code.palCdList, function()
                 {
                     $this.initGrid();
                     $this.searchGrowActStndList(true);

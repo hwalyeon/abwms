@@ -29,7 +29,7 @@ let fatActStndDetl = new Vue({
         initCodeList: function() {
         	let $this = this;
 			getCommonCodeList('FAT_JUDG_CD',$this.code.fatJudgCdList,'');
-			getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList,'');
+			getCommonCodeList('PAL_CD',$this.code.palCdList,'');
         	
         },
         initPage: function(currFatJudgCd, prdtFatJudgCd, palCd) {

@@ -25,7 +25,7 @@ let palStndDetl = new Vue({
         },
         initCodeList: function() {
         	let $this = this;
-			getCommonCodeList('ACT_LEVL_CD',$this.code.palCdList);
+			getCommonCodeList('PAL_CD',$this.code.palCdList);
         	
         },
         initPage: function(palCd) {
