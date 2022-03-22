@@ -31,6 +31,7 @@
                ,gfix_dt /* gfix_dt 성장비만지수_일자 character(8) */
                ,grow_mesu_dt /* grow_mesu_dt 성장_측정_일자 character(8) */
                ,act_stnd_dt /* act_stnd_dt 활동_기준_일자 character(8) */
+               ,qust_stnd_dt /* qust_stnd_dt 설문_기준_일자 character(8) */
                ,ambr_yn /* ambr_yn 미아_여부 character(1) */
                ,ambr_dtct_dttm /* ambr_dtct_dttm 미아_탐지_일시 character(14) */
                ,del_dt /* del_dt 삭제_일자 character(8) */
@@ -111,6 +112,9 @@
 		</if>
 		<if test="actStndDt != null">
 		    ,act_stnd_dt /* act_stnd_dt 활동_기준_일자 character(8) */
+		</if>
+		<if test="qustStndDt != null">
+		    ,qust_stnd_dt /* qust_stnd_dt 설문_기준_일자 character(8) */
 		</if>
 		<if test="ambrYn != null">
 		    ,ambr_yn /* ambr_yn 미아_여부 character(1) */
@@ -196,6 +200,9 @@
 		</if>
 		<if test="actStndDt != null">
 		    ,#{actStndDt} /* act_stnd_dt 활동_기준_일자 character(8) */
+		</if>
+		<if test="qustStndDt != null">
+		    ,#{qustStndDt} /* qust_stnd_dt 설문_기준_일자 character(8) */
 		</if>
 		<if test="ambrYn != null">
 		    ,#{ambrYn} /* ambr_yn 미아_여부 character(1) */
@@ -287,6 +294,9 @@
 		<if test="actStndDt != null">
 		    ,act_stnd_dt = #{actStndDt} /* act_stnd_dt 활동_기준_일자 character(8) */
 		</if>
+		<if test="qustStndDt != null">
+		    ,qust_stnd_dt = #{qustStndDt} /* qust_stnd_dt 설문_기준_일자 character(8) */
+		</if>
 		<if test="ambrYn != null">
 		    ,ambr_yn = #{ambrYn} /* ambr_yn 미아_여부 character(1) */
 		</if>
@@ -375,6 +385,9 @@
 		<if test="actStndDt != null">
 		    ,act_stnd_dt /* act_stnd_dt 활동_기준_일자 character(8) */
 		</if>
+		<if test="qustStndDt != null">
+		    ,qust_stnd_dt /* qust_stnd_dt 설문_기준_일자 character(8) */
+		</if>
 		<if test="ambrYn != null">
 		    ,ambr_yn /* ambr_yn 미아_여부 character(1) */
 		</if>
@@ -459,6 +472,9 @@
 		</if>
 		<if test="actStndDt != null">
 		    ,#{actStndDt} /* act_stnd_dt 활동_기준_일자 character(8) */
+		</if>
+		<if test="qustStndDt != null">
+		    ,#{qustStndDt} /* qust_stnd_dt 설문_기준_일자 character(8) */
 		</if>
 		<if test="ambrYn != null">
 		    ,#{ambrYn} /* ambr_yn 미아_여부 character(1) */
@@ -546,6 +562,9 @@
 		</if>
 		<if test="actStndDt != null">
 		    ,act_stnd_dt = #{actStndDt} /* act_stnd_dt 활동_기준_일자 character(8) */
+		</if>
+		<if test="qustStndDt != null">
+		    ,qust_stnd_dt = #{qustStndDt} /* qust_stnd_dt 설문_기준_일자 character(8) */
 		</if>
 		<if test="ambrYn != null">
 		    ,ambr_yn = #{ambrYn} /* ambr_yn 미아_여부 character(1) */

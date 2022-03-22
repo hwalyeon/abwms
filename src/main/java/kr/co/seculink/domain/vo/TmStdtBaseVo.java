@@ -73,6 +73,9 @@ public class TmStdtBaseVo implements Serializable {
 	/* act_stnd_dt 활동_기준_일자 character(8) */
 	private String actStndDt;
 
+	/* qust_stnd_dt 설문_기준_일자 character(8) */
+	private String qustStndDt;
+
 	/* ambr_yn 미아_여부 character(1) */
 	private String ambrYn;
 
@@ -433,6 +436,21 @@ public class TmStdtBaseVo implements Serializable {
 	 */
 	public void setActStndDt(String actStndDt) {
 		this.actStndDt = actStndDt;
+	}
+	/**
+	 * Get qust_stnd_dt 설문_기준_일자 character(8)
+	 * @Return String qustStndDt
+	 */
+	public String getQustStndDt() {
+		return this.qustStndDt;
+	}
+	
+	/**
+	 * Set qust_stnd_dt 설문_기준_일자 character(8)
+	 * @Param String qustStndDt
+	 */
+	public void setQustStndDt(String qustStndDt) {
+		this.qustStndDt = qustStndDt;
 	}
 	/**
 	 * Get ambr_yn 미아_여부 character(1)
