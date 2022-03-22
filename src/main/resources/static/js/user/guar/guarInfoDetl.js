@@ -67,9 +67,10 @@ let guarInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(bandId, guarNo, guarTelNo, stdtNo, stdtNm) {
+        initPage: function(bandId, guarNo, guarTelNo, stdtNo, stdtNm, callback) {
 
 			let $this = this;
+
 			if(typeof callback === 'function')
 			{
 				$this.callBack = callback;
@@ -91,7 +92,7 @@ let guarInfoDetl = new Vue({
 					success: function(response) {
 						if ( !!response.rtnData.result )
 						{
-							if(response.rtnData.result.guarNo != null){
+							if(response.rtnData.result != null){
 								$this.params.crud = 'U';
 							}
 							$.each(response.rtnData.result.result, function(key, val) {

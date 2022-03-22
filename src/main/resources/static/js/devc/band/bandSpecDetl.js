@@ -81,8 +81,9 @@ let bandSpecDetl = new Vue({
 			
 			let $this = this;
 
-			$this.params.gridData = [{'crud'      :'U',
-				                      'guarTelNo' : $this.params.guarTelNo},];
+			$this.params.gridData = [{'crud'      :'U'                             ,
+				                      'guarTelNoTemp' : $this.params.guarTelNoTemp ,
+			                          'guarTelNo'     : $this.params.guarTelNo       },];
 
 			AjaxUtil.post({
                 url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",

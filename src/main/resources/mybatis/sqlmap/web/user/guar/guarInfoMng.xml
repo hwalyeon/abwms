@@ -4,41 +4,38 @@
 
 	<!--보호자(사용자)정보_리스트 조회 -->
 	<select id="selectGuarInfoList"	parameterType="java.util.Map" resultType="MybatisMap">
-
-		select TGB.GUAR_NO                    -- 보호자_번호
-			 , TGB.GUAR_NO  AS GUAR_NO_TEMP   -- 보호자_번호_임시
-			 , TPB.PRNT_NO  AS PRNT_NO_TEMP   -- 학부모_번호_임시
-			 , TGB.GUAR_NM                    -- 보호자_명
-			 , TBS.GUAR_TEL_NO                -- 보호자_전화_번호
-			 , TSB.STDT_NO                    -- 학생_번호
-			 , TSB.STDT_NM                    -- 학생_명
-			 , TGB.ENTR_DT                    -- 가입_일자(보호자)
-			 , fn_getCdNm('ENTR_STAT_CD',ENTR_STAT_CD)  as ENTR_STAT_CD_NM-- 가입_상태_코드_명
-			 , TGB.ENTR_STAT_CD               -- 가입_상태_코드
-			 , TBI.TEL_NO                     -- 전화_번호(밴드)
-			 , TEB.LOC_NM                     -- 위치_명(학교,학원_명)
-			 , TBI.BAND_ID                    -- 밴드_ID
-			 , TPB.PRNT_NO                    -- 학부모_번호
-			 , TPB.PRNT_NM as PRNT_NM_MALE    -- 학부모_명_남자
-			 , TPB2.PRNT_NM as PRNT_NM_FEMALE --학부모_명_여자
-		from   TS_BAND_INFO TBI             -- 밴드_정보
-			   inner join TS_BAND_SPEC TBS  -- 밴드_상세
-			   on TBI.BAND_ID = TBS.BAND_ID
-			   inner join TM_GUAR_BASE TGB  -- 보호자_기본
-			   on TBS.GUAR_TEL_NO = TGB.GUAR_TEL_NO
-			   left outer join TM_STDT_GUAR_CONN TSGC  -- 학생_보호자_연결
-			   on TGB.GUAR_NO = TSGC.GUAR_NO
-			   left outer join TM_STDT_BASE TSB  -- 학생_기본
-			   on TBI.BAND_ID = TSB.BAND_ID
-			   left outer join TI_EORG_BASE TEB  -- 교육시설_기본
-			   on TSB.EORG_LOC_NO = TEB.LOC_NO
-			   left outer join TM_PRNT_BASE TPB  -- 학부모_기본
-			   on  TGB.PRNT_NO = TPB.PRNT_NO
-			   and TPB.SEX_CD = 'MALE'
-			   left outer join TM_PRNT_BASE TPB2 -- 학부모_기본
-			   on  TGB.PRNT_NO = TPB2.PRNT_NO
-			   and    TPB2.SEX_CD = 'FEMALE'
-		WHERE 1=1
+		select TGB.GUAR_NO       --보호자_번호
+		     , TGB.GUAR_NM       --보호자_명
+		     , TGB.GUAR_TEL_NO   --보호자_전화_번호
+		     , TSB.STDT_NO       --학생_번호
+		     , TSB.STDT_NM       --학생_명
+		     , TGB.ENTR_DT       --가입_일자
+		     , TGB.ENTR_STAT_CD  --가입_상태_코드
+		     , fn_getCdNm('ENTR_STAT_CD',ENTR_STAT_CD) as ENTR_STAT_CD_NM --가입_상태_코드_명
+		     , TEB.LOC_NM        --위치_명
+		     , TBI.BAND_ID                    -- 밴드_ID
+		     , TBI.TEL_NO                     -- 전화_번호(밴드)
+		     , TPB.PRNT_NO                    -- 학부모_번호
+		     , TPB.PRNT_NM as PRNT_NM_MALE    -- 학부모_명_남자
+		     , TPB2.PRNT_NM as PRNT_NM_FEMALE --학부모_명_여자
+		from   TM_GUAR_BASE TGB               --보호자_기본
+			   left outer join TM_STDT_GUAR_CONN TSGC  --학생_보호자_연결
+			   on   TGB.GUAR_NO  = TSGC.GUAR_NO
+			   left outer JOIN TM_STDT_BASE TSB        --학생_기본
+			   on   TSGC.STDT_NO = TSB.STDT_NO
+			   left outer join TI_EORG_BASE TEB        --교육시설_기본
+			   on   TSB.EORG_LOC_NO = TEB.LOC_NO
+			   left outer join TM_PRNT_BASE TPB        --학부모_기본
+			   on   TGB.PRNT_NO = TPB.PRNT_NO
+			   and  TPB.SEX_CD  = 'MALE'
+			   left outer join TM_PRNT_BASE TPB2       --학부모_기본
+			   on   TGB.PRNT_NO = TPB2.PRNT_NO
+			   and  TPB2.SEX_CD = 'FEMALE'
+			   left outer join TS_BAND_SPEC TBS        --밴드_상세
+			   on  TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
+			   and TSB.BAND_ID     = TBS.BAND_ID
+			   left outer join TS_BAND_INFO TBI
+		on TBS.BAND_ID = TBI.BAND_ID
 		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
 			and TGB.ENTR_DT between replace(#{entrDtFr},'-','') and replace(#{entrDtTo},'-','')</if>
 		<if test=" stdtNo != null and stdtNo !='' ">
@@ -57,6 +54,8 @@
 			and TGB.GUAR_TEL_NO = #{guarTelNo}</if>
 		<if test=" locNm != null and locNm !='' ">
 			and TEB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+		<if test=" entrStatCd != null and entrStatCd !='' ">
+			and TGB.ENTR_STAT_CD = #{entrStatCd}</if>
 		group by TGB.GUAR_NO, TBS.GUAR_TEL_NO, TBI.BAND_ID, TSB.STDT_NO, TEB.LOC_NM, TPB.PRNT_NO, TPB.PRNT_NM, TPB2.PRNT_NM
 		order by ENTR_STAT_CD_NM, TGB.GUAR_NO, TGB.GUAR_NM, TSB.STDT_NO, TGB.ENTR_DT, TEB.LOC_NM, TBI.BAND_ID
 		<if test=' paging == "Y" '>
@@ -195,11 +194,20 @@
 	<update id="updateTmGuarInfoList" parameterType="java.util.Map">
 		UPDATE TM_GUAR_BASE
 		SET
-		<if test="guarNm != null">        guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(40) */</if>
-		<if test="guarTelNo != null">    ,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */</if>
-		<if test="guarPw != null">       ,guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */	</if>
-		<if test="selfCertDttm != null"> ,self_cert_dttm = #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */	</if>
-		<if test="autoLoginYn != null">  ,auto_login_yn = #{autoLoginYn} /* auto_login_yn 자동_로그인_여부 character(1) */
+		<if test="guarNm != null">
+			guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(40) */
+		</if>
+		<if test="guarTelNo != null">
+			,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		</if>
+		<if test="guarPw != null">
+			,guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
+		</if>
+		<if test="selfCertDttm != null">
+			,self_cert_dttm = #{selfCertDttm} /* self_cert_dttm 본인_인증_일시 character(14) */
+		</if>
+		<if test="autoLoginYn != null">
+			,auto_login_yn = #{autoLoginYn} /* auto_login_yn 자동_로그인_여부 character(1) */
 		</if>
 		<if test="devcCertVal != null">
 			,devc_cert_val = #{devcCertVal} /* devc_cert_val 장치_인증_값 character varying(1000) */
@@ -211,7 +219,7 @@
 			,dzone_alam_yn = #{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		</if>
 		<if test="prntNo != null">
-			,prnt_no = #{prntNo}::NUMERIC /* prnt_no 학부모_번호 numeric */
+			,prnt_no = #{prntNo} /* prnt_no 학부모_번호 numeric */
 		</if>
 		<if test="szoneAlamYn != null">
 			,szone_alam_yn = #{szoneAlamYn} /* szone_alam_yn 세이프존_알림_여부 character(1) */
@@ -244,10 +252,10 @@
 			,ltrm_nuse_alam_yn = #{ltrmNuseAlamYn} /* ltrm_nuse_alam_yn 장기_미사용_알림_여부 character(1) */
 		</if>
 		<if test="entrDt != null">
-			,entr_dt	        = replace(#{entrDt} , '-','')  /* entr_dt 가입_일자 character(8) */
+			,entr_dt = replace(#{entrDt},'-','') /* entr_dt 가입_일자 character(8) */
 		</if>
 		<if test="relsDt != null">
-			,rels_dt 	        = replace(#{relsDt} , '-','') /* rels_dt 해지_일자 character(8) */
+			,rels_dt = replace(#{relsDt},'-','') /* rels_dt 해지_일자 character(8) */
 		</if>
 		<if test="relsResnCd != null">
 			,rels_resn_cd = #{relsResnCd} /* rels_resn_cd 해지_사유_코드 character varying(20) */
@@ -262,7 +270,7 @@
 			,UPT_TM = TO_CHAR(NOW(), 'HH24MISS')
 			,UPT_USER_ID = #{uptUserId}
 		WHERE 1=1
-		AND GUAR_NO = #{guarNo}::NUMERIC
+		AND guar_no = #{guarNo}::NUMERIC
 	</update>
 
 	<!--보호자(사용자)_정보_삭제 -->
@@ -322,7 +330,7 @@
                   ON TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
         WHERE     1 = 1
 		AND       TGB.guar_tel_no = #{guarTelNo}
-		AND       TBS.band_id     = #{bandId}
+		<if test="bandId != null and bandId !='' ">AND  TBS.band_id = #{bandId}</if>
 		<if test="stdtNo != null and stdtNo !='' ">AND  TSB.stdt_no = #{stdtNo}::NUMERIC</if>
 		group by TGB.guar_no ,TSB.stdt_no
 	</select>

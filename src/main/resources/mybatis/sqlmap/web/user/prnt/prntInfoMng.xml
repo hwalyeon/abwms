@@ -9,6 +9,7 @@
                , TSB.STDT_NM       /* stdt_nm 학생_명 character varying(20) */
                , TPB.PRNT_NO       /* prnt_no 학부모_번호 numeric */
                , TPB.SEX_CD        /* sex_cd 성별_코드 character varying(20) */
+               , fn_getCdNm('SEX_CD', TPB.SEX_CD) AS SEX_CD_NM        /* sex_cd 성별_코드 character varying(20) */
                , TPB.PRNT_NM       /* prnt_nm 학부모_명 character varying(40) */
                , TPB.HGHT_VAL      /* hght_val 키_값 numeric */
                , TPB.WGHT_VAL      /* wght_val 체중_값 numeric */
@@ -25,9 +26,53 @@
                  on TBI.BAND_ID = TSB.BAND_ID
                  and TSB.PRNT_NO = TPB.PRNT_NO
         WHERE    1=1
-        and      TBI.BAND_ID = cast(#{bandId} as varchar)
+        <if test="bandId != null and bandId != '' ">and      TBI.BAND_ID = cast(#{bandId} as varchar)</if>
         and      TPB.SEX_CD  = #{sexCd}
         <if test="prntNo != null and prntNo != '' ">AND TPB.PRNT_NO = #{prntNo}::NUMERIC</if>
         group by TBI.BAND_ID, TSB.STDT_NO, TPB.PRNT_NO, TPB.SEX_CD
 	</select>
+
+    <insert id="insertTmPrntBase" parameterType="java.util.Map">
+     insert into TM_PRNT_BASE
+        (
+        prnt_no /* prnt_no 학부모_번호 numeric */
+        ,sex_cd /* sex_cd 성별_코드 character varying(20) */
+        <if test="prntNm != null">
+            ,prnt_nm /* prnt_nm 학부모_명 character varying(40) */
+        </if>
+        ,hght_val /* hght_val 키_값 numeric */
+        ,wght_val /* wght_val 체중_값 numeric */
+        ,bmi_val /* bmi_val BMI_값 numeric */
+        <if test="raceDivCd != null">
+            ,race_div_cd /* race_div_cd 인종_구분_코드 character varying(20) */
+        </if>
+        , reg_dt /* reg_dt 등록_일자 character(8) */
+        , reg_tm /* reg_tm 등록_시각 character(6) */
+        , reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+        , upt_dt /* upt_dt 수정_일자 character(8) */
+        , upt_tm /* upt_tm 수정_시각 character(6) */
+        , upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+        )
+        VALUES
+        (
+        #{prntNo} /* prnt_no 학부모_번호 numeric */
+        #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+        <if test="prntNm != null">
+            ,#{prntNm} /* prnt_nm 학부모_명 character varying(40) */
+        </if>
+        ,#{hghtVal} /* hght_val 키_값 numeric */
+        ,#{wghtVal} /* wght_val 체중_값 numeric */
+        ,#{bmiVal} /* bmi_val BMI_값 numeric */
+        <if test="raceDivCd != null">
+            ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
+        </if>
+        , TO_CHAR(NOW(), 'YYYYMMDD')
+        , TO_CHAR(NOW(), 'HH24MISS')
+        , #{regUserId}
+        , TO_CHAR(NOW(), 'YYYYMMDD')
+        , TO_CHAR(NOW(), 'HH24MISS')
+        , #{uptUserId}
+        )
+
+    </insert>
 </mapper>

@@ -16,11 +16,10 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	//보호자(사용자)_정보 상세보기
+	//학부모_정보 상세보기
 	public Map<String, Object> searchPrntInfo(Map<String, Object> params) throws BizException
 	{
 		Map<String, Object> result = dao.selectOne("user.prnt.prntInfoMng.selectPrntInfoDetl", params);
-
 		return result;
 	}
 /*

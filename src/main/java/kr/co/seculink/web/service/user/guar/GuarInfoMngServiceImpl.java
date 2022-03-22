@@ -47,6 +47,7 @@ public class GuarInfoMngServiceImpl implements GuarInfoMngService
 
 		int saveCnt = 0;
 
+		System.out.println("params:"+params);
 		if ("U".equals(params.get("crud"))) {
 			saveCnt += dao.update("user.guar.guarInfoMng.updateTmGuarInfoList", params);
 		} else if ("D".equals(params.get("crud"))) {
@@ -57,34 +58,24 @@ public class GuarInfoMngServiceImpl implements GuarInfoMngService
 		}
 	}
 
-	//배우자_정보 상세보기
-	public Map<String, Object> searchSposInfo(Map<String, String> params) throws BizException
-	{
-		Map<String, String> result = dao.selectOne("user.guar.guarInfoMng.selectSposInfoDetl", params);
-
-		Map<String, Object> rtnMap = new HashMap<>();
-
-		rtnMap.put("result", result);
-
-		return rtnMap;
-	}
-
-	//배우자_정보 저장
-	public void saveSposInfoDetl(Map<String, Object> params) throws BizException
+	//학부모_정보 저장
+	public void savePrntInfoDetl(Map<String, Object> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
 		int saveCnt = 0;
 
-
-		if ("U".equals(params.get("crud"))) {
-			saveCnt += dao.update("user.guar.guarInfoMng.updateTmSposInfoList", params);
-        } else if ("D".equals(params.get("crud"))) {
-			saveCnt += dao.delete("user.guar.guarInfoMng.deleteTmSposInfoList", params);
-		}
+		System.out.println("params:"+params);
+		if ("C".equals(params.get("crud"))) {
+			saveCnt += dao.insert("user.prnt.prntInfoMng.insertTmPrntBase", params);
+		} else if ("U".equals(params.get("crud"))) {
+			saveCnt += dao.update("user.prnt.prntInfoMng.updateTmPrntBase", params);
+		}/* else if ("D".equals(params.get("crud"))) {
+			saveCnt += dao.delete("user.prnt.prntInfoMng.deleteTmPrntBase", params);
+		}*/
 		if (saveCnt == 0) {
-			throw new BizException("ECOM999", new String[]{"배우자 정보 저장이 실패하였습니다."});
+			throw new BizException("ECOM999", new String[]{"보호자(사용자) 정보 저장이 실패하였습니다."});
 		}
 	}
 
@@ -95,33 +86,6 @@ public class GuarInfoMngServiceImpl implements GuarInfoMngService
 
 		return result;
 	}
-/*
-
-	//약관동의여부_정보 저장
-	public void saveTermAgreYnInfoDetl(Map<String, Object> params) throws BizException {
-
-		int saveCnt = 0;
-
-		List<Map<String, String>> gridDate = (List<Map<String, String>>) params.get("gridList");
-
-
-		for(Map<String,String> info:gridDate) {
-
-			log.debug("crud : " + info.get("crud"));
-			Map<String, Object> result = dao.selectOne("user.guar.guarInfoMng.searchDupCdCk", info);
-
-			if (result == null) {
-				saveCnt += dao.insert("user.guar.guarInfoMng.insertTmTermAgreDetlInfoList", info);
-			} else {
-				saveCnt += dao.update("user.guar.guarInfoMng.updateTmTermAgreDetlInfoList", info);
-			}
-
-		}
-		if (saveCnt == 0) {
-			throw new BizException("ECOM999", new String[]{"약관동의여부 정보 저장이 실패하였습니다."});
-		}
-	}
-*/
 
 }
 	

@@ -43,7 +43,7 @@ let prntInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(bandId, prntNo, sexCd)
+        initPage: function(bandId, prntNo, stdtNo, stdtNm, sexCd, callback)
 		{
 			let $this = this;
 
@@ -68,13 +68,20 @@ let prntInfoDetl = new Vue({
 					success: function(response) {
 						if (!!response.rtnData.result)
 						{
-							console.log(response.rtnData.result);
 							$.each(response.rtnData.result, function(key, val) {
 								$this.params[key] = val;});
 
-							if(response.rtnData.result.prntNo != null){
+							if(response.rtnData.result.prntNm != null){
 								$this.params.crud = 'U';
 							}
+						}
+						else
+						{
+							$this.params.stdtNo = stdtNo;
+							$this.params.stdtNm = stdtNm;
+							$this.params.bandId = bandId;
+							$this.params.prntNo = prntNo;
+							$this.params.sexCd = sexCd;
 						}
 					},
 					error: function (response) {
@@ -96,7 +103,7 @@ let prntInfoDetl = new Vue({
                 return false;
             }
 			AjaxUtil.post({
-                url: "/user/guar/guarInfoMng/saveSposInfoDetl.ab",
+                url: "/user/guar/guarInfoMng/savePrntInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
@@ -131,9 +138,6 @@ let prntInfoDetl = new Vue({
             });
 		},
 		resetPrntDetlInfo: function() {
-			let $this =this;
-			let sexCd = $this.params.sexCd;
-
 			this.params = {
 				crud              : 'C',
 				userId            : '' ,
@@ -143,7 +147,7 @@ let prntInfoDetl = new Vue({
 				guarNm            : '' , //보호자_이름
 				prntNo            : '' , //학부모_번호
 				prntNm            : '' , //학부모_명
-				sexCd             : sexCd , //성별_코드
+				sexCd             : '' , //성별_코드
 				hghtVal           : '' , //키_값
 				wghtVal		      : '' , //체중_값
 				BMIVal		      : '' , //BMI_값

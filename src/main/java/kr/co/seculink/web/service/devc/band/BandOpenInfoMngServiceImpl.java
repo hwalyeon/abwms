@@ -74,14 +74,17 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		for(Map<String,Object> info:gridData)
 			{
 				log.debug("crud         : " + info.get("crud"));
-
 				Object bandId = params.get("bandId");
 				info.put("bandId",bandId);
+/*
+
+
 				Object guarTelNoTemp = params.get("guarTelNoTemp");
 				info.put("guarTelNoTemp",guarTelNoTemp);
 
                System.out.println("gridData: "+gridData);
 
+*/
 
 				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
 

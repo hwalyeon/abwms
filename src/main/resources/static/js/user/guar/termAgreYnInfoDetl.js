@@ -62,11 +62,11 @@ let termAgreYnInfoDetl = new Vue({
 			let colModels = [
 				{name: "crud"      		, index: "crud"       	  , label: "crud"		      , hidden: true },
 				{name: "termDivCd"      , index: "termDivCd"      , label: "약관 구분 코드" 	  , hidden: true },
-				{name: "guarNo"         , index: "guarNo"         , label: "보호자번호" 	      , width: 50 , align: "center" },
+				{name: "guarNo"         , index: "guarNo"         , label: "보호자번호" 	      , width: 30 , align: "center" },
 				{name: "termVer"        , index: "termVer"        , label: "약관버전" 	      , width: 30 , align: "center" },
 				{name: "termDivCdNm"    , index: "termDivCdNm"    , label: "약관 구분 코드명"  , width: 70 , align: "center" },
-				{name: "termAgreYn"     , index: "termAgreYn"     , label: "약관 동의 여부" 	  , width: 30 , align: "center" },
-				{name: "termAgreDttm" 	, index: "termAgreDttm"   , label: "약관 동의 일시" 	  , width: 50 , align: "center" }
+				{name: "termAgreYn"     , index: "termAgreYn"     , label: "약관 동의 여부" 	  , width: 20 , align: "center" },
+				{name: "termAgreDttm" 	, index: "termAgreDttm"   , label: "약관 동의 일시" 	  , width: 70 , align: "center" }
 			];
 			$("#termAgreYnInfoDetl_list").jqGrid("GridUnload");
 			$("#termAgreYnInfoDetl_list").jqGrid($.extend(true, {}, commonGridOptions(),
