@@ -33,12 +33,12 @@
 												</div>
 												<label class="col-xs-1 control-label">학생명</label>
 												<div class="col-xs-1"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.stdtNm" class="form-control" />
+													<input type="text" name="stdtNm" v-model="stdtInfo.stdtNm" class="form-control" />
 												</div>
 												<label class="col-xs-1 control-label">학교명</label>
 												<div class="col-xs-2"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.eorgLocNm" class="form-control float_left width_per_70 ime-eng"/>
-													<button type="button" class="btn btn-outline btn-primary float_right" v-on:click="">검색</button>
+													<input type="text" name="eorgLocNm" v-model="stdtInfo.eorgLocNm" class="form-control float_left width_per_70 ime-eng" readonly="true"/>
+													<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#stdtEorgLocPopup" v-on:click="stdtInfoEorgLocPop()">검색</button>
 												</div>
 												<label class="col-xs-1 control-label">학년</label>
 												<div class="col-xs-1"  style="padding:0px">
