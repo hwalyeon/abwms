@@ -47,9 +47,7 @@ public class GuarInfoMngServiceImpl implements GuarInfoMngService
 
 		int saveCnt = 0;
 
-		if ("C".equals(params.get("crud"))){
-			saveCnt += dao.insert("user.guar.guarInfoMng.insertTmGuarInfoList", params);
-		} else if ("U".equals(params.get("crud"))) {
+		if ("U".equals(params.get("crud"))) {
 			saveCnt += dao.update("user.guar.guarInfoMng.updateTmGuarInfoList", params);
 		} else if ("D".equals(params.get("crud"))) {
 			saveCnt += dao.delete("user.guar.guarInfoMng.deleteTmGuarInfoList", params);
@@ -79,23 +77,10 @@ public class GuarInfoMngServiceImpl implements GuarInfoMngService
 
 		int saveCnt = 0;
 
-		if ("C".equals(params.get("crud"))){
-			saveCnt += dao.insert("user.guar.guarInfoMng.insertTmSposInfoList", params);
-			saveCnt += dao.update("user.guar.guarInfoMng.updateTmGuarInfoList", params);
-		} else if ("U".equals(params.get("crud"))) {
+
+		if ("U".equals(params.get("crud"))) {
 			saveCnt += dao.update("user.guar.guarInfoMng.updateTmSposInfoList", params);
-
-			//보호자 번호 가져오기
-			Map<String, Object> result = dao.selectOne("user.guar.guarInfoMng.selectGuarNo",params);
-
-			Object guarNo = result.get("guarNo");
-			params.put("guarNo",guarNo);
-			params.put("sposNo","");
-			params.put("guarNm", params.get("sposNm"));
-			params.put("guarTelNo", params.get("sposTelNo"));
-			saveCnt += dao.update("user.guar.guarInfoMng.updateTmGuarInfoList", params);
-
-		} else if ("D".equals(params.get("crud"))) {
+        } else if ("D".equals(params.get("crud"))) {
 			saveCnt += dao.delete("user.guar.guarInfoMng.deleteTmSposInfoList", params);
 		}
 		if (saveCnt == 0) {

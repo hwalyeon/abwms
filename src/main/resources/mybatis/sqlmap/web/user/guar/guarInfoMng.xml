@@ -287,7 +287,7 @@
                 , TGB.auto_login_yn      /* auto_login_yn 자동_로그인_여부 bpchar(1)*/
                 , TGB.devc_cert_val      /* devc_cert_val 장치_인증_값*/
                 , TGB.FCM_TOKN_VAL
-                , TGB.prnt_no            /* spos_no 배우자_번호 numeric */
+                , TGB.prnt_no            /* prnt_no 학부모_번호 numeric */
                 , TGB.dzone_alam_yn      /* dzone_alam_yn 위험지역_알림_여부 character(1) */
                 , TGB.szone_alam_yn      /* szone_alam_yn 세이프존_알림_여부 character(1) */
                 , TGB.fall_alam_yn       /* fall_alam_yn 낙상_알림_여부 character(1) */
@@ -322,7 +322,7 @@
                   ON TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
         WHERE     1 = 1
 		AND       TGB.guar_tel_no = #{guarTelNo}
-		AND       TSB.band_id     = #{bandId}
+		AND       TBS.band_id     = #{bandId}
 		<if test="stdtNo != null and stdtNo !='' ">AND  TSB.stdt_no = #{stdtNo}::NUMERIC</if>
 		group by TGB.guar_no ,TSB.stdt_no
 	</select>
