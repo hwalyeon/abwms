@@ -2,7 +2,7 @@ let stdtInfoDetl = new Vue({
     el: "#stdtInfoDetlPopup",
     data: {
 		stdtInfo: {
-    		crud: 'U'
+    		crud: 'C'
     	},
 		code: {
 			 sexCdList: []
@@ -388,7 +388,7 @@ let stdtInfoDetl = new Vue({
 		resetParam: function() {
 			let $this = this;
 			$this.stdtInfo = {
-				crud: 'U'
+				crud: 'C'
 			}
 		}
 
