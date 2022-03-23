@@ -137,20 +137,7 @@ public class GuarInfoMngController
 //		return vo;
 //	}
 //
-	//학부모_정보 저장
-	@ResponseBody
-	@RequestMapping("/user/guar/guarInfoMng/savePrntInfoDetl.ab")
-	public RtnMsg saveSposInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		guarInfoMngService.savePrntInfoDetl(params);
-
-		rtnMap.put("result", params);
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
 
 	//약관동의여부_정보 상세보기
 	@ResponseBody

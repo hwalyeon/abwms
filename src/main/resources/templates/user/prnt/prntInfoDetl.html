@@ -56,20 +56,20 @@
 								<tr>
 									<th scope="row">키</th>
 									<td>
-										<input type="text" name="hghtVal" v-model="params.hghtVal" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)"/>
+										<input type="text" name="hghtVal" v-model="params.hghtVal" class="form-control float_left width_per_100 ime-eng"/>
 									</td>
 								</tr>
 								<tr>
 									<th scope="row">체중</th>
 									<td>
-										<input type="text" name="wghtVal" v-model="params.wghtVal" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)"/>
+										<input type="text" name="wghtVal" v-model="params.wghtVal" class="form-control float_left width_per_100 ime-eng" />
 									</td>
 								</tr>
 								<tr>
 								<tr>
 									<th scope="row">BMI</th>
 									<td>
-										<input type="text" name="bmiVal" v-model="params.bmiVal" class="form-control float_left width_per_100 ime-eng" v-on:input="nanCk(event)"/>
+										<input type="text" name="bmiVal" v-model="params.bmiVal" class="form-control float_left width_per_100 ime-eng"/>
 									</td>
 								</tr>
 								<tr>
@@ -88,7 +88,7 @@
             	<div class="modal-footer">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="">저장</button>
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="savePrntInfoDetl">저장</button>
 						</div>
 <!--						<div v-if="params.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteUser">삭제</button>

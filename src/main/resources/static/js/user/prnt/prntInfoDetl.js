@@ -14,7 +14,7 @@ let prntInfoDetl = new Vue({
     		sexCd             : '' , //성별_코드
 			hghtVal           : '' , //키_값
 			wghtVal		      : '' , //체중_값
-			BMIVal		      : '' , //BMI_값
+			bmiVal		      : '' , //BMI_값
 			raceDivCd         : '' , //인종_구분_코드
     	},
 		callBack : null,
@@ -93,9 +93,24 @@ let prntInfoDetl = new Vue({
 		isValid: function()
 		{
         	let $this = this;
+
+			if ( WebUtil.isNull($this.params.hghtVal) ) {
+				Swal.alert(['키는 필수 입력 값 입니다.', 'info']);
+				return false;
+			}else if ( WebUtil.isNull($this.params.wghtVal) ) {
+				Swal.alert(['몸무게는 필수 입력 값 입니다.', 'info']);
+				return false;
+			}else if ( WebUtil.isNull($this.params.bmiVal) ) {
+				Swal.alert(['BMI는 필수 입력 값 입니다.', 'info']);
+				return false;
+			}else {
+				return true;
+			}
+
+
         	return true;
         },
-		saveSposInfoDetl: function() {
+		savePrntInfoDetl: function() {
 			
 			let $this = this;
 			
@@ -103,7 +118,7 @@ let prntInfoDetl = new Vue({
                 return false;
             }
 			AjaxUtil.post({
-                url: "/user/guar/guarInfoMng/savePrntInfoDetl.ab",
+                url: "/user/prnt/prntInfoMng/savePrntInfoDetl.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
@@ -112,7 +127,7 @@ let prntInfoDetl = new Vue({
                 	});                	
                 },
                 error: function (response) {
-                	Swal.alert([response, 'error']);
+                	Swal.alert([response, '학부모 정보 저장에 실패하였습니다.']);
                 }
             });
 		},
@@ -150,7 +165,7 @@ let prntInfoDetl = new Vue({
 				sexCd             : '' , //성별_코드
 				hghtVal           : '' , //키_값
 				wghtVal		      : '' , //체중_값
-				BMIVal		      : '' , //BMI_값
+				bmiVal		      : '' , //BMI_값
 				raceDivCd         : '' , //인종_구분_코드
 	    	}
 		},

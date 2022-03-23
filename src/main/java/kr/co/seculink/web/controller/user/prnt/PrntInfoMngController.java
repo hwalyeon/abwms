@@ -39,6 +39,22 @@ public class PrntInfoMngController
 
 		return vo;
 	}
+
+
+	//학부모_정보 저장
+	@ResponseBody
+	@RequestMapping("/user/prnt/prntInfoMng/savePrntInfoDetl.ab")
+	public RtnMsg saveSposInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+		prntInfoMngService.savePrntInfoDetl(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
 /*
 	//보호자(사용자)_정보 저장
 	@ResponseBody
