@@ -10,8 +10,8 @@
 	<select id="select" resultType="kr.co.seculink.domain.vo.TsAlamHistVo">
 		/* Generated SQL SQL ID : ts_alam_hist.select */
         SELECT  alam_no /* alam_no 알림_번호 numeric */
-               ,stdt_no /* stdt_no 학생_번호 numeric */
                ,guar_no /* guar_no 보호자_번호 numeric */
+               ,stdt_no /* stdt_no 학생_번호 numeric */
                ,alam_chnl_cd /* alam_chnl_cd 알림_채널_코드 character varying(20) */
                ,alam_type_cd /* alam_type_cd 알림_유형_코드 character varying(20) */
                ,alam_titl /* alam_titl 알림_제목 character varying(200) */
@@ -29,6 +29,7 @@
         FROM   ts_alam_hist
 		WHERE  1 = 1
 		AND    alam_no = #{alamNo} /* alam_no 알림_번호 numeric */
+		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</select>
 
 	<insert id="insert" >
@@ -36,9 +37,9 @@
 		INSERT INTO ts_alam_hist
 		(
 		     alam_no /* alam_no 알림_번호 numeric */
-		    ,stdt_no /* stdt_no 학생_번호 numeric */
-		<if test="guarNo != null">
 		    ,guar_no /* guar_no 보호자_번호 numeric */
+		<if test="stdtNo != null">
+		    ,stdt_no /* stdt_no 학생_번호 numeric */
 		</if>
 		<if test="alamChnlCd != null">
 		    ,alam_chnl_cd /* alam_chnl_cd 알림_채널_코드 character varying(20) */
@@ -76,9 +77,9 @@
 		VALUES
 		(
 		     #{alamNo} /* alam_no 알림_번호 numeric */
+		     #{guarNo} /* guar_no 보호자_번호 numeric */
+		<if test="stdtNo != null">
 		    ,#{stdtNo} /* stdt_no 학생_번호 numeric */
-		<if test="guarNo != null">
-		    ,#{guarNo} /* guar_no 보호자_번호 numeric */
 		</if>
 		<if test="alamChnlCd != null">
 		    ,#{alamChnlCd} /* alam_chnl_cd 알림_채널_코드 character varying(20) */
@@ -122,9 +123,6 @@
 		<if test="stdtNo != null">
 		    ,stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
 		</if>
-		<if test="guarNo != null">
-		    ,guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
-		</if>
 		<if test="alamChnlCd != null">
 		    ,alam_chnl_cd = #{alamChnlCd} /* alam_chnl_cd 알림_채널_코드 character varying(20) */
 		</if>
@@ -157,6 +155,7 @@
 		</trim>
 		WHERE  1 = 1
 		AND    alam_no = #{alamNo} /* alam_no 알림_번호 numeric */
+		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</update>
 	
 	<update id="merge" >
@@ -164,9 +163,9 @@
 		INSERT INTO ts_alam_hist
 		(
 		     alam_no /* alam_no 알림_번호 numeric */
+		     guar_no /* guar_no 보호자_번호 numeric */
+		<if test="stdtNo != null">
 		    ,stdt_no /* stdt_no 학생_번호 numeric */
-		<if test="guarNo != null">
-		    ,guar_no /* guar_no 보호자_번호 numeric */
 		</if>
 		<if test="alamChnlCd != null">
 		    ,alam_chnl_cd /* alam_chnl_cd 알림_채널_코드 character varying(20) */
@@ -204,9 +203,9 @@
 		VALUES
 		(
 		     #{alamNo} /* alam_no 알림_번호 numeric */
+		     #{guarNo} /* guar_no 보호자_번호 numeric */
+		<if test="stdtNo != null">
 		    ,#{stdtNo} /* stdt_no 학생_번호 numeric */
-		<if test="guarNo != null">
-		    ,#{guarNo} /* guar_no 보호자_번호 numeric */
 		</if>
 		<if test="alamChnlCd != null">
 		    ,#{alamChnlCd} /* alam_chnl_cd 알림_채널_코드 character varying(20) */
@@ -247,9 +246,6 @@
 		<if test="stdtNo != null">
 		    ,stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
 		</if>
-		<if test="guarNo != null">
-		    ,guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
-		</if>
 		<if test="alamChnlCd != null">
 		    ,alam_chnl_cd = #{alamChnlCd} /* alam_chnl_cd 알림_채널_코드 character varying(20) */
 		</if>
@@ -287,5 +283,6 @@
 		DELETE FROM ts_alam_hist
 		WHERE  1 = 1
 		AND    alam_no = #{alamNo} /* alam_no 알림_번호 numeric */
+		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</delete>
 </mapper>
