@@ -10,11 +10,11 @@ public class TsAlamHistVo implements Serializable {
 	/* alam_no 알림_번호 numeric(null) */
 	private double alamNo;
 
-	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
-
 	/* guar_no 보호자_번호 numeric(null) */
 	private double guarNo;
+
+	/* stdt_no 학생_번호 numeric(null) */
+	private double stdtNo;
 
 	/* alam_chnl_cd 알림_채널_코드 character varying(20) */
 	private String alamChnlCd;
@@ -75,21 +75,6 @@ public class TsAlamHistVo implements Serializable {
 		this.alamNo = alamNo;
 	}
 	/**
-	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
-	 */
-	public double getStdtNo() {
-		return this.stdtNo;
-	}
-	
-	/**
-	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
-	 */
-	public void setStdtNo(double stdtNo) {
-		this.stdtNo = stdtNo;
-	}
-	/**
 	 * Get guar_no 보호자_번호 numeric(null)
 	 * @Return double guarNo
 	 */
@@ -103,6 +88,21 @@ public class TsAlamHistVo implements Serializable {
 	 */
 	public void setGuarNo(double guarNo) {
 		this.guarNo = guarNo;
+	}
+	/**
+	 * Get stdt_no 학생_번호 numeric(null)
+	 * @Return double stdtNo
+	 */
+	public double getStdtNo() {
+		return this.stdtNo;
+	}
+	
+	/**
+	 * Set stdt_no 학생_번호 numeric(null)
+	 * @Param double stdtNo
+	 */
+	public void setStdtNo(double stdtNo) {
+		this.stdtNo = stdtNo;
 	}
 	/**
 	 * Get alam_chnl_cd 알림_채널_코드 character varying(20)
