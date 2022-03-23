@@ -39,7 +39,7 @@ public class MybatisAOP {
         // mybatis의 경우 0번째는 sqlId
 		String sqlId = args[0] + "";
 		
-//		log.debug("### SQL ID : {}", sqlId);
+		log.debug("### SQL ID : {}", sqlId);
 		
 		SqlSessionTemplate sqlSessionTemplate = (SqlSessionTemplate) joinPoint.getTarget();
 		
