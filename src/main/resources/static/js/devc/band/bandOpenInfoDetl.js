@@ -361,16 +361,43 @@ let bandOpenInfoDetl = new Vue({
 
 			let gridData = $this.params.gridData;
 
-			if(gridData.length > 0){
+			console.log(gridData);
 
-			}else
+			let checkIds = $("#guarTelNo_list").jqGrid("getGridParam","selrow") + "";  // 단건
+
+			let checkId = checkIds.split(",");
+
+			for ( var i in checkId )
 			{
-				$this.params.gridData = [{'crud':'N'}];
+				if ( $("#guarTelNo_list").getRowData(checkId[i]).crud == "C" )
+				{
+					$("#guarTelNo_list").setRowData(checkId[i], {crud: "N"});
+					$("#"+checkId[i],"#guarTelNo_list").css({display: "none"});
+				}
+				else
+				{
+					$("#guarTelNo_list").setRowData(checkId[i], {crud: "D"});
+					$("#"+checkId[i],"#guarTelNo_list").css({display: "none"});
+				}
 			}
 
 			if (!this.isValid()) {
                 return false;
             }
+
+			//보호자 등록 시 가입_상태_코드 보호자 등록으로 변경
+
+			let size = 0;
+
+				while(size<gridData.length)
+				{
+				if ( $("#guarTelNo_list").getRowData(checkId[size]).crud == "C" && $("#guarTelNo_list").getRowData(checkId[size]).bandOpenStatCd == "OPEN"  )
+				{
+					$("#guarTelNo_list").setRowData(checkId[size], {bandOpenStatCd: "PRNT"});
+
+					size= size+1;
+				}
+			}
 
             $this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
 
