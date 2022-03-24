@@ -22,11 +22,11 @@ public class TsStdtStrsHistVo implements Serializable {
 	/* hbit_mdan 심박_중간값 numeric(null) */
 	private double hbitMdan;
 
-	/* ment_strs_pnt 정신적_스트레스_점수 numeric(null) */
-	private double mentStrsPnt;
+	/* mind_strs_pnt 정신적_스트레스_점수 numeric(null) */
+	private double mindStrsPnt;
 
-	/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
-	private String mentStrsStatCd;
+	/* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+	private String mindStrsStatCd;
 
 	/* phys_strs_pnt 신체적_스트레스_점수 numeric(null) */
 	private double physStrsPnt;
@@ -34,11 +34,11 @@ public class TsStdtStrsHistVo implements Serializable {
 	/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	private String physStrsStatCd;
 
-	/* strs_cope_pnt 스트레스_대처_점수 numeric(null) */
-	private double strsCopePnt;
+	/* strs_lrgeparty_pnt 스트레스_대처_점수 numeric(null) */
+	private double strsLrgepartyPnt;
 
-	/* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
-	private String strsCopeStatCd;
+	/* strs_lrgeparty_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+	private String strsLrgepartyStatCd;
 
 	/* avg_hbit_cnt 평균_심박_수 numeric(null) */
 	private double avgHbitCnt;
@@ -150,34 +150,34 @@ public class TsStdtStrsHistVo implements Serializable {
 		this.hbitMdan = hbitMdan;
 	}
 	/**
-	 * Get ment_strs_pnt 정신적_스트레스_점수 numeric(null)
-	 * @Return double mentStrsPnt
+	 * Get mind_strs_pnt 정신적_스트레스_점수 numeric(null)
+	 * @Return double mindStrsPnt
 	 */
-	public double getMentStrsPnt() {
-		return this.mentStrsPnt;
+	public double getMindStrsPnt() {
+		return this.mindStrsPnt;
 	}
 	
 	/**
-	 * Set ment_strs_pnt 정신적_스트레스_점수 numeric(null)
-	 * @Param double mentStrsPnt
+	 * Set mind_strs_pnt 정신적_스트레스_점수 numeric(null)
+	 * @Param double mindStrsPnt
 	 */
-	public void setMentStrsPnt(double mentStrsPnt) {
-		this.mentStrsPnt = mentStrsPnt;
+	public void setMindStrsPnt(double mindStrsPnt) {
+		this.mindStrsPnt = mindStrsPnt;
 	}
 	/**
-	 * Get ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
-	 * @Return String mentStrsStatCd
+	 * Get mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
+	 * @Return String mindStrsStatCd
 	 */
-	public String getMentStrsStatCd() {
-		return this.mentStrsStatCd;
+	public String getMindStrsStatCd() {
+		return this.mindStrsStatCd;
 	}
 	
 	/**
-	 * Set ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
-	 * @Param String mentStrsStatCd
+	 * Set mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
+	 * @Param String mindStrsStatCd
 	 */
-	public void setMentStrsStatCd(String mentStrsStatCd) {
-		this.mentStrsStatCd = mentStrsStatCd;
+	public void setMindStrsStatCd(String mindStrsStatCd) {
+		this.mindStrsStatCd = mindStrsStatCd;
 	}
 	/**
 	 * Get phys_strs_pnt 신체적_스트레스_점수 numeric(null)
@@ -210,34 +210,34 @@ public class TsStdtStrsHistVo implements Serializable {
 		this.physStrsStatCd = physStrsStatCd;
 	}
 	/**
-	 * Get strs_cope_pnt 스트레스_대처_점수 numeric(null)
-	 * @Return double strsCopePnt
+	 * Get strs_lrgeparty_pnt 스트레스_대처_점수 numeric(null)
+	 * @Return double strsLrgepartyPnt
 	 */
-	public double getStrsCopePnt() {
-		return this.strsCopePnt;
+	public double getStrsLrgepartyPnt() {
+		return this.strsLrgepartyPnt;
 	}
 	
 	/**
-	 * Set strs_cope_pnt 스트레스_대처_점수 numeric(null)
-	 * @Param double strsCopePnt
+	 * Set strs_lrgeparty_pnt 스트레스_대처_점수 numeric(null)
+	 * @Param double strsLrgepartyPnt
 	 */
-	public void setStrsCopePnt(double strsCopePnt) {
-		this.strsCopePnt = strsCopePnt;
+	public void setStrsLrgepartyPnt(double strsLrgepartyPnt) {
+		this.strsLrgepartyPnt = strsLrgepartyPnt;
 	}
 	/**
-	 * Get strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20)
-	 * @Return String strsCopeStatCd
+	 * Get strs_lrgeparty_stat_cd 스트레스_대처_상태_코드 character varying(20)
+	 * @Return String strsLrgepartyStatCd
 	 */
-	public String getStrsCopeStatCd() {
-		return this.strsCopeStatCd;
+	public String getStrsLrgepartyStatCd() {
+		return this.strsLrgepartyStatCd;
 	}
 	
 	/**
-	 * Set strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20)
-	 * @Param String strsCopeStatCd
+	 * Set strs_lrgeparty_stat_cd 스트레스_대처_상태_코드 character varying(20)
+	 * @Param String strsLrgepartyStatCd
 	 */
-	public void setStrsCopeStatCd(String strsCopeStatCd) {
-		this.strsCopeStatCd = strsCopeStatCd;
+	public void setStrsLrgepartyStatCd(String strsLrgepartyStatCd) {
+		this.strsLrgepartyStatCd = strsLrgepartyStatCd;
 	}
 	/**
 	 * Get avg_hbit_cnt 평균_심박_수 numeric(null)

@@ -28,6 +28,9 @@ public class TsBlbdBaseVo implements Serializable {
 	/* srch_cnt 조회_건수 numeric(null) */
 	private double srchCnt;
 
+	/* alam_yn 알림_여부 character(1) */
+	private String alamYn;
+
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -151,6 +154,21 @@ public class TsBlbdBaseVo implements Serializable {
 	 */
 	public void setSrchCnt(double srchCnt) {
 		this.srchCnt = srchCnt;
+	}
+	/**
+	 * Get alam_yn 알림_여부 character(1)
+	 * @Return String alamYn
+	 */
+	public String getAlamYn() {
+		return this.alamYn;
+	}
+	
+	/**
+	 * Set alam_yn 알림_여부 character(1)
+	 * @Param String alamYn
+	 */
+	public void setAlamYn(String alamYn) {
+		this.alamYn = alamYn;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

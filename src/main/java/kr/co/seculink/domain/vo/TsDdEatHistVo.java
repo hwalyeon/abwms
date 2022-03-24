@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 public class TsDdEatHistVo implements Serializable {
 
-	/* stnd_dt 기준_일자 numeric(null) */
-	private double stndDt;
+	/* stnd_dt 기준_일자 character(8) */
+	private String stndDt;
 
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
@@ -45,18 +45,18 @@ public class TsDdEatHistVo implements Serializable {
 
 
 	/**
-	 * Get stnd_dt 기준_일자 numeric(null)
-	 * @Return double stndDt
+	 * Get stnd_dt 기준_일자 character(8)
+	 * @Return String stndDt
 	 */
-	public double getStndDt() {
+	public String getStndDt() {
 		return this.stndDt;
 	}
 	
 	/**
-	 * Set stnd_dt 기준_일자 numeric(null)
-	 * @Param double stndDt
+	 * Set stnd_dt 기준_일자 character(8)
+	 * @Param String stndDt
 	 */
-	public void setStndDt(double stndDt) {
+	public void setStndDt(String stndDt) {
 		this.stndDt = stndDt;
 	}
 	/**
