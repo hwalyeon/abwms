@@ -350,30 +350,48 @@ let bandOpenInfoDetl = new Vue({
 			let $this = this;
 
 
-			//params에 gridData값 세팅
-			$this.params.gridData = commonGridGetDataNew($("#guarTelNo_list"));
-			let guarTelNoList = $("#guarTelNo_list").jqGrid("getRowData");
-
-
+			//밴드 모델코드 값 세팅
 			$this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
 
-			let gridData = $this.params.gridData;
 
 
-			console.log(guarTelNoList);
+			//params에 gridData값 세팅
+			$this.params.gridData = commonGridGetDataNew($("#guarTelNo_list"));
 
 
+			if($this.params.gridData != null)
+			{
+				for(var i=0; $this.params.gridData.length > i; i++ ){
 
-			let cnt = 0;
-			if(guarTelNoList.indexOf('C')){
-				cnt = +1;
+					$this.params.gridData[i].bandId=$this.params.bandId;
+				}
 			}
 
-			if(guarTelNoList.length==0)
 
-			return false;
+			//보호자 목록에 따른 '밴드_개통_상태_코드' 변경
 
+			//jqGrid 값 전체 가져오기
+			let guarTelNoList = $("#guarTelNo_list").jqGrid("getRowData");
+			//$this.params.생략을 위한 변수 선언
+			let bandOpenStatCd = $this.params.bandOpenStatCd;
 
+            //crud='C', crud='U' 값 찾기
+			let filteredCrudC = _.filter(guarTelNoList, function(data, index) {return data.crud === 'C';});
+			let filteredCrudU = _.filter(guarTelNoList, function(data, index) {return data.crud === 'U';});
+
+			let count = filteredCrudC.length+filteredCrudU.length;
+
+            //보호자 목록 값 유무에 따른 개통상태코드 값 변경
+			if(bandOpenStatCd == 'PRNT'){
+				if(guarTelNoList.length==0 || (guarTelNoList.length!= 0 && count == 0 ))
+				{
+					$this.params.bandOpenStatCd = 'OPEN';
+				}
+			}else if(bandOpenStatCd=='OPEN'){
+				if(guarTelNoList.length !=0 || count != 0){
+					$this.params.bandOpenStatCd = 'PRNT';
+				}
+			}
 
 			//값 검증
 			if (!this.isValid()) {

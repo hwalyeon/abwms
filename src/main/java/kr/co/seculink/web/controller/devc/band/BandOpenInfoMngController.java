@@ -163,6 +163,7 @@ public class BandOpenInfoMngController
 
 
 		System.out.println("params:"+params);
+
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		bandOpenInfoMngService.saveBandOpenInfoDetl(params);
