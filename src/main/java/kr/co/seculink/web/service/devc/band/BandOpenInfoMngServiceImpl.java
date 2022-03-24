@@ -88,7 +88,11 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 				if ("C".equals(info.get("crud")))
 				{
 					if (exists == null ) {
+						//grid 가 null 이면 bandId 가 존재하지 않기 때문에 params의 bandId 값을 세팅
+						info.put("bandId",(String)params.get("bandId"));
+
 						saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
+						System.out.println("info:"+info);
 					}else{
 						throw new BizException("ECOM999", new String[]{"이미 등록된 보호자 번호입니다."});
 					}
@@ -109,6 +113,10 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 			saveCnt += dao.update("devc.band.bandOpenInfoMng.updateTsBandInfoList", params);
 		} else if ("D".equals(params.get("crud"))) {
 			saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTsBandInfoList", params);
+			//밴드_상세 테이블 삭제 : Grid -버튼 아닌 모달창 삭제 버튼 선택 시 일괄 삭제
+			for(Map<String,Object> info:gridData){
+				saveCnt += dao.delete("devc.band.bandOpenInfoMng.deleteTmBandSpecList", info);
+			}
 		}
 		if (saveCnt == 0) {
 			throw new BizException("ECOM999", new String[]{"밴드정보 저장이 실패하였습니다."});

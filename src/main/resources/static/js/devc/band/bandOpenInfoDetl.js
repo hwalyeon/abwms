@@ -111,9 +111,9 @@ let bandOpenInfoDetl = new Vue({
 				{name: "crud"           , index: "crud"           , label: "crud"		    , hidden: true },
 				{name: "bandId"         , index: "bandId"         , label: "밴드ID"         , hidden: true },
 				{name: "guarTelNoTemp"  , index: "guarTelNoTemp"  , label: "보호자 전화번호" , hidden: true },
-				{name: "guarNo"         , index: "guarNo"         , label: "보호자 번호"     , width: 50     , align: "center"  , formatter: function(cellValue, options, rowObject){
+				{name: "guarNo"         , index: "guarNo"         , label: "보호자 번호"     , width: 50     , align: "center"  , function(cellValue, options, rowObject){
 				        if(WebUtil.isNull(cellValue)) return ''; else return cellValue}},
-				{name: "guarNm"     , index: "guarNm"    , label: "보호자 이름" 	  , width: 50 , align: "center", formatter: function(cellValue, options, rowObject){
+				{name: "guarNm"     , index: "guarNm"    , label: "보호자 이름" 	  , width: 50 , align: "center", function(cellValue, options, rowObject){
 						if(WebUtil.isNull(cellValue)) return ''; else return cellValue}},
 				{name: "guarTelNo"  , index: "guarTelNo" , label: "보호자 전화번호" , width: 80 , align: "center", editable:true , editrules:{number:true}}
 			];
@@ -353,35 +353,25 @@ let bandOpenInfoDetl = new Vue({
 			//밴드 모델코드 값 세팅
 			$this.params.bandMdlCd = ($this.params.bandId).substr(3,1);
 
-
-
 			//params에 gridData값 세팅
 			$this.params.gridData = commonGridGetDataNew($("#guarTelNo_list"));
 
 
-			if($this.params.gridData != null)
-			{
-				for(var i=0; $this.params.gridData.length > i; i++ ){
 
-					$this.params.gridData[i].bandId=$this.params.bandId;
-				}
-			}
+			//보호자 목록 값 유무에 따른 개통상태코드 값 변경
 
-
-			//보호자 목록에 따른 '밴드_개통_상태_코드' 변경
-
-			//jqGrid 값 전체 가져오기
+			//1.jqGrid 값 전체 가져오기(crud 변경 없는 경우도 포함하기 위해해)
 			let guarTelNoList = $("#guarTelNo_list").jqGrid("getRowData");
-			//$this.params.생략을 위한 변수 선언
+
+			//2.$this.params.생략을 위한 변수 선언
 			let bandOpenStatCd = $this.params.bandOpenStatCd;
 
-            //crud='C', crud='U' 값 찾기
+            //3.crud='C', crud='U' 값 존재 시 count
 			let filteredCrudC = _.filter(guarTelNoList, function(data, index) {return data.crud === 'C';});
 			let filteredCrudU = _.filter(guarTelNoList, function(data, index) {return data.crud === 'U';});
-
 			let count = filteredCrudC.length+filteredCrudU.length;
 
-            //보호자 목록 값 유무에 따른 개통상태코드 값 변경
+			//4.조건 부여
 			if(bandOpenStatCd == 'PRNT'){
 				if(guarTelNoList.length==0 || (guarTelNoList.length!= 0 && count == 0 ))
 				{
@@ -392,6 +382,8 @@ let bandOpenInfoDetl = new Vue({
 					$this.params.bandOpenStatCd = 'PRNT';
 				}
 			}
+
+			console.log($this.params);
 
 			//값 검증
 			if (!this.isValid()) {
@@ -421,15 +413,6 @@ let bandOpenInfoDetl = new Vue({
 			$this.params.crud     = 'D';
 			$this.params.gridData = $("#guarTelNo_list").jqGrid("getRowData");
 
-            //행 삭제 버튼 클릭 없이 삭제 진행 시 gridData.crud 값 삽입
-			if($this.params.gridData != null)
-			{
-				for(var i=0; $this.params.gridData.length > i; i++ ){
-
-					$this.params.gridData[i].crud='D';
-				}
-			}
-
             AjaxUtil.post({
                 url: "/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab",
                 param: $this.params,
@@ -454,7 +437,7 @@ let bandOpenInfoDetl = new Vue({
 				bandYtypCd     : '' ,  //밴드_출고_년월
 				bandMdlCd      : '' ,  //밴드_모델_코드
 				telNo          : '' ,  //밴드_전화_번호
-				bandOpenStatCd : '' ,  //밴드_개통_상태_코드
+				bandOpenStatCd : 'OPEN' ,  //밴드_개통_상태_코드
 				blthId         : '' ,  //블루투스_ID
 				apiUrlGramNo   : '' ,  //API_URL_전문_번호
 				apiUrlDttm     : '' ,  //API_URL_일시

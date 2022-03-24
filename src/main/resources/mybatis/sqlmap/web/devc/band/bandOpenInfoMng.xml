@@ -74,6 +74,7 @@
 	<!--밴드/개통정보_보호자_전화번호_리스트 조회 -->
 	<select id="selectBandOpenInfoGuarTelNoList"	parameterType="java.util.Map" resultType="MybatisMap">
 		select    TGB.GUAR_NO         -- 보호자_번호
+		        , TBS.BAND_ID
 				, TGB.GUAR_NM         -- 보호자_명
 				, TBS.GUAR_TEL_NO     -- 보호자_전화_번호
 				, TBS.GUAR_TEL_NO     AS GUAR_TEL_NO_TEMP-- 보호자_전화_번호
