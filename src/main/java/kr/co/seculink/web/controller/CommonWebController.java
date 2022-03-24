@@ -156,4 +156,7 @@ public class CommonWebController {
 	@RequestMapping("/svcStnd/act/fatActStndMng.pg")
 	public String getSvcStndActFatActStndMng() {return "svcStnd/act/fatActStndMng";}
 
+	//위험감정 발생이력
+	@RequestMapping("/oper/dgem/dgemHist.pg")
+	public String getOperDgemDgemHist() {return "oper/dgem/dgemHist";}
 }
