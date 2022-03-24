@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout/defaultLayout}">
+<body th:remove="tag">
+<div class="modal fade" id="locSearchDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog-wrap">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 500px; padding-bottom: 20px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="ibox-title">
+                        <i class="fa fa-title-bar"></i>
+                        <h5>학교 정보 조회</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="ibox-content border-style_none">
+                        <table class="table table-bordered table_view">
+                            <colgroup>
+                                <col class="col-xs-4" />
+                                <col class="col-xs-8" />
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <th scope="row">대분류</th>
+                                <td>
+                                    <select id="wordHead1" name="wordHead1" class="form-control" v-model="params.wordHead1" @change="changeWordHead1()">
+                                        <option value="">전체</option>
+                                        <option v-for="item in code.wordHead1List" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">중분류</th>
+                                <td>
+                                    <select id="wordHead2" name="wordHead2" class="form-control" v-model="params.wordHead2" @change="changeWordHead2()">
+                                        <option value="">전체</option>
+                                        <option v-for="item in code.wordHead2ListFilter" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">장소명</th>
+                                <td>
+                                    <input id="addrSpec" type="text" name ="addrSpec" class="form-control" v-model="params.addrSpec">
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 결과 리스트 영역 -->
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="form-group">
+                            <div class="float_left">
+                                <div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
+                                    <i class="fa fa-title-bar"></i>
+                                    <h5>학생정보 목록</h5>
+                                </div>
+                            </div>
+                            <div class="clear_both"></div>
+                        </div>
+                        <div class="form-group">
+                            <div id="locsearch_list_wrapper">
+                                <table id="locsearch_list"></table>
+                                <div id="locsearch_pager_list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="">
+                    <div class="text-center">
+                        <div class="disp_in_block width_per_20 mg_right_15">
+                            <button type="button" class="btn btn-w-m btn-primary" v-on:click="searchLocInfoList(true)"><span>조회</span></button>
+                        </div>
+                        <div class="disp_in_block width_per_20">
+                            <input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

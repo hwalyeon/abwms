@@ -94,10 +94,10 @@ public class locInfoMngController
 		List<Map<String, String>> result = locInfoMngService.searchLocInfoSpec(params);
 		rtnMap.put("result", result);
 
-//		if ( !GEUtil.isEmpty(params.get("paging")) ) {
-//			params.put("paging", "N");
-//			vo.setTotalCount(locInfoMngService.searchLocInfoSpec(params).size());
-//		}
+		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+			params.put("paging", "N");
+			vo.setTotalCount(locInfoMngService.searchLocInfoSpec(params).size());
+		}
 
 		vo.setRtnData(rtnMap, params);
 

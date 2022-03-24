@@ -191,10 +191,15 @@ let dgemHist = new Vue({
             $this.params.stdtNm = data.stdtNm;
             $this.params.guarNo = data.guarNo;
             $this.params.guarNm = data.guarNm;
+            $this.params.locNm  = data.locNm;
         },
         stdtGuarDetlPopup: function() {
             stdtGuarDetl.initialize();
             console.log("테스트는 성공 ㅋ");
+        },
+
+        locSearchDetlPopup: function() {
+            locSearchDetl.initialize();
         },
 
         stdtInfoDetlPopup: function(stdtNo, guarNo) {

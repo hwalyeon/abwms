@@ -10,10 +10,10 @@ spring:
       on-profile: local, default
   datasource:
     hikari:
-#      driver-class-name: org.postgresql.Driver
-      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-#      jdbc-url: jdbc:postgresql://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dsv?currentSchema=absv
-      jdbc-url: jdbc:log4jdbc:postgresql://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dsv?currentSchema=absv
+      driver-class-name: org.postgresql.Driver
+#      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+      jdbc-url: jdbc:postgresql://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dsv?currentSchema=absv
+#      jdbc-url: jdbc:log4jdbc:postgresql://abd01.cluster-czdogjjomgak.ap-northeast-2.rds.amazonaws.com:5432/abd01dsv?currentSchema=absv
       username: masteraccount
       password: TLZBFLDZM1!
   servlet:

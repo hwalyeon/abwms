@@ -154,7 +154,11 @@
 						TLIB.UPT_TM,
 						TLIB.UPT_USER_ID
 				ORDER BY TLIB.LOC_NO
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex}
+		</if>
 				) A
+
 	</select>
 
 	<!-- 위치정보_관리_리스트_상세정보_조회-->
@@ -256,7 +260,11 @@
 						TLIB.UPT_DT,
 						TLIB.UPT_TM,
 						TLIB.UPT_USER_ID
+					<if test=' paging == "Y" '>
+						LIMIT ${rowCount} OFFSET ${currentIndex}
+					</if>
 				) A
+
 	</select>
 
 	<!--TS_LOC_INFO_BASE 인서트-->

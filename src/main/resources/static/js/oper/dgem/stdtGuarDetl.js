@@ -76,6 +76,7 @@ let stdtGuarDetl = new Vue({
 				ondblClickRow: function(rowId, status, e) {
 					let item = $('#stdtguar_list').jqGrid('getRowData', rowId);
 					dgemHist.setData(item);
+					console.log(item);
 					closeModal($('#stdtGuarDetlPopup'));
 				},
 				gridComplete: function(rowId, rowObject) {
