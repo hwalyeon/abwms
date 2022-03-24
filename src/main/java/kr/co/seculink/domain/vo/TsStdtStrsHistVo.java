@@ -34,11 +34,11 @@ public class TsStdtStrsHistVo implements Serializable {
 	/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	private String physStrsStatCd;
 
-	/* strs_lrgeparty_pnt 스트레스_대처_점수 numeric(null) */
-	private double strsLrgepartyPnt;
+	/* strs_cope_pnt 스트레스_대처_점수 numeric(null) */
+	private double strsCopePnt;
 
-	/* strs_lrgeparty_stat_cd 스트레스_대처_상태_코드 character varying(20) */
-	private String strsLrgepartyStatCd;
+	/* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
+	private String strsCopeStatCd;
 
 	/* avg_hbit_cnt 평균_심박_수 numeric(null) */
 	private double avgHbitCnt;
@@ -210,34 +210,34 @@ public class TsStdtStrsHistVo implements Serializable {
 		this.physStrsStatCd = physStrsStatCd;
 	}
 	/**
-	 * Get strs_lrgeparty_pnt 스트레스_대처_점수 numeric(null)
-	 * @Return double strsLrgepartyPnt
+	 * Get strs_cope_pnt 스트레스_대처_점수 numeric(null)
+	 * @Return double strsCopePnt
 	 */
-	public double getStrsLrgepartyPnt() {
-		return this.strsLrgepartyPnt;
+	public double getStrsCopePnt() {
+		return this.strsCopePnt;
 	}
 	
 	/**
-	 * Set strs_lrgeparty_pnt 스트레스_대처_점수 numeric(null)
-	 * @Param double strsLrgepartyPnt
+	 * Set strs_cope_pnt 스트레스_대처_점수 numeric(null)
+	 * @Param double strsCopePnt
 	 */
-	public void setStrsLrgepartyPnt(double strsLrgepartyPnt) {
-		this.strsLrgepartyPnt = strsLrgepartyPnt;
+	public void setStrsCopePnt(double strsCopePnt) {
+		this.strsCopePnt = strsCopePnt;
 	}
 	/**
-	 * Get strs_lrgeparty_stat_cd 스트레스_대처_상태_코드 character varying(20)
-	 * @Return String strsLrgepartyStatCd
+	 * Get strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20)
+	 * @Return String strsCopeStatCd
 	 */
-	public String getStrsLrgepartyStatCd() {
-		return this.strsLrgepartyStatCd;
+	public String getStrsCopeStatCd() {
+		return this.strsCopeStatCd;
 	}
 	
 	/**
-	 * Set strs_lrgeparty_stat_cd 스트레스_대처_상태_코드 character varying(20)
-	 * @Param String strsLrgepartyStatCd
+	 * Set strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20)
+	 * @Param String strsCopeStatCd
 	 */
-	public void setStrsLrgepartyStatCd(String strsLrgepartyStatCd) {
-		this.strsLrgepartyStatCd = strsLrgepartyStatCd;
+	public void setStrsCopeStatCd(String strsCopeStatCd) {
+		this.strsCopeStatCd = strsCopeStatCd;
 	}
 	/**
 	 * Get avg_hbit_cnt 평균_심박_수 numeric(null)
