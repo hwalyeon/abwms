@@ -7,13 +7,13 @@ import java.io.Serializable;
  */
 public class TiStrsStndVo implements Serializable {
 
-	/* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
-	private String mentStrsStatCd;
+	/* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+	private String mindStrsStatCd;
 
 	/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	private String physStrsStatCd;
 
-	/* strs_judg_cntn 스트레스_판정_내용 text(null) */
+	/* strs_judg_cntn 스트레스_판정_내용 character varying(4000) */
 	private String strsJudgCntn;
 
 	/* reg_dt 등록_일자 character(8) */
@@ -36,19 +36,19 @@ public class TiStrsStndVo implements Serializable {
 
 
 	/**
-	 * Get ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
-	 * @Return String mentStrsStatCd
+	 * Get mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
+	 * @Return String mindStrsStatCd
 	 */
-	public String getMentStrsStatCd() {
-		return this.mentStrsStatCd;
+	public String getMindStrsStatCd() {
+		return this.mindStrsStatCd;
 	}
 	
 	/**
-	 * Set ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
-	 * @Param String mentStrsStatCd
+	 * Set mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20)
+	 * @Param String mindStrsStatCd
 	 */
-	public void setMentStrsStatCd(String mentStrsStatCd) {
-		this.mentStrsStatCd = mentStrsStatCd;
+	public void setMindStrsStatCd(String mindStrsStatCd) {
+		this.mindStrsStatCd = mindStrsStatCd;
 	}
 	/**
 	 * Get phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20)
@@ -66,7 +66,7 @@ public class TiStrsStndVo implements Serializable {
 		this.physStrsStatCd = physStrsStatCd;
 	}
 	/**
-	 * Get strs_judg_cntn 스트레스_판정_내용 text(null)
+	 * Get strs_judg_cntn 스트레스_판정_내용 character varying(4000)
 	 * @Return String strsJudgCntn
 	 */
 	public String getStrsJudgCntn() {
@@ -74,7 +74,7 @@ public class TiStrsStndVo implements Serializable {
 	}
 	
 	/**
-	 * Set strs_judg_cntn 스트레스_판정_내용 text(null)
+	 * Set strs_judg_cntn 스트레스_판정_내용 character varying(4000)
 	 * @Param String strsJudgCntn
 	 */
 	public void setStrsJudgCntn(String strsJudgCntn) {
