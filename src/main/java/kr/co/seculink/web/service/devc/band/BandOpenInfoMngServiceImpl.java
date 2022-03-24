@@ -29,6 +29,14 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		return result;
 	}
 
+	//밴드/개통정보_보호자_전화번호_리스트 조회
+	public List<Map<String, String>> searchBandOpenInfoGuarTelNoList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("devc.band.bandOpenInfoMng.selectBandOpenInfoGuarTelNoList", params);
+
+		return result;
+	}
+
 	//밴드ID 중복 조회
 	public Map<String, String> searchDupBandId(Map<String, String> params) throws BizException
 	{
@@ -74,8 +82,6 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 		for(Map<String,Object> info:gridData)
 			{
 				log.debug("crud         : " + info.get("crud"));
-				Object bandId = params.get("bandId");
-				info.put("bandId",bandId);
 
 				TsBandSpecVo exists = dao.selectOne("TS_BAND_SPEC.select", info);
 
@@ -108,5 +114,6 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 			throw new BizException("ECOM999", new String[]{"밴드정보 저장이 실패하였습니다."});
 		}
 	}
+
 }
 	

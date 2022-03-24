@@ -71,6 +71,25 @@
 	</select>
 
 
+	<!--밴드/개통정보_보호자_전화번호_리스트 조회 -->
+	<select id="selectBandOpenInfoGuarTelNoList"	parameterType="java.util.Map" resultType="MybatisMap">
+		select    TGB.GUAR_NO         -- 보호자_번호
+				, TGB.GUAR_NM         -- 보호자_명
+				, TBS.GUAR_TEL_NO     -- 보호자_전화_번호
+				, TBS.GUAR_TEL_NO     AS GUAR_TEL_NO_TEMP-- 보호자_전화_번호
+		from      TS_BAND_INFO TBI
+				  inner join TS_BAND_SPEC TBS
+				  on TBI.BAND_ID = TBS.BAND_ID
+				  left outer join TM_GUAR_BASE TGB
+				  on TBS.GUAR_TEL_NO = TGB.GUAR_TEL_NO
+				  where     1=1
+				  and       TBI.BAND_ID = #{bandId}
+		ORDER BY  TGB.GUAR_NO, TGB.GUAR_NM
+		          <if test=' paging == "Y" '>
+			      LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+
+
 	<insert id="insertTsBandInfoList" parameterType="java.util.Map">
 		INSERT INTO TS_BAND_INFO
 		(

@@ -47,6 +47,25 @@ public class BandOpenInfoMngController
 		return vo;
 	}
 
+	//밴드/개통정보_보호자_전화번호_리스트 조회
+	@ResponseBody
+	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfoGuarTelNoList.ab")
+	public RtnMsg searchBandOpenInfoGuarTelNoList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = bandOpenInfoMngService.searchBandOpenInfoGuarTelNoList(params);
+
+		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List)bandOpenInfoMngService.searchBandOpenInfoGuarTelNoList(params)).size());
+		}
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
 	//밴드/개통 정보 목록_리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/devc/band/bandOpenInfoMng/searchBandOpenInfoList/excel.ab")
@@ -142,6 +161,8 @@ public class BandOpenInfoMngController
 	@RequestMapping("/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab")
 	public RtnMsg saveBandOpenInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 
+
+		System.out.println("params:"+params);
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		bandOpenInfoMngService.saveBandOpenInfoDetl(params);
