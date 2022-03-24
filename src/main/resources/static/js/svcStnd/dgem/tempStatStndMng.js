@@ -178,43 +178,25 @@ let tempStatStndMng = new Vue({
 
             if(gridData.length > 0)
             {
-                /*for (let data in gridData)
+                for (let data in gridData)
                 {
                     if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
                     {
-                    if(WebUtil.isNull(gridData[data].currFatJudgCd)){
-                        Swal.alert(["현재비만판정코드 필수 입력입니다.", 'warning']);
+                    if(WebUtil.isNull(gridData[data].ageYcnt)){
+                        Swal.alert(["나이년수는 필수 입력입니다.", 'warning']);
                         return false;
-                    }if(WebUtil.isNull(gridData[data].prdtFatJudgCd)){
-                        Swal.alert(["예측비만판정코드 필수 입력입니다.", 'warning']);
+                    }if(WebUtil.isNull(gridData[data].tempValFr)){
+                        Swal.alert(["체온값 FORM은 필수 입력입니다.", 'warning']);
                         return false;
-                    }if(WebUtil.isNull(gridData[data].sexCd)){
-                        Swal.alert(["성별 코드 필수 입력입니다.", 'warning']);
+                    }if(WebUtil.isNull(gridData[data].tempValTo)){
+                        Swal.alert(["체온값 TO는 필수 입력입니다.", 'warning']);
                         return false;
-                    }if(WebUtil.isNull(gridData[data].ageYcnt)){
-                        Swal.alert(["나이년수 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].calQtyFr)){
-                        Swal.alert(["칼로리량 FORM 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].calQtyTo)){
-                        Swal.alert(["칼로리량 TO 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].ddCalQty)){
-                        Swal.alert(["일일 칼로리량 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].palCd)){
-                        Swal.alert(["신체활동수준 코드 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].nutrCd)){
-                        Swal.alert(["영양소 코드 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].nutrStatCd)){
-                        Swal.alert(["영양섭취 상태 코드 필수 입력입니다.", 'warning']);
+                    }if(WebUtil.isNull(gridData[data].tempStatCd)){
+                        Swal.alert(["심박상태 코드는 필수 입력입니다.", 'warning']);
                         return false;
                     }
                     }
-                }*/
+                }
             }
             else
             {

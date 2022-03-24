@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{common/layout/defaultLayout}">
+<head>
+	<meta charset="UTF-8">
+	<title>사용자</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="wrapper-content" id="dgemHist">
+
+		<!-- 검색조건 영역 -->
+		<div class="ibox m-b-sm">
+			<div class="ibox-title">
+				<i class="fa fa-title-bar"></i>
+				<h5>검색조건</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-xs-1 control-label" >위험감정 일자</label>
+						<div class="col-xs-1" style="width: 10%">
+							<input type="date" name="dgemDt" class="form-control" v-model="params.dgemDt">
+						</div>
+						<div class="col-xs-1" style="width: 10%">
+							<input type="date" name="dgemDt" class="form-control" v-model="params.dgemDt">
+						</div>
+						<!--이번 달-->
+						<div class="col-xs-1"  style="padding:0px; margin-right:5px;" >
+							<select id="mmDd" name="mmDd" class="form-control" style=" margin-right:15px;" v-model="params.mmDd" v-on:change="mmDdSelect">
+								<option value="">전체</option>
+								<option v-for="item in code.mmDdList" v-bind:value="item.value" v-text="item.text"></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label" style="padding-left:0px">위험감정 상태</label>
+						<div class="col-xs-1"  style="padding:0px">
+							<input type="text" name="dgemStatCd" class="form-control" v-model="params.dgemStatCd">
+						</div>
+						<label class="col-xs-1 control-label">보호자명</label>
+						<div class="col-xs-1"  style="padding:0px">
+							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
+						</div>
+						<label class="col-xs-1 control-label" style="margin-left:15px;">보호자번호</label>
+						<div class="col-xs-1" style="padding:0px;">
+							<input type="number" name="guarNo" class="form-control" v-model="params.guarNo">
+						</div>
+						<div>
+							<button type="button" id="btn1" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="clear_both"></div>
+						<label class="col-xs-1 control-label">심박상태 코드</label>
+						<div class="col-xs-1" style="width: 10%">
+							<input type="text" name="hbitStatCd" class="form-control" v-model="params.hbitStatCd">
+						</div>
+						<label class="col-xs-1 control-label" style="width: 10%" >체온상태 코드</label>
+						<div class="col-xs-1"  style="padding:0px; margin-right:5px;" >
+							<input type="text" name="tempStatCd" class="form-control" v-model="params.tempStatCd">
+						</div>
+						<label class="col-xs-1 control-label"  style="padding-left:0px">장소분류 코드</label>
+						<div class="col-xs-1" style="padding:0px" >
+							<input type="text" name="plcClssCd" class="form-control"  v-model="params.plcClssCd">
+						</div>
+						<label class="col-xs-1 control-label">학생명</label>
+						<div class="col-xs-1" style="padding:0px" >
+							<input type="text" name="stdtNm" class="form-control"  v-model="params.stdtNm">
+						</div>
+						<label class="col-xs-1 control-label" style="margin-left:15px;">학생번호</label>
+						<div class="col-xs-1"  style="padding:0px">
+							<input type="number" name="stdtNo" class="form-control" v-model="params.stdtNo">
+						</div>
+						<div>
+							<button type="button" id="btn2" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="clear_both">
+							<label class="col-xs-1 control-label">학교명</label>
+							<div class="col-xs-1" style="width: 10% ">
+								<input type="text" name="locNm" class="form-control"  v-model="params.locNm">
+							</div>
+						</div>
+						<button type="button" id="btn3" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" style="margin-left:-6px" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
+					</div>
+					<div class="form-group mg_none">
+						<div class="text-center">
+							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
+								<span class="glyphicon glyphicon-refresh"> 초기화</span>
+							</button>&nbsp;
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchDgemHistList(true)"><span>조회</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 검색조건 영역 -->
+
+		<!-- 결과 리스트 영역 -->
+		<div class="ibox">
+			<div class="ibox-content">
+				<div class="form-group">
+					<div class="float_left">
+						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
+							<i class="fa fa-title-bar"></i>
+							<h5>학생정보 목록</h5>
+						</div>
+					</div>
+					<div class="float_right">
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#stdtRegDetlPopup" v-on:click="stdtRegDetlPopup">학생등록</button>
+						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+					</div>
+					<div class="clear_both"></div>
+				</div>
+				<div class="form-group">
+					<div id="grid_list_wrapper">
+						<table id="grid_list"></table>
+						<div id="grid_pager_list"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:insert="~{oper/dgem/stdtGuarDetl :: body}"></div> <!-- 학생 및 보호자 번호 검색 팝업 -->
+</div>
+<section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/oper/dgem/dgemHist.js}"></script> <!-- 위험감정 발생이력 -->
+	<script type="text/javascript" th:src="@{/js/oper/dgem/stdtGuarDetl.js}"></script> <!-- 학생 및 보호자 번호 검색 팝업 -->
+</section>
+</body>
+</html>
