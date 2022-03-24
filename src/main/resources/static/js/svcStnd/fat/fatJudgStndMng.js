@@ -146,7 +146,7 @@ let fatJudgStndMng = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                mentStrsStatCd:'',
+                mindStrsStatCd:'',
                 physStrsStatCd:'',
                 blngNm        :'',
                 telNo         :'',

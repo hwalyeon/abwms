@@ -20,7 +20,7 @@
                    ,trim(upt_user_id) /* upt_user_id 수정_사용자_ID character varying(20) */ AS upt_user_id
         FROM   ti_fat_judg_stnd
         WHERE
-            fat_judg_cd LIKE CONCAT (#{fatJudgCd}, '%') /* ment_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+            fat_judg_cd LIKE CONCAT (#{fatJudgCd}, '%')
     </select>
 
     <!-- 비만판정기준 insert -->

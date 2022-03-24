@@ -102,7 +102,7 @@ public class StrsStndMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<String>();
-			data.add(String.valueOf(info.get("mentStrsStatCd")));
+			data.add(String.valueOf(info.get("mindStrsStatCd")));
 			data.add(String.valueOf(info.get("mentStrsStatNm")));
 			data.add(String.valueOf(info.get("physStrsStatCd")));
 			data.add(String.valueOf(info.get("physStrsStatNm")));
