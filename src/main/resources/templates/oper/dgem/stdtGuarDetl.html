@@ -46,6 +46,12 @@
 									<input type="text" id="blnNm" name="blngNm"  class="form-control" maxlength="100" v-model="params.guarNm"/>
 								</td>
 							</tr>
+							<tr>
+								<th scope="row">보호자 전화번호</th>
+								<td>
+									<input type="text" id="guarTelNo" name="guarTelNo"  class="form-control" maxlength="100" v-model="params.guarTelNo"/>
+								</td>
+							</tr>
 							</tbody>
 						</table>
 					</div>
@@ -76,7 +82,7 @@
 							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchStdtGuarList(true)"><span>조회</span></button>
 						</div>
 						<div class="disp_in_block width_per_20">
-							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+							<input type="button" data-dismiss="modal" class="form-control" v-on:click="resetSearchParam()" th:value="닫기">
 						</div>
 					</div>
 				</div>

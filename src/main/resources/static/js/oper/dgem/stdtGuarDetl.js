@@ -108,6 +108,20 @@ let stdtGuarDetl = new Vue({
 			}).trigger("reloadGrid");
 
 		},
+		resetSearchParam: function () {
+			let $this = this;
+			$this.params = {
+				stdtNo: '',
+				stdtNm: '',
+				guarNo: '',
+				guarNm: '',
+				guarTelNo: '',
+				totalCount: 0,
+				rowCount: 30,
+				currentPage: 1,
+				currentIndex: 0
+			}
+		}
 	},
 	computed: {
 

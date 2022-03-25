@@ -45,7 +45,7 @@ let locSearchDetl = new Vue({
             setTimeout(function()
             {
                 $this.initGrid();
-                // $this.searchLocInfoList(true);
+                $this.searchLocInfoList(true);
             },300);
         },
         initCodeList : function() {
@@ -61,8 +61,8 @@ let locSearchDetl = new Vue({
             let $this = this;
 
             let colModels = [
-                {name: "locNo"          , index: "locNo"        , label: "위치번호"     , width: 45         , align: "center"},
-                {name: "locNm"          , index: "locNm"        , label: "위치명"       , width: 100        , align: "left"  },
+                {name: "locNo"          , index: "locNo"        , label: "학교번호"     , width: 45         , align: "center"},
+                {name: "locNm"          , index: "locNm"        , label: "학교명"       , width: 100        , align: "left"  },
                 {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소구분"     , width: 46         , align: "center"},
                 {name: "plcNm"          , index: "plcNm"        , label: "장소구분상세"  , width: 63         , align: "center"},
             ];
@@ -191,6 +191,15 @@ let locSearchDetl = new Vue({
                 }
             })
         },
+        resetSearchParam: function() {
+            let $this = this;
+            $this.params = {
+                locNm: '',
+                rowCount     : 30,
+                currentPage : 1  ,
+                currentIndex: 0
+            }
+        }
     },
     computed: {
 
@@ -200,8 +209,8 @@ let locSearchDetl = new Vue({
     },
     mounted: function() {
         let self = this;
-        // $(document).ready(function() {
-        //     self.initialize();
-        // });
+        $(document).ready(function() {
+            self.initialize();
+        });
     }
 });

@@ -195,7 +195,6 @@ let dgemHist = new Vue({
         },
         stdtGuarDetlPopup: function() {
             stdtGuarDetl.initialize();
-            console.log("테스트는 성공 ㅋ");
         },
 
         locSearchDetlPopup: function() {
