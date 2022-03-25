@@ -449,9 +449,9 @@
              ,tssh.strs_hist_seq
              ,tssh.hbit_mdan  as strt_hbit_mdan
              ,tssh.avg_hbit_cnt
-             ,tssh.ment_strs_pnt
-             ,tssh.ment_strs_stat_cd
-             ,fn_getcdnm('STRS_STAT_CD' , tssh.ment_strs_stat_cd) as ment_strs_stat_nm
+             ,tssh.mind_strs_pnt
+             ,tssh.mind_strs_stat_cd
+             ,fn_getcdnm('STRS_STAT_CD' , tssh.mind_strs_stat_cd) as mind_strs_stat_nm
              ,tssh.phys_strs_pnt
              ,tssh.phys_strs_stat_cd
              ,fn_getcdnm('STRS_STAT_CD' , tssh.phys_strs_stat_cd) as phys_strs_stat_nm
@@ -501,9 +501,9 @@
          ,gfix.curr_eval_cntn
          ,gfix.prdt_fat_judg_nm
          ,strs.avg_hbit_cnt
-         ,strs.ment_strs_pnt
-         ,strs.ment_strs_stat_cd
-         ,strs.ment_strs_stat_nm
+         ,strs.mind_strs_pnt
+         ,strs.mind_strs_stat_cd
+         ,strs.mind_strs_stat_nm
          ,strs.phys_strs_pnt
          ,strs.phys_strs_stat_cd
          ,strs.phys_strs_stat_nm

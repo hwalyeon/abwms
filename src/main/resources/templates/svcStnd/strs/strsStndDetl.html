@@ -24,9 +24,9 @@
 			                    <tr>
 			                        <th scope="row">정신적스트레스상태</th>
 			                        <td colspan="3">
-										<select id="mentStrsStatCd" name="mentStrsStatCd" class="form-control" v-model="strsStndInfo.mentStrsStatCd" :disabled="strsStndInfo.crud=='U'">
+										<select id="mindStrsStatCd" name="mindStrsStatCd" class="form-control" v-model="strsStndInfo.mindStrsStatCd" :disabled="strsStndInfo.crud=='U'">
 											<option value="">선택</option>
-											<option v-for="item in code.mentStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+											<option v-for="item in code.mindStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 										</select>
 			                        </td>
 			                    </tr>
@@ -35,7 +35,7 @@
 									<td colspan="3">
 										<select id="physStrsStatCd" name="physStrsStatCd" class="form-control" v-model="strsStndInfo.physStrsStatCd" :disabled="strsStndInfo.crud=='U'">
 											<option value="">선택</option>
-											<option v-for="item in code.mentStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+											<option v-for="item in code.mindStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 										</select>
 									</td>
 								</tr>

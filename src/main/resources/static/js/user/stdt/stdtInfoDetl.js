@@ -2,7 +2,43 @@ let stdtInfoDetl = new Vue({
     el: "#stdtInfoDetlPopup",
     data: {
 		stdtInfo: {
-    		crud: 'C'
+    		crud      : 'C',
+			stdtNo    : '',
+			stdtNm    : '',
+			eorgLocNm : '',
+			sgrdCd    : '',
+			bithDt    : '',
+			raceDivCd : '',
+			sexCd     : '',
+			hghtVal   : '',
+			wghtVal   : '',
+			wastVal   : '',
+			guarNo    : '',
+			guarNm    : '',
+			guarTelNo : '',
+			prntNo    : '',
+			prntMale  : '',
+			prntFemale : '',
+			bandId    : '',
+			bandTelNo : '',
+			bandStatNm : '',
+			bandCommDttm : '',
+			plcClssNm : '',
+			locNm     : '',
+			latLonVal : '',
+			occrDttm  : '',
+			dgemStatNm : '',
+			locMesuDttm : '',
+			growJudgNm : '',
+			gfixUptDttm : '',
+			fatJudgNm : '',
+			prdtFatJudgNm : '',
+			gfixUptDttm : '',
+			avgHbitCnt : '',
+			mentStrsStatNm : '',
+			physStrsStatNm : '',
+			strsCopeStatNm : '',
+			strsUptDttm : ''
     	},
 		code: {
 			 sexCdList: []
@@ -218,7 +254,7 @@ let stdtInfoDetl = new Vue({
 			let dataStrs = {
 				labels : ['정신','신체','대처능력'],
 				datasets: [{
-					data: [$this.stdtInfo.mentStrsPnt ,$this.stdtInfo.physStrsPnt , $this.stdtInfo.strsCopePnt],
+					data: [$this.stdtInfo.mindStrsPnt ,$this.stdtInfo.physStrsPnt , $this.stdtInfo.strsCopePnt],
 					backgroundColor: ['#2a99ec' , '#f3e24a','#65D965'],
 					borderColor : ['#2a99ec', '#f3e24a', '#65D965']
 				}]
@@ -388,7 +424,43 @@ let stdtInfoDetl = new Vue({
 		resetParam: function() {
 			let $this = this;
 			$this.stdtInfo = {
-				crud: 'C'
+				crud    : 'C',
+				stdtNo  : '',
+				stdtNm  : '',
+				eorgLocNm : '',
+				sgrdCd  : '',
+				bithDt  : '',
+				raceDivCd : '',
+				sexCd   : '',
+				hghtVal : '',
+				wghtVal : '',
+				wastVal : '',
+				guarNo  : '',
+				guarNm  : '',
+				guarTelNo : '',
+				prntNo  : '',
+				prntMale : '',
+				prntFemale : '',
+				bandId  : '',
+				bandTelNo : '',
+				bandStatNm  : '',
+				bandCommDttm : '',
+				plcClssNm : '',
+				locNm   : '',
+				latLonVal : '',
+				occrDttm : '',
+				dgemStatNm : '',
+				locMesuDttm : '',
+				growJudgNm : '',
+				gfixUptDttm : '',
+				fatJudgNm : '',
+				prdtFatJudgNm : '',
+				gfixUptDttm : '',
+				avgHbitCnt : '',
+				mentStrsStatNm : '',
+				physStrsStatNm : '',
+				strsCopeStatNm : '',
+				strsUptDttm : ''
 			}
 		}
 

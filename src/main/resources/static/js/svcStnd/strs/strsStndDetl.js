@@ -3,13 +3,13 @@ let strsStndDetl = new Vue({
     data: {
     	strsStndInfo: {
     		crud: 'C',
-			mentStrsStatCd:'',
+			mindStrsStatCd:'',
 			physStrsStatCd:'',
 			strsJudgCntn:''
     	},
 		summerNoteId1 : 'summerNoteId1',
  		code: {
-			mentStrsStatCdList: []
+			mindStrsStatCdList: []
 		}
 	},
 
@@ -25,19 +25,19 @@ let strsStndDetl = new Vue({
         },
         initCodeList: function() {
         	let $this = this;
-			$this.code.mentStrsStatCdList = [];
-			getCommonCodeList('STRS_STAT_CD',$this.code.mentStrsStatCdList);
+			$this.code.mindStrsStatCdList = [];
+			getCommonCodeList('STRS_STAT_CD',$this.code.mindStrsStatCdList);
         },
-        initPage: function(mentStrsStatCd, physStrsStatCd) {
+        initPage: function(mindStrsStatCd, physStrsStatCd) {
         	
         	let $this = this;
         	$this.resetstrsStndInfo();
 
         	
-        	if ( !WebUtil.isNull(mentStrsStatCd) || !WebUtil.isNull(physStrsStatCd))
+        	if ( !WebUtil.isNull(mindStrsStatCd) || !WebUtil.isNull(physStrsStatCd))
     		{
         		let params = {
-        			'mentStrsStatCd' : mentStrsStatCd ,
+        			'mindStrsStatCd' : mindStrsStatCd ,
 					'physStrsStatCd' : physStrsStatCd
         		}
         		
@@ -62,7 +62,7 @@ let strsStndDetl = new Vue({
         	
         	let $this = this;
         	
-        	if ( WebUtil.isNull($this.strsStndInfo.mentStrsStatCd) ) {
+        	if ( WebUtil.isNull($this.strsStndInfo.mindStrsStatCd) ) {
         		Swal.alert(['정신적스트레스상태를 입력하세요.', 'info']);
         		return false;
         	}
@@ -127,7 +127,7 @@ let strsStndDetl = new Vue({
 		resetstrsStndInfo: function() {
 			this.strsStndInfo = {
 				crud: 'C',
-				mentStrsStatCd: '',
+				mindStrsStatCd: '',
 				physStrsStatCd: '',
 				fatJudgNm: ''
 	    	}
