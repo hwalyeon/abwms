@@ -57,7 +57,7 @@
 						</div>
 					</div>
 					<div class="float_right">
-						<!--<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#userDetlPopup" v-on:click="regUserPop()">&nbsp;사용자등록</button> -->
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#foodInfoDetlPopup" v-on:click="foodInfoDetlPop(0)">&nbsp;식품등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
@@ -71,9 +71,10 @@
 			</div>
 		</div>
     </div>
-<!--    <div th:insert="~{set/userDetl :: body}"></div>-->
+    <div th:insert="~{svcStnd/food/foodInfoDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/svcStnd/food/foodInfoDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/svcStnd/food/foodInfoMng.js}"></script>
 </section>
 </body>

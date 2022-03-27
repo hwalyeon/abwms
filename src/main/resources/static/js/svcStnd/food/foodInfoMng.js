@@ -63,12 +63,15 @@ let foodInfoMng = new Vue({
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
                 {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
+                {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"},
+                {name: "foodInfoDetlPopup" , index: "foodInfoDetlPopup" , label: "상세정보보기", width: 50, align: "center",
+                    formatter: function(cellValue, options, rowObject) {
+                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="foodInfoMng.foodInfoDetlPop(\'' + rowObject.foodNo + '\')" value="상세보기" data-toggle="modal" data-target="#foodInfoDetlPopup" />';
+                    }
+                }
 
             ];
 
-        	console.log("1");
-  
             $("#user_list").jqGrid("GridUnload");
            	$("#user_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
@@ -87,14 +90,14 @@ let foodInfoMng = new Vue({
                     })
                 }
             }));
-            console.log("2");
+
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
         },
         searchFoodInfoList: function(isSearch) {
-            console.log("3");
+
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
-            console.log("4");
+
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
@@ -111,7 +114,7 @@ let foodInfoMng = new Vue({
                     }
                 }
             }).trigger("reloadGrid");
-            console.log("5");
+
 		},
         mentFoodInfoNmVal:function(){
             let $this = this;
@@ -137,6 +140,9 @@ let foodInfoMng = new Vue({
             });
         },
 
+        foodInfoDetlPop : function (foodNo){
+            foodInfoDetl.initPage(foodNo);
+        },
 
 		resetSearchParam: function() {
 			let $this = this;

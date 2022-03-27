@@ -8,5 +8,7 @@ import java.util.Map;
 public interface FoodInfoMngService
 {
 	public List<Map<String, String>> searchFoodInfoList(Map<String, String> params) throws BizException;
+
+    public void saveFoodInfo(Map<String, Object> params) throws BizException;
 }
 

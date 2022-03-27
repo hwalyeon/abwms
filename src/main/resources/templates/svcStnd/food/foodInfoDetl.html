@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:remove="tag">
+<div class="modal fade" id="foodInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog-wrap">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 850px; height: 775px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>식품별 영양소 정보</h5>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="ibox">
+						<div class="ibox-content border-style_none">
+							<table class="table table-bordered table_view">
+								<colgroup>
+									<col class="col-xs-2" />
+									<col class="col-xs-10" />
+								</colgroup>
+								<tbody>
+									<tr>
+										<th scope="row">식품번호</th>
+										<td>
+											<input type="text" name="foodNo" v-model="params.foodNo" class="form-control float_left width_per_100 ime-eng" readonly="true"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">식품대분류명</th>
+										<td>
+											<input type="text" name="foodLclsNm" v-model="params.foodLclsNm" class="form-control float_left width_per_100 ime-eng"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">식품중분류명</th>
+										<td>
+											<input type="text" name="foodMclsNm" v-model="params.foodMclsNm" class="form-control float_left width_per_100 ime-eng"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">식품명</th>
+										<td>
+											<input type="text" name="foodNm" v-model="params.foodNm" class="form-control float_left width_per_100 ime-eng"/>
+								       	</td>
+									</tr>
+									<tr>
+										<th scope="row">1회섭취용량</th>
+										<td>
+											<input type="text" name="qtimEatQty" v-model="params.otimEatQty" class="form-control float_left width_per_100 ime-eng"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">섭취단위코드</th>
+										<td>
+											<select id="eatUnitCd" name="eatUnitCd" class="form-control float_left width_per_100 ime-eng" v-model="params.eatUnitCd">
+												<option value="">선택</option>
+												<option v-for="item in code.eatUnitCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+											</select>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+            		</div>
+					<div class="ibox">
+						<div class="ibox-content border-style_none">
+							<div class="form-group">
+								<div id="foodNutrInfo_list_wrapper">
+									<table id="foodNutrInfo_list"></table>
+									<div id="foodNutrInfo_pager_list"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+            	<div class="modal-footer" style="">
+					<div class="text-center">
+						<div class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveInfo">저장</button>
+						</div>
+						<div v-if="params.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteInfo">삭제</button>
+						</div>
+						<div class="disp_in_block width_per_20">
+							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

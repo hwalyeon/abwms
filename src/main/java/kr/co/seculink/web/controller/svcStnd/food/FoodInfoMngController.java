@@ -4,8 +4,10 @@ import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
+import kr.co.seculink.web.service.svcStnd.food.FoodInfoMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,9 @@ public class FoodInfoMngController
 
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
+
+	@Autowired
+	private FoodInfoMngService foodInfoMngService;
 
 	@ResponseBody
 	@RequestMapping("/svcStnd/food/foodInfoMng/searchFoodInfoList.ab")
@@ -85,5 +90,41 @@ public class FoodInfoMngController
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/food/foodInfoMng//searchFoodElemList.ab")
+
+	public RtnMsg searchFoodElemList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = dao.selectList("svcStnd.food.foodInfoMng.searchFoodInfoList", params);
+		if(result != null && result.size() > 0) rtnMap.put("foodInfo", result.get(0));
+		else rtnMap.put("foodInfo", "");
+
+		List<Map<String, String>> gridList = dao.selectList("svcStnd.food.foodInfoMng.searchFoodElemList", params);
+		rtnMap.put("result", gridList);
+
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	@ResponseBody
+	@RequestMapping("/svcStnd/food/foodInfoMng//saveFoodInfo.ab")
+
+	public RtnMsg saveFoodInfo(@RequestBody(required = false) Map<String, Object> params) throws BizException
+	{
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		foodInfoMngService.saveFoodInfo(params);
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
 	}
 }
