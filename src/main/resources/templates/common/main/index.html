@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{common/layout/tabLayout}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:v-on="http://www.w3.org/1999/xhtml"
+	  xmlns:v-bind="http://www.w3.org/1999/xhtml"
+	  layout:decorate="~{common/layout/tabLayout}">
 <body>
     <div layout:fragment="content">
 		<div id="indexApp" class="animated" v-cloak>
@@ -27,14 +28,17 @@
 		               		<i class="fa fa-refresh"></i> <span>리로딩메시지</span>
 						</a> -->
 					</div>
-		            <ul class="nav navbar-top-links navbar-right">
-		            	<li>Hello {{searchAuthParam.userNm}}</li>
-		                <li>
-		                	<a href="#" v-on:click="logout">
-		                    	<i class="fa fa-sign-out"></i> 로그아웃
-							</a>
-						</li>
-					</ul>
+					<div class="form-group required">
+						<ul class="nav navbar-top-links navbar-right">
+							<button type="button" class="btn btn-w-m btn-primary mg_right_20" v-on:click="totMonStatPop()"><span>종합관제현황</span></button>
+							<li>Hello {{searchAuthParam.userNm}}</li>
+							<li>
+								<a href="#" v-on:click="logout">
+									<i class="fa fa-sign-out"></i> 로그아웃
+								</a>
+							</li>
+						</ul>
+					</div>
 				</nav>
 			</div>
 			<div class="row">
@@ -177,6 +181,12 @@
 					}
 				}
 			}, false);
+
+			function totMonStatPop() {
+				// http://127.0.0.1:28080//oper/cmon/totMonStat.pg
+				// http://127.0.0.1:28080//oper/cmon/totMonStatTemp.pg
+				window.open('/oper/cmon/totMonStatTemp.pg','title','height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
+			}
 
 		</script>
 	</section>

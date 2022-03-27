@@ -159,4 +159,13 @@ public class CommonWebController {
 	//위험감정 발생이력
 	@RequestMapping("/oper/dgem/dgemHist.pg")
 	public String getOperDgemDgemHist() {return "oper/dgem/dgemHist";}
+
+	//종합관제현황
+	@RequestMapping("/oper/cmon/totMonStat.pg")
+	public String getOperCmonTotMonStat() {return "oper/cmon/totMonStat";}
+
+	//종합관제현황 임시
+	@RequestMapping("/oper/cmon/totMonStatTemp.pg")
+	public String getOperCmonTotMonStatTemp() {return "oper/cmon/totMonStatTemp";}
+
 }

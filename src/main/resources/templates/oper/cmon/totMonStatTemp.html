@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:v-on="http://www.w3.org/1999/xhtml"
+	  layout:decorate="~{common/layout/defaultLayout}">
+<head>
+	<meta charset="UTF-8">
+	<title>사용자</title>
+	<style>
+		/*.form-group border-line {*/
+		/*	margin-bottom: 15px;*/
+		/*	border-width: 1px;*/
+		/*	border-color: #000000;*/
+		/*	border-style: solid;*/
+		/*}*/
+		.border-line {
+			border: 1px solid #e7e7e7;
+		}
+		.chart-padding-1 {
+			padding: 15px 0px;
+		}
+		.chart-padding-2{
+			padding: 15px 15px;
+		}
+	</style>
+</head>
+
+<body>
+<div layout:fragment="content">
+	<div class="wrapper-content" id="totMonStat">
+		<div class="ibox-content">
+
+			<div class="form-group">
+				로고
+			</div>
+			<div class="col-xs-2 border-line" style="padding-top: 15px;">
+				<div class="form-group">
+					<span class="float_left">가동 현황</span>
+					<span class="float_right">+ more</span>
+					<div class="col-xs-12 chart-padding-2 form-group border-line">
+						<div id=chartOperStat class ="float_left">
+							<canvas id="operStatChart" width="80" height="80">
+							</canvas>
+						</div>
+						<div id="operStatDetl">
+							<br>
+							<span class="col-xs-8"> 개통&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 200000 대</span>
+							<span class="col-xs-8"> 가동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 180000 대</span>
+							<span class="col-xs-8"> 무응답&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;20000 대</span>
+						</div>
+					</div>
+					<span class="float_left">개통 현황</span>
+					<span class="float_right">+ more</span>
+					<div class="col-xs-12 chart-padding-2 form-group border-line">
+						<div id=chartOpenStat class ="float_left">
+							<canvas id="openStatChart" width="80" height="80">
+							</canvas>
+						</div>
+						<div id="openStatDetl">
+							<br>
+							<span class="col-xs-8"> 밴드 개통&nbsp;: 500000 건</span>
+							<span class="col-xs-8"> 서류 제출&nbsp;: 300000 건</span>
+							<span class="col-xs-8"> 회원 가입&nbsp;: 200000 건</span>
+						</div>
+					</div>
+					<span class="float_left">헬스케어 활용율</span>
+					<span class="float_right">+ more</span>
+					<div class="col-xs-12 form-group border-line">
+						<div class="col-xs-12 chart-padding-1">
+							<div id=chartGrowFat class ="float_left">
+								<canvas id="growFatChart" width="80" height="80">
+								</canvas>
+							</div>
+							<div id="growFatDetl">
+								<br>
+								<span class="col-xs-8"> TOTAL&nbsp;: 200000 명</span>
+								<span class="col-xs-8"> USAGE&nbsp;: 160000 명</span>
+							</div>
+						</div>
+						<div class="col-xs-12 chart-padding-1">
+							<div id=chartFatPrdt class ="float_left">
+								<canvas id="fatPrdtChart" width="80" height="80">
+								</canvas>
+							</div>
+							<div id="fatPrdtDetl">
+								<br>
+								<span class="col-xs-8"> TOTAL&nbsp;: 200000 명</span>
+								<span class="col-xs-8"> USAGE&nbsp;: 140000 명</span>
+							</div>
+						</div>
+						<div class="col-xs-12 chart-padding-1">
+							<div id=chartStrs class ="float_left">
+								<canvas id="strsChart" width="80" height="80">
+								</canvas>
+							</div>
+							<div id="strsDetl">
+								<br>
+								<span class="col-xs-8"> TOTAL&nbsp;: 200000 명</span>
+								<span class="col-xs-8"> USAGE&nbsp;: 180000 명</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-7 border-line" style="padding-bottom: 10px;">
+				위험안전발생
+				<div class="form-group">
+					<div class="col-xs-6 border-line">
+						<div class="col-xs-3 chart-padding-1">
+							<div id=chartDngrSafeOccr class ="float_left">
+								<canvas id="dngrSafeOccrChart" width="110" height="110">
+								</canvas>
+							</div>
+						</div>
+						<div class="col-xs-4" style="padding: 30px 30px;">
+							<span class="float_right" style="font-size: 24px;"> {{totMonStat.tmpDngrSafeOcrrTd}} 건</span>
+							<span class="float_right"> 평균대비 : {{totMonStat.tmpDngrSafeOcrrDif}} 건</span>
+							<span class="float_right"> 연평균: {{totMonStat.tmpDngrSafeOcrrYav}} 건</span>
+						</div>
+						<div class="col-xs-5 chart-padding-1">
+							<br>
+							<span class="col-xs-6 float_left"> 정상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
+							<span class="float_right">	20,0000 건</span>
+							<span class="col-xs-6 float_left"> 정상(유의)&nbsp;&nbsp;&nbsp;: </span>
+							<span class="float_right">	1,4000 건</span>
+							<span class="col-xs-6 float_left"> 주의&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
+							<span class="float_right">	1,0000 건</span>
+							<span class="col-xs-6 float_left"> 위험가능성 : </span>
+							<span class="float_right">	1,3000 건</span>
+							<span class="col-xs-6 float_left"> 위험&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
+							<span class="float_right">	30 건</span>
+						</div>
+					</div>
+					<div class="col-xs-6 border-line">
+						<div class="col-xs-3">
+							<span class="col-xs-12">TOTAL</span>
+							<span class="col-xs-12">16,000 건</span>
+						</div>
+						<div class="col-xs-2">
+							<span>	위험지역</span>
+							<span>	4,000 건</span>
+						</div>
+						<div class="col-xs-2">
+							<span>	낙상</span>
+							<span>	4,000 건</span>
+						</div>
+						<div class="col-xs-2">
+							<span>	심박 의심</span>
+							<span>	4,000 건</span>
+						</div>
+						<div class="col-xs-2">
+							<span>	체온 의심</span>
+							<span>	4,000 건</span>
+						</div>
+					</div>
+					<div class="col-xs-6 border-line">
+						위험지역 추이
+					</div>
+					<div class="col-xs-6 border-line">
+						공공기준 top3
+					</div>
+					<div class="col-xs-6 border-line">
+						탐지율
+					</div>
+					<div class="col-xs-6 border-line">
+						위험지역 top3
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-3 border-line">
+				<div class="form-group">
+					<div class="col-xs-12 border-line">
+						갱신주기
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12 border-line">
+						시계
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-12 border-line">
+						이력
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-10 border-line" style="padding-bottom: 10px;">
+				헬스케어
+				<div class="form-group">
+					<div class="col-xs-12 border-line">
+						헬스케어 상단
+					</div>
+					<div class="col-xs-12 border-line">
+						헬스케어 하단
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/oper/cmon/totMonStat.js}"></script>
+</section>
+</body>
+</html>
