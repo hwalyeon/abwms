@@ -160,6 +160,10 @@ public class CommonWebController {
 	@RequestMapping("/oper/dgem/dgemHist.pg")
 	public String getOperDgemDgemHist() {return "oper/dgem/dgemHist";}
 
+	//위치 이력
+	@RequestMapping("/oper/dgem/locHist.pg")
+	public String getOperDgemLocHist() {return "oper/dgem/locHist";}
+
 	//스트레스지수 이력
 	@RequestMapping("/oper/hc/strsHist.pg")
 	public String getOperHcStrsHist() {return "oper/hc/strsHist";}

@@ -2,15 +2,19 @@ let stdtGuarDetl = new Vue({
 	el: "#stdtGuarDetlPopup",
 	data: {
 		params: {
-			stdtNo   :'',
-			stdtNm   :'',
-			guarNo   :'',
-			guarNm   :'',
-			guarTelNo:'',
-			hghtVal  : 0,
-			wghtVal  : 0,
-			wastVal  : 0
-
+			stdtNo      :'',
+			stdtNm      :'',
+			guarNo      :'',
+			guarNm      :'',
+			guarTelNo   :'',
+			hghtVal     : 0,
+			wghtVal     : 0,
+			wastVal     : 0,
+			paging      :'Y',
+			totalCount  : 0,
+			rowCount    : 30,
+			currentPage : 1,
+			currentIndex: 0
 		},
 		code: {
 		},
@@ -76,6 +80,7 @@ let stdtGuarDetl = new Vue({
 				ondblClickRow: function(rowId, status, e) {
 					let item = $('#stdtguar_list').jqGrid('getRowData', rowId);
 					dgemHist.setData(item);
+					locHist.setData(item);
 					console.log(item);
 					closeModal($('#stdtGuarDetlPopup'));
 				},

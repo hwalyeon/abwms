@@ -72,7 +72,7 @@ let locSearchDetl = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 height: 270,
-                url: '/svcStnd/loc/locInfoMng/searchLocInfoList.ab',
+                url: '/oper/dgem/dgemHist/searchLocList.ab',
                 pager: "#locsearch_pager_list",
                 colModel: colModels,
                 onPaging : function(data) {
@@ -86,6 +86,7 @@ let locSearchDetl = new Vue({
                 ondblClickRow: function(rowId, status, e) {
                     let item = $('#locsearch_list').jqGrid('getRowData', rowId);
                     dgemHist.setData(item);
+                    locHist.setData(item);
                     console.log(item);
                     closeModal($('#locSearchDetlPopup'));
                 },

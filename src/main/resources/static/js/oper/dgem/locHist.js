@@ -1,45 +1,40 @@
-let dgemHist = new Vue({
-    el: "#dgemHist",
+let locHist = new Vue({
+    el: "#locHist",
     data: {
         params: {
-            entrDtFr       :'' ,  //가입_일자_From
-            entrDtTo       :'' ,  //가입_일자_To
-            stdtNo         :'',
-            dgemHistSeq    :'',
-            dgemDt         :'',
-            dgemTm         :'',
-            dgemIdx        :'',
-            dgemStatCd     :'',
-            dgemStatCntn   :'',
-            dgemSmryCntn   :'',
-            locHistNo      :'',
-            currLatVal     :'',
-            currLonVal     :'',
-            locMesuDttm    :'',
-            actDivCd       :'',
-            hbitStatCd     :'',
-            plcClssCd      :'',
-            tempStatCd     :'',
-            judgNo         :'',
-            rmrk           :'',
-            dgemAlamNo     :'',
-            locNm          :'',
-            guarNo         :'',
-            guarNm         :'',
-            guarTelNo      :'',
-            mmDd           :'THIS_MONTH',
-            paging         :'Y',
-            totalCount     : 0,
-            rowCount       : 30,
-            currentPage    : 1,
-            currentIndex   : 0
+            emtrDtFr    :'',
+            entrDtTo    :'',
+            schlNm      :'',
+            occrDttm    :'',
+            locNm       :'',
+            stdtNo      :'',
+            stdtNm      :'',
+            locNm       :'',
+            plcClssCd   :'DZONE',
+            latVal      :'',
+            lonVal      :'',
+            nearLocNo   :'',
+            addrBase    :'',
+            telNo       :'',
+            guarNo      :'',
+            guarNm      :'',
+            guarTelNo   :'',
+            regDt       :'',
+            regTm       :'',
+            regUserId   :'',
+            uptDt       :'',
+            uptTm       :'',
+            uptUserId   :'',
+            mmDd        :'THIS_MONTH',
+            paging      :'Y',
+            totalCount  : 0,
+            rowCount    : 30,
+            currentPage : 1,
+            currentIndex: 0
         },
         code:{
             mmDdList           : [] ,
-            hbitStatCdList     : [] , //심박_상태_코드_리스트
             plcClssCdList      : [] , //장소_구분_코드_리스트
-            tempStatCdList     : [] , //체온_상태_코드_리스트
-            dgemStatCdList     : [] , //위험감정_상태_코드_리스트
         },
     },
 
@@ -56,7 +51,7 @@ let dgemHist = new Vue({
 
             $this.initGrid();
 
-            $this.searchDgemHistList(true);
+            $this.searchLocHistList(true);
 
         },
         initValue: function() {
@@ -85,46 +80,28 @@ let dgemHist = new Vue({
         {
             let $this = this;
             let colModels = [
-                {name: "crud"              , index: "crud"              , label: "crud"		 	    , hidden: true                },
-                {name: "guarNoTemp"        , index: "guarNoTemp"        , label: "보호자번호"			, width: 80     , align: "center" , hidden: true},
-                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80     , align: "center" , fixed: true},
-                {name: "dgemHistSeq"       , index: "dgemHistSeq"       , label: "위험감정 이력순번"	, width: 110    , align: "center" , fixed: true},
-                {name: "dgemDt"            , index: "dgemDt"            , label: "위험감정 일자"		, width: 80     , align: "center" , fixed: true},
-                {name: "dgemTm"            , index: "dgemTm"            , label: "위험감정 시각"		, width: 80     , align: "center" , fixed: true},
-                {name: "dgemIdx"           , index: "dgemIdx"           , label: "위험감정 지수"	    , width: 80     , align: "center" , fixed: true},
-                {name: "dgemStatCd"        , index: "dgemStatCd"        , label: "위험감정 상태코드"	, width: 110    , align: "center" , fixed: true},
-                {name: "dgemStatCntn"      , index: "dgemStatCntn"      , label: "위험감정 요약내용"   , width: 110    , align: "center" , fixed: true},
-                {name: "dgemSmryCntn"      , index: "dgemSmryCntn"      , label: "위험감정 상태내용"	, width: 110    , align: "center" , fixed: true},
-                {name: "locHistNo"         , index: "locHistNo"         , label: "위치이력 번호"		, width: 80     , align: "center" , fixed: true},
-                {name: "currLatVal"        , index: "currLatVal"        , label: "현재위도 값"		, width: 80     , align: "center" , fixed: true},
-                {name: "currLonVal"        , index: "currLonVal"        , label: "현재경도 값"  		, width: 80     , align: "center" , fixed: true},
-                {name: "locMesuDttm"       , index: "locMesuDttm"       , label: "위치측정일시"	 	, width: 100    , align: "center" , fixed: true},
-                {name: "actDivCd"          , index: "actDivCd"          , label: "활동구분코드"		, width: 100    , align: "center" , fixed: true},
-                {name: "hbitStatCd"        , index: "hbitStatCd"        , label: "심박상태코드"  		, width: 100    , align: "center" , fixed: true},
-                {name: "plcClssCd"         , index: "plcClssCd"         , label: "장소분류코드" 	    , width: 110    , align: "center" , fixed: true},
-                {name: "tempStatCd"        , index: "tempStatCd"        , label: "체온상태코드"    	, width: 110    , align: "center" , fixed: true},
-                {name: "judgNo"            , index: "judgNo"            , label: "판정번호" 	        , width: 110    , align: "center" , fixed: true},
-                {name: "rmrk"              , index: "rmrk"              , label: "비고" 	            , width: 110    , align: "center" , fixed: true},
-                {name: "dgemAlamNo"        , index: "dgemAlamNo"        , label: "위험감정알림번호" 	, width: 110    , align: "center" , fixed: true},
-                {name: "locNm"             , index: "locNm"             , label: "학교명"        	, width: 110    , align: "center" , fixed: true},
-                {name: "guarNo"            , index: "guarNo"            , label: "보호자번호" 	    , width: 110    , align: "center" , fixed: true},
-                {name: "guarNm"            , index: "guarNm"            , label: "보호자명" 	        , width: 110    , align: "center" , fixed: true},
-                {name: "guarTelNo"         , index: "guarTelNo"         , label: "보호자전화번호" 	    , width: 110    , align: "center" , fixed: true},
-                {name: "stdtInfoDetlPopup" , index: "stdtInfoDetlPopup" , label: "상세정보보기"       , width: 80    , align: "center",fixed: true,
-                    formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemHist.stdtInfoDetlPopup(\'' + rowObject.stdtNo + '\' , \'' + rowObject.guarNo + '\' )" value="상세보기" data-toggle="modal" data-target="#stdtInfoDetlPopup" />';
-                    }
-                }
-
+                {name: "crud"              , index: "crud"              , label: "crud"		 	 , hidden: true                                  },
+                {name: "occrDttm"          , index: "occrDttm"          , label: "발생일시"		 , width: 80     , align: "center" },
+                {name: "schlNm"            , index: "schlNm"            , label: "학교명"		 , width: 80     , align: "center" },
+                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"	     , width: 110    , align: "center" },
+                {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 , width: 80     , align: "center" },
+                {name: "locNm"             , index: "locNm"             , label: "장소"		     , width: 80     , align: "center" },
+                {name: "plcClssCd"         , index: "plcClssCd"         , label: "장소분류"	     , width: 80     , align: "center" },
+                {name: "latVal"            , index: "latVal"            , label: "위도"	         , width: 110    , align: "center" },
+                {name: "lonVal"            , index: "lonVal"            , label: "경도"           , width: 110    , align: "center" },
+                {name: "nearLocNo"         , index: "nearLocNo"         , label: "위치명"	     , width: 110    , align: "center" },
+                {name: "addrBase"          , index: "addrBase"          , label: "주소"		     , width: 80     , align: "center" },
+                {name: "telNo"             , index: "telNo"             , label: "학생 전화번호"	 , width: 80     , align: "center" },
+                {name: "guarNo"            , index: "guarNo"            , label: "보호자번호"  	 , width: 80     , align: "center" },
+                {name: "guarNm"            , index: "guarNm"            , label: "보호자명"	 	 , width: 100    , align: "center" },
+                {name: "guarTelNo"         , index: "guarTelNo"         , label: "보호자 전화번호"  , width: 100    , align: "center" }
             ];
-
-
 
             $("#grid_list").jqGrid("GridUnload");
             $("#grid_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
-                url: '/oper/dgem/dgemHist/searchDgemHistList.ab',
+                url: '/oper/dgem/locHist/searchLocHistList.ab',
                 pager: '#grid_pager_list',
                 height: 450,
                 colModel: colModels,
@@ -133,15 +110,14 @@ let dgemHist = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchDgemHistList(false);
+                        $this.searchLocHistList(false);
                     })
                 },
                 gridComplete: function() {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["dgemHistSeq","dgemDt","dgemTm","dgemIdx","dgemStatCd","dgemStatCntn","dgemSmryCntn",
-                                                  "locHistNo","currLatVal","currLonVal","locMesuDttm","actDivCd","hbitStatCd",
-                                                  "plcClssCd","tempStatCd","judgNo","rmrk","dgemAlamNo","locNm","stdtNo","stdtInfoDetlPopup"], "stdtNo");
+                    $(grid).tableRowSpan(["occrDttm","schlNm","stdtNo","stdtNm","locNm","plcClssCd","latVal","lonVal","nearLocNo","addrBase"
+                                                 ,"telNo","regDt","regTm","regUserId","uptDt","uptTm","uptUserId"], "stdtNo");
                     //밴드 상세 팝업 생성
                     $("#grid_list").find('A.links[data-band]').on('click', function(e) {
                         stdtInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
@@ -163,7 +139,7 @@ let dgemHist = new Vue({
 
             resizeJqGridWidth("grid_list", "grid_list_wrapper");
         },
-        searchDgemHistList: function(isSearch) {
+        searchLocHistList: function(isSearch) {
 
             let $this = this;
             let params = $.extend(true, {}, $this.params);
@@ -225,11 +201,11 @@ let dgemHist = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/oper/dgem/dgemHist/searchDgemHistList/excel.ab",
+                url: "/oper/dgem/locHist/searchLocHistList/excel.ab",
                 param: params,
                 success: function(response)
                 {
-                    saveFileLocal(response, 'dgemHist.xls');
+                    saveFileLocal(response, 'locHist.xls');
                 },
                 error: function (response)
                 {
@@ -241,8 +217,13 @@ let dgemHist = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                stdtNo:'',
                 mmDd:'THIS_MONTH',
+                plcClssCd:'',
+                schlNm:'',
+                guarNm:'',
+                guarNo:'',
+                stdtNm:'',
+                stdtNo:'',
                 paging: 'Y',
                 totalCount: 0,
                 rowCount: 30,

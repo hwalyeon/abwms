@@ -78,7 +78,17 @@ let totMonStat = new Vue({
 
             careMmelNeatQustCnt     : 1853,
             careMmelNeatQustObj     : 20000,
-            careMmelNeatQustRt      : 9.2
+            careMmelNeatQustRt      : 9.2,
+
+        },
+        clockParam: {
+            hhmmss                  : '',
+            yyyymmdd                : '',
+            ddd                     : '',
+            amPm                    : ''
+        },
+        cycl: {
+            initCycl                : 3000
         },
         code: {
             // sexCdList: []
@@ -156,6 +166,10 @@ let totMonStat = new Vue({
 
             $this.initCodeList();
             $this.initPage();
+
+            $this.clock();
+            setInterval($this.clock, 1000);
+            $this.numCountAnimate();
         },
         initCodeList: function() {
             // let $this = this;
@@ -229,6 +243,8 @@ let totMonStat = new Vue({
                     ,'guarNo'   : guarNo
                 }
 
+                $this.initData();
+
                 AjaxUtil.post({
                     url: "/user/stdt/stdtInfoMng/searchStdtDetlInfo.ab",
                     param: params,
@@ -237,7 +253,9 @@ let totMonStat = new Vue({
                             $.each(response["rtnData"].result, function(key, val) {
                                 $this.totMonStat[key] = val;
                             });
+
                             $this.updateChart();
+                            $this.initCycl(5000);
                         }
                     },
                     error: function (response) {
@@ -249,7 +267,6 @@ let totMonStat = new Vue({
         },
         updateChart : function() {
             let $this = this;
-
             let TempChartColor      = '#989998';
             let operStatChartColor  = '#65D965';
 
@@ -312,8 +329,8 @@ let totMonStat = new Vue({
                 labels              : ['가동','무응답'],
                 datasets: [{
                     data            : [$this.totMonStat.growIdx , operStatModIdx],
-                    backgroundColor : [operStatChartColor       , TempChartColor],
-                    borderColor     : [operStatChartColor       , TempChartColor],
+                    backgroundColor : [colorBlu                 , colorGra],
+                    borderColor     : [colorBlu                 , colorGra],
                     borderWidth     : 10
                 }]
             };
@@ -368,7 +385,9 @@ let totMonStat = new Vue({
                     data            : [tmpDngrZoneProg4wb       , tmpDngrZoneProg3wb        , tmpDngrZoneProg2wb        , tmpDngrZoneProg1wb        , tmpDngrZoneProgBfDay],
                     backgroundColor : [colorBlu                 , colorBlu                  , colorBlu                  , colorBlu                  , colorBlu],
                     borderColor     : [colorBlu                 , colorBlu                  , colorBlu                  , colorBlu                  , colorBlu],
-                    borderWidth     : 0
+                    borderWidth     : 0,
+                    categoryPercentage: 1.0,
+                    barPercentage   : 0.4
                 }]
             };
             let dataPublSafeDtct = {
@@ -503,7 +522,7 @@ let totMonStat = new Vue({
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if($this.totMonStat.growIdx != null ) srcIdx = $this.totMonStat.growIdx;
-                    $this.textCenter('operStatChart', srcIdx, $this.chartOperStat, operStatChartColor, '' , '');
+                    $this.textCenter('operStatChart', srcIdx, $this.chartOperStat, colorBlu, '' , '');
                 }
             }];
             let pluginsGrowFat = [{
@@ -779,7 +798,6 @@ let totMonStat = new Vue({
             $this.chartCareMmelNeatFmenu= new Chart(ctxCareMmelNeatFmenu, configCareMmelNeatFmenu);
             $this.chartCareMmelNeatQust = new Chart(ctxCareMmelNeatQust , configCareMmelNeatQust);
 
-
             $this.totMonStat.tmpDngrZoneCnt         = $this.toNumber($this.totMonStat.tmpDngrZoneCnt);
             $this.totMonStat.tmpFallDownCnt         = $this.toNumber($this.totMonStat.tmpFallDownCnt);
             $this.totMonStat.tmpHbitAbnmCnt         = $this.toNumber($this.totMonStat.tmpHbitAbnmCnt);
@@ -833,6 +851,128 @@ let totMonStat = new Vue({
         },
         toNumber: function (value) {
             return value.toLocaleString('ko-KR');
+        },
+        initData: function () {
+            let $this = this;
+
+            $this.totMonStat = {
+                temp                : null,
+                tmpDngrSafeOcrrTd   : $this.tmpDngrSafeOcrrTd,
+                tmpDngrSafeOcrrDif  : $this.tmpDngrSafeOcrrDif,
+                tmpDngrSafeOcrrYav  : 3.8,
+
+                tmpDngrZoneCnt      : 4400,
+                tmpFallDownCnt      : 2400,
+                tmpHbitAbnmCnt      : 1200,
+                tmpTmepAbnmCnt      : 3300,
+                tmpTotal            : 200000,
+                tmpUsage            : 140000,
+                tmpNumber1          : 200000,
+                tmpNumber2          : 180000,
+                tmpNumber3          : 20000,
+                tmpNumber4          : 500000,
+                tmpNumber5          : 300000,
+                tmpNumber6          : 200000,
+
+                plcCdPublTop1       : '유흥/유해',
+                plcCdPublTop2       : '공사/위험물',
+                plcCdPublTop3       : '우범지역',
+                addrPublTop1        : '서울특별시 마포구 마포대로12 한신빌딩 911',
+                addrPublTop2        : '서울특별시 금천구 디지털로9길 99 스타밸리빌',
+                addrPublTop3        : '서울시 금천구 가산동 1234-17 우리벤처타워',
+                cntPublTop1         : 123,
+                cntPublTop2         : 78,
+                cntPublTop3         : 50,
+                plcCdPrntTop1       : '우범지역',
+                plcCdPrntTop2       : '유흥/유해',
+                plcCdPrntTop3       : '공사/위험물',
+                addrPrntTop1        : '서울특별시 송파구 송파대로8길 17',
+                addrPrntTop2        : '제주특별자치도 제주시 첨단로 242',
+                addrPrntTop3        : '서울특별시 용산구 국방부',
+                cntPrntTop1         : 123,
+                cntPrntTop2         : 78,
+                cntPrntTop3         : 999,
+
+                careBmiBodyIdxAvg       : 27.56,
+                careBmiBodyIdxMin       : 17.12,
+                careBmiBodyIdxMax       : 42.78,
+
+                careGrowLowRt           : 20,
+                careGrowOverRt          : 27,
+
+                careFatIdxHighRt        : 10,
+                careFatIdxGnrlRt        : 20,
+                careFatIdxUndrRt        : 10,
+
+                careFatPrdtHighRt       : 10,
+                careFatPrdtGnrlRt       : 20,
+                careFatPrdtUndrRt       : 10,
+
+                careStrsHigh            : 20,
+                careStrsVeryHigh        : 10,
+
+                careExcsTimeAvg         : 1.2,
+                careExcsTimeBfDay       : 1.5,
+                careExcsTimeDif         : 0.3,
+
+                careCalEatAvg           : 2113,
+                careCalEatbfDay         : 2238,
+                careCalEatDif           : 125,
+
+                careFmenuCdTop1         : '밥',
+                careFmenuRtTop1         : 33.1,
+                careFmenuCdTop2         : '빵',
+                careFmenuRtTop2         : 27.5,
+                careFmenuCdTop3         : '튀김',
+                careFmenuRtTop3         : 12.9,
+
+                careMmelNeatFmenuCnt    : 1853,
+                careMmelNeatFmenuObj    : 20000,
+                careMmelNeatFmenuRt     : 9.2,
+
+                careMmelNeatQustCnt     : 1853,
+                careMmelNeatQustObj     : 20000,
+                careMmelNeatQustRt      : 9.2
+            }
+        },
+        clock: function() {
+            let $this = this;
+            let date = moment().lang("ko");
+
+            $this.clockParam.hhmmss = date.format(timeFormatPattern);
+            $this.clockParam.yyyymmdd = date.format(dateFormatPattern);
+            $this.clockParam.ddd = date.format("(ddd)");
+            $this.clockParam.amPm = date.format("a");
+        },
+        initCycl: function(timeCycl) {
+            let $this = this;
+            if (timeCycl === null) timeCycl = 5000;
+            clearInterval($this.cycl.initCycl);
+            $this.cycl.initCycl = setInterval($this.searchStdtDetlInfo, timeCycl);
+        },
+        numCountAnimate: function () {
+            let $this = this;
+            var memberCountConTxt= $this.totMonStat.tmpTmepAbnmCnt;
+
+
+
+            $({ val : 0 }).animate({ val : memberCountConTxt }, {
+                duration: 1000,
+                step: function() {
+                    var num = numberWithCommas(Math.floor(this.val));
+                    //$(".memberCountCon").text(num);
+                    $this.totMonStat.tmpTmepAbnmCnt = num;
+                },
+                complete: function() {
+                    var num = numberWithCommas(Math.floor(this.val));
+                    //$(".memberCountCon").text(num);
+                    $this.totMonStat.tmpTmepAbnmCnt = num;
+                }
+            });
+
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
         }
     },
     computed: {

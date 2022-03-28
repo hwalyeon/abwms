@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service("dgemHistService")
-public class DgemHistServiceImpl implements DgemHistService
+@Service("locHistService")
+public class LocHistServiceImpl implements LocHistService
 {
 	@Autowired
 	private FileService fileService;
@@ -22,23 +22,9 @@ public class DgemHistServiceImpl implements DgemHistService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	public List<Map<String, String>> searchDgemHistList(Map<String, String> params) throws BizException
+	public List<Map<String, String>> searchLocHistList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("oper.dgem.dgemHist.searchDgemHistList", params);
-
-		return result;
-	}
-
-	public List<Map<String, String>> searchStdtGuarList(Map<String, String> params) throws BizException
-	{
-		List<Map<String, String>> result = dao.selectList("oper.dgem.dgemHist.searchStdtGuarList", params);
-
-		return result;
-	}
-
-	public List<Map<String, String>> searchLocList(Map<String, String> params) throws BizException
-	{
-		List<Map<String, String>> result = dao.selectList("oper.dgem.dgemHist.searchLocList", params);
+		List<Map<String, String>> result = dao.selectList("oper.dgem.locHist.searchLocHistList", params);
 
 		return result;
 	}

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-	<div class="wrapper-content" id="dgemHist">
+	<div class="wrapper-content" id="locHist">
 
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
@@ -24,7 +24,7 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label" >위험감정 일자</label>
+						<label class="col-xs-1 control-label" >발생일자</label>
 						<div class="col-xs-1" style="width: 10%">
 							<input type="date" name="entrDtFr" class="form-control" v-model="params.entrDtFr">
 						</div>
@@ -38,41 +38,6 @@
 								<option v-for="item in code.mmDdList" v-bind:value="item.value" v-text="item.text"></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label">위험감정 상태</label>
-						<div class="col-xs-1" style="padding:0px; margin-right:5px;">
-							<select id="dgemStatCd" namd="dgemStatCd" class="form-control" v-model="params.dgemStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.dgemStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-							</select>
-						</div>
-						<label class="col-xs-1 control-label">보호자명</label>
-						<div class="col-xs-1"  style="padding:0px">
-							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
-						</div>
-						<label class="col-xs-1 control-label" style="margin-left:15px;">보호자번호</label>
-						<div class="col-xs-1" style="padding:0px;">
-							<input type="number" name="guarNo" class="form-control" v-model="params.guarNo">
-						</div>
-						<div>
-							<button type="button" id="btn1" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="clear_both"></div>
-						<label class="col-xs-1 control-label">심박 상태</label>
-						<div class="col-xs-2" style="width: 10%">
-							<select id="hbitStatCd" namd="hbitStatCd" class="form-control" v-model="params.hbitStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.hbitStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-							</select>
-						</div>
-						<label class="col-xs-1 control-label" style="width: 10%">체온 상태</label>
-						<div class="col-xs-1" style="padding:0px; margin-right:5px;">
-							<select id="tempStatCd" namd="tempStatCd" class="form-control" v-model="params.tempStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.tempStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-							</select>
-						</div>
 						<label class="col-xs-1 control-label">장소 분류</label>
 						<div class="col-xs-1" style="padding:0px; margin-right:5px;">
 							<select id="plcClssCd" namd="plcClssCd" class="form-control" v-model="params.plcClssCd">
@@ -80,33 +45,42 @@
 								<option v-for="item in code.plcClssCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
 							</select>
 						</div>
+						<label class="col-xs-1 control-label" style="margin-left:15px;">학교명</label>
+						<div class="col-xs-1" style="padding:0px">
+							<input type="text" name="locNm" class="form-control"  v-model="params.locNm">
+						</div>
+						<div>
+						<button type="button" id="btn3" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#locSearchDetlPopup" v-on:click="locSearchDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="clear_both"></div>
+						<label class="col-xs-1 control-label">보호자명</label>
+						<div class="col-xs-1"  style="width: 10%">
+							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
+						</div>
+						<label class="col-xs-1 control-label" style="width: 10%">보호자번호</label>
+						<div class="col-xs-1" style="padding:0px; margin-right:5px;">
+							<input type="number" name="guarNo" class="form-control" v-model="params.guarNo">
+						</div>
 						<label class="col-xs-1 control-label">학생명</label>
-						<div class="col-xs-1" style="padding:0px" >
+						<div class="col-xs-1" style="padding:0px; margin-right:5px;">
 							<input type="text" name="stdtNm" class="form-control"  v-model="params.stdtNm">
 						</div>
 						<label class="col-xs-1 control-label" style="margin-left:15px;">학생번호</label>
-						<div class="col-xs-1"  style="padding:0px">
+						<div class="col-xs-1" style="padding:0px">
 							<input type="number" name="stdtNo" class="form-control" v-model="params.stdtNo">
 						</div>
 						<div>
 							<button type="button" id="btn2" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
 						</div>
 					</div>
-					<div class="form-group">
-						<div class="clear_both">
-							<label class="col-xs-1 control-label">학교명</label>
-							<div class="col-xs-1" style="width: 10% ">
-								<input type="text" name="locNm" class="form-control"  v-model="params.locNm">
-							</div>
-						</div>
-						<button type="button" id="btn3" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" style="margin-left:-6px" data-style="zoom-in" data-toggle="modal" data-target="#locSearchDetlPopup" v-on:click="locSearchDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
-					</div>
 					<div class="form-group mg_none">
 						<div class="text-center">
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchDgemHistList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchLocHistList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -143,7 +117,7 @@
 	<div th:insert="~{user/stdt/stdtInfoDetl  :: body}"></div> <!-- 학생 상세보기 팝업 -->
 </div>
 <section layout:fragment="user_script">
-	<script type="text/javascript" th:src="@{/js/oper/dgem/dgemHist.js}"></script> <!-- 위험감정 발생이력 -->
+	<script type="text/javascript" th:src="@{/js/oper/dgem/locHist.js}"></script> <!-- 위치이력 -->
 	<script type="text/javascript" th:src="@{/js/oper/dgem/stdtGuarDetl.js}"></script> <!-- 학생 및 보호자 번호 검색 팝업 -->
 	<script type="text/javascript" th:src="@{/js/oper/dgem/locSearchDetl.js}"></script> <!-- 학교(위치번호) 검색 팝업 -->
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoDetl.js}"></script> <!-- 학생 상세보기 팝업 -->
