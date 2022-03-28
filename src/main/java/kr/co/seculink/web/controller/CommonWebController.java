@@ -177,8 +177,8 @@ public class CommonWebController {
 	public String getOperHcGfixHist() {return "oper/hc/gfixHist";}
 
 	//보호자식단표 현황
-	@RequestMapping("/oper/hc/guarFmenuHistDetl.pg")
-	public String getOperHcGuarFmenuHistDetl() {return "oper/hc/guarFmenuHistDetl";}
+	@RequestMapping("/oper/hc/guarFmenuHist.pg")
+	public String getOperHcGuarFmenuHist() {return "oper/hc/guarFmenuHist";}
 
 	//영양소섭취 이력
 	@RequestMapping("/oper/hc/nutrEatHist.pg")
