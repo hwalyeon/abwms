@@ -160,6 +160,34 @@ public class CommonWebController {
 	@RequestMapping("/oper/dgem/dgemHist.pg")
 	public String getOperDgemDgemHist() {return "oper/dgem/dgemHist";}
 
+	//스트레스지수 이력
+	@RequestMapping("/oper/hc/strsHist.pg")
+	public String getOperHcStrsHist() {return "oper/hc/strsHist";}
+
+	//섭취 이력
+	@RequestMapping("/oper/hc/eatHist.pg")
+	public String getOperHcEatHist() {return "oper/hc/eatHist";}
+
+	//활동 이력
+	@RequestMapping("/oper/hc/actHist.pg")
+	public String getOperHcActHist() {return "oper/hc/actHist";}
+
+	//성장비만지수 이력
+	@RequestMapping("/oper/hc/gfixHist.pg")
+	public String getOperHcGfixHist() {return "oper/hc/gfixHist";}
+
+	//보호자식단표 현황
+	@RequestMapping("/oper/hc/guarFmenuHistDetl.pg")
+	public String getOperHcGuarFmenuHistDetl() {return "oper/hc/guarFmenuHistDetl";}
+
+	//영양소섭취 이력
+	@RequestMapping("/oper/hc/nutrEatHist.pg")
+	public String getOperHcNutrEatHist() {return "oper/hc/nutrEatHist";}
+
+	//캐시비 이력
+	@RequestMapping("/oper/hc/cbeeHistDetl.pg")
+	public String getOperHcCbeeHistDetl() {return "oper/hc/cbeeHistDetl";}
+
 	//종합관제현황
 	@RequestMapping("/oper/cmon/totMonStat.pg")
 	public String getOperCmonTotMonStat() {return "oper/cmon/totMonStat";}
