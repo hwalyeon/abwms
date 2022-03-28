@@ -18,8 +18,8 @@
                ,alam_cntn /* alam_cntn 알림_내용 text */
                ,ref_url /* ref_url 참조_URL character varying(500) */
                ,ref_data /* ref_data 참조_데이터 character(18) */
-               ,send_yn /* send_yn 발송_여부 character(1) */
                ,send_dttm /* send_dttm 발송_일시 character(14) */
+               ,send_rslt_cd /* send_rslt_cd 발송_결과_코드 character varying(20) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -59,9 +59,11 @@
 		<if test="refData != null">
 		    ,ref_data /* ref_data 참조_데이터 character(18) */
 		</if>
-		    ,send_yn /* send_yn 발송_여부 character(1) */
 		<if test="sendDttm != null">
 		    ,send_dttm /* send_dttm 발송_일시 character(14) */
+		</if>
+		<if test="sendRsltCd != null">
+		    ,send_rslt_cd /* send_rslt_cd 발송_결과_코드 character varying(20) */
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -99,9 +101,11 @@
 		<if test="refData != null">
 		    ,#{refData} /* ref_data 참조_데이터 character(18) */
 		</if>
-		    ,#{sendYn} /* send_yn 발송_여부 character(1) */
 		<if test="sendDttm != null">
 		    ,#{sendDttm} /* send_dttm 발송_일시 character(14) */
+		</if>
+		<if test="sendRsltCd != null">
+		    ,#{sendRsltCd} /* send_rslt_cd 발송_결과_코드 character varying(20) */
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
@@ -141,11 +145,11 @@
 		<if test="refData != null">
 		    ,ref_data = #{refData} /* ref_data 참조_데이터 character(18) */
 		</if>
-		<if test="sendYn != null">
-		    ,send_yn = #{sendYn} /* send_yn 발송_여부 character(1) */
-		</if>
 		<if test="sendDttm != null">
 		    ,send_dttm = #{sendDttm} /* send_dttm 발송_일시 character(14) */
+		</if>
+		<if test="sendRsltCd != null">
+		    ,send_rslt_cd = #{sendRsltCd} /* send_rslt_cd 발송_결과_코드 character varying(20) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
@@ -185,9 +189,11 @@
 		<if test="refData != null">
 		    ,ref_data /* ref_data 참조_데이터 character(18) */
 		</if>
-		    ,send_yn /* send_yn 발송_여부 character(1) */
 		<if test="sendDttm != null">
 		    ,send_dttm /* send_dttm 발송_일시 character(14) */
+		</if>
+		<if test="sendRsltCd != null">
+		    ,send_rslt_cd /* send_rslt_cd 발송_결과_코드 character varying(20) */
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -225,9 +231,11 @@
 		<if test="refData != null">
 		    ,#{refData} /* ref_data 참조_데이터 character(18) */
 		</if>
-		    ,#{sendYn} /* send_yn 발송_여부 character(1) */
 		<if test="sendDttm != null">
 		    ,#{sendDttm} /* send_dttm 발송_일시 character(14) */
+		</if>
+		<if test="sendRsltCd != null">
+		    ,#{sendRsltCd} /* send_rslt_cd 발송_결과_코드 character varying(20) */
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
@@ -264,11 +272,11 @@
 		<if test="refData != null">
 		    ,ref_data = #{refData} /* ref_data 참조_데이터 character(18) */
 		</if>
-		<if test="sendYn != null">
-		    ,send_yn = #{sendYn} /* send_yn 발송_여부 character(1) */
-		</if>
 		<if test="sendDttm != null">
 		    ,send_dttm = #{sendDttm} /* send_dttm 발송_일시 character(14) */
+		</if>
+		<if test="sendRsltCd != null">
+		    ,send_rslt_cd = #{sendRsltCd} /* send_rslt_cd 발송_결과_코드 character varying(20) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */

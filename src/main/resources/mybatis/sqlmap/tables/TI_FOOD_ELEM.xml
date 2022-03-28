@@ -41,7 +41,7 @@
 		VALUES
 		(
 		     #{foodNo} /* food_no 식품_번호 numeric */
-		    ,#{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
+		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		    ,#{nutrQty} /* nutr_qty 영양소_용량 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */

@@ -34,11 +34,11 @@ public class TsAlamHistVo implements Serializable {
 	/* ref_data 참조_데이터 character(18) */
 	private String refData;
 
-	/* send_yn 발송_여부 character(1) */
-	private String sendYn;
-
 	/* send_dttm 발송_일시 character(14) */
 	private String sendDttm;
+
+	/* send_rslt_cd 발송_결과_코드 character varying(20) */
+	private String sendRsltCd;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -195,21 +195,6 @@ public class TsAlamHistVo implements Serializable {
 		this.refData = refData;
 	}
 	/**
-	 * Get send_yn 발송_여부 character(1)
-	 * @Return String sendYn
-	 */
-	public String getSendYn() {
-		return this.sendYn;
-	}
-	
-	/**
-	 * Set send_yn 발송_여부 character(1)
-	 * @Param String sendYn
-	 */
-	public void setSendYn(String sendYn) {
-		this.sendYn = sendYn;
-	}
-	/**
 	 * Get send_dttm 발송_일시 character(14)
 	 * @Return String sendDttm
 	 */
@@ -223,6 +208,21 @@ public class TsAlamHistVo implements Serializable {
 	 */
 	public void setSendDttm(String sendDttm) {
 		this.sendDttm = sendDttm;
+	}
+	/**
+	 * Get send_rslt_cd 발송_결과_코드 character varying(20)
+	 * @Return String sendRsltCd
+	 */
+	public String getSendRsltCd() {
+		return this.sendRsltCd;
+	}
+	
+	/**
+	 * Set send_rslt_cd 발송_결과_코드 character varying(20)
+	 * @Param String sendRsltCd
+	 */
+	public void setSendRsltCd(String sendRsltCd) {
+		this.sendRsltCd = sendRsltCd;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)
