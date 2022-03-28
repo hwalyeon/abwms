@@ -28,8 +28,8 @@ public class GuarFmenuHistController {
 
 	// 스트레스_지수_이력 리스트 조회
 	@ResponseBody
-	@RequestMapping("/oper/hc/strsHist/strsHistList.ab")
-	public RtnMsg searchStrsHistList(@RequestBody(required = false) Map<String, String> params) throws BizException {
+	@RequestMapping("/oper/hc/guarFmenuHist/guarFmenuHistList.ab")
+	public RtnMsg searchGuarFmenuHistList(@RequestBody(required = false) Map<String, String> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
