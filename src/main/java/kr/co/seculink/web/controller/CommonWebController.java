@@ -185,8 +185,8 @@ public class CommonWebController {
 	public String getOperHcNutrEatHist() {return "oper/hc/nutrEatHist";}
 
 	//캐시비 이력
-	@RequestMapping("/oper/hc/cbeeHistDetl.pg")
-	public String getOperHcCbeeHistDetl() {return "oper/hc/cbeeHistDetl";}
+	@RequestMapping("/oper/cbee/cbeeHistDetl.pg")
+	public String getOperCbeeCbeeHistDetl() {return "oper/cbee/cbeeHistDetl";}
 
 	//종합관제현황
 	@RequestMapping("/oper/cmon/totMonStat.pg")
