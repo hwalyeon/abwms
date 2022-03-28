@@ -27,4 +27,11 @@ public class ActHistServiceImpl implements ActHistService
 		
 		return result;
 	}
+	// 활동_코드 리스트 조회
+	public List<Map<String, String>> searchActCdList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("oper.hc.actHist.selectActCdList", params);
+
+		return result;
+	}
 }

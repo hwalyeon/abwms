@@ -9,5 +9,7 @@ public interface ActHistService
 {
 	// 스트레스_지수_이력 리스트 조회
 	public List<Map<String, String>> searchActHistList(Map<String, String> params) throws BizException;
+	// 활동_코드 리스트 조회
+	public List<Map<String, String>> searchActCdList(Map<String, String> params) throws BizException;
 }
  

@@ -3,7 +3,7 @@
 <mapper namespace="oper.hc.guarFmenuHist">
 
     <!--스트레스_지수_이력 리스트 조회-->
-	<select id="selectguarFmenuHistList" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="selectGuarFmenuHistList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT tssh.strs_judg_dttm /* strs_judg_dttm 스트레스_판정_일시 character(14) */
 			 , teb.loc_nm /*loc_nm 학교_명 varchar(100) */
 			 , tssh.stdt_no /* stdt_no 학생_번호 numeric */

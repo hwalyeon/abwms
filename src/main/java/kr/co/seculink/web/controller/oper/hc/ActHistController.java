@@ -26,7 +26,7 @@ public class ActHistController {
 	@Autowired
 	private ActHistService actHistService;
 
-	// 스트레스_지수_이력 리스트 조회
+	//활동_이력 리스트 조회
 	@ResponseBody
 	@RequestMapping("/oper/hc/actHist/actHistList.ab")
 	public RtnMsg searchActHistList(@RequestBody(required = false) Map<String, String> params) throws BizException {
@@ -45,8 +45,22 @@ public class ActHistController {
 
 		return vo;
 	}
+	//활동_코드 리스트 조회
+	@ResponseBody
+	@RequestMapping("/oper/hc/actHist/searchActCdList.ab")
+	public RtnMsg searchActCdList(@RequestBody(required = false) Map<String, String> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
 
-	//스트레스_지수_이력 리스트 엑셀다운로드
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = actHistService.searchActCdList(params);
+		rtnMap.put("result", result);
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+	//활동_이력 리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/oper/hc/actHist/actHistList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required = false) Map<String, String> params) throws BizException {
@@ -58,7 +72,7 @@ public class ActHistController {
 	}
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list) {
-		String[] arrHeader = { "발생일시", "학교 명","학생 번호","학생 명","성별","나이(년)","나이(개월)","스트레스 상태","정신적 상태","신체적 상태","대처능력","학생(밴드)전화번호","보호자 번호","보호자 명","보호자 전화번호" };
+		String[] arrHeader = { "발생일시", "학생 번호","학생 명","학교 명","활동 명","활동 시간(분)","발생 건수(반복활동 수)","칼로리 소모량","판정 번호","학생(밴드)전화번호","보호자 번호","보호자 명","보호자 전화번호" };
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -66,17 +80,15 @@ public class ActHistController {
 
 		for (Map<String, String> info : list) {
 			data = new ArrayList<String>();
-			data.add(info.get("actJudgDttm"));
-			data.add(info.get("locNm"));
+			data.add(info.get("stndDt"));
 			data.add(String.valueOf(info.get("stdtNo")));
 			data.add(info.get("stdtNm"));
-			data.add(info.get("sexCdNm"));
-			data.add(String.valueOf(info.get("ageYy")));
-			data.add(String.valueOf(info.get("ageMm")));
-			data.add(info.get("actStatCdNm"));
-			data.add(info.get("mindActStatCdNm"));
-			data.add(info.get("physActStatCdNm"));
-			data.add(info.get("actCopeStatCd"));
+			data.add(info.get("locNm"));
+			data.add(info.get("actNm"));
+			data.add(String.valueOf(info.get("actTcntMcnt")));
+			data.add(String.valueOf(info.get("rpetActCnt")));
+			data.add(String.valueOf(info.get("calCsumQty")));
+			data.add(String.valueOf(info.get("judgNo")));
 			data.add(info.get("telNo"));
 			data.add(String.valueOf(info.get("guarNo")));
 			data.add(info.get("guarNm"));
