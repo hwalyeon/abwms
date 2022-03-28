@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oper.hc.guarFmenuHist">
+
+    <!--스트레스_지수_이력 리스트 조회-->
+	<select id="selectguarFmenuHistList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT tssh.strs_judg_dttm /* strs_judg_dttm 스트레스_판정_일시 character(14) */
+			 , teb.loc_nm /*loc_nm 학교_명 varchar(100) */
+			 , tssh.stdt_no /* stdt_no 학생_번호 numeric */
+			 , tsb.stdt_nm  /*stdt_nm 학생_명 varchar(40) */
+			 , fn_getcdnm('SEX_CD', tsb.sex_cd) as sex_cd_nm --성별_코드_명
+			 , fn_getage(tsb.bith_dt) as age_yy --나이(년수)
+			 , fn_getagem(tsb.bith_dt) as age_mm --나이(개월수)
+			 , fn_getcdnm('STRS_STAT_CD' , tssh.strs_stat_cd) as strs_stat_cd_nm --스트레스_상태_코드_명
+			 , fn_getcdnm('STRS_STAT_CD' , tssh.mind_strs_stat_cd) as mind_strs_stat_cd_nm --정신적_스트레스_상태_코드_명
+			 , fn_getcdnm('STRS_STAT_CD' , tssh.phys_strs_stat_cd) as phys_strs_stat_cd_nm --신체적_스트레스_상태_코드_명
+			 , fn_getcdnm('STRS_COPE_STAT_CD',tssh.strs_cope_stat_cd) as strs_cope_stat_cd --스트레스_대처_상태_코드_명
+			 , tbi.tel_no --밴드_전화_번호
+			 , tgb.guar_no --보호자_번호
+			 , tgb.guar_nm --보호자_명
+			 , tgb.guar_tel_no --보호자_전화_번호
+		FROM   TS_STDT_STRS_HIST tssh           --학생_스트레스_이력
+			   inner join TM_STDT_BASE tsb      --학생_기본 tsb
+			   on tssh.STDT_NO = tsb.STDT_NO
+			   inner join TS_BAND_INFO tbi      --밴드_정보 tbi
+			   on tsb.BAND_ID = tbi.BAND_ID
+			   inner join TM_STDT_GUAR_CONN tsgc--학생_보호자_연결 tsgc
+			   on tsgc.STDT_NO = tsb.STDT_NO
+			   inner join  TM_GUAR_BASE tgb     --보호자_기본 tgb
+			   on tsgc.GUAR_NO = tgb.GUAR_NO
+			   left outer join TI_EORG_BASE teb --교육기관_기본 teb
+			   on tsb.EORG_LOC_NO = teb.LOC_NO
+		WHERE  1 = 1
+		<if test="strsJudgDttmFr != null and strsJudgDttmFr != null and strsJudgDttmTo !='' and strsJudgDttmTo !='' ">/*발생 일시*/
+			and tssh.strs_judg_dttm between replace(#{strsJudgDttmFr},'-','') and replace(#{strsJudgDttmTo},'-','')</if>
+		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
+			and tssh.stdt_no = #{stdtNo}::NUMERIC </if>
+		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
+			and tsb.stdt_NM like CONCAT('%',#{stdtNm},'%')</if>
+		<if test="ageFr != null and ageFr != null and ageTo !='' and ageTo !='' ">/*나이*/
+			and fn_getage(tsb.bith_dt)  between #{ageFr}::NUMERIC  and #{ageTo}::NUMERIC </if>
+		<if test=" sexCd != null and sexCd !='' ">/*성별*/
+			and tsb.sex_cd = #{sexCd} </if>
+		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
+			and tgb.guar_no = #{guarNo}::NUMERIC </if>
+		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
+			and tsb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
+		<if test=" strsStatCd != null and strsStatCd !='' ">/*스트레스_상태_코드*/
+			and tssh.strs_stat_cd like CONCAT('%',#{strsStatCd},'%')</if>
+		<if test=" mindStrsStatCd != null and mindStrsStatCd !='' ">/*정신적_스트레스_상태_코드*/
+			and tssh.mind_strs_stat_cd like CONCAT('%',#{mindStrsStatCd},'%')</if>
+		<if test=" physStrsStatCd != null and physStrsStatCd !='' ">/*신체적_스트레스_상태_코드*/
+			and tssh.phys_strs_stat_cd_nm like CONCAT('%',#{physStrsStatCd},'%')</if>
+		<if test=" strsCopeStatCd != null and strsCopeStatCd !='' ">/*스트레스_대처_상태_코드*/
+			and tssh.strs_cope_stat_cd like CONCAT('%',#{strsCopeStatCd},'%')</if>
+		<if test=" locNm != null and locNm !='' ">
+			and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+        <if test=' paging == "Y" '>
+		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+</mapper>
