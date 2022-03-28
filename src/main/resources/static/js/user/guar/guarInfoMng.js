@@ -62,7 +62,6 @@ let guarInfoMng = new Vue({
             {
                 let $this = this;
                 getCommonCodeList('ENTR_STAT_CD',$this.code.entrStatCdList);
-                console.log($this.code.entrStatCdList);
             },
             initGrid: function()
             {
@@ -129,6 +128,11 @@ let guarInfoMng = new Vue({
                             }
                         },
                         gridComplete: function () {
+                            let grid = this;
+
+                            $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo","stdtNo","stdtNm","entrDt","entdStatCdNm","locNm","bandId","telNo","prntNo","prntNmMale","prntNmFemale"],"guarNo");
+
+
                             //보호자(사용자)정보 상세 팝업
                             $("#guarInfo_list").find('A.links[data-guar]').on('click', function(e) {
                                 guarInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'), $(e.target).data('guar-no'),$(e.target).data('guar-tel-no'),$(e.target).data('stdt-no'),$(e.target).data('stdt-nm'));
