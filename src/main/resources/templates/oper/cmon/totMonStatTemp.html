@@ -7,12 +7,13 @@
 	<title>사용자</title>
 	<script src="https://kit.fontawesome.com/ab74e7e073.js" crossorigin="anonymous"></script>
 	<style>
-		/*.form-group border-line {*/
-		/*	margin-bottom: 15px;*/
-		/*	border-width: 1px;*/
-		/*	border-color: #000000;*/
-		/*	border-style: solid;*/
-		/*}*/
+		.gray-bg {
+			background-color: #000000;
+		}
+		.ibox-content {
+			background-color: #000000;
+			color: #ffffff;
+		}
 		.border-line {
 			border: 1px solid #e7e7e7;
 		}
@@ -23,352 +24,380 @@
 			padding: 15px 0px;
 		}
 		.chart-padding-1 {
-			padding: 0px 15px;
+			padding: 21px 20px;
 		}
-		.chart-padding-2{
-			padding: 15px 15px;
+		.chart-padding-2 {
+			padding-right: 0px;
+			padding-top: 16px;
+		}
+		.chart-padding-3 {
+			padding: 21px 15px;
+		}
+		.minMax-height-130 {
+			min-height: 130px;
+			max-height: 130px;
+		}
+		.minMax-height-150 {
+			min-height: 150px;
+			max-height: 150px;
 		}
 	</style>
 </head>
 
 <body>
 <div layout:fragment="content">
-	<div class="wrapper-content" id="totMonStat">
+	<div class="wrapper-content" id="totMonStat" v-cloak>
 		<div class="ibox-content">
+			<div class="row">
+				<div class="form-group">
+					로고
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-2 border-line" style="padding-top: 15px;">
+					<div class="form-group">
+						<span class="float_left">가동 현황</span>
+						<span class="float_right">+ more</span>
+						<div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-130">
+							<div id=chartOperStat class ="float_left">
+								<canvas id="operStatChart" width="80" height="80">
+								</canvas>
+							</div>
+							<div id="operStatDetl">
+								<br>
+								<span class="col-xs-8 text-center"> 개통&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{totMonStat.tmpNumber1}} 대</span>
+								<span class="col-xs-8 text-center"> 가동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{totMonStat.tmpNumber2}} 대</span>
+								<span class="col-xs-8 text-center"> 무응답&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{totMonStat.tmpNumber3}} 대</span>
+							</div>
+						</div>
+						<span class="float_left">개통 현황</span>
+						<span class="float_right">+ more</span>
+						<div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-130">
+							<div id=chartOpenStat class ="float_left">
+								<canvas id="openStatChart" width="80" height="80">
+								</canvas>
+							</div>
+							<div id="openStatDetl">
+								<br>
+								<span class="col-xs-8 text-center"> 밴드 개통&nbsp;: {{totMonStat.tmpNumber4}} 건</span>
+								<span class="col-xs-8 text-center"> 서류 제출&nbsp;: {{totMonStat.tmpNumber5}} 건</span>
+								<span class="col-xs-8 text-center"> 회원 가입&nbsp;: {{totMonStat.tmpNumber6}} 건</span>
+							</div>
+						</div>
+						<span class="float_left">헬스케어 활용율</span>
+						<span class="float_right">+ more</span>
+						<div class="col-xs-12 form-group border-line chart-padding-1">
+							<div class="col-xs-12 chart-padding-0 minMax-height-130">
+								<div id=chartGrowFat class ="float_left">
+									<canvas id="growFatChart" width="80" height="80">
+									</canvas>
+								</div>
+								<div id="growFatDetl">
+									<span class="col-xs-8 text-center"> 성장 / 비만</span>
+									<span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
+									<span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
+								</div>
+							</div>
+							<div class="col-xs-12 chart-padding-0 minMax-height-130">
+								<div id=chartFatPrdt class ="float_left">
+									<canvas id="fatPrdtChart" width="80" height="80">
+									</canvas>
+								</div>
+								<div id="fatPrdtDetl">
+									<span class="col-xs-8 text-center"> 비만 예측</span>
+									<span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
+									<span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
+								</div>
+							</div>
+							<div class="col-xs-12 chart-padding-0 minMax-height-130">
+								<div id=chartStrs class ="float_left">
+									<canvas id="strsChart" width="80" height="80">
+									</canvas>
+								</div>
+								<div id="strsDetl">
+									<span class="col-xs-8 text-center"> 스트레스</span>
+									<span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
+									<span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-7 border-line" style="padding-bottom: 10px;">
+					위험안전발생
+					<div class="form-group">
+						<div class="col-xs-6 border-line minMax-height-150">
+							<div class="col-xs-3 chart-padding-0">
+								<div id=chartDngrSafeOccr class ="float_left">
+									<canvas id="dngrSafeOccrChart" width="110" height="110">
+									</canvas>
+								</div>
+							</div>
+							<div class="col-xs-4" style="padding: 30px 30px;">
+								<span class="float_right" style="font-size: 24px;color: #2a99ec"> {{totMonStat.tmpDngrSafeOcrrTd}} 건</span>
+								<span class="float_right"> 평균대비 : {{totMonStat.tmpDngrSafeOcrrDif}} 건</span>
+								<span class="float_right"> 연평균: {{totMonStat.tmpDngrSafeOcrrYav}} 건</span>
+							</div>
+							<div class="col-xs-5 chart-padding-0">
+								<br>
+								<span class="col-xs-6 float_left" style="color: #09ea09"> 정상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
+								<span class="float_right" style="color: #09ea09">	20,0000 건</span>
+								<span class="col-xs-6 float_left" style="color: #09ea09"> 정상(유의)&nbsp;&nbsp;&nbsp;: </span>
+								<span class="float_right" style="color: #09ea09">	1,4000 건</span>
+								<span class="col-xs-6 float_left" style="color: #09ea09"> 주의&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
+								<span class="float_right" style="color: #09ea09">	1,0000 건</span>
+								<span class="col-xs-6 float_left" style="color: #09ea09"> 위험가능성 : </span>
+								<span class="float_right" style="color: #09ea09">	1,3000 건</span>
+								<span class="col-xs-6 float_left" style="color: #09ea09"> 위험&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
+								<span class="float_right" style="color: #09ea09">	30 건</span>
+							</div>
+						</div>
+						<div class="col-xs-6 border-line minMax-height-150">
+							<div class="col-xs-3">
+								<span class="col-xs-12 chart-padding-0">TOTAL</span>
+								<i class="fa-regular fa-square-check fa-4x" style="color: #406aec"></i>
+								<span class="col-xs-12 chart-padding-0">16,000 건</span>
+							</div>
+							<div class="col-xs-2">
+								<span class="col-xs-12 chart-padding-0">위험 지역</span>
+								<i class="fa-solid fa-triangle-exclamation fa-4x" style="color: #ee5e5e"></i>
+								<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpDngrZoneCnt}} 건</span>
+							</div>
+							<div class="col-xs-2">
+								<span class="col-xs-12 chart-padding-0">낙상</span>
+								<i class="fa-solid fa-person-falling-burst fa-4x" style="color: #ee5e5e"></i>
+								<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpFallDownCnt}} 건</span>
+							</div>
+							<div class="col-xs-2">
+								<span class="col-xs-12 chart-padding-0">심박 의심</span>
+								<i class="fa-solid fa-heart-pulse fa-4x" style="color: #ee5e5e"></i>
+								<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpHbitAbnmCnt}} 건</span>
+							</div>
+							<div class="col-xs-2">
+								<span class="col-xs-12 chart-padding-0">체온 의심</span>
+								<i class="fa-solid fa-temperature-quarter fa-4x" style="color: #ee5e5e"></i>
+								<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpTmepAbnmCnt}} 건</span>
+							</div>
+						</div>
+						<div class="col-xs-6 border-line minMax-height-150">
+							<span class="col-xs-12 chart-padding-0">위험지역 추이</span>
+							<div id=chartDngrZoneProg class ="col-xs-8 float_left">
+								<canvas id="dngrZoneProgChart" width="320" height="99">
+								</canvas>
+							</div>
+							<div class="col-xs-4">
+								<span class="col-xs-12 text-center" style="font-size: 24px;color: #2a99ec"> 증가 추세 </span>
+								<span class="col-xs-12 text-center"> 최저/최고 대비</span>
+								<span class="col-xs-12 text-center"> +1.8% </span>
+							</div>
+						</div>
+						<div class="col-xs-6 border-line minMax-height-150" style="padding-bottom: 30px;">
+							<span class="col-xs-12 chart-padding-0">자주 방문하는 위험지역 top3 (공공기준)</span>
+							<input type="text" name="plcCdPublTop1" class="col-xs-3" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.plcCdPublTop1">
+							<input type="text" name="addrPublTop1" class="col-xs-7" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.addrPublTop1">
+							<input type="text" name="cntPublTop1" class="col-xs-2 text-right" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.cntPublTop1">
+							<input type="text" name="plcCdPublTop2" class="col-xs-3" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.plcCdPublTop2">
+							<input type="text" name="addrPublTop2" class="col-xs-7" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.addrPublTop2">
+							<input type="text" name="cntPublTop2" class="col-xs-2 text-right" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.cntPublTop2">
+							<input type="text" name="plcCdPublTop3" class="col-xs-3" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.plcCdPublTop3">
+							<input type="text" name="addrPublTop3" class="col-xs-7" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.addrPublTop3">
+							<input type="text" name="cntPublTop3" class="col-xs-2 text-right" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
+						</div>
+						<div class="col-xs-6 border-line minMax-height-150" style="padding-bottom: 10px;">
+							<div class="col-xs-6">
+								<span class="col-xs-12 chart-padding-0">공공 안전위험지역 활용(탐지율)</span>
+								<div id=chartPublSafeDtct class ="col-xs-6">
+									<canvas id="publSafeDtctChart" width="70" height="70">
+									</canvas>
+									<span class="text-center">세이프존</span>
+								</div>
+								<div id=chartPublDngrDtct class ="col-xs-6">
+									<canvas id="publDngrDtctChart" width="70" height="70">
+									</canvas>
+									<span class="text-center">위험지역</span>
+								</div>
+							</div>
+							<div class="col-xs-6">
+								<span class="col-xs-12 chart-padding-0">학부모 지정지역 활용(탐지율)</span>
+								<div id=chartPrntSafeDtct class ="col-xs-6">
+									<canvas id="prntSafeDtctChart" width="70" height="70">
+									</canvas>
+									<span class="text-center">세이프존</span>
+								</div>
+								<div id=chartPrntDngrDtct class ="col-xs-6">
+									<canvas id="prntDngrDtctChart" width="70" height="70">
+									</canvas>
+									<span class="text-center">위험지역</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6 border-line minMax-height-150" style="padding-bottom: 30px;">
+							<span class="col-xs-12 chart-padding-0">보호자가 많이 지정한 위험지역 TOP3</span>
+							<input type="text" name="plcCdPrntTop1" class="col-xs-3" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
+							<input type="text" name="addrPrntTop1" class="col-xs-7" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
+							<input type="text" name="cntPrntTop1" class="col-xs-2 text-right" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
+							<input type="text" name="plcCdPrntTop2" class="col-xs-3" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.plcCdPrntTop2">
+							<input type="text" name="addrPrntTop2" class="col-xs-7" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.addrPrntTop2">
+							<input type="text" name="cntPrntTop2" class="col-xs-2 text-right" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.cntPrntTop2">
+							<input type="text" name="plcCdPrntTop3" class="col-xs-3" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.plcCdPrntTop3">
+							<input type="text" name="addrPrntTop3" class="col-xs-7" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.addrPrntTop3">
+							<input type="text" name="cntPrntTop3" class="col-xs-2 text-right" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.cntPrntTop3">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-3 border-line">
+					<div class="form-group">
+						<div class="col-xs-12 border-line">
+							<button class="col-xs-3 btn btn-secondary" v-on:click="initCycl(5000)" type="button">
+								<span class="glyphicon"> 갱신주기 :  </span>
+							</button>
+							<button class="col-xs-3 btn btn-secondary" v-on:click="initCycl(5000)" type="button">
+								<span class="glyphicon"> 5 sec </span>
+							</button>
+							<button class="col-xs-3 btn btn-secondary" v-on:click="initCycl(30000)" type="button">
+								<span class="glyphicon"> 30 sec </span>
+							</button>
+							<button class="col-xs-3 btn btn-secondary" v-on:click="initCycl(60000)" type="button">
+								<span class="glyphicon"> 1 min </span>
+							</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-12 border-line">
+							<span class="col-xs-12 text-center" style="font-size: 36px;">{{clockParam.amPm}} {{clockParam.hhmmss}}</span>
+							<span class="col-xs-12 text-center" style="font-size: 24px;color: #09ea09">{{clockParam.yyyymmdd}}{{clockParam.ddd}}</span>
+							<span class="float_right">+ more</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-12 border-line">
+							이력
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-10 border-line" style="padding-bottom: 10px;">
+					헬스케어
+					<div class="form-group">
+						<div class="col-xs-12 border-line minMax-height-150">
+							<div class ="col-xs-2 chart-padding-2">
+								<div id=chartCareBmiBodyIdx class ="col-xs-4 chart-padding float_left">
+									<canvas id="careBmiBodyIdxChart" width="100" height="110">
+									</canvas>
+								</div>
+								<div id="careBmiBodyIdxDetl" class="col-xs-8 chart-padding-0">
+									<span class="col-xs-12 text-center">[BMI-체질량지수]</span>
+									<span class="col-xs-12 text-center" style="font-size: 18px;">{{ totMonStat.careBmiBodyIdxAvg }}</span>
+									<span class="col-xs-12 text-center">최저 : {{ totMonStat.careBmiBodyIdxMin }}</span>
+									<span class="col-xs-12 text-center">최대 : {{ totMonStat.careBmiBodyIdxMax }}</span>
+								</div>
+							</div>
+							<div class ="col-xs-3 chart-padding-1">
+								<div id=chartCareGrowIdx class ="col-xs-5 chart-padding-0">
+									<canvas id="careGrowIdxChart" width="80" height="80" style="margin-left: 50px;">
+									</canvas>
+								</div>
+								<div id="careGrowIdxDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[성장 지수]</span>
 
-			<div class="form-group">
-				로고
-			</div>
-			<div class="col-xs-2 border-line" style="padding-top: 15px;">
-				<div class="form-group">
-					<span class="float_left">가동 현황</span>
-					<span class="float_right">+ more</span>
-					<div class="col-xs-12 chart-padding-2 form-group border-line">
-						<div id=chartOperStat class ="float_left">
-							<canvas id="operStatChart" width="80" height="80">
-							</canvas>
-						</div>
-						<div id="operStatDetl">
-							<br>
-							<span class="col-xs-8 text-center"> 개통&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{totMonStat.tmpNumber1}} 대</span>
-							<span class="col-xs-8 text-center"> 가동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{totMonStat.tmpNumber2}} 대</span>
-							<span class="col-xs-8 text-center"> 무응답&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{totMonStat.tmpNumber3}} 대</span>
-						</div>
-					</div>
-					<span class="float_left">개통 현황</span>
-					<span class="float_right">+ more</span>
-					<div class="col-xs-12 chart-padding-2 form-group border-line">
-						<div id=chartOpenStat class ="float_left">
-							<canvas id="openStatChart" width="80" height="80">
-							</canvas>
-						</div>
-						<div id="openStatDetl">
-							<br>
-							<span class="col-xs-8 text-center"> 밴드 개통&nbsp;: {{totMonStat.tmpNumber4}} 건</span>
-							<span class="col-xs-8 text-center"> 서류 제출&nbsp;: {{totMonStat.tmpNumber5}} 건</span>
-							<span class="col-xs-8 text-center"> 회원 가입&nbsp;: {{totMonStat.tmpNumber6}} 건</span>
-						</div>
-					</div>
-					<span class="float_left">헬스케어 활용율</span>
-					<span class="float_right">+ more</span>
-					<div class="col-xs-12 form-group border-line">
-						<div class="col-xs-12 chart-padding-0">
-							<div id=chartGrowFat class ="float_left">
-								<canvas id="growFatChart" width="80" height="80">
-								</canvas>
+									<span class="col-xs-12 text-center">과성장 : {{ totMonStat.careGrowOverRt }} %</span>
+									<span class="col-xs-12 text-center">저성장 : {{ totMonStat.careGrowLowRt }} %</span>
+								</div>
 							</div>
-							<div id="growFatDetl">
-								<span class="col-xs-8 text-center"> 성장 / 비만</span>
-								<span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
-								<span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
+							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+								<div id=chartCareFatIdx class ="col-xs-5 chart-padding-0">
+									<canvas id="careFatIdxChart" width="80" height="80" style="margin-left: 20px;">
+									</canvas>
+								</div>
+								<div id="careFatIdxDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[비만 지수]</span>
+									<span class="col-xs-12 text-center">고도비만 : {{ totMonStat.careFatIdxHighRt }} %</span>
+									<span class="col-xs-12 text-center">비만 : {{ totMonStat.careFatIdxGnrlRt }} %</span>
+									<span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatIdxUndrRt }} %</span>
+								</div>
 							</div>
-						</div>
-						<div class="col-xs-12 chart-padding-0">
-							<div id=chartFatPrdt class ="float_left">
-								<canvas id="fatPrdtChart" width="80" height="80">
-								</canvas>
+							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+								<div id=chartCareFatPrdt class ="col-xs-5 chart-padding-0">
+									<canvas id="careFatPrdtChart" width="80" height="80" style="margin-left: 20px;">
+									</canvas>
+								</div>
+								<div id="careFatPrdtDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[비만 예측]</span>
+									<span class="col-xs-12 text-center">고도비만 : {{ totMonStat.careFatPrdtHighRt }} %</span>
+									<span class="col-xs-12 text-center">비만 : {{ totMonStat.careFatPrdtGnrlRt }} %</span>
+									<span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatPrdtUndrRt }} %</span>
+								</div>
 							</div>
-							<div id="fatPrdtDetl">
-								<span class="col-xs-8 text-center"> 비만 예측</span>
-								<span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
-								<span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
-							</div>
-						</div>
-						<div class="col-xs-12 chart-padding-0">
-							<div id=chartStrs class ="float_left">
-								<canvas id="strsChart" width="80" height="80">
-								</canvas>
-							</div>
-							<div id="strsDetl">
-								<span class="col-xs-8 text-center"> 스트레스</span>
-								<span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
-								<span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-7 border-line" style="padding-bottom: 10px;">
-				위험안전발생
-				<div class="form-group">
-					<div class="col-xs-6 border-line">
-						<div class="col-xs-3 chart-padding-0">
-							<div id=chartDngrSafeOccr class ="float_left">
-								<canvas id="dngrSafeOccrChart" width="110" height="110">
-								</canvas>
-							</div>
-						</div>
-						<div class="col-xs-4" style="padding: 30px 30px;">
-							<span class="float_right" style="font-size: 24px;"> {{totMonStat.tmpDngrSafeOcrrTd}} 건</span>
-							<span class="float_right"> 평균대비 : {{totMonStat.tmpDngrSafeOcrrDif}} 건</span>
-							<span class="float_right"> 연평균: {{totMonStat.tmpDngrSafeOcrrYav}} 건</span>
-						</div>
-						<div class="col-xs-5 chart-padding-0">
-							<br>
-							<span class="col-xs-6 float_left"> 정상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
-							<span class="float_right">	20,0000 건</span>
-							<span class="col-xs-6 float_left"> 정상(유의)&nbsp;&nbsp;&nbsp;: </span>
-							<span class="float_right">	1,4000 건</span>
-							<span class="col-xs-6 float_left"> 주의&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
-							<span class="float_right">	1,0000 건</span>
-							<span class="col-xs-6 float_left"> 위험가능성 : </span>
-							<span class="float_right">	1,3000 건</span>
-							<span class="col-xs-6 float_left"> 위험&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
-							<span class="float_right">	30 건</span>
-						</div>
-					</div>
-					<div class="col-xs-6 border-line">
-						<div class="col-xs-3">
-							<span class="col-xs-12 chart-padding-0">TOTAL</span>
-							<i class="fa-regular fa-square-check fa-4x" style="color: #406aec"></i>
-							<span class="col-xs-12 chart-padding-0">16,000 건</span>
-						</div>
-						<div class="col-xs-2">
-							<span class="col-xs-12 chart-padding-0">위험 지역</span>
-							<i class="fa-solid fa-triangle-exclamation fa-4x" style="color: #ee5e5e"></i>
-							<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpDngrZoneCnt}} 건</span>
-						</div>
-						<div class="col-xs-2">
-							<span class="col-xs-12 chart-padding-0">낙상</span>
-							<i class="fa-solid fa-person-falling-burst fa-4x" style="color: #ee5e5e"></i>
-							<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpFallDownCnt}} 건</span>
-						</div>
-						<div class="col-xs-2">
-							<span class="col-xs-12 chart-padding-0">심박 의심</span>
-							<i class="fa-solid fa-heart-pulse fa-4x" style="color: #ee5e5e"></i>
-							<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpHbitAbnmCnt}} 건</span>
-						</div>
-						<div class="col-xs-2">
-							<span class="col-xs-12 chart-padding-0">체온 의심</span>
-							<i class="fa-solid fa-temperature-quarter fa-4x" style="color: #ee5e5e"></i>
-							<span class="col-xs-12 chart-padding-0">{{totMonStat.tmpTmepAbnmCnt}} 건</span>
-						</div>
-					</div>
-					<div class="col-xs-6 border-line">
-						<span class="col-xs-12 chart-padding-0">위험지역 추이</span>
-						<div id=chartDngrZoneProg class ="col-xs-8 float_left">
-							<canvas id="dngrZoneProgChart" width="320" height="100">
-							</canvas>
-						</div>
-						<div class="col-xs-4">
-							<span class="col-xs-12 text-center" style="font-size: 24px;color: #2aca76"> 증가 추세 </span>
-							<span class="col-xs-12 text-center"> 최저/최고 대비</span>
-							<span class="col-xs-12 text-center"> +1.8% </span>
-						</div>
-					</div>
-					<div class="col-xs-6 border-line" style="padding-bottom: 30px;">
-						<span class="col-xs-12 chart-padding-0">자주 방문하는 위험지역 top3 (공공기준)</span>
-						<input type="text" name="plcCdPublTop1" class="col-xs-3" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.plcCdPublTop1">
-						<input type="text" name="addrPublTop1" class="col-xs-7" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.addrPublTop1">
-						<input type="text" name="cntPublTop1" class="col-xs-2 text-right" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.cntPublTop1">
-						<input type="text" name="plcCdPublTop2" class="col-xs-3" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.plcCdPublTop2">
-						<input type="text" name="addrPublTop2" class="col-xs-7" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.addrPublTop2">
-						<input type="text" name="cntPublTop2" class="col-xs-2 text-right" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.cntPublTop2">
-						<input type="text" name="plcCdPublTop3" class="col-xs-3" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.plcCdPublTop3">
-						<input type="text" name="addrPublTop3" class="col-xs-7" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.addrPublTop3">
-						<input type="text" name="cntPublTop3" class="col-xs-2 text-right" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
-					</div>
-					<div class="col-xs-6 border-line" style="padding-bottom: 10px;">
-						<div class="col-xs-6">
-							<span class="col-xs-12 chart-padding-0">공공 안전위험지역 활용(탐지율)</span>
-							<div id=chartPublSafeDtct class ="col-xs-6">
-								<canvas id="publSafeDtctChart" width="70" height="70">
-								</canvas>
-								<span class="text-center">세이프존</span>
-							</div>
-							<div id=chartPublDngrDtct class ="col-xs-6">
-								<canvas id="publDngrDtctChart" width="70" height="70">
-								</canvas>
-								<span class="text-center">위험지역</span>
-							</div>
-						</div>
-						<div class="col-xs-6">
-							<span class="col-xs-12 chart-padding-0">학부모 지정지역 활용(탐지율)</span>
-							<div id=chartPrntSafeDtct class ="col-xs-6">
-								<canvas id="prntSafeDtctChart" width="70" height="70">
-								</canvas>
-								<span class="text-center">세이프존</span>
-							</div>
-							<div id=chartPrntDngrDtct class ="col-xs-6">
-								<canvas id="prntDngrDtctChart" width="70" height="70">
-								</canvas>
-								<span class="text-center">위험지역</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-6 border-line" style="padding-bottom: 30px;">
-						<span class="col-xs-12 chart-padding-0">보호자가 많이 지정한 위험지역 TOP3</span>
-						<input type="text" name="plcCdPrntTop1" class="col-xs-3" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
-						<input type="text" name="addrPrntTop1" class="col-xs-7" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
-						<input type="text" name="cntPrntTop1" class="col-xs-2 text-right" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
-						<input type="text" name="plcCdPrntTop2" class="col-xs-3" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.plcCdPrntTop2">
-						<input type="text" name="addrPrntTop2" class="col-xs-7" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.addrPrntTop2">
-						<input type="text" name="cntPrntTop2" class="col-xs-2 text-right" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.cntPrntTop2">
-						<input type="text" name="plcCdPrntTop3" class="col-xs-3" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.plcCdPrntTop3">
-						<input type="text" name="addrPrntTop3" class="col-xs-7" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.addrPrntTop3">
-						<input type="text" name="cntPrntTop3" class="col-xs-2 text-right" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.cntPrntTop3">
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-3 border-line">
-				<div class="form-group">
-					<div class="col-xs-12 border-line">
-						갱신주기
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12 border-line">
-						시계
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-12 border-line">
-						이력
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-10 border-line" style="padding-bottom: 10px;">
-				헬스케어
-				<div class="form-group">
-					<div class="col-xs-12 border-line">
-						<div class ="col-xs-2">
-							<div id=chartCareBmiBodyIdx class ="col-xs-4 chart-padding float_left">
-								<canvas id="careBmiBodyIdxChart" width="100" height="110">
-								</canvas>
-							</div>
-							<div id="careBmiBodyIdxDetl" class="col-xs-8 chart-padding-0">
-								<span class="col-xs-12 text-center">[BMI-체질량지수]</span>
-								<span class="col-xs-12 text-center" style="font-size: 18px;">{{ totMonStat.careBmiBodyIdxAvg }}</span>
-								<span class="col-xs-12 text-center">최저 : {{ totMonStat.careBmiBodyIdxMin }}</span>
-								<span class="col-xs-12 text-center">최대 : {{ totMonStat.careBmiBodyIdxMax }}</span>
-							</div>
-						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareGrowIdx class ="col-xs-5 chart-padding-0">
-								<canvas id="careGrowIdxChart" width="80" height="80" style="margin-left: 20px;">
-								</canvas>
-							</div>
-							<div id="careGrowIdxDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[성장 지수]</span>
+							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+								<div id=chartCareStrs class ="col-xs-5 chart-padding-0">
+									<canvas id="careStrsChart" width="80" height="80" style="margin-left: 20px;">
+									</canvas>
+								</div>
+								<div id="careStrsDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[스트레스]</span>
 
-								<span class="col-xs-12 text-center">과성장 : {{ totMonStat.careGrowOverRt }} %</span>
-								<span class="col-xs-12 text-center">저성장 : {{ totMonStat.careGrowLowRt }} %</span>
+									<span class="col-xs-12 text-center">과성장 : {{ totMonStat.careStrsHigh }} %</span>
+									<span class="col-xs-12 text-center">저성장 : {{ totMonStat.careStrsVeryHigh }} %</span>
+								</div>
 							</div>
 						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareFatIdx class ="col-xs-5 chart-padding-0">
-								<canvas id="careFatIdxChart" width="80" height="80" style="margin-left: 20px;">
-								</canvas>
+						<div class="col-xs-12 border-line minMax-height-150">
+							<div class ="col-xs-2 chart-padding-2">
+								<div id=chartCareExcsTime class ="col-xs-4 chart-padding-0 float_left">
+									<canvas id="careExcsTimeChart" width="100" height="110">
+									</canvas>
+								</div>
+								<div id="careExcsTimeDetl" class="col-xs-8 chart-padding-0">
+									<span class="col-xs-12 text-center">[평균 운동시간]</span>
+									<span class="col-xs-12 text-center" style="font-size: 18px;">{{ totMonStat.careExcsTimeDif }} H</span>
+									<span class="col-xs-12 text-center">평균 : {{ totMonStat.careExcsTimeAvg }} h</span>
+									<span class="col-xs-12 text-center">전일 : {{ totMonStat.careExcsTimeBfDay }} h</span>
+								</div>
 							</div>
-							<div id="careFatIdxDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[비만 지수]</span>
-								<span class="col-xs-12 text-center">고도비만 : {{ totMonStat.careFatIdxHighRt }} %</span>
-								<span class="col-xs-12 text-center">비만 : {{ totMonStat.careFatIdxGnrlRt }} %</span>
-								<span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatIdxUndrRt }} %</span>
+							<div class ="col-xs-3 chart-padding-1">
+								<div id=chartCareCalEat class ="col-xs-5 chart-padding">
+									<canvas id="careCalEatChart" width="110" height="110">
+									</canvas>
+								</div>
+								<div id="careCalEatDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[평균 칼로리 섭취]</span>
+									<span class="col-xs-12 text-center" style="font-size: 18px;">{{ totMonStat.careCalEatDif }} kcal</span>
+									<span class="col-xs-12 text-center">평균 : {{ totMonStat.careCalEatAvg }} kcal</span>
+									<span class="col-xs-12 text-center">전일 : {{ totMonStat.careCalEatbfDay }} kcal</span>
+								</div>
 							</div>
-						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareFatPrdt class ="col-xs-5 chart-padding-0">
-								<canvas id="careFatPrdtChart" width="80" height="80" style="margin-left: 20px;">
-								</canvas>
+							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+								<div id=chartCareFmenuTop class ="col-xs-5 chart-padding-0">
+									<canvas id="careFmenuTopChart" width="80" height="80" style="margin-left: 20px;">
+									</canvas>
+								</div>
+								<div id="careFmenuTopDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[주요식단 TOP3]</span>
+									<span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop1 }} : {{ totMonStat.careFmenuRtTop1 }} %</span>
+									<span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop2 }} : {{ totMonStat.careFmenuRtTop2 }} %</span>
+									<span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop3 }} : {{ totMonStat.careFmenuRtTop3 }} %</span>
+								</div>
 							</div>
-							<div id="careFatPrdtDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[비만 예측]</span>
-								<span class="col-xs-12 text-center">고도비만 : {{ totMonStat.careFatPrdtHighRt }} %</span>
-								<span class="col-xs-12 text-center">비만 : {{ totMonStat.careFatPrdtGnrlRt }} %</span>
-								<span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatPrdtUndrRt }} %</span>
+							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+								<div id=chartCareMmelNeatFmenu class ="col-xs-5 chart-padding-0">
+									<canvas id="careMmelNeatFmenuChart" width="80" height="80" style="margin-left: 20px;">
+									</canvas>
+								</div>
+								<div id="careMmelNeatFmenuDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[아침결식율-식단]</span>
+									<span class="col-xs-12 text-center">결식 : {{ totMonStat.careMmelNeatFmenuCnt }} 명</span>
+									<span class="col-xs-12 text-center">대상 : {{ totMonStat.careMmelNeatFmenuObj }} 명</span>
+								</div>
 							</div>
-						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareStrs class ="col-xs-5 chart-padding-0">
-								<canvas id="careStrsChart" width="80" height="80" style="margin-left: 20px;">
-								</canvas>
-							</div>
-							<div id="careStrsDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[스트레스]</span>
-
-								<span class="col-xs-12 text-center">과성장 : {{ totMonStat.careStrsHigh }} %</span>
-								<span class="col-xs-12 text-center">저성장 : {{ totMonStat.careStrsVeryHigh }} %</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-xs-12 border-line">
-						<div class ="col-xs-2">
-							<div id=chartCareExcsTime class ="col-xs-4 chart-padding float_left">
-								<canvas id="careExcsTimeChart" width="100" height="110">
-								</canvas>
-							</div>
-							<div id="careExcsTimeDetl" class="col-xs-8 chart-padding-0">
-								<span class="col-xs-12 text-center">[평균 운동시간]</span>
-								<span class="col-xs-12 text-center" style="font-size: 18px;">{{ totMonStat.careExcsTimeDif }} H</span>
-								<span class="col-xs-12 text-center">평균 : {{ totMonStat.careExcsTimeAvg }} h</span>
-								<span class="col-xs-12 text-center">전일 : {{ totMonStat.careExcsTimeBfDay }} h</span>
-							</div>
-						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareCalEat class ="col-xs-5 chart-padding">
-								<canvas id="careCalEatChart" width="110" height="110">
-								</canvas>
-							</div>
-							<div id="careCalEatDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[평균 칼로리 섭취]</span>
-								<span class="col-xs-12 text-center" style="font-size: 18px;">{{ totMonStat.careCalEatDif }} kcal</span>
-								<span class="col-xs-12 text-center">평균 : {{ totMonStat.careCalEatAvg }} kcal</span>
-								<span class="col-xs-12 text-center">전일 : {{ totMonStat.careCalEatbfDay }} kcal</span>
-							</div>
-						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareFmenuTop class ="col-xs-5 chart-padding-0">
-								<canvas id="careFmenuTopChart" width="80" height="80" style="margin-left: 20px;">
-								</canvas>
-							</div>
-							<div id="careFmenuTopDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[주요식단 TOP3]</span>
-								<span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop1 }} : {{ totMonStat.careFmenuRtTop1 }} %</span>
-								<span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop2 }} : {{ totMonStat.careFmenuRtTop2 }} %</span>
-								<span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop3 }} : {{ totMonStat.careFmenuRtTop3 }} %</span>
-							</div>
-						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareMmelNeatFmenu class ="col-xs-5 chart-padding-0">
-								<canvas id="careMmelNeatFmenuChart" width="80" height="80" style="margin-left: 20px;">
-								</canvas>
-							</div>
-							<div id="careMmelNeatFmenuDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[아침결식율-식단]</span>
-								<span class="col-xs-12 text-center">결식 : {{ totMonStat.careMmelNeatFmenuCnt }} 명</span>
-								<span class="col-xs-12 text-center">대상 : {{ totMonStat.careMmelNeatFmenuObj }} 명</span>
-							</div>
-						</div>
-						<div class ="col-xs-2">
-							<div id=chartCareMmelNeatQust class ="col-xs-5 chart-padding-0">
-								<canvas id="careMmelNeatQustChart" width="80" height="80" style="margin-left: 20px;">
-								</canvas>
-							</div>
-							<div id="careMmelNeatQustDetl" class="col-xs-7 chart-padding-0">
-								<span class="col-xs-12 text-center">[아침결식율-설문]</span>
-								<span class="col-xs-12 text-center">결식 : {{ totMonStat.careMmelNeatFmenuCnt }} 명</span>
-								<span class="col-xs-12 text-center">대상 : {{ totMonStat.careMmelNeatFmenuObj }} 명</span>
+							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+								<div id=chartCareMmelNeatQust class ="col-xs-5 chart-padding-0">
+									<canvas id="careMmelNeatQustChart" width="80" height="80" style="margin-left: 20px;">
+									</canvas>
+								</div>
+								<div id="careMmelNeatQustDetl" class="col-xs-7 chart-padding-0">
+									<span class="col-xs-12 text-center">[아침결식율-설문]</span>
+									<span class="col-xs-12 text-center">결식 : {{ totMonStat.careMmelNeatFmenuCnt }} 명</span>
+									<span class="col-xs-12 text-center">대상 : {{ totMonStat.careMmelNeatFmenuObj }} 명</span>
+								</div>
 							</div>
 						</div>
 					</div>
