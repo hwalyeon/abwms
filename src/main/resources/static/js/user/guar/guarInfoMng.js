@@ -73,6 +73,8 @@ let guarInfoMng = new Vue({
                         {name: "prntNoTemp"   , index: "prntNoTemp"   , label: "학부모번호"     , hidden: true },
                         {name: "guarNo"       , index: "guarNo"       , label: "보호자번호"     , width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
                                 return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}"data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}" data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
+                        {name: "guarNo"       , index: "guarNo"       , label: "보호자번호"     , width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
+                                return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}"data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}" data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
                         {name: "guarNm"       , index: "guarNm"       , label: "보호자명"	   , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                                 return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}"data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}" data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
                         {name: "guarTelNo"    , index: "guarTelNo"    , label: "보호자전화번호" , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
@@ -130,7 +132,7 @@ let guarInfoMng = new Vue({
                         gridComplete: function () {
                             let grid = this;
 
-                            $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo","stdtNo","stdtNm","entrDt","entdStatCdNm","locNm","bandId","telNo","prntNo","prntNmMale","prntNmFemale"],"guarNo");
+                            $(grid).tableRowSpan(["guarNo","guarNm"], "guarNo");
 
 
                             //보호자(사용자)정보 상세 팝업

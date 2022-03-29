@@ -24,7 +24,7 @@ let actHist = new Vue({
         code:
         {
             bDPerList     : [] , //기준_일자_기간_리스트
-            actClssCdList  : [] , //활동_구분_코드
+            actClssCdList : [] , //활동_구분_코드
             actCdList     : [] , //활동_코드
         },
 	},
@@ -101,7 +101,7 @@ let actHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["stndDt","stdtNo","stdtNm","locNm","actNm", "actTcntMcnt","rpetActCnt", "calCsumQty","judgNo","physStrsStatCdNm","telNo"], "stdtNo");
+                    $(grid).tableRowSpan(["stndDt","stdtNo","stdtNm","locNm","actNm", "actTcntMcnt","rpetActCnt", "calCsumQty","judgNo","telNo"], "stdtNo");
                 }
             }));
             resizeJqGridWidth("actHist_list", "actHist_list_wrapper");
