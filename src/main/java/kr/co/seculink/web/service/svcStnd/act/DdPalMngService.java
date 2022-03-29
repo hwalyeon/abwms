@@ -1,4 +1,4 @@
-package kr.co.seculink.web.service.svcStnd.fat;
+package kr.co.seculink.web.service.svcStnd.act;
 
 import kr.co.seculink.exception.BizException;
 
