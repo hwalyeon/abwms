@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface CbeeHistService
 {
-	// 스트레스_지수_이력 리스트 조회
+	// 캐시비 리스트 조회
 	public List<Map<String, String>> searchCbeeHistList(Map<String, String> params) throws BizException;
 }
  

@@ -26,7 +26,7 @@ public class CbeeHistController {
 	@Autowired
 	private CbeeHistService cbeeHistService;
 
-	// 스트레스_지수_이력 리스트 조회
+	// 캐시비 리스트 조회
 	@ResponseBody
 	@RequestMapping("/oper/cbee/cbeeHist/cbeeHistList.ab")
 	public RtnMsg searchCbeeHistList(@RequestBody(required = false) Map<String, String> params) throws BizException {
@@ -46,7 +46,7 @@ public class CbeeHistController {
 		return vo;
 	}
 
-	//스트레스_지수_이력 리스트 엑셀다운로드
+	//캐시비 리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/oper/cbee/cbeeHist/cbeeHistList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required = false) Map<String, String> params) throws BizException {
@@ -58,7 +58,7 @@ public class CbeeHistController {
 	}
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list) {
-		String[] arrHeader = { "발생일시", "학교 명","학생 번호","학생 명","성별","나이(년)","나이(개월)","스트레스 상태","정신적 상태","신체적 상태","대처능력","학생(밴드)전화번호","보호자 번호","보호자 명","보호자 전화번호" };
+		String[] arrHeader = { "발생 일시", "학교 명","학생 번호","학생 명","발생 구분(적립/소진)","발생 금액","누적 잔액","학생(밴드)전화번호","보호자 번호","보호자 명","보호자 전화번호" };
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -66,17 +66,13 @@ public class CbeeHistController {
 
 		for (Map<String, String> info : list) {
 			data = new ArrayList<String>();
-			data.add(info.get("cbeeJudgDttm"));
+			data.add(info.get("occrDttm"));
 			data.add(info.get("locNm"));
 			data.add(String.valueOf(info.get("stdtNo")));
 			data.add(info.get("stdtNm"));
-			data.add(info.get("sexCdNm"));
-			data.add(String.valueOf(info.get("ageYy")));
-			data.add(String.valueOf(info.get("ageMm")));
-			data.add(info.get("cbeeStatCdNm"));
-			data.add(info.get("mindCbeeStatCdNm"));
-			data.add(info.get("physCbeeStatCdNm"));
-			data.add(info.get("cbeeCopeStatCd"));
+			data.add(info.get("cbeeUseCdNm"));
+			data.add(String.valueOf(info.get("useCbeeAmt")));
+			data.add(String.valueOf(info.get("cbeeBal")));
 			data.add(info.get("telNo"));
 			data.add(String.valueOf(info.get("guarNo")));
 			data.add(info.get("guarNm"));

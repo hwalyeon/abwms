@@ -21,7 +21,7 @@ public class CbeeHistServiceImpl implements CbeeHistService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	// 스트레스_지수_이력 리스트 조회
+	// 캐시비 리스트 조회
 	public List<Map<String, String>> searchCbeeHistList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("oper.cbee.cbeeHist.selectCbeeHistList", params);
