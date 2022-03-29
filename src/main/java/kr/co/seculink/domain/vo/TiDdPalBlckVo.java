@@ -7,11 +7,11 @@ import java.io.Serializable;
  */
 public class TiDdPalBlckVo implements Serializable {
 
-	/* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-	private String currFatJudgCd;
+	/* fat_judg_cd 비만_판정_코드 character varying(20) */
+	private String fatJudgCd;
 
-	/* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-	private String prdtFatJudgCd;
+	/* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+	private String fatpJudgCd;
 
 	/* sex_cd 성별_코드 character varying(20) */
 	private String sexCd;
@@ -57,34 +57,34 @@ public class TiDdPalBlckVo implements Serializable {
 
 
 	/**
-	 * Get curr_fat_judg_cd 현재_비만_판정_코드 character varying(20)
-	 * @Return String currFatJudgCd
+	 * Get fat_judg_cd 비만_판정_코드 character varying(20)
+	 * @Return String fatJudgCd
 	 */
-	public String getCurrFatJudgCd() {
-		return this.currFatJudgCd;
+	public String getFatJudgCd() {
+		return this.fatJudgCd;
 	}
 	
 	/**
-	 * Set curr_fat_judg_cd 현재_비만_판정_코드 character varying(20)
-	 * @Param String currFatJudgCd
+	 * Set fat_judg_cd 비만_판정_코드 character varying(20)
+	 * @Param String fatJudgCd
 	 */
-	public void setCurrFatJudgCd(String currFatJudgCd) {
-		this.currFatJudgCd = currFatJudgCd;
+	public void setFatJudgCd(String fatJudgCd) {
+		this.fatJudgCd = fatJudgCd;
 	}
 	/**
-	 * Get prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20)
-	 * @Return String prdtFatJudgCd
+	 * Get fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Return String fatpJudgCd
 	 */
-	public String getPrdtFatJudgCd() {
-		return this.prdtFatJudgCd;
+	public String getFatpJudgCd() {
+		return this.fatpJudgCd;
 	}
 	
 	/**
-	 * Set prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20)
-	 * @Param String prdtFatJudgCd
+	 * Set fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Param String fatpJudgCd
 	 */
-	public void setPrdtFatJudgCd(String prdtFatJudgCd) {
-		this.prdtFatJudgCd = prdtFatJudgCd;
+	public void setFatpJudgCd(String fatpJudgCd) {
+		this.fatpJudgCd = fatpJudgCd;
 	}
 	/**
 	 * Get sex_cd 성별_코드 character varying(20)

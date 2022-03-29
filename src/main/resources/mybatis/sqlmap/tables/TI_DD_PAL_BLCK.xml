@@ -9,8 +9,8 @@
 
 	<select id="select" resultType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
 		/* Generated SQL SQL ID : ti_dd_pal_blck.select */
-        SELECT  curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-               ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+        SELECT  fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
+               ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
                ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -27,8 +27,8 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ti_dd_pal_blck
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -40,8 +40,8 @@
 		/* Generated SQL SQL ID : ti_dd_pal_blck.insert */
 		INSERT INTO ti_dd_pal_blck
 		(
-		     curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		    ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		    ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -67,8 +67,8 @@
 		)
 		VALUES
 		(
-		     #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		     #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		     #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		     #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -114,8 +114,8 @@
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -127,8 +127,8 @@
 		/* Generated SQL SQL ID : ti_dd_pal_blck.merge */
 		INSERT INTO ti_dd_pal_blck
 		(
-		     curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		     prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		     fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		     sex_cd /* sex_cd 성별_코드 character varying(20) */
 		     age_ycnt /* age_ycnt 나이_년수 numeric */
 		     pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -154,8 +154,8 @@
 		)
 		VALUES
 		(
-		     #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		     #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		     #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		     #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -203,8 +203,8 @@
 		/* Generated SQL SQL ID : ti_dd_pal_blck.delete */
 		DELETE FROM ti_dd_pal_blck
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */

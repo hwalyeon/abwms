@@ -7,17 +7,17 @@ import java.io.Serializable;
  */
 public class TiFatJudgSpecVo implements Serializable {
 
-	/* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-	private String currFatJudgCd;
+	/* fat_judg_cd 비만_판정_코드 character varying(20) */
+	private String fatJudgCd;
 
-	/* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-	private String prdtFatJudgCd;
+	/* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+	private String fatpJudgCd;
 
-	/* prdt_eval_smry 예측_평가_요약 character varying(1000) */
-	private String prdtEvalSmry;
+	/* fatp_eval_smry 비만예측_평가_요약 character varying(1000) */
+	private String fatpEvalSmry;
 
-	/* prdt_eval_cntn 예측_평가_내용 character varying(4000) */
-	private String prdtEvalCntn;
+	/* fatp_eval_cntn 비만예측_평가_내용 character varying(4000) */
+	private String fatpEvalCntn;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -39,64 +39,64 @@ public class TiFatJudgSpecVo implements Serializable {
 
 
 	/**
-	 * Get curr_fat_judg_cd 현재_비만_판정_코드 character varying(20)
-	 * @Return String currFatJudgCd
+	 * Get fat_judg_cd 비만_판정_코드 character varying(20)
+	 * @Return String fatJudgCd
 	 */
-	public String getCurrFatJudgCd() {
-		return this.currFatJudgCd;
+	public String getFatJudgCd() {
+		return this.fatJudgCd;
 	}
 	
 	/**
-	 * Set curr_fat_judg_cd 현재_비만_판정_코드 character varying(20)
-	 * @Param String currFatJudgCd
+	 * Set fat_judg_cd 비만_판정_코드 character varying(20)
+	 * @Param String fatJudgCd
 	 */
-	public void setCurrFatJudgCd(String currFatJudgCd) {
-		this.currFatJudgCd = currFatJudgCd;
+	public void setFatJudgCd(String fatJudgCd) {
+		this.fatJudgCd = fatJudgCd;
 	}
 	/**
-	 * Get prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20)
-	 * @Return String prdtFatJudgCd
+	 * Get fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Return String fatpJudgCd
 	 */
-	public String getPrdtFatJudgCd() {
-		return this.prdtFatJudgCd;
-	}
-	
-	/**
-	 * Set prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20)
-	 * @Param String prdtFatJudgCd
-	 */
-	public void setPrdtFatJudgCd(String prdtFatJudgCd) {
-		this.prdtFatJudgCd = prdtFatJudgCd;
-	}
-	/**
-	 * Get prdt_eval_smry 예측_평가_요약 character varying(1000)
-	 * @Return String prdtEvalSmry
-	 */
-	public String getPrdtEvalSmry() {
-		return this.prdtEvalSmry;
+	public String getFatpJudgCd() {
+		return this.fatpJudgCd;
 	}
 	
 	/**
-	 * Set prdt_eval_smry 예측_평가_요약 character varying(1000)
-	 * @Param String prdtEvalSmry
+	 * Set fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Param String fatpJudgCd
 	 */
-	public void setPrdtEvalSmry(String prdtEvalSmry) {
-		this.prdtEvalSmry = prdtEvalSmry;
+	public void setFatpJudgCd(String fatpJudgCd) {
+		this.fatpJudgCd = fatpJudgCd;
 	}
 	/**
-	 * Get prdt_eval_cntn 예측_평가_내용 character varying(4000)
-	 * @Return String prdtEvalCntn
+	 * Get fatp_eval_smry 비만예측_평가_요약 character varying(1000)
+	 * @Return String fatpEvalSmry
 	 */
-	public String getPrdtEvalCntn() {
-		return this.prdtEvalCntn;
+	public String getFatpEvalSmry() {
+		return this.fatpEvalSmry;
 	}
 	
 	/**
-	 * Set prdt_eval_cntn 예측_평가_내용 character varying(4000)
-	 * @Param String prdtEvalCntn
+	 * Set fatp_eval_smry 비만예측_평가_요약 character varying(1000)
+	 * @Param String fatpEvalSmry
 	 */
-	public void setPrdtEvalCntn(String prdtEvalCntn) {
-		this.prdtEvalCntn = prdtEvalCntn;
+	public void setFatpEvalSmry(String fatpEvalSmry) {
+		this.fatpEvalSmry = fatpEvalSmry;
+	}
+	/**
+	 * Get fatp_eval_cntn 비만예측_평가_내용 character varying(4000)
+	 * @Return String fatpEvalCntn
+	 */
+	public String getFatpEvalCntn() {
+		return this.fatpEvalCntn;
+	}
+	
+	/**
+	 * Set fatp_eval_cntn 비만예측_평가_내용 character varying(4000)
+	 * @Param String fatpEvalCntn
+	 */
+	public void setFatpEvalCntn(String fatpEvalCntn) {
+		this.fatpEvalCntn = fatpEvalCntn;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

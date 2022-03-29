@@ -9,8 +9,8 @@
 
 	<select id="select" resultType="kr.co.seculink.domain.vo.TiFatActStndVo">
 		/* Generated SQL SQL ID : ti_fat_act_stnd.select */
-        SELECT  curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-               ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+        SELECT  fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
+               ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
                ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
                ,fat_act_rmrk /* fat_act_rmrk 비만_활동_비고 text */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -21,8 +21,8 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ti_fat_act_stnd
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</select>
 
@@ -30,8 +30,8 @@
 		/* Generated SQL SQL ID : ti_fat_act_stnd.insert */
 		INSERT INTO ti_fat_act_stnd
 		(
-		     curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		    ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		    ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		<if test="fatActRmrk != null">
 		    ,fat_act_rmrk /* fat_act_rmrk 비만_활동_비고 text */
@@ -49,8 +49,8 @@
 		)
 		VALUES
 		(
-		     #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		     #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		     #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		     #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		<if test="fatActRmrk != null">
 		    ,#{fatActRmrk} /* fat_act_rmrk 비만_활동_비고 text */
@@ -82,8 +82,8 @@
 		</if>
 		</trim>
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</update>
 	
@@ -91,8 +91,8 @@
 		/* Generated SQL SQL ID : ti_fat_act_stnd.merge */
 		INSERT INTO ti_fat_act_stnd
 		(
-		     curr_fat_judg_cd /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		     prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		     fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		     pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		<if test="fatActRmrk != null">
 		    ,fat_act_rmrk /* fat_act_rmrk 비만_활동_비고 text */
@@ -110,8 +110,8 @@
 		)
 		VALUES
 		(
-		     #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		     #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		     #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		     #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		     #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		<if test="fatActRmrk != null">
 		    ,#{fatActRmrk} /* fat_act_rmrk 비만_활동_비고 text */
@@ -145,8 +145,8 @@
 		/* Generated SQL SQL ID : ti_fat_act_stnd.delete */
 		DELETE FROM ti_fat_act_stnd
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</delete>
 </mapper>
