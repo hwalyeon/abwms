@@ -88,8 +88,8 @@
         /* Generated SQL SQL ID : ti_dd_pal_blck.delete */
 		DELETE FROM ti_hbit_stat_stnd
 		WHERE  1 = 1
-		AND    sex_cd      = #{sexCd} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    age_ycnt    = #{ageYcnt}::numeric /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-		AND    hbit_cnt_fr = #{hbitCntFr}::numeric /* sex_cd 성별_코드 character varying(20) */
+		AND    sex_cd      = #{sexCd}
+		AND    age_ycnt    = #{ageYcnt}::numeric
+		AND    hbit_cnt_fr = #{hbitCntFr}::numeric
 	   </delete>
 </mapper>
