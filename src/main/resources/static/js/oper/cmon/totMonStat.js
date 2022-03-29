@@ -1,6 +1,7 @@
 let totMonStat = new Vue({
     el: "#totMonStat",
     data: {
+        isActive: true,
         totMonStatDgemHist:[{
             dgemDt : '',
             dgemTm : '',
@@ -17,6 +18,7 @@ let totMonStat = new Vue({
             tmpDngrSafeOcrrDif  : 0,
             tmpDngrSafeOcrrYav  : 5.8,
 
+            tmpTotal            : 200000,
             tmpUsage            : 140000,
             tmpNumber1          : 200000,
             tmpNumber2          : 180000,
@@ -89,7 +91,7 @@ let totMonStat = new Vue({
             tmpFallDownCnt      : 2400,
             tmpHbitAbnmCnt      : 1200,
             tmpTmepAbnmCnt      : 3300,
-            tmpTotal            : 20000
+            tmpTotalCnt         : 20000
         },
         clockParam: {
             hhmmss                  : '',
@@ -106,6 +108,8 @@ let totMonStat = new Vue({
             button2                : false,
             button3                : false
         },
+        errorClass: 'activeButtona',
+        activeClass: 'activeButton',
         code: {
             // sexCdList: []
         },
@@ -832,14 +836,6 @@ let totMonStat = new Vue({
             $this.totMonStat.careMmelNeatFmenuObj   = $this.toNumber($this.totMonStat.careMmelNeatFmenuObj);
             $this.totMonStat.careMmelNeatQustCnt    = $this.toNumber($this.totMonStat.careMmelNeatQustCnt);
             $this.totMonStat.careMmelNeatQustObj    = $this.toNumber($this.totMonStat.careMmelNeatQustObj);
-            $this.totMonStat.tmpUsage               = $this.toNumber($this.totMonStat.tmpUsage);
-            $this.totMonStat.tmpNumber1             = $this.toNumber($this.totMonStat.tmpNumber1);
-            $this.totMonStat.tmpNumber2             = $this.toNumber($this.totMonStat.tmpNumber2);
-            $this.totMonStat.tmpNumber3             = $this.toNumber($this.totMonStat.tmpNumber3);
-            $this.totMonStat.tmpNumber4             = $this.toNumber($this.totMonStat.tmpNumber4);
-            $this.totMonStat.tmpNumber5             = $this.toNumber($this.totMonStat.tmpNumber5);
-            $this.totMonStat.tmpNumber6             = $this.toNumber($this.totMonStat.tmpNumber6);
-
 
             $this.numCountAnimate();
             // $this.chartStrs = new Chart(ctxStrs, configStrs);
@@ -875,6 +871,7 @@ let totMonStat = new Vue({
                 tmpDngrSafeOcrrDif  : 0,
                 tmpDngrSafeOcrrYav  : 5.8,
 
+                tmpTotal            : 200000,
                 tmpUsage            : 140000,
                 tmpNumber1          : 200000,
                 tmpNumber2          : 180000,
@@ -946,7 +943,7 @@ let totMonStat = new Vue({
                 tmpFallDownCnt          : 2400,
                 tmpHbitAbnmCnt          : 1200,
                 tmpTmepAbnmCnt          : 3300,
-                tmpTotal                : 20000
+                tmpTotalCnt             : 20000
             }
         },
         chartPerModIdx: function(srcIdx, perIdx) {
@@ -1014,13 +1011,85 @@ let totMonStat = new Vue({
         numCountAnimate: function () {
             let $this = this;
 
+            let tmpNumber1            = $this.totMonStat.tmpNumber1;
+            let tmpNumber2            = $this.totMonStat.tmpNumber2;
+            let tmpNumber3            = $this.totMonStat.tmpNumber3;
+            let tmpNumber4            = $this.totMonStat.tmpNumber4;
+            let tmpNumber5            = $this.totMonStat.tmpNumber5;
+            let tmpNumber6            = $this.totMonStat.tmpNumber6;
+
+            let tmpTotal            = $this.totMonStat.tmpTotal;
+            let tmpUsage            = $this.totMonStat.tmpUsage;
             let tmpDngrSafeOcrrTd   = $this.totMonStat.tmpDngrSafeOcrrTd;
             let tmpDngrZoneCnt      = $this.totCnt.tmpDngrZoneCnt;
             let tmpFallDownCnt      = $this.totCnt.tmpFallDownCnt;
             let tmpHbitAbnmCnt      = $this.totCnt.tmpHbitAbnmCnt;
             let tmpTmepAbnmCnt      = $this.totCnt.tmpTmepAbnmCnt;
-            let tmpTotal            = $this.totCnt.tmpTotal;
+            let tmpTotalCnt         = $this.totCnt.tmpTotalCnt;
 
+            $({ val : 0 }).animate({ val : tmpNumber1 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber2 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber3 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber4 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber5 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber6 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpTotal }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
+                }
+            });
             $({ val : 0 }).animate({ val : tmpDngrSafeOcrrTd }, {
                 duration: 1000,
                 step: function() {
@@ -1028,6 +1097,15 @@ let totMonStat = new Vue({
                 },
                 complete: function() {
                     $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpUsage }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
                 }
             });
             $({ val : 0 }).animate({ val : tmpDngrZoneCnt }, {
@@ -1066,13 +1144,13 @@ let totMonStat = new Vue({
                     $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
                 }
             });
-            $({ val : 0 }).animate({ val : tmpTotal }, {
+            $({ val : 0 }).animate({ val : tmpTotalCnt }, {
                 duration: 1000,
                 step: function() {
-                    $this.totCnt.tmpTotal = $this.toNumber(Math.floor(this.val));
+                    $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
                 },
                 complete: function() {
-                    $this.totCnt.tmpTotal = $this.toNumber(Math.floor(this.val));
+                    $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
                 }
             });
         }
