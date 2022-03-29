@@ -19,7 +19,7 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class locInfoMngController
+public class LocInfoMngController
 {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
