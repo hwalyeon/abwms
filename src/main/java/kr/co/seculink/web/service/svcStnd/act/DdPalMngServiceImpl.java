@@ -1,11 +1,8 @@
-package kr.co.seculink.web.service.svcStnd.fat;
+package kr.co.seculink.web.service.svcStnd.act;
 
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.web.service.cmon.FileService;
-import kr.co.seculink.web.service.svcStnd.strs.StrsStndMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +20,7 @@ public class DdPalMngServiceImpl implements DdPalMngService
 
 	public List<Map<String, String>> searchDdPalList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.fat.ddPalMng.searchDdPalList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.act.ddPalMng.searchDdPalList", params);
 
 		return result;
 	}
@@ -40,11 +37,11 @@ public class DdPalMngServiceImpl implements DdPalMngService
 			log.debug("crud         : " +  info.get("crud"));
 
 			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.fat.ddPalMng.insertTiDdPalList", info);
+				saveCnt += dao.insert("svcStnd.act.ddPalMng.insertTiDdPalList", info);
 			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.fat.ddPalMng.updateTiDdPalList", info);
+				saveCnt += dao.update("svcStnd.act.ddPalMng.updateTiDdPalList", info);
 			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.fat.ddPalMng.deleteTiDdPalList", info);
+				saveCnt += dao.delete("svcStnd.act.ddPalMng.deleteTiDdPalList", info);
 			}
 		}
 		if(saveCnt == 0){

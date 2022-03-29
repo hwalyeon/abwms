@@ -121,8 +121,8 @@ public class CommonWebController {
 	public String getSvcStndFoodFoodInfoMng() {return "svcStnd/food/foodInfoMng";}
 
 	//일일 신체활동수준
-	@RequestMapping("/svcStnd/fat/ddPalMng.pg")
-	public String getSvcStndFatDdPalMng() {return "svcStnd/fat/ddPalMng";}
+	@RequestMapping("/svcStnd/act/ddPalMng.pg")
+	public String getSvcStndFatDdPalMng() {return "svcStnd/act/ddPalMng";}
 
 	//밴드/개통정보
 	@RequestMapping("/devc/band/bandOpenInfoMng.pg")

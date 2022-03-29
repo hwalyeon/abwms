@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="svcStnd.fat.ddPalMng">
+<mapper namespace="svcStnd.act.ddPalMng">
 
        <select id="searchDdPalList" parameterType="java.util.Map" resultType="MybatisMap">
            SELECT  	A.curr_fat_judg_cd AS curr_fat_judg_cd_temp/* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */

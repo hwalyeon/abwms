@@ -35,6 +35,8 @@ let ddPalMng = new Vue({
             nutrCdList      : [],
             nutrCdNmList    : []
         },
+
+        codeCnt : 0
 	},
 
 	
@@ -58,29 +60,25 @@ let ddPalMng = new Vue({
             //신체활동수준코드
             getCommonCodeList('PAL_CD',$this.code.palCdList, function()
             {
-                $this.initGrid();
-                $this.searchDdPalList(true);
+                $this.codeCnt += 1;
             }
             );
             //영양섭취상태
             getCommonCodeList('NUTR_STAT_CD',$this.code.nutrStatCdList, function()
             {
-                $this.initGrid();
-                $this.searchDdPalList(true);
+                $this.codeCnt += 1;
             }
             );
             //현재비만판정,예측비만판정
             getCommonCodeList('FAT_JUDG_CD',$this.code.mentDdPalCdList, function()
             {
-                $this.initGrid();
-                $this.searchDdPalList(true);
+                $this.codeCnt += 1;
             }
             );
             //성별
             getCommonCodeList('SEX_CD',$this.code.sexCdList, function()
             {
-                $this.initGrid();
-                $this.searchDdPalList(true);
+                $this.codeCnt += 1;
             }
             );
             //영양섭취상태
@@ -96,8 +94,6 @@ let ddPalMng = new Vue({
                             });
                         }
                         $this.codeCnt += 1;
-                        $this.initGrid();
-                        $this.searchDdPalList(true);
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
@@ -158,7 +154,7 @@ let ddPalMng = new Vue({
            	$("#user_list").jqGrid($.extend(true, {}, commonEditGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-                url: '/svcStnd/fat/ddPalMng/searchDdPalList.ab',
+                url: '/svcStnd/act/ddPalMng/searchDdPalList.ab',
                 pager: '#user_pager_list',
 				height: 405,
                 colModel: colModels,
@@ -313,7 +309,7 @@ let ddPalMng = new Vue({
             param.gridList = gridData;
 
             AjaxUtil.post({
-                url: "/svcStnd/fat/ddPalMng/saveDdPal.ab",
+                url: "/svcStnd/act/ddPalMng/saveDdPal.ab",
                 param: param,
                 success: function(response) {
                     Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
@@ -334,7 +330,7 @@ let ddPalMng = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/svcStnd/fat/ddPalMng/searchDdPalList/excel.ab",
+                url: "/svcStnd/act/ddPalMng/searchDdPalList/excel.ab",
                 param: params,
                 success: function(response)
                 {
@@ -375,6 +371,13 @@ let ddPalMng = new Vue({
 
     },
     watch: {
+        'codeCnt' : function (value){
+            let $this = this;
+            if(value ===  5){
+                $this.initGrid();
+                $this.searchDdPalList(true);
+            }
+        }
 
     },
     mounted: function() {
