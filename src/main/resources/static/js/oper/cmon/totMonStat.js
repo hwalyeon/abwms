@@ -13,15 +13,10 @@ let totMonStat = new Vue({
             noRsps              : 0,
 
             temp                : null,
-            tmpDngrSafeOcrrTd   : '',
-            tmpDngrSafeOcrrDif  : '',
-            tmpDngrSafeOcrrYav  : 3.8,
+            tmpDngrSafeOcrrTd   : 0,
+            tmpDngrSafeOcrrDif  : 0,
+            tmpDngrSafeOcrrYav  : 5.8,
 
-            tmpDngrZoneCnt      : 4400,
-            tmpFallDownCnt      : 2400,
-            tmpHbitAbnmCnt      : 1200,
-            tmpTmepAbnmCnt      : 3300,
-            tmpTotal            : 200000,
             tmpUsage            : 140000,
             tmpNumber1          : 200000,
             tmpNumber2          : 180000,
@@ -88,6 +83,13 @@ let totMonStat = new Vue({
             careMmelNeatQustCnt     : 11853,
             careMmelNeatQustObj     : 20000,
 
+        },
+        totCnt: {
+            tmpDngrZoneCnt      : 4400,
+            tmpFallDownCnt      : 2400,
+            tmpHbitAbnmCnt      : 1200,
+            tmpTmepAbnmCnt      : 3300,
+            tmpTotal            : 20000
         },
         clockParam: {
             hhmmss                  : '',
@@ -183,7 +185,6 @@ let totMonStat = new Vue({
 
             $this.clock();
             setInterval($this.clock, 1000);
-            $this.numCountAnimate();
         },
         initCodeList: function() {
             // let $this = this;
@@ -275,7 +276,6 @@ let totMonStat = new Vue({
                                 $this.totMonStatDgemHist.push({'dgemDt':item.dgemDt, 'dgemTm':item.dgemTm, 'dgemStatCd':item.dgemStatCd, 'dgemStatNm':item.dgemStatNm});
                             });
                         }
-                        console.log("jcw :: " + $this.totMonStatDgemHist[0].dgemStatNm);
                         $this.updateChart();
                         $this.initCycl($this.cycl.timeCycl);
                     },
@@ -315,8 +315,8 @@ let totMonStat = new Vue({
             let tmpStrsIdx          = 65;
 
             // 위험안전 발생 Data
-            let tmpDngrSafeOcrrTd   = 1100;
-            let tmpDngrSafeOcrrAv   = 1400;
+            let tmpDngrSafeOcrrTd   = 2170;
+            let tmpDngrSafeOcrrAv   = 2600;
 
             // 위험지역 추이 Data
             let tmpDngrZoneProg4wb  = 1400;
@@ -333,8 +333,8 @@ let totMonStat = new Vue({
             let tmpPrntSafeDtct   = 89.5;
             let tmpPrntDngrDtct   = 35.6;
 
-            $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(tmpDngrSafeOcrrTd);
-            $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrAv - tmpDngrSafeOcrrTd;
+            $this.totMonStat.tmpDngrSafeOcrrTd = tmpDngrSafeOcrrTd;
+            $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrTd - tmpDngrSafeOcrrAv;
 
             // 백분율 몫 구하기
             let operCntQuotiIdx     = $this.chartPerQuoti($this.totMonStat.operCnt, $this.totMonStat.openCnt);
@@ -826,17 +826,12 @@ let totMonStat = new Vue({
             $this.chartCareMmelNeatFmenu= new Chart(ctxCareMmelNeatFmenu, configCareMmelNeatFmenu);
             $this.chartCareMmelNeatQust = new Chart(ctxCareMmelNeatQust , configCareMmelNeatQust);
 
-            $this.totMonStat.tmpDngrZoneCnt         = $this.toNumber($this.totMonStat.tmpDngrZoneCnt);
-            $this.totMonStat.tmpFallDownCnt         = $this.toNumber($this.totMonStat.tmpFallDownCnt);
-            $this.totMonStat.tmpHbitAbnmCnt         = $this.toNumber($this.totMonStat.tmpHbitAbnmCnt);
-            $this.totMonStat.tmpTmepAbnmCnt         = $this.toNumber($this.totMonStat.tmpTmepAbnmCnt);
             $this.totMonStat.careCalEatAvg          = $this.toNumber($this.totMonStat.careCalEatAvg);
             $this.totMonStat.careCalEatbfDay        = $this.toNumber($this.totMonStat.careCalEatbfDay);
             $this.totMonStat.careMmelNeatFmenuCnt   = $this.toNumber($this.totMonStat.careMmelNeatFmenuCnt);
             $this.totMonStat.careMmelNeatFmenuObj   = $this.toNumber($this.totMonStat.careMmelNeatFmenuObj);
             $this.totMonStat.careMmelNeatQustCnt    = $this.toNumber($this.totMonStat.careMmelNeatQustCnt);
             $this.totMonStat.careMmelNeatQustObj    = $this.toNumber($this.totMonStat.careMmelNeatQustObj);
-            $this.totMonStat.tmpTotal               = $this.toNumber($this.totMonStat.tmpTotal);
             $this.totMonStat.tmpUsage               = $this.toNumber($this.totMonStat.tmpUsage);
             $this.totMonStat.tmpNumber1             = $this.toNumber($this.totMonStat.tmpNumber1);
             $this.totMonStat.tmpNumber2             = $this.toNumber($this.totMonStat.tmpNumber2);
@@ -845,6 +840,8 @@ let totMonStat = new Vue({
             $this.totMonStat.tmpNumber5             = $this.toNumber($this.totMonStat.tmpNumber5);
             $this.totMonStat.tmpNumber6             = $this.toNumber($this.totMonStat.tmpNumber6);
 
+
+            $this.numCountAnimate();
             // $this.chartStrs = new Chart(ctxStrs, configStrs);
 
             // const operStatCntn = document.getElementById('operStatCntn');
@@ -865,30 +862,6 @@ let totMonStat = new Vue({
         //         }
         //     }];
         // },
-        chartPerModIdx: function(srcIdx, perIdx) {
-            if (WebUtil.isNull(perIdx)) {
-                perIdx = 100;
-            }
-            let modIdx;
-
-            if      (srcIdx > 100 ) modIdx = 0;
-            else if (srcIdx < 0   ) modIdx = 100;
-            else    modIdx  = perIdx - srcIdx;
-
-            return modIdx;
-        },
-        chartPerQuoti: function(numerator, denominator) {
-            // 분모 혹은 제수 : null 또는 0 일 경우 임의로 1로 강제 세팅
-            if (WebUtil.isNull(denominator) || denominator === 0) {
-                denominator = 1;
-            }
-            let quoti;
-            quoti  = Math.round((numerator / denominator * 100) * 10) / 10;
-            return quoti;
-        },
-        toNumber: function (value) {
-            return value.toLocaleString('ko-KR');
-        },
         initData: function () {
             let $this = this;
             $this.totMonStatDgemHist = [];
@@ -898,15 +871,10 @@ let totMonStat = new Vue({
                 noRsps              : '',
 
                 temp                : null,
-                tmpDngrSafeOcrrTd   : $this.tmpDngrSafeOcrrTd,
-                tmpDngrSafeOcrrDif  : $this.tmpDngrSafeOcrrDif,
-                tmpDngrSafeOcrrYav  : 3.8,
+                tmpDngrSafeOcrrTd   : 0,
+                tmpDngrSafeOcrrDif  : 0,
+                tmpDngrSafeOcrrYav  : 5.8,
 
-                tmpDngrZoneCnt      : 4400,
-                tmpFallDownCnt      : 2400,
-                tmpHbitAbnmCnt      : 1200,
-                tmpTmepAbnmCnt      : 3300,
-                tmpTotal            : 200000,
                 tmpUsage            : 140000,
                 tmpNumber1          : 200000,
                 tmpNumber2          : 180000,
@@ -972,7 +940,38 @@ let totMonStat = new Vue({
 
                 careMmelNeatQustCnt     : 11853,
                 careMmelNeatQustObj     : 20000,
+            },
+            $this.totCnt = {
+                tmpDngrZoneCnt          : 4400,
+                tmpFallDownCnt          : 2400,
+                tmpHbitAbnmCnt          : 1200,
+                tmpTmepAbnmCnt          : 3300,
+                tmpTotal                : 20000
             }
+        },
+        chartPerModIdx: function(srcIdx, perIdx) {
+            if (WebUtil.isNull(perIdx)) {
+                perIdx = 100;
+            }
+            let modIdx;
+
+            if      (srcIdx > 100 ) modIdx = 0;
+            else if (srcIdx < 0   ) modIdx = 100;
+            else    modIdx  = perIdx - srcIdx;
+
+            return modIdx;
+        },
+        chartPerQuoti: function(numerator, denominator) {
+            // 분모 혹은 제수 : null 또는 0 일 경우 임의로 1로 강제 세팅
+            if (WebUtil.isNull(denominator) || denominator === 0) {
+                denominator = 1;
+            }
+            let quoti;
+            quoti  = Math.round((numerator / denominator * 100) * 10) / 10;
+            return quoti;
+        },
+        toNumber: function (value) {
+            return value.toLocaleString('ko-KR');
         },
         clock: function() {
             let $this = this;
@@ -1014,25 +1013,68 @@ let totMonStat = new Vue({
         },
         numCountAnimate: function () {
             let $this = this;
-            var memberCountConTxt= $this.totMonStat.tmpTmepAbnmCnt;
 
-            $({ val : 0 }).animate({ val : memberCountConTxt }, {
+            let tmpDngrSafeOcrrTd   = $this.totMonStat.tmpDngrSafeOcrrTd;
+            let tmpDngrZoneCnt      = $this.totCnt.tmpDngrZoneCnt;
+            let tmpFallDownCnt      = $this.totCnt.tmpFallDownCnt;
+            let tmpHbitAbnmCnt      = $this.totCnt.tmpHbitAbnmCnt;
+            let tmpTmepAbnmCnt      = $this.totCnt.tmpTmepAbnmCnt;
+            let tmpTotal            = $this.totCnt.tmpTotal;
+
+            $({ val : 0 }).animate({ val : tmpDngrSafeOcrrTd }, {
                 duration: 1000,
                 step: function() {
-                    var num = numberWithCommas(Math.floor(this.val));
-                    //$(".memberCountCon").text(num);
-                    $this.totMonStat.tmpTmepAbnmCnt = num;
+                    $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(Math.floor(this.val));
                 },
                 complete: function() {
-                    var num = numberWithCommas(Math.floor(this.val));
-                    //$(".memberCountCon").text(num);
-                    $this.totMonStat.tmpTmepAbnmCnt = num;
+                    $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(Math.floor(this.val));
                 }
             });
-
-            function numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
+            $({ val : 0 }).animate({ val : tmpDngrZoneCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpFallDownCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpHbitAbnmCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpTmepAbnmCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpTotal }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpTotal = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpTotal = $this.toNumber(Math.floor(this.val));
+                }
+            });
         }
     },
     computed: {
