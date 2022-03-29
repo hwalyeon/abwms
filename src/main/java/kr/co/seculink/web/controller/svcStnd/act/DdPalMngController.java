@@ -87,8 +87,8 @@ public class DdPalMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<String>();
-			data.add(String.valueOf(info.get("currFatJudgCd")));
-			data.add(String.valueOf(info.get("prdtFatJudgCd")));
+			data.add(String.valueOf(info.get("fatJudgCd")));
+			data.add(String.valueOf(info.get("fatpJudgCd")));
 			data.add(String.valueOf(info.get("sexCd")));
 			data.add(String.valueOf(info.get("ageYcnt")));
 			data.add(String.valueOf(info.get("calQtyFr")));

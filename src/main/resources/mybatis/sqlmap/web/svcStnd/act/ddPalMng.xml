@@ -3,14 +3,14 @@
 <mapper namespace="svcStnd.act.ddPalMng">
 
        <select id="searchDdPalList" parameterType="java.util.Map" resultType="MybatisMap">
-           SELECT  	A.curr_fat_judg_cd AS curr_fat_judg_cd_temp/* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-           ,A.prdt_fat_judg_cd AS prdt_fat_judg_cd_temp/* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+           SELECT  	A.fat_judg_cd AS fat_judg_cd_temp/* fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+           ,A.fatp_judg_cd AS fatp_judg_cd_temp/* fatp_judg_cd 예측_비만_판정_코드 character varying(20) */
            ,A.sex_cd           AS sex_cd_temp/* sex_cd 성별_코드 character varying(20) */
            ,A.age_ycnt         AS age_ycnt_temp
            ,A.nutr_stat_cd     AS nutr_stat_cd_temp
            ,A.nutr_cd          AS nutr_cd_temp
-           ,A.curr_fat_judg_cd
-           ,A.prdt_fat_judg_cd
+           ,A.fat_judg_cd
+           ,A.fatp_judg_cd
            ,A.sex_cd
            ,A.age_ycnt /* age_ycnt 나이_년수_FROM numeric */
            ,A.pal_cd
@@ -27,8 +27,8 @@
            ,A.upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
            FROM   ti_dd_pal_blck A
            WHERE  1 = 1
-		AND    curr_fat_judg_cd like concat('%',#{currFatJudgCd},'%')
-		AND    prdt_fat_judg_cd like concat('%',#{prdtFatJudgCd},'%')
+		AND    fat_judg_cd like concat('%',#{fatJudgCd},'%')
+		AND    fatp_judg_cd like concat('%',#{fatpJudgCd},'%')
         <if test=' paging == "Y" '>
         LIMIT ${rowCount} OFFSET ${currentIndex} </if>
         </select>
@@ -37,8 +37,8 @@
            /* Generated SQL SQL ID : ti_dd_pal_blck.insert */
            INSERT INTO ti_dd_pal_blck
            (
-           curr_fat_judg_cd
-           ,prdt_fat_judg_cd
+           fat_judg_cd
+           ,fatp_judg_cd
            ,sex_cd
            ,age_ycnt
            ,cal_qty_fr
@@ -56,8 +56,8 @@
            )
            VALUES
            (
-            #{currFatJudgCd}
-            ,#{prdtFatJudgCd}
+            #{fatJudgCd}
+            ,#{fatpJudgCd}
             ,#{sexCd}
             ,#{ageYcnt}::NUMERIC
             ,#{calQtyFr}::NUMERIC
@@ -81,8 +81,8 @@
            SET      UPT_DT       = TO_CHAR(NOW(), 'YYYYMMDD')
            ,UPT_TM       = TO_CHAR(NOW(),'HH24MISS')
            ,UPT_USER_ID  = #{uptUserId}
-           <if test="currFatJudgCd != null and currFatJudgCd !=''">  ,curr_fat_judg_cd = #{currFatJudgCd}</if>
-           <if test="prdtFatJudgCd != null and prdtFatJudgCd != ''">  ,prdt_fat_judg_cd = #{prdtFatJudgCd}</if>
+           <if test="fatJudgCd != null and fatJudgCd !=''">  ,fat_judg_cd = #{fatJudgCd}</if>
+           <if test="fatpJudgCd != null and fatpJudgCd != ''">  ,fatp_judg_cd = #{fatpJudgCd}</if>
            <if test="sexCd != null and sexCd != ''">  ,sex_cd = #{sexCd}</if>
            <if test="ageYcnt != null and ageYcnt != ''">  ,age_ycnt = #{ageYcnt}::NUMERIC</if>
            <if test="palValFr != null and palValFr != ''">  ,pal_val_fr = #{palValFr}::NUMERIC</if>
@@ -94,8 +94,8 @@
            <if test="nutrCd    != null and nutrCd    != ''">  ,nutr_cd     = #{nutrCd}</if>
            <if test="nutrStatCd    != null and nutrStatCd    != ''">  ,nutr_stat_cd = #{nutrStatCd}</if>
            WHERE  1=1
-           AND    curr_fat_judg_cd = #{currFatJudgCdTemp} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-           AND    prdt_fat_judg_cd = #{prdtFatJudgCdTemp} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+           AND    fat_judg_cd = #{fatJudgCdTemp} /* fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+           AND    fatp_judg_cd = #{fatpJudgCdTemp} /* fatp_judg_cd 예측_비만_판정_코드 character varying(20) */
            AND    sex_cd = #{sexCdTemp} /* sex_cd 성별_코드 character varying(20) */
            AND    age_ycnt = #{ageYcntTemp}::NUMERIC /* age_ycnt_fr 나이_년수_FROM numeric */
            AND    pal_val_fr = #{palValFrTemp}::NUMERIC /* pal_val_fr 신체활동수준_값_FROM numeric */
@@ -105,8 +105,8 @@
         /* Generated SQL SQL ID : ti_dd_pal_blck.delete */
 		DELETE FROM ti_dd_pal_blck
 		WHERE  1 = 1
-		AND    curr_fat_judg_cd = #{currFatJudgCdTemp} /* curr_fat_judg_cd 현재_비만_판정_코드 character varying(20) */
-		AND    prdt_fat_judg_cd = #{prdtFatJudgCdTemp} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    fat_judg_cd = #{fatJudgCdTemp} /* fat_judg_cd 현재_비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCdTemp} /* fatp_judg_cd 예측_비만_판정_코드 character varying(20) */
 		AND    sex_cd = #{sexCdTemp} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} ::NUMERIC /* age_ycnt_fr 나이_년수_FROM numeric */
 	   </delete>

@@ -2,8 +2,8 @@ let ddPalMng = new Vue({
     el: "#ddPalMng",
     data: {
     	params: {
-            currFatJudgCd:'',
-            prdtFatJudgCd:'',
+            fatJudgCd:'',
+            fatpJudgCd:'',
             sexCd:'',
             ageYcnt:'',
             palValFr:'',
@@ -111,11 +111,11 @@ let ddPalMng = new Vue({
         	let colModels =
             [
                 {name:"crud"               , index: "crud"            , label:"crud"               , hidden:true},
-                {name: "currFatJudgCdTemp" , index: "currFatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center", hidden  : true  },
-                {name: "currFatJudgCd"     , index: "currFatJudgCd"   , label: "현재비만판정"     , width: 80   , align: "center"
+                {name: "fatJudgCdTemp" , index: "fatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center", hidden  : true  },
+                {name: "fatJudgCd"     , index: "fatJudgCd"   , label: "현재비만판정"     , width: 80   , align: "center"
                     , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
-                {name: "prdtFatJudgCdTemp" , index: "prdtFatJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center", hidden  : true  },
-                {name: "prdtFatJudgCd"     , index: "prdtFatJudgCd"   , label: "예측비만판정"     , width: 80   , align: "center" , editable: true
+                {name: "fatpJudgCdTemp" , index: "fatpJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center", hidden  : true  },
+                {name: "fatpJudgCd"     , index: "fatpJudgCd"   , label: "예측비만판정"     , width: 80   , align: "center" , editable: true
                     , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
                 {name: "sexCdTemp"         , index: "sexCdTemp"       , label: "성별"            , width: 80   , align: "center", hidden  : true  },
                 {name: "sexCd"             , index: "sexCd"           , label: "성별"            , width: 80   , align: "center" , editable: true
@@ -210,8 +210,8 @@ let ddPalMng = new Vue({
             var cnt = $("#user_list").jqGrid("getGridParam", "records")+1;
 
             var addRow = {crud:"C"
-                ,currFatJudgCdTemp:""
-                ,prdtFatJudgCdTemp:""
+                ,fatJudgCdTemp:""
+                ,fatpJudgCdTemp:""
                 ,sexCdTemp:""
                 ,ageYcnt:""
                 ,palValFr:""
@@ -266,37 +266,37 @@ let ddPalMng = new Vue({
                 {
                     if(gridData[data].crud === 'C' || gridData[data].crud === 'U')
                     {
-                        if(WebUtil.isNull(gridData[data].currFatJudgCd)){
+                        if(WebUtil.isNull(gridData[data].fatJudgCd)){
                             Swal.alert(["현재비만판정코드 필수 입력입니다.", 'warning']);
                             return false;
-                        }if(WebUtil.isNull(gridData[data].prdtFatJudgCd)){
-                        Swal.alert(["예측비만판정코드 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].sexCd)){
-                        Swal.alert(["성별 코드 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].ageYcnt)){
-                        Swal.alert(["나이년수 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].calQtyFr)){
-                        Swal.alert(["칼로리량 FORM 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].calQtyTo)){
-                        Swal.alert(["칼로리량 TO 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].ddCalQty)){
-                        Swal.alert(["일일 칼로리량 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].palCd)){
-                        Swal.alert(["신체활동수준 코드 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].nutrCd)){
-                        Swal.alert(["영양소 코드 필수 입력입니다.", 'warning']);
-                        return false;
-                    }if(WebUtil.isNull(gridData[data].nutrStatCd)){
-                        Swal.alert(["영양섭취 상태 코드 필수 입력입니다.", 'warning']);
-                        return false;
-                    }
+                        }if(WebUtil.isNull(gridData[data].fatpJudgCd)){
+                            Swal.alert(["예측비만판정코드 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].sexCd)){
+                            Swal.alert(["성별 코드 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].ageYcnt)){
+                            Swal.alert(["나이년수 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].calQtyFr)){
+                            Swal.alert(["칼로리량 FORM 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].calQtyTo)){
+                            Swal.alert(["칼로리량 TO 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].ddCalQty)){
+                            Swal.alert(["일일 칼로리량 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].palCd)){
+                            Swal.alert(["신체활동수준 코드 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].nutrCd)){
+                            Swal.alert(["영양소 코드 필수 입력입니다.", 'warning']);
+                            return false;
+                        }if(WebUtil.isNull(gridData[data].nutrStatCd)){
+                            Swal.alert(["영양섭취 상태 코드 필수 입력입니다.", 'warning']);
+                            return false;
+                        }
                     }
                 }
             }
@@ -347,8 +347,8 @@ let ddPalMng = new Vue({
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
-                currFatJudgCd:'',
-                prdtFatJudgCd:'',
+                fatJudgCd:'',
+                fatpJudgCd:'',
                 sexCd:'',
                 ageYcnt:'',
                 palValFr:'',
