@@ -26,10 +26,10 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label" >기준일자</label>
 						<div class="col-xs-2">
-							<input type="date" name="entrDtFr" class="form-control" v-model="params.strsJudgDttmFr"  v-on:change="bDSelect">
+							<input type="date" name="gfixDtFr" class="form-control" v-model="params.gfixDtFr"  v-on:change="bDSelect">
 						</div>
 						<div class="col-xs-2" style="padding-right:5px">
-							<input type="date" name="entrDtTo" class="form-control" v-model="params.strsJudgDttmTo"  v-on:change="bDSelect">
+							<input type="date" name="gfixDtTo" class="form-control" v-model="params.gfixDtTo"  v-on:change="bDSelect">
 						</div>
 						<!--이번 달-->
 						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">
@@ -74,40 +74,32 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<!--스트레스_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">스트레스 상태</label>
+						<!--성장_판정_코드_리스트-->
+						<label class="col-xs-1 control-label">성장 판정</label>
 						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">
-							<select id="strsStatCd" name="strsStatCd" class="form-control" style=" margin-right:15px;" v-model="params.strsStatCd">
+							<select id="growJudgCd" name="growJudgCd" class="form-control" style=" margin-right:15px;" v-model="params.growJudgCd">
 								<option value="">전체</option>
-								<option v-for="item in code.strsStatCdList" v-bind:value="item.value" v-text="item.cdNm"></option>
+								<option v-for="item in code.growJudgCdList" v-bind:value="item.value" v-text="item.cdNm"></option>
 							</select>
 						</div>
-						<!--정신적_스트레스_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">정신적 상태</label>
+						<!--비만_판정_코드_리스트-->
+						<label class="col-xs-1 control-label">비만 판정</label>
 						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
-							<select id="mindStrsStatCd" name="mindStrsStatCd" class="form-control" v-model="params.mindStrsStatCd">
+							<select id="fatJudgCd" name="fatJudgCd" class="form-control" v-model="params.fatJudgCd">
 								<option value="">전체</option>
-								<option v-for="item in code.mindStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+								<option v-for="item in code.fatJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
-						<!--신체적_스트레스_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">신체적 상태</label>
+						<!--비만_예측_판정_코드_리스트-->
+						<label class="col-xs-1 control-label">비만예측 판정</label>
 						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
-							<select id="physStrsStatCd" name="physStrsStatCd" class="form-control" v-model="params.physStrsStatCd">
+							<select id="fatpJudgCd" name="fatpJudgCd" class="form-control" v-model="params.fatpJudgCd">
 								<option value="">전체</option>
-								<option v-for="item in code.physStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-							</select>
-						</div>
-						<!--스트레스_대처_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">대처 상태</label>
-						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
-							<select id="strsCopeStatCd" name="strsCopeStatCd" class="form-control" v-model="params.strsCopeStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.strsCopeStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+								<option v-for="item in code.fatEstmCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
 						<label class="col-xs-1 control-label">학교(학원)명</label>
-						<div class="col-xs-2" style="padding-left:0px;">
+						<div class="col-xs-1" style="padding:0px;">
 							<input type="text" name="locNm" class="form-control" v-model="params.locNm">
 						</div>
 					</div>
@@ -123,7 +115,6 @@
 			</div>
 		</div>
 		<!-- 검색조건 영역 -->
-		
 		<!-- 결과 리스트 영역 -->
 		<div class="ibox">                                 
 			<div class="ibox-content">
@@ -131,10 +122,9 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>스트레스지수 이력 목록</h5>
+							<h5>성장/비만지수 이력 목록</h5>
 						</div>
 					</div>
-					<div class="clear_both"></div>
 					<div class="float_right">
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
