@@ -1,5 +1,5 @@
-let locHist = new Vue({
-    el: "#locHist",
+let btchJobHist = new Vue({
+    el: "#btchJobHist",
     data: {
         params: {
             emtrDtFr    :'',

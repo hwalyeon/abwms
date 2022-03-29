@@ -164,6 +164,10 @@ public class CommonWebController {
 	@RequestMapping("/oper/dgem/locHist.pg")
 	public String getOperDgemLocHist() {return "oper/dgem/locHist";}
 
+	//위험안전지역 발생현황
+	@RequestMapping("/oper/dgem/dszoneHist.pg")
+	public String getOperDgemDszoneHist() {return "oper/dgem/dszoneHist";}
+
 	//스트레스지수 이력
 	@RequestMapping("/oper/hc/strsHist.pg")
 	public String getOperHcStrsHist() {return "oper/hc/strsHist";}
@@ -191,6 +195,14 @@ public class CommonWebController {
 	//캐시비 이력
 	@RequestMapping("/oper/cbee/cbeeHist.pg")
 	public String getOperCbeeCbeeHist() {return "oper/cbee/cbeeHist";}
+
+	//배치작업 이력
+	@RequestMapping("/oper/sys/btchJobHist.pg")
+	public String getOperSysBtchJobHist() {return "oper/sys/btchJobHist";}
+
+	//알람처기 이력
+	@RequestMapping("/oper/sys/alamHist.pg")
+	public String getOperSysAlamHist() {return "oper/sys/alamHist";}
 
 	//종합관제현황
 	@RequestMapping("/oper/cmon/totMonStat.pg")

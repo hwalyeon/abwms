@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oper.dgem.dszoneHist">
+
+	<!-- 위치정보_관리_조회_조건_조회_1-->
+	<select id="searchLocInfoSelect" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT DISTINCT WORD_HEAD_1
+		FROM   TI_ADDR_HEAD
+		WHERE  1 = 1
+		ORDER BY WORD_HEAD_1
+	</select>
+
+	<!-- 위치정보_관리_조회_조건_조회_2-->
+	<select id="searchLocInfoSelect2" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT WORD_HEAD_1,
+			   WORD_HEAD_2
+		FROM   TI_ADDR_HEAD
+		WHERE  1 = 1
+		ORDER BY WORD_HEAD_1, WORD_HEAD_2
+	</select>
+
+	<!-- 위치정보_관리_학부모_학생_조건_조회-->
+	<select id="searchPrntNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT		PRNT_NO,
+					PRNT_NO || ': ' || ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM),' / ') AS PRNT_NO_NM
+		FROM		TM_PRNT_BASE TPB
+		WHERE 		1=1
+		GROUP BY	PRNT_NO
+		ORDER BY 	PRNT_NO
+	</select>
+
+	<!-- 위치정보_관리_학부모_학생_조건_조회_2-->
+	<select id="searchStdtNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT		STDT_NO,
+					STDT_NO || ': ' || STDT_NM AS STDT_NO_NM,
+					PRNT_NO
+		FROM		TM_STDT_BASE
+		WHERE 		1=1
+		AND 		DEL_YN = 'N'
+		ORDER BY 	STDT_NO
+	</select>
+
+	<!-- 위치정보_관리_리스트_조회-->
+	<select id="searchLocInfoList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT	LOC_NO,
+		       	LOC_NM,
+				PLC_CLSS_CD,
+				PLC_CLSS_NM,
+				PLC_CD,
+				PLC_NM,
+				RD_PUBL_GUAR_DIV,
+				RD_PUBL_GUAR_DIV_NM,
+				PRNT_NO,
+				PRNT_NM,
+				PRNT_NO || ': ' || PRNT_NM AS PRNT_NO_NM,
+				STDT_NO,
+				STDT_NM,
+				STDT_NO || ': ' || STDT_NM AS STDT_NO_NM,
+				LAT_VAL,
+				LON_VAL,
+				VALD_RNGE_DIST,
+				SWST_LAT_VAL,
+				SWST_LON_VAL,
+				NEST_LAT_VAL,
+				NEST_LON_VAL,
+				PSTNO,
+				ADDR_BASE,
+				ADDR_SPEC,
+				DEL_YN,
+				REG_DT,
+				REG_TM,
+				REG_USER_ID,
+				UPT_DT,
+				UPT_TM,
+				UPT_USER_ID
+		FROM 	(
+				SELECT	TLIB.LOC_NO,
+						TLIB.LOC_NM,
+						TLIB.PLC_CLSS_CD,
+						FN_GETCDNM('PLC_CLSS_CD', TLIB.PLC_CLSS_CD) AS PLC_CLSS_NM,
+						TLIB.PLC_CD,
+						FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS PLC_NM,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'publ'	ELSE 'prnt' END AS RD_PUBL_GUAR_DIV,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'	ELSE '학부모' END AS RD_PUBL_GUAR_DIV_NM,
+						ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM), '/') AS PRNT_NM,
+						TSB.PRNT_NO,
+						TSB.STDT_NO,
+						TSB.STDT_NM,
+						TLIB.LAT_VAL,
+						TLIB.LON_VAL,
+						TLIB.VALD_RNGE_DIST,
+						TLIB.SWST_LAT_VAL,
+						TLIB.SWST_LON_VAL,
+						TLIB.NEST_LAT_VAL,
+						TLIB.NEST_LON_VAL,
+						TLIB.PSTNO,
+						TLIB.ADDR_BASE,
+						TLIB.ADDR_SPEC,
+						TLIB.DEL_YN,
+						TLIB.REG_DT,
+						TLIB.REG_TM,
+						TLIB.REG_USER_ID,
+						TLIB.UPT_DT,
+						TLIB.UPT_TM,
+						TLIB.UPT_USER_ID
+				FROM	ABSV.TS_LOC_INFO_BASE TLIB
+						LEFT OUTER JOIN TM_GUAR_APNT_PLC TGAP
+						ON TGAP.LOC_NO = TLIB.LOC_NO
+						LEFT OUTER JOIN TM_STDT_BASE TSB
+						ON TSB.STDT_NO = TGAP.STDT_NO
+						LEFT OUTER JOIN TM_PRNT_BASE TPB
+						ON TPB.PRNT_NO = TSB.PRNT_NO
+				WHERE	1=1
+				AND 	TLIB.DEL_YN = 'N'
+				<if test="plcClssCd != null and plcClssCd !=''">
+				AND		TLIB.PLC_CLSS_CD = #{plcClssCd}</if>
+				<if test="plcCd != null and plcCd !=''">
+				AND		TLIB.PLC_CD = #{plcCd}</if>
+				<if test="wordHead1 != null and wordHead1 !=''">
+				AND 	SPLIT_PART(TLIB.ADDR_BASE, ' ', 1) = #{wordHead1}</if>
+				<if test="wordHead2 != null and wordHead2 !=''">
+				AND 	SPLIT_PART(TLIB.ADDR_BASE, ' ', 2) = #{wordHead2}</if>
+				<if test="addrSpec != null and addrSpec !=''">
+				AND 	TLIB.ADDR_SPEC LIKE CONCAT('%',#{addrSpec},'%')</if>
+				<if test="rdPublGuarDiv =='publ'">
+				AND 	TLIB.LOC_NO BETWEEN '1' AND '999999'</if>
+				<if test="rdPublGuarDiv =='prnt'">
+				AND 	TLIB.LOC_NO &gt; '999999'</if>
+				<if test="prntNo != null and prntNo !=''">
+				AND  	TSB.PRNT_NO = #{prntNo}::NUMERIC</if>
+				<if test="stdtNo != null and stdtNo !=''">
+				AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
+				GROUP BY TLIB.LOC_NO,
+						TLIB.LOC_NM,
+						TLIB.PLC_CLSS_CD,
+						TSB.PRNT_NO,
+						TSB.STDT_NO,
+						TSB.STDT_NM,
+						TLIB.LAT_VAL,
+						TLIB.LON_VAL,
+						TLIB.VALD_RNGE_DIST,
+						TLIB.SWST_LAT_VAL,
+						TLIB.SWST_LON_VAL,
+						TLIB.NEST_LAT_VAL,
+						TLIB.NEST_LON_VAL,
+						TLIB.PSTNO,
+						TLIB.ADDR_BASE,
+						TLIB.ADDR_SPEC,
+						TLIB.DEL_YN,
+						TLIB.REG_DT,
+						TLIB.REG_TM,
+						TLIB.REG_USER_ID,
+						TLIB.UPT_DT,
+						TLIB.UPT_TM,
+						TLIB.UPT_USER_ID
+				ORDER BY TLIB.LOC_NO
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex}
+		</if>
+				) A
+
+	</select>
+
+	<!-- 위치정보_관리_리스트_상세정보_조회-->
+	<select id="searchLocInfoSpec" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT	LOC_NO,
+		       	LOC_NM,
+				PLC_CLSS_CD,
+				PLC_CLSS_NM,
+				PLC_CD,
+				PLC_NM,
+				RD_PUBL_GUAR_DIV,
+				RD_PUBL_GUAR_DIV_NM,
+				PRNT_NO,
+				PRNT_NM,
+				PRNT_NO || ': ' || PRNT_NM AS PRNT_NO_NM,
+				STDT_NO,
+				STDT_NM,
+				STDT_NO || ': ' || STDT_NM AS STDT_NO_NM,
+				LAT_VAL,
+				LON_VAL,
+				VALD_RNGE_DIST,
+				SWST_LAT_VAL,
+				SWST_LON_VAL,
+				NEST_LAT_VAL,
+				NEST_LON_VAL,
+				PSTNO,
+				ADDR_BASE,
+				ADDR_SPEC,
+				DEL_YN,
+				REG_DT,
+				REG_TM,
+				REG_USER_ID,
+				UPT_DT,
+				UPT_TM,
+				UPT_USER_ID
+		FROM 	(
+				SELECT	TLIB.LOC_NO,
+						TLIB.LOC_NM,
+						TLIB.PLC_CLSS_CD,
+						FN_GETCDNM('PLC_CLSS_CD', TLIB.PLC_CLSS_CD) AS PLC_CLSS_NM,
+						TLIB.PLC_CD,
+						FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS PLC_NM,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'publ'	ELSE 'prnt' END AS RD_PUBL_GUAR_DIV,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'	ELSE '학부모' END AS RD_PUBL_GUAR_DIV_NM,
+						ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM), '/') AS PRNT_NM,
+						TSB.PRNT_NO,
+						TSB.STDT_NO,
+						TSB.STDT_NM,
+						TLIB.LAT_VAL,
+						TLIB.LON_VAL,
+						TLIB.VALD_RNGE_DIST,
+						TLIB.SWST_LAT_VAL,
+						TLIB.SWST_LON_VAL,
+						TLIB.NEST_LAT_VAL,
+						TLIB.NEST_LON_VAL,
+						TLIB.PSTNO,
+						TLIB.ADDR_BASE,
+						TLIB.ADDR_SPEC,
+						TLIB.DEL_YN,
+						TLIB.REG_DT,
+						TLIB.REG_TM,
+						TLIB.REG_USER_ID,
+						TLIB.UPT_DT,
+						TLIB.UPT_TM,
+						TLIB.UPT_USER_ID
+				FROM	ABSV.TS_LOC_INFO_BASE TLIB
+				LEFT OUTER JOIN TM_GUAR_APNT_PLC TGAP
+				ON 		TGAP.LOC_NO = TLIB.LOC_NO
+				LEFT OUTER JOIN TM_STDT_BASE TSB
+				ON 		TSB.STDT_NO = TGAP.STDT_NO
+				LEFT OUTER JOIN TM_PRNT_BASE TPB
+				ON 		TPB.PRNT_NO = TSB.PRNT_NO
+				WHERE	1=1
+				AND 	TLIB.DEL_YN = 'N'
+				<if test="locNo != null and locNo !=''">
+				AND 	TLIB.LOC_NO = #{locNo}::NUMERIC</if>
+				<if test="stdtNo != null and stdtNo !=''">
+				AND 	TGAP.STDT_NO = #{stdtNo}::NUMERIC</if>
+				GROUP BY TLIB.LOC_NO,
+						TLIB.LOC_NM,
+						TLIB.PLC_CLSS_CD,
+						TSB.PRNT_NO,
+						TSB.STDT_NO,
+						TSB.STDT_NM,
+						TLIB.LAT_VAL,
+						TLIB.LON_VAL,
+						TLIB.VALD_RNGE_DIST,
+						TLIB.SWST_LAT_VAL,
+						TLIB.SWST_LON_VAL,
+						TLIB.NEST_LAT_VAL,
+						TLIB.NEST_LON_VAL,
+						TLIB.PSTNO,
+						TLIB.ADDR_BASE,
+						TLIB.ADDR_SPEC,
+						TLIB.DEL_YN,
+						TLIB.REG_DT,
+						TLIB.REG_TM,
+						TLIB.REG_USER_ID,
+						TLIB.UPT_DT,
+						TLIB.UPT_TM,
+						TLIB.UPT_USER_ID
+					<if test=' paging == "Y" '>
+						LIMIT ${rowCount} OFFSET ${currentIndex}
+					</if>
+				) A
+
+	</select>
+
+	<!--TS_LOC_INFO_BASE 인서트-->
+	<insert id="insertTsLocInfoBase" parameterType="java.util.Map">
+		<selectKey keyProperty="locNo" resultType="int" order="BEFORE">
+			<if test="rdPublGuarDivSpec != null and rdPublGuarDivSpec == 'publ'">
+				SELECT MAX(LOC_NO)+1 AS LOC_NO from TS_LOC_INFO_BASE WHERE LOC_NO &lt; 1000000
+			</if>
+			<if test="rdPublGuarDivSpec != null and rdPublGuarDivSpec == 'prnt'">
+				SELECT MAX(LOC_NO)+1 AS LOC_NO FROM TS_LOC_INFO_BASE WHERE LOC_NO &gt; 999999
+			</if>
+		</selectKey>
+		INSERT INTO	ABSV.TS_LOC_INFO_BASE (
+				LOC_NO,
+				LOC_NM,
+				PLC_CD,
+				PLC_CLSS_CD,
+				LAT_VAL,
+				LON_VAL,
+				VALD_RNGE_DIST,
+				SWST_LAT_VAL,
+				SWST_LON_VAL,
+				NEST_LAT_VAL,
+				NEST_LON_VAL,
+				<if test="pstno != null and pstno != ''">
+				PSTNO,
+				</if>
+				ADDR_BASE,
+				ADDR_SPEC,
+				<if test="delYn != null and delYn != ''">
+				DEL_YN,
+				</if>
+				REG_DT,
+				REG_TM,
+				REG_USER_ID,
+				UPT_DT,
+				UPT_TM,
+				UPT_USER_ID
+				)
+		values 	(
+				#{locNo}::NUMERIC,
+				#{locNm},
+				#{plcCd},
+				#{plcClssCd},
+				#{latVal}::NUMERIC,
+				#{lonVal}::NUMERIC,
+				#{valdRngeDist}::NUMERIC,
+				#{swstLatVal}::NUMERIC,
+				#{swstLonVal}::NUMERIC,
+				#{nestLatVal}::NUMERIC,
+				#{nestLonVal}::NUMERIC,
+				<if test="pstno != null and pstno != ''">
+				#{pstno},
+				</if>
+				#{addrBase},
+				#{addrSpec},
+				<if test="delYn != null and delYn != ''">
+				#{delYn}::bpchar,
+				</if>
+				to_char(now(), 'YYYYMMDD'::text),
+				to_char(now(), 'HH24MISS'::text),
+				#{regUserId},
+				to_char(now(), 'YYYYMMDD'::text),
+				to_char(now(), 'HH24MISS'::text),
+				#{uptUserId}
+				)
+	</insert>
+
+	<!--TS_LOC_INFO_BASE 업데이트-->
+	<update id="updateTsLocInfoBase" parameterType="java.util.Map">
+		UPDATE		ABSV.TS_LOC_INFO_BASE
+		SET			LOC_NM 			= #{locNm},
+					PLC_CD 			= #{plcCd},
+					PLC_CLSS_CD		= #{plcClssCd},
+					LAT_VAL 		= #{latVal}::NUMERIC,
+					LON_VAL 		= #{lonVal}::NUMERIC,
+					VALD_RNGE_DIST	= #{valdRngeDist}::NUMERIC,
+					SWST_LAT_VAL	= #{swstLatVal}::NUMERIC,
+					SWST_LON_VAL	= #{swstLonVal}::NUMERIC,
+					NEST_LAT_VAL	= #{nestLatVal}::NUMERIC,
+					NEST_LON_VAL	= #{nestLonVal}::NUMERIC,
+					PSTNO			= #{pstno},
+					ADDR_BASE		= #{addrBase},
+					ADDR_SPEC		= #{addrSpec},
+					DEL_YN			= #{delYn}::BPCHAR,
+					REG_DT			= TO_CHAR(NOW(), 'YYYYMMDD'::TEXT),
+					REG_TM			= TO_CHAR(NOW(), 'HH24MISS'::TEXT),
+					REG_USER_ID		= #{regUserId},
+					UPT_DT			= TO_CHAR(NOW(), 'YYYYMMDD'::TEXT),
+					UPT_TM			= TO_CHAR(NOW(), 'HH24MISS'::TEXT),
+					UPT_USER_ID		= #{uptUserId}
+		WHERE		LOC_NO			= #{locNo}::NUMERIC
+	</update>
+
+	<!--TS_LOC_INFO_BASE 삭제-->
+	<delete id ="deleteTsLocInfoBase" parameterType="java.util.Map">
+		UPDATE		ABSV.TS_LOC_INFO_BASE
+		SET			DEL_YN		= 'Y',
+					UPT_DT		= TO_CHAR(NOW(), 'YYYYMMDD'::TEXT),
+					UPT_TM		= TO_CHAR(NOW(), 'HH24MISS'::TEXT),
+					UPT_USER_ID	= ''
+		WHERE		LOC_NO		= #{locNo}
+	</delete>
+
+	<!--TM_GUAR_APNT_PLC 삭제-->
+	<delete id ="deleteTmGuarApntPlc" parameterType="java.util.Map">
+		DELETE
+		FROM    	TM_GUAR_APNT_PLC
+		WHERE		LOC_NO		= #{locNo}
+		AND 		STDT_NO		= #{stdtNo}
+	</delete>
+
+	<!--TM_GUAR_APNT_PLC 인서트-->
+	<insert id="insertTmGuarApntPlc" parameterType="java.util.Map">
+		INSERT INTO ABSV.TM_GUAR_APNT_PLC (
+				STDT_NO,
+				LOC_NO,
+				<if test="rmrk != null and rmrk != ''">
+					RMRK,
+				</if>
+				REG_DT,
+				REG_TM,
+				REG_USER_ID,
+				UPT_DT,
+				UPT_TM,
+				UPT_USER_ID
+				)
+		VALUES 	(
+				#{stdtNo}::NUMERIC,
+				#{locNo}::NUMERIC,
+				<if test="rmrk != null and rmrk != ''">
+					#{rmrk},
+				</if>
+				to_char(now(), 'YYYYMMDD'::text),
+				to_char(now(), 'HH24MISS'::text),
+				#{regUserId},
+				to_char(now(), 'YYYYMMDD'::text),
+				to_char(now(), 'HH24MISS'::text),
+				#{uptUserId}
+				)
+	</insert>
+
+	<!-- 위치정보_관리_리스트_상세정보_조회-->
+	<select id="searchChkRegLimit" parameterType="java.util.Map" resultType="int">
+		SELECT 		COUNT(1) AS ROW_COUNT
+		FROM 		(
+					SELECT		TGAP.LOC_NO, TGAP.STDT_NO
+					FROM		TM_GUAR_APNT_PLC TGAP
+								INNER JOIN TM_STDT_BASE TSB
+							    ON TSB.STDT_NO = TGAP.STDT_NO
+					WHERE		1 = 1
+					AND  		TGAP.STDT_NO = #{stdtNo}::NUMERIC
+					GROUP BY 	TGAP.LOC_NO, TGAP.STDT_NO
+					) A
+	</select>
+
+</mapper>

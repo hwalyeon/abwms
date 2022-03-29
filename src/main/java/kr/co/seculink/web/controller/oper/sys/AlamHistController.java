@@ -1,10 +1,10 @@
-package kr.co.seculink.web.controller.oper.dgem;
+package kr.co.seculink.web.controller.oper.sys;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
-import kr.co.seculink.web.service.oper.dgem.LocHistService;
+import kr.co.seculink.web.service.oper.sys.AlamHistService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,32 +19,32 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class LocHistController
+public class AlamHistController
 {
 
 	@Resource(name = "sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
 	@Autowired
-	private LocHistService locHistService;
+	private AlamHistService alamHistService;
 
 	//리스트 조회
 	@ResponseBody
-	@RequestMapping("/oper/dgem/locHist/searchLocHistList.ab")
-	public RtnMsg searchLocHistList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	@RequestMapping("/oper/sys/alamHist/searchAlamHistList.ab")
+	public RtnMsg searchAlamHistList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
 
-		List<Map<String, String>> result = dao.selectList("oper.dgem.locHist.searchLocHistList", params);
+		List<Map<String, String>> result = dao.selectList("oper.sys.alamHist.searchAlamHistList", params);
 		rtnMap.put("result", result);
 
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)dao.selectList("oper.dgem.locHist.searchLocHistList", params)).size());
+			vo.setTotalCount(((List)dao.selectList("oper.sys.alamHist.searchAlamHistList", params)).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
@@ -55,11 +55,11 @@ public class LocHistController
 
 	//학생정보 엑셀 다운로드
 	@ResponseBody
-	@RequestMapping("/oper/dgem/locHist/searchLocHistList/excel.ab")
+	@RequestMapping("/oper/sys/alamHist/searchAlamHistList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		params.put("paging", "N");
-		List<Map<String, String>> result = dao.selectList("oper.dgem.locHist.searchLocHistList", params);
+		List<Map<String, String>> result = dao.selectList("oper.sys.alamHist.searchAlamHistList", params);
 
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
