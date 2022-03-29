@@ -21,7 +21,7 @@ public class GuarFmenuHistServiceImpl implements GuarFmenuHistService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	// 스트레스_지수_이력 리스트 조회
+	//보호자_식단표_현황리스트 조회
 	public List<Map<String, String>> searchGuarFmenuHistList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("oper.hc.guarFmenuHist.selectGuarFmenuHistList", params);
