@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface GuarFmenuHistService
 {
-	// 스트레스_지수_이력 리스트 조회
+	//보호자_식단표_현황리스트 조회
 	public List<Map<String, String>> searchGuarFmenuHistList(Map<String, String> params) throws BizException;
 }
  
