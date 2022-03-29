@@ -38,7 +38,7 @@
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
-			and tsb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
+			and tgb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
 			order by tsch.occr_dttm
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>

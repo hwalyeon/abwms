@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oper.hc.guarFmenuHist">
+
+    <!--스트레스_지수_이력 리스트 조회-->
+	<select id="selectGuarFmenuHistList" parameterType="java.util.Map" resultType="MybatisMap">
+		select tfb.guar_no  /* guar_no 보호자_번호 numeric */
+		     , tgb.guar_nm       /* guar_nm 보호자_명 character varying(40) */
+		     , tfb.fmenu_seq     /* fmenu_seq 식단표_순번 numeric */
+		     , tfb.fmenu_nm      /* fmenu_nm 식단표_명 character varying(100) */
+		     , tfb.mmel_yn       /* mmel_yn 아침_여부 character(1) */
+		     , tfb.amel_yn       /* amel_yn 점심_여부 character(1) */
+		     , tfb.emel_yn       /* emel_yn 저녁_여부 character(1) */
+		     , tfb.smel_yn       /* smel_yn 간식_여부 character(1) */
+		     , tdeh.feqUse       /*이용 빈도(수)*/
+		from   ts_fmenu_base tfb                --식단표_기본 tfb
+		inner join      TM_GUAR_BASE tgb            --보호자_기본 tgb
+		                on tfb.GUAR_NO = tgb.GUAR_NO
+		left outer join ( select   count(FMENU_SEQ) as feqUse
+								  , guar_no
+							  	  , fmenu_seq
+						  from      TS_DD_EAT_HIST
+						  group by  guar_no,fmenu_seq
+						) tdeh                   --일별_섭취_이력 tdeh
+		                on tfb.GUAR_NO = tdeh.GUAR_NO
+		and    tfb.FMENU_SEQ = tdeh.FMENU_SEQ
+		WHERE  1 = 1
+		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
+			and tfb.guar_no = #{guarNo}::NUMERIC </if>
+		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
+            and tgb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
+		<if test=" fmenuSeq != null and fmenuSeq !='' ">/*식단표_순번*/
+			and tfb.fmenu_seq = #{fmenuSeq}::NUMERIC</if>
+		<if test=" fmenuNm != null and fmenuNm !='' ">/*식단표_명*/
+			and tfb.fmenu_nm like CONCAT('%',#{fmenuNm},'%')</if>
+		<if test=" mmelYn != null and mmelYn !='' ">/*아침_여부*/
+			and tfb.mmel_yn = #{mmelYn}</if>
+		<if test=" amelYn != null and mmelYn !='' ">/*점심_여부*/
+			and tfb.amel_yn = #{mmelYn}</if>
+		<if test=" emelYn != null and emelYn !='' ">/*저녁_여부*/
+			and tfb.emel_yn = #{mmelYn}</if>
+		<if test=" smelYn != null and smelYn !='' ">/*간식_여부*/
+			and tfb.smel_yn = #{smel_yn}</if>
+
+
+
+		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
+			and tssh.stdt_no = #{stdtNo}::NUMERIC </if>
+		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
+			and tsb.stdt_NM like CONCAT('%',#{stdtNm},'%')</if>
+		<if test="ageFr != null and ageFr != null and ageTo !='' and ageTo !='' ">/*나이*/
+			and fn_getage(tsb.bith_dt)  between #{ageFr}::NUMERIC  and #{ageTo}::NUMERIC </if>
+		<if test=" sexCd != null and sexCd !='' ">/*성별*/
+			and tsb.sex_cd = #{sexCd} </if>
+
+		<if test=" strsStatCd != null and strsStatCd !='' ">/*스트레스_상태_코드*/
+			and tssh.strs_stat_cd like CONCAT('%',#{strsStatCd},'%')</if>
+		<if test=" mindStrsStatCd != null and mindStrsStatCd !='' ">/*정신적_스트레스_상태_코드*/
+			and tssh.mind_strs_stat_cd like CONCAT('%',#{mindStrsStatCd},'%')</if>
+		<if test=" physStrsStatCd != null and physStrsStatCd !='' ">/*신체적_스트레스_상태_코드*/
+			and tssh.phys_strs_stat_cd_nm like CONCAT('%',#{physStrsStatCd},'%')</if>
+		<if test=" strsCopeStatCd != null and strsCopeStatCd !='' ">/*스트레스_대처_상태_코드*/
+			and tssh.strs_cope_stat_cd like CONCAT('%',#{strsCopeStatCd},'%')</if>
+		<if test=" locNm != null and locNm !='' ">
+			and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+        <if test=' paging == "Y" '>
+		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+</mapper>

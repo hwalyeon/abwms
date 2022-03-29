@@ -13,10 +13,10 @@
 			   , tdah.rpet_act_cnt  /* rpet_act_cnt 반복_활동_수 numeric */
 			   , tdah.cal_csum_qty  /* cal_csum_qty 칼로리_소모_량 numeric */
 			   , tdah.judg_no 	    /* judg_no 판정_번호 numeric */
-			   , tbi.tel_no 	    --밴드_전화_번호
-			   , tgb.guar_no 	    --보호자_번호
-			   , tgb.guar_nm 	    --보호자_명
-			   , tgb.guar_tel_no    --보호자_전화_번호
+		       , tbi.tel_no         /* tel_no 전화_번호 character varying(20) */
+		       , tgb.guar_no        /* guar_no 보호자_번호 numeric */
+		       , tgb.guar_nm        /* guar_nm 보호자_명 character varying(40) */
+		       , tgb.guar_tel_no    /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		FROM   ts_dd_act_hist tdah              --일별_활동_이력 tdah
 		       inner join TI_ACT_STND tas       --활동_기준 TAS
 		       on tdah.ACT_CD = tas.ACT_CD
@@ -46,7 +46,7 @@
 		<if test=" guarNo != null and guarNo !='' ">            /*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">            /*보호자_명*/
-			and tsb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
+			and tgb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

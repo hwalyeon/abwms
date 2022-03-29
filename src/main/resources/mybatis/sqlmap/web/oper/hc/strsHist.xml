@@ -44,15 +44,15 @@
 		<if test=" guarNo != null and guarNo !='' ">                              /*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">                              /*보호자_명*/
-			and tsb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
+			and tgb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
 		<if test=" strsStatCd != null and strsStatCd !='' ">                      /*스트레스_상태_코드*/
-			and tssh.strs_stat_cd like CONCAT('%',#{strsStatCd},'%')</if>
+			and tssh.strs_stat_cd = #{strsStatCd}</if>
 		<if test=" mindStrsStatCd != null and mindStrsStatCd !='' ">              /*정신적_스트레스_상태_코드*/
-			and tssh.mind_strs_stat_cd like CONCAT('%',#{mindStrsStatCd},'%')</if>
+			and tssh.mind_strs_stat_cd = #{mindStrsStatCd}</if>
 		<if test=" physStrsStatCd != null and physStrsStatCd !='' ">              /*신체적_스트레스_상태_코드*/
-			and tssh.phys_strs_stat_cd_nm like CONCAT('%',#{physStrsStatCd},'%')</if>
+			and tssh.phys_strs_stat_cd_nm = #{physStrsStatCd}</if>
 		<if test=" strsCopeStatCd != null and strsCopeStatCd !='' ">              /*스트레스_대처_상태_코드*/
-			and tssh.strs_cope_stat_cd like CONCAT('%',#{strsCopeStatCd},'%')</if>
+			and tssh.strs_cope_stat_cd = #{strsCopeStatCd}</if>
 		<if test=" locNm != null and locNm !='' ">                                /*지역_명*/
 			and teb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
         <if test=' paging == "Y" '>
