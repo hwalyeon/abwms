@@ -441,7 +441,7 @@
              ,tgjs.spec_cntn
              ,fn_getcdnm('FAT_JUDG_CD' , tgh.fat_judg_cd) as fat_judg_nm
              ,tfjs.curr_eval_cntn
-             ,fn_getcdnm('FAT_JUDG_CD' , tgh.prdt_fat_judg_cd) as prdt_fat_judg_nm
+             ,fn_getcdnm('FAT_JUDG_CD' , tgh.fatp_judg_cd) as fatp_judg_nm
              ,tgh.cal_eat_qty
              ,tgh.cal_csum_qty
              ,tgh.pal_val
@@ -514,7 +514,7 @@
          ,gfix.fat_idx
          ,gfix.fat_judg_nm
          ,gfix.curr_eval_cntn
-         ,gfix.prdt_fat_judg_nm
+         ,gfix.fatp_judg_nm
          ,strs.avg_hbit_cnt
          ,strs.mind_strs_pnt
          ,strs.mind_strs_stat_cd

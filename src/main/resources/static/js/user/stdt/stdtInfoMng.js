@@ -233,7 +233,7 @@ let stdtInfoMng = new Vue({
         },
         //보호자(사용자)정보 상세 팝업
         regGuarInfoDetlPopup:function(bandId, guarNo, guarTelNo, stdtNo, stdtNm) {
-            guarInfoDetl.initPage(bandId, guarNo, guarTelNo, stdtNo, stdtNm, function(){bandOpenInfoMng.searchBandOpenInfoList});
+            guarInfoDetl.initPage( guarNo, function(){bandOpenInfoMng.searchBandOpenInfoList});
         },
         //학부모정보 상세 팝업
         regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {

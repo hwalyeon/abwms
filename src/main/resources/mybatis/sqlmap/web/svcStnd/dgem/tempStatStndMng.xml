@@ -78,7 +78,7 @@
         /* Generated SQL SQL ID : ti_dd_pal_blck.delete */
 		DELETE FROM ti_temp_stat_stnd
 		WHERE  1 = 1
-		AND    age_ycnt     = #{ageYcnt}  ::numeric /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		AND    age_ycnt     = #{ageYcnt}  ::numeric
 		AND    temp_val_fr  = #{tempValFr}::numeric
 	   </delete>
 </mapper>
