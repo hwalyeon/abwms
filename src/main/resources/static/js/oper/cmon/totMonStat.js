@@ -2,6 +2,10 @@ let totMonStat = new Vue({
     el: "#totMonStat",
     data: {
         totMonStat: {
+            openCnt             : 0,
+            operCnt             : 0,
+            noRsps              : 0,
+
             temp                : null,
             tmpDngrSafeOcrrTd   : '',
             tmpDngrSafeOcrrDif  : '',
@@ -88,7 +92,8 @@ let totMonStat = new Vue({
             amPm                    : ''
         },
         cycl: {
-            initCycl                : 3000
+            initCycl                : '',
+            timeCycl                : 5000
         },
         code: {
             // sexCdList: []
@@ -234,6 +239,8 @@ let totMonStat = new Vue({
         },
         searchStdtDetlInfo: function (stdtNo, guarNo){
             let $this = this;
+
+            // jcw 임시 로직
             stdtNo = 1;
             guarNo = 1;
             if ( !WebUtil.isNull(stdtNo) )
@@ -245,8 +252,9 @@ let totMonStat = new Vue({
 
                 $this.initData();
 
+                // /user/stdt/stdtInfoMng/searchStdtDetlInfo.ab
                 AjaxUtil.post({
-                    url: "/user/stdt/stdtInfoMng/searchStdtDetlInfo.ab",
+                    url: "/oper/cmon/totMonStat/searchTotMonStat.ab",
                     param: params,
                     success: function(response) {
                         if ( !!response["rtnData"].result ) {
@@ -255,29 +263,28 @@ let totMonStat = new Vue({
                             });
 
                             $this.updateChart();
-                            $this.initCycl(5000);
+                            $this.initCycl($this.cycl.timeCycl);
                         }
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
-                        closeModal($('#stdtInfoDetlPopup'));
                     }
                 });
             }
         },
         updateChart : function() {
             let $this = this;
-            let TempChartColor      = '#989998';
-            let operStatChartColor  = '#65D965';
+            // let TempChartColor      = '#989998';
+            // let operStatChartColor  = '#65D965';
 
-            if ($this.totMonStat.growJudgCd !== 'VLOW') {
-                if      ($this.totMonStat.growJudgCd === 'LOW')   operStatChartColor = '#65D965';
-                else if ($this.totMonStat.growJudgCd === 'AVG')   operStatChartColor = '#f3e24a';
-                else if ($this.totMonStat.growJudgCd === 'HIGH')  operStatChartColor = '#fc8f46';
-                else if ($this.totMonStat.growJudgCd === 'OHIGH') operStatChartColor = '#f1071b';
-            } else {
-                operStatChartColor = '#2a99ec';
-            }
+            // if ($this.totMonStat.growJudgCd !== 'VLOW') {
+            //     if      ($this.totMonStat.growJudgCd === 'LOW')   operStatChartColor = '#65D965';
+            //     else if ($this.totMonStat.growJudgCd === 'AVG')   operStatChartColor = '#f3e24a';
+            //     else if ($this.totMonStat.growJudgCd === 'HIGH')  operStatChartColor = '#fc8f46';
+            //     else if ($this.totMonStat.growJudgCd === 'OHIGH') operStatChartColor = '#f1071b';
+            // } else {
+            //     operStatChartColor = '#2a99ec';
+            // }
 
             let colorRed = '#f1071b';
             let colorGre = '#09ea09';
@@ -315,7 +322,11 @@ let totMonStat = new Vue({
             $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(tmpDngrSafeOcrrTd);
             $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrAv - tmpDngrSafeOcrrTd;
 
-            let operStatModIdx      = $this.chartPerModIdx($this.totMonStat.growIdx, 100);
+            // 백분율 몫 구하기
+            let operCntQuotiIdx     = $this.chartPerQuoti($this.totMonStat.operCnt, $this.totMonStat.openCnt);
+
+            // 나머지 구하기
+            let operCntModIdx       = $this.chartPerModIdx(operCntQuotiIdx);
             let growFatModIdx       = $this.chartPerModIdx(tmpGrowFatIdx);
             let fatPrdtModIdx       = $this.chartPerModIdx(tmpFatPrdtIdx);
             let strsModIdx          = $this.chartPerModIdx(tmpStrsIdx);
@@ -324,11 +335,10 @@ let totMonStat = new Vue({
             let prntSafeDtctModIdx  = $this.chartPerModIdx(tmpPrntSafeDtct);
             let prntDngrDtctModIdx  = $this.chartPerModIdx(tmpPrntDngrDtct);
 
-
             let dataOperStat = {
                 labels              : ['가동','무응답'],
                 datasets: [{
-                    data            : [$this.totMonStat.growIdx , operStatModIdx],
+                    data            : [operCntQuotiIdx          , operCntModIdx],
                     backgroundColor : [colorBlu                 , colorGra],
                     borderColor     : [colorBlu                 , colorGra],
                     borderWidth     : 10
@@ -521,7 +531,7 @@ let totMonStat = new Vue({
             let pluginsOperStat = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if($this.totMonStat.growIdx != null ) srcIdx = $this.totMonStat.growIdx;
+                    if(operCntQuotiIdx != null ) srcIdx = operCntQuotiIdx;
                     $this.textCenter('operStatChart', srcIdx, $this.chartOperStat, colorBlu, '' , '');
                 }
             }];
@@ -750,28 +760,28 @@ let totMonStat = new Vue({
                 plugins : pluginsCareMmelNeatQust
             };
 
-            let ctxOperStat     = document.getElementById('operStatChart').getContext('2d');
-            let ctxOpenStat     = document.getElementById('openStatChart').getContext('2d');
-            let ctxGrowFat      = document.getElementById('growFatChart').getContext('2d');
-            let ctxFatPrdt      = document.getElementById('fatPrdtChart').getContext('2d');
-            let ctxStrs         = document.getElementById('strsChart').getContext('2d');
-            let ctxDngrSafeOccr = document.getElementById('dngrSafeOccrChart').getContext('2d');
-            let ctxDngrZoneProg = document.getElementById('dngrZoneProgChart').getContext('2d');
-            let ctxPublSafeDtct = document.getElementById('publSafeDtctChart').getContext('2d');
-            let ctxPublDngrDtct = document.getElementById('publDngrDtctChart').getContext('2d');
-            let ctxPrntSafeDtct = document.getElementById('prntSafeDtctChart').getContext('2d');
-            let ctxPrntDngrDtct = document.getElementById('prntDngrDtctChart').getContext('2d');
+            let ctxOperStat             = document.getElementById('operStatChart').getContext('2d');
+            let ctxOpenStat             = document.getElementById('openStatChart').getContext('2d');
+            let ctxGrowFat              = document.getElementById('growFatChart').getContext('2d');
+            let ctxFatPrdt              = document.getElementById('fatPrdtChart').getContext('2d');
+            let ctxStrs                 = document.getElementById('strsChart').getContext('2d');
+            let ctxDngrSafeOccr         = document.getElementById('dngrSafeOccrChart').getContext('2d');
+            let ctxDngrZoneProg         = document.getElementById('dngrZoneProgChart').getContext('2d');
+            let ctxPublSafeDtct         = document.getElementById('publSafeDtctChart').getContext('2d');
+            let ctxPublDngrDtct         = document.getElementById('publDngrDtctChart').getContext('2d');
+            let ctxPrntSafeDtct         = document.getElementById('prntSafeDtctChart').getContext('2d');
+            let ctxPrntDngrDtct         = document.getElementById('prntDngrDtctChart').getContext('2d');
 
-            let ctxCareBmiBodyIdx   = document.getElementById('careBmiBodyIdxChart').getContext('2d');
-            let ctxCareGrowIdx      = document.getElementById('careGrowIdxChart').getContext('2d');
-            let ctxCareFatIdx       = document.getElementById('careFatIdxChart').getContext('2d');
-            let ctxCareFatPrdt      = document.getElementById('careFatPrdtChart').getContext('2d');
-            let ctxCareStrs         = document.getElementById('careStrsChart').getContext('2d');
-            let ctxCareExcsTime     = document.getElementById('careExcsTimeChart').getContext('2d');
-            let ctxCareCalEat       = document.getElementById('careCalEatChart').getContext('2d');
-            let ctxCareFmenuTop     = document.getElementById('careFmenuTopChart').getContext('2d');
-            let ctxCareMmelNeatFmenu= document.getElementById('careMmelNeatFmenuChart').getContext('2d');
-            let ctxCareMmelNeatQust = document.getElementById('careMmelNeatQustChart').getContext('2d');
+            let ctxCareBmiBodyIdx       = document.getElementById('careBmiBodyIdxChart').getContext('2d');
+            let ctxCareGrowIdx          = document.getElementById('careGrowIdxChart').getContext('2d');
+            let ctxCareFatIdx           = document.getElementById('careFatIdxChart').getContext('2d');
+            let ctxCareFatPrdt          = document.getElementById('careFatPrdtChart').getContext('2d');
+            let ctxCareStrs             = document.getElementById('careStrsChart').getContext('2d');
+            let ctxCareExcsTime         = document.getElementById('careExcsTimeChart').getContext('2d');
+            let ctxCareCalEat           = document.getElementById('careCalEatChart').getContext('2d');
+            let ctxCareFmenuTop         = document.getElementById('careFmenuTopChart').getContext('2d');
+            let ctxCareMmelNeatFmenu    = document.getElementById('careMmelNeatFmenuChart').getContext('2d');
+            let ctxCareMmelNeatQust     = document.getElementById('careMmelNeatQustChart').getContext('2d');
 
             $this.initChart();
 
@@ -849,6 +859,15 @@ let totMonStat = new Vue({
 
             return modIdx;
         },
+        chartPerQuoti: function(numerator, denominator) {
+            // 분모 혹은 제수 : null 또는 0 일 경우 임의로 1로 강제 세팅
+            if (WebUtil.isNull(denominator) || denominator === 0) {
+                denominator = 1;
+            }
+            let quoti;
+            quoti  = Math.round((numerator / denominator * 100) * 10) / 10;
+            return quoti;
+        },
         toNumber: function (value) {
             return value.toLocaleString('ko-KR');
         },
@@ -856,6 +875,10 @@ let totMonStat = new Vue({
             let $this = this;
 
             $this.totMonStat = {
+                openCnt             : '',
+                operCnt             : '',
+                noRsps              : '',
+
                 temp                : null,
                 tmpDngrSafeOcrrTd   : $this.tmpDngrSafeOcrrTd,
                 tmpDngrSafeOcrrDif  : $this.tmpDngrSafeOcrrDif,
@@ -947,14 +970,14 @@ let totMonStat = new Vue({
         initCycl: function(timeCycl) {
             let $this = this;
             if (timeCycl === null) timeCycl = 5000;
+            $this.cycl.timeCycl = timeCycl;
+
             clearInterval($this.cycl.initCycl);
             $this.cycl.initCycl = setInterval($this.searchStdtDetlInfo, timeCycl);
         },
         numCountAnimate: function () {
             let $this = this;
             var memberCountConTxt= $this.totMonStat.tmpTmepAbnmCnt;
-
-
 
             $({ val : 0 }).animate({ val : memberCountConTxt }, {
                 duration: 1000,

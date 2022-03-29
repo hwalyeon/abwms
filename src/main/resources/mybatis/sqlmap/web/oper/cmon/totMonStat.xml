@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="oper.cmon.totMonStat">
+
+	<!-- 종합관제현황_조회 -->
+	<select id="searchTotMonStat" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT		123456 	AS OPEN_CNT
+				  , 97456 	AS OPER_CNT
+				  , 24561 	AS NO_RSPS
+		FROM		NOW()
+	</select>
+
+</mapper>
