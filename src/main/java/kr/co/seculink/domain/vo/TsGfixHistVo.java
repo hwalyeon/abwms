@@ -88,6 +88,9 @@ public class TsGfixHistVo implements Serializable {
 	/* fat_stnd_no 비만_기준_번호 numeric(null) */
 	private double fatStndNo;
 
+	/* nutr_eat_qty 영양소_섭취_량 numeric(null) */
+	private double nutrEatQty;
+
 	/* fat_idx 비만_지수 numeric(null) */
 	private double fatIdx;
 
@@ -97,17 +100,17 @@ public class TsGfixHistVo implements Serializable {
 	/* fat_judg_desc 비만_판정_설명 character varying(4000) */
 	private String fatJudgDesc;
 
-	/* prdt_bmi_val 예측_BMI_값 numeric(null) */
-	private double prdtBmiVal;
+	/* fatp_bmi_val 비만예측_BMI_값 numeric(null) */
+	private double fatpBmiVal;
 
-	/* prdt_fat_idx 예측_비만_지수 numeric(null) */
-	private double prdtFatIdx;
+	/* fatp_idx 비만예측_지수 numeric(null) */
+	private double fatpIdx;
 
-	/* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-	private String prdtFatJudgCd;
+	/* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+	private String fatpJudgCd;
 
-	/* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
-	private String prdtFatJudgDesc;
+	/* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
+	private String fatpJudgDesc;
 
 	/* pal_val 신체활동수준_값 numeric(null) */
 	private double palVal;
@@ -543,6 +546,21 @@ public class TsGfixHistVo implements Serializable {
 		this.fatStndNo = fatStndNo;
 	}
 	/**
+	 * Get nutr_eat_qty 영양소_섭취_량 numeric(null)
+	 * @Return double nutrEatQty
+	 */
+	public double getNutrEatQty() {
+		return this.nutrEatQty;
+	}
+	
+	/**
+	 * Set nutr_eat_qty 영양소_섭취_량 numeric(null)
+	 * @Param double nutrEatQty
+	 */
+	public void setNutrEatQty(double nutrEatQty) {
+		this.nutrEatQty = nutrEatQty;
+	}
+	/**
 	 * Get fat_idx 비만_지수 numeric(null)
 	 * @Return double fatIdx
 	 */
@@ -588,64 +606,64 @@ public class TsGfixHistVo implements Serializable {
 		this.fatJudgDesc = fatJudgDesc;
 	}
 	/**
-	 * Get prdt_bmi_val 예측_BMI_값 numeric(null)
-	 * @Return double prdtBmiVal
+	 * Get fatp_bmi_val 비만예측_BMI_값 numeric(null)
+	 * @Return double fatpBmiVal
 	 */
-	public double getPrdtBmiVal() {
-		return this.prdtBmiVal;
+	public double getFatpBmiVal() {
+		return this.fatpBmiVal;
 	}
 	
 	/**
-	 * Set prdt_bmi_val 예측_BMI_값 numeric(null)
-	 * @Param double prdtBmiVal
+	 * Set fatp_bmi_val 비만예측_BMI_값 numeric(null)
+	 * @Param double fatpBmiVal
 	 */
-	public void setPrdtBmiVal(double prdtBmiVal) {
-		this.prdtBmiVal = prdtBmiVal;
+	public void setFatpBmiVal(double fatpBmiVal) {
+		this.fatpBmiVal = fatpBmiVal;
 	}
 	/**
-	 * Get prdt_fat_idx 예측_비만_지수 numeric(null)
-	 * @Return double prdtFatIdx
+	 * Get fatp_idx 비만예측_지수 numeric(null)
+	 * @Return double fatpIdx
 	 */
-	public double getPrdtFatIdx() {
-		return this.prdtFatIdx;
-	}
-	
-	/**
-	 * Set prdt_fat_idx 예측_비만_지수 numeric(null)
-	 * @Param double prdtFatIdx
-	 */
-	public void setPrdtFatIdx(double prdtFatIdx) {
-		this.prdtFatIdx = prdtFatIdx;
-	}
-	/**
-	 * Get prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20)
-	 * @Return String prdtFatJudgCd
-	 */
-	public String getPrdtFatJudgCd() {
-		return this.prdtFatJudgCd;
+	public double getFatpIdx() {
+		return this.fatpIdx;
 	}
 	
 	/**
-	 * Set prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20)
-	 * @Param String prdtFatJudgCd
+	 * Set fatp_idx 비만예측_지수 numeric(null)
+	 * @Param double fatpIdx
 	 */
-	public void setPrdtFatJudgCd(String prdtFatJudgCd) {
-		this.prdtFatJudgCd = prdtFatJudgCd;
+	public void setFatpIdx(double fatpIdx) {
+		this.fatpIdx = fatpIdx;
 	}
 	/**
-	 * Get prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000)
-	 * @Return String prdtFatJudgDesc
+	 * Get fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Return String fatpJudgCd
 	 */
-	public String getPrdtFatJudgDesc() {
-		return this.prdtFatJudgDesc;
+	public String getFatpJudgCd() {
+		return this.fatpJudgCd;
 	}
 	
 	/**
-	 * Set prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000)
-	 * @Param String prdtFatJudgDesc
+	 * Set fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Param String fatpJudgCd
 	 */
-	public void setPrdtFatJudgDesc(String prdtFatJudgDesc) {
-		this.prdtFatJudgDesc = prdtFatJudgDesc;
+	public void setFatpJudgCd(String fatpJudgCd) {
+		this.fatpJudgCd = fatpJudgCd;
+	}
+	/**
+	 * Get fatp_judg_desc 비만예측_판정_설명 character varying(4000)
+	 * @Return String fatpJudgDesc
+	 */
+	public String getFatpJudgDesc() {
+		return this.fatpJudgDesc;
+	}
+	
+	/**
+	 * Set fatp_judg_desc 비만예측_판정_설명 character varying(4000)
+	 * @Param String fatpJudgDesc
+	 */
+	public void setFatpJudgDesc(String fatpJudgDesc) {
+		this.fatpJudgDesc = fatpJudgDesc;
 	}
 	/**
 	 * Get pal_val 신체활동수준_값 numeric(null)

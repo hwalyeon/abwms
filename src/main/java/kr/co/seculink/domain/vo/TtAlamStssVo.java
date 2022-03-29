@@ -28,8 +28,8 @@ public class TtAlamStssVo implements Serializable {
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
-	/* obj_cnt 대상_건수 numeric(null) */
-	private double objCnt;
+	/* alam_cnt 알림_건수 numeric(null) */
+	private double alamCnt;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -48,9 +48,6 @@ public class TtAlamStssVo implements Serializable {
 
 	/* upt_user_id 수정_사용자_ID character varying(20) */
 	private String uptUserId;
-
-	/* neat_cnt 결식_건수 numeric(null) */
-	private double neatCnt;
 
 
 	/**
@@ -159,19 +156,19 @@ public class TtAlamStssVo implements Serializable {
 		this.weekNm = weekNm;
 	}
 	/**
-	 * Get obj_cnt 대상_건수 numeric(null)
-	 * @Return double objCnt
+	 * Get alam_cnt 알림_건수 numeric(null)
+	 * @Return double alamCnt
 	 */
-	public double getObjCnt() {
-		return this.objCnt;
+	public double getAlamCnt() {
+		return this.alamCnt;
 	}
 	
 	/**
-	 * Set obj_cnt 대상_건수 numeric(null)
-	 * @Param double objCnt
+	 * Set alam_cnt 알림_건수 numeric(null)
+	 * @Param double alamCnt
 	 */
-	public void setObjCnt(double objCnt) {
-		this.objCnt = objCnt;
+	public void setAlamCnt(double alamCnt) {
+		this.alamCnt = alamCnt;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)
@@ -262,21 +259,6 @@ public class TtAlamStssVo implements Serializable {
 	 */
 	public void setUptUserId(String uptUserId) {
 		this.uptUserId = uptUserId;
-	}
-	/**
-	 * Get neat_cnt 결식_건수 numeric(null)
-	 * @Return double neatCnt
-	 */
-	public double getNeatCnt() {
-		return this.neatCnt;
-	}
-	
-	/**
-	 * Set neat_cnt 결식_건수 numeric(null)
-	 * @Param double neatCnt
-	 */
-	public void setNeatCnt(double neatCnt) {
-		this.neatCnt = neatCnt;
 	}
 
 } // end of class

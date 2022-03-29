@@ -36,13 +36,14 @@
                ,grow_prdt_desc /* grow_prdt_desc 성장_예측_설명 character varying(4000) */
                ,fat_stnd_ver /* fat_stnd_ver 비만_기준_버전 character varying(20) */
                ,fat_stnd_no /* fat_stnd_no 비만_기준_번호 numeric */
+               ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
                ,fat_idx /* fat_idx 비만_지수 numeric */
                ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
                ,fat_judg_desc /* fat_judg_desc 비만_판정_설명 character varying(4000) */
-               ,prdt_bmi_val /* prdt_bmi_val 예측_BMI_값 numeric */
-               ,prdt_fat_idx /* prdt_fat_idx 예측_비만_지수 numeric */
-               ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
-               ,prdt_fat_judg_desc /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
+               ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
+               ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
+               ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+               ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
                ,pal_val /* pal_val 신체활동수준_값 numeric */
                ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
                ,rmrk /* rmrk 비고 character varying(4000) */
@@ -107,6 +108,7 @@
 		<if test="fatStndNo != null">
 		    ,fat_stnd_no /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
 		    ,fat_idx /* fat_idx 비만_지수 numeric */
 		<if test="fatJudgCd != null">
 		    ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
@@ -114,13 +116,13 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
-		    ,prdt_bmi_val /* prdt_bmi_val 예측_BMI_값 numeric */
-		    ,prdt_fat_idx /* prdt_fat_idx 예측_비만_지수 numeric */
-		<if test="prdtFatJudgCd != null">
-		    ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		    ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		    ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
+		<if test="fatpJudgCd != null">
+		    ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
-		<if test="prdtFatJudgDesc != null">
-		    ,prdt_fat_judg_desc /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
+		<if test="fatpJudgDesc != null">
+		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
 		<if test="calNutrStatCd != null">
@@ -187,6 +189,7 @@
 		<if test="fatStndNo != null">
 		    ,#{fatStndNo} /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
 		    ,#{fatIdx} /* fat_idx 비만_지수 numeric */
 		<if test="fatJudgCd != null">
 		    ,#{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
@@ -194,13 +197,13 @@
 		<if test="fatJudgDesc != null">
 		    ,#{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
-		    ,#{prdtBmiVal} /* prdt_bmi_val 예측_BMI_값 numeric */
-		    ,#{prdtFatIdx} /* prdt_fat_idx 예측_비만_지수 numeric */
-		<if test="prdtFatJudgCd != null">
-		    ,#{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		    ,#{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		    ,#{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
+		<if test="fatpJudgCd != null">
+		    ,#{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
-		<if test="prdtFatJudgDesc != null">
-		    ,#{prdtFatJudgDesc} /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
+		<if test="fatpJudgDesc != null">
+		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
 		<if test="calNutrStatCd != null">
@@ -301,6 +304,9 @@
 		<if test="fatStndNo != null">
 		    ,fat_stnd_no = #{fatStndNo} /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		<if test="nutrEatQty != null">
+		    ,nutr_eat_qty = #{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
 		<if test="fatIdx != null">
 		    ,fat_idx = #{fatIdx} /* fat_idx 비만_지수 numeric */
 		</if>
@@ -310,17 +316,17 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc = #{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
-		<if test="prdtBmiVal != null">
-		    ,prdt_bmi_val = #{prdtBmiVal} /* prdt_bmi_val 예측_BMI_값 numeric */
+		<if test="fatpBmiVal != null">
+		    ,fatp_bmi_val = #{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		</if>
-		<if test="prdtFatIdx != null">
-		    ,prdt_fat_idx = #{prdtFatIdx} /* prdt_fat_idx 예측_비만_지수 numeric */
+		<if test="fatpIdx != null">
+		    ,fatp_idx = #{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
 		</if>
-		<if test="prdtFatJudgCd != null">
-		    ,prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		<if test="fatpJudgCd != null">
+		    ,fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
-		<if test="prdtFatJudgDesc != null">
-		    ,prdt_fat_judg_desc = #{prdtFatJudgDesc} /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
+		<if test="fatpJudgDesc != null">
+		    ,fatp_judg_desc = #{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
@@ -391,6 +397,7 @@
 		<if test="fatStndNo != null">
 		    ,fat_stnd_no /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
 		    ,fat_idx /* fat_idx 비만_지수 numeric */
 		<if test="fatJudgCd != null">
 		    ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
@@ -398,13 +405,13 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
-		    ,prdt_bmi_val /* prdt_bmi_val 예측_BMI_값 numeric */
-		    ,prdt_fat_idx /* prdt_fat_idx 예측_비만_지수 numeric */
-		<if test="prdtFatJudgCd != null">
-		    ,prdt_fat_judg_cd /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		    ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		    ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
+		<if test="fatpJudgCd != null">
+		    ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
-		<if test="prdtFatJudgDesc != null">
-		    ,prdt_fat_judg_desc /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
+		<if test="fatpJudgDesc != null">
+		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
 		<if test="calNutrStatCd != null">
@@ -471,6 +478,7 @@
 		<if test="fatStndNo != null">
 		    ,#{fatStndNo} /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
 		    ,#{fatIdx} /* fat_idx 비만_지수 numeric */
 		<if test="fatJudgCd != null">
 		    ,#{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
@@ -478,13 +486,13 @@
 		<if test="fatJudgDesc != null">
 		    ,#{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
-		    ,#{prdtBmiVal} /* prdt_bmi_val 예측_BMI_값 numeric */
-		    ,#{prdtFatIdx} /* prdt_fat_idx 예측_비만_지수 numeric */
-		<if test="prdtFatJudgCd != null">
-		    ,#{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		    ,#{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		    ,#{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
+		<if test="fatpJudgCd != null">
+		    ,#{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
-		<if test="prdtFatJudgDesc != null">
-		    ,#{prdtFatJudgDesc} /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
+		<if test="fatpJudgDesc != null">
+		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
 		<if test="calNutrStatCd != null">
@@ -582,6 +590,9 @@
 		<if test="fatStndNo != null">
 		    ,fat_stnd_no = #{fatStndNo} /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		<if test="nutrEatQty != null">
+		    ,nutr_eat_qty = #{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
 		<if test="fatIdx != null">
 		    ,fat_idx = #{fatIdx} /* fat_idx 비만_지수 numeric */
 		</if>
@@ -591,17 +602,17 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc = #{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
-		<if test="prdtBmiVal != null">
-		    ,prdt_bmi_val = #{prdtBmiVal} /* prdt_bmi_val 예측_BMI_값 numeric */
+		<if test="fatpBmiVal != null">
+		    ,fatp_bmi_val = #{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		</if>
-		<if test="prdtFatIdx != null">
-		    ,prdt_fat_idx = #{prdtFatIdx} /* prdt_fat_idx 예측_비만_지수 numeric */
+		<if test="fatpIdx != null">
+		    ,fatp_idx = #{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
 		</if>
-		<if test="prdtFatJudgCd != null">
-		    ,prdt_fat_judg_cd = #{prdtFatJudgCd} /* prdt_fat_judg_cd 예측_비만_판정_코드 character varying(20) */
+		<if test="fatpJudgCd != null">
+		    ,fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
-		<if test="prdtFatJudgDesc != null">
-		    ,prdt_fat_judg_desc = #{prdtFatJudgDesc} /* prdt_fat_judg_desc 예측_비만_판정_설명 character varying(4000) */
+		<if test="fatpJudgDesc != null">
+		    ,fatp_judg_desc = #{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */

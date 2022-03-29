@@ -28,8 +28,8 @@ public class TtFatIdxStssVo implements Serializable {
 	/* avg_bmi_val 평균_BMI_값 numeric(null) */
 	private double avgBmiVal;
 
-	/* avg_fat_idx 평균_비만_지수 numeric(null) */
-	private double avgFatIdx;
+	/* avg_idx 평균_지수 numeric(null) */
+	private double avgIdx;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -156,19 +156,19 @@ public class TtFatIdxStssVo implements Serializable {
 		this.avgBmiVal = avgBmiVal;
 	}
 	/**
-	 * Get avg_fat_idx 평균_비만_지수 numeric(null)
-	 * @Return double avgFatIdx
+	 * Get avg_idx 평균_지수 numeric(null)
+	 * @Return double avgIdx
 	 */
-	public double getAvgFatIdx() {
-		return this.avgFatIdx;
+	public double getAvgIdx() {
+		return this.avgIdx;
 	}
 	
 	/**
-	 * Set avg_fat_idx 평균_비만_지수 numeric(null)
-	 * @Param double avgFatIdx
+	 * Set avg_idx 평균_지수 numeric(null)
+	 * @Param double avgIdx
 	 */
-	public void setAvgFatIdx(double avgFatIdx) {
-		this.avgFatIdx = avgFatIdx;
+	public void setAvgIdx(double avgIdx) {
+		this.avgIdx = avgIdx;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

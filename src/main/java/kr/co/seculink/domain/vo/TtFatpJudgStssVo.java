@@ -16,8 +16,8 @@ public class TtFatpJudgStssVo implements Serializable {
 	/* age_ycnt 나이_년수 numeric(null) */
 	private double ageYcnt;
 
-	/* grow_judg_cd 성장_판정_코드 character varying(20) */
-	private String growJudgCd;
+	/* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+	private String fatpJudgCd;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
@@ -96,19 +96,19 @@ public class TtFatpJudgStssVo implements Serializable {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
-	 * Get grow_judg_cd 성장_판정_코드 character varying(20)
-	 * @Return String growJudgCd
+	 * Get fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Return String fatpJudgCd
 	 */
-	public String getGrowJudgCd() {
-		return this.growJudgCd;
+	public String getFatpJudgCd() {
+		return this.fatpJudgCd;
 	}
 	
 	/**
-	 * Set grow_judg_cd 성장_판정_코드 character varying(20)
-	 * @Param String growJudgCd
+	 * Set fatp_judg_cd 비만예측_판정_코드 character varying(20)
+	 * @Param String fatpJudgCd
 	 */
-	public void setGrowJudgCd(String growJudgCd) {
-		this.growJudgCd = growJudgCd;
+	public void setFatpJudgCd(String fatpJudgCd) {
+		this.fatpJudgCd = fatpJudgCd;
 	}
 	/**
 	 * Get stnd_yymm 기준_년월 character(6)
