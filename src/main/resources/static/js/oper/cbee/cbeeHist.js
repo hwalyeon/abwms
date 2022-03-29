@@ -96,7 +96,8 @@ let cbeeHist = new Vue({
                     let grid = this;
 
                     $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","telNo"], "stdtNo");
-                    $(grid).tableRowSpan(["occrDttm","cbeeUseCdNm","useCbeeAmt","cbeeBal"], "occrDttm");
+                    $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
+                    $(grid).tableRowSpan(["occrDttm","cbeeUseCdNm","useCbeeAmt","cbeeBal",], "occrDttm");
 
                 }
             }));
@@ -157,8 +158,8 @@ let cbeeHist = new Vue({
         {
             let $this = this;
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.cbeeJudgDttmFr = terms.strDt;
-            this.params.cbeeJudgDttmTo = terms.endDt;
+            this.params.occrDttmFr = terms.strDt;
+            this.params.occrDttmTo = terms.endDt;
         },
         //기준_일자_선택
         bDSelect: function()
