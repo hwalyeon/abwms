@@ -84,7 +84,6 @@ let guarFmenuHist = new Vue({
         {
 			let $this     = this;
             let params = $.extend(true, {}, $this.params);
-
             if ( isSearch )
             {
                 params.currentPage = 1;
