@@ -28,12 +28,11 @@ let gfixHist = new Vue({
         },
         code:
         {
-            bDPerList          : [] , //기준_일자_기간_리스트
-            sexCdList          : [] , //성별_코드
-            strsStatCdList     : [] , //스트레스_상태_코드
-            mindStrsStatCdList : [] , //정신적_스트레스_상태_코드
-            physStrsStatCdList : [] , //신체적_스트레스_상태_코드
-            strsCopeStatCdList : [] , //스트레스_대처_상태_코드
+            bDPerList      : [] , //기준_일자_기간_리스트
+            sexCdList      : [] , //성별_코드_리스트
+            growJudgCdList : [] , //성장_판정__코드 리스트
+            fatJudgCdList  : [] , //비만_판정_코드_리스트
+            fatEstmCdList  : [] , //비만_예측_코드_리스트
         },
 	},
     methods:
@@ -62,11 +61,10 @@ let gfixHist = new Vue({
         {
             let $this = this;
 
-            getCommonCodeList('SEX_CD'            , $this.code.sexCdList         ); //성별_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.strsStatCdList    ); //스트레스_상태_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.mindStrsStatCdList); //정신적_스트레스_상태_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.physStrsStatCdList); //신체적_스트레스_상태_코드
-            getCommonCodeList('STRS_COPE_STAT_CD' , $this.code.strsCopeStatCdList); //신체적_스트레스_상태_코드
+            getCommonCodeList('SEX_CD'       , $this.code.sexCdList      ); //성별_코드_리스트
+            getCommonCodeList('GROW_JUDG_CD' , $this.code.growJudgCdList ); //성장_판정__코드 리스트
+            getCommonCodeList('FAT_JUDG_CD'  , $this.code.fatJudgCdList  ); //비만_판정_코드_리스트
+            getCommonCodeList('FAT_ESTM_CD'  , $this.code.fatEstmCdList  ); //비만_예측_판정_코드_리스트
         },
         initGrid: function()
         {
@@ -107,6 +105,11 @@ let gfixHist = new Vue({
                         $this.params.currentIndex = resultMap.currentIndex;
                         $this.searchGfixHistList(false);
                     })
+                },
+                gridComplete: function () {
+                    let grid = this;
+
+                    $(grid).tableRowSpan(["strsJudgDttm","locNm","stdtNo","stdtNm","sexCdNm", "ageYy","ageMm", "strsStatCdNm","mindStrsStatCdNm","physStrsStatCdNm","strsCopeStatCd","telNo"], "stdtNo");
                 }
             }));
             resizeJqGridWidth("gfixHist_list", "gfixHist_list_wrapper");

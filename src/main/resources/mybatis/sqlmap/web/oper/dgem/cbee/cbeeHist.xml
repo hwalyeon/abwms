@@ -4,57 +4,42 @@
 
     <!--스트레스_지수_이력 리스트 조회-->
 	<select id="selectCbeeHistList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT tssh.cbee_judg_dttm /* cbee_judg_dttm 스트레스_판정_일시 character(14) */
-			 , teb.loc_nm /*loc_nm 학교_명 varchar(100) */
-			 , tssh.stdt_no /* stdt_no 학생_번호 numeric */
-			 , tsb.stdt_nm  /*stdt_nm 학생_명 varchar(40) */
-			 , fn_getcdnm('SEX_CD', tsb.sex_cd) as sex_cd_nm --성별_코드_명
-			 , fn_getage(tsb.bith_dt) as age_yy --나이(년수)
-			 , fn_getagem(tsb.bith_dt) as age_mm --나이(개월수)
-			 , fn_getcdnm('STRS_STAT_CD' , tssh.cbee_stat_cd) as cbee_stat_cd_nm --스트레스_상태_코드_명
-			 , fn_getcdnm('STRS_STAT_CD' , tssh.mind_cbee_stat_cd) as mind_cbee_stat_cd_nm --정신적_스트레스_상태_코드_명
-			 , fn_getcdnm('STRS_STAT_CD' , tssh.phys_cbee_stat_cd) as phys_cbee_stat_cd_nm --신체적_스트레스_상태_코드_명
-			 , fn_getcdnm('STRS_COPE_STAT_CD',tssh.cbee_cope_stat_cd) as cbee_cope_stat_cd --스트레스_대처_상태_코드_명
-			 , tbi.tel_no --밴드_전화_번호
-			 , tgb.guar_no --보호자_번호
-			 , tgb.guar_nm --보호자_명
-			 , tgb.guar_tel_no --보호자_전화_번호
-		FROM   TS_STDT_STRS_HIST tssh           --학생_스트레스_이력
-			   inner join TM_STDT_BASE tsb      --학생_기본 tsb
-			   on tssh.STDT_NO = tsb.STDT_NO
-			   inner join TS_BAND_INFO tbi      --밴드_정보 tbi
-			   on tsb.BAND_ID = tbi.BAND_ID
-			   inner join TM_STDT_GUAR_CONN tsgc--학생_보호자_연결 tsgc
-			   on tsgc.STDT_NO = tsb.STDT_NO
-			   inner join  TM_GUAR_BASE tgb     --보호자_기본 tgb
-			   on tsgc.GUAR_NO = tgb.GUAR_NO
-			   left outer join TI_EORG_BASE teb --교육기관_기본 teb
-			   on tsb.EORG_LOC_NO = teb.LOC_NO
+		SELECT   tsch.occr_dttm       /* occr_dttm 발생_일시 character(14) */
+		       , teb.loc_nm           /*loc_nm 학교_명 varchar(100) */
+		       , tsch.stdt_no         /* stdt_no 학생_번호 numeric */
+		       , tsb.stdt_nm          /*stdt_nm 학생_명 varchar(40) */
+		       , fn_getcdnm('CBEE_USE_CD',tsch.cbee_use_cd)  as  cbee_use_cd_nm  /* cbee_use_cd 캐시비_사용_코드 character varying(20) */
+		       , tsch.use_cbee_amt    /* use_cbee_amt 사용_캐시비_금액 numeric */
+		       , tsch.cbee_bal        /* cbee_bal 캐시비_잔액 numeric */
+		       , tbi.tel_no           /* tel_no 전화_번호 character varying(20) */
+		       , tgb.guar_no          /* guar_no 보호자_번호 numeric */
+		       , tgb.guar_nm          /* guar_nm 보호자_명 character varying(40) */
+		       , tgb.guar_tel_no      /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		FROM    ts_stdt_cbee_hist tsch
+			    inner join TM_STDT_BASE tsb      --학생_기본 tsb
+			    on tsch.STDT_NO = tsb.STDT_NO
+			    inner join TS_BAND_INFO tbi      --밴드_정보 tbi
+			    on tsb.BAND_ID = tbi.BAND_ID
+			    inner join TM_STDT_GUAR_CONN tsgc--학생_보호자_연결 tsgc
+			    on tsgc.STDT_NO = tsb.STDT_NO
+			    inner join  TM_GUAR_BASE tgb     --보호자_기본 tgb
+			    on tsgc.GUAR_NO = tgb.GUAR_NO
+			    left outer join TI_EORG_BASE teb --교육기관_기본 teb
+			    on tsb.EORG_LOC_NO = teb.LOC_NO
 		WHERE  1 = 1
-		<if test="cbeeJudgDttmFr != null and cbeeJudgDttmFr != null and cbeeJudgDttmTo !='' and cbeeJudgDttmTo !='' ">/*발생 일시*/
-			and tssh.cbee_judg_dttm between replace(#{cbeeJudgDttmFr},'-','') and replace(#{cbeeJudgDttmTo},'-','')</if>
+		<if test="occrDttmFr != null and occrDttmFr != null and occrDttmTo !='' and occrDttmTo !='' ">/*발생 일시*/
+			and tsch.occr_dttm between replace(#{occrDttmFr},'-','') and replace(#{occrDttmTo},'-','')</if>
 		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
-			and tssh.stdt_no = #{stdtNo}::NUMERIC </if>
+			and tsch.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
 			and tsb.stdt_NM like CONCAT('%',#{stdtNm},'%')</if>
-		<if test="ageFr != null and ageFr != null and ageTo !='' and ageTo !='' ">/*나이*/
-			and fn_getage(tsb.bith_dt)  between #{ageFr}::NUMERIC  and #{ageTo}::NUMERIC </if>
-		<if test=" sexCd != null and sexCd !='' ">/*성별*/
-			and tsb.sex_cd = #{sexCd} </if>
+		<if test=" locNm != null and locNm !='' ">/*학교(학원)명*/
+			and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
 			and tsb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
-		<if test=" cbeeStatCd != null and cbeeStatCd !='' ">/*스트레스_상태_코드*/
-			and tssh.cbee_stat_cd like CONCAT('%',#{cbeeStatCd},'%')</if>
-		<if test=" mindCbeeStatCd != null and mindCbeeStatCd !='' ">/*정신적_스트레스_상태_코드*/
-			and tssh.mind_cbee_stat_cd like CONCAT('%',#{mindCbeeStatCd},'%')</if>
-		<if test=" physCbeeStatCd != null and physCbeeStatCd !='' ">/*신체적_스트레스_상태_코드*/
-			and tssh.phys_cbee_stat_cd_nm like CONCAT('%',#{physCbeeStatCd},'%')</if>
-		<if test=" cbeeCopeStatCd != null and cbeeCopeStatCd !='' ">/*스트레스_대처_상태_코드*/
-			and tssh.cbee_cope_stat_cd like CONCAT('%',#{cbeeCopeStatCd},'%')</if>
-		<if test=" locNm != null and locNm !='' ">
-			and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+			order by tsch.occr_dttm
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

@@ -24,8 +24,8 @@ let actHist = new Vue({
         code:
         {
             bDPerList     : [] , //기준_일자_기간_리스트
-            actClssCdList : [] , //활동_구분_코드
-            actCdList     : [] , //활동_코드
+            actClssCdList : [] , //활동_분류_코드_리스트
+            actCdList     : [] , //활동_코드_리스트
         },
 	},
     methods:

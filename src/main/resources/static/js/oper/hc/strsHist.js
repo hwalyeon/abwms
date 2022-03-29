@@ -29,11 +29,11 @@ let strsHist = new Vue({
         code:
         {
             bDPerList          : [] , //기준_일자_기간_리스트
-            sexCdList          : [] , //성별_코드
-            strsStatCdList     : [] , //스트레스_상태_코드
-            mindStrsStatCdList : [] , //정신적_스트레스_상태_코드
-            physStrsStatCdList : [] , //신체적_스트레스_상태_코드
-            strsCopeStatCdList : [] , //스트레스_대처_상태_코드
+            sexCdList          : [] , //성별_코드_리스트
+            strsStatCdList     : [] , //스트레스_상태_코드_리스트
+            mindStrsStatCdList : [] , //정신적_스트레스_상태_코드_리스트
+            physStrsStatCdList : [] , //신체적_스트레스_상태_코드_리스트
+            strsCopeStatCdList : [] , //스트레스_대처_상태_코드_리스트
         },
 	},
     methods:
@@ -62,11 +62,11 @@ let strsHist = new Vue({
         {
             let $this = this;
 
-            getCommonCodeList('SEX_CD'            , $this.code.sexCdList         ); //성별_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.strsStatCdList    ); //스트레스_상태_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.mindStrsStatCdList); //정신적_스트레스_상태_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.physStrsStatCdList); //신체적_스트레스_상태_코드
-            getCommonCodeList('STRS_COPE_STAT_CD' , $this.code.strsCopeStatCdList); //신체적_스트레스_상태_코드
+            getCommonCodeList('SEX_CD'            , $this.code.sexCdList         ); //성별_코드_리스트
+            getCommonCodeList('STRS_STAT_CD'      , $this.code.strsStatCdList    ); //스트레스_상태_코드_리스트
+            getCommonCodeList('STRS_STAT_CD'      , $this.code.mindStrsStatCdList); //정신적_스트레스_상태_코드_리스트
+            getCommonCodeList('STRS_STAT_CD'      , $this.code.physStrsStatCdList); //신체적_스트레스_상태_코드_리스트
+            getCommonCodeList('STRS_COPE_STAT_CD' , $this.code.strsCopeStatCdList); //신체적_스트레스_상태_코드_리스트
         },
         initGrid: function()
         {
