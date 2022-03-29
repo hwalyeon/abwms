@@ -10,4 +10,7 @@ public interface TotMonStatService
 	// 종합관제현황_조회
 	Map<String, String> searchTotMonStat(Map<String, String> params) throws BizException;
 
+	// 종합관제현황_조회
+	List<Map<String, String>> searchTotMonStatDgemHist(Map<String, String> params) throws BizException;
+
 }

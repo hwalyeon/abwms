@@ -19,4 +19,9 @@ public class TotMonStatServiceImpl implements TotMonStatService
 	public Map<String, String> searchTotMonStat(Map<String, String> params) {
 		return dao.selectOne("oper.cmon.totMonStat.searchTotMonStat", params);
 	}
+
+	// 종합관제현황_위험감정_이력_조회
+	public List<Map<String, String>> searchTotMonStatDgemHist(Map<String, String> params) {
+		return dao.selectList("oper.cmon.totMonStat.searchTotMonStatDgemHist", params);
+	}
 }

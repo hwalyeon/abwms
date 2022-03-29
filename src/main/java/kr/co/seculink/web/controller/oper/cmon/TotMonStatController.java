@@ -33,10 +33,13 @@ public class TotMonStatController
 		Map<String, Object> rtnMap = new HashMap<>();
 
 		Map<String, String> result = totMonStatService.searchTotMonStat(params);
-
-		log.info("jcw result :: " + result);
+		List<Map<String, String>> result2 = totMonStatService.searchTotMonStatDgemHist(params);
 
 		rtnMap.put("result", result);
+		rtnMap.put("result2", result2);
+
+		log.info("jcw result2 :: " + result2);
+
 		vo.setRtnData(rtnMap);
 
 		return vo;
