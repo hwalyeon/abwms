@@ -70,10 +70,10 @@ public class FatActStndMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<>();
-			data.add(info.get("currFatJudgCd"));
-			data.add(info.get("currFatJudgNm"));
-			data.add(info.get("prdtFatJudgCd"));
-			data.add(info.get("prdtFatJudgNm"));
+			data.add(info.get("fatJudgCd"));
+			data.add(info.get("fatJudgNm"));
+			data.add(info.get("fatpJudgCd"));
+			data.add(info.get("fatpJudgNm"));
 			data.add(info.get("palCd"));
 			data.add(info.get("palNm"));
 			data.add(info.get("fatActRmrk"));

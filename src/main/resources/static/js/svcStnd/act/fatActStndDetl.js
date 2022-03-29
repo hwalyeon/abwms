@@ -3,10 +3,10 @@ let fatActStndDetl = new Vue({
     data: {
 		fatActStndInfo: {
     		crud				: 'C',
-			currFatJudgCd   	: '' ,    // 현재_비만_판정_코드
-			currFatJudgNm    	: '' ,    // 현재_비만_판정_명
-			prdtFatJudgCd    	: '' ,    // 예측_비만_판정_코드
-			prdtFatJudgNm    	: '' ,    // 예측_비만_판정_명
+			fatJudgCd   	: '' ,    // 현재_비만_판정_코드
+			fatJudgNm    	: '' ,    // 현재_비만_판정_명
+			fatpJudgCd    	: '' ,    // 예측_비만_판정_코드
+			fatpJudgNm    	: '' ,    // 예측_비만_판정_명
 			palCd            	: '' ,    // 신체활동수준_코드
 			palNm            	: '' ,    // 신체활동수준_명
 			fatActRmrk       	: ''      // 비만_활동_비고
@@ -32,16 +32,16 @@ let fatActStndDetl = new Vue({
 			getCommonCodeList('PAL_CD',$this.code.palCdList,'');
         	
         },
-        initPage: function(currFatJudgCd, prdtFatJudgCd, palCd) {
+        initPage: function(fatJudgCd, fatpJudgCd, palCd) {
         	
         	let $this = this;
         	$this.resetFatActStndInfo();
         	
-        	if ( !WebUtil.isNull(currFatJudgCd) && !WebUtil.isNull(prdtFatJudgCd) && !WebUtil.isNull(palCd))
+        	if ( !WebUtil.isNull(fatJudgCd) && !WebUtil.isNull(fatpJudgCd) && !WebUtil.isNull(palCd))
     		{
         		let params = {
-					'currFatJudgCd' 	: currFatJudgCd,
-					'prdtFatJudgCd' 	: prdtFatJudgCd,
+					'fatJudgCd' 	: fatJudgCd,
+					'fatpJudgCd' 	: fatpJudgCd,
         			'palCd' 			: palCd
         		}
         		AjaxUtil.post({
@@ -65,22 +65,22 @@ let fatActStndDetl = new Vue({
         	
         	let $this = this;
 
-			if ( WebUtil.isNull($this.fatActStndInfo.currFatJudgCd) ) {
+			if ( WebUtil.isNull($this.fatActStndInfo.fatJudgCd) ) {
 				Swal.alert(['현재비만판정 코드를 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.fatActStndInfo.currFatJudgNm) ) {
+			if ( WebUtil.isNull($this.fatActStndInfo.fatJudgNm) ) {
 				Swal.alert(['현재비만판정 명을 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.fatActStndInfo.prdtFatJudgCd) ) {
+			if ( WebUtil.isNull($this.fatActStndInfo.fatpJudgCd) ) {
 				Swal.alert(['예측비만판정 코드를 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.fatActStndInfo.prdtFatJudgNm) ) {
+			if ( WebUtil.isNull($this.fatActStndInfo.fatpJudgNm) ) {
 				Swal.alert(['예측비만판정 명을 입력하세요.', 'info']);
 				return false;
 			}
@@ -150,21 +150,21 @@ let fatActStndDetl = new Vue({
 			let $this = this;
 			$this.fatActStndInfo.palNm = WebUtil.getCodeNm($this.code.palCdList, $this.fatActStndInfo.palCd);
 		},
-		changeCurrFatJudgCd : function (){
+		changeFatJudgCd : function (){
 			let $this = this;
-			$this.fatActStndInfo.currFatJudgNm = WebUtil.getCodeNm($this.code.fatJudgCdList, $this.fatActStndInfo.currFatJudgCd);
+			$this.fatActStndInfo.fatJudgNm = WebUtil.getCodeNm($this.code.fatJudgCdList, $this.fatActStndInfo.fatJudgCd);
 		},
-		changePrdtFatJudgCd : function (){
+		changeFatpJudgCd : function (){
 			let $this = this;
-			$this.fatActStndInfo.prdtFatJudgNm = WebUtil.getCodeNm($this.code.fatJudgCdList, $this.fatActStndInfo.prdtFatJudgCd);
+			$this.fatActStndInfo.fatpJudgNm = WebUtil.getCodeNm($this.code.fatJudgCdList, $this.fatActStndInfo.fatpJudgCd);
 		},
 		resetFatActStndInfo: function() {
 			this.fatActStndInfo = {
 				crud				: 'C',
-				currFatJudgCd   	: '' ,    // 현재_비만_판정_코드
-				currFatJudgNm    	: '' ,    // 현재_비만_판정_명
-				prdtFatJudgCd    	: '' ,    // 예측_비만_판정_코드
-				prdtFatJudgNm    	: '' ,    // 예측_비만_판정_명
+				fatJudgCd   	: '' ,    // 현재_비만_판정_코드
+				fatJudgNm    	: '' ,    // 현재_비만_판정_명
+				fatpJudgCd    	: '' ,    // 예측_비만_판정_코드
+				fatpJudgNm    	: '' ,    // 예측_비만_판정_명
 				palCd            	: '' ,    // 신체활동수준_코드
 				palNm            	: '' ,    // 신체활동수준_명
 				fatActRmrk       	: ''      // 비만_활동_비고

@@ -5,10 +5,10 @@ let fatActStndMng = new Vue({
             params:
                 {
                     userId           : '' ,
-                    currFatJudgCd    : '' ,    // 현재_비만_판정_코드
-                    currFatJudgNm    : '' ,    // 현재_비만_판정_명
-                    prdtFatJudgCd    : '' ,    // 예측_비만_판정_코드
-                    prdtFatJudgNm    : '' ,    // 예측_비만_판정_명
+                    fatJudgCd    : '' ,    // 현재_비만_판정_코드
+                    fatJudgNm    : '' ,    // 현재_비만_판정_명
+                    fatpJudgCd    : '' ,    // 예측_비만_판정_코드
+                    fatpJudgNm    : '' ,    // 예측_비만_판정_명
                     palCd            : '' ,    // 신체활동수준_코드
                     palNm            : '' ,    // 신체활동수준_명
                     fatActRmrk       : '' ,    // 비만_활동_비고
@@ -54,10 +54,10 @@ let fatActStndMng = new Vue({
                 let colModels =
                 [
                     {name: "crud"               , index: "crud"                 , label:"crud"                          , hidden:true},
-                    {name: "currFatJudgCd"      , index: "currFatJudgCd"        , label: "현재비만판정 코드"               , width: 80        , align: "center"  , editable: false},
-                    {name: "currFatJudgNm"      , index: "currFatJudgNm"        , label: "현재비만판정 명"                 , width: 80       , align: "center"   , editable: false},
-                    {name: "prdtFatJudgCd"      , index: "prdtFatJudgCd"        , label: "예측비만판정 코드"               , width: 80        , align: "center"  , editable: false},
-                    {name: "prdtFatJudgNm"      , index: "prdtFatJudgNm"        , label: "예측비만판정 명"                 , width: 80       , align: "center"   , editable: false},
+                    {name: "fatJudgCd"      , index: "fatJudgCd"        , label: "현재비만판정 코드"               , width: 80        , align: "center"  , editable: false},
+                    {name: "fatJudgNm"      , index: "fatJudgNm"        , label: "현재비만판정 명"                 , width: 80       , align: "center"   , editable: false},
+                    {name: "fatpJudgCd"      , index: "fatpJudgCd"        , label: "예측비만판정 코드"               , width: 80        , align: "center"  , editable: false},
+                    {name: "fatpJudgNm"      , index: "fatpJudgNm"        , label: "예측비만판정 명"                 , width: 80       , align: "center"   , editable: false},
                     {name: "palCd"              , index: "palCd"                , label: "신체활동수준 코드"               , width: 80        , align: "center"  , editable: false},
                     {name: "palNm"              , index: "palNm"                , label: "신체활동수준 명"                 , width: 80       , align: "center"   , editable: false},
                     {name: "fatActRmrk"         , index: "fatActRmrk"           , label: "비만활동 비고"                  , width: 500       , align: "center"  , editable: false},
@@ -69,7 +69,7 @@ let fatActStndMng = new Vue({
                     {name: "uptUserId"          , index: "uptUserId"            , label: "수정사용자 ID"                  , width: 80        , align: "center"} ,
                     {name: "fatActStndPop"     , index: "fatActStndPop"         , label: "상세정보 보기"                   , width: 80       , align: "center"  ,
                         formatter: function(cellValue, options, rowObject) {
-                            return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="fatActStndMng.regFatActStndPop(\'' + rowObject.currFatJudgCd + '\', \'' + rowObject.prdtFatJudgCd + '\', \'' + rowObject.palCd + '\')" value="상세보기" data-toggle="modal" data-target="#fatActStndDetlPopup" />';
+                            return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="fatActStndMng.regFatActStndPop(\'' + rowObject.fatJudgCd + '\', \'' + rowObject.fatpJudgCd + '\', \'' + rowObject.palCd + '\')" value="상세보기" data-toggle="modal" data-target="#fatActStndDetlPopup" />';
                         }
                     }
                 ];
@@ -149,20 +149,20 @@ let fatActStndMng = new Vue({
             palStndNmVal:function(){
                 let $this = this;
             },
-            currFatJudgStndNmVal:function(){
+            fatJudgStndNmVal:function(){
                 let $this = this;
             },
-            prdtFatJudgStndNmVal:function(){
+            fatpJudgStndNmVal:function(){
                 let $this = this;
             },
-            regFatActStndPop: function(currFatJudgCd, prdtFatJudgCd, palCd) {
-                fatActStndDetl.initPage(currFatJudgCd, prdtFatJudgCd, palCd);
+            regFatActStndPop: function(fatJudgCd, fatpJudgCd, palCd) {
+                fatActStndDetl.initPage(fatJudgCd, fatpJudgCd, palCd);
             },
             resetSearchParam: function() {
                 let $this = this;
                 $this.params = {
-                    currFatJudgCd    : '' ,    // 현재_비만_판정_코드
-                    prdtFatJudgCd    : '' ,    // 예측_비만_판정_코드
+                    fatJudgCd    : '' ,    // 현재_비만_판정_코드
+                    fatpJudgCd    : '' ,    // 예측_비만_판정_코드
                     palCd            : '' ,    // 신체활동수준_코드
                     paging           : 'Y',
                     totalCount       : 0  ,

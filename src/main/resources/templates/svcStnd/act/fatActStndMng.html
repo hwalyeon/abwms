@@ -26,23 +26,23 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label">현재비만판정</label>
 						<div class="col-xs-1">
-							<select id="currFatJudgCd" name="currFatJudgCd" class="form-control" v-model="params.currFatJudgCd" v-on:click="currFatJudgStndNmVal()">
+							<select id="fatJudgCd" name="fatJudgCd" class="form-control" v-model="params.fatJudgCd" v-on:click="fatJudgStndNmVal()">
 								<option value="">전체</option>
 								<option v-for="item in code.fatJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
 						<div class="col-xs-1">
-							<input type="text" name ="currFatJudgCd" class="form-control" v-model="params.currFatJudgCd">
+							<input type="text" name ="fatJudgCd" class="form-control" v-model="params.fatJudgCd">
 						</div>
 						<label class="col-xs-1 control-label">예측비만판정</label>
 						<div class="col-xs-1">
-							<select id="prdtFatJudgCd" name="prdtFatJudgCd" class="form-control" v-model="params.prdtFatJudgCd" v-on:click="prdtFatJudgStndNmVal()">
+							<select id="fatpJudgCd" name="fatpJudgCd" class="form-control" v-model="params.fatpJudgCd" v-on:click="fatpJudgStndNmVal()">
 								<option value="">전체</option>
 								<option v-for="item in code.fatJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
 						<div class="col-xs-1">
-							<input type="text" name ="prdtFatJudgCd" class="form-control" v-model="params.prdtFatJudgCd">
+							<input type="text" name ="fatpJudgCd" class="form-control" v-model="params.fatpJudgCd">
 						</div>
 						<label class="col-xs-1 control-label">신체활동수준</label>
 						<div class="col-xs-1">

@@ -4,10 +4,10 @@
 
 	<!-- 비만활동 기준 리스트 조회-->
 	<select id="searchFatActStndList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT		CURR_FAT_JUDG_CD,
-					fn_getCdNm('FAT_JUDG_CD', CURR_FAT_JUDG_CD) AS CURR_FAT_JUDG_NM,
-					PRDT_FAT_JUDG_CD,
-					fn_getCdNm('FAT_JUDG_CD', PRDT_FAT_JUDG_CD) AS PRDT_FAT_JUDG_NM,
+		SELECT		FAT_JUDG_CD,
+					fn_getCdNm('FAT_JUDG_CD', FAT_JUDG_CD) AS FAT_JUDG_NM,
+					FATP_JUDG_CD,
+					fn_getCdNm('FAT_JUDG_CD', FATP_JUDG_CD) AS FATP_JUDG_NM,
 					PAL_CD,
 					fn_getCdNm('PAL_CD', PAL_CD) AS PAL_NM,
 					SUBSTRING(FAT_ACT_RMRK,0,100) AS FAT_ACT_RMRK,
@@ -19,10 +19,10 @@
 					UPT_USER_ID
 		FROM        TI_FAT_ACT_STND
 		WHERE     	1 = 1
-		<if test=" currFatJudgCd != null and currFatJudgCd != '' ">
-		AND         CURR_FAT_JUDG_CD = #{currFatJudgCd}   </if>
-		<if test=" prdtFatJudgCd != null and prdtFatJudgCd != '' ">
-		AND         PRDT_FAT_JUDG_CD = #{prdtFatJudgCd}   </if>
+		<if test=" fatJudgCd != null and fatJudgCd != '' ">
+		AND         FAT_JUDG_CD = #{ㄹatJudgCd}   </if>
+		<if test=" fatpJudgCd != null and fatpJudgCd != '' ">
+		AND         fatp_JUDG_CD = #{fatpJudgCd}   </if>
 		<if test=" palCd != null and palCd != '' ">
 		AND         PAL_CD = #{palCd}  </if>
 		<if test=' paging == "Y" '>
@@ -33,8 +33,8 @@
 	<insert id="insertTiFatActStndList" parameterType="java.util.Map">
 		INSERT INTO TI_FAT_ACT_STND
 					(
-					CURR_FAT_JUDG_CD,
-					PRDT_FAT_JUDG_CD,
+					FAT_JUDG_CD,
+				    FATP_JUDG_CD,
 					PAL_CD,
 					FAT_ACT_RMRK,
 					REG_DT,
@@ -46,8 +46,8 @@
 					)
 		VALUES
 					(
-					  #{currFatJudgCd}
-					, #{prdtFatJudgCd}
+					  #{fatJudgCd}
+					, #{fatpJudgCd}
 					, #{palCd}
 					, #{fatActRmrk}
 					, TO_CHAR(NOW(), 'YYYYMMDD')
@@ -66,37 +66,37 @@
 					, UPT_TM			= TO_CHAR(NOW(),'HH24MISS')
 					, UPT_USER_ID 		= #{uptUserId}
 		<if test="fatActRmrk != null and fatActRmrk != ''">	, FAT_ACT_RMRK = #{fatActRmrk}</if>
-		WHERE		CURR_FAT_JUDG_CD	= #{currFatJudgCd}
-	    AND			PRDT_FAT_JUDG_CD	= #{prdtFatJudgCd}
-		AND 		PAL_CD 				= #{palCd}
+		WHERE		FAT_JUDG_CD	    = #{fatJudgCd}
+	    AND			FATP_JUDG_CD	= #{fatpJudgCd}
+		AND 		PAL_CD 			= #{palCd}
 	</update>
 
 	<!--행추가_행삭제 삭제-->
 	<delete id ="deleteTiFatActStndList" parameterType="java.util.Map">
 		DELETE
 		FROM    	TI_FAT_ACT_STND
-		WHERE		CURR_FAT_JUDG_CD	= #{currFatJudgCd}
-		AND			PRDT_FAT_JUDG_CD	= #{prdtFatJudgCd}
-		AND 		PAL_CD 				= #{palCd}
+		WHERE		FAT_JUDG_CD	    = #{fatJudgCd}
+		AND			FATP_JUDG_CD	= #{fatpJudgCd}
+		AND 		PAL_CD 			= #{palCd}
 	</delete>
 
 	<!--비만활동 코드 조회-->
 	<select id="searchFatJudgCdChk" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT      CURR_FAT_JUDG_CD,
-					PRDT_FAT_JUDG_CD,
+		SELECT      FAT_JUDG_CD,
+					FATP_JUDG_CD,
 		    		PAL_CD
 		FROM        TI_FAT_ACT_STND
-		WHERE		CURR_FAT_JUDG_CD	= #{currFatJudgCd}
-		AND			PRDT_FAT_JUDG_CD	= #{prdtFatJudgCd}
-		AND 		PAL_CD 				= #{palCd}
+		WHERE		FAT_JUDG_CD	    = #{fatJudgCd}
+		AND			FATP_JUDG_CD	= #{fatpJudgCd}
+		AND 		PAL_CD 			= #{palCd}
 	</select>
 
 	<!-- 비만활동 기준 상세보기 조회-->
 	<select id="searchFatActStndInfo" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT		CURR_FAT_JUDG_CD,
-		fn_getCdNm('FAT_JUDG_CD', CURR_FAT_JUDG_CD) AS CURR_FAT_JUDG_NM,
-		PRDT_FAT_JUDG_CD,
-		fn_getCdNm('FAT_JUDG_CD', PRDT_FAT_JUDG_CD) AS PRDT_FAT_JUDG_NM,
+		SELECT		FAT_JUDG_CD,
+		fn_getCdNm('FAT_JUDG_CD', FAT_JUDG_CD) AS FAT_JUDG_NM,
+		FATP_JUDG_CD,
+		fn_getCdNm('FAT_JUDG_CD', FATP_JUDG_CD) AS FATP_JUDG_NM,
 		PAL_CD,
 		fn_getCdNm('PAL_CD', PAL_CD) AS PAL_NM,
 		FAT_ACT_RMRK,
@@ -108,10 +108,10 @@
 		UPT_USER_ID
 		FROM        TI_FAT_ACT_STND
 		WHERE     	1 = 1
-		<if test=" currFatJudgCd != null and currFatJudgCd != '' ">
-			AND         CURR_FAT_JUDG_CD = #{currFatJudgCd}   </if>
-		<if test=" prdtFatJudgCd != null and prdtFatJudgCd != '' ">
-			AND         PRDT_FAT_JUDG_CD = #{prdtFatJudgCd}   </if>
+		<if test=" fatJudgCd != null and fatJudgCd != '' ">
+			AND         FAT_JUDG_CD = #{fatJudgCd}   </if>
+		<if test=" fatpJudgCd != null and fatpJudgCd != '' ">
+			AND         FATP_JUDG_CD = #{fatpJudgCd}   </if>
 		<if test=" palCd != null and palCd != '' ">
 			AND         PAL_CD = #{palCd}  </if>
 		<if test=' paging == "Y" '>
