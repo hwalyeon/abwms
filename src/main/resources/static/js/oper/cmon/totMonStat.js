@@ -1,6 +1,11 @@
 let totMonStat = new Vue({
     el: "#totMonStat",
     data: {
+        menuList: [],
+        searchAuthParam : {
+            searchClass : '01',
+            empNo : 0
+        },
         totMonStatDgemHist:[{
             dgemDt : '',
             dgemTm : '',
@@ -186,6 +191,9 @@ let totMonStat = new Vue({
         initialize: function() {
             let $this = this;
 
+            $this.searchAuthParam.userId = SessionUtil.getUserId();
+            $this.searchAuthParam.userNm = SessionUtil.getUserNm();
+            $this.getMenuList();
             $this.initCodeList();
             $this.initPage();
 
@@ -1211,9 +1219,38 @@ let totMonStat = new Vue({
                 }
             });
         },
-        linkCall: function () {
-            opener.call("/svcStnd/loc/locInfoMng.pg");
+        linkCall: function (menuNo) {
+            let $this = this;
+
+            let menuInfo = $this.menuList.find(findMenu);
+            function findMenu(element)  {
+                if(element.menuNo === menuNo)  {
+                    return true;
+                }
+            }
+            opener.call(menuInfo.menuNm, menuInfo.menuUrl, menuInfo.menuNo);
             self.close();
+        },
+        getMenuList: function() {
+            let $this = this;
+
+			console.log('getMenuList');
+
+            AjaxUtil.post({
+                url: "/oper/cmon/totMonStat/searchTotMonStatMenuList.ab",
+                param: $this.searchAuthParam,
+                success: function(response) {
+
+                    if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 ) {
+                        $.each(response["rtnData"].result, function(index, item) {
+                            $this.menuList.push({'menuNo':item.menuNo, 'menuNm':item.menuNm, 'menuUrl':item.menuUrl + '.pg'});
+                        });
+                    }
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
         }
     },
     computed: {

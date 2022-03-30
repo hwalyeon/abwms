@@ -187,11 +187,9 @@
 				// http://127.0.0.1:28080//oper/cmon/totMonStatTemp.pg
 				window.open('/oper/cmon/totMonStatTemp.pg','title','height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
 			}
-
-			window.call = function (data) {
-				console.log("jcw 종합관제 화면에서 넘겨준 data :: " + data);
-				//alert("jcw 종합관제 화면에서 넘겨준 data :: " + data);
-				window.location.href = data;
+			window.call = function (menuNm, menuUrl, menuNo) {
+				//window.location.href = data;
+				index.newTab(menuNm, menuUrl, menuNo, '');
 			};
 
 		</script>

@@ -24,4 +24,10 @@ public class TotMonStatServiceImpl implements TotMonStatService
 	public List<Map<String, String>> searchTotMonStatDgemHist(Map<String, String> params) {
 		return dao.selectList("oper.cmon.totMonStat.searchTotMonStatDgemHist", params);
 	}
+
+	// 종합관제현황_메뉴_리스트_조회
+	public List<Map<String, String>> searchTotMonStatMenuList(Map<String, String> params) {
+		return dao.selectList("oper.cmon.totMonStat.searchTotMonStatMenuList", params);
+	}
+
 }

@@ -38,27 +38,20 @@ public class TotMonStatController
 		rtnMap.put("result", result);
 		rtnMap.put("result2", result2);
 
-		log.info("jcw result2 :: " + result2);
-
 		vo.setRtnData(rtnMap);
 
 		return vo;
 	}
 
-	// 종합관제현황_조회_임시
+	// 종합관제현황_메뉴_리스트_조회
 	@ResponseBody
-	@RequestMapping("/oper/cmon/totMonStat/searchTotMonStatTemp.ab")
-	public RtnMsg<Map<String, Object>> searchLocInfoList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	@RequestMapping("/oper/cmon/totMonStat/searchTotMonStatMenuList.ab")
+	public RtnMsg<Map<String, Object>> searchTotMonStatMenuList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		Map<String, String> result = totMonStatService.searchTotMonStat(params);
-
-		if ( !GEUtil.isEmpty(params.get("paging")) ) {
-			params.put("paging", "N");
-			vo.setTotalCount(totMonStatService.searchTotMonStat(params).size());
-		}
+		List<Map<String, String>> result = totMonStatService.searchTotMonStatMenuList(params);
 
 		rtnMap.put("result", result);
 		vo.setRtnData(rtnMap);

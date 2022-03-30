@@ -73,8 +73,8 @@
 				<div class="col-xs-2 border-line" style="padding-top: 15px;">
 					<div class="form-group">
 						<span class="float_left">가동 현황</span>
-						<span class="float_right">+ more</span>
-						<div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-140">
+						<span class="float_right" v-on:click="linkCall('F310')">+ more</span>
+						<div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-140" v-on:click="linkCall('F310')">
 							<div id=chartOperStat class ="float_left">
 								<canvas id="operStatChart" width="80" height="80">
 								</canvas>
@@ -87,8 +87,8 @@
 							</div>
 						</div>
 						<span class="float_left" style="padding-top: 1px">개통 현황</span>
-						<span class="float_right" v-on:click="linkCall()">+ more</span>
-						<div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-140">
+						<span class="float_right" v-on:click="linkCall('H110')">+ more</span>
+						<div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-140"  v-on:click="linkCall('H110')">
 							<div id=chartOpenStat class ="float_left">
 								<canvas id="openStatChart" width="80" height="80">
 								</canvas>
@@ -101,8 +101,8 @@
 							</div>
 						</div>
 						<span class="float_left" style="padding-top: 1px">헬스케어 활용율</span>
-						<span class="float_right">+ more</span>
-						<div class="col-xs-12 form-group border-line chart-padding-1">
+						<span class="float_right" v-on:click="linkCall('O310')">+ more</span>
+						<div class="col-xs-12 form-group border-line chart-padding-1" v-on:click="linkCall('O310')">
 							<div class="col-xs-12 chart-padding-0 minMax-height-140" style="padding-top: 28px;">
 								<div id=chartGrowFat class ="float_left">
 									<canvas id="growFatChart" width="80" height="80">
@@ -167,7 +167,7 @@
 								<span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber11}} 건</span>
 							</div>
 						</div>
-						<div class="col-xs-6 border-line minMax-height-160">
+						<div class="col-xs-6 border-line minMax-height-160" v-on:click="linkCall('F310')">
 							<div class="col-xs-3 text-center" style="width:22%">
 								<span class="col-xs-12 chart-padding-0">TOTAL</span>
 								<i class="fa-regular fa-square-check fa-4x" style="color: #ff0015"></i>
@@ -194,7 +194,7 @@
 								<span class="col-xs-12 chart-padding-0">{{totCnt.tmpTmepAbnmCnt}} 건</span>
 							</div>
 						</div>
-						<div class="col-xs-6 border-line minMax-height-160">
+						<div class="col-xs-6 border-line minMax-height-160" v-on:click="linkCall('F310')">
 							<span class="col-xs-12 chart-padding-0">위험지역 추이</span>
 							<div id=chartDngrZoneProg class ="col-xs-8 float_left">
 								<canvas id="dngrZoneProgChart" width="420" height="99">
@@ -206,8 +206,8 @@
 								<span class="col-xs-12 text-center"> +1.8% </span>
 							</div>
 						</div>
-						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 30px;">
-							<span class="col-xs-12 chart-padding-0">자주 방문하는 위험지역 top3 (공공기준)</span>
+						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 30px;" v-on:click="linkCall('O240')">
+							<span class="col-xs-12 chart-padding-0" v-on:click="linkCall('O240')">자주 방문하는 위험지역 top3 (공공기준)</span>
 							<input type="text" name="plcCdPublTop1" class="col-xs-3" 			style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.plcCdPublTop1">
 							<input type="text" name="addrPublTop1" class="col-xs-7" 			style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.addrPublTop1">
 							<input type="text" name="cntPublTop1" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.cntPublTop1">
@@ -218,7 +218,7 @@
 							<input type="text" name="addrPublTop3" class="col-xs-7" 			style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.addrPublTop3">
 							<input type="text" name="cntPublTop3" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
 						</div>
-						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 10px;">
+						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 10px;" v-on:click="linkCall('O230')">
 							<div class="col-xs-6" >
 								<span class="col-xs-12 chart-padding-0 text-center">공공 안전위험지역 활용(탐지율)</span>
 								<div id=chartPublSafeDtct class ="col-xs-6">
@@ -246,8 +246,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 30px;">
-							<span class="col-xs-12 chart-padding-0">보호자가 많이 지정한 위험지역 TOP3</span>
+						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 30px;" v-on:click="linkCall('O250')">
+							<span class="col-xs-12 chart-padding-0" v-on:click="linkCall('O250')">보호자가 많이 지정한 위험지역 TOP3</span>
 							<input type="text" name="plcCdPrntTop1" class="col-xs-3" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
 							<input type="text" name="addrPrntTop1" class="col-xs-7" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
 							<input type="text" name="cntPrntTop1" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
@@ -281,11 +281,11 @@
 						<div class="col-xs-12 border-line" style="padding-top: 10px;">
 							<span class="col-xs-12 text-center chart-padding" style="font-size: 36px;">{{clockParam.amPm}} {{clockParam.hhmmss}}</span>
 							<span class="col-xs-12 text-center" style="font-size: 24px;color: #09ea09">{{clockParam.yyyymmdd}}{{clockParam.ddd}}</span>
-							<span class="float_right">+ more</span>
+							<span class="float_right" v-on:click="linkCall('O210')">+ more</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-12 border-line">
+						<div class="col-xs-12 border-line" v-on:click="linkCall('O210')">
 							<div class="col-xs-2">
 								<span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 12px;"> {{ item.dgemDt }} </span>
 							</div>
@@ -310,7 +310,7 @@
 					헬스케어
 					<div class="form-group">
 						<div class="col-xs-12 border-line minMax-height-160">
-							<div class ="col-xs-2 chart-padding-2">
+							<div class ="col-xs-2 chart-padding-2" v-on:click="linkCall('F310')">
 								<div id=chartCareBmiBodyIdx class ="col-xs-4 chart-padding float_left">
 									<canvas id="careBmiBodyIdxChart" width="100" height="110">
 									</canvas>
@@ -322,7 +322,7 @@
 									<span class="col-xs-12 text-center">최대 : {{ totMonStat.careBmiBodyIdxMax }}</span>
 								</div>
 							</div>
-							<div class ="col-xs-3 chart-padding-1">
+							<div class ="col-xs-3 chart-padding-1" v-on:click="linkCall('F310')">
 								<div id=chartCareGrowIdx class ="col-xs-5 chart-padding-0">
 									<canvas id="careGrowIdxChart" width="80" height="80" style="margin-left: 50px;">
 									</canvas>
@@ -334,7 +334,7 @@
 									<span class="col-xs-12 text-center">저성장 : {{ totMonStat.careGrowLowRt }} %</span>
 								</div>
 							</div>
-							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+							<div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
 								<div id=chartCareFatIdx class ="col-xs-5 chart-padding-0">
 									<canvas id="careFatIdxChart" width="80" height="80" style="margin-left: 20px;">
 									</canvas>
@@ -346,7 +346,7 @@
 									<span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatIdxUndrRt }} %</span>
 								</div>
 							</div>
-							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+							<div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
 								<div id=chartCareFatPrdt class ="col-xs-5 chart-padding-0">
 									<canvas id="careFatPrdtChart" width="80" height="80" style="margin-left: 20px;">
 									</canvas>
@@ -358,7 +358,7 @@
 									<span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatPrdtUndrRt }} %</span>
 								</div>
 							</div>
-							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+							<div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
 								<div id=chartCareStrs class ="col-xs-5 chart-padding-0">
 									<canvas id="careStrsChart" width="80" height="80" style="margin-left: 20px;">
 									</canvas>
@@ -372,7 +372,7 @@
 							</div>
 						</div>
 						<div class="col-xs-12 border-line minMax-height-160">
-							<div class ="col-xs-2 chart-padding-2">
+							<div class ="col-xs-2 chart-padding-2" v-on:click="linkCall('F310')">
 								<div id=chartCareExcsTime class ="col-xs-4 chart-padding-0 float_left">
 									<canvas id="careExcsTimeChart" width="100" height="110">
 									</canvas>
@@ -384,7 +384,7 @@
 									<span class="col-xs-12 text-center">전일 : {{ totMonStat.careExcsTimeBfDay }} h</span>
 								</div>
 							</div>
-							<div class ="col-xs-3 chart-padding-1">
+							<div class ="col-xs-3 chart-padding-1" v-on:click="linkCall('F310')">
 								<div id=chartCareCalEat class ="col-xs-5 chart-padding">
 									<canvas id="careCalEatChart" width="110" height="110">
 									</canvas>
@@ -396,7 +396,7 @@
 									<span class="col-xs-12 text-center">전일 : {{ totMonStat.careCalEatbfDay }} kcal</span>
 								</div>
 							</div>
-							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+							<div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
 								<div id=chartCareFmenuTop class ="col-xs-5 chart-padding-0">
 									<canvas id="careFmenuTopChart" width="80" height="80" style="margin-left: 20px;">
 									</canvas>
@@ -408,7 +408,7 @@
 									<span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop3 }} : {{ totMonStat.careFmenuRtTop3 }} %</span>
 								</div>
 							</div>
-							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+							<div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
 								<div id=chartCareMmelNeatFmenu class ="col-xs-5 chart-padding-0">
 									<canvas id="careMmelNeatFmenuChart" width="80" height="80" style="margin-left: 20px;">
 									</canvas>
@@ -419,7 +419,7 @@
 									<span class="col-xs-12 text-center">대상 : {{ totMonStat.careMmelNeatFmenuObj }} 명</span>
 								</div>
 							</div>
-							<div class ="col-xs-2 chart-padding-1" style="width:19%">
+							<div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
 								<div id=chartCareMmelNeatQust class ="col-xs-5 chart-padding-0">
 									<canvas id="careMmelNeatQustChart" width="80" height="80" style="margin-left: 20px;">
 									</canvas>
