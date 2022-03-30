@@ -1,20 +1,22 @@
 let totMonStat = new Vue({
     el: "#totMonStat",
     data: {
+        totMonStatDgemHist:[{
+            dgemDt : '',
+            dgemTm : '',
+            dgemStatCd : '',
+            dgemStatNm : ''
+        }],
         totMonStat: {
             openCnt             : 0,
             operCnt             : 0,
             noRsps              : 0,
 
             temp                : null,
-            tmpDngrSafeOcrrTd   : '',
-            tmpDngrSafeOcrrDif  : '',
-            tmpDngrSafeOcrrYav  : 3.8,
+            tmpDngrSafeOcrrTd   : 0,
+            tmpDngrSafeOcrrDif  : 0,
+            tmpDngrSafeOcrrYav  : 5.8,
 
-            tmpDngrZoneCnt      : 4400,
-            tmpFallDownCnt      : 2400,
-            tmpHbitAbnmCnt      : 1200,
-            tmpTmepAbnmCnt      : 3300,
             tmpTotal            : 200000,
             tmpUsage            : 140000,
             tmpNumber1          : 200000,
@@ -23,6 +25,11 @@ let totMonStat = new Vue({
             tmpNumber4          : 500000,
             tmpNumber5          : 300000,
             tmpNumber6          : 200000,
+            tmpNumber7          : 200000,
+            tmpNumber8          : 14000,
+            tmpNumber9          : 10000,
+            tmpNumber10         : 13000,
+            tmpNumber11         : 30,
 
             plcCdPublTop1       : '유흥/유해',
             plcCdPublTop2       : '공사/위험물',
@@ -76,14 +83,19 @@ let totMonStat = new Vue({
             careFmenuCdTop3         : '튀김',
             careFmenuRtTop3         : 12.9,
 
-            careMmelNeatFmenuCnt    : 1853,
+            careMmelNeatFmenuCnt    : 11853,
             careMmelNeatFmenuObj    : 20000,
-            careMmelNeatFmenuRt     : 9.2,
 
-            careMmelNeatQustCnt     : 1853,
+            careMmelNeatQustCnt     : 11853,
             careMmelNeatQustObj     : 20000,
-            careMmelNeatQustRt      : 9.2,
 
+        },
+        totCnt: {
+            tmpDngrZoneCnt      : 4400,
+            tmpFallDownCnt      : 2400,
+            tmpHbitAbnmCnt      : 1200,
+            tmpTmepAbnmCnt      : 3300,
+            tmpTotalCnt         : 20000
         },
         clockParam: {
             hhmmss                  : '',
@@ -92,8 +104,13 @@ let totMonStat = new Vue({
             amPm                    : ''
         },
         cycl: {
-            initCycl                : '',
+            initCycl                : null,
             timeCycl                : 5000
+        },
+        cyclButton: {
+            button1                : true,
+            button2                : false,
+            button3                : false
         },
         code: {
             // sexCdList: []
@@ -174,7 +191,6 @@ let totMonStat = new Vue({
 
             $this.clock();
             setInterval($this.clock, 1000);
-            $this.numCountAnimate();
         },
         initCodeList: function() {
             // let $this = this;
@@ -252,7 +268,6 @@ let totMonStat = new Vue({
 
                 $this.initData();
 
-                // /user/stdt/stdtInfoMng/searchStdtDetlInfo.ab
                 AjaxUtil.post({
                     url: "/oper/cmon/totMonStat/searchTotMonStat.ab",
                     param: params,
@@ -261,10 +276,14 @@ let totMonStat = new Vue({
                             $.each(response["rtnData"].result, function(key, val) {
                                 $this.totMonStat[key] = val;
                             });
-
-                            $this.updateChart();
-                            $this.initCycl($this.cycl.timeCycl);
                         }
+                        if ( !!response["rtnData"]["result2"] ) {
+                            $.each(response["rtnData"]["result2"], function(index, item) {
+                                $this.totMonStatDgemHist.push({'dgemDt':item.dgemDt, 'dgemTm':item.dgemTm, 'dgemStatCd':item.dgemStatCd, 'dgemStatNm':item.dgemStatNm});
+                            });
+                        }
+                        $this.updateChart();
+                        $this.initCycl($this.cycl.timeCycl);
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
@@ -286,23 +305,24 @@ let totMonStat = new Vue({
             //     operStatChartColor = '#2a99ec';
             // }
 
-            let colorRed = '#f1071b';
+            let colorRed = '#ff0b21';
             let colorGre = '#09ea09';
             let colorBlu = '#2a99ec';
             let colorYel = '#f3e24a';
             let colorOra = '#fc8f46';
-            let colorGra = '#989998';
+            let colorGra = '#4d4d4d';
+            let colorLggre = '#c0dc5c';
             let colorBla = '#000000';
             let colorWhi = '#ffffff';
 
             // 헬스케어 활용율 Data
             let tmpGrowFatIdx       = 80;
             let tmpFatPrdtIdx       = 70;
-            let tmpStrsIdx          = 90;
+            let tmpStrsIdx          = 65;
 
             // 위험안전 발생 Data
-            let tmpDngrSafeOcrrTd   = 1100;
-            let tmpDngrSafeOcrrAv   = 1400;
+            let tmpDngrSafeOcrrTd   = 2170;
+            let tmpDngrSafeOcrrAv   = 2600;
 
             // 위험지역 추이 Data
             let tmpDngrZoneProg4wb  = 1400;
@@ -319,11 +339,13 @@ let totMonStat = new Vue({
             let tmpPrntSafeDtct   = 89.5;
             let tmpPrntDngrDtct   = 35.6;
 
-            $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(tmpDngrSafeOcrrTd);
-            $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrAv - tmpDngrSafeOcrrTd;
+            $this.totMonStat.tmpDngrSafeOcrrTd = tmpDngrSafeOcrrTd;
+            $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrTd - tmpDngrSafeOcrrAv;
 
             // 백분율 몫 구하기
             let operCntQuotiIdx     = $this.chartPerQuoti($this.totMonStat.operCnt, $this.totMonStat.openCnt);
+            let NeatFmenuQuotiIdx   = $this.chartPerQuoti($this.totMonStat.careMmelNeatFmenuCnt, $this.totMonStat.careMmelNeatFmenuObj);
+            let NeatQustQuotiIdx    = $this.chartPerQuoti($this.totMonStat.careMmelNeatQustCnt, $this.totMonStat.careMmelNeatQustObj);
 
             // 나머지 구하기
             let operCntModIdx       = $this.chartPerModIdx(operCntQuotiIdx);
@@ -334,13 +356,15 @@ let totMonStat = new Vue({
             let publDngrDtctModIdx  = $this.chartPerModIdx(tmpPublDngrDtct);
             let prntSafeDtctModIdx  = $this.chartPerModIdx(tmpPrntSafeDtct);
             let prntDngrDtctModIdx  = $this.chartPerModIdx(tmpPrntDngrDtct);
+            let NeatFmenuModIdx       = $this.chartPerModIdx(NeatFmenuQuotiIdx);
+            let NeatQustModIdx       = $this.chartPerModIdx(NeatQustQuotiIdx);
 
             let dataOperStat = {
                 labels              : ['가동','무응답'],
                 datasets: [{
                     data            : [operCntQuotiIdx          , operCntModIdx],
-                    backgroundColor : [colorBlu                 , colorGra],
-                    borderColor     : [colorBlu                 , colorGra],
+                    backgroundColor : [colorBlu                 , colorBla],
+                    borderColor     : [colorBlu                 , colorBla],
                     borderWidth     : 10
                 }]
             };
@@ -348,8 +372,8 @@ let totMonStat = new Vue({
                 labels              : ['개통','제출','가입'],
                 datasets: [{
                     data            : [50       , 30        , 20        ],
-                    backgroundColor : [colorBlu , colorOra  , colorGra  ],
-                    borderColor     : [colorBlu , colorOra  , colorGra  ],
+                    backgroundColor : [colorBlu , colorOra  , colorLggre  ],
+                    borderColor     : [colorBlu , colorOra  , colorLggre  ],
                     borderWidth     : 22
                 }]
             };
@@ -357,8 +381,8 @@ let totMonStat = new Vue({
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
                     data            : [tmpGrowFatIdx            , growFatModIdx],
-                    backgroundColor : [colorBlu                 , colorWhi],
-                    borderColor     : [colorBlu                 , colorWhi],
+                    backgroundColor : [colorBlu                 , colorBla],
+                    borderColor     : [colorBlu                 , colorBla],
                     borderWidth     : 10
                 }]
             };
@@ -366,8 +390,8 @@ let totMonStat = new Vue({
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
                     data            : [tmpFatPrdtIdx            , fatPrdtModIdx],
-                    backgroundColor : [colorBlu                 , colorWhi],
-                    borderColor     : [colorBlu                 , colorWhi],
+                    backgroundColor : [colorBlu                 , colorBla],
+                    borderColor     : [colorBlu                 , colorBla],
                     borderWidth     : 10
                 }]
             };
@@ -375,8 +399,8 @@ let totMonStat = new Vue({
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
                     data            : [tmpStrsIdx               , strsModIdx],
-                    backgroundColor : [colorBlu                 , colorWhi],
-                    borderColor     : [colorBlu                 , colorWhi],
+                    backgroundColor : [colorBlu                 , colorBla],
+                    borderColor     : [colorBlu                 , colorBla],
                     borderWidth     : 10
                 }]
             };
@@ -404,8 +428,8 @@ let totMonStat = new Vue({
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
                     data            : [tmpPublSafeDtct          , publSafeDtctModIdx],
-                    backgroundColor : [colorGre                 , colorWhi],
-                    borderColor     : [colorGre                 , colorWhi],
+                    backgroundColor : [colorGre                 , colorGra],
+                    borderColor     : [colorGre                 , colorGra],
                     borderWidth     : 5
                 }]
             };
@@ -413,8 +437,8 @@ let totMonStat = new Vue({
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
                     data            : [tmpPublDngrDtct          , publDngrDtctModIdx],
-                    backgroundColor : [colorOra                 , colorWhi],
-                    borderColor     : [colorOra                 , colorWhi],
+                    backgroundColor : [colorOra                 , colorGra],
+                    borderColor     : [colorOra                 , colorGra],
                     borderWidth     : 5
                 }]
             };
@@ -422,8 +446,8 @@ let totMonStat = new Vue({
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
                     data            : [tmpPrntSafeDtct          , prntSafeDtctModIdx],
-                    backgroundColor : [colorGre                 , colorWhi],
-                    borderColor     : [colorGre                 , colorWhi],
+                    backgroundColor : [colorGre                 , colorGra],
+                    borderColor     : [colorGre                 , colorGra],
                     borderWidth     : 5
                 }]
             };
@@ -431,8 +455,8 @@ let totMonStat = new Vue({
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
                     data            : [tmpPrntDngrDtct          , prntDngrDtctModIdx],
-                    backgroundColor : [colorOra                 , colorWhi],
-                    borderColor     : [colorOra                 , colorWhi],
+                    backgroundColor : [colorOra                 , colorGra],
+                    borderColor     : [colorOra                 , colorGra],
                     borderWidth     : 5
                 }]
             };
@@ -449,9 +473,9 @@ let totMonStat = new Vue({
             let dataCareGrowIdx = {
                 labels              : ['과성장','저성장'],
                 datasets: [{
-                    data            : [$this.totMonStat.careGrowOverRt      , $this.totMonStat.careGrowLowRt],
-                    backgroundColor : [colorGre                             , colorWhi],
-                    borderColor     : [colorGre                             , colorWhi],
+                    data            : [tmpGrowFatIdx      , growFatModIdx],
+                    backgroundColor : [colorGre                             , colorGra],
+                    borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
@@ -459,8 +483,8 @@ let totMonStat = new Vue({
                 labels              : ['고도비만','비만','저체중'],
                 datasets: [{
                     data            : [$this.totMonStat.careFatIdxHighRt    , $this.totMonStat.careFatIdxGnrlRt     , $this.totMonStat.careFatIdxUndrRt],
-                    backgroundColor : [colorBlu                             , colorOra                              , colorGra],
-                    borderColor     : [colorBlu                             , colorOra                              , colorGra],
+                    backgroundColor : [colorBlu                             , colorOra                              , colorLggre],
+                    borderColor     : [colorBlu                             , colorOra                              , colorLggre],
                     borderWidth     : 22
                 }]
             };
@@ -468,17 +492,17 @@ let totMonStat = new Vue({
                 labels              : ['고도비만','비만','저체중'],
                 datasets: [{
                     data            : [$this.totMonStat.careFatPrdtHighRt   , $this.totMonStat.careFatPrdtGnrlRt    , $this.totMonStat.careFatPrdtUndrRt],
-                    backgroundColor : [colorBlu                             , colorOra                              , colorGra],
-                    borderColor     : [colorBlu                             , colorOra                              , colorGra],
+                    backgroundColor : [colorBlu                             , colorOra                              , colorLggre],
+                    borderColor     : [colorBlu                             , colorOra                              , colorLggre],
                     borderWidth     : 22
                 }]
             };
             let dataCareStrs = {
                 labels              : ['높음','매우높음'],
                 datasets: [{
-                    data            : [$this.totMonStat.careStrsHigh        , $this.totMonStat.careStrsVeryHigh],
-                    backgroundColor : [colorGre                             , colorWhi],
-                    borderColor     : [colorGre                             , colorWhi],
+                    data            : [tmpStrsIdx        , strsModIdx],
+                    backgroundColor : [colorGre                             , colorGra],
+                    borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
@@ -504,26 +528,26 @@ let totMonStat = new Vue({
                 labels              : ['밥','빵','튀김'],
                 datasets: [{
                     data            : [$this.totMonStat.careFmenuRtTop1     , $this.totMonStat.careFmenuRtTop2      , $this.totMonStat.careFmenuRtTop3],
-                    backgroundColor : [colorBlu                             , colorOra                              , colorGra],
-                    borderColor     : [colorBlu                             , colorOra                              , colorGra],
+                    backgroundColor : [colorBlu                             , colorOra                              , colorLggre],
+                    borderColor     : [colorBlu                             , colorOra                              , colorLggre],
                     borderWidth     : 22
                 }]
             };
             let dataCareMmelNeatFmenut = {
                 labels              : ['결식','대상'],
                 datasets: [{
-                    data            : [$this.totMonStat.careMmelNeatFmenuCnt, $this.totMonStat.careMmelNeatFmenuObj],
-                    backgroundColor : [colorGre                             , colorWhi],
-                    borderColor     : [colorGre                             , colorWhi],
+                    data            : [NeatFmenuQuotiIdx                    , NeatFmenuModIdx],
+                    backgroundColor : [colorGre                             , colorGra],
+                    borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
             let dataCareMmelNeatQust = {
                 labels              : ['결식','대상'],
                 datasets: [{
-                    data            : [$this.totMonStat.careMmelNeatQustCnt , $this.totMonStat.careMmelNeatQustObj],
-                    backgroundColor : [colorGre                             , colorWhi],
-                    borderColor     : [colorGre                             , colorWhi],
+                    data            : [NeatQustQuotiIdx                     , NeatQustModIdx],
+                    backgroundColor : [colorGre                             , colorGra],
+                    borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
@@ -560,7 +584,7 @@ let totMonStat = new Vue({
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if(tmpPublSafeDtct != null ) srcIdx = tmpPublSafeDtct;
-                    $this.textCenter('publSafeDtctChart', srcIdx, $this.chartPublSafeDtct, colorBlu, '' , '');
+                    $this.textCenter('publSafeDtctChart', srcIdx, $this.chartPublSafeDtct, colorGre, '' , '');
                 }
             }];
             let pluginsPublDngrDtct = [{
@@ -574,7 +598,7 @@ let totMonStat = new Vue({
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if(tmpPrntSafeDtct != null ) srcIdx = tmpPrntSafeDtct;
-                    $this.textCenter('prntSafeDtctChart', srcIdx, $this.chartPrntSafeDtct, colorBlu, '' , '');
+                    $this.textCenter('prntSafeDtctChart', srcIdx, $this.chartPrntSafeDtct, colorGre, '' , '');
                 }
             }];
             let pluginsPrntDngrDtct = [{
@@ -588,46 +612,46 @@ let totMonStat = new Vue({
             let pluginsCareGrowIdx = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-                    $this.textCenter('careGrowIdxChart', srcIdx, $this.chartCareGrowIdx, colorBlu, '' , '');
+                    if(tmpGrowFatIdx != null ) srcIdx = tmpGrowFatIdx;
+                    $this.textCenter('careGrowIdxChart', srcIdx, $this.chartCareGrowIdx, colorGre, '' , '');
                 }
             }];
             // 의미 확인 후 centerText 수정 필요
-            let pluginsCareFatIdx = [{
-                beforeDraw: function () {
-                    let srcIdx = '-';
-                    if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-                    $this.textCenter('careFatIdxChart', srcIdx, $this.chartCareFatIdx, colorBlu, '' , '');
-                }
-            }];
-            // 의미 확인 후 centerText 수정 필요
-            let pluginsCareFatPrdt = [{
-                beforeDraw: function () {
-                    let srcIdx = '-';
-                    if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-                    $this.textCenter('careFatPrdtChart', srcIdx, $this.chartCareFatPrdt, colorBlu, '' , '');
-                }
-            }];
+            // let pluginsCareFatIdx = [{
+            //     beforeDraw: function () {
+            //         let srcIdx = '-';
+            //         if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
+            //         $this.textCenter('careFatIdxChart', srcIdx, $this.chartCareFatIdx, colorBlu, '' , '');
+            //     }
+            // }];
+            // // 의미 확인 후 centerText 수정 필요
+            // let pluginsCareFatPrdt = [{
+            //     beforeDraw: function () {
+            //         let srcIdx = '-';
+            //         if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
+            //         $this.textCenter('careFatPrdtChart', srcIdx, $this.chartCareFatPrdt, colorBlu, '' , '');
+            //     }
+            // }];
             // 의미 확인 후 centerText 수정 필요
             let pluginsCareStrs = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-                    $this.textCenter('careStrsChart', srcIdx, $this.chartCareStrs, colorBlu, '' , '');
+                    $this.textCenter('careStrsChart', srcIdx, $this.chartCareStrs, colorGre, '' , '');
                 }
             }];
             let pluginsCareMmelNeatFmenu = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if($this.careMmelNeatFmenuRt != null ) srcIdx = $this.careMmelNeatFmenuRt;
-                    $this.textCenter('careMmelNeatFmenuChart', srcIdx, $this.chartCareMmelNeatFmenu, colorBlu, '' , '');
+                    if(NeatFmenuQuotiIdx != null ) srcIdx = NeatFmenuQuotiIdx;
+                    $this.textCenter('careMmelNeatFmenuChart', srcIdx, $this.chartCareMmelNeatFmenu, colorGre, '' , '');
                 }
             }];
             let pluginsCareMmelNeatQust = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if($this.careMmelNeatQustRt != null ) srcIdx = $this.careMmelNeatQustRt;
-                    $this.textCenter('careMmelNeatQustChart', srcIdx, $this.chartCareMmelNeatQust, colorBlu, '' , '');
+                    if(NeatQustQuotiIdx != null ) srcIdx = NeatQustQuotiIdx;
+                    $this.textCenter('careMmelNeatQustChart', srcIdx, $this.chartCareMmelNeatQust, colorGre, '' , '');
                 }
             }];
             // jcw : 신기하네.. 왜 updateChart에서 호출할땐 오브젝트고.. 여기서 넘겨서 할땐 널일까..
@@ -715,13 +739,13 @@ let totMonStat = new Vue({
                 type    : 'doughnut',
                 data    : dataCareFatIdx,
                 options : $this.options,
-                plugins : pluginsCareFatIdx
+                plugins : [{}]
             };
             let configCareFatPrdt = {
                 type    : 'doughnut',
                 data    : dataCareFatPrdt,
                 options : $this.options,
-                plugins : pluginsCareFatPrdt
+                plugins : [{}]
             };
             let configCareStrs = {
                 type    : 'doughnut',
@@ -808,25 +832,14 @@ let totMonStat = new Vue({
             $this.chartCareMmelNeatFmenu= new Chart(ctxCareMmelNeatFmenu, configCareMmelNeatFmenu);
             $this.chartCareMmelNeatQust = new Chart(ctxCareMmelNeatQust , configCareMmelNeatQust);
 
-            $this.totMonStat.tmpDngrZoneCnt         = $this.toNumber($this.totMonStat.tmpDngrZoneCnt);
-            $this.totMonStat.tmpFallDownCnt         = $this.toNumber($this.totMonStat.tmpFallDownCnt);
-            $this.totMonStat.tmpHbitAbnmCnt         = $this.toNumber($this.totMonStat.tmpHbitAbnmCnt);
-            $this.totMonStat.tmpTmepAbnmCnt         = $this.toNumber($this.totMonStat.tmpTmepAbnmCnt);
             $this.totMonStat.careCalEatAvg          = $this.toNumber($this.totMonStat.careCalEatAvg);
             $this.totMonStat.careCalEatbfDay        = $this.toNumber($this.totMonStat.careCalEatbfDay);
             $this.totMonStat.careMmelNeatFmenuCnt   = $this.toNumber($this.totMonStat.careMmelNeatFmenuCnt);
             $this.totMonStat.careMmelNeatFmenuObj   = $this.toNumber($this.totMonStat.careMmelNeatFmenuObj);
             $this.totMonStat.careMmelNeatQustCnt    = $this.toNumber($this.totMonStat.careMmelNeatQustCnt);
             $this.totMonStat.careMmelNeatQustObj    = $this.toNumber($this.totMonStat.careMmelNeatQustObj);
-            $this.totMonStat.tmpTotal               = $this.toNumber($this.totMonStat.tmpTotal);
-            $this.totMonStat.tmpUsage               = $this.toNumber($this.totMonStat.tmpUsage);
-            $this.totMonStat.tmpNumber1             = $this.toNumber($this.totMonStat.tmpNumber1);
-            $this.totMonStat.tmpNumber2             = $this.toNumber($this.totMonStat.tmpNumber2);
-            $this.totMonStat.tmpNumber3             = $this.toNumber($this.totMonStat.tmpNumber3);
-            $this.totMonStat.tmpNumber4             = $this.toNumber($this.totMonStat.tmpNumber4);
-            $this.totMonStat.tmpNumber5             = $this.toNumber($this.totMonStat.tmpNumber5);
-            $this.totMonStat.tmpNumber6             = $this.toNumber($this.totMonStat.tmpNumber6);
 
+            $this.numCountAnimate();
             // $this.chartStrs = new Chart(ctxStrs, configStrs);
 
             // const operStatCntn = document.getElementById('operStatCntn');
@@ -847,47 +860,19 @@ let totMonStat = new Vue({
         //         }
         //     }];
         // },
-        chartPerModIdx: function(srcIdx, perIdx) {
-            if (WebUtil.isNull(perIdx)) {
-                perIdx = 100;
-            }
-            let modIdx;
-
-            if      (srcIdx > 100 ) modIdx = 0;
-            else if (srcIdx < 0   ) modIdx = 100;
-            else    modIdx  = perIdx - srcIdx;
-
-            return modIdx;
-        },
-        chartPerQuoti: function(numerator, denominator) {
-            // 분모 혹은 제수 : null 또는 0 일 경우 임의로 1로 강제 세팅
-            if (WebUtil.isNull(denominator) || denominator === 0) {
-                denominator = 1;
-            }
-            let quoti;
-            quoti  = Math.round((numerator / denominator * 100) * 10) / 10;
-            return quoti;
-        },
-        toNumber: function (value) {
-            return value.toLocaleString('ko-KR');
-        },
         initData: function () {
             let $this = this;
-
+            $this.totMonStatDgemHist = [];
             $this.totMonStat = {
                 openCnt             : '',
                 operCnt             : '',
                 noRsps              : '',
 
                 temp                : null,
-                tmpDngrSafeOcrrTd   : $this.tmpDngrSafeOcrrTd,
-                tmpDngrSafeOcrrDif  : $this.tmpDngrSafeOcrrDif,
-                tmpDngrSafeOcrrYav  : 3.8,
+                tmpDngrSafeOcrrTd   : 0,
+                tmpDngrSafeOcrrDif  : 0,
+                tmpDngrSafeOcrrYav  : 5.8,
 
-                tmpDngrZoneCnt      : 4400,
-                tmpFallDownCnt      : 2400,
-                tmpHbitAbnmCnt      : 1200,
-                tmpTmepAbnmCnt      : 3300,
                 tmpTotal            : 200000,
                 tmpUsage            : 140000,
                 tmpNumber1          : 200000,
@@ -896,6 +881,11 @@ let totMonStat = new Vue({
                 tmpNumber4          : 500000,
                 tmpNumber5          : 300000,
                 tmpNumber6          : 200000,
+                tmpNumber7          : 200000,
+                tmpNumber8          : 14000,
+                tmpNumber9          : 10000,
+                tmpNumber10         : 13000,
+                tmpNumber11         : 30,
 
                 plcCdPublTop1       : '유흥/유해',
                 plcCdPublTop2       : '공사/위험물',
@@ -949,14 +939,43 @@ let totMonStat = new Vue({
                 careFmenuCdTop3         : '튀김',
                 careFmenuRtTop3         : 12.9,
 
-                careMmelNeatFmenuCnt    : 1853,
+                careMmelNeatFmenuCnt    : 11853,
                 careMmelNeatFmenuObj    : 20000,
-                careMmelNeatFmenuRt     : 9.2,
 
-                careMmelNeatQustCnt     : 1853,
+                careMmelNeatQustCnt     : 11853,
                 careMmelNeatQustObj     : 20000,
-                careMmelNeatQustRt      : 9.2
+            },
+            $this.totCnt = {
+                tmpDngrZoneCnt          : 4400,
+                tmpFallDownCnt          : 2400,
+                tmpHbitAbnmCnt          : 1200,
+                tmpTmepAbnmCnt          : 3300,
+                tmpTotalCnt             : 20000
             }
+        },
+        chartPerModIdx: function(srcIdx, perIdx) {
+            if (WebUtil.isNull(perIdx)) {
+                perIdx = 100;
+            }
+            let modIdx;
+
+            if      (srcIdx > 100 ) modIdx = 0;
+            else if (srcIdx < 0   ) modIdx = 100;
+            else    modIdx  = perIdx - srcIdx;
+
+            return modIdx;
+        },
+        chartPerQuoti: function(numerator, denominator) {
+            // 분모 혹은 제수 : null 또는 0 일 경우 임의로 1로 강제 세팅
+            if (WebUtil.isNull(denominator) || denominator === 0) {
+                denominator = 1;
+            }
+            let quoti;
+            quoti  = Math.round((numerator / denominator * 100) * 10) / 10;
+            return quoti;
+        },
+        toNumber: function (value) {
+            return value.toLocaleString('ko-KR');
         },
         clock: function() {
             let $this = this;
@@ -969,33 +988,228 @@ let totMonStat = new Vue({
         },
         initCycl: function(timeCycl) {
             let $this = this;
+
             if (timeCycl === null) timeCycl = 5000;
             $this.cycl.timeCycl = timeCycl;
+
+            switch (timeCycl) {
+                case 5000   :
+                    $this.cyclButton.button1 = true;
+                    $this.cyclButton.button2 = false;
+                    $this.cyclButton.button3 = false;
+                    break;
+                case 30000  :
+                    $this.cyclButton.button1 = false;
+                    $this.cyclButton.button2 = true;
+                    $this.cyclButton.button3 = false;
+                    break;
+                case 60000  :
+                    $this.cyclButton.button1 = false;
+                    $this.cyclButton.button2 = false;
+                    $this.cyclButton.button3 = true;
+                    break;
+                default     :
+                    break;
+            }
 
             clearInterval($this.cycl.initCycl);
             $this.cycl.initCycl = setInterval($this.searchStdtDetlInfo, timeCycl);
         },
         numCountAnimate: function () {
             let $this = this;
-            var memberCountConTxt= $this.totMonStat.tmpTmepAbnmCnt;
 
-            $({ val : 0 }).animate({ val : memberCountConTxt }, {
+            let tmpNumber1          = $this.totMonStat.tmpNumber1;
+            let tmpNumber2          = $this.totMonStat.tmpNumber2;
+            let tmpNumber3          = $this.totMonStat.tmpNumber3;
+            let tmpNumber4          = $this.totMonStat.tmpNumber4;
+            let tmpNumber5          = $this.totMonStat.tmpNumber5;
+            let tmpNumber6          = $this.totMonStat.tmpNumber6;
+            let tmpNumber7          = $this.totMonStat.tmpNumber7;
+            let tmpNumber8          = $this.totMonStat.tmpNumber8;
+            let tmpNumber9          = $this.totMonStat.tmpNumber9;
+            let tmpNumber10         = $this.totMonStat.tmpNumber10;
+            let tmpNumber11         = $this.totMonStat.tmpNumber11;
+
+            let tmpTotal            = $this.totMonStat.tmpTotal;
+            let tmpUsage            = $this.totMonStat.tmpUsage;
+            let tmpDngrSafeOcrrTd   = $this.totMonStat.tmpDngrSafeOcrrTd;
+            let tmpDngrZoneCnt      = $this.totCnt.tmpDngrZoneCnt;
+            let tmpFallDownCnt      = $this.totCnt.tmpFallDownCnt;
+            let tmpHbitAbnmCnt      = $this.totCnt.tmpHbitAbnmCnt;
+            let tmpTmepAbnmCnt      = $this.totCnt.tmpTmepAbnmCnt;
+            let tmpTotalCnt         = $this.totCnt.tmpTotalCnt;
+
+            $({ val : 0 }).animate({ val : tmpNumber1 }, {
                 duration: 1000,
                 step: function() {
-                    var num = numberWithCommas(Math.floor(this.val));
-                    //$(".memberCountCon").text(num);
-                    $this.totMonStat.tmpTmepAbnmCnt = num;
+                    $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
                 },
                 complete: function() {
-                    var num = numberWithCommas(Math.floor(this.val));
-                    //$(".memberCountCon").text(num);
-                    $this.totMonStat.tmpTmepAbnmCnt = num;
+                    $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
                 }
             });
-
-            function numberWithCommas(x) {
-                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
+            $({ val : 0 }).animate({ val : tmpNumber2 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber3 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber4 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber5 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber6 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber7 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber8 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber9 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber10 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpNumber11 }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpTotal }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpDngrSafeOcrrTd }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpUsage }, {
+                duration: 1000,
+                step: function() {
+                    $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpDngrZoneCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpFallDownCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpHbitAbnmCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpTmepAbnmCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            $({ val : 0 }).animate({ val : tmpTotalCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
         }
     },
     computed: {
