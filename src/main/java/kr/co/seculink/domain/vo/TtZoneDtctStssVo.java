@@ -22,8 +22,8 @@ public class TtZoneDtctStssVo implements Serializable {
 	/* plc_clss_cd 장소_분류_코드 character varying(20) */
 	private String plcClssCd;
 
-	/* 위치_번호 위치_번호 numeric(null) */
-	private double 위치번호;
+	/* loc_no 위치_번호 numeric(null) */
+	private double locNo;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
@@ -135,19 +135,19 @@ public class TtZoneDtctStssVo implements Serializable {
 		this.plcClssCd = plcClssCd;
 	}
 	/**
-	 * Get 위치_번호 위치_번호 numeric(null)
-	 * @Return double 위치번호
+	 * Get loc_no 위치_번호 numeric(null)
+	 * @Return double locNo
 	 */
-	public double get위치번호() {
-		return this.위치번호;
+	public double getLocNo() {
+		return this.locNo;
 	}
 	
 	/**
-	 * Set 위치_번호 위치_번호 numeric(null)
-	 * @Param double 위치번호
+	 * Set loc_no 위치_번호 numeric(null)
+	 * @Param double locNo
 	 */
-	public void set위치번호(double 위치번호) {
-		this.위치번호 = 위치번호;
+	public void setLocNo(double locNo) {
+		this.locNo = locNo;
 	}
 	/**
 	 * Get stnd_yymm 기준_년월 character(6)

@@ -7,17 +7,20 @@ import java.io.Serializable;
  */
 public class TsDdEatSpecVo implements Serializable {
 
+	/* stnd_dt 기준_일자 character(8) */
+	private String stndDt;
+
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
-	/* gfix_dt 성장비만지수_일자 character(8) */
-	private String gfixDt;
+	/* eat_seq 섭취_순번 numeric(null) */
+	private double eatSeq;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
 
-	/* avg_eat_qty 평균_섭취_량 numeric(null) */
-	private double avgEatQty;
+	/* nutr_eat_qty 영양소_섭취_량 numeric(null) */
+	private double nutrEatQty;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -39,6 +42,21 @@ public class TsDdEatSpecVo implements Serializable {
 
 
 	/**
+	 * Get stnd_dt 기준_일자 character(8)
+	 * @Return String stndDt
+	 */
+	public String getStndDt() {
+		return this.stndDt;
+	}
+	
+	/**
+	 * Set stnd_dt 기준_일자 character(8)
+	 * @Param String stndDt
+	 */
+	public void setStndDt(String stndDt) {
+		this.stndDt = stndDt;
+	}
+	/**
 	 * Get stdt_no 학생_번호 numeric(null)
 	 * @Return double stdtNo
 	 */
@@ -54,19 +72,19 @@ public class TsDdEatSpecVo implements Serializable {
 		this.stdtNo = stdtNo;
 	}
 	/**
-	 * Get gfix_dt 성장비만지수_일자 character(8)
-	 * @Return String gfixDt
+	 * Get eat_seq 섭취_순번 numeric(null)
+	 * @Return double eatSeq
 	 */
-	public String getGfixDt() {
-		return this.gfixDt;
+	public double getEatSeq() {
+		return this.eatSeq;
 	}
 	
 	/**
-	 * Set gfix_dt 성장비만지수_일자 character(8)
-	 * @Param String gfixDt
+	 * Set eat_seq 섭취_순번 numeric(null)
+	 * @Param double eatSeq
 	 */
-	public void setGfixDt(String gfixDt) {
-		this.gfixDt = gfixDt;
+	public void setEatSeq(double eatSeq) {
+		this.eatSeq = eatSeq;
 	}
 	/**
 	 * Get nutr_cd 영양소_코드 character varying(20)
@@ -84,19 +102,19 @@ public class TsDdEatSpecVo implements Serializable {
 		this.nutrCd = nutrCd;
 	}
 	/**
-	 * Get avg_eat_qty 평균_섭취_량 numeric(null)
-	 * @Return double avgEatQty
+	 * Get nutr_eat_qty 영양소_섭취_량 numeric(null)
+	 * @Return double nutrEatQty
 	 */
-	public double getAvgEatQty() {
-		return this.avgEatQty;
+	public double getNutrEatQty() {
+		return this.nutrEatQty;
 	}
 	
 	/**
-	 * Set avg_eat_qty 평균_섭취_량 numeric(null)
-	 * @Param double avgEatQty
+	 * Set nutr_eat_qty 영양소_섭취_량 numeric(null)
+	 * @Param double nutrEatQty
 	 */
-	public void setAvgEatQty(double avgEatQty) {
-		this.avgEatQty = avgEatQty;
+	public void setNutrEatQty(double nutrEatQty) {
+		this.nutrEatQty = nutrEatQty;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

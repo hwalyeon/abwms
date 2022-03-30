@@ -14,7 +14,7 @@
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
                ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
                ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
-               ,위치_번호 /* 위치_번호 위치_번호 numeric */
+               ,loc_no /* loc_no 위치_번호 numeric */
                ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
                ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
                ,week_nm /* week_nm 요일_명 character varying(10) */
@@ -33,7 +33,7 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		AND    plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		AND    위치_번호 = #{위치번호} /* 위치_번호 위치_번호 numeric */
+		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
 	<insert id="insert" >
@@ -45,7 +45,7 @@
 		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
 		    ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		    ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		    ,위치_번호 /* 위치_번호 위치_번호 numeric */
+		    ,loc_no /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -73,7 +73,7 @@
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		     #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		     #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		     #{위치번호} /* 위치_번호 위치_번호 numeric */
+		     #{locNo} /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -127,7 +127,7 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		AND    plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		AND    위치_번호 = #{위치번호} /* 위치_번호 위치_번호 numeric */
+		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
 	<update id="merge" >
@@ -139,7 +139,7 @@
 		     age_ycnt /* age_ycnt 나이_년수 numeric */
 		     loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		     plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		     위치_번호 /* 위치_번호 위치_번호 numeric */
+		     loc_no /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -167,7 +167,7 @@
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		     #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		     #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		     #{위치번호} /* 위치_번호 위치_번호 numeric */
+		     #{locNo} /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -223,6 +223,6 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		AND    plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		AND    위치_번호 = #{위치번호} /* 위치_번호 위치_번호 numeric */
+		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</delete>
 </mapper>
