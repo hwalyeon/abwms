@@ -44,7 +44,7 @@ let foodInfoDetl = new Vue({
                 {name: "foodNo"           , index: "foodNo"        , label: "식품번호"     , width: 50        , align: "center", hidden:true},
                 {name: "nutrCd"           , index: "nutrCd"        , label: "영양소코드"   , width: 50        , align: "center"},
                 {name: "nutrNm"           , index: "nutrNm"        , label: "영양소명"     , width: 50        , align: "center"},
-                {name: "nutrQty"          , index: "nutrQty"       , label: "영양소용량"   , width: 50        , align: "left" , editable :true, editrules:{number:true}}
+                {name: "nutrQty"          , index: "nutrQty"       , label: "영양소용량"   , width: 50        , align: "right" , editable :true, editrules:{number:true}}
             ];
 
             $("#foodNutrInfo_list").jqGrid("GridUnload");
@@ -55,7 +55,7 @@ let foodInfoDetl = new Vue({
                 url       : '/svcStnd/food/foodInfoMng/searchFoodElemList.ab',
                 shrinkToFit: true,
                 pager       : '#foodNutrInfo_pager_list',
-                height      : 200,
+                height      : 150,
                 colModel : colModels,
                 rowNum : 3000
             }));
