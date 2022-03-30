@@ -40,8 +40,8 @@ public class TsGfixHistVo implements Serializable {
 	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
 	private double calCsumQty;
 
-	/* mom_hght_val_1 엄마_키_값_1 numeric(null) */
-	private double momHghtVal1;
+	/* mom_hght_val 엄마_키_값 numeric(null) */
+	private double momHghtVal;
 
 	/* mom_wght_val 엄마_몸무게_값 numeric(null) */
 	private double momWghtVal;
@@ -64,8 +64,8 @@ public class TsGfixHistVo implements Serializable {
 	/* grow_stnd_no 성장_기준_번호 numeric(null) */
 	private double growStndNo;
 
-	/* grow_idx 성장_지수 numeric(null) */
-	private double growIdx;
+	/* gidx 성장지수 numeric(null) */
+	private double gidx;
 
 	/* grow_judg_cd 성장_판정_코드 character varying(20) */
 	private String growJudgCd;
@@ -91,8 +91,8 @@ public class TsGfixHistVo implements Serializable {
 	/* nutr_eat_qty 영양소_섭취_량 numeric(null) */
 	private double nutrEatQty;
 
-	/* fat_idx 비만_지수 numeric(null) */
-	private double fatIdx;
+	/* fidx 비만지수 numeric(null) */
+	private double fidx;
 
 	/* fat_judg_cd 비만_판정_코드 character varying(20) */
 	private String fatJudgCd;
@@ -306,19 +306,19 @@ public class TsGfixHistVo implements Serializable {
 		this.calCsumQty = calCsumQty;
 	}
 	/**
-	 * Get mom_hght_val_1 엄마_키_값_1 numeric(null)
-	 * @Return double momHghtVal1
+	 * Get mom_hght_val 엄마_키_값 numeric(null)
+	 * @Return double momHghtVal
 	 */
-	public double getMomHghtVal1() {
-		return this.momHghtVal1;
+	public double getMomHghtVal() {
+		return this.momHghtVal;
 	}
 	
 	/**
-	 * Set mom_hght_val_1 엄마_키_값_1 numeric(null)
-	 * @Param double momHghtVal1
+	 * Set mom_hght_val 엄마_키_값 numeric(null)
+	 * @Param double momHghtVal
 	 */
-	public void setMomHghtVal1(double momHghtVal1) {
-		this.momHghtVal1 = momHghtVal1;
+	public void setMomHghtVal(double momHghtVal) {
+		this.momHghtVal = momHghtVal;
 	}
 	/**
 	 * Get mom_wght_val 엄마_몸무게_값 numeric(null)
@@ -426,19 +426,19 @@ public class TsGfixHistVo implements Serializable {
 		this.growStndNo = growStndNo;
 	}
 	/**
-	 * Get grow_idx 성장_지수 numeric(null)
-	 * @Return double growIdx
+	 * Get gidx 성장지수 numeric(null)
+	 * @Return double gidx
 	 */
-	public double getGrowIdx() {
-		return this.growIdx;
+	public double getGidx() {
+		return this.gidx;
 	}
 	
 	/**
-	 * Set grow_idx 성장_지수 numeric(null)
-	 * @Param double growIdx
+	 * Set gidx 성장지수 numeric(null)
+	 * @Param double gidx
 	 */
-	public void setGrowIdx(double growIdx) {
-		this.growIdx = growIdx;
+	public void setGidx(double gidx) {
+		this.gidx = gidx;
 	}
 	/**
 	 * Get grow_judg_cd 성장_판정_코드 character varying(20)
@@ -561,19 +561,19 @@ public class TsGfixHistVo implements Serializable {
 		this.nutrEatQty = nutrEatQty;
 	}
 	/**
-	 * Get fat_idx 비만_지수 numeric(null)
-	 * @Return double fatIdx
+	 * Get fidx 비만지수 numeric(null)
+	 * @Return double fidx
 	 */
-	public double getFatIdx() {
-		return this.fatIdx;
+	public double getFidx() {
+		return this.fidx;
 	}
 	
 	/**
-	 * Set fat_idx 비만_지수 numeric(null)
-	 * @Param double fatIdx
+	 * Set fidx 비만지수 numeric(null)
+	 * @Param double fidx
 	 */
-	public void setFatIdx(double fatIdx) {
-		this.fatIdx = fatIdx;
+	public void setFidx(double fidx) {
+		this.fidx = fidx;
 	}
 	/**
 	 * Get fat_judg_cd 비만_판정_코드 character varying(20)

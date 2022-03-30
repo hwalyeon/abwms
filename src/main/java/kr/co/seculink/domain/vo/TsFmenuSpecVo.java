@@ -16,8 +16,8 @@ public class TsFmenuSpecVo implements Serializable {
 	/* fmenu_spec_seq 식단표_상세_순번 numeric(null) */
 	private double fmenuSpecSeq;
 
-	/* food_no 식품_번호 character varying(20) */
-	private String foodNo;
+	/* food_no 식품_번호 numeric(null) */
+	private double foodNo;
 
 	/* qty 수량 numeric(null) */
 	private double qty;
@@ -87,18 +87,18 @@ public class TsFmenuSpecVo implements Serializable {
 		this.fmenuSpecSeq = fmenuSpecSeq;
 	}
 	/**
-	 * Get food_no 식품_번호 character varying(20)
-	 * @Return String foodNo
+	 * Get food_no 식품_번호 numeric(null)
+	 * @Return double foodNo
 	 */
-	public String getFoodNo() {
+	public double getFoodNo() {
 		return this.foodNo;
 	}
 	
 	/**
-	 * Set food_no 식품_번호 character varying(20)
-	 * @Param String foodNo
+	 * Set food_no 식품_번호 numeric(null)
+	 * @Param double foodNo
 	 */
-	public void setFoodNo(String foodNo) {
+	public void setFoodNo(double foodNo) {
 		this.foodNo = foodNo;
 	}
 	/**
