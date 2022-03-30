@@ -217,7 +217,7 @@ let stdtInfoMng = new Vue({
         },
 
         stdtInfoDetlPopup: function(stdtNo, guarNo) {
-            stdtInfoDetl.initPage(stdtNo, guarNo);
+            stdtInfoDetl.initPage(stdtNo, guarNo, function(){ stdtInfoMng.searchStdtInfoList(true)});
         },
 
         stdtRegDetlPopup: function() {
