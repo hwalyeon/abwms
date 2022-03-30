@@ -74,10 +74,10 @@ let nutrEatHist = new Vue({
             let $this = this;
             let colModels =
                 [
-                    {name: "stndDt"           , index: "stndDt"           , label: "기준 일자" 	            ,  width: 80 , align: "center" },
-                    {name: "locNm"            , index: "locNm"            , label: "학교 명" 	            ,  width: 120 , align: "center" },
-                    {name: "stdtNo"           , index: "stdtNo"           , label: "학생 번호" 	            ,  width: 80 , align: "center" },
-                    {name: "stdtNm"           , index: "stdtNm"           , label: "학생 명" 	            ,  width: 80 , align: "center" },
+                    {name: "stndDt"           , index: "stndDt"           , label: "기준 일자" 	            ,  width: 80 , align: "center" , fixed: true },
+                    {name: "locNm"            , index: "locNm"            , label: "학교 명" 	            ,  width: 120 , align: "center", fixed: true },
+                    {name: "stdtNo"           , index: "stdtNo"           , label: "학생 번호" 	            ,  width: 80 , align: "center" , fixed: true },
+                    {name: "stdtNm"           , index: "stdtNm"           , label: "학생 명" 	            ,  width: 80 , align: "center" , fixed: true },
                 ];
 
             if($this.code.nutrCdNmList.length > 0){
@@ -90,10 +90,10 @@ let nutrEatHist = new Vue({
                     }
                 }
             }
-            colModels.push({name: "telNo"     , index: "telNo"     , label: "학생(밴드)<br/>전화번호" , width: 120 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}});
-            colModels.push({name: "guarNo"    , index: "guarNo"    , label: "보호자 번호"             , width: 120 , align: "center" });
-            colModels.push({name: "guarNm"    , index: "guarNm"    , label: "보호자 명"               , width: 120 , align: "center" });
-            colModels.push({name: "guarTelNo" , index: "guarTelNo" , label: "보호자<br/>전화번호"     , width: 120 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}});
+            colModels.push({name: "telNo"     , index: "telNo"     , label: "학생(밴드)<br/>전화번호" , width: 120 , align: "center" ,fixed: true ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}});
+            colModels.push({name: "guarNo"    , index: "guarNo"    , label: "보호자 번호"             , width: 120 , align: "center" ,fixed: true });
+            colModels.push({name: "guarNm"    , index: "guarNm"    , label: "보호자 명"               , width: 120 , align: "center" ,fixed: true });
+            colModels.push({name: "guarTelNo" , index: "guarTelNo" , label: "보호자<br/>전화번호"     , width: 120 , align: "center" ,fixed: true  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}});
 
 
             $("#nutrEatHist_list").jqGrid("GridUnload");
