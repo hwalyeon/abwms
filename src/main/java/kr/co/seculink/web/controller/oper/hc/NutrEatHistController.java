@@ -26,9 +26,9 @@ public class NutrEatHistController {
 	@Autowired
 	private NutrEatHistService nutrEatHistService;
 
-	// 스트레스_지수_이력 리스트 조회
+	//영양소_섭취_이력 리스트 조회
 	@ResponseBody
-	@RequestMapping("/oper/hc/nutrEatHist/nutrEatHistList.ab")
+	@RequestMapping("/oper/hc/nutrEatHist/searchNutrEatHistList.ab")
 	public RtnMsg searchNutrEatHistList(@RequestBody(required = false) Map<String, String> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
@@ -46,37 +46,72 @@ public class NutrEatHistController {
 		return vo;
 	}
 
-	//스트레스_지수_이력 리스트 엑셀다운로드
+	//영양소_섭취_이력 리스트 엑셀다운로드
 	@ResponseBody
-	@RequestMapping("/oper/hc/nutrEatHist/nutrEatHistList/excel.ab")
+	@RequestMapping("/oper/hc/nutrEatHist/searchNutrEatHistList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required = false) Map<String, String> params) throws BizException {
 	
 		params.put("paging", "N");
+
+		List<Map<String, String>> resultHeader = dao.selectList("svcStnd.nutr.ddNutrEatStndMng.searchNutrCdNmList", params);
+
 		List<Map<String, String>> result = dao.selectList("oper.hc.nutrEatHist.selectNutrEatHistList", params);
 
-		return new ModelAndView("excelXlsView", getExcelMap(result));
+		return new ModelAndView("excelXlsView", getExcelMap(result,resultHeader));
 	}
 
-	private Map<String, Object> getExcelMap(List<Map<String, String>> list) {
-		String[] arrHeader = { "발생일시", "학교 명","학생 번호","학생 명","성별","나이(년)","나이(개월)","스트레스 상태","정신적 상태","신체적 상태","대처능력","학생(밴드)전화번호","보호자 번호","보호자 명","보호자 전화번호" };
-		List<String> headerList = Arrays.asList(arrHeader);
+	private Map<String, Object> getExcelMap(List<Map<String, String>> list,List<Map<String, String>> header) {
+
+		List<String> headerList = new ArrayList<>();
+		headerList.add("기준 일자");
+		headerList.add("학교 명");
+		headerList.add("학생 번호");
+		headerList.add("학생 명");
+		if(header.size() > 0){
+			for(Map<String, String> headerInfo : header){
+				headerList.add(headerInfo.get("nutrNm") + " ( " +  headerInfo.get("nutrCd") + " )");
+			}
+		}
+		headerList.add("학생(밴드)전화번호");
+		headerList.add("보호자 번호");
+		headerList.add("보호자 명");
+		headerList.add("보호자 전화 번호");
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
 		List<String> data;
 
 		for (Map<String, String> info : list) {
 			data = new ArrayList<String>();
-			data.add(info.get("strsJudgDttm"));
+			data.add(info.get("stndDt"));
 			data.add(info.get("locNm"));
 			data.add(String.valueOf(info.get("stdtNo")));
 			data.add(info.get("stdtNm"));
-			data.add(info.get("sexCdNm"));
-			data.add(String.valueOf(info.get("ageYy")));
-			data.add(String.valueOf(info.get("ageMm")));
-			data.add(info.get("strsStatCdNm"));
-			data.add(info.get("mindStrsStatCdNm"));
-			data.add(info.get("physStrsStatCdNm"));
-			data.add(info.get("strsCopeStatCd"));
+			data.add(String.valueOf(info.get("cal")));
+			data.add(String.valueOf(info.get("prtn")));
+			data.add(String.valueOf(info.get("fidx")));
+			data.add(String.valueOf(info.get("carb")));
+			data.add(String.valueOf(info.get("dfib")));
+			data.add(String.valueOf(info.get("ca")));
+			data.add(String.valueOf(info.get("fe")));
+			data.add(String.valueOf(info.get("mg")));
+			data.add(String.valueOf(info.get("na")));
+			data.add(String.valueOf(info.get("zn")));
+			data.add(String.valueOf(info.get("vitD3")));
+			data.add(String.valueOf(info.get("vitB")));
+			data.add(String.valueOf(info.get("vitB1")));
+			data.add(String.valueOf(info.get("vitB2")));
+			data.add(String.valueOf(info.get("nia")));
+			data.add(String.valueOf(info.get("dfe")));
+			data.add(String.valueOf(info.get("vitB12")));
+			data.add(String.valueOf(info.get("amno")));
+			data.add(String.valueOf(info.get("ile")));
+			data.add(String.valueOf(info.get("leu")));
+			data.add(String.valueOf(info.get("val")));
+			data.add(String.valueOf(info.get("chl")));
+			data.add(String.valueOf(info.get("fapu")));
+			data.add(String.valueOf(info.get("epa")));
+			data.add(String.valueOf(info.get("dha")));
+			data.add(String.valueOf(info.get("epaDha")));
 			data.add(info.get("telNo"));
 			data.add(String.valueOf(info.get("guarNo")));
 			data.add(info.get("guarNm"));

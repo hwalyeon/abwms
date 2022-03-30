@@ -4,7 +4,7 @@
 	  layout:decorate="~{common/layout/defaultLayout}">
 <head>
 	<meta charset="UTF-8">
-	<title>스트레스지수 이력</title>
+	<title>영양소_섭취_이력</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -26,10 +26,10 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label" >기준일자</label>
 						<div class="col-xs-2">
-							<input type="date" name="entrDtFr" class="form-control" v-model="params.strsJudgDttmFr"  v-on:change="bDSelect">
+							<input type="date" name="stndDtFr" class="form-control" v-model="params.stndDtFr"  v-on:change="bDSelect">
 						</div>
 						<div class="col-xs-2" style="padding-right:5px">
-							<input type="date" name="entrDtTo" class="form-control" v-model="params.strsJudgDttmTo"  v-on:change="bDSelect">
+							<input type="date" name="stndDtTo" class="form-control" v-model="params.stndDtTo"  v-on:change="bDSelect">
 						</div>
 						<!--이번 달-->
 						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">
@@ -48,21 +48,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-1 control-label" >나이</label>
-						<div class="col-xs-1"  style="padding:0px; margin-left: 15px;" >
-							<input type="text" name="ageFr" class="form-control"  v-model="params.ageFr" >
-						</div>
-						<label class="col-xs-1 control-label"style="margin-left:10px; width:5px;">~</label>
-						<label class="col-xs-1 control-label" style="margin-left: -40px;" >나이</label>
-						<div class="col-xs-1" style="padding:0px;">
-							<input type="text" name="ageTo" class="form-control" style="padding-left:0px; padding-right:0px;"v-model="params.ageTo">
-						</div>
-						<label class="col-xs-1 control-label">성별</label>
-						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
-							<select id="sexCd" name="sexCd" class="form-control" v-model="params.sexCd">
-								<option value="">전체</option>
-								<option v-for="item in code.sexCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-							</select>
+						<label class="col-xs-1 control-label">학교(학원)명</label>
+						<div class="col-xs-1" style="padding:0px; margin-left: 15px;" >
+							<input type="text" name="locNm" class="form-control" v-model="params.locNm">
 						</div>
 						<label class="col-xs-1 control-label" >보호자번호</label>
 						<div class="col-xs-1"   style="padding:0px">
@@ -71,44 +59,6 @@
 						<label class="col-xs-1 control-label">보호자명</label>
 						<div class="col-xs-2"  style="padding-left:0px;" >
 							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
-						</div>
-					</div>
-					<div class="form-group">
-						<!--스트레스_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">스트레스 상태</label>
-						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">
-							<select id="strsStatCd" name="strsStatCd" class="form-control" style=" margin-right:15px;" v-model="params.strsStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.strsStatCdList" v-bind:value="item.value" v-text="item.cdNm"></option>
-							</select>
-						</div>
-						<!--정신적_스트레스_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">정신적 상태</label>
-						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
-							<select id="mindStrsStatCd" name="mindStrsStatCd" class="form-control" v-model="params.mindStrsStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.mindStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-							</select>
-						</div>
-						<!--신체적_스트레스_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">신체적 상태</label>
-						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
-							<select id="physStrsStatCd" name="physStrsStatCd" class="form-control" v-model="params.physStrsStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.physStrsStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-							</select>
-						</div>
-						<!--스트레스_대처_상태_코드_리스트-->
-						<label class="col-xs-1 control-label">대처 상태</label>
-						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
-							<select id="strsCopeStatCd" name="strsCopeStatCd" class="form-control" v-model="params.strsCopeStatCd">
-								<option value="">전체</option>
-								<option v-for="item in code.strsCopeStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
-							</select>
-						</div>
-						<label class="col-xs-1 control-label">학교(학원)명</label>
-						<div class="col-xs-2" style="padding-left:0px;">
-							<input type="text" name="locNm" class="form-control" v-model="params.locNm">
 						</div>
 					</div>
 					<div class="form-group mg_none">
@@ -131,7 +81,7 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>스트레스지수 이력 목록</h5>
+							<h5>영양소섭취 이력 목록</h5>
 						</div>
 					</div>
 					<div class="clear_both"></div>
@@ -149,7 +99,7 @@
 			</div>
 		</div>
     </div>
-</div>
+</div>n
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/oper/hc/nutrEatHist.js}"></script>
 </section>

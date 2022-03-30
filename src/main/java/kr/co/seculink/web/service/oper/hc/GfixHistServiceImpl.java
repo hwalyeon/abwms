@@ -21,10 +21,10 @@ public class GfixHistServiceImpl implements GfixHistService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	// 스트레스_지수_이력 리스트 조회
+	// 성장/비만_지수_이력 리스트 조회
 	public List<Map<String, String>> searchGfixHistList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("oper.hc.gfixHist.selectStrsHistList", params);
+		List<Map<String, String>> result = dao.selectList("oper.hc.gfixHist.selectGfixHistList", params);
 		
 		return result;
 	}

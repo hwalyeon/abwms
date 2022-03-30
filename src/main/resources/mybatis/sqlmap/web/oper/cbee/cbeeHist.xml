@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oper.cbee.cbeeHist">
 
-    <!--스트레스_지수_이력 리스트 조회-->
+    <!--캐시_이력 리비스트 조회-->
 	<select id="selectCbeeHistList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT   tsch.occr_dttm       /* occr_dttm 발생_일시 character(14) */
 		       , teb.loc_nm           /*loc_nm 학교_명 varchar(100) */
@@ -34,7 +34,7 @@
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
 			and tsb.stdt_NM like CONCAT('%',#{stdtNm},'%')</if>
 		<if test=" locNm != null and locNm !='' ">/*학교(학원)명*/
-			and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+			and teb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/

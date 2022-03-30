@@ -21,7 +21,7 @@ public class NutrEatHistServiceImpl implements NutrEatHistService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	// 스트레스_지수_이력 리스트 조회
+	// 영양소_섭취_이력 리스트 조회
 	public List<Map<String, String>> searchNutrEatHistList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("oper.hc.nutrEatHist.selectNutrEatHistList", params);

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface GfixHistService
 {
-	// 스트레스_지수_이력 리스트 조회
+	//성장/비만_지수_이력 리스트 조회
 	public List<Map<String, String>> searchGfixHistList(Map<String, String> params) throws BizException;
 }
  

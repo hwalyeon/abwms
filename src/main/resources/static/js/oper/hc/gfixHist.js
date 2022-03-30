@@ -53,7 +53,7 @@ let gfixHist = new Vue({
             //기준_일자_기간 기본 값 세팅(이번 달)
             $this.code.bDPerList = CodeUtil.getPeriodDateList();
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.strsJudgDttmFr = terms.strDt;
+            this.params.gfixDtFr = terms.strDt;
             this.params.gfixDtTo = terms.endDt;
         },
         initCodeList : function()
@@ -70,38 +70,39 @@ let gfixHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "gfixDt"       , index: "gfixDt"       , label: "기준 일자" 	            ,  width: 50 , align: "center" },
-                {name: "locNm"        , index: "locNm"        , label: "학교 명" 	            ,  width: 50 , align: "center" },
-                {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	            ,  width: 50 , align: "center" },
-                {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	            ,  width: 50 , align: "center" },
-                {name: "sexCdNm"      , index: "sexCdNm"      , label: "성별"	                ,  width: 50 , align: "center" },
-                {name: "ageYcnt"      , index: "ageYcnt"      , label: "나이(년)"                , width: 50 , align: "center" },
-                {name: "ageMcnt"      , index: "ageMcnt"      , label: "나이(개월)"              , width: 50 , align: "center" },
-                {name: "hghtVal"      , index: "hghtVal"      , label: "키"                      , width: 50 , align: "center" },
-                {name: "wghtVal"      , index: "wghtVal"      , label: "몸무게"                  , width: 50 , align: "center" },
-                {name: "calEatQty"    , index: "calEatQty"    , label: "칼로리 섭취/일"          , width: 50 , align: "center" },
-                {name: "calCsumQty"   , index: "calCsumQty"   , label: "칼로리 소모/일"          , width: 50 , align: "center" },
-                {name: "growIdx"      , index: "growIdx"      , label: "성장지수"                , width: 50 , align: "center" },
-                {name: "growJudgCdNm" , index: "growJudgCdNm" , label: "성장 판정"               , width: 50 , align: "center" },
-                {name: "fatIdx"       , index: "fatIdx"       , label: "비만 지수"               , width: 50 , align: "center" },
-                {name: "fatJudgCdNm"  , index: "fatJudgCdNm"  , label: "비만 판정"               , width: 50 , align: "center" },
-                {name: "fatpIdx"      , index: "fatpIdx"      , label: "비만 예측지수"           , width: 50 , align: "center" },
-                {name: "fatpJudgCdNm" , index: "fatpJudgCdNm" , label: "비만 예측"               , width: 50 , align: "center" },
-                {name: "palVal"       , index: "palVal"       , label: "신체활동 수준"           , width: 50 , align: "center" },
-                {name: "telNo"        , index: "telNo"        , label: "학생(밴드)<br/>전화번호" , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
-                {name: "guarNo"       , index: "guarNo"       , label: "보호자 번호"             , width: 50 , align: "center" },
-                {name: "guarNm"       , index: "guarNm"       , label: "보호자 명"               , width: 50 , align: "center" },
-                {name: "guarTelNo" 	  , index: "guarTelNo" 	  , label: "보호자<br/>전화번호"     , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
+                {name: "gfixDt"       , index: "gfixDt"       , label: "기준 일자" 	            ,  width: 100 , align: "center" ,fixed:true},
+                {name: "locNm"        , index: "locNm"        , label: "학교 명" 	            ,  width: 100 , align: "center" ,fixed:true},
+                {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	            ,  width: 100 , align: "center" ,fixed:true},
+                {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	            ,  width: 100 , align: "center" ,fixed:true},
+                {name: "sexCdNm"      , index: "sexCdNm"      , label: "성별"	                ,  width: 80 , align: "center" ,fixed:true},
+                {name: "ageYcnt"      , index: "ageYcnt"      , label: "나이(년)"                , width: 80 , align: "center" ,fixed:true},
+                {name: "ageMcnt"      , index: "ageMcnt"      , label: "나이(개월)"              , width: 80 , align: "center" ,fixed:true},
+                {name: "hghtVal"      , index: "hghtVal"      , label: "키"                      , width: 80 , align: "center" ,fixed:true},
+                {name: "wghtVal"      , index: "wghtVal"      , label: "몸무게"                  , width: 80 , align: "center" ,fixed:true},
+                {name: "calEatQty"    , index: "calEatQty"    , label: "칼로리 섭취/일"          , width: 80 , align: "center" ,fixed:true},
+                {name: "calCsumQty"   , index: "calCsumQty"   , label: "칼로리 소모/일"          , width: 80 , align: "center" ,fixed:true},
+                {name: "growIdx"      , index: "growIdx"      , label: "성장지수"                , width: 80 , align: "center" ,fixed:true},
+                {name: "growJudgCdNm" , index: "growJudgCdNm" , label: "성장 판정"               , width: 80 , align: "center" ,fixed:true},
+                {name: "fatIdx"       , index: "fatIdx"       , label: "비만 지수"               , width: 80 , align: "center" ,fixed:true},
+                {name: "fatJudgCdNm"  , index: "fatJudgCdNm"  , label: "비만 판정"               , width: 80 , align: "center" ,fixed:true},
+                {name: "fatpIdx"      , index: "fatpIdx"      , label: "비만 예측지수"           , width: 80 , align: "center" ,fixed:true},
+                {name: "fatpJudgCdNm" , index: "fatpJudgCdNm" , label: "비만 예측"               , width: 80 , align: "center" ,fixed:true},
+                {name: "palVal"       , index: "palVal"       , label: "신체활동 수준"           , width: 80 , align: "center" ,fixed:true},
+                {name: "telNo"        , index: "telNo"        , label: "학생(밴드)<br/>전화번호" , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);},fixed:true},
+                {name: "guarNo"       , index: "guarNo"       , label: "보호자 번호"             , width: 100 , align: "center" ,fixed:true},
+                {name: "guarNm"       , index: "guarNm"       , label: "보호자 명"               , width: 100 , align: "center" ,fixed:true},
+                {name: "guarTelNo" 	  , index: "guarTelNo" 	  , label: "보호자<br/>전화번호"     , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);},fixed:true}
             ];
             $("#gfixHist_list").jqGrid("GridUnload");
            	$("#gfixHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
             {
             	datatype : "local",
             	mtype    : 'post'  ,
-                url      : '/oper/hc/gfixHist/gfixHistList.ab',
+                url      : '/oper/hc/gfixHist/searchGfixHistList.ab',
                 pager    : '#gfixHist_pager_list',
 				height   : 405     ,
                 colModel : colModels,
+                autowidth: false,
                 onPaging : function(data)
                 {
                     onPagingCommon(data, this, function(resultMap)
@@ -159,7 +160,7 @@ let gfixHist = new Vue({
 			AjaxUtil.post(
        {
 				dataType : 'binary',
-                url      : "/oper/hc/gfixHist/gfixHistList/excel.ab",
+                url      : "/oper/hc/gfixHist/searchGfixHistList/excel.ab",
                 param    : params,
                 success  : function(response)
                 {
@@ -176,7 +177,7 @@ let gfixHist = new Vue({
         {
             let $this = this;
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.strsJudgDttmFr = terms.strDt;
+            this.params.gfixDtFr = terms.strDt;
             this.params.gfixDtTo = terms.endDt;
         },
         //기준_일자_선택
@@ -199,12 +200,12 @@ let gfixHist = new Vue({
                 Swal.alert(['정확한 나이 범위를 입력하세요.', 'info']);
                 return false;
             }
-            if( ((WebUtil.isNotNull($this.params.strsJudgDttmFr)) && (WebUtil.isNull($this.params.gfixDtTo))) || ((WebUtil.isNotNull($this.params.gfixDtTo)) && (WebUtil.isNull($this.params.strsJudgDttmFr))) )
+            if( ((WebUtil.isNotNull($this.params.gfixDtFr)) && (WebUtil.isNull($this.params.gfixDtTo))) || ((WebUtil.isNotNull($this.params.gfixDtTo)) && (WebUtil.isNull($this.params.gfixDtFr))) )
             {
                 Swal.alert(['나머지 기준 일자를 선택하세요.', 'info']);
                 return false;
             }
-            if( ((WebUtil.isNotNull($this.params.strsJudgDttmFr) && WebUtil.isNotNull($this.params.gfixDtTo)) && $this.params.strsJudgDttmFr > $this.params.gfixDtTo) )
+            if( ((WebUtil.isNotNull($this.params.gfixDtFr) && WebUtil.isNotNull($this.params.gfixDtTo)) && $this.params.gfixDtFr > $this.params.gfixDtTo) )
             {
                 Swal.alert(['정확한 기준 일자를 선택하세요.', 'info']);
                 return false;
@@ -217,8 +218,8 @@ let gfixHist = new Vue({
 			$this.params =
             {
                 userId         : '' ,
-                strsJudgDttmFr : '' , //스트레스_판정_일시(FROM)
-                gfixDtTo : '' , //스트레스_판정_일시(To)
+                gfixDtFr       : '' , //성장비만지수_일자(FROM)
+                gfixDtTo       : '' , //성장비만지수_일자(To)
                 bDPer          : 'THIS_MONTH' , //기준_일자_기간
                 stdtNo         : '' , //학생_번호
                 stdtNm         : '' , //학생_명
@@ -227,10 +228,9 @@ let gfixHist = new Vue({
                 sexCd          : '' , //성별_코드
                 guarNo         : '' , //보호자_번호
                 guarNm         : '' , //보호자_명
-                strsStatCd     : '' , //스트레스_상태_코드
-                mindStrsStatCd : '' , //정신적_스트레스_상태_코드
-                physStrsStatCd : '' , //신체적_스트레스_상태_코드
-                strsCopeStatCd : '' , //스트레스_대처_상태_코드
+                growJudgCd     : '' , //성장_판정_코드
+                fatJudgCd      : '' , //비만_판정_코드
+                fatpJudgCd     : '' , //비만_예측_판정_코드
                 locNm          : '' , //학교(학원)명
                 paging         : 'Y',
                 totalCount     : 0  ,

@@ -39,12 +39,6 @@ let cbeeHist = new Vue({
         {
             let $this = this;
             $this.userId = SessionUtil.getUserId();
-
-            //기준_일자_기간 기본 값 세팅(이번 달)
-            $this.code.bDPerList = CodeUtil.getPeriodDateList();
-            const terms = getPeriodDate($this.params.bDPer);
-            this.params.cbeeJudgDttmFr = terms.strDt;
-            this.params.cbeeJudgDttmTo = terms.endDt;
         },
         initCodeList : function()
         {
@@ -87,7 +81,7 @@ let cbeeHist = new Vue({
                     onPagingCommon(data, this, function(resultMap)
                     {
                         $this.params.currentPage  = resultMap.currentPage;
-                        $this.params.rowCount      = resultMap.rowCount;
+                        $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
                         $this.searchCbeeHistList(false);
                     })
@@ -106,7 +100,7 @@ let cbeeHist = new Vue({
         //캐시비 이력 리스트 조회
         searchCbeeHistList: function(isSearch)
         {
-			let $this     = this;
+			let $this  = this;
             let params = $.extend(true, {}, $this.params);
 
             //유효성_검증
