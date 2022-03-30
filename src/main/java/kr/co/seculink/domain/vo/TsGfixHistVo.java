@@ -40,23 +40,23 @@ public class TsGfixHistVo implements Serializable {
 	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
 	private double calCsumQty;
 
-	/* 엄마_hght_val_1 엄마_키_값_1 numeric(null) */
-	private double 엄마HghtVal1;
+	/* mom_hght_val_1 엄마_키_값_1 numeric(null) */
+	private double momHghtVal1;
 
-	/* 엄마_wght_val 엄마_몸무게_값 numeric(null) */
-	private double 엄마WghtVal;
+	/* mom_wght_val 엄마_몸무게_값 numeric(null) */
+	private double momWghtVal;
 
-	/* 엄마_bmi_val 엄마_BMI_값 numeric(null) */
-	private double 엄마BmiVal;
+	/* mom_bmi_val 엄마_BMI_값 numeric(null) */
+	private double momBmiVal;
 
-	/* 아빠_hght_val 아빠_키_값 numeric(null) */
-	private double 아빠HghtVal;
+	/* dad_hght_val 아빠_키_값 numeric(null) */
+	private double dadHghtVal;
 
-	/* 아빠_wght_val 아빠_몸무게_값 numeric(null) */
-	private double 아빠WghtVal;
+	/* dad_wght_val 아빠_몸무게_값 numeric(null) */
+	private double dadWghtVal;
 
-	/* 아빠_bmi_val 아빠_BMI_값 numeric(null) */
-	private double 아빠BmiVal;
+	/* dad_bmi_val 아빠_BMI_값 numeric(null) */
+	private double dadBmiVal;
 
 	/* grow_stnd_ver 성장_기준_버전 character varying(20) */
 	private String growStndVer;
@@ -306,94 +306,94 @@ public class TsGfixHistVo implements Serializable {
 		this.calCsumQty = calCsumQty;
 	}
 	/**
-	 * Get 엄마_hght_val_1 엄마_키_값_1 numeric(null)
-	 * @Return double 엄마HghtVal1
+	 * Get mom_hght_val_1 엄마_키_값_1 numeric(null)
+	 * @Return double momHghtVal1
 	 */
-	public double get엄마HghtVal1() {
-		return this.엄마HghtVal1;
+	public double getMomHghtVal1() {
+		return this.momHghtVal1;
 	}
 	
 	/**
-	 * Set 엄마_hght_val_1 엄마_키_값_1 numeric(null)
-	 * @Param double 엄마HghtVal1
+	 * Set mom_hght_val_1 엄마_키_값_1 numeric(null)
+	 * @Param double momHghtVal1
 	 */
-	public void set엄마HghtVal1(double 엄마HghtVal1) {
-		this.엄마HghtVal1 = 엄마HghtVal1;
+	public void setMomHghtVal1(double momHghtVal1) {
+		this.momHghtVal1 = momHghtVal1;
 	}
 	/**
-	 * Get 엄마_wght_val 엄마_몸무게_값 numeric(null)
-	 * @Return double 엄마WghtVal
+	 * Get mom_wght_val 엄마_몸무게_값 numeric(null)
+	 * @Return double momWghtVal
 	 */
-	public double get엄마WghtVal() {
-		return this.엄마WghtVal;
-	}
-	
-	/**
-	 * Set 엄마_wght_val 엄마_몸무게_값 numeric(null)
-	 * @Param double 엄마WghtVal
-	 */
-	public void set엄마WghtVal(double 엄마WghtVal) {
-		this.엄마WghtVal = 엄마WghtVal;
-	}
-	/**
-	 * Get 엄마_bmi_val 엄마_BMI_값 numeric(null)
-	 * @Return double 엄마BmiVal
-	 */
-	public double get엄마BmiVal() {
-		return this.엄마BmiVal;
+	public double getMomWghtVal() {
+		return this.momWghtVal;
 	}
 	
 	/**
-	 * Set 엄마_bmi_val 엄마_BMI_값 numeric(null)
-	 * @Param double 엄마BmiVal
+	 * Set mom_wght_val 엄마_몸무게_값 numeric(null)
+	 * @Param double momWghtVal
 	 */
-	public void set엄마BmiVal(double 엄마BmiVal) {
-		this.엄마BmiVal = 엄마BmiVal;
+	public void setMomWghtVal(double momWghtVal) {
+		this.momWghtVal = momWghtVal;
 	}
 	/**
-	 * Get 아빠_hght_val 아빠_키_값 numeric(null)
-	 * @Return double 아빠HghtVal
+	 * Get mom_bmi_val 엄마_BMI_값 numeric(null)
+	 * @Return double momBmiVal
 	 */
-	public double get아빠HghtVal() {
-		return this.아빠HghtVal;
-	}
-	
-	/**
-	 * Set 아빠_hght_val 아빠_키_값 numeric(null)
-	 * @Param double 아빠HghtVal
-	 */
-	public void set아빠HghtVal(double 아빠HghtVal) {
-		this.아빠HghtVal = 아빠HghtVal;
-	}
-	/**
-	 * Get 아빠_wght_val 아빠_몸무게_값 numeric(null)
-	 * @Return double 아빠WghtVal
-	 */
-	public double get아빠WghtVal() {
-		return this.아빠WghtVal;
+	public double getMomBmiVal() {
+		return this.momBmiVal;
 	}
 	
 	/**
-	 * Set 아빠_wght_val 아빠_몸무게_값 numeric(null)
-	 * @Param double 아빠WghtVal
+	 * Set mom_bmi_val 엄마_BMI_값 numeric(null)
+	 * @Param double momBmiVal
 	 */
-	public void set아빠WghtVal(double 아빠WghtVal) {
-		this.아빠WghtVal = 아빠WghtVal;
+	public void setMomBmiVal(double momBmiVal) {
+		this.momBmiVal = momBmiVal;
 	}
 	/**
-	 * Get 아빠_bmi_val 아빠_BMI_값 numeric(null)
-	 * @Return double 아빠BmiVal
+	 * Get dad_hght_val 아빠_키_값 numeric(null)
+	 * @Return double dadHghtVal
 	 */
-	public double get아빠BmiVal() {
-		return this.아빠BmiVal;
+	public double getDadHghtVal() {
+		return this.dadHghtVal;
 	}
 	
 	/**
-	 * Set 아빠_bmi_val 아빠_BMI_값 numeric(null)
-	 * @Param double 아빠BmiVal
+	 * Set dad_hght_val 아빠_키_값 numeric(null)
+	 * @Param double dadHghtVal
 	 */
-	public void set아빠BmiVal(double 아빠BmiVal) {
-		this.아빠BmiVal = 아빠BmiVal;
+	public void setDadHghtVal(double dadHghtVal) {
+		this.dadHghtVal = dadHghtVal;
+	}
+	/**
+	 * Get dad_wght_val 아빠_몸무게_값 numeric(null)
+	 * @Return double dadWghtVal
+	 */
+	public double getDadWghtVal() {
+		return this.dadWghtVal;
+	}
+	
+	/**
+	 * Set dad_wght_val 아빠_몸무게_값 numeric(null)
+	 * @Param double dadWghtVal
+	 */
+	public void setDadWghtVal(double dadWghtVal) {
+		this.dadWghtVal = dadWghtVal;
+	}
+	/**
+	 * Get dad_bmi_val 아빠_BMI_값 numeric(null)
+	 * @Return double dadBmiVal
+	 */
+	public double getDadBmiVal() {
+		return this.dadBmiVal;
+	}
+	
+	/**
+	 * Set dad_bmi_val 아빠_BMI_값 numeric(null)
+	 * @Param double dadBmiVal
+	 */
+	public void setDadBmiVal(double dadBmiVal) {
+		this.dadBmiVal = dadBmiVal;
 	}
 	/**
 	 * Get grow_stnd_ver 성장_기준_버전 character varying(20)

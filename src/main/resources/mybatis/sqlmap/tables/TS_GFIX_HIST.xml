@@ -20,12 +20,12 @@
                ,wast_size /* wast_size 허리_사이즈 numeric */
                ,cal_eat_qty /* cal_eat_qty 칼로리_섭취_량 numeric */
                ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
-               ,엄마_hght_val_1 /* 엄마_hght_val_1 엄마_키_값_1 numeric */
-               ,엄마_wght_val /* 엄마_wght_val 엄마_몸무게_값 numeric */
-               ,엄마_bmi_val /* 엄마_bmi_val 엄마_BMI_값 numeric */
-               ,아빠_hght_val /* 아빠_hght_val 아빠_키_값 numeric */
-               ,아빠_wght_val /* 아빠_wght_val 아빠_몸무게_값 numeric */
-               ,아빠_bmi_val /* 아빠_bmi_val 아빠_BMI_값 numeric */
+               ,mom_hght_val_1 /* mom_hght_val_1 엄마_키_값_1 numeric */
+               ,mom_wght_val /* mom_wght_val 엄마_몸무게_값 numeric */
+               ,mom_bmi_val /* mom_bmi_val 엄마_BMI_값 numeric */
+               ,dad_hght_val /* dad_hght_val 아빠_키_값 numeric */
+               ,dad_wght_val /* dad_wght_val 아빠_몸무게_값 numeric */
+               ,dad_bmi_val /* dad_bmi_val 아빠_BMI_값 numeric */
                ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
                ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
                ,grow_idx /* grow_idx 성장_지수 numeric */
@@ -76,12 +76,12 @@
 		    ,wast_size /* wast_size 허리_사이즈 numeric */
 		    ,cal_eat_qty /* cal_eat_qty 칼로리_섭취_량 numeric */
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
-		    ,엄마_hght_val_1 /* 엄마_hght_val_1 엄마_키_값_1 numeric */
-		    ,엄마_wght_val /* 엄마_wght_val 엄마_몸무게_값 numeric */
-		    ,엄마_bmi_val /* 엄마_bmi_val 엄마_BMI_값 numeric */
-		    ,아빠_hght_val /* 아빠_hght_val 아빠_키_값 numeric */
-		    ,아빠_wght_val /* 아빠_wght_val 아빠_몸무게_값 numeric */
-		    ,아빠_bmi_val /* 아빠_bmi_val 아빠_BMI_값 numeric */
+		    ,mom_hght_val_1 /* mom_hght_val_1 엄마_키_값_1 numeric */
+		    ,mom_wght_val /* mom_wght_val 엄마_몸무게_값 numeric */
+		    ,mom_bmi_val /* mom_bmi_val 엄마_BMI_값 numeric */
+		    ,dad_hght_val /* dad_hght_val 아빠_키_값 numeric */
+		    ,dad_wght_val /* dad_wght_val 아빠_몸무게_값 numeric */
+		    ,dad_bmi_val /* dad_bmi_val 아빠_BMI_값 numeric */
 		<if test="growStndVer != null">
 		    ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -157,12 +157,12 @@
 		    ,#{wastSize} /* wast_size 허리_사이즈 numeric */
 		    ,#{calEatQty} /* cal_eat_qty 칼로리_섭취_량 numeric */
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
-		    ,#{엄마HghtVal1} /* 엄마_hght_val_1 엄마_키_값_1 numeric */
-		    ,#{엄마WghtVal} /* 엄마_wght_val 엄마_몸무게_값 numeric */
-		    ,#{엄마BmiVal} /* 엄마_bmi_val 엄마_BMI_값 numeric */
-		    ,#{아빠HghtVal} /* 아빠_hght_val 아빠_키_값 numeric */
-		    ,#{아빠WghtVal} /* 아빠_wght_val 아빠_몸무게_값 numeric */
-		    ,#{아빠BmiVal} /* 아빠_bmi_val 아빠_BMI_값 numeric */
+		    ,#{momHghtVal1} /* mom_hght_val_1 엄마_키_값_1 numeric */
+		    ,#{momWghtVal} /* mom_wght_val 엄마_몸무게_값 numeric */
+		    ,#{momBmiVal} /* mom_bmi_val 엄마_BMI_값 numeric */
+		    ,#{dadHghtVal} /* dad_hght_val 아빠_키_값 numeric */
+		    ,#{dadWghtVal} /* dad_wght_val 아빠_몸무게_값 numeric */
+		    ,#{dadBmiVal} /* dad_bmi_val 아빠_BMI_값 numeric */
 		<if test="growStndVer != null">
 		    ,#{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -256,23 +256,23 @@
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		</if>
-		<if test="엄마HghtVal1 != null">
-		    ,엄마_hght_val_1 = #{엄마HghtVal1} /* 엄마_hght_val_1 엄마_키_값_1 numeric */
+		<if test="momHghtVal1 != null">
+		    ,mom_hght_val_1 = #{momHghtVal1} /* mom_hght_val_1 엄마_키_값_1 numeric */
 		</if>
-		<if test="엄마WghtVal != null">
-		    ,엄마_wght_val = #{엄마WghtVal} /* 엄마_wght_val 엄마_몸무게_값 numeric */
+		<if test="momWghtVal != null">
+		    ,mom_wght_val = #{momWghtVal} /* mom_wght_val 엄마_몸무게_값 numeric */
 		</if>
-		<if test="엄마BmiVal != null">
-		    ,엄마_bmi_val = #{엄마BmiVal} /* 엄마_bmi_val 엄마_BMI_값 numeric */
+		<if test="momBmiVal != null">
+		    ,mom_bmi_val = #{momBmiVal} /* mom_bmi_val 엄마_BMI_값 numeric */
 		</if>
-		<if test="아빠HghtVal != null">
-		    ,아빠_hght_val = #{아빠HghtVal} /* 아빠_hght_val 아빠_키_값 numeric */
+		<if test="dadHghtVal != null">
+		    ,dad_hght_val = #{dadHghtVal} /* dad_hght_val 아빠_키_값 numeric */
 		</if>
-		<if test="아빠WghtVal != null">
-		    ,아빠_wght_val = #{아빠WghtVal} /* 아빠_wght_val 아빠_몸무게_값 numeric */
+		<if test="dadWghtVal != null">
+		    ,dad_wght_val = #{dadWghtVal} /* dad_wght_val 아빠_몸무게_값 numeric */
 		</if>
-		<if test="아빠BmiVal != null">
-		    ,아빠_bmi_val = #{아빠BmiVal} /* 아빠_bmi_val 아빠_BMI_값 numeric */
+		<if test="dadBmiVal != null">
+		    ,dad_bmi_val = #{dadBmiVal} /* dad_bmi_val 아빠_BMI_값 numeric */
 		</if>
 		<if test="growStndVer != null">
 		    ,grow_stnd_ver = #{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
@@ -365,12 +365,12 @@
 		    ,wast_size /* wast_size 허리_사이즈 numeric */
 		    ,cal_eat_qty /* cal_eat_qty 칼로리_섭취_량 numeric */
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
-		    ,엄마_hght_val_1 /* 엄마_hght_val_1 엄마_키_값_1 numeric */
-		    ,엄마_wght_val /* 엄마_wght_val 엄마_몸무게_값 numeric */
-		    ,엄마_bmi_val /* 엄마_bmi_val 엄마_BMI_값 numeric */
-		    ,아빠_hght_val /* 아빠_hght_val 아빠_키_값 numeric */
-		    ,아빠_wght_val /* 아빠_wght_val 아빠_몸무게_값 numeric */
-		    ,아빠_bmi_val /* 아빠_bmi_val 아빠_BMI_값 numeric */
+		    ,mom_hght_val_1 /* mom_hght_val_1 엄마_키_값_1 numeric */
+		    ,mom_wght_val /* mom_wght_val 엄마_몸무게_값 numeric */
+		    ,mom_bmi_val /* mom_bmi_val 엄마_BMI_값 numeric */
+		    ,dad_hght_val /* dad_hght_val 아빠_키_값 numeric */
+		    ,dad_wght_val /* dad_wght_val 아빠_몸무게_값 numeric */
+		    ,dad_bmi_val /* dad_bmi_val 아빠_BMI_값 numeric */
 		<if test="growStndVer != null">
 		    ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -446,12 +446,12 @@
 		    ,#{wastSize} /* wast_size 허리_사이즈 numeric */
 		    ,#{calEatQty} /* cal_eat_qty 칼로리_섭취_량 numeric */
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
-		    ,#{엄마HghtVal1} /* 엄마_hght_val_1 엄마_키_값_1 numeric */
-		    ,#{엄마WghtVal} /* 엄마_wght_val 엄마_몸무게_값 numeric */
-		    ,#{엄마BmiVal} /* 엄마_bmi_val 엄마_BMI_값 numeric */
-		    ,#{아빠HghtVal} /* 아빠_hght_val 아빠_키_값 numeric */
-		    ,#{아빠WghtVal} /* 아빠_wght_val 아빠_몸무게_값 numeric */
-		    ,#{아빠BmiVal} /* 아빠_bmi_val 아빠_BMI_값 numeric */
+		    ,#{momHghtVal1} /* mom_hght_val_1 엄마_키_값_1 numeric */
+		    ,#{momWghtVal} /* mom_wght_val 엄마_몸무게_값 numeric */
+		    ,#{momBmiVal} /* mom_bmi_val 엄마_BMI_값 numeric */
+		    ,#{dadHghtVal} /* dad_hght_val 아빠_키_값 numeric */
+		    ,#{dadWghtVal} /* dad_wght_val 아빠_몸무게_값 numeric */
+		    ,#{dadBmiVal} /* dad_bmi_val 아빠_BMI_값 numeric */
 		<if test="growStndVer != null">
 		    ,#{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -542,23 +542,23 @@
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		</if>
-		<if test="엄마HghtVal1 != null">
-		    ,엄마_hght_val_1 = #{엄마HghtVal1} /* 엄마_hght_val_1 엄마_키_값_1 numeric */
+		<if test="momHghtVal1 != null">
+		    ,mom_hght_val_1 = #{momHghtVal1} /* mom_hght_val_1 엄마_키_값_1 numeric */
 		</if>
-		<if test="엄마WghtVal != null">
-		    ,엄마_wght_val = #{엄마WghtVal} /* 엄마_wght_val 엄마_몸무게_값 numeric */
+		<if test="momWghtVal != null">
+		    ,mom_wght_val = #{momWghtVal} /* mom_wght_val 엄마_몸무게_값 numeric */
 		</if>
-		<if test="엄마BmiVal != null">
-		    ,엄마_bmi_val = #{엄마BmiVal} /* 엄마_bmi_val 엄마_BMI_값 numeric */
+		<if test="momBmiVal != null">
+		    ,mom_bmi_val = #{momBmiVal} /* mom_bmi_val 엄마_BMI_값 numeric */
 		</if>
-		<if test="아빠HghtVal != null">
-		    ,아빠_hght_val = #{아빠HghtVal} /* 아빠_hght_val 아빠_키_값 numeric */
+		<if test="dadHghtVal != null">
+		    ,dad_hght_val = #{dadHghtVal} /* dad_hght_val 아빠_키_값 numeric */
 		</if>
-		<if test="아빠WghtVal != null">
-		    ,아빠_wght_val = #{아빠WghtVal} /* 아빠_wght_val 아빠_몸무게_값 numeric */
+		<if test="dadWghtVal != null">
+		    ,dad_wght_val = #{dadWghtVal} /* dad_wght_val 아빠_몸무게_값 numeric */
 		</if>
-		<if test="아빠BmiVal != null">
-		    ,아빠_bmi_val = #{아빠BmiVal} /* 아빠_bmi_val 아빠_BMI_값 numeric */
+		<if test="dadBmiVal != null">
+		    ,dad_bmi_val = #{dadBmiVal} /* dad_bmi_val 아빠_BMI_값 numeric */
 		</if>
 		<if test="growStndVer != null">
 		    ,grow_stnd_ver = #{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
