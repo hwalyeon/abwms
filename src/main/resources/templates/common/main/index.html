@@ -188,6 +188,12 @@
 				window.open('/oper/cmon/totMonStatTemp.pg','title','height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
 			}
 
+			window.call = function (data) {
+				console.log("jcw 종합관제 화면에서 넘겨준 data :: " + data);
+				alert("jcw 종합관제 화면에서 넘겨준 data :: " + data);
+				window.location.href = '/svcStnd/loc/locInfoMng.pg';
+			};
+
 		</script>
 	</section>
 </body>

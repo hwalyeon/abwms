@@ -1210,6 +1210,10 @@ let totMonStat = new Vue({
                     $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
                 }
             });
+        },
+        linkCall: function () {
+            opener.call("aa");
+            self.close();
         }
     },
     computed: {

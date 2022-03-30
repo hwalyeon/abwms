@@ -87,7 +87,7 @@
 							</div>
 						</div>
 						<span class="float_left" style="padding-top: 1px">개통 현황</span>
-						<span class="float_right">+ more</span>
+						<span class="float_right" v-on:click="linkCall()">+ more</span>
 						<div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-140">
 							<div id=chartOpenStat class ="float_left">
 								<canvas id="openStatChart" width="80" height="80">
@@ -208,15 +208,15 @@
 						</div>
 						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 30px;">
 							<span class="col-xs-12 chart-padding-0">자주 방문하는 위험지역 top3 (공공기준)</span>
-							<input type="text" name="plcCdPublTop1" class="col-xs-3" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.plcCdPublTop1">
-							<input type="text" name="addrPublTop1" class="col-xs-7" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.addrPublTop1">
-							<input type="text" name="cntPublTop1" class="col-xs-2 text-right" style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.cntPublTop1">
-							<input type="text" name="plcCdPublTop2" class="col-xs-3" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.plcCdPublTop2">
-							<input type="text" name="addrPublTop2" class="col-xs-7" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.addrPublTop2">
-							<input type="text" name="cntPublTop2" class="col-xs-2 text-right" style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.cntPublTop2">
-							<input type="text" name="plcCdPublTop3" class="col-xs-3" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.plcCdPublTop3">
-							<input type="text" name="addrPublTop3" class="col-xs-7" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.addrPublTop3">
-							<input type="text" name="cntPublTop3" class="col-xs-2 text-right" style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
+							<input type="text" name="plcCdPublTop1" class="col-xs-3" 			style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.plcCdPublTop1">
+							<input type="text" name="addrPublTop1" class="col-xs-7" 			style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.addrPublTop1">
+							<input type="text" name="cntPublTop1" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.cntPublTop1">
+							<input type="text" name="plcCdPublTop2" class="col-xs-3" 			style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.plcCdPublTop2">
+							<input type="text" name="addrPublTop2" class="col-xs-7" 			style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.addrPublTop2">
+							<input type="text" name="cntPublTop2" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.cntPublTop2">
+							<input type="text" name="plcCdPublTop3" class="col-xs-3" 			style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.plcCdPublTop3">
+							<input type="text" name="addrPublTop3" class="col-xs-7" 			style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.addrPublTop3">
+							<input type="text" name="cntPublTop3" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
 						</div>
 						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 10px;">
 							<div class="col-xs-6" >
@@ -248,15 +248,15 @@
 						</div>
 						<div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 30px;">
 							<span class="col-xs-12 chart-padding-0">보호자가 많이 지정한 위험지역 TOP3</span>
-							<input type="text" name="plcCdPrntTop1" class="col-xs-3" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
-							<input type="text" name="addrPrntTop1" class="col-xs-7" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
-							<input type="text" name="cntPrntTop1" class="col-xs-2 text-right" style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
-							<input type="text" name="plcCdPrntTop2" class="col-xs-3" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.plcCdPrntTop2">
-							<input type="text" name="addrPrntTop2" class="col-xs-7" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.addrPrntTop2">
-							<input type="text" name="cntPrntTop2" class="col-xs-2 text-right" style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.cntPrntTop2">
-							<input type="text" name="plcCdPrntTop3" class="col-xs-3" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.plcCdPrntTop3">
-							<input type="text" name="addrPrntTop3" class="col-xs-7" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.addrPrntTop3">
-							<input type="text" name="cntPrntTop3" class="col-xs-2 text-right" style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.cntPrntTop3">
+							<input type="text" name="plcCdPrntTop1" class="col-xs-3" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
+							<input type="text" name="addrPrntTop1" class="col-xs-7" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
+							<input type="text" name="cntPrntTop1" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
+							<input type="text" name="plcCdPrntTop2" class="col-xs-3" 			style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.plcCdPrntTop2">
+							<input type="text" name="addrPrntTop2" class="col-xs-7" 			style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.addrPrntTop2">
+							<input type="text" name="cntPrntTop2" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.cntPrntTop2">
+							<input type="text" name="plcCdPrntTop3" class="col-xs-3"			style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.plcCdPrntTop3">
+							<input type="text" name="addrPrntTop3" class="col-xs-7" 			style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.addrPrntTop3">
+							<input type="text" name="cntPrntTop3" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.cntPrntTop3">
 						</div>
 					</div>
 				</div>
