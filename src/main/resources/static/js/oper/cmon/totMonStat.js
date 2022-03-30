@@ -1212,7 +1212,7 @@ let totMonStat = new Vue({
             });
         },
         linkCall: function () {
-            opener.call("aa");
+            opener.call("/svcStnd/loc/locInfoMng.pg");
             self.close();
         }
     },
