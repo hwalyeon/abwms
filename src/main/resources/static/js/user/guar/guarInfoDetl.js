@@ -67,7 +67,7 @@ let guarInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(bandId, guarNo, guarTelNo, stdtNo, stdtNm, callback) {
+        initPage: function(guarNo, callback) {
 
 			let $this = this;
 
@@ -80,11 +80,7 @@ let guarInfoDetl = new Vue({
 			if (!WebUtil.isNull(guarNo))
 			{
 				let params = {
-					'bandId'    : bandId    ,
-					'guarNo'    : guarNo    ,
-					'guarTelNo' : guarTelNo ,
-					'stdtNo'    : stdtNo    ,
-					'stdtNm'    : stdtNm
+					'guarNo'    : guarNo
 				}
 				AjaxUtil.post({
 					url: "/user/guar/guarInfoMng/searchGuarInfo.ab",

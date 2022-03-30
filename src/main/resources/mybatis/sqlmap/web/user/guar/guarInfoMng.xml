@@ -285,8 +285,6 @@
 	<!--보호자(사용자)_정보_상세보기 -->
 	<select id="selectGuarInfoDetl" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT    TGB.guar_no             as guar_no_temp
-                , TSB.stdt_no
-                , TSB.stdt_nm
                 , TGB.guar_no            /* guar_no 보호자_번호 numeric */
                 , TGB.guar_nm            /* guar_nm 보호자_명 character varying(20) */
                 , TGB.guar_tel_no        /* guar_tel_no 보호자_전화_번호 character varying(20) */
@@ -319,20 +317,9 @@
                 , TGB.upt_tm             /* upt_tm 수정_시각 character(6) */
                 , TGB.upt_user_id        /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM      tm_guar_base TGB
-                  left outer JOIN
-                  TM_STDT_GUAR_CONN TSGC
-                  on TGB.GUAR_NO = TSGC.GUAR_NO
-                  left outer JOIN
-                  TM_STDT_BASE TSB
-                  on TSGC.STDT_NO = TSB.STDT_NO
-                  left outer join
-                  ts_band_spec TBS
-                  ON TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
         WHERE     1 = 1
-		AND       TGB.guar_tel_no = #{guarTelNo}
-		<if test="bandId != null and bandId !='' ">AND  TBS.band_id = #{bandId}</if>
-		<if test="stdtNo != null and stdtNo !='' ">AND  TSB.stdt_no = #{stdtNo}::NUMERIC</if>
-		group by TGB.guar_no ,TSB.stdt_no
+        AND       TGB.guar_no = cast(#{guarNo} as numeric )
+		group by TGB.guar_no
 	</select>
 
 

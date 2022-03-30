@@ -212,7 +212,7 @@ let dgemHist = new Vue({
         },
         //보호자(사용자)정보 상세 팝업
         regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-            guarInfoDetl.initPage(bandId,guarNo,stdtNo, function(){ guarInfoMng.searchGuarInfoList(true) });
+            guarInfoDetl.initPage(guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
         },
         //학부모정보 상세 팝업
         regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {

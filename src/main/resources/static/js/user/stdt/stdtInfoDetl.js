@@ -21,7 +21,7 @@ let stdtInfoDetl = new Vue({
 			prntFemale : '',
 			bandId    : '',
 			bandTelNo : '',
-			bandStatNm : '',
+			bandStatNm : '-',
 			bandCommDttm : '',
 			plcClssNm : '',
 			locNm     : '',
@@ -93,7 +93,7 @@ let stdtInfoDetl = new Vue({
 			var fontSizeTemp = fontSize || '20';
 			var fontStyleTemp = fontStyle || 'Arial';
 
-			if(txt.length > 3){
+			if(txt != null && txt.length > 3){
 				fontSizeTemp = 15;
 			}
 
@@ -163,6 +163,9 @@ let stdtInfoDetl = new Vue({
 			let TempChartColor = '#989998';
 			let locTxt = '!';
 			let dgemModIdx = 100 - $this.stdtInfo.dgemIdx;
+
+			let bandStatNm = '-';
+			if(WebUtil.isNotNull($this.stdtInfo.bandStatNm)) bandStatNm = $this.stdtInfo.bandStatNm;
 
 			let growModIdx = 0;
 			if ($this.stdtInfo.growIdx > 100 ) growModIdx = 0;
@@ -295,7 +298,7 @@ let stdtInfoDetl = new Vue({
 
 			let pluginsBand = [{
 				beforeDraw: function () {
-					$this.textCenter('bandStatChart', $this.stdtInfo.bandStatNm, $this.chartBand, bandChartColor, '' , '');
+					$this.textCenter('bandStatChart', bandStatNm, $this.chartBand, bandChartColor, '' , '');
 				}
 			}];
 
@@ -443,7 +446,7 @@ let stdtInfoDetl = new Vue({
 				prntFemale : '',
 				bandId  : '',
 				bandTelNo : '',
-				bandStatNm  : '',
+				bandStatNm  : '-',
 				bandCommDttm : '',
 				plcClssNm : '',
 				locNm   : '',

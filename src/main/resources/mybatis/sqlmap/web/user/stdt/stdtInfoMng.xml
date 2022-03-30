@@ -86,10 +86,11 @@
         left outer join
         TS_GFIX_HIST G
         on  	 A.STDT_NO     = G.STDT_NO
+        and      A.GFIX_DT     = G.GFIX_DT
         left outer join
         TS_STDT_CBEE_HIST K
-        on		 A.CBEE_HIST_NO = K.CBEE_HIST_NO
-        and        A.STDT_NO      = K.STDT_NO
+        on		 A.STDT_NO      = K.STDT_NO
+        and      A.CBEE_HIST_NO = K.CBEE_HIST_NO
         where      1=1
     <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
     and B.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>

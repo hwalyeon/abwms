@@ -230,7 +230,7 @@ let bandOpenInfoMng = new Vue({
             },
             //보호자(사용자)정보 상세
             regGuarInfoDetlPopup: function(bandId, guarNo, guarTelNo, stdtNo, stdtNm) {
-                guarInfoDetl.initPage(bandId, guarNo, guarTelNo, stdtNo, stdtNm, function(){bandOpenInfoMng.searchBandOpenInfoList});
+                guarInfoDetl.initPage(guarNo, function(){bandOpenInfoMng.searchBandOpenInfoList});
             },
             //밴드/개통정보 상세
             regBandOpenInfoDetlPopup: function(bandId) {
@@ -242,7 +242,7 @@ let bandOpenInfoMng = new Vue({
             },
             //학생정보상세 팝업
             regStdtInfoDetlPopup: function(guarNo, stdtNo){
-                stdtInfoDetl.initPage(guarNo, stdtNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
+                stdtInfoDetl.initPage(stdtNo, guarNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
             resetSearchParam: function()
             {

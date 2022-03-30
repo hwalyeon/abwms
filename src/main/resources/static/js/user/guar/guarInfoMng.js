@@ -72,11 +72,9 @@ let guarInfoMng = new Vue({
                         {name: "guarNoTemp"   , index: "guarNoTemp"   , label: "보호자번호"     , hidden: true },
                         {name: "prntNoTemp"   , index: "prntNoTemp"   , label: "학부모번호"     , hidden: true },
                         {name: "guarNo"       , index: "guarNo"       , label: "보호자번호"     , width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                                return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}"data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}" data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
-                        {name: "guarNo"       , index: "guarNo"       , label: "보호자번호"     , width: 40     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                                return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}"data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}" data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
+                                return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
                         {name: "guarNm"       , index: "guarNm"       , label: "보호자명"	   , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                                return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}"data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}" data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
+                                return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;}},
                         {name: "guarTelNo"    , index: "guarTelNo"    , label: "보호자전화번호" , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                                 let guarTelNoTemp = phoneFormatter(cellValue);
                                 return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}"data-guar-no="${rowObject.guarNo}" data-guar-tel-no="${rowObject.guarTelNo}" data-stdt-no="${rowObject.stdtNo}" data-stdt-nm="${rowObject.stdtNm}">${cellValue}</a>`;}},
@@ -137,7 +135,7 @@ let guarInfoMng = new Vue({
 
                             //보호자(사용자)정보 상세 팝업
                             $("#guarInfo_list").find('A.links[data-guar]').on('click', function(e) {
-                                guarInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'), $(e.target).data('guar-no'),$(e.target).data('guar-tel-no'),$(e.target).data('stdt-no'),$(e.target).data('stdt-nm'));
+                                guarInfoMng.regGuarInfoDetlPopup($(e.target).data('guar-no'));
                             });
                             //밴드/개통정보 상세 팝업
                             $("#guarInfo_list").find('A.links[data-band]').on('click', function(e) {
@@ -208,8 +206,8 @@ let guarInfoMng = new Vue({
                     });
             },
             //보호자(사용자)정보 상세 팝업
-            regGuarInfoDetlPopup:function(bandId, guarNo, guarTelNo, stdtNo, stdtNm) {
-                guarInfoDetl.initPage(bandId, guarNo, guarTelNo, stdtNo, stdtNm, function(){ guarInfoMng.searchGuarInfoList(true) });
+            regGuarInfoDetlPopup:function(guarNo) {
+                guarInfoDetl.initPage(guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
             },
             //밴드/개통정보 상세 팝업
             regBandOpenInfoDetlPopup: function(bandId) {
@@ -225,7 +223,7 @@ let guarInfoMng = new Vue({
             },
             //학생정보상세 팝업
             regStdtInfoDetlPopup: function(guarNo, stdtNo){
-                stdtInfoDetl.initPage(guarNo, stdtNo, function(){ guarInfoMng.searchGuarInfoList(true) });
+                stdtInfoDetl.initPage(stdtNo, guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
             },
             resetSearchParam: function()
             {
