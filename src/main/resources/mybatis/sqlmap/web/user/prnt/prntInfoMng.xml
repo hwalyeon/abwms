@@ -5,10 +5,7 @@
 	<!--보호자(사용자)_정보_상세보기 -->
 	<select id="selectPrntInfoDetl" parameterType="java.util.Map" resultType="MybatisMap">
 		/* Generated SQL SQL ID : tm_prnt_base.select */
-        select   TBI.BAND_ID       /* band_id 밴드_ID character varying(20) */
-               , TSB.STDT_NO       /* stdt_no 학생_번호 numeric */
-               , TSB.STDT_NM       /* stdt_nm 학생_명 character varying(20) */
-               , TPB.PRNT_NO       /* prnt_no 학부모_번호 numeric */
+        select   TPB.PRNT_NO       /* prnt_no 학부모_번호 numeric */
                , TPB.SEX_CD        /* sex_cd 성별_코드 character varying(20) */
                , fn_getCdNm('SEX_CD', TPB.SEX_CD) AS SEX_CD_NM        /* sex_cd 성별_코드 character varying(20) */
                , TPB.PRNT_NM       /* prnt_nm 학부모_명 character varying(40) */
@@ -16,21 +13,10 @@
                , TPB.WGHT_VAL      /* wght_val 체중_값 numeric */
                , TPB.BMI_VAL       /* bmi_val BMI_값             numeric */
                , TPB.RACE_DIV_CD   /* race_div_cd 인종_구분_코드 character varying(20) */
-        from     TS_BAND_INFO TBI
-                 inner join   TS_BAND_SPEC TBS
-                 on TBI.BAND_ID = TBS.BAND_ID
-                 inner join   TM_GUAR_BASE TGB
-                 on TBS.GUAR_TEL_NO = TGB.GUAR_TEL_NO
-                 left outer join  TM_PRNT_BASE TPB
-                 on TGB.PRNT_NO = TPB.PRNT_NO
-                 left outer join TM_STDT_BASE TSB
-                 on TBI.BAND_ID = TSB.BAND_ID
-                 and TSB.PRNT_NO = TPB.PRNT_NO
+        from     TM_PRNT_BASE TPB
         WHERE    1=1
-        <if test="bandId != null and bandId != '' ">and      TBI.BAND_ID = cast(#{bandId} as varchar)</if>
+        AND TPB.PRNT_NO = #{prntNo}::NUMERIC
         and      TPB.SEX_CD  = #{sexCd}
-        <if test="prntNo != null and prntNo != '' ">AND TPB.PRNT_NO = #{prntNo}::NUMERIC</if>
-        group by TBI.BAND_ID, TSB.STDT_NO, TPB.PRNT_NO, TPB.SEX_CD
 	</select>
 
     <!--학부모_기본_삽입-->

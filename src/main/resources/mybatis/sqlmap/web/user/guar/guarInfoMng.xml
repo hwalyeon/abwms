@@ -15,7 +15,7 @@
 		     , TEB.LOC_NM        --위치_명
 		     , TBI.BAND_ID                    -- 밴드_ID
 		     , TBI.TEL_NO                     -- 전화_번호(밴드)
-		     , TPB.PRNT_NO                    -- 학부모_번호
+		     , TGB.PRNT_NO                    -- 학부모_번호
 		     , TPB.PRNT_NM as PRNT_NM_MALE    -- 학부모_명_남자
 		     , TPB2.PRNT_NM as PRNT_NM_FEMALE --학부모_명_여자
 		from   TM_GUAR_BASE TGB               --보호자_기본
