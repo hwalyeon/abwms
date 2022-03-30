@@ -43,7 +43,7 @@ let prntInfoDetl = new Vue({
 			let $this = this;
 			$this.userId = SessionUtil.getUserId();
 		},
-        initPage: function(bandId, prntNo, stdtNo, stdtNm, sexCd, callback)
+        initPage: function(prntNo, sexCd, callback)
 		{
 			let $this = this;
 
@@ -58,7 +58,6 @@ let prntInfoDetl = new Vue({
 			{
 				let params =
 					{
-						'bandId' : bandId ,
 						'prntNo' : prntNo ,
 						'sexCd'  : sexCd
 					}
@@ -77,9 +76,6 @@ let prntInfoDetl = new Vue({
 						}
 						else
 						{
-							$this.params.stdtNo = stdtNo;
-							$this.params.stdtNm = stdtNm;
-							$this.params.bandId = bandId;
 							$this.params.prntNo = prntNo;
 							$this.params.sexCd = sexCd;
 						}

@@ -58,7 +58,8 @@ let stdtInfoDetl = new Vue({
 		chartGrow : null,
 		chartFat : null,
 		chartNutrEat : null,
-		chartStrs : null
+		chartStrs : null,
+		callBack : null
 	},
 
     methods: {
@@ -77,8 +78,14 @@ let stdtInfoDetl = new Vue({
 			getCommonCodeList('SGRD_CD',$this.code.sgrdCdList);
 			getCommonCodeList('RACE_DIV_CD',$this.code.raceDivCdList);
         },
-        initPage: function(stdtNo, guarNo) {
+        initPage: function(stdtNo, guarNo, callback) {
         	let $this = this;
+
+			if(typeof callback === 'function')
+			{
+				$this.callBack = callback;
+			}
+
 			$this.resetParam();
 			$this.initChart();
 			$this.searchStdtDetlInfo(stdtNo, guarNo);
@@ -407,7 +414,7 @@ let stdtInfoDetl = new Vue({
 				success: function(response) {
 					Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
 						closeModal($('#stdtInfoDetlPopup'));
-						stdtInfoMng.searchStdtInfoList(true);
+						if($this.callBack != null ) $this.callBack();
 					});
 				},
 				error: function (response) {

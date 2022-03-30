@@ -205,18 +205,15 @@ let dgemHist = new Vue({
             stdtInfoDetl.initPage(stdtNo, guarNo);
         },
         regBandOpenInfoDetlPopup: function(bandId) {
-            bandOpenInfoDetl.initPage(bandId, function(){  stdtInfoMng.searchDgemHistList(true) });
-        },
-        regSposInfoDetlPopup: function(guarNo) {
-            prntInfoDetl.initPage(guarNo);
+            bandOpenInfoDetl.initPage(bandId, function(){  dgemHist.searchDgemHistList(true) });
         },
         //보호자(사용자)정보 상세 팝업
         regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-            guarInfoDetl.initPage(guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
+            guarInfoDetl.initPage(guarNo, function(){ dgemHist.searchDgemHistList(true) });
         },
         //학부모정보 상세 팝업
         regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-            prntInfoDetl.initPage(bandId, prntNo, sexCd, function(){ guarInfoMng.searchGuarInfoList(true) });
+            prntInfoDetl.initPage(prntNo, sexCd, function(){ dgemHist.searchDgemHistList(true) });
         },
         downloadExcel : function()
         {

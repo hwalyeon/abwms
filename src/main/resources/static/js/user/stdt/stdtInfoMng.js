@@ -217,7 +217,7 @@ let stdtInfoMng = new Vue({
         },
 
         stdtInfoDetlPopup: function(stdtNo, guarNo) {
-            stdtInfoDetl.initPage(stdtNo, guarNo);
+            stdtInfoDetl.initPage(stdtNo, guarNo, function(){ stdtInfoMng.searchStdtInfoList(true)});
         },
 
         stdtRegDetlPopup: function() {
@@ -232,7 +232,7 @@ let stdtInfoMng = new Vue({
         },
         //학부모정보 상세 팝업
         regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-            prntInfoDetl.initPage(bandId, prntNo, '', '', sexCd, function(){ stdtInfoMng.searchStdtInfoList(true) });
+            prntInfoDetl.initPage(prntNo, sexCd, function(){ stdtInfoMng.searchStdtInfoList(true) });
         },
         downloadExcel : function()
         {

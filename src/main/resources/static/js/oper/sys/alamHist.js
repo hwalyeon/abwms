@@ -150,16 +150,13 @@ let alamHist = new Vue({
         regBandOpenInfoDetlPopup: function(bandId) {
             bandOpenInfoDetl.initPage(bandId, function(){  stdtInfoMng.searchDgemHistList(true) });
         },
-        regSposInfoDetlPopup: function(guarNo) {
-            prntInfoDetl.initPage(guarNo);
-        },
         //보호자(사용자)정보 상세 팝업
         regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-            guarInfoDetl.initPage(bandId,guarNo,stdtNo, function(){ guarInfoMng.searchGuarInfoList(true) });
+            guarInfoDetl.initPage(guarNo, function(){ alamHist.searchAlamHistList(true) });
         },
         //학부모정보 상세 팝업
         regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-            prntInfoDetl.initPage(bandId, prntNo, sexCd, function(){ guarInfoMng.searchGuarInfoList(true) });
+            prntInfoDetl.initPage(prntNo, sexCd, function(){ alamHist.searchAlamHistList(true) });
         },
         downloadExcel : function()
         {
