@@ -132,6 +132,9 @@ let guarInfoMng = new Vue({
 
                             $(grid).tableRowSpan(["guarNo","guarNm"], "guarNo");
 
+                            $(grid).tableRowSpan(["prntNo","prntNmMale", "prntNmFemale"], "prntNo");
+
+                            $(grid).tableRowSpan(["termAgreYnInfoDetlPopup"], "guarNo");
 
                             //보호자(사용자)정보 상세 팝업
                             $("#guarInfo_list").find('A.links[data-guar]').on('click', function(e) {
