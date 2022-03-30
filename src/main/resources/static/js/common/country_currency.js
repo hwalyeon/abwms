@@ -248,7 +248,7 @@ var _COUNTRY = [
 ];
 
 var _CURRENCIES = [
-	  {﻿name:"Afghanistan Afghani", code :"AFN", sign:"؋"} // "&#1547"} //encodeURIComponent("؋")}
+	  {name:"Afghanistan Afghani", code :"AFN", sign:"؋"} // "&#1547"} //encodeURIComponent("؋")}
 		,{name:"Albania Lek", code :"ALL", sign:"Lek"}
 		,{name:"Argentina Peso", code :"ARS", sign:"$"}
 		,{name:"Aruba Guilder", code :"AWG", sign:"ƒ"}
