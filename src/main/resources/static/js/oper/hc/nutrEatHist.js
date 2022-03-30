@@ -123,6 +123,7 @@ let nutrEatHist = new Vue({
                         let grid = this;
 
                         $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","telNo"], "stdtNo");
+                        $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
                         $(grid).tableRowSpan(["stndDt","cal","prtn","carb","ca","fe","mg","na","vitD3","vitB","vitB1","nia","dfe","chl","fapu","epa","dha","dfib","epaDha","vitB12","vitB2","zn","ile","leu","val","amno","fat"], "stndDt");
                     }
                 }));

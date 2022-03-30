@@ -74,7 +74,7 @@
 			 , coalesce( MAX(dehni.DHA)    , 0 ) as DHA
 			 , coalesce( MAX(dehni.EPA_DHA), 0 ) as EPA_DHA
 			 , tbi.tel_no                         as tel_no      /* tel_no      전화_번호        character varying(20) */
-			 , tgb.guar_no                        as guar_no     /* guar_no     보호자_번호      numeric               */
+			 , tdeh.guar_no                       as guar_no     /* guar_no     보호자_번호      numeric               */
 			 , tgb.guar_nm                        as guar_nm     /* guar_nm     보호자_명        character varying(40) */
 			 , tgb.guar_tel_no                    as guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20)  */
 		 from  ts_dd_eat_hist tdeh                    --일별_섭취_이력 tdeh
@@ -86,10 +86,8 @@
 		               on tdeh.STDT_NO = tsb.STDT_NO
 		       inner join TS_BAND_INFO tbi             --밴드_정보 tbi
 		               on tsb.BAND_ID = tbi.BAND_ID
-		       inner join TM_STDT_GUAR_CONN tsgc       --학생_보호자_연결 tsgc
-		               on tsgc.STDT_NO = tsb.STDT_NO
 		       inner join  TM_GUAR_BASE tgb            --보호자_기본 tgb
-		               on tsgc.GUAR_NO = tgb.GUAR_NO
+		               on tdeh.GUAR_NO = tgb.GUAR_NO
 		       left outer join TI_EORG_BASE teb        --교육기관_기본 teb
 		               on tsb.EORG_LOC_NO = teb.LOC_NO
 		where 1=1
@@ -105,8 +103,8 @@
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
 			and tgb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
-		group by tdeh.stnd_dt,tdeh.stdt_no,teb.loc_nm,tsb.stdt_nm,tbi.tel_no,tgb.guar_no
-        <if test=' paging == "Y" '>
+		group by tdeh.stnd_dt, tdeh.stdt_no, teb.loc_nm, tsb.stdt_nm, tbi.tel_no, tdeh.guar_no, tgb.guar_nm, tgb.guar_tel_no
+		<if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 </mapper>
