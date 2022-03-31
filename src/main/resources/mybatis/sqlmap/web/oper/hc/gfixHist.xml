@@ -7,7 +7,7 @@
 		SELECT tgh.gfix_dt          /* gfix_dt      성장비만지수_일자 char(8) */
 		     , teb.loc_nm           /* loc_nm       학교_명        varchar(100) */
 		     , tgh.stdt_no          /* stdt_no      학생_번호       numeric */
-		     , tsb.stdt_nm          /* stdt_nm      학생_명        varchar(40) */
+		     , decr(tsb.stdt_nm) as stdt_nm          /* stdt_nm      학생_명        varchar(40) */
 		     , fn_getcdnm('SEX_CD', tsb.sex_cd) as sex_cd_nm --성별_코드_명
 		     , tgh.age_ycnt         /* age_ycnt     나이_년수       numeric */
 		     , tgh.age_mcnt         /* age_mcnt     나이_월수       numeric */
@@ -15,17 +15,17 @@
 		     , tgh.wght_val         /* wght_val     몸무게_값       numeric */
 		     , tgh.cal_eat_qty      /* cal_eat_qty  칼로리_섭취_량   numeric */
 		     , tgh.cal_csum_qty     /* cal_csum_qty 칼로리_소모_량   numeric */
-		     , tgh.grow_idx         /* grow_idx     성장_지수       numeric */
+		     , tgh.gidx             /* gidx     성장_지수       numeric */
 		     , fn_getcdnm('GROW_JUDG_CD', tgh.grow_judg_cd) as grow_judg_cd_nm  /* grow_judg_cd 성장_판정_코드 character varying(20) */
-		     , tgh.fat_idx          /* fat_idx      비만_지수       numeric */
+		     , tgh.fidx          /* fidx      비만_지수       numeric */
 		     , fn_getcdnm('FAT_JUDG_CD' , tgh.fat_judg_cd ) as fat_judg_cd_nm /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		     , tgh.fatp_idx         /* fatp_idx     비만_예측_지수   numeric */
-		     , fn_getcdnm('FATP_JUDG_CD' , tgh.fatp_judg_cd ) as fatp_judg_cd_nm /* fatp_judg_cd 비만_예측_판정_코드 character varying(20) */
+		     , fn_getcdnm('FAT_JUDG_CD' , tgh.fatp_judg_cd ) as fatp_judg_cd_nm /* fatp_judg_cd 비만_예측_판정_코드 character varying(20) */
 		     , tgh.pal_val          /* pal_val      신체활동수준_값   numeric */
-		     , tbi.tel_no           /* tel_no       전화_번호       character varying(20) */
+		     , decr(tbi.tel_no) as tel_no           /* tel_no       전화_번호       character varying(20) */
 		     , tgb.guar_no          /* guar_no      보호자_번호      numeric */
-		     , tgb.guar_nm          /* guar_nm      보호자_명       character varying(40) */
-		     , tgb.guar_tel_no      /* guar_tel_no  보호자_전화_번호  character varying(20) */
+		     , decr(tgb.guar_nm) as guar_nm          /* guar_nm      보호자_명       character varying(40) */
+		     , decr(tgb.guar_tel_no) as guar_tel_no      /* guar_tel_no  보호자_전화_번호  character varying(20) */
 		FROM   TS_GFIX_HIST tgh                      --성장비만지수_이력 tgh
 		       inner join TM_STDT_BASE tsb           --학생_기본 tsb
 		               on tgh.STDT_NO = tsb.STDT_NO
@@ -43,7 +43,7 @@
 		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
 			and tgh.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
-			and tsb.stdt_NM like CONCAT('%',#{stdtNm},'%')</if>
+			and decr(tsb.stdt_NM) like CONCAT('%',#{stdtNm},'%')</if>
 		<if test="ageFr != null and ageFr != null and ageTo !='' and ageTo !='' ">/*나이*/
 			and tgh.age_ycnt  between #{ageFr}::NUMERIC  and #{ageTo}::NUMERIC </if>
 		<if test=" sexCd != null and sexCd !='' ">/*성별*/
@@ -51,7 +51,7 @@
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
-			and tgb.guar_nm like CONCAT('%',#{guarNm},'%')</if>
+			and decr(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>
 		<if test=" growJudgCd != null and growJudgCd !='' ">/*성장_판정_코드*/
 			and tgh.grow_judg_cd = #{growJudgCd}</if>
 		<if test=" fatJudgCd != null and fatJudgCd !='' ">/*비만_판정_코드*/

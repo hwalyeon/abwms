@@ -5,19 +5,19 @@
 	<!--보호자(사용자)정보_리스트 조회 -->
 	<select id="selectGuarInfoList"	parameterType="java.util.Map" resultType="MybatisMap">
 		select TGB.GUAR_NO       --보호자_번호
-		     , TGB.GUAR_NM       --보호자_명
-		     , TGB.GUAR_TEL_NO   --보호자_전화_번호
+		     , DECR(TGB.GUAR_NM) as GUAR_NM    --보호자_명
+		     , DECR(TGB.GUAR_TEL_NO) as GUAR_TEL_NO   --보호자_전화_번호
 		     , TSB.STDT_NO       --학생_번호
-		     , TSB.STDT_NM       --학생_명
+		     , DECR(TSB.STDT_NM) as STDT_NM       --학생_명
 		     , TGB.ENTR_DT       --가입_일자
 		     , TGB.ENTR_STAT_CD  --가입_상태_코드
 		     , fn_getCdNm('ENTR_STAT_CD',ENTR_STAT_CD) as ENTR_STAT_CD_NM --가입_상태_코드_명
 		     , TEB.LOC_NM        --위치_명
 		     , TBI.BAND_ID                    -- 밴드_ID
-		     , TBI.TEL_NO                     -- 전화_번호(밴드)
+		     , DECR(TBI.TEL_NO) as TEL_NO     -- 전화_번호(밴드)
 		     , TGB.PRNT_NO                    -- 학부모_번호
-		     , TPB.PRNT_NM as PRNT_NM_MALE    -- 학부모_명_남자
-		     , TPB2.PRNT_NM as PRNT_NM_FEMALE --학부모_명_여자
+		     , DECR(TPB.PRNT_NM)  as PRNT_NM_MALE    -- 학부모_명_남자
+		     , DECR(TPB2.PRNT_NM) as PRNT_NM_FEMALE --학부모_명_여자
 		from   TM_GUAR_BASE TGB               --보호자_기본
 			   left outer join TM_STDT_GUAR_CONN TSGC  --학생_보호자_연결
 			   on   TGB.GUAR_NO  = TSGC.GUAR_NO
@@ -41,17 +41,17 @@
 		<if test=" stdtNo != null and stdtNo !='' ">
 			and TSB.STDT_NO = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">
-			and TSB.STDT_NM like CONCAT('%',#{stdtNm},'%')</if>
+			and DECR(TSB.STDT_NM) like CONCAT('%',#{stdtNm},'%')</if>
 		<if test=" bandId != null and bandId !='' ">
 			and TBI.BAND_ID like CONCAT('%',#{bandId},'%')</if>
 		<if test=" telNo != null and telNo !='' ">
-			and TBI.TEL_NO = #{telNo}</if>
+			and TBI.TEL_NO = ENCR(#{telNo})</if>
 		<if test=" guarNo != null and guarNo !='' ">
 			and TGB.GUAR_NO = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">
-			and TGB.GUAR_NM like CONCAT('%',#{guarNm},'%')</if>
+			and DECR(TGB.GUAR_NM) like CONCAT('%',#{guarNm},'%')</if>
 		<if test=" guarTelNo != null and guarTelNo !='' ">
-			and TGB.GUAR_TEL_NO = #{guarTelNo}</if>
+			and TGB.GUAR_TEL_NO = ENCR(#{guarTelNo})</if>
 		<if test=" locNm != null and locNm !='' ">
 			and TEB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" entrStatCd != null and entrStatCd !='' ">
@@ -134,10 +134,10 @@
 		(
 			#{guarNo} /* guar_no 보호자_번호 numeric */
 			<if test="guarNm != null">
-				,#{guarNm} /* guar_nm 보호자_명 character varying(40) */
+				,ENCR(#{guarNm}) /* guar_nm 보호자_명 character varying(40) */
 			</if>
 			<if test="guarTelNo != null">
-				,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+				,ENCR(#{guarTelNo}) /* guar_tel_no 보호자_전화_번호 character varying(20) */
 			</if>
 			<if test="guarPw != null">
 				,#{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -195,10 +195,10 @@
 		UPDATE TM_GUAR_BASE
 		SET
 		<if test="guarNm != null">
-			guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(40) */
+			guar_nm = ENCR(#{guarNm}) /* guar_nm 보호자_명 character varying(40) */
 		</if>
 		<if test="guarTelNo != null">
-			,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+			,guar_tel_no = ENCR(#{guarTelNo}) /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		</if>
 		<if test="guarPw != null">
 			,guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -286,8 +286,8 @@
 	<select id="selectGuarInfoDetl" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT    TGB.guar_no             as guar_no_temp
                 , TGB.guar_no            /* guar_no 보호자_번호 numeric */
-                , TGB.guar_nm            /* guar_nm 보호자_명 character varying(20) */
-                , TGB.guar_tel_no        /* guar_tel_no 보호자_전화_번호 character varying(20) */
+                , DECR(TGB.guar_nm)       as guar_nm        /* guar_nm 보호자_명 character varying(20) */
+                , DECR(TGB.guar_tel_no)   as guar_tel_no    /* guar_tel_no 보호자_전화_번호 character varying(20) */
                 , TGB.guar_pw            /* guar_pw 보호자_비밀번호 character varying(1000) */
                 , TGB.self_cert_dttm     /* self_cert_dttm 본인_인증_일시 character(14) */
                 , TGB.auto_login_yn      /* auto_login_yn 자동_로그인_여부 bpchar(1)*/

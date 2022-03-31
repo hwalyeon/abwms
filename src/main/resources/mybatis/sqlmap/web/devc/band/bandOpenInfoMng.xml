@@ -18,16 +18,16 @@
 		        , T1.BAND_YTYP        -- 출고년월
 		        , TBI.BAND_MDL_CD     -- 밴드_모델_코드
 		        , TBI.BAND_ID         -- 밴드_ID
-		        , TBI.TEL_NO          -- 전화_번호(밴드)
+		        , DECR(TBI.TEL_NO) AS TEL_NO       -- 전화_번호(밴드)
 		        , TBI.BLTH_ID         -- 블루투스_ID
 		        , TBI.BAND_OPEN_STAT_CD -- 밴드_개통_상태_코드
 		        , fn_getCdNm('BAND_OPEN_STAT_CD', BAND_OPEN_STAT_CD) as BAND_OPEN_STAT_CD_NM -- 밴드_개통_상태_코드_명
 		        , TSB.STDT_NO         -- 학생_번호
-		        , TSB.STDT_NM         -- 학생_명
+		        , DECR(TSB.STDT_NM) AS STDT_NM     -- 학생_명
 		        , TGB.GUAR_NO         -- 보호자_번호
-		        , TGB.GUAR_NM         -- 보호자_명
-		        , TBS.GUAR_TEL_NO     -- 보호자_전화_번호
-		        , TBS.GUAR_TEL_NO     AS GUAR_TEL_NO_TEMP-- 보호자_전화_번호
+		        , DECR(TGB.GUAR_NM) AS GUAR_NM        -- 보호자_명
+		        , DECR(TBS.GUAR_TEL_NO)  AS GUAR_TEL_NO    -- 보호자_전화_번호
+		        , DECR(TBS.GUAR_TEL_NO)  AS GUAR_TEL_NO_TEMP-- 보호자_전화_번호
 	            , TBI.API_URL_GRAM_NO -- API URL 제공여부
 	            , TBI.API_URL_DTTM    -- URL_제공_일시
 	            , TBI.OPEN_GRAM_NO    -- 개통_전문_번호
@@ -52,9 +52,9 @@
 		          <if test="uptDtFr != null and uptDtTo != null and uptDtFr !='' and uptDtTo !='' ">
 		and       TBI.UPT_DT between #{uptDtFr} and #{uptDtTo}</if>
 		          <if test=" stdtNm != null and stdtNm !='' ">
-		and       TSB.STDT_NM like CONCAT('%',#{stdtNm},'%')</if>
+		and       DECR(TSB.STDT_NM) like CONCAT('%',#{stdtNm},'%')</if>
 		          <if test="telNo != null and telNo !='' ">
-		and       TBI.TEL_NO = #{telNo}</if>
+		and       TBI.TEL_NO = ENCR(#{telNo})</if>
 		          <if test="bandYtypCd != null and bandYtypCd !='' ">
 		and       T1.BAND_YTYP like CONCAT('%',#{bandYtypCd},'%')</if>
 		          <if test="bandId != null and bandId !='' ">
@@ -62,7 +62,7 @@
 		          <if test="bandOpenStatCd != null and bandOpenStatCd !='' ">
 		and       TBI.BAND_OPEN_STAT_CD = #{bandOpenStatCd}</if>
 		          <if test="guarTelNo != null and guarTelNo !='' ">
-		and       TBS.GUAR_TEL_NO = #{guarTelNo} </if>
+		and       TBS.GUAR_TEL_NO = ENCR(#{guarTelNo}) </if>
 		          <if test="guarNm != null and guarNm !='' ">
 		and       TGB.GUAR_NM like CONCAT('%',#{guarNm},'%')</if>
 		ORDER BY  TBI.UPT_DT, TBI.REG_DT, T1.BAND_YTYP, TBI.BAND_ID, TGB.GUAR_NO, TGB.GUAR_NM
@@ -76,8 +76,8 @@
 		select    TGB.GUAR_NO         -- 보호자_번호
 		        , TBS.BAND_ID
 				, TGB.GUAR_NM         -- 보호자_명
-				, TBS.GUAR_TEL_NO     -- 보호자_전화_번호
-				, TBS.GUAR_TEL_NO     AS GUAR_TEL_NO_TEMP-- 보호자_전화_번호
+				, DECR(TBS.GUAR_TEL_NO) AS GUAR_TEL_NO      -- 보호자_전화_번호
+				, DECR(TBS.GUAR_TEL_NO)	AS GUAR_TEL_NO_TEMP -- 보호자_전화_번호
 		from      TS_BAND_INFO TBI
 				  inner join TS_BAND_SPEC TBS
 				  on TBI.BAND_ID = TBS.BAND_ID
@@ -113,7 +113,7 @@
 		(
 		    #{bandId}
 		  , #{bandMdlCd}
-		  , #{telNo}
+		  , ENCR(#{telNo})
 		  , #{blthId}
 		  <if test="apiUrlGramNo   != null and apiUrlGramNo !='' ">, #{apiUrlGramNo}::NUMERIC </if>
 		  , #{apiUrlDttm}
@@ -133,7 +133,7 @@
 		SET UPT_DT = TO_CHAR(NOW(), 'YYYYMMDD')
 		, UPT_TM = TO_CHAR(NOW(),'HH24MISS')
 		, UPT_USER_ID = #{uptUserId}
-		<if test="telNo != null and telNo !=''"> ,TEL_NO = #{telNo}</if>
+		<if test="telNo != null and telNo !=''"> ,TEL_NO = ENCR(#{telNo})</if>
 		<if test="bandOpenStatCd != null and bandOpenStatCd != ''"> ,BAND_OPEN_STAT_CD = #{bandOpenStatCd}</if>
 		<if test="blthId != null and blthId != ''"> ,BLTH_ID = #{blthId}</if>
 		WHERE 1=1
@@ -175,7 +175,7 @@
 		VALUES
 		(
 		   #{bandId} /* band_id 밴드_ID character varying(20) */
-		 , #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		 , ENCR(#{guarTelNo}) /* guar_tel_no 보호자_전화_번호 character varying(20) */
 		 , TO_CHAR(NOW(), 'YYYYMMDD')
 		 , TO_CHAR(NOW(), 'HH24MISS')
 		 , #{regUserId}
@@ -192,10 +192,10 @@
 		SET    UPT_DT = TO_CHAR(NOW(), 'YYYYMMDD')
 		     , UPT_TM = TO_CHAR(NOW(),'HH24MISS')
 		     , UPT_USER_ID = #{uptUserId}
-		<if test="guarTelNo != null and guarTelNo !=''"> ,GUAR_TEL_NO = #{guarTelNo}</if>
+		<if test="guarTelNo != null and guarTelNo !=''"> ,GUAR_TEL_NO = ENCR(#{guarTelNo})</if>
 		WHERE  1 = 1
 		AND    BAND_ID = #{bandId} /* band_id 밴드_ID character varying(20) */
-		AND    GUAR_TEL_NO = #{guarTelNoTemp} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		AND    GUAR_TEL_NO = ENCR(#{guarTelNoTemp}) /* guar_tel_no 보호자_전화_번호 character varying(20) */
 	</update>
 
     <!-- 밴드/개통 정보 상세 페이지 삭제-->
@@ -204,7 +204,7 @@
 		DELETE FROM TS_BAND_SPEC
 		WHERE  1 = 1
 		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
-		AND    GUAR_TEL_NO = #{guarTelNoTemp} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		AND    GUAR_TEL_NO = ENCR(#{guarTelNoTemp}) /* guar_tel_no 보호자_전화_번호 character varying(20) */
 	</delete>
 
 </mapper>

@@ -13,8 +13,5 @@ public interface DgemHistService
 
 	public List<Map<String, String>> searchLocList(Map<String, String> params) throws BizException;
 
-	public Map<String, Object> searchStdtDetlInfo(Map<String, String> params) throws BizException;
-
-	public void saveStdtInfo(Map<String, Object> params) throws BizException;
 }
 

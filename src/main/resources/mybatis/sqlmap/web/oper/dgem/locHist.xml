@@ -6,17 +6,17 @@
     select TSLH.OCCR_DTTM
     ,TEB.LOC_NM as SCHL_NM
     ,TSLH.STDT_NO
-    ,TSB.STDT_NM
+    ,DECR(TSB.STDT_NM) AS STDT_NM
     ,TSLH.LOC_NM
     ,TSLH.PLC_CLSS_CD
     ,TSLH.LAT_VAL
     ,TSLH.LON_VAL
     ,TSLH.NEAR_LOC_NO
     ,TLIB.ADDR_BASE
-    ,TBI.TEL_NO
+    ,DECR(TBI.TEL_NO) AS TEL_NO
     ,TGB.GUAR_NO
-    ,TGB.GUAR_NM
-    ,TBS.GUAR_TEL_NO
+    ,DECR(TGB.GUAR_NM) AS GUAR_NM
+    ,DECR(TBS.GUAR_TEL_NO) AS GUAR_TEL_NO
     ,TSLH.REG_DT
     ,TSLH.REG_TM
     ,TSLH.REG_USER_ID
@@ -57,11 +57,11 @@
     <if test=" stdtNo != null and stdtNo !='' ">
     and     TSLH.STDT_NO      = #{stdtNo}::numeric                /* 학생번호     */</if>
     <if test=" stdtNm != null and stdtNm !='' ">
-    and     TSB.STDT_NM      like CONCAT ('%',#{stdtNm},'%')     /* 학생명       */</if>
+    and     DECR(TSB.STDT_NM)      like CONCAT ('%',#{stdtNm},'%')     /* 학생명       */</if>
     <if test=" guarNo != null and guarNo !='' ">
     and     TGB.GUAR_NO      = #{guarNo}::numeric                /* 보호자번호    */</if>
     <if test=" guarNm != null and guarNm !='' ">
-    and     TGB.GUAR_NM      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
+    and     DECR(TGB.GUAR_NM)      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>
@@ -70,10 +70,10 @@
     <!--학생정보 및 보호자 정보 select-->
     <select id="searchStdtGuarList" parameterType="java.util.Map" resultType="MybatisMap">
         select A.STDT_NO
-        ,A.STDT_NM
+        ,DECR(A.STDT_NM) AS STDT_NM
         ,C.GUAR_NO
-        ,C.GUAR_NM
-        ,C.GUAR_TEL_NO
+        ,DECR(C.GUAR_NM) AS GUAR_NM
+        ,DECR(C.GUAR_TEL_NO) AS GUAR_TEL_NO
         from   TM_STDT_BASE A
         left outer join
         TM_STDT_GUAR_CONN B
@@ -85,13 +85,13 @@
         <if test=" stdtNo != null and stdtNo !='' ">
         and    A.STDT_NO = #{stdtNo}::numeric</if>
         <if test=" stdtNm != null and stdtNm !='' ">
-        and    A.STDT_NM = #{stdtNm}</if>
+        and    A.STDT_NM = ENCR(#{stdtNm})</if>
         <if test=" guarNo != null and guarNo !='' ">
         and    C.GUAR_NO = #{guarNo}::numeric</if>
         <if test=" guarNm != null and guarNm !='' ">
-        and    C.GUAR_NM = #{guarNm}</if>
+        and    C.GUAR_NM = ENCR(#{guarNm})</if>
         <if test=" guarTelNo != null and guarTelNo !='' ">
-        and    C.GUAR_TEL_NO = #{guarTelNo}</if>
+        and    C.GUAR_TEL_NO = ENCR(#{guarTelNo})</if>
         group  by A.STDT_NO , A.STDT_NM , C.GUAR_NO , C.GUAR_NM
         order  by A.stdt_no
         <if test=' paging == "Y" '>
