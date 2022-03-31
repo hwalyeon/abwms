@@ -12,10 +12,10 @@
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,stdt_no /* stdt_no 학생_번호 numeric */
                ,act_cd /* act_cd 활동_코드 character varying(20) */
-               ,act_tcnt_mcnt /* act_tcnt_mcnt 활동_시간_분수 numeric */
+               ,act_mcnt /* act_mcnt 활동_분수 numeric */
                ,rpet_act_cnt /* rpet_act_cnt 반복_활동_수 numeric */
-               ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
-               ,apal_val /* apal_val 활동에너지소모량_값 numeric */
+               ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+               ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
                ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
                ,judg_no /* judg_no 판정_번호 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -38,10 +38,10 @@
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		    ,stdt_no /* stdt_no 학생_번호 numeric */
 		    ,act_cd /* act_cd 활동_코드 character varying(20) */
-		    ,act_tcnt_mcnt /* act_tcnt_mcnt 활동_시간_분수 numeric */
+		    ,act_mcnt /* act_mcnt 활동_분수 numeric */
 		    ,rpet_act_cnt /* rpet_act_cnt 반복_활동_수 numeric */
-		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
-		    ,apal_val /* apal_val 활동에너지소모량_값 numeric */
+		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
@@ -62,10 +62,10 @@
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
 		     #{actCd} /* act_cd 활동_코드 character varying(20) */
-		    ,#{actTcntMcnt} /* act_tcnt_mcnt 활동_시간_분수 numeric */
+		    ,#{actMcnt} /* act_mcnt 활동_분수 numeric */
 		    ,#{rpetActCnt} /* rpet_act_cnt 반복_활동_수 numeric */
-		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
-		    ,#{apalVal} /* apal_val 활동에너지소모량_값 numeric */
+		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
@@ -87,17 +87,17 @@
 		/* Generated SQL SQL ID : ts_dd_act_hist.update */
 		UPDATE ts_dd_act_hist
 		<trim prefix="SET" prefixOverrides=",">
-		<if test="actTcntMcnt != null">
-		    ,act_tcnt_mcnt = #{actTcntMcnt} /* act_tcnt_mcnt 활동_시간_분수 numeric */
+		<if test="actMcnt != null">
+		    ,act_mcnt = #{actMcnt} /* act_mcnt 활동_분수 numeric */
 		</if>
 		<if test="rpetActCnt != null">
 		    ,rpet_act_cnt = #{rpetActCnt} /* rpet_act_cnt 반복_활동_수 numeric */
 		</if>
-		<if test="bmrVal != null">
-		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		<if test="bcsmVal != null">
+		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
-		<if test="apalVal != null">
-		    ,apal_val = #{apalVal} /* apal_val 활동에너지소모량_값 numeric */
+		<if test="acsmVal != null">
+		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
@@ -124,10 +124,10 @@
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		     stdt_no /* stdt_no 학생_번호 numeric */
 		     act_cd /* act_cd 활동_코드 character varying(20) */
-		    ,act_tcnt_mcnt /* act_tcnt_mcnt 활동_시간_분수 numeric */
+		    ,act_mcnt /* act_mcnt 활동_분수 numeric */
 		    ,rpet_act_cnt /* rpet_act_cnt 반복_활동_수 numeric */
-		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
-		    ,apal_val /* apal_val 활동에너지소모량_값 numeric */
+		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
@@ -148,10 +148,10 @@
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
 		     #{actCd} /* act_cd 활동_코드 character varying(20) */
-		    ,#{actTcntMcnt} /* act_tcnt_mcnt 활동_시간_분수 numeric */
+		    ,#{actMcnt} /* act_mcnt 활동_분수 numeric */
 		    ,#{rpetActCnt} /* rpet_act_cnt 반복_활동_수 numeric */
-		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
-		    ,#{apalVal} /* apal_val 활동에너지소모량_값 numeric */
+		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
@@ -170,17 +170,17 @@
 		ON CONFLICT
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
-		<if test="actTcntMcnt != null">
-		    ,act_tcnt_mcnt = #{actTcntMcnt} /* act_tcnt_mcnt 활동_시간_분수 numeric */
+		<if test="actMcnt != null">
+		    ,act_mcnt = #{actMcnt} /* act_mcnt 활동_분수 numeric */
 		</if>
 		<if test="rpetActCnt != null">
 		    ,rpet_act_cnt = #{rpetActCnt} /* rpet_act_cnt 반복_활동_수 numeric */
 		</if>
-		<if test="bmrVal != null">
-		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		<if test="bcsmVal != null">
+		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
-		<if test="apalVal != null">
-		    ,apal_val = #{apalVal} /* apal_val 활동에너지소모량_값 numeric */
+		<if test="acsmVal != null">
+		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */

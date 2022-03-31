@@ -16,17 +16,17 @@ public class TsDdActHistVo implements Serializable {
 	/* act_cd 활동_코드 character varying(20) */
 	private String actCd;
 
-	/* act_tcnt_mcnt 활동_시간_분수 numeric(null) */
-	private double actTcntMcnt;
+	/* act_mcnt 활동_분수 numeric(null) */
+	private double actMcnt;
 
 	/* rpet_act_cnt 반복_활동_수 numeric(null) */
 	private double rpetActCnt;
 
-	/* bmr_val 기초에너지소모량_값 numeric(null) */
-	private double bmrVal;
+	/* bcsm_val 기초에너지소모량_값 numeric(null) */
+	private double bcsmVal;
 
-	/* apal_val 활동에너지소모량_값 numeric(null) */
-	private double apalVal;
+	/* acsm_val 활동에너지소모량_값 numeric(null) */
+	private double acsmVal;
 
 	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
 	private double calCsumQty;
@@ -99,19 +99,19 @@ public class TsDdActHistVo implements Serializable {
 		this.actCd = actCd;
 	}
 	/**
-	 * Get act_tcnt_mcnt 활동_시간_분수 numeric(null)
-	 * @Return double actTcntMcnt
+	 * Get act_mcnt 활동_분수 numeric(null)
+	 * @Return double actMcnt
 	 */
-	public double getActTcntMcnt() {
-		return this.actTcntMcnt;
+	public double getActMcnt() {
+		return this.actMcnt;
 	}
 	
 	/**
-	 * Set act_tcnt_mcnt 활동_시간_분수 numeric(null)
-	 * @Param double actTcntMcnt
+	 * Set act_mcnt 활동_분수 numeric(null)
+	 * @Param double actMcnt
 	 */
-	public void setActTcntMcnt(double actTcntMcnt) {
-		this.actTcntMcnt = actTcntMcnt;
+	public void setActMcnt(double actMcnt) {
+		this.actMcnt = actMcnt;
 	}
 	/**
 	 * Get rpet_act_cnt 반복_활동_수 numeric(null)
@@ -129,34 +129,34 @@ public class TsDdActHistVo implements Serializable {
 		this.rpetActCnt = rpetActCnt;
 	}
 	/**
-	 * Get bmr_val 기초에너지소모량_값 numeric(null)
-	 * @Return double bmrVal
+	 * Get bcsm_val 기초에너지소모량_값 numeric(null)
+	 * @Return double bcsmVal
 	 */
-	public double getBmrVal() {
-		return this.bmrVal;
+	public double getBcsmVal() {
+		return this.bcsmVal;
 	}
 	
 	/**
-	 * Set bmr_val 기초에너지소모량_값 numeric(null)
-	 * @Param double bmrVal
+	 * Set bcsm_val 기초에너지소모량_값 numeric(null)
+	 * @Param double bcsmVal
 	 */
-	public void setBmrVal(double bmrVal) {
-		this.bmrVal = bmrVal;
+	public void setBcsmVal(double bcsmVal) {
+		this.bcsmVal = bcsmVal;
 	}
 	/**
-	 * Get apal_val 활동에너지소모량_값 numeric(null)
-	 * @Return double apalVal
+	 * Get acsm_val 활동에너지소모량_값 numeric(null)
+	 * @Return double acsmVal
 	 */
-	public double getApalVal() {
-		return this.apalVal;
+	public double getAcsmVal() {
+		return this.acsmVal;
 	}
 	
 	/**
-	 * Set apal_val 활동에너지소모량_값 numeric(null)
-	 * @Param double apalVal
+	 * Set acsm_val 활동에너지소모량_값 numeric(null)
+	 * @Param double acsmVal
 	 */
-	public void setApalVal(double apalVal) {
-		this.apalVal = apalVal;
+	public void setAcsmVal(double acsmVal) {
+		this.acsmVal = acsmVal;
 	}
 	/**
 	 * Get cal_csum_qty 칼로리_소모_량 numeric(null)
