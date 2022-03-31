@@ -5,12 +5,12 @@
 	
 	<select id="searchTcUserBase" parameterType="java.util.Map" resultType="MybatisMap">
 	SELECT USER_ID
-	      ,USER_NM
+	      ,DECR(USER_NM) AS USER_NM
 	      ,USER_PW
 	      ,BLNG_NM
-	      ,TEL_NO
-	      ,MTEL_NO
-	      ,MAIL_ADDR
+	      ,DECR(TEL_NO) AS TEL_NO
+	      ,DECR(MTEL_NO) AS MTEL_NO
+	      ,DECR(MAIL_ADDR) AS MAIL_ADDR
 	      ,ENTR_DT
 	      ,RELS_DT	      
 	      ,USE_YN
@@ -19,17 +19,17 @@
 	<if test=" userId != null and userId != '' ">
 	AND   USER_ID = #{userId}		</if>
 	<if test=" userNm != null and userNm != '' ">
-	AND   USER_NM LIKE CONCAT('%', #{userNm}, '%')	</if>
+	AND   DECR(USER_NM) LIKE CONCAT('%', #{userNm}, '%')	</if>
 	<if test=" userPw != null and userPw != '' ">
 	AND   USER_PW = #{userPw}	</if>
 	<if test=" blngNm != null and blngNm != '' ">
 	AND   BLNG_NM LIKE CONCAT ('%', #{blngNm}, '%')		</if>
 	<if test=" telNo != null and telNo != '' ">
-	AND   TEL_NO LIKE CONCAT ('%', #{telNo}, '%')		</if>
+	AND   DECR(TEL_NO) LIKE CONCAT ('%', #{telNo}, '%')		</if>
 	<if test=" mtelNo != null and mtelNo != '' ">
-	AND   MTEL_NO LIKE CONCAT ('%', #{mtelNo}, '%')		</if>
+	AND   DECR(MTEL_NO) LIKE CONCAT ('%', #{mtelNo}, '%')		</if>
 	<if test=" mailAddr != null and mailAddr != '' ">
-	AND   MAIL_ADDR LIKE CONCAT ('%', #{mailAddr}, '%')		</if>
+	AND   DECR(MAIL_ADDR) LIKE CONCAT ('%', #{mailAddr}, '%')		</if>
 	<if test=" useYn != null and useYn != '' ">
 	AND   USE_YN LIKE CONCAT('%',#{useYn},'%')</if>
 	ORDER BY USER_ID
@@ -64,16 +64,16 @@
 	VALUES
 	(
 	     #{userId}
-	    ,#{userNm}
+	    ,ENCR(#{userNm})
 	    ,#{userPw}
 	<if test=" blngNm != null and blngNm != '' ">
 	    ,#{blngNm}			</if>
 	<if test=" telNo != null and telNo != '' ">
-	    ,#{telNo}			</if>
+	    ,ENCR(#{telNo})			</if>
 	<if test=" mtelNo != null and mtelNo != '' ">
-	    ,#{mtelNo}			</if>
+	    ,ENCR(#{mtelNo})			</if>
 	<if test=" mailAddr != null and mailAddr != '' ">
-	    ,#{mailAddr}		</if>
+	    ,ENCR(#{mailAddr})		</if>
 	    ,TO_CHAR(NOW(), 'YYYYMMDD')	  
 	    ,''
 	    ,#{useYn}
@@ -92,11 +92,11 @@
 	      ,UPT_TM      = TO_CHAR(NOW(), 'HH24MMIS')
 	      ,UPT_USER_ID = #{uptUserId}
 	      ,USER_ID = #{userId}
-    	<if test="userNm     != null and userNm     != ''">,USER_NM      = #{userNm}		</if>
+    	<if test="userNm     != null and userNm     != ''">,USER_NM      = ENCR(#{userNm})		</if>
     	<if test="blngNm     != null and blngNm     != ''">,BLNG_NM      = #{blngNm}		</if>
-    	<if test="telNo      != null and telNo      != ''">,TEL_NO       = #{telNo}				    </if>
-    	<if test="mtelNo     != null and mtelNo     != ''">,MTEL_NO      = #{mtelNo}	    	</if>
-    	<if test="mailAddr   != null and mailAddr   != ''">,MAIL_ADDR    = #{mailAddr}		</if>
+    	<if test="telNo      != null and telNo      != ''">,TEL_NO       = ENCR(#{telNo})				    </if>
+    	<if test="mtelNo     != null and mtelNo     != ''">,MTEL_NO      = ENCR(#{mtelNo})	    	</if>
+    	<if test="mailAddr   != null and mailAddr   != ''">,MAIL_ADDR    = ENCR(#{mailAddr})		</if>
     	<if test="ertrDt     != null and ertrDt     != ''">,ERTR_DT      = #{ertrDt}			        </if>
     	<if test="relsDt     != null and relsDt     != ''">,RELS_DT      = #{relsDt}			        </if>
     	<if test="useYn      != null and useYn      != ''">,USE_YN       = #{useYn}		     	</if>

@@ -8,9 +8,9 @@
 	SELECT USER_ID
 	      ,USER_NM
 	      ,BLNG_NM
-	      ,TEL_NO
-	      ,MTEL_NO
-	      ,MAIL_ADDR
+	      ,DECR(TEL_NO) AS TEL_NO
+	      ,DECR(MTEL_NO) AS MTEL_NO
+	      ,DECR(MAIL_ADDR) AS MAIN_ADDR
 	FROM   TC_USER_BASE
 	WHERE  1 = 1
 	AND   USER_ID = #{userId}

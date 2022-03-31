@@ -22,7 +22,7 @@
 	<!-- 위치정보_관리_학부모_학생_조건_조회-->
 	<select id="searchPrntNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT		PRNT_NO,
-					PRNT_NO || ': ' || ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM),' / ') AS PRNT_NO_NM
+					PRNT_NO || ': ' || ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)),' / ') AS PRNT_NO_NM
 		FROM		TM_PRNT_BASE TPB
 		WHERE 		1=1
 		GROUP BY	PRNT_NO
@@ -32,7 +32,7 @@
 	<!-- 위치정보_관리_학부모_학생_조건_조회_2-->
 	<select id="searchStdtNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT		STDT_NO,
-					STDT_NO || ': ' || STDT_NM AS STDT_NO_NM,
+					STDT_NO || ': ' || DECR(STDT_NM) AS STDT_NO_NM,
 					PRNT_NO
 		FROM		TM_STDT_BASE
 		WHERE 		1=1
@@ -82,10 +82,10 @@
 						FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS PLC_NM,
 						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'publ'	ELSE 'prnt' END AS RD_PUBL_GUAR_DIV,
 						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'	ELSE '학부모' END AS RD_PUBL_GUAR_DIV_NM,
-						ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM), '/') AS PRNT_NM,
+						ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)), '/') AS PRNT_NM,
 						TSB.PRNT_NO,
 						TSB.STDT_NO,
-						TSB.STDT_NM,
+		                DECR(TSB.STDT_NM) as STDT_NM,
 						TLIB.LAT_VAL,
 						TLIB.LON_VAL,
 						TLIB.VALD_RNGE_DIST,
@@ -203,10 +203,10 @@
 						FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS PLC_NM,
 						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'publ'	ELSE 'prnt' END AS RD_PUBL_GUAR_DIV,
 						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'	ELSE '학부모' END AS RD_PUBL_GUAR_DIV_NM,
-						ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM), '/') AS PRNT_NM,
+						ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)), '/') AS PRNT_NM,
 						TSB.PRNT_NO,
 						TSB.STDT_NO,
-						TSB.STDT_NM,
+						DECR(TSB.STDT_NM) AS STDT_NM,
 						TLIB.LAT_VAL,
 						TLIB.LON_VAL,
 						TLIB.VALD_RNGE_DIST,

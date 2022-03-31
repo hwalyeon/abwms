@@ -24,8 +24,8 @@
         ,A.DGEM_ALAM_NO   /* 위험감정 알림 번호 */
         ,D.LOC_NM	     /* 학교명 */
         ,F.GUAR_NO 		 /* 보호자번호 */
-        ,F.GUAR_NM		 /* 보호자명 */
-        ,F.GUAR_TEL_NO    /* 보호자전화번호 */
+        ,DECR(F.GUAR_NM) as GUAR_NM	 /* 보호자명 */
+        ,DECR(F.GUAR_TEL_NO) as GUAR_TEL_NO    /* 보호자전화번호 */
         ,fn_getCdNm('EVNT_DIV_CD',B.evnt_div_cd) as evnt_div_nm /* 이벤트 구분 명 */
         ,A.REG_DT
         ,A.REG_TM
@@ -68,11 +68,11 @@
     <if test=" stdtNo != null and stdtNo !='' ">
     and     C.STDT_NO      = #{stdtNo}::numeric                /* 학생번호     */</if>
     <if test=" stdtNm != null and stdtNm !='' ">
-    and     C.STDT_NM      like CONCAT ('%',#{stdtNm},'%')     /* 학생명       */</if>
+    and     DECR(C.STDT_NM)      like CONCAT ('%',#{stdtNm},'%')     /* 학생명       */</if>
     <if test=" guarNo != null and guarNo !='' ">
     and     F.GUAR_NO      = #{guarNo}::numeric                /* 보호자번호    */</if>
     <if test=" guarNm != null and guarNm !='' ">
-    and     F.GUAR_NM      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
+    and     DECR(F.GUAR_NM)      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
     ORDER BY A.STDT_NO
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}

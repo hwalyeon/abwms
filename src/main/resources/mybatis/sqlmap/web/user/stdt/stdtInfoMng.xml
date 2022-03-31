@@ -5,24 +5,23 @@
     <select id="searchStdtInfoList" parameterType="java.util.Map" resultType="MybatisMap">
         select     B.ENTR_DT/*가입일자*/
         ,B.GUAR_NO/*학부모번호*/
-        ,B.GUAR_NM/*학부모명*/
+        ,DECR(B.GUAR_NM) AS GUAR_NM/*학부모명*/
         ,B.PRNT_NO/*학부모번호*/
-        ,C.PRNT_NM/*학부모1*/
-        ,B.GUAR_TEL_NO/*학부모전화번호*/
-        ,C.PRNT_NM as PRNT_NM_MALE
-        ,CC.PRNT_NM as prnt_nm2/*학부모2*/
+        ,DECR(C.PRNT_NM) AS PRNT_NM/*학부모1*/
+        ,DECR(B.GUAR_TEL_NO) AS GUAR_TEL_NO /*학부모전화번호*/
+        ,DECR(C.PRNT_NM) as PRNT_NM_MALE
+        ,DECR(CC.PRNT_NM) as prnt_nm2/*학부모2*/
         ,A.STDT_NO/*학생번호*/
-        ,A.STDT_NM/*학생명*/
-        ,I.TEL_NO/*전화번호*/
-        ,fn_getCdNm('PLC_CLSS_CD',HI.PLC_CLSS_CD)as PLC_CLSS_NM/*현재위치분류*/
+        ,DECR(A.STDT_NM) as STDT_NM/*학생명*/
+        ,fn_getCdNm('PLC_CLSS_CD',HI.PLC_CLSS_CD) as PLC_CLSS_NM/*현재위치분류*/
         ,HI.LOC_NM as CURR_LOC_NM/*현재위치*/
         ,H.DGEM_STAT_CD/*위험감정상태*/
         ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
         ,F.STRS_IDX/*스트레스상태*/
-        ,G.GIDX/*성장상태*/
-        ,G.FIDX/*비만상태*/
+        ,G.GIDX /*성장상태*/
+        ,G.FIDX /*비만상태*/
         ,I.BAND_ID/*밴드ID*/
-        ,I.TEL_NO/*전화번호*/
+        ,DECR(I.TEL_NO) AS TEL_NO /*전화번호*/
         ,I.BLTH_ID/*블루투스 ID*/
         ,A.SEX_CD/*성별*/
         ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_NM
@@ -97,17 +96,17 @@
     <if test=" stdtNo != null and stdtNo !='' ">
     and      A.STDT_NO     = #{stdtNo}::numeric</if>
     <if test=" stdtNm != null and stdtNm !='' ">
-    and      A.STDT_NM     like concat('%',#{stdtNm},'%')</if>
+    and      DECR(A.STDT_NM)     like concat('%',#{stdtNm},'%')</if>
     <if test=" telNo != null and telNo !='' ">
-    and      I.TEL_NO      like concat('%',#{telNo},'%')</if>
+    and      DECR(I.TEL_NO)      like concat('%',#{telNo},'%')</if>
     <if test=" bandId != null and bandId !='' ">
     and      I.BAND_ID     like concat('%',#{bandId},'%')</if>
     <if test=" guarNo != null and guarNo !='' ">
     and      B.GUAR_NO     = #{guarNo}::numeric</if>
     <if test=" prntNm != null and prntNm !='' ">
-    and    (  C.PRNT_NM 	   like concat('%',#{prntNm},'%')  OR  C.PRNT_NM 	   like concat('%',#{prntNm},'%') )</if>
+    and    (  DECR(C.PRNT_NM) 	   like concat('%',#{prntNm},'%')  OR  DECR(CC.PRNT_NM) 	   like concat('%',#{prntNm},'%') )</if>
     <if test=" guarTelNo != null and guarTelNo !='' ">
-    and      B.GUAR_TEL_NO like concat('%',#{guarTelNo},'%')</if>
+    and      DECR(B.GUAR_TEL_NO) like concat('%',#{guarTelNo},'%')</if>
     <if test=" locNm != null and locNm !='' ">
     and      D.LOC_NM      like concat('%',#{locNm},'%')</if>
     ORDER BY A.STDT_NO
@@ -144,7 +143,7 @@
    VALUES
    (
         #{stdtNo}  /* stdt_no 학생_번호 numeric */
-       ,#{stdtNm} /* stdt_nm 학생_명 character varying(40) */
+       ,encr(#{stdtNm}) /* stdt_nm 학생_명 character varying(40) */
        ,#{bandId} /* band_id 밴드_ID character varying(20) */
        ,${eorgLocNo} /* eorg_loc_no 교육시설_위치_번호 numeric */
        ,#{sgrdCd} /* sgrd_cd 학년_코드 character varying(20) */
@@ -252,7 +251,7 @@
           UPDATE tm_stdt_base
           <trim prefix="SET" prefixOverrides=",">
             <if test="stdtNm != null">
-                ,stdt_nm = #{stdtNm}
+                ,stdt_nm = encr(#{stdtNm})
             </if>
             <if test="bandId != null">
                 ,band_id = #{bandId}
@@ -317,7 +316,7 @@
     with stdt_info as (
           select
                 tsb.stdt_no
-               ,tsb.stdt_nm
+               ,decr(tsb.stdt_nm) as stdt_nm
                ,tsgc.guar_no
                ,tsb.band_id
                ,tsb.eorg_loc_no
@@ -340,8 +339,8 @@
                ,tsb.loc_hist_no
                ,tsb.cbee_hist_no
                ,tsb.gfix_dt
-               ,tgb.guar_nm
-               ,tgb.guar_tel_no
+               ,decr(tgb.guar_nm) as guar_nm
+               ,encr(tgb.guar_tel_no) as guar_tel_no
                ,tsgh.hght_val
                ,tsgh.wght_val
                ,tsgh.wast_val
@@ -365,8 +364,8 @@
             (
             select
                  tpb.prnt_no
-                 ,case when tpb.sex_cd = 'MALE' then tpb.prnt_nm else '' end as prnt_male
-                 ,case when tpb.sex_cd = 'FEMALE' then tpb.prnt_nm else '' end as prnt_female
+                 ,case when tpb.sex_cd = 'MALE' then decr(tpb.prnt_nm) else '' end as prnt_male
+                 ,case when tpb.sex_cd = 'FEMALE' then decr(tpb.prnt_nm) else '' end as prnt_female
             from stdt_info stdt
             inner join tm_prnt_base tpb
             on stdt.prnt_no = tpb.prnt_no
@@ -483,7 +482,7 @@
     select
           stdt.*
          ,tbi.band_id
-         ,tbi.tel_no  as band_tel_no
+         ,encr(tbi.tel_no)  as band_tel_no
          ,loc.plc_clss_cd
          ,loc.plc_clss_nm
          ,loc.loc_nm
@@ -617,7 +616,7 @@
     <select id="searchBandList" parameterType="java.util.Map" resultType="MybatisMap">
         select
              band_id
-            ,tel_no
+            ,decr(tel_no) as tel_no
             ,band_open_stat_cd
             ,fn_getCdNm('BAND_OPEN_STAT_CD', band_open_stat_cd) AS band_open_stat_nm
         from ts_band_info tbi
@@ -626,7 +625,7 @@
             and band_id like '%' || #{bandId} || '%'
         </if>
         <if test="telNo != null and telNo !='' ">
-            and tel_no like '%' || #{telNo} || '%'
+            and decr(tel_no) like '%' || #{telNo} || '%'
         </if>
         <if test="bandOpenStatCd != null and bandOpenStatCd !='' ">
             and band_open_stat_cd = #{bandOpenStatCd}
