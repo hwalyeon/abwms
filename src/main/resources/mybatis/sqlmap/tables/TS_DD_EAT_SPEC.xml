@@ -11,7 +11,6 @@
 		/* Generated SQL SQL ID : ts_dd_eat_spec.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,stdt_no /* stdt_no 학생_번호 numeric */
-               ,eat_seq /* eat_seq 섭취_순번 numeric */
                ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
                ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -24,7 +23,6 @@
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
-		AND    eat_seq = #{eatSeq} /* eat_seq 섭취_순번 numeric */
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</select>
 
@@ -34,9 +32,10 @@
 		(
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		    ,stdt_no /* stdt_no 학생_번호 numeric */
-		    ,eat_seq /* eat_seq 섭취_순번 numeric */
 		    ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
+		<if test="nutrEatQty != null">
 		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -52,9 +51,10 @@
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{eatSeq} /* eat_seq 섭취_순번 numeric */
 		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
+		<if test="nutrEatQty != null">
 		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -84,7 +84,6 @@
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
-		AND    eat_seq = #{eatSeq} /* eat_seq 섭취_순번 numeric */
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</update>
 	
@@ -94,9 +93,10 @@
 		(
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		     stdt_no /* stdt_no 학생_번호 numeric */
-		     eat_seq /* eat_seq 섭취_순번 numeric */
 		     nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
+		<if test="nutrEatQty != null">
 		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -112,9 +112,10 @@
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{eatSeq} /* eat_seq 섭취_순번 numeric */
 		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
+		<if test="nutrEatQty != null">
 		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -146,7 +147,6 @@
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
-		AND    eat_seq = #{eatSeq} /* eat_seq 섭취_순번 numeric */
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</delete>
 </mapper>

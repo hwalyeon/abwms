@@ -13,9 +13,6 @@ public class TsDdEatSpecVo implements Serializable {
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
-	/* eat_seq 섭취_순번 numeric(null) */
-	private double eatSeq;
-
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
 
@@ -70,21 +67,6 @@ public class TsDdEatSpecVo implements Serializable {
 	 */
 	public void setStdtNo(double stdtNo) {
 		this.stdtNo = stdtNo;
-	}
-	/**
-	 * Get eat_seq 섭취_순번 numeric(null)
-	 * @Return double eatSeq
-	 */
-	public double getEatSeq() {
-		return this.eatSeq;
-	}
-	
-	/**
-	 * Set eat_seq 섭취_순번 numeric(null)
-	 * @Param double eatSeq
-	 */
-	public void setEatSeq(double eatSeq) {
-		this.eatSeq = eatSeq;
 	}
 	/**
 	 * Get nutr_cd 영양소_코드 character varying(20)
