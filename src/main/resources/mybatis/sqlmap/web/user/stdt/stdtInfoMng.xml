@@ -19,8 +19,8 @@
         ,H.DGEM_STAT_CD/*위험감정상태*/
         ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
         ,F.STRS_IDX/*스트레스상태*/
-        ,G.GROW_IDX/*성장상태*/
-        ,G.FAT_IDX/*비만상태*/
+        ,G.GIDX/*성장상태*/
+        ,G.FIDX/*비만상태*/
         ,I.BAND_ID/*밴드ID*/
         ,I.TEL_NO/*전화번호*/
         ,I.BLTH_ID/*블루투스 ID*/
@@ -434,10 +434,10 @@
         select
               tgh.stdt_no
              ,tgh.gfix_dt
-             ,tgh.grow_idx
+             ,tgh.gidx
              ,tgh.grow_judg_cd
              ,fn_getcdnm('GROW_JUDG_CD' , tgh.grow_judg_cd) as grow_judg_nm
-             ,tgh.fat_idx
+             ,tgh.fidx
              ,tgjs.smry_cntn
              ,tgjs.spec_cntn
              ,fn_getcdnm('FAT_JUDG_CD' , tgh.fat_judg_cd) as fat_judg_nm
@@ -507,12 +507,12 @@
          ,grow.dgem_stat_cd
          ,grow.dgem_stat_nm
          ,grow.loc_mesu_dttm
-         ,gfix.grow_idx
+         ,gfix.gidx
          ,gfix.grow_judg_cd
          ,gfix.grow_judg_nm
          ,gfix.smry_cntn
          ,gfix.spec_cntn
-         ,gfix.fat_idx
+         ,gfix.fidx
          ,gfix.fat_judg_nm
          ,gfix.curr_eval_cntn
          ,gfix.fatp_judg_nm

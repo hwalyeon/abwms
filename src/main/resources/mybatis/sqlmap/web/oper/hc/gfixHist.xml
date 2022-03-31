@@ -15,12 +15,12 @@
 		     , tgh.wght_val         /* wght_val     몸무게_값       numeric */
 		     , tgh.cal_eat_qty      /* cal_eat_qty  칼로리_섭취_량   numeric */
 		     , tgh.cal_csum_qty     /* cal_csum_qty 칼로리_소모_량   numeric */
-		     , tgh.grow_idx         /* grow_idx     성장_지수       numeric */
+		     , tgh.gidx             /* gidx     성장_지수       numeric */
 		     , fn_getcdnm('GROW_JUDG_CD', tgh.grow_judg_cd) as grow_judg_cd_nm  /* grow_judg_cd 성장_판정_코드 character varying(20) */
-		     , tgh.fat_idx          /* fat_idx      비만_지수       numeric */
+		     , tgh.fidx          /* fidx      비만_지수       numeric */
 		     , fn_getcdnm('FAT_JUDG_CD' , tgh.fat_judg_cd ) as fat_judg_cd_nm /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		     , tgh.fatp_idx         /* fatp_idx     비만_예측_지수   numeric */
-		     , fn_getcdnm('FATP_JUDG_CD' , tgh.fatp_judg_cd ) as fatp_judg_cd_nm /* fatp_judg_cd 비만_예측_판정_코드 character varying(20) */
+		     , fn_getcdnm('FAT_JUDG_CD' , tgh.fatp_judg_cd ) as fatp_judg_cd_nm /* fatp_judg_cd 비만_예측_판정_코드 character varying(20) */
 		     , tgh.pal_val          /* pal_val      신체활동수준_값   numeric */
 		     , tbi.tel_no           /* tel_no       전화_번호       character varying(20) */
 		     , tgb.guar_no          /* guar_no      보호자_번호      numeric */

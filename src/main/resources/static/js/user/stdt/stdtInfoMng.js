@@ -16,8 +16,8 @@ let stdtInfoMng = new Vue({
             locNm          :'',
             dgemStatNm     :'',
             strsIdx        :'',
-            growIdx        :'',
-            fatIdx         :'',
+            gidx        :'',
+            fidx         :'',
             bandId         :'',
             telNo          :'',
             blthId         :'',
@@ -109,8 +109,8 @@ let stdtInfoMng = new Vue({
                 {name: "currLocNm"         , index: "currLocNm"         , label: "현재위치(주소)"	    , width: 250    , align: "center" , fixed: true},
                 {name: "dgemStatNm"        , index: "dgemStatNm"        , label: "위험감정상태"	 	, width: 80     , align: "center" , fixed: true},
                 {name: "strsIdx"           , index: "strsIdx"           , label: "스트레스상태"   	, width: 80     , align: "center" , fixed: true},
-                {name: "growIdx"           , index: "growIdx"           , label: "성장상태"		 	, width: 80     , align: "center" , fixed: true},
-                {name: "fatIdx"            , index: "fatIdx"            , label: "비만상태"		 	, width: 80     , align: "center" , fixed: true},
+                {name: "gidx"           , index: "gidx"           , label: "성장상태"		 	, width: 80     , align: "center" , fixed: true},
+                {name: "fidx"            , index: "fidx"            , label: "비만상태"		 	, width: 80     , align: "center" , fixed: true},
                 {name: "bandId"           , index: "bandId"             , label: "밴드ID"		    , width: 80     , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
                         return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
                 {name: "blthId"           , index: "blthId"             , label: "블루투스ID"         , width: 100    , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
@@ -171,7 +171,7 @@ let stdtInfoMng = new Vue({
                     let grid = this;
 
                     $(grid).tableRowSpan(["prntNm","prntNm2","stdtNo","locNo","stdtNm","telNo","plcClssNm",
-                                                  "currLoc","currLocNm","dgemStatNm","strsIdx","growIdx","fatIdx",
+                                                  "currLoc","currLocNm","dgemStatNm","strsIdx","gidx","fidx",
                                                   "bandId","blthId","sexNm","bithDt","locNm","age","bandStatNm",
                                                   "mindStrsStatNm","physStrsStatNm","useTotal","saveTotal","cbeeBal",
                                                   "prntInfoDetlPopup","stdtInfoDetlPopup","prntNo"], "stdtNo");

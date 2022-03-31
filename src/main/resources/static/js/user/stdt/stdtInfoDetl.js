@@ -175,14 +175,14 @@ let stdtInfoDetl = new Vue({
 			if(WebUtil.isNotNull($this.stdtInfo.bandStatNm)) bandStatNm = $this.stdtInfo.bandStatNm;
 
 			let growModIdx = 0;
-			if ($this.stdtInfo.growIdx > 100 ) growModIdx = 0;
-			else if ($this.stdtInfo.growIdx < 0 ) growModIdx = 100;
-			else growModIdx = 100 - $this.stdtInfo.growIdx;
+			if ($this.stdtInfo.gidx > 100 ) growModIdx = 0;
+			else if ($this.stdtInfo.gidx < 0 ) growModIdx = 100;
+			else growModIdx = 100 - $this.stdtInfo.gidx;
 
 			let fatModIdx = 0;
-			if ($this.stdtInfo.fatIdx > 100 ) fatModIdx = 0;
-			else if ($this.stdtInfo.fatIdx < 0 ) fatModIdx = 100;
-			else fatModIdx = 100 - $this.stdtInfo.fatIdx;
+			if ($this.stdtInfo.fidx > 100 ) fatModIdx = 0;
+			else if ($this.stdtInfo.fidx < 0 ) fatModIdx = 100;
+			else fatModIdx = 100 - $this.stdtInfo.fidx;
 
 			// 밴드정보
 			if($this.stdtInfo.bandStatCd === 'NORM')  bandChartColor = '#2a99ec';
@@ -246,7 +246,7 @@ let stdtInfoDetl = new Vue({
 			let dataGrow = {
 				labels : ['상태','상태'],
 				datasets: [{
-					data: [$this.stdtInfo.growIdx ,growModIdx],
+					data: [$this.stdtInfo.gidx ,growModIdx],
 					backgroundColor: [growChartColor , TempChartColor],
 					borderColor : [growChartColor, TempChartColor]
 				}]
@@ -255,7 +255,7 @@ let stdtInfoDetl = new Vue({
 			let dataFat = {
 				labels : ['상태','상태'],
 				datasets: [{
-					data: [$this.stdtInfo.fatIdx ,fatModIdx],
+					data: [$this.stdtInfo.fidx ,fatModIdx],
 					backgroundColor: [fatChartColor , TempChartColor],
 					borderColor : [fatChartColor, TempChartColor]
 				}]
@@ -325,17 +325,17 @@ let stdtInfoDetl = new Vue({
 
 			let pluginsGrow = [{
 				beforeDraw: function () {
-					let growIdx = '-';
-					if($this.stdtInfo.growIdx != null ) growIdx = $this.stdtInfo.growIdx;
-					$this.textCenter('growChart', growIdx, $this.chartGrow, growChartColor, '' , '');
+					let gidx = '-';
+					if($this.stdtInfo.gidx != null ) gidx = $this.stdtInfo.gidx;
+					$this.textCenter('growChart', gidx, $this.chartGrow, growChartColor, '' , '');
 				}
 			}];
 
 			let pluginsFat = [{
 				beforeDraw: function () {
-					let fatIdx = '-';
-					if($this.stdtInfo.fatIdx != null ) fatIdx = $this.stdtInfo.fatIdx;
-					$this.textCenter('fatChart', fatIdx, $this.chartFat, fatChartColor, '' , '');
+					let fidx = '-';
+					if($this.stdtInfo.fidx != null ) fidx = $this.stdtInfo.fidx;
+					$this.textCenter('fatChart', fidx, $this.chartFat, fatChartColor, '' , '');
 				}
 			}];
 
