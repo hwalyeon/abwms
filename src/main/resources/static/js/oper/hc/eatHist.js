@@ -1,24 +1,23 @@
 let eatHist = new Vue({
-    el: "#eatHist", //스트레스_지수_이력
+    el: "#eatHist", //섭취_이력
     data:
     {
     	params:
         {
             userId         : '' ,
-            strsJudgDttmFr : '' , //스트레스_판정_일시(FROM)
-            strsJudgDttmTo : '' , //스트레스_판정_일시(To)
+            stndDtFr       : '' , //기준_일자(FROM)
+            stndDtTo       : '' , //기준_일자(To)
             bDPer          : 'THIS_MONTH' , //기준_일자_기간
             stdtNo         : '' , //학생_번호
             stdtNm         : '' , //학생_명
-            ageFr          : '' , //나이(FROM)
-            ageTo          : '' , //나이(To)
-            sexCd          : '' , //성별_코드
+            fmenuNm        : '' , //식단표_명
+            mmelYn         : '' , //아침_여부
+            amelYn         : '' , //점심_여부
+            emelYn         : '' , //저녁_여부
+            smelYn         : '' , //간식_여부
+            mmelStarvYn    : '' , //아침_결식_여부
             guarNo         : '' , //보호자_번호
             guarNm         : '' , //보호자_명
-            strsStatCd     : '' , //스트레스_상태_코드
-            mindStrsStatCd : '' , //정신적_스트레스_상태_코드
-            physStrsStatCd : '' , //신체적_스트레스_상태_코드
-            strsCopeStatCd : '' , //스트레스_대처_상태_코드
             locNm          : '' , //학교(학원)명
     		paging         : 'Y',
     		totalCount     : 0  ,
@@ -29,11 +28,6 @@ let eatHist = new Vue({
         code:
         {
             bDPerList          : [] , //기준_일자_기간_리스트
-            sexCdList          : [] , //성별_코드
-            strsStatCdList     : [] , //스트레스_상태_코드
-            mindStrsStatCdList : [] , //정신적_스트레스_상태_코드
-            physStrsStatCdList : [] , //신체적_스트레스_상태_코드
-            strsCopeStatCdList : [] , //스트레스_대처_상태_코드
         },
 	},
     methods:
@@ -52,42 +46,47 @@ let eatHist = new Vue({
             let $this = this;
             $this.userId = SessionUtil.getUserId();
 
-            //기준_일자_기간 기본 값 세팅(이번 달)
-            $this.code.bDPerList = CodeUtil.getPeriodDateList();
-            const terms = getPeriodDate($this.params.bDPer);
-            this.params.strsJudgDttmFr = terms.strDt;
-            this.params.strsJudgDttmTo = terms.endDt;
+
         },
         initCodeList : function()
         {
             let $this = this;
 
-            getCommonCodeList('SEX_CD'            , $this.code.sexCdList         ); //성별_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.strsStatCdList    ); //스트레스_상태_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.mindStrsStatCdList); //정신적_스트레스_상태_코드
-            getCommonCodeList('STRS_STAT_CD'      , $this.code.physStrsStatCdList); //신체적_스트레스_상태_코드
-            getCommonCodeList('STRS_COPE_STAT_CD' , $this.code.strsCopeStatCdList); //신체적_스트레스_상태_코드
+            //기준_일자_기간_리스트
+            $this.code.bDPerList = CodeUtil.getPeriodDateList();
+            const terms = getPeriodDate($this.params.bDPer);
+            this.params.stndDtFr = terms.strDt;
+            this.params.stndDtTo = terms.endDt;
         },
         initGrid: function()
         {
             let $this = this;
         	let colModels =
             [
-                {name: "strsJudgDttm"     , index: "strsJudgDttm"     , label: "발생 일시" 	            ,  width: 50 , align: "center" },
-                {name: "locNm"            , index: "locNm"            , label: "학교 명" 	            ,  width: 50 , align: "center" },
-                {name: "stdtNo"           , index: "stdtNo"           , label: "학생 번호" 	            ,  width: 50 , align: "center" },
-                {name: "stdtNm"           , index: "stdtNm"           , label: "학생 명" 	            ,  width: 50 , align: "center" },
-                {name: "sexCdNm"          , index: "sexCdNm"          , label: "성별"	                ,  width: 50 , align: "center" },
-                {name: "ageYy"            , index: "ageYy"            , label: "나이(년)"                , width: 50 , align: "center" },
-                {name: "ageMm"            , index: "ageMm"            , label: "나이(개월)"              , width: 50 , align: "center" },
-                {name: "strsStatCdNm"     , index: "strsStatCdNm"     , label: "스트레스 상태"           , width: 50 , align: "center" },
-                {name: "mindStrsStatCdNm" , index: "mindStrsStatCdNm" , label: "정신적 상태"             , width: 50 , align: "center" },
-                {name: "physStrsStatCdNm" , index: "physStrsStatCdNm" , label: "신체적 상태"             , width: 50 , align: "center" },
-                {name: "strsCopeStatCd"   , index: "strsCopeStatCd"   , label: "대처 능력"               , width: 50 , align: "center" },
-                {name: "telNo"            , index: "telNo"            , label: "학생(밴드)<br/>전화번호" , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
-                {name: "guarNo"           , index: "guarNo"           , label: "보호자 번호"             , width: 50 , align: "center" },
-                {name: "guarNm"           , index: "guarNm"           , label: "보호자 명"               , width: 50 , align: "center" },
-                {name: "guarTelNo" 	      , index: "guarTelNo" 	      , label: "보호자<br/>전화번호"     , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
+                {name: "stndDt"       , index: "stndDt"        , label: "발생 일시" 	         ,  width: 50 , align: "center" },
+                {name: "locNm"        , index: "locNm"         , label: "학교 명" 	             ,  width: 50 , align: "center" },
+                {name: "stdtNo"       , index: "stdtNo"        , label: "학생 번호" 	         ,  width: 50 , align: "center" },
+                {name: "stdtNm"       , index: "stdtNm"        , label: "학생 명" 	             ,  width: 50 , align: "center" },
+                {name: "mmelFmenuSeq" , index: "mmelFmenuSeq"  , label: "아침 식단 번호"	         ,  width: 50 , align: "center" ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.mmelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "mmelFmenuNm"  , index: "mmelFmenuNm"   , label: "아침 식단 명"            , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.mmelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "amelFmenuSeq" , index: "amelFmenuSeq"  , label: "점심 식단 번호"          , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.amelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "amelFmenuNm"  , index: "amelFmenuNm"   , label: "점심 식단 명"            , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.amelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "emelFmenuSeq" , index: "emelFmenuSeq"  , label: "저녁 식단 번호"          , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.emelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "emelFmenuNm"  , index: "emelFmenuNm"   , label: "저녁 식단 명"            , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.emelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "smelFmenuSeq" , index: "smelFmenuSeq"  , label: "간식 식단 번호"          , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.smelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "smelFmenuNm"  , index: "smelFmenuNm"   , label: "간식 식단 명"            , width: 50 , align: "center" ,formatter: function(cellValue, options, rowObject) {
+                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.smelFmenuSeq}" data-guarNo-id="${rowObject.guarNo}">${cellValue}</a>`;}},
+                {name: "telNo"        , index: "telNo"         , label: "학생(밴드)<br/>전화번호" , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
+                {name: "guarNo"       , index: "guarNo"        , label: "보호자 번호"             , width: 50 , align: "center" },
+                {name: "guarNm"       , index: "guarNm"        , label: "보호자 명"               , width: 50 , align: "center" },
+                {name: "guarTelNo" 	  , index: "guarTelNo" 	   , label: "보호자<br/>전화번호"     , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
             ];
             $("#eatHist_list").jqGrid("GridUnload");
            	$("#eatHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -103,15 +102,27 @@ let eatHist = new Vue({
                     onPagingCommon(data, this, function(resultMap)
                     {
                         $this.params.currentPage  = resultMap.currentPage;
-                        $this.params.rowCount      = resultMap.rowCount;
+                        $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
                         $this.searchEatHistList(false);
                     })
+                },
+                gridComplete: function ()
+                {
+                    let grid = this;
+
+                    $(grid).tableRowSpan(["stdtNo", "stdtNm", "locNm", "telNo"], "stdtNo");
+                    $(grid).tableRowSpan(["guarNo", "guarNm", "guarTelNo"], "guarNo");
+
+                    //섭취_상세
+                    $("#eatHist_list").find('A.links[data-eatDetl]').on('click', function(e) {
+                        eatHist.regEatHistDetlPopup($(e.target).data('fmenuSeq', 'guarNo'))
+                    });
                 }
             }));
             resizeJqGridWidth("eatHist_list", "eatHist_list_wrapper");
         },
-        //스트레스_지수_이력 리스트 조회
+        //섭취_이력 리스트 조회
         searchEatHistList: function(isSearch)
         {
 			let $this     = this;
@@ -140,7 +151,7 @@ let eatHist = new Vue({
                 }
             }).trigger("reloadGrid");
 		},
-        //스트레스_지수_이력 리스트 엑셀 다운로드
+        //섭취_이력 리스트 엑셀 다운로드
 		downloadExcel : function()
         {
 			let $this = this;
@@ -161,13 +172,14 @@ let eatHist = new Vue({
                 }
             });
 		},
+
         //기준_일자_기간_선택
         bDPerSelect: function()
         {
             let $this = this;
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.strsJudgDttmFr = terms.strDt;
-            this.params.strsJudgDttmTo = terms.endDt;
+            this.params.stndDtFr = terms.strDt;
+            this.params.stndDtTo = terms.endDt;
         },
         //기준_일자_선택
         bDSelect: function()
@@ -180,26 +192,31 @@ let eatHist = new Vue({
 
             let $this = this;
 
-            if( ((WebUtil.isNotNull($this.params.ageFr)) && (WebUtil.isNull($this.params.ageTo))) || ((WebUtil.isNotNull($this.params.ageTo)) && (WebUtil.isNull($this.params.ageFr))) )
-            {
-                Swal.alert(['나머지 나이 범위를 입력하세요.', 'info']);
-                return false;
-            }
-            if ((WebUtil.isNotNull($this.params.ageFr) && WebUtil.isNotNull($this.params.ageTo)) &&parseInt($this.params.ageFr) > parseInt($this.params.ageTo)){
-                Swal.alert(['정확한 나이 범위를 입력하세요.', 'info']);
-                return false;
-            }
-            if( ((WebUtil.isNotNull($this.params.strsJudgDttmFr)) && (WebUtil.isNull($this.params.strsJudgDttmTo))) || ((WebUtil.isNotNull($this.params.strsJudgDttmTo)) && (WebUtil.isNull($this.params.strsJudgDttmFr))) )
+            if( ((WebUtil.isNotNull($this.params.stndDtFr)) && (WebUtil.isNull($this.params.stndDtTo))) || ((WebUtil.isNotNull($this.params.stndDtTo)) && (WebUtil.isNull($this.params.stndDtFr))) )
             {
                 Swal.alert(['나머지 기준 일자를 선택하세요.', 'info']);
                 return false;
             }
-            if( ((WebUtil.isNotNull($this.params.strsJudgDttmFr) && WebUtil.isNotNull($this.params.strsJudgDttmTo)) && $this.params.strsJudgDttmFr > $this.params.strsJudgDttmTo) )
+            if( ((WebUtil.isNotNull($this.params.stndDtFr) && WebUtil.isNotNull($this.params.stndDtTo)) && $this.params.stndDtFr > $this.params.stndDtTo) )
             {
                 Swal.alert(['정확한 기준 일자를 선택하세요.', 'info']);
                 return false;
             }
             return true;
+        },
+        mmelStarvYnCk: function(){
+          let $this = this;
+
+           $this.params.mmelYn      = 'N';
+        },
+        mmelYnCk: function(){
+          let $this = this;
+
+           $this.params.mmelStarvYn      = '';
+        },
+        //섭취_이력 상세
+        regEatHistDetlPopup: function(fmenuSeq, guarNo) {
+            eatHistDetl.initPage(fmenuSeq, guarNo, function(){bandOpenInfoMng.searchEatHistList});
         },
 		resetSearchParam: function()
         {
@@ -207,20 +224,19 @@ let eatHist = new Vue({
 			$this.params =
             {
                 userId         : '' ,
-                strsJudgDttmFr : '' , //스트레스_판정_일시(FROM)
-                strsJudgDttmTo : '' , //스트레스_판정_일시(To)
+                stndDtFr       : '' , //기준_일자(FROM)
+                stndDtTo       : '' , //기준_일자(To)
                 bDPer          : 'THIS_MONTH' , //기준_일자_기간
                 stdtNo         : '' , //학생_번호
                 stdtNm         : '' , //학생_명
-                ageFr          : '' , //나이(FROM)
-                ageTo          : '' , //나이(To)
-                sexCd          : '' , //성별_코드
+                fmenuNm        : '' , //식단표_명
+                mmelYn         : '' , //아침_여부
+                amelYn         : '' , //점심_여부
+                emelYn         : '' , //저녁_여부
+                smelYn         : '' , //간식_여부
+                mmelStarvYn    : '' , //아침_결식_여부
                 guarNo         : '' , //보호자_번호
                 guarNm         : '' , //보호자_명
-                strsStatCd     : '' , //스트레스_상태_코드
-                mindStrsStatCd : '' , //정신적_스트레스_상태_코드
-                physStrsStatCd : '' , //신체적_스트레스_상태_코드
-                strsCopeStatCd : '' , //스트레스_대처_상태_코드
                 locNm          : '' , //학교(학원)명
                 paging         : 'Y',
                 totalCount     : 0  ,

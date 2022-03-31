@@ -52,7 +52,7 @@ let strsHist = new Vue({
             let $this = this;
             $this.userId = SessionUtil.getUserId();
 
-            //기준_일자_기간 기본 값 세팅(이번 달)
+            //기준_일자_기간_리스트
             $this.code.bDPerList = CodeUtil.getPeriodDateList();
             const terms = getPeriodDate($this.params.bDPer);
             this.params.strsJudgDttmFr = terms.strDt;

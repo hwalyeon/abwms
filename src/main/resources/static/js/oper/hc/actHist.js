@@ -93,7 +93,7 @@ let actHist = new Vue({
                     onPagingCommon(data, this, function(resultMap)
                     {
                         $this.params.currentPage  = resultMap.currentPage;
-                        $this.params.rowCount      = resultMap.rowCount;
+                        $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
                         $this.searchStrsHistList(false);
                     })
