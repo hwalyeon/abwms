@@ -19,7 +19,7 @@ public class TsGfixHistVo implements Serializable {
 	/* age_ycnt 나이_년수 numeric(null) */
 	private double ageYcnt;
 
-	/* age_mcnt 나이_월수 numeric(null) */
+	/* age_mcnt 나이_개월수 numeric(null) */
 	private double ageMcnt;
 
 	/* hght_val 키_값 numeric(null) */
@@ -115,6 +115,9 @@ public class TsGfixHistVo implements Serializable {
 	/* pal_val 신체활동수준_값 numeric(null) */
 	private double palVal;
 
+	/* pal_cd 신체활동수준_코드 character varying(20) */
+	private String palCd;
+
 	/* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
 	private String calNutrStatCd;
 
@@ -201,7 +204,7 @@ public class TsGfixHistVo implements Serializable {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
-	 * Get age_mcnt 나이_월수 numeric(null)
+	 * Get age_mcnt 나이_개월수 numeric(null)
 	 * @Return double ageMcnt
 	 */
 	public double getAgeMcnt() {
@@ -209,7 +212,7 @@ public class TsGfixHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set age_mcnt 나이_월수 numeric(null)
+	 * Set age_mcnt 나이_개월수 numeric(null)
 	 * @Param double ageMcnt
 	 */
 	public void setAgeMcnt(double ageMcnt) {
@@ -679,6 +682,21 @@ public class TsGfixHistVo implements Serializable {
 	 */
 	public void setPalVal(double palVal) {
 		this.palVal = palVal;
+	}
+	/**
+	 * Get pal_cd 신체활동수준_코드 character varying(20)
+	 * @Return String palCd
+	 */
+	public String getPalCd() {
+		return this.palCd;
+	}
+	
+	/**
+	 * Set pal_cd 신체활동수준_코드 character varying(20)
+	 * @Param String palCd
+	 */
+	public void setPalCd(String palCd) {
+		this.palCd = palCd;
 	}
 	/**
 	 * Get cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20)

@@ -11,7 +11,7 @@
 		/* Generated SQL SQL ID : ts_band_info.select */
         SELECT  band_id /* band_id 밴드_ID character varying(20) */
                ,band_mdl_cd /* band_mdl_cd 밴드_모델_코드 character varying(20) */
-               ,tel_no /* tel_no 전화_번호 character varying(20) */
+               ,tel_no /* tel_no 전화_번호 character varying(256) */
                ,blth_id /* blth_id 블루투스_ID character varying(40) */
                ,api_url_gram_no /* api_url_gram_no API_URL_전문_번호 numeric */
                ,api_url_dttm /* api_url_dttm API_URL_일시 character(14) */
@@ -37,7 +37,7 @@
 		    ,band_mdl_cd /* band_mdl_cd 밴드_모델_코드 character varying(20) */
 		</if>
 		<if test="telNo != null">
-		    ,tel_no /* tel_no 전화_번호 character varying(20) */
+		    ,tel_no /* tel_no 전화_번호 character varying(256) */
 		</if>
 		<if test="blthId != null">
 		    ,blth_id /* blth_id 블루투스_ID character varying(40) */
@@ -72,7 +72,7 @@
 		    ,#{bandMdlCd} /* band_mdl_cd 밴드_모델_코드 character varying(20) */
 		</if>
 		<if test="telNo != null">
-		    ,#{telNo} /* tel_no 전화_번호 character varying(20) */
+		    ,#{telNo} /* tel_no 전화_번호 character varying(256) */
 		</if>
 		<if test="blthId != null">
 		    ,#{blthId} /* blth_id 블루투스_ID character varying(40) */
@@ -110,7 +110,7 @@
 		    ,band_mdl_cd = #{bandMdlCd} /* band_mdl_cd 밴드_모델_코드 character varying(20) */
 		</if>
 		<if test="telNo != null">
-		    ,tel_no = #{telNo} /* tel_no 전화_번호 character varying(20) */
+		    ,tel_no = #{telNo} /* tel_no 전화_번호 character varying(256) */
 		</if>
 		<if test="blthId != null">
 		    ,blth_id = #{blthId} /* blth_id 블루투스_ID character varying(40) */
@@ -146,7 +146,7 @@
 		    ,band_mdl_cd /* band_mdl_cd 밴드_모델_코드 character varying(20) */
 		</if>
 		<if test="telNo != null">
-		    ,tel_no /* tel_no 전화_번호 character varying(20) */
+		    ,tel_no /* tel_no 전화_번호 character varying(256) */
 		</if>
 		<if test="blthId != null">
 		    ,blth_id /* blth_id 블루투스_ID character varying(40) */
@@ -181,7 +181,7 @@
 		    ,#{bandMdlCd} /* band_mdl_cd 밴드_모델_코드 character varying(20) */
 		</if>
 		<if test="telNo != null">
-		    ,#{telNo} /* tel_no 전화_번호 character varying(20) */
+		    ,#{telNo} /* tel_no 전화_번호 character varying(256) */
 		</if>
 		<if test="blthId != null">
 		    ,#{blthId} /* blth_id 블루투스_ID character varying(40) */
@@ -216,7 +216,7 @@
 		    ,band_mdl_cd = #{bandMdlCd} /* band_mdl_cd 밴드_모델_코드 character varying(20) */
 		</if>
 		<if test="telNo != null">
-		    ,tel_no = #{telNo} /* tel_no 전화_번호 character varying(20) */
+		    ,tel_no = #{telNo} /* tel_no 전화_번호 character varying(256) */
 		</if>
 		<if test="blthId != null">
 		    ,blth_id = #{blthId} /* blth_id 블루투스_ID character varying(40) */

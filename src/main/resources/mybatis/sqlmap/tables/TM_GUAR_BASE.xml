@@ -10,15 +10,15 @@
 	<select id="select" resultType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.select */
         SELECT  guar_no /* guar_no 보호자_번호 numeric */
-               ,guar_nm /* guar_nm 보호자_명 character varying(40) */
-               ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+               ,guar_nm /* guar_nm 보호자_명 character varying(256) */
+               ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
                ,guar_pw /* guar_pw 보호자_비밀번호 character varying(400) */
                ,self_cert_dttm /* self_cert_dttm 본인_인증_일시 character(14) */
                ,auto_login_yn /* auto_login_yn 자동_로그인_여부 character(1) */
                ,devc_cert_val /* devc_cert_val 장치_인증_값 character varying(1000) */
                ,fcm_tokn_val /* fcm_tokn_val FCM_토큰_값 character varying(200) */
-               ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
                ,prnt_no /* prnt_no 학부모_번호 numeric */
+               ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
                ,szone_alam_yn /* szone_alam_yn 세이프존_알림_여부 character(1) */
                ,fall_alam_yn /* fall_alam_yn 낙상_알림_여부 character(1) */
                ,hbit_abnm_alam_yn /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -51,10 +51,10 @@
 		(
 		     guar_no /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		    ,guar_nm /* guar_nm 보호자_명 character varying(40) */
+		    ,guar_nm /* guar_nm 보호자_명 character varying(256) */
 		</if>
 		<if test="guarTelNo != null">
-		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		</if>
 		<if test="guarPw != null">
 		    ,guar_pw /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -69,10 +69,10 @@
 		<if test="fcmToknVal != null">
 		    ,fcm_tokn_val /* fcm_tokn_val FCM_토큰_값 character varying(200) */
 		</if>
-		    ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		<if test="prntNo != null">
 		    ,prnt_no /* prnt_no 학부모_번호 numeric */
 		</if>
+		    ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		    ,szone_alam_yn /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,fall_alam_yn /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,hbit_abnm_alam_yn /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -113,10 +113,10 @@
 		(
 		     #{guarNo} /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		    ,#{guarNm} /* guar_nm 보호자_명 character varying(40) */
+		    ,#{guarNm} /* guar_nm 보호자_명 character varying(256) */
 		</if>
 		<if test="guarTelNo != null">
-		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		</if>
 		<if test="guarPw != null">
 		    ,#{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -131,10 +131,10 @@
 		<if test="fcmToknVal != null">
 		    ,#{fcmToknVal} /* fcm_tokn_val FCM_토큰_값 character varying(200) */
 		</if>
-		    ,#{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		<if test="prntNo != null">
 		    ,#{prntNo} /* prnt_no 학부모_번호 numeric */
 		</if>
+		    ,#{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		    ,#{szoneAlamYn} /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,#{fallAlamYn} /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,#{hbitAbnmAlamYn} /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -178,10 +178,10 @@
 		UPDATE tm_guar_base
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="guarNm != null">
-		    ,guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(40) */
+		    ,guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(256) */
 		</if>
 		<if test="guarTelNo != null">
-		    ,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		</if>
 		<if test="guarPw != null">
 		    ,guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -198,11 +198,11 @@
 		<if test="fcmToknVal != null">
 		    ,fcm_tokn_val = #{fcmToknVal} /* fcm_tokn_val FCM_토큰_값 character varying(200) */
 		</if>
-		<if test="dzoneAlamYn != null">
-		    ,dzone_alam_yn = #{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
-		</if>
 		<if test="prntNo != null">
 		    ,prnt_no = #{prntNo} /* prnt_no 학부모_번호 numeric */
+		</if>
+		<if test="dzoneAlamYn != null">
+		    ,dzone_alam_yn = #{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		</if>
 		<if test="szoneAlamYn != null">
 		    ,szone_alam_yn = #{szoneAlamYn} /* szone_alam_yn 세이프존_알림_여부 character(1) */
@@ -265,10 +265,10 @@
 		(
 		     guar_no /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		    ,guar_nm /* guar_nm 보호자_명 character varying(40) */
+		    ,guar_nm /* guar_nm 보호자_명 character varying(256) */
 		</if>
 		<if test="guarTelNo != null">
-		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		</if>
 		<if test="guarPw != null">
 		    ,guar_pw /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -283,10 +283,10 @@
 		<if test="fcmToknVal != null">
 		    ,fcm_tokn_val /* fcm_tokn_val FCM_토큰_값 character varying(200) */
 		</if>
-		    ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		<if test="prntNo != null">
 		    ,prnt_no /* prnt_no 학부모_번호 numeric */
 		</if>
+		    ,dzone_alam_yn /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		    ,szone_alam_yn /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,fall_alam_yn /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,hbit_abnm_alam_yn /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -327,10 +327,10 @@
 		(
 		     #{guarNo} /* guar_no 보호자_번호 numeric */
 		<if test="guarNm != null">
-		    ,#{guarNm} /* guar_nm 보호자_명 character varying(40) */
+		    ,#{guarNm} /* guar_nm 보호자_명 character varying(256) */
 		</if>
 		<if test="guarTelNo != null">
-		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		</if>
 		<if test="guarPw != null">
 		    ,#{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -345,10 +345,10 @@
 		<if test="fcmToknVal != null">
 		    ,#{fcmToknVal} /* fcm_tokn_val FCM_토큰_값 character varying(200) */
 		</if>
-		    ,#{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		<if test="prntNo != null">
 		    ,#{prntNo} /* prnt_no 학부모_번호 numeric */
 		</if>
+		    ,#{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		    ,#{szoneAlamYn} /* szone_alam_yn 세이프존_알림_여부 character(1) */
 		    ,#{fallAlamYn} /* fall_alam_yn 낙상_알림_여부 character(1) */
 		    ,#{hbitAbnmAlamYn} /* hbit_abnm_alam_yn 심박_이상_알림_여부 character(1) */
@@ -389,10 +389,10 @@
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
 		<if test="guarNm != null">
-		    ,guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(40) */
+		    ,guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(256) */
 		</if>
 		<if test="guarTelNo != null">
-		    ,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		</if>
 		<if test="guarPw != null">
 		    ,guar_pw = #{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
@@ -409,11 +409,11 @@
 		<if test="fcmToknVal != null">
 		    ,fcm_tokn_val = #{fcmToknVal} /* fcm_tokn_val FCM_토큰_값 character varying(200) */
 		</if>
-		<if test="dzoneAlamYn != null">
-		    ,dzone_alam_yn = #{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
-		</if>
 		<if test="prntNo != null">
 		    ,prnt_no = #{prntNo} /* prnt_no 학부모_번호 numeric */
+		</if>
+		<if test="dzoneAlamYn != null">
+		    ,dzone_alam_yn = #{dzoneAlamYn} /* dzone_alam_yn 위험지역_알림_여부 character(1) */
 		</if>
 		<if test="szoneAlamYn != null">
 		    ,szone_alam_yn = #{szoneAlamYn} /* szone_alam_yn 세이프존_알림_여부 character(1) */

@@ -15,6 +15,7 @@
                ,act_tcnt_mcnt /* act_tcnt_mcnt 활동_시간_분수 numeric */
                ,rpet_act_cnt /* rpet_act_cnt 반복_활동_수 numeric */
                ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
+               ,apal_val /* apal_val 활동에너지소모량_값 numeric */
                ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
                ,judg_no /* judg_no 판정_번호 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -40,6 +41,7 @@
 		    ,act_tcnt_mcnt /* act_tcnt_mcnt 활동_시간_분수 numeric */
 		    ,rpet_act_cnt /* rpet_act_cnt 반복_활동_수 numeric */
 		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
+		    ,apal_val /* apal_val 활동에너지소모량_값 numeric */
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
@@ -63,6 +65,7 @@
 		    ,#{actTcntMcnt} /* act_tcnt_mcnt 활동_시간_분수 numeric */
 		    ,#{rpetActCnt} /* rpet_act_cnt 반복_활동_수 numeric */
 		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		    ,#{apalVal} /* apal_val 활동에너지소모량_값 numeric */
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
@@ -93,6 +96,9 @@
 		<if test="bmrVal != null">
 		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
 		</if>
+		<if test="apalVal != null">
+		    ,apal_val = #{apalVal} /* apal_val 활동에너지소모량_값 numeric */
+		</if>
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		</if>
@@ -121,6 +127,7 @@
 		    ,act_tcnt_mcnt /* act_tcnt_mcnt 활동_시간_분수 numeric */
 		    ,rpet_act_cnt /* rpet_act_cnt 반복_활동_수 numeric */
 		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
+		    ,apal_val /* apal_val 활동에너지소모량_값 numeric */
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
@@ -144,6 +151,7 @@
 		    ,#{actTcntMcnt} /* act_tcnt_mcnt 활동_시간_분수 numeric */
 		    ,#{rpetActCnt} /* rpet_act_cnt 반복_활동_수 numeric */
 		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		    ,#{apalVal} /* apal_val 활동에너지소모량_값 numeric */
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
@@ -170,6 +178,9 @@
 		</if>
 		<if test="bmrVal != null">
 		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		</if>
+		<if test="apalVal != null">
+		    ,apal_val = #{apalVal} /* apal_val 활동에너지소모량_값 numeric */
 		</if>
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */

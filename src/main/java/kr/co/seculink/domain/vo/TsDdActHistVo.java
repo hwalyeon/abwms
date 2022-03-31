@@ -25,6 +25,9 @@ public class TsDdActHistVo implements Serializable {
 	/* bmr_val 기초에너지소모량_값 numeric(null) */
 	private double bmrVal;
 
+	/* apal_val 활동에너지소모량_값 numeric(null) */
+	private double apalVal;
+
 	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
 	private double calCsumQty;
 
@@ -139,6 +142,21 @@ public class TsDdActHistVo implements Serializable {
 	 */
 	public void setBmrVal(double bmrVal) {
 		this.bmrVal = bmrVal;
+	}
+	/**
+	 * Get apal_val 활동에너지소모량_값 numeric(null)
+	 * @Return double apalVal
+	 */
+	public double getApalVal() {
+		return this.apalVal;
+	}
+	
+	/**
+	 * Set apal_val 활동에너지소모량_값 numeric(null)
+	 * @Param double apalVal
+	 */
+	public void setApalVal(double apalVal) {
+		this.apalVal = apalVal;
 	}
 	/**
 	 * Get cal_csum_qty 칼로리_소모_량 numeric(null)

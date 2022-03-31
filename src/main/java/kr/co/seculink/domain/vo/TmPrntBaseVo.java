@@ -13,7 +13,7 @@ public class TmPrntBaseVo implements Serializable {
 	/* sex_cd 성별_코드 character varying(20) */
 	private String sexCd;
 
-	/* prnt_nm 학부모_명 character varying(40) */
+	/* prnt_nm 학부모_명 character varying(256) */
 	private String prntNm;
 
 	/* hght_val 키_값 numeric(null) */
@@ -78,7 +78,7 @@ public class TmPrntBaseVo implements Serializable {
 		this.sexCd = sexCd;
 	}
 	/**
-	 * Get prnt_nm 학부모_명 character varying(40)
+	 * Get prnt_nm 학부모_명 character varying(256)
 	 * @Return String prntNm
 	 */
 	public String getPrntNm() {
@@ -86,7 +86,7 @@ public class TmPrntBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set prnt_nm 학부모_명 character varying(40)
+	 * Set prnt_nm 학부모_명 character varying(256)
 	 * @Param String prntNm
 	 */
 	public void setPrntNm(String prntNm) {

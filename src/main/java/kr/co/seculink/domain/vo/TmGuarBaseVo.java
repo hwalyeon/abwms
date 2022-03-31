@@ -10,10 +10,10 @@ public class TmGuarBaseVo implements Serializable {
 	/* guar_no 보호자_번호 numeric(null) */
 	private double guarNo;
 
-	/* guar_nm 보호자_명 character varying(40) */
+	/* guar_nm 보호자_명 character varying(256) */
 	private String guarNm;
 
-	/* guar_tel_no 보호자_전화_번호 character varying(20) */
+	/* guar_tel_no 보호자_전화_번호 character varying(256) */
 	private String guarTelNo;
 
 	/* guar_pw 보호자_비밀번호 character varying(400) */
@@ -31,11 +31,11 @@ public class TmGuarBaseVo implements Serializable {
 	/* fcm_tokn_val FCM_토큰_값 character varying(200) */
 	private String fcmToknVal;
 
-	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
-	private String dzoneAlamYn;
-
 	/* prnt_no 학부모_번호 numeric(null) */
 	private double prntNo;
+
+	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
+	private String dzoneAlamYn;
 
 	/* szone_alam_yn 세이프존_알림_여부 character(1) */
 	private String szoneAlamYn;
@@ -117,7 +117,7 @@ public class TmGuarBaseVo implements Serializable {
 		this.guarNo = guarNo;
 	}
 	/**
-	 * Get guar_nm 보호자_명 character varying(40)
+	 * Get guar_nm 보호자_명 character varying(256)
 	 * @Return String guarNm
 	 */
 	public String getGuarNm() {
@@ -125,14 +125,14 @@ public class TmGuarBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set guar_nm 보호자_명 character varying(40)
+	 * Set guar_nm 보호자_명 character varying(256)
 	 * @Param String guarNm
 	 */
 	public void setGuarNm(String guarNm) {
 		this.guarNm = guarNm;
 	}
 	/**
-	 * Get guar_tel_no 보호자_전화_번호 character varying(20)
+	 * Get guar_tel_no 보호자_전화_번호 character varying(256)
 	 * @Return String guarTelNo
 	 */
 	public String getGuarTelNo() {
@@ -140,7 +140,7 @@ public class TmGuarBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set guar_tel_no 보호자_전화_번호 character varying(20)
+	 * Set guar_tel_no 보호자_전화_번호 character varying(256)
 	 * @Param String guarTelNo
 	 */
 	public void setGuarTelNo(String guarTelNo) {
@@ -222,21 +222,6 @@ public class TmGuarBaseVo implements Serializable {
 		this.fcmToknVal = fcmToknVal;
 	}
 	/**
-	 * Get dzone_alam_yn 위험지역_알림_여부 character(1)
-	 * @Return String dzoneAlamYn
-	 */
-	public String getDzoneAlamYn() {
-		return this.dzoneAlamYn;
-	}
-	
-	/**
-	 * Set dzone_alam_yn 위험지역_알림_여부 character(1)
-	 * @Param String dzoneAlamYn
-	 */
-	public void setDzoneAlamYn(String dzoneAlamYn) {
-		this.dzoneAlamYn = dzoneAlamYn;
-	}
-	/**
 	 * Get prnt_no 학부모_번호 numeric(null)
 	 * @Return double prntNo
 	 */
@@ -250,6 +235,21 @@ public class TmGuarBaseVo implements Serializable {
 	 */
 	public void setPrntNo(double prntNo) {
 		this.prntNo = prntNo;
+	}
+	/**
+	 * Get dzone_alam_yn 위험지역_알림_여부 character(1)
+	 * @Return String dzoneAlamYn
+	 */
+	public String getDzoneAlamYn() {
+		return this.dzoneAlamYn;
+	}
+	
+	/**
+	 * Set dzone_alam_yn 위험지역_알림_여부 character(1)
+	 * @Param String dzoneAlamYn
+	 */
+	public void setDzoneAlamYn(String dzoneAlamYn) {
+		this.dzoneAlamYn = dzoneAlamYn;
 	}
 	/**
 	 * Get szone_alam_yn 세이프존_알림_여부 character(1)

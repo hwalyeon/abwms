@@ -7,25 +7,25 @@ import java.io.Serializable;
  */
 public class TcUserBaseVo implements Serializable {
 
-	/* user_id 사용자_ID character varying(40) */
+	/* user_id 사용자_ID character varying(20) */
 	private String userId;
 
-	/* user_pw 사용자_암호 character varying(100) */
+	/* user_pw 사용자_암호 character varying(200) */
 	private String userPw;
 
-	/* user_nm 사용자_명 character varying(40) */
+	/* user_nm 사용자_명 character varying(256) */
 	private String userNm;
 
-	/* blng_nm 소속_명 character varying(100) */
+	/* blng_nm 소속_명 character varying(40) */
 	private String blngNm;
 
-	/* tel_no 전화_번호 character varying(20) */
+	/* tel_no 전화_번호 character varying(256) */
 	private String telNo;
 
-	/* mtel_no 휴대폰_번호 character varying(20) */
+	/* mtel_no 휴대폰_번호 character varying(256) */
 	private String mtelNo;
 
-	/* mail_addr 메일_주소 character varying(50) */
+	/* mail_addr 메일_주소 character varying(256) */
 	private String mailAddr;
 
 	/* entr_dt 가입_일자 character(8) */
@@ -57,7 +57,7 @@ public class TcUserBaseVo implements Serializable {
 
 
 	/**
-	 * Get user_id 사용자_ID character varying(40)
+	 * Get user_id 사용자_ID character varying(20)
 	 * @Return String userId
 	 */
 	public String getUserId() {
@@ -65,14 +65,14 @@ public class TcUserBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set user_id 사용자_ID character varying(40)
+	 * Set user_id 사용자_ID character varying(20)
 	 * @Param String userId
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	/**
-	 * Get user_pw 사용자_암호 character varying(100)
+	 * Get user_pw 사용자_암호 character varying(200)
 	 * @Return String userPw
 	 */
 	public String getUserPw() {
@@ -80,14 +80,14 @@ public class TcUserBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set user_pw 사용자_암호 character varying(100)
+	 * Set user_pw 사용자_암호 character varying(200)
 	 * @Param String userPw
 	 */
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
 	/**
-	 * Get user_nm 사용자_명 character varying(40)
+	 * Get user_nm 사용자_명 character varying(256)
 	 * @Return String userNm
 	 */
 	public String getUserNm() {
@@ -95,14 +95,14 @@ public class TcUserBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set user_nm 사용자_명 character varying(40)
+	 * Set user_nm 사용자_명 character varying(256)
 	 * @Param String userNm
 	 */
 	public void setUserNm(String userNm) {
 		this.userNm = userNm;
 	}
 	/**
-	 * Get blng_nm 소속_명 character varying(100)
+	 * Get blng_nm 소속_명 character varying(40)
 	 * @Return String blngNm
 	 */
 	public String getBlngNm() {
@@ -110,14 +110,14 @@ public class TcUserBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set blng_nm 소속_명 character varying(100)
+	 * Set blng_nm 소속_명 character varying(40)
 	 * @Param String blngNm
 	 */
 	public void setBlngNm(String blngNm) {
 		this.blngNm = blngNm;
 	}
 	/**
-	 * Get tel_no 전화_번호 character varying(20)
+	 * Get tel_no 전화_번호 character varying(256)
 	 * @Return String telNo
 	 */
 	public String getTelNo() {
@@ -125,14 +125,14 @@ public class TcUserBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set tel_no 전화_번호 character varying(20)
+	 * Set tel_no 전화_번호 character varying(256)
 	 * @Param String telNo
 	 */
 	public void setTelNo(String telNo) {
 		this.telNo = telNo;
 	}
 	/**
-	 * Get mtel_no 휴대폰_번호 character varying(20)
+	 * Get mtel_no 휴대폰_번호 character varying(256)
 	 * @Return String mtelNo
 	 */
 	public String getMtelNo() {
@@ -140,14 +140,14 @@ public class TcUserBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set mtel_no 휴대폰_번호 character varying(20)
+	 * Set mtel_no 휴대폰_번호 character varying(256)
 	 * @Param String mtelNo
 	 */
 	public void setMtelNo(String mtelNo) {
 		this.mtelNo = mtelNo;
 	}
 	/**
-	 * Get mail_addr 메일_주소 character varying(50)
+	 * Get mail_addr 메일_주소 character varying(256)
 	 * @Return String mailAddr
 	 */
 	public String getMailAddr() {
@@ -155,7 +155,7 @@ public class TcUserBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set mail_addr 메일_주소 character varying(50)
+	 * Set mail_addr 메일_주소 character varying(256)
 	 * @Param String mailAddr
 	 */
 	public void setMailAddr(String mailAddr) {

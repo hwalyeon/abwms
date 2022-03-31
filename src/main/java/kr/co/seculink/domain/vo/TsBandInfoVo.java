@@ -13,7 +13,7 @@ public class TsBandInfoVo implements Serializable {
 	/* band_mdl_cd 밴드_모델_코드 character varying(20) */
 	private String bandMdlCd;
 
-	/* tel_no 전화_번호 character varying(20) */
+	/* tel_no 전화_번호 character varying(256) */
 	private String telNo;
 
 	/* blth_id 블루투스_ID character varying(40) */
@@ -81,7 +81,7 @@ public class TsBandInfoVo implements Serializable {
 		this.bandMdlCd = bandMdlCd;
 	}
 	/**
-	 * Get tel_no 전화_번호 character varying(20)
+	 * Get tel_no 전화_번호 character varying(256)
 	 * @Return String telNo
 	 */
 	public String getTelNo() {
@@ -89,7 +89,7 @@ public class TsBandInfoVo implements Serializable {
 	}
 	
 	/**
-	 * Set tel_no 전화_번호 character varying(20)
+	 * Set tel_no 전화_번호 character varying(256)
 	 * @Param String telNo
 	 */
 	public void setTelNo(String telNo) {

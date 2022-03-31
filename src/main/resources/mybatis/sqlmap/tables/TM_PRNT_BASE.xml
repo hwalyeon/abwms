@@ -11,7 +11,7 @@
 		/* Generated SQL SQL ID : tm_prnt_base.select */
         SELECT  prnt_no /* prnt_no 학부모_번호 numeric */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
-               ,prnt_nm /* prnt_nm 학부모_명 character varying(40) */
+               ,prnt_nm /* prnt_nm 학부모_명 character varying(256) */
                ,hght_val /* hght_val 키_값 numeric */
                ,wght_val /* wght_val 체중_값 numeric */
                ,bmi_val /* bmi_val BMI_값 numeric */
@@ -35,7 +35,7 @@
 		     prnt_no /* prnt_no 학부모_번호 numeric */
 		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		<if test="prntNm != null">
-		    ,prnt_nm /* prnt_nm 학부모_명 character varying(40) */
+		    ,prnt_nm /* prnt_nm 학부모_명 character varying(256) */
 		</if>
 		    ,hght_val /* hght_val 키_값 numeric */
 		    ,wght_val /* wght_val 체중_값 numeric */
@@ -59,7 +59,7 @@
 		     #{prntNo} /* prnt_no 학부모_번호 numeric */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		<if test="prntNm != null">
-		    ,#{prntNm} /* prnt_nm 학부모_명 character varying(40) */
+		    ,#{prntNm} /* prnt_nm 학부모_명 character varying(256) */
 		</if>
 		    ,#{hghtVal} /* hght_val 키_값 numeric */
 		    ,#{wghtVal} /* wght_val 체중_값 numeric */
@@ -85,7 +85,7 @@
 		UPDATE tm_prnt_base
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="prntNm != null">
-		    ,prnt_nm = #{prntNm} /* prnt_nm 학부모_명 character varying(40) */
+		    ,prnt_nm = #{prntNm} /* prnt_nm 학부모_명 character varying(256) */
 		</if>
 		<if test="hghtVal != null">
 		    ,hght_val = #{hghtVal} /* hght_val 키_값 numeric */
@@ -117,7 +117,7 @@
 		     prnt_no /* prnt_no 학부모_번호 numeric */
 		     sex_cd /* sex_cd 성별_코드 character varying(20) */
 		<if test="prntNm != null">
-		    ,prnt_nm /* prnt_nm 학부모_명 character varying(40) */
+		    ,prnt_nm /* prnt_nm 학부모_명 character varying(256) */
 		</if>
 		    ,hght_val /* hght_val 키_값 numeric */
 		    ,wght_val /* wght_val 체중_값 numeric */
@@ -141,7 +141,7 @@
 		     #{prntNo} /* prnt_no 학부모_번호 numeric */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		<if test="prntNm != null">
-		    ,#{prntNm} /* prnt_nm 학부모_명 character varying(40) */
+		    ,#{prntNm} /* prnt_nm 학부모_명 character varying(256) */
 		</if>
 		    ,#{hghtVal} /* hght_val 키_값 numeric */
 		    ,#{wghtVal} /* wght_val 체중_값 numeric */
@@ -164,7 +164,7 @@
 		DO UPDATE
 		<trim prefix="" prefixOverrides=",">
 		<if test="prntNm != null">
-		    ,prnt_nm = #{prntNm} /* prnt_nm 학부모_명 character varying(40) */
+		    ,prnt_nm = #{prntNm} /* prnt_nm 학부모_명 character varying(256) */
 		</if>
 		<if test="hghtVal != null">
 		    ,hght_val = #{hghtVal} /* hght_val 키_값 numeric */

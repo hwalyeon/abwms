@@ -10,7 +10,7 @@ public class TmStdtBaseVo implements Serializable {
 	/* stdt_no 학생_번호 numeric(null) */
 	private double stdtNo;
 
-	/* stdt_nm 학생_명 character varying(40) */
+	/* stdt_nm 학생_명 character varying(256) */
 	private String stdtNm;
 
 	/* band_id 밴드_ID character varying(20) */
@@ -123,7 +123,7 @@ public class TmStdtBaseVo implements Serializable {
 		this.stdtNo = stdtNo;
 	}
 	/**
-	 * Get stdt_nm 학생_명 character varying(40)
+	 * Get stdt_nm 학생_명 character varying(256)
 	 * @Return String stdtNm
 	 */
 	public String getStdtNm() {
@@ -131,7 +131,7 @@ public class TmStdtBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set stdt_nm 학생_명 character varying(40)
+	 * Set stdt_nm 학생_명 character varying(256)
 	 * @Param String stdtNm
 	 */
 	public void setStdtNm(String stdtNm) {

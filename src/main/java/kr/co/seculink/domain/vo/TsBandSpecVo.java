@@ -10,7 +10,7 @@ public class TsBandSpecVo implements Serializable {
 	/* band_id 밴드_ID character varying(20) */
 	private String bandId;
 
-	/* guar_tel_no 보호자_전화_번호 character varying(20) */
+	/* guar_tel_no 보호자_전화_번호 character varying(256) */
 	private String guarTelNo;
 
 	/* reg_dt 등록_일자 character(8) */
@@ -48,7 +48,7 @@ public class TsBandSpecVo implements Serializable {
 		this.bandId = bandId;
 	}
 	/**
-	 * Get guar_tel_no 보호자_전화_번호 character varying(20)
+	 * Get guar_tel_no 보호자_전화_번호 character varying(256)
 	 * @Return String guarTelNo
 	 */
 	public String getGuarTelNo() {
@@ -56,7 +56,7 @@ public class TsBandSpecVo implements Serializable {
 	}
 	
 	/**
-	 * Set guar_tel_no 보호자_전화_번호 character varying(20)
+	 * Set guar_tel_no 보호자_전화_번호 character varying(256)
 	 * @Param String guarTelNo
 	 */
 	public void setGuarTelNo(String guarTelNo) {

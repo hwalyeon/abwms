@@ -10,7 +10,7 @@
 	<select id="select" resultType="kr.co.seculink.domain.vo.TsBandSpecVo">
 		/* Generated SQL SQL ID : ts_band_spec.select */
         SELECT  band_id /* band_id 밴드_ID character varying(20) */
-               ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+               ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -20,7 +20,7 @@
         FROM   ts_band_spec
 		WHERE  1 = 1
 		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
-		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 	</select>
 
 	<insert id="insert" >
@@ -28,7 +28,7 @@
 		INSERT INTO ts_band_spec
 		(
 		     band_id /* band_id 밴드_ID character varying(20) */
-		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -43,7 +43,7 @@
 		VALUES
 		(
 		     #{bandId} /* band_id 밴드_ID character varying(20) */
-		     #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		     #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -69,7 +69,7 @@
 		</trim>
 		WHERE  1 = 1
 		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
-		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 	</update>
 	
 	<update id="merge" >
@@ -77,7 +77,7 @@
 		INSERT INTO ts_band_spec
 		(
 		     band_id /* band_id 밴드_ID character varying(20) */
-		     guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		     guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -92,7 +92,7 @@
 		VALUES
 		(
 		     #{bandId} /* band_id 밴드_ID character varying(20) */
-		     #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		     #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -120,6 +120,6 @@
 		DELETE FROM ts_band_spec
 		WHERE  1 = 1
 		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
-		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 	</delete>
 </mapper>
