@@ -115,6 +115,12 @@ public class TsGfixHistVo implements Serializable {
 	/* pal_val 신체활동수준_값 numeric(null) */
 	private double palVal;
 
+	/* bcsm_val 기초에너지소모량_값 numeric(null) */
+	private double bcsmVal;
+
+	/* acsm_val 활동에너지소모량_값 numeric(null) */
+	private double acsmVal;
+
 	/* pal_cd 신체활동수준_코드 character varying(20) */
 	private String palCd;
 
@@ -682,6 +688,36 @@ public class TsGfixHistVo implements Serializable {
 	 */
 	public void setPalVal(double palVal) {
 		this.palVal = palVal;
+	}
+	/**
+	 * Get bcsm_val 기초에너지소모량_값 numeric(null)
+	 * @Return double bcsmVal
+	 */
+	public double getBcsmVal() {
+		return this.bcsmVal;
+	}
+	
+	/**
+	 * Set bcsm_val 기초에너지소모량_값 numeric(null)
+	 * @Param double bcsmVal
+	 */
+	public void setBcsmVal(double bcsmVal) {
+		this.bcsmVal = bcsmVal;
+	}
+	/**
+	 * Get acsm_val 활동에너지소모량_값 numeric(null)
+	 * @Return double acsmVal
+	 */
+	public double getAcsmVal() {
+		return this.acsmVal;
+	}
+	
+	/**
+	 * Set acsm_val 활동에너지소모량_값 numeric(null)
+	 * @Param double acsmVal
+	 */
+	public void setAcsmVal(double acsmVal) {
+		this.acsmVal = acsmVal;
 	}
 	/**
 	 * Get pal_cd 신체활동수준_코드 character varying(20)

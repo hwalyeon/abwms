@@ -22,14 +22,8 @@ public class TsDdActHistVo implements Serializable {
 	/* rpet_act_cnt 반복_활동_수 numeric(null) */
 	private double rpetActCnt;
 
-	/* bcsm_val 기초에너지소모량_값 numeric(null) */
-	private double bcsmVal;
-
 	/* acsm_val 활동에너지소모량_값 numeric(null) */
 	private double acsmVal;
-
-	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
-	private double calCsumQty;
 
 	/* judg_no 판정_번호 numeric(null) */
 	private double judgNo;
@@ -129,21 +123,6 @@ public class TsDdActHistVo implements Serializable {
 		this.rpetActCnt = rpetActCnt;
 	}
 	/**
-	 * Get bcsm_val 기초에너지소모량_값 numeric(null)
-	 * @Return double bcsmVal
-	 */
-	public double getBcsmVal() {
-		return this.bcsmVal;
-	}
-	
-	/**
-	 * Set bcsm_val 기초에너지소모량_값 numeric(null)
-	 * @Param double bcsmVal
-	 */
-	public void setBcsmVal(double bcsmVal) {
-		this.bcsmVal = bcsmVal;
-	}
-	/**
 	 * Get acsm_val 활동에너지소모량_값 numeric(null)
 	 * @Return double acsmVal
 	 */
@@ -157,21 +136,6 @@ public class TsDdActHistVo implements Serializable {
 	 */
 	public void setAcsmVal(double acsmVal) {
 		this.acsmVal = acsmVal;
-	}
-	/**
-	 * Get cal_csum_qty 칼로리_소모_량 numeric(null)
-	 * @Return double calCsumQty
-	 */
-	public double getCalCsumQty() {
-		return this.calCsumQty;
-	}
-	
-	/**
-	 * Set cal_csum_qty 칼로리_소모_량 numeric(null)
-	 * @Param double calCsumQty
-	 */
-	public void setCalCsumQty(double calCsumQty) {
-		this.calCsumQty = calCsumQty;
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
