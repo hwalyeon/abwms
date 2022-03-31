@@ -18,7 +18,7 @@
 		     , TGB.PRNT_NO                    -- 학부모_번호
 		     , DECR(TPB.PRNT_NM)  as PRNT_NM_MALE    -- 학부모_명_남자
 		     , DECR(TPB2.PRNT_NM) as PRNT_NM_FEMALE --학부모_명_여자
-		from   TM_GUAR_BASE TGB               --보호자_기본
+		from   TM_GUAR_BASE TGB                        --보호자_기본
 			   left outer join TM_STDT_GUAR_CONN TSGC  --학생_보호자_연결
 			   on   TGB.GUAR_NO  = TSGC.GUAR_NO
 			   left outer JOIN TM_STDT_BASE TSB        --학생_기본

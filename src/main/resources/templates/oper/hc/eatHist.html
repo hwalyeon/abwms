@@ -54,23 +54,23 @@
 						</div>
 						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">아침</label>
 						<div class="col-xs-1"  style=" padding:6px 0px 0px 0px; width:30px;" >
-							<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="Y" false-value="N" v-on:change="mmelYnCk">
+							<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="Y" false-value="" v-on:change="mmelYnCk">
 						</div>
 						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">점심</label>
 						<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;" >
-							<input type="checkbox" name="amelYn" v-model="params.amelYn" true-value="Y" false-value="N">
+							<input type="checkbox" name="amelYn" v-model="params.amelYn" true-value="Y" false-value="">
 						</div>
 						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">저녁</label>
 						<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;" >
-							<input type="checkbox" name="emelYn" v-model="params.emelYn" true-value="Y" false-value="N">
+							<input type="checkbox" name="emelYn" v-model="params.emelYn" true-value="Y" false-value="">
 						</div>
 						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">간식</label>
 						<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;">
-							<input type="checkbox" name="smelYn" v-model="params.smelYn" true-value="Y" false-value="N">
+							<input type="checkbox" name="smelYn" v-model="params.smelYn" true-value="Y" false-value="">
 						</div>
 						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; margin-left:20px;width:70px;">아침 결식</label>
 						<div class="col-xs-1"  style=" padding:6px 0px 0px 0px; width:47px;" >
-							<input type="checkbox" name="mmelStarvYn" v-model="params.mmelStarvYn" true-value="N" false-value="N" v-on:change="mmelStarvYnCk">
+							<input type="checkbox" name="mmelStarvYn" v-model="params.mmelStarvYn" true-value="N" false-value="" v-on:change="mmelStarvYnCk">
 						</div>
 						<label class="col-xs-1 control-label" >보호자번호</label>
 						<div class="col-xs-1"   style="padding:0px">
@@ -119,9 +119,11 @@
 			</div>
 		</div>
     </div>
+	<div th:insert="~{js/oper/hc/eatHistDetl :: body}">  </div>  <!--섭취_이력 상세       -->
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/oper/hc/eatHist.js}"></script>
+	<script type="text/javascript" th:src="@{/js/oper/hc/eatHistDetl.js}"></script>
 </section>
 </body>
 </html>

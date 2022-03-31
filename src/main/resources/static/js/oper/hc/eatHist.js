@@ -68,21 +68,29 @@ let eatHist = new Vue({
                 {name: "stdtNo"       , index: "stdtNo"        , label: "학생 번호" 	         ,  width: 50 , align: "center" },
                 {name: "stdtNm"       , index: "stdtNm"        , label: "학생 명" 	             ,  width: 50 , align: "center" },
                 {name: "mmelFmenuSeq" , index: "mmelFmenuSeq"  , label: "아침 식단 번호"	         ,  width: 50 , align: "center" ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.mmelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.mmelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "mmelFmenuNm"  , index: "mmelFmenuNm"   , label: "아침 식단 명"            , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.mmelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.mmelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "amelFmenuSeq" , index: "amelFmenuSeq"  , label: "점심 식단 번호"          , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.amelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.amelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "amelFmenuNm"  , index: "amelFmenuNm"   , label: "점심 식단 명"            , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.amelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.amelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "emelFmenuSeq" , index: "emelFmenuSeq"  , label: "저녁 식단 번호"          , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.emelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.emelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "emelFmenuNm"  , index: "emelFmenuNm"   , label: "저녁 식단 명"            , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.emelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.emelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "smelFmenuSeq" , index: "smelFmenuSeq"  , label: "간식 식단 번호"          , width: 50 , align: "center"  ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.smelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.smelFmenuSeq}" data-guarNo="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "smelFmenuNm"  , index: "smelFmenuNm"   , label: "간식 식단 명"            , width: 50 , align: "center" ,formatter: function(cellValue, options, rowObject) {
-                        return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.smelFmenuSeq}" data-guarNo-id="${rowObject.guarNo}">${cellValue}</a>`;}},
+                        if(WebUtil.isNull(cellValue)) return '';
+                        else return `<a data-toggle="modal" class="links" data-target="#eatHistDetl" data-eatDetl data-placement="bottom" title="${cellValue}" data-fmenuSeq="${rowObject.smelFmenuSeq}" data-guarNo-id="${rowObject.guarNo}">${cellValue}</a>`;}},
                 {name: "telNo"        , index: "telNo"         , label: "학생(밴드)<br/>전화번호" , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
                 {name: "guarNo"       , index: "guarNo"        , label: "보호자 번호"             , width: 50 , align: "center" },
                 {name: "guarNm"       , index: "guarNm"        , label: "보호자 명"               , width: 50 , align: "center" },
@@ -172,7 +180,6 @@ let eatHist = new Vue({
                 }
             });
 		},
-
         //기준_일자_기간_선택
         bDPerSelect: function()
         {
