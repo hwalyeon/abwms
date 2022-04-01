@@ -40,7 +40,11 @@ let eatHistDetl = new Vue({
 			{
 				let $this = this;
 
-				$this.resetFmenuSpec();
+				$this.resetEatHistDetl();
+				//식단_구성_목록 초기화
+				$("#fmenuSpec_list").clearGridData();
+				//섭취_영양_정보_목록 초기화
+				$("#eatNutrSpec_list").clearGridData();
 
 				if (!WebUtil.isNull(fmenuSeq))
 				{
@@ -75,6 +79,7 @@ let eatHistDetl = new Vue({
 					$this.initGrid();
 					$this.searchFmenuSpecList(true);
 				},300);
+
 			},
 			initGrid: function()
 			{
@@ -120,7 +125,6 @@ let eatHistDetl = new Vue({
 					gridComplete: function ()
 					{
 						var grid = this;
-
 						$('td[rowspan="1"]', grid).each(function () {
 							var spans = $('td[rowspanid="' + this.id + '"]', grid).length + 1;
 
@@ -129,20 +133,21 @@ let eatHistDetl = new Vue({
 							}
 						});
 					}
+
 				}));
 				resizeJqGridWidth("fmenuSpec_list", "fmenuSpec_list_wrapper");
 
 				/*섭취_영양_정보_그리드*/
 				let eatNutrSpecColModels =
 				[
-					{name: "nutrNm"     , index: "nutrNm"     , label: "영양소" , width: 90 , align: "center" },
-					{name: "nutrQty"    , index: "nutrQty"    , label: "섭취량" , width: 90 , align: "left"   },
-					{name: "nutrUnitCd" , index: "nutrUnitCd" , label: "단위"   , width: 90 , align: "center" }
+					{name: "nutrNm"     , index: "nutrNm"     , label: "영양소" , width: 120 , align: "center" },
+					{name: "nutrQty"    , index: "nutrQty"    , label: "섭취량" , width: 90  , align: "left"   },
+					{name: "nutrUnitCd" , index: "nutrUnitCd" , label: "단위"   , width: 60  , align: "center" }
 				];
 				$("#eatNutrSpec_list").jqGrid("GridUnload");
 				$("#eatNutrSpec_list").jqGrid($.extend(true, {}, commonGridOptions(), {
 					mtype    : 'post',
-					height   : 425,
+					height   : 440,
 					datatype : "local",
 					url      : '/oper/hc/eatHist/searchEatNutrSpecList.ab',
 					pager    : "#eatNutrSpec_pager_list",
@@ -186,6 +191,17 @@ let eatHistDetl = new Vue({
 					loadComplete: function(response) {
 						if ( response.rtnData.result == 0 ) {
 							Swal.alert(["데이터가 없습니다.", "info"]);
+						}else{
+
+							//섭취_영양_정보 자동 세팅(첫 번째 음식)
+							let item = $('#fmenuSpec_list').jqGrid('getRowData', 1);
+							if (!!item.foodNo)
+							{
+								$this.params.eatNutrSpec.foodNo = item.foodNo;
+								$this.params.eatNutrSpec.eatQty = item.eatQty;
+								$this.params.eatNutrSpec.foodNm = item.foodNm;
+								$this.searcheEtNutrSpecList(true);
+							}
 						}
 					}
 				}).trigger("reloadGrid");
@@ -213,36 +229,35 @@ let eatHistDetl = new Vue({
 				}).trigger("reloadGrid");
 			},
 			/*초기화_식단_정보_*/
-			resetFmenuSpec: function() {
-				this.params.fmenuSpec =
+			resetEatHistDetl: function() {
+				this.params =
 				{
-					guarNo        : '' , //보호자_번호
-					fmenuSeq      : '' , //식단_번호
-					fmenuNm       : '' , //식단_명
-					fmenuCtgry    : '' , //식단_유형
-					fmenuQty      : '' , //식단_용량
-					paging        : 'Y',
-					totalCoun     : 0  ,
-					rowCount      : 30 ,
-					currentPage   : 1  ,
-					currentIndex  : 0
+					fmenuSpec:
+						{
+							guarNo: '', //보호자_번호
+							fmenuSeq: '', //식단_순번
+							fmenuNm: '', //식단_명
+							fmenuCtgry: '', //식단_유형
+							fmenuQty: '', //식단_용량
+							paging: 'Y',
+							totalCoun: 0,
+							rowCount: 30,
+							currentPage: 1,
+							currentIndex: 0
+						},
+					eatNutrSpec:
+						{
+							foodNo: '', //음식_번호
+							foodNm: '', //음식_번호
+							eatQty: '', //섭취_량
+							paging: 'Y',
+							totalCoun: 0,
+							rowCount: 30,
+							currentPage: 1,
+							currentIndex: 0
+						}
 				}
-				$("#fmenuSpec_list").clearGridData();
-			},
-			/*초기화_섭취_영양_정보*/
-			resetEatNutrSpec: function() {
-				this.params.eatNutrSpec =
-					{
-						foodNo        : '' , //음식_번호
-						eatQty        : '' , //섭취_량
-						paging        : 'Y',
-						totalCoun     : 0  ,
-						rowCount      : 30 ,
-						currentPage   : 1  ,
-						currentIndex  : 0
-					}
-				$("#eatNutrSpec_list").clearGridData();
-			},
+			}
 		},
 	computed:
 		{
