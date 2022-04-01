@@ -7,7 +7,14 @@ import java.util.Map;
 
 public interface EatHistService
 {
-	// 스트레스_지수_이력 리스트 조회
+	// 섭취_이력 리스트 조회
 	public List<Map<String, String>> searchEatHistList(Map<String, String> params) throws BizException;
+	
+	// 식단_정보 리스트 조회
+	public List<Map<String, String>> searchFmenuSpecList(Map<String, String> params) throws BizException;
+
+	// 영양소_섭취_정보 리스트 조회
+	public List<Map<String, String>> searchEatNutrSpecList(Map<String, String> params) throws BizException;
+
 }
  

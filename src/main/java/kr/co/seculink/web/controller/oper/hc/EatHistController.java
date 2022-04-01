@@ -26,10 +26,10 @@ public class EatHistController {
 	@Autowired
 	private EatHistService eatHistService;
 
-	// 스트레스_지수_이력 리스트 조회
+	// 섭취_이력 리스트 조회
 	@ResponseBody
-	@RequestMapping("/oper/hc/eatHist/eatHistList.ab")
-	public RtnMsg searchSEatistList(@RequestBody(required = false) Map<String, String> params) throws BizException {
+	@RequestMapping("/oper/hc/eatHist/searchEatHistList.ab")
+	public RtnMsg searchEatHistList(@RequestBody(required = false) Map<String, String> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
@@ -46,9 +46,9 @@ public class EatHistController {
 		return vo;
 	}
 
-	//스트레스_지수_이력 리스트 엑셀다운로드
+	//섭취_이력 리스트 엑셀다운로드
 	@ResponseBody
-	@RequestMapping("/oper/hc/eatHist/eatHistList/excel.ab")
+	@RequestMapping("/oper/hc/eatHist/searchEatHistList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required = false) Map<String, String> params) throws BizException {
 	
 		params.put("paging", "N");
@@ -90,5 +90,44 @@ public class EatHistController {
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
 	}
+
+	// 식단_정보 리스트 조회
+	@ResponseBody
+	@RequestMapping("/oper/hc/eatHist/searchFmenuSpecList.ab")
+	public RtnMsg searchFmenuSpecList(@RequestBody(required = false) Map<String, String> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = eatHistService.searchFmenuSpecList(params);
+		rtnMap.put("result", result);
+
+		if (!GEUtil.isEmpty(params.get("paging"))) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List) eatHistService.searchFmenuSpecList(params)).size());
+		}
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	// 섭취_영양_정보 리스트 조회
+	@ResponseBody
+	@RequestMapping("/oper/hc/eatHist/searchEatNutrSpecList.ab")
+	public RtnMsg searcheEtNutrSpecList(@RequestBody(required = false) Map<String, String> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+		List<Map<String, String>> result = eatHistService.searchEatNutrSpecList(params);
+		rtnMap.put("result", result);
+
+		if (!GEUtil.isEmpty(params.get("paging"))) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List) eatHistService.searchEatNutrSpecList(params)).size());
+		}
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
 
 }

@@ -21,11 +21,25 @@ public class EatHistServiceImpl implements EatHistService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	// 스트레스_지수_이력 리스트 조회
+	// 섭취_이력 리스트 조회
 	public List<Map<String, String>> searchEatHistList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("oper.hc.eatHist.selectEatHistList", params);
 		
+		return result;
+	}
+	// 식단_정보 리스트 조회
+	public List<Map<String, String>> searchFmenuSpecList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("oper.hc.eatHist.selectFmenuSpecList", params);
+
+		return result;
+	}
+	// 섭취_영양소_정보 리스트 조회
+	public List<Map<String, String>> searchEatNutrSpecList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("oper.hc.eatHist.selectEatNutrSpecList", params);
+
 		return result;
 	}
 }

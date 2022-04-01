@@ -70,4 +70,53 @@
 		<if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
+
+	<!--식단_정보_리스트 조회-->
+	<select id="selectFmenuSpecList" parameterType="java.util.Map" resultType="MybatisMap">
+		select   fmenuSpec.FMENU_CTGRY                            as FMENU_CTGRY /* fmenu_ctgry  식단_유형                          */
+		       , fmenuSpec.FMENU_SEQ                              as FMENU_SEQ   /* fmenu_seq    식단표_순번 numeric                */
+    	       , fmenuSpec.FMENU_NM                               as FMENU_NM    /* fmenu_nm     식단표_명   character varying(100) */
+		       , fmenuSpec.FOOD_NO                                as FOOD_NO     /* food_no      식품_번호   numeric                */
+    	       , fmenuSpec.FOOD_NM                                as FOOD_NM     /* food_nm      식품_명     character varying(100) */
+    	       , fmenuSpec.QTY                                    as QTY         /* qty          수량        numeric                */
+    	       , fmenuSpec.EAT_QTY                                as EAT_QTY     /* eat_qty      섭취_용량   numeric                */
+    	       , sum(fmenuSpec.EAT_QTY) over()                    as fmenu_qty   /* fmenu_qty    식단_용량   numeric                */
+		from    (
+		           select  case
+		                   when TFB.MMEL_YN = 'Y' then '아침'
+		                   when TFB.AMEL_YN = 'Y' then '점심'
+		                   when TFB.EMEL_YN = 'Y' then '저녁'
+		                   when TFB.SMEL_YN = 'Y' then '간식' end as FMENU_CTGRY  /* fmenu_ctgry  식단_유형                          */
+		                 , TFB.FMENU_SEQ                          as FMENU_SEQ    /* fmenu_seq    식단표_순번 numeric                */
+		                 , TFB.FMENU_NM                           as FMENU_NM     /* fmenu_nm     식단표_명   character varying(100) */
+		                 , TFI.FOOD_NM                            as FOOD_NM      /* food_nm      식품_명     character varying(100) */
+		                 , TFI.FOOD_NO                            as FOOD_NO      /* food_no      식품_번호   numeric                */
+		                 , TFS.QTY                                as QTY          /* qty          수량        numeric                */
+		                 , (TFI.OTIM_EAT_QTY*TFS.QTY)             as EAT_QTY      /* eat_qty      섭취_용량   numeric                */
+		           from    TS_FMENU_BASE TFB                                      --식단_기본
+		                   inner join TS_FMENU_SPEC TFS
+		                          on  TFB.GUAR_NO = TFS.GUAR_NO
+		                          and TFB.FMENU_SEQ = TFS.FMENU_SEQ
+		                   inner join TI_FOOD_INFO TFI                            --음식_정보
+		                           on TFS.FOOD_NO = TFI.FOOD_NO
+		           where   1=1
+		           and     TFB.GUAR_NO   = #{guarNo}::NUMERIC
+		           and     TFB.FMENU_SEQ = #{fmenuSeq}::NUMERIC
+			     ) fmenuSpec
+		where    1=1
+		group by fmenuSpec.FMENU_CTGRY, fmenuSpec.FMENU_NM, fmenuSpec.FOOD_NM, fmenuSpec.QTY , fmenuSpec.EAT_QTY, fmenuSpec.FOOD_NO, fmenuSpec.FMENU_SEQ
+	</select>
+
+	<!--섭취_영양소_정보_리스트 조회-->
+	<select id="selectEatNutrSpecList" parameterType="java.util.Map" resultType="MybatisMap">
+	    select TFE.FOOD_NO                              as FOOD_NO      /* food_no      식품_번호        numeric               */
+             , CONCAT(TNI.NUTR_NM,'(',TFE.NUTR_CD,')')  as NUTR_NM      /* nutr_nm      영양소_명        character varying(40) */
+             , (TFE.NUTR_QTY * #{eatQty}::NUMERIC )     as NUTR_QTY     /* nutr_qty     영양소_용량      numeric               */
+             , TNI.NUTR_UNIT_CD                         as NUTR_UNIT_CD /* nutr_unit_cd 영양소_단위_코드 character varying(20) */
+        FROM   TI_FOOD_ELEM TFE                                          -- 식품_성분  TFE
+               inner join TI_NUTR_INFO TNI                               -- 영양소_정보 TNI
+                       on TFE.NUTR_CD = TNI.NUTR_CD
+        where 1=1
+        and   TFE.FOOD_NO = #{foodNo}::NUMERIC                          /* food_no 식품_번호 numeric */
+	</select>
 </mapper>
