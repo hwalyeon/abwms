@@ -7,10 +7,7 @@ import java.util.Map;
 
 public interface LocHistService
 {
+	//위치 이력 리스트
 	public List<Map<String, String>> searchLocHistList(Map<String, String> params) throws BizException;
-
-	public Map<String, Object> searchStdtDetlInfo(Map<String, String> params) throws BizException;
-
-	public void saveStdtInfo(Map<String, Object> params) throws BizException;
 }
 

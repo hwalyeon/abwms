@@ -21,26 +21,26 @@ public class DgemHistServiceImpl implements DgemHistService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
+	//위험감정 발생이력 목록
 	public List<Map<String, String>> searchDgemHistList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("oper.dgem.dgemHist.searchDgemHistList", params);
 
 		return result;
 	}
-
+	//학생정보 및 보호자 정보
 	public List<Map<String, String>> searchStdtGuarList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("oper.dgem.dgemHist.searchStdtGuarList", params);
 
 		return result;
 	}
-
+	//학교정보 리스트 조회
 	public List<Map<String, String>> searchLocList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, String>> result = dao.selectList("oper.dgem.dgemHist.searchLocList", params);
 
 		return result;
 	}
-
 }
 

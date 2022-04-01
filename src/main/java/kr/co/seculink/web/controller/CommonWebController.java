@@ -168,6 +168,14 @@ public class CommonWebController {
 	@RequestMapping("/oper/dgem/dszoneHist.pg")
 	public String getOperDgemDszoneHist() {return "oper/dgem/dszoneHist";}
 
+	//공공안전지역 탐지현황
+	@RequestMapping("/oper/dgem/porgZoneStat.pg")
+	public String getOperDgemPorgZoneStat() {return "oper/dgem/porgZoneStat";}
+
+	//보호자관심지역 현황
+	@RequestMapping("/oper/dgem/guarZoneStat.pg")
+	public String getOperDgemGuarZoneStat() {return "oper/dgem/guarZoneStat";}
+
 	//스트레스지수 이력
 	@RequestMapping("/oper/hc/strsHist.pg")
 	public String getOperHcStrsHist() {return "oper/hc/strsHist";}

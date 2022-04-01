@@ -18,13 +18,16 @@ let stdtGuarDetl = new Vue({
 		},
 		code: {
 		},
+		callback: null
 	},
 
 	methods: {
 
-		initialize: function() {
+		initialize: function(callback) {
 
 			let $this = this;
+
+			$this.callback = callback;
 
 			$this.initValue();
 
@@ -79,9 +82,10 @@ let stdtGuarDetl = new Vue({
 				},
 				ondblClickRow: function(rowId, status, e) {
 					let item = $('#stdtguar_list').jqGrid('getRowData', rowId);
-					dgemHist.setData(item);
+					$this.callback(item);
+					/*dgemHist.setData(item);
 					locHist.setData(item);
-					console.log(item);
+					dszoneHist.setData(item);*/
 					closeModal($('#stdtGuarDetlPopup'));
 				},
 				gridComplete: function(rowId, rowObject) {

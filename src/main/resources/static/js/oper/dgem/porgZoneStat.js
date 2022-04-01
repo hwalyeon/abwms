@@ -1,5 +1,5 @@
-let dszoneHist = new Vue({
-    el: "#dszoneHist",
+let porgZoneStat = new Vue({
+    el: "#porgZoneStat",
     data: {
         params : {
             plcClssCd    :'',
@@ -14,8 +14,8 @@ let dszoneHist = new Vue({
             locNm        :'',
             rdPublGuarDiv:'all',
             locApntCd    :'',
-            mmDd         :'TODAY',
-            plcClssCd    :'DZONE',
+            mmDd         :'RECENT_MONTH',
+            plcClssCd    :'',
             paging       :'Y',
             totalCount   : 0,
             rowCount     : 30,
@@ -71,21 +71,21 @@ let dszoneHist = new Vue({
             searchSpecFg:''
         },
         draw: {
-            flag      :false,
-            id        :-1,
-            cntrPos   :null,
-            line      :null,
-            circle    :null,
-            rectangle :null,
-            lat       :0,
-            lng       :0,
-            southLat  :0,
-            northLat  :0,
-            westLng   :0,
-            eastLng   :0,
-            dist      :50,
-            title     :'',
-            infoWndw  :null,
+            flag      : false,
+            id        : -1,
+            cntrPos   : null,
+            line      : null,
+            circle    : null,
+            rectangle : null,
+            lat       : 0,
+            lng       : 0,
+            southLat  : 0,
+            northLat  : 0,
+            westLng   : 0,
+            eastLng   : 0,
+            dist      : 50,
+            title     : '',
+            infoWndw  : null,
         },
         code : {
             plcClssCdList       :[],
@@ -301,10 +301,10 @@ let dszoneHist = new Vue({
             }
         },
         locSearchDetlPopup: function() {
-            locSearchDetl.initialize(this.setData);
+            locSearchDetl.initialize();
         },
         stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize(this.setData);
+            stdtGuarDetl.initialize();
         },
         getLatPerMeter: function() {
             // 위도거리 : 1도=111Km
@@ -415,19 +415,16 @@ let dszoneHist = new Vue({
             $this.code.plcCdListFilter = $this.code.plcCdList;
             $this.code.plcCdListFilterSpec = $this.code.plcCdList;
             $this.searchAddrHeadList();
-
         },
         initGrid: function() {
             let $this = this;
 
             let locListColModels = [
-                {name: "stndDt"         , index: "stndDt"       , label: "기준일자"    , width: 70         , align: "center"   ,fixed:true},
-                {name: "locNo"          , index: "locNo"        , label: "위치번호"    , width: 55         , align: "center"   ,fixed:true},
-                {name: "locNm"          , index: "locNm"        , label: "위치명"      , width: 100        , align: "center"   ,fixed:true},
-                {name: "locApntNm"      , index: "locApntNm"    , label: "위치지정명"   , width: 100        , align: "center"  ,fixed:true},
-                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"  , width: 69          , align: "center"   ,fixed:true},
-                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"    , width: 55          , align: "center"   ,fixed:true},
-                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 55      , align: "center"   ,fixed:true}
+                {name: "locNo"          , index: "locNo"        , label: "위치번호"       , width: 55         , align: "center"  },
+                {name: "locNm"          , index: "locNm"        , label: "위치명"         , width: 200        , align: "center" },
+                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"      , width: 69         , align: "center" },
+                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"        , width: 55         , align: "center" },
+                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 55         , align: "center" }
             ];
 
             $("#locInfo_list").jqGrid("GridUnload");
@@ -435,7 +432,7 @@ let dszoneHist = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 height: 450,
-                url: '/oper/dgem/dszoneHist/searchLocInfoList.ab',
+                url: '/oper/dgem/porgZoneStat/searchLocInfoList.ab',
                 pager: "#locInfo_pager_list",
                 colModel: locListColModels,
                 onPaging : function(data) {
@@ -526,7 +523,7 @@ let dszoneHist = new Vue({
             let $this = this;
 
             AjaxUtil.post({
-                url: "/oper/dgem/dszoneHist/searchLocInfoSelect.ab",
+                url: "/oper/dgem/porgZoneStat/searchLocInfoSelect.ab",
                 param: {},
                 success: function(response) {
                     $this.code.wordHead1List = [];
@@ -558,7 +555,7 @@ let dszoneHist = new Vue({
             }
 
             AjaxUtil.post({
-                url: "/oper/dgem/dszoneHist/searchLocInfoSpec.ab",
+                url: "/oper/dgem/porgZoneStat/searchLocInfoSpec.ab",
                 param: params,
                 success: function(response) {
                     if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 ) {
@@ -602,7 +599,7 @@ let dszoneHist = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/oper/dgem/dszoneHist/searchLocInfoList/excel.ab",
+                url: "/oper/dgem/porgZoneStat/searchLocInfoList/excel.ab",
                 param: params,
                 success: function(response) {
                     saveFileLocal(response, '위치정보목록.xls');
@@ -627,8 +624,8 @@ let dszoneHist = new Vue({
                 locNm:'',
                 rdPublGuarDiv:'all',
                 locApntCd:'',
-                mmDd     :'TODAY',
-                plcClssCd:'DZONE',
+                mmDd     :'RECENT_MONTH',
+                plcClssCd:'',
                 paging: 'Y',
                 totalCount: 0,
                 rowCount: 30,
@@ -680,11 +677,11 @@ let dszoneHist = new Vue({
             }
 
             AjaxUtil.post({
-                url: "/oper/dgem/dszoneHist/saveLocInfoSpec.ab",
+                url: "/oper/dgem/porgZoneStat/saveLocInfoSpec.ab",
                 param: $this.locInfoSpec,
                 success: function(response) {
                     Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                        dszoneHist.searchLocInfoSpec(false);
+                        porgZoneStat.searchLocInfoSpec(false);
                     });
                 },
                 error: function (response) {
@@ -707,11 +704,11 @@ let dszoneHist = new Vue({
             $this.locInfoSpec.crud = 'D';
 
             AjaxUtil.post({
-                url: "/oper/dgem/dszoneHist/saveLocInfoSpec.ab",
+                url: "/oper/dgem/porgZoneStat/saveLocInfoSpec.ab",
                 param: $this.locInfoSpec,
                 success: function(response) {
                     Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                        dszoneHist.searchLocInfoList(true);
+                        porgZoneStat.searchLocInfoList(true);
                     });
                 },
                 error: function (response) {

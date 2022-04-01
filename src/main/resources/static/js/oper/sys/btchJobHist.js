@@ -2,8 +2,10 @@ let btchJobHist = new Vue({
     el: "#btchJobHist",
     data: {
         params: {
-            emtrDtFr    :'',
+            entrDtFr    :'',
             entrDtTo    :'',
+            endDtFr    :'',
+            endDtTo    :'',
             schlNm      :'',
             occrDttm    :'',
             locNm       :'',
@@ -26,6 +28,7 @@ let btchJobHist = new Vue({
             uptTm       :'',
             uptUserId   :'',
             mmDd        :'THIS_MONTH',
+            mmDd2       :'THIS_MONTH',
             paging      :'Y',
             totalCount  : 0,
             rowCount    : 30,
@@ -34,6 +37,7 @@ let btchJobHist = new Vue({
         },
         code:{
             mmDdList           : [] ,
+            mmDdList2          : [] ,
             plcClssCdList      : [] , //장소_구분_코드_리스트
         },
     },
@@ -56,10 +60,13 @@ let btchJobHist = new Vue({
         },
         initValue: function() {
             let $this = this;
-            $this.code.mmDdList = CodeUtil.getPeriodDateList();
+            $this.code.mmDdList  = CodeUtil.getPeriodDateList();
+            $this.code.mmDdList2 = CodeUtil.getPeriodDateList();
             const terms = getPeriodDate($this.params.mmDd);
             this.params.entrDtFr = terms.strDt;
             this.params.entrDtTo = terms.endDt;
+            this.params.endDtFr  = terms.strDt;
+            this.params.endDtTo  = terms.endDt;
         },
         mmDdSelect: function()
         {
@@ -67,6 +74,13 @@ let btchJobHist = new Vue({
             const terms = getPeriodDate($this.params.mmDd);
             this.params.entrDtFr = terms.strDt;
             this.params.entrDtTo = terms.endDt;
+        },
+        mmDdSelect2: function()
+        {
+            let $this = this;
+            const terms = getPeriodDate($this.params.mmDd2);
+            this.params.endDtFr = terms.strDt;
+            this.params.endDtTo = terms.endDt;
         },
         initCodeList: function() {
             let $this = this;
@@ -80,28 +94,22 @@ let btchJobHist = new Vue({
         {
             let $this = this;
             let colModels = [
-                {name: "crud"              , index: "crud"              , label: "crud"		 	 , hidden: true                                  },
-                {name: "occrDttm"          , index: "occrDttm"          , label: "발생일시"		 , width: 80     , align: "center" },
-                {name: "schlNm"            , index: "schlNm"            , label: "학교명"		 , width: 80     , align: "center" },
-                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"	     , width: 110    , align: "center" },
-                {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 , width: 80     , align: "center" },
-                {name: "locNm"             , index: "locNm"             , label: "장소"		     , width: 80     , align: "center" },
-                {name: "plcClssCd"         , index: "plcClssCd"         , label: "장소분류"	     , width: 80     , align: "center" },
-                {name: "latVal"            , index: "latVal"            , label: "위도"	         , width: 110    , align: "center" },
-                {name: "lonVal"            , index: "lonVal"            , label: "경도"           , width: 110    , align: "center" },
-                {name: "nearLocNo"         , index: "nearLocNo"         , label: "위치명"	     , width: 110    , align: "center" },
-                {name: "addrBase"          , index: "addrBase"          , label: "주소"		     , width: 110     , align: "center" },
-                {name: "telNo"             , index: "telNo"             , label: "학생 전화번호"	 , width: 80     , align: "center" },
-                {name: "guarNo"            , index: "guarNo"            , label: "보호자번호"  	 , width: 80     , align: "center" },
-                {name: "guarNm"            , index: "guarNm"            , label: "보호자명"	 	 , width: 100    , align: "center" },
-                {name: "guarTelNo"         , index: "guarTelNo"         , label: "보호자 전화번호"  , width: 100    , align: "center" }
+                {name: "crud"           , index: "crud"           , label: "crud"		 , hidden: true                    },
+                {name: "strtDt"         , index: "strtDt"         , label: "시작일자"	 , width: 80     , align: "center" },
+                {name: "endDt"          , index: "endDt"          , label: "종료일자"	 , width: 80     , align: "center" },
+                {name: "jobId"          , index: "jobId"          , label: "작업ID"		 , width: 80     , align: "center" },
+                {name: "jobNm"          , index: "jobNm"          , label: "작업명"		 , width: 80     , align: "center" },
+                {name: "jobHistNo"      , index: "jobHistNo"      , label: "작업이력번호"	 , width: 110    , align: "center" },
+                {name: "rmrk"           , index: "rmrk"           , label: "비고"		 , width: 80     , align: "center" },
+                {name: "rsltCntn"       , index: "rsltCntn"       , label: "결과내용"	 , width: 80     , align: "center" },
+                {name: "rsltCd"         , index: "rsltCd"         , label: "결과코드"	 , width: 80     , align: "center" }
             ];
 
             $("#grid_list").jqGrid("GridUnload");
             $("#grid_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
-                url: '/oper/dgem/locHist/searchLocHistList.ab',
+                url: '/oper/sys/btchJobHist/searchBtchJobHistList.ab',
                 pager: '#grid_pager_list',
                 height: 450,
                 colModel: colModels,
@@ -113,28 +121,6 @@ let btchJobHist = new Vue({
                         $this.searchLocHistList(false);
                     })
                 },
-                gridComplete: function() {
-                    let grid = this;
-
-                    $(grid).tableRowSpan(["occrDttm","schlNm","stdtNo","stdtNm","locNm","plcClssCd","latVal","lonVal","nearLocNo","addrBase"
-                                                 ,"telNo","regDt","regTm","regUserId","uptDt","uptTm","uptUserId"], "stdtNo");
-                    //밴드 상세 팝업 생성
-                    $("#grid_list").find('A.links[data-band]').on('click', function(e) {
-                        stdtInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
-                    });
-                    //보호자 상세 팝업 생성
-                    $("#grid_list").find('A.links[data-guar-tel]').on('click', function(e) {
-                        bandOpenInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-tel-no'))
-                    });
-                    //학부모정보 상세 팝업
-                    $("#grid_list").find('A.links[data-prnt]').on('click', function(e) {
-                        guarInfoMng.regPrntInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('prnt-no'),$(e.target).data('sex-cd'))
-                    });
-                    //보호자(사용자)정보 상세 팝업
-                    $("#grid_list").find('A.links[data-guar]').on('click', function(e) {
-                        guarInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-no'),$(e.target).data('stdt-no'))
-                    });
-                }
             }));
 
             resizeJqGridWidth("grid_list", "grid_list_wrapper");
@@ -160,37 +146,6 @@ let btchJobHist = new Vue({
             }).trigger("reloadGrid");
 
         },
-        setData: function(data) {
-            console.log(data);
-            let $this = this;
-            $this.params.stdtNo = data.stdtNo;
-            $this.params.stdtNm = data.stdtNm;
-            $this.params.guarNo = data.guarNo;
-            $this.params.guarNm = data.guarNm;
-            $this.params.locNm  = data.locNm;
-        },
-        stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize();
-        },
-
-        locSearchDetlPopup: function() {
-            locSearchDetl.initialize();
-        },
-
-        stdtInfoDetlPopup: function(stdtNo, guarNo) {
-            stdtInfoDetl.initPage(stdtNo, guarNo);
-        },
-        regBandOpenInfoDetlPopup: function(bandId) {
-            bandOpenInfoDetl.initPage(bandId, function(){  stdtInfoMng.searchDgemHistList(true) });
-        },
-        //보호자(사용자)정보 상세 팝업
-        regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-            guarInfoDetl.initPage(guarNo, function(){ btchJobHist.searchLocHistList(true) });
-        },
-        //학부모정보 상세 팝업
-        regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-            prntInfoDetl.initPage(prntNo, sexCd, function(){ btchJobHist.searchLocHistList(true) });
-        },
         downloadExcel : function()
         {
             let $this = this;
@@ -198,7 +153,7 @@ let btchJobHist = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/oper/dgem/locHist/searchLocHistList/excel.ab",
+                url: "/oper/sys/btchJobHist/searchBtchJobHistList/excel.ab",
                 param: params,
                 success: function(response)
                 {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="oper.dgem.dszoneHist">
+<mapper namespace="oper.dgem.guarZoneStat">
 
 	<!-- 위치정보_관리_조회_조건_조회_1-->
 	<select id="searchLocInfoSelect" parameterType="java.util.Map" resultType="MybatisMap">
@@ -22,7 +22,7 @@
 	<!-- 위치정보_관리_학부모_학생_조건_조회-->
 	<select id="searchPrntNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT		PRNT_NO,
-					PRNT_NO || ': ' || ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)),' / ') AS PRNT_NO_NM
+					PRNT_NO || ': ' || ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM),' / ') AS PRNT_NO_NM
 		FROM		TM_PRNT_BASE TPB
 		WHERE 		1=1
 		GROUP BY	PRNT_NO
@@ -32,7 +32,7 @@
 	<!-- 위치정보_관리_학부모_학생_조건_조회_2-->
 	<select id="searchStdtNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT		STDT_NO,
-					STDT_NO || ': ' || DECR(STDT_NM) AS STDT_NO_NM,
+					STDT_NO || ': ' || STDT_NM AS STDT_NO_NM,
 					PRNT_NO
 		FROM		TM_STDT_BASE
 		WHERE 		1=1
@@ -42,59 +42,28 @@
 
 	<!-- 위치정보_관리_리스트_조회-->
 	<select id="searchLocInfoList" parameterType="java.util.Map" resultType="MybatisMap">
-		select         TZDS.STND_DT		/*기준일자*/
-		,TZDS.LOC_NO		/*위치번호*/
-		,TLIB.LOC_NM		/*위치명*/
-		,fn_getCdNm('LOC_APNT_CD',TZDS.LOC_APNT_CD) LOC_APNT_NM 	/*위치지정코드*/
-		,TZDS.LOC_APNT_CD
-		,fn_getCdNm('PLC_CLSS_CD',TZDS.PLC_CLSS_CD) PLC_CLSS_NM 	/*장소분류코드*/
-		,TZDS.PLC_CLSS_CD
-		,TZDS.OCCR_CNT	/*탐지건수*/
-		,TZDS.STDT_CNT	/*탐지학생수*/
-		from   TT_ZONE_DTCT_STSS TZDS
-		left   outer join
-		TS_LOC_INFO_BASE TLIB
-		on     TZDS.LOC_NO = TLIB.LOC_NO
-		left   outer join
-		TM_GUAR_APNT_PLC TGAP
-		on     TLIB.LOC_NO = TGAP.LOC_NO
-		left   outer join
-		TM_STDT_BASE TSB
-		on     TGAP.STDT_NO = TSB.STDT_NO
-		left   outer join
-		TM_STDT_GUAR_CONN TSGC
-		on     TSGC.STDT_NO = TSB.STDT_NO
-		left   outer join
-		TM_GUAR_BASE TGB
-		on     TSGC.GUAR_NO = TGB.GUAR_NO
-		left   outer join
-		TI_EORG_BASE TEB
-		on     TSB.EORG_LOC_NO = TEB.LOC_NO
-		where  1=1
-		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-			and    TZDS.STND_DT between #{entrDtFr} and #{entrDtTo}</if>
-		<if test=" plcClssCd != null and plcClssCd !='' ">
-			and    TZDS.PLC_CLSS_CD = #{plcClssCd}</if>
-		<if test=" locApntCd != null and locApntCd !='' ">
-			and    TZDS.LOC_APNT_CD = #{locApntCd}</if>
-		<if test=" stdtNo != null and stdtNo !='' ">
-			and	   TSB.STDT_NO = #{stdtNo}			 /*학생번호*/</if>
-		<if test=" stdtNm != null and stdtNm !='' ">
-			and	   DECR(TSB.STDT_NM) = #{stdtNm}			 /*학생명*/</if>
-		<if test=" guarNm != null and guarNm !='' ">
-			and    TGB.GUAR_NM = #{guarNm}/*보호자명*/</if>
-		<if test=" guarNo != null and guarNo !='' ">
-			and    TGB.GUAR_NO = #{guarNo}	         /*보호자번호*/</if>
-		<if test=" locNm != null and locNm !='' ">
-			and    TEB.LOC_NM = #{locNm}	     /*학교명*/</if>
-		group  by
-		TZDS.STND_DT,	  /*기준일자*/
-		TZDS.LOC_NO,	  /*위치번호*/
-		TLIB.LOC_NM,      /*위치명*/
-		TZDS.LOC_APNT_CD, /*위치지정명*/
-		TZDS.PLC_CLSS_CD, /*장소분류명*/
-		TZDS.OCCR_CNT,	  /*탐지건수*/
-		TZDS.STDT_CNT	  /*탐지학생수*/
+	select TGDS.STND_DT
+		  ,TGDS.PLC_CLSS_CD
+		  ,fn_getCdnm('PLC_CLSS_CD',TGDS.PLC_CLSS_CD) as PLC_CLSS_NM
+		  ,TGDS.LAT_VAL
+		  ,TGDS.LON_VAL
+		  ,TGDS.NEAR_ADDR
+		  ,TLIB.LOC_NO
+		  ,TGDS.DUP_APNT_CNT
+	from   TT_GUAR_DZONE_STSS TGDS
+	left   outer join
+		   TS_LOC_INFO_BASE TLIB
+	on     TGDS.LAT_VAL = TLIB.LAT_VAL
+	and    TGDS.LON_VAL = TLIB.LON_VAL
+	where  1=1
+	<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
+	and    TGDS.STND_DT between #{entrDtFr} and #{entrDtTo}</if>
+	<if test=" plcClssCd != null and plcClssCd !='' ">
+	and    TGDS.PLC_CLSS_CD = #{plcClssCd}</if>
+	<if test="wordHead1 != null and wordHead1 !=''">
+	and    SPLIT_PART(TLIB.ADDR_BASE, ' ', 1) = #{wordHead1}</if>
+	<if test="wordHead2 != null and wordHead2 !=''">
+	and    SPLIT_PART(TLIB.ADDR_BASE, ' ', 2) = #{wordHead2}</if>
 	</select>
 
 	<!-- 위치정보_관리_리스트_상세정보_조회-->
@@ -139,10 +108,10 @@
 						FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS PLC_NM,
 						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'publ'	ELSE 'prnt' END AS RD_PUBL_GUAR_DIV,
 						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'	ELSE '학부모' END AS RD_PUBL_GUAR_DIV_NM,
-						ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)), '/') AS PRNT_NM,
+						ARRAY_TO_STRING(ARRAY_AGG(PRNT_NM), '/') AS PRNT_NM,
 						TSB.PRNT_NO,
 						TSB.STDT_NO,
-						DECR(TSB.STDT_NM) AS STDT_NM,
+						TSB.STDT_NM,
 						TLIB.LAT_VAL,
 						TLIB.LON_VAL,
 						TLIB.VALD_RNGE_DIST,

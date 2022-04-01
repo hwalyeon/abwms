@@ -28,7 +28,7 @@ public class DgemHistController
 	@Autowired
 	private DgemHistService dgemHistService;
 
-	//리스트 조회
+	//위험감정 발생이력 리스트 조회
 	@ResponseBody
 	@RequestMapping("/oper/dgem/dgemHist/searchDgemHistList.ab")
 	public RtnMsg searchDgemHistList(@RequestBody(required = false) Map<String, String> params) throws BizException
@@ -101,7 +101,7 @@ public class DgemHistController
 		return vo;
 	}
 
-	//학생정보 엑셀 다운로드
+	//위험감정 발생이력 엑셀 다운로드
 	@ResponseBody
 	@RequestMapping("/oper/dgem/dgemHist/searchDgemHistList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException

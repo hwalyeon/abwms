@@ -27,5 +27,6 @@ public class BtchJobHistServiceImpl implements BtchJobHistService
 
 		return result;
 	}
+
 }
 

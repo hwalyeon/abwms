@@ -2,29 +2,28 @@ let locHist = new Vue({
     el: "#locHist",
     data: {
         params: {
-            emtrDtFr    :'',
-            entrDtTo    :'',
-            schlNm      :'',
-            occrDttm    :'',
-            locNm       :'',
-            stdtNo      :'',
-            stdtNm      :'',
-            locNm       :'',
-            plcClssCd   :'DZONE',
-            latVal      :'',
-            lonVal      :'',
-            nearLocNo   :'',
-            addrBase    :'',
-            telNo       :'',
-            guarNo      :'',
-            guarNm      :'',
-            guarTelNo   :'',
-            regDt       :'',
-            regTm       :'',
-            regUserId   :'',
-            uptDt       :'',
-            uptTm       :'',
-            uptUserId   :'',
+            emtrDtFr    :'',        //일자_From
+            entrDtTo    :'',        //일자_To
+            schlNm      :'',        //학교명
+            occrDttm    :'',        //발생일시
+            locNm       :'',        //장소
+            stdtNo      :'',        //학생번호
+            stdtNm      :'',        //학생명
+            plcClssCd   :'DZONE',   //장소분류
+            latVal      :'',        //위도
+            lonVal      :'',        //경도
+            nearLocNo   :'',        //위치명
+            addrBase    :'',        //주소
+            telNo       :'',        //학생 전화번호
+            guarNo      :'',        //보호자번호
+            guarNm      :'',        //보호자명
+            guarTelNo   :'',        //보호자 전화번호
+            regDt       :'',        //등록일자
+            regTm       :'',        //등록시각
+            regUserId   :'',        //등록사용자ID
+            uptDt       :'',        //수정일자
+            uptTm       :'',        //수정시각
+            uptUserId   :'',        //수정사용자ID
             mmDd        :'THIS_MONTH',
             paging      :'Y',
             totalCount  : 0,
@@ -33,7 +32,7 @@ let locHist = new Vue({
             currentIndex: 0
         },
         code:{
-            mmDdList           : [] ,
+            mmDdList           : [] , //일자_리스트
             plcClssCdList      : [] , //장소_구분_코드_리스트
         },
     },
@@ -70,17 +69,13 @@ let locHist = new Vue({
         },
         initCodeList: function() {
             let $this = this;
-            getCommonCodeList('GROW_JUDG_CD', $this.code.mentGrowJudgCdList);
-            getCommonCodeList('HBIT_STAT_CD', $this.code.hbitStatCdList); //심박_상태_코드_리스트
-            getCommonCodeList('TEMP_STAT_CD', $this.code.tempStatCdList); //체온_상태_코드_리스트
             getCommonCodeList('PLC_CLSS_CD' , $this.code.plcClssCdList);  //장소_구분_코드_리스트
-            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList); //위험감정_상태_코드_리스트
         },
         initGrid: function()
         {
             let $this = this;
             let colModels = [
-                {name: "crud"              , index: "crud"              , label: "crud"		 	 , hidden: true                                  },
+                {name: "crud"              , index: "crud"              , label: "crud"		 	 , hidden: true                    },
                 {name: "occrDttm"          , index: "occrDttm"          , label: "발생일시"		 , width: 80     , align: "center" },
                 {name: "schlNm"            , index: "schlNm"            , label: "학교명"		 , width: 80     , align: "center" },
                 {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"	     , width: 110    , align: "center" },
@@ -90,7 +85,7 @@ let locHist = new Vue({
                 {name: "latVal"            , index: "latVal"            , label: "위도"	         , width: 110    , align: "center" },
                 {name: "lonVal"            , index: "lonVal"            , label: "경도"           , width: 110    , align: "center" },
                 {name: "nearLocNo"         , index: "nearLocNo"         , label: "위치명"	     , width: 110    , align: "center" },
-                {name: "addrBase"          , index: "addrBase"          , label: "주소"		     , width: 110     , align: "center" },
+                {name: "addrBase"          , index: "addrBase"          , label: "주소"		     , width: 110     , align: "center"},
                 {name: "telNo"             , index: "telNo"             , label: "학생 전화번호"	 , width: 80     , align: "center" },
                 {name: "guarNo"            , index: "guarNo"            , label: "보호자번호"  	 , width: 80     , align: "center" },
                 {name: "guarNm"            , index: "guarNm"            , label: "보호자명"	 	 , width: 100    , align: "center" },
@@ -118,22 +113,6 @@ let locHist = new Vue({
 
                     $(grid).tableRowSpan(["occrDttm","schlNm","stdtNo","stdtNm","locNm","plcClssCd","latVal","lonVal","nearLocNo","addrBase"
                                                  ,"telNo","regDt","regTm","regUserId","uptDt","uptTm","uptUserId"], "stdtNo");
-                    //밴드 상세 팝업 생성
-                    $("#grid_list").find('A.links[data-band]').on('click', function(e) {
-                        stdtInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
-                    });
-                    //보호자 상세 팝업 생성
-                    $("#grid_list").find('A.links[data-guar-tel]').on('click', function(e) {
-                        bandOpenInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-tel-no'))
-                    });
-                    //학부모정보 상세 팝업
-                    $("#grid_list").find('A.links[data-prnt]').on('click', function(e) {
-                        guarInfoMng.regPrntInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('prnt-no'),$(e.target).data('sex-cd'))
-                    });
-                    //보호자(사용자)정보 상세 팝업
-                    $("#grid_list").find('A.links[data-guar]').on('click', function(e) {
-                        guarInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-no'),$(e.target).data('stdt-no'))
-                    });
                 }
             }));
 
@@ -160,37 +139,31 @@ let locHist = new Vue({
             }).trigger("reloadGrid");
 
         },
+        //(학생 및 보호자 번호 , 학교명) 팝업 Grid 값 부모창 input 값에 삽입
         setData: function(data) {
             console.log(data);
             let $this = this;
-            $this.params.stdtNo = data.stdtNo;
-            $this.params.stdtNm = data.stdtNm;
-            $this.params.guarNo = data.guarNo;
-            $this.params.guarNm = data.guarNm;
-            $this.params.locNm  = data.locNm;
+            if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined)
+            {
+                $this.params.stdtNo = data.stdtNo;
+                $this.params.stdtNm = data.stdtNm;
+                $this.params.guarNo = data.guarNo;
+                $this.params.guarNm = data.guarNm;
+            }
+            if(data.locNm !== undefined)
+            {
+                $this.params.locNm  = data.locNm;
+            }
         },
+        //학생 및 보호자 search 팝업
         stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize();
+            stdtGuarDetl.initialize(this.setData);
         },
-
+        //학교명 search 팝업
         locSearchDetlPopup: function() {
-            locSearchDetl.initialize();
+            locSearchDetl.initialize(this.setData);
         },
-
-        stdtInfoDetlPopup: function(stdtNo, guarNo) {
-            stdtInfoDetl.initPage(stdtNo, guarNo);
-        },
-        regBandOpenInfoDetlPopup: function(bandId) {
-            bandOpenInfoDetl.initPage(bandId, function(){  stdtInfoMng.searchDgemHistList(true) });
-        },
-        //보호자(사용자)정보 상세 팝업
-        regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-            guarInfoDetl.initPage(guarNo, function(){ locHist.searchLocHistList(true) });
-        },
-        //학부모정보 상세 팝업
-        regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-            prntInfoDetl.initPage(prntNo, sexCd, function(){ locHist.searchLocHistList(true) });
-        },
+        //엑셀 다운로드
         downloadExcel : function()
         {
             let $this = this;
@@ -210,7 +183,7 @@ let locHist = new Vue({
                 }
             });
         },
-
+        //초기화
         resetSearchParam: function() {
             let $this = this;
             $this.params = {

@@ -33,20 +33,26 @@ let locSearchDetl = new Vue({
             prntNoListSepc: [],
             stdtNoListSpec: [],
             stdtNoListFilterSpec:[]
-        }
+        },
+        callback: null
     },
 
     methods: {
 
-        initialize: function() {
+        initialize: function(callback) {
             let $this = this;
-
+            $this.callback = callback;
             $this.initCodeList();
+            console.log('0');
             setTimeout(function()
             {
+                console.log('1');
                 $this.initGrid();
+                console.log('2');
                 $this.searchLocInfoList(true);
-            },300);
+                console.log('3');
+            },500);
+            console.log('4');
         },
         initCodeList : function() {
             let $this = this;
@@ -85,9 +91,10 @@ let locSearchDetl = new Vue({
                 },
                 ondblClickRow: function(rowId, status, e) {
                     let item = $('#locsearch_list').jqGrid('getRowData', rowId);
-                    dgemHist.setData(item);
-                    locHist.setData(item);
-                    console.log(item);
+                    $this.callback(item);
+                    // dgemHist.setData(item);
+                    // locHist.setData(item);
+                    // dszoneHist.setData(item);
                     closeModal($('#locSearchDetlPopup'));
                 },
                 gridComplete: function (rowId, rowObject) {

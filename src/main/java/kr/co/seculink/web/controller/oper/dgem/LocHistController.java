@@ -28,7 +28,7 @@ public class LocHistController
 	@Autowired
 	private LocHistService locHistService;
 
-	//리스트 조회
+	//위치 이력 목록 리스트 조회
 	@ResponseBody
 	@RequestMapping("/oper/dgem/locHist/searchLocHistList.ab")
 	public RtnMsg searchLocHistList(@RequestBody(required = false) Map<String, String> params) throws BizException
@@ -53,7 +53,7 @@ public class LocHistController
 	}
 
 
-	//학생정보 엑셀 다운로드
+	//위치이력 엑셀 다운로드
 	@ResponseBody
 	@RequestMapping("/oper/dgem/locHist/searchLocHistList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException

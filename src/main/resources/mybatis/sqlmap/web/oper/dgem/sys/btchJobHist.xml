@@ -1,136 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oper.sys.btchJobHist">
-    <!-- 위험감정 발생이력 조회 -->
-    <select id="searchDgemHistList" parameterType="java.util.Map" resultType="MybatisMap">
-        select  A.STDT_NO		 /* 학생번호 */
-        ,A.DGEM_HIST_SEQ  /* 위험감정 이력 순번 */
-        ,A.DGEM_DT        /* 위험감정 일자 */
-        ,A.DGEM_TM        /* 위험감정 시각 */
-        ,A.DGEM_IDX       /* 위험감정 지수 */
-        ,fn_getCdnm('DGEM_STAT_CD',A.DGEM_STAT_CD) as DGEM_STAT_CD/* 위험감정 상태 코드 */
-        ,A.DGEM_STAT_CNTN /* 위험감정 요약 내용 */
-        ,A.DGEM_SMRY_CNTN /* 위험감정 상태 내용 */
-        ,A.LOC_HIST_NO    /* 위치 이력 번호 */
-        ,A.CURR_LAT_VAL   /* 현재 위도 값 */
-        ,A.CURR_LON_VAL   /* 현재 경도 값 */
-        ,A.LOC_MESU_DTTM  /* 위치 측정 일시 */
-        ,fn_getCdnm('ACT_DIV_CD',A.ACT_DIV_CD) as ACT_DIV_CD       /* 활동 구분 코드 */
-        ,fn_getCdnm('HBIT_STAT_CD',A.HBIT_STAT_CD)as HBIT_STAT_CD  /* 심박 상태 코드 */
-        ,fn_getCdnm('PLC_CLSS_CD',A.PLC_CLSS_CD) as PLC_CLSS_CD    /* 장소 분류 코드 */
-        ,fn_getCdnm('TEMP_STAT_CD',A.TEMP_STAT_CD) as TEMP_STAT_CD /* 체온 상태 코드 */
-        ,A.JUDG_NO        /* 판정 번호 */
-        ,A.RMRK			 /* 비고 */
-        ,A.DGEM_ALAM_NO   /* 위험감정 알림 번호 */
-        ,D.LOC_NM	     /* 학교명 */
-        ,F.GUAR_NO 		 /* 보호자번호 */
-        ,F.GUAR_NM		 /* 보호자명 */
-        ,F.GUAR_TEL_NO    /* 보호자전화번호 */
-        ,fn_getCdNm('EVNT_DIV_CD',B.evnt_div_cd) as evnt_div_nm /* 이벤트 구분 명 */
-        ,A.REG_DT
-        ,A.REG_TM
-        ,A.REG_USER_ID
-        ,A.UPT_DT
-        ,A.UPT_TM
-        ,A.UPT_USER_ID
-        from    TS_STDT_DGEM_HIST A
-        left    outer join
-        TD_JUDG_BASE B
-        on      A.JUDG_NO = B.JUDG_NO
-        left    outer join
-        TM_STDT_BASE C
-        on      A.STDT_NO = C.STDT_NO
-        left    outer join
-        TI_EORG_BASE D
-        on      C.EORG_LOC_NO = D.LOC_NO
-        left    outer join
-        TM_STDT_GUAR_CONN E
-        on      C.STDT_NO = E.STDT_NO
-        left    outer join
-        TM_GUAR_BASE F
-        on      E.GUAR_NO = F.GUAR_NO
-        where   1=1
-    and     fn_getCdNm('EVNT_DIV_CD',B.evnt_div_cd) in('정기판정셋','이벤트판정셋')
+    <!-- 배치작업 이력 조회 -->
+    <select id="searchBtchJobHistList" parameterType="java.util.Map" resultType="MybatisMap">
+    select TJB.JOB_ID
+          ,TJB.JOB_NM
+          ,TJB.JOB_HIST_NO
+          ,TJB.RMRK
+          ,TJH.RSLT_CNTN
+          ,TJH.RSLT_CD
+          ,TJH.STRT_DT
+          ,TJH.END_DT
+    from   TC_JOB_BASE TJB
+    inner  join
+    TC_JOB_HIST TJH
+    on     TJB.JOB_ID = TJH.JOB_ID
+    where  1=1
     <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-    and     DGEM_DT between #{entrDtFr} and #{entrDtTo}        /* 위험감정 일자 */</if>
-    <if test=" dgemTm != null and dgemTm !='' ">
-    and     DGEM_TM        like CONCAT ('%',#{dgemTm},'%')     /* 위험감정 시각 */</if>
-    <if test=" dgemStatCd != null and dgemStatCd !='' ">
-    and     DGEM_STAT_CD   like CONCAT ('%',#{dgemStatCd},'%') /* 위험감정 상태 */</if>
-    <if test=" plcClssCd != null and plcClssCd !='' ">
-    and     PLC_CLSS_CD    like CONCAT ('%',#{plcClssCd},'%')  /* 장소분류 코드 */</if>
-    <if test=" hbitStatCd != null and hbitStatCd !='' ">
-    and     A.HBIT_STAT_CD like CONCAT ('%',#{hbitStatCd},'%') /* 심박상태 코드 */</if>
-    <if test=" tempStatCd != null and tempStatCd !='' ">
-    and     TEMP_STAT_CD   like CONCAT ('%',#{tempStatCd},'%') /* 체온상태 코드 */</if>
-    <if test=" locNm != null and locNm !='' ">
-    and     D.LOC_NM       like CONCAT ('%',#{locNm},'%')      /* 학교명       */</if>
-    <if test=" stdtNo != null and stdtNo !='' ">
-    and     C.STDT_NO      = #{stdtNo}::numeric                /* 학생번호     */</if>
-    <if test=" stdtNm != null and stdtNm !='' ">
-    and     DECR(C.STDT_NM)      like CONCAT ('%',#{stdtNm},'%')     /* 학생명       */</if>
-    <if test=" guarNo != null and guarNo !='' ">
-    and     F.GUAR_NO      = #{guarNo}::numeric                /* 보호자번호    */</if>
-    <if test=" guarNm != null and guarNm !='' ">
-    and     DECR(F.GUAR_NM)      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
-    ORDER BY A.STDT_NO
+    and TJH.STRT_DT between replace(#{entrDtFr},'-','') and replace(#{entrDtTo},'-','')</if>
+    <if test="endDtFr  != null and endDtFr  != null and endDtTo  !='' and endDtTo !='' ">
+    and TJH.END_DT  between replace(#{endDtFr},'-','')  and replace(#{endDtTo},'-','')</if>
+    <if test=" jobId != null and jobId != '' ">
+    and TJB.JOB_ID  = #{jobId}</if>
+    <if test=" jobNm != null and jobNm != '' ">
+    and TJB.JOB_NM  = #{jobNm}</if>
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>
     </select>
-
-    <!--학생정보 및 보호자 정보 select-->
-    <select id="searchStdtGuarList" parameterType="java.util.Map" resultType="MybatisMap">
-        select A.STDT_NO
-        ,DECR(A.STDT_NM) AS STDT_NM
-        ,C.GUAR_NO
-        ,DECR(C.GUAR_NM) AS GUAR_NM
-        ,DECR(C.GUAR_TEL_NO) AS GUAR_TEL_NO
-        from   TM_STDT_BASE A
-        left outer join
-        TM_STDT_GUAR_CONN B
-        on     A.STDT_NO = B.STDT_NO
-        left outer join
-        TM_GUAR_BASE C
-        on     B.GUAR_NO = C.GUAR_NO
-        where  1=1
-        <if test=" stdtNo != null and stdtNo !='' ">
-            and    A.STDT_NO = #{stdtNo}::numeric</if>
-        <if test=" stdtNm != null and stdtNm !='' ">
-            and    A.STDT_NM = ENCR(#{stdtNm})</if>
-        <if test=" guarNo != null and guarNo !='' ">
-            and    C.GUAR_NO = #{guarNo}::numeric</if>
-        <if test=" guarNm != null and guarNm !='' ">
-            and    C.GUAR_NM = ENCR(#{guarNm})</if>
-        <if test=" guarTelNo != null and guarTelNo !='' ">
-            and    C.GUAR_TEL_NO = ENCR(#{guarTelNo})</if>
-        group  by A.STDT_NO , A.STDT_NM , C.GUAR_NO , C.GUAR_NM
-        order  by A.stdt_no
-        <if test=' paging == "Y" '>
-            LIMIT ${rowCount} OFFSET ${currentIndex}
-        </if>
-    </select>
-
-    <!--학교정보 select-->
-    <select id="searchLocList" parameterType="java.util.Map" resultType="MybatisMap">
-        select TEB.LOC_NO
-	          ,TEB.LOC_NM
-	          ,TEB.ROAD_ADDR
-        from   TI_EORG_BASE TEB
-        left   outer join
-	           TM_STDT_BASE TSB
-        on     TSB.EORG_LOC_NO = TEB.LOC_NO
-        where  1=1
-        <if test="wordHead1 != null and wordHead1 !=''">
-        and    SPLIT_PART(TEB.ROAD_ADDR, ' ', 1) = #{wordHead1} </if>
-        <if test="wordHead2 != null and wordHead2 !=''">
-        and    SPLIT_PART(TEB.ROAD_ADDR, ' ', 2) = #{wordHead2} </if>
-        <if test="locNm     != null and locNm     !=''">
-        and    TEB.LOC_NM like CONCAT ('%',#{locNm},'%')        </if>
-        order  by TEB.LOC_NO
-        <if test=' paging == "Y" '>
-            LIMIT ${rowCount} OFFSET ${currentIndex}
-        </if>
-    </select>
-
 </mapper>

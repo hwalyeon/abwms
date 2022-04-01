@@ -2,31 +2,31 @@ let dgemHist = new Vue({
     el: "#dgemHist",
     data: {
         params: {
-            entrDtFr       :'' ,  //가입_일자_From
-            entrDtTo       :'' ,  //가입_일자_To
-            stdtNo         :'',
-            dgemHistSeq    :'',
-            dgemDt         :'',
-            dgemTm         :'',
-            dgemIdx        :'',
-            dgemStatCd     :'',
-            dgemStatCntn   :'',
-            dgemSmryCntn   :'',
-            locHistNo      :'',
-            currLatVal     :'',
-            currLonVal     :'',
-            locMesuDttm    :'',
-            actDivCd       :'',
-            hbitStatCd     :'',
-            plcClssCd      :'',
-            tempStatCd     :'',
-            judgNo         :'',
-            rmrk           :'',
-            dgemAlamNo     :'',
-            locNm          :'',
-            guarNo         :'',
-            guarNm         :'',
-            guarTelNo      :'',
+            entrDtFr       :'',  //일자_From
+            entrDtTo       :'',  //일자_To
+            stdtNo         :'',  //학생번호
+            dgemHistSeq    :'',  //위험감정 이력순번
+            dgemDt         :'',  //위험감정 일자
+            dgemTm         :'',  //위험감정 시각
+            dgemIdx        :'',  //위험감정 지수
+            dgemStatCd     :'',  //위험감정 상태코드
+            dgemStatCntn   :'',  //위험감정 요약내용
+            dgemSmryCntn   :'',  //위험감정 상태내용
+            locHistNo      :'',  //위치이력 번호
+            currLatVal     :'',  //현재위도 값
+            currLonVal     :'',  //현재경도 값
+            locMesuDttm    :'',  //위치측정일시
+            actDivCd       :'',  //활동구분코드
+            hbitStatCd     :'',  //심박상태코드
+            plcClssCd      :'',  //장소분류코드
+            tempStatCd     :'',  //체온상태코드
+            judgNo         :'',  //판정번호
+            rmrk           :'',  //비고
+            dgemAlamNo     :'',  //위험감정알림번호
+            locNm          :'',  //학교명
+            guarNo         :'',  //보호자번호
+            guarNm         :'',  //보호자명
+            guarTelNo      :'',  //보호자전화번호
             mmDd           :'THIS_MONTH',
             paging         :'Y',
             totalCount     : 0,
@@ -35,7 +35,7 @@ let dgemHist = new Vue({
             currentIndex   : 0
         },
         code:{
-            mmDdList           : [] ,
+            mmDdList           : [] , //일자_리스트
             hbitStatCdList     : [] , //심박_상태_코드_리스트
             plcClssCdList      : [] , //장소_구분_코드_리스트
             tempStatCdList     : [] , //체온_상태_코드_리스트
@@ -75,17 +75,16 @@ let dgemHist = new Vue({
         },
         initCodeList: function() {
             let $this = this;
-            getCommonCodeList('GROW_JUDG_CD', $this.code.mentGrowJudgCdList);
-            getCommonCodeList('HBIT_STAT_CD', $this.code.hbitStatCdList); //심박_상태_코드_리스트
-            getCommonCodeList('TEMP_STAT_CD', $this.code.tempStatCdList); //체온_상태_코드_리스트
-            getCommonCodeList('PLC_CLSS_CD' , $this.code.plcClssCdList);  //장소_구분_코드_리스트
-            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList); //위험감정_상태_코드_리스트
+            getCommonCodeList('HBIT_STAT_CD', $this.code.hbitStatCdList);  //심박_상태_코드_리스트
+            getCommonCodeList('TEMP_STAT_CD', $this.code.tempStatCdList);  //체온_상태_코드_리스트
+            getCommonCodeList('PLC_CLSS_CD' , $this.code.plcClssCdList );  //장소_구분_코드_리스트
+            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList);  //위험감정_상태_코드_리스트
         },
         initGrid: function()
         {
             let $this = this;
             let colModels = [
-                {name: "crud"              , index: "crud"              , label: "crud"		 	    , hidden: true                },
+                {name: "crud"              , index: "crud"              , label: "crud"		 	    , hidden: true                                  },
                 {name: "guarNoTemp"        , index: "guarNoTemp"        , label: "보호자번호"			, width: 80     , align: "center" , hidden: true},
                 {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80     , align: "center" , fixed: true},
                 {name: "dgemHistSeq"       , index: "dgemHistSeq"       , label: "위험감정 이력순번"	, width: 110    , align: "center" , fixed: true},
@@ -110,7 +109,7 @@ let dgemHist = new Vue({
                 {name: "guarNo"            , index: "guarNo"            , label: "보호자번호" 	    , width: 110    , align: "center" , fixed: true},
                 {name: "guarNm"            , index: "guarNm"            , label: "보호자명" 	        , width: 110    , align: "center" , fixed: true},
                 {name: "guarTelNo"         , index: "guarTelNo"         , label: "보호자전화번호" 	    , width: 110    , align: "center" , fixed: true},
-                {name: "stdtInfoDetlPopup" , index: "stdtInfoDetlPopup" , label: "상세정보보기"       , width: 80    , align: "center",fixed: true,
+                {name: "stdtInfoDetlPopup" , index: "stdtInfoDetlPopup" , label: "상세정보보기"       , width: 80     , align: "center" ,fixed: true,
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemHist.stdtInfoDetlPopup(\'' + rowObject.stdtNo + '\' , \'' + rowObject.guarNo + '\' )" value="상세보기" data-toggle="modal" data-target="#stdtInfoDetlPopup" />';
                     }
@@ -142,22 +141,6 @@ let dgemHist = new Vue({
                     $(grid).tableRowSpan(["dgemHistSeq","dgemDt","dgemTm","dgemIdx","dgemStatCd","dgemStatCntn","dgemSmryCntn",
                                                   "locHistNo","currLatVal","currLonVal","locMesuDttm","actDivCd","hbitStatCd",
                                                   "plcClssCd","tempStatCd","judgNo","rmrk","dgemAlamNo","locNm","stdtNo","stdtInfoDetlPopup"], "stdtNo");
-                    //밴드 상세 팝업 생성
-                    $("#grid_list").find('A.links[data-band]').on('click', function(e) {
-                        stdtInfoMng.regBandOpenInfoDetlPopup($(e.target).data('band-id'))
-                    });
-                    //보호자 상세 팝업 생성
-                    $("#grid_list").find('A.links[data-guar-tel]').on('click', function(e) {
-                        bandOpenInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-tel-no'))
-                    });
-                    //학부모정보 상세 팝업
-                    $("#grid_list").find('A.links[data-prnt]').on('click', function(e) {
-                        guarInfoMng.regPrntInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('prnt-no'),$(e.target).data('sex-cd'))
-                    });
-                    //보호자(사용자)정보 상세 팝업
-                    $("#grid_list").find('A.links[data-guar]').on('click', function(e) {
-                        guarInfoMng.regGuarInfoDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-no'),$(e.target).data('stdt-no'))
-                    });
                 }
             }));
 
@@ -184,37 +167,35 @@ let dgemHist = new Vue({
             }).trigger("reloadGrid");
 
         },
+        //(학생 및 보호자 번호 , 학교명) 팝업 Grid 값 부모창 input 값에 삽입
         setData: function(data) {
             console.log(data);
             let $this = this;
-            $this.params.stdtNo = data.stdtNo;
-            $this.params.stdtNm = data.stdtNm;
-            $this.params.guarNo = data.guarNo;
-            $this.params.guarNm = data.guarNm;
-            $this.params.locNm  = data.locNm;
+            if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined)
+            {
+                $this.params.stdtNo = data.stdtNo;
+                $this.params.stdtNm = data.stdtNm;
+                $this.params.guarNo = data.guarNo;
+                $this.params.guarNm = data.guarNm;
+            }
+            if(data.locNm !== undefined)
+            {
+                $this.params.locNm  = data.locNm;
+            }
         },
-        stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize();
-        },
-
-        locSearchDetlPopup: function() {
-            locSearchDetl.initialize();
-        },
-
+        //학생정보 상세 팝업
         stdtInfoDetlPopup: function(stdtNo, guarNo) {
             stdtInfoDetl.initPage(stdtNo, guarNo);
         },
-        regBandOpenInfoDetlPopup: function(bandId) {
-            bandOpenInfoDetl.initPage(bandId, function(){  dgemHist.searchDgemHistList(true) });
+        //학생 및 보호자 정보 search 팝업
+        stdtGuarDetlPopup: function() {
+            stdtGuarDetl.initialize(this.setData);
         },
-        //보호자(사용자)정보 상세 팝업
-        regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-            guarInfoDetl.initPage(guarNo, function(){ dgemHist.searchDgemHistList(true) });
+        //학교명 정보 search 팝업
+        locSearchDetlPopup: function() {
+            locSearchDetl.initialize(this.setData);
         },
-        //학부모정보 상세 팝업
-        regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-            prntInfoDetl.initPage(prntNo, sexCd, function(){ dgemHist.searchDgemHistList(true) });
-        },
+        //엑셀 다운로드
         downloadExcel : function()
         {
             let $this = this;
@@ -234,7 +215,7 @@ let dgemHist = new Vue({
                 }
             });
         },
-
+        //초기화
         resetSearchParam: function() {
             let $this = this;
             $this.params = {

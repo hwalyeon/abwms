@@ -52,7 +52,6 @@ public class BtchJobHistController
 		return vo;
 	}
 
-
 	//학생정보 엑셀 다운로드
 	@ResponseBody
 	@RequestMapping("/oper/sys/btchJobHist/searchBtchJobHistList/excel.ab")

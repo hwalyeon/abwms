@@ -4,8 +4,7 @@ import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
-import kr.co.seculink.web.service.oper.dgem.DszoneHistService;
-
+import kr.co.seculink.web.service.oper.dgem.PorgZoneStatService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +19,24 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class DszoneHistController
+public class PorgZoneStatController
 {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
 	@Autowired
-	private DszoneHistService dszoneHistService;
+	private PorgZoneStatService porgZoneStatService;
 
 	// 위치정보_관리_조회_조건_조회
 	@ResponseBody
-	@RequestMapping("/oper/dgem/dszoneHist/searchLocInfoSelect.ab")
+	@RequestMapping("/oper/dgem/porgZoneStat/searchLocInfoSelect.ab")
 	public RtnMsg<Map<String, Object>> searchLocInfoSelect(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		List<Map<String, String>> result = dszoneHistService.searchLocInfoSelect(params);
-		List<Map<String, String>> result2 = dszoneHistService.searchLocInfoSelect2(params);
+		List<Map<String, String>> result = porgZoneStatService.searchLocInfoSelect(params);
+		List<Map<String, String>> result2 = porgZoneStatService.searchLocInfoSelect2(params);
 
 		rtnMap.put("result", result);
 		rtnMap.put("result2", result2);
@@ -48,17 +47,17 @@ public class DszoneHistController
 
 	// 위치정보_관리_리스트_조회
 	@ResponseBody
-	@RequestMapping("/oper/dgem/dszoneHist/searchLocInfoList.ab")
+	@RequestMapping("/oper/dgem/porgZoneStat/searchLocInfoList.ab")
 	public RtnMsg<Map<String, Object>> searchLocInfoList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		List<Map<String, String>> result = dszoneHistService.searchLocInfoList(params);
+		List<Map<String, String>> result = porgZoneStatService.searchLocInfoList(params);
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(dszoneHistService.searchLocInfoList(params).size());
+			vo.setTotalCount(porgZoneStatService.searchLocInfoList(params).size());
 		}
 
 		rtnMap.put("result", result);
@@ -69,17 +68,17 @@ public class DszoneHistController
 
 	// 위치정보_관리_리스트_상세정보_조회
 	@ResponseBody
-	@RequestMapping("/oper/dgem/dszoneHist/searchLocInfoSpec.ab")
+	@RequestMapping("/oper/dgem/porgZoneStat/searchLocInfoSpec.ab")
 	public RtnMsg<Map<String, Object>> searchLocInfoSpec(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
-		List<Map<String, String>> result = dszoneHistService.searchLocInfoSpec(params);
+		List<Map<String, String>> result = porgZoneStatService.searchLocInfoSpec(params);
 		rtnMap.put("result", result);
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(dszoneHistService.searchLocInfoSpec(params).size());
+			vo.setTotalCount(porgZoneStatService.searchLocInfoSpec(params).size());
 		}
 
 		vo.setRtnData(rtnMap, params);
@@ -87,13 +86,28 @@ public class DszoneHistController
 		return vo;
 	}
 
+	// 위치정보_관리_상세정보_저장
+	@ResponseBody
+	@RequestMapping("/oper/dgem/porgZoneStat/saveLocInfoSpec.ab")
+	public RtnMsg<Map<String, Object>> saveLocInfoSpec(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
+
+		porgZoneStatService.saveLocInfoSpec(params);
+
+		rtnMap.put("result", params);
+		vo.setRtnData(rtnMap,null);
+
+		return vo;
+	}
+
 	// 위치정보_관리_리스트 엑셀다운로드
 	@ResponseBody
-	@RequestMapping("/oper/dgem/dszoneHist/searchLocInfoList/excel.ab")
+	@RequestMapping("/oper/dgem/porgZoneStat/searchLocInfoList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		params.put("paging", "N");
-		List<Map<String, String>> result = dao.selectList("oper.dgem.dszoneHist.searchLocInfoList", params);
+		List<Map<String, String>> result = dao.selectList("oper.dgem.porgZoneStat.searchLocInfoList", params);
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
 
