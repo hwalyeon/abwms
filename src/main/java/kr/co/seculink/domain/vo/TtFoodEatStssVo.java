@@ -16,8 +16,8 @@ public class TtFoodEatStssVo implements Serializable {
 	/* age_ycnt 나이_년수 numeric(null) */
 	private double ageYcnt;
 
-	/* 식품_번호 식품_번호 numeric(null) */
-	private double 식품번호;
+	/* food_no 식품_번호 numeric(null) */
+	private double foodNo;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
@@ -96,19 +96,19 @@ public class TtFoodEatStssVo implements Serializable {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
-	 * Get 식품_번호 식품_번호 numeric(null)
-	 * @Return double 식품번호
+	 * Get food_no 식품_번호 numeric(null)
+	 * @Return double foodNo
 	 */
-	public double get식품번호() {
-		return this.식품번호;
+	public double getFoodNo() {
+		return this.foodNo;
 	}
 	
 	/**
-	 * Set 식품_번호 식품_번호 numeric(null)
-	 * @Param double 식품번호
+	 * Set food_no 식품_번호 numeric(null)
+	 * @Param double foodNo
 	 */
-	public void set식품번호(double 식품번호) {
-		this.식품번호 = 식품번호;
+	public void setFoodNo(double foodNo) {
+		this.foodNo = foodNo;
 	}
 	/**
 	 * Get stnd_yymm 기준_년월 character(6)

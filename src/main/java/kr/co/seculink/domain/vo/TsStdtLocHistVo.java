@@ -10,7 +10,7 @@ public class TsStdtLocHistVo implements Serializable {
 	/* loc_hist_no 위치_이력_번호 numeric(null) */
 	private double locHistNo;
 
-	/* loc_nm 위치_명 character varying(100) */
+	/* loc_nm 위치_명 character varying(200) */
 	private String locNm;
 
 	/* stdt_no 학생_번호 numeric(null) */
@@ -24,6 +24,9 @@ public class TsStdtLocHistVo implements Serializable {
 
 	/* lon_val 경도_값 numeric(null) */
 	private double lonVal;
+
+	/* plc_cd 장소_코드 character varying(20) */
+	private String plcCd;
 
 	/* plc_clss_cd 장소_분류_코드 character varying(20) */
 	private String plcClssCd;
@@ -78,7 +81,7 @@ public class TsStdtLocHistVo implements Serializable {
 		this.locHistNo = locHistNo;
 	}
 	/**
-	 * Get loc_nm 위치_명 character varying(100)
+	 * Get loc_nm 위치_명 character varying(200)
 	 * @Return String locNm
 	 */
 	public String getLocNm() {
@@ -86,7 +89,7 @@ public class TsStdtLocHistVo implements Serializable {
 	}
 	
 	/**
-	 * Set loc_nm 위치_명 character varying(100)
+	 * Set loc_nm 위치_명 character varying(200)
 	 * @Param String locNm
 	 */
 	public void setLocNm(String locNm) {
@@ -151,6 +154,21 @@ public class TsStdtLocHistVo implements Serializable {
 	 */
 	public void setLonVal(double lonVal) {
 		this.lonVal = lonVal;
+	}
+	/**
+	 * Get plc_cd 장소_코드 character varying(20)
+	 * @Return String plcCd
+	 */
+	public String getPlcCd() {
+		return this.plcCd;
+	}
+	
+	/**
+	 * Set plc_cd 장소_코드 character varying(20)
+	 * @Param String plcCd
+	 */
+	public void setPlcCd(String plcCd) {
+		this.plcCd = plcCd;
 	}
 	/**
 	 * Get plc_clss_cd 장소_분류_코드 character varying(20)
