@@ -27,7 +27,7 @@
 			                        <th scope="row">밴드 ID
 										<td>
 											<div><input type="text" name="bandId" v-model="params.bandId" class="form-control float_left width_per_60 ime-eng"  v-on:input="bandIdInput" maxlength="10" :readonly="params.crud=='U'"/>
-												<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupBandId"  :disabled="params.crud=='U'" ><span>ID 확인</span></button>
+												<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupBandId"  :disabled="params.crud=='U'" v-digitonly.number><span>ID 확인</span></button>
 											</div>
 									<div class="clear_both" style="width:100%; height:5px;"></div>
 											<div>
@@ -47,7 +47,7 @@
 								<tr>
 									<th scope="row">밴드 전화 번호</th>
 									<td>
-										<input type="text" name="telNo" v-model="params.telNo" class="form-control float_left width_per_100 ime-eng"  maxlength="11" :readonly="params.crud=='U'"/>
+										<input type="text" name="telNo" v-model="params.telNo" class="form-control float_left width_per_100 ime-eng"  maxlength="11" :readonly="params.crud=='U'" v-digitonly.number/>
 									</td>
 			                    </tr>
 								<tr>
