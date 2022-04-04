@@ -26,10 +26,16 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label" >기준일자</label>
 						<div class="col-xs-2">
-							<input type="date" name="strsJudgDttmFr" class="form-control" v-model="params.strsJudgDttmFr"  v-on:change="bDSelect">
+							<div class="input-group date" id="strsJudgDttmFrPicker">
+								<input type="text" id="strsJudgDttmFr" name="strsJudgDttmFr" v-model="params.strsJudgDttmFr" class="form-control">
+								<span class="input-group-addon"><i class="fa fa-calendar" v-on:click="setDatepicker"></i></span>
+							</div>
 						</div>
-						<div class="col-xs-2" style="padding-right:5px">
-							<input type="date" name="strsJudgDttmTo" class="form-control" v-model="params.strsJudgDttmTo"  v-on:change="bDSelect">
+						<div class="col-xs-2">
+							<div class="input-group date" id="strsJudgDttmToPicker">
+								<input type="text" id="strsJudgDttmTo" name="strsJudgDttmTo" v-model="params.strsJudgDttmTo" class="form-control">
+								<span class="input-group-addon"><i class="fa fa-calendar" v-on:click="setDatepicker"></i></span>
+							</div>
 						</div>
 						<!--이번 달-->
 						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">

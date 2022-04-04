@@ -7,7 +7,7 @@ let eatHist = new Vue({
             userId         : '' ,
             stndDtFr       : '' , //기준_일자(FROM)
             stndDtTo       : '' , //기준_일자(To)
-            bDPer          : '' , //기준_일자_기간
+            bDPer          : 'THIS_MONTH' , //기준_일자_기간
             stdtNo         : '' , //학생_번호
             stdtNm         : '' , //학생_명
             fmenuNm        : '' , //식단표_명
@@ -180,6 +180,35 @@ let eatHist = new Vue({
                 }
             });
 		},
+        //기준_일자 선택
+        setDatepicker : function() {
+            let $this = this;
+            if($this.params.bDPer!=='')
+            {$this.params.bDPer = '' ;}
+
+            $('#stndDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.stndDtFr = $('#stndDtFr').val();
+            });
+            $('#stndDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.stndDtTo = $('#stndDtTo').val();
+            });
+        },
         //기준_일자_기간_선택
         bDPerSelect: function()
         {
@@ -187,12 +216,6 @@ let eatHist = new Vue({
             const terms = getPeriodDate($this.params.bDPer);
             this.params.stndDtFr = terms.strDt;
             this.params.stndDtTo = terms.endDt;
-        },
-        //기준_일자_선택
-        bDSelect: function()
-        {
-            let $this = this;
-            $this.params.bDPer ='';
         },
         //유효성_검증
         isValid: function() {

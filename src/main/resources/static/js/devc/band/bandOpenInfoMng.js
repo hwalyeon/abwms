@@ -8,7 +8,7 @@ let bandOpenInfoMng = new Vue({
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
-                    mmDd           : '' ,  //기준_일자 _이번달
+                    bDPer           : '' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     telNo          : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID
@@ -24,7 +24,7 @@ let bandOpenInfoMng = new Vue({
                 },
             code:
                 {
-                     mmDdList           : [] , //기준_일자_이번달_리스트
+                     bDPerList           : [] , //기준_일자_이번달_리스트
                      bandOpenStatCdList : [] , //밴드_개통_상태_코드_리스트
                      bandYtypCdList     : [] , //밴드_출고년월_리스트
                      bandMdlCdList      : [] , //밴드_모델_코드_리스트
@@ -46,15 +46,15 @@ let bandOpenInfoMng = new Vue({
                 //출고_년월_값 세팅
                 $this.initBandYtypCdValue();
                 //이번 달 기본 값 세팅
-                $this.code.mmDdList = CodeUtil.getPeriodDateList();
-                const terms = getPeriodDate($this.params.mmDd);
+                $this.code.bDPerList = CodeUtil.getPeriodDateList();
+                const terms = getPeriodDate($this.params.bDPer);
                 this.params.uptDtFr = terms.strDt;
                 this.params.uptDtTo = terms.endDt;
             }, //기간_선택
-            mmDdSelect: function()
+            bDPerSelect: function()
             {
                 let $this = this;
-                const terms = getPeriodDate($this.params.mmDd);
+                const terms = getPeriodDate($this.params.bDPer);
                 this.params.uptDtFr = terms.strDt;
                 this.params.uptDtTo = terms.endDt;
             },
@@ -182,9 +182,50 @@ let bandOpenInfoMng = new Vue({
                     }));
                 resizeJqGridWidth("bandOpenInfo_list", "bandOpenInfo_list_wrapper");
             },
+            //기준_일자 선택
+            setDatepicker : function() {
+                let $this = this;
+                $this.params.bDPer = '' ;
+                $('#uptDtFrPicker').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                }).on("changeDate", function() {
+                    $this.params.uptDtFr = $('#uptDtFr').val();
+                    });
+                $('#uptDtToPicker').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                }).on("changeDate", function() {
+                    $this.params.uptDtTo = $('#uptDtTo').val();
+                });
+            },
+            //기준_일자_기간_선택
+            bDPerSelect: function()
+            {
+                let $this = this;
+                const terms = getPeriodDate($this.params.bDPer);
+                this.params.uptDtFr = terms.strDt;
+                this.params.uptDtTo = terms.endDt;
+            },
+            //밴드/개통 정보 목록 조회
             searchBandOpenInfoList: function(isSearch)
             {
                 let $this = this;
+                //유효성_검증
+                if ( !this.isValid() ) {
+                    return false;
+                }
+
                 let params = $.extend(true, {}, $this.params);
 
                 if ( isSearch )
@@ -192,7 +233,6 @@ let bandOpenInfoMng = new Vue({
                     params.currentPage = 1;
                     params.currentIndex = 0;
                 }
-
                 $("#bandOpenInfo_list").setGridParam(
                     {
                         datatype: "json",
@@ -207,6 +247,23 @@ let bandOpenInfoMng = new Vue({
                             }
                         }
                     }).trigger("reloadGrid");
+            },
+            //유효성_검증
+            isValid: function() {
+
+                let $this = this;
+
+                if( ((WebUtil.isNotNull($this.params.uptDtFr)) && (WebUtil.isNull($this.params.uptDtTo))) || ((WebUtil.isNotNull($this.params.uptDtTo)) && (WebUtil.isNull($this.params.uptDtFr))) )
+                {
+                    Swal.alert(['나머지 기준 일자를 선택하세요.', 'info']);
+                    return false;
+                }
+                if( ((WebUtil.isNotNull($this.params.uptDtFr) && WebUtil.isNotNull($this.params.uptDtTo)) && $this.params.uptDtFr > $this.params.uptDtTo) )
+                {
+                    Swal.alert(['정확한 기준 일자를 선택하세요.', 'info']);
+                    return false;
+                }
+                return true;
             },
             downloadExcel : function()
             {
@@ -252,7 +309,7 @@ let bandOpenInfoMng = new Vue({
             		 userId         : '' ,
                      uptDtFr        : '' ,  //기준_일자From
                      uptDtTo        : '' ,  //기준_일자To
-                     mmDd           : 'THIS_MONTH' ,  //기준_일자 _이번달
+                     bDPer           : 'THIS_MONTH' ,  //기준_일자 _이번달
                      stdtNm         : '' ,  //학생_명
                      telNo          : '' ,  //밴드_전화_번호
                      bandId         : '' ,  //밴드_ID
@@ -267,8 +324,8 @@ let bandOpenInfoMng = new Vue({
                      currentIndex   : 0
                 }
                 //이번 달 기본 값 세팅
-                $this.code.mmDdList = CodeUtil.getPeriodDateList();
-                const terms = getPeriodDate($this.params.mmDd);
+                $this.code.bDPerList = CodeUtil.getPeriodDateList();
+                const terms = getPeriodDate($this.params.bDPer);
                 this.params.uptDtFr = terms.strDt;
                 this.params.uptDtTo = terms.endDt;
             }

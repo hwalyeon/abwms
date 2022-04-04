@@ -20,22 +20,23 @@
 		     , DECR(TPB2.PRNT_NM) as PRNT_NM_FEMALE --학부모_명_여자
 		from   TM_GUAR_BASE TGB                        --보호자_기본
 			   left outer join TM_STDT_GUAR_CONN TSGC  --학생_보호자_연결
-			   on   TGB.GUAR_NO  = TSGC.GUAR_NO
+			                on   TGB.GUAR_NO  = TSGC.GUAR_NO
 			   left outer JOIN TM_STDT_BASE TSB        --학생_기본
-			   on   TSGC.STDT_NO = TSB.STDT_NO
+			                on   TSGC.STDT_NO = TSB.STDT_NO
 			   left outer join TI_EORG_BASE TEB        --교육시설_기본
-			   on   TSB.EORG_LOC_NO = TEB.LOC_NO
+			                on   TSB.EORG_LOC_NO = TEB.LOC_NO
 			   left outer join TM_PRNT_BASE TPB        --학부모_기본
-			   on   TGB.PRNT_NO = TPB.PRNT_NO
-			   and  TPB.SEX_CD  = 'MALE'
+			                on   TGB.PRNT_NO = TPB.PRNT_NO
+			               and  TPB.SEX_CD  = 'MALE'
 			   left outer join TM_PRNT_BASE TPB2       --학부모_기본
-			   on   TGB.PRNT_NO = TPB2.PRNT_NO
+			                on   TGB.PRNT_NO = TPB2.PRNT_NO
 			   and  TPB2.SEX_CD = 'FEMALE'
 			   left outer join TS_BAND_SPEC TBS        --밴드_상세
-			   on  TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
-			   and TSB.BAND_ID     = TBS.BAND_ID
+			                on  TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
+			               and TSB.BAND_ID     = TBS.BAND_ID
 			   left outer join TS_BAND_INFO TBI
-		on TBS.BAND_ID = TBI.BAND_ID
+	       	                on TBS.BAND_ID = TBI.BAND_ID
+	    where 1=1
 		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
 			and TGB.ENTR_DT between replace(#{entrDtFr},'-','') and replace(#{entrDtTo},'-','')</if>
 		<if test=" stdtNo != null and stdtNo !='' ">

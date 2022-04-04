@@ -172,6 +172,35 @@ let gfixHist = new Vue({
                 }
             });
 		},
+        //기준_일자 선택
+        setDatepicker : function() {
+            let $this = this;
+            if($this.params.bDPer!=='')
+            {$this.params.bDPer = '' ;}
+
+            $('#gfixDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.gfixDtFr = $('#gfixDtFr').val();
+            });
+            $('#gfixDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.gfixDtTo = $('#gfixDtTo').val();
+            });
+        },
         //기준_일자_기간_선택
         bDPerSelect: function()
         {
@@ -179,12 +208,6 @@ let gfixHist = new Vue({
             const terms = getPeriodDate($this.params.bDPer);
             this.params.gfixDtFr = terms.strDt;
             this.params.gfixDtTo = terms.endDt;
-        },
-        //기준_일자_선택
-        bDSelect: function()
-        {
-            let $this = this;
-            $this.params.bDPer ='';
         },
         //유효성_검증
         isValid: function() {

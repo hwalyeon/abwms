@@ -47,8 +47,8 @@ let cbeeHist = new Vue({
             //기준_일자_기간_리스트
             $this.code.bDPerList = CodeUtil.getPeriodDateList();
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.stndDtFr = terms.strDt;
-            this.params.stndDtTo = terms.endDt;
+            this.params.occrDttmFr = terms.strDt;
+            this.params.occrDttmTo = terms.endDt;
         },
         initGrid: function()
         {
@@ -151,15 +151,41 @@ let cbeeHist = new Vue({
         bDPerSelect: function()
         {
             let $this = this;
+            $this.params.occrDttmFr = '' ;
+            $this.params.occrDttmTo = '' ;
+
             const terms = getPeriodDate($this.params.bDPer);
             this.params.occrDttmFr = terms.strDt;
             this.params.occrDttmTo = terms.endDt;
         },
-        //기준_일자_선택
-        bDSelect: function()
-        {
+        //기준_일자 선택
+        setDatepicker : function() {
             let $this = this;
-            $this.params.bDPer ='';
+            if($this.params.bDPer!=='')
+            {$this.params.bDPer = '' ;}
+
+            $('#occrDttmFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.occrDttmFr = $('#occrDttmFr').val();
+            });
+            $('#occrDttmToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.occrDttmTo = $('#occrDttmTo').val();
+            });
         },
         //유효성_검증
         isValid: function() {

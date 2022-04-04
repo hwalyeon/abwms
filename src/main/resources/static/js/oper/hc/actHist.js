@@ -182,6 +182,35 @@ let actHist = new Vue({
                 }
             });
         },
+        //기준_일자 선택
+        setDatepicker : function() {
+            let $this = this;
+            if($this.params.bDPer!=='')
+            {$this.params.bDPer = '' ;}
+
+            $('#stndDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.stndDtFr = $('#stndDtFr').val();
+            });
+            $('#stndDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.stndDtTo = $('#stndDtTo').val();
+            });
+        },
         //기준_일자_기간_선택
         bDPerSelect: function()
         {
@@ -196,13 +225,6 @@ let actHist = new Vue({
             let $this = this;
             $this.params.actCd = '';
             $this.actCdList();
-
-        },
-        //기준_일자_선택
-        bDSelect: function()
-        {
-            let $this = this;
-            $this.params.bDPer ='';
         },
         //유효성_검증
         isValid: function() {

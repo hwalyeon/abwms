@@ -9,7 +9,7 @@ let guarInfoMng = new Vue({
                     entrDtFr       : '' ,  //가입_일자_From
                     entrDtTo       : '' ,  //가입_일자_To
                     entrDt         : '' ,  //가입_일자
-                    mmDd           : '' ,  //기준_일자 _이번달  THIS_MONTH
+                    bDPer          : 'THIS_MONTH' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     telNo          : '' ,  //전화_번호(밴드)
                     stdtNo         : '' ,  //학생_번호
@@ -27,7 +27,7 @@ let guarInfoMng = new Vue({
                 },
             code:
                 {
-            	    mmDdList        : [] , //기준_일자_이번달_리스트
+            	    bDPerList        : [] , //기준_일자_이번달_리스트
                     entrStatCdList  : []   //가입_상태_코드_리스트
                 },
             popParams :{
@@ -53,8 +53,8 @@ let guarInfoMng = new Vue({
                 let $this    = this;
                 $this.userId = SessionUtil.getUserId();
                 //이번 달 기본 값 세팅
-                $this.code.mmDdList = CodeUtil.getPeriodDateList();
-                const terms = getPeriodDate($this.params.mmDd);
+                $this.code.bDPerList = CodeUtil.getPeriodDateList();
+                const terms = getPeriodDate($this.params.bDPer);
                 this.params.entrDtFr = terms.strDt;
                 this.params.entrDtTo = terms.endDt;
             },
@@ -156,10 +156,15 @@ let guarInfoMng = new Vue({
                     }));
                 resizeJqGridWidth("guarInfo_list", "guarInfo_list_wrapper");
             },
+            //보호자(사용자)정보 목록 조회
             searchGuarInfoList: function(isSearch)
             {
                 let $this = this;
                 let params = $.extend(true, {}, $this.params);
+
+                if(!this.isValid()){
+                    return false
+                }
 
                 if ( isSearch )
                 {
@@ -180,13 +185,59 @@ let guarInfoMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
+            //기준_일자 선택
+            setDatepicker : function() {
+                let $this = this;
+                if($this.params.bDPer!=='')
+                {$this.params.bDPer = '' ;}
+
+                $('#entrDtFrPicker').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                }).on("changeDate", function() {
+                    $this.params.entrDtFr = $('#entrDtFr').val();
+                });
+                $('#entrDtToPicker').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    format: 'yyyy-mm-dd',
+                    autoclose: true,
+                    todayHighlight: true,
+                }).on("changeDate", function() {
+                    $this.params.entrDtTo = $('#entrDtTo').val();
+                });
+            },
            //기간_선택
-            mmDdSelect: function()
+            bDPerSelect: function()
             {
                 let $this = this;
-                const terms = getPeriodDate($this.params.mmDd);
+                const terms = getPeriodDate($this.params.bDPer);
                 this.params.entrDtFr = terms.strDt;
                 this.params.entrDtTo = terms.endDt;
+            },
+            //유효성_검증
+            isValid: function() {
+
+                let $this = this;
+
+                if( ((WebUtil.isNotNull($this.params.entrDtFr)) && (WebUtil.isNull($this.params.entrDtTo))) || ((WebUtil.isNotNull($this.params.entrDtTo)) && (WebUtil.isNull($this.params.entrDtFr))) )
+                {
+                    Swal.alert(['나머지 기준 일자를 선택하세요.', 'info']);
+                    return false;
+                }
+                if( ((WebUtil.isNotNull($this.params.entrDtFr) && WebUtil.isNotNull($this.params.entrDtTo)) && $this.params.entrDtFr > $this.params.entrDtTo) )
+                {
+                    Swal.alert(['정확한 기준 일자를 선택하세요.', 'info']);
+                    return false;
+                }
+                return true;
             },
             downloadExcel : function()
             {
@@ -236,7 +287,7 @@ let guarInfoMng = new Vue({
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
-                    mmDd           : '' ,  //기준_일자 _이번달
+                    bDPer           : '' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     bandTelNo      : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID
