@@ -4,32 +4,36 @@
 
     <!--활동_이력 리스트 조회-->
 	<select id="selectActHistList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT   tdah.stnd_dt       /* stnd_dt 기준_일자 character(8) */
-			   , tdah.stdt_no 	    /* stdt_no 학생_번호 numeric */
-			   , decr(tsb.stdt_nm) as stdt_nm  	    /*stdt_nm 학생_명 varchar(40) */
-			   , teb.loc_nm         /*loc_nm 학교_명 varchar(100) */
-			   , tas.act_nm         --활동_명
-			   , tdah.act_tcnt_mcnt /* act_tcnt_mcnt 활동_시간_분수 numeric */
-			   , tdah.rpet_act_cnt  /* rpet_act_cnt 반복_활동_수 numeric */
-			   , tdah.cal_csum_qty  /* cal_csum_qty 칼로리_소모_량 numeric */
-			   , tdah.judg_no 	    /* judg_no 판정_번호 numeric */
-		       , decr(tbi.tel_no) as tel_no         /* tel_no 전화_번호 character varying(20) */
-		       , tgb.guar_no        /* guar_no 보호자_번호 numeric */
-		       , decr(tgb.guar_nm) as guar_nm        /* guar_nm 보호자_명 character varying(40) */
-		       , decr(tgb.guar_tel_no) as guar_tel_no    /* guar_tel_no 보호자_전화_번호 character varying(20) */
-		FROM   ts_dd_act_hist tdah              --일별_활동_이력 tdah
-		       inner join TI_ACT_STND tas       --활동_기준 TAS
-		       on tdah.ACT_CD = tas.ACT_CD
-		       inner join TM_STDT_BASE tsb      --학생_기본 tsb
-		       on tdah.STDT_NO = tsb.STDT_NO
-		       inner join TS_BAND_INFO tbi      --밴드_정보 tbi
-		       on tsb.BAND_ID = tbi.BAND_ID
-		       inner join TM_STDT_GUAR_CONN tsgc--학생_보호자_연결 tsgc
-		       on tsgc.STDT_NO = tsb.STDT_NO
-		       inner join  TM_GUAR_BASE tgb     --보호자_기본 tgb
-		       on tsgc.GUAR_NO = tgb.GUAR_NO
-		       left outer join TI_EORG_BASE teb --교육기관_기본 teb
-		       on tsb.EORG_LOC_NO = teb.LOC_NO
+		SELECT   tdah.stnd_dt                          /* stnd_dt      기준_일자       character(8)  */
+			   , tdah.stdt_no                          /* stdt_no      학생_번호       numeric       */
+			   , decr(tsb.stdt_nm) as stdt_nm          /* stdt_nm      학생_명         varchar(40)   */
+			   , teb.loc_nm                            /* loc_nm       학교_명         varchar(100)  */
+			   , tas.act_nm                            -- 활동_명
+			   , tdah.act_mcnt                         /* act_mcnt     활동_시간_분수  numeric       */
+			   , tdah.rpet_act_cnt                     /* rpet_act_cnt 반복_활동_수    numeric       */
+			   , tgh.cal_csum_qty                      /* cal_csum_qty 칼로리_소모_량  numeric       */
+			   , tdah.judg_no                          /* judg_no      판정_번호       numeric       */
+			   , decr(tbi.tel_no) as tel_no            /* tel_no       전화_번호       character varying(20) */
+			   , tgb.guar_no                           /* guar_no      보호자_번호     numeric       */
+			   , decr(tgb.guar_nm) as guar_nm          /* guar_nm      보호자_명       character varying(40) */
+			   , decr(tgb.guar_tel_no) as guar_tel_no  /* guar_tel_no 보호자_전화_번호 character varying(20) */
+		FROM   ts_dd_act_hist tdah                     --일별_활동_이력 tdah
+			   inner join TI_ACT_STND tas              --활동_기준 tas
+			           on tdah.ACT_CD = tas.ACT_CD
+			   inner join TM_STDT_BASE tsb             --학생_기본 tsb
+			           on tdah.STDT_NO = tsb.STDT_NO
+			          and tdah.STND_DT = tsb.ACT_STND_DT
+			   left outer join ts_GFIX_HIST tgh        --성장비만지수_이력 TGH
+			           on  tsb.STDT_NO = tgh.STDT_NO
+			   and tsb.GFIX_DT = tgh.GFIX_DT
+			   inner join TS_BAND_INFO tbi             --밴드_정보 tbi
+			           on tsb.BAND_ID = tbi.BAND_ID
+			   inner join TM_STDT_GUAR_CONN tsgc       --학생_보호자_연결 tsgc
+			           on tsgc.STDT_NO = tsb.STDT_NO
+			   inner join  TM_GUAR_BASE tgb            --보호자_기본 tgb
+			           on tsgc.GUAR_NO = tgb.GUAR_NO
+			   left outer join TI_EORG_BASE teb        --교육기관_기본 teb
+			           on tsb.EORG_LOC_NO = teb.LOC_NO
 		WHERE  1 = 1
 		<if test="stndDtFr != null and stndDtFr != null and stndDtTo !='' and stndDtTo !='' ">/*발생 일시*/
 			and tdah.stnd_dt between replace(#{stndDtFr},'-','') and replace(#{stndDtTo},'-','')</if>

@@ -4,15 +4,15 @@
 
     <!--보호자_식단표_현황 리스트 조회-->
 	<select id="selectGuarFmenuHistList" parameterType="java.util.Map" resultType="MybatisMap">
-		select tfb.guar_no       /* guar_no   보호자_번호 numeric */
-		     , tgb.guar_nm       /* guar_nm   보호자_명   character varying(40) */
-		     , tfb.fmenu_seq     /* fmenu_seq 식단표_순번 numeric */
-		     , tfb.fmenu_nm      /* fmenu_nm  식단표_명   character varying(100) */
-		     , tfb.mmel_yn       /* mmel_yn   아침_여부   character(1) */
-		     , tfb.amel_yn       /* amel_yn   점심_여부   character(1) */
-		     , tfb.emel_yn       /* emel_yn   저녁_여부   character(1) */
-		     , tfb.smel_yn       /* smel_yn   간식_여부   character(1) */
-		     , tdeh.feq_use       /*이용 빈도(수)*/
+		select tfb.guar_no         as guar_no    /* guar_no   보호자_번호 numeric */
+		     , DECR(tgb.guar_nm)   as guar_nm    /* guar_nm   보호자_명   character varying(40) */
+		     , tfb.fmenu_seq       as fmenu_seq  /* fmenu_seq 식단표_순번 numeric */
+		     , tfb.fmenu_nm        as fmenu_nm   /* fmenu_nm  식단표_명   character varying(100) */
+		     , tfb.mmel_yn         as mmel_yn    /* mmel_yn   아침_여부   character(1) */
+		     , tfb.amel_yn         as amel_yn    /* amel_yn   점심_여부   character(1) */
+		     , tfb.emel_yn         as emel_yn    /* emel_yn   저녁_여부   character(1) */
+		     , tfb.smel_yn         as smel_yn    /* smel_yn   간식_여부   character(1) */
+		     , tdeh.feq_use        as feq_use    /*이용 빈도(수)*/
 		from   ts_fmenu_base tfb                --식단표_기본 tfb
 		inner join      TM_GUAR_BASE tgb            --보호자_기본 tgb
 		                on tfb.GUAR_NO = tgb.GUAR_NO
@@ -32,7 +32,7 @@
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tfb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
-			and tgb.guar_NM like CONCAT('%',#{guarNm},'%')</if>
+			and DECR(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

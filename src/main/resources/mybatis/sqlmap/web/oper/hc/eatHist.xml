@@ -43,13 +43,13 @@
 		<if test=" stdtNo != null and stdtNo !='' ">
 		and tdeh.stdt_no = #{stdtNo}::NUMERIC </if>                          /*학생_번호*/
 		<if test=" stdtNm != null and stdtNm !='' ">
-		and tdeh.stdt_nm like CONCAT('%',#{stdtNm},'%')</if>                 /*학생_명*/
+		and  DECR(tsb.stdt_nm) like CONCAT('%',#{stdtNm},'%')</if>          /*학생_명*/
 		<if test=" fmenuNm != null and fmenuNm !='' ">
 		and tfb.fmenu_nm like CONCAT('%',#{fmenuNm},'%')</if>                /*식단표_명*/
 		<if test=" guarNo != null and guarNo !='' ">
 		and tdeh.guar_no = #{guarNo}::NUMERIC </if>                          /*보호자_번호*/
 		<if test=" guarNm != null and guarNm !='' ">
-		and tsb.guar_NM like CONCAT('%',#{guarNm},'%')</if>                  /*보호자_명*/
+		and DECR(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>            /*보호자_명*/
 		<if test=" locNm != null and locNm !='' ">
 		and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>                    /*학교_명*/
 		group by tdeh.stnd_dt, teb.loc_nm , tdeh.stdt_no, tsb.stdt_nm, tdeh.guar_no, tbi.tel_no , tgb.guar_nm  , tgb.guar_tel_no
@@ -75,7 +75,7 @@
 	<select id="selectFmenuSpecList" parameterType="java.util.Map" resultType="MybatisMap">
 		select   fmenuSpec.FMENU_CTGRY                            as FMENU_CTGRY /* fmenu_ctgry  식단_유형                          */
 		       , fmenuSpec.FMENU_SEQ                              as FMENU_SEQ   /* fmenu_seq    식단표_순번 numeric                */
-    	       , fmenuSpec.FMENU_NM                               as FMENU_NM    /* fmenu_nm     식단표_명   character varying(100) */
+    	       , fmenuSpec.FMENU_NM                               as FMENU_NM    /* fmenu_nm     식단표_명   charactaer varying(100) */
 		       , fmenuSpec.FOOD_NO                                as FOOD_NO     /* food_no      식품_번호   numeric                */
     	       , fmenuSpec.FOOD_NM                                as FOOD_NM     /* food_nm      식품_명     character varying(100) */
     	       , fmenuSpec.QTY                                    as QTY         /* qty          수량        numeric                */

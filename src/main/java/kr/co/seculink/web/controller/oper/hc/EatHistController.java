@@ -58,7 +58,7 @@ public class EatHistController {
 	}
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list) {
-		String[] arrHeader = { "발생일시", "학교 명","학생 번호","학생 명","성별","나이(년)","나이(개월)","스트레스 상태","정신적 상태","신체적 상태","대처능력","학생(밴드)전화번호","보호자 번호","보호자 명","보호자 전화번호" };
+		String[] arrHeader = { "기준일자", "학교 명","학생 번호","학생 명","아침 식단 번호","아침 식단 명","점심 식단 번호","점심 식단 명","저녁 식단 번호","저녁 식단 명","간식 식단 번호","간식 식단 명","학생(밴드)전화번호","보호자 번호","보호자 명","보호자 전화번호" };
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -66,17 +66,18 @@ public class EatHistController {
 
 		for (Map<String, String> info : list) {
 			data = new ArrayList<String>();
-			data.add(info.get("strsJudgDttm"));
+			data.add(info.get("stndDt"));
 			data.add(info.get("locNm"));
 			data.add(String.valueOf(info.get("stdtNo")));
 			data.add(info.get("stdtNm"));
-			data.add(info.get("sexCdNm"));
-			data.add(String.valueOf(info.get("ageYy")));
-			data.add(String.valueOf(info.get("ageMm")));
-			data.add(info.get("strsStatCdNm"));
-			data.add(info.get("mindStrsStatCdNm"));
-			data.add(info.get("physStrsStatCdNm"));
-			data.add(info.get("strsCopeStatCd"));
+			data.add(String.valueOf(info.get("mmelFmenuSeq")));
+			data.add(info.get("mmelFmenuNm"));
+			data.add(String.valueOf(info.get("amelFmenuSeq")));
+			data.add(info.get("amelFmenuNm"));
+			data.add(String.valueOf(info.get("emelFmenuSeq")));
+			data.add(info.get("emelFmenuNm"));
+			data.add(String.valueOf(info.get("smelFmenuSeq")));
+			data.add(info.get("smelFmenuNm"));
 			data.add(info.get("telNo"));
 			data.add(String.valueOf(info.get("guarNo")));
 			data.add(info.get("guarNm"));

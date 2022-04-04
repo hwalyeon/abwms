@@ -88,7 +88,7 @@ public class NutrEatHistController {
 			data.add(info.get("stdtNm"));
 			data.add(String.valueOf(info.get("cal")));
 			data.add(String.valueOf(info.get("prtn")));
-			data.add(String.valueOf(info.get("fidx")));
+			data.add(String.valueOf(info.get("fat")));
 			data.add(String.valueOf(info.get("carb")));
 			data.add(String.valueOf(info.get("dfib")));
 			data.add(String.valueOf(info.get("ca")));

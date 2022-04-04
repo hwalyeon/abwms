@@ -70,7 +70,7 @@ let actHist = new Vue({
                 {name: "stdtNm"      , index: "stdtNm"      , label: "학생 명" 	                   ,  width: 50 , align: "center" },
                 {name: "locNm"       , index: "locNm"       , label: "학교 명" 	                   ,  width: 50 , align: "center" },
                 {name: "actNm"       , index: "actNm"       , label: "활동명"	                   ,  width: 50 , align: "center" },
-                {name: "actTcntMcnt" , index: "actTcntMcnt" , label: "활동시간(분)"                 , width: 50 , align: "center" },
+                {name: "actMcnt"     , index: "actMcnt"     , label: "활동시간(분)"                 , width: 50 , align: "center" },
                 {name: "rpetActCnt"  , index: "rpetActCnt"  , label: "발생 건수<br/>(반복 활동 수)"  , width: 50 , align: "center" },
                 {name: "calCsumQty"  , index: "calCsumQty"  , label: "칼로리 소모량"                , width: 50 , align: "center" },
                 {name: "judgNo"      , index: "judgNo"      , label: "판정 번호"                    , width: 50 , align: "center" },
@@ -101,7 +101,8 @@ let actHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["stndDt","stdtNo","stdtNm","locNm","actNm", "actTcntMcnt","rpetActCnt", "calCsumQty","judgNo","telNo"], "stdtNo");
+                    $(grid).tableRowSpan(["stndDt","stdtNo","stdtNm","locNm","telNo"], "stdtNo");
+                    $(grid).tableRowSpan(["actNm", "actMcnt","rpetActCnt", "calCsumQty","judgNo"], "actNm");
                 }
             }));
             resizeJqGridWidth("actHist_list", "actHist_list_wrapper");

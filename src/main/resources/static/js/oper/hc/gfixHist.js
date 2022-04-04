@@ -81,9 +81,9 @@ let gfixHist = new Vue({
                 {name: "wghtVal"      , index: "wghtVal"      , label: "몸무게"                  , width: 80 , align: "center" ,fixed:true},
                 {name: "calEatQty"    , index: "calEatQty"    , label: "칼로리 섭취/일"          , width: 80 , align: "center" ,fixed:true},
                 {name: "calCsumQty"   , index: "calCsumQty"   , label: "칼로리 소모/일"          , width: 80 , align: "center" ,fixed:true},
-                {name: "gidx"         , index: "gidx"      , label: "성장지수"                , width: 80 , align: "center" ,fixed:true},
+                {name: "gidx"         , index: "gidx"         , label: "성장지수"                , width: 80 , align: "center" ,fixed:true},
                 {name: "growJudgCdNm" , index: "growJudgCdNm" , label: "성장 판정"               , width: 80 , align: "center" ,fixed:true},
-                {name: "fidx"         , index: "fidx"       , label: "비만 지수"               , width: 80 , align: "center" ,fixed:true},
+                {name: "fidx"         , index: "fidx"         , label: "비만 지수"               , width: 80 , align: "center" ,fixed:true},
                 {name: "fatJudgCdNm"  , index: "fatJudgCdNm"  , label: "비만 판정"               , width: 80 , align: "center" ,fixed:true},
                 {name: "fatpIdx"      , index: "fatpIdx"      , label: "비만 예측지수"           , width: 80 , align: "center" ,fixed:true},
                 {name: "fatpJudgCdNm" , index: "fatpJudgCdNm" , label: "비만 예측"               , width: 80 , align: "center" ,fixed:true},
@@ -116,8 +116,8 @@ let gfixHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","sexCdNm", "ageYcnt","ageMcnt", "hghtVal","wghtVal"], "stdtNo");
-                    $(grid).tableRowSpan(["gfixDt","calEatQty","calCsumQty","growIdx","growJudgCdNm", "fidx","fatJudgCdNm", "fatpIdx","fatpJudgCdNm","palVal"], "gfixDt");
+                    $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","sexCdNm", "ageYcnt","ageMcnt", "hghtVal","wghtVal","telNo"], "stdtNo");
+                    $(grid).tableRowSpan(["gfixDt","calEatQty","calCsumQty","growIdx","gidx","growJudgCdNm", "fidx","fatJudgCdNm", "fatpIdx","fatpJudgCdNm","palVal"], "gfixDt");
                 }
             }));
             resizeJqGridWidth("gfixHist_list", "gfixHist_list_wrapper");

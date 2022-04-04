@@ -5,104 +5,103 @@
     <!--영양소_섭취_이력 리스트 조회-->
 	<select id="selectNutrEatHistList" parameterType="java.util.Map" resultType="MybatisMap">
 		with
-		dd_eat_hist_nutr_info as
+		nutrInfo as
 		(
-		select tdeh.stnd_dt                                                    as stnd_dt /* stnd_dt 기준_일자 character(8) */
-		     , tdeh.stdt_no                                                    as stdt_no /* stdt_no 학생_번호 numeric */
-		     , tdeh.eat_seq                                                    as eat_seq /* eat_seq 섭취_순번 numeric */
-		     , case when tdes.nutr_cd = 'CAL'     then tdes.nutr_eat_qty  end  as CAL
-		     , case when tdes.nutr_cd = 'PRTN'    then tdes.nutr_eat_qty  end  as PRTN
-		     , case when tdes.nutr_cd = 'FAT'     then tdes.nutr_eat_qty  end  as FAT
-		     , case when tdes.nutr_cd = 'CARB'    then tdes.nutr_eat_qty  end  as CARB
-		     , case when tdes.nutr_cd = 'DFIB'    then tdes.nutr_eat_qty  end  as DFIB
-		     , case when tdes.nutr_cd = 'CA'      then tdes.nutr_eat_qty  end  as CA
-		     , case when tdes.nutr_cd = 'FE'      then tdes.nutr_eat_qty  end  as FE
-		     , case when tdes.nutr_cd = 'MG'      then tdes.nutr_eat_qty  end  as MG
-		     , case when tdes.nutr_cd = 'NA'      then tdes.nutr_eat_qty  end  as NA
-		     , case when tdes.nutr_cd = 'ZN'      then tdes.nutr_eat_qty  end  as ZN
-		     , case when tdes.nutr_cd = 'VIT_D3'  then tdes.nutr_eat_qty  end  as VIT_D3
-		     , case when tdes.nutr_cd = 'VIT_B'   then tdes.nutr_eat_qty  end  as VIT_B
-		     , case when tdes.nutr_cd = 'VIT_B1'  then tdes.nutr_eat_qty  end  as VIT_B1
-		     , case when tdes.nutr_cd = 'VIT_B2'  then tdes.nutr_eat_qty  end  as VIT_B2
-		     , case when tdes.nutr_cd = 'NIA'     then tdes.nutr_eat_qty  end  as NIA
-		     , case when tdes.nutr_cd = 'DFE'     then tdes.nutr_eat_qty  end  as DFE
-		     , case when tdes.nutr_cd = 'VIT_B12' then tdes.nutr_eat_qty  end  as VIT_B12
-		     , case when tdes.nutr_cd = 'ILE'     then tdes.nutr_eat_qty  end  as ILE
-		     , case when tdes.nutr_cd = 'LEU'     then tdes.nutr_eat_qty  end  as LEU
-		     , case when tdes.nutr_cd = 'VAL'     then tdes.nutr_eat_qty  end  as VAL
-		     , case when tdes.nutr_cd = 'AMNO'    then tdes.nutr_eat_qty  end  as AMNO
-		     , case when tdes.nutr_cd = 'CHL'     then tdes.nutr_eat_qty  end  as CHL
-		     , case when tdes.nutr_cd = 'FAPU'    then tdes.nutr_eat_qty  end  as FAPU
-		     , case when tdes.nutr_cd = 'EPA'     then tdes.nutr_eat_qty  end  as EPA
-		     , case when tdes.nutr_cd = 'DHA'     then tdes.nutr_eat_qty  end  as DHA
-		     , case when tdes.nutr_cd = 'EPA_DHA' then tdes.nutr_eat_qty  end  as EPA_DHA
-		from   ts_dd_eat_hist tdeh --일별_섭취_이력
-		       left outer join TS_DD_EAT_SPEC tdes --일별_섭취_상세
-		                    on tdeh.STDT_NO = tdes.STDT_NO
-		                   and tdeh.STND_DT = tdes.STND_DT
-		                   and tdeh.EAT_SEQ = tdes.EAT_SEQ
-		where  1=1
+		  select tdeh.stnd_dt                                                    as stnd_dt /* stnd_dt 기준_일자 character(8) */
+		       , tdeh.stdt_no                                                    as stdt_no /* stdt_no 학생_번호 numeric */
+		       , tdeh.eat_seq                                                    as eat_seq /* eat_seq 섭취_순번 numeric */
+		       , case when tdes.nutr_cd = 'CAL'     then tdes.nutr_eat_qty  end  as CAL
+		       , case when tdes.nutr_cd = 'PRTN'    then tdes.nutr_eat_qty  end  as PRTN
+		       , case when tdes.nutr_cd = 'FAT'     then tdes.nutr_eat_qty  end  as FAT
+		       , case when tdes.nutr_cd = 'CARB'    then tdes.nutr_eat_qty  end  as CARB
+		       , case when tdes.nutr_cd = 'DFIB'    then tdes.nutr_eat_qty  end  as DFIB
+		       , case when tdes.nutr_cd = 'CA'      then tdes.nutr_eat_qty  end  as CA
+		       , case when tdes.nutr_cd = 'FE'      then tdes.nutr_eat_qty  end  as FE
+		       , case when tdes.nutr_cd = 'MG'      then tdes.nutr_eat_qty  end  as MG
+		       , case when tdes.nutr_cd = 'NA'      then tdes.nutr_eat_qty  end  as NA
+		       , case when tdes.nutr_cd = 'ZN'      then tdes.nutr_eat_qty  end  as ZN
+		       , case when tdes.nutr_cd = 'VIT_D3'  then tdes.nutr_eat_qty  end  as VIT_D3
+		       , case when tdes.nutr_cd = 'VIT_B'   then tdes.nutr_eat_qty  end  as VIT_B
+		       , case when tdes.nutr_cd = 'VIT_B1'  then tdes.nutr_eat_qty  end  as VIT_B1
+		       , case when tdes.nutr_cd = 'VIT_B2'  then tdes.nutr_eat_qty  end  as VIT_B2
+		       , case when tdes.nutr_cd = 'NIA'     then tdes.nutr_eat_qty  end  as NIA
+		       , case when tdes.nutr_cd = 'DFE'     then tdes.nutr_eat_qty  end  as DFE
+		       , case when tdes.nutr_cd = 'VIT_B12' then tdes.nutr_eat_qty  end  as VIT_B12
+		       , case when tdes.nutr_cd = 'ILE'     then tdes.nutr_eat_qty  end  as ILE
+		       , case when tdes.nutr_cd = 'LEU'     then tdes.nutr_eat_qty  end  as LEU
+		       , case when tdes.nutr_cd = 'VAL'     then tdes.nutr_eat_qty  end  as VAL
+		       , case when tdes.nutr_cd = 'AMNO'    then tdes.nutr_eat_qty  end  as AMNO
+		       , case when tdes.nutr_cd = 'CHL'     then tdes.nutr_eat_qty  end  as CHL
+		       , case when tdes.nutr_cd = 'FAPU'    then tdes.nutr_eat_qty  end  as FAPU
+		       , case when tdes.nutr_cd = 'EPA'     then tdes.nutr_eat_qty  end  as EPA
+		       , case when tdes.nutr_cd = 'DHA'     then tdes.nutr_eat_qty  end  as DHA
+		       , case when tdes.nutr_cd = 'EPA_DHA' then tdes.nutr_eat_qty  end  as EPA_DHA
+		  from   ts_dd_eat_hist tdeh --일별_섭취_이력
+		         left outer join TS_DD_EAT_SPEC tdes --일별_섭취_상세
+		                     on  tdeh.STDT_NO = tdes.STDT_NO
+		                     and tdeh.STND_DT = tdes.STND_DT
+		  where  1=1
 		)
-		select tdeh.stnd_dt                      as stnd_dt    /* stnd_dt 기준_일자 character(8) */
-			 , teb.loc_nm                        as loc_nm     /* loc_nm  학교_명   varchar(100) */
-			 , tdeh.stdt_no                      as stdt_no    /* stdt_no 학생_번호 numeric      */
-			 , decr(tsb.stdt_nm)                 as stdt_nm    /* stdt_nm 학생_명   varchar(40)  */
-			 , coalesce( MAX(dehni.CAL)    , 0 ) as CAL
-			 , coalesce( MAX(dehni.PRTN)   , 0 ) as PRTN
-			 , coalesce( MAX(dehni.FAT)    , 0 ) as FAT
-			 , coalesce( MAX(dehni.CARB)   , 0 ) as CARB
-			 , coalesce( MAX(dehni.DFIB)   , 0 ) as DFIB
-			 , coalesce( MAX(dehni.CA)     , 0 ) as CA
-			 , coalesce( MAX(dehni.FE)     , 0 ) as FE
-			 , coalesce( MAX(dehni.MG)     , 0 ) as MG
-			 , coalesce( MAX(dehni.NA)     , 0 ) as NA
-			 , coalesce( MAX(dehni.ZN)     , 0 ) as ZN
-			 , coalesce( MAX(dehni.VIT_D3) , 0 ) as VIT_D3
-			 , coalesce( MAX(dehni.VIT_B)  , 0 ) as VIT_B
-			 , coalesce( MAX(dehni.VIT_B1) , 0 ) as VIT_B1
-			 , coalesce( MAX(dehni.VIT_B2) , 0 ) as VIT_B2
-			 , coalesce( MAX(dehni.NIA)    , 0 ) as NIA
-			 , coalesce( MAX(dehni.DFE)    , 0 ) as DFE
-			 , coalesce( MAX(dehni.VIT_B12), 0 ) as VIT_B12
-			 , coalesce( MAX(dehni.ILE)    , 0 ) as ILE
-			 , coalesce( MAX(dehni.LEU)    , 0 ) as LEU
-			 , coalesce( MAX(dehni.VAL)    , 0 ) as VAL
-			 , coalesce( MAX(dehni.AMNO)   , 0 ) as AMNO
-			 , coalesce( MAX(dehni.CHL)    , 0 ) as CHL
-			 , coalesce( MAX(dehni.FAPU)   , 0 ) as FAPU
-			 , coalesce( MAX(dehni.EPA)    , 0 ) as EPA
-			 , coalesce( MAX(dehni.DHA)    , 0 ) as DHA
-			 , coalesce( MAX(dehni.EPA_DHA), 0 ) as EPA_DHA
-			 , decr(tbi.tel_no)                  as tel_no      /* tel_no      전화_번호        character varying(20) */
-			 , tdeh.guar_no                      as guar_no     /* guar_no     보호자_번호      numeric               */
-			 , decr(tgb.guar_nm)                 as guar_nm     /* guar_nm     보호자_명        character varying(40) */
-			 , decr(tgb.guar_tel_no)             as guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20)  */
-		 from  ts_dd_eat_hist tdeh                    --일별_섭취_이력 tdeh
-		       inner join dd_eat_hist_nutr_info dehni --일별_섭취_상세 dehni
-		               on tdeh.STDT_NO = dehni.STDT_NO
-		              and tdeh.STND_DT = dehni.STND_DT
-		              and tdeh.EAT_SEQ = dehni.EAT_SEQ
-		       inner join TM_STDT_BASE tsb             --학생_기본 tsb
-		               on tdeh.STDT_NO = tsb.STDT_NO
-		       inner join TS_BAND_INFO tbi             --밴드_정보 tbi
-		               on tsb.BAND_ID = tbi.BAND_ID
-		       inner join  TM_GUAR_BASE tgb            --보호자_기본 tgb
-		               on tdeh.GUAR_NO = tgb.GUAR_NO
-		       left outer join TI_EORG_BASE teb        --교육기관_기본 teb
-		               on tsb.EORG_LOC_NO = teb.LOC_NO
+		select tdeh.stnd_dt                         as stnd_dt    /* stnd_dt 기준_일자 character(8) */
+		     , teb.loc_nm                           as loc_nm     /* loc_nm  학교_명   varchar(100) */
+		     , tdeh.stdt_no                         as stdt_no    /* stdt_no 학생_번호 numeric      */
+		     , DECR(tsb.stdt_nm)                    as stdt_nm    /* stdt_nm 학생_명   varchar(40)  */
+		     , coalesce( MAX(nutrInfo.CAL)    , 0 ) as CAL
+		     , coalesce( MAX(nutrInfo.PRTN)   , 0 ) as PRTN
+		     , coalesce( MAX(nutrInfo.FAT)    , 0 ) as FAT
+		     , coalesce( MAX(nutrInfo.CARB)   , 0 ) as CARB
+		     , coalesce( MAX(nutrInfo.DFIB)   , 0 ) as DFIB
+		     , coalesce( MAX(nutrInfo.CA)     , 0 ) as CA
+		     , coalesce( MAX(nutrInfo.FE)     , 0 ) as FE
+		     , coalesce( MAX(nutrInfo.MG)     , 0 ) as MG
+		     , coalesce( MAX(nutrInfo.NA)     , 0 ) as NA
+		     , coalesce( MAX(nutrInfo.ZN)     , 0 ) as ZN
+		     , coalesce( MAX(nutrInfo.VIT_D3) , 0 ) as VIT_D3
+		     , coalesce( MAX(nutrInfo.VIT_B)  , 0 ) as VIT_B
+		     , coalesce( MAX(nutrInfo.VIT_B1) , 0 ) as VIT_B1
+		     , coalesce( MAX(nutrInfo.VIT_B2) , 0 ) as VIT_B2
+		     , coalesce( MAX(nutrInfo.NIA)    , 0 ) as NIA
+		     , coalesce( MAX(nutrInfo.DFE)    , 0 ) as DFE
+		     , coalesce( MAX(nutrInfo.VIT_B12), 0 ) as VIT_B12
+		     , coalesce( MAX(nutrInfo.ILE)    , 0 ) as ILE
+		     , coalesce( MAX(nutrInfo.LEU)    , 0 ) as LEU
+		     , coalesce( MAX(nutrInfo.VAL)    , 0 ) as VAL
+		     , coalesce( MAX(nutrInfo.AMNO)   , 0 ) as AMNO
+		     , coalesce( MAX(nutrInfo.CHL)    , 0 ) as CHL
+		     , coalesce( MAX(nutrInfo.FAPU)   , 0 ) as FAPU
+		     , coalesce( MAX(nutrInfo.EPA)    , 0 ) as EPA
+		     , coalesce( MAX(nutrInfo.DHA)    , 0 ) as DHA
+		     , coalesce( MAX(nutrInfo.EPA_DHA), 0 ) as EPA_DHA
+		     , DECR(tbi.tel_no)                  as tel_no      /* tel_no      전화_번호        character varying(20) */
+		     , tdeh.guar_no                      as guar_no     /* guar_no     보호자_번호      numeric               */
+		     , DECR(tgb.guar_nm)                 as guar_nm     /* guar_nm     보호자_명        character varying(40) */
+		     , DECR(tgb.guar_tel_no)             as guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20)  */
+		from  ts_dd_eat_hist tdeh                    --일별_섭취_이력 tdeh
+			  inner join nutrInfo -- 영양소_정보 nutrInfo
+			          on tdeh.STND_DT = nutrInfo.STND_DT
+			         and tdeh.STDT_NO = nutrInfo.STDT_NO
+			         and tdeh.EAT_SEQ = nutrInfo.EAT_SEQ
+			  inner join TM_STDT_BASE tsb             --학생_기본 tsb
+			          on tdeh.STDT_NO = tsb.STDT_NO
+			  inner join TS_BAND_INFO tbi             --밴드_정보 tbi
+			          on tsb.BAND_ID = tbi.BAND_ID
+			  inner join  TM_GUAR_BASE tgb            --보호자_기본 tgb
+			          on tdeh.GUAR_NO = tgb.GUAR_NO
+			  left outer join TI_EORG_BASE teb        --교육기관_기본 teb
+			          on tsb.EORG_LOC_NO = teb.LOC_NO
 		where 1=1
 		<if test="stndDtFr != null and stndDtFr != null and stndDtTo !='' and stndDtTo !='' ">/*발생 일시*/
 			and tdeh.stnd_dt between replace(#{stndDtFr},'-','') and replace(#{stndDtTo},'-','')</if>
 		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
 			and tdeh.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
-			and decr(tsb.stdt_nm) like CONCAT('%',#{stdtNm},'%')</if>
+			and DECR(tsb.stdt_nm) like CONCAT('%',#{stdtNm},'%')</if>
 		<if test=" locNm != null and locNm !='' ">/*학교(학원)명*/
 			and teb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
-			and decr(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>
+			and DECR(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>
 		group by tdeh.stnd_dt, tdeh.stdt_no, teb.loc_nm, tsb.stdt_nm, tbi.tel_no, tdeh.guar_no, tgb.guar_nm, tgb.guar_tel_no
 		<if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>

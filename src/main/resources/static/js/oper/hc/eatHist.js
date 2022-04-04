@@ -63,7 +63,7 @@ let eatHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "stndDt"       , index: "stndDt"        , label: "발생 일시" 	         ,  width: 50 , align: "center" },
+                {name: "stndDt"       , index: "stndDt"        , label: "기준 일자" 	         ,  width: 50 , align: "center" },
                 {name: "locNm"        , index: "locNm"         , label: "학교 명" 	             ,  width: 50 , align: "center" },
                 {name: "stdtNo"       , index: "stdtNo"        , label: "학생 번호" 	         ,  width: 50 , align: "center" },
                 {name: "stdtNm"       , index: "stdtNm"        , label: "학생 명" 	             ,  width: 50 , align: "center" },
