@@ -25,6 +25,7 @@
                ,strs_stat_cd /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
                ,strs_proc_stat_cd /* strs_proc_stat_cd 스트레스_처리_상태_코드 character varying(20) */
                ,judg_no /* judg_no 판정_번호 numeric */
+               ,strs_alam_no /* strs_alam_no 스트레스_알림_번호 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -67,6 +68,9 @@
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
+		<if test="strsAlamNo != null">
+		    ,strs_alam_no /* strs_alam_no 스트레스_알림_번호 numeric */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -105,6 +109,9 @@
 		</if>
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
+		</if>
+		<if test="strsAlamNo != null">
+		    ,#{strsAlamNo} /* strs_alam_no 스트레스_알림_번호 numeric */
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
@@ -165,6 +172,9 @@
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 		</if>
+		<if test="strsAlamNo != null">
+		    ,strs_alam_no = #{strsAlamNo} /* strs_alam_no 스트레스_알림_번호 numeric */
+		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
@@ -206,6 +216,9 @@
 		<if test="judgNo != null">
 		    ,judg_no /* judg_no 판정_번호 numeric */
 		</if>
+		<if test="strsAlamNo != null">
+		    ,strs_alam_no /* strs_alam_no 스트레스_알림_번호 numeric */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -244,6 +257,9 @@
 		</if>
 		<if test="judgNo != null">
 		    ,#{judgNo} /* judg_no 판정_번호 numeric */
+		</if>
+		<if test="strsAlamNo != null">
+		    ,#{strsAlamNo} /* strs_alam_no 스트레스_알림_번호 numeric */
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
@@ -300,6 +316,9 @@
 		</if>
 		<if test="judgNo != null">
 		    ,judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
+		</if>
+		<if test="strsAlamNo != null">
+		    ,strs_alam_no = #{strsAlamNo} /* strs_alam_no 스트레스_알림_번호 numeric */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */

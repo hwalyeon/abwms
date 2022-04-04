@@ -55,6 +55,9 @@ public class TsStdtStrsHistVo implements Serializable {
 	/* judg_no 판정_번호 numeric(null) */
 	private double judgNo;
 
+	/* strs_alam_no 스트레스_알림_번호 numeric(null) */
+	private double strsAlamNo;
+
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -313,6 +316,21 @@ public class TsStdtStrsHistVo implements Serializable {
 	 */
 	public void setJudgNo(double judgNo) {
 		this.judgNo = judgNo;
+	}
+	/**
+	 * Get strs_alam_no 스트레스_알림_번호 numeric(null)
+	 * @Return double strsAlamNo
+	 */
+	public double getStrsAlamNo() {
+		return this.strsAlamNo;
+	}
+	
+	/**
+	 * Set strs_alam_no 스트레스_알림_번호 numeric(null)
+	 * @Param double strsAlamNo
+	 */
+	public void setStrsAlamNo(double strsAlamNo) {
+		this.strsAlamNo = strsAlamNo;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)
