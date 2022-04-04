@@ -19,6 +19,9 @@ public class TsDdEatSpecVo implements Serializable {
 	/* nutr_eat_qty 영양소_섭취_량 numeric(null) */
 	private double nutrEatQty;
 
+	/* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+	private String nutrStatCd;
+
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -97,6 +100,21 @@ public class TsDdEatSpecVo implements Serializable {
 	 */
 	public void setNutrEatQty(double nutrEatQty) {
 		this.nutrEatQty = nutrEatQty;
+	}
+	/**
+	 * Get nutr_stat_cd 영양섭취_상태_코드 character varying(20)
+	 * @Return String nutrStatCd
+	 */
+	public String getNutrStatCd() {
+		return this.nutrStatCd;
+	}
+	
+	/**
+	 * Set nutr_stat_cd 영양섭취_상태_코드 character varying(20)
+	 * @Param String nutrStatCd
+	 */
+	public void setNutrStatCd(String nutrStatCd) {
+		this.nutrStatCd = nutrStatCd;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

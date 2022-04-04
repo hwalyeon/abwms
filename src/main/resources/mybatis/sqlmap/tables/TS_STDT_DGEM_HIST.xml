@@ -18,9 +18,6 @@
                ,dgem_smry_cntn /* dgem_smry_cntn 위험감정_요약_내용 character varying(200) */
                ,dgem_stat_cntn /* dgem_stat_cntn 위험감정_상태_내용 text */
                ,loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
-               ,curr_lat_val /* curr_lat_val 현재_위도_값 numeric */
-               ,curr_lon_val /* curr_lon_val 현재_경도_값 numeric */
-               ,loc_mesu_dttm /* loc_mesu_dttm 위치_측정_일시 character(14) */
                ,act_div_cd /* act_div_cd 활동_구분_코드 character varying(20) */
                ,hbit_stat_cd /* hbit_stat_cd 심박_상태_코드 character varying(20) */
                ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
@@ -64,11 +61,6 @@
 		</if>
 		<if test="locHistNo != null">
 		    ,loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
-		</if>
-		    ,curr_lat_val /* curr_lat_val 현재_위도_값 numeric */
-		    ,curr_lon_val /* curr_lon_val 현재_경도_값 numeric */
-		<if test="locMesuDttm != null">
-		    ,loc_mesu_dttm /* loc_mesu_dttm 위치_측정_일시 character(14) */
 		</if>
 		<if test="actDivCd != null">
 		    ,act_div_cd /* act_div_cd 활동_구분_코드 character varying(20) */
@@ -124,11 +116,6 @@
 		</if>
 		<if test="locHistNo != null">
 		    ,#{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
-		</if>
-		    ,#{currLatVal} /* curr_lat_val 현재_위도_값 numeric */
-		    ,#{currLonVal} /* curr_lon_val 현재_경도_값 numeric */
-		<if test="locMesuDttm != null">
-		    ,#{locMesuDttm} /* loc_mesu_dttm 위치_측정_일시 character(14) */
 		</if>
 		<if test="actDivCd != null">
 		    ,#{actDivCd} /* act_div_cd 활동_구분_코드 character varying(20) */
@@ -189,15 +176,6 @@
 		<if test="locHistNo != null">
 		    ,loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
 		</if>
-		<if test="currLatVal != null">
-		    ,curr_lat_val = #{currLatVal} /* curr_lat_val 현재_위도_값 numeric */
-		</if>
-		<if test="currLonVal != null">
-		    ,curr_lon_val = #{currLonVal} /* curr_lon_val 현재_경도_값 numeric */
-		</if>
-		<if test="locMesuDttm != null">
-		    ,loc_mesu_dttm = #{locMesuDttm} /* loc_mesu_dttm 위치_측정_일시 character(14) */
-		</if>
 		<if test="actDivCd != null">
 		    ,act_div_cd = #{actDivCd} /* act_div_cd 활동_구분_코드 character varying(20) */
 		</if>
@@ -255,11 +233,6 @@
 		<if test="locHistNo != null">
 		    ,loc_hist_no /* loc_hist_no 위치_이력_번호 numeric */
 		</if>
-		    ,curr_lat_val /* curr_lat_val 현재_위도_값 numeric */
-		    ,curr_lon_val /* curr_lon_val 현재_경도_값 numeric */
-		<if test="locMesuDttm != null">
-		    ,loc_mesu_dttm /* loc_mesu_dttm 위치_측정_일시 character(14) */
-		</if>
 		<if test="actDivCd != null">
 		    ,act_div_cd /* act_div_cd 활동_구분_코드 character varying(20) */
 		</if>
@@ -314,11 +287,6 @@
 		</if>
 		<if test="locHistNo != null">
 		    ,#{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
-		</if>
-		    ,#{currLatVal} /* curr_lat_val 현재_위도_값 numeric */
-		    ,#{currLonVal} /* curr_lon_val 현재_경도_값 numeric */
-		<if test="locMesuDttm != null">
-		    ,#{locMesuDttm} /* loc_mesu_dttm 위치_측정_일시 character(14) */
 		</if>
 		<if test="actDivCd != null">
 		    ,#{actDivCd} /* act_div_cd 활동_구분_코드 character varying(20) */
@@ -375,15 +343,6 @@
 		</if>
 		<if test="locHistNo != null">
 		    ,loc_hist_no = #{locHistNo} /* loc_hist_no 위치_이력_번호 numeric */
-		</if>
-		<if test="currLatVal != null">
-		    ,curr_lat_val = #{currLatVal} /* curr_lat_val 현재_위도_값 numeric */
-		</if>
-		<if test="currLonVal != null">
-		    ,curr_lon_val = #{currLonVal} /* curr_lon_val 현재_경도_값 numeric */
-		</if>
-		<if test="locMesuDttm != null">
-		    ,loc_mesu_dttm = #{locMesuDttm} /* loc_mesu_dttm 위치_측정_일시 character(14) */
 		</if>
 		<if test="actDivCd != null">
 		    ,act_div_cd = #{actDivCd} /* act_div_cd 활동_구분_코드 character varying(20) */

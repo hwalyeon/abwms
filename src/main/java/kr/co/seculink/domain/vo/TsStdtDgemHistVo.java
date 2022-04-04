@@ -34,15 +34,6 @@ public class TsStdtDgemHistVo implements Serializable {
 	/* loc_hist_no 위치_이력_번호 numeric(null) */
 	private double locHistNo;
 
-	/* curr_lat_val 현재_위도_값 numeric(null) */
-	private double currLatVal;
-
-	/* curr_lon_val 현재_경도_값 numeric(null) */
-	private double currLonVal;
-
-	/* loc_mesu_dttm 위치_측정_일시 character(14) */
-	private String locMesuDttm;
-
 	/* act_div_cd 활동_구분_코드 character varying(20) */
 	private String actDivCd;
 
@@ -217,51 +208,6 @@ public class TsStdtDgemHistVo implements Serializable {
 	 */
 	public void setLocHistNo(double locHistNo) {
 		this.locHistNo = locHistNo;
-	}
-	/**
-	 * Get curr_lat_val 현재_위도_값 numeric(null)
-	 * @Return double currLatVal
-	 */
-	public double getCurrLatVal() {
-		return this.currLatVal;
-	}
-	
-	/**
-	 * Set curr_lat_val 현재_위도_값 numeric(null)
-	 * @Param double currLatVal
-	 */
-	public void setCurrLatVal(double currLatVal) {
-		this.currLatVal = currLatVal;
-	}
-	/**
-	 * Get curr_lon_val 현재_경도_값 numeric(null)
-	 * @Return double currLonVal
-	 */
-	public double getCurrLonVal() {
-		return this.currLonVal;
-	}
-	
-	/**
-	 * Set curr_lon_val 현재_경도_값 numeric(null)
-	 * @Param double currLonVal
-	 */
-	public void setCurrLonVal(double currLonVal) {
-		this.currLonVal = currLonVal;
-	}
-	/**
-	 * Get loc_mesu_dttm 위치_측정_일시 character(14)
-	 * @Return String locMesuDttm
-	 */
-	public String getLocMesuDttm() {
-		return this.locMesuDttm;
-	}
-	
-	/**
-	 * Set loc_mesu_dttm 위치_측정_일시 character(14)
-	 * @Param String locMesuDttm
-	 */
-	public void setLocMesuDttm(String locMesuDttm) {
-		this.locMesuDttm = locMesuDttm;
 	}
 	/**
 	 * Get act_div_cd 활동_구분_코드 character varying(20)
