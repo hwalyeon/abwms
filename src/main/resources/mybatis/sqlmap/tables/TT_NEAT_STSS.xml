@@ -12,7 +12,7 @@
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
-               ,act_cd /* act_cd 결식_구분_코드 character varying(20) */
+               ,etim_div_cd /* etim_div_cd 식때_구분_코드 character varying(20) */
                ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
                ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
                ,week_nm /* week_nm 요일_명 character varying(10) */
@@ -29,7 +29,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		AND    act_cd = #{actCd} /* act_cd 결식_구분_코드 character varying(20) */
+		AND    etim_div_cd = #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
 	</select>
 
 	<insert id="insert" >
@@ -39,7 +39,7 @@
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
-		    ,act_cd /* act_cd 결식_구분_코드 character varying(20) */
+		    ,etim_div_cd /* etim_div_cd 식때_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -65,7 +65,7 @@
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		     #{actCd} /* act_cd 결식_구분_코드 character varying(20) */
+		     #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -117,7 +117,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		AND    act_cd = #{actCd} /* act_cd 결식_구분_코드 character varying(20) */
+		AND    etim_div_cd = #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
 	</update>
 	
 	<update id="merge" >
@@ -127,7 +127,7 @@
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		     sex_cd /* sex_cd 성별_코드 character varying(20) */
 		     age_ycnt /* age_ycnt 나이_년수 numeric */
-		     act_cd /* act_cd 결식_구분_코드 character varying(20) */
+		     etim_div_cd /* etim_div_cd 식때_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -153,7 +153,7 @@
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		     #{actCd} /* act_cd 결식_구분_코드 character varying(20) */
+		     #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -207,6 +207,6 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		AND    act_cd = #{actCd} /* act_cd 결식_구분_코드 character varying(20) */
+		AND    etim_div_cd = #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
 	</delete>
 </mapper>

@@ -25,6 +25,9 @@ public class TtCalEatStssVo implements Serializable {
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
+	/* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null) */
+	private double avgCalEatQty;
+
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -42,9 +45,6 @@ public class TtCalEatStssVo implements Serializable {
 
 	/* upt_user_id 수정_사용자_ID character varying(20) */
 	private String uptUserId;
-
-	/* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null) */
-	private double avgCalEatQty;
 
 
 	/**
@@ -138,6 +138,21 @@ public class TtCalEatStssVo implements Serializable {
 		this.weekNm = weekNm;
 	}
 	/**
+	 * Get avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
+	 * @Return double avgCalEatQty
+	 */
+	public double getAvgCalEatQty() {
+		return this.avgCalEatQty;
+	}
+	
+	/**
+	 * Set avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
+	 * @Param double avgCalEatQty
+	 */
+	public void setAvgCalEatQty(double avgCalEatQty) {
+		this.avgCalEatQty = avgCalEatQty;
+	}
+	/**
 	 * Get reg_dt 등록_일자 character(8)
 	 * @Return String regDt
 	 */
@@ -226,21 +241,6 @@ public class TtCalEatStssVo implements Serializable {
 	 */
 	public void setUptUserId(String uptUserId) {
 		this.uptUserId = uptUserId;
-	}
-	/**
-	 * Get avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
-	 * @Return double avgCalEatQty
-	 */
-	public double getAvgCalEatQty() {
-		return this.avgCalEatQty;
-	}
-	
-	/**
-	 * Set avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
-	 * @Param double avgCalEatQty
-	 */
-	public void setAvgCalEatQty(double avgCalEatQty) {
-		this.avgCalEatQty = avgCalEatQty;
 	}
 
 } // end of class

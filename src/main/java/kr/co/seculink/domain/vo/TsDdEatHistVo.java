@@ -22,6 +22,9 @@ public class TsDdEatHistVo implements Serializable {
 	/* fmenu_seq 식단표_순번 numeric(null) */
 	private double fmenuSeq;
 
+	/* etim_div_cd 식때_구분_코드 character(18) */
+	private String etimDivCd;
+
 	/* eat_qty 섭취_용량 numeric(null) */
 	private double eatQty;
 
@@ -118,6 +121,21 @@ public class TsDdEatHistVo implements Serializable {
 	 */
 	public void setFmenuSeq(double fmenuSeq) {
 		this.fmenuSeq = fmenuSeq;
+	}
+	/**
+	 * Get etim_div_cd 식때_구분_코드 character(18)
+	 * @Return String etimDivCd
+	 */
+	public String getEtimDivCd() {
+		return this.etimDivCd;
+	}
+	
+	/**
+	 * Set etim_div_cd 식때_구분_코드 character(18)
+	 * @Param String etimDivCd
+	 */
+	public void setEtimDivCd(String etimDivCd) {
+		this.etimDivCd = etimDivCd;
 	}
 	/**
 	 * Get eat_qty 섭취_용량 numeric(null)

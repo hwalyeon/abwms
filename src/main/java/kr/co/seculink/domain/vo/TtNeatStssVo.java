@@ -16,8 +16,8 @@ public class TtNeatStssVo implements Serializable {
 	/* age_ycnt 나이_년수 numeric(null) */
 	private double ageYcnt;
 
-	/* act_cd 결식_구분_코드 character varying(20) */
-	private String actCd;
+	/* etim_div_cd 식때_구분_코드 character varying(20) */
+	private String etimDivCd;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
@@ -99,19 +99,19 @@ public class TtNeatStssVo implements Serializable {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
-	 * Get act_cd 결식_구분_코드 character varying(20)
-	 * @Return String actCd
+	 * Get etim_div_cd 식때_구분_코드 character varying(20)
+	 * @Return String etimDivCd
 	 */
-	public String getActCd() {
-		return this.actCd;
+	public String getEtimDivCd() {
+		return this.etimDivCd;
 	}
 	
 	/**
-	 * Set act_cd 결식_구분_코드 character varying(20)
-	 * @Param String actCd
+	 * Set etim_div_cd 식때_구분_코드 character varying(20)
+	 * @Param String etimDivCd
 	 */
-	public void setActCd(String actCd) {
-		this.actCd = actCd;
+	public void setEtimDivCd(String etimDivCd) {
+		this.etimDivCd = etimDivCd;
 	}
 	/**
 	 * Get stnd_yymm 기준_년월 character(6)
