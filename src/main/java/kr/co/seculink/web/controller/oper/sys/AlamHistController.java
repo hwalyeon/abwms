@@ -67,7 +67,7 @@ public class AlamHistController
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
 		String [] arrHeader = {"발생일시","학교명","학생번호","학생명","장소","장소분류","위도","경도","위치명","주소","학생전화번호","보호자번호",
-					           "보호자명","보호자전화번호","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
+					           "보호자명","보호자전화번호"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();

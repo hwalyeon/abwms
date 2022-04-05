@@ -52,6 +52,7 @@ let locHist = new Vue({
 
             $this.searchLocHistList(true);
 
+            $this.setDatepicker();
         },
         initValue: function() {
             let $this = this;
@@ -163,6 +164,31 @@ let locHist = new Vue({
         locSearchDetlPopup: function() {
             locSearchDetl.initialize(this.setData);
         },
+        setDatepicker : function() {
+            let $this = this;
+            $('#entrDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtFr = $('#entrDtFr').val();
+            });
+            $('#entrDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtTo = $('#entrDtTo').val();
+            });
+        },
         //엑셀 다운로드
         downloadExcel : function()
         {
@@ -187,7 +213,7 @@ let locHist = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                mmDd:'THIS_MONTH',
+                mmDd:'',
                 plcClssCd:'',
                 schlNm:'',
                 guarNm:'',

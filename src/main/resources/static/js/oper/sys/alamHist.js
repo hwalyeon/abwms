@@ -47,8 +47,9 @@ let alamHist = new Vue({
 
             $this.initGrid();
 
-            $this.searchLocHistList(true);
+            $this.searchAlamHistList(true);
 
+            $this.setDatepicker();
         },
         initValue: function() {
             let $this = this;
@@ -99,7 +100,7 @@ let alamHist = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchLocHistList(false);
+                        $this.searchAlamHistList(false);
                     })
                 },
             }));
@@ -110,7 +111,7 @@ let alamHist = new Vue({
 
             let $this = this;
             let params = $.extend(true, {}, $this.params);
-            if ( isSearch ) {
+            if (isSearch) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
             }
@@ -120,44 +121,60 @@ let alamHist = new Vue({
                 postData: JSON.stringify(params),
                 page: 1,
                 loadComplete: function (response) {
-                    if ( response.rtnData.result == 0 ) {
+                    if (response.rtnData.result == 0) {
                         Swal.alert(['조회할 내용이 없습니다.', "info"]);
                     }
                 }
             }).trigger("reloadGrid");
+        },
+            //보호자 번호 팝업 Grid 값 부모창 input 값에 삽입
+            setData: function(data) {
+                console.log(data);
+                let $this = this;
+                if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined)
+                {
+                    $this.params.stdtNo = data.stdtNo;
+                    $this.params.stdtNm = data.stdtNm;
+                    $this.params.guarNo = data.guarNo;
+                    $this.params.guarNm = data.guarNm;
+                }
+                if(data.locNm !== undefined)
+                {
+                    $this.params.locNm  = data.locNm;
+                }
+            },
 
-        },
-        setData: function(data) {
-            console.log(data);
-            let $this = this;
-            $this.params.stdtNo = data.stdtNo;
-            $this.params.stdtNm = data.stdtNm;
-            $this.params.guarNo = data.guarNo;
-            $this.params.guarNm = data.guarNm;
-            $this.params.locNm  = data.locNm;
-        },
+        //학생 및 보호자 정보 search 팝업
         stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize();
+            stdtGuarDetl.initialize(this.setData);
         },
 
-        locSearchDetlPopup: function() {
-            locSearchDetl.initialize();
+        setDatepicker : function() {
+            let $this = this;
+            $('#entrDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtFr = $('#entrDtFr').val();
+            });
+            $('#entrDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtTo = $('#entrDtTo').val();
+            });
         },
 
-        stdtInfoDetlPopup: function(stdtNo, guarNo) {
-            stdtInfoDetl.initPage(stdtNo, guarNo);
-        },
-        regBandOpenInfoDetlPopup: function(bandId) {
-            bandOpenInfoDetl.initPage(bandId, function(){  stdtInfoMng.searchDgemHistList(true) });
-        },
-        //보호자(사용자)정보 상세 팝업
-        regGuarInfoDetlPopup: function(bandId,guarNo,stdtNo) {
-            guarInfoDetl.initPage(guarNo, function(){ alamHist.searchAlamHistList(true) });
-        },
-        //학부모정보 상세 팝업
-        regPrntInfoDetlPopup: function(bandId, prntNo, sexCd) {
-            prntInfoDetl.initPage(prntNo, sexCd, function(){ alamHist.searchAlamHistList(true) });
-        },
         downloadExcel : function()
         {
             let $this = this;
@@ -181,13 +198,19 @@ let alamHist = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                mmDd:'THIS_MONTH',
-                plcClssCd:'',
-                schlNm:'',
-                guarNm:'',
-                guarNo:'',
-                stdtNm:'',
-                stdtNo:'',
+                mmDd        :'',
+                emtrDtFr    :'',
+                entrDtTo    :'',
+                sendDttm    :'',
+                guarNo      :'',
+                guarNm      :'',
+                guarTelNo   :'',
+                stdtNo      :'',
+                stdtnm      :'',
+                alamChnlCd  :'',
+                alamTypeCd  :'',
+                alamTitl    :'',
+                sendRsltCd  :'',
                 paging: 'Y',
                 totalCount: 0,
                 rowCount: 30,

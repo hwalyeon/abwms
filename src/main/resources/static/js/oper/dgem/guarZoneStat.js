@@ -116,6 +116,7 @@ let guarZoneStat = new Vue({
             $this.createMap();
             $this.initGrid();
             $this.searchLocInfoList(true);
+            $this.setDatepicker();
         },
         initValue: function() {
             let $this = this;
@@ -306,6 +307,32 @@ let guarZoneStat = new Vue({
         stdtGuarDetlPopup: function() {
             stdtGuarDetl.initialize();
         },
+        //datepicker
+        setDatepicker : function() {
+            let $this = this;
+            $('#entrDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtFr = $('#entrDtFr').val();
+            });
+            $('#entrDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtTo = $('#entrDtTo').val();
+            });
+        },
         getLatPerMeter: function() {
             // 위도거리 : 1도=111Km
             return 1 / (111 * 1000);
@@ -438,9 +465,9 @@ let guarZoneStat = new Vue({
                 colModel: locListColModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
-                        $this.locInfo.currentPage    = resultMap.currentPage;
-                        $this.locInfo.rowCount       = resultMap.rowCount;
-                        $this.locInfo.currentIndex   = resultMap.currentIndex;
+                        $this.params.currentPage    = resultMap.currentPage;
+                        $this.params.rowCount       = resultMap.rowCount;
+                        $this.params.currentIndex   = resultMap.currentIndex;
                         $this.searchLocInfoList(false);
                     })
                 },

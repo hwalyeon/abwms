@@ -57,6 +57,8 @@ let btchJobHist = new Vue({
 
             $this.searchLocHistList(true);
 
+            $this.setDatepicker();
+
         },
         initValue: function() {
             let $this = this;
@@ -146,6 +148,53 @@ let btchJobHist = new Vue({
             }).trigger("reloadGrid");
 
         },
+        setDatepicker : function() {
+            let $this = this;
+            $('#entrDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtFr = $('#entrDtFr').val();
+            });
+            $('#entrDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtTo = $('#entrDtTo').val();
+            });
+            $('#endDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtFr = $('#endDtFr').val();
+            });
+            $('#endDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtTo = $('#endDtTo').val();
+            });
+        },
         downloadExcel : function()
         {
             let $this = this;
@@ -169,7 +218,8 @@ let btchJobHist = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                mmDd:'THIS_MONTH',
+                mmDd:'',
+                mmDd2:'',
                 plcClssCd:'',
                 schlNm:'',
                 guarNm:'',

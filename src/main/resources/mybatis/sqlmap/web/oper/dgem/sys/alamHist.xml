@@ -37,9 +37,9 @@
         <if test=" sendRsltCd != null and sendRsltCd !='' ">
         and    TAH.SEND_RSLT_CD    = #{sendRsltCd}</if>
         <if test=" guarNo != null and guarNo !='' ">
-        and    TAH.GUAR_NO         = #{guarNo}</if>
+        and    TAH.GUAR_NO         = #{guarNo}::numeric</if>
         <if test=" guarNm != null and guarNm !='' ">
-        and    DECR(TAH.GUAR_NM)   = #{guarNm}</if>
+        and    DECR(TGB.GUAR_NM)   = #{guarNm}</if>
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>

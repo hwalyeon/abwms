@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:remove="tag">
+<div class="modal fade" id="alamDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog-wrap">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 580px; height: 415px;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>알람 정보</h5>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="ibox-content border-style_none">
+						<table class="table table-bordered table_view">
+							<colgroup>
+								<col class="col-xs-2" />
+								<col class="col-xs-4" />
+								<col class="col-xs-2" />
+								<col class="col-xs-4" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">보호자명</th>
+									<td>
+										<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
+									</td>
+									<th scope="row">보호자번호</th>
+									<td>
+										<input type="number" name="guarNo" class="form-control" v-model="params.guarNo" style="width:70%; float:left;">
+										<button type="button" id="btn1" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">학생명</th>
+									<td>
+										<input type="text" name="stdtNm" class="form-control"  v-model="params.stdtNm">
+									</td>
+									<th scope="row">학생번호</th>
+									<td>
+										<input type="number" name="stdtNo" class="form-control" v-model="params.stdtNo" style="width:70%; float:left;">
+										<button type="button" id="btn2" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup" style="width:23%; float:right;"><i class="fa fa-search" aria-hidden="true"></i></button>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">알림제목</th>
+									<td>
+										<input type="text" name="alamTitl" class="form-control"  v-model="params.alamTitl">
+									</td>
+									<th scope="row">알림유형코드</th>
+									<td>
+										<input type="text" name="alamTypeCd" class="form-control"  v-model="params.alamTypeCd" :disabled="true">
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">알림내용</th>
+									<td colspan="3">
+										<input type="text" name="alamCntn" class="form-control" v-model="params.alamCntn">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+            	</div>
+            	<div class="modal-footer">
+					<div class="text-center">
+						<div class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveStdtRegInfo">저장</button>
+						</div>
+						<div class="disp_in_block width_per_20">
+							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+						</div>
+					</div>
+				</div>			
+            </div>
+        </div>
+    </div>
+</div>

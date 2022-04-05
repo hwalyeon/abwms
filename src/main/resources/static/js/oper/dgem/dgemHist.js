@@ -58,6 +58,8 @@ let dgemHist = new Vue({
 
             $this.searchDgemHistList(true);
 
+            $this.setDatepicker();
+
         },
         initValue: function() {
             let $this = this;
@@ -95,9 +97,9 @@ let dgemHist = new Vue({
                 {name: "dgemStatCntn"      , index: "dgemStatCntn"      , label: "위험감정 요약내용"   , width: 110    , align: "center" , fixed: true},
                 {name: "dgemSmryCntn"      , index: "dgemSmryCntn"      , label: "위험감정 상태내용"	, width: 110    , align: "center" , fixed: true},
                 {name: "locHistNo"         , index: "locHistNo"         , label: "위치이력 번호"		, width: 80     , align: "center" , fixed: true},
-                {name: "currLatVal"        , index: "currLatVal"        , label: "현재위도 값"		, width: 80     , align: "center" , fixed: true},
+                /*{name: "currLatVal"        , index: "currLatVal"        , label: "현재위도 값"		, width: 80     , align: "center" , fixed: true},
                 {name: "currLonVal"        , index: "currLonVal"        , label: "현재경도 값"  		, width: 80     , align: "center" , fixed: true},
-                {name: "locMesuDttm"       , index: "locMesuDttm"       , label: "위치측정일시"	 	, width: 100    , align: "center" , fixed: true},
+                {name: "locMesuDttm"       , index: "locMesuDttm"       , label: "위치측정일시"	 	, width: 100    , align: "center" , fixed: true},*/
                 {name: "actDivCd"          , index: "actDivCd"          , label: "활동구분코드"		, width: 100    , align: "center" , fixed: true},
                 {name: "hbitStatCd"        , index: "hbitStatCd"        , label: "심박상태코드"  		, width: 100    , align: "center" , fixed: true},
                 {name: "plcClssCd"         , index: "plcClssCd"         , label: "장소분류코드" 	    , width: 110    , align: "center" , fixed: true},
@@ -195,6 +197,31 @@ let dgemHist = new Vue({
         locSearchDetlPopup: function() {
             locSearchDetl.initialize(this.setData);
         },
+        setDatepicker : function() {
+            let $this = this;
+            $('#entrDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtFr = $('#entrDtFr').val();
+            });
+            $('#entrDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtTo = $('#entrDtTo').val();
+            });
+        },
         //엑셀 다운로드
         downloadExcel : function()
         {
@@ -220,7 +247,7 @@ let dgemHist = new Vue({
             let $this = this;
             $this.params = {
                 stdtNo:'',
-                mmDd:'THIS_MONTH',
+                mmDd:'',
                 paging: 'Y',
                 totalCount: 0,
                 rowCount: 30,

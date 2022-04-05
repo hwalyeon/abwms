@@ -12,9 +12,9 @@
         ,A.DGEM_STAT_CNTN /* 위험감정 요약 내용 */
         ,A.DGEM_SMRY_CNTN /* 위험감정 상태 내용 */
         ,A.LOC_HIST_NO    /* 위치 이력 번호 */
-        ,A.CURR_LAT_VAL   /* 현재 위도 값 */
+        /*,A.CURR_LAT_VAL   /* 현재 위도 값 */
         ,A.CURR_LON_VAL   /* 현재 경도 값 */
-        ,A.LOC_MESU_DTTM  /* 위치 측정 일시 */
+        ,A.LOC_MESU_DTTM  /* 위치 측정 일시 */*/
         ,fn_getCdnm('ACT_DIV_CD',A.ACT_DIV_CD) as ACT_DIV_CD       /* 활동 구분 코드 */
         ,fn_getCdnm('HBIT_STAT_CD',A.HBIT_STAT_CD)as HBIT_STAT_CD  /* 심박 상태 코드 */
         ,fn_getCdnm('PLC_CLSS_CD',A.PLC_CLSS_CD) as PLC_CLSS_CD    /* 장소 분류 코드 */
@@ -83,10 +83,10 @@
     <!--학생정보 및 보호자 정보 select-->
     <select id="searchStdtGuarList" parameterType="java.util.Map" resultType="MybatisMap">
         select A.STDT_NO
-        ,A.STDT_NM
+        ,DECR(A.STDT_NM) as STDT_NM
         ,C.GUAR_NO
-        ,C.GUAR_NM
-        ,C.GUAR_TEL_NO
+        ,DECR(C.GUAR_NM) as GUAR_NM
+        ,DECR(C.GUAR_TEL_NO) as GUAR_TEL_NO
         from   TM_STDT_BASE A
         left outer join
         TM_STDT_GUAR_CONN B
@@ -98,13 +98,13 @@
         <if test=" stdtNo != null and stdtNo !='' ">
             and    A.STDT_NO = #{stdtNo}::numeric</if>
         <if test=" stdtNm != null and stdtNm !='' ">
-            and    A.STDT_NM = #{stdtNm}</if>
+            and    DECR(A.STDT_NM) = #{stdtNm}</if>
         <if test=" guarNo != null and guarNo !='' ">
             and    C.GUAR_NO = #{guarNo}::numeric</if>
         <if test=" guarNm != null and guarNm !='' ">
-            and    C.GUAR_NM = #{guarNm}</if>
+            and    DECR(C.GUAR_NM) = #{guarNm}</if>
         <if test=" guarTelNo != null and guarTelNo !='' ">
-            and    C.GUAR_TEL_NO = #{guarTelNo}</if>
+            and    DECR(C.GUAR_TEL_NO) = #{guarTelNo}</if>
         group  by A.STDT_NO , A.STDT_NM , C.GUAR_NO , C.GUAR_NM
         order  by A.stdt_no
         <if test=' paging == "Y" '>
