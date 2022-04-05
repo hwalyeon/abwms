@@ -193,7 +193,6 @@ let actHist = new Vue({
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                format: 'yyyy-mm-dd',
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
@@ -204,7 +203,6 @@ let actHist = new Vue({
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                format: 'yyyy-mm-dd',
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {

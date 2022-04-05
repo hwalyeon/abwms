@@ -191,7 +191,6 @@ let bandOpenInfoMng = new Vue({
                     keyboardNavigation: false,
                     forceParse: false,
                     calendarWeeks: true,
-                    format: 'yyyy-mm-dd',
                     autoclose: true,
                     todayHighlight: true,
                 }).on("changeDate", function() {
@@ -202,7 +201,6 @@ let bandOpenInfoMng = new Vue({
                     keyboardNavigation: false,
                     forceParse: false,
                     calendarWeeks: true,
-                    format: 'yyyy-mm-dd',
                     autoclose: true,
                     todayHighlight: true,
                 }).on("changeDate", function() {
