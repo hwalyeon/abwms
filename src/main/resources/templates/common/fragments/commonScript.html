@@ -83,6 +83,7 @@
 
 <!-- Chart -->
 <script type="text/javascript" th:src="@{/js/plugins/chartJs/chart.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/chartJs/chartjs-plugin-datalabels.min.js}"></script>
 
 
 <!-- Vue Common -->
@@ -111,6 +112,8 @@
     var locale = null;
     var timestampFormatPattern = 'YYYY-MM-DD HH:mm:ss';
     var dateFormatPattern = 'YYYY-MM-DD';
+    var datepickerFormatPattern = 'yyyy-mm-dd';
+    var datepickerFormatMmPattern = 'yyyy-mm';
     var timeFormatPattern = 'HH:mm:ss';
     var serverUrl = '';
     var uploadUrl = ''
