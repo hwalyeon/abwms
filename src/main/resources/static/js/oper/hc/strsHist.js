@@ -177,7 +177,6 @@ let strsHist = new Vue({
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                format: 'yyyy-mm-dd',
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
@@ -188,7 +187,6 @@ let strsHist = new Vue({
                 keyboardNavigation: false,
                 forceParse: false,
                 calendarWeeks: true,
-                format: 'yyyy-mm-dd',
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
