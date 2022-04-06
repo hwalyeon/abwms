@@ -74,6 +74,18 @@ var CodeUtil = {
     },
 
     /**
+     * 기간 구분
+     */
+    getPeriodDivList: function() {
+        return [
+            { value: "MONTH",     text: "월별" },
+            { value: "WEEK",      text: "주차별"},
+            { value: "DAY",       text: "일별" },
+            { value: "WEEK_NM",   text: "요일별"},
+        ];
+    },
+
+    /**
      * 거래처 목록 조회
      */
     selectSelAcntList: function(callback) {

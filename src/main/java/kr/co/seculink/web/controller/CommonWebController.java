@@ -220,4 +220,10 @@ public class CommonWebController {
 	@RequestMapping("/oper/cmon/totMonStatTemp.pg")
 	public String getOperCmonTotMonStatTemp() {return "oper/cmon/totMonStatTemp";}
 
+	/* 통계 */
+	// 성장지수 추이분석
+	@RequestMapping("/stat/hc/gidxStss.pg")
+	public String getStatHcGidxStss() {return "stat/hc/gidxStss";}
+
+
 }
