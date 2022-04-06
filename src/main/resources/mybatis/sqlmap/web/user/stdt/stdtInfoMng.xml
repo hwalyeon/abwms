@@ -340,7 +340,7 @@
                ,tsb.cbee_hist_no
                ,tsb.gfix_dt
                ,decr(tgb.guar_nm) as guar_nm
-               ,encr(tgb.guar_tel_no) as guar_tel_no
+               ,decr(tgb.guar_tel_no) as guar_tel_no
                ,tsgh.hght_val
                ,tsgh.wght_val
                ,tsgh.wast_val
@@ -407,7 +407,8 @@
              ,fn_getcdnm('HBIT_STAT_CD' , tsdh.hbit_stat_cd) as hbit_stat_nm
              ,tjb.temp_val
              ,fn_getcdnm('TEMP_STAT_CD' , tsdh.temp_stat_cd) as temp_stat_nm
-             ,to_char(to_timestamp(tsdh.loc_mesu_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as loc_mesu_dttm
+             -- ,to_char(to_timestamp(tsdh.loc_mesu_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as loc_mesu_dttm
+             ,'' as loc_mesu_dttm
              ,tsdh.dgem_idx
              ,tsdh.dgem_stat_cd
              ,fn_getcdnm('DGEM_STAT_CD' , tsdh.dgem_stat_cd) as dgem_stat_nm
@@ -482,7 +483,7 @@
     select
           stdt.*
          ,tbi.band_id
-         ,encr(tbi.tel_no)  as band_tel_no
+         ,decr(tbi.tel_no)  as band_tel_no
          ,loc.plc_clss_cd
          ,loc.plc_clss_nm
          ,loc.loc_nm
