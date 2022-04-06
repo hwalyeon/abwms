@@ -40,6 +40,7 @@ let eatHist = new Vue({
         	$this.initCodeList();
         	$this.initGrid();
             $this.searchEatHistList(true);
+            $this.setDatepicker();
         },
         initValue: function()
         {

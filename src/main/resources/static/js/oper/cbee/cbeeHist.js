@@ -34,6 +34,7 @@ let cbeeHist = new Vue({
             $this.initCodeList();
         	$this.initGrid();
             $this.searchCbeeHistList(true);
+            $this.setDatepicker();
         },
         initValue: function()
         {

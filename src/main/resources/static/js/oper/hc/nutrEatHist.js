@@ -35,6 +35,7 @@ let nutrEatHist = new Vue({
             $this.initValue();
         	$this.initCodeList();
             $this.searchNutrEatHistList(true);
+            $this.setDatepicker();
         },
         initValue: function()
         {

@@ -46,6 +46,7 @@ let strsHist = new Vue({
         	$this.initCodeList();
         	$this.initGrid();
             $this.searchStrsHistList(true);
+            $this.setDatepicker();
         },
         initValue: function()
         {

@@ -44,6 +44,7 @@ let gfixHist = new Vue({
         	$this.initCodeList();
         	$this.initGrid();
             $this.searchGfixHistList(true);
+            $this.setDatepicker();
         },
         initValue: function()
         {

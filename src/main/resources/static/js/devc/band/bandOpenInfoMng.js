@@ -8,7 +8,7 @@ let bandOpenInfoMng = new Vue({
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
-                    bDPer           : '' ,  //기준_일자 _이번달
+                    bDPer          : 'TISH_MONTH' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     telNo          : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID
@@ -38,6 +38,7 @@ let bandOpenInfoMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                $this.setDatepicker();
             },
             initValue: function()
             {
@@ -174,8 +175,8 @@ let bandOpenInfoMng = new Vue({
                                 bandOpenInfoMng.regBandSpecDetlPopup($(e.target).data('band-id'),$(e.target).data('guar-tel-no'))
                             });
                             //학생정보 상세 팝업
-                            $("#guarInfo_list").find('A.links[data-stdt]').on('click', function(e) {
-                                guarInfoMng.regStdtInfoDetlPopup($(e.target).data('guar-no'),$(e.target).data('stdt-no'))
+                            $("#bandOpenInfo_list").find('A.links[data-stdt]').on('click', function(e) {
+                                bandOpenInfoMng.regStdtInfoDetlPopup($(e.target).data('stdt-no'), $(e.target).data('guar-no'))
                             });
 
                         }
@@ -296,7 +297,7 @@ let bandOpenInfoMng = new Vue({
                 bandSpecDetl.initPage(bandId, guarTelNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
             //학생정보상세 팝업
-            regStdtInfoDetlPopup: function(guarNo, stdtNo){
+            regStdtInfoDetlPopup: function(stdtNo, guarNo){
                 stdtInfoDetl.initPage(stdtNo, guarNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
             resetSearchParam: function()
