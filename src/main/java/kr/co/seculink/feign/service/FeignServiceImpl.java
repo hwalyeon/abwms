@@ -34,7 +34,7 @@ public class FeignServiceImpl implements FeignService
             throw new BizException("VALID.001", new String[] {"제목"});
         }
 
-        if ( XUtil.isEmpty(String.valueOf(params.getAlamCntn())) ) {
+        if ( XUtil.isEmpty(String.valueOf(params.getEtcAlamCntn())) ) {
             throw new BizException("VALID.001", new String[] {"내용"});
         }
 
