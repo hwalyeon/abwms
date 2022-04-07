@@ -123,76 +123,8 @@ public class AuthController {
 		
 		return rtnMsg;
 	}
-	
-	@PostMapping("/stdtLogin")
-	public RtnMsg stdtLogin(@RequestBody Map<String, String> params) throws BaseException {
-		
-		RtnMsg rtnMsg = new RtnMsg();
 
-		try {
-			
-			// DB에서 사용자 정보 확인
-			Map<String, String> userInfo = dao.selectOne("cmon.user.searchUserInfo", params);
-			
-			if ( null == userInfo ) {
-				throw new BizException("ECOM007"); // 사용자ID 또는 비밀번호 오류
-			} else {
-				if ( "N".equals(userInfo.get("stdtYn")) ) {
-					throw new BizException("ECOM007"); // 사용자ID 또는 비밀번호 오류
-				}
-			}
-			
-			List<GrantedAuthority> grantedAuths = new ArrayList<>();
-			
-			// 권한조회
-			List<Map<String, String>> roleList = dao.selectList("cmon.user.searchRoleList", params);
-			
-			String[] roles = new String[roleList.size()];
-			
-			for ( int i = 0 ; i < roleList.size() ; i++ )
-			{
-				Map<String, String> roleMap = roleList.get(i);
-				
-				grantedAuths.add(new SimpleGrantedAuthority(roleMap.get("roleCd")));
-				roles[i] = roleMap.get("roleCd");
-			}
-			
-//			String[] roles = new String[] {ROLE.일반사용자};
-//			
-//			List<GrantedAuthority> grantedAuths = new ArrayList<>();
-//			
-//			grantedAuths.add(new SimpleGrantedAuthority(ROLE.일반사용자));
-
-			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(params.get("userId"), params.get("userId"), grantedAuths);
-			SecurityContextHolder.getContext().setAuthentication(this.authenticationProvider.authenticate(authToken));
-			
-			// token 발행
-			String token = jwtTokenProvider.issueToken(params.get("userId"), params.get("userId"), roles);
-	
-			Map<String, Object> result = new HashMap<String, Object>();
-			result.put("jwtToken", token);
-			result.put("userInfo", userInfo);
-			result.put("roleList", roleList);
-			
-			rtnMsg.setRtnData(result);
-			
-			
-		} catch (UsernameNotFoundException e) {
-			
-			throw new BizException("ECOM007"); // 사용자ID 또는 비밀번호 오류
-		} catch (AuthenticationException e) {
-			
-			throw new SysException(e, "ECOM008", null); // 로그인 처리 중 오류
-		} catch (BaseException e) {
-			throw e;
-		}
-				
-		log.debug("session user id {}", GEUtil.getSessionUserId());
-		
-		return rtnMsg;
-	}
-	
-	@PostMapping("/logout")
+	@PostMapping("/logout.ab")
 //	@ApiOperation(value = "[" + API_DIV.마이페이지 + "-2000] 로그아웃 <Z완>", notes = "<로그아웃> 버튼 https://zpl.io/aBD6Z8K")
 	public RtnMsg<Void> logout() {	
 

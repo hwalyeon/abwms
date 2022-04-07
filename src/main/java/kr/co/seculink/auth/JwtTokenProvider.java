@@ -65,8 +65,8 @@ public class JwtTokenProvider {
 		    token = JWT.create()
 		        .withIssuer(this.issuer)
 		        .withExpiresAt(expires)
-		        .withClaim("userId", userId)
-		        .withClaim("clientId", clientId)
+		        .withClaim("userId"    , userId)
+		        .withClaim("clientId"  , clientId)
 		        .withArrayClaim("roles", roles)
 		        .sign(algorithm);
 		} catch (JWTCreationException e) {
@@ -76,11 +76,11 @@ public class JwtTokenProvider {
 		
 		// 사용자 별 키를 DB에 저장
 		Map<String, String> param = new HashMap<>();
-		param.put("userId", userId);
+		param.put("userId"   , userId);
 	    param.put("regUserId", userId);
 	    param.put("uptUserId", userId);
-		param.put("clntId", clientId);
-		param.put("keyVal", encKey);
+		param.put("clntId"   , clientId);
+		param.put("keyVal"   , encKey);
 		
 		dao.update("TOKN_KEY.merge", param);
 		
@@ -116,8 +116,8 @@ public class JwtTokenProvider {
 		}
 	}
 	
-	public boolean validateToken(String token) {
-		
+	public boolean validateToken(String token)
+	{
 		//blacklist 확인
 		if (true == this.blackListToken.contains(token)) {
 			
@@ -138,7 +138,7 @@ public class JwtTokenProvider {
 			return false;
 		}
 		
-		String userId = jwt.getClaim("userId").asString();
+		String userId   = jwt.getClaim("userId").asString();
 		String clientId = jwt.getClaim("clientId").asString();
 		
 		// key 가져오기 Redis먼저
@@ -153,7 +153,8 @@ public class JwtTokenProvider {
 		param.put("userId", userId);
 		param.put("clntId", clientId);
 		
-		if (null == secret || secret.isEmpty() == true) {
+		if (null == secret || secret.isEmpty() == true)
+		{
 			//Redis에 없으면 DB확인
 			log.debug("Redis에 토큰 정보 없음");
 			

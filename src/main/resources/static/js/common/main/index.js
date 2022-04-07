@@ -159,7 +159,7 @@ var index = new Vue({
 			let $this = this;
 			
 			AjaxUtil.post({
-                url: "/v1/auth/logout",
+                url: "/v1/auth/logout.ab",
                 param: $this.searchAuthParam,
                 success: function(response) {
                 	

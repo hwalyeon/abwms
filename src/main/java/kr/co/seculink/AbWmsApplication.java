@@ -1,18 +1,17 @@
 package kr.co.seculink;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
+@EnableFeignClients
 //@EnableScheduling
 //@EnableRedisRepositories
-public class WasManagerServiceServerApplication {
+public class AbWmsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WasManagerServiceServerApplication.class, args);
+		SpringApplication.run(AbWmsApplication.class, args);
 	}
 	
 //	@Value("${spring.redis.host}")

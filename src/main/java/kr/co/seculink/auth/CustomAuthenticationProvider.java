@@ -14,12 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class CustomAuthenticationProvider implements AuthenticationProvider {
-
+public class CustomAuthenticationProvider implements AuthenticationProvider
+{
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
-		String userId = (String) authentication.getPrincipal();
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException
+	{
+		String userId   = (String) authentication.getPrincipal();
 		String clientId = (String) authentication.getCredentials();
 		List<SimpleGrantedAuthority> roleList = (List<SimpleGrantedAuthority>) authentication.getAuthorities();
 		
