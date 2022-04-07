@@ -225,5 +225,20 @@ public class CommonWebController {
 	@RequestMapping("/stat/hc/gidxStss.pg")
 	public String getStatHcGidxStss() {return "stat/hc/gidxStss";}
 
+	// 평균 칼로리섭취 추이분석
+	@RequestMapping("/stat/hc/avalCalStss.pg")
+	public String getStatHcAvalCalStss() {return "stat/hc/avalCalStss";}
+
+	// 평균 운동시간 추이분석
+	@RequestMapping("/stat/hc/avalActStss.pg")
+	public String getStatHcAvalActStss() {return "stat/hc/avalActStss";}
+
+	// 식품별 섭취현황 추이분석
+	@RequestMapping("/stat/hc/foodEatStss.pg")
+	public String foodEatHcFoodEatStss() {return "stat/hc/gidxStss";}
+
+	// 유형별 결식율 추이분석
+	@RequestMapping("/stat/hc/neatStss.pg")
+	public String getStatHcNeatStss() {return "stat/hc/neatStss";}
 
 }
