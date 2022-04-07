@@ -13,11 +13,12 @@
         from tt_gidx_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and stnd_dt between #{stndDtFr} and #{stndDtTo}
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and stnd_yymm between #{stndMmFr} and #{stndMmTo}
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -54,11 +55,11 @@
     and tcs.cd_grp = 'GROW_JUDG_CD'
     where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and stnd_dt between #{stndDtFr} and #{stndDtTo}
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and stnd_yymm between #{stndMmFr} and #{stndMmTo}
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -86,11 +87,11 @@
         from tt_gidx_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and stnd_dt between #{stndDtFr} and #{stndDtTo}
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and stnd_yymm between #{stndMmFr} and #{stndMmTo}
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -100,7 +101,6 @@
             and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
         </if>
         ) x
-    where 1=1
         <choose>
             <when test="perdDivCd.equals('WEEK_NM')">
                 inner join  tc_cd_spec tcs
@@ -125,11 +125,11 @@
       from tt_grow_judg_stss tgjs
       where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and stnd_dt between #{stndDtFr} and #{stndDtTo}
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and stnd_yymm between #{stndMmFr} and #{stndMmTo}
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
         </if>
 
         <if test="sexCd != null and sexCd != ''">

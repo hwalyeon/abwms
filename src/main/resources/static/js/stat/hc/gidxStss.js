@@ -552,6 +552,15 @@ let gidxStss = new Vue({
             $this.params.stndDtTo = '';
             $this.params.stndMmFr = '';
             $this.params.stndMmTo = '';
+
+
+            $("#stndDtFrPicker").datepicker('setDate' , '');
+            $("#stndDtToPicker").datepicker('setDate' , '');
+
+            $("#stndMmFrPicker").datepicker('setDate' , '');
+            $("#stndMmToPicker").datepicker('setDate' , '');
+
+
         },
 		downloadExcel : function() {
 			
