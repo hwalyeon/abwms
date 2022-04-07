@@ -221,6 +221,10 @@ public class CommonWebController {
 	public String getOperCmonTotMonStatTemp() {return "oper/cmon/totMonStatTemp";}
 
 	/* 통계 */
+	// 위험감정 추이분석
+	@RequestMapping("/stat/dgem/dgemStss.pg")
+	public String getStatDgemDgemStss() {return "stat/dgem/dgemStss";}
+
 	// 성장지수 추이분석
 	@RequestMapping("/stat/hc/gidxStss.pg")
 	public String getStatHcGidxStss() {return "stat/hc/gidxStss";}
