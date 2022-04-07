@@ -121,7 +121,8 @@ let gidxStss = new Vue({
             ];
 
             if($this.code.growJudgCdList.length > 0){
-                for(var i in $this.code.growJudgCdList ){
+                for(var i in $this.code.growJudgCdList )
+                {
                     var data = $this.code.growJudgCdList[i];
                     colModelsJudg.push( {name:data.cdVal , index:data.cdVal , label:data.cdNm ,  width: 80} );
                 }
