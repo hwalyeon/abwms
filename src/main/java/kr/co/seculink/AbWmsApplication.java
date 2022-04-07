@@ -6,32 +6,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-//@EnableScheduling
-//@EnableRedisRepositories
 public class AbWmsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AbWmsApplication.class, args);
 	}
 	
-//	@Value("${spring.redis.host}")
-//    private String redisHost;
-//
-//    @Value("${spring.redis.port}")
-//    private int redisPort;
-//
-//    @Bean
-//    public RedisConnectionFactory redisConnectionFactory() {
-//        return new LettuceConnectionFactory(redisHost, redisPort);
-//    }
-//
-//    @Bean
-//    public RedisTemplate<?, ?> redisTemplate() {
-//        RedisTemplate<byte[], byte[]> redisTemplate = new RedisTemplate<>();
-//        redisTemplate.setConnectionFactory(redisConnectionFactory());
-//        return redisTemplate;
-//    }
-    
     /**
      * AWS redis의 경우 CONFIG등 명령어를 허용하지 않음
      * local 제외
