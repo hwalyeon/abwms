@@ -113,7 +113,7 @@ let stdtEorgLocPop = new Vue({
 			{
 				var rowData = $("#stdtEorgLocPopup_list").getRowData($("#stdtEorgLocPopup_list").jqGrid("getGridParam","selrow") + "");
 
-				this.callback(rowData);
+				$this.callback(rowData);
 
 				$("#stdtEorgLocPopup").modal("hide");
 			}
