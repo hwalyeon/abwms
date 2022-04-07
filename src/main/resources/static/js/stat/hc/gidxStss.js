@@ -346,11 +346,6 @@ let gidxStss = new Vue({
         setDatepicker : function() {
             let $this = this;
 
-            var toDate = new Date();
-            var maxDate = moment(toDate).add(-1, "days").format(dateFormatPattern);
-            var maxMonth = moment(toDate).add(-1, "months").format(dateFormatPattern);
-
-
             $('#stndDtFrPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
