@@ -220,7 +220,7 @@ let gidxStss = new Vue({
                 type : 'bar',
                 data : dataGidx,
                 options: optionsGidx,
-                plugins: [{}]
+                plugins: [ChartDataLabels]
             };
 
 
@@ -261,9 +261,12 @@ let gidxStss = new Vue({
                     {
                         label: '성장지수',
                         data: gidxData,
-                        borderColor : "#fcdd84",
-                        backgroundColor: "#D6E5EB",
-                        order : 1
+                        borderColor : "#d6e5eb",
+                        backgroundColor: "#d6e5eb",
+                        order : 1,
+                        datalabels:{
+                            display:false
+                        }
                     } ,
                     {
                         label: '',
@@ -271,7 +274,10 @@ let gidxStss = new Vue({
                         borderColor: "#FBD5B0",
                         backgroundColor: "#FBD5B0",
                         type: 'line',
-                        order: 0
+                        order: 0,
+                        datalabels:{
+                            display:true
+                        }
                     }
                 ]
             };
