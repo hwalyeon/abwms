@@ -19,9 +19,9 @@ public class DgemStssServiceImpl implements DgemStssService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
-	public List<Map<String, Object>> searchGidxStssList(Map<String, String> params) throws BizException
+	public List<Map<String, Object>> searchDgemStssList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, Object>> result = dao.selectList("stat.dgem.dgemStss.searchGidxStssList", params);
+		List<Map<String, Object>> result = dao.selectList("stat.dgem.dgemStss.searchDgemStssList", params);
 
 		List<Map<String, Object>> newResult = new ArrayList<Map<String, Object>>();
 
@@ -37,9 +37,9 @@ public class DgemStssServiceImpl implements DgemStssService
 	}
 
 
-	public List<Map<String, Object>> searchGidxJudgList(Map<String, String> params) throws BizException
+	public List<Map<String, Object>> searchDgemJudgList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, Object>> result = dao.selectList("stat.dgem.dgemStss.searchGidxJudgList", params);
+		List<Map<String, Object>> result = dao.selectList("stat.dgem.dgemStss.searchDgemJudgList", params);
 
 		List<Map<String, Object>> newResult = new ArrayList<Map<String, Object>>();
 

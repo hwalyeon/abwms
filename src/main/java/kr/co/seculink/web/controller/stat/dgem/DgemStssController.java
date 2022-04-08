@@ -4,7 +4,6 @@ import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.web.excel.ExcelConstant;
 import kr.co.seculink.web.service.stat.dgem.DgemStssService;
-import kr.co.seculink.web.service.stat.hc.GidxStssService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +28,17 @@ public class DgemStssController
 	private DgemStssService dgemStssService;
 
 	@ResponseBody
-	@RequestMapping("/stat/dgem/dgemStss/searchGidxStssColList.ab")
-	public RtnMsg searchGidxStssColList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	@RequestMapping("/stat/dgem/dgemStss/searchDgemStssColList.ab")
+	public RtnMsg searchDgemStssColList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, String>> stndDtList = dao.selectList("stat.dgem.dgemStss.searchGidxStssCdList", params);
+		List<Map<String, String>> stndDtList = dao.selectList("stat.dgem.dgemStss.searchDgemStssCdList", params);
 		rtnMap.put("stndDtList", stndDtList);
 
-		List<Map<String, String>> growJudgCdList = dao.selectList("stat.dgem.dgemStss.searchGrowJudgCdList", params);
+		List<Map<String, String>> growJudgCdList = dao.selectList("stat.dgem.dgemStss.searchDgemIdxCdList", params);
 		rtnMap.put("growJudgCdList", growJudgCdList);
 
 		vo.setRtnData(rtnMap, params);
@@ -48,14 +47,14 @@ public class DgemStssController
 	}
 
 	@ResponseBody
-	@RequestMapping("/stat/dgem/dgemStss/searchGidxStssList.ab")
-	public RtnMsg searchGidxStssList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	@RequestMapping("/stat/dgem/dgemStss/searchDgemStssList.ab")
+	public RtnMsg searchDgemStssList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, Object>> result = dgemStssService.searchGidxStssList(params);
+		List<Map<String, Object>> result = dgemStssService.searchDgemStssList(params);
 		rtnMap.put("result", result);
 
 		vo.setRtnData(rtnMap, params);
@@ -65,14 +64,14 @@ public class DgemStssController
 
 
 	@ResponseBody
-	@RequestMapping("/stat/dgem/dgemStss/searchGidxJudgList.ab")
-	public RtnMsg searchGidxJudgList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	@RequestMapping("/stat/dgem/dgemStss/searchDgemJudgList.ab")
+	public RtnMsg searchDgemJudgList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{
 
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-		List<Map<String, Object>> result = dgemStssService.searchGidxJudgList(params);
+		List<Map<String, Object>> result = dgemStssService.searchDgemJudgList(params);
 		rtnMap.put("result", result);
 
 		vo.setRtnData(rtnMap, params);
@@ -80,13 +79,13 @@ public class DgemStssController
 		return vo;
 	}
 
-	//성장지수 통계 엑셀 다운로드
+	//위험감정 통계 엑셀 다운로드
 	@ResponseBody
-	@RequestMapping("/stat/dgem/dgemStss/searchGidxStssList/excel.ab")
+	@RequestMapping("/stat/dgem/dgemStss/searchDgemStssList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		params.put("paging", "N");
-		List<Map<String, Object>> result = dao.selectList("stat.dgem.dgemStss.searchGidxStssList", params);
+		List<Map<String, Object>> result = dao.selectList("stat.dgem.dgemStss.searchDgemStssList", params);
 
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}

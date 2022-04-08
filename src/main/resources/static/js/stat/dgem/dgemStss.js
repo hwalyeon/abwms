@@ -61,7 +61,7 @@ let dgemStss = new Vue({
             }
 
             AjaxUtil.post({
-                url: "/stat/dgem/dgemStss/searchGidxStssColList.ab",
+                url: "/stat/dgem/dgemStss/searchDgemStssColList.ab",
                 param: $this.params,
                 success: function(response) {
                     $this.code.stndDtList = [];
@@ -79,7 +79,7 @@ let dgemStss = new Vue({
 
                     // 차트초기화 및 조회
                     $this.initGrid();
-                    $this.searchGidxStssList(true);
+                    $this.searchDgemStssList(true);
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
@@ -107,7 +107,7 @@ let dgemStss = new Vue({
                 mtype: 'post',
                 pginput : false,
                 height: 30,
-                url: '/stat/dgem/dgemStss/searchGidxStssList.ab',
+                url: '/stat/dgem/dgemStss/searchDgemStssList.ab',
                 colModel: colModels
             }));
 
@@ -133,7 +133,7 @@ let dgemStss = new Vue({
                 mtype: 'post',
                 pginput : false,
                 height: 60,
-                url: '/stat/dgem/dgemStss/searchGidxJudgList.ab',
+                url: '/stat/dgem/dgemStss/searchDgemJudgList.ab',
                 colModel: colModelsJudg
             }));
 
@@ -149,7 +149,7 @@ let dgemStss = new Vue({
                 labels : [],
                 datasets: [
                     {
-                        label: '성장지수',
+                        label: '위험감정지수',
                         data: [],
                         borderColor : "#fcdd84",
                         backgroundColor: "#0000ff",
@@ -225,7 +225,7 @@ let dgemStss = new Vue({
             $this.chartGidxJudg = new Chart(ctxGidxJudg, configGidxJudg);
         },
 
-        // 성장지수 차트
+        // 위험감정지수 차트
         updateGidxChart: function() {
             let $this = this;
 
@@ -248,7 +248,7 @@ let dgemStss = new Vue({
                 labels : gidxLabels,
                 datasets: [
                     {
-                        label: '성장지수',
+                        label: '위험감정지수',
                         data: gidxData,
                         borderColor : "#d6e5eb",
                         backgroundColor: "#d6e5eb",
@@ -339,7 +339,7 @@ let dgemStss = new Vue({
         },
 
         // 조회
-        searchGidxStssList: function(isSearch) {
+        searchDgemStssList: function(isSearch) {
             let $this = this;
             let params = $.extend(true, {}, $this.params);
 
@@ -384,10 +384,10 @@ let dgemStss = new Vue({
 
             AjaxUtil.post({
                 dataType: 'binary',
-                url: "/stat/dgem/dgemStss/searchGidxStssList/excel.ab",
+                url: "/stat/dgem/dgemStss/searchDgemStssList/excel.ab",
                 param: params,
                 success: function(response) {
-                    saveFileLocal(response, 'gidxList.xls');
+                    saveFileLocal(response, 'dgemList.xls');
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);

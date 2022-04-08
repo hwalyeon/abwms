@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="stat.dgem.dgemStss">
 
-    <select id="searchGidxStssCdList" parameterType="java.util.Map" resultType="MybatisMap">
+    <select id="searchDgemStssCdList" parameterType="java.util.Map" resultType="MybatisMap">
         select x.stnd_dt
         from
         (select
@@ -46,7 +46,7 @@
     </select>
 
 
-    <select id="searchGrowJudgCdList" parameterType="java.util.Map" resultType="MybatisMap">
+    <select id="searchDgemIdxCdList" parameterType="java.util.Map" resultType="MybatisMap">
         select  dgem_stat_cd as cd_val
         ,tcs.cd_nm
         from TT_DGEM_STAT_STSS tgjs
@@ -72,7 +72,7 @@
         order by tcs.sort_ord
     </select>
 
-    <select id="searchGidxStssList" parameterType="java.util.Map" resultType="MybatisMap">
+    <select id="searchDgemStssList" parameterType="java.util.Map" resultType="MybatisMap">
         select
         x.stnd_dt
         ,round( avg(x.occr_cnt) , 2) as avg_idx
@@ -117,8 +117,8 @@
         </choose>
     </select>
 
-    <select id="searchGidxJudgList" parameterType="java.util.Map" resultType="MybatisMap">
-        with ts_gfix_judg_stss_temp  as
+    <select id="searchDgemJudgList" parameterType="java.util.Map" resultType="MybatisMap">
+        with tt_dgem_stat_stss_temp  as
         ( select
         dgem_stat_cd
         ,sum(occr_cnt) as occr_cnt
@@ -144,7 +144,7 @@
         ,occr_cnt
         ,sum(occr_cnt) over()                          as tot_cnt
         ,round(sum(occr_cnt) over(partition by dgem_stat_cd) / sum(occr_cnt) over() * 100 , 2) as occr_per
-        from ts_gfix_judg_stss_temp tgjs
+        from tt_dgem_stat_stss_temp tgjs
         where 1=1
         order by dgem_stat_cd
     </select>
