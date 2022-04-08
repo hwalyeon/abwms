@@ -43,3 +43,7 @@ upload:
   event: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\
   temp: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\temp\\
   hwork: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\
+
+api:
+  url:
+    abejd: http://127.0.0.1:7080/

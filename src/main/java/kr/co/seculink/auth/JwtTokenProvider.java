@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.data.redis.core.RedisTemplate;
 //import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -39,15 +41,18 @@ public class JwtTokenProvider {
 	
 	@Value("${jwt.token.expirySeconds}")
 	int expirySeconds;
-	
+
+	@Value("${spring.profiles.active}")
+	private String activeProfiles;
+
 	@Autowired
 	private SqlSessionTemplate dao;
 	
 	@Autowired
 	private LinkedHashSet<String> blackListToken;
 	
-//	@Autowired
-//	private RedisTemplate<String, String> redisTemplate;
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
 	
 	public Algorithm getAlgorithm(String secret) {
 		return Algorithm.HMAC256(secret);
@@ -65,8 +70,8 @@ public class JwtTokenProvider {
 		    token = JWT.create()
 		        .withIssuer(this.issuer)
 		        .withExpiresAt(expires)
-		        .withClaim("userId", userId)
-		        .withClaim("clientId", clientId)
+		        .withClaim("userId"    , userId)
+		        .withClaim("clientId"  , clientId)
 		        .withArrayClaim("roles", roles)
 		        .sign(algorithm);
 		} catch (JWTCreationException e) {
@@ -76,22 +81,41 @@ public class JwtTokenProvider {
 		
 		// 사용자 별 키를 DB에 저장
 		Map<String, String> param = new HashMap<>();
-		param.put("userId", userId);
+		param.put("userId"   , userId);
 	    param.put("regUserId", userId);
 	    param.put("uptUserId", userId);
-		param.put("clntId", clientId);
-		param.put("keyVal", encKey);
+		param.put("clntId"   , clientId);
+		param.put("keyVal"   , encKey);
 		
 		dao.update("TOKN_KEY.merge", param);
 		
 		// Redis에도 캐시
-//		ValueOperations<String, String> vop = redisTemplate.opsForValue();
-//		
-//		vop.set(userId + "_" + clientId, encKey);
-		
+		if ( "D01".equals(activeProfiles) )
+		{
+			ValueOperations<String, String> vop = redisTemplate.opsForValue();
+			vop.set(userId + "_" + clientId, encKey);
+		}
+
 		return token;
 	}
-	
+
+	public void removeToken(String userId, String clientId)
+	{
+		Map<String, String> dbParam = new HashMap<String, String>();
+
+		dbParam.put("userId", userId);
+		dbParam.put("clntId", userId);
+
+		// 토큰 키 삭제
+		this.dao.delete("TOKN_KEY.delete", dbParam);
+
+		// Redis 삭제
+		if ( "D01".equals(activeProfiles) )
+		{
+			this.redisTemplate.delete(userId + "_" + clientId);
+		}
+	}
+
 	public DecodedJWT decodeToken(String token) {
 		return JWT.decode(token);
 	}
@@ -116,8 +140,8 @@ public class JwtTokenProvider {
 		}
 	}
 	
-	public boolean validateToken(String token) {
-		
+	public boolean validateToken(String token)
+	{
 		//blacklist 확인
 		if (true == this.blackListToken.contains(token)) {
 			
@@ -138,22 +162,25 @@ public class JwtTokenProvider {
 			return false;
 		}
 		
-		String userId = jwt.getClaim("userId").asString();
+		String userId   = jwt.getClaim("userId").asString();
 		String clientId = jwt.getClaim("clientId").asString();
 		
 		// key 가져오기 Redis먼저
 		String secret = "";
+		ValueOperations<String, String> vop = null;
 		
 		// Redis에도 캐시
-//		ValueOperations<String, String> vop = redisTemplate.opsForValue();
-//		
-//		secret = vop.get(userId + "_" + clientId);
+		if ( "D01".equals(activeProfiles) ) {
+			vop = redisTemplate.opsForValue();
+			secret = vop.get(userId + "_" + clientId);
+		}
 		
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("userId", userId);
 		param.put("clntId", clientId);
 		
-		if (null == secret || secret.isEmpty() == true) {
+		if (null == secret || secret.isEmpty() == true)
+		{
 			//Redis에 없으면 DB확인
 			log.debug("Redis에 토큰 정보 없음");
 			
@@ -170,7 +197,9 @@ public class JwtTokenProvider {
 			secret = toknKeyData.get("keyVal");
 			
 			// Redis에 secret 저장
-//			vop.set(userId + clientId, secret);
+			if ( "D01".equals(activeProfiles) ) {
+				vop.set(userId + clientId, secret);
+			}
 		} else {
 			log.debug("redis에 정보 있음 {}", secret);
 		}
@@ -189,7 +218,9 @@ public class JwtTokenProvider {
 			this.dao.delete("TOKN_KEY.delete", param);
 			
 			//Redis 삭제
-//			this.redisTemplate.delete(userId + "_" + clientId);
+			if ( "D01".equals(activeProfiles) ) {
+				this.redisTemplate.delete(userId + "_" + clientId);
+			}
 			
 			this.addBlackListToken(token);
 			

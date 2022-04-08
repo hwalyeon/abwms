@@ -37,48 +37,40 @@ public class JwtTokenFilter extends GenericFilterBean {
 	private CustomAuthenticationProvider authenticationProvider;
 	
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
+	{
 		String uri = ((HttpServletRequest) request).getRequestURI();
 		HttpServletResponse servletResponse = (HttpServletResponse) response;
 		
 		boolean isSkipAuth = false;
 		
-		if (GEUtil.antmachers(uri, SecurityConfig.authSkipUris)) {
-			
+		if ( GEUtil.antmachers(uri, SecurityConfig.authSkipUris))
+		{
 			isSkipAuth = true;
-			
-			//chain.doFilter(request, response);
-			//return;
 		}
 		
 //		log.debug("token filter/isSkipAuth : {}, {}", uri, isSkipAuth);
 		
 		String token = this.jwtTokenProvider.getRequestToken((HttpServletRequest) request);
 		
-		if (null == token) {
-			
-			//System.out.println("invalid JWT token");
-			//throw new ServletException("invalid JWT token");
-//			log.debug("Token 없음");
-			//servletResponse.setStatus(HttpStatus.FORBIDDEN.value());
+		if ( null == token)
+		{
 			chain.doFilter(request, response);
 			return;
-			
-		} else {
-			if (false == this.jwtTokenProvider.validateToken(token)) {
-				
+		}
+		else
+		{
+			if ( false == this.jwtTokenProvider.validateToken(token))
+			{
 				if (true == isSkipAuth) {
 					chain.doFilter(request, response);
 					return;
 				}
 				
 				servletResponse.setStatus(HttpStatus.FORBIDDEN.value());
-				//throw new ServletException("invalid JWT token");
-			} else {
-				log.debug("token 검증 성공");
-				
+			}
+			else
+			{
 				DecodedJWT jwt = this.jwtTokenProvider.decodeToken(token);
 				
 				String userId   = jwt.getClaim("userId").asString();

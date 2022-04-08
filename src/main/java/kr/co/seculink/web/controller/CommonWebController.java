@@ -221,9 +221,21 @@ public class CommonWebController {
 	public String getOperCmonTotMonStatTemp() {return "oper/cmon/totMonStatTemp";}
 
 	/* 통계 */
+	// 위험감정 추이분석
+	@RequestMapping("/stat/dgem/dgemStss.pg")
+	public String getStatDgemDgemStss() {return "stat/dgem/dgemStss";}
+
 	// 성장지수 추이분석
 	@RequestMapping("/stat/hc/gidxStss.pg")
 	public String getStatHcGidxStss() {return "stat/hc/gidxStss";}
+
+	// 비만지수 추이분석
+	@RequestMapping("/stat/hc/fidxStss.pg")
+	public String getStatHcFidxStss() {return "stat/hc/fidxStss";}
+
+	// 비만예측지수 추이분석
+	@RequestMapping("/stat/hc/fatpStss.pg")
+	public String getStatHcFatpStss() {return "stat/hc/fatpStss";}
 
 	// 평균 칼로리섭취 추이분석
 	@RequestMapping("/stat/hc/avalCalStss.pg")
