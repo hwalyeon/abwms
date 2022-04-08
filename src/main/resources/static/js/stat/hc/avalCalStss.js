@@ -124,20 +124,12 @@ let avalCalStss = new Vue({
                  labels  : [],
                  datasets: [
                      {
-                         label: '성장지수',
+                         label: '평균 칼로리 섭취',
                          data: [],
-                         borderColor : "#fcdd84",
-                         backgroundColor: "#0000ff",
+                         borderColor : "#d6e5eb",
+                         backgroundColor: "#d6e5eb",
                          order : 1
                      } ,
-                     {
-                         label: '',
-                         data: [],
-                         borderColor: "#f60636",
-                         backgroundColor: "#f50940",
-                         type: 'line',
-                         order: 0
-                     }
                  ]
              };
 

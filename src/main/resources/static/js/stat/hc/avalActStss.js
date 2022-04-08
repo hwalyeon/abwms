@@ -92,9 +92,7 @@ let avalActStss = new Vue({
 
                 let colModels =
                     [
-                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center" },
-                        {name: "avgActTcntMcnt", index: "avgActTcntMcnt", label: "전체 운동시간(분)", width:80, align: "center" },
-                        {name: "avgCalCsumQty", index: "avgCalCsumQty", label: "전체 칼로리섭취량(g)", width:80, align: "center" }
+                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center" }
                     ];
 
                 if($this.code.stndDtList.length > 0){
@@ -109,9 +107,14 @@ let avalActStss = new Vue({
                     datatype : "local",
                     mtype    : 'post',
                     pginput  : false,
-                    height   : 30,
+                    height   : 60,
                     url      : '/stat/hc/avalActStss/searchAvalActStssList.ab',
                     colModel : colModels
+                    ,
+                    onSelectRow: function(rowId, status, e){
+                        $("#avalAct_List").getRowData(rowId);
+                    }
+
                 }));
 
                 resizeJqGridWidth("avalAct_list", "avalAct_list_wrapper");
@@ -128,8 +131,8 @@ let avalActStss = new Vue({
                         {
                             label: '성장지수',
                             data: [],
-                            borderColor : "#fcdd84",
-                            backgroundColor: "#0000ff",
+                            borderColor : "#d6e5eb",
+                            backgroundColor: "#d6e5eb",
                             order : 1
                         } ,
                         {
@@ -197,12 +200,12 @@ let avalActStss = new Vue({
                 }).trigger("reloadGrid");
 
             },
-            // 평균 칼로리 섭취 차트
+            // 평균 운동시간 차트
             updateAvalActChart: function()
             {
                 let $this = this;
 
-                var gridData      = $("#avalAct_list").getRowData(1);
+                var gridData      = $("#avalAct_list").getRowData(selectRowId);
                 let gridColModel  = $("#avalAct_list").jqGrid("getGridParam","colModel");
                 var avalActLabels = [];
                 var avalActData   = [];
@@ -223,7 +226,7 @@ let avalActStss = new Vue({
                     labels : avalActLabels,
                     datasets: [
                         {
-                            label: '평균 칼로리 섭취',
+                            label: '전체 운동시간',
                             data: avalActData,
                             borderColor : "#d6e5eb",
                             backgroundColor: "#d6e5eb",

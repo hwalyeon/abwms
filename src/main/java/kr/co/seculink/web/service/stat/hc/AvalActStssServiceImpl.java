@@ -25,12 +25,20 @@ public class AvalActStssServiceImpl implements AvalActStssService
         List<Map<String, Object>> newResult = new ArrayList<Map<String, Object>>();
 
         if(result != null && result.size() > 0){
-            Map<String, Object> newInfo = new HashMap<String, Object>();
+            Map<String, Object> newInfo          = new HashMap<String, Object>();
+            Map<String, Object> newInfoCalCsumQty = new HashMap<>();
+
             for (Map<String, Object> info : result){
                 newInfo.put(info.get("stndDt").toString(), info.get("avgActTcntMcnt").toString());
-                newInfo.put(info.get("stndDt").toString(), info.get("avgCalCsumQty").toString());
+                newInfoCalCsumQty.put(info.get("stndDt").toString(), info.get("avgCalCsumQty").toString());
             }
+
+            newInfo.put("divCd", "전체 운동시간(분)");
+            newInfoCalCsumQty.put("divCd", "전체 칼로리 섭취량(g)");
             newResult.add(newInfo);
+            newResult.add(newInfoCalCsumQty);
+
+            System.out.println("newInfo얌"+newInfo+"newInfoCalCsumQty얌:"+newInfoCalCsumQty);
         }
         return newResult;
     }
