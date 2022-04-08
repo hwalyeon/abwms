@@ -92,7 +92,9 @@ let avalActStss = new Vue({
 
                 let colModels =
                     [
-                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center" }
+                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center" },
+                        {name: "avgActTcntMcnt", index: "avgActTcntMcnt", label: "전체 운동시간(분)", width:80, align: "center" },
+                        {name: "avgCalCsumQty", index: "avgCalCsumQty", label: "전체 칼로리섭취량(g)", width:80, align: "center" }
                     ];
 
                 if($this.code.stndDtList.length > 0){

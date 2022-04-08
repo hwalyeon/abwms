@@ -8,7 +8,7 @@
                           when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
                           when #{perdDivCd} = 'WEEK_NM' then week_nm
         else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD') end as stnd_dt
-        from tt_act_stss
+        from tt_cal_eat_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
@@ -46,8 +46,7 @@
     <select id="searchAvalCalStssList" parameterType="java.util.Map" resultType="MybatisMap">
         select
         x.stnd_dt
-        ,round( avg(x.avg_cal_csum_qty) , 2) as avg_cal_csum_qty
-        ,round( avg(x.avg_act_tcnt_mcnt) , 2) as avg_act_tcnt_mcnt
+        ,round( avg(x.avg_cal_eat_qty) , 2) as avg_cal_eat_qty
         from
         (select
         case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
@@ -55,9 +54,8 @@
         when #{perdDivCd} = 'WEEK_NM' then week_nm
         else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
         end as stnd_dt
-        , avg_cal_csum_qty
-        , avg_act_tcnt_mcnt
-        from tt_act_stss
+        ,avg_cal_eat_qty
+        from tt_cal_eat_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}

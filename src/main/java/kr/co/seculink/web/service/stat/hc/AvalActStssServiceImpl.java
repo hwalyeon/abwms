@@ -27,9 +27,9 @@ public class AvalActStssServiceImpl implements AvalActStssService
         if(result != null && result.size() > 0){
             Map<String, Object> newInfo = new HashMap<String, Object>();
             for (Map<String, Object> info : result){
-                newInfo.put(info.get("stndDt").toString(), info.get("avgActEatQty").toString());
+                newInfo.put(info.get("stndDt").toString(), info.get("avgActTcntMcnt").toString());
+                newInfo.put(info.get("stndDt").toString(), info.get("avgCalCsumQty").toString());
             }
-            newInfo.put("divCd", "평균 칼로리 섭취 량");
             newResult.add(newInfo);
         }
         return newResult;
