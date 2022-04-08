@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stat.hc.fidxStss">
+
+    <select id="searchFidxStssCdList" parameterType="java.util.Map" resultType="MybatisMap">
+    select x.stnd_dt
+    from
+        (select
+              case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
+                   when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
+                   when #{perdDivCd} = 'WEEK_NM' then week_nm
+                   else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD') end as stnd_dt
+        from tt_fidx_stss
+        where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+        ) x
+        <choose>
+         <when test="perdDivCd.equals('WEEK_NM')">
+             inner join  tc_cd_spec tcs
+             on x.stnd_dt = tcs.cd_val
+             and tcs.cd_grp = 'WEEK_CD'
+             where 1=1
+             group by x.stnd_dt , tcs.sort_ord
+             order by tcs.sort_ord ,  x.stnd_dt
+         </when>
+        <otherwise>
+            group by x.stnd_dt
+            order by x.stnd_dt
+        </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="searchGrowJudgCdList" parameterType="java.util.Map" resultType="MybatisMap">
+    select  fat_judg_cd as cd_val
+           ,tcs.cd_nm
+    from tt_fat_judg_stss tfjs
+    inner join tc_cd_spec tcs
+    on tfjs.fat_judg_cd = tcs.cd_val
+    and tcs.cd_grp = 'FAT_JUDG_CD'
+    where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+    group by tfjs.fat_judg_cd, tcs.cd_nm, tcs.sort_ord
+    order by tcs.sort_ord
+    </select>
+
+    <select id="searchFidxStssList" parameterType="java.util.Map" resultType="MybatisMap">
+    select
+         x.stnd_dt
+        ,round( avg(x.avg_idx) , 2) as avg_idx
+    from
+        (select
+             case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
+                  when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
+                  when #{perdDivCd} = 'WEEK_NM' then week_nm
+                  else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
+             end as stnd_dt
+             ,avg_idx
+        from tt_fidx_stss
+        where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+        ) x
+        <choose>
+            <when test="perdDivCd.equals('WEEK_NM')">
+                inner join  tc_cd_spec tcs
+                on x.stnd_dt = tcs.cd_val
+                and tcs.cd_grp = 'WEEK_CD'
+                where 1=1
+                group by x.stnd_dt , tcs.sort_ord
+                order by tcs.sort_ord ,  x.stnd_dt
+            </when>
+            <otherwise>
+                group by x.stnd_dt
+                order by x.stnd_dt
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="searchFidxJudgList" parameterType="java.util.Map" resultType="MybatisMap">
+     with ts_gfix_judg_stss_temp  as
+    ( select
+          fat_judg_cd
+       ,sum(occr_cnt) as occr_cnt
+      from tt_fat_judg_stss tfjs
+      where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+      group by  fat_judg_cd
+    )
+    select  fat_judg_cd
+           ,occr_cnt
+           ,sum(occr_cnt) over()                          as tot_cnt
+           ,round(sum(occr_cnt) over(partition by fat_judg_cd) / sum(occr_cnt) over() * 100 , 2) as occr_per
+    from ts_gfix_judg_stss_temp tfjs
+    where 1=1
+    order by fat_judg_cd
+    </select>
+
+</mapper>

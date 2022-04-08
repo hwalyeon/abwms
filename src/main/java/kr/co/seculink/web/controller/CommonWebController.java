@@ -229,6 +229,14 @@ public class CommonWebController {
 	@RequestMapping("/stat/hc/gidxStss.pg")
 	public String getStatHcGidxStss() {return "stat/hc/gidxStss";}
 
+	// 비만지수 추이분석
+	@RequestMapping("/stat/hc/fidxStss.pg")
+	public String getStatHcFidxStss() {return "stat/hc/fidxStss";}
+
+	// 비만예측지수 추이분석
+	@RequestMapping("/stat/hc/fatpStss.pg")
+	public String getStatHcFatpStss() {return "stat/hc/fatpStss";}
+
 	// 평균 칼로리섭취 추이분석
 	@RequestMapping("/stat/hc/avalCalStss.pg")
 	public String getStatHcAvalCalStss() {return "stat/hc/avalCalStss";}
