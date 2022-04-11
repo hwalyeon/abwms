@@ -85,7 +85,12 @@
 		<div class="ibox">
 			<div class="ibox-title">
 				<i class="fa fa-title-bar"></i>
-				<h5>{{title.text}}</h5>
+				<h5>평균 운동시간</h5>
+				<div class="float_right">
+					<input type="radio" v-model="params.occrDivCd" value="1" @change="updateAvalActChart($event.target.value)"><span>운동시간(분)</span></input>
+					<span style="padding-right:10px;"></span>
+					<input type="radio" v-model="params.occrDivCd" value="2" @change="updateAvalActChart($event.target.value)"><span>칼로리(g)</span></input>
+				</div>
 			</div>
 			<div class="ibox-content">
 				<div class="form-group">

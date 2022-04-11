@@ -170,13 +170,11 @@ let actHist = new Vue({
                 url    : "/oper/hc/actHist/searchActCdList.ab",
                 param  : params,
                 success: function (response) {
-                    console.log(response);
                     if (!!response.rtnData.result) {
                         $.each(response.rtnData.result, function (index, item) {
                             $this.code.actCdList.push({'cdVal': item.actCd, 'cdNm': item.actNm});
                         });
                     }
-                    console.log($this.code.actCdList);
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);

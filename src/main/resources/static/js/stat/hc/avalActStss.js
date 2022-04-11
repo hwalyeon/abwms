@@ -9,7 +9,7 @@ let avalActStss = new Vue({
                 stndMmFr    : '' ,
                 stndMmTo    : '' ,
                 perdDivCd   : 'DAY',
-                occrDivCd   : '02',
+                occrDivCd   : '1',
                 sexCd       : '' ,
                 ageYcntFr   : '' ,
                 ageYcntTo   : '' ,
@@ -134,7 +134,7 @@ let avalActStss = new Vue({
                     labels  : [],
                     datasets: [
                         {
-                            label: '성장지수',
+                            label: $this.title.text,
                             data: [],
                             borderColor : "#d6e5eb",
                             backgroundColor: "#d6e5eb",
@@ -210,11 +210,16 @@ let avalActStss = new Vue({
             {
                 let $this = this;
 
+                console.log(rowId);
+
                 if(rowId==1){
                     $this.title.text ='평균 운동시간'
                 }else{
-                    $this.title.text ='평균 칼로리 섭취량량'
+                    $this.title.text ='평균 칼로리 섭취량'
                }
+
+
+
                 var gridData      = $("#avalAct_list").getRowData(rowId);
                 let gridColModel  = $("#avalAct_list").jqGrid("getGridParam","colModel");
                 var avalActLabels = [];
@@ -236,7 +241,7 @@ let avalActStss = new Vue({
                     labels : avalActLabels,
                     datasets: [
                         {
-                            label: '전체 운동시간',
+                            label: $this.title.text,
                             data: avalActData,
                             borderColor : "#d6e5eb",
                             backgroundColor: "#d6e5eb",
@@ -280,7 +285,7 @@ let avalActStss = new Vue({
                         stndMmFr: '',
                         stndMmTo: '',
                         perdDivCd: 'DAY',
-                        occrDivCd: '02',
+                        occrDivCd: '1',
                         sexCd: '',
                         ageYcntFr: '',
                         ageYcntTo: '',
