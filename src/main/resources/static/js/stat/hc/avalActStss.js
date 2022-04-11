@@ -3,21 +3,25 @@ let avalActStss = new Vue({
     data:
         {
             params:
-                {
-                    stndDtFr    : '' ,
-                    stndDtTo    : '' ,
-                    stndMmFr    : '' ,
-                    stndMmTo    : '' ,
-                    perdDivCd   : 'DAY',
-                    occrDivCd   : '02',
-                    sexCd       : '' ,
-                    ageYcntFr   : '' ,
-                    ageYcntTo   : '' ,
-                    totalCount  : 0  ,
-                    rowCount    : 30 ,
-                    currentPage : 1  ,
-                    currentIndex: 0
-                },
+            {
+                stndDtFr    : '' ,
+                stndDtTo    : '' ,
+                stndMmFr    : '' ,
+                stndMmTo    : '' ,
+                perdDivCd   : 'DAY',
+                occrDivCd   : '02',
+                sexCd       : '' ,
+                ageYcntFr   : '' ,
+                ageYcntTo   : '' ,
+                totalCount  : 0  ,
+                rowCount    : 30 ,
+                currentPage : 1  ,
+                currentIndex: 0
+            },
+            title:
+            {
+                text:'평균 운동시간'
+            },
             code :
                 {
                     perdDivList : [] ,
@@ -112,7 +116,8 @@ let avalActStss = new Vue({
                     colModel : colModels
                     ,
                     onSelectRow: function(rowId, status, e){
-                        $("#avalAct_List").getRowData(rowId);
+
+                        $this.updateAvalActChart(rowId);
                     }
 
                 }));
@@ -138,8 +143,8 @@ let avalActStss = new Vue({
                         {
                             label: '',
                             data: [],
-                            borderColor: "#f60636",
-                            backgroundColor: "#f50940",
+                            borderColor: "#FBD5B0",
+                            backgroundColor: "#FBD5B0",
                             type: 'line',
                             order: 0
                         }
@@ -194,18 +199,23 @@ let avalActStss = new Vue({
                             Swal.alert(['조회할 내용이 없습니다.', "info"]);
                         }else
                         {
-                            $this.updateAvalActChart();
+                            $this.updateAvalActChart(1);
                         }
                     }
                 }).trigger("reloadGrid");
 
             },
             // 평균 운동시간 차트
-            updateAvalActChart: function()
+            updateAvalActChart: function(rowId)
             {
                 let $this = this;
 
-                var gridData      = $("#avalAct_list").getRowData(selectRowId);
+                if(rowId==1){
+                    $this.title.text ='평균 운동시간'
+                }else{
+                    $this.title.text ='평균 칼로리 섭취량량'
+               }
+                var gridData      = $("#avalAct_list").getRowData(rowId);
                 let gridColModel  = $("#avalAct_list").jqGrid("getGridParam","colModel");
                 var avalActLabels = [];
                 var avalActData   = [];
