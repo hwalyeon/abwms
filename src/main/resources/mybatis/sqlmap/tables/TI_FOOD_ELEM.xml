@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FOOD_ELEM">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiFoodElemVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFoodElemVo" resultType="kr.co.seculink.domain.vo.TiFoodElemVo">
 		/* Generated SQL SQL ID : ti_food_elem.select */
         SELECT  food_no /* food_no 식품_번호 numeric */
                ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
@@ -24,7 +24,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFoodElemVo">
 		/* Generated SQL SQL ID : ti_food_elem.insert */
 		INSERT INTO ti_food_elem
 		(
@@ -41,7 +41,7 @@
 		VALUES
 		(
 		     #{foodNo} /* food_no 식품_번호 numeric */
-		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
+		     ,#{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		    ,#{nutrQty} /* nutr_qty 영양소_용량 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
@@ -52,7 +52,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFoodElemVo">
 		/* Generated SQL SQL ID : ti_food_elem.update */
 		UPDATE ti_food_elem
 		<trim prefix="SET" prefixOverrides=",">
@@ -70,7 +70,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFoodElemVo">
 		/* Generated SQL SQL ID : ti_food_elem.merge */
 		INSERT INTO ti_food_elem
 		(
@@ -96,8 +96,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_food_elem_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="nutrQty != null">
 		    ,nutr_qty = #{nutrQty} /* nutr_qty 영양소_용량 numeric */
@@ -110,7 +110,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFoodElemVo">
 		/* Generated SQL SQL ID : ti_food_elem.delete */
 		DELETE FROM ti_food_elem
 		WHERE  1 = 1

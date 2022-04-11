@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class TsQnaBaseVo implements Serializable {
 
 	/* qna_no 질의응답_번호 numeric(null) */
-	private double qnaNo;
+	private Double qnaNo;
 
 	/* qust_guar_no 질문_보호자_번호 numeric(null) */
-	private double qustGuarNo;
+	private Double qustGuarNo;
 
 	/* qust_dt 질문_일자 character(8) */
 	private String qustDt;
@@ -58,32 +58,32 @@ public class TsQnaBaseVo implements Serializable {
 
 	/**
 	 * Get qna_no 질의응답_번호 numeric(null)
-	 * @Return double qnaNo
+	 * @Return Double qnaNo
 	 */
-	public double getQnaNo() {
+	public Double getQnaNo() {
 		return this.qnaNo;
 	}
 	
 	/**
 	 * Set qna_no 질의응답_번호 numeric(null)
-	 * @Param double qnaNo
+	 * @Param Double qnaNo
 	 */
-	public void setQnaNo(double qnaNo) {
+	public void setQnaNo(Double qnaNo) {
 		this.qnaNo = qnaNo;
 	}
 	/**
 	 * Get qust_guar_no 질문_보호자_번호 numeric(null)
-	 * @Return double qustGuarNo
+	 * @Return Double qustGuarNo
 	 */
-	public double getQustGuarNo() {
+	public Double getQustGuarNo() {
 		return this.qustGuarNo;
 	}
 	
 	/**
 	 * Set qust_guar_no 질문_보호자_번호 numeric(null)
-	 * @Param double qustGuarNo
+	 * @Param Double qustGuarNo
 	 */
-	public void setQustGuarNo(double qustGuarNo) {
+	public void setQustGuarNo(Double qustGuarNo) {
 		this.qustGuarNo = qustGuarNo;
 	}
 	/**

@@ -7,12 +7,13 @@
 -->
 <mapper namespace="TS_LOC_INFO_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo" resultType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
 		/* Generated SQL SQL ID : ts_loc_info_base.select */
         SELECT  loc_no /* loc_no 위치_번호 numeric */
                ,loc_nm /* loc_nm 위치_명 character varying(100) */
                ,plc_cd /* plc_cd 장소_코드 character varying(20) */
                ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
+               ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
                ,lat_val /* lat_val 위도_값 numeric */
                ,lon_val /* lon_val 경도_값 numeric */
                ,vald_rnge_dist /* vald_rnge_dist 유효_반경_거리 numeric */
@@ -35,7 +36,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
 		/* Generated SQL SQL ID : ts_loc_info_base.insert */
 		INSERT INTO ts_loc_info_base
 		(
@@ -48,6 +49,9 @@
 		</if>
 		<if test="plcClssCd != null">
 		    ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		</if>
+		<if test="locApntCd != null">
+		    ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
 		    ,lat_val /* lat_val 위도_값 numeric */
 		    ,lon_val /* lon_val 경도_값 numeric */
@@ -88,6 +92,9 @@
 		</if>
 		<if test="plcClssCd != null">
 		    ,#{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		</if>
+		<if test="locApntCd != null">
+		    ,#{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
 		    ,#{latVal} /* lat_val 위도_값 numeric */
 		    ,#{lonVal} /* lon_val 경도_값 numeric */
@@ -119,7 +126,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
 		/* Generated SQL SQL ID : ts_loc_info_base.update */
 		UPDATE ts_loc_info_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -131,6 +138,9 @@
 		</if>
 		<if test="plcClssCd != null">
 		    ,plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		</if>
+		<if test="locApntCd != null">
+		    ,loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
 		<if test="latVal != null">
 		    ,lat_val = #{latVal} /* lat_val 위도_값 numeric */
@@ -175,7 +185,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
 		/* Generated SQL SQL ID : ts_loc_info_base.merge */
 		INSERT INTO ts_loc_info_base
 		(
@@ -188,6 +198,9 @@
 		</if>
 		<if test="plcClssCd != null">
 		    ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		</if>
+		<if test="locApntCd != null">
+		    ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
 		    ,lat_val /* lat_val 위도_값 numeric */
 		    ,lon_val /* lon_val 경도_값 numeric */
@@ -229,6 +242,9 @@
 		<if test="plcClssCd != null">
 		    ,#{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
 		</if>
+		<if test="locApntCd != null">
+		    ,#{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
+		</if>
 		    ,#{latVal} /* lat_val 위도_값 numeric */
 		    ,#{lonVal} /* lon_val 경도_값 numeric */
 		    ,#{valdRngeDist} /* vald_rnge_dist 유효_반경_거리 numeric */
@@ -257,8 +273,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_loc_info_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="locNm != null">
 		    ,loc_nm = #{locNm} /* loc_nm 위치_명 character varying(100) */
@@ -268,6 +284,9 @@
 		</if>
 		<if test="plcClssCd != null">
 		    ,plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		</if>
+		<if test="locApntCd != null">
+		    ,loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
 		<if test="latVal != null">
 		    ,lat_val = #{latVal} /* lat_val 위도_값 numeric */
@@ -310,7 +329,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
 		/* Generated SQL SQL ID : ts_loc_info_base.delete */
 		DELETE FROM ts_loc_info_base
 		WHERE  1 = 1

@@ -23,7 +23,7 @@ public class TiTermBaseVo implements Serializable {
 	private String essnYn;
 
 	/* sort_ord 정렬_순서 numeric(null) */
-	private double sortOrd;
+	private Double sortOrd;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -121,17 +121,17 @@ public class TiTermBaseVo implements Serializable {
 	}
 	/**
 	 * Get sort_ord 정렬_순서 numeric(null)
-	 * @Return double sortOrd
+	 * @Return Double sortOrd
 	 */
-	public double getSortOrd() {
+	public Double getSortOrd() {
 		return this.sortOrd;
 	}
 	
 	/**
 	 * Set sort_ord 정렬_순서 numeric(null)
-	 * @Param double sortOrd
+	 * @Param Double sortOrd
 	 */
-	public void setSortOrd(double sortOrd) {
+	public void setSortOrd(Double sortOrd) {
 		this.sortOrd = sortOrd;
 	}
 	/**

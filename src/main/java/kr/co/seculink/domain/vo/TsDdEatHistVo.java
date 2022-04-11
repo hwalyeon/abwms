@@ -11,22 +11,22 @@ public class TsDdEatHistVo implements Serializable {
 	private String stndDt;
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* eat_seq 섭취_순번 numeric(null) */
-	private double eatSeq;
+	private Double eatSeq;
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* fmenu_seq 식단표_순번 numeric(null) */
-	private double fmenuSeq;
+	private Double fmenuSeq;
 
 	/* etim_div_cd 식때_구분_코드 character(18) */
 	private String etimDivCd;
 
 	/* eat_qty 섭취_용량 numeric(null) */
-	private double eatQty;
+	private Double eatQty;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -64,62 +64,62 @@ public class TsDdEatHistVo implements Serializable {
 	}
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
 	 * Get eat_seq 섭취_순번 numeric(null)
-	 * @Return double eatSeq
+	 * @Return Double eatSeq
 	 */
-	public double getEatSeq() {
+	public Double getEatSeq() {
 		return this.eatSeq;
 	}
 	
 	/**
 	 * Set eat_seq 섭취_순번 numeric(null)
-	 * @Param double eatSeq
+	 * @Param Double eatSeq
 	 */
-	public void setEatSeq(double eatSeq) {
+	public void setEatSeq(Double eatSeq) {
 		this.eatSeq = eatSeq;
 	}
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**
 	 * Get fmenu_seq 식단표_순번 numeric(null)
-	 * @Return double fmenuSeq
+	 * @Return Double fmenuSeq
 	 */
-	public double getFmenuSeq() {
+	public Double getFmenuSeq() {
 		return this.fmenuSeq;
 	}
 	
 	/**
 	 * Set fmenu_seq 식단표_순번 numeric(null)
-	 * @Param double fmenuSeq
+	 * @Param Double fmenuSeq
 	 */
-	public void setFmenuSeq(double fmenuSeq) {
+	public void setFmenuSeq(Double fmenuSeq) {
 		this.fmenuSeq = fmenuSeq;
 	}
 	/**
@@ -139,17 +139,17 @@ public class TsDdEatHistVo implements Serializable {
 	}
 	/**
 	 * Get eat_qty 섭취_용량 numeric(null)
-	 * @Return double eatQty
+	 * @Return Double eatQty
 	 */
-	public double getEatQty() {
+	public Double getEatQty() {
 		return this.eatQty;
 	}
 	
 	/**
 	 * Set eat_qty 섭취_용량 numeric(null)
-	 * @Param double eatQty
+	 * @Param Double eatQty
 	 */
-	public void setEatQty(double eatQty) {
+	public void setEatQty(Double eatQty) {
 		this.eatQty = eatQty;
 	}
 	/**

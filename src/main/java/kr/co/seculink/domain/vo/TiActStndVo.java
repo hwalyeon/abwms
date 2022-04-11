@@ -20,13 +20,13 @@ public class TiActStndVo implements Serializable {
 	private String actDesc;
 
 	/* met_val MET_값 numeric(null) */
-	private double metVal;
+	private Double metVal;
 
 	/* met_min_cfct MET_분당_환산계수 numeric(null) */
-	private double metMinCfct;
+	private Double metMinCfct;
 
 	/* sort_ord 정렬_순서 numeric(null) */
-	private double sortOrd;
+	private Double sortOrd;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -109,47 +109,47 @@ public class TiActStndVo implements Serializable {
 	}
 	/**
 	 * Get met_val MET_값 numeric(null)
-	 * @Return double metVal
+	 * @Return Double metVal
 	 */
-	public double getMetVal() {
+	public Double getMetVal() {
 		return this.metVal;
 	}
 	
 	/**
 	 * Set met_val MET_값 numeric(null)
-	 * @Param double metVal
+	 * @Param Double metVal
 	 */
-	public void setMetVal(double metVal) {
+	public void setMetVal(Double metVal) {
 		this.metVal = metVal;
 	}
 	/**
 	 * Get met_min_cfct MET_분당_환산계수 numeric(null)
-	 * @Return double metMinCfct
+	 * @Return Double metMinCfct
 	 */
-	public double getMetMinCfct() {
+	public Double getMetMinCfct() {
 		return this.metMinCfct;
 	}
 	
 	/**
 	 * Set met_min_cfct MET_분당_환산계수 numeric(null)
-	 * @Param double metMinCfct
+	 * @Param Double metMinCfct
 	 */
-	public void setMetMinCfct(double metMinCfct) {
+	public void setMetMinCfct(Double metMinCfct) {
 		this.metMinCfct = metMinCfct;
 	}
 	/**
 	 * Get sort_ord 정렬_순서 numeric(null)
-	 * @Return double sortOrd
+	 * @Return Double sortOrd
 	 */
-	public double getSortOrd() {
+	public Double getSortOrd() {
 		return this.sortOrd;
 	}
 	
 	/**
 	 * Set sort_ord 정렬_순서 numeric(null)
-	 * @Param double sortOrd
+	 * @Param Double sortOrd
 	 */
-	public void setSortOrd(double sortOrd) {
+	public void setSortOrd(Double sortOrd) {
 		this.sortOrd = sortOrd;
 	}
 	/**

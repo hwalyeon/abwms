@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_PRNT_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TmPrntBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo" resultType="kr.co.seculink.domain.vo.TmPrntBaseVo">
 		/* Generated SQL SQL ID : tm_prnt_base.select */
         SELECT  prnt_no /* prnt_no 학부모_번호 numeric */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -28,7 +28,7 @@
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
 		/* Generated SQL SQL ID : tm_prnt_base.insert */
 		INSERT INTO tm_prnt_base
 		(
@@ -57,7 +57,7 @@
 		VALUES
 		(
 		     #{prntNo} /* prnt_no 학부모_번호 numeric */
-		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		     ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		<if test="prntNm != null">
 		    ,#{prntNm} /* prnt_nm 학부모_명 character varying(256) */
 		</if>
@@ -80,7 +80,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
 		/* Generated SQL SQL ID : tm_prnt_base.update */
 		UPDATE tm_prnt_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -110,7 +110,7 @@
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
 		/* Generated SQL SQL ID : tm_prnt_base.merge */
 		INSERT INTO tm_prnt_base
 		(
@@ -160,8 +160,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tm_prnt_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="prntNm != null">
 		    ,prnt_nm = #{prntNm} /* prnt_nm 학부모_명 character varying(256) */
@@ -186,7 +186,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
 		/* Generated SQL SQL ID : tm_prnt_base.delete */
 		DELETE FROM tm_prnt_base
 		WHERE  1 = 1

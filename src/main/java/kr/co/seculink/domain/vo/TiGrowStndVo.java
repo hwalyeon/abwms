@@ -11,25 +11,25 @@ public class TiGrowStndVo implements Serializable {
 	private String growStndVer;
 
 	/* grow_stnd_no 성장_기준_번호 numeric(null) */
-	private double growStndNo;
+	private Double growStndNo;
 
 	/* sex_cd 성별_코드 character varying(20) */
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* age_mcnt 나이_개월수 numeric(null) */
-	private double ageMcnt;
+	private Double ageMcnt;
 
 	/* p3_gidx 백분위3_성장지수 numeric(null) */
-	private double p3Gidx;
+	private Double p3Gidx;
 
 	/* p50_gidx 백분위50_성장지수 numeric(null) */
-	private double p50Gidx;
+	private Double p50Gidx;
 
 	/* p97_gidx 백분위97_성장지수 numeric(null) */
-	private double p97Gidx;
+	private Double p97Gidx;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -67,17 +67,17 @@ public class TiGrowStndVo implements Serializable {
 	}
 	/**
 	 * Get grow_stnd_no 성장_기준_번호 numeric(null)
-	 * @Return double growStndNo
+	 * @Return Double growStndNo
 	 */
-	public double getGrowStndNo() {
+	public Double getGrowStndNo() {
 		return this.growStndNo;
 	}
 	
 	/**
 	 * Set grow_stnd_no 성장_기준_번호 numeric(null)
-	 * @Param double growStndNo
+	 * @Param Double growStndNo
 	 */
-	public void setGrowStndNo(double growStndNo) {
+	public void setGrowStndNo(Double growStndNo) {
 		this.growStndNo = growStndNo;
 	}
 	/**
@@ -97,77 +97,77 @@ public class TiGrowStndVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get age_mcnt 나이_개월수 numeric(null)
-	 * @Return double ageMcnt
+	 * @Return Double ageMcnt
 	 */
-	public double getAgeMcnt() {
+	public Double getAgeMcnt() {
 		return this.ageMcnt;
 	}
 	
 	/**
 	 * Set age_mcnt 나이_개월수 numeric(null)
-	 * @Param double ageMcnt
+	 * @Param Double ageMcnt
 	 */
-	public void setAgeMcnt(double ageMcnt) {
+	public void setAgeMcnt(Double ageMcnt) {
 		this.ageMcnt = ageMcnt;
 	}
 	/**
 	 * Get p3_gidx 백분위3_성장지수 numeric(null)
-	 * @Return double p3Gidx
+	 * @Return Double p3Gidx
 	 */
-	public double getP3Gidx() {
+	public Double getP3Gidx() {
 		return this.p3Gidx;
 	}
 	
 	/**
 	 * Set p3_gidx 백분위3_성장지수 numeric(null)
-	 * @Param double p3Gidx
+	 * @Param Double p3Gidx
 	 */
-	public void setP3Gidx(double p3Gidx) {
+	public void setP3Gidx(Double p3Gidx) {
 		this.p3Gidx = p3Gidx;
 	}
 	/**
 	 * Get p50_gidx 백분위50_성장지수 numeric(null)
-	 * @Return double p50Gidx
+	 * @Return Double p50Gidx
 	 */
-	public double getP50Gidx() {
+	public Double getP50Gidx() {
 		return this.p50Gidx;
 	}
 	
 	/**
 	 * Set p50_gidx 백분위50_성장지수 numeric(null)
-	 * @Param double p50Gidx
+	 * @Param Double p50Gidx
 	 */
-	public void setP50Gidx(double p50Gidx) {
+	public void setP50Gidx(Double p50Gidx) {
 		this.p50Gidx = p50Gidx;
 	}
 	/**
 	 * Get p97_gidx 백분위97_성장지수 numeric(null)
-	 * @Return double p97Gidx
+	 * @Return Double p97Gidx
 	 */
-	public double getP97Gidx() {
+	public Double getP97Gidx() {
 		return this.p97Gidx;
 	}
 	
 	/**
 	 * Set p97_gidx 백분위97_성장지수 numeric(null)
-	 * @Param double p97Gidx
+	 * @Param Double p97Gidx
 	 */
-	public void setP97Gidx(double p97Gidx) {
+	public void setP97Gidx(Double p97Gidx) {
 		this.p97Gidx = p97Gidx;
 	}
 	/**

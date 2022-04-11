@@ -11,10 +11,10 @@ public class TiGrowJudgStndVo implements Serializable {
 	private String growJudgCd;
 
 	/* gidx_fr 성장지수_FROM numeric(null) */
-	private double gidxFr;
+	private Double gidxFr;
 
 	/* gidx_to 성장지수_TO numeric(null) */
-	private double gidxTo;
+	private Double gidxTo;
 
 	/* smry_cntn 요약_내용 character varying(1000) */
 	private String smryCntn;
@@ -58,32 +58,32 @@ public class TiGrowJudgStndVo implements Serializable {
 	}
 	/**
 	 * Get gidx_fr 성장지수_FROM numeric(null)
-	 * @Return double gidxFr
+	 * @Return Double gidxFr
 	 */
-	public double getGidxFr() {
+	public Double getGidxFr() {
 		return this.gidxFr;
 	}
 	
 	/**
 	 * Set gidx_fr 성장지수_FROM numeric(null)
-	 * @Param double gidxFr
+	 * @Param Double gidxFr
 	 */
-	public void setGidxFr(double gidxFr) {
+	public void setGidxFr(Double gidxFr) {
 		this.gidxFr = gidxFr;
 	}
 	/**
 	 * Get gidx_to 성장지수_TO numeric(null)
-	 * @Return double gidxTo
+	 * @Return Double gidxTo
 	 */
-	public double getGidxTo() {
+	public Double getGidxTo() {
 		return this.gidxTo;
 	}
 	
 	/**
 	 * Set gidx_to 성장지수_TO numeric(null)
-	 * @Param double gidxTo
+	 * @Param Double gidxTo
 	 */
-	public void setGidxTo(double gidxTo) {
+	public void setGidxTo(Double gidxTo) {
 		this.gidxTo = gidxTo;
 	}
 	/**

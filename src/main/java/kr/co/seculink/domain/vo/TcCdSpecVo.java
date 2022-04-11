@@ -29,7 +29,7 @@ public class TcCdSpecVo implements Serializable {
 	private String fltrVal3;
 
 	/* sort_ord 정렬_순서 numeric(null) */
-	private double sortOrd;
+	private Double sortOrd;
 
 	/* use_yn 사용_여부 character(1) */
 	private String useYn;
@@ -160,17 +160,17 @@ public class TcCdSpecVo implements Serializable {
 	}
 	/**
 	 * Get sort_ord 정렬_순서 numeric(null)
-	 * @Return double sortOrd
+	 * @Return Double sortOrd
 	 */
-	public double getSortOrd() {
+	public Double getSortOrd() {
 		return this.sortOrd;
 	}
 	
 	/**
 	 * Set sort_ord 정렬_순서 numeric(null)
-	 * @Param double sortOrd
+	 * @Param Double sortOrd
 	 */
-	public void setSortOrd(double sortOrd) {
+	public void setSortOrd(Double sortOrd) {
 		this.sortOrd = sortOrd;
 	}
 	/**

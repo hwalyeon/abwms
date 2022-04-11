@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class TmStdtGuarConnVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -34,32 +34,32 @@ public class TmStdtGuarConnVo implements Serializable {
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**

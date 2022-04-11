@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsCsInfoVo implements Serializable {
 
 	/* reg_no 등록_번호 numeric(null) */
-	private double regNo;
+	private Double regNo;
 
 	/* cs_tel_no 고객지원_전화_번호 character varying(20) */
 	private String csTelNo;
@@ -43,17 +43,17 @@ public class TsCsInfoVo implements Serializable {
 
 	/**
 	 * Get reg_no 등록_번호 numeric(null)
-	 * @Return double regNo
+	 * @Return Double regNo
 	 */
-	public double getRegNo() {
+	public Double getRegNo() {
 		return this.regNo;
 	}
 	
 	/**
 	 * Set reg_no 등록_번호 numeric(null)
-	 * @Param double regNo
+	 * @Param Double regNo
 	 */
-	public void setRegNo(double regNo) {
+	public void setRegNo(Double regNo) {
 		this.regNo = regNo;
 	}
 	/**

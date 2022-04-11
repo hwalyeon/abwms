@@ -14,28 +14,28 @@ public class TiGfixFctrVo implements Serializable {
 	private String sexCd;
 
 	/* age_mcnt 나이_개월수 numeric(null) */
-	private double ageMcnt;
+	private Double ageMcnt;
 
 	/* fctr_1 팩터_1 numeric(null) */
-	private double fctr1;
+	private Double fctr1;
 
 	/* fctr_2 팩터_2 numeric(null) */
-	private double fctr2;
+	private Double fctr2;
 
 	/* fctr_3 팩터_3 numeric(null) */
-	private double fctr3;
+	private Double fctr3;
 
 	/* fctr_4 팩터_4 numeric(null) */
-	private double fctr4;
+	private Double fctr4;
 
 	/* fctr_5 팩터_5 numeric(null) */
-	private double fctr5;
+	private Double fctr5;
 
 	/* fctr_6 팩터_6 numeric(null) */
-	private double fctr6;
+	private Double fctr6;
 
 	/* fctr_7 팩터_7 numeric(null) */
-	private double fctr7;
+	private Double fctr7;
 
 	/* idx_frml_cd 지수_공식_코드 character varying(500) */
 	private String idxFrmlCd;
@@ -91,122 +91,122 @@ public class TiGfixFctrVo implements Serializable {
 	}
 	/**
 	 * Get age_mcnt 나이_개월수 numeric(null)
-	 * @Return double ageMcnt
+	 * @Return Double ageMcnt
 	 */
-	public double getAgeMcnt() {
+	public Double getAgeMcnt() {
 		return this.ageMcnt;
 	}
 	
 	/**
 	 * Set age_mcnt 나이_개월수 numeric(null)
-	 * @Param double ageMcnt
+	 * @Param Double ageMcnt
 	 */
-	public void setAgeMcnt(double ageMcnt) {
+	public void setAgeMcnt(Double ageMcnt) {
 		this.ageMcnt = ageMcnt;
 	}
 	/**
 	 * Get fctr_1 팩터_1 numeric(null)
-	 * @Return double fctr1
+	 * @Return Double fctr1
 	 */
-	public double getFctr1() {
+	public Double getFctr1() {
 		return this.fctr1;
 	}
 	
 	/**
 	 * Set fctr_1 팩터_1 numeric(null)
-	 * @Param double fctr1
+	 * @Param Double fctr1
 	 */
-	public void setFctr1(double fctr1) {
+	public void setFctr1(Double fctr1) {
 		this.fctr1 = fctr1;
 	}
 	/**
 	 * Get fctr_2 팩터_2 numeric(null)
-	 * @Return double fctr2
+	 * @Return Double fctr2
 	 */
-	public double getFctr2() {
+	public Double getFctr2() {
 		return this.fctr2;
 	}
 	
 	/**
 	 * Set fctr_2 팩터_2 numeric(null)
-	 * @Param double fctr2
+	 * @Param Double fctr2
 	 */
-	public void setFctr2(double fctr2) {
+	public void setFctr2(Double fctr2) {
 		this.fctr2 = fctr2;
 	}
 	/**
 	 * Get fctr_3 팩터_3 numeric(null)
-	 * @Return double fctr3
+	 * @Return Double fctr3
 	 */
-	public double getFctr3() {
+	public Double getFctr3() {
 		return this.fctr3;
 	}
 	
 	/**
 	 * Set fctr_3 팩터_3 numeric(null)
-	 * @Param double fctr3
+	 * @Param Double fctr3
 	 */
-	public void setFctr3(double fctr3) {
+	public void setFctr3(Double fctr3) {
 		this.fctr3 = fctr3;
 	}
 	/**
 	 * Get fctr_4 팩터_4 numeric(null)
-	 * @Return double fctr4
+	 * @Return Double fctr4
 	 */
-	public double getFctr4() {
+	public Double getFctr4() {
 		return this.fctr4;
 	}
 	
 	/**
 	 * Set fctr_4 팩터_4 numeric(null)
-	 * @Param double fctr4
+	 * @Param Double fctr4
 	 */
-	public void setFctr4(double fctr4) {
+	public void setFctr4(Double fctr4) {
 		this.fctr4 = fctr4;
 	}
 	/**
 	 * Get fctr_5 팩터_5 numeric(null)
-	 * @Return double fctr5
+	 * @Return Double fctr5
 	 */
-	public double getFctr5() {
+	public Double getFctr5() {
 		return this.fctr5;
 	}
 	
 	/**
 	 * Set fctr_5 팩터_5 numeric(null)
-	 * @Param double fctr5
+	 * @Param Double fctr5
 	 */
-	public void setFctr5(double fctr5) {
+	public void setFctr5(Double fctr5) {
 		this.fctr5 = fctr5;
 	}
 	/**
 	 * Get fctr_6 팩터_6 numeric(null)
-	 * @Return double fctr6
+	 * @Return Double fctr6
 	 */
-	public double getFctr6() {
+	public Double getFctr6() {
 		return this.fctr6;
 	}
 	
 	/**
 	 * Set fctr_6 팩터_6 numeric(null)
-	 * @Param double fctr6
+	 * @Param Double fctr6
 	 */
-	public void setFctr6(double fctr6) {
+	public void setFctr6(Double fctr6) {
 		this.fctr6 = fctr6;
 	}
 	/**
 	 * Get fctr_7 팩터_7 numeric(null)
-	 * @Return double fctr7
+	 * @Return Double fctr7
 	 */
-	public double getFctr7() {
+	public Double getFctr7() {
 		return this.fctr7;
 	}
 	
 	/**
 	 * Set fctr_7 팩터_7 numeric(null)
-	 * @Param double fctr7
+	 * @Param Double fctr7
 	 */
-	public void setFctr7(double fctr7) {
+	public void setFctr7(Double fctr7) {
 		this.fctr7 = fctr7;
 	}
 	/**

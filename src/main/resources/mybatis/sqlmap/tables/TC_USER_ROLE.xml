@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_USER_ROLE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TcUserRoleVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TcUserRoleVo" resultType="kr.co.seculink.domain.vo.TcUserRoleVo">
 		/* Generated SQL SQL ID : tc_user_role.select */
         SELECT  user_id /* user_id 사용자_ID character varying(40) */
                ,role_cd /* role_cd 역할_코드 character varying(40) */
@@ -23,7 +23,7 @@
 		AND    role_cd = #{roleCd} /* role_cd 역할_코드 character varying(40) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
 		/* Generated SQL SQL ID : tc_user_role.insert */
 		INSERT INTO tc_user_role
 		(
@@ -39,7 +39,7 @@
 		VALUES
 		(
 		     #{userId} /* user_id 사용자_ID character varying(40) */
-		     #{roleCd} /* role_cd 역할_코드 character varying(40) */
+		     ,#{roleCd} /* role_cd 역할_코드 character varying(40) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -49,7 +49,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
 		/* Generated SQL SQL ID : tc_user_role.update */
 		UPDATE tc_user_role
 		<trim prefix="SET" prefixOverrides=",">
@@ -64,7 +64,7 @@
 		AND    role_cd = #{roleCd} /* role_cd 역할_코드 character varying(40) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
 		/* Generated SQL SQL ID : tc_user_role.merge */
 		INSERT INTO tc_user_role
 		(
@@ -88,8 +88,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tc_user_role_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
@@ -99,7 +99,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
 		/* Generated SQL SQL ID : tc_user_role.delete */
 		DELETE FROM tc_user_role
 		WHERE  1 = 1

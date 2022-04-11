@@ -14,7 +14,7 @@ public class TtActStssVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* act_cd 활동_코드 character varying(20) */
 	private String actCd;
@@ -23,16 +23,16 @@ public class TtActStssVo implements Serializable {
 	private String stndYymm;
 
 	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	private Double mnthWeekSeq;
 
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
 	/* avg_cal_csum_qty 평균_칼로리_소모_량 numeric(null) */
-	private double avgCalCsumQty;
+	private Double avgCalCsumQty;
 
 	/* avg_act_tcnt_mcnt 평균_활동_시간_분수 numeric(null) */
-	private double avgActTcntMcnt;
+	private Double avgActTcntMcnt;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -85,17 +85,17 @@ public class TtActStssVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
@@ -130,17 +130,17 @@ public class TtActStssVo implements Serializable {
 	}
 	/**
 	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
+	 * @Return Double mnthWeekSeq
 	 */
-	public double getMnthWeekSeq() {
+	public Double getMnthWeekSeq() {
 		return this.mnthWeekSeq;
 	}
 	
 	/**
 	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * @Param Double mnthWeekSeq
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
+	public void setMnthWeekSeq(Double mnthWeekSeq) {
 		this.mnthWeekSeq = mnthWeekSeq;
 	}
 	/**
@@ -160,32 +160,32 @@ public class TtActStssVo implements Serializable {
 	}
 	/**
 	 * Get avg_cal_csum_qty 평균_칼로리_소모_량 numeric(null)
-	 * @Return double avgCalCsumQty
+	 * @Return Double avgCalCsumQty
 	 */
-	public double getAvgCalCsumQty() {
+	public Double getAvgCalCsumQty() {
 		return this.avgCalCsumQty;
 	}
 	
 	/**
 	 * Set avg_cal_csum_qty 평균_칼로리_소모_량 numeric(null)
-	 * @Param double avgCalCsumQty
+	 * @Param Double avgCalCsumQty
 	 */
-	public void setAvgCalCsumQty(double avgCalCsumQty) {
+	public void setAvgCalCsumQty(Double avgCalCsumQty) {
 		this.avgCalCsumQty = avgCalCsumQty;
 	}
 	/**
 	 * Get avg_act_tcnt_mcnt 평균_활동_시간_분수 numeric(null)
-	 * @Return double avgActTcntMcnt
+	 * @Return Double avgActTcntMcnt
 	 */
-	public double getAvgActTcntMcnt() {
+	public Double getAvgActTcntMcnt() {
 		return this.avgActTcntMcnt;
 	}
 	
 	/**
 	 * Set avg_act_tcnt_mcnt 평균_활동_시간_분수 numeric(null)
-	 * @Param double avgActTcntMcnt
+	 * @Param Double avgActTcntMcnt
 	 */
-	public void setAvgActTcntMcnt(double avgActTcntMcnt) {
+	public void setAvgActTcntMcnt(Double avgActTcntMcnt) {
 		this.avgActTcntMcnt = avgActTcntMcnt;
 	}
 	/**

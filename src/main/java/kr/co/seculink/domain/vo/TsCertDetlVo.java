@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsCertDetlVo implements Serializable {
 
 	/* cert_seq 인증_순번 numeric(null) */
-	private double certSeq;
+	private Double certSeq;
 
 	/* gen_dttm 생성_일시 character(14) */
 	private String genDttm;
@@ -17,10 +17,10 @@ public class TsCertDetlVo implements Serializable {
 	private String certNo;
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* alam_no 알림_번호 numeric(null) */
-	private double alamNo;
+	private Double alamNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -43,17 +43,17 @@ public class TsCertDetlVo implements Serializable {
 
 	/**
 	 * Get cert_seq 인증_순번 numeric(null)
-	 * @Return double certSeq
+	 * @Return Double certSeq
 	 */
-	public double getCertSeq() {
+	public Double getCertSeq() {
 		return this.certSeq;
 	}
 	
 	/**
 	 * Set cert_seq 인증_순번 numeric(null)
-	 * @Param double certSeq
+	 * @Param Double certSeq
 	 */
-	public void setCertSeq(double certSeq) {
+	public void setCertSeq(Double certSeq) {
 		this.certSeq = certSeq;
 	}
 	/**
@@ -88,32 +88,32 @@ public class TsCertDetlVo implements Serializable {
 	}
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**
 	 * Get alam_no 알림_번호 numeric(null)
-	 * @Return double alamNo
+	 * @Return Double alamNo
 	 */
-	public double getAlamNo() {
+	public Double getAlamNo() {
 		return this.alamNo;
 	}
 	
 	/**
 	 * Set alam_no 알림_번호 numeric(null)
-	 * @Param double alamNo
+	 * @Param Double alamNo
 	 */
-	public void setAlamNo(double alamNo) {
+	public void setAlamNo(Double alamNo) {
 		this.alamNo = alamNo;
 	}
 	/**

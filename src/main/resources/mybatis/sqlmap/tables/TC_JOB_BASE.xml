@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_JOB_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TcJobBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TcJobBaseVo" resultType="kr.co.seculink.domain.vo.TcJobBaseVo">
 		/* Generated SQL SQL ID : tc_job_base.select */
         SELECT  job_id /* job_id 작업_ID character varying(20) */
                ,job_nm /* job_nm 작업_명 character varying(100) */
@@ -24,7 +24,7 @@
 		AND    job_id = #{jobId} /* job_id 작업_ID character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
 		/* Generated SQL SQL ID : tc_job_base.insert */
 		INSERT INTO tc_job_base
 		(
@@ -66,7 +66,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
 		/* Generated SQL SQL ID : tc_job_base.update */
 		UPDATE tc_job_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -89,7 +89,7 @@
 		AND    job_id = #{jobId} /* job_id 작업_ID character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
 		/* Generated SQL SQL ID : tc_job_base.merge */
 		INSERT INTO tc_job_base
 		(
@@ -129,8 +129,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(18) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character(9999) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tc_job_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="jobNm != null">
 		    ,job_nm = #{jobNm} /* job_nm 작업_명 character varying(100) */
@@ -149,7 +149,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
 		/* Generated SQL SQL ID : tc_job_base.delete */
 		DELETE FROM tc_job_base
 		WHERE  1 = 1

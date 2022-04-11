@@ -7,13 +7,13 @@
 -->
 <mapper namespace="TI_DD_NUTR_EAT_BLCK">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo" resultType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.select */
         SELECT  sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
                ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
                ,eat_qty_fr /* eat_qty_fr 섭취_량_FROM numeric */
-               ,eat_qty_to /* eat_qty_to 섭취_량_TO character(18) */
+               ,eat_qty_to /* eat_qty_to 섭취_량_TO numeric */
                ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
                ,use_yn /* use_yn 사용_여부 character(1) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -30,7 +30,7 @@
 		AND    eat_qty_fr = #{eatQtyFr} /* eat_qty_fr 섭취_량_FROM numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.insert */
 		INSERT INTO ti_dd_nutr_eat_blck
 		(
@@ -39,7 +39,7 @@
 		    ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
 		    ,eat_qty_fr /* eat_qty_fr 섭취_량_FROM numeric */
 		<if test="eatQtyTo != null">
-		    ,eat_qty_to /* eat_qty_to 섭취_량_TO character(18) */
+		    ,eat_qty_to /* eat_qty_to 섭취_량_TO numeric */
 		</if>
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
@@ -55,11 +55,11 @@
 		VALUES
 		(
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
-		     #{eatQtyFr} /* eat_qty_fr 섭취_량_FROM numeric */
+		     ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		     ,#{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
+		     ,#{eatQtyFr} /* eat_qty_fr 섭취_량_FROM numeric */
 		<if test="eatQtyTo != null">
-		    ,#{eatQtyTo} /* eat_qty_to 섭취_량_TO character(18) */
+		    ,#{eatQtyTo} /* eat_qty_to 섭취_량_TO numeric */
 		</if>
 		<if test="nutrStatCd != null">
 		    ,#{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
@@ -74,12 +74,12 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.update */
 		UPDATE ti_dd_nutr_eat_blck
 		<trim prefix="SET" prefixOverrides=",">
 		<if test="eatQtyTo != null">
-		    ,eat_qty_to = #{eatQtyTo} /* eat_qty_to 섭취_량_TO character(18) */
+		    ,eat_qty_to = #{eatQtyTo} /* eat_qty_to 섭취_량_TO numeric */
 		</if>
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
@@ -100,7 +100,7 @@
 		AND    eat_qty_fr = #{eatQtyFr} /* eat_qty_fr 섭취_량_FROM numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.merge */
 		INSERT INTO ti_dd_nutr_eat_blck
 		(
@@ -109,7 +109,7 @@
 		     nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
 		     eat_qty_fr /* eat_qty_fr 섭취_량_FROM numeric */
 		<if test="eatQtyTo != null">
-		    ,eat_qty_to /* eat_qty_to 섭취_량_TO character(18) */
+		    ,eat_qty_to /* eat_qty_to 섭취_량_TO numeric */
 		</if>
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
@@ -129,7 +129,7 @@
 		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		     #{eatQtyFr} /* eat_qty_fr 섭취_량_FROM numeric */
 		<if test="eatQtyTo != null">
-		    ,#{eatQtyTo} /* eat_qty_to 섭취_량_TO character(18) */
+		    ,#{eatQtyTo} /* eat_qty_to 섭취_량_TO numeric */
 		</if>
 		<if test="nutrStatCd != null">
 		    ,#{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
@@ -142,11 +142,11 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_dd_nutr_eat_blck_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="eatQtyTo != null">
-		    ,eat_qty_to = #{eatQtyTo} /* eat_qty_to 섭취_량_TO character(18) */
+		    ,eat_qty_to = #{eatQtyTo} /* eat_qty_to 섭취_량_TO numeric */
 		</if>
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
@@ -162,7 +162,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatBlckVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_blck.delete */
 		DELETE FROM ti_dd_nutr_eat_blck
 		WHERE  1 = 1

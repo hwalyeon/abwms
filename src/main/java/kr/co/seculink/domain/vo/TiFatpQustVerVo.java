@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TiFatpQustVerVo implements Serializable {
 
 	/* qust_ver 설문_버전 numeric(null) */
-	private double qustVer;
+	private Double qustVer;
 
 	/* rmrk 비고 character varying(100) */
 	private String rmrk;
@@ -34,17 +34,17 @@ public class TiFatpQustVerVo implements Serializable {
 
 	/**
 	 * Get qust_ver 설문_버전 numeric(null)
-	 * @Return double qustVer
+	 * @Return Double qustVer
 	 */
-	public double getQustVer() {
+	public Double getQustVer() {
 		return this.qustVer;
 	}
 	
 	/**
 	 * Set qust_ver 설문_버전 numeric(null)
-	 * @Param double qustVer
+	 * @Param Double qustVer
 	 */
-	public void setQustVer(double qustVer) {
+	public void setQustVer(Double qustVer) {
 		this.qustVer = qustVer;
 	}
 	/**

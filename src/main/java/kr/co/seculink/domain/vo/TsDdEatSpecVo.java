@@ -11,13 +11,13 @@ public class TsDdEatSpecVo implements Serializable {
 	private String stndDt;
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
 
 	/* nutr_eat_qty 영양소_섭취_량 numeric(null) */
-	private double nutrEatQty;
+	private Double nutrEatQty;
 
 	/* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 	private String nutrStatCd;
@@ -58,17 +58,17 @@ public class TsDdEatSpecVo implements Serializable {
 	}
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -88,17 +88,17 @@ public class TsDdEatSpecVo implements Serializable {
 	}
 	/**
 	 * Get nutr_eat_qty 영양소_섭취_량 numeric(null)
-	 * @Return double nutrEatQty
+	 * @Return Double nutrEatQty
 	 */
-	public double getNutrEatQty() {
+	public Double getNutrEatQty() {
 		return this.nutrEatQty;
 	}
 	
 	/**
 	 * Set nutr_eat_qty 영양소_섭취_량 numeric(null)
-	 * @Param double nutrEatQty
+	 * @Param Double nutrEatQty
 	 */
-	public void setNutrEatQty(double nutrEatQty) {
+	public void setNutrEatQty(Double nutrEatQty) {
 		this.nutrEatQty = nutrEatQty;
 	}
 	/**

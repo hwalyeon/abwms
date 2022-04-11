@@ -8,13 +8,13 @@ import java.io.Serializable;
 public class TiTempStatStndVo implements Serializable {
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* temp_val_fr 체온_값_FROM numeric(null) */
-	private double tempValFr;
+	private Double tempValFr;
 
 	/* temp_val_to 체온_값_TO numeric(null) */
-	private double tempValTo;
+	private Double tempValTo;
 
 	/* temp_stat_cd 체온_상태_코드 character varying(20) */
 	private String tempStatCd;
@@ -40,47 +40,47 @@ public class TiTempStatStndVo implements Serializable {
 
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get temp_val_fr 체온_값_FROM numeric(null)
-	 * @Return double tempValFr
+	 * @Return Double tempValFr
 	 */
-	public double getTempValFr() {
+	public Double getTempValFr() {
 		return this.tempValFr;
 	}
 	
 	/**
 	 * Set temp_val_fr 체온_값_FROM numeric(null)
-	 * @Param double tempValFr
+	 * @Param Double tempValFr
 	 */
-	public void setTempValFr(double tempValFr) {
+	public void setTempValFr(Double tempValFr) {
 		this.tempValFr = tempValFr;
 	}
 	/**
 	 * Get temp_val_to 체온_값_TO numeric(null)
-	 * @Return double tempValTo
+	 * @Return Double tempValTo
 	 */
-	public double getTempValTo() {
+	public Double getTempValTo() {
 		return this.tempValTo;
 	}
 	
 	/**
 	 * Set temp_val_to 체온_값_TO numeric(null)
-	 * @Param double tempValTo
+	 * @Param Double tempValTo
 	 */
-	public void setTempValTo(double tempValTo) {
+	public void setTempValTo(Double tempValTo) {
 		this.tempValTo = tempValTo;
 	}
 	/**

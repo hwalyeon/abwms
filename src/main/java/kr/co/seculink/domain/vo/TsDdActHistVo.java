@@ -11,22 +11,22 @@ public class TsDdActHistVo implements Serializable {
 	private String stndDt;
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* act_cd 활동_코드 character varying(20) */
 	private String actCd;
 
 	/* act_mcnt 활동_분수 numeric(null) */
-	private double actMcnt;
+	private Double actMcnt;
 
 	/* rpet_act_cnt 반복_활동_수 numeric(null) */
-	private double rpetActCnt;
+	private Double rpetActCnt;
 
 	/* acsm_val 활동에너지소모량_값 numeric(null) */
-	private double acsmVal;
+	private Double acsmVal;
 
 	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	private Double judgNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -64,17 +64,17 @@ public class TsDdActHistVo implements Serializable {
 	}
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -94,62 +94,62 @@ public class TsDdActHistVo implements Serializable {
 	}
 	/**
 	 * Get act_mcnt 활동_분수 numeric(null)
-	 * @Return double actMcnt
+	 * @Return Double actMcnt
 	 */
-	public double getActMcnt() {
+	public Double getActMcnt() {
 		return this.actMcnt;
 	}
 	
 	/**
 	 * Set act_mcnt 활동_분수 numeric(null)
-	 * @Param double actMcnt
+	 * @Param Double actMcnt
 	 */
-	public void setActMcnt(double actMcnt) {
+	public void setActMcnt(Double actMcnt) {
 		this.actMcnt = actMcnt;
 	}
 	/**
 	 * Get rpet_act_cnt 반복_활동_수 numeric(null)
-	 * @Return double rpetActCnt
+	 * @Return Double rpetActCnt
 	 */
-	public double getRpetActCnt() {
+	public Double getRpetActCnt() {
 		return this.rpetActCnt;
 	}
 	
 	/**
 	 * Set rpet_act_cnt 반복_활동_수 numeric(null)
-	 * @Param double rpetActCnt
+	 * @Param Double rpetActCnt
 	 */
-	public void setRpetActCnt(double rpetActCnt) {
+	public void setRpetActCnt(Double rpetActCnt) {
 		this.rpetActCnt = rpetActCnt;
 	}
 	/**
 	 * Get acsm_val 활동에너지소모량_값 numeric(null)
-	 * @Return double acsmVal
+	 * @Return Double acsmVal
 	 */
-	public double getAcsmVal() {
+	public Double getAcsmVal() {
 		return this.acsmVal;
 	}
 	
 	/**
 	 * Set acsm_val 활동에너지소모량_값 numeric(null)
-	 * @Param double acsmVal
+	 * @Param Double acsmVal
 	 */
-	public void setAcsmVal(double acsmVal) {
+	public void setAcsmVal(Double acsmVal) {
 		this.acsmVal = acsmVal;
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
+	 * @Return Double judgNo
 	 */
-	public double getJudgNo() {
+	public Double getJudgNo() {
 		return this.judgNo;
 	}
 	
 	/**
 	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
+	 * @Param Double judgNo
 	 */
-	public void setJudgNo(double judgNo) {
+	public void setJudgNo(Double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**

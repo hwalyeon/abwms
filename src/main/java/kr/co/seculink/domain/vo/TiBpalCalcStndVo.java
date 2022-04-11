@@ -11,10 +11,10 @@ public class TiBpalCalcStndVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt_fr 나이_년수_FROM numeric(null) */
-	private double ageYcntFr;
+	private Double ageYcntFr;
 
 	/* age_ycnt_to 나이_년수_TO numeric(null) */
-	private double ageYcntTo;
+	private Double ageYcntTo;
 
 	/* calc_frml 계산_식 character varying(2000) */
 	private String calcFrml;
@@ -55,32 +55,32 @@ public class TiBpalCalcStndVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt_fr 나이_년수_FROM numeric(null)
-	 * @Return double ageYcntFr
+	 * @Return Double ageYcntFr
 	 */
-	public double getAgeYcntFr() {
+	public Double getAgeYcntFr() {
 		return this.ageYcntFr;
 	}
 	
 	/**
 	 * Set age_ycnt_fr 나이_년수_FROM numeric(null)
-	 * @Param double ageYcntFr
+	 * @Param Double ageYcntFr
 	 */
-	public void setAgeYcntFr(double ageYcntFr) {
+	public void setAgeYcntFr(Double ageYcntFr) {
 		this.ageYcntFr = ageYcntFr;
 	}
 	/**
 	 * Get age_ycnt_to 나이_년수_TO numeric(null)
-	 * @Return double ageYcntTo
+	 * @Return Double ageYcntTo
 	 */
-	public double getAgeYcntTo() {
+	public Double getAgeYcntTo() {
 		return this.ageYcntTo;
 	}
 	
 	/**
 	 * Set age_ycnt_to 나이_년수_TO numeric(null)
-	 * @Param double ageYcntTo
+	 * @Param Double ageYcntTo
 	 */
-	public void setAgeYcntTo(double ageYcntTo) {
+	public void setAgeYcntTo(Double ageYcntTo) {
 		this.ageYcntTo = ageYcntTo;
 	}
 	/**

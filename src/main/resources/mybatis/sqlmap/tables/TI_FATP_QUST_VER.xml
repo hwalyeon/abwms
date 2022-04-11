@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FATP_QUST_VER">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiFatpQustVerVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFatpQustVerVo" resultType="kr.co.seculink.domain.vo.TiFatpQustVerVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_ver.select */
         SELECT  qust_ver /* qust_ver 설문_버전 numeric */
                ,rmrk /* rmrk 비고 character varying(100) */
@@ -22,7 +22,7 @@
 		AND    qust_ver = #{qustVer} /* qust_ver 설문_버전 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFatpQustVerVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_ver.insert */
 		INSERT INTO ti_fatp_qust_ver
 		(
@@ -60,7 +60,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFatpQustVerVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_ver.update */
 		UPDATE ti_fatp_qust_ver
 		<trim prefix="SET" prefixOverrides=",">
@@ -77,7 +77,7 @@
 		AND    qust_ver = #{qustVer} /* qust_ver 설문_버전 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFatpQustVerVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_ver.merge */
 		INSERT INTO ti_fatp_qust_ver
 		(
@@ -113,8 +113,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_fatp_qust_ver_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(100) */
@@ -127,7 +127,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFatpQustVerVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_ver.delete */
 		DELETE FROM ti_fatp_qust_ver
 		WHERE  1 = 1

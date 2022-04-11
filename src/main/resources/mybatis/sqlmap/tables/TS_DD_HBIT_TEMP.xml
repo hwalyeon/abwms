@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_HBIT_TEMP">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo" resultType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,stnd_dt /* stnd_dt 기준_일자 character(8) */
@@ -21,7 +21,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.insert */
 		INSERT INTO ts_dd_hbit_temp
 		(
@@ -35,7 +35,7 @@
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
+		     ,#{stndDt} /* stnd_dt 기준_일자 character(8) */
 		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
 		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
 		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
@@ -43,7 +43,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.update */
 		UPDATE ts_dd_hbit_temp
 		<trim prefix="SET" prefixOverrides=",">
@@ -65,7 +65,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.merge */
 		INSERT INTO ts_dd_hbit_temp
 		(
@@ -85,8 +85,8 @@
 		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
 		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_dd_hbit_temp_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="botBlckVal != null">
 		    ,bot_blck_val = #{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
@@ -103,7 +103,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.delete */
 		DELETE FROM ts_dd_hbit_temp
 		WHERE  1 = 1

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_GUAR_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TmGuarBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo" resultType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.select */
         SELECT  guar_no /* guar_no 보호자_번호 numeric */
                ,guar_nm /* guar_nm 보호자_명 character varying(256) */
@@ -45,7 +45,7 @@
 		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.insert */
 		INSERT INTO tm_guar_base
 		(
@@ -173,7 +173,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.update */
 		UPDATE tm_guar_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -259,7 +259,7 @@
 		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.merge */
 		INSERT INTO tm_guar_base
 		(
@@ -385,8 +385,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tm_guar_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="guarNm != null">
 		    ,guar_nm = #{guarNm} /* guar_nm 보호자_명 character varying(256) */
@@ -468,7 +468,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmGuarBaseVo">
 		/* Generated SQL SQL ID : tm_guar_base.delete */
 		DELETE FROM tm_guar_base
 		WHERE  1 = 1

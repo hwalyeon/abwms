@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsLocInfoBaseVo implements Serializable {
 
 	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
+	private Double locNo;
 
 	/* loc_nm 위치_명 character varying(100) */
 	private String locNm;
@@ -19,26 +19,29 @@ public class TsLocInfoBaseVo implements Serializable {
 	/* plc_clss_cd 장소_분류_코드 character varying(20) */
 	private String plcClssCd;
 
+	/* loc_apnt_cd 위치_지정_코드 character varying(20) */
+	private String locApntCd;
+
 	/* lat_val 위도_값 numeric(null) */
-	private double latVal;
+	private Double latVal;
 
 	/* lon_val 경도_값 numeric(null) */
-	private double lonVal;
+	private Double lonVal;
 
 	/* vald_rnge_dist 유효_반경_거리 numeric(null) */
-	private double valdRngeDist;
+	private Double valdRngeDist;
 
 	/* swst_lat_val 남서_위도_값 numeric(null) */
-	private double swstLatVal;
+	private Double swstLatVal;
 
 	/* swst_lon_val 남서_경도_값 numeric(null) */
-	private double swstLonVal;
+	private Double swstLonVal;
 
 	/* nest_lat_val 북동_위도_값 numeric(null) */
-	private double nestLatVal;
+	private Double nestLatVal;
 
 	/* nest_lon_val 북동_경도_값 numeric(null) */
-	private double nestLonVal;
+	private Double nestLonVal;
 
 	/* pstno 우편번호 character varying(10) */
 	private String pstno;
@@ -73,17 +76,17 @@ public class TsLocInfoBaseVo implements Serializable {
 
 	/**
 	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
+	 * @Return Double locNo
 	 */
-	public double getLocNo() {
+	public Double getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
 	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
+	 * @Param Double locNo
 	 */
-	public void setLocNo(double locNo) {
+	public void setLocNo(Double locNo) {
 		this.locNo = locNo;
 	}
 	/**
@@ -132,108 +135,123 @@ public class TsLocInfoBaseVo implements Serializable {
 		this.plcClssCd = plcClssCd;
 	}
 	/**
-	 * Get lat_val 위도_값 numeric(null)
-	 * @Return double latVal
+	 * Get loc_apnt_cd 위치_지정_코드 character varying(20)
+	 * @Return String locApntCd
 	 */
-	public double getLatVal() {
+	public String getLocApntCd() {
+		return this.locApntCd;
+	}
+	
+	/**
+	 * Set loc_apnt_cd 위치_지정_코드 character varying(20)
+	 * @Param String locApntCd
+	 */
+	public void setLocApntCd(String locApntCd) {
+		this.locApntCd = locApntCd;
+	}
+	/**
+	 * Get lat_val 위도_값 numeric(null)
+	 * @Return Double latVal
+	 */
+	public Double getLatVal() {
 		return this.latVal;
 	}
 	
 	/**
 	 * Set lat_val 위도_값 numeric(null)
-	 * @Param double latVal
+	 * @Param Double latVal
 	 */
-	public void setLatVal(double latVal) {
+	public void setLatVal(Double latVal) {
 		this.latVal = latVal;
 	}
 	/**
 	 * Get lon_val 경도_값 numeric(null)
-	 * @Return double lonVal
+	 * @Return Double lonVal
 	 */
-	public double getLonVal() {
+	public Double getLonVal() {
 		return this.lonVal;
 	}
 	
 	/**
 	 * Set lon_val 경도_값 numeric(null)
-	 * @Param double lonVal
+	 * @Param Double lonVal
 	 */
-	public void setLonVal(double lonVal) {
+	public void setLonVal(Double lonVal) {
 		this.lonVal = lonVal;
 	}
 	/**
 	 * Get vald_rnge_dist 유효_반경_거리 numeric(null)
-	 * @Return double valdRngeDist
+	 * @Return Double valdRngeDist
 	 */
-	public double getValdRngeDist() {
+	public Double getValdRngeDist() {
 		return this.valdRngeDist;
 	}
 	
 	/**
 	 * Set vald_rnge_dist 유효_반경_거리 numeric(null)
-	 * @Param double valdRngeDist
+	 * @Param Double valdRngeDist
 	 */
-	public void setValdRngeDist(double valdRngeDist) {
+	public void setValdRngeDist(Double valdRngeDist) {
 		this.valdRngeDist = valdRngeDist;
 	}
 	/**
 	 * Get swst_lat_val 남서_위도_값 numeric(null)
-	 * @Return double swstLatVal
+	 * @Return Double swstLatVal
 	 */
-	public double getSwstLatVal() {
+	public Double getSwstLatVal() {
 		return this.swstLatVal;
 	}
 	
 	/**
 	 * Set swst_lat_val 남서_위도_값 numeric(null)
-	 * @Param double swstLatVal
+	 * @Param Double swstLatVal
 	 */
-	public void setSwstLatVal(double swstLatVal) {
+	public void setSwstLatVal(Double swstLatVal) {
 		this.swstLatVal = swstLatVal;
 	}
 	/**
 	 * Get swst_lon_val 남서_경도_값 numeric(null)
-	 * @Return double swstLonVal
+	 * @Return Double swstLonVal
 	 */
-	public double getSwstLonVal() {
+	public Double getSwstLonVal() {
 		return this.swstLonVal;
 	}
 	
 	/**
 	 * Set swst_lon_val 남서_경도_값 numeric(null)
-	 * @Param double swstLonVal
+	 * @Param Double swstLonVal
 	 */
-	public void setSwstLonVal(double swstLonVal) {
+	public void setSwstLonVal(Double swstLonVal) {
 		this.swstLonVal = swstLonVal;
 	}
 	/**
 	 * Get nest_lat_val 북동_위도_값 numeric(null)
-	 * @Return double nestLatVal
+	 * @Return Double nestLatVal
 	 */
-	public double getNestLatVal() {
+	public Double getNestLatVal() {
 		return this.nestLatVal;
 	}
 	
 	/**
 	 * Set nest_lat_val 북동_위도_값 numeric(null)
-	 * @Param double nestLatVal
+	 * @Param Double nestLatVal
 	 */
-	public void setNestLatVal(double nestLatVal) {
+	public void setNestLatVal(Double nestLatVal) {
 		this.nestLatVal = nestLatVal;
 	}
 	/**
 	 * Get nest_lon_val 북동_경도_값 numeric(null)
-	 * @Return double nestLonVal
+	 * @Return Double nestLonVal
 	 */
-	public double getNestLonVal() {
+	public Double getNestLonVal() {
 		return this.nestLonVal;
 	}
 	
 	/**
 	 * Set nest_lon_val 북동_경도_값 numeric(null)
-	 * @Param double nestLonVal
+	 * @Param Double nestLonVal
 	 */
-	public void setNestLonVal(double nestLonVal) {
+	public void setNestLonVal(Double nestLonVal) {
 		this.nestLonVal = nestLonVal;
 	}
 	/**

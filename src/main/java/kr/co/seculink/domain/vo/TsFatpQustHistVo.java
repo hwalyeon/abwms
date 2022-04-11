@@ -7,26 +7,26 @@ import java.io.Serializable;
  */
 public class TsFatpQustHistVo implements Serializable {
 
+	/* stdt_no 학생_번호 numeric(null) */
+	private Double stdtNo;
+
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
 
-	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
-
 	/* qust_ver 설문_버전 numeric(null) */
-	private double qustVer;
+	private Double qustVer;
 
 	/* qust_no 질문_번호 numeric(null) */
-	private double qustNo;
+	private Double qustNo;
 
 	/* ans_seq 답변_순번 numeric(null) */
-	private double ansSeq;
-
-	/* reg_dt 등록_일자 character(8) */
-	private String regDt;
+	private Double ansSeq;
 
 	/* ans_val 답변_값 character varying(20) */
 	private String ansVal;
+
+	/* reg_dt 등록_일자 character(8) */
+	private String regDt;
 
 	/* reg_tm 등록_시각 character(6) */
 	private String regTm;
@@ -45,6 +45,21 @@ public class TsFatpQustHistVo implements Serializable {
 
 
 	/**
+	 * Get stdt_no 학생_번호 numeric(null)
+	 * @Return Double stdtNo
+	 */
+	public Double getStdtNo() {
+		return this.stdtNo;
+	}
+	
+	/**
+	 * Set stdt_no 학생_번호 numeric(null)
+	 * @Param Double stdtNo
+	 */
+	public void setStdtNo(Double stdtNo) {
+		this.stdtNo = stdtNo;
+	}
+	/**
 	 * Get stnd_dt 기준_일자 character(8)
 	 * @Return String stndDt
 	 */
@@ -60,79 +75,49 @@ public class TsFatpQustHistVo implements Serializable {
 		this.stndDt = stndDt;
 	}
 	/**
-	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
-	 */
-	public double getStdtNo() {
-		return this.stdtNo;
-	}
-	
-	/**
-	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
-	 */
-	public void setStdtNo(double stdtNo) {
-		this.stdtNo = stdtNo;
-	}
-	/**
 	 * Get qust_ver 설문_버전 numeric(null)
-	 * @Return double qustVer
+	 * @Return Double qustVer
 	 */
-	public double getQustVer() {
+	public Double getQustVer() {
 		return this.qustVer;
 	}
 	
 	/**
 	 * Set qust_ver 설문_버전 numeric(null)
-	 * @Param double qustVer
+	 * @Param Double qustVer
 	 */
-	public void setQustVer(double qustVer) {
+	public void setQustVer(Double qustVer) {
 		this.qustVer = qustVer;
 	}
 	/**
 	 * Get qust_no 질문_번호 numeric(null)
-	 * @Return double qustNo
+	 * @Return Double qustNo
 	 */
-	public double getQustNo() {
+	public Double getQustNo() {
 		return this.qustNo;
 	}
 	
 	/**
 	 * Set qust_no 질문_번호 numeric(null)
-	 * @Param double qustNo
+	 * @Param Double qustNo
 	 */
-	public void setQustNo(double qustNo) {
+	public void setQustNo(Double qustNo) {
 		this.qustNo = qustNo;
 	}
 	/**
 	 * Get ans_seq 답변_순번 numeric(null)
-	 * @Return double ansSeq
+	 * @Return Double ansSeq
 	 */
-	public double getAnsSeq() {
+	public Double getAnsSeq() {
 		return this.ansSeq;
 	}
 	
 	/**
 	 * Set ans_seq 답변_순번 numeric(null)
-	 * @Param double ansSeq
+	 * @Param Double ansSeq
 	 */
-	public void setAnsSeq(double ansSeq) {
+	public void setAnsSeq(Double ansSeq) {
 		this.ansSeq = ansSeq;
-	}
-	/**
-	 * Get reg_dt 등록_일자 character(8)
-	 * @Return String regDt
-	 */
-	public String getRegDt() {
-		return this.regDt;
-	}
-	
-	/**
-	 * Set reg_dt 등록_일자 character(8)
-	 * @Param String regDt
-	 */
-	public void setRegDt(String regDt) {
-		this.regDt = regDt;
 	}
 	/**
 	 * Get ans_val 답변_값 character varying(20)
@@ -148,6 +133,21 @@ public class TsFatpQustHistVo implements Serializable {
 	 */
 	public void setAnsVal(String ansVal) {
 		this.ansVal = ansVal;
+	}
+	/**
+	 * Get reg_dt 등록_일자 character(8)
+	 * @Return String regDt
+	 */
+	public String getRegDt() {
+		return this.regDt;
+	}
+	
+	/**
+	 * Set reg_dt 등록_일자 character(8)
+	 * @Param String regDt
+	 */
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
 	}
 	/**
 	 * Get reg_tm 등록_시각 character(6)

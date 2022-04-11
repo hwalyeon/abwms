@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FATP_QUST_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiFatpQustBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFatpQustBaseVo" resultType="kr.co.seculink.domain.vo.TiFatpQustBaseVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_base.select */
         SELECT  qust_ver /* qust_ver 설문_버전 numeric */
                ,qust_no /* qust_no 질문_번호 numeric */
@@ -24,7 +24,7 @@
 		AND    qust_no = #{qustNo} /* qust_no 질문_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFatpQustBaseVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_base.insert */
 		INSERT INTO ti_fatp_qust_base
 		(
@@ -47,7 +47,7 @@
 		VALUES
 		(
 		     #{qustVer} /* qust_ver 설문_버전 numeric */
-		     #{qustNo} /* qust_no 질문_번호 numeric */
+		     ,#{qustNo} /* qust_no 질문_번호 numeric */
 		<if test="qustCntn != null">
 		    ,#{qustCntn} /* qust_cntn 설문_내용 character varying(200) */
 		</if>
@@ -64,7 +64,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFatpQustBaseVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_base.update */
 		UPDATE ti_fatp_qust_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -82,7 +82,7 @@
 		AND    qust_no = #{qustNo} /* qust_no 질문_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFatpQustBaseVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_base.merge */
 		INSERT INTO ti_fatp_qust_base
 		(
@@ -120,8 +120,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_fatp_qust_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="qustCntn != null">
 		    ,qust_cntn = #{qustCntn} /* qust_cntn 설문_내용 character varying(200) */
@@ -134,7 +134,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFatpQustBaseVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_base.delete */
 		DELETE FROM ti_fatp_qust_base
 		WHERE  1 = 1

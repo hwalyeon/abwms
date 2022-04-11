@@ -8,13 +8,13 @@ import java.io.Serializable;
 public class TmTermAgreDetlVo implements Serializable {
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* term_div_cd 약관_구분_코드 character varying(20) */
 	private String termDivCd;
 
 	/* term_ver 약관_버전 numeric(null) */
-	private double termVer;
+	private Double termVer;
 
 	/* term_agre_yn 약관_동의_여부 character(1) */
 	private String termAgreYn;
@@ -43,17 +43,17 @@ public class TmTermAgreDetlVo implements Serializable {
 
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**
@@ -73,17 +73,17 @@ public class TmTermAgreDetlVo implements Serializable {
 	}
 	/**
 	 * Get term_ver 약관_버전 numeric(null)
-	 * @Return double termVer
+	 * @Return Double termVer
 	 */
-	public double getTermVer() {
+	public Double getTermVer() {
 		return this.termVer;
 	}
 	
 	/**
 	 * Set term_ver 약관_버전 numeric(null)
-	 * @Param double termVer
+	 * @Param Double termVer
 	 */
-	public void setTermVer(double termVer) {
+	public void setTermVer(Double termVer) {
 		this.termVer = termVer;
 	}
 	/**

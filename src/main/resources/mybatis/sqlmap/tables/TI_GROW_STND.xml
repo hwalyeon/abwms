@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_GROW_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiGrowStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiGrowStndVo" resultType="kr.co.seculink.domain.vo.TiGrowStndVo">
 		/* Generated SQL SQL ID : ti_grow_stnd.select */
         SELECT  grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(500) */
                ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
@@ -29,7 +29,7 @@
 		AND    grow_stnd_no = #{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiGrowStndVo">
 		/* Generated SQL SQL ID : ti_grow_stnd.insert */
 		INSERT INTO ti_grow_stnd
 		(
@@ -53,7 +53,7 @@
 		VALUES
 		(
 		     #{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(500) */
-		     #{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
+		     ,#{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
 		<if test="sexCd != null">
 		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
@@ -71,7 +71,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiGrowStndVo">
 		/* Generated SQL SQL ID : ti_grow_stnd.update */
 		UPDATE ti_grow_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -104,7 +104,7 @@
 		AND    grow_stnd_no = #{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiGrowStndVo">
 		/* Generated SQL SQL ID : ti_grow_stnd.merge */
 		INSERT INTO ti_grow_stnd
 		(
@@ -144,8 +144,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_grow_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="sexCd != null">
 		    ,sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
@@ -173,7 +173,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiGrowStndVo">
 		/* Generated SQL SQL ID : ti_grow_stnd.delete */
 		DELETE FROM ti_grow_stnd
 		WHERE  1 = 1

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_DD_NUTR_EAT_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiDdNutrEatStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatStndVo" resultType="kr.co.seculink.domain.vo.TiDdNutrEatStndVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_stnd.select */
         SELECT  sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
@@ -27,7 +27,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiDdNutrEatStndVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_stnd.insert */
 		INSERT INTO ti_dd_nutr_eat_stnd
 		(
@@ -46,8 +46,8 @@
 		VALUES
 		(
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		     #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
+		     ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		     ,#{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 		    ,#{ddRcmdQty} /* dd_rcmd_qty 일_권장_량 numeric */
 		    ,#{ddNeedQty} /* dd_need_qty 일_필요_량 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
@@ -59,7 +59,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatStndVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_stnd.update */
 		UPDATE ti_dd_nutr_eat_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -81,7 +81,7 @@
 		AND    nutr_cd = #{nutrCd} /* nutr_cd 영양소_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiDdNutrEatStndVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_stnd.merge */
 		INSERT INTO ti_dd_nutr_eat_stnd
 		(
@@ -111,8 +111,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_dd_nutr_eat_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="ddRcmdQty != null">
 		    ,dd_rcmd_qty = #{ddRcmdQty} /* dd_rcmd_qty 일_권장_량 numeric */
@@ -128,7 +128,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiDdNutrEatStndVo">
 		/* Generated SQL SQL ID : ti_dd_nutr_eat_stnd.delete */
 		DELETE FROM ti_dd_nutr_eat_stnd
 		WHERE  1 = 1

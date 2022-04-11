@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TmPrntBaseVo implements Serializable {
 
 	/* prnt_no 학부모_번호 numeric(null) */
-	private double prntNo;
+	private Double prntNo;
 
 	/* sex_cd 성별_코드 character varying(20) */
 	private String sexCd;
@@ -17,13 +17,13 @@ public class TmPrntBaseVo implements Serializable {
 	private String prntNm;
 
 	/* hght_val 키_값 numeric(null) */
-	private double hghtVal;
+	private Double hghtVal;
 
 	/* wght_val 체중_값 numeric(null) */
-	private double wghtVal;
+	private Double wghtVal;
 
 	/* bmi_val BMI_값 numeric(null) */
-	private double bmiVal;
+	private Double bmiVal;
 
 	/* race_div_cd 인종_구분_코드 character varying(20) */
 	private String raceDivCd;
@@ -49,17 +49,17 @@ public class TmPrntBaseVo implements Serializable {
 
 	/**
 	 * Get prnt_no 학부모_번호 numeric(null)
-	 * @Return double prntNo
+	 * @Return Double prntNo
 	 */
-	public double getPrntNo() {
+	public Double getPrntNo() {
 		return this.prntNo;
 	}
 	
 	/**
 	 * Set prnt_no 학부모_번호 numeric(null)
-	 * @Param double prntNo
+	 * @Param Double prntNo
 	 */
-	public void setPrntNo(double prntNo) {
+	public void setPrntNo(Double prntNo) {
 		this.prntNo = prntNo;
 	}
 	/**
@@ -94,47 +94,47 @@ public class TmPrntBaseVo implements Serializable {
 	}
 	/**
 	 * Get hght_val 키_값 numeric(null)
-	 * @Return double hghtVal
+	 * @Return Double hghtVal
 	 */
-	public double getHghtVal() {
+	public Double getHghtVal() {
 		return this.hghtVal;
 	}
 	
 	/**
 	 * Set hght_val 키_값 numeric(null)
-	 * @Param double hghtVal
+	 * @Param Double hghtVal
 	 */
-	public void setHghtVal(double hghtVal) {
+	public void setHghtVal(Double hghtVal) {
 		this.hghtVal = hghtVal;
 	}
 	/**
 	 * Get wght_val 체중_값 numeric(null)
-	 * @Return double wghtVal
+	 * @Return Double wghtVal
 	 */
-	public double getWghtVal() {
+	public Double getWghtVal() {
 		return this.wghtVal;
 	}
 	
 	/**
 	 * Set wght_val 체중_값 numeric(null)
-	 * @Param double wghtVal
+	 * @Param Double wghtVal
 	 */
-	public void setWghtVal(double wghtVal) {
+	public void setWghtVal(Double wghtVal) {
 		this.wghtVal = wghtVal;
 	}
 	/**
 	 * Get bmi_val BMI_값 numeric(null)
-	 * @Return double bmiVal
+	 * @Return Double bmiVal
 	 */
-	public double getBmiVal() {
+	public Double getBmiVal() {
 		return this.bmiVal;
 	}
 	
 	/**
 	 * Set bmi_val BMI_값 numeric(null)
-	 * @Param double bmiVal
+	 * @Param Double bmiVal
 	 */
-	public void setBmiVal(double bmiVal) {
+	public void setBmiVal(Double bmiVal) {
 		this.bmiVal = bmiVal;
 	}
 	/**

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FAT_ACT_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiFatActStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFatActStndVo" resultType="kr.co.seculink.domain.vo.TiFatActStndVo">
 		/* Generated SQL SQL ID : ti_fat_act_stnd.select */
         SELECT  fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
                ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
@@ -26,7 +26,7 @@
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFatActStndVo">
 		/* Generated SQL SQL ID : ti_fat_act_stnd.insert */
 		INSERT INTO ti_fat_act_stnd
 		(
@@ -50,8 +50,8 @@
 		VALUES
 		(
 		     #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
-		     #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
-		     #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
+		     ,#{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+		     ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		<if test="fatActRmrk != null">
 		    ,#{fatActRmrk} /* fat_act_rmrk 비만_활동_비고 text */
 		</if>
@@ -68,7 +68,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFatActStndVo">
 		/* Generated SQL SQL ID : ti_fat_act_stnd.update */
 		UPDATE ti_fat_act_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -87,7 +87,7 @@
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFatActStndVo">
 		/* Generated SQL SQL ID : ti_fat_act_stnd.merge */
 		INSERT INTO ti_fat_act_stnd
 		(
@@ -127,8 +127,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_fat_act_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="fatActRmrk != null">
 		    ,fat_act_rmrk = #{fatActRmrk} /* fat_act_rmrk 비만_활동_비고 text */
@@ -141,7 +141,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFatActStndVo">
 		/* Generated SQL SQL ID : ti_fat_act_stnd.delete */
 		DELETE FROM ti_fat_act_stnd
 		WHERE  1 = 1

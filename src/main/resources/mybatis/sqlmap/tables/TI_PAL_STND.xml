@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_PAL_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiPalStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiPalStndVo" resultType="kr.co.seculink.domain.vo.TiPalStndVo">
 		/* Generated SQL SQL ID : ti_pal_stnd.select */
         SELECT  pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
                ,pal_nm /* pal_nm 신체활동수준_명 character varying(30) */
@@ -25,7 +25,7 @@
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
 		/* Generated SQL SQL ID : ti_pal_stnd.insert */
 		INSERT INTO ti_pal_stnd
 		(
@@ -73,7 +73,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
 		/* Generated SQL SQL ID : ti_pal_stnd.update */
 		UPDATE ti_pal_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -99,7 +99,7 @@
 		AND    pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
 		/* Generated SQL SQL ID : ti_pal_stnd.merge */
 		INSERT INTO ti_pal_stnd
 		(
@@ -145,8 +145,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_pal_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="palNm != null">
 		    ,pal_nm = #{palNm} /* pal_nm 신체활동수준_명 character varying(30) */
@@ -168,7 +168,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiPalStndVo">
 		/* Generated SQL SQL ID : ti_pal_stnd.delete */
 		DELETE FROM ti_pal_stnd
 		WHERE  1 = 1

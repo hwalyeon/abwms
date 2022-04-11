@@ -7,12 +7,13 @@
 -->
 <mapper namespace="TT_NEAT_STSS">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TtNeatStssVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TtNeatStssVo" resultType="kr.co.seculink.domain.vo.TtNeatStssVo">
 		/* Generated SQL SQL ID : tt_neat_stss.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
                ,etim_div_cd /* etim_div_cd 식때_구분_코드 character varying(20) */
+               ,eagr_div_cd /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
                ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
                ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
                ,week_nm /* week_nm 요일_명 character varying(10) */
@@ -30,9 +31,10 @@
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    etim_div_cd = #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
+		AND    eagr_div_cd = #{eagrDivCd} /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TtNeatStssVo">
 		/* Generated SQL SQL ID : tt_neat_stss.insert */
 		INSERT INTO tt_neat_stss
 		(
@@ -40,6 +42,7 @@
 		    ,sex_cd /* sex_cd 성별_코드 character varying(20) */
 		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
 		    ,etim_div_cd /* etim_div_cd 식때_구분_코드 character varying(20) */
+		    ,eagr_div_cd /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -63,9 +66,10 @@
 		VALUES
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
-		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		     #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
+		     ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		     ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		     ,#{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
+		     ,#{eagrDivCd} /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -88,7 +92,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TtNeatStssVo">
 		/* Generated SQL SQL ID : tt_neat_stss.update */
 		UPDATE tt_neat_stss
 		<trim prefix="SET" prefixOverrides=",">
@@ -118,9 +122,10 @@
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    etim_div_cd = #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
+		AND    eagr_div_cd = #{eagrDivCd} /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TtNeatStssVo">
 		/* Generated SQL SQL ID : tt_neat_stss.merge */
 		INSERT INTO tt_neat_stss
 		(
@@ -128,6 +133,7 @@
 		     sex_cd /* sex_cd 성별_코드 character varying(20) */
 		     age_ycnt /* age_ycnt 나이_년수 numeric */
 		     etim_div_cd /* etim_div_cd 식때_구분_코드 character varying(20) */
+		     eagr_div_cd /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -154,6 +160,7 @@
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		     #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
+		     #{eagrDivCd} /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -174,8 +181,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tt_neat_stss_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="stndYymm != null">
 		    ,stnd_yymm = #{stndYymm} /* stnd_yymm 기준_년월 character(6) */
@@ -200,7 +207,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TtNeatStssVo">
 		/* Generated SQL SQL ID : tt_neat_stss.delete */
 		DELETE FROM tt_neat_stss
 		WHERE  1 = 1
@@ -208,5 +215,6 @@
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    etim_div_cd = #{etimDivCd} /* etim_div_cd 식때_구분_코드 character varying(20) */
+		AND    eagr_div_cd = #{eagrDivCd} /* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
 	</delete>
 </mapper>

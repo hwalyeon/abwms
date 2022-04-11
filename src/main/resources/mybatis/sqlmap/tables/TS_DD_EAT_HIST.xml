@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_EAT_HIST">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdEatHistVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo" resultType="kr.co.seculink.domain.vo.TsDdEatHistVo">
 		/* Generated SQL SQL ID : ts_dd_eat_hist.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,stdt_no /* stdt_no 학생_번호 numeric */
@@ -29,7 +29,7 @@
 		AND    eat_seq = #{eatSeq} /* eat_seq 섭취_순번 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
 		/* Generated SQL SQL ID : ts_dd_eat_hist.insert */
 		INSERT INTO ts_dd_eat_hist
 		(
@@ -60,8 +60,8 @@
 		VALUES
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
-		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{eatSeq} /* eat_seq 섭취_순번 numeric */
+		     ,#{stdtNo} /* stdt_no 학생_번호 numeric */
+		     ,#{eatSeq} /* eat_seq 섭취_순번 numeric */
 		<if test="guarNo != null">
 		    ,#{guarNo} /* guar_no 보호자_번호 numeric */
 		</if>
@@ -85,7 +85,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
 		/* Generated SQL SQL ID : ts_dd_eat_hist.update */
 		UPDATE ts_dd_eat_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -113,7 +113,7 @@
 		AND    eat_seq = #{eatSeq} /* eat_seq 섭취_순번 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
 		/* Generated SQL SQL ID : ts_dd_eat_hist.merge */
 		INSERT INTO ts_dd_eat_hist
 		(
@@ -167,8 +167,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_dd_eat_hist_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="guarNo != null">
 		    ,guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
@@ -190,7 +190,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
 		/* Generated SQL SQL ID : ts_dd_eat_hist.delete */
 		DELETE FROM ts_dd_eat_hist
 		WHERE  1 = 1

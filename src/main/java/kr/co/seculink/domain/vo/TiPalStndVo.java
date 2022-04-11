@@ -14,10 +14,10 @@ public class TiPalStndVo implements Serializable {
 	private String palNm;
 
 	/* pal_val_fr 신체활동수준_값_FROM numeric(null) */
-	private double palValFr;
+	private Double palValFr;
 
 	/* pal_val_to 신체활동수준_값_TO numeric(null) */
-	private double palValTo;
+	private Double palValTo;
 
 	/* pal_eat_rmrk 신체활동수준_섭취_비고 character varying(4000) */
 	private String palEatRmrk;
@@ -73,32 +73,32 @@ public class TiPalStndVo implements Serializable {
 	}
 	/**
 	 * Get pal_val_fr 신체활동수준_값_FROM numeric(null)
-	 * @Return double palValFr
+	 * @Return Double palValFr
 	 */
-	public double getPalValFr() {
+	public Double getPalValFr() {
 		return this.palValFr;
 	}
 	
 	/**
 	 * Set pal_val_fr 신체활동수준_값_FROM numeric(null)
-	 * @Param double palValFr
+	 * @Param Double palValFr
 	 */
-	public void setPalValFr(double palValFr) {
+	public void setPalValFr(Double palValFr) {
 		this.palValFr = palValFr;
 	}
 	/**
 	 * Get pal_val_to 신체활동수준_값_TO numeric(null)
-	 * @Return double palValTo
+	 * @Return Double palValTo
 	 */
-	public double getPalValTo() {
+	public Double getPalValTo() {
 		return this.palValTo;
 	}
 	
 	/**
 	 * Set pal_val_to 신체활동수준_값_TO numeric(null)
-	 * @Param double palValTo
+	 * @Param Double palValTo
 	 */
-	public void setPalValTo(double palValTo) {
+	public void setPalValTo(Double palValTo) {
 		this.palValTo = palValTo;
 	}
 	/**

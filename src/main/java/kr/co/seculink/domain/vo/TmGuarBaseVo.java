@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TmGuarBaseVo implements Serializable {
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* guar_nm 보호자_명 character varying(256) */
 	private String guarNm;
@@ -32,7 +32,7 @@ public class TmGuarBaseVo implements Serializable {
 	private String fcmToknVal;
 
 	/* prnt_no 학부모_번호 numeric(null) */
-	private double prntNo;
+	private Double prntNo;
 
 	/* dzone_alam_yn 위험지역_알림_여부 character(1) */
 	private String dzoneAlamYn;
@@ -103,17 +103,17 @@ public class TmGuarBaseVo implements Serializable {
 
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**
@@ -223,17 +223,17 @@ public class TmGuarBaseVo implements Serializable {
 	}
 	/**
 	 * Get prnt_no 학부모_번호 numeric(null)
-	 * @Return double prntNo
+	 * @Return Double prntNo
 	 */
-	public double getPrntNo() {
+	public Double getPrntNo() {
 		return this.prntNo;
 	}
 	
 	/**
 	 * Set prnt_no 학부모_번호 numeric(null)
-	 * @Param double prntNo
+	 * @Param Double prntNo
 	 */
-	public void setPrntNo(double prntNo) {
+	public void setPrntNo(Double prntNo) {
 		this.prntNo = prntNo;
 	}
 	/**

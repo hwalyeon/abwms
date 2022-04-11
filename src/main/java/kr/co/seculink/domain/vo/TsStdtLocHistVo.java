@@ -8,22 +8,22 @@ import java.io.Serializable;
 public class TsStdtLocHistVo implements Serializable {
 
 	/* loc_hist_no 위치_이력_번호 numeric(null) */
-	private double locHistNo;
+	private Double locHistNo;
 
 	/* loc_nm 위치_명 character varying(200) */
 	private String locNm;
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* occr_dttm 발생_일시 character(14) */
 	private String occrDttm;
 
 	/* lat_val 위도_값 numeric(null) */
-	private double latVal;
+	private Double latVal;
 
 	/* lon_val 경도_값 numeric(null) */
-	private double lonVal;
+	private Double lonVal;
 
 	/* plc_cd 장소_코드 character varying(20) */
 	private String plcCd;
@@ -32,7 +32,7 @@ public class TsStdtLocHistVo implements Serializable {
 	private String plcClssCd;
 
 	/* near_loc_no 인근_위치_번호 numeric(null) */
-	private double nearLocNo;
+	private Double nearLocNo;
 
 	/* enl_div_cd 등하원_구분_코드 character varying(20) */
 	private String enlDivCd;
@@ -41,10 +41,10 @@ public class TsStdtLocHistVo implements Serializable {
 	private String bleId;
 
 	/* loc_alam_no 위치_알림_번호 numeric(null) */
-	private double locAlamNo;
+	private Double locAlamNo;
 
 	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	private Double judgNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -67,17 +67,17 @@ public class TsStdtLocHistVo implements Serializable {
 
 	/**
 	 * Get loc_hist_no 위치_이력_번호 numeric(null)
-	 * @Return double locHistNo
+	 * @Return Double locHistNo
 	 */
-	public double getLocHistNo() {
+	public Double getLocHistNo() {
 		return this.locHistNo;
 	}
 	
 	/**
 	 * Set loc_hist_no 위치_이력_번호 numeric(null)
-	 * @Param double locHistNo
+	 * @Param Double locHistNo
 	 */
-	public void setLocHistNo(double locHistNo) {
+	public void setLocHistNo(Double locHistNo) {
 		this.locHistNo = locHistNo;
 	}
 	/**
@@ -97,17 +97,17 @@ public class TsStdtLocHistVo implements Serializable {
 	}
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -127,32 +127,32 @@ public class TsStdtLocHistVo implements Serializable {
 	}
 	/**
 	 * Get lat_val 위도_값 numeric(null)
-	 * @Return double latVal
+	 * @Return Double latVal
 	 */
-	public double getLatVal() {
+	public Double getLatVal() {
 		return this.latVal;
 	}
 	
 	/**
 	 * Set lat_val 위도_값 numeric(null)
-	 * @Param double latVal
+	 * @Param Double latVal
 	 */
-	public void setLatVal(double latVal) {
+	public void setLatVal(Double latVal) {
 		this.latVal = latVal;
 	}
 	/**
 	 * Get lon_val 경도_값 numeric(null)
-	 * @Return double lonVal
+	 * @Return Double lonVal
 	 */
-	public double getLonVal() {
+	public Double getLonVal() {
 		return this.lonVal;
 	}
 	
 	/**
 	 * Set lon_val 경도_값 numeric(null)
-	 * @Param double lonVal
+	 * @Param Double lonVal
 	 */
-	public void setLonVal(double lonVal) {
+	public void setLonVal(Double lonVal) {
 		this.lonVal = lonVal;
 	}
 	/**
@@ -187,17 +187,17 @@ public class TsStdtLocHistVo implements Serializable {
 	}
 	/**
 	 * Get near_loc_no 인근_위치_번호 numeric(null)
-	 * @Return double nearLocNo
+	 * @Return Double nearLocNo
 	 */
-	public double getNearLocNo() {
+	public Double getNearLocNo() {
 		return this.nearLocNo;
 	}
 	
 	/**
 	 * Set near_loc_no 인근_위치_번호 numeric(null)
-	 * @Param double nearLocNo
+	 * @Param Double nearLocNo
 	 */
-	public void setNearLocNo(double nearLocNo) {
+	public void setNearLocNo(Double nearLocNo) {
 		this.nearLocNo = nearLocNo;
 	}
 	/**
@@ -232,32 +232,32 @@ public class TsStdtLocHistVo implements Serializable {
 	}
 	/**
 	 * Get loc_alam_no 위치_알림_번호 numeric(null)
-	 * @Return double locAlamNo
+	 * @Return Double locAlamNo
 	 */
-	public double getLocAlamNo() {
+	public Double getLocAlamNo() {
 		return this.locAlamNo;
 	}
 	
 	/**
 	 * Set loc_alam_no 위치_알림_번호 numeric(null)
-	 * @Param double locAlamNo
+	 * @Param Double locAlamNo
 	 */
-	public void setLocAlamNo(double locAlamNo) {
+	public void setLocAlamNo(Double locAlamNo) {
 		this.locAlamNo = locAlamNo;
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
+	 * @Return Double judgNo
 	 */
-	public double getJudgNo() {
+	public Double getJudgNo() {
 		return this.judgNo;
 	}
 	
 	/**
 	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
+	 * @Param Double judgNo
 	 */
-	public void setJudgNo(double judgNo) {
+	public void setJudgNo(Double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_STDT_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TmStdtBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo" resultType="kr.co.seculink.domain.vo.TmStdtBaseVo">
 		/* Generated SQL SQL ID : tm_stdt_base.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,stdt_nm /* stdt_nm 학생_명 character varying(256) */
@@ -47,7 +47,7 @@
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
 		/* Generated SQL SQL ID : tm_stdt_base.insert */
 		INSERT INTO tm_stdt_base
 		(
@@ -227,7 +227,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
 		/* Generated SQL SQL ID : tm_stdt_base.update */
 		UPDATE tm_stdt_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -319,7 +319,7 @@
 		AND    stdt_no = #{stdtNo} /* stdt_no 학생_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
 		/* Generated SQL SQL ID : tm_stdt_base.merge */
 		INSERT INTO tm_stdt_base
 		(
@@ -497,8 +497,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tm_stdt_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="stdtNm != null">
 		    ,stdt_nm = #{stdtNm} /* stdt_nm 학생_명 character varying(256) */
@@ -586,7 +586,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmStdtBaseVo">
 		/* Generated SQL SQL ID : tm_stdt_base.delete */
 		DELETE FROM tm_stdt_base
 		WHERE  1 = 1

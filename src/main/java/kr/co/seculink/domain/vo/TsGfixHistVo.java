@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsGfixHistVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* gfix_dt 성장비만지수_일자 character(8) */
 	private String gfixDt;
@@ -17,55 +17,55 @@ public class TsGfixHistVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* age_mcnt 나이_개월수 numeric(null) */
-	private double ageMcnt;
+	private Double ageMcnt;
 
 	/* hght_val 키_값 numeric(null) */
-	private double hghtVal;
+	private Double hghtVal;
 
 	/* wght_val 몸무게_값 numeric(null) */
-	private double wghtVal;
+	private Double wghtVal;
 
 	/* bmi_val BMI_값 numeric(null) */
-	private double bmiVal;
+	private Double bmiVal;
 
 	/* wast_size 허리_사이즈 numeric(null) */
-	private double wastSize;
+	private Double wastSize;
 
 	/* cal_eat_qty 칼로리_섭취_량 numeric(null) */
-	private double calEatQty;
+	private Double calEatQty;
 
 	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
-	private double calCsumQty;
+	private Double calCsumQty;
 
 	/* mom_hght_val 엄마_키_값 numeric(null) */
-	private double momHghtVal;
+	private Double momHghtVal;
 
 	/* mom_wght_val 엄마_몸무게_값 numeric(null) */
-	private double momWghtVal;
+	private Double momWghtVal;
 
 	/* mom_bmi_val 엄마_BMI_값 numeric(null) */
-	private double momBmiVal;
+	private Double momBmiVal;
 
 	/* dad_hght_val 아빠_키_값 numeric(null) */
-	private double dadHghtVal;
+	private Double dadHghtVal;
 
 	/* dad_wght_val 아빠_몸무게_값 numeric(null) */
-	private double dadWghtVal;
+	private Double dadWghtVal;
 
 	/* dad_bmi_val 아빠_BMI_값 numeric(null) */
-	private double dadBmiVal;
+	private Double dadBmiVal;
 
 	/* grow_stnd_ver 성장_기준_버전 character varying(20) */
 	private String growStndVer;
 
 	/* grow_stnd_no 성장_기준_번호 numeric(null) */
-	private double growStndNo;
+	private Double growStndNo;
 
 	/* gidx 성장지수 numeric(null) */
-	private double gidx;
+	private Double gidx;
 
 	/* grow_judg_cd 성장_판정_코드 character varying(20) */
 	private String growJudgCd;
@@ -74,7 +74,7 @@ public class TsGfixHistVo implements Serializable {
 	private String growJudgDesc;
 
 	/* grow_prdt_idx 성장_예측_지수 numeric(null) */
-	private double growPrdtIdx;
+	private Double growPrdtIdx;
 
 	/* grow_prdt_cd 성장_예측_코드 character varying(20) */
 	private String growPrdtCd;
@@ -86,13 +86,13 @@ public class TsGfixHistVo implements Serializable {
 	private String fatStndVer;
 
 	/* fat_stnd_no 비만_기준_번호 numeric(null) */
-	private double fatStndNo;
+	private Double fatStndNo;
 
 	/* nutr_eat_qty 영양소_섭취_량 numeric(null) */
-	private double nutrEatQty;
+	private Double nutrEatQty;
 
 	/* fidx 비만지수 numeric(null) */
-	private double fidx;
+	private Double fidx;
 
 	/* fat_judg_cd 비만_판정_코드 character varying(20) */
 	private String fatJudgCd;
@@ -101,10 +101,10 @@ public class TsGfixHistVo implements Serializable {
 	private String fatJudgDesc;
 
 	/* fatp_bmi_val 비만예측_BMI_값 numeric(null) */
-	private double fatpBmiVal;
+	private Double fatpBmiVal;
 
 	/* fatp_idx 비만예측_지수 numeric(null) */
-	private double fatpIdx;
+	private Double fatpIdx;
 
 	/* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 	private String fatpJudgCd;
@@ -113,13 +113,13 @@ public class TsGfixHistVo implements Serializable {
 	private String fatpJudgDesc;
 
 	/* pal_val 신체활동수준_값 numeric(null) */
-	private double palVal;
+	private Double palVal;
 
 	/* bcsm_val 기초에너지소모량_값 numeric(null) */
-	private double bcsmVal;
+	private Double bcsmVal;
 
 	/* acsm_val 활동에너지소모량_값 numeric(null) */
-	private double acsmVal;
+	private Double acsmVal;
 
 	/* pal_cd 신체활동수준_코드 character varying(20) */
 	private String palCd;
@@ -151,17 +151,17 @@ public class TsGfixHistVo implements Serializable {
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -196,212 +196,212 @@ public class TsGfixHistVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get age_mcnt 나이_개월수 numeric(null)
-	 * @Return double ageMcnt
+	 * @Return Double ageMcnt
 	 */
-	public double getAgeMcnt() {
+	public Double getAgeMcnt() {
 		return this.ageMcnt;
 	}
 	
 	/**
 	 * Set age_mcnt 나이_개월수 numeric(null)
-	 * @Param double ageMcnt
+	 * @Param Double ageMcnt
 	 */
-	public void setAgeMcnt(double ageMcnt) {
+	public void setAgeMcnt(Double ageMcnt) {
 		this.ageMcnt = ageMcnt;
 	}
 	/**
 	 * Get hght_val 키_값 numeric(null)
-	 * @Return double hghtVal
+	 * @Return Double hghtVal
 	 */
-	public double getHghtVal() {
+	public Double getHghtVal() {
 		return this.hghtVal;
 	}
 	
 	/**
 	 * Set hght_val 키_값 numeric(null)
-	 * @Param double hghtVal
+	 * @Param Double hghtVal
 	 */
-	public void setHghtVal(double hghtVal) {
+	public void setHghtVal(Double hghtVal) {
 		this.hghtVal = hghtVal;
 	}
 	/**
 	 * Get wght_val 몸무게_값 numeric(null)
-	 * @Return double wghtVal
+	 * @Return Double wghtVal
 	 */
-	public double getWghtVal() {
+	public Double getWghtVal() {
 		return this.wghtVal;
 	}
 	
 	/**
 	 * Set wght_val 몸무게_값 numeric(null)
-	 * @Param double wghtVal
+	 * @Param Double wghtVal
 	 */
-	public void setWghtVal(double wghtVal) {
+	public void setWghtVal(Double wghtVal) {
 		this.wghtVal = wghtVal;
 	}
 	/**
 	 * Get bmi_val BMI_값 numeric(null)
-	 * @Return double bmiVal
+	 * @Return Double bmiVal
 	 */
-	public double getBmiVal() {
+	public Double getBmiVal() {
 		return this.bmiVal;
 	}
 	
 	/**
 	 * Set bmi_val BMI_값 numeric(null)
-	 * @Param double bmiVal
+	 * @Param Double bmiVal
 	 */
-	public void setBmiVal(double bmiVal) {
+	public void setBmiVal(Double bmiVal) {
 		this.bmiVal = bmiVal;
 	}
 	/**
 	 * Get wast_size 허리_사이즈 numeric(null)
-	 * @Return double wastSize
+	 * @Return Double wastSize
 	 */
-	public double getWastSize() {
+	public Double getWastSize() {
 		return this.wastSize;
 	}
 	
 	/**
 	 * Set wast_size 허리_사이즈 numeric(null)
-	 * @Param double wastSize
+	 * @Param Double wastSize
 	 */
-	public void setWastSize(double wastSize) {
+	public void setWastSize(Double wastSize) {
 		this.wastSize = wastSize;
 	}
 	/**
 	 * Get cal_eat_qty 칼로리_섭취_량 numeric(null)
-	 * @Return double calEatQty
+	 * @Return Double calEatQty
 	 */
-	public double getCalEatQty() {
+	public Double getCalEatQty() {
 		return this.calEatQty;
 	}
 	
 	/**
 	 * Set cal_eat_qty 칼로리_섭취_량 numeric(null)
-	 * @Param double calEatQty
+	 * @Param Double calEatQty
 	 */
-	public void setCalEatQty(double calEatQty) {
+	public void setCalEatQty(Double calEatQty) {
 		this.calEatQty = calEatQty;
 	}
 	/**
 	 * Get cal_csum_qty 칼로리_소모_량 numeric(null)
-	 * @Return double calCsumQty
+	 * @Return Double calCsumQty
 	 */
-	public double getCalCsumQty() {
+	public Double getCalCsumQty() {
 		return this.calCsumQty;
 	}
 	
 	/**
 	 * Set cal_csum_qty 칼로리_소모_량 numeric(null)
-	 * @Param double calCsumQty
+	 * @Param Double calCsumQty
 	 */
-	public void setCalCsumQty(double calCsumQty) {
+	public void setCalCsumQty(Double calCsumQty) {
 		this.calCsumQty = calCsumQty;
 	}
 	/**
 	 * Get mom_hght_val 엄마_키_값 numeric(null)
-	 * @Return double momHghtVal
+	 * @Return Double momHghtVal
 	 */
-	public double getMomHghtVal() {
+	public Double getMomHghtVal() {
 		return this.momHghtVal;
 	}
 	
 	/**
 	 * Set mom_hght_val 엄마_키_값 numeric(null)
-	 * @Param double momHghtVal
+	 * @Param Double momHghtVal
 	 */
-	public void setMomHghtVal(double momHghtVal) {
+	public void setMomHghtVal(Double momHghtVal) {
 		this.momHghtVal = momHghtVal;
 	}
 	/**
 	 * Get mom_wght_val 엄마_몸무게_값 numeric(null)
-	 * @Return double momWghtVal
+	 * @Return Double momWghtVal
 	 */
-	public double getMomWghtVal() {
+	public Double getMomWghtVal() {
 		return this.momWghtVal;
 	}
 	
 	/**
 	 * Set mom_wght_val 엄마_몸무게_값 numeric(null)
-	 * @Param double momWghtVal
+	 * @Param Double momWghtVal
 	 */
-	public void setMomWghtVal(double momWghtVal) {
+	public void setMomWghtVal(Double momWghtVal) {
 		this.momWghtVal = momWghtVal;
 	}
 	/**
 	 * Get mom_bmi_val 엄마_BMI_값 numeric(null)
-	 * @Return double momBmiVal
+	 * @Return Double momBmiVal
 	 */
-	public double getMomBmiVal() {
+	public Double getMomBmiVal() {
 		return this.momBmiVal;
 	}
 	
 	/**
 	 * Set mom_bmi_val 엄마_BMI_값 numeric(null)
-	 * @Param double momBmiVal
+	 * @Param Double momBmiVal
 	 */
-	public void setMomBmiVal(double momBmiVal) {
+	public void setMomBmiVal(Double momBmiVal) {
 		this.momBmiVal = momBmiVal;
 	}
 	/**
 	 * Get dad_hght_val 아빠_키_값 numeric(null)
-	 * @Return double dadHghtVal
+	 * @Return Double dadHghtVal
 	 */
-	public double getDadHghtVal() {
+	public Double getDadHghtVal() {
 		return this.dadHghtVal;
 	}
 	
 	/**
 	 * Set dad_hght_val 아빠_키_값 numeric(null)
-	 * @Param double dadHghtVal
+	 * @Param Double dadHghtVal
 	 */
-	public void setDadHghtVal(double dadHghtVal) {
+	public void setDadHghtVal(Double dadHghtVal) {
 		this.dadHghtVal = dadHghtVal;
 	}
 	/**
 	 * Get dad_wght_val 아빠_몸무게_값 numeric(null)
-	 * @Return double dadWghtVal
+	 * @Return Double dadWghtVal
 	 */
-	public double getDadWghtVal() {
+	public Double getDadWghtVal() {
 		return this.dadWghtVal;
 	}
 	
 	/**
 	 * Set dad_wght_val 아빠_몸무게_값 numeric(null)
-	 * @Param double dadWghtVal
+	 * @Param Double dadWghtVal
 	 */
-	public void setDadWghtVal(double dadWghtVal) {
+	public void setDadWghtVal(Double dadWghtVal) {
 		this.dadWghtVal = dadWghtVal;
 	}
 	/**
 	 * Get dad_bmi_val 아빠_BMI_값 numeric(null)
-	 * @Return double dadBmiVal
+	 * @Return Double dadBmiVal
 	 */
-	public double getDadBmiVal() {
+	public Double getDadBmiVal() {
 		return this.dadBmiVal;
 	}
 	
 	/**
 	 * Set dad_bmi_val 아빠_BMI_값 numeric(null)
-	 * @Param double dadBmiVal
+	 * @Param Double dadBmiVal
 	 */
-	public void setDadBmiVal(double dadBmiVal) {
+	public void setDadBmiVal(Double dadBmiVal) {
 		this.dadBmiVal = dadBmiVal;
 	}
 	/**
@@ -421,32 +421,32 @@ public class TsGfixHistVo implements Serializable {
 	}
 	/**
 	 * Get grow_stnd_no 성장_기준_번호 numeric(null)
-	 * @Return double growStndNo
+	 * @Return Double growStndNo
 	 */
-	public double getGrowStndNo() {
+	public Double getGrowStndNo() {
 		return this.growStndNo;
 	}
 	
 	/**
 	 * Set grow_stnd_no 성장_기준_번호 numeric(null)
-	 * @Param double growStndNo
+	 * @Param Double growStndNo
 	 */
-	public void setGrowStndNo(double growStndNo) {
+	public void setGrowStndNo(Double growStndNo) {
 		this.growStndNo = growStndNo;
 	}
 	/**
 	 * Get gidx 성장지수 numeric(null)
-	 * @Return double gidx
+	 * @Return Double gidx
 	 */
-	public double getGidx() {
+	public Double getGidx() {
 		return this.gidx;
 	}
 	
 	/**
 	 * Set gidx 성장지수 numeric(null)
-	 * @Param double gidx
+	 * @Param Double gidx
 	 */
-	public void setGidx(double gidx) {
+	public void setGidx(Double gidx) {
 		this.gidx = gidx;
 	}
 	/**
@@ -481,17 +481,17 @@ public class TsGfixHistVo implements Serializable {
 	}
 	/**
 	 * Get grow_prdt_idx 성장_예측_지수 numeric(null)
-	 * @Return double growPrdtIdx
+	 * @Return Double growPrdtIdx
 	 */
-	public double getGrowPrdtIdx() {
+	public Double getGrowPrdtIdx() {
 		return this.growPrdtIdx;
 	}
 	
 	/**
 	 * Set grow_prdt_idx 성장_예측_지수 numeric(null)
-	 * @Param double growPrdtIdx
+	 * @Param Double growPrdtIdx
 	 */
-	public void setGrowPrdtIdx(double growPrdtIdx) {
+	public void setGrowPrdtIdx(Double growPrdtIdx) {
 		this.growPrdtIdx = growPrdtIdx;
 	}
 	/**
@@ -541,47 +541,47 @@ public class TsGfixHistVo implements Serializable {
 	}
 	/**
 	 * Get fat_stnd_no 비만_기준_번호 numeric(null)
-	 * @Return double fatStndNo
+	 * @Return Double fatStndNo
 	 */
-	public double getFatStndNo() {
+	public Double getFatStndNo() {
 		return this.fatStndNo;
 	}
 	
 	/**
 	 * Set fat_stnd_no 비만_기준_번호 numeric(null)
-	 * @Param double fatStndNo
+	 * @Param Double fatStndNo
 	 */
-	public void setFatStndNo(double fatStndNo) {
+	public void setFatStndNo(Double fatStndNo) {
 		this.fatStndNo = fatStndNo;
 	}
 	/**
 	 * Get nutr_eat_qty 영양소_섭취_량 numeric(null)
-	 * @Return double nutrEatQty
+	 * @Return Double nutrEatQty
 	 */
-	public double getNutrEatQty() {
+	public Double getNutrEatQty() {
 		return this.nutrEatQty;
 	}
 	
 	/**
 	 * Set nutr_eat_qty 영양소_섭취_량 numeric(null)
-	 * @Param double nutrEatQty
+	 * @Param Double nutrEatQty
 	 */
-	public void setNutrEatQty(double nutrEatQty) {
+	public void setNutrEatQty(Double nutrEatQty) {
 		this.nutrEatQty = nutrEatQty;
 	}
 	/**
 	 * Get fidx 비만지수 numeric(null)
-	 * @Return double fidx
+	 * @Return Double fidx
 	 */
-	public double getFidx() {
+	public Double getFidx() {
 		return this.fidx;
 	}
 	
 	/**
 	 * Set fidx 비만지수 numeric(null)
-	 * @Param double fidx
+	 * @Param Double fidx
 	 */
-	public void setFidx(double fidx) {
+	public void setFidx(Double fidx) {
 		this.fidx = fidx;
 	}
 	/**
@@ -616,32 +616,32 @@ public class TsGfixHistVo implements Serializable {
 	}
 	/**
 	 * Get fatp_bmi_val 비만예측_BMI_값 numeric(null)
-	 * @Return double fatpBmiVal
+	 * @Return Double fatpBmiVal
 	 */
-	public double getFatpBmiVal() {
+	public Double getFatpBmiVal() {
 		return this.fatpBmiVal;
 	}
 	
 	/**
 	 * Set fatp_bmi_val 비만예측_BMI_값 numeric(null)
-	 * @Param double fatpBmiVal
+	 * @Param Double fatpBmiVal
 	 */
-	public void setFatpBmiVal(double fatpBmiVal) {
+	public void setFatpBmiVal(Double fatpBmiVal) {
 		this.fatpBmiVal = fatpBmiVal;
 	}
 	/**
 	 * Get fatp_idx 비만예측_지수 numeric(null)
-	 * @Return double fatpIdx
+	 * @Return Double fatpIdx
 	 */
-	public double getFatpIdx() {
+	public Double getFatpIdx() {
 		return this.fatpIdx;
 	}
 	
 	/**
 	 * Set fatp_idx 비만예측_지수 numeric(null)
-	 * @Param double fatpIdx
+	 * @Param Double fatpIdx
 	 */
-	public void setFatpIdx(double fatpIdx) {
+	public void setFatpIdx(Double fatpIdx) {
 		this.fatpIdx = fatpIdx;
 	}
 	/**
@@ -676,47 +676,47 @@ public class TsGfixHistVo implements Serializable {
 	}
 	/**
 	 * Get pal_val 신체활동수준_값 numeric(null)
-	 * @Return double palVal
+	 * @Return Double palVal
 	 */
-	public double getPalVal() {
+	public Double getPalVal() {
 		return this.palVal;
 	}
 	
 	/**
 	 * Set pal_val 신체활동수준_값 numeric(null)
-	 * @Param double palVal
+	 * @Param Double palVal
 	 */
-	public void setPalVal(double palVal) {
+	public void setPalVal(Double palVal) {
 		this.palVal = palVal;
 	}
 	/**
 	 * Get bcsm_val 기초에너지소모량_값 numeric(null)
-	 * @Return double bcsmVal
+	 * @Return Double bcsmVal
 	 */
-	public double getBcsmVal() {
+	public Double getBcsmVal() {
 		return this.bcsmVal;
 	}
 	
 	/**
 	 * Set bcsm_val 기초에너지소모량_값 numeric(null)
-	 * @Param double bcsmVal
+	 * @Param Double bcsmVal
 	 */
-	public void setBcsmVal(double bcsmVal) {
+	public void setBcsmVal(Double bcsmVal) {
 		this.bcsmVal = bcsmVal;
 	}
 	/**
 	 * Get acsm_val 활동에너지소모량_값 numeric(null)
-	 * @Return double acsmVal
+	 * @Return Double acsmVal
 	 */
-	public double getAcsmVal() {
+	public Double getAcsmVal() {
 		return this.acsmVal;
 	}
 	
 	/**
 	 * Set acsm_val 활동에너지소모량_값 numeric(null)
-	 * @Param double acsmVal
+	 * @Param Double acsmVal
 	 */
-	public void setAcsmVal(double acsmVal) {
+	public void setAcsmVal(Double acsmVal) {
 		this.acsmVal = acsmVal;
 	}
 	/**

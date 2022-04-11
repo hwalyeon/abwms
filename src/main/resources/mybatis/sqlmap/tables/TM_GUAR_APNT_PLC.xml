@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_GUAR_APNT_PLC">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo" resultType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,loc_no /* loc_no 위치_번호 numeric */
@@ -24,7 +24,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.insert */
 		INSERT INTO tm_guar_apnt_plc
 		(
@@ -47,7 +47,7 @@
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{locNo} /* loc_no 위치_번호 numeric */
+		     ,#{locNo} /* loc_no 위치_번호 numeric */
 		<if test="rmrk != null">
 		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
 		</if>
@@ -64,7 +64,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.update */
 		UPDATE tm_guar_apnt_plc
 		<trim prefix="SET" prefixOverrides=",">
@@ -82,7 +82,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.merge */
 		INSERT INTO tm_guar_apnt_plc
 		(
@@ -120,8 +120,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tm_guar_apnt_plc_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
@@ -134,7 +134,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmGuarApntPlcVo">
 		/* Generated SQL SQL ID : tm_guar_apnt_plc.delete */
 		DELETE FROM tm_guar_apnt_plc
 		WHERE  1 = 1

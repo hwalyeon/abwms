@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsBlbdBaseVo implements Serializable {
 
 	/* blbd_no 게시_번호 numeric(null) */
-	private double blbdNo;
+	private Double blbdNo;
 
 	/* blbd_strt_dt 게시_시작_일자 character(8) */
 	private String blbdStrtDt;
@@ -26,7 +26,7 @@ public class TsBlbdBaseVo implements Serializable {
 	private String blbdCntn;
 
 	/* srch_cnt 조회_건수 numeric(null) */
-	private double srchCnt;
+	private Double srchCnt;
 
 	/* alam_yn 알림_여부 character(1) */
 	private String alamYn;
@@ -52,17 +52,17 @@ public class TsBlbdBaseVo implements Serializable {
 
 	/**
 	 * Get blbd_no 게시_번호 numeric(null)
-	 * @Return double blbdNo
+	 * @Return Double blbdNo
 	 */
-	public double getBlbdNo() {
+	public Double getBlbdNo() {
 		return this.blbdNo;
 	}
 	
 	/**
 	 * Set blbd_no 게시_번호 numeric(null)
-	 * @Param double blbdNo
+	 * @Param Double blbdNo
 	 */
-	public void setBlbdNo(double blbdNo) {
+	public void setBlbdNo(Double blbdNo) {
 		this.blbdNo = blbdNo;
 	}
 	/**
@@ -142,17 +142,17 @@ public class TsBlbdBaseVo implements Serializable {
 	}
 	/**
 	 * Get srch_cnt 조회_건수 numeric(null)
-	 * @Return double srchCnt
+	 * @Return Double srchCnt
 	 */
-	public double getSrchCnt() {
+	public Double getSrchCnt() {
 		return this.srchCnt;
 	}
 	
 	/**
 	 * Set srch_cnt 조회_건수 numeric(null)
-	 * @Param double srchCnt
+	 * @Param Double srchCnt
 	 */
-	public void setSrchCnt(double srchCnt) {
+	public void setSrchCnt(Double srchCnt) {
 		this.srchCnt = srchCnt;
 	}
 	/**

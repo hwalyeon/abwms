@@ -20,7 +20,7 @@ public class TiDgemStndVo implements Serializable {
 	private String tempStatCd;
 
 	/* dgem_idx 위험감정_지수 numeric(null) */
-	private double dgemIdx;
+	private Double dgemIdx;
 
 	/* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
 	private String dgemStatCd;
@@ -112,17 +112,17 @@ public class TiDgemStndVo implements Serializable {
 	}
 	/**
 	 * Get dgem_idx 위험감정_지수 numeric(null)
-	 * @Return double dgemIdx
+	 * @Return Double dgemIdx
 	 */
-	public double getDgemIdx() {
+	public Double getDgemIdx() {
 		return this.dgemIdx;
 	}
 	
 	/**
 	 * Set dgem_idx 위험감정_지수 numeric(null)
-	 * @Param double dgemIdx
+	 * @Param Double dgemIdx
 	 */
-	public void setDgemIdx(double dgemIdx) {
+	public void setDgemIdx(Double dgemIdx) {
 		this.dgemIdx = dgemIdx;
 	}
 	/**

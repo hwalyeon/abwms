@@ -8,19 +8,19 @@ import java.io.Serializable;
 public class TsFmenuSpecVo implements Serializable {
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* fmenu_seq 식단표_순번 numeric(null) */
-	private double fmenuSeq;
+	private Double fmenuSeq;
 
 	/* fmenu_spec_seq 식단표_상세_순번 numeric(null) */
-	private double fmenuSpecSeq;
+	private Double fmenuSpecSeq;
 
 	/* food_no 식품_번호 numeric(null) */
-	private double foodNo;
+	private Double foodNo;
 
 	/* qty 수량 numeric(null) */
-	private double qty;
+	private Double qty;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -43,77 +43,77 @@ public class TsFmenuSpecVo implements Serializable {
 
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**
 	 * Get fmenu_seq 식단표_순번 numeric(null)
-	 * @Return double fmenuSeq
+	 * @Return Double fmenuSeq
 	 */
-	public double getFmenuSeq() {
+	public Double getFmenuSeq() {
 		return this.fmenuSeq;
 	}
 	
 	/**
 	 * Set fmenu_seq 식단표_순번 numeric(null)
-	 * @Param double fmenuSeq
+	 * @Param Double fmenuSeq
 	 */
-	public void setFmenuSeq(double fmenuSeq) {
+	public void setFmenuSeq(Double fmenuSeq) {
 		this.fmenuSeq = fmenuSeq;
 	}
 	/**
 	 * Get fmenu_spec_seq 식단표_상세_순번 numeric(null)
-	 * @Return double fmenuSpecSeq
+	 * @Return Double fmenuSpecSeq
 	 */
-	public double getFmenuSpecSeq() {
+	public Double getFmenuSpecSeq() {
 		return this.fmenuSpecSeq;
 	}
 	
 	/**
 	 * Set fmenu_spec_seq 식단표_상세_순번 numeric(null)
-	 * @Param double fmenuSpecSeq
+	 * @Param Double fmenuSpecSeq
 	 */
-	public void setFmenuSpecSeq(double fmenuSpecSeq) {
+	public void setFmenuSpecSeq(Double fmenuSpecSeq) {
 		this.fmenuSpecSeq = fmenuSpecSeq;
 	}
 	/**
 	 * Get food_no 식품_번호 numeric(null)
-	 * @Return double foodNo
+	 * @Return Double foodNo
 	 */
-	public double getFoodNo() {
+	public Double getFoodNo() {
 		return this.foodNo;
 	}
 	
 	/**
 	 * Set food_no 식품_번호 numeric(null)
-	 * @Param double foodNo
+	 * @Param Double foodNo
 	 */
-	public void setFoodNo(double foodNo) {
+	public void setFoodNo(Double foodNo) {
 		this.foodNo = foodNo;
 	}
 	/**
 	 * Get qty 수량 numeric(null)
-	 * @Return double qty
+	 * @Return Double qty
 	 */
-	public double getQty() {
+	public Double getQty() {
 		return this.qty;
 	}
 	
 	/**
 	 * Set qty 수량 numeric(null)
-	 * @Param double qty
+	 * @Param Double qty
 	 */
-	public void setQty(double qty) {
+	public void setQty(Double qty) {
 		this.qty = qty;
 	}
 	/**

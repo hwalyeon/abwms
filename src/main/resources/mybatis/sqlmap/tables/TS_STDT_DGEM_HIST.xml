@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_STDT_DGEM_HIST">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo" resultType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,dgem_hist_seq /* dgem_hist_seq 위험감정_이력_순번 numeric */
@@ -37,7 +37,7 @@
 		AND    dgem_hist_seq = #{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.insert */
 		INSERT INTO ts_stdt_dgem_hist
 		(
@@ -97,7 +97,7 @@
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
+		     ,#{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
 		<if test="dgemDt != null">
 		    ,#{dgemDt} /* dgem_dt 위험감정_일자 character(8) */
 		</if>
@@ -151,7 +151,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.update */
 		UPDATE ts_stdt_dgem_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -208,7 +208,7 @@
 		AND    dgem_hist_seq = #{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.merge */
 		INSERT INTO ts_stdt_dgem_hist
 		(
@@ -320,8 +320,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_stdt_dgem_hist_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="dgemDt != null">
 		    ,dgem_dt = #{dgemDt} /* dgem_dt 위험감정_일자 character(8) */
@@ -373,7 +373,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.delete */
 		DELETE FROM ts_stdt_dgem_hist
 		WHERE  1 = 1

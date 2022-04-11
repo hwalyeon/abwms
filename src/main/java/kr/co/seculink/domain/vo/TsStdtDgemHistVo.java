@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class TsStdtDgemHistVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* dgem_hist_seq 위험감정_이력_순번 numeric(null) */
-	private double dgemHistSeq;
+	private Double dgemHistSeq;
 
 	/* dgem_dt 위험감정_일자 character(8) */
 	private String dgemDt;
@@ -20,7 +20,7 @@ public class TsStdtDgemHistVo implements Serializable {
 	private String dgemTm;
 
 	/* dgem_idx 위험감정_지수 numeric(null) */
-	private double dgemIdx;
+	private Double dgemIdx;
 
 	/* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
 	private String dgemStatCd;
@@ -32,7 +32,7 @@ public class TsStdtDgemHistVo implements Serializable {
 	private String dgemStatCntn;
 
 	/* loc_hist_no 위치_이력_번호 numeric(null) */
-	private double locHistNo;
+	private Double locHistNo;
 
 	/* act_div_cd 활동_구분_코드 character varying(20) */
 	private String actDivCd;
@@ -47,13 +47,13 @@ public class TsStdtDgemHistVo implements Serializable {
 	private String tempStatCd;
 
 	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	private Double judgNo;
 
 	/* rmrk 비고 character varying(4000) */
 	private String rmrk;
 
 	/* dgem_alam_no 위험감정_알림_번호 numeric(null) */
-	private double dgemAlamNo;
+	private Double dgemAlamNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -76,32 +76,32 @@ public class TsStdtDgemHistVo implements Serializable {
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
 	 * Get dgem_hist_seq 위험감정_이력_순번 numeric(null)
-	 * @Return double dgemHistSeq
+	 * @Return Double dgemHistSeq
 	 */
-	public double getDgemHistSeq() {
+	public Double getDgemHistSeq() {
 		return this.dgemHistSeq;
 	}
 	
 	/**
 	 * Set dgem_hist_seq 위험감정_이력_순번 numeric(null)
-	 * @Param double dgemHistSeq
+	 * @Param Double dgemHistSeq
 	 */
-	public void setDgemHistSeq(double dgemHistSeq) {
+	public void setDgemHistSeq(Double dgemHistSeq) {
 		this.dgemHistSeq = dgemHistSeq;
 	}
 	/**
@@ -136,17 +136,17 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	/**
 	 * Get dgem_idx 위험감정_지수 numeric(null)
-	 * @Return double dgemIdx
+	 * @Return Double dgemIdx
 	 */
-	public double getDgemIdx() {
+	public Double getDgemIdx() {
 		return this.dgemIdx;
 	}
 	
 	/**
 	 * Set dgem_idx 위험감정_지수 numeric(null)
-	 * @Param double dgemIdx
+	 * @Param Double dgemIdx
 	 */
-	public void setDgemIdx(double dgemIdx) {
+	public void setDgemIdx(Double dgemIdx) {
 		this.dgemIdx = dgemIdx;
 	}
 	/**
@@ -196,17 +196,17 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	/**
 	 * Get loc_hist_no 위치_이력_번호 numeric(null)
-	 * @Return double locHistNo
+	 * @Return Double locHistNo
 	 */
-	public double getLocHistNo() {
+	public Double getLocHistNo() {
 		return this.locHistNo;
 	}
 	
 	/**
 	 * Set loc_hist_no 위치_이력_번호 numeric(null)
-	 * @Param double locHistNo
+	 * @Param Double locHistNo
 	 */
-	public void setLocHistNo(double locHistNo) {
+	public void setLocHistNo(Double locHistNo) {
 		this.locHistNo = locHistNo;
 	}
 	/**
@@ -271,17 +271,17 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
+	 * @Return Double judgNo
 	 */
-	public double getJudgNo() {
+	public Double getJudgNo() {
 		return this.judgNo;
 	}
 	
 	/**
 	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
+	 * @Param Double judgNo
 	 */
-	public void setJudgNo(double judgNo) {
+	public void setJudgNo(Double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**
@@ -301,17 +301,17 @@ public class TsStdtDgemHistVo implements Serializable {
 	}
 	/**
 	 * Get dgem_alam_no 위험감정_알림_번호 numeric(null)
-	 * @Return double dgemAlamNo
+	 * @Return Double dgemAlamNo
 	 */
-	public double getDgemAlamNo() {
+	public Double getDgemAlamNo() {
 		return this.dgemAlamNo;
 	}
 	
 	/**
 	 * Set dgem_alam_no 위험감정_알림_번호 numeric(null)
-	 * @Param double dgemAlamNo
+	 * @Param Double dgemAlamNo
 	 */
-	public void setDgemAlamNo(double dgemAlamNo) {
+	public void setDgemAlamNo(Double dgemAlamNo) {
 		this.dgemAlamNo = dgemAlamNo;
 	}
 	/**

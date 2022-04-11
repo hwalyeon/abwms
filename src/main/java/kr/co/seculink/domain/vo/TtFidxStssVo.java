@@ -14,22 +14,22 @@ public class TtFidxStssVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
 
 	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	private Double mnthWeekSeq;
 
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
 	/* avg_bmi_val 평균_BMI_값 numeric(null) */
-	private double avgBmiVal;
+	private Double avgBmiVal;
 
 	/* avg_idx 평균_지수 numeric(null) */
-	private double avgIdx;
+	private Double avgIdx;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -82,17 +82,17 @@ public class TtFidxStssVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
@@ -112,17 +112,17 @@ public class TtFidxStssVo implements Serializable {
 	}
 	/**
 	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
+	 * @Return Double mnthWeekSeq
 	 */
-	public double getMnthWeekSeq() {
+	public Double getMnthWeekSeq() {
 		return this.mnthWeekSeq;
 	}
 	
 	/**
 	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * @Param Double mnthWeekSeq
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
+	public void setMnthWeekSeq(Double mnthWeekSeq) {
 		this.mnthWeekSeq = mnthWeekSeq;
 	}
 	/**
@@ -142,32 +142,32 @@ public class TtFidxStssVo implements Serializable {
 	}
 	/**
 	 * Get avg_bmi_val 평균_BMI_값 numeric(null)
-	 * @Return double avgBmiVal
+	 * @Return Double avgBmiVal
 	 */
-	public double getAvgBmiVal() {
+	public Double getAvgBmiVal() {
 		return this.avgBmiVal;
 	}
 	
 	/**
 	 * Set avg_bmi_val 평균_BMI_값 numeric(null)
-	 * @Param double avgBmiVal
+	 * @Param Double avgBmiVal
 	 */
-	public void setAvgBmiVal(double avgBmiVal) {
+	public void setAvgBmiVal(Double avgBmiVal) {
 		this.avgBmiVal = avgBmiVal;
 	}
 	/**
 	 * Get avg_idx 평균_지수 numeric(null)
-	 * @Return double avgIdx
+	 * @Return Double avgIdx
 	 */
-	public double getAvgIdx() {
+	public Double getAvgIdx() {
 		return this.avgIdx;
 	}
 	
 	/**
 	 * Set avg_idx 평균_지수 numeric(null)
-	 * @Param double avgIdx
+	 * @Param Double avgIdx
 	 */
-	public void setAvgIdx(double avgIdx) {
+	public void setAvgIdx(Double avgIdx) {
 		this.avgIdx = avgIdx;
 	}
 	/**

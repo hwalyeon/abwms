@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_ALAM_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsAlamBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsAlamBaseVo" resultType="kr.co.seculink.domain.vo.TsAlamBaseVo">
 		/* Generated SQL SQL ID : ts_alam_base.select */
         SELECT  alam_no /* alam_no 알림_번호 numeric */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
@@ -21,7 +21,7 @@
 		AND    alam_no = #{alamNo} /* alam_no 알림_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsAlamBaseVo">
 		/* Generated SQL SQL ID : ts_alam_base.insert */
 		INSERT INTO ts_alam_base
 		(
@@ -53,7 +53,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsAlamBaseVo">
 		/* Generated SQL SQL ID : ts_alam_base.update */
 		UPDATE ts_alam_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -67,7 +67,7 @@
 		AND    alam_no = #{alamNo} /* alam_no 알림_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsAlamBaseVo">
 		/* Generated SQL SQL ID : ts_alam_base.merge */
 		INSERT INTO ts_alam_base
 		(
@@ -97,8 +97,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_alam_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
@@ -108,7 +108,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsAlamBaseVo">
 		/* Generated SQL SQL ID : ts_alam_base.delete */
 		DELETE FROM ts_alam_base
 		WHERE  1 = 1

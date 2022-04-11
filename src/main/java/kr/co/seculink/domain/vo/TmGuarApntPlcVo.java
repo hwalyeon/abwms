@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class TmGuarApntPlcVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
+	private Double locNo;
 
 	/* rmrk 비고 character varying(4000) */
 	private String rmrk;
@@ -37,32 +37,32 @@ public class TmGuarApntPlcVo implements Serializable {
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
 	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
+	 * @Return Double locNo
 	 */
-	public double getLocNo() {
+	public Double getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
 	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
+	 * @Param Double locNo
 	 */
-	public void setLocNo(double locNo) {
+	public void setLocNo(Double locNo) {
 		this.locNo = locNo;
 	}
 	/**

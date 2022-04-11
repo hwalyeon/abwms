@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FAT_JUDG_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo" resultType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.select */
         SELECT  fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
                ,bmi_fr /* bmi_fr BMI_FROM numeric */
@@ -27,7 +27,7 @@
 		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.insert */
 		INSERT INTO ti_fat_judg_stnd
 		(
@@ -87,7 +87,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.update */
 		UPDATE ti_fat_judg_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -119,7 +119,7 @@
 		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.merge */
 		INSERT INTO ti_fat_judg_stnd
 		(
@@ -177,8 +177,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_fat_judg_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="bmiFr != null">
 		    ,bmi_fr = #{bmiFr} /* bmi_fr BMI_FROM numeric */
@@ -206,7 +206,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.delete */
 		DELETE FROM ti_fat_judg_stnd
 		WHERE  1 = 1

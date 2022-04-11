@@ -17,46 +17,46 @@ public class TcApiStndVo implements Serializable {
 	private String apiUrl;
 
 	/* gps_base_cycl GPS정기핑_기본_주기 numeric(null) */
-	private double gpsBaseCycl;
+	private Double gpsBaseCycl;
 
 	/* gps_next_cycl GPS정기핑_다음_주기 numeric(null) */
-	private double gpsNextCycl;
+	private Double gpsNextCycl;
 
 	/* rdet_next_cycl 정기판정_다음_주기 numeric(null) */
-	private double rdetNextCycl;
+	private Double rdetNextCycl;
 
 	/* rdet_base_cycl 정기판정_기본_주기 numeric(null) */
-	private double rdetBaseCycl;
+	private Double rdetBaseCycl;
 
 	/* led_slep_tcnt LED_슬립_시간 numeric(null) */
-	private double ledSlepTcnt;
+	private Double ledSlepTcnt;
 
 	/* msor_ssng_levl 모션센서_감지_레벨 numeric(null) */
-	private double msorSsngLevl;
+	private Double msorSsngLevl;
 
 	/* hsor_isng_cycl 심박센서_내부감지_주기 numeric(null) */
-	private double hsorIsngCycl;
+	private Double hsorIsngCycl;
 
 	/* tsor_isng_cycl 체온센서_내부감지_주기 numeric(null) */
-	private double tsorIsngCycl;
+	private Double tsorIsngCycl;
 
 	/* tsor_evnt_minval 체온센서_이벤트_하한값 numeric(null) */
-	private double tsorEvntMinval;
+	private Double tsorEvntMinval;
 
 	/* tsor_evnt_maxval 체온센서_이벤트_상한값 numeric(null) */
-	private double tsorEvntMaxval;
+	private Double tsorEvntMaxval;
 
 	/* hbitcnt_mdan_minval 심박수_중간값_하한값 numeric(null) */
-	private double hbitcntMdanMinval;
+	private Double hbitcntMdanMinval;
 
 	/* hbitcnt_mdan_maxval 심박수_중간값_상한값 numeric(null) */
-	private double hbitcntMdanMaxval;
+	private Double hbitcntMdanMaxval;
 
 	/* msor_evnt_minval 모션센서_이벤트_하한값 numeric(null) */
-	private double msorEvntMinval;
+	private Double msorEvntMinval;
 
 	/* msor_evnt_maxval 모션센서_이벤트_상한값 numeric(null) */
-	private double msorEvntMaxval;
+	private Double msorEvntMaxval;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -124,212 +124,212 @@ public class TcApiStndVo implements Serializable {
 	}
 	/**
 	 * Get gps_base_cycl GPS정기핑_기본_주기 numeric(null)
-	 * @Return double gpsBaseCycl
+	 * @Return Double gpsBaseCycl
 	 */
-	public double getGpsBaseCycl() {
+	public Double getGpsBaseCycl() {
 		return this.gpsBaseCycl;
 	}
 	
 	/**
 	 * Set gps_base_cycl GPS정기핑_기본_주기 numeric(null)
-	 * @Param double gpsBaseCycl
+	 * @Param Double gpsBaseCycl
 	 */
-	public void setGpsBaseCycl(double gpsBaseCycl) {
+	public void setGpsBaseCycl(Double gpsBaseCycl) {
 		this.gpsBaseCycl = gpsBaseCycl;
 	}
 	/**
 	 * Get gps_next_cycl GPS정기핑_다음_주기 numeric(null)
-	 * @Return double gpsNextCycl
+	 * @Return Double gpsNextCycl
 	 */
-	public double getGpsNextCycl() {
+	public Double getGpsNextCycl() {
 		return this.gpsNextCycl;
 	}
 	
 	/**
 	 * Set gps_next_cycl GPS정기핑_다음_주기 numeric(null)
-	 * @Param double gpsNextCycl
+	 * @Param Double gpsNextCycl
 	 */
-	public void setGpsNextCycl(double gpsNextCycl) {
+	public void setGpsNextCycl(Double gpsNextCycl) {
 		this.gpsNextCycl = gpsNextCycl;
 	}
 	/**
 	 * Get rdet_next_cycl 정기판정_다음_주기 numeric(null)
-	 * @Return double rdetNextCycl
+	 * @Return Double rdetNextCycl
 	 */
-	public double getRdetNextCycl() {
+	public Double getRdetNextCycl() {
 		return this.rdetNextCycl;
 	}
 	
 	/**
 	 * Set rdet_next_cycl 정기판정_다음_주기 numeric(null)
-	 * @Param double rdetNextCycl
+	 * @Param Double rdetNextCycl
 	 */
-	public void setRdetNextCycl(double rdetNextCycl) {
+	public void setRdetNextCycl(Double rdetNextCycl) {
 		this.rdetNextCycl = rdetNextCycl;
 	}
 	/**
 	 * Get rdet_base_cycl 정기판정_기본_주기 numeric(null)
-	 * @Return double rdetBaseCycl
+	 * @Return Double rdetBaseCycl
 	 */
-	public double getRdetBaseCycl() {
+	public Double getRdetBaseCycl() {
 		return this.rdetBaseCycl;
 	}
 	
 	/**
 	 * Set rdet_base_cycl 정기판정_기본_주기 numeric(null)
-	 * @Param double rdetBaseCycl
+	 * @Param Double rdetBaseCycl
 	 */
-	public void setRdetBaseCycl(double rdetBaseCycl) {
+	public void setRdetBaseCycl(Double rdetBaseCycl) {
 		this.rdetBaseCycl = rdetBaseCycl;
 	}
 	/**
 	 * Get led_slep_tcnt LED_슬립_시간 numeric(null)
-	 * @Return double ledSlepTcnt
+	 * @Return Double ledSlepTcnt
 	 */
-	public double getLedSlepTcnt() {
+	public Double getLedSlepTcnt() {
 		return this.ledSlepTcnt;
 	}
 	
 	/**
 	 * Set led_slep_tcnt LED_슬립_시간 numeric(null)
-	 * @Param double ledSlepTcnt
+	 * @Param Double ledSlepTcnt
 	 */
-	public void setLedSlepTcnt(double ledSlepTcnt) {
+	public void setLedSlepTcnt(Double ledSlepTcnt) {
 		this.ledSlepTcnt = ledSlepTcnt;
 	}
 	/**
 	 * Get msor_ssng_levl 모션센서_감지_레벨 numeric(null)
-	 * @Return double msorSsngLevl
+	 * @Return Double msorSsngLevl
 	 */
-	public double getMsorSsngLevl() {
+	public Double getMsorSsngLevl() {
 		return this.msorSsngLevl;
 	}
 	
 	/**
 	 * Set msor_ssng_levl 모션센서_감지_레벨 numeric(null)
-	 * @Param double msorSsngLevl
+	 * @Param Double msorSsngLevl
 	 */
-	public void setMsorSsngLevl(double msorSsngLevl) {
+	public void setMsorSsngLevl(Double msorSsngLevl) {
 		this.msorSsngLevl = msorSsngLevl;
 	}
 	/**
 	 * Get hsor_isng_cycl 심박센서_내부감지_주기 numeric(null)
-	 * @Return double hsorIsngCycl
+	 * @Return Double hsorIsngCycl
 	 */
-	public double getHsorIsngCycl() {
+	public Double getHsorIsngCycl() {
 		return this.hsorIsngCycl;
 	}
 	
 	/**
 	 * Set hsor_isng_cycl 심박센서_내부감지_주기 numeric(null)
-	 * @Param double hsorIsngCycl
+	 * @Param Double hsorIsngCycl
 	 */
-	public void setHsorIsngCycl(double hsorIsngCycl) {
+	public void setHsorIsngCycl(Double hsorIsngCycl) {
 		this.hsorIsngCycl = hsorIsngCycl;
 	}
 	/**
 	 * Get tsor_isng_cycl 체온센서_내부감지_주기 numeric(null)
-	 * @Return double tsorIsngCycl
+	 * @Return Double tsorIsngCycl
 	 */
-	public double getTsorIsngCycl() {
+	public Double getTsorIsngCycl() {
 		return this.tsorIsngCycl;
 	}
 	
 	/**
 	 * Set tsor_isng_cycl 체온센서_내부감지_주기 numeric(null)
-	 * @Param double tsorIsngCycl
+	 * @Param Double tsorIsngCycl
 	 */
-	public void setTsorIsngCycl(double tsorIsngCycl) {
+	public void setTsorIsngCycl(Double tsorIsngCycl) {
 		this.tsorIsngCycl = tsorIsngCycl;
 	}
 	/**
 	 * Get tsor_evnt_minval 체온센서_이벤트_하한값 numeric(null)
-	 * @Return double tsorEvntMinval
+	 * @Return Double tsorEvntMinval
 	 */
-	public double getTsorEvntMinval() {
+	public Double getTsorEvntMinval() {
 		return this.tsorEvntMinval;
 	}
 	
 	/**
 	 * Set tsor_evnt_minval 체온센서_이벤트_하한값 numeric(null)
-	 * @Param double tsorEvntMinval
+	 * @Param Double tsorEvntMinval
 	 */
-	public void setTsorEvntMinval(double tsorEvntMinval) {
+	public void setTsorEvntMinval(Double tsorEvntMinval) {
 		this.tsorEvntMinval = tsorEvntMinval;
 	}
 	/**
 	 * Get tsor_evnt_maxval 체온센서_이벤트_상한값 numeric(null)
-	 * @Return double tsorEvntMaxval
+	 * @Return Double tsorEvntMaxval
 	 */
-	public double getTsorEvntMaxval() {
+	public Double getTsorEvntMaxval() {
 		return this.tsorEvntMaxval;
 	}
 	
 	/**
 	 * Set tsor_evnt_maxval 체온센서_이벤트_상한값 numeric(null)
-	 * @Param double tsorEvntMaxval
+	 * @Param Double tsorEvntMaxval
 	 */
-	public void setTsorEvntMaxval(double tsorEvntMaxval) {
+	public void setTsorEvntMaxval(Double tsorEvntMaxval) {
 		this.tsorEvntMaxval = tsorEvntMaxval;
 	}
 	/**
 	 * Get hbitcnt_mdan_minval 심박수_중간값_하한값 numeric(null)
-	 * @Return double hbitcntMdanMinval
+	 * @Return Double hbitcntMdanMinval
 	 */
-	public double getHbitcntMdanMinval() {
+	public Double getHbitcntMdanMinval() {
 		return this.hbitcntMdanMinval;
 	}
 	
 	/**
 	 * Set hbitcnt_mdan_minval 심박수_중간값_하한값 numeric(null)
-	 * @Param double hbitcntMdanMinval
+	 * @Param Double hbitcntMdanMinval
 	 */
-	public void setHbitcntMdanMinval(double hbitcntMdanMinval) {
+	public void setHbitcntMdanMinval(Double hbitcntMdanMinval) {
 		this.hbitcntMdanMinval = hbitcntMdanMinval;
 	}
 	/**
 	 * Get hbitcnt_mdan_maxval 심박수_중간값_상한값 numeric(null)
-	 * @Return double hbitcntMdanMaxval
+	 * @Return Double hbitcntMdanMaxval
 	 */
-	public double getHbitcntMdanMaxval() {
+	public Double getHbitcntMdanMaxval() {
 		return this.hbitcntMdanMaxval;
 	}
 	
 	/**
 	 * Set hbitcnt_mdan_maxval 심박수_중간값_상한값 numeric(null)
-	 * @Param double hbitcntMdanMaxval
+	 * @Param Double hbitcntMdanMaxval
 	 */
-	public void setHbitcntMdanMaxval(double hbitcntMdanMaxval) {
+	public void setHbitcntMdanMaxval(Double hbitcntMdanMaxval) {
 		this.hbitcntMdanMaxval = hbitcntMdanMaxval;
 	}
 	/**
 	 * Get msor_evnt_minval 모션센서_이벤트_하한값 numeric(null)
-	 * @Return double msorEvntMinval
+	 * @Return Double msorEvntMinval
 	 */
-	public double getMsorEvntMinval() {
+	public Double getMsorEvntMinval() {
 		return this.msorEvntMinval;
 	}
 	
 	/**
 	 * Set msor_evnt_minval 모션센서_이벤트_하한값 numeric(null)
-	 * @Param double msorEvntMinval
+	 * @Param Double msorEvntMinval
 	 */
-	public void setMsorEvntMinval(double msorEvntMinval) {
+	public void setMsorEvntMinval(Double msorEvntMinval) {
 		this.msorEvntMinval = msorEvntMinval;
 	}
 	/**
 	 * Get msor_evnt_maxval 모션센서_이벤트_상한값 numeric(null)
-	 * @Return double msorEvntMaxval
+	 * @Return Double msorEvntMaxval
 	 */
-	public double getMsorEvntMaxval() {
+	public Double getMsorEvntMaxval() {
 		return this.msorEvntMaxval;
 	}
 	
 	/**
 	 * Set msor_evnt_maxval 모션센서_이벤트_상한값 numeric(null)
-	 * @Param double msorEvntMaxval
+	 * @Param Double msorEvntMaxval
 	 */
-	public void setMsorEvntMaxval(double msorEvntMaxval) {
+	public void setMsorEvntMaxval(Double msorEvntMaxval) {
 		this.msorEvntMaxval = msorEvntMaxval;
 	}
 	/**

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_STRS_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiStrsStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiStrsStndVo" resultType="kr.co.seculink.domain.vo.TiStrsStndVo">
 		/* Generated SQL SQL ID : ti_strs_stnd.select */
         SELECT  mind_strs_stat_cd /* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
                ,phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
@@ -24,7 +24,7 @@
 		AND    phys_strs_stat_cd = #{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
 		/* Generated SQL SQL ID : ti_strs_stnd.insert */
 		INSERT INTO ti_strs_stnd
 		(
@@ -47,7 +47,7 @@
 		VALUES
 		(
 		     #{mindStrsStatCd} /* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
-		     #{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+		     ,#{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 		<if test="strsJudgCntn != null">
 		    ,#{strsJudgCntn} /* strs_judg_cntn 스트레스_판정_내용 character varying(4000) */
 		</if>
@@ -64,7 +64,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
 		/* Generated SQL SQL ID : ti_strs_stnd.update */
 		UPDATE ti_strs_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -82,7 +82,7 @@
 		AND    phys_strs_stat_cd = #{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
 		/* Generated SQL SQL ID : ti_strs_stnd.merge */
 		INSERT INTO ti_strs_stnd
 		(
@@ -120,8 +120,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_strs_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="strsJudgCntn != null">
 		    ,strs_judg_cntn = #{strsJudgCntn} /* strs_judg_cntn 스트레스_판정_내용 character varying(4000) */
@@ -134,7 +134,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiStrsStndVo">
 		/* Generated SQL SQL ID : ti_strs_stnd.delete */
 		DELETE FROM ti_strs_stnd
 		WHERE  1 = 1

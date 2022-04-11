@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class TsStdtCbeeHistVo implements Serializable {
 
 	/* cbee_hist_no 캐시비_이력_번호 numeric(null) */
-	private double cbeeHistNo;
+	private Double cbeeHistNo;
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* cbee_use_cd 캐시비_사용_코드 character varying(20) */
 	private String cbeeUseCd;
@@ -20,16 +20,16 @@ public class TsStdtCbeeHistVo implements Serializable {
 	private String occrDttm;
 
 	/* use_cbee_amt 사용_캐시비_금액 numeric(null) */
-	private double useCbeeAmt;
+	private Double useCbeeAmt;
 
 	/* cbee_bal 캐시비_잔액 numeric(null) */
-	private double cbeeBal;
+	private Double cbeeBal;
 
 	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	private Double judgNo;
 
 	/* cbee_alam_no 캐시비_알림_번호 numeric(null) */
-	private double cbeeAlamNo;
+	private Double cbeeAlamNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -52,32 +52,32 @@ public class TsStdtCbeeHistVo implements Serializable {
 
 	/**
 	 * Get cbee_hist_no 캐시비_이력_번호 numeric(null)
-	 * @Return double cbeeHistNo
+	 * @Return Double cbeeHistNo
 	 */
-	public double getCbeeHistNo() {
+	public Double getCbeeHistNo() {
 		return this.cbeeHistNo;
 	}
 	
 	/**
 	 * Set cbee_hist_no 캐시비_이력_번호 numeric(null)
-	 * @Param double cbeeHistNo
+	 * @Param Double cbeeHistNo
 	 */
-	public void setCbeeHistNo(double cbeeHistNo) {
+	public void setCbeeHistNo(Double cbeeHistNo) {
 		this.cbeeHistNo = cbeeHistNo;
 	}
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -112,62 +112,62 @@ public class TsStdtCbeeHistVo implements Serializable {
 	}
 	/**
 	 * Get use_cbee_amt 사용_캐시비_금액 numeric(null)
-	 * @Return double useCbeeAmt
+	 * @Return Double useCbeeAmt
 	 */
-	public double getUseCbeeAmt() {
+	public Double getUseCbeeAmt() {
 		return this.useCbeeAmt;
 	}
 	
 	/**
 	 * Set use_cbee_amt 사용_캐시비_금액 numeric(null)
-	 * @Param double useCbeeAmt
+	 * @Param Double useCbeeAmt
 	 */
-	public void setUseCbeeAmt(double useCbeeAmt) {
+	public void setUseCbeeAmt(Double useCbeeAmt) {
 		this.useCbeeAmt = useCbeeAmt;
 	}
 	/**
 	 * Get cbee_bal 캐시비_잔액 numeric(null)
-	 * @Return double cbeeBal
+	 * @Return Double cbeeBal
 	 */
-	public double getCbeeBal() {
+	public Double getCbeeBal() {
 		return this.cbeeBal;
 	}
 	
 	/**
 	 * Set cbee_bal 캐시비_잔액 numeric(null)
-	 * @Param double cbeeBal
+	 * @Param Double cbeeBal
 	 */
-	public void setCbeeBal(double cbeeBal) {
+	public void setCbeeBal(Double cbeeBal) {
 		this.cbeeBal = cbeeBal;
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
+	 * @Return Double judgNo
 	 */
-	public double getJudgNo() {
+	public Double getJudgNo() {
 		return this.judgNo;
 	}
 	
 	/**
 	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
+	 * @Param Double judgNo
 	 */
-	public void setJudgNo(double judgNo) {
+	public void setJudgNo(Double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**
 	 * Get cbee_alam_no 캐시비_알림_번호 numeric(null)
-	 * @Return double cbeeAlamNo
+	 * @Return Double cbeeAlamNo
 	 */
-	public double getCbeeAlamNo() {
+	public Double getCbeeAlamNo() {
 		return this.cbeeAlamNo;
 	}
 	
 	/**
 	 * Set cbee_alam_no 캐시비_알림_번호 numeric(null)
-	 * @Param double cbeeAlamNo
+	 * @Param Double cbeeAlamNo
 	 */
-	public void setCbeeAlamNo(double cbeeAlamNo) {
+	public void setCbeeAlamNo(Double cbeeAlamNo) {
 		this.cbeeAlamNo = cbeeAlamNo;
 	}
 	/**

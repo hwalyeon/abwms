@@ -11,25 +11,25 @@ public class TiFatStndVo implements Serializable {
 	private String fatStndVer;
 
 	/* fat_stnd_no 비만_기준_번호 numeric(null) */
-	private double fatStndNo;
+	private Double fatStndNo;
 
 	/* sex_cd 성별_코드 character varying(20) */
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* age_mcnt 나이_개월수 numeric(null) */
-	private double ageMcnt;
+	private Double ageMcnt;
 
 	/* p5_fidx 백분위5_비만지수 numeric(null) */
-	private double p5Fidx;
+	private Double p5Fidx;
 
 	/* p50_fidx 백분위50_비만지수 numeric(null) */
-	private double p50Fidx;
+	private Double p50Fidx;
 
 	/* p95_fidx 백분위95_비만지수 numeric(null) */
-	private double p95Fidx;
+	private Double p95Fidx;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -67,17 +67,17 @@ public class TiFatStndVo implements Serializable {
 	}
 	/**
 	 * Get fat_stnd_no 비만_기준_번호 numeric(null)
-	 * @Return double fatStndNo
+	 * @Return Double fatStndNo
 	 */
-	public double getFatStndNo() {
+	public Double getFatStndNo() {
 		return this.fatStndNo;
 	}
 	
 	/**
 	 * Set fat_stnd_no 비만_기준_번호 numeric(null)
-	 * @Param double fatStndNo
+	 * @Param Double fatStndNo
 	 */
-	public void setFatStndNo(double fatStndNo) {
+	public void setFatStndNo(Double fatStndNo) {
 		this.fatStndNo = fatStndNo;
 	}
 	/**
@@ -97,77 +97,77 @@ public class TiFatStndVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get age_mcnt 나이_개월수 numeric(null)
-	 * @Return double ageMcnt
+	 * @Return Double ageMcnt
 	 */
-	public double getAgeMcnt() {
+	public Double getAgeMcnt() {
 		return this.ageMcnt;
 	}
 	
 	/**
 	 * Set age_mcnt 나이_개월수 numeric(null)
-	 * @Param double ageMcnt
+	 * @Param Double ageMcnt
 	 */
-	public void setAgeMcnt(double ageMcnt) {
+	public void setAgeMcnt(Double ageMcnt) {
 		this.ageMcnt = ageMcnt;
 	}
 	/**
 	 * Get p5_fidx 백분위5_비만지수 numeric(null)
-	 * @Return double p5Fidx
+	 * @Return Double p5Fidx
 	 */
-	public double getP5Fidx() {
+	public Double getP5Fidx() {
 		return this.p5Fidx;
 	}
 	
 	/**
 	 * Set p5_fidx 백분위5_비만지수 numeric(null)
-	 * @Param double p5Fidx
+	 * @Param Double p5Fidx
 	 */
-	public void setP5Fidx(double p5Fidx) {
+	public void setP5Fidx(Double p5Fidx) {
 		this.p5Fidx = p5Fidx;
 	}
 	/**
 	 * Get p50_fidx 백분위50_비만지수 numeric(null)
-	 * @Return double p50Fidx
+	 * @Return Double p50Fidx
 	 */
-	public double getP50Fidx() {
+	public Double getP50Fidx() {
 		return this.p50Fidx;
 	}
 	
 	/**
 	 * Set p50_fidx 백분위50_비만지수 numeric(null)
-	 * @Param double p50Fidx
+	 * @Param Double p50Fidx
 	 */
-	public void setP50Fidx(double p50Fidx) {
+	public void setP50Fidx(Double p50Fidx) {
 		this.p50Fidx = p50Fidx;
 	}
 	/**
 	 * Get p95_fidx 백분위95_비만지수 numeric(null)
-	 * @Return double p95Fidx
+	 * @Return Double p95Fidx
 	 */
-	public double getP95Fidx() {
+	public Double getP95Fidx() {
 		return this.p95Fidx;
 	}
 	
 	/**
 	 * Set p95_fidx 백분위95_비만지수 numeric(null)
-	 * @Param double p95Fidx
+	 * @Param Double p95Fidx
 	 */
-	public void setP95Fidx(double p95Fidx) {
+	public void setP95Fidx(Double p95Fidx) {
 		this.p95Fidx = p95Fidx;
 	}
 	/**

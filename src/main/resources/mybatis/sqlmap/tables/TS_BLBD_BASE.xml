@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_BLBD_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo" resultType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
 		/* Generated SQL SQL ID : ts_blbd_base.select */
         SELECT  blbd_no /* blbd_no 게시_번호 numeric */
                ,blbd_strt_dt /* blbd_strt_dt 게시_시작_일자 character(8) */
@@ -28,7 +28,7 @@
 		AND    blbd_no = #{blbdNo} /* blbd_no 게시_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
 		/* Generated SQL SQL ID : ts_blbd_base.insert */
 		INSERT INTO ts_blbd_base
 		(
@@ -94,7 +94,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
 		/* Generated SQL SQL ID : ts_blbd_base.update */
 		UPDATE ts_blbd_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -129,7 +129,7 @@
 		AND    blbd_no = #{blbdNo} /* blbd_no 게시_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
 		/* Generated SQL SQL ID : ts_blbd_base.merge */
 		INSERT INTO ts_blbd_base
 		(
@@ -193,8 +193,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_blbd_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="blbdStrtDt != null">
 		    ,blbd_strt_dt = #{blbdStrtDt} /* blbd_strt_dt 게시_시작_일자 character(8) */
@@ -225,7 +225,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsBlbdBaseVo">
 		/* Generated SQL SQL ID : ts_blbd_base.delete */
 		DELETE FROM ts_blbd_base
 		WHERE  1 = 1

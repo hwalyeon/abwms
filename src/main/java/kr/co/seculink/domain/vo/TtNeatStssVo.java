@@ -14,25 +14,28 @@ public class TtNeatStssVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* etim_div_cd 식때_구분_코드 character varying(20) */
 	private String etimDivCd;
+
+	/* eagr_div_cd 섭취집계_구분_코드 character varying(20) */
+	private String eagrDivCd;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
 
 	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	private Double mnthWeekSeq;
 
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
 	/* obj_cnt 대상_건수 numeric(null) */
-	private double objCnt;
+	private Double objCnt;
 
 	/* neat_cnt 결식_건수 numeric(null) */
-	private double neatCnt;
+	private Double neatCnt;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -85,17 +88,17 @@ public class TtNeatStssVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
@@ -114,6 +117,21 @@ public class TtNeatStssVo implements Serializable {
 		this.etimDivCd = etimDivCd;
 	}
 	/**
+	 * Get eagr_div_cd 섭취집계_구분_코드 character varying(20)
+	 * @Return String eagrDivCd
+	 */
+	public String getEagrDivCd() {
+		return this.eagrDivCd;
+	}
+	
+	/**
+	 * Set eagr_div_cd 섭취집계_구분_코드 character varying(20)
+	 * @Param String eagrDivCd
+	 */
+	public void setEagrDivCd(String eagrDivCd) {
+		this.eagrDivCd = eagrDivCd;
+	}
+	/**
 	 * Get stnd_yymm 기준_년월 character(6)
 	 * @Return String stndYymm
 	 */
@@ -130,17 +148,17 @@ public class TtNeatStssVo implements Serializable {
 	}
 	/**
 	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
+	 * @Return Double mnthWeekSeq
 	 */
-	public double getMnthWeekSeq() {
+	public Double getMnthWeekSeq() {
 		return this.mnthWeekSeq;
 	}
 	
 	/**
 	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * @Param Double mnthWeekSeq
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
+	public void setMnthWeekSeq(Double mnthWeekSeq) {
 		this.mnthWeekSeq = mnthWeekSeq;
 	}
 	/**
@@ -160,32 +178,32 @@ public class TtNeatStssVo implements Serializable {
 	}
 	/**
 	 * Get obj_cnt 대상_건수 numeric(null)
-	 * @Return double objCnt
+	 * @Return Double objCnt
 	 */
-	public double getObjCnt() {
+	public Double getObjCnt() {
 		return this.objCnt;
 	}
 	
 	/**
 	 * Set obj_cnt 대상_건수 numeric(null)
-	 * @Param double objCnt
+	 * @Param Double objCnt
 	 */
-	public void setObjCnt(double objCnt) {
+	public void setObjCnt(Double objCnt) {
 		this.objCnt = objCnt;
 	}
 	/**
 	 * Get neat_cnt 결식_건수 numeric(null)
-	 * @Return double neatCnt
+	 * @Return Double neatCnt
 	 */
-	public double getNeatCnt() {
+	public Double getNeatCnt() {
 		return this.neatCnt;
 	}
 	
 	/**
 	 * Set neat_cnt 결식_건수 numeric(null)
-	 * @Param double neatCnt
+	 * @Param Double neatCnt
 	 */
-	public void setNeatCnt(double neatCnt) {
+	public void setNeatCnt(Double neatCnt) {
 		this.neatCnt = neatCnt;
 	}
 	/**

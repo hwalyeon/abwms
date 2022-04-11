@@ -8,13 +8,13 @@ import java.io.Serializable;
 public class TiFatpQustSpecVo implements Serializable {
 
 	/* qust_ver 설문_버전 numeric(null) */
-	private double qustVer;
+	private Double qustVer;
 
 	/* qust_no 질문_번호 numeric(null) */
-	private double qustNo;
+	private Double qustNo;
 
 	/* ans_seq 답변_순번 numeric(null) */
-	private double ansSeq;
+	private Double ansSeq;
 
 	/* ans_val 답변_값 character varying(20) */
 	private String ansVal;
@@ -43,47 +43,47 @@ public class TiFatpQustSpecVo implements Serializable {
 
 	/**
 	 * Get qust_ver 설문_버전 numeric(null)
-	 * @Return double qustVer
+	 * @Return Double qustVer
 	 */
-	public double getQustVer() {
+	public Double getQustVer() {
 		return this.qustVer;
 	}
 	
 	/**
 	 * Set qust_ver 설문_버전 numeric(null)
-	 * @Param double qustVer
+	 * @Param Double qustVer
 	 */
-	public void setQustVer(double qustVer) {
+	public void setQustVer(Double qustVer) {
 		this.qustVer = qustVer;
 	}
 	/**
 	 * Get qust_no 질문_번호 numeric(null)
-	 * @Return double qustNo
+	 * @Return Double qustNo
 	 */
-	public double getQustNo() {
+	public Double getQustNo() {
 		return this.qustNo;
 	}
 	
 	/**
 	 * Set qust_no 질문_번호 numeric(null)
-	 * @Param double qustNo
+	 * @Param Double qustNo
 	 */
-	public void setQustNo(double qustNo) {
+	public void setQustNo(Double qustNo) {
 		this.qustNo = qustNo;
 	}
 	/**
 	 * Get ans_seq 답변_순번 numeric(null)
-	 * @Return double ansSeq
+	 * @Return Double ansSeq
 	 */
-	public double getAnsSeq() {
+	public Double getAnsSeq() {
 		return this.ansSeq;
 	}
 	
 	/**
 	 * Set ans_seq 답변_순번 numeric(null)
-	 * @Param double ansSeq
+	 * @Param Double ansSeq
 	 */
-	public void setAnsSeq(double ansSeq) {
+	public void setAnsSeq(Double ansSeq) {
 		this.ansSeq = ansSeq;
 	}
 	/**

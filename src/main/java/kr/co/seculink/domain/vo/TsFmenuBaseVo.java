@@ -8,10 +8,10 @@ import java.io.Serializable;
 public class TsFmenuBaseVo implements Serializable {
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* fmenu_seq 식단표_순번 numeric(null) */
-	private double fmenuSeq;
+	private Double fmenuSeq;
 
 	/* fmenu_nm 식단표_명 character varying(100) */
 	private String fmenuNm;
@@ -49,32 +49,32 @@ public class TsFmenuBaseVo implements Serializable {
 
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**
 	 * Get fmenu_seq 식단표_순번 numeric(null)
-	 * @Return double fmenuSeq
+	 * @Return Double fmenuSeq
 	 */
-	public double getFmenuSeq() {
+	public Double getFmenuSeq() {
 		return this.fmenuSeq;
 	}
 	
 	/**
 	 * Set fmenu_seq 식단표_순번 numeric(null)
-	 * @Param double fmenuSeq
+	 * @Param Double fmenuSeq
 	 */
-	public void setFmenuSeq(double fmenuSeq) {
+	public void setFmenuSeq(Double fmenuSeq) {
 		this.fmenuSeq = fmenuSeq;
 	}
 	/**

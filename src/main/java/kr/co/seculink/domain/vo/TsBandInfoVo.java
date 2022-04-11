@@ -20,13 +20,13 @@ public class TsBandInfoVo implements Serializable {
 	private String blthId;
 
 	/* api_url_gram_no API_URL_전문_번호 numeric(null) */
-	private double apiUrlGramNo;
+	private Double apiUrlGramNo;
 
 	/* api_url_dttm API_URL_일시 character(14) */
 	private String apiUrlDttm;
 
 	/* open_gram_no 개통_전문_번호 numeric(null) */
-	private double openGramNo;
+	private Double openGramNo;
 
 	/* band_open_stat_cd 밴드_개통_상태_코드 character varying(20) */
 	private String bandOpenStatCd;
@@ -112,17 +112,17 @@ public class TsBandInfoVo implements Serializable {
 	}
 	/**
 	 * Get api_url_gram_no API_URL_전문_번호 numeric(null)
-	 * @Return double apiUrlGramNo
+	 * @Return Double apiUrlGramNo
 	 */
-	public double getApiUrlGramNo() {
+	public Double getApiUrlGramNo() {
 		return this.apiUrlGramNo;
 	}
 	
 	/**
 	 * Set api_url_gram_no API_URL_전문_번호 numeric(null)
-	 * @Param double apiUrlGramNo
+	 * @Param Double apiUrlGramNo
 	 */
-	public void setApiUrlGramNo(double apiUrlGramNo) {
+	public void setApiUrlGramNo(Double apiUrlGramNo) {
 		this.apiUrlGramNo = apiUrlGramNo;
 	}
 	/**
@@ -142,17 +142,17 @@ public class TsBandInfoVo implements Serializable {
 	}
 	/**
 	 * Get open_gram_no 개통_전문_번호 numeric(null)
-	 * @Return double openGramNo
+	 * @Return Double openGramNo
 	 */
-	public double getOpenGramNo() {
+	public Double getOpenGramNo() {
 		return this.openGramNo;
 	}
 	
 	/**
 	 * Set open_gram_no 개통_전문_번호 numeric(null)
-	 * @Param double openGramNo
+	 * @Param Double openGramNo
 	 */
-	public void setOpenGramNo(double openGramNo) {
+	public void setOpenGramNo(Double openGramNo) {
 		this.openGramNo = openGramNo;
 	}
 	/**

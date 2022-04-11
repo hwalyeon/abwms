@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_BAND_SPEC">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsBandSpecVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsBandSpecVo" resultType="kr.co.seculink.domain.vo.TsBandSpecVo">
 		/* Generated SQL SQL ID : ts_band_spec.select */
         SELECT  band_id /* band_id 밴드_ID character varying(20) */
                ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
@@ -23,7 +23,7 @@
 		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
 		/* Generated SQL SQL ID : ts_band_spec.insert */
 		INSERT INTO ts_band_spec
 		(
@@ -43,7 +43,7 @@
 		VALUES
 		(
 		     #{bandId} /* band_id 밴드_ID character varying(20) */
-		     #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
+		     ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		<if test="regUserId != null">
@@ -57,7 +57,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
 		/* Generated SQL SQL ID : ts_band_spec.update */
 		UPDATE ts_band_spec
 		<trim prefix="SET" prefixOverrides=",">
@@ -72,7 +72,7 @@
 		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
 		/* Generated SQL SQL ID : ts_band_spec.merge */
 		INSERT INTO ts_band_spec
 		(
@@ -104,8 +104,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_band_spec_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
@@ -115,7 +115,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
 		/* Generated SQL SQL ID : ts_band_spec.delete */
 		DELETE FROM ts_band_spec
 		WHERE  1 = 1

@@ -14,16 +14,16 @@ public class TtGuarDzoneStssVo implements Serializable {
 	private String plcClssCd;
 
 	/* lat_val 위도_값 numeric(null) */
-	private double latVal;
+	private Double latVal;
 
 	/* lon_val 경도_값 numeric(null) */
-	private double lonVal;
+	private Double lonVal;
 
 	/* near_addr 인근_주소 character varying(200) */
 	private String nearAddr;
 
 	/* dup_apnt_cnt 중복_지정_건수 numeric(null) */
-	private double dupApntCnt;
+	private Double dupApntCnt;
 
 	/* addr_head_1 주소_헤더_1 character varying(30) */
 	private String addrHead1;
@@ -64,32 +64,32 @@ public class TtGuarDzoneStssVo implements Serializable {
 	}
 	/**
 	 * Get lat_val 위도_값 numeric(null)
-	 * @Return double latVal
+	 * @Return Double latVal
 	 */
-	public double getLatVal() {
+	public Double getLatVal() {
 		return this.latVal;
 	}
 	
 	/**
 	 * Set lat_val 위도_값 numeric(null)
-	 * @Param double latVal
+	 * @Param Double latVal
 	 */
-	public void setLatVal(double latVal) {
+	public void setLatVal(Double latVal) {
 		this.latVal = latVal;
 	}
 	/**
 	 * Get lon_val 경도_값 numeric(null)
-	 * @Return double lonVal
+	 * @Return Double lonVal
 	 */
-	public double getLonVal() {
+	public Double getLonVal() {
 		return this.lonVal;
 	}
 	
 	/**
 	 * Set lon_val 경도_값 numeric(null)
-	 * @Param double lonVal
+	 * @Param Double lonVal
 	 */
-	public void setLonVal(double lonVal) {
+	public void setLonVal(Double lonVal) {
 		this.lonVal = lonVal;
 	}
 	/**
@@ -109,17 +109,17 @@ public class TtGuarDzoneStssVo implements Serializable {
 	}
 	/**
 	 * Get dup_apnt_cnt 중복_지정_건수 numeric(null)
-	 * @Return double dupApntCnt
+	 * @Return Double dupApntCnt
 	 */
-	public double getDupApntCnt() {
+	public Double getDupApntCnt() {
 		return this.dupApntCnt;
 	}
 	
 	/**
 	 * Set dup_apnt_cnt 중복_지정_건수 numeric(null)
-	 * @Param double dupApntCnt
+	 * @Param Double dupApntCnt
 	 */
-	public void setDupApntCnt(double dupApntCnt) {
+	public void setDupApntCnt(Double dupApntCnt) {
 		this.dupApntCnt = dupApntCnt;
 	}
 	/**

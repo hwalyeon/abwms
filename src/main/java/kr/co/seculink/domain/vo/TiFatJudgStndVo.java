@@ -11,16 +11,16 @@ public class TiFatJudgStndVo implements Serializable {
 	private String fatJudgCd;
 
 	/* bmi_fr BMI_FROM numeric(null) */
-	private double bmiFr;
+	private Double bmiFr;
 
 	/* bmi_to BMI_TO numeric(null) */
-	private double bmiTo;
+	private Double bmiTo;
 
 	/* fidx_fr 비만지수_FROM numeric(null) */
-	private double fidxFr;
+	private Double fidxFr;
 
 	/* fidx_to 비만지수_TO numeric(null) */
-	private double fidxTo;
+	private Double fidxTo;
 
 	/* curr_eval_cntn 현재_평가_내용 character varying(4000) */
 	private String currEvalCntn;
@@ -64,62 +64,62 @@ public class TiFatJudgStndVo implements Serializable {
 	}
 	/**
 	 * Get bmi_fr BMI_FROM numeric(null)
-	 * @Return double bmiFr
+	 * @Return Double bmiFr
 	 */
-	public double getBmiFr() {
+	public Double getBmiFr() {
 		return this.bmiFr;
 	}
 	
 	/**
 	 * Set bmi_fr BMI_FROM numeric(null)
-	 * @Param double bmiFr
+	 * @Param Double bmiFr
 	 */
-	public void setBmiFr(double bmiFr) {
+	public void setBmiFr(Double bmiFr) {
 		this.bmiFr = bmiFr;
 	}
 	/**
 	 * Get bmi_to BMI_TO numeric(null)
-	 * @Return double bmiTo
+	 * @Return Double bmiTo
 	 */
-	public double getBmiTo() {
+	public Double getBmiTo() {
 		return this.bmiTo;
 	}
 	
 	/**
 	 * Set bmi_to BMI_TO numeric(null)
-	 * @Param double bmiTo
+	 * @Param Double bmiTo
 	 */
-	public void setBmiTo(double bmiTo) {
+	public void setBmiTo(Double bmiTo) {
 		this.bmiTo = bmiTo;
 	}
 	/**
 	 * Get fidx_fr 비만지수_FROM numeric(null)
-	 * @Return double fidxFr
+	 * @Return Double fidxFr
 	 */
-	public double getFidxFr() {
+	public Double getFidxFr() {
 		return this.fidxFr;
 	}
 	
 	/**
 	 * Set fidx_fr 비만지수_FROM numeric(null)
-	 * @Param double fidxFr
+	 * @Param Double fidxFr
 	 */
-	public void setFidxFr(double fidxFr) {
+	public void setFidxFr(Double fidxFr) {
 		this.fidxFr = fidxFr;
 	}
 	/**
 	 * Get fidx_to 비만지수_TO numeric(null)
-	 * @Return double fidxTo
+	 * @Return Double fidxTo
 	 */
-	public double getFidxTo() {
+	public Double getFidxTo() {
 		return this.fidxTo;
 	}
 	
 	/**
 	 * Set fidx_to 비만지수_TO numeric(null)
-	 * @Param double fidxTo
+	 * @Param Double fidxTo
 	 */
-	public void setFidxTo(double fidxTo) {
+	public void setFidxTo(Double fidxTo) {
 		this.fidxTo = fidxTo;
 	}
 	/**

@@ -8,13 +8,13 @@ import java.io.Serializable;
 public class TiFoodElemVo implements Serializable {
 
 	/* food_no 식품_번호 numeric(null) */
-	private double foodNo;
+	private Double foodNo;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
 
 	/* nutr_qty 영양소_용량 numeric(null) */
-	private double nutrQty;
+	private Double nutrQty;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -37,17 +37,17 @@ public class TiFoodElemVo implements Serializable {
 
 	/**
 	 * Get food_no 식품_번호 numeric(null)
-	 * @Return double foodNo
+	 * @Return Double foodNo
 	 */
-	public double getFoodNo() {
+	public Double getFoodNo() {
 		return this.foodNo;
 	}
 	
 	/**
 	 * Set food_no 식품_번호 numeric(null)
-	 * @Param double foodNo
+	 * @Param Double foodNo
 	 */
-	public void setFoodNo(double foodNo) {
+	public void setFoodNo(Double foodNo) {
 		this.foodNo = foodNo;
 	}
 	/**
@@ -67,17 +67,17 @@ public class TiFoodElemVo implements Serializable {
 	}
 	/**
 	 * Get nutr_qty 영양소_용량 numeric(null)
-	 * @Return double nutrQty
+	 * @Return Double nutrQty
 	 */
-	public double getNutrQty() {
+	public Double getNutrQty() {
 		return this.nutrQty;
 	}
 	
 	/**
 	 * Set nutr_qty 영양소_용량 numeric(null)
-	 * @Param double nutrQty
+	 * @Param Double nutrQty
 	 */
-	public void setNutrQty(double nutrQty) {
+	public void setNutrQty(Double nutrQty) {
 		this.nutrQty = nutrQty;
 	}
 	/**

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_ROLE_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TcRoleBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TcRoleBaseVo" resultType="kr.co.seculink.domain.vo.TcRoleBaseVo">
 		/* Generated SQL SQL ID : tc_role_base.select */
         SELECT  role_cd /* role_cd 역할_코드 character varying(40) */
                ,role_nm /* role_nm 역할_명 character varying(100) */
@@ -24,7 +24,7 @@
 		AND    role_cd = #{roleCd} /* role_cd 역할_코드 character varying(40) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcRoleBaseVo">
 		/* Generated SQL SQL ID : tc_role_base.insert */
 		INSERT INTO tc_role_base
 		(
@@ -66,7 +66,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TcRoleBaseVo">
 		/* Generated SQL SQL ID : tc_role_base.update */
 		UPDATE tc_role_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -89,7 +89,7 @@
 		AND    role_cd = #{roleCd} /* role_cd 역할_코드 character varying(40) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcRoleBaseVo">
 		/* Generated SQL SQL ID : tc_role_base.merge */
 		INSERT INTO tc_role_base
 		(
@@ -129,8 +129,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tc_role_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="roleNm != null">
 		    ,role_nm = #{roleNm} /* role_nm 역할_명 character varying(100) */
@@ -149,7 +149,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcRoleBaseVo">
 		/* Generated SQL SQL ID : tc_role_base.delete */
 		DELETE FROM tc_role_base
 		WHERE  1 = 1

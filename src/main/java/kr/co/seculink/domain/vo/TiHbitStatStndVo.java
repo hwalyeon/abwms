@@ -11,13 +11,13 @@ public class TiHbitStatStndVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* hbit_cnt_fr 심박_수_FROM numeric(null) */
-	private double hbitCntFr;
+	private Double hbitCntFr;
 
 	/* hbit_cnt_to 심박_수_TO numeric(null) */
-	private double hbitCntTo;
+	private Double hbitCntTo;
 
 	/* hbit_stat_cd 심박_상태_코드 character varying(20) */
 	private String hbitStatCd;
@@ -58,47 +58,47 @@ public class TiHbitStatStndVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get hbit_cnt_fr 심박_수_FROM numeric(null)
-	 * @Return double hbitCntFr
+	 * @Return Double hbitCntFr
 	 */
-	public double getHbitCntFr() {
+	public Double getHbitCntFr() {
 		return this.hbitCntFr;
 	}
 	
 	/**
 	 * Set hbit_cnt_fr 심박_수_FROM numeric(null)
-	 * @Param double hbitCntFr
+	 * @Param Double hbitCntFr
 	 */
-	public void setHbitCntFr(double hbitCntFr) {
+	public void setHbitCntFr(Double hbitCntFr) {
 		this.hbitCntFr = hbitCntFr;
 	}
 	/**
 	 * Get hbit_cnt_to 심박_수_TO numeric(null)
-	 * @Return double hbitCntTo
+	 * @Return Double hbitCntTo
 	 */
-	public double getHbitCntTo() {
+	public Double getHbitCntTo() {
 		return this.hbitCntTo;
 	}
 	
 	/**
 	 * Set hbit_cnt_to 심박_수_TO numeric(null)
-	 * @Param double hbitCntTo
+	 * @Param Double hbitCntTo
 	 */
-	public void setHbitCntTo(double hbitCntTo) {
+	public void setHbitCntTo(Double hbitCntTo) {
 		this.hbitCntTo = hbitCntTo;
 	}
 	/**

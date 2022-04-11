@@ -7,13 +7,13 @@
 -->
 <mapper namespace="TM_SPOS_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TmSposBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TmSposBaseVo" resultType="kr.co.seculink.domain.vo.TmSposBaseVo">
 		/* Generated SQL SQL ID : tm_spos_base.select */
         FROM   tm_spos_base
 		WHERE  1 = 1
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
 		/* Generated SQL SQL ID : tm_spos_base.insert */
 		INSERT INTO tm_spos_base
 		(
@@ -23,7 +23,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
 		/* Generated SQL SQL ID : tm_spos_base.update */
 		UPDATE tm_spos_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -31,7 +31,7 @@
 		WHERE  1 = 1
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
 		/* Generated SQL SQL ID : tm_spos_base.merge */
 		INSERT INTO tm_spos_base
 		(
@@ -39,13 +39,13 @@
 		VALUES
 		(
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tm_spos_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmSposBaseVo">
 		/* Generated SQL SQL ID : tm_spos_base.delete */
 		DELETE FROM tm_spos_base
 		WHERE  1 = 1

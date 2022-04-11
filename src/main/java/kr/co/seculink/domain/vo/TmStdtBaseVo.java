@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TmStdtBaseVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* stdt_nm 학생_명 character varying(256) */
 	private String stdtNm;
@@ -17,7 +17,7 @@ public class TmStdtBaseVo implements Serializable {
 	private String bandId;
 
 	/* eorg_loc_no 교육시설_위치_번호 numeric(null) */
-	private double eorgLocNo;
+	private Double eorgLocNo;
 
 	/* sgrd_cd 학년_코드 character varying(20) */
 	private String sgrdCd;
@@ -32,7 +32,7 @@ public class TmStdtBaseVo implements Serializable {
 	private String raceDivCd;
 
 	/* prnt_no 학부모_번호 numeric(null) */
-	private double prntNo;
+	private Double prntNo;
 
 	/* band_stat_cd 밴드_상태_코드 character varying(20) */
 	private String bandStatCd;
@@ -41,28 +41,28 @@ public class TmStdtBaseVo implements Serializable {
 	private String bandCommDttm;
 
 	/* band_chrg_qty 밴드_충전_량 numeric(null) */
-	private double bandChrgQty;
+	private Double bandChrgQty;
 
 	/* band_alam_no 밴드_알림_번호 numeric(null) */
-	private double bandAlamNo;
+	private Double bandAlamNo;
 
 	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	private Double judgNo;
 
 	/* dact_judg_no 위험활동_판정_번호 numeric(null) */
-	private double dactJudgNo;
+	private Double dactJudgNo;
 
 	/* dgem_hist_seq 위험감정_이력_순번 numeric(null) */
-	private double dgemHistSeq;
+	private Double dgemHistSeq;
 
 	/* strs_hist_seq 스트레스_이력_순번 numeric(null) */
-	private double strsHistSeq;
+	private Double strsHistSeq;
 
 	/* loc_hist_no 위치_이력_번호 numeric(null) */
-	private double locHistNo;
+	private Double locHistNo;
 
 	/* cbee_hist_no 캐시비_이력_번호 numeric(null) */
-	private double cbeeHistNo;
+	private Double cbeeHistNo;
 
 	/* gfix_dt 성장비만지수_일자 character(8) */
 	private String gfixDt;
@@ -109,17 +109,17 @@ public class TmStdtBaseVo implements Serializable {
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -154,17 +154,17 @@ public class TmStdtBaseVo implements Serializable {
 	}
 	/**
 	 * Get eorg_loc_no 교육시설_위치_번호 numeric(null)
-	 * @Return double eorgLocNo
+	 * @Return Double eorgLocNo
 	 */
-	public double getEorgLocNo() {
+	public Double getEorgLocNo() {
 		return this.eorgLocNo;
 	}
 	
 	/**
 	 * Set eorg_loc_no 교육시설_위치_번호 numeric(null)
-	 * @Param double eorgLocNo
+	 * @Param Double eorgLocNo
 	 */
-	public void setEorgLocNo(double eorgLocNo) {
+	public void setEorgLocNo(Double eorgLocNo) {
 		this.eorgLocNo = eorgLocNo;
 	}
 	/**
@@ -229,17 +229,17 @@ public class TmStdtBaseVo implements Serializable {
 	}
 	/**
 	 * Get prnt_no 학부모_번호 numeric(null)
-	 * @Return double prntNo
+	 * @Return Double prntNo
 	 */
-	public double getPrntNo() {
+	public Double getPrntNo() {
 		return this.prntNo;
 	}
 	
 	/**
 	 * Set prnt_no 학부모_번호 numeric(null)
-	 * @Param double prntNo
+	 * @Param Double prntNo
 	 */
-	public void setPrntNo(double prntNo) {
+	public void setPrntNo(Double prntNo) {
 		this.prntNo = prntNo;
 	}
 	/**
@@ -274,122 +274,122 @@ public class TmStdtBaseVo implements Serializable {
 	}
 	/**
 	 * Get band_chrg_qty 밴드_충전_량 numeric(null)
-	 * @Return double bandChrgQty
+	 * @Return Double bandChrgQty
 	 */
-	public double getBandChrgQty() {
+	public Double getBandChrgQty() {
 		return this.bandChrgQty;
 	}
 	
 	/**
 	 * Set band_chrg_qty 밴드_충전_량 numeric(null)
-	 * @Param double bandChrgQty
+	 * @Param Double bandChrgQty
 	 */
-	public void setBandChrgQty(double bandChrgQty) {
+	public void setBandChrgQty(Double bandChrgQty) {
 		this.bandChrgQty = bandChrgQty;
 	}
 	/**
 	 * Get band_alam_no 밴드_알림_번호 numeric(null)
-	 * @Return double bandAlamNo
+	 * @Return Double bandAlamNo
 	 */
-	public double getBandAlamNo() {
+	public Double getBandAlamNo() {
 		return this.bandAlamNo;
 	}
 	
 	/**
 	 * Set band_alam_no 밴드_알림_번호 numeric(null)
-	 * @Param double bandAlamNo
+	 * @Param Double bandAlamNo
 	 */
-	public void setBandAlamNo(double bandAlamNo) {
+	public void setBandAlamNo(Double bandAlamNo) {
 		this.bandAlamNo = bandAlamNo;
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
+	 * @Return Double judgNo
 	 */
-	public double getJudgNo() {
+	public Double getJudgNo() {
 		return this.judgNo;
 	}
 	
 	/**
 	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
+	 * @Param Double judgNo
 	 */
-	public void setJudgNo(double judgNo) {
+	public void setJudgNo(Double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**
 	 * Get dact_judg_no 위험활동_판정_번호 numeric(null)
-	 * @Return double dactJudgNo
+	 * @Return Double dactJudgNo
 	 */
-	public double getDactJudgNo() {
+	public Double getDactJudgNo() {
 		return this.dactJudgNo;
 	}
 	
 	/**
 	 * Set dact_judg_no 위험활동_판정_번호 numeric(null)
-	 * @Param double dactJudgNo
+	 * @Param Double dactJudgNo
 	 */
-	public void setDactJudgNo(double dactJudgNo) {
+	public void setDactJudgNo(Double dactJudgNo) {
 		this.dactJudgNo = dactJudgNo;
 	}
 	/**
 	 * Get dgem_hist_seq 위험감정_이력_순번 numeric(null)
-	 * @Return double dgemHistSeq
+	 * @Return Double dgemHistSeq
 	 */
-	public double getDgemHistSeq() {
+	public Double getDgemHistSeq() {
 		return this.dgemHistSeq;
 	}
 	
 	/**
 	 * Set dgem_hist_seq 위험감정_이력_순번 numeric(null)
-	 * @Param double dgemHistSeq
+	 * @Param Double dgemHistSeq
 	 */
-	public void setDgemHistSeq(double dgemHistSeq) {
+	public void setDgemHistSeq(Double dgemHistSeq) {
 		this.dgemHistSeq = dgemHistSeq;
 	}
 	/**
 	 * Get strs_hist_seq 스트레스_이력_순번 numeric(null)
-	 * @Return double strsHistSeq
+	 * @Return Double strsHistSeq
 	 */
-	public double getStrsHistSeq() {
+	public Double getStrsHistSeq() {
 		return this.strsHistSeq;
 	}
 	
 	/**
 	 * Set strs_hist_seq 스트레스_이력_순번 numeric(null)
-	 * @Param double strsHistSeq
+	 * @Param Double strsHistSeq
 	 */
-	public void setStrsHistSeq(double strsHistSeq) {
+	public void setStrsHistSeq(Double strsHistSeq) {
 		this.strsHistSeq = strsHistSeq;
 	}
 	/**
 	 * Get loc_hist_no 위치_이력_번호 numeric(null)
-	 * @Return double locHistNo
+	 * @Return Double locHistNo
 	 */
-	public double getLocHistNo() {
+	public Double getLocHistNo() {
 		return this.locHistNo;
 	}
 	
 	/**
 	 * Set loc_hist_no 위치_이력_번호 numeric(null)
-	 * @Param double locHistNo
+	 * @Param Double locHistNo
 	 */
-	public void setLocHistNo(double locHistNo) {
+	public void setLocHistNo(Double locHistNo) {
 		this.locHistNo = locHistNo;
 	}
 	/**
 	 * Get cbee_hist_no 캐시비_이력_번호 numeric(null)
-	 * @Return double cbeeHistNo
+	 * @Return Double cbeeHistNo
 	 */
-	public double getCbeeHistNo() {
+	public Double getCbeeHistNo() {
 		return this.cbeeHistNo;
 	}
 	
 	/**
 	 * Set cbee_hist_no 캐시비_이력_번호 numeric(null)
-	 * @Param double cbeeHistNo
+	 * @Param Double cbeeHistNo
 	 */
-	public void setCbeeHistNo(double cbeeHistNo) {
+	public void setCbeeHistNo(Double cbeeHistNo) {
 		this.cbeeHistNo = cbeeHistNo;
 	}
 	/**

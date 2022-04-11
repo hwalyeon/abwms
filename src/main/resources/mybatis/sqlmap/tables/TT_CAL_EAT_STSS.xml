@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TT_CAL_EAT_STSS">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TtCalEatStssVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TtCalEatStssVo" resultType="kr.co.seculink.domain.vo.TtCalEatStssVo">
 		/* Generated SQL SQL ID : tt_cal_eat_stss.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -29,7 +29,7 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TtCalEatStssVo">
 		/* Generated SQL SQL ID : tt_cal_eat_stss.insert */
 		INSERT INTO tt_cal_eat_stss
 		(
@@ -58,8 +58,8 @@
 		VALUES
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
-		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		     ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		     ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -81,7 +81,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TtCalEatStssVo">
 		/* Generated SQL SQL ID : tt_cal_eat_stss.update */
 		UPDATE tt_cal_eat_stss
 		<trim prefix="SET" prefixOverrides=",">
@@ -109,7 +109,7 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TtCalEatStssVo">
 		/* Generated SQL SQL ID : tt_cal_eat_stss.merge */
 		INSERT INTO tt_cal_eat_stss
 		(
@@ -159,8 +159,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tt_cal_eat_stss_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="stndYymm != null">
 		    ,stnd_yymm = #{stndYymm} /* stnd_yymm 기준_년월 character(6) */
@@ -182,7 +182,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TtCalEatStssVo">
 		/* Generated SQL SQL ID : tt_cal_eat_stss.delete */
 		DELETE FROM tt_cal_eat_stss
 		WHERE  1 = 1

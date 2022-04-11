@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TcCalVo implements Serializable {
 
 	/* regi_no 등록_번호 numeric(null) */
-	private double regiNo;
+	private Double regiNo;
 
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
@@ -80,13 +80,13 @@ public class TcCalVo implements Serializable {
 	private String holidayYn;
 
 	/* year_week_seq 년별_주차 numeric(null) */
-	private double yearWeekSeq;
+	private Double yearWeekSeq;
 
 	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	private Double mnthWeekSeq;
 
 	/* week_seq 주차 numeric(null) */
-	private double weekSeq;
+	private Double weekSeq;
 
 	/* regi_dt 등록_일자 character(8) */
 	private String regiDt;
@@ -109,17 +109,17 @@ public class TcCalVo implements Serializable {
 
 	/**
 	 * Get regi_no 등록_번호 numeric(null)
-	 * @Return double regiNo
+	 * @Return Double regiNo
 	 */
-	public double getRegiNo() {
+	public Double getRegiNo() {
 		return this.regiNo;
 	}
 	
 	/**
 	 * Set regi_no 등록_번호 numeric(null)
-	 * @Param double regiNo
+	 * @Param Double regiNo
 	 */
-	public void setRegiNo(double regiNo) {
+	public void setRegiNo(Double regiNo) {
 		this.regiNo = regiNo;
 	}
 	/**
@@ -469,47 +469,47 @@ public class TcCalVo implements Serializable {
 	}
 	/**
 	 * Get year_week_seq 년별_주차 numeric(null)
-	 * @Return double yearWeekSeq
+	 * @Return Double yearWeekSeq
 	 */
-	public double getYearWeekSeq() {
+	public Double getYearWeekSeq() {
 		return this.yearWeekSeq;
 	}
 	
 	/**
 	 * Set year_week_seq 년별_주차 numeric(null)
-	 * @Param double yearWeekSeq
+	 * @Param Double yearWeekSeq
 	 */
-	public void setYearWeekSeq(double yearWeekSeq) {
+	public void setYearWeekSeq(Double yearWeekSeq) {
 		this.yearWeekSeq = yearWeekSeq;
 	}
 	/**
 	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
+	 * @Return Double mnthWeekSeq
 	 */
-	public double getMnthWeekSeq() {
+	public Double getMnthWeekSeq() {
 		return this.mnthWeekSeq;
 	}
 	
 	/**
 	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * @Param Double mnthWeekSeq
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
+	public void setMnthWeekSeq(Double mnthWeekSeq) {
 		this.mnthWeekSeq = mnthWeekSeq;
 	}
 	/**
 	 * Get week_seq 주차 numeric(null)
-	 * @Return double weekSeq
+	 * @Return Double weekSeq
 	 */
-	public double getWeekSeq() {
+	public Double getWeekSeq() {
 		return this.weekSeq;
 	}
 	
 	/**
 	 * Set week_seq 주차 numeric(null)
-	 * @Param double weekSeq
+	 * @Param Double weekSeq
 	 */
-	public void setWeekSeq(double weekSeq) {
+	public void setWeekSeq(Double weekSeq) {
 		this.weekSeq = weekSeq;
 	}
 	/**

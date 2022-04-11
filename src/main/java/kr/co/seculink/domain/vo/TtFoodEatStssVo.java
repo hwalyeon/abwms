@@ -14,22 +14,22 @@ public class TtFoodEatStssVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* food_no 식품_번호 numeric(null) */
-	private double foodNo;
+	private Double foodNo;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
 
 	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	private Double mnthWeekSeq;
 
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
 	/* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null) */
-	private double avgCalEatQty;
+	private Double avgCalEatQty;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -82,32 +82,32 @@ public class TtFoodEatStssVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
 	 * Get food_no 식품_번호 numeric(null)
-	 * @Return double foodNo
+	 * @Return Double foodNo
 	 */
-	public double getFoodNo() {
+	public Double getFoodNo() {
 		return this.foodNo;
 	}
 	
 	/**
 	 * Set food_no 식품_번호 numeric(null)
-	 * @Param double foodNo
+	 * @Param Double foodNo
 	 */
-	public void setFoodNo(double foodNo) {
+	public void setFoodNo(Double foodNo) {
 		this.foodNo = foodNo;
 	}
 	/**
@@ -127,17 +127,17 @@ public class TtFoodEatStssVo implements Serializable {
 	}
 	/**
 	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
+	 * @Return Double mnthWeekSeq
 	 */
-	public double getMnthWeekSeq() {
+	public Double getMnthWeekSeq() {
 		return this.mnthWeekSeq;
 	}
 	
 	/**
 	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * @Param Double mnthWeekSeq
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
+	public void setMnthWeekSeq(Double mnthWeekSeq) {
 		this.mnthWeekSeq = mnthWeekSeq;
 	}
 	/**
@@ -157,17 +157,17 @@ public class TtFoodEatStssVo implements Serializable {
 	}
 	/**
 	 * Get avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
-	 * @Return double avgCalEatQty
+	 * @Return Double avgCalEatQty
 	 */
-	public double getAvgCalEatQty() {
+	public Double getAvgCalEatQty() {
 		return this.avgCalEatQty;
 	}
 	
 	/**
 	 * Set avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
-	 * @Param double avgCalEatQty
+	 * @Param Double avgCalEatQty
 	 */
-	public void setAvgCalEatQty(double avgCalEatQty) {
+	public void setAvgCalEatQty(Double avgCalEatQty) {
 		this.avgCalEatQty = avgCalEatQty;
 	}
 	/**

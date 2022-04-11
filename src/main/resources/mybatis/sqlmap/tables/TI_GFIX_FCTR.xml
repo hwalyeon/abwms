@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_GFIX_FCTR">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiGfixFctrVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo" resultType="kr.co.seculink.domain.vo.TiGfixFctrVo">
 		/* Generated SQL SQL ID : ti_gfix_fctr.select */
         SELECT  gfix_div_cd /* gfix_div_cd 성장비만지수_구분_코드 character varying(20) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -33,7 +33,7 @@
 		AND    age_mcnt = #{ageMcnt} /* age_mcnt 나이_개월수 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
 		/* Generated SQL SQL ID : ti_gfix_fctr.insert */
 		INSERT INTO ti_gfix_fctr
 		(
@@ -78,8 +78,8 @@
 		VALUES
 		(
 		     #{gfixDivCd} /* gfix_div_cd 성장비만지수_구분_코드 character varying(20) */
-		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageMcnt} /* age_mcnt 나이_개월수 numeric */
+		     ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		     ,#{ageMcnt} /* age_mcnt 나이_개월수 numeric */
 		<if test="fctr1 != null">
 		    ,#{fctr1} /* fctr_1 팩터_1 numeric */
 		</if>
@@ -117,7 +117,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
 		/* Generated SQL SQL ID : ti_gfix_fctr.update */
 		UPDATE ti_gfix_fctr
 		<trim prefix="SET" prefixOverrides=",">
@@ -157,7 +157,7 @@
 		AND    age_mcnt = #{ageMcnt} /* age_mcnt 나이_개월수 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
 		/* Generated SQL SQL ID : ti_gfix_fctr.merge */
 		INSERT INTO ti_gfix_fctr
 		(
@@ -239,8 +239,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_gfix_fctr_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="fctr1 != null">
 		    ,fctr_1 = #{fctr1} /* fctr_1 팩터_1 numeric */
@@ -274,7 +274,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
 		/* Generated SQL SQL ID : ti_gfix_fctr.delete */
 		DELETE FROM ti_gfix_fctr
 		WHERE  1 = 1

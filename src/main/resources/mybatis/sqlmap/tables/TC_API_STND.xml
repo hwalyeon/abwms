@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_API_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TcApiStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TcApiStndVo" resultType="kr.co.seculink.domain.vo.TcApiStndVo">
 		/* Generated SQL SQL ID : tc_api_stnd.select */
         SELECT  svr_id /* svr_id 서버_ID character varying(20) */
                ,svr_nm /* svr_nm 서버_명 character varying(100) */
@@ -37,7 +37,7 @@
 		AND    svr_id = #{svrId} /* svr_id 서버_ID character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcApiStndVo">
 		/* Generated SQL SQL ID : tc_api_stnd.insert */
 		INSERT INTO tc_api_stnd
 		(
@@ -109,7 +109,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TcApiStndVo">
 		/* Generated SQL SQL ID : tc_api_stnd.update */
 		UPDATE tc_api_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -171,7 +171,7 @@
 		AND    svr_id = #{svrId} /* svr_id 서버_ID character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcApiStndVo">
 		/* Generated SQL SQL ID : tc_api_stnd.merge */
 		INSERT INTO tc_api_stnd
 		(
@@ -241,8 +241,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tc_api_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="svrNm != null">
 		    ,svr_nm = #{svrNm} /* svr_nm 서버_명 character varying(100) */
@@ -300,7 +300,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcApiStndVo">
 		/* Generated SQL SQL ID : tc_api_stnd.delete */
 		DELETE FROM tc_api_stnd
 		WHERE  1 = 1

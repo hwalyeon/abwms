@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TcFileVo implements Serializable {
 
 	/* file_no 파일_번호 numeric(null) */
-	private double fileNo;
+	private Double fileNo;
 
 	/* file_path 파일_경로 character varying(1000) */
 	private String filePath;
@@ -40,17 +40,17 @@ public class TcFileVo implements Serializable {
 
 	/**
 	 * Get file_no 파일_번호 numeric(null)
-	 * @Return double fileNo
+	 * @Return Double fileNo
 	 */
-	public double getFileNo() {
+	public Double getFileNo() {
 		return this.fileNo;
 	}
 	
 	/**
 	 * Set file_no 파일_번호 numeric(null)
-	 * @Param double fileNo
+	 * @Param Double fileNo
 	 */
-	public void setFileNo(double fileNo) {
+	public void setFileNo(Double fileNo) {
 		this.fileNo = fileNo;
 	}
 	/**

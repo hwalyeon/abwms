@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsAlamBaseVo implements Serializable {
 
 	/* alam_no 알림_번호 numeric(null) */
-	private double alamNo;
+	private Double alamNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -31,17 +31,17 @@ public class TsAlamBaseVo implements Serializable {
 
 	/**
 	 * Get alam_no 알림_번호 numeric(null)
-	 * @Return double alamNo
+	 * @Return Double alamNo
 	 */
-	public double getAlamNo() {
+	public Double getAlamNo() {
 		return this.alamNo;
 	}
 	
 	/**
 	 * Set alam_no 알림_번호 numeric(null)
-	 * @Param double alamNo
+	 * @Param Double alamNo
 	 */
-	public void setAlamNo(double alamNo) {
+	public void setAlamNo(Double alamNo) {
 		this.alamNo = alamNo;
 	}
 	/**

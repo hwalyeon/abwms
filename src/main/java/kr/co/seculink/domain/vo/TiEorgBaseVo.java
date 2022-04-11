@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TiEorgBaseVo implements Serializable {
 
 	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
+	private Double locNo;
 
 	/* plc_cd 장소_코드 character varying(20) */
 	private String plcCd;
@@ -23,10 +23,10 @@ public class TiEorgBaseVo implements Serializable {
 	private String jibnAddr;
 
 	/* lat_val 위도_값 numeric(null) */
-	private double latVal;
+	private Double latVal;
 
 	/* lon_val 경도_값 numeric(null) */
-	private double lonVal;
+	private Double lonVal;
 
 	/* mng_orgn_nm 관리_기관_명 character varying(100) */
 	private String mngOrgnNm;
@@ -38,7 +38,7 @@ public class TiEorgBaseVo implements Serializable {
 	private String cctvYn;
 
 	/* cctv_cnt CCTV_대수 numeric(null) */
-	private double cctvCnt;
+	private Double cctvCnt;
 
 	/* road_wdth_desc 도로_넓이_설명 character varying(50) */
 	private String roadWdthDesc;
@@ -73,17 +73,17 @@ public class TiEorgBaseVo implements Serializable {
 
 	/**
 	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
+	 * @Return Double locNo
 	 */
-	public double getLocNo() {
+	public Double getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
 	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
+	 * @Param Double locNo
 	 */
-	public void setLocNo(double locNo) {
+	public void setLocNo(Double locNo) {
 		this.locNo = locNo;
 	}
 	/**
@@ -148,32 +148,32 @@ public class TiEorgBaseVo implements Serializable {
 	}
 	/**
 	 * Get lat_val 위도_값 numeric(null)
-	 * @Return double latVal
+	 * @Return Double latVal
 	 */
-	public double getLatVal() {
+	public Double getLatVal() {
 		return this.latVal;
 	}
 	
 	/**
 	 * Set lat_val 위도_값 numeric(null)
-	 * @Param double latVal
+	 * @Param Double latVal
 	 */
-	public void setLatVal(double latVal) {
+	public void setLatVal(Double latVal) {
 		this.latVal = latVal;
 	}
 	/**
 	 * Get lon_val 경도_값 numeric(null)
-	 * @Return double lonVal
+	 * @Return Double lonVal
 	 */
-	public double getLonVal() {
+	public Double getLonVal() {
 		return this.lonVal;
 	}
 	
 	/**
 	 * Set lon_val 경도_값 numeric(null)
-	 * @Param double lonVal
+	 * @Param Double lonVal
 	 */
-	public void setLonVal(double lonVal) {
+	public void setLonVal(Double lonVal) {
 		this.lonVal = lonVal;
 	}
 	/**
@@ -223,17 +223,17 @@ public class TiEorgBaseVo implements Serializable {
 	}
 	/**
 	 * Get cctv_cnt CCTV_대수 numeric(null)
-	 * @Return double cctvCnt
+	 * @Return Double cctvCnt
 	 */
-	public double getCctvCnt() {
+	public Double getCctvCnt() {
 		return this.cctvCnt;
 	}
 	
 	/**
 	 * Set cctv_cnt CCTV_대수 numeric(null)
-	 * @Param double cctvCnt
+	 * @Param Double cctvCnt
 	 */
-	public void setCctvCnt(double cctvCnt) {
+	public void setCctvCnt(Double cctvCnt) {
 		this.cctvCnt = cctvCnt;
 	}
 	/**

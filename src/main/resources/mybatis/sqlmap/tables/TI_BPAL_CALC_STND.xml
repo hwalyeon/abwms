@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_BPAL_CALC_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo" resultType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.select */
         SELECT  sex_cd /* sex_cd 성별_코드 character varying(20) */
                ,age_ycnt_fr /* age_ycnt_fr 나이_년수_FROM numeric */
@@ -25,7 +25,7 @@
 		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.insert */
 		INSERT INTO ti_bpal_calc_stnd
 		(
@@ -45,7 +45,7 @@
 		VALUES
 		(
 		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
+		     ,#{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
 		    ,#{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
 		<if test="calcFrml != null">
 		    ,#{calcFrml} /* calc_frml 계산_식 character varying(2000) */
@@ -59,7 +59,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.update */
 		UPDATE ti_bpal_calc_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -80,7 +80,7 @@
 		AND    age_ycnt_fr = #{ageYcntFr} /* age_ycnt_fr 나이_년수_FROM numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.merge */
 		INSERT INTO ti_bpal_calc_stnd
 		(
@@ -112,8 +112,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_bpal_calc_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="ageYcntTo != null">
 		    ,age_ycnt_to = #{ageYcntTo} /* age_ycnt_to 나이_년수_TO numeric */
@@ -129,7 +129,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiBpalCalcStndVo">
 		/* Generated SQL SQL ID : ti_bpal_calc_stnd.delete */
 		DELETE FROM ti_bpal_calc_stnd
 		WHERE  1 = 1

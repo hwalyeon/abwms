@@ -8,13 +8,13 @@ import java.io.Serializable;
 public class TsAlamHistVo implements Serializable {
 
 	/* alam_no 알림_번호 numeric(null) */
-	private double alamNo;
+	private Double alamNo;
 
 	/* guar_no 보호자_번호 numeric(null) */
-	private double guarNo;
+	private Double guarNo;
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* alam_chnl_cd 알림_채널_코드 character varying(20) */
 	private String alamChnlCd;
@@ -61,47 +61,47 @@ public class TsAlamHistVo implements Serializable {
 
 	/**
 	 * Get alam_no 알림_번호 numeric(null)
-	 * @Return double alamNo
+	 * @Return Double alamNo
 	 */
-	public double getAlamNo() {
+	public Double getAlamNo() {
 		return this.alamNo;
 	}
 	
 	/**
 	 * Set alam_no 알림_번호 numeric(null)
-	 * @Param double alamNo
+	 * @Param Double alamNo
 	 */
-	public void setAlamNo(double alamNo) {
+	public void setAlamNo(Double alamNo) {
 		this.alamNo = alamNo;
 	}
 	/**
 	 * Get guar_no 보호자_번호 numeric(null)
-	 * @Return double guarNo
+	 * @Return Double guarNo
 	 */
-	public double getGuarNo() {
+	public Double getGuarNo() {
 		return this.guarNo;
 	}
 	
 	/**
 	 * Set guar_no 보호자_번호 numeric(null)
-	 * @Param double guarNo
+	 * @Param Double guarNo
 	 */
-	public void setGuarNo(double guarNo) {
+	public void setGuarNo(Double guarNo) {
 		this.guarNo = guarNo;
 	}
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_TEMP_STAT_STND">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiTempStatStndVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo" resultType="kr.co.seculink.domain.vo.TiTempStatStndVo">
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.select */
         SELECT  age_ycnt /* age_ycnt 나이_년수 numeric */
                ,temp_val_fr /* temp_val_fr 체온_값_FROM numeric */
@@ -25,7 +25,7 @@
 		AND    temp_val_fr = #{tempValFr} /* temp_val_fr 체온_값_FROM numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.insert */
 		INSERT INTO ti_temp_stat_stnd
 		(
@@ -49,7 +49,7 @@
 		VALUES
 		(
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		     #{tempValFr} /* temp_val_fr 체온_값_FROM numeric */
+		     ,#{tempValFr} /* temp_val_fr 체온_값_FROM numeric */
 		    ,#{tempValTo} /* temp_val_to 체온_값_TO numeric */
 		<if test="tempStatCd != null">
 		    ,#{tempStatCd} /* temp_stat_cd 체온_상태_코드 character varying(20) */
@@ -67,7 +67,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.update */
 		UPDATE ti_temp_stat_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -88,7 +88,7 @@
 		AND    temp_val_fr = #{tempValFr} /* temp_val_fr 체온_값_FROM numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.merge */
 		INSERT INTO ti_temp_stat_stnd
 		(
@@ -128,8 +128,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_temp_stat_stnd_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="tempValTo != null">
 		    ,temp_val_to = #{tempValTo} /* temp_val_to 체온_값_TO numeric */
@@ -145,7 +145,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.delete */
 		DELETE FROM ti_temp_stat_stnd
 		WHERE  1 = 1

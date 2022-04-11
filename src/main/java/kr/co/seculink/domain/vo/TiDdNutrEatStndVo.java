@@ -11,16 +11,16 @@ public class TiDdNutrEatStndVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
 
 	/* dd_rcmd_qty 일_권장_량 numeric(null) */
-	private double ddRcmdQty;
+	private Double ddRcmdQty;
 
 	/* dd_need_qty 일_필요_량 numeric(null) */
-	private double ddNeedQty;
+	private Double ddNeedQty;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -58,17 +58,17 @@ public class TiDdNutrEatStndVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
@@ -88,32 +88,32 @@ public class TiDdNutrEatStndVo implements Serializable {
 	}
 	/**
 	 * Get dd_rcmd_qty 일_권장_량 numeric(null)
-	 * @Return double ddRcmdQty
+	 * @Return Double ddRcmdQty
 	 */
-	public double getDdRcmdQty() {
+	public Double getDdRcmdQty() {
 		return this.ddRcmdQty;
 	}
 	
 	/**
 	 * Set dd_rcmd_qty 일_권장_량 numeric(null)
-	 * @Param double ddRcmdQty
+	 * @Param Double ddRcmdQty
 	 */
-	public void setDdRcmdQty(double ddRcmdQty) {
+	public void setDdRcmdQty(Double ddRcmdQty) {
 		this.ddRcmdQty = ddRcmdQty;
 	}
 	/**
 	 * Get dd_need_qty 일_필요_량 numeric(null)
-	 * @Return double ddNeedQty
+	 * @Return Double ddNeedQty
 	 */
-	public double getDdNeedQty() {
+	public Double getDdNeedQty() {
 		return this.ddNeedQty;
 	}
 	
 	/**
 	 * Set dd_need_qty 일_필요_량 numeric(null)
-	 * @Param double ddNeedQty
+	 * @Param Double ddNeedQty
 	 */
-	public void setDdNeedQty(double ddNeedQty) {
+	public void setDdNeedQty(Double ddNeedQty) {
 		this.ddNeedQty = ddNeedQty;
 	}
 	/**

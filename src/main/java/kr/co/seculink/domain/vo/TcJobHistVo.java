@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TcJobHistVo implements Serializable {
 
 	/* job_hist_no 작업_이력_번호 numeric(null) */
-	private double jobHistNo;
+	private Double jobHistNo;
 
 	/* job_id 작업_ID character varying(200) */
 	private String jobId;
@@ -26,7 +26,7 @@ public class TcJobHistVo implements Serializable {
 	private String endTm;
 
 	/* job_tcnt 작업_시간 numeric(null) */
-	private double jobTcnt;
+	private Double jobTcnt;
 
 	/* rslt_cd 결과_코드 character varying(20) */
 	private String rsltCd;
@@ -55,17 +55,17 @@ public class TcJobHistVo implements Serializable {
 
 	/**
 	 * Get job_hist_no 작업_이력_번호 numeric(null)
-	 * @Return double jobHistNo
+	 * @Return Double jobHistNo
 	 */
-	public double getJobHistNo() {
+	public Double getJobHistNo() {
 		return this.jobHistNo;
 	}
 	
 	/**
 	 * Set job_hist_no 작업_이력_번호 numeric(null)
-	 * @Param double jobHistNo
+	 * @Param Double jobHistNo
 	 */
-	public void setJobHistNo(double jobHistNo) {
+	public void setJobHistNo(Double jobHistNo) {
 		this.jobHistNo = jobHistNo;
 	}
 	/**
@@ -145,17 +145,17 @@ public class TcJobHistVo implements Serializable {
 	}
 	/**
 	 * Get job_tcnt 작업_시간 numeric(null)
-	 * @Return double jobTcnt
+	 * @Return Double jobTcnt
 	 */
-	public double getJobTcnt() {
+	public Double getJobTcnt() {
 		return this.jobTcnt;
 	}
 	
 	/**
 	 * Set job_tcnt 작업_시간 numeric(null)
-	 * @Param double jobTcnt
+	 * @Param Double jobTcnt
 	 */
-	public void setJobTcnt(double jobTcnt) {
+	public void setJobTcnt(Double jobTcnt) {
 		this.jobTcnt = jobTcnt;
 	}
 	/**

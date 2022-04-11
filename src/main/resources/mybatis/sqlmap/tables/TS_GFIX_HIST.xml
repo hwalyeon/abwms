@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_GFIX_HIST">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsGfixHistVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsGfixHistVo" resultType="kr.co.seculink.domain.vo.TsGfixHistVo">
 		/* Generated SQL SQL ID : ts_gfix_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,gfix_dt /* gfix_dt 성장비만지수_일자 character(8) */
@@ -62,7 +62,7 @@
 		AND    gfix_dt = #{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsGfixHistVo">
 		/* Generated SQL SQL ID : ts_gfix_hist.insert */
 		INSERT INTO ts_gfix_hist
 		(
@@ -153,7 +153,7 @@
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
+		     ,#{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
 		<if test="sexCd != null">
 		    ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
 		</if>
@@ -238,7 +238,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsGfixHistVo">
 		/* Generated SQL SQL ID : ts_gfix_hist.update */
 		UPDATE ts_gfix_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -370,7 +370,7 @@
 		AND    gfix_dt = #{gfixDt} /* gfix_dt 성장비만지수_일자 character(8) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsGfixHistVo">
 		/* Generated SQL SQL ID : ts_gfix_hist.merge */
 		INSERT INTO ts_gfix_hist
 		(
@@ -544,8 +544,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_gfix_hist_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="sexCd != null">
 		    ,sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
@@ -672,7 +672,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsGfixHistVo">
 		/* Generated SQL SQL ID : ts_gfix_hist.delete */
 		DELETE FROM ts_gfix_hist
 		WHERE  1 = 1

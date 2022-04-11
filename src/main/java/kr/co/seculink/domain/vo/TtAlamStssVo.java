@@ -14,7 +14,7 @@ public class TtAlamStssVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* act_cd 알림_유형_코드 character varying(20) */
 	private String actCd;
@@ -23,13 +23,13 @@ public class TtAlamStssVo implements Serializable {
 	private String stndYymm;
 
 	/* mnth_week_seq 월별_주차 numeric(null) */
-	private double mnthWeekSeq;
+	private Double mnthWeekSeq;
 
 	/* week_nm 요일_명 character varying(10) */
 	private String weekNm;
 
 	/* alam_cnt 알림_건수 numeric(null) */
-	private double alamCnt;
+	private Double alamCnt;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -82,17 +82,17 @@ public class TtAlamStssVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
@@ -127,17 +127,17 @@ public class TtAlamStssVo implements Serializable {
 	}
 	/**
 	 * Get mnth_week_seq 월별_주차 numeric(null)
-	 * @Return double mnthWeekSeq
+	 * @Return Double mnthWeekSeq
 	 */
-	public double getMnthWeekSeq() {
+	public Double getMnthWeekSeq() {
 		return this.mnthWeekSeq;
 	}
 	
 	/**
 	 * Set mnth_week_seq 월별_주차 numeric(null)
-	 * @Param double mnthWeekSeq
+	 * @Param Double mnthWeekSeq
 	 */
-	public void setMnthWeekSeq(double mnthWeekSeq) {
+	public void setMnthWeekSeq(Double mnthWeekSeq) {
 		this.mnthWeekSeq = mnthWeekSeq;
 	}
 	/**
@@ -157,17 +157,17 @@ public class TtAlamStssVo implements Serializable {
 	}
 	/**
 	 * Get alam_cnt 알림_건수 numeric(null)
-	 * @Return double alamCnt
+	 * @Return Double alamCnt
 	 */
-	public double getAlamCnt() {
+	public Double getAlamCnt() {
 		return this.alamCnt;
 	}
 	
 	/**
 	 * Set alam_cnt 알림_건수 numeric(null)
-	 * @Param double alamCnt
+	 * @Param Double alamCnt
 	 */
-	public void setAlamCnt(double alamCnt) {
+	public void setAlamCnt(Double alamCnt) {
 		this.alamCnt = alamCnt;
 	}
 	/**

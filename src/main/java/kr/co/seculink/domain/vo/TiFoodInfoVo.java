@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TiFoodInfoVo implements Serializable {
 
 	/* food_no 식품_번호 numeric(null) */
-	private double foodNo;
+	private Double foodNo;
 
 	/* food_lcls_nm 식품_대분류_명 character varying(100) */
 	private String foodLclsNm;
@@ -20,7 +20,7 @@ public class TiFoodInfoVo implements Serializable {
 	private String foodNm;
 
 	/* otim_eat_qty 1회_섭취_용량 numeric(null) */
-	private double otimEatQty;
+	private Double otimEatQty;
 
 	/* eat_unit_cd 섭취_단위_코드 character varying(20) */
 	private String eatUnitCd;
@@ -46,17 +46,17 @@ public class TiFoodInfoVo implements Serializable {
 
 	/**
 	 * Get food_no 식품_번호 numeric(null)
-	 * @Return double foodNo
+	 * @Return Double foodNo
 	 */
-	public double getFoodNo() {
+	public Double getFoodNo() {
 		return this.foodNo;
 	}
 	
 	/**
 	 * Set food_no 식품_번호 numeric(null)
-	 * @Param double foodNo
+	 * @Param Double foodNo
 	 */
-	public void setFoodNo(double foodNo) {
+	public void setFoodNo(Double foodNo) {
 		this.foodNo = foodNo;
 	}
 	/**
@@ -106,17 +106,17 @@ public class TiFoodInfoVo implements Serializable {
 	}
 	/**
 	 * Get otim_eat_qty 1회_섭취_용량 numeric(null)
-	 * @Return double otimEatQty
+	 * @Return Double otimEatQty
 	 */
-	public double getOtimEatQty() {
+	public Double getOtimEatQty() {
 		return this.otimEatQty;
 	}
 	
 	/**
 	 * Set otim_eat_qty 1회_섭취_용량 numeric(null)
-	 * @Param double otimEatQty
+	 * @Param Double otimEatQty
 	 */
-	public void setOtimEatQty(double otimEatQty) {
+	public void setOtimEatQty(Double otimEatQty) {
 		this.otimEatQty = otimEatQty;
 	}
 	/**

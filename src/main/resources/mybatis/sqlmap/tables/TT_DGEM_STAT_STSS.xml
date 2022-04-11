@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TT_DGEM_STAT_STSS">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TtDgemStatStssVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TtDgemStatStssVo" resultType="kr.co.seculink.domain.vo.TtDgemStatStssVo">
 		/* Generated SQL SQL ID : tt_dgem_stat_stss.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -31,7 +31,7 @@
 		AND    dgem_stat_cd = #{dgemStatCd} /* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TtDgemStatStssVo">
 		/* Generated SQL SQL ID : tt_dgem_stat_stss.insert */
 		INSERT INTO tt_dgem_stat_stss
 		(
@@ -61,9 +61,9 @@
 		VALUES
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
-		     #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
-		     #{dgemStatCd} /* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
+		     ,#{sexCd} /* sex_cd 성별_코드 character varying(20) */
+		     ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
+		     ,#{dgemStatCd} /* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
@@ -85,7 +85,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TtDgemStatStssVo">
 		/* Generated SQL SQL ID : tt_dgem_stat_stss.update */
 		UPDATE tt_dgem_stat_stss
 		<trim prefix="SET" prefixOverrides=",">
@@ -114,7 +114,7 @@
 		AND    dgem_stat_cd = #{dgemStatCd} /* dgem_stat_cd 위험감정_상태_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TtDgemStatStssVo">
 		/* Generated SQL SQL ID : tt_dgem_stat_stss.merge */
 		INSERT INTO tt_dgem_stat_stss
 		(
@@ -166,8 +166,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tt_dgem_stat_stss_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="stndYymm != null">
 		    ,stnd_yymm = #{stndYymm} /* stnd_yymm 기준_년월 character(6) */
@@ -189,7 +189,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TtDgemStatStssVo">
 		/* Generated SQL SQL ID : tt_dgem_stat_stss.delete */
 		DELETE FROM tt_dgem_stat_stss
 		WHERE  1 = 1

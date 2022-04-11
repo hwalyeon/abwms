@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_STDT_STRS_HIST">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsStdtStrsHistVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtStrsHistVo" resultType="kr.co.seculink.domain.vo.TsStdtStrsHistVo">
 		/* Generated SQL SQL ID : ts_stdt_strs_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,strs_hist_seq /* strs_hist_seq 스트레스_이력_순번 numeric */
@@ -38,7 +38,7 @@
 		AND    strs_hist_seq = #{strsHistSeq} /* strs_hist_seq 스트레스_이력_순번 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtStrsHistVo">
 		/* Generated SQL SQL ID : ts_stdt_strs_hist.insert */
 		INSERT INTO ts_stdt_strs_hist
 		(
@@ -85,7 +85,7 @@
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{strsHistSeq} /* strs_hist_seq 스트레스_이력_순번 numeric */
+		     ,#{strsHistSeq} /* strs_hist_seq 스트레스_이력_순번 numeric */
 		<if test="strsJudgDttm != null">
 		    ,#{strsJudgDttm} /* strs_judg_dttm 스트레스_판정_일시 character(14) */
 		</if>
@@ -126,7 +126,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsStdtStrsHistVo">
 		/* Generated SQL SQL ID : ts_stdt_strs_hist.update */
 		UPDATE ts_stdt_strs_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -186,7 +186,7 @@
 		AND    strs_hist_seq = #{strsHistSeq} /* strs_hist_seq 스트레스_이력_순번 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtStrsHistVo">
 		/* Generated SQL SQL ID : ts_stdt_strs_hist.merge */
 		INSERT INTO ts_stdt_strs_hist
 		(
@@ -272,8 +272,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_stdt_strs_hist_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="strsJudgDttm != null">
 		    ,strs_judg_dttm = #{strsJudgDttm} /* strs_judg_dttm 스트레스_판정_일시 character(14) */
@@ -328,7 +328,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsStdtStrsHistVo">
 		/* Generated SQL SQL ID : ts_stdt_strs_hist.delete */
 		DELETE FROM ts_stdt_strs_hist
 		WHERE  1 = 1

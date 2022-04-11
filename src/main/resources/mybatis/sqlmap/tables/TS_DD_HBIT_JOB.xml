@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_HBIT_JOB">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdHbitJobVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdHbitJobVo" resultType="kr.co.seculink.domain.vo.TsDdHbitJobVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_job.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,stnd_dt /* stnd_dt 기준_일자 character(8) */
@@ -26,7 +26,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdHbitJobVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_job.insert */
 		INSERT INTO ts_dd_hbit_job
 		(
@@ -45,7 +45,7 @@
 		VALUES
 		(
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
+		     ,#{stndDt} /* stnd_dt 기준_일자 character(8) */
 		    ,#{valdYn} /* vald_yn 유효_여부 character(1) */
 		    ,#{accuAvgVal} /* accu_avg_val 누적_평균_값 numeric */
 		    ,#{accuSdevVal} /* accu_sdev_val 누적_표준편차_값 numeric */
@@ -58,7 +58,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdHbitJobVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_job.update */
 		UPDATE ts_dd_hbit_job
 		<trim prefix="SET" prefixOverrides=",">
@@ -95,7 +95,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdHbitJobVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_job.merge */
 		INSERT INTO ts_dd_hbit_job
 		(
@@ -125,8 +125,8 @@
 		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
 		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_dd_hbit_job_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="valdYn != null">
 		    ,vald_yn = #{valdYn} /* vald_yn 유효_여부 character(1) */
@@ -158,7 +158,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdHbitJobVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_job.delete */
 		DELETE FROM ts_dd_hbit_job
 		WHERE  1 = 1

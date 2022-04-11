@@ -11,16 +11,16 @@ public class TiDdNutrEatBlckVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
 
 	/* eat_qty_fr 섭취_량_FROM numeric(null) */
-	private double eatQtyFr;
+	private Double eatQtyFr;
 
-	/* eat_qty_to 섭취_량_TO character(18) */
-	private String eatQtyTo;
+	/* eat_qty_to 섭취_량_TO numeric(null) */
+	private Double eatQtyTo;
 
 	/* nutr_stat_cd 영양섭취_상태_코드 character varying(4000) */
 	private String nutrStatCd;
@@ -64,17 +64,17 @@ public class TiDdNutrEatBlckVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
@@ -94,32 +94,32 @@ public class TiDdNutrEatBlckVo implements Serializable {
 	}
 	/**
 	 * Get eat_qty_fr 섭취_량_FROM numeric(null)
-	 * @Return double eatQtyFr
+	 * @Return Double eatQtyFr
 	 */
-	public double getEatQtyFr() {
+	public Double getEatQtyFr() {
 		return this.eatQtyFr;
 	}
 	
 	/**
 	 * Set eat_qty_fr 섭취_량_FROM numeric(null)
-	 * @Param double eatQtyFr
+	 * @Param Double eatQtyFr
 	 */
-	public void setEatQtyFr(double eatQtyFr) {
+	public void setEatQtyFr(Double eatQtyFr) {
 		this.eatQtyFr = eatQtyFr;
 	}
 	/**
-	 * Get eat_qty_to 섭취_량_TO character(18)
-	 * @Return String eatQtyTo
+	 * Get eat_qty_to 섭취_량_TO numeric(null)
+	 * @Return Double eatQtyTo
 	 */
-	public String getEatQtyTo() {
+	public Double getEatQtyTo() {
 		return this.eatQtyTo;
 	}
 	
 	/**
-	 * Set eat_qty_to 섭취_량_TO character(18)
-	 * @Param String eatQtyTo
+	 * Set eat_qty_to 섭취_량_TO numeric(null)
+	 * @Param Double eatQtyTo
 	 */
-	public void setEatQtyTo(String eatQtyTo) {
+	public void setEatQtyTo(Double eatQtyTo) {
 		this.eatQtyTo = eatQtyTo;
 	}
 	/**

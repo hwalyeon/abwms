@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsStdtGrowHistVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* mesu_dt 측정_일자 character(8) */
 	private String mesuDt;
@@ -17,19 +17,19 @@ public class TsStdtGrowHistVo implements Serializable {
 	private String hghtUnitCd;
 
 	/* hght_val 키_값 numeric(null) */
-	private double hghtVal;
+	private Double hghtVal;
 
 	/* wght_unit_cd 체중_단위_코드 character varying(20) */
 	private String wghtUnitCd;
 
 	/* wght_val 체중_값 numeric(null) */
-	private double wghtVal;
+	private Double wghtVal;
 
 	/* wast_unit_cd 허리_단위_코드 character varying(20) */
 	private String wastUnitCd;
 
 	/* wast_val 허리_값 numeric(null) */
-	private double wastVal;
+	private Double wastVal;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -52,17 +52,17 @@ public class TsStdtGrowHistVo implements Serializable {
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -97,17 +97,17 @@ public class TsStdtGrowHistVo implements Serializable {
 	}
 	/**
 	 * Get hght_val 키_값 numeric(null)
-	 * @Return double hghtVal
+	 * @Return Double hghtVal
 	 */
-	public double getHghtVal() {
+	public Double getHghtVal() {
 		return this.hghtVal;
 	}
 	
 	/**
 	 * Set hght_val 키_값 numeric(null)
-	 * @Param double hghtVal
+	 * @Param Double hghtVal
 	 */
-	public void setHghtVal(double hghtVal) {
+	public void setHghtVal(Double hghtVal) {
 		this.hghtVal = hghtVal;
 	}
 	/**
@@ -127,17 +127,17 @@ public class TsStdtGrowHistVo implements Serializable {
 	}
 	/**
 	 * Get wght_val 체중_값 numeric(null)
-	 * @Return double wghtVal
+	 * @Return Double wghtVal
 	 */
-	public double getWghtVal() {
+	public Double getWghtVal() {
 		return this.wghtVal;
 	}
 	
 	/**
 	 * Set wght_val 체중_값 numeric(null)
-	 * @Param double wghtVal
+	 * @Param Double wghtVal
 	 */
-	public void setWghtVal(double wghtVal) {
+	public void setWghtVal(Double wghtVal) {
 		this.wghtVal = wghtVal;
 	}
 	/**
@@ -157,17 +157,17 @@ public class TsStdtGrowHistVo implements Serializable {
 	}
 	/**
 	 * Get wast_val 허리_값 numeric(null)
-	 * @Return double wastVal
+	 * @Return Double wastVal
 	 */
-	public double getWastVal() {
+	public Double getWastVal() {
 		return this.wastVal;
 	}
 	
 	/**
 	 * Set wast_val 허리_값 numeric(null)
-	 * @Param double wastVal
+	 * @Param Double wastVal
 	 */
-	public void setWastVal(double wastVal) {
+	public void setWastVal(Double wastVal) {
 		this.wastVal = wastVal;
 	}
 	/**

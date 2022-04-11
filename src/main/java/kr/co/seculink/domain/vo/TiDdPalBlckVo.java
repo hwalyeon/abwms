@@ -17,19 +17,19 @@ public class TiDdPalBlckVo implements Serializable {
 	private String sexCd;
 
 	/* age_ycnt 나이_년수 numeric(null) */
-	private double ageYcnt;
+	private Double ageYcnt;
 
 	/* pal_cd 신체활동수준_코드 character varying(20) */
 	private String palCd;
 
 	/* cal_qty_fr 칼로리_량_FROM numeric(null) */
-	private double calQtyFr;
+	private Double calQtyFr;
 
 	/* cal_qty_to 칼로리_량_TO numeric(null) */
-	private double calQtyTo;
+	private Double calQtyTo;
 
 	/* dd_cal_qty 일일_칼로리_량 numeric(null) */
-	private double ddCalQty;
+	private Double ddCalQty;
 
 	/* nutr_cd 영양소_코드 character varying(20) */
 	private String nutrCd;
@@ -103,17 +103,17 @@ public class TiDdPalBlckVo implements Serializable {
 	}
 	/**
 	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return double ageYcnt
+	 * @Return Double ageYcnt
 	 */
-	public double getAgeYcnt() {
+	public Double getAgeYcnt() {
 		return this.ageYcnt;
 	}
 	
 	/**
 	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param double ageYcnt
+	 * @Param Double ageYcnt
 	 */
-	public void setAgeYcnt(double ageYcnt) {
+	public void setAgeYcnt(Double ageYcnt) {
 		this.ageYcnt = ageYcnt;
 	}
 	/**
@@ -133,47 +133,47 @@ public class TiDdPalBlckVo implements Serializable {
 	}
 	/**
 	 * Get cal_qty_fr 칼로리_량_FROM numeric(null)
-	 * @Return double calQtyFr
+	 * @Return Double calQtyFr
 	 */
-	public double getCalQtyFr() {
+	public Double getCalQtyFr() {
 		return this.calQtyFr;
 	}
 	
 	/**
 	 * Set cal_qty_fr 칼로리_량_FROM numeric(null)
-	 * @Param double calQtyFr
+	 * @Param Double calQtyFr
 	 */
-	public void setCalQtyFr(double calQtyFr) {
+	public void setCalQtyFr(Double calQtyFr) {
 		this.calQtyFr = calQtyFr;
 	}
 	/**
 	 * Get cal_qty_to 칼로리_량_TO numeric(null)
-	 * @Return double calQtyTo
+	 * @Return Double calQtyTo
 	 */
-	public double getCalQtyTo() {
+	public Double getCalQtyTo() {
 		return this.calQtyTo;
 	}
 	
 	/**
 	 * Set cal_qty_to 칼로리_량_TO numeric(null)
-	 * @Param double calQtyTo
+	 * @Param Double calQtyTo
 	 */
-	public void setCalQtyTo(double calQtyTo) {
+	public void setCalQtyTo(Double calQtyTo) {
 		this.calQtyTo = calQtyTo;
 	}
 	/**
 	 * Get dd_cal_qty 일일_칼로리_량 numeric(null)
-	 * @Return double ddCalQty
+	 * @Return Double ddCalQty
 	 */
-	public double getDdCalQty() {
+	public Double getDdCalQty() {
 		return this.ddCalQty;
 	}
 	
 	/**
 	 * Set dd_cal_qty 일일_칼로리_량 numeric(null)
-	 * @Param double ddCalQty
+	 * @Param Double ddCalQty
 	 */
-	public void setDdCalQty(double ddCalQty) {
+	public void setDdCalQty(Double ddCalQty) {
 		this.ddCalQty = ddCalQty;
 	}
 	/**

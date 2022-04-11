@@ -8,43 +8,43 @@ import java.io.Serializable;
 public class TsStdtStrsHistVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* strs_hist_seq 스트레스_이력_순번 numeric(null) */
-	private double strsHistSeq;
+	private Double strsHistSeq;
 
 	/* strs_judg_dttm 스트레스_판정_일시 character(14) */
 	private String strsJudgDttm;
 
 	/* strs_idx 스트레스_지수 numeric(null) */
-	private double strsIdx;
+	private Double strsIdx;
 
 	/* hbit_mdan 심박_중간값 numeric(null) */
-	private double hbitMdan;
+	private Double hbitMdan;
 
 	/* mind_strs_pnt 정신적_스트레스_점수 numeric(null) */
-	private double mindStrsPnt;
+	private Double mindStrsPnt;
 
 	/* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
 	private String mindStrsStatCd;
 
 	/* phys_strs_pnt 신체적_스트레스_점수 numeric(null) */
-	private double physStrsPnt;
+	private Double physStrsPnt;
 
 	/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
 	private String physStrsStatCd;
 
 	/* strs_cope_pnt 스트레스_대처_점수 numeric(null) */
-	private double strsCopePnt;
+	private Double strsCopePnt;
 
 	/* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
 	private String strsCopeStatCd;
 
 	/* avg_hbit_cnt 평균_심박_수 numeric(null) */
-	private double avgHbitCnt;
+	private Double avgHbitCnt;
 
 	/* abnm_hbit_cnt 이상_심박_수 numeric(null) */
-	private double abnmHbitCnt;
+	private Double abnmHbitCnt;
 
 	/* strs_stat_cd 스트레스_상태_코드 character varying(20) */
 	private String strsStatCd;
@@ -53,10 +53,10 @@ public class TsStdtStrsHistVo implements Serializable {
 	private String strsProcStatCd;
 
 	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	private Double judgNo;
 
 	/* strs_alam_no 스트레스_알림_번호 numeric(null) */
-	private double strsAlamNo;
+	private Double strsAlamNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -79,32 +79,32 @@ public class TsStdtStrsHistVo implements Serializable {
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
 	 * Get strs_hist_seq 스트레스_이력_순번 numeric(null)
-	 * @Return double strsHistSeq
+	 * @Return Double strsHistSeq
 	 */
-	public double getStrsHistSeq() {
+	public Double getStrsHistSeq() {
 		return this.strsHistSeq;
 	}
 	
 	/**
 	 * Set strs_hist_seq 스트레스_이력_순번 numeric(null)
-	 * @Param double strsHistSeq
+	 * @Param Double strsHistSeq
 	 */
-	public void setStrsHistSeq(double strsHistSeq) {
+	public void setStrsHistSeq(Double strsHistSeq) {
 		this.strsHistSeq = strsHistSeq;
 	}
 	/**
@@ -124,47 +124,47 @@ public class TsStdtStrsHistVo implements Serializable {
 	}
 	/**
 	 * Get strs_idx 스트레스_지수 numeric(null)
-	 * @Return double strsIdx
+	 * @Return Double strsIdx
 	 */
-	public double getStrsIdx() {
+	public Double getStrsIdx() {
 		return this.strsIdx;
 	}
 	
 	/**
 	 * Set strs_idx 스트레스_지수 numeric(null)
-	 * @Param double strsIdx
+	 * @Param Double strsIdx
 	 */
-	public void setStrsIdx(double strsIdx) {
+	public void setStrsIdx(Double strsIdx) {
 		this.strsIdx = strsIdx;
 	}
 	/**
 	 * Get hbit_mdan 심박_중간값 numeric(null)
-	 * @Return double hbitMdan
+	 * @Return Double hbitMdan
 	 */
-	public double getHbitMdan() {
+	public Double getHbitMdan() {
 		return this.hbitMdan;
 	}
 	
 	/**
 	 * Set hbit_mdan 심박_중간값 numeric(null)
-	 * @Param double hbitMdan
+	 * @Param Double hbitMdan
 	 */
-	public void setHbitMdan(double hbitMdan) {
+	public void setHbitMdan(Double hbitMdan) {
 		this.hbitMdan = hbitMdan;
 	}
 	/**
 	 * Get mind_strs_pnt 정신적_스트레스_점수 numeric(null)
-	 * @Return double mindStrsPnt
+	 * @Return Double mindStrsPnt
 	 */
-	public double getMindStrsPnt() {
+	public Double getMindStrsPnt() {
 		return this.mindStrsPnt;
 	}
 	
 	/**
 	 * Set mind_strs_pnt 정신적_스트레스_점수 numeric(null)
-	 * @Param double mindStrsPnt
+	 * @Param Double mindStrsPnt
 	 */
-	public void setMindStrsPnt(double mindStrsPnt) {
+	public void setMindStrsPnt(Double mindStrsPnt) {
 		this.mindStrsPnt = mindStrsPnt;
 	}
 	/**
@@ -184,17 +184,17 @@ public class TsStdtStrsHistVo implements Serializable {
 	}
 	/**
 	 * Get phys_strs_pnt 신체적_스트레스_점수 numeric(null)
-	 * @Return double physStrsPnt
+	 * @Return Double physStrsPnt
 	 */
-	public double getPhysStrsPnt() {
+	public Double getPhysStrsPnt() {
 		return this.physStrsPnt;
 	}
 	
 	/**
 	 * Set phys_strs_pnt 신체적_스트레스_점수 numeric(null)
-	 * @Param double physStrsPnt
+	 * @Param Double physStrsPnt
 	 */
-	public void setPhysStrsPnt(double physStrsPnt) {
+	public void setPhysStrsPnt(Double physStrsPnt) {
 		this.physStrsPnt = physStrsPnt;
 	}
 	/**
@@ -214,17 +214,17 @@ public class TsStdtStrsHistVo implements Serializable {
 	}
 	/**
 	 * Get strs_cope_pnt 스트레스_대처_점수 numeric(null)
-	 * @Return double strsCopePnt
+	 * @Return Double strsCopePnt
 	 */
-	public double getStrsCopePnt() {
+	public Double getStrsCopePnt() {
 		return this.strsCopePnt;
 	}
 	
 	/**
 	 * Set strs_cope_pnt 스트레스_대처_점수 numeric(null)
-	 * @Param double strsCopePnt
+	 * @Param Double strsCopePnt
 	 */
-	public void setStrsCopePnt(double strsCopePnt) {
+	public void setStrsCopePnt(Double strsCopePnt) {
 		this.strsCopePnt = strsCopePnt;
 	}
 	/**
@@ -244,32 +244,32 @@ public class TsStdtStrsHistVo implements Serializable {
 	}
 	/**
 	 * Get avg_hbit_cnt 평균_심박_수 numeric(null)
-	 * @Return double avgHbitCnt
+	 * @Return Double avgHbitCnt
 	 */
-	public double getAvgHbitCnt() {
+	public Double getAvgHbitCnt() {
 		return this.avgHbitCnt;
 	}
 	
 	/**
 	 * Set avg_hbit_cnt 평균_심박_수 numeric(null)
-	 * @Param double avgHbitCnt
+	 * @Param Double avgHbitCnt
 	 */
-	public void setAvgHbitCnt(double avgHbitCnt) {
+	public void setAvgHbitCnt(Double avgHbitCnt) {
 		this.avgHbitCnt = avgHbitCnt;
 	}
 	/**
 	 * Get abnm_hbit_cnt 이상_심박_수 numeric(null)
-	 * @Return double abnmHbitCnt
+	 * @Return Double abnmHbitCnt
 	 */
-	public double getAbnmHbitCnt() {
+	public Double getAbnmHbitCnt() {
 		return this.abnmHbitCnt;
 	}
 	
 	/**
 	 * Set abnm_hbit_cnt 이상_심박_수 numeric(null)
-	 * @Param double abnmHbitCnt
+	 * @Param Double abnmHbitCnt
 	 */
-	public void setAbnmHbitCnt(double abnmHbitCnt) {
+	public void setAbnmHbitCnt(Double abnmHbitCnt) {
 		this.abnmHbitCnt = abnmHbitCnt;
 	}
 	/**
@@ -304,32 +304,32 @@ public class TsStdtStrsHistVo implements Serializable {
 	}
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
+	 * @Return Double judgNo
 	 */
-	public double getJudgNo() {
+	public Double getJudgNo() {
 		return this.judgNo;
 	}
 	
 	/**
 	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
+	 * @Param Double judgNo
 	 */
-	public void setJudgNo(double judgNo) {
+	public void setJudgNo(Double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**
 	 * Get strs_alam_no 스트레스_알림_번호 numeric(null)
-	 * @Return double strsAlamNo
+	 * @Return Double strsAlamNo
 	 */
-	public double getStrsAlamNo() {
+	public Double getStrsAlamNo() {
 		return this.strsAlamNo;
 	}
 	
 	/**
 	 * Set strs_alam_no 스트레스_알림_번호 numeric(null)
-	 * @Param double strsAlamNo
+	 * @Param Double strsAlamNo
 	 */
-	public void setStrsAlamNo(double strsAlamNo) {
+	public void setStrsAlamNo(Double strsAlamNo) {
 		this.strsAlamNo = strsAlamNo;
 	}
 	/**

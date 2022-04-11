@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_CD_GRP">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TcCdGrpVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TcCdGrpVo" resultType="kr.co.seculink.domain.vo.TcCdGrpVo">
 		/* Generated SQL SQL ID : tc_cd_grp.select */
         SELECT  cd_grp /* cd_grp 코드_그룹 character varying(40) */
                ,cd_grp_nm /* cd_grp_nm 코드_그룹_명 character varying(100) */
@@ -23,7 +23,7 @@
 		AND    cd_grp = #{cdGrp} /* cd_grp 코드_그룹 character varying(40) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcCdGrpVo">
 		/* Generated SQL SQL ID : tc_cd_grp.insert */
 		INSERT INTO tc_cd_grp
 		(
@@ -55,7 +55,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TcCdGrpVo">
 		/* Generated SQL SQL ID : tc_cd_grp.update */
 		UPDATE tc_cd_grp
 		<trim prefix="SET" prefixOverrides=",">
@@ -75,7 +75,7 @@
 		AND    cd_grp = #{cdGrp} /* cd_grp 코드_그룹 character varying(40) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcCdGrpVo">
 		/* Generated SQL SQL ID : tc_cd_grp.merge */
 		INSERT INTO tc_cd_grp
 		(
@@ -105,8 +105,8 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT tc_cd_grp_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="cdGrpNm != null">
 		    ,cd_grp_nm = #{cdGrpNm} /* cd_grp_nm 코드_그룹_명 character varying(100) */
@@ -122,7 +122,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcCdGrpVo">
 		/* Generated SQL SQL ID : tc_cd_grp.delete */
 		DELETE FROM tc_cd_grp
 		WHERE  1 = 1

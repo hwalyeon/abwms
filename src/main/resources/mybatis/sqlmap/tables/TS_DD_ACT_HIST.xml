@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_ACT_HIST">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdActHistVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdActHistVo" resultType="kr.co.seculink.domain.vo.TsDdActHistVo">
 		/* Generated SQL SQL ID : ts_dd_act_hist.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,stdt_no /* stdt_no 학생_번호 numeric */
@@ -29,7 +29,7 @@
 		AND    act_cd = #{actCd} /* act_cd 활동_코드 character varying(20) */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
 		/* Generated SQL SQL ID : ts_dd_act_hist.insert */
 		INSERT INTO ts_dd_act_hist
 		(
@@ -56,8 +56,8 @@
 		VALUES
 		(
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
-		     #{stdtNo} /* stdt_no 학생_번호 numeric */
-		     #{actCd} /* act_cd 활동_코드 character varying(20) */
+		     ,#{stdtNo} /* stdt_no 학생_번호 numeric */
+		     ,#{actCd} /* act_cd 활동_코드 character varying(20) */
 		    ,#{actMcnt} /* act_mcnt 활동_분수 numeric */
 		    ,#{rpetActCnt} /* rpet_act_cnt 반복_활동_수 numeric */
 		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
@@ -77,7 +77,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
 		/* Generated SQL SQL ID : ts_dd_act_hist.update */
 		UPDATE ts_dd_act_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -105,7 +105,7 @@
 		AND    act_cd = #{actCd} /* act_cd 활동_코드 character varying(20) */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
 		/* Generated SQL SQL ID : ts_dd_act_hist.merge */
 		INSERT INTO ts_dd_act_hist
 		(
@@ -151,8 +151,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ts_dd_act_hist_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="actMcnt != null">
 		    ,act_mcnt = #{actMcnt} /* act_mcnt 활동_분수 numeric */
@@ -174,7 +174,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdActHistVo">
 		/* Generated SQL SQL ID : ts_dd_act_hist.delete */
 		DELETE FROM ts_dd_act_hist
 		WHERE  1 = 1

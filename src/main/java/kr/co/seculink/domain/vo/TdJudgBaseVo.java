@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TdJudgBaseVo implements Serializable {
 
 	/* judg_no 판정_번호 numeric(null) */
-	private double judgNo;
+	private Double judgNo;
 
 	/* evnt_div_cd 이벤트_구분_코드 character varying(20) */
 	private String evntDivCd;
@@ -23,49 +23,49 @@ public class TdJudgBaseVo implements Serializable {
 	private String judgTm;
 
 	/* lat_val 위도_값 numeric(null) */
-	private double latVal;
+	private Double latVal;
 
 	/* lon_val 경도_값 numeric(null) */
-	private double lonVal;
+	private Double lonVal;
 
 	/* hbit_stat_cd 심박_상태_코드 character varying(20) */
 	private String hbitStatCd;
 
 	/* min_hbit_cnt 최소_심박_수 numeric(null) */
-	private double minHbitCnt;
+	private Double minHbitCnt;
 
 	/* max_hbit_cnt 최대_심박_수 numeric(null) */
-	private double maxHbitCnt;
+	private Double maxHbitCnt;
 
 	/* hbit_mdan 심박_중간값 numeric(null) */
-	private double hbitMdan;
+	private Double hbitMdan;
 
 	/* abnm_hbit_cnt 이상_심박_수 numeric(null) */
-	private double abnmHbitCnt;
+	private Double abnmHbitCnt;
 
 	/* min1_hbit_cntn 1분_심박_내용 character varying(4000) */
 	private String min1HbitCntn;
 
 	/* temp_val 체온_값 numeric(null) */
-	private double tempVal;
+	private Double tempVal;
 
 	/* act_div_cd 활동_구분_코드 character varying(20) */
 	private String actDivCd;
 
 	/* cbee_bal 캐시비_잔액 numeric(null) */
-	private double cbeeBal;
+	private Double cbeeBal;
 
 	/* accu_run_tcnt_cnt 누적_달리기_시간_수 numeric(null) */
-	private double accuRunTcntCnt;
+	private Double accuRunTcntCnt;
 
 	/* accu_walk_tcnt_cnt 누적_걸음_시간_수 numeric(null) */
-	private double accuWalkTcntCnt;
+	private Double accuWalkTcntCnt;
 
 	/* accu_walk_cnt 누적_걸음_수 numeric(null) */
-	private double accuWalkCnt;
+	private Double accuWalkCnt;
 
 	/* gram_no 전문_번호 numeric(null) */
-	private double gramNo;
+	private Double gramNo;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -88,17 +88,17 @@ public class TdJudgBaseVo implements Serializable {
 
 	/**
 	 * Get judg_no 판정_번호 numeric(null)
-	 * @Return double judgNo
+	 * @Return Double judgNo
 	 */
-	public double getJudgNo() {
+	public Double getJudgNo() {
 		return this.judgNo;
 	}
 	
 	/**
 	 * Set judg_no 판정_번호 numeric(null)
-	 * @Param double judgNo
+	 * @Param Double judgNo
 	 */
-	public void setJudgNo(double judgNo) {
+	public void setJudgNo(Double judgNo) {
 		this.judgNo = judgNo;
 	}
 	/**
@@ -163,32 +163,32 @@ public class TdJudgBaseVo implements Serializable {
 	}
 	/**
 	 * Get lat_val 위도_값 numeric(null)
-	 * @Return double latVal
+	 * @Return Double latVal
 	 */
-	public double getLatVal() {
+	public Double getLatVal() {
 		return this.latVal;
 	}
 	
 	/**
 	 * Set lat_val 위도_값 numeric(null)
-	 * @Param double latVal
+	 * @Param Double latVal
 	 */
-	public void setLatVal(double latVal) {
+	public void setLatVal(Double latVal) {
 		this.latVal = latVal;
 	}
 	/**
 	 * Get lon_val 경도_값 numeric(null)
-	 * @Return double lonVal
+	 * @Return Double lonVal
 	 */
-	public double getLonVal() {
+	public Double getLonVal() {
 		return this.lonVal;
 	}
 	
 	/**
 	 * Set lon_val 경도_값 numeric(null)
-	 * @Param double lonVal
+	 * @Param Double lonVal
 	 */
-	public void setLonVal(double lonVal) {
+	public void setLonVal(Double lonVal) {
 		this.lonVal = lonVal;
 	}
 	/**
@@ -208,62 +208,62 @@ public class TdJudgBaseVo implements Serializable {
 	}
 	/**
 	 * Get min_hbit_cnt 최소_심박_수 numeric(null)
-	 * @Return double minHbitCnt
+	 * @Return Double minHbitCnt
 	 */
-	public double getMinHbitCnt() {
+	public Double getMinHbitCnt() {
 		return this.minHbitCnt;
 	}
 	
 	/**
 	 * Set min_hbit_cnt 최소_심박_수 numeric(null)
-	 * @Param double minHbitCnt
+	 * @Param Double minHbitCnt
 	 */
-	public void setMinHbitCnt(double minHbitCnt) {
+	public void setMinHbitCnt(Double minHbitCnt) {
 		this.minHbitCnt = minHbitCnt;
 	}
 	/**
 	 * Get max_hbit_cnt 최대_심박_수 numeric(null)
-	 * @Return double maxHbitCnt
+	 * @Return Double maxHbitCnt
 	 */
-	public double getMaxHbitCnt() {
+	public Double getMaxHbitCnt() {
 		return this.maxHbitCnt;
 	}
 	
 	/**
 	 * Set max_hbit_cnt 최대_심박_수 numeric(null)
-	 * @Param double maxHbitCnt
+	 * @Param Double maxHbitCnt
 	 */
-	public void setMaxHbitCnt(double maxHbitCnt) {
+	public void setMaxHbitCnt(Double maxHbitCnt) {
 		this.maxHbitCnt = maxHbitCnt;
 	}
 	/**
 	 * Get hbit_mdan 심박_중간값 numeric(null)
-	 * @Return double hbitMdan
+	 * @Return Double hbitMdan
 	 */
-	public double getHbitMdan() {
+	public Double getHbitMdan() {
 		return this.hbitMdan;
 	}
 	
 	/**
 	 * Set hbit_mdan 심박_중간값 numeric(null)
-	 * @Param double hbitMdan
+	 * @Param Double hbitMdan
 	 */
-	public void setHbitMdan(double hbitMdan) {
+	public void setHbitMdan(Double hbitMdan) {
 		this.hbitMdan = hbitMdan;
 	}
 	/**
 	 * Get abnm_hbit_cnt 이상_심박_수 numeric(null)
-	 * @Return double abnmHbitCnt
+	 * @Return Double abnmHbitCnt
 	 */
-	public double getAbnmHbitCnt() {
+	public Double getAbnmHbitCnt() {
 		return this.abnmHbitCnt;
 	}
 	
 	/**
 	 * Set abnm_hbit_cnt 이상_심박_수 numeric(null)
-	 * @Param double abnmHbitCnt
+	 * @Param Double abnmHbitCnt
 	 */
-	public void setAbnmHbitCnt(double abnmHbitCnt) {
+	public void setAbnmHbitCnt(Double abnmHbitCnt) {
 		this.abnmHbitCnt = abnmHbitCnt;
 	}
 	/**
@@ -283,17 +283,17 @@ public class TdJudgBaseVo implements Serializable {
 	}
 	/**
 	 * Get temp_val 체온_값 numeric(null)
-	 * @Return double tempVal
+	 * @Return Double tempVal
 	 */
-	public double getTempVal() {
+	public Double getTempVal() {
 		return this.tempVal;
 	}
 	
 	/**
 	 * Set temp_val 체온_값 numeric(null)
-	 * @Param double tempVal
+	 * @Param Double tempVal
 	 */
-	public void setTempVal(double tempVal) {
+	public void setTempVal(Double tempVal) {
 		this.tempVal = tempVal;
 	}
 	/**
@@ -313,77 +313,77 @@ public class TdJudgBaseVo implements Serializable {
 	}
 	/**
 	 * Get cbee_bal 캐시비_잔액 numeric(null)
-	 * @Return double cbeeBal
+	 * @Return Double cbeeBal
 	 */
-	public double getCbeeBal() {
+	public Double getCbeeBal() {
 		return this.cbeeBal;
 	}
 	
 	/**
 	 * Set cbee_bal 캐시비_잔액 numeric(null)
-	 * @Param double cbeeBal
+	 * @Param Double cbeeBal
 	 */
-	public void setCbeeBal(double cbeeBal) {
+	public void setCbeeBal(Double cbeeBal) {
 		this.cbeeBal = cbeeBal;
 	}
 	/**
 	 * Get accu_run_tcnt_cnt 누적_달리기_시간_수 numeric(null)
-	 * @Return double accuRunTcntCnt
+	 * @Return Double accuRunTcntCnt
 	 */
-	public double getAccuRunTcntCnt() {
+	public Double getAccuRunTcntCnt() {
 		return this.accuRunTcntCnt;
 	}
 	
 	/**
 	 * Set accu_run_tcnt_cnt 누적_달리기_시간_수 numeric(null)
-	 * @Param double accuRunTcntCnt
+	 * @Param Double accuRunTcntCnt
 	 */
-	public void setAccuRunTcntCnt(double accuRunTcntCnt) {
+	public void setAccuRunTcntCnt(Double accuRunTcntCnt) {
 		this.accuRunTcntCnt = accuRunTcntCnt;
 	}
 	/**
 	 * Get accu_walk_tcnt_cnt 누적_걸음_시간_수 numeric(null)
-	 * @Return double accuWalkTcntCnt
+	 * @Return Double accuWalkTcntCnt
 	 */
-	public double getAccuWalkTcntCnt() {
+	public Double getAccuWalkTcntCnt() {
 		return this.accuWalkTcntCnt;
 	}
 	
 	/**
 	 * Set accu_walk_tcnt_cnt 누적_걸음_시간_수 numeric(null)
-	 * @Param double accuWalkTcntCnt
+	 * @Param Double accuWalkTcntCnt
 	 */
-	public void setAccuWalkTcntCnt(double accuWalkTcntCnt) {
+	public void setAccuWalkTcntCnt(Double accuWalkTcntCnt) {
 		this.accuWalkTcntCnt = accuWalkTcntCnt;
 	}
 	/**
 	 * Get accu_walk_cnt 누적_걸음_수 numeric(null)
-	 * @Return double accuWalkCnt
+	 * @Return Double accuWalkCnt
 	 */
-	public double getAccuWalkCnt() {
+	public Double getAccuWalkCnt() {
 		return this.accuWalkCnt;
 	}
 	
 	/**
 	 * Set accu_walk_cnt 누적_걸음_수 numeric(null)
-	 * @Param double accuWalkCnt
+	 * @Param Double accuWalkCnt
 	 */
-	public void setAccuWalkCnt(double accuWalkCnt) {
+	public void setAccuWalkCnt(Double accuWalkCnt) {
 		this.accuWalkCnt = accuWalkCnt;
 	}
 	/**
 	 * Get gram_no 전문_번호 numeric(null)
-	 * @Return double gramNo
+	 * @Return Double gramNo
 	 */
-	public double getGramNo() {
+	public Double getGramNo() {
 		return this.gramNo;
 	}
 	
 	/**
 	 * Set gram_no 전문_번호 numeric(null)
-	 * @Param double gramNo
+	 * @Param Double gramNo
 	 */
-	public void setGramNo(double gramNo) {
+	public void setGramNo(Double gramNo) {
 		this.gramNo = gramNo;
 	}
 	/**

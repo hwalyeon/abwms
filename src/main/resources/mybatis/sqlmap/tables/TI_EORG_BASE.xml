@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_EORG_BASE">
 
-	<select id="select" resultType="kr.co.seculink.domain.vo.TiEorgBaseVo">
+	<select id="select" parameterType="kr.co.seculink.domain.vo.TiEorgBaseVo" resultType="kr.co.seculink.domain.vo.TiEorgBaseVo">
 		/* Generated SQL SQL ID : ti_eorg_base.select */
         SELECT  loc_no /* loc_no 위치_번호 numeric */
                ,plc_cd /* plc_cd 장소_코드 character varying(20) */
@@ -35,7 +35,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
-	<insert id="insert" >
+	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiEorgBaseVo">
 		/* Generated SQL SQL ID : ti_eorg_base.insert */
 		INSERT INTO ti_eorg_base
 		(
@@ -135,7 +135,7 @@
 		)
 	</insert>
 	
-	<update id="update">
+	<update id="update" parameterType="kr.co.seculink.domain.vo.TiEorgBaseVo">
 		/* Generated SQL SQL ID : ti_eorg_base.update */
 		UPDATE ti_eorg_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -191,7 +191,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
-	<update id="merge" >
+	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiEorgBaseVo">
 		/* Generated SQL SQL ID : ti_eorg_base.merge */
 		INSERT INTO ti_eorg_base
 		(
@@ -289,8 +289,8 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT
-		DO UPDATE
+		ON CONFLICT CONSTRAINT ti_eorg_base_pkey
+		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="plcCd != null">
 		    ,plc_cd = #{plcCd} /* plc_cd 장소_코드 character varying(20) */
@@ -342,7 +342,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiEorgBaseVo">
 		/* Generated SQL SQL ID : ti_eorg_base.delete */
 		DELETE FROM ti_eorg_base
 		WHERE  1 = 1

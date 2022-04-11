@@ -17,7 +17,7 @@ public class TsBleInfoVo implements Serializable {
 	private String bleInstTm;
 
 	/* loc_no 위치_번호 numeric(null) */
-	private double locNo;
+	private Double locNo;
 
 	/* rmrk 비고 character varying(4000) */
 	private String rmrk;
@@ -88,17 +88,17 @@ public class TsBleInfoVo implements Serializable {
 	}
 	/**
 	 * Get loc_no 위치_번호 numeric(null)
-	 * @Return double locNo
+	 * @Return Double locNo
 	 */
-	public double getLocNo() {
+	public Double getLocNo() {
 		return this.locNo;
 	}
 	
 	/**
 	 * Set loc_no 위치_번호 numeric(null)
-	 * @Param double locNo
+	 * @Param Double locNo
 	 */
-	public void setLocNo(double locNo) {
+	public void setLocNo(Double locNo) {
 		this.locNo = locNo;
 	}
 	/**

@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TsDdHbitJobVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */
-	private double stdtNo;
+	private Double stdtNo;
 
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
@@ -17,43 +17,43 @@ public class TsDdHbitJobVo implements Serializable {
 	private String valdYn;
 
 	/* accu_avg_val 누적_평균_값 numeric(null) */
-	private double accuAvgVal;
+	private Double accuAvgVal;
 
 	/* accu_sdev_val 누적_표준편차_값 numeric(null) */
-	private double accuSdevVal;
+	private Double accuSdevVal;
 
 	/* down_stnd_val 하위_기준_값 numeric(null) */
-	private double downStndVal;
+	private Double downStndVal;
 
 	/* uppr_stnd_val 상위_기준_값 numeric(null) */
-	private double upprStndVal;
+	private Double upprStndVal;
 
 	/* bot_blck_val 최하위_구간_값 numeric(null) */
-	private double botBlckVal;
+	private Double botBlckVal;
 
 	/* down_blck_val 하위_구간_값 numeric(null) */
-	private double downBlckVal;
+	private Double downBlckVal;
 
 	/* uppr_blck_val 상위_구간_값 numeric(null) */
-	private double upprBlckVal;
+	private Double upprBlckVal;
 
 	/* top_blck_val 최상위_구간_값 numeric(null) */
-	private double topBlckVal;
+	private Double topBlckVal;
 
 
 	/**
 	 * Get stdt_no 학생_번호 numeric(null)
-	 * @Return double stdtNo
+	 * @Return Double stdtNo
 	 */
-	public double getStdtNo() {
+	public Double getStdtNo() {
 		return this.stdtNo;
 	}
 	
 	/**
 	 * Set stdt_no 학생_번호 numeric(null)
-	 * @Param double stdtNo
+	 * @Param Double stdtNo
 	 */
-	public void setStdtNo(double stdtNo) {
+	public void setStdtNo(Double stdtNo) {
 		this.stdtNo = stdtNo;
 	}
 	/**
@@ -88,122 +88,122 @@ public class TsDdHbitJobVo implements Serializable {
 	}
 	/**
 	 * Get accu_avg_val 누적_평균_값 numeric(null)
-	 * @Return double accuAvgVal
+	 * @Return Double accuAvgVal
 	 */
-	public double getAccuAvgVal() {
+	public Double getAccuAvgVal() {
 		return this.accuAvgVal;
 	}
 	
 	/**
 	 * Set accu_avg_val 누적_평균_값 numeric(null)
-	 * @Param double accuAvgVal
+	 * @Param Double accuAvgVal
 	 */
-	public void setAccuAvgVal(double accuAvgVal) {
+	public void setAccuAvgVal(Double accuAvgVal) {
 		this.accuAvgVal = accuAvgVal;
 	}
 	/**
 	 * Get accu_sdev_val 누적_표준편차_값 numeric(null)
-	 * @Return double accuSdevVal
+	 * @Return Double accuSdevVal
 	 */
-	public double getAccuSdevVal() {
+	public Double getAccuSdevVal() {
 		return this.accuSdevVal;
 	}
 	
 	/**
 	 * Set accu_sdev_val 누적_표준편차_값 numeric(null)
-	 * @Param double accuSdevVal
+	 * @Param Double accuSdevVal
 	 */
-	public void setAccuSdevVal(double accuSdevVal) {
+	public void setAccuSdevVal(Double accuSdevVal) {
 		this.accuSdevVal = accuSdevVal;
 	}
 	/**
 	 * Get down_stnd_val 하위_기준_값 numeric(null)
-	 * @Return double downStndVal
+	 * @Return Double downStndVal
 	 */
-	public double getDownStndVal() {
+	public Double getDownStndVal() {
 		return this.downStndVal;
 	}
 	
 	/**
 	 * Set down_stnd_val 하위_기준_값 numeric(null)
-	 * @Param double downStndVal
+	 * @Param Double downStndVal
 	 */
-	public void setDownStndVal(double downStndVal) {
+	public void setDownStndVal(Double downStndVal) {
 		this.downStndVal = downStndVal;
 	}
 	/**
 	 * Get uppr_stnd_val 상위_기준_값 numeric(null)
-	 * @Return double upprStndVal
+	 * @Return Double upprStndVal
 	 */
-	public double getUpprStndVal() {
+	public Double getUpprStndVal() {
 		return this.upprStndVal;
 	}
 	
 	/**
 	 * Set uppr_stnd_val 상위_기준_값 numeric(null)
-	 * @Param double upprStndVal
+	 * @Param Double upprStndVal
 	 */
-	public void setUpprStndVal(double upprStndVal) {
+	public void setUpprStndVal(Double upprStndVal) {
 		this.upprStndVal = upprStndVal;
 	}
 	/**
 	 * Get bot_blck_val 최하위_구간_값 numeric(null)
-	 * @Return double botBlckVal
+	 * @Return Double botBlckVal
 	 */
-	public double getBotBlckVal() {
+	public Double getBotBlckVal() {
 		return this.botBlckVal;
 	}
 	
 	/**
 	 * Set bot_blck_val 최하위_구간_값 numeric(null)
-	 * @Param double botBlckVal
+	 * @Param Double botBlckVal
 	 */
-	public void setBotBlckVal(double botBlckVal) {
+	public void setBotBlckVal(Double botBlckVal) {
 		this.botBlckVal = botBlckVal;
 	}
 	/**
 	 * Get down_blck_val 하위_구간_값 numeric(null)
-	 * @Return double downBlckVal
+	 * @Return Double downBlckVal
 	 */
-	public double getDownBlckVal() {
+	public Double getDownBlckVal() {
 		return this.downBlckVal;
 	}
 	
 	/**
 	 * Set down_blck_val 하위_구간_값 numeric(null)
-	 * @Param double downBlckVal
+	 * @Param Double downBlckVal
 	 */
-	public void setDownBlckVal(double downBlckVal) {
+	public void setDownBlckVal(Double downBlckVal) {
 		this.downBlckVal = downBlckVal;
 	}
 	/**
 	 * Get uppr_blck_val 상위_구간_값 numeric(null)
-	 * @Return double upprBlckVal
+	 * @Return Double upprBlckVal
 	 */
-	public double getUpprBlckVal() {
+	public Double getUpprBlckVal() {
 		return this.upprBlckVal;
 	}
 	
 	/**
 	 * Set uppr_blck_val 상위_구간_값 numeric(null)
-	 * @Param double upprBlckVal
+	 * @Param Double upprBlckVal
 	 */
-	public void setUpprBlckVal(double upprBlckVal) {
+	public void setUpprBlckVal(Double upprBlckVal) {
 		this.upprBlckVal = upprBlckVal;
 	}
 	/**
 	 * Get top_blck_val 최상위_구간_값 numeric(null)
-	 * @Return double topBlckVal
+	 * @Return Double topBlckVal
 	 */
-	public double getTopBlckVal() {
+	public Double getTopBlckVal() {
 		return this.topBlckVal;
 	}
 	
 	/**
 	 * Set top_blck_val 최상위_구간_값 numeric(null)
-	 * @Param double topBlckVal
+	 * @Param Double topBlckVal
 	 */
-	public void setTopBlckVal(double topBlckVal) {
+	public void setTopBlckVal(Double topBlckVal) {
 		this.topBlckVal = topBlckVal;
 	}
 
