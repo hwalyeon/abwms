@@ -247,7 +247,7 @@ public class CommonWebController {
 
 	// 식품별 섭취현황 추이분석
 	@RequestMapping("/stat/hc/foodEatStss.pg")
-	public String foodEatHcFoodEatStss() {return "stat/hc/gidxStss";}
+	public String foodEatHcFoodEatStss() {return "stat/hc/foodEatStss";}
 
 	// 유형별 결식율 추이분석
 	@RequestMapping("/stat/hc/neatStss.pg")
