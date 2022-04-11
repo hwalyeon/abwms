@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TT_FATP_JUDG_STSS">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TtFatpJudgStssVo" resultType="kr.co.seculink.domain.vo.TtFatpJudgStssVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TtFatpJudgStssVo">
 		/* Generated SQL SQL ID : tt_fatp_judg_stss.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -31,7 +31,7 @@
 		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TtFatpJudgStssVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tt_fatp_judg_stss.insert */
 		INSERT INTO tt_fatp_judg_stss
 		(
@@ -85,7 +85,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TtFatpJudgStssVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tt_fatp_judg_stss.update */
 		UPDATE tt_fatp_judg_stss
 		<trim prefix="SET" prefixOverrides=",">
@@ -114,7 +114,7 @@
 		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TtFatpJudgStssVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tt_fatp_judg_stss.merge */
 		INSERT INTO tt_fatp_judg_stss
 		(
@@ -189,7 +189,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TtFatpJudgStssVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tt_fatp_judg_stss.delete */
 		DELETE FROM tt_fatp_judg_stss
 		WHERE  1 = 1

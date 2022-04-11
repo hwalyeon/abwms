@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_LOC_INFO_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo" resultType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
 		/* Generated SQL SQL ID : ts_loc_info_base.select */
         SELECT  loc_no /* loc_no 위치_번호 numeric */
                ,loc_nm /* loc_nm 위치_명 character varying(100) */
@@ -36,7 +36,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_loc_info_base.insert */
 		INSERT INTO ts_loc_info_base
 		(
@@ -126,7 +126,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_loc_info_base.update */
 		UPDATE ts_loc_info_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -185,7 +185,7 @@
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_loc_info_base.merge */
 		INSERT INTO ts_loc_info_base
 		(
@@ -329,7 +329,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsLocInfoBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_loc_info_base.delete */
 		DELETE FROM ts_loc_info_base
 		WHERE  1 = 1

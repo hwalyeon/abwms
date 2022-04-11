@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_CS_INFO">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsCsInfoVo" resultType="kr.co.seculink.domain.vo.TsCsInfoVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsCsInfoVo">
 		/* Generated SQL SQL ID : ts_cs_info.select */
         SELECT  reg_no /* reg_no 등록_번호 numeric */
                ,cs_tel_no /* cs_tel_no 고객지원_전화_번호 character varying(20) */
@@ -25,7 +25,7 @@
 		AND    reg_no = #{regNo} /* reg_no 등록_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsCsInfoVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_cs_info.insert */
 		INSERT INTO ts_cs_info
 		(
@@ -81,7 +81,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsCsInfoVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_cs_info.update */
 		UPDATE ts_cs_info
 		<trim prefix="SET" prefixOverrides=",">
@@ -107,7 +107,7 @@
 		AND    reg_no = #{regNo} /* reg_no 등록_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsCsInfoVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_cs_info.merge */
 		INSERT INTO ts_cs_info
 		(
@@ -184,7 +184,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsCsInfoVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_cs_info.delete */
 		DELETE FROM ts_cs_info
 		WHERE  1 = 1

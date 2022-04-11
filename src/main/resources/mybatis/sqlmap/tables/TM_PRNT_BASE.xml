@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_PRNT_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo" resultType="kr.co.seculink.domain.vo.TmPrntBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TmPrntBaseVo">
 		/* Generated SQL SQL ID : tm_prnt_base.select */
         SELECT  prnt_no /* prnt_no 학부모_번호 numeric */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -28,7 +28,7 @@
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tm_prnt_base.insert */
 		INSERT INTO tm_prnt_base
 		(
@@ -80,7 +80,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tm_prnt_base.update */
 		UPDATE tm_prnt_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -110,7 +110,7 @@
 		AND    sex_cd = #{sexCd} /* sex_cd 성별_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tm_prnt_base.merge */
 		INSERT INTO tm_prnt_base
 		(
@@ -186,7 +186,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmPrntBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tm_prnt_base.delete */
 		DELETE FROM tm_prnt_base
 		WHERE  1 = 1

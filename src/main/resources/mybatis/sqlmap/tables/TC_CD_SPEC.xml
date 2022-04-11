@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_CD_SPEC">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TcCdSpecVo" resultType="kr.co.seculink.domain.vo.TcCdSpecVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TcCdSpecVo">
 		/* Generated SQL SQL ID : tc_cd_spec.select */
         SELECT  cd_grp /* cd_grp 코드_그룹 character varying(40) */
                ,cd_val /* cd_val 코드_값 character varying(40) */
@@ -30,7 +30,7 @@
 		AND    cd_val = #{cdVal} /* cd_val 코드_값 character varying(40) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcCdSpecVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tc_cd_spec.insert */
 		INSERT INTO tc_cd_spec
 		(
@@ -94,7 +94,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TcCdSpecVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tc_cd_spec.update */
 		UPDATE tc_cd_spec
 		<trim prefix="SET" prefixOverrides=",">
@@ -130,7 +130,7 @@
 		AND    cd_val = #{cdVal} /* cd_val 코드_값 character varying(40) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcCdSpecVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tc_cd_spec.merge */
 		INSERT INTO tc_cd_spec
 		(
@@ -224,7 +224,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcCdSpecVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tc_cd_spec.delete */
 		DELETE FROM tc_cd_spec
 		WHERE  1 = 1

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_STDT_GUAR_CONN">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TmStdtGuarConnVo" resultType="kr.co.seculink.domain.vo.TmStdtGuarConnVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TmStdtGuarConnVo">
 		/* Generated SQL SQL ID : tm_stdt_guar_conn.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,guar_no /* guar_no 보호자_번호 numeric */
@@ -23,7 +23,7 @@
 		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmStdtGuarConnVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tm_stdt_guar_conn.insert */
 		INSERT INTO tm_stdt_guar_conn
 		(
@@ -57,7 +57,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TmStdtGuarConnVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tm_stdt_guar_conn.update */
 		UPDATE tm_stdt_guar_conn
 		<trim prefix="SET" prefixOverrides=",">
@@ -72,7 +72,7 @@
 		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmStdtGuarConnVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tm_stdt_guar_conn.merge */
 		INSERT INTO tm_stdt_guar_conn
 		(
@@ -115,7 +115,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmStdtGuarConnVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tm_stdt_guar_conn.delete */
 		DELETE FROM tm_stdt_guar_conn
 		WHERE  1 = 1

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FAT_JUDG_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo" resultType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.select */
         SELECT  fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
                ,bmi_fr /* bmi_fr BMI_FROM numeric */
@@ -27,7 +27,7 @@
 		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.insert */
 		INSERT INTO ti_fat_judg_stnd
 		(
@@ -87,7 +87,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.update */
 		UPDATE ti_fat_judg_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -119,7 +119,7 @@
 		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.merge */
 		INSERT INTO ti_fat_judg_stnd
 		(
@@ -206,7 +206,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFatJudgStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_fat_judg_stnd.delete */
 		DELETE FROM ti_fat_judg_stnd
 		WHERE  1 = 1

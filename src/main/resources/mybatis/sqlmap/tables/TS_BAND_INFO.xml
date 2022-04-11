@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_BAND_INFO">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsBandInfoVo" resultType="kr.co.seculink.domain.vo.TsBandInfoVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsBandInfoVo">
 		/* Generated SQL SQL ID : ts_band_info.select */
         SELECT  band_id /* band_id 밴드_ID character varying(20) */
                ,band_mdl_cd /* band_mdl_cd 밴드_모델_코드 character varying(20) */
@@ -28,7 +28,7 @@
 		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsBandInfoVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_band_info.insert */
 		INSERT INTO ts_band_info
 		(
@@ -102,7 +102,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsBandInfoVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_band_info.update */
 		UPDATE ts_band_info
 		<trim prefix="SET" prefixOverrides=",">
@@ -137,7 +137,7 @@
 		AND    band_id = #{bandId} /* band_id 밴드_ID character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsBandInfoVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_band_info.merge */
 		INSERT INTO ts_band_info
 		(
@@ -241,7 +241,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsBandInfoVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_band_info.delete */
 		DELETE FROM ts_band_info
 		WHERE  1 = 1

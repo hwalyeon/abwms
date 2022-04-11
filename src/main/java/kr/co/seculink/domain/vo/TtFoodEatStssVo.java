@@ -31,6 +31,9 @@ public class TtFoodEatStssVo implements Serializable {
 	/* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null) */
 	private Double avgCalEatQty;
 
+	/* eat_cnt 섭취_건수 numeric(null) */
+	private Double eatCnt;
+
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -169,6 +172,21 @@ public class TtFoodEatStssVo implements Serializable {
 	 */
 	public void setAvgCalEatQty(Double avgCalEatQty) {
 		this.avgCalEatQty = avgCalEatQty;
+	}
+	/**
+	 * Get eat_cnt 섭취_건수 numeric(null)
+	 * @Return Double eatCnt
+	 */
+	public Double getEatCnt() {
+		return this.eatCnt;
+	}
+	
+	/**
+	 * Set eat_cnt 섭취_건수 numeric(null)
+	 * @Param Double eatCnt
+	 */
+	public void setEatCnt(Double eatCnt) {
+		this.eatCnt = eatCnt;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

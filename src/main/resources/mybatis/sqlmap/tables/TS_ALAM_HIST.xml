@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_ALAM_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsAlamHistVo" resultType="kr.co.seculink.domain.vo.TsAlamHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsAlamHistVo">
 		/* Generated SQL SQL ID : ts_alam_hist.select */
         SELECT  alam_no /* alam_no 알림_번호 numeric */
                ,guar_no /* guar_no 보호자_번호 numeric */
@@ -32,7 +32,7 @@
 		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsAlamHistVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_alam_hist.insert */
 		INSERT INTO ts_alam_hist
 		(
@@ -120,7 +120,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsAlamHistVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_alam_hist.update */
 		UPDATE ts_alam_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -162,7 +162,7 @@
 		AND    guar_no = #{guarNo} /* guar_no 보호자_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsAlamHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_alam_hist.merge */
 		INSERT INTO ts_alam_hist
 		(
@@ -286,7 +286,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsAlamHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_alam_hist.delete */
 		DELETE FROM ts_alam_hist
 		WHERE  1 = 1

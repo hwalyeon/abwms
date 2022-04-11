@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_CERT_DETL">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsCertDetlVo" resultType="kr.co.seculink.domain.vo.TsCertDetlVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsCertDetlVo">
 		/* Generated SQL SQL ID : ts_cert_detl.select */
         SELECT  cert_seq /* cert_seq 인증_순번 numeric */
                ,gen_dttm /* gen_dttm 생성_일시 character(14) */
@@ -25,7 +25,7 @@
 		AND    cert_seq = #{certSeq} /* cert_seq 인증_순번 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsCertDetlVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_cert_detl.insert */
 		INSERT INTO ts_cert_detl
 		(
@@ -81,7 +81,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsCertDetlVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_cert_detl.update */
 		UPDATE ts_cert_detl
 		<trim prefix="SET" prefixOverrides=",">
@@ -107,7 +107,7 @@
 		AND    cert_seq = #{certSeq} /* cert_seq 인증_순번 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsCertDetlVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_cert_detl.merge */
 		INSERT INTO ts_cert_detl
 		(
@@ -184,7 +184,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsCertDetlVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_cert_detl.delete */
 		DELETE FROM ts_cert_detl
 		WHERE  1 = 1

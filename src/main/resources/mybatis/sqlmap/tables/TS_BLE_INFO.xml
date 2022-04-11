@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_BLE_INFO">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsBleInfoVo" resultType="kr.co.seculink.domain.vo.TsBleInfoVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsBleInfoVo">
 		/* Generated SQL SQL ID : ts_ble_info.select */
         SELECT  ble_id /* ble_id BLE_ID character varying(40) */
                ,ble_inst_dt /* ble_inst_dt BLE_설치_일자 character(8) */
@@ -25,7 +25,7 @@
 		AND    ble_id = #{bleId} /* ble_id BLE_ID character varying(40) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsBleInfoVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_ble_info.insert */
 		INSERT INTO ts_ble_info
 		(
@@ -81,7 +81,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsBleInfoVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_ble_info.update */
 		UPDATE ts_ble_info
 		<trim prefix="SET" prefixOverrides=",">
@@ -107,7 +107,7 @@
 		AND    ble_id = #{bleId} /* ble_id BLE_ID character varying(40) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsBleInfoVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_ble_info.merge */
 		INSERT INTO ts_ble_info
 		(
@@ -184,7 +184,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsBleInfoVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_ble_info.delete */
 		DELETE FROM ts_ble_info
 		WHERE  1 = 1

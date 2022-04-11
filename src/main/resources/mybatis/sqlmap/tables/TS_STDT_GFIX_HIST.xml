@@ -7,13 +7,13 @@
 -->
 <mapper namespace="TS_STDT_GFIX_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtGfixHistVo" resultType="kr.co.seculink.domain.vo.TsStdtGfixHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsStdtGfixHistVo">
 		/* Generated SQL SQL ID : ts_stdt_gfix_hist.select */
         FROM   ts_stdt_gfix_hist
 		WHERE  1 = 1
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtGfixHistVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_stdt_gfix_hist.insert */
 		INSERT INTO ts_stdt_gfix_hist
 		(
@@ -23,7 +23,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsStdtGfixHistVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_stdt_gfix_hist.update */
 		UPDATE ts_stdt_gfix_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -31,7 +31,7 @@
 		WHERE  1 = 1
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtGfixHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_stdt_gfix_hist.merge */
 		INSERT INTO ts_stdt_gfix_hist
 		(
@@ -45,7 +45,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsStdtGfixHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_stdt_gfix_hist.delete */
 		DELETE FROM ts_stdt_gfix_hist
 		WHERE  1 = 1

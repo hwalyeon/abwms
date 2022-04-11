@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TT_ALAM_STSS">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TtAlamStssVo" resultType="kr.co.seculink.domain.vo.TtAlamStssVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TtAlamStssVo">
 		/* Generated SQL SQL ID : tt_alam_stss.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -31,7 +31,7 @@
 		AND    act_cd = #{actCd} /* act_cd 알림_유형_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TtAlamStssVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tt_alam_stss.insert */
 		INSERT INTO tt_alam_stss
 		(
@@ -85,7 +85,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TtAlamStssVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tt_alam_stss.update */
 		UPDATE tt_alam_stss
 		<trim prefix="SET" prefixOverrides=",">
@@ -114,7 +114,7 @@
 		AND    act_cd = #{actCd} /* act_cd 알림_유형_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TtAlamStssVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tt_alam_stss.merge */
 		INSERT INTO tt_alam_stss
 		(
@@ -189,7 +189,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TtAlamStssVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tt_alam_stss.delete */
 		DELETE FROM tt_alam_stss
 		WHERE  1 = 1

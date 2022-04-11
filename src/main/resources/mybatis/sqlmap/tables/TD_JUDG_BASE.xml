@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TD_JUDG_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TdJudgBaseVo" resultType="kr.co.seculink.domain.vo.TdJudgBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TdJudgBaseVo">
 		/* Generated SQL SQL ID : td_judg_base.select */
         SELECT  judg_no /* judg_no 판정_번호 numeric */
                ,evnt_div_cd /* evnt_div_cd 이벤트_구분_코드 character varying(20) */
@@ -40,7 +40,7 @@
 		AND    judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TdJudgBaseVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : td_judg_base.insert */
 		INSERT INTO td_judg_base
 		(
@@ -134,7 +134,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TdJudgBaseVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : td_judg_base.update */
 		UPDATE td_judg_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -205,7 +205,7 @@
 		AND    judg_no = #{judgNo} /* judg_no 판정_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TdJudgBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : td_judg_base.merge */
 		INSERT INTO td_judg_base
 		(
@@ -365,7 +365,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TdJudgBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : td_judg_base.delete */
 		DELETE FROM td_judg_base
 		WHERE  1 = 1

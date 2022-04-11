@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TM_TERM_AGRE_DETL">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TmTermAgreDetlVo" resultType="kr.co.seculink.domain.vo.TmTermAgreDetlVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TmTermAgreDetlVo">
 		/* Generated SQL SQL ID : tm_term_agre_detl.select */
         SELECT  guar_no /* guar_no 보호자_번호 numeric */
                ,term_div_cd /* term_div_cd 약관_구분_코드 character varying(20) */
@@ -27,7 +27,7 @@
 		AND    term_ver = #{termVer} /* term_ver 약관_버전 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TmTermAgreDetlVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tm_term_agre_detl.insert */
 		INSERT INTO tm_term_agre_detl
 		(
@@ -71,7 +71,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TmTermAgreDetlVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tm_term_agre_detl.update */
 		UPDATE tm_term_agre_detl
 		<trim prefix="SET" prefixOverrides=",">
@@ -93,7 +93,7 @@
 		AND    term_ver = #{termVer} /* term_ver 약관_버전 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TmTermAgreDetlVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tm_term_agre_detl.merge */
 		INSERT INTO tm_term_agre_detl
 		(
@@ -152,7 +152,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TmTermAgreDetlVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tm_term_agre_detl.delete */
 		DELETE FROM tm_term_agre_detl
 		WHERE  1 = 1

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_BAND_SPEC">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsBandSpecVo" resultType="kr.co.seculink.domain.vo.TsBandSpecVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsBandSpecVo">
 		/* Generated SQL SQL ID : ts_band_spec.select */
         SELECT  band_id /* band_id 밴드_ID character varying(20) */
                ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
@@ -23,7 +23,7 @@
 		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_band_spec.insert */
 		INSERT INTO ts_band_spec
 		(
@@ -57,7 +57,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_band_spec.update */
 		UPDATE ts_band_spec
 		<trim prefix="SET" prefixOverrides=",">
@@ -72,7 +72,7 @@
 		AND    guar_tel_no = #{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_band_spec.merge */
 		INSERT INTO ts_band_spec
 		(
@@ -115,7 +115,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsBandSpecVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_band_spec.delete */
 		DELETE FROM ts_band_spec
 		WHERE  1 = 1

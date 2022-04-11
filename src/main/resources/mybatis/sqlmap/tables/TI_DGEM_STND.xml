@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_DGEM_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiDgemStndVo" resultType="kr.co.seculink.domain.vo.TiDgemStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiDgemStndVo">
 		/* Generated SQL SQL ID : ti_dgem_stnd.select */
         SELECT  act_div_cd /* act_div_cd 활동_구분_코드 character varying(20) */
                ,hbit_stat_cd /* hbit_stat_cd 심박_상태_코드 character varying(20) */
@@ -31,7 +31,7 @@
 		AND    temp_stat_cd = #{tempStatCd} /* temp_stat_cd 체온_상태_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiDgemStndVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ti_dgem_stnd.insert */
 		INSERT INTO ti_dgem_stnd
 		(
@@ -89,7 +89,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiDgemStndVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ti_dgem_stnd.update */
 		UPDATE ti_dgem_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -118,7 +118,7 @@
 		AND    temp_stat_cd = #{tempStatCd} /* temp_stat_cd 체온_상태_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiDgemStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_dgem_stnd.merge */
 		INSERT INTO ti_dgem_stnd
 		(
@@ -197,7 +197,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiDgemStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_dgem_stnd.delete */
 		DELETE FROM ti_dgem_stnd
 		WHERE  1 = 1

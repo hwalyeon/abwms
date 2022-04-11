@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_FATP_QUST_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsFatpQustHistVo" resultType="kr.co.seculink.domain.vo.TsFatpQustHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsFatpQustHistVo">
 		/* Generated SQL SQL ID : ts_fatp_qust_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,stnd_dt /* stnd_dt 기준_일자 character(8) */
@@ -29,7 +29,7 @@
 		AND    qust_no = #{qustNo} /* qust_no 질문_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsFatpQustHistVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_fatp_qust_hist.insert */
 		INSERT INTO ts_fatp_qust_hist
 		(
@@ -75,7 +75,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsFatpQustHistVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_fatp_qust_hist.update */
 		UPDATE ts_fatp_qust_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -98,7 +98,7 @@
 		AND    qust_no = #{qustNo} /* qust_no 질문_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsFatpQustHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_fatp_qust_hist.merge */
 		INSERT INTO ts_fatp_qust_hist
 		(
@@ -159,7 +159,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsFatpQustHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_fatp_qust_hist.delete */
 		DELETE FROM ts_fatp_qust_hist
 		WHERE  1 = 1

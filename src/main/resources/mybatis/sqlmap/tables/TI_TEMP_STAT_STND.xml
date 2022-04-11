@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_TEMP_STAT_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo" resultType="kr.co.seculink.domain.vo.TiTempStatStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiTempStatStndVo">
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.select */
         SELECT  age_ycnt /* age_ycnt 나이_년수 numeric */
                ,temp_val_fr /* temp_val_fr 체온_값_FROM numeric */
@@ -25,7 +25,7 @@
 		AND    temp_val_fr = #{tempValFr} /* temp_val_fr 체온_값_FROM numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.insert */
 		INSERT INTO ti_temp_stat_stnd
 		(
@@ -67,7 +67,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.update */
 		UPDATE ti_temp_stat_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -88,7 +88,7 @@
 		AND    temp_val_fr = #{tempValFr} /* temp_val_fr 체온_값_FROM numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.merge */
 		INSERT INTO ti_temp_stat_stnd
 		(
@@ -145,7 +145,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiTempStatStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_temp_stat_stnd.delete */
 		DELETE FROM ti_temp_stat_stnd
 		WHERE  1 = 1

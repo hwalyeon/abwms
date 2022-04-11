@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_MENU_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TcMenuBaseVo" resultType="kr.co.seculink.domain.vo.TcMenuBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TcMenuBaseVo">
 		/* Generated SQL SQL ID : tc_menu_base.select */
         SELECT  menu_no /* menu_no 메뉴_번호 character varying(200) */
                ,uppr_menu_no /* uppr_menu_no 상위_메뉴_번호 character varying(200) */
@@ -27,7 +27,7 @@
 		AND    menu_no = #{menuNo} /* menu_no 메뉴_번호 character varying(200) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcMenuBaseVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tc_menu_base.insert */
 		INSERT INTO tc_menu_base
 		(
@@ -83,7 +83,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TcMenuBaseVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tc_menu_base.update */
 		UPDATE tc_menu_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -115,7 +115,7 @@
 		AND    menu_no = #{menuNo} /* menu_no 메뉴_번호 character varying(200) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcMenuBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tc_menu_base.merge */
 		INSERT INTO tc_menu_base
 		(
@@ -198,7 +198,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcMenuBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tc_menu_base.delete */
 		DELETE FROM tc_menu_base
 		WHERE  1 = 1

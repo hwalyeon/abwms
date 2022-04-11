@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_QNA_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo" resultType="kr.co.seculink.domain.vo.TsQnaBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsQnaBaseVo">
 		/* Generated SQL SQL ID : ts_qna_base.select */
         SELECT  qna_no /* qna_no 질의응답_번호 numeric */
                ,qust_guar_no /* qust_guar_no 질문_보호자_번호 numeric */
@@ -30,7 +30,7 @@
 		AND    qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_qna_base.insert */
 		INSERT INTO ts_qna_base
 		(
@@ -108,7 +108,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_qna_base.update */
 		UPDATE ts_qna_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -149,7 +149,7 @@
 		AND    qna_no = #{qnaNo} /* qna_no 질의응답_번호 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_qna_base.merge */
 		INSERT INTO ts_qna_base
 		(
@@ -263,7 +263,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsQnaBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_qna_base.delete */
 		DELETE FROM ts_qna_base
 		WHERE  1 = 1

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_USER_ROLE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TcUserRoleVo" resultType="kr.co.seculink.domain.vo.TcUserRoleVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TcUserRoleVo">
 		/* Generated SQL SQL ID : tc_user_role.select */
         SELECT  user_id /* user_id 사용자_ID character varying(40) */
                ,role_cd /* role_cd 역할_코드 character varying(40) */
@@ -23,7 +23,7 @@
 		AND    role_cd = #{roleCd} /* role_cd 역할_코드 character varying(40) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tc_user_role.insert */
 		INSERT INTO tc_user_role
 		(
@@ -49,7 +49,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tc_user_role.update */
 		UPDATE tc_user_role
 		<trim prefix="SET" prefixOverrides=",">
@@ -64,7 +64,7 @@
 		AND    role_cd = #{roleCd} /* role_cd 역할_코드 character varying(40) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tc_user_role.merge */
 		INSERT INTO tc_user_role
 		(
@@ -99,7 +99,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcUserRoleVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tc_user_role.delete */
 		DELETE FROM tc_user_role
 		WHERE  1 = 1

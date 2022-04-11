@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TC_JOB_BASE">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TcJobBaseVo" resultType="kr.co.seculink.domain.vo.TcJobBaseVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TcJobBaseVo">
 		/* Generated SQL SQL ID : tc_job_base.select */
         SELECT  job_id /* job_id 작업_ID character varying(20) */
                ,job_nm /* job_nm 작업_명 character varying(100) */
@@ -24,7 +24,7 @@
 		AND    job_id = #{jobId} /* job_id 작업_ID character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tc_job_base.insert */
 		INSERT INTO tc_job_base
 		(
@@ -66,7 +66,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tc_job_base.update */
 		UPDATE tc_job_base
 		<trim prefix="SET" prefixOverrides=",">
@@ -89,7 +89,7 @@
 		AND    job_id = #{jobId} /* job_id 작업_ID character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tc_job_base.merge */
 		INSERT INTO tc_job_base
 		(
@@ -149,7 +149,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TcJobBaseVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tc_job_base.delete */
 		DELETE FROM tc_job_base
 		WHERE  1 = 1

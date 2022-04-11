@@ -7,13 +7,13 @@
 -->
 <mapper namespace="TS_ALAM_DETL">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsAlamDetlVo" resultType="kr.co.seculink.domain.vo.TsAlamDetlVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsAlamDetlVo">
 		/* Generated SQL SQL ID : ts_alam_detl.select */
         FROM   ts_alam_detl
 		WHERE  1 = 1
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsAlamDetlVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_alam_detl.insert */
 		INSERT INTO ts_alam_detl
 		(
@@ -23,7 +23,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsAlamDetlVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_alam_detl.update */
 		UPDATE ts_alam_detl
 		<trim prefix="SET" prefixOverrides=",">
@@ -31,7 +31,7 @@
 		WHERE  1 = 1
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsAlamDetlVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_alam_detl.merge */
 		INSERT INTO ts_alam_detl
 		(
@@ -45,7 +45,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsAlamDetlVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_alam_detl.delete */
 		DELETE FROM ts_alam_detl
 		WHERE  1 = 1

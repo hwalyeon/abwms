@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_STDT_GROW_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo" resultType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
 		/* Generated SQL SQL ID : ts_stdt_grow_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,mesu_dt /* mesu_dt 측정_일자 character(8) */
@@ -29,7 +29,7 @@
 		AND    mesu_dt = #{mesuDt} /* mesu_dt 측정_일자 character(8) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_stdt_grow_hist.insert */
 		INSERT INTO ts_stdt_grow_hist
 		(
@@ -87,7 +87,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_stdt_grow_hist.update */
 		UPDATE ts_stdt_grow_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -120,7 +120,7 @@
 		AND    mesu_dt = #{mesuDt} /* mesu_dt 측정_일자 character(8) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_stdt_grow_hist.merge */
 		INSERT INTO ts_stdt_grow_hist
 		(
@@ -205,7 +205,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsStdtGrowHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_stdt_grow_hist.delete */
 		DELETE FROM ts_stdt_grow_hist
 		WHERE  1 = 1

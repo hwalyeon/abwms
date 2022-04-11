@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_FATP_QUST_SPEC">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiFatpQustSpecVo" resultType="kr.co.seculink.domain.vo.TiFatpQustSpecVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiFatpQustSpecVo">
 		/* Generated SQL SQL ID : ti_fatp_qust_spec.select */
         SELECT  qust_ver /* qust_ver 설문_버전 numeric */
                ,qust_no /* qust_no 질문_번호 numeric */
@@ -27,7 +27,7 @@
 		AND    ans_seq = #{ansSeq} /* ans_seq 답변_순번 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiFatpQustSpecVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ti_fatp_qust_spec.insert */
 		INSERT INTO ti_fatp_qust_spec
 		(
@@ -75,7 +75,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiFatpQustSpecVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ti_fatp_qust_spec.update */
 		UPDATE ti_fatp_qust_spec
 		<trim prefix="SET" prefixOverrides=",">
@@ -97,7 +97,7 @@
 		AND    ans_seq = #{ansSeq} /* ans_seq 답변_순번 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiFatpQustSpecVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_fatp_qust_spec.merge */
 		INSERT INTO ti_fatp_qust_spec
 		(
@@ -160,7 +160,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiFatpQustSpecVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_fatp_qust_spec.delete */
 		DELETE FROM ti_fatp_qust_spec
 		WHERE  1 = 1

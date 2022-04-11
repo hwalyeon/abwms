@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_DD_PAL_BLCK">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo" resultType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
 		/* Generated SQL SQL ID : ti_dd_pal_blck.select */
         SELECT  fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
                ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
@@ -36,7 +36,7 @@
 		AND    cal_qty_to = #{calQtyTo} /* cal_qty_to 칼로리_량_TO numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ti_dd_pal_blck.insert */
 		INSERT INTO ti_dd_pal_blck
 		(
@@ -94,7 +94,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ti_dd_pal_blck.update */
 		UPDATE ti_dd_pal_blck
 		<trim prefix="SET" prefixOverrides=",">
@@ -123,7 +123,7 @@
 		AND    cal_qty_to = #{calQtyTo} /* cal_qty_to 칼로리_량_TO numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_dd_pal_blck.merge */
 		INSERT INTO ti_dd_pal_blck
 		(
@@ -199,7 +199,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiDdPalBlckVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_dd_pal_blck.delete */
 		DELETE FROM ti_dd_pal_blck
 		WHERE  1 = 1

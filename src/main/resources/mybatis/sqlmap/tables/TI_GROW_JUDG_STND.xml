@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_GROW_JUDG_STND">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiGrowJudgStndVo" resultType="kr.co.seculink.domain.vo.TiGrowJudgStndVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiGrowJudgStndVo">
 		/* Generated SQL SQL ID : ti_grow_judg_stnd.select */
         SELECT  grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
                ,gidx_fr /* gidx_fr 성장지수_FROM numeric */
@@ -25,7 +25,7 @@
 		AND    grow_judg_cd = #{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiGrowJudgStndVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ti_grow_judg_stnd.insert */
 		INSERT INTO ti_grow_judg_stnd
 		(
@@ -65,7 +65,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiGrowJudgStndVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ti_grow_judg_stnd.update */
 		UPDATE ti_grow_judg_stnd
 		<trim prefix="SET" prefixOverrides=",">
@@ -91,7 +91,7 @@
 		AND    grow_judg_cd = #{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiGrowJudgStndVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_grow_judg_stnd.merge */
 		INSERT INTO ti_grow_judg_stnd
 		(
@@ -152,7 +152,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiGrowJudgStndVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_grow_judg_stnd.delete */
 		DELETE FROM ti_grow_judg_stnd
 		WHERE  1 = 1

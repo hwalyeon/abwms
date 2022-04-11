@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_HBIT_TEMP">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo" resultType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,stnd_dt /* stnd_dt 기준_일자 character(8) */
@@ -21,7 +21,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.insert */
 		INSERT INTO ts_dd_hbit_temp
 		(
@@ -43,7 +43,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.update */
 		UPDATE ts_dd_hbit_temp
 		<trim prefix="SET" prefixOverrides=",">
@@ -65,7 +65,7 @@
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.merge */
 		INSERT INTO ts_dd_hbit_temp
 		(
@@ -103,7 +103,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdHbitTempVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_dd_hbit_temp.delete */
 		DELETE FROM ts_dd_hbit_temp
 		WHERE  1 = 1

@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_STDT_DGEM_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo" resultType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.select */
         SELECT  stdt_no /* stdt_no 학생_번호 numeric */
                ,dgem_hist_seq /* dgem_hist_seq 위험감정_이력_순번 numeric */
@@ -37,7 +37,7 @@
 		AND    dgem_hist_seq = #{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.insert */
 		INSERT INTO ts_stdt_dgem_hist
 		(
@@ -151,7 +151,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.update */
 		UPDATE ts_stdt_dgem_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -208,7 +208,7 @@
 		AND    dgem_hist_seq = #{dgemHistSeq} /* dgem_hist_seq 위험감정_이력_순번 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.merge */
 		INSERT INTO ts_stdt_dgem_hist
 		(
@@ -373,7 +373,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsStdtDgemHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_stdt_dgem_hist.delete */
 		DELETE FROM ts_stdt_dgem_hist
 		WHERE  1 = 1

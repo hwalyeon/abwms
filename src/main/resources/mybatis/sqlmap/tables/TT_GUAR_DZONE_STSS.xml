@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TT_GUAR_DZONE_STSS">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TtGuarDzoneStssVo" resultType="kr.co.seculink.domain.vo.TtGuarDzoneStssVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TtGuarDzoneStssVo">
 		/* Generated SQL SQL ID : tt_guar_dzone_stss.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
@@ -25,7 +25,7 @@
 		AND    lon_val = #{lonVal} /* lon_val 경도_값 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TtGuarDzoneStssVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : tt_guar_dzone_stss.insert */
 		INSERT INTO tt_guar_dzone_stss
 		(
@@ -63,7 +63,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TtGuarDzoneStssVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : tt_guar_dzone_stss.update */
 		UPDATE tt_guar_dzone_stss
 		<trim prefix="SET" prefixOverrides=",">
@@ -87,7 +87,7 @@
 		AND    lon_val = #{lonVal} /* lon_val 경도_값 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TtGuarDzoneStssVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : tt_guar_dzone_stss.merge */
 		INSERT INTO tt_guar_dzone_stss
 		(
@@ -141,7 +141,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TtGuarDzoneStssVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : tt_guar_dzone_stss.delete */
 		DELETE FROM tt_guar_dzone_stss
 		WHERE  1 = 1

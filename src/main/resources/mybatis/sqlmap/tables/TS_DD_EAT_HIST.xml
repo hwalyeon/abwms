@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TS_DD_EAT_HIST">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo" resultType="kr.co.seculink.domain.vo.TsDdEatHistVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TsDdEatHistVo">
 		/* Generated SQL SQL ID : ts_dd_eat_hist.select */
         SELECT  stnd_dt /* stnd_dt 기준_일자 character(8) */
                ,stdt_no /* stdt_no 학생_번호 numeric */
@@ -29,7 +29,7 @@
 		AND    eat_seq = #{eatSeq} /* eat_seq 섭취_순번 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ts_dd_eat_hist.insert */
 		INSERT INTO ts_dd_eat_hist
 		(
@@ -85,7 +85,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ts_dd_eat_hist.update */
 		UPDATE ts_dd_eat_hist
 		<trim prefix="SET" prefixOverrides=",">
@@ -113,7 +113,7 @@
 		AND    eat_seq = #{eatSeq} /* eat_seq 섭취_순번 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ts_dd_eat_hist.merge */
 		INSERT INTO ts_dd_eat_hist
 		(
@@ -190,7 +190,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TsDdEatHistVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ts_dd_eat_hist.delete */
 		DELETE FROM ts_dd_eat_hist
 		WHERE  1 = 1

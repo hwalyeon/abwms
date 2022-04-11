@@ -7,7 +7,7 @@
 -->
 <mapper namespace="TI_GFIX_FCTR">
 
-	<select id="select" parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo" resultType="kr.co.seculink.domain.vo.TiGfixFctrVo">
+	<select id="select" resultType="kr.co.seculink.domain.vo.TiGfixFctrVo">
 		/* Generated SQL SQL ID : ti_gfix_fctr.select */
         SELECT  gfix_div_cd /* gfix_div_cd 성장비만지수_구분_코드 character varying(20) */
                ,sex_cd /* sex_cd 성별_코드 character varying(20) */
@@ -33,7 +33,7 @@
 		AND    age_mcnt = #{ageMcnt} /* age_mcnt 나이_개월수 numeric */
 	</select>
 
-	<insert id="insert"  parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
+	<insert id="insert"  >
 		/* Generated SQL SQL ID : ti_gfix_fctr.insert */
 		INSERT INTO ti_gfix_fctr
 		(
@@ -117,7 +117,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
+	<update id="update" >
 		/* Generated SQL SQL ID : ti_gfix_fctr.update */
 		UPDATE ti_gfix_fctr
 		<trim prefix="SET" prefixOverrides=",">
@@ -157,7 +157,7 @@
 		AND    age_mcnt = #{ageMcnt} /* age_mcnt 나이_개월수 numeric */
 	</update>
 	
-	<update id="merge"  parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
+	<update id="merge" >
 		/* Generated SQL SQL ID : ti_gfix_fctr.merge */
 		INSERT INTO ti_gfix_fctr
 		(
@@ -274,7 +274,7 @@
 		</trim>
 	</update>
 	
-	<delete id="delete" parameterType="kr.co.seculink.domain.vo.TiGfixFctrVo">
+	<delete id="delete">
 		/* Generated SQL SQL ID : ti_gfix_fctr.delete */
 		DELETE FROM ti_gfix_fctr
 		WHERE  1 = 1
