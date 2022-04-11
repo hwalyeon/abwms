@@ -297,7 +297,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT td_judg_base_pkey
+		ON CONFLICT ON CONSTRAINT td_judg_base_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="evntDivCd != null">

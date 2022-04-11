@@ -248,7 +248,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT ts_alam_hist_pkey
+		ON CONFLICT ON CONSTRAINT ts_alam_hist_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="stdtNo != null">

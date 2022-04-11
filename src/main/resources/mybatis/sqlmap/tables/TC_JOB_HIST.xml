@@ -217,7 +217,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT tc_job_hist_pkey
+		ON CONFLICT ON CONSTRAINT tc_job_hist_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="jobId != null">

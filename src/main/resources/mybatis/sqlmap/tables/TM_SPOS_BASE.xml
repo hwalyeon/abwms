@@ -39,7 +39,7 @@
 		VALUES
 		(
 		)
-		ON CONFLICT CONSTRAINT tm_spos_base_pkey
+		ON CONFLICT ON CONSTRAINT tm_spos_base_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		</trim>

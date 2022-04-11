@@ -120,7 +120,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT ti_grow_act_stnd_pkey
+		ON CONFLICT ON CONSTRAINT ti_grow_act_stnd_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="growActRmrk != null">

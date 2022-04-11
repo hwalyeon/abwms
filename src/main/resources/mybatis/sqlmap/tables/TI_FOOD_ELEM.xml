@@ -96,7 +96,7 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT CONSTRAINT ti_food_elem_pkey
+		ON CONFLICT ON CONSTRAINT ti_food_elem_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="nutrQty != null">

@@ -39,7 +39,7 @@
 		VALUES
 		(
 		)
-		ON CONFLICT CONSTRAINT ts_alam_detl_pkey
+		ON CONFLICT ON CONSTRAINT ts_alam_detl_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		</trim>

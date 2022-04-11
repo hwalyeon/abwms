@@ -470,7 +470,7 @@
 		    ,#{updtTm} /* updt_tm 수정_시각 character(6) */
 		    ,#{updtUserId} /* updt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT CONSTRAINT tc_cal_pkey
+		ON CONFLICT ON CONSTRAINT tc_cal_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="stndDt != null">

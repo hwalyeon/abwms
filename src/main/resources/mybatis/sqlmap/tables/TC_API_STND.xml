@@ -241,7 +241,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT tc_api_stnd_pkey
+		ON CONFLICT ON CONSTRAINT tc_api_stnd_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="svrNm != null">

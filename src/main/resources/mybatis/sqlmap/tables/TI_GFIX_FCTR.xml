@@ -239,7 +239,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT ti_gfix_fctr_pkey
+		ON CONFLICT ON CONSTRAINT ti_gfix_fctr_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="fctr1 != null">

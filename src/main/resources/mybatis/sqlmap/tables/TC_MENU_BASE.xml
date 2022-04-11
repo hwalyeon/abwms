@@ -169,7 +169,7 @@
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
-		ON CONFLICT CONSTRAINT tc_menu_base_pkey
+		ON CONFLICT ON CONSTRAINT tc_menu_base_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="upprMenuNo != null">

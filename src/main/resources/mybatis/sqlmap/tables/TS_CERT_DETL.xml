@@ -161,7 +161,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT ts_cert_detl_pkey
+		ON CONFLICT ON CONSTRAINT ts_cert_detl_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="genDttm != null">

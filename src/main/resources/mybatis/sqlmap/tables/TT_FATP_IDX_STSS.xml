@@ -159,7 +159,7 @@
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT tt_fatp_idx_stss_pkey
+		ON CONFLICT ON CONSTRAINT tt_fatp_idx_stss_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="stndYymm != null">

@@ -125,7 +125,7 @@
 		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
 		    ,#{topBlckVal} /* top_blck_val 최상위_구간_값 numeric */
 		)
-		ON CONFLICT CONSTRAINT ts_dd_hbit_job_pkey
+		ON CONFLICT ON CONSTRAINT ts_dd_hbit_job_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="valdYn != null">

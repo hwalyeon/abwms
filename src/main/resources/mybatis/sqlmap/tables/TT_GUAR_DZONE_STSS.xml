@@ -123,7 +123,7 @@
 		    ,#{addrHead2} /* addr_head_2 주소_헤더_2 character varying(30) */
 		</if>
 		)
-		ON CONFLICT CONSTRAINT tt_guar_dzone_stss_pkey
+		ON CONFLICT ON CONSTRAINT tt_guar_dzone_stss_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
 		<if test="nearAddr != null">
