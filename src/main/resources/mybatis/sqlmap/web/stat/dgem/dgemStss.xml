@@ -10,7 +10,7 @@
         when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
         when #{perdDivCd} = 'WEEK_NM' then week_nm
         else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD') end as stnd_dt
-        from TT_DGEM_STAT_STSS
+        from TT_DGEM_IDX_STSS
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
@@ -75,7 +75,7 @@
     <select id="searchDgemStssList" parameterType="java.util.Map" resultType="MybatisMap">
         select
         x.stnd_dt
-        ,round( avg(x.occr_cnt) , 2) as avg_idx
+        ,round( avg(x.avg_idx) , 2) as avg_idx
         from
         (select
         case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
@@ -83,8 +83,8 @@
         when #{perdDivCd} = 'WEEK_NM' then week_nm
         else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
         end as stnd_dt
-        ,occr_cnt
-        from tt_dgem_stat_stss
+        ,avg_idx
+        from TT_DGEM_IDX_STSS
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}

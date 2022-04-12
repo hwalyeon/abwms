@@ -88,7 +88,11 @@ let dgemHist = new Vue({
             let colModels = [
                 {name: "crud"              , index: "crud"              , label: "crud"		 	    , hidden: true                                  },
                 {name: "guarNoTemp"        , index: "guarNoTemp"        , label: "보호자번호"			, width: 80     , align: "center" , hidden: true},
-                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80     , align: "center" , fixed: true},
+                {name: "stdtHistSeq"        , index: "stdtHistSeq"        , label: "학생이력"			, width: 80     , align: "center" , hidden: true},
+                {name: "stdtGuarNm"        , index: "stdtGuarNm"        , label: "학생이력"			, width: 80     , align: "center" , hidden: true},
+                {name: "stdtNo"       , index: "stdtNo"       , label: "학생번호"	 , width: 80     , align: "center"  ,fixed:true , formatter: function(cellValue, options, rowObject){
+                        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemHist.regStdtInfoDetlPopup(\'' + rowObject.stdtNo + '\', \'' + rowObject.guarNo + '\')" value="신규" data-toggle="modal" data-target="#stdtRegDetlPopup" />';
+                        else return`<a data-toggle="modal" class="links" data-target="#stdtInfoDetlPopup" data-stdt data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
                 {name: "dgemHistSeq"       , index: "dgemHistSeq"       , label: "위험감정 이력순번"	, width: 110    , align: "center" , fixed: true},
                 {name: "dgemDt"            , index: "dgemDt"            , label: "위험감정 일자"		, width: 80     , align: "center" , fixed: true},
                 {name: "dgemTm"            , index: "dgemTm"            , label: "위험감정 시각"		, width: 80     , align: "center" , fixed: true},
@@ -107,16 +111,10 @@ let dgemHist = new Vue({
                 {name: "judgNo"            , index: "judgNo"            , label: "판정번호" 	        , width: 110    , align: "center" , fixed: true},
                 {name: "rmrk"              , index: "rmrk"              , label: "비고" 	            , width: 110    , align: "center" , fixed: true},
                 {name: "dgemAlamNo"        , index: "dgemAlamNo"        , label: "위험감정알림번호" 	, width: 110    , align: "center" , fixed: true},
-                {name: "locNm"             , index: "locNm"             , label: "학교명"        	, width: 110    , align: "center" , fixed: true},
+                {name: "locNm"             , index: "locNm"             , label: "학교명"        	, width: 150    , align: "center" , fixed: true},
                 {name: "guarNo"            , index: "guarNo"            , label: "보호자번호" 	    , width: 110    , align: "center" , fixed: true},
                 {name: "guarNm"            , index: "guarNm"            , label: "보호자명" 	        , width: 110    , align: "center" , fixed: true},
                 {name: "guarTelNo"         , index: "guarTelNo"         , label: "보호자전화번호" 	    , width: 110    , align: "center" , fixed: true},
-                {name: "stdtInfoDetlPopup" , index: "stdtInfoDetlPopup" , label: "상세정보보기"       , width: 80     , align: "center" ,fixed: true,
-                    formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemHist.stdtInfoDetlPopup(\'' + rowObject.stdtNo + '\' , \'' + rowObject.guarNo + '\' )" value="상세보기" data-toggle="modal" data-target="#stdtInfoDetlPopup" />';
-                    }
-                }
-
             ];
 
 
@@ -140,9 +138,14 @@ let dgemHist = new Vue({
                 gridComplete: function() {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["dgemHistSeq","dgemDt","dgemTm","dgemIdx","dgemStatCd","dgemStatCntn","dgemSmryCntn",
-                                                  "locHistNo","currLatVal","currLonVal","locMesuDttm","actDivCd","hbitStatCd",
-                                                  "plcClssCd","tempStatCd","judgNo","rmrk","dgemAlamNo","locNm","stdtNo","stdtInfoDetlPopup"], "stdtNo");
+                    $(grid).tableRowSpan(["stdtNo","dgemHistSeq","dgemDt","dgemTm","dgemIdx","dgemStatCd","dgemStatCntn","dgemSmryCntn",
+                        "locHistNo","currLatVal","currLonVal","locMesuDttm","actDivCd","hbitStatCd","plcClssCd","tempStatCd","judgNo","rmrk","dgemAlamNo","locNm"], "stdtHistSeq");
+                    $(grid).tableRowSpan(["stdtNo","locNm","guarNo","guarNm","guarTelNo"], "stdtGuarNm");
+
+                    //학생정보 상세 팝업
+                    $("#grid_list").find('A.links[data-stdt]').on('click', function(e) {
+                        dgemHist.regStdtInfoDetlPopup($(e.target).data('stdt-no'), $(e.target).data('guar-no'))
+                    });
                 }
             }));
 
@@ -185,9 +188,9 @@ let dgemHist = new Vue({
                 $this.params.locNm  = data.locNm;
             }
         },
-        //학생정보 상세 팝업
-        stdtInfoDetlPopup: function(stdtNo, guarNo) {
-            stdtInfoDetl.initPage(stdtNo, guarNo);
+        //학생정보상세 팝업
+        regStdtInfoDetlPopup: function(stdtNo, guarNo){
+            stdtInfoDetl.initPage(stdtNo, guarNo, function(){ dgemHist.searchDgemHistList(true) });
         },
         //학생 및 보호자 정보 search 팝업
         stdtGuarDetlPopup: function() {

@@ -5,6 +5,8 @@
     <select id="searchDgemHistList" parameterType="java.util.Map" resultType="MybatisMap">
         select  A.STDT_NO		 /* 학생번호 */
         ,A.DGEM_HIST_SEQ  /* 위험감정 이력 순번 */
+        ,A.STDT_NO || '_' || A.DGEM_HIST_SEQ AS STDT_HIST_SEQ  /* 위험감정 이력 순번 */
+        ,A.STDT_NO || '_' || F.GUAR_NM       AS STDT_GUAR_NM  /* 위험감정 이력 순번 */
         ,A.DGEM_DT        /* 위험감정 일자 */
         ,A.DGEM_TM        /* 위험감정 시각 */
         ,A.DGEM_IDX       /* 위험감정 지수 */
@@ -37,20 +39,20 @@
         left    outer join
         TD_JUDG_BASE B
         on      A.JUDG_NO = B.JUDG_NO
-        left    outer join
+        inner join
         TM_STDT_BASE C
         on      A.STDT_NO = C.STDT_NO
-        left    outer join
+        inner join
         TI_EORG_BASE D
         on      C.EORG_LOC_NO = D.LOC_NO
-        left    outer join
+        inner join
         TM_STDT_GUAR_CONN E
         on      C.STDT_NO = E.STDT_NO
-        left    outer join
+        inner join
         TM_GUAR_BASE F
         on      E.GUAR_NO = F.GUAR_NO
         where   1=1
-    and     fn_getCdNm('EVNT_DIV_CD',B.evnt_div_cd) in('정기판정셋','이벤트판정셋')
+        and     B.evnt_div_cd in('ndt','edt')
     <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
     and     DGEM_DT between #{entrDtFr} and #{entrDtTo}        /* 위험감정 일자 */</if>
     <if test=" dgemTm != null and dgemTm !='' ">
@@ -73,7 +75,9 @@
     and     F.GUAR_NO      = #{guarNo}::numeric                /* 보호자번호    */</if>
     <if test=" guarNm != null and guarNm !='' ">
     and     DECR(F.GUAR_NM)      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
-    ORDER BY A.STDT_NO
+    ORDER BY A.STDT_NO,
+             A.DGEM_HIST_SEQ,
+             F.GUAR_NO
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>
