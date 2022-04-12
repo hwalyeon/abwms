@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface DzoneStssService
 {
-    public List<Map<String, Object>> searchAvalActStssList(Map<String, String> params) throws BizException;
+    public List<Map<String, Object>> searchDzoneStssList(Map<String, String> params) throws BizException;
 }
 

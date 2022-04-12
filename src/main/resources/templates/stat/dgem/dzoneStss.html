@@ -86,11 +86,16 @@
 				<div class="ibox-title">
 					<i class="fa fa-title-bar"></i>
 					<h5>위험지역 발생 추이</h5>
+					<div class="float_right">
+						<input type="radio" v-model="params.occrDivCd" value="1" @change="updateAvalActChart($event.target.value)"><span>발생건수</span></input>
+						<span style="padding-right:10px;"></span>
+						<input type="radio" v-model="params.occrDivCd" value="2" @change="updateAvalActChart($event.target.value)"><span>발생학생수</span></input>
+					</div>
 				</div>
 				<div class="ibox-content">
 					<div class="form-group">
-						<div id="chartAvalCal" style="width:100%; text-align: center;" >
-							<canvas id="avalCalChart" width="1400px" height="400" style="display: inline-block"> </canvas>
+						<div id="chartAvalAct" style="width:100%; text-align: center;" >
+							<canvas id="avalActChart" width="1400px" height="400" style="display: inline-block"> </canvas>
 						</div>
 					</div>
 					<div class="form-group">
@@ -100,8 +105,8 @@
 						<div class="clear_both"></div>
 					</div>
 					<div class="form-group">
-						<div id="avalCal_list_wrapper">
-							<table id="avalCal_list"></table>
+						<div id="avalAct_list_wrapper">
+							<table id="avalAct_list"></table>
 						</div>
 					</div>
 				</div>
