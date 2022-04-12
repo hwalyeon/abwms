@@ -225,6 +225,10 @@ public class CommonWebController {
 	@RequestMapping("/stat/dgem/dgemStss.pg")
 	public String getStatDgemDgemStss() {return "stat/dgem/dgemStss";}
 
+	// 위험지역 추이분석
+	@RequestMapping("/stat/dgem/dzoneStss.pg")
+	public String getStatDgemZoneStss() {return "stat/dgem/dzoneStss";}
+
 	// 성장지수 추이분석
 	@RequestMapping("/stat/hc/gidxStss.pg")
 	public String getStatHcGidxStss() {return "stat/hc/gidxStss";}
