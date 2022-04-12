@@ -3,12 +3,11 @@ let alamDetl = new Vue({
     data: {
 		params: {
     		crud: 'C' ,
-			stdtNm : '',
-			bandId : '',
-			eorgLocNo : '',
-			sgrdCd : '',
-			sexCd : '',
-			alamCntn:'',
+			guarNo:'',
+			stdtNo:'',
+			userId:'',
+			alamTitl:'',
+			etcAlamCntn:'',
 			alamTypeCd:'99',
 			raceDivCd : '',
 			hghtVal : 0,
@@ -34,13 +33,13 @@ let alamDetl = new Vue({
         	let $this = this;
 
         	$this.initCodeList();
+
         },
         initCodeList: function() {
         	let $this = this;
         },
         initPage: function() {
         	let $this = this;
-			//$this.resetParam();
         },
         isValid: function() {
         	let $this = this;
@@ -83,16 +82,15 @@ let alamDetl = new Vue({
 			}
 		},
 
-		saveStdtRegInfo : function (){
+		sendData : function (){
         	let $this = this;
 
 			AjaxUtil.post({
-				url: "/user/stdt/stdtInfoMng/saveStdtInfo.ab",
+				url: "/stat/hc/alamDetl/sendAlamList.ab",
 				param: $this.params,
 				success: function(response) {
-					Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-						closeModal($('#stdtRegDetlPopup'));
-						stdtInfoMng.searchStdtInfoList(true);
+					Swal.alert(['전송이 완료되었습니다.', 'success']).then(function() {
+						closeModal($('#alamDetlPopup'));
 					});
 				},
 				error: function (response) {
