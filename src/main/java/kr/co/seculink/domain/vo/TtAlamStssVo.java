@@ -10,14 +10,8 @@ public class TtAlamStssVo implements Serializable {
 	/* stnd_dt 기준_일자 character(8) */
 	private String stndDt;
 
-	/* sex_cd 성별_코드 character varying(20) */
-	private String sexCd;
-
-	/* age_ycnt 나이_년수 numeric(null) */
-	private Double ageYcnt;
-
-	/* act_cd 알림_유형_코드 character varying(20) */
-	private String actCd;
+	/* alam_type_cd 알림_유형_코드 character varying(20) */
+	private String alamTypeCd;
 
 	/* stnd_yymm 기준_년월 character(6) */
 	private String stndYymm;
@@ -66,49 +60,19 @@ public class TtAlamStssVo implements Serializable {
 		this.stndDt = stndDt;
 	}
 	/**
-	 * Get sex_cd 성별_코드 character varying(20)
-	 * @Return String sexCd
+	 * Get alam_type_cd 알림_유형_코드 character varying(20)
+	 * @Return String alamTypeCd
 	 */
-	public String getSexCd() {
-		return this.sexCd;
+	public String getAlamTypeCd() {
+		return this.alamTypeCd;
 	}
 	
 	/**
-	 * Set sex_cd 성별_코드 character varying(20)
-	 * @Param String sexCd
+	 * Set alam_type_cd 알림_유형_코드 character varying(20)
+	 * @Param String alamTypeCd
 	 */
-	public void setSexCd(String sexCd) {
-		this.sexCd = sexCd;
-	}
-	/**
-	 * Get age_ycnt 나이_년수 numeric(null)
-	 * @Return Double ageYcnt
-	 */
-	public Double getAgeYcnt() {
-		return this.ageYcnt;
-	}
-	
-	/**
-	 * Set age_ycnt 나이_년수 numeric(null)
-	 * @Param Double ageYcnt
-	 */
-	public void setAgeYcnt(Double ageYcnt) {
-		this.ageYcnt = ageYcnt;
-	}
-	/**
-	 * Get act_cd 알림_유형_코드 character varying(20)
-	 * @Return String actCd
-	 */
-	public String getActCd() {
-		return this.actCd;
-	}
-	
-	/**
-	 * Set act_cd 알림_유형_코드 character varying(20)
-	 * @Param String actCd
-	 */
-	public void setActCd(String actCd) {
-		this.actCd = actCd;
+	public void setAlamTypeCd(String alamTypeCd) {
+		this.alamTypeCd = alamTypeCd;
 	}
 	/**
 	 * Get stnd_yymm 기준_년월 character(6)
