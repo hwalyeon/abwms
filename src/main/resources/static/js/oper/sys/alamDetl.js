@@ -16,13 +16,6 @@ let alamDetl = new Vue({
 
     	},
 		code: {
-			 sexCdList: []
-			,sgrdCdList: []
-			,raceDivCdList : []
-		},
-		selectItem: {
-			text: '',
-			value: '',
 		}
 	},
 
@@ -35,31 +28,6 @@ let alamDetl = new Vue({
         	$this.initCodeList();
 
         },
-        initCodeList: function() {
-        	let $this = this;
-        },
-        initPage: function() {
-        	let $this = this;
-        },
-        isValid: function() {
-        	let $this = this;
-        },
-
-		eorgLocPop : function (){
-        	let $this = this;
-			stdtEorgLocPop.initPage( { callback : function(rowData) {
-					$this.params.eorgLocNo = rowData.locNo;
-					$this.params.eorgLocNm = rowData.locNm;
-			}});
-		},
-
-		bandListPop : function (){
-			let $this = this;
-			bandPop.initPage( { callback : function(rowData) {
-					$this.params.bandId = rowData.bandId;
-			}});
-		},
-
 		//학생 및 보호자 정보 search 팝업
 		stdtGuarDetlPopup: function() {
 			stdtGuarDetl.initialize(this.setData);
@@ -82,6 +50,7 @@ let alamDetl = new Vue({
 			}
 		},
 
+		//알림내용 보내기
 		sendData : function (){
         	let $this = this;
 
@@ -98,14 +67,6 @@ let alamDetl = new Vue({
 				}
 			});
 		},
-
-		resetParam: function() {
-			let $this = this;
-			$this.params = {
-				crud : 'C'
-			}
-		}
-
     },
     computed: {
 
