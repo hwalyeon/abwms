@@ -118,7 +118,7 @@
     </select>
 
     <select id="searchFidxJudgList" parameterType="java.util.Map" resultType="MybatisMap">
-     with ts_gfix_judg_stss_temp  as
+     with ts_fidx_judg_stss_temp  as
     ( select
           fat_judg_cd
        ,sum(occr_cnt) as occr_cnt
@@ -144,7 +144,7 @@
            ,occr_cnt
            ,sum(occr_cnt) over()                          as tot_cnt
            ,round(sum(occr_cnt) over(partition by fat_judg_cd) / sum(occr_cnt) over() * 100 , 2) as occr_per
-    from ts_gfix_judg_stss_temp tfjs
+    from ts_fidx_judg_stss_temp tfjs
     where 1=1
     order by fat_judg_cd
     </select>
