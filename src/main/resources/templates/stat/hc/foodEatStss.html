@@ -8,9 +8,108 @@
 </head>
 <body>
 <div layout:fragment="content">
-
+	<div class="wrapper-content" id="foodEatStss">
+		<!--검색조건 영역-->
+		<div class="ibox m-b-sm">
+			<div class="ibox-title">
+				<i class="fa fa-title-bar"></i>
+				<h5>검색조건</h5>
+			</div>
+			<div class="ibox-content">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-xs-1 control-label">구분</label>
+						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">
+							<select id="perdDivCd" name="mmDd" class="form-control width_100" style=" margin-right:15px;" v-model="params.perdDivCd" v-on:change="changePerdDiv">
+								<option v-for="item in code.perdDivList" v-bind:value="item.value" v-text="item.text"></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">기간</label>
+						<div class="col-xs-3" v-show="params.perdDivCd === 'DAY' ">
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndDtFrPicker">
+									<input type="text" id="stndDtFr" name="stndDtFr" v-model="params.stndDtFr" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndDtToPicker">
+									<input type="text" id ="stndDtTo" name="stndDtTo" v-model="params.stndDtTo" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-3" v-show="params.perdDivCd !== 'DAY' ">
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndMmFrPicker">
+									<input type="text" id="stndMmFr" name="stndMmFr" v-model="params.stndMmFr" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndMmToPicker">
+									<input type="text" id="stndMmTo" name="stndMmTo" v-model="params.stndMmTo" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<label class="col-xs-1 control-label">성별</label>
+						<div class="col-xs-1">
+							<select id="sexCd" name="sexCd" class="form-control" v-model="params.sexCd">
+								<option value="">전체</option>
+								<option v-for="item in code.sexCdList" :value="item.cdVal" v-text="item.cdNm" ></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">나이</label>
+						<div class="col-xs-1">
+							<input type="text" id="ageYcntFr" name="ageYcntFr" v-model="params.ageYcntFr" class="form-control">
+						</div>
+						<div class="col-xs-1">
+							<input type="text" id="ageYcntTo" name="ageYcntTo" v-model="params.ageYcntTo" class="form-control">
+						</div>
+					</div>
+					<div class="form-group mg_none">
+						<div class="text-center">
+							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
+								<span class="glyphicon glyphicon-refresh"> 초기화</span>
+							</button>&nbsp;
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="initSearch()"><span>조회</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 검색결과 영역 -->
+		<div class="ibox">
+			<div class="ibox-title">
+				<i class="fa fa-title-bar"></i>
+				<h5>식품별 섭취현황</h5>
+			</div>
+			<div class="ibox-content">
+				<div class="form-group">
+					<div id="chartFoodEat" style="width:100%; text-align: center;" >
+						<canvas id="foodEatChart" width="1400px" height="350" style="display: inline-block"> </canvas>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="float_right">
+						<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+					</div>
+					<div class="clear_both"></div>
+				</div>
+				<div class="form-group">
+					<div id="foodEat_list_wrapper">
+						<table id="foodEat_list"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/stat/statComponent.js}"></script>
 	<script type="text/javascript" th:src="@{/js/stat/hc/foodEatStss.js}"></script>
 </section>
 </body>

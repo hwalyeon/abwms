@@ -37,13 +37,8 @@ public class AvalActStssServiceImpl implements AvalActStssService
             newInfoCalCsumQty.put("divCd", "전체 칼로리 섭취량(g)");
             newResult.add(newInfo);
             newResult.add(newInfoCalCsumQty);
-
-            System.out.println("newInfo얌"+newInfo+"newInfoCalCsumQty얌:"+newInfoCalCsumQty);
         }
         return newResult;
     }
-
-
-
 }
 

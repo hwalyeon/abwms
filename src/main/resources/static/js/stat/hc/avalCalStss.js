@@ -240,11 +240,23 @@ let avalCalStss = new Vue({
              $this.chartAvalCal.update();
 
          },
-         /**/
+         //평균 칼로리 섭취 통계 엑셀 다운로드
          downloadExcel: function()
          {
            let $this = this;
+             let params = $.extend(true, {}, $this.params);
 
+             AjaxUtil.post({
+                 dataType: 'binary',
+                 url: "/stat/hc/avalCalStss/searchAvalCalStssList/excel.ab",
+                 param: params,
+                 success: function(response) {
+                     saveFileLocal(response, 'avalCalList.xls');
+                 },
+                 error: function (response) {
+                     Swal.alert([response, 'error']);
+                 }
+             });
          },
         resetSearchParam: function()
         {

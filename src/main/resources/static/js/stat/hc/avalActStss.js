@@ -268,11 +268,23 @@ let avalActStss = new Vue({
                 $this.chartAvalAct.update();
 
             },
-            /**/
+            //평균 운동시간 통계 엑셀 다운로드
             downloadExcel: function()
             {
                 let $this = this;
+                let params = $.extend(true, {}, $this.params);
 
+                AjaxUtil.post({
+                    dataType: 'binary',
+                    url: "/stat/hc/avalActStss/searchAvalActStssList/excel.ab",
+                    param: params,
+                    success: function(response) {
+                        saveFileLocal(response, 'avalActList.xls');
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
             },
             resetSearchParam: function()
             {

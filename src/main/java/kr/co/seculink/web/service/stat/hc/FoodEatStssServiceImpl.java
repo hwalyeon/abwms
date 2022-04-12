@@ -18,29 +18,26 @@ public class FoodEatStssServiceImpl implements FoodEatStssService
     @Resource(name="sqlSessionTemplate")
     private SqlSessionTemplate dao;
 
-    public List<Map<String, Object>> searchFoodEatStssList(Map<String, String> params) throws BizException
-    {
+    public List<Map<String, Object>> searchFoodEatStssList(Map<String, String> params) throws BizException {
         List<Map<String, Object>> result = dao.selectList("stat.hc.foodEatStss.searchFoodEatStssList", params);
 
         List<Map<String, Object>> newResult = new ArrayList<Map<String, Object>>();
 
-        if(result != null && result.size() > 0){
-            Map<String, Object> newInfo          = new HashMap<String, Object>();
-            Map<String, Object> newInfoCalCsumQty = new HashMap<>();
-
-            for (Map<String, Object> info : result){
-                newInfo.put(info.get("stndDt").toString(), info.get("avgActTcntMcnt").toString());
-                newInfoCalCsumQty.put(info.get("stndDt").toString(), info.get("avgCalCsumQty").toString());
+        if(result != null && result.size() > 0) {
+            Map<String, Object> newInfo = new HashMap<String, Object>();
+            String foodNm = null;
+            for (Map<String, Object> info : result) {
+                if(foodNm != null && !foodNm.equals(info.get("foodNm"))){
+                    newInfo.put("foodNm", foodNm);
+                    newResult.add(newInfo);
+                    newInfo = new HashMap<String, Object>();
+                }
+                newInfo.put(info.get("stndDt").toString(), info.get("avgCalEatQty").toString());
+                foodNm = info.get("foodNm").toString();
             }
-
-            newInfo.put("divCd", "전체 운동시간(분)");
-            newInfoCalCsumQty.put("divCd", "전체 칼로리 섭취량(g)");
-            newResult.add(newInfo);
-            newResult.add(newInfoCalCsumQty);
-
-            System.out.println("newInfo얌"+newInfo+"newInfoCalCsumQty얌:"+newInfoCalCsumQty);
         }
+
         return newResult;
     }
-}
 
+}

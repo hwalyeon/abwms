@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="stat.hc.foodEatStss">
-    <select id="searchFoodEatCdList" parameterType="java.util.Map" resultType="MybatisMap">
+    <select id="searchFoodEatStssCdList" parameterType="java.util.Map" resultType="MybatisMap">
         select x.stnd_dt
         from (select case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
         when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
@@ -42,11 +42,11 @@
         </choose>
     </select>
 
-    <select id="searchFoodEatList" parameterType="java.util.Map" resultType="MybatisMap">
+    <select id="searchFoodEatStssList" parameterType="java.util.Map" resultType="MybatisMap">
         select
-        x.stnd_dt
-        ,round( avg(x.avg_act_tcnt_mcnt) , 2) as avg_act_tcnt_mcnt
-        ,round( avg(x.avg_cal_csum_qty) , 2) as avg_cal_csum_qty
+         x.stnd_dt
+        ,x.food_nm
+        ,round( avg(x.avg_cal_eat_qty) , 2) as avg_cal_eat_qty
         from
         (select
         case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
@@ -54,9 +54,11 @@
         when #{perdDivCd} = 'WEEK_NM' then week_nm
         else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
         end as stnd_dt
-        ,avg_act_tcnt_mcnt
-        ,avg_cal_csum_qty
+        ,tt_food_eat_stss.avg_cal_eat_qty
+        ,TFI.food_nm
         from tt_food_eat_stss
+        inner join TI_FOOD_INFO TFI
+        on tt_food_eat_stss.FOOD_NO =TFI.FOOD_NO
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
@@ -79,12 +81,12 @@
                 on x.stnd_dt = tcs.cd_val
                 and tcs.cd_grp = 'WEEK_CD'
                 where 1=1
-                group by x.stnd_dt , tcs.sort_ord
+                group by x.stnd_dt , tcs.sort_ord,TFI.food_nm
                 order by tcs.sort_ord ,  x.stnd_dt
             </when>
             <otherwise>
-                group by x.stnd_dt
-                order by x.stnd_dt
+                group by x.stnd_dt,x.food_nm
+                order by x.food_nm ,x.stnd_dt
             </otherwise>
         </choose>
     </select>
