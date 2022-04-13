@@ -624,13 +624,11 @@ let locInfoMng = new Vue({
                 addrSpec: '',
                 delYn:''
             }
-
-            // $this.currLat = 37.48170530421067;
-            // $this.currLng = 126.88481997057949;
-            // $this.mapCont.marker.setMap(null);
-            // $this.draw.rectangle.setMap(null);
-            // $this.initMapPosition();
-            // $this.createMap();
+        },
+        resetSearchParamSpecRe: function() {
+            let $this = this;
+            $this.locInfoSpec.crud = 'C';
+            $this.locInfoSpec.locNo = '';
         },
         regLocInfoSpec : function () {
             let $this = this;
