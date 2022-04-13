@@ -8,10 +8,139 @@
 </head>
 <body>
 <div layout:fragment="content">
-
+	<div class="wrapper-content" id="neatStss">
+		<!--검색조건 영역-->
+		<div class="ibox m-b-sm">
+			<div class="ibox-title">
+				<i class="fa fa-title-bar"></i>
+				<h5>검색조건</h5>
+			</div>
+			<div class="ibox-content">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-xs-1 control-label">구분</label>
+						<div class="col-xs-1" style="margin-right:15px;" >
+							<select id="eagrDivCd" name="eagrDivCd" class="form-control"  v-model="params.eagrDivCd"  v-on:change="changeEagrDiv($event.target.value)">
+								<option v-for="item in code.eagrDivCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+							</select>
+						</div>
+						<div class="col-xs-2" style="padding-left:35px;">
+							<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">아침</label>
+							<div class="col-xs-1"  style=" padding:6px 0px 0px 0px; width:30px;" >
+								<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="MORN" false-value="">
+							</div>
+							<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;" >점심</label>
+							<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;" >
+								<input type="checkbox" name="amelYn" v-model="params.amelYn" true-value="AFTN" false-value="" :disabled="params.eagrDivCd=='QUST'">
+							</div>
+							<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">저녁</label>
+							<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;">
+								<input type="checkbox" name="emelYn" v-model="params.emelYn" true-value="EVEN" false-value=""  :disabled="params.eagrDivCd=='QUST'">
+							</div>
+						</div>
+						<label class="col-xs-1 control-label">구분</label>
+						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">
+							<select id="perdDivCd" name="mmDd" class="form-control width_100" style=" margin-right:15px;" v-model="params.perdDivCd" v-on:change="changePerdDiv($event.target.value)" :disabled="params.eagrDivCd=='QUST'" >
+								<option v-for="item in code.perdDivList" v-bind:value="item.value" v-text="item.text"></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">기간</label>
+						<div class="col-xs-3" v-show="params.perdDivCd === 'DAY' ">
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndDtFrPicker">
+									<input type="text" id="stndDtFr" name="stndDtFr" v-model="params.stndDtFr" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndDtToPicker">
+									<input type="text" id ="stndDtTo" name="stndDtTo" v-model="params.stndDtTo" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-3" v-show="params.perdDivCd !== 'DAY' ">
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndMmFrPicker">
+									<input type="text" id="stndMmFr" name="stndMmFr" v-model="params.stndMmFr" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndMmToPicker">
+									<input type="text" id="stndMmTo" name="stndMmTo" v-model="params.stndMmTo" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-xs-1 control-label">성별</label>
+						<div class="col-xs-1">
+							<select id="sexCd" name="sexCd" class="form-control" v-model="params.sexCd">
+								<option value="">전체</option>
+								<option v-for="item in code.sexCdList" :value="item.cdVal" v-text="item.cdNm" ></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">나이</label>
+						<div class="col-xs-1">
+							<input type="text" id="ageYcntFr" name="ageYcntFr" v-model="params.ageYcntFr" class="form-control">
+						</div>
+						<div class="col-xs-1">
+							<input type="text" id="ageYcntTo" name="ageYcntTo" v-model="params.ageYcntTo" class="form-control">
+						</div>
+					</div>
+				</div>
+					<div class="form-group mg_none">
+						<div class="text-center">
+							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
+								<span class="glyphicon glyphicon-refresh"> 초기화</span>
+							</button>&nbsp;
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="initSearch()"><span>조회</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 검색결과 영역 -->
+		<div class="ibox">
+			<div class="ibox-title">
+				<i class="fa fa-title-bar"></i>
+				<h5>결식통계</h5>
+				<div class="float_right">
+					<input type="radio" v-model="params.occrDivCd" value="1" @change="updateNeatChart($event.target.value)"><span>결식건수</span></input>
+					<span style="padding-right:10px;"></span>
+					<input type="radio" v-model="params.occrDivCd" value="2" @change="updateNeatChart($event.target.value)"><span>결식율(%)</span></input>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="form-group">
+					<div id="chartNeat" style="width:100%; text-align: center;" >
+						<canvas id="neatChart" width="1400px" height="400" style="display: inline-block"> </canvas>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="float_right">
+						<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+					</div>
+					<div class="clear_both"></div>
+				</div>
+				<div class="form-group">
+					<div id="neat_list_wrapper">
+						<table id="neat_list"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/stat/statComponent.js}"></script>
 	<script type="text/javascript" th:src="@{/js/stat/hc/neatStss.js}"></script>
 </section>
 </body>
 </html>
+
