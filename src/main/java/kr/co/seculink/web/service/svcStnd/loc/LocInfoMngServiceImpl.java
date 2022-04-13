@@ -56,7 +56,6 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 
 		if( "C".equals(params.get("crud"))) {
 			saveCnt += dao.insert("svcStnd.loc.locInfoMng.insertTsLocInfoBase", params);
-
 			if("prnt".equals(params.get("rdPublGuarDivSpec"))) {
 				if(chkRegLimit(params)) {
 					saveCnt += dao.insert("svcStnd.loc.locInfoMng.insertTmGuarApntPlc", params);

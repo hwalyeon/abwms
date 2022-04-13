@@ -19,14 +19,7 @@ let locInfoMng = new Vue({
             currentIndex: 0
         },
         locInfo : {
-            locNo: '',
-            locNm: '',
-            stdtNo:'',
-            paging: 'Y',
-            totalCount: 0,
-            rowCount: 30,
-            currentPage: 1,
-            currentIndex: 0
+            locNo: ''
         },
         locInfoSpec: {
             crud:'C',
@@ -47,12 +40,7 @@ let locInfoMng = new Vue({
             pstno: '',
             addrBase: '',
             addrSpec: '',
-            delYn:'',
-            paging: 'Y',
-            totalCount: 0,
-            rowCount: 30,
-            currentPage: 1,
-            currentIndex: 0
+            delYn:''
         },
         map: null,
         currLat: 37.48170530421067,
@@ -132,6 +120,10 @@ let locInfoMng = new Vue({
         createMap : function() {
             let $this = this;
 
+            if(!!$this.locInfoSpec.latVal) {
+                $this.currLat = $this.locInfoSpec.latVal;
+                $this.currLng = $this.locInfoSpec.lonVal;
+            }
             if ( !$this.map ) {
                 $this.map = new kakao.maps.Map(this.getContainer(), {
                     center: $this.getLatLng($this.currLat, $this.currLng), // 지도의 중심좌표 37.48170530421067, 126.88481997057949
@@ -166,14 +158,16 @@ let locInfoMng = new Vue({
             kakao.maps.event.addListener($this.map, 'click', function(mouseEvent) {
 
                 $this.mapCont.mouseEvent = mouseEvent;
+                $this.locInfoSpec.valdRngeDist = $this.draw.dist;
 
                 if($this.mapCont.draggable === 'true') {
                     searchDetailAddrFromCoords($this.mapCont.mouseEvent.latLng, function(result, status) {
+                        $this.mapCont.result = [];
                         $this.mapCont.result = result;
                         if (status === kakao.maps.services.Status.OK) {
                             var detailAddr = !!$this.mapCont.result[0].road_address ? '<div>도로명 : ' + $this.mapCont.result[0].road_address.address_name + '</div>' : '';
 
-                            // $this.mapCont.detailAddr = [];
+                            $this.mapCont.detailAddr = null;
                             $this.mapCont.detailAddr = detailAddr;
                             $this.mapCont.detailAddr += '<div>지번 : ' + $this.mapCont.result[0].address.address_name + '</div>';
 
@@ -190,6 +184,7 @@ let locInfoMng = new Vue({
                             $this.draw.cntrPos = latlng;
                             // 마커를 클릭한 위치에 표시합니다
                             $this.mapCont.marker.setPosition(latlng);
+                            $this.mapCont.marker.setMap(null);
                             $this.mapCont.marker.setMap($this.map);
 
                             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
@@ -222,7 +217,7 @@ let locInfoMng = new Vue({
                     $this.map.setLevel(7);
                 }
                 $this.draw.dist = $this.locInfoSpec.valdRngeDist;
-
+                $this.mapCont.detailAddr = null;
                 $this.mapCont.detailAddr = !!$this.locInfoSpec.addrBase ? '<div>도로명 : ' + $this.locInfoSpec.addrBase + '</div>' : '';
                 $this.mapCont.detailAddr += !!$this.locInfoSpec.addrSpec ? '<div>상세 : ' + $this.locInfoSpec.addrSpec + '</div>' : '';
 
@@ -234,6 +229,7 @@ let locInfoMng = new Vue({
                 var markerPosition  = $this.getLatLng($this.locInfoSpec.latVal, $this.locInfoSpec.lonVal);
 
                 $this.mapCont.marker.setPosition(markerPosition);
+                $this.mapCont.marker.setMap(null);
                 $this.mapCont.marker.setMap($this.map);
 
                 // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
@@ -340,6 +336,7 @@ let locInfoMng = new Vue({
 
             $this.draw.rectangle.setBounds(rectangleBounds);
             // 지도에 사각형을 표시합니다
+            $this.draw.rectangle.setMap(null);
             $this.draw.rectangle.setMap($this.map);
         },
         setMarking : function() {
@@ -400,9 +397,9 @@ let locInfoMng = new Vue({
                 colModel: locListColModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
-                        $this.locInfo.currentPage    = resultMap.currentPage;
-                        $this.locInfo.rowCount       = resultMap.rowCount;
-                        $this.locInfo.currentIndex   = resultMap.currentIndex;
+                        $this.params.currentPage    = resultMap.currentPage;
+                        $this.params.rowCount       = resultMap.rowCount;
+                        $this.params.currentIndex   = resultMap.currentIndex;
                         $this.searchLocInfoList(false);
                     })
                 },
@@ -411,8 +408,6 @@ let locInfoMng = new Vue({
                     if ( !!item.locNo )
                     {
                         $this.locInfo.locNo      = item.locNo;
-                        $this.locInfo.locNm      = item.locNm;
-                        $this.locInfo.stdtNo     = item.stdtNo;
                         $this.mapCont.draggable  = 'true';
                         $this.setMarking();
                         $this.searchLocInfoSpec(true);
@@ -445,32 +440,6 @@ let locInfoMng = new Vue({
             $this.mapCont.draggable  = 'true';
             $this.setMarking();
 
-            $this.locInfoSpec = {
-                crud:'C',
-                rdPublGuarDivSpec: '',
-                prntNo:'',
-                stdtNo:'',
-                locNo: '',
-                locNm: '',
-                plcClssCd: '',
-                plcCd: '',
-                latVal: '',
-                lonVal: '',
-                valdRngeDist: '',
-                swstLatVal:'',
-                swstLonVal:'',
-                nestLatVal:'',
-                nestLonVal:'',
-                pstno: '',
-                addrBase: '',
-                addrSpec: '',
-                delYn:'',
-                paging: 'Y',
-                totalCount: 0,
-                rowCount: 30,
-                currentPage: 1,
-                currentIndex: 0
-            }
             $("#locInfo_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
@@ -542,12 +511,21 @@ let locInfoMng = new Vue({
         searchLocInfoSpec : function(isSearch) {
             let $this = this;
             let params;
-            if (isSearch) {
-                params = $.extend(true, {}, this.locInfo);
-            } else {
-                params = $.extend(true, {}, this.locInfo);
+            //$this.map = null;
+            //$this.mapCont.detailAddr = null;
+            if(!!$this.mapCont.marker) {
+                $this.mapCont.marker.setMap(null);
             }
-
+            if(!!$this.draw.rectangle) {
+                $this.draw.rectangle.setMap(null);
+            }
+            if (isSearch) {
+                params = $.extend(true, {}, $this.locInfo);
+                console.log($this.locInfo);
+            } else {
+                params = $.extend(true, {}, $this.locInfo);
+                console.log($this.locInfo);
+            }
             AjaxUtil.post({
                 url: "/svcStnd/loc/locInfoMng/searchLocInfoSpec.ab",
                 param: params,
@@ -644,12 +622,7 @@ let locInfoMng = new Vue({
                 pstno: '',
                 addrBase: '',
                 addrSpec: '',
-                delYn:'',
-                paging: 'Y',
-                totalCount: 0,
-                rowCount: 30,
-                currentPage: 1,
-                currentIndex: 0
+                delYn:''
             }
 
             // $this.currLat = 37.48170530421067;
@@ -671,6 +644,9 @@ let locInfoMng = new Vue({
                 param: $this.locInfoSpec,
                 success: function(response) {
                     Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                        if (!!response["rtnData"].result.locNo) {
+                            $this.locInfo.locNo = response["rtnData"].result.locNo;
+                        }
                         locInfoMng.searchLocInfoSpec(false);
                     });
                 },
@@ -757,10 +733,10 @@ let locInfoMng = new Vue({
                 return false;
             }
 
-            if ( WebUtil.isNull($this.locInfoSpec.addrSpec) ) {
-                Swal.alert(['상세주소를 입력해주세요.', 'info']);
-                return false;
-            }
+            // if ( WebUtil.isNull($this.locInfoSpec.addrSpec) ) {
+            //     Swal.alert(['상세주소를 입력해주세요.', 'info']);
+            //     return false;
+            // }
 
             if ( WebUtil.isNull($this.locInfoSpec.swstLatVal) || WebUtil.isNull($this.locInfoSpec.swstLonVal) ||
                 WebUtil.isNull($this.locInfoSpec.nestLatVal) || WebUtil.isNull($this.locInfoSpec.nestLonVal)) {
@@ -902,6 +878,7 @@ let locInfoMng = new Vue({
                     $this.draw.rectangle.setBounds(rectangleBounds);
 
                     // 지도에 사각형을 표시합니다
+                    $this.draw.rectangle.setMap(null);
                     $this.draw.rectangle.setMap($this.map);
                 }
                 $this.locInfoSpec.valdRngeDist = $this.draw.dist;
