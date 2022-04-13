@@ -4,7 +4,7 @@
 	  layout:decorate="~{common/layout/defaultLayout}">
 <head>
 	<meta charset="UTF-8">
-	<title>성장/비만지수 이력</title>
+	<title>비만예측설문조사 이력</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -132,9 +132,6 @@
 						</div>
 					</div>
 					<div class="float_right">
-						<button type="button"  id="" class="btn btn-w-m btn-primary mg_right_5" @click=""><span>성장지수 추이분석</span></button>
-						<button type="button" class="btn btn-w-m btn-primary mg_right_5" @click=""><span>비만지수 추이분석</span></button>
-						<button type="button" class="btn btn-w-m btn-primary mg_right_5" @click=""><span>비만예측지수 추이분석</span></button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button " data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
@@ -150,7 +147,7 @@
     </div>
 </div>
 <section layout:fragment="user_script">
-	<script type="text/javascript" th:src="@{/js/oper/hc/gfixHist.js}"></script>
+	<script type="text/javascript" th:src="@{/js/oper/hc/fatpQustHist.js}"></script>
 </section>
 </body>
 </html>

@@ -196,6 +196,10 @@ public class CommonWebController {
 	@RequestMapping("/oper/hc/guarFmenuHist.pg")
 	public String getOperHcGuarFmenuHist() {return "oper/hc/guarFmenuHist";}
 
+	//비만예측설문조사 이력
+	@RequestMapping("/oper/hc/fatpQustHist.pg")
+	public String getOperHcFatpQustHist() {return "oper/hc/fatpQustHist";}
+
 	//영양소섭취 이력
 	@RequestMapping("/oper/hc/nutrEatHist.pg")
 	public String getOperHcNutrEatHist() {return "oper/hc/nutrEatHist";}
