@@ -59,7 +59,7 @@ public class DzoneStssController
         return vo;
     }
 
-    //평균 운동시간 통계 엑셀 다운로드
+    //위험지역 발생 추이 엑셀 다운로드
     @ResponseBody
     @RequestMapping("/stat/dgem/dzoneStss/searchDzoneStssList/excel.ab")
     public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException

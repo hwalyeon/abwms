@@ -106,8 +106,8 @@ let dzoneStss = new Vue({
                     }
                 }
 
-                $("#avalAct_list").jqGrid("GridUnload");
-                $("#avalAct_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+                $("#dzoneStss_list").jqGrid("GridUnload");
+                $("#dzoneStss_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                     datatype : "local",
                     mtype    : 'post',
                     pginput  : false,
@@ -117,20 +117,20 @@ let dzoneStss = new Vue({
                     ,
                     onSelectRow: function(rowId, status, e){
 
-                        $this.updateAvalActChart(rowId);
+                        $this.updateDzoneStssChart(rowId);
                     }
 
                 }));
 
-                resizeJqGridWidth("avalAct_list", "avalAct_list_wrapper");
+                resizeJqGridWidth("dzoneStss_list", "dzoneStss_list_wrapper");
 
             },
             initChart: function ()
             {
                 let $this = this;
 
-                if ($this.chartAvalAct != null )  $this.chartAvalAct.destroy();
-                let dataAvalAct = {
+                if ($this.chartDzoneStss != null )  $this.chartDzoneStss.destroy();
+                let dataDzoneStss = {
                     labels  : [],
                     datasets: [
                         {
@@ -151,7 +151,7 @@ let dzoneStss = new Vue({
                     ]
                 };
 
-                let optionsAvalAct = {
+                let optionsDzoneStss = {
                     responsive : false,
                     plugins: {
                         legend: {
@@ -164,16 +164,16 @@ let dzoneStss = new Vue({
                     }
                 };
 
-                let ctxAvalAct = document.getElementById('avalActChart').getContext('2d');
+                let ctxDzoneStss = document.getElementById('dzoneStssChart').getContext('2d');
 
-                let configAvalAct = {
+                let configDzoneStss = {
                     type   : 'bar',
-                    data   : dataAvalAct,
-                    options: optionsAvalAct,
+                    data   : dataDzoneStss,
+                    options: optionsDzoneStss,
                     plugins: [ChartDataLabels]
                 };
 
-                $this.chartAvalAct = new Chart(ctxAvalAct, configAvalAct);
+                $this.chartDzoneStss = new Chart(ctxDzoneStss, configDzoneStss);
             },
             searchDzoneStssList: function(isSearch )
             {
@@ -187,7 +187,7 @@ let dzoneStss = new Vue({
                 }
 
 
-                $("#avalAct_list").setGridParam
+                $("#dzoneStss_list").setGridParam
                 ({
                     datatype    : "json",
                     postData    : JSON.stringify(params),
@@ -199,14 +199,14 @@ let dzoneStss = new Vue({
                             Swal.alert(['조회할 내용이 없습니다.', "info"]);
                         }else
                         {
-                            $this.updateAvalActChart(1);
+                            $this.updateDzoneStssChart(1);
                         }
                     }
                 }).trigger("reloadGrid");
 
             },
             // 평균 운동시간 차트
-            updateAvalActChart: function(rowId)
+            updateDzoneStssChart: function(rowId)
             {
                 let $this = this;
 
@@ -220,10 +220,10 @@ let dzoneStss = new Vue({
 
 
 
-                var gridData      = $("#avalAct_list").getRowData(rowId);
-                let gridColModel  = $("#avalAct_list").jqGrid("getGridParam","colModel");
-                var avalActLabels = [];
-                var avalActData   = [];
+                var gridData      = $("#dzoneStss_list").getRowData(rowId);
+                let gridColModel  = $("#dzoneStss_list").jqGrid("getGridParam","colModel");
+                var dzoneStssLabels = [];
+                var dzoneStssData   = [];
 
                 if(gridData != null)
                 {
@@ -231,18 +231,18 @@ let dzoneStss = new Vue({
                     {
                         if(gridColModel[data].name != 'divCd')
                         {
-                            avalActLabels.push(gridColModel[data].name);
-                            avalActData.push(gridData[gridColModel[data].name]);
+                            dzoneStssLabels.push(gridColModel[data].name);
+                            dzoneStssData.push(gridData[gridColModel[data].name]);
                         }
                     }
                 }
 
-                let dataAvalAct = {
-                    labels : avalActLabels,
+                let dataDzoneStss = {
+                    labels : dzoneStssLabels,
                     datasets: [
                         {
                             label: $this.title.text,
-                            data: avalActData,
+                            data: dzoneStssData,
                             borderColor : "#d6e5eb",
                             backgroundColor: "#d6e5eb",
                             order : 1,
@@ -252,7 +252,7 @@ let dzoneStss = new Vue({
                         } ,
                         {
                             label: '',
-                            data: avalActData,
+                            data: dzoneStssData,
                             borderColor: "#FBD5B0",
                             backgroundColor: "#FBD5B0",
                             type: 'line',
@@ -264,8 +264,8 @@ let dzoneStss = new Vue({
                     ]
                 };
 
-                $this.chartAvalAct.data = dataAvalAct;
-                $this.chartAvalAct.update();
+                $this.chartDzoneStss.data = dataDzoneStss;
+                $this.chartDzoneStss.update();
 
             },
             //평균 운동시간 통계 엑셀 다운로드
@@ -279,7 +279,7 @@ let dzoneStss = new Vue({
                     url: "/stat/dgem/dzoneStss/searchDzoneStssList/excel.ab",
                     param: params,
                     success: function(response) {
-                        saveFileLocal(response, 'avalActList.xls');
+                        saveFileLocal(response, 'dzonStssList.xls');
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
