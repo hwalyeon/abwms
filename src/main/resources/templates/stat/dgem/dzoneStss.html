@@ -4,7 +4,7 @@
 	  layout:decorate="~{common/layout/defaultLayout}">
 <head>
 	<meta charset="UTF-8">
-	<title>평균 칼로리섭취 추이분석</title>
+	<title>위험지역 발생추이 분석</title>
 </head>
 <body>
 	<div layout:fragment="content">
@@ -87,15 +87,15 @@
 					<i class="fa fa-title-bar"></i>
 					<h5>위험지역 발생 추이</h5>
 					<div class="float_right">
-						<input type="radio" v-model="params.occrDivCd" value="1" @change="updateAvalActChart($event.target.value)"><span>발생건수</span></input>
+						<input type="radio" v-model="params.occrDivCd" value="1" @change="updateDzoneStssChart($event.target.value)"><span>발생건수</span></input>
 						<span style="padding-right:10px;"></span>
-						<input type="radio" v-model="params.occrDivCd" value="2" @change="updateAvalActChart($event.target.value)"><span>발생학생수</span></input>
+						<input type="radio" v-model="params.occrDivCd" value="2" @change="updateDzoneStssChart($event.target.value)"><span>발생학생수</span></input>
 					</div>
 				</div>
 				<div class="ibox-content">
 					<div class="form-group">
-						<div id="chartAvalAct" style="width:100%; text-align: center;" >
-							<canvas id="avalActChart" width="1400px" height="400" style="display: inline-block"> </canvas>
+						<div id="chartDzoneStss" style="width:100%; text-align: center;" >
+							<canvas id="dzoneStssChart" width="1400px" height="400" style="display: inline-block"> </canvas>
 						</div>
 					</div>
 					<div class="form-group">
@@ -105,8 +105,8 @@
 						<div class="clear_both"></div>
 					</div>
 					<div class="form-group">
-						<div id="avalAct_list_wrapper">
-							<table id="avalAct_list"></table>
+						<div id="dzoneStss_list_wrapper">
+							<table id="dzoneStss_list"></table>
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,5 @@
-let dzoneStss = new Vue({
-    el: "#dzoneStss",
+let cbeeStss = new Vue({
+    el: "#cbeeStss",
     data:
         {
             params:
@@ -9,7 +9,7 @@ let dzoneStss = new Vue({
                     stndMmFr    : '' ,
                     stndMmTo    : '' ,
                     perdDivCd   : 'DAY',
-                    occrDivCd   : '1',
+                    occrDivCd   : '02',
                     sexCd       : '' ,
                     ageYcntFr   : '' ,
                     ageYcntTo   : '' ,
@@ -17,10 +17,6 @@ let dzoneStss = new Vue({
                     rowCount    : 30 ,
                     currentPage : 1  ,
                     currentIndex: 0
-                },
-            title:
-                {
-                    text:'발생건수'
                 },
             code :
                 {
@@ -71,7 +67,7 @@ let dzoneStss = new Vue({
 
                 AjaxUtil.post(
                     {
-                        url    : "/stat/dgem/dzoneStss/searchDzoneStssColList.ab",
+                        url    : "/stat/etc/cbeeStss/searchCbeeStssColList.ab",
                         param  : $this.params,
                         success: function(response)
                         {
@@ -83,7 +79,7 @@ let dzoneStss = new Vue({
                             }
                             // 차트초기화 및 조회
                             $this.initGrid();
-                            $this.searchDzoneStssList(true);
+                            $this.searchCbeeStssList(true);
                         },
                         error: function (response) {
                             Swal.alert([response, 'error']);
@@ -106,52 +102,38 @@ let dzoneStss = new Vue({
                     }
                 }
 
-                $("#dzoneStss_list").jqGrid("GridUnload");
-                $("#dzoneStss_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+                $("#cbeeStss_list").jqGrid("GridUnload");
+                $("#cbeeStss_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                     datatype : "local",
                     mtype    : 'post',
                     pginput  : false,
-                    height   : 60,
-                    url      : '/stat/dgem/dzoneStss/searchDzoneStssList.ab',
+                    height   : 30,
+                    url      : '/stat/etc/cbeeStss/searchCbeeStssList.ab',
                     colModel : colModels
-                    ,
-                    onSelectRow: function(rowId, status, e){
-
-                        $this.updateDzoneStssChart(rowId);
-                    }
-
                 }));
 
-                resizeJqGridWidth("dzoneStss_list", "dzoneStss_list_wrapper");
+                resizeJqGridWidth("cbeeStss_list", "cbeeStss_list_wrapper");
 
             },
             initChart: function ()
             {
                 let $this = this;
 
-                if ($this.chartDzoneStss != null )  $this.chartDzoneStss.destroy();
-                let dataDzoneStss = {
+                if ($this.chartCbeeStss != null )  $this.chartCbeeStss.destroy();
+                let dataCbeeStss = {
                     labels  : [],
                     datasets: [
                         {
-                            label: $this.title.text,
+                            label: '캐시비 사용금액',
                             data: [],
                             borderColor : "#d6e5eb",
                             backgroundColor: "#d6e5eb",
                             order : 1
                         } ,
-                        {
-                            label: '',
-                            data: [],
-                            borderColor: "#FBD5B0",
-                            backgroundColor: "#FBD5B0",
-                            type: 'line',
-                            order: 0
-                        }
                     ]
                 };
 
-                let optionsDzoneStss = {
+                let optionsCbeeStss = {
                     responsive : false,
                     plugins: {
                         legend: {
@@ -164,18 +146,18 @@ let dzoneStss = new Vue({
                     }
                 };
 
-                let ctxDzoneStss = document.getElementById('dzoneStssChart').getContext('2d');
+                let ctxCbeeStss = document.getElementById('cbeeStssChart').getContext('2d');
 
-                let configDzoneStss = {
+                let configCbeeStss = {
                     type   : 'bar',
-                    data   : dataDzoneStss,
-                    options: optionsDzoneStss,
+                    data   : dataCbeeStss,
+                    options: optionsCbeeStss,
                     plugins: [ChartDataLabels]
                 };
 
-                $this.chartDzoneStss = new Chart(ctxDzoneStss, configDzoneStss);
+                $this.chartCbeeStss = new Chart(ctxCbeeStss, configCbeeStss);
             },
-            searchDzoneStssList: function(isSearch )
+            searchCbeeStssList: function(isSearch )
             {
                 let $this  = this;
                 let params = $.extend(true, {}, $this.params);
@@ -187,7 +169,7 @@ let dzoneStss = new Vue({
                 }
 
 
-                $("#dzoneStss_list").setGridParam
+                $("#cbeeStss_list").setGridParam
                 ({
                     datatype    : "json",
                     postData    : JSON.stringify(params),
@@ -199,31 +181,21 @@ let dzoneStss = new Vue({
                             Swal.alert(['조회할 내용이 없습니다.', "info"]);
                         }else
                         {
-                            $this.updateDzoneStssChart(1);
+                            $this.updateCbeeStssChart();
                         }
                     }
                 }).trigger("reloadGrid");
 
             },
-            // 평균 운동시간 차트
-            updateDzoneStssChart: function(rowId)
+            // 캐시비 사용금액 차트
+            updateCbeeStssChart: function()
             {
                 let $this = this;
 
-                console.log(rowId);
-
-                if(rowId==1){
-                    $this.title.text ='발생건수'
-                }else{
-                    $this.title.text ='발생학생수'
-                }
-
-
-
-                var gridData      = $("#dzoneStss_list").getRowData(rowId);
-                let gridColModel  = $("#dzoneStss_list").jqGrid("getGridParam","colModel");
-                var dzoneStssLabels = [];
-                var dzoneStssData   = [];
+                var gridData      = $("#cbeeStss_list").getRowData(1);
+                let gridColModel  = $("#cbeeStss_list").jqGrid("getGridParam","colModel");
+                var cbeeStssLabels = [];
+                var cbeeStssData   = [];
 
                 if(gridData != null)
                 {
@@ -231,18 +203,18 @@ let dzoneStss = new Vue({
                     {
                         if(gridColModel[data].name != 'divCd')
                         {
-                            dzoneStssLabels.push(gridColModel[data].name);
-                            dzoneStssData.push(gridData[gridColModel[data].name]);
+                            cbeeStssLabels.push(gridColModel[data].name);
+                            cbeeStssData.push(gridData[gridColModel[data].name]);
                         }
                     }
                 }
 
-                let dataDzoneStss = {
-                    labels : dzoneStssLabels,
+                let dataCbeeStss = {
+                    labels : cbeeStssLabels,
                     datasets: [
                         {
-                            label: $this.title.text,
-                            data: dzoneStssData,
+                            label: '캐시비 사용금액',
+                            data: cbeeStssData,
                             borderColor : "#d6e5eb",
                             backgroundColor: "#d6e5eb",
                             order : 1,
@@ -252,7 +224,7 @@ let dzoneStss = new Vue({
                         } ,
                         {
                             label: '',
-                            data: dzoneStssData,
+                            data: cbeeStssData,
                             borderColor: "#FBD5B0",
                             backgroundColor: "#FBD5B0",
                             type: 'line',
@@ -264,11 +236,11 @@ let dzoneStss = new Vue({
                     ]
                 };
 
-                $this.chartDzoneStss.data = dataDzoneStss;
-                $this.chartDzoneStss.update();
+                $this.chartCbeeStss.data = dataCbeeStss;
+                $this.chartCbeeStss.update();
 
             },
-            //평균 운동시간 통계 엑셀 다운로드
+            //캐시비 사용금액 통계 엑셀 다운로드
             downloadExcel: function()
             {
                 let $this = this;
@@ -276,10 +248,10 @@ let dzoneStss = new Vue({
 
                 AjaxUtil.post({
                     dataType: 'binary',
-                    url: "/stat/dgem/dzoneStss/searchDzoneStssList/excel.ab",
+                    url: "/stat/etc/cbeeStss/searchCbeeStssList/excel.ab",
                     param: params,
                     success: function(response) {
-                        saveFileLocal(response, 'dzonStssList.xls');
+                        saveFileLocal(response, 'cbeeStssList.xls');
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
@@ -297,7 +269,7 @@ let dzoneStss = new Vue({
                         stndMmFr: '',
                         stndMmTo: '',
                         perdDivCd: 'DAY',
-                        occrDivCd: '1',
+                        occrDivCd: '02',
                         sexCd: '',
                         ageYcntFr: '',
                         ageYcntTo: '',

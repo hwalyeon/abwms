@@ -1,9 +1,9 @@
-package kr.co.seculink.web.controller.stat.dgem;
+package kr.co.seculink.web.controller.stat.etc;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.web.excel.ExcelConstant;
-import kr.co.seculink.web.service.stat.dgem.DzoneStssService;
+import kr.co.seculink.web.service.stat.etc.CbeeStssService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +18,23 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class DzoneStssController
+public class CbeeStssController
 {
-
     @Resource(name = "sqlSessionTemplate")
     private SqlSessionTemplate dao;
 
     @Autowired
-    private DzoneStssService dzoneStssService;
+    private CbeeStssService cbeeStssService;
 
     @ResponseBody
-    @RequestMapping("/stat/dgem/dzoneStss/searchDzoneStssColList.ab")
-    public RtnMsg searchDzoneStssColList(@RequestBody(required = false) Map<String, String> params) throws BizException
+    @RequestMapping("/stat/etc/cbeeStss/searchCbeeStssColList.ab")
+    public RtnMsg searchCbeeStssColList(@RequestBody(required = false) Map<String, String> params) throws BizException
     {
 
         RtnMsg vo = new RtnMsg();
         Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-        List<Map<String, String>> stndDtList = dao.selectList("stat.dgem.dzoneStss.searchDzoneStssCdList", params);
+        List<Map<String, String>> stndDtList = dao.selectList("stat.etc.cbeeStss.searchCbeeStssCdList", params);
         rtnMap.put("stndDtList", stndDtList);
 
         vo.setRtnData(rtnMap, params);
@@ -44,14 +43,14 @@ public class DzoneStssController
     }
 
     @ResponseBody
-    @RequestMapping("/stat/dgem/dzoneStss/searchDzoneStssList.ab")
-    public RtnMsg searchDzoneStssList(@RequestBody(required = false) Map<String, String> params) throws BizException
+    @RequestMapping("/stat/etc/cbeeStss/searchCbeeStssList.ab")
+    public RtnMsg searchCbeeStssList(@RequestBody(required = false) Map<String, String> params) throws BizException
     {
 
         RtnMsg vo = new RtnMsg();
         Map<String, Object> rtnMap = new HashMap<String, Object>();
 
-        List<Map<String, Object>> result = dzoneStssService.searchDzoneStssList(params);
+        List<Map<String, Object>> result = cbeeStssService.searchCbeeStssList(params);
         rtnMap.put("result", result);
 
         vo.setRtnData(rtnMap, params);
@@ -59,20 +58,20 @@ public class DzoneStssController
         return vo;
     }
 
-    //위험지역 발생 추이 엑셀 다운로드
+    //캐시비 사용금액 통계 엑셀 다운로드
     @ResponseBody
-    @RequestMapping("/stat/dgem/dzoneStss/searchDzoneStssList/excel.ab")
+    @RequestMapping("/stat/etc/cbeeStss/searchCbeeStssList/excel.ab")
     public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
     {
         params.put("paging", "N");
-        List<Map<String, Object>> result = dao.selectList("stat.dgem.dzoneStss.searchDzoneStssList", params);
+        List<Map<String, Object>> result = dao.selectList("stat.etc.cbeeStss.searchCbeeStssList", params);
 
         return new ModelAndView("excelXlsView", getExcelMap(result));
     }
 
     private Map<String, Object> getExcelMap(List<Map<String, Object>> list)
     {
-        String [] arrHeader = {"기준일자","발생건수","발생학생수"};
+        String [] arrHeader = {"기준일자","캐시비 사용금액 섭취량"};
         List<String> headerList = Arrays.asList(arrHeader);
 
         List<List<String>> dataList = new ArrayList<List<String>>();
@@ -82,8 +81,7 @@ public class DzoneStssController
         {
             data = new ArrayList<String>();
             data.add(String.valueOf(info.get("stndDt")));
-            data.add(String.valueOf(info.get("occrCnt")));
-            data.add(String.valueOf(info.get("stdtCnt")));
+            data.add(String.valueOf(info.get("cbeeAmt")));
             dataList.add(data);
         }
 

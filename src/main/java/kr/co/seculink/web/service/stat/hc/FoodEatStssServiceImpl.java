@@ -35,6 +35,8 @@ public class FoodEatStssServiceImpl implements FoodEatStssService
                 newInfo.put(info.get("stndDt").toString(), info.get("avgCalEatQty").toString());
                 foodNm = info.get("foodNm").toString();
             }
+            newInfo.put("foodNm", foodNm);
+            newResult.add(newInfo);
         }
 
         return newResult;

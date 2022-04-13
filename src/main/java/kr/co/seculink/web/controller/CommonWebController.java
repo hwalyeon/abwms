@@ -257,4 +257,8 @@ public class CommonWebController {
 	@RequestMapping("/stat/hc/neatStss.pg")
 	public String getStatHcNeatStss() {return "stat/hc/neatStss";}
 
+	// 캐시비 추이분석
+	@RequestMapping("/stat/etc/cbeeStss.pg")
+	public String getStatEtcCbeeStss() {return "stat/etc/cbeeStss";}
+
 }
