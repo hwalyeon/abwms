@@ -40,13 +40,14 @@
                ,fidx /* fidx 비만지수 numeric */
                ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
                ,fat_judg_desc /* fat_judg_desc 비만_판정_설명 character varying(4000) */
+               ,fatp_qust_stnd_dt /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
                ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
                ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
                ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
                ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
                ,pal_val /* pal_val 신체활동수준_값 numeric */
-               ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
-               ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
+               ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
+               ,act에너placecsumqty_val /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
                ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
                ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
                ,rmrk /* rmrk 비고 character varying(4000) */
@@ -119,6 +120,9 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
+		<if test="fatpQustStndDt != null">
+		    ,fatp_qust_stnd_dt /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
+		</if>
 		    ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		    ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
 		<if test="fatpJudgCd != null">
@@ -128,8 +132,8 @@
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
-		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
-		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
+		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
+		    ,act에너placecsumqty_val /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -205,6 +209,9 @@
 		<if test="fatJudgDesc != null">
 		    ,#{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
+		<if test="fatpQustStndDt != null">
+		    ,#{fatpQustStndDt} /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
+		</if>
 		    ,#{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		    ,#{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
 		<if test="fatpJudgCd != null">
@@ -214,8 +221,8 @@
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
-		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
-		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
+		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		    ,#{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -329,6 +336,9 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc = #{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
+		<if test="fatpQustStndDt != null">
+		    ,fatp_qust_stnd_dt = #{fatpQustStndDt} /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
+		</if>
 		<if test="fatpBmiVal != null">
 		    ,fatp_bmi_val = #{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		</if>
@@ -344,11 +354,11 @@
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
 		</if>
-		<if test="bcsmVal != null">
-		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		<if test="bmrVal != null">
+		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
 		</if>
-		<if test="acsmVal != null">
-		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
+		<if test="act에너placecsumqtyVal != null">
+		    ,act에너placecsumqty_val = #{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
 		</if>
 		<if test="palCd != null">
 		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -427,6 +437,9 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
+		<if test="fatpQustStndDt != null">
+		    ,fatp_qust_stnd_dt /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
+		</if>
 		    ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		    ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
 		<if test="fatpJudgCd != null">
@@ -436,8 +449,8 @@
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
-		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
-		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
+		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
+		    ,act에너placecsumqty_val /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -513,6 +526,9 @@
 		<if test="fatJudgDesc != null">
 		    ,#{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
+		<if test="fatpQustStndDt != null">
+		    ,#{fatpQustStndDt} /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
+		</if>
 		    ,#{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		    ,#{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
 		<if test="fatpJudgCd != null">
@@ -522,8 +538,8 @@
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
-		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
-		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
+		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		    ,#{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -634,6 +650,9 @@
 		<if test="fatJudgDesc != null">
 		    ,fat_judg_desc = #{fatJudgDesc} /* fat_judg_desc 비만_판정_설명 character varying(4000) */
 		</if>
+		<if test="fatpQustStndDt != null">
+		    ,fatp_qust_stnd_dt = #{fatpQustStndDt} /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
+		</if>
 		<if test="fatpBmiVal != null">
 		    ,fatp_bmi_val = #{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
 		</if>
@@ -649,11 +668,11 @@
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
 		</if>
-		<if test="bcsmVal != null">
-		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		<if test="bmrVal != null">
+		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
 		</if>
-		<if test="acsmVal != null">
-		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
+		<if test="act에너placecsumqtyVal != null">
+		    ,act에너placecsumqty_val = #{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
 		</if>
 		<if test="palCd != null">
 		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
