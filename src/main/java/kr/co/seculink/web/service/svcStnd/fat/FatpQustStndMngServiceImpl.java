@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service("fatPrdtStndMngService")
+@Service("fatpQustStndMngService")
 public class FatpQustStndMngServiceImpl implements FatpQustStndMngService
 {
 	@Autowired
@@ -26,7 +26,7 @@ public class FatpQustStndMngServiceImpl implements FatpQustStndMngService
 	
 	public List<Map<String, String>> searchFatpQustList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.fatPrdt.fatPrdtStndMng.searchTcFatpQustStatBase", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fatpQust.fatpQustStndMng.searchTcFatpQustStatBase", params);
 		
 		return result;
 	}
@@ -40,15 +40,15 @@ public class FatpQustStndMngServiceImpl implements FatpQustStndMngService
 		List<Map<String, String>> gridData = (List<Map<String, String>>) params.get("gridList");
 		for (Map<String, String> info : gridData) {
 			log.debug("crud         : " +  info.get("crud"));
-			log.debug("fatPrdtStatCd   : " +  info.get("fatPrdtStatCd"));
-			log.debug("fatPrdtStatCntn : " +  info.get("fatPrdtStatCntn"));
+			log.debug("fatpQustStatCd   : " +  info.get("fatpQustStatCd"));
+			log.debug("fatpQustStatCntn : " +  info.get("fatpQustStatCntn"));
 
 			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.fatPrdt.fatPrdtStndMng.insertTiFatpQustStnd", info);
+				saveCnt += dao.insert("svcStnd.fatpQust.fatpQustStndMng.insertTiFatpQustStnd", info);
 			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.fatPrdt.fatPrdtStndMng.updateTiFatpQustStnd", info);
+				saveCnt += dao.update("svcStnd.fatpQust.fatpQustStndMng.updateTiFatpQustStnd", info);
 			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.fatPrdt.fatPrdtStndMng.deleteTiFatpQustStnd", info);
+				saveCnt += dao.delete("svcStnd.fatpQust.fatpQustStndMng.deleteTiFatpQustStnd", info);
 			}
 		}
 
@@ -61,7 +61,7 @@ public class FatpQustStndMngServiceImpl implements FatpQustStndMngService
 	//중복 조회
 	public Map<String, String> searchDupCdCk(Map<String, String> params) throws BizException
 	{
-		Map<String, String> result = dao.selectOne("svcStnd.fatPrdt.fatPrdtStndMng.searchDupCdCk", params);
+		Map<String, String> result = dao.selectOne("svcStnd.fatpQust.fatpQustStndMng.searchDupCdCk", params);
 
 		Map<String, String> rtnMap = new HashMap<>();
 		if ( result == null || GEUtil.isEmpty(result.get("actDivCd")) ) {
