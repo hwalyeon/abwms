@@ -3,9 +3,9 @@ let locStdtGuarPopup = new Vue({
 	data: {
 		params: {
 			stdtNo      :'',
-			stdtNm      :'',
+			stdtNoNm    :'',
 			guarNo      :'',
-			guarNm      :'',
+			guarNoNm    :'',
 			guarTelNo   :'',
 			paging      :'Y',
 			totalCount  : 0,
@@ -19,13 +19,14 @@ let locStdtGuarPopup = new Vue({
 	methods: {
 		initialize: function(callback) {
 			let $this = this;
-
-			alert("jcw callback?? :: " + callback);
+			console.log("jcw :: ");
 			$this.callback = callback;
 
-			$this.initGrid();
 			setTimeout(function() {
-				$this.searchStdtGuarList(true);
+				$this.initGrid();
+				$this.searchLocStdtGuarList(true);
+				console.log("jcw ??? :: ");
+				console.log($this.params);
 			},300);
 		},
 		initGrid: function()
@@ -44,8 +45,8 @@ let locStdtGuarPopup = new Vue({
 			$("#stdtGuar_list").jqGrid($.extend(true, {}, commonGridOptions(), {
 				datatype: "local",
 				mtype: 'post',
-				url: '/oper/dgem/dgemHist/searchStdtGuarList.ab',
-				pager: '#stdtguar_pager_list',
+				url: '/svcStnd/loc/locInfoMng/searchLocStdtGuarList.ab',
+				pager: '#locStdtGuar_pager_list',
 				height: 270,
 				colModel: colModels,
 				onPaging : function(data) {
@@ -53,55 +54,66 @@ let locStdtGuarPopup = new Vue({
 						$this.params.currentPage  = resultMap.currentPage;
 						$this.params.rowCount     = resultMap.rowCount;
 						$this.params.currentIndex = resultMap.currentIndex;
-						$this.searchStdtGuarList(false);
+						$this.searchLocStdtGuarList(false);
 					})
 				},
 				ondblClickRow: function(rowId, status, e) {
-					let item = $('#stdtGuar_list').jqGrid('getRowData', rowId);
+					let item = $('#locStdtGuar_list').jqGrid('getRowData', rowId);
 					$this.callback(item);
-					//closeModal($('#locStdtGuarPopup'));
-					self.closeModal();
+					closeModal($('#locStdtGuarPopup'));
+					//self.closeModal();
 				},
-				gridComplete: function(rowId, rowObject) {
-					let grid = this;
-					alert("jcw gi");
-				},
+				gridComplete: function () {
+					var grid = this;
+
+					$('td[rowspan="1"]', grid).each(function () {
+						var spans = $('td[rowspanid="' + this.id + '"]', grid).length + 1;
+
+						if (spans > 1) {
+							$(this).attr('rowspan', spans);
+						}
+					});
+				}
 			}));
-
-			resizeJqGridWidth("stdtguar_list", "stdtguar_list_wrapper");
+			resizeJqGridWidth("locStdtGuar_list", "locStdtGuar_list_wrapper");
 		},
-		searchStdtGuarList: function(isSearch) {
-
+		searchLocStdtGuarList: function(isSearch) {
 			let $this = this;
+
 			let params = $.extend(true, {}, $this.params);
 			if ( isSearch ) {
 				params.currentPage = 1;
 				params.currentIndex = 0;
 			}
 
-			$("#stdtguar_list").setGridParam({
+			console.log("jcw 22 :: ");
+			$("#locStdtGuar_list").setGridParam({
 				datatype: "json",
 				postData: JSON.stringify(params),
 				page: 1,
 				loadComplete: function (response) {
-					if ( response.rtnData.result == 0 ) {
+					console.log("jcw 입수 :: ");
+					console.log(response);
+					if ( response["rtnData"].result === 0 ) {
 						Swal.alert(['조회할 내용이 없습니다.', "info"]);
 					}
+					console.log("jcw 입수 :: ");
 				}
 			}).trigger("reloadGrid");
 
+			console.log("jcw 33 :: ");
 		},
 		resetSearchParam: function () {
 			let $this = this;
 			$this.params = {
-				stdtNo: '',
-				stdtNm: '',
-				guarNo: '',
-				guarNm: '',
-				guarTelNo: '',
-				totalCount: 0,
-				rowCount: 30,
-				currentPage: 1,
+				stdtNo      :'',
+				stdtNoNm    :'',
+				guarNo      :'',
+				guarNoNm    :'',
+				guarTelNo   :'',
+				totalCount	: 0,
+				rowCount	: 30,
+				currentPage	: 1,
 				currentIndex: 0
 			}
 		}
@@ -114,8 +126,8 @@ let locStdtGuarPopup = new Vue({
 	},
 	mounted: function() {
 		let self = this;
-		$(document).ready(function() {
-			self.initialize();
-		});
+		// $(document).ready(function() {
+		// 	self.initialize();
+		// });
 	}
 });
