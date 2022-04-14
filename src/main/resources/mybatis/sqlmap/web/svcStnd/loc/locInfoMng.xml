@@ -19,43 +19,45 @@
 		ORDER BY WORD_HEAD_1, WORD_HEAD_2
 	</select>
 
-	<!-- 위치정보_관리_학부모_학생_조건_조회-->
-	<select id="searchPrntNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT		PRNT_NO,
-					PRNT_NO || ': ' || ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)),' / ') AS PRNT_NO_NM
-		FROM		TM_PRNT_BASE TPB
+	<!-- 위치정보_관리_보호자_학생_조건_조회-->
+	<select id="searchGuarNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT		GUAR_NO,
+					ARRAY_TO_STRING(ARRAY_AGG(DECR(GUAR_NM)),' / ') AS GUAR_NM
+		FROM		TM_GUAR_BASE TPB
 		WHERE 		1=1
-		GROUP BY	PRNT_NO
-		ORDER BY 	PRNT_NO
+		GROUP BY	GUAR_NO
+		ORDER BY 	GUAR_NO
 	</select>
 
-	<!-- 위치정보_관리_학부모_학생_조건_조회_2-->
+	<!-- 위치정보_관리_보호자_학생_조건_조회_2-->
 	<select id="searchStdtNoSelect" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT		STDT_NO,
-					STDT_NO || ': ' || DECR(STDT_NM) AS STDT_NO_NM,
-					PRNT_NO
-		FROM		TM_STDT_BASE
-		WHERE 		1=1
-		AND 		DEL_YN = 'N'
-		ORDER BY 	STDT_NO
+		SELECT      TSB.STDT_NO,
+					DECR(TSB.STDT_NM) AS STDT_NM,
+					TSGC.GUAR_NO
+		FROM        TM_STDT_BASE TSB
+					INNER JOIN
+					TM_STDT_GUAR_CONN TSGC
+					ON TSB.STDT_NO = TSGC.STDT_NO
+		WHERE       1=1
+		AND         TSB.DEL_YN = 'N'
+		ORDER BY    TSB.STDT_NO
 	</select>
 
 	<!-- 위치정보_관리_리스트_조회-->
 	<select id="searchLocInfoList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT	LOC_NO,
-		       	LOC_NM,
+				LOC_NM,
 				PLC_CLSS_CD,
 				PLC_CLSS_NM,
 				PLC_CD,
 				PLC_NM,
-				RD_PUBL_GUAR_DIV,
-				RD_PUBL_GUAR_DIV_NM,
-				PRNT_NO,
-				PRNT_NM,
-				PRNT_NO || ': ' || PRNT_NM AS PRNT_NO_NM,
+				RD_GORG_GUAR_DIV,
+				RD_GORG_GUAR_DIV_NM,
+				GUAR_NM,
 				STDT_NO,
 				STDT_NM,
 				STDT_NO || ': ' || STDT_NM AS STDT_NO_NM,
+				LOC_APNT_CD,
 				LAT_VAL,
 				LON_VAL,
 				VALD_RNGE_DIST,
@@ -80,12 +82,12 @@
 						FN_GETCDNM('PLC_CLSS_CD', TLIB.PLC_CLSS_CD) AS PLC_CLSS_NM,
 						TLIB.PLC_CD,
 						FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS PLC_NM,
-						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'publ'	ELSE 'prnt' END AS RD_PUBL_GUAR_DIV,
-						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'	ELSE '학부모' END AS RD_PUBL_GUAR_DIV_NM,
-						ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)), '/') AS PRNT_NM,
-						TSB.PRNT_NO,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'GORG'  ELSE 'GUAR' END AS RD_GORG_GUAR_DIV,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'   ELSE '보호자' END AS RD_GORG_GUAR_DIV_NM,
+						ARRAY_TO_STRING(ARRAY_AGG(DECR(TGB.GUAR_NM)), '/') AS GUAR_NM,
 						TSB.STDT_NO,
 						DECR(TSB.STDT_NM) AS STDT_NM,
+						TLIB.LOC_APNT_CD,
 						TLIB.LAT_VAL,
 						TLIB.LON_VAL,
 						TLIB.VALD_RNGE_DIST,
@@ -108,8 +110,10 @@
 						ON TGAP.LOC_NO = TLIB.LOC_NO
 						LEFT OUTER JOIN TM_STDT_BASE TSB
 						ON TSB.STDT_NO = TGAP.STDT_NO
-						LEFT OUTER JOIN TM_PRNT_BASE TPB
-						ON TPB.PRNT_NO = TSB.PRNT_NO
+						LEFT OUTER JOIN TM_STDT_GUAR_CONN TSGC
+						ON TSB.STDT_NO = TSGC.STDT_NO
+						LEFT OUTER JOIN TM_GUAR_BASE TGB
+						ON TGB.GUAR_NO  = TSGC.GUAR_NO
 				WHERE	1=1
 				AND 	TLIB.DEL_YN = 'N'
 				<if test="plcClssCd != null and plcClssCd !=''">
@@ -122,61 +126,42 @@
 				AND 	SPLIT_PART(TLIB.ADDR_BASE, ' ', 2) = #{wordHead2}</if>
 				<if test="addrSpec != null and addrSpec !=''">
 				AND 	TLIB.ADDR_SPEC LIKE CONCAT('%',#{addrSpec},'%')</if>
-				<if test="rdPublGuarDiv =='publ'">
+				<if test="rdGorgGuarDiv =='GORG'">
 				AND 	TLIB.LOC_NO BETWEEN '1' AND '999999'</if>
-				<if test="rdPublGuarDiv =='prnt'">
+				<if test="rdGorgGuarDiv =='GUAR'">
 				AND 	TLIB.LOC_NO &gt; '999999'</if>
-				<if test="prntNo != null and prntNo !=''">
-				AND  	TSB.PRNT_NO = #{prntNo}::NUMERIC</if>
+				<if test="guarNo != null and guarNo !=''">
+				AND  	TGB.GUAR_NO = #{guarNo}::NUMERIC</if>
 				<if test="stdtNo != null and stdtNo !=''">
 				AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
+				<if test="guarNm != null and guarNm !=''">
+				AND  	TGB.GUAR_NM = LIKE CONCAT('%',#{guarNm},'%')</if>
+				<if test="stdtNm != null and stdtNm !=''">
+				AND  	TSB.STDT_NM = LIKE CONCAT('%',#{stdtNm},'%')</if>
 				GROUP BY TLIB.LOC_NO,
-						TLIB.LOC_NM,
-						TLIB.PLC_CLSS_CD,
-						TSB.PRNT_NO,
-						TSB.STDT_NO,
-						TSB.STDT_NM,
-						TLIB.LAT_VAL,
-						TLIB.LON_VAL,
-						TLIB.VALD_RNGE_DIST,
-						TLIB.SWST_LAT_VAL,
-						TLIB.SWST_LON_VAL,
-						TLIB.NEST_LAT_VAL,
-						TLIB.NEST_LON_VAL,
-						TLIB.PSTNO,
-						TLIB.ADDR_BASE,
-						TLIB.ADDR_SPEC,
-						TLIB.DEL_YN,
-						TLIB.REG_DT,
-						TLIB.REG_TM,
-						TLIB.REG_USER_ID,
-						TLIB.UPT_DT,
-						TLIB.UPT_TM,
-						TLIB.UPT_USER_ID
+						TSB.STDT_NO
 				ORDER BY TLIB.LOC_NO
-		<if test=' paging == "Y" '>
-			LIMIT ${rowCount} OFFSET ${currentIndex}
-		</if>
+				<if test=' paging == "Y" '>
+				LIMIT ${rowCount} OFFSET ${currentIndex}
+				</if>
 				) A
-
 	</select>
 
 	<!-- 위치정보_관리_리스트_상세정보_조회-->
 	<select id="searchLocInfoSpec" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT	LOC_NO,
-		       	LOC_NM,
+				LOC_NM,
 				PLC_CLSS_CD,
 				PLC_CLSS_NM,
 				PLC_CD,
 				PLC_NM,
-				RD_PUBL_GUAR_DIV,
-				RD_PUBL_GUAR_DIV_NM,
-				PRNT_NO,
-				PRNT_NM,
-				PRNT_NO || ': ' || PRNT_NM AS PRNT_NO_NM,
+				RD_GORG_GUAR_DIV,
+				RD_GORG_GUAR_DIV_NM,
+				GUAR_NM,
 				STDT_NO,
 				STDT_NM,
 				STDT_NO || ': ' || STDT_NM AS STDT_NO_NM,
+				LOC_APNT_CD,
 				LAT_VAL,
 				LON_VAL,
 				VALD_RNGE_DIST,
@@ -201,12 +186,12 @@
 						FN_GETCDNM('PLC_CLSS_CD', TLIB.PLC_CLSS_CD) AS PLC_CLSS_NM,
 						TLIB.PLC_CD,
 						FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS PLC_NM,
-						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'publ'	ELSE 'prnt' END AS RD_PUBL_GUAR_DIV,
-						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'	ELSE '학부모' END AS RD_PUBL_GUAR_DIV_NM,
-						ARRAY_TO_STRING(ARRAY_AGG(DECR(PRNT_NM)), '/') AS PRNT_NM,
-						TSB.PRNT_NO,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN 'GORG'  ELSE 'GUAR' END AS RD_GORG_GUAR_DIV,
+						CASE WHEN TLIB.LOC_NO BETWEEN '1' AND '999999' THEN '공공'   ELSE '보호자' END AS RD_GORG_GUAR_DIV_NM,
+						ARRAY_TO_STRING(ARRAY_AGG(DECR(TGB.GUAR_NM)), '/') AS GUAR_NM,
 						TSB.STDT_NO,
 						DECR(TSB.STDT_NM) AS STDT_NM,
+						TLIB.LOC_APNT_CD,
 						TLIB.LAT_VAL,
 						TLIB.LON_VAL,
 						TLIB.VALD_RNGE_DIST,
@@ -225,12 +210,14 @@
 						TLIB.UPT_TM,
 						TLIB.UPT_USER_ID
 				FROM	ABSV.TS_LOC_INFO_BASE TLIB
-				LEFT OUTER JOIN TM_GUAR_APNT_PLC TGAP
-				ON 		TGAP.LOC_NO = TLIB.LOC_NO
-				LEFT OUTER JOIN TM_STDT_BASE TSB
-				ON 		TSB.STDT_NO = TGAP.STDT_NO
-				LEFT OUTER JOIN TM_PRNT_BASE TPB
-				ON 		TPB.PRNT_NO = TSB.PRNT_NO
+						LEFT OUTER JOIN TM_GUAR_APNT_PLC TGAP
+						ON TGAP.LOC_NO = TLIB.LOC_NO
+						LEFT OUTER JOIN TM_STDT_BASE TSB
+						ON TSB.STDT_NO = TGAP.STDT_NO
+						LEFT OUTER JOIN TM_STDT_GUAR_CONN TSGC
+						ON TSB.STDT_NO = TSGC.STDT_NO
+						LEFT OUTER JOIN TM_GUAR_BASE TGB
+						ON TGB.GUAR_NO  = TSGC.GUAR_NO
 				WHERE	1=1
 				AND 	TLIB.DEL_YN = 'N'
 				<if test="locNo != null and locNo !=''">
@@ -238,42 +225,21 @@
 				<if test="stdtNo != null and stdtNo !=''">
 				AND 	TGAP.STDT_NO = #{stdtNo}::NUMERIC</if>
 				GROUP BY TLIB.LOC_NO,
-						TLIB.LOC_NM,
-						TLIB.PLC_CLSS_CD,
-						TSB.PRNT_NO,
-						TSB.STDT_NO,
-						TSB.STDT_NM,
-						TLIB.LAT_VAL,
-						TLIB.LON_VAL,
-						TLIB.VALD_RNGE_DIST,
-						TLIB.SWST_LAT_VAL,
-						TLIB.SWST_LON_VAL,
-						TLIB.NEST_LAT_VAL,
-						TLIB.NEST_LON_VAL,
-						TLIB.PSTNO,
-						TLIB.ADDR_BASE,
-						TLIB.ADDR_SPEC,
-						TLIB.DEL_YN,
-						TLIB.REG_DT,
-						TLIB.REG_TM,
-						TLIB.REG_USER_ID,
-						TLIB.UPT_DT,
-						TLIB.UPT_TM,
-						TLIB.UPT_USER_ID
-					<if test=' paging == "Y" '>
-						LIMIT ${rowCount} OFFSET ${currentIndex}
-					</if>
+						TSB.STDT_NO
+				ORDER BY TLIB.LOC_NO
+				<if test=' paging == "Y" '>
+				LIMIT ${rowCount} OFFSET ${currentIndex}
+				</if>
 				) A
-
 	</select>
 
 	<!--TS_LOC_INFO_BASE 인서트-->
 	<insert id="insertTsLocInfoBase" parameterType="java.util.Map">
 		<selectKey keyProperty="locNo" resultType="int" order="BEFORE">
-			<if test="rdPublGuarDivSpec != null and rdPublGuarDivSpec == 'publ'">
+			<if test="rdGorgGuarDivSpec != null and rdGorgGuarDivSpec == 'GORG'">
 				SELECT MAX(LOC_NO)+1 AS LOC_NO from TS_LOC_INFO_BASE WHERE LOC_NO &lt; 1000000
 			</if>
-			<if test="rdPublGuarDivSpec != null and rdPublGuarDivSpec == 'prnt'">
+			<if test="rdGorgGuarDivSpec != null and rdGorgGuarDivSpec == 'GUAR'">
 				SELECT MAX(LOC_NO)+1 AS LOC_NO FROM TS_LOC_INFO_BASE WHERE LOC_NO &gt; 999999
 			</if>
 		</selectKey>
@@ -282,6 +248,7 @@
 				LOC_NM,
 				PLC_CD,
 				PLC_CLSS_CD,
+				LOC_APNT_CD,
 				LAT_VAL,
 				LON_VAL,
 				VALD_RNGE_DIST,
@@ -309,6 +276,7 @@
 				#{locNm},
 				#{plcCd},
 				#{plcClssCd},
+				#{locApntCd},
 				#{latVal}::NUMERIC,
 				#{lonVal}::NUMERIC,
 				#{valdRngeDist}::NUMERIC,
@@ -407,7 +375,7 @@
 				)
 	</insert>
 
-	<!-- 위치정보_관리_리스트_상세정보_조회-->
+	<!-- 학생별 위치정보 등록 제한-->
 	<select id="searchChkRegLimit" parameterType="java.util.Map" resultType="int">
 		SELECT 		COUNT(1) AS ROW_COUNT
 		FROM 		(
@@ -419,6 +387,41 @@
 					AND  		TGAP.STDT_NO = #{stdtNo}::NUMERIC
 					GROUP BY 	TGAP.LOC_NO, TGAP.STDT_NO
 					) A
+	</select>
+
+	<!-- 위치정보_관리_학생_보호자_조회-->
+	<select id="searchLocStdtGuarList" parameterType="java.util.Map" resultType="MybatisMap">
+
+		SELECT      TSB.STDT_NO             AS STDT_NO,
+					DECR(TSB.STDT_NM)       AS STDT_NM,
+					TGB.GUAR_NO             AS GUAR_NO,
+					DECR(TGB.GUAR_NM)       AS GUAR_NM,
+					DECR(TGB.GUAR_TEL_NO)   AS GUAR_TEL_NO
+		FROM        TM_STDT_BASE TSB
+					INNER JOIN
+					TM_STDT_GUAR_CONN TSGC
+					ON TSB.STDT_NO = TSGC.STDT_NO
+					INNER JOIN
+					TM_GUAR_BASE TGB
+					ON TSGC.GUAR_NO  = TGB.GUAR_NO
+		WHERE       1=1
+		AND         TSB.DEL_YN = 'N'
+		<if test="stdtNo != null and stdtNo !=''">
+		AND         TSB.STDT_NO = #{stdtNo} </if>
+		<if test="guarNo != null and guarNo !=''">
+		AND         TSGC.GUAR_NO = #{guarNo} </if>
+		<if test="stdtNm != null and stdtNm !=''">
+		AND         DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%') </if>
+		<if test="guarNm != null and guarNm !=''">
+		AND         DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%') </if>
+		<if test="guarTelNo != null and guarTelNo !=''">
+		AND         DECR(TGB.GUAR_TEL_NO) LIKE CONCAT('%',#{guarTelNo},'%') </if>
+		ORDER BY    TSB.STDT_NO
+		<if test=' paging == "Y" '>
+		LIMIT 		${rowCount} OFFSET ${currentIndex}
+		</if>
+		) A
+
 	</select>
 
 </mapper>

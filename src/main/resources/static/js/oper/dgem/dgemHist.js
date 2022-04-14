@@ -119,12 +119,12 @@ let dgemHist = new Vue({
 
 
 
-            $("#grid_list").jqGrid("GridUnload");
-            $("#grid_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+            $("#dgem_list").jqGrid("GridUnload");
+            $("#dgem_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
                 url: '/oper/dgem/dgemHist/searchDgemHistList.ab',
-                pager: '#grid_pager_list',
+                pager: '#dgem_pager_list',
                 height: 450,
                 colModel: colModels,
                 onPaging : function(data) {
@@ -143,13 +143,13 @@ let dgemHist = new Vue({
                     $(grid).tableRowSpan(["stdtNo","locNm","guarNo","guarNm","guarTelNo"], "stdtGuarNm");
 
                     //학생정보 상세 팝업
-                    $("#grid_list").find('A.links[data-stdt]').on('click', function(e) {
+                    $("#dgem_list").find('A.links[data-stdt]').on('click', function(e) {
                         dgemHist.regStdtInfoDetlPopup($(e.target).data('stdt-no'), $(e.target).data('guar-no'))
                     });
                 }
             }));
 
-            resizeJqGridWidth("grid_list", "grid_list_wrapper");
+            resizeJqGridWidth("dgem_list", "dgem_list_wrapper");
         },
         searchDgemHistList: function(isSearch) {
 
@@ -160,7 +160,7 @@ let dgemHist = new Vue({
                 params.currentIndex = 0;
             }
 
-            $("#grid_list").setGridParam({
+            $("#dgem_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,

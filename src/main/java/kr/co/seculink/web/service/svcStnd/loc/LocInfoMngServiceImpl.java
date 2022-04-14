@@ -28,12 +28,12 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 		return dao.selectList("svcStnd.loc.locInfoMng.searchLocInfoSelect2", params);
 	}
 
-	//위치정보_관리_학부모_학생_조건_조회
-	public List<Map<String, String>> searchPrntNoSelect(Map<String, String> params) {
-		return dao.selectList("svcStnd.loc.locInfoMng.searchPrntNoSelect", params);
+	//위치정보_관리_보호자_학생_조건_조회
+	public List<Map<String, String>> searchGuarNoSelect(Map<String, String> params) {
+		return dao.selectList("svcStnd.loc.locInfoMng.searchGuarNoSelect", params);
 	}
 
-	//위치정보_관리_학부모_학생_조건_조회_2
+	//위치정보_관리_보호자_학생_조건_조회_2
 	public List<Map<String, String>> searchStdtNoSelect(Map<String, String> params) {
 		return dao.selectList("svcStnd.loc.locInfoMng.searchStdtNoSelect", params);
 	}
@@ -56,7 +56,7 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 
 		if( "C".equals(params.get("crud"))) {
 			saveCnt += dao.insert("svcStnd.loc.locInfoMng.insertTsLocInfoBase", params);
-			if("prnt".equals(params.get("rdPublGuarDivSpec"))) {
+			if("guar".equals(params.get("rdGorgGuarDivSpec"))) {
 				if(chkRegLimit(params)) {
 					saveCnt += dao.insert("svcStnd.loc.locInfoMng.insertTmGuarApntPlc", params);
 				}
@@ -65,7 +65,7 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 			saveCnt += dao.update("svcStnd.loc.locInfoMng.updateTsLocInfoBase", params);
 		}else if( "D".equals(params.get("crud"))) {
 			saveCnt += dao.update("svcStnd.loc.locInfoMng.deleteTsLocInfoBase", params);
-			if("prnt".equals(params.get("rdPublGuarDivSpec"))) {
+			if("guar".equals(params.get("rdGorgGuarDivSpec"))) {
 				saveCnt += dao.delete("svcStnd.loc.locInfoMng.deleteTmGuarApntPlc", params);
 			}
 		}
@@ -86,5 +86,8 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 		}
 		return chkRtn;
 	}
-
+	//위치정보_관리_학생_보호자_조회
+	public List<Map<String, String>> searchLocStdtGuarList(Map<String, String> params) {
+		return dao.selectList("svcStnd.loc.locInfoMng.searchLocStdtGuarList", params);
+	}
 }

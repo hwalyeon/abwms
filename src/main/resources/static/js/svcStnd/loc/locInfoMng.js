@@ -6,12 +6,12 @@ let locInfoMng = new Vue({
             plcCd:'',
             wordHead1:'',
             wordHead2:'',
-            prntNo:'',
+            guarNo:'',
             stdtNo:'',
-            prntNoNm:'',
-            stdtNoNm:'',
+            guarNm:'',
+            stdtNm:'',
             addrSpec:'',
-            rdPublGuarDiv:'all',
+            rdGorgGuarDiv:'ALL',
             paging: 'Y',
             totalCount: 0,
             rowCount: 30,
@@ -23,13 +23,14 @@ let locInfoMng = new Vue({
         },
         locInfoSpec: {
             crud:'C',
-            rdPublGuarDivSpec: '',
-            prntNo:'',
+            rdGorgGuarDivSpec: '',
+            guarNo:'',
             stdtNo:'',
             locNo: '',
             locNm: '',
             plcClssCd: '',
             plcCd: '',
+            locApntCd:'',
             latVal: '',
             lonVal: '',
             valdRngeDist: '',
@@ -79,12 +80,13 @@ let locInfoMng = new Vue({
             wordHead1List: [],
             wordHead2List: [],
             wordHead2ListFilter:[],
-            prntNoList: [],
+            guarNoList: [],
             stdtNoList: [],
             stdtNoListFilter:[],
-            prntNoListSepc: [],
+            guarNoListSepc: [],
             stdtNoListSpec: [],
-            stdtNoListFilterSpec:[]
+            stdtNoListFilterSpec:[],
+            locApntCdList: []
         }
     },
 
@@ -368,10 +370,11 @@ let locInfoMng = new Vue({
 
             getCommonCodeList('PLC_CLSS_CD',$this.code.plcClssCdList, '');
             getCommonCodeList('PLC_CD',$this.code.plcCdList, '');
+            getCommonCodeList('LOC_APNT_CD',$this.code.locApntCdList, '');
             $this.code.plcCdListFilter = $this.code.plcCdList;
             $this.code.plcCdListFilterSpec = $this.code.plcCdList;
             $this.searchAddrHeadList();
-            $this.searchPrntStdtList();
+            $this.searchGuarStdtList();
         },
         initGrid: function() {
             let $this = this;
@@ -381,8 +384,8 @@ let locInfoMng = new Vue({
                 {name: "locNm"          , index: "locNm"        , label: "위치명"       , width: 100        , align: "left"  },
                 {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소구분"     , width: 46         , align: "center"},
                 {name: "plcNm"          , index: "plcNm"        , label: "장소구분상세"  , width: 63         , align: "center"},
-                {name: "prntNoNm"       , index: "prntNo"       , label: "학부모"       , width: 50         , align: "center"},
-                {name: "stdtNoNm"       , index: "stdtNo"       , label: "학생"        , width: 50          , align: "center"},
+                {name: "guarNm"         , index: "guarNo"       , label: "보호자"       , width: 50         , align: "center"},
+                {name: "stdtNm"         , index: "stdtNo"       , label: "학생"        , width: 50          , align: "center"},
                 {name: "regUserId"      , index: "regUserId"    , label: "등록자"       , width: 35         , align: "center"},
                 {name: "stdtNo"         , index: "stdtNo"       , label: "학생"         , width: 35         , align: "center"     , hidden:true}
             ];
@@ -477,26 +480,26 @@ let locInfoMng = new Vue({
                 }
             });
         },
-        searchPrntStdtList : function() {
+        searchGuarStdtList : function() {
             let $this = this;
 
             AjaxUtil.post({
-                url: "/svcStnd/loc/locInfoMng/searchPrntStdtList.ab",
+                url: "/svcStnd/loc/locInfoMng/searchGuarStdtList.ab",
                 param: {},
                 success: function(response) {
-                    $this.code.prntNoList = [];
+                    $this.code.guarNoList = [];
                     $this.code.stdtNoList = [];
-                    $this.code.prntNoListSpec = [];
+                    $this.code.guarNoListSpec = [];
                     $this.code.stdtNoListSepc = [];
                     if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 ) {
                         $.each(response["rtnData"].result, function(index, item) {
-                            $this.code.prntNoList.push({'cdVal':item.prntNo, 'cdNm':item.prntNoNm});
+                            $this.code.guarNoList.push({'cdVal':item.guarNo, 'cdNm':item.guarNm});
                         });
-                        $this.code.prntNoListSpec = $this.code.prntNoList;
+                        $this.code.guarNoListSpec = $this.code.guarNoList;
                     }
                     if ( !!response["rtnData"]["result2"] && response["rtnData"]["result2"].length > 0 ) {
                         $.each(response["rtnData"]["result2"], function(index, item) {
-                            $this.code.stdtNoList.push({'cdVal':item.stdtNo, 'cdNm':item.stdtNoNm, 'prntNo':item.prntNo});
+                            $this.code.stdtNoList.push({'cdVal':item.stdtNo, 'cdNm':item.stdtNm, 'guarNo':item.guarNo});
                         });
                         $this.code.stdtNoListFilter = $this.code.stdtNoList;
                         $this.code.stdtNoListSpec = $this.code.stdtNoList;
@@ -533,12 +536,13 @@ let locInfoMng = new Vue({
                     if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 ) {
                         $.each(response["rtnData"].result, function(index, item) {
                             $this.locInfoSpec.crud = 'U',
-                                $this.locInfoSpec.rdPublGuarDivSpec = item.rdPublGuarDiv,
-                                $this.locInfoSpec.prntNo = item.prntNo,
+                                $this.locInfoSpec.rdGorgGuarDivSpec = item.rdGorgGuarDiv,
+                                // $this.locInfoSpec.guarNo = item.guarNo,
                                 $this.locInfoSpec.stdtNo = item.stdtNo,
                                 $this.locInfoSpec.locNo = item.locNo,
                                 $this.locInfoSpec.locNm = item.locNm,
                                 $this.locInfoSpec.plcClssCd = item.plcClssCd,
+                                $this.locInfoSpec.locApntCd = item.locApntCd,
                                 $this.locInfoSpec.plcCd = item.plcCd,
                                 $this.locInfoSpec.latVal = item.latVal,
                                 $this.locInfoSpec.lonVal = item.lonVal,
@@ -553,7 +557,7 @@ let locInfoMng = new Vue({
                                 $this.locInfoSpec.delYn = item.delYn
                         });
 
-                        $this.changePrntNoSpec();
+                        $this.changeGuarNoSpec();
                         $this.mapCont.searchSpecFg = 'Y';
                         $this.createMap();
                     }
@@ -588,12 +592,12 @@ let locInfoMng = new Vue({
                 plcCd:'',
                 wordHead1:'',
                 wordHead2:'',
-                prntNo:'',
+                guarNo:'',
                 stdtNo:'',
-                prntNoNm:'',
-                stdtNoNm:'',
+                guarNm:'',
+                stdtNm:'',
                 addrSpec:'',
-                rdPublGuarDiv:'all',
+                rdGorgGuarDiv:'ALL',
                 paging: 'Y',
                 totalCount: 0,
                 rowCount: 30,
@@ -605,13 +609,14 @@ let locInfoMng = new Vue({
             let $this = this;
             $this.locInfoSpec = {
                 crud:'C',
-                rdPublGuarDivSpec: 'publ',
-                prntNo:'',
+                rdGorgGuarDivSpec: 'GORG',
+                guarNo:'',
                 stdtNo:'',
                 locNo: '',
                 locNm: '',
                 plcClssCd: '',
                 plcCd: '',
+                locApntCd:'',
                 latVal: '',
                 lonVal: '',
                 valdRngeDist: '',
@@ -635,6 +640,13 @@ let locInfoMng = new Vue({
 
             if ( !this.beforeSave() ) {
                 return false;
+            }
+
+            // 20220414 컬럼 추가에 따른 로직
+            if($this.locInfoSpec.rdGorgGuarDivSpec === 'GORG') {
+                $this.locInfoSpec.locApntCd = 'GORG'
+            } else {
+                $this.locInfoSpec.locApntCd = 'GUAR'
             }
 
             AjaxUtil.post({
@@ -683,16 +695,16 @@ let locInfoMng = new Vue({
         beforeSave : function() {
             let $this = this;
 
-            if ( WebUtil.isNull($this.locInfoSpec.rdPublGuarDivSpec) ) {
+            if ( WebUtil.isNull($this.locInfoSpec.rdGorgGuarDivSpec) ) {
                 Swal.alert(['자료구분을 입력해주세요.', 'info']);
                 return false;
             }
 
-            if ( $this.locInfoSpec.rdPublGuarDivSpec === 'prnt' &&
+            if ( $this.locInfoSpec.rdGorgGuarDivSpec === 'GUAR' &&
                 WebUtil.isNull($this.locInfoSpec.stdtNo)) {
-                Swal.alert(['학부모 지정일땐 학생을 입력해주세요.', 'info']);
+                Swal.alert(['보호자 지정일땐 학생을 입력해주세요.', 'info']);
                 return false;
-            } else if($this.locInfoSpec.rdPublGuarDivSpec === 'publ') {
+            } else if($this.locInfoSpec.rdGorgGuarDivSpec === 'GORG') {
                 $this.locInfoSpec.stdtNo = '';
             }
 
@@ -743,6 +755,22 @@ let locInfoMng = new Vue({
             }
 
             return true;
+        },
+        //학생 및 보호자 search 팝업
+        locStdtGuarPopup: function() {
+            locStdtGuarPopup.initialize(this.setPopupData);
+            console.log("jcw 팝업 후 :: ");
+        },
+        //(학생 및 보호자 번호 , 학교명) 팝업 Grid 값 부모창 input 값에 삽입
+        setPopupData: function(data) {
+            console.log(data);
+            let $this = this;
+            if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined) {
+                $this.params.stdtNo = data.stdtNo;
+                $this.params.stdtNm = data.stdtNm;
+                $this.params.guarNo = data.guarNo;
+                $this.params.guarNm = data.guarNm;
+            }
         },
         changePlcClssCd : function () {
             let $this = this;
@@ -807,15 +835,15 @@ let locInfoMng = new Vue({
                 }
             })
         },
-        changePrntNo : function () {
+        changeGuarNo : function () {
             let $this = this;
 
-            if($this.params.prntNo === ''){
+            if($this.params.guarNo === ''){
                 $this.code.stdtNoListFilter = $this.code.stdtNoList;
             }
             else{
                 $this.code.stdtNoListFilter = _.filter($this.code.stdtNoList, function(item) {
-                    return item.prntNo === $this.params.prntNo;
+                    return item.guarNo === $this.params.guarNo;
                 })
             }
         },
@@ -824,18 +852,18 @@ let locInfoMng = new Vue({
 
             _.filter($this.code.stdtNoList, function(item) {
                 if(item.cdVal === $this.params.stdtNo){
-                    $this.params.prntNo = item.prntNo;
+                    $this.params.guarNo = item.guarNo;
                 }
             })
         },
-        changePrntNoSpec : function () {
+        changeGuarNoSpec : function () {
             let $this = this;
-            if($this.locInfoSpec.prntNo === ''){
+            if($this.locInfoSpec.guarNo === ''){
                 $this.code.stdtNoListFilterSpec = $this.code.stdtNoListSpec;
             }
             else{
                 $this.code.stdtNoListFilterSpec = _.filter($this.code.stdtNoListSpec, function(item) {
-                    return item.prntNo === $this.locInfoSpec.prntNo;
+                    return item.guarNo === $this.locInfoSpec.guarNo;
                 })
             }
         },
@@ -843,7 +871,7 @@ let locInfoMng = new Vue({
             let $this = this;
             _.filter($this.code.stdtNoListSpec, function(item) {
                 if(item.cdVal === $this.locInfoSpec.stdtNo){
-                    $this.locInfoSpec.prntNo = item.prntNo;
+                    $this.locInfoSpec.guarNo = item.guarNo;
                 }
             })
         },

@@ -26,7 +26,7 @@ public class StrsStndMngServiceImpl implements StrsStndMngService
 	private FileService fileService;
 
 	@Autowired
-	private DgemStndMngService dgemStndMngService;
+	private StrsStndMngService strsStndMngService;
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;

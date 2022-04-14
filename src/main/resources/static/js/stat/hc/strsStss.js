@@ -468,6 +468,8 @@ let strsStss = new Vue({
                 sexCd: '',
                 ageYcntFr: '',
                 ageYcntTo: '',
+                strsTypeCd : '',
+                subStrsTypeCd : '',
                 totalCount: 0,
                 rowCount: 30,
                 currentPage: 1,

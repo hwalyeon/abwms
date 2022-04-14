@@ -52,10 +52,10 @@
 		,TZDS.OCCR_CNT	/*탐지건수*/
 		,TZDS.STDT_CNT	/*탐지학생수*/
 		from   TT_ZONE_DTCT_STSS TZDS
-		left   outer join
+		inner  join
 		TS_LOC_INFO_BASE TLIB
 		on     TZDS.LOC_NO = TLIB.LOC_NO
-		left   outer join
+		inner  join
 		TM_GUAR_APNT_PLC TGAP
 		on     TLIB.LOC_NO = TGAP.LOC_NO
 		left   outer join

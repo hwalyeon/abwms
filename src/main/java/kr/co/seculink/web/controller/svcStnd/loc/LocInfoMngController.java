@@ -45,15 +45,15 @@ public class LocInfoMngController
 		return vo;
 	}
 
-	// 위치정보_관리_학부모_학생_조건_조회
+	// 위치정보_관리_보호자_학생_조건_조회
 	@ResponseBody
-	@RequestMapping("/svcStnd/loc/locInfoMng/searchPrntStdtList.ab")
-	public RtnMsg<Map<String, Object>> searchPrntStdtList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	@RequestMapping("/svcStnd/loc/locInfoMng/searchGuarStdtList.ab")
+	public RtnMsg<Map<String, Object>> searchGuarStdtList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		List<Map<String, String>> result = locInfoMngService.searchPrntNoSelect(params);
+		List<Map<String, String>> result = locInfoMngService.searchGuarNoSelect(params);
 		List<Map<String, String>> result2 = locInfoMngService.searchStdtNoSelect(params);
 
 		rtnMap.put("result", result);
@@ -131,7 +131,7 @@ public class LocInfoMngController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"위치번호","위치명","장소구분","장소구분명","장소구분상세","장소구분상세명","공공/학부모","위도","경도","유효반경","남서위도","남서경도","북동위도","북동경도","우편번호","주소","주소상세","삭제여부","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
+		String [] arrHeader = {"위치번호","위치명","장소구분","장소구분명","장소구분상세","장소구분상세명","공공/보호자","위도","경도","유효반경","남서위도","남서경도","북동위도","북동경도","우편번호","주소","주소상세","삭제여부","등록일자","등록시각","등록사용자ID","수정등록일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 		List<List<String>> dataList = new ArrayList<>();
 		List<String> data;
@@ -145,7 +145,7 @@ public class LocInfoMngController
 			data.add(info.get("plcClssNm"));
 			data.add(info.get("plcCd"));
 			data.add(info.get("plcNm"));
-			data.add(info.get("rdPublGuarDivNm"));
+			data.add(info.get("rdGorgGuarDivNm"));
 			data.add(String.valueOf(info.get("latVal")));
 			data.add(String.valueOf(info.get("lonVal")));
 			data.add(String.valueOf(info.get("valdRngeDist")));
@@ -170,5 +170,26 @@ public class LocInfoMngController
 		map.put(ExcelConstant.HEAD, headerList);
 		map.put(ExcelConstant.BODY, dataList);
 		return map;
+	}
+
+	// 위치정보_관리_학생_보호자_조회
+	@ResponseBody
+	@RequestMapping("/svcStnd/loc/locInfoMng/searchLocStdtGuarList.ab")
+	public RtnMsg<Map<String, Object>> searchLocStdtGuarList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
+		log.info("jcw :: ");
+		List<Map<String, String>> result = locInfoMngService.searchLocStdtGuarList(params);
+
+		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+			params.put("paging", "N");
+			vo.setTotalCount(locInfoMngService.searchLocStdtGuarList(params).size());
+		}
+
+		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
 	}
 }
