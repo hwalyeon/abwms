@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stat.hc.strsStss">
+
+    <select id="searchStrsStssColList" parameterType="java.util.Map" resultType="MybatisMap">
+    select  x.stnd_dt
+    from
+        (select
+              case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
+                   when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
+                   when #{perdDivCd} = 'WEEK_NM' then week_nm
+                   else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD') end as stnd_dt
+        from tt_strs_idx_stss
+        where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+
+        <if test="strsTypeCd != null and strsTypeCd != ''">
+            and strs_type_cd = #{strsTypeCd}
+        </if>
+        ) x
+        <choose>
+         <when test="perdDivCd.equals('WEEK_NM')">
+             inner join  tc_cd_spec tcs
+             on x.stnd_dt = tcs.cd_val
+             and tcs.cd_grp = 'WEEK_CD'
+             where 1=1
+             group by x.stnd_dt , tcs.sort_ord
+             order by tcs.sort_ord ,  x.stnd_dt
+         </when>
+        <otherwise>
+            group by x.stnd_dt
+            order by x.stnd_dt
+        </otherwise>
+        </choose>
+    </select>
+
+
+    <select id="searchStrsStatCdList" parameterType="java.util.Map" resultType="MybatisMap">
+    select  strs_stat_cd as cd_val
+           ,tcs.cd_nm
+    from tt_strs_judg_stss tsjs
+    inner join tc_cd_spec tcs
+    on tsjs.strs_stat_cd = tcs.cd_val
+    <choose>
+        <when test="strsTypeCd.equals('CSTRS')">
+            and tcs.cd_grp = 'STRS_COPE_STAT_CD'
+        </when>
+        <otherwise>
+            and tcs.cd_grp = 'STRS_STAT_CD'
+        </otherwise>
+    </choose>
+    where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+        and strs_type_cd = #{subStrsTypeCd}
+    group by tsjs.strs_stat_cd, tcs.cd_nm, tcs.sort_ord
+    order by tcs.sort_ord
+    </select>
+
+    <select id="searchStrsStssList" parameterType="java.util.Map" resultType="MybatisMap">
+    select
+         x.stnd_dt
+        ,x.strs_type_cd
+        ,fn_getCdnm('STRS_TYPE_CD' , x.strs_type_cd ) as strs_type_nm
+        ,round( avg(x.avg_idx) , 2) as avg_idx
+    from
+        (select
+             case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
+                  when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
+                  when #{perdDivCd} = 'WEEK_NM' then week_nm
+                  else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
+             end as stnd_dt
+             ,strs_type_cd
+             ,avg_idx
+        from tt_strs_idx_stss
+        where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+        <if test="strsTypeCd != null and strsTypeCd != ''">
+            and strs_type_cd = #{strsTypeCd}
+        </if>
+        ) x
+        <choose>
+            <when test="perdDivCd.equals('WEEK_NM')">
+                inner join  tc_cd_spec tcs
+                on x.stnd_dt = tcs.cd_val
+                and tcs.cd_grp = 'WEEK_CD'
+                where 1=1
+                group by x.stnd_dt ,x.strs_type_cd, tcs.sort_ord
+                order by tcs.sort_ord  , x.strs_type_cd ,  x.stnd_dt
+            </when>
+            <otherwise>
+                group by x.stnd_dt , x.strs_type_cd
+                order by x.strs_type_cd, x.stnd_dt
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="searchStrsJudgList" parameterType="java.util.Map" resultType="MybatisMap">
+     with ts_strs_judg_stss_temp  as
+    ( select
+          strs_stat_cd
+       ,sum(occr_cnt) as occr_cnt
+      from tt_strs_judg_stss tsjs
+      where 1=1
+        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+        </if>
+
+        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+        </if>
+
+        <if test="sexCd != null and sexCd != ''">
+            and sex_cd = #{sexCd}
+        </if>
+        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+        </if>
+        and strs_type_cd = #{subStrsTypeCd}
+      group by  strs_stat_cd
+    )
+    select  strs_stat_cd
+           ,occr_cnt
+           ,sum(occr_cnt) over()                          as tot_cnt
+           ,round(sum(occr_cnt) over(partition by strs_stat_cd) / sum(occr_cnt) over() * 100 , 2) as occr_per
+    from ts_strs_judg_stss_temp tsjs
+    where 1=1
+    order by strs_stat_cd
+    </select>
+
+</mapper>

@@ -4,11 +4,11 @@
 	  layout:decorate="~{common/layout/defaultLayout}">
 <head>
 	<meta charset="UTF-8">
-	<title>비만예측 추이분석</title>
+	<title>스트레스 추이분석</title>
 </head>
 <body>
 <div layout:fragment="content">
-	<div class="wrapper-content" id="fatpStss">
+	<div class="wrapper-content" id="strsStss">
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
 			<div class="ibox-title">
@@ -75,6 +75,29 @@
 							<input type="text" id="ageYcntTo" name="ageYcntTo" v-model="params.ageYcntTo" class="form-control">
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label class="col-xs-1 control-label">스트레스 구분</label>
+						<div class="col-xs-6">
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="" >
+							</div>
+							<label class="col-xs-1 mg_top_5 width_60">전체</label>
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="MSTRS">
+							</div>
+							<label class="col-xs-1 mg_top_5 width_120">정신적스트레스</label>
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="PSTRS">
+							</div>
+							<label class="col-xs-1 mg_top_5 width_120">신체적스트레스</label>
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="CSTRS">
+							</div>
+							<label class="col-xs-1 mg_top_5 width_150">스트레스대처능력</label>
+						</div>
+					</div>
+
 					<div class="form-group mg_none">
 						<div class="text-center">
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
@@ -93,12 +116,12 @@
 				<div class="ibox">
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>비만예측지수</h5>
+						<h5>스트레스지수</h5>
 					</div>
 					<div class="ibox-content">
 						<div class="form-group">
-							<div id="chartFatp">
-								<canvas id="fatpChart" width="1068" height="400"> </canvas>
+							<div id="chartStrs">
+								<canvas id="strsChart" width="1068" height="350"> </canvas>
 							</div>
 						</div>
 						<div class="form-group">
@@ -108,8 +131,8 @@
 							<div class="clear_both"></div>
 						</div>
 						<div class="form-group">
-							<div id="fatp_list_wrapper">
-								<table id="fatp_list"></table>
+							<div id="strs_list_wrapper">
+								<table id="strs_list"></table>
 							</div>
 						</div>
 					</div>
@@ -119,21 +142,21 @@
 				<div class="ibox">
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>비만예측판정상태</h5>
+						<h5>성장판정상태</h5>
 						<div class="float_right">
-							<input type="radio" v-model="params.occrDivCd" value="01" @change="updateFatpJudgChart()"><span> 발생건수</span></input>
-							<input type="radio" v-model="params.occrDivCd" value="02" @change="updateFatpJudgChart()"><span> 발생비율(%)</span></input>
+							<input type="radio" v-model="params.occrDivCd" value="01" @change="updateStrsJudgChart()"><span> 발생건수</span></input>
+							<input type="radio" v-model="params.occrDivCd" value="02" @change="updateStrsJudgChart()"><span> 발생비율(%)</span></input>
 						</div>
 					</div>
 					<div class="ibox-content">
 						<div class="form-group">
-							<div id="chartFatpJudg">
-								<canvas id="fatpJudgChart" width="500" height="400"> </canvas>
+							<div id="chartStrsJudg">
+								<canvas id="strsJudgChart" width="500" height="400"> </canvas>
 							</div>
 						</div>
 						<div class="form-group">
-							<div id="fatpJudg_list_wrapper">
-								<table id="fatpJudg_list"></table>
+							<div id="strsJudg_list_wrapper">
+								<table id="strsJudg_list"></table>
 							</div>
 						</div>
 					</div>
@@ -144,7 +167,7 @@
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/stat/statComponent.js}"></script>
-	<script type="text/javascript" th:src="@{/js/stat/hc/fatpStss.js}"></script>
+	<script type="text/javascript" th:src="@{/js/stat/hc/strsStss.js}"></script>
 </section>
 </body>
 </html>
