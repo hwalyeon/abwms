@@ -79,7 +79,7 @@ public class LocInfoMngController
 		}
 
 		rtnMap.put("result", result);
-		vo.setRtnData(rtnMap);
+		vo.setRtnData(rtnMap, params);
 
 		return vo;
 	}
@@ -114,7 +114,7 @@ public class LocInfoMngController
 		locInfoMngService.saveLocInfoSpec(params);
 
 		rtnMap.put("result", params);
-		vo.setRtnData(rtnMap,null);
+		vo.setRtnData(rtnMap, params);
 
 		return vo;
 	}
