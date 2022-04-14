@@ -4,18 +4,18 @@
 
     <!--비만예측_기준 목록 조회-->
 	<select id="selectTiFatPrdtSpecBase" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT  fat_judg_cd                              as fat_judg_cd       /* fat_judg_cd    비만_판정_코드    character varying(20) */
-		      , fn_getCdNm('FAT_JUDG_CD', fat_judg_cd)   as fat_judg_cd_nm
-		      , fatp_judg_cd                             as fatp_judg_cd      /* fatp_judg_cd   비만예측_판정_코드 character varying(20) */
-		      , fn_getCdNm('FAT_JUDG_CD', fat_judg_cd)   as fatp_judg_cd_nm   /* fatp_judg_cd   비만예측_판정_코드 character varying(20) */
-		      , fatp_eval_smry                           as fatp_eval_smry    /* fatp_eval_smry 비만예측_평가_요약 character varying(1000) */
-		      , fatp_eval_cntn                           as fatp_eval_cntn    /* fatp_eval_cntn 비만예측_평가_내용 character varying(4000) */
-		      , reg_dt                                   as reg_dt            /* reg_dt         등록_일자          character(8) */
-		      , reg_tm                                   as reg_tm            /* reg_tm         등록_시각          character(6) */
-		      , reg_user_id                              as reg_user_id       /* reg_user_id    등록_사용자_ID     character varying(20) */
-		      , upt_dt                                   as upt_dt            /* upt_dt         수정_일자          character(8) */
-		      , upt_tm                                   as upt_tm            /* upt_tm         수정_시각          character(6) */
-		      , upt_user_id                              as upt_user_id       /* upt_user_id    수정_사용자_ID      character varying(20) */
+		SELECT  fat_judg_cd                              as fat_judg_cd       /* fat_judg_cd       비만_판정_코드    character varying(20)    */
+		      , fn_getCdNm('FAT_JUDG_CD', fat_judg_cd)   as fat_judg_cd_nm    /*                   비만_판정_코드_명                          */
+		      , fatp_judg_cd                             as fatp_judg_cd      /* fatp_judg_cd      비만예측_판정_코드 character varying(20)   */
+		      , fn_getCdNm('FAT_JUDG_CD', fatp_judg_cd)   as fatp_judg_cd_nm   /*                   비만예측_판정_코드_명                      */
+		      , fatp_eval_smry                           as fatp_eval_smry    /* fatp_eval_smry    비만예측_평가_요약 character varying(1000) */
+		      , fatp_eval_cntn                           as fatp_eval_cntn    /* fatp_eval_cntn    비만예측_평가_내용 character varying(4000) */
+		      , reg_dt                                   as reg_dt            /* reg_dt            등록_일자          character(8)            */
+		      , reg_tm                                   as reg_tm            /* reg_tm            등록_시각          character(6)            */
+		      , reg_user_id                              as reg_user_id       /* reg_user_id       등록_사용자_ID     character varying(20)   */
+		      , upt_dt                                   as upt_dt            /* upt_dt            수정_일자          character(8)            */
+		      , upt_tm                                   as upt_tm            /* upt_tm            수정_시각          character(6)            */
+		      , upt_user_id                              as upt_user_id       /* upt_user_id       수정_사용자_ID      character varying(20)  */
 		FROM    ti_fat_judg_spec
 		WHERE   1 = 1
 		<if test=" fatJudgCd != null and fatJudgCd != '' ">
@@ -24,8 +24,69 @@
 		<if test=" fatpJudgCd != null and fatpJudgCd != '' ">
 		AND     fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
+		ORDER BY fat_judg_cd, fatp_judg_cd
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 
+
+	<insert id="insertTmGuarInfoList"  parameterType="java.util.Map">
+		INSERT INTO ti_fat_judg_spec
+		(
+		fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+		<if test="fatpEvalSmry != null">
+			,fatp_eval_smry /* fatp_eval_smry 비만예측_평가_요약 character varying(1000) */
+		</if>
+		<if test="fatpEvalCntn != null">
+			,fatp_eval_cntn /* fatp_eval_cntn 비만예측_평가_내용 character varying(4000) */
+		</if>
+		,reg_dt /* reg_dt 등록_일자 character(8) */
+		,reg_tm /* reg_tm 등록_시각 character(6) */
+		<if test="regUserId != null">
+			,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		</if>
+		,upt_dt /* upt_dt 수정_일자 character(8) */
+		,upt_tm /* upt_tm 수정_시각 character(6) */
+		<if test="uptUserId != null">
+			,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
+		)
+		VALUES
+		(
+		#{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		,#{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+		<if test="fatpEvalSmry != null">
+			,#{fatpEvalSmry} /* fatp_eval_smry 비만예측_평가_요약 character varying(1000) */
+		</if>
+		<if test="fatpEvalCntn != null">
+			,#{fatpEvalCntn} /* fatp_eval_cntn 비만예측_평가_내용 character varying(4000) */
+		</if>
+		, TO_CHAR(NOW(), 'YYYYMMDD')
+		, TO_CHAR(NOW(), 'HH24MISS')
+		, #{regUserId}
+		, TO_CHAR(NOW(), 'YYYYMMDD')
+		, TO_CHAR(NOW(), 'HH24MISS')
+		, #{uptUserId}
+		)
+	</insert>
+
+	<update id="updateTmGuarInfoList"  parameterType="java.util.Map">
+		UPDATE ti_fat_judg_spec
+		SET    UPT_DT           =  TO_CHAR(NOW(), 'YYYYMMDD')
+		    ,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
+		    ,  UPT_USER_ID  = #{uptUserId}
+		       <if test="fatpEvalSmry != null"> , fatp_eval_smry  = #{fatpEvalSmry} /* fatp_eval_smry 비만예측_평가_요약 character varying(1000) */	</if>
+			   <if test="fatpEvalCntn != null">	, fatp_eval_cntn = #{fatpEvalCntn} /* fatp_eval_cntn 비만예측_평가_내용 character varying(4000) */</if>
+		WHERE  1 = 1
+		AND    fat_judg_cd  = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+	</update>
+
+	<delete id="deleteTmGuarInfoList"  parameterType="java.util.Map">
+	    DELETE FROM ti_fat_judg_spec
+		WHERE  1 = 1
+		AND    fat_judg_cd = #{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
+		AND    fatp_judg_cd = #{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
+	</delete>
 </mapper>

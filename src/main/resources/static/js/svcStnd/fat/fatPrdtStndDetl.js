@@ -6,11 +6,16 @@ let fatPrdtStndDetl = new Vue({
             userId          : '' ,
 			fatJudgCd       : '' , //비만_판정_코드
 			fatpJudgCd      : '' , //비만예측_판정_코드
-			fatPrdtSmryCntn : '' , //요약_내용
-			fatPrdtStatCntn : '' , //상세_내용
+            fatpEvalSmry    : '' , //요약_내용
+            fatpEvalCntn    : '' , //상세_내용
      	},
-		summerNoteFatPrdtStnd1 : 'summerNoteFatPrdtStnd1' ,
-		summerNoteFatPrdtStnd2 : 'summerNoteFatPrdtStnd2'
+        code:
+            {
+                fatJudgCdList   : []  , //비만_판정_코드_리스트
+                fatpJudgCdList  : []  , //비만예측_판정_코드_리스트
+            },
+        summerNoteFatpEvalSmry : 'summerNoteFatpEvalSmry' ,
+        summerNoteFatpEvalCntn : 'summerNoteFatpEvalCntn'
 
 	},
 
@@ -20,7 +25,15 @@ let fatPrdtStndDetl = new Vue({
         initialize: function() {
 
         	let $this = this;
+            $this.initCodeList();
 
+        },
+        initCodeList : function()
+        {
+            let $this = this;
+
+            getCommonCodeList('FAT_JUDG_CD',$this.code.fatJudgCdList);  //비만_판정_코드_리스트
+            getCommonCodeList('FAT_JUDG_CD',$this.code.fatpJudgCdList); //비만예측_판정_코드_리스트
         },
         initPage: function(fatJudgCd, fatpJudgCd) {
         	
@@ -53,28 +66,37 @@ let fatPrdtStndDetl = new Vue({
         },
         isValid: function() {
         	
-        	let $this = this;        	        	
-        	
+        	let $this = this;
 
-        	
-        	return true;
+            if ( WebUtil.isNull($this.params.fatJudgCd) ) {
+                Swal.alert(['비만 판정 코드는 필수 입력입니다.', 'info']);
+                return false;
+            }
+
+            if ( WebUtil.isNull($this.params.fatpJudgCd) ) {
+                Swal.alert(['비만 예측 판정 코드는 필수 입력입니다.', 'info']);
+                return false;
+            }
+
+            return true;
         },
 
-		saveInfo: function() {
+        saveInfo: function() {
 
-			let $this = this;
+            let $this = this;
 
-            if ( !this.isValid() ) {
+
+            if (!this.isValid()) {
                 return false;
             }
 
 			AjaxUtil.post({
-                url: "/svcStnd/dgem/dgemStndMng/saveInfo.ab",
+                url: "/svcStnd/fat/fatPrdtStndMng/saveInfo.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#dgemStndDetlPopup'));
-						dgemStndMng.searchDgemList(true);
+                		closeModal($('#fatPrdtStndDetlPopup'));
+						fatPrdtStndMng.searchFatPrdtList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -85,24 +107,24 @@ let fatPrdtStndDetl = new Vue({
 		},
 		searchDupCdCk: function()
         {
-
             let $this = this;
-            let param = $this.params
+
+            let params = $this.params
 
             AjaxUtil.post({
-                url: "/svcStnd/dgem/dgemStndMng/searchDupCdCk.ab",
-                param: $this.params,
+                url: "/svcStnd/fat/fatPrdtStndMng/searchFatPrdtList.ab",
+                param: params,
                 success: function(response) {
-                    if ( response.rtnData.result.existsYn === 'Y' ) {
+
+                    if ( response.rtnData.existsYn === 'Y' ) {
+                        Swal.alert(['이미 등록된 코드입니다.', 'warning']);
                         return false;
-                    } else {
+                    }else{
                         return true;
                     }
-                },
-                error: function (response) {
-                    Swal.alert([response, 'error']);
                 }
             });
+            return true;
         },
 
 		deleteInfo: function() {
@@ -112,12 +134,12 @@ let fatPrdtStndDetl = new Vue({
 			$this.params.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/svcStnd/dgem/dgemStndMng/saveInfo.ab",
+                url: "/svcStnd/fat/fatPrdtStndMng/saveInfo.ab",
                 param: $this.params,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#dgemStndDetlPopup'));
-                		 dgemStndMng.searchDgemList(true);
+                        closeModal($('#fatPrdtStndDetlPopup'));
+                        fatPrdtStndMng.searchFatPrdtList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -127,12 +149,12 @@ let fatPrdtStndDetl = new Vue({
 		},
 		resetFatPrdtStndInfo: function() {
 			this.params = {
-				crud: 'C',
-				userId          : '' ,
-				fatJudgCd       : '' , //비만_판정_코드
-				fatpJudgCd      : '' , //비만예측_판정_코드
-				fatPrdtSmryCntn : '' , //요약_내용
-				fatPrdtStatCntn : '' , //상세_내용
+                crud: 'C',
+                userId          : '' ,
+                fatJudgCd       : '' , //비만_판정_코드
+                fatpJudgCd      : '' , //비만예측_판정_코드
+                fatpEvalSmry    : '' , //요약_내용
+                fatpEvalCntn    : '' , //상세_내용
 	    	}
 		}
     },

@@ -4,7 +4,7 @@
 <div class="modal fade" id="fatPrdtStndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 850px; height: 800px;">
+			<div class="modal-content" style="width: 850px; padding-bottom:20px;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -13,7 +13,7 @@
 					</div>
 				</div>
 				<div class="modal-body">
-					<div class="ibox-content border-style_none">
+					<div class="ibox-content border-s_none" style="border: none;">
 						<table class="table table-bordered table_view">
 		                    <colgroup>
 		                        <col class="col-xs-2" />
@@ -23,13 +23,19 @@
 			                    <tr>
 			                    	<th scope="row">비만 판정 코드</th>
 			                    	<td>
-			                    		<input type="text" name="fatJudgCd" class="form-control" v-model="params.fatJudgCd">
+										<select id="fatJudgCd" name="fatJudgCd" class="form-control" v-model="params.fatJudgCd" :disabled="params.crud=='U'">
+											<option value="">전체</option>
+											<option v-for="item in code.fatJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
 			                    	</td>
 			                    </tr>
 								<tr>
 									<th scope="row">비만 예측 판정 코드</th>
 									<td>
-										<input type="text" name="fatpJudgCd" class="form-control" v-model="params.fatpJudgCd">
+										<select id="fatpJudgCd" name="fatpJudgCd" class="form-control" v-model="params.fatpJudgCd" :disabled="params.crud=='U'">
+											<option value="">전체</option>
+											<option v-for="item in code.fatpJudgCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
 									</td>
 								</tr>
 			                    <tr>	
@@ -37,9 +43,9 @@
 			                        <td>
 										<div>
 											<summer-note
-													v-model="params.fatPrdtSmryCntn"
-													ref="fatPrdtSmryCntn"
-													:summer-note-id="summerNoteFatPrdtStnd1"
+													v-model="params.fatpEvalSmry"
+													ref="fatpEvalSmry"
+													:summer-note-id="summerNoteFatpEvalSmry"
 													:options="{height:60, notUseVideo:true, maxImageWidth: 1280}"/>
 										</div>
 			                        </td>
@@ -49,10 +55,10 @@
 			                        <td>
 			                        	<div>
 											<summer-note
-													v-model="params.fatPrdtStatCntn"
-													ref="fatPrdtStatCntn"
-													:summer-note-id="summerNoteFatPrdtStnd2"
-													:options="{height:60, notUseVideo:true, maxImageWidth: 1280}"/>
+													v-model="params.fatpEvalCntn"
+													ref="fatpEvalCntn"
+													:summer-note-id="summerNoteFatpEvalCntn"
+													:options="{height:100, notUseVideo:true, maxImageWidth: 1280}"/>
 										</div>
 									</td>
 			                    </tr>

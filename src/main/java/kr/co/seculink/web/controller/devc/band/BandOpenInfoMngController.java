@@ -161,9 +161,6 @@ public class BandOpenInfoMngController
 	@RequestMapping("/devc/band/bandOpenInfoMng/saveBandOpenInfoDetl.ab")
 	public RtnMsg saveBandOpenInfoDetl(@RequestBody(required = false)Map<String,Object>params)throws BizException {
 
-
-		System.out.println("params:"+params);
-
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		bandOpenInfoMngService.saveBandOpenInfoDetl(params);

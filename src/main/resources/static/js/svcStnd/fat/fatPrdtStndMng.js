@@ -41,7 +41,6 @@ let fatPrdtStndMng = new Vue({
 
             getCommonCodeList('FAT_JUDG_CD',$this.code.fatJudgCdList);  //비만_판정_코드_리스트
             getCommonCodeList('FAT_JUDG_CD',$this.code.fatpJudgCdList); //비만예측_판정_코드_리스트
-
         },
         initGrid: function()
         {
@@ -135,11 +134,11 @@ let fatPrdtStndMng = new Vue({
 			AjaxUtil.post(
 {
 				dataType : 'binary',
-                url            : "/svcStnd/dgem/dgemStndMng/searchFatPrdtList/excel.ab",
-                param     : params,
-                success: function(response)
+                url      : "/svcStnd/fat/fatPrdtStndMng/searchFatPrdtList/excel.ab",
+                param    : params,
+                success  : function(response)
                 {
-                	saveFileLocal(response, 'dgemStndMng.xls');
+                	saveFileLocal(response, 'fatPrdtStndMng.xls');
                 },
                 error: function (response)
                 {
