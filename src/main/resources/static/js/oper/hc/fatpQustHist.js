@@ -1,24 +1,20 @@
 let fatpQustHist = new Vue({
-    el: "#fatpQustHist", //성장/비만_지수_이력
+    el: "#fatpQustHist", //비만예측설문조사_이력
     data:
     {
     	params:
         {
             userId         : '' ,
-            gfixDtFr       : '' , //성장비만지수_일자(FROM)
-            gfixDtTo       : '' , //성장비만지수_일자(To)
+            stndDtFr       : '' , //기준_일자(FROM)
+            stndDtTo       : '' , //기준_일자(FROM)
             bDPer          : 'THIS_MONTH' , //기준_일자_기간
             stdtNo         : '' , //학생_번호
             stdtNm         : '' , //학생_명
             ageFr          : '' , //나이(FROM)
             ageTo          : '' , //나이(To)
             sexCd          : '' , //성별_코드
-            guarNo         : '' , //보호자_번호
-            guarNm         : '' , //보호자_명
-            growJudgCd     : '' , //성장_판정_코드
-            fatJudgCd      : '' , //비만_판정_코드
-            fatpJudgCd     : '' , //비만_예측_판정_코드
-            locNm          : '' , //학교(학원)명
+            fatpIdxFr      : '' , //비만예측_지수_Fr
+            fatpIdxTo      : '' , //비만예측_지수_To
     		paging         : 'Y',
     		totalCount     : 0  ,
             rowCount       : 30 ,
@@ -29,9 +25,6 @@ let fatpQustHist = new Vue({
         {
             bDPerList      : [] , //기준_일자_기간_리스트
             sexCdList      : [] , //성별_코드_리스트
-            growJudgCdList : [] , //성장_판정__코드 리스트
-            fatJudgCdList  : [] , //비만_판정_코드_리스트
-            fatEstmCdList  : [] , //비만_예측_코드_리스트
         },
 	},
     methods:
@@ -43,67 +36,58 @@ let fatpQustHist = new Vue({
             $this.initValue();
         	$this.initCodeList();
         	$this.initGrid();
-            $this.searchGfixHistList(true);
+            $this.searchFatpQustHistList(true);
             $this.setDatepicker();
         },
         initValue: function()
         {
             let $this = this;
             $this.userId = SessionUtil.getUserId();
-
-            //기준_일자_기간 기본 값 세팅(이번 달)
-            $this.code.bDPerList = CodeUtil.getPeriodDateList();
-            const terms = getPeriodDate($this.params.bDPer);
-            this.params.gfixDtFr = terms.strDt;
-            this.params.gfixDtTo = terms.endDt;
         },
         initCodeList : function()
         {
             let $this = this;
 
-            getCommonCodeList('SEX_CD'       , $this.code.sexCdList      ); //성별_코드_리스트
-            getCommonCodeList('GROW_JUDG_CD' , $this.code.growJudgCdList ); //성장_판정__코드 리스트
-            getCommonCodeList('FAT_JUDG_CD'  , $this.code.fatJudgCdList  ); //비만_판정_코드_리스트
-            getCommonCodeList('FAT_ESTM_CD'  , $this.code.fatEstmCdList  ); //비만_예측_판정_코드_리스트
+            //기준_일자_기간_리스트
+            $this.code.bDPerList = CodeUtil.getPeriodDateList();
+            const terms = getPeriodDate($this.params.bDPer);
+            this.params.stndDtFr = terms.strDt;
+            this.params.stndDtTo = terms.endDt;
+
+            getCommonCodeList('SEX_CD', $this.code.sexCdList); //성별_코드_리스트
         },
         initGrid: function()
         {
             let $this = this;
         	let colModels =
             [
-                {name: "gfixDt"       , index: "gfixDt"       , label: "기준 일자" 	            ,  width: 100 , align: "center" ,fixed:true},
-                {name: "locNm"        , index: "locNm"        , label: "학교 명" 	            ,  width: 100 , align: "center" ,fixed:true},
-                {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	            ,  width: 100 , align: "center" ,fixed:true},
-                {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	            ,  width: 100 , align: "center" ,fixed:true},
-                {name: "sexCdNm"      , index: "sexCdNm"      , label: "성별"	                ,  width: 80 , align: "center" ,fixed:true},
-                {name: "ageYcnt"      , index: "ageYcnt"      , label: "나이(년)"                , width: 80 , align: "center" ,fixed:true},
-                {name: "ageMcnt"      , index: "ageMcnt"      , label: "나이(개월)"              , width: 80 , align: "center" ,fixed:true},
-                {name: "hghtVal"      , index: "hghtVal"      , label: "키"                      , width: 80 , align: "center" ,fixed:true},
-                {name: "wghtVal"      , index: "wghtVal"      , label: "몸무게"                  , width: 80 , align: "center" ,fixed:true},
-                {name: "calEatQty"    , index: "calEatQty"    , label: "칼로리 섭취/일"          , width: 80 , align: "center" ,fixed:true},
-                {name: "calCsumQty"   , index: "calCsumQty"   , label: "칼로리 소모/일"          , width: 80 , align: "center" ,fixed:true},
-                {name: "gidx"         , index: "gidx"         , label: "성장지수"                , width: 80 , align: "center" ,fixed:true},
-                {name: "growJudgCdNm" , index: "growJudgCdNm" , label: "성장 판정"               , width: 80 , align: "center" ,fixed:true},
-                {name: "fidx"         , index: "fidx"         , label: "비만 지수"               , width: 80 , align: "center" ,fixed:true},
-                {name: "fatJudgCdNm"  , index: "fatJudgCdNm"  , label: "비만 판정"               , width: 80 , align: "center" ,fixed:true},
-                {name: "fatpIdx"      , index: "fatpIdx"      , label: "비만 예측지수"           , width: 80 , align: "center" ,fixed:true},
-                {name: "fatpJudgCdNm" , index: "fatpJudgCdNm" , label: "비만 예측"               , width: 80 , align: "center" ,fixed:true},
-                {name: "palVal"       , index: "palVal"       , label: "신체활동 수준"           , width: 80 , align: "center" ,fixed:true},
-                {name: "telNo"        , index: "telNo"        , label: "학생(밴드)<br/>전화번호" , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);},fixed:true},
-                {name: "guarNo"       , index: "guarNo"       , label: "보호자 번호"             , width: 100 , align: "center" ,fixed:true},
-                {name: "guarNm"       , index: "guarNm"       , label: "보호자 명"               , width: 100 , align: "center" ,fixed:true},
-                {name: "guarTelNo" 	  , index: "guarTelNo" 	  , label: "보호자<br/>전화번호"     , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);},fixed:true}
+                {name: "stndDt"       , index: "stndDt"       , label: "기준 일자" 	                            , align: "center"    },
+                {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	                            , align: "center"    },
+                {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	                            , align: "center"    },
+                {name: "sexCd"        , index: "sexCd"        , label: "성별"	                                , align: "center"    },
+                {name: "ageYcnt"      , index: "ageYcnt"      , label: "나이(년)"                                , align: "center"   },
+                {name: "qustNo1"      , index: "qustNo1"     , label: "주 평균 </br>라면 섭취 횟수"             , align: "center"   , width: 250 },
+                {name: "qustNo2"      , index: "qustNo2"     , label: "주 평균</br>음료수 섭취 횟수"             , align: "center"   , width: 250 },
+                {name: "qustNo3"      , index: "qustNo3"     , label: "주 평균</br>패스트푸드 섭취 횟수"         , align: "center"   , width: 250 },
+                {name: "qustNo4"      , index: "qustNo4"     , label: "주 평균</br>육류 섭취 횟수"            , align: "center"  , width: 250  },
+                {name: "qustNo5"      , index: "qustNo5"     , label: "주 평균</br>유제품 섭취 횟수"            , align: "center"   , width: 250 },
+                {name: "qustNo6"      , index: "qustNo6"     , label: "주 평균</br>과일 섭취 횟수"            , align: "center"   , width: 250 },
+                {name: "qustNo7"      , index: "qustNo7"     , label: "주 평균</br>야채 (김치 제외) 섭취 횟수", align: "center" , width: 250 },
+                {name: "qustNo8"      , index: "qustNo8"     , label: "주 평균</br>아침 결식 횟수"            , align: "center" , width: 250 },
+                {name: "fatpBmiVal"   , index: "fatpBmiVal"   , label: "비만 예측 BMI"                          , align: "center" },
+                {name: "fatpIdx"      , index: "fatpIdx"      , label: "비만 예측지수"                          , align: "center"  },
+                {name: "fatpJudgCd"   , index: "fatpJudgCd"   , label: "비만 예측</br>판정코드"                 , align: "center"  },
+                {name: "fatpJudgDesc" , index: "fatpJudgDesc" , label: "비만 예측</br>판정설명"                 , align: "center"  }
             ];
-            $("#gfixHist_list").jqGrid("GridUnload");
-           	$("#gfixHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
+            $("#fatpQustHist_list").jqGrid("GridUnload");
+           	$("#fatpQustHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
             {
             	datatype : "local",
             	mtype    : 'post'  ,
-                url      : '/oper/hc/gfixHist/searchGfixHistList.ab',
-                pager    : '#gfixHist_pager_list',
+                url      : '/oper/hc/fatpQustHist/searchFatpQustHistList.ab',
+                pager    : '#fatpQustHist_pager_list',
 				height   : 405     ,
                 colModel : colModels,
-                autowidth: false,
                 onPaging : function(data)
                 {
                     onPagingCommon(data, this, function(resultMap)
@@ -111,20 +95,18 @@ let fatpQustHist = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount      = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchGfixHistList(false);
+                        $this.searchFatpQustHistList(false);
                     })
                 },
                 gridComplete: function () {
                     let grid = this;
-
-                    $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","sexCdNm", "ageYcnt","ageMcnt", "hghtVal","wghtVal","telNo"], "stdtNo");
-                    $(grid).tableRowSpan(["gfixDt","calEatQty","calCsumQty","growIdx","gidx","growJudgCdNm", "fidx","fatJudgCdNm", "fatpIdx","fatpJudgCdNm","palVal"], "gfixDt");
+                    $(grid).tableRowSpan(["stdtNo", "stdtNm", "sexCd","ageYcnt"], "stdtNo");
                 }
             }));
-            resizeJqGridWidth("gfixHist_list", "gfixHist_list_wrapper");
+            resizeJqGridWidth("fatpQustHist_list", "fatpQustHist_list_wrapper");
         },
-        //성장/비만_지수_이력 리스트 조회
-        searchGfixHistList: function(isSearch)
+        //비만예측설문조사_이력 리스트 조회
+        searchFatpQustHistList: function(isSearch)
         {
 			let $this     = this;
             let params = $.extend(true, {}, $this.params);
@@ -138,7 +120,7 @@ let fatpQustHist = new Vue({
                 params.currentPage = 1;
                 params.currentIndex = 0;
             }
-			$("#gfixHist_list").setGridParam(
+			$("#fatpQustHist_list").setGridParam(
 			{
                 datatype: "json",
                 postData: JSON.stringify(params),
@@ -152,7 +134,7 @@ let fatpQustHist = new Vue({
                 }
             }).trigger("reloadGrid");
 		},
-        //성장/비만_지수_이력 리스트 엑셀 다운로드
+        //비만예측설문조사_이력 리스트 엑셀 다운로드
 		downloadExcel : function()
         {
 			let $this = this;
@@ -161,11 +143,11 @@ let fatpQustHist = new Vue({
 			AjaxUtil.post(
        {
 				dataType : 'binary',
-                url      : "/oper/hc/gfixHist/searchGfixHistList/excel.ab",
+                url      : "/oper/hc/fatpQustHist/searchFatpQustHistList/excel.ab",
                 param    : params,
                 success  : function(response)
                 {
-                	saveFileLocal(response, 'gfixHist.xls');
+                	saveFileLocal(response, 'fatpQustHist.xls');
                 },
                 error    : function (response)
                 {
@@ -179,7 +161,7 @@ let fatpQustHist = new Vue({
             if($this.params.bDPer!=='')
             {$this.params.bDPer = '' ;}
 
-            $('#gfixDtFrPicker').datepicker({
+            $('#stndDtFrPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
@@ -187,9 +169,9 @@ let fatpQustHist = new Vue({
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
-                $this.params.gfixDtFr = $('#gfixDtFr').val();
+                $this.params.stndDtFr = $('#stndDtFr').val();
             });
-            $('#gfixDtToPicker').datepicker({
+            $('#stndDtToPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
@@ -197,7 +179,7 @@ let fatpQustHist = new Vue({
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
-                $this.params.gfixDtTo = $('#gfixDtTo').val();
+                $this.params.stndDtTo = $('#stndDtTo').val();
             });
         },
         //기준_일자_기간_선택
@@ -205,8 +187,8 @@ let fatpQustHist = new Vue({
         {
             let $this = this;
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.gfixDtFr = terms.strDt;
-            this.params.gfixDtTo = terms.endDt;
+            this.params.stndDtFr = terms.strDt;
+            this.params.stndDtTo = terms.endDt;
         },
         //유효성_검증
         isValid: function() {
@@ -222,14 +204,24 @@ let fatpQustHist = new Vue({
                 Swal.alert(['정확한 나이 범위를 입력하세요.', 'info']);
                 return false;
             }
-            if( ((WebUtil.isNotNull($this.params.gfixDtFr)) && (WebUtil.isNull($this.params.gfixDtTo))) || ((WebUtil.isNotNull($this.params.gfixDtTo)) && (WebUtil.isNull($this.params.gfixDtFr))) )
+            if( ((WebUtil.isNotNull($this.params.stndDtFr)) && (WebUtil.isNull($this.params.stndDtTo))) || ((WebUtil.isNotNull($this.params.stndDtTo)) && (WebUtil.isNull($this.params.stndDtFr))) )
             {
                 Swal.alert(['나머지 기준 일자를 선택하세요.', 'info']);
                 return false;
             }
-            if( ((WebUtil.isNotNull($this.params.gfixDtFr) && WebUtil.isNotNull($this.params.gfixDtTo)) && $this.params.gfixDtFr > $this.params.gfixDtTo) )
+            if( ((WebUtil.isNotNull($this.params.stndDtFr) && WebUtil.isNotNull($this.params.stndDtTo)) && $this.params.stndDtFr > $this.params.stndDtTo) )
             {
                 Swal.alert(['정확한 기준 일자를 선택하세요.', 'info']);
+                return false;
+            }
+            if( ((WebUtil.isNotNull($this.params.fatpIdxFr)) && (WebUtil.isNull($this.params.fatpIdxTo))) || ((WebUtil.isNotNull($this.params.fatpIdxTo)) && (WebUtil.isNull($this.params.fatpIdxFr))) )
+            {
+                Swal.alert(['나머지 비만예측지수를 선택하세요.', 'info']);
+                return false;
+            }
+            if( ((WebUtil.isNotNull($this.params.fatpIdxFr) && WebUtil.isNotNull($this.params.fatpIdxTo)) && $this.params.fatpIdxFr > $this.params.fatpIdxTo) )
+            {
+                Swal.alert(['정확한 비만예측지수를 입력하세요.', 'info']);
                 return false;
             }
             return true;
@@ -240,8 +232,8 @@ let fatpQustHist = new Vue({
 			$this.params =
             {
                 userId         : '' ,
-                gfixDtFr       : '' , //성장비만지수_일자(FROM)
-                gfixDtTo       : '' , //성장비만지수_일자(To)
+                stndDtFr       : '' , //성장비만지수_일자(FROM)
+                stndDtTo       : '' , //성장비만지수_일자(To)
                 bDPer          : 'THIS_MONTH' , //기준_일자_기간
                 stdtNo         : '' , //학생_번호
                 stdtNm         : '' , //학생_명

@@ -2,5 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oper.hc.fatpQustHist">
 
+    <select id="selectFatpQustHistList" parameterType="java.util.Map" resultType="MybatisMap">
 
+        with ts_fatp_qust_hist_temp
+        as(
+        select     tfqh.stnd_dt   /* 기준_일자 */
+        , tfqh.stdt_no   /* 학생_번호 */
+        , max(case when tfqh.qust_no = 1 then tfqs.ans_cntn end) as "qust_no1"
+        , max(case when tfqh.qust_no = 2 then tfqs.ans_cntn end) as "qust_no2"
+        , max(case when tfqh.qust_no = 3 then tfqs.ans_cntn end) as "qust_no3"
+        , max(case when tfqh.qust_no = 4 then tfqs.ans_cntn end) as "qust_no4"
+        , max(case when tfqh.qust_no = 5 then tfqs.ans_cntn end) as "qust_no5"
+        , max(case when tfqh.qust_no = 6 then tfqs.ans_cntn end) as "qust_no6"
+        , max(case when tfqh.qust_no = 7 then tfqs.ans_cntn end) as "qust_no7"
+        , max(case when tfqh.qust_no = 8 then tfqs.ans_cntn end) as "qust_no8"
+        from     ts_fatp_qust_hist tfqh                  -- 비만예측_설문_이력
+        inner join ti_fatp_qust_base tfqb       -- 비만예측_설문_기본
+        on tfqh.qust_ver = tfqb.qust_ver
+        and tfqh.qust_no  = tfqb.qust_no
+        inner join ti_fatp_qust_spec tfqs       -- 비만예측_설문_상세
+        on tfqb.qust_ver = tfqs.qust_ver
+        and tfqb.qust_no  = tfqs.qust_no
+        and tfqh.ans_val  = tfqs.ans_val
+        group by tfqh.stnd_dt   /* 기준_일자 */
+        , tfqh.stdt_no   /* 학생_번호 */
+        )
+        select    tfqht.stnd_dt                  as stnd_dt        /* stnd_dt        기준_일자          character(8)          */
+                , tfqht.stdt_no                  as stdt_no        /* stdt_no        학생_번호          numeric               */
+                , decr(tsb.stdt_nm)              as stdt_nm        /* stdt_nm        학생_명            varchar(40)           */
+                , tsb.sex_cd                     as sex_cd         /* sex_cd         성별_코드          character varying(20) */
+                , fn_getAge(tsb.bith_dt)         as age_ycnt       /* age_ycnt       나이_년수          numeric               */
+                , tfqht.qust_no1                 as qust_no1       /* qust_cntn      1번_질문_설문_내용 character varying(200) */
+                , tfqht.qust_no2                 as qust_no2       /* qust_cntn      2번_질문_설문_내용 character varying(200) */
+                , tfqht.qust_no3                 as qust_no3       /* qust_cntn      3번_질문_설문_내용 character varying(200) */
+                , tfqht.qust_no4                 as qust_no4       /* qust_cntn      4번_질문_설문_내용 character varying(200) */
+                , tfqht.qust_no5                 as qust_no5       /* qust_cntn      5번_질문_설문_내용 character varying(200) */
+                , tfqht.qust_no6                 as qust_no6       /* qust_cntn      6번_질문_설문_내용 character varying(200) */
+                , tfqht.qust_no7                 as qust_no7       /* qust_cntn      7번_질문_설문_내용 character varying(200) */
+                , tfqht.qust_no8                 as qust_no8       /* qust_cntn      8번_질문_설문_내용 character varying(200) */
+                , tfg.fatp_bmi_val               as fatp_bmi_val   /* fatp_bmi_val   비만예측_BMI_값    numeric                */
+                , tfg.fatp_idx                   as fatp_idx       /* fatp_idx       비만예측_지수      numeric                */
+                , tfg.fatp_judg_cd               as fatp_judg_cd   /* fatp_judg_cd   비만예측_판정_코드 character varying(20)  */
+                , tfg.fatp_judg_desc             as fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
+        from      ts_fatp_qust_hist_temp tfqht                 -- 비만예측_설문_이력,기본,상세
+                       inner join tm_stdt_base tsb             -- 학생_기본
+                               on tfqht.stdt_no = tsb.stdt_no
+                  left outer join ts_gfix_hist tfg             -- 성장비만지수_이력
+                               on tfqht.stdt_no = tfg.stdt_no
+                              and tfqht.stnd_dt = tfg.fatp_qust_stnd_dt
+        WHERE  1 = 1
+        <if test="stndDtFr != null and stndDtFr != null and stndDtTo !='' and stndDtTo !='' ">/*발생 일시*/
+            and tfqht.stnd_dt between replace(#{stndDtFr},'-','') and replace(#{stndDtTo},'-','')</if>
+        <if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
+            and tfqht.stdt_no = #{stdtNo}::NUMERIC </if>
+        <if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
+            and decr(tsb.stdt_NM) like CONCAT('%',#{stdtNm},'%')</if>
+        <if test="ageFr != null and ageFr != null and ageTo !='' and ageTo !='' ">/*나이*/
+            and fn_getAge(tsb.bith_dt)  between #{ageFr}::NUMERIC  and #{ageTo}::NUMERIC </if>
+        <if test=" sexCd != null and sexCd !='' ">/*성별*/
+            and tsb.sex_cd = #{sexCd} </if>
+        <if test="fatpIdxFr != null and fatpIdxFr != null and fatpIdxTo !='' and fatpIdxTo !='' ">/*비만예측지수*/
+            and tfqht.fatp_idx  between #{fatpIdxFr}::NUMERIC  and #{fatpIdxTo}::NUMERIC </if>
+        order by  tfqht.stnd_dt
+        <if test=' paging == "Y" '>
+            LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+    </select>
 </mapper>
