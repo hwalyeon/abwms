@@ -174,36 +174,7 @@ let dgemStndMng = new Vue({
                 }
             });
 		},
-        /*codeList : function (arrayObject , callback)
-        {
-            AjaxUtil.post({
-                url: "/svcStnd/dgem/dgemStndMng/searchDgemList.ab",
-                param: {},
-                success: function(response) {
-                    var dataList = response.rtnData.result;
 
-                    if (Array.isArray(arrayObject)) {
-                        var dataCnt = dataList.length;
-                        var m = 0;
-
-                        for (m = 0; m < dataCnt; m++) {
-                            arrayObject.push({
-                                cdVal   : dataList[m].dgemStatCd,
-                                cdNm    : dataList[m].dgemStatCntn,
-                                sortOrd : 0
-                            });
-                        }
-                    }
-
-                    if (typeof callback === "function") {
-                        callback(dataList);
-                    }
-                },
-                error: function (response) {
-                    alert(response);
-                }
-            });
-        },*/
 		resetSearchParam: function()
         {
 			let $this = this;
