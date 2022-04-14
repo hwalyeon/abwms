@@ -1,7 +1,11 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="keywords" content="sellper, photo editor, collage, seller, openmarket"  />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no,target-densitydpi=medium-dpi" />
+<meta name="robots" content="noindex">
+<link rel="shortcut icon" th:href="@{/favicon.ico}" />
+<title>AbWms</title>
 
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
@@ -25,18 +29,16 @@
 
 <link th:href="@{/css/plugins/iCheck/custom.css}" rel="stylesheet">
 <link th:href="@{/css/plugins/chosen/bootstrap-chosen.css}" rel="stylesheet">
-<link th:href="@{/css/plugins/summernote/summernote-lite.css}" rel="stylesheet">
-
+<link th:href="@{/css/plugins/summernote/summernote.css}" rel="stylesheet">
 
 <!-- Bootstrap Fileinput -->
 <link th:href="@{/css/plugins/bootstrap-fileinput/4.5.2/fileinput.min.css}" media="all" rel="stylesheet" type="text/css" />
 
-<!-- CSS -->
+<!-- 웹 CSS -->
 <link th:href="@{/css/web.css}" rel="stylesheet">
-	
+
 <!-- Customize size -->
 <style type="text/css">
-
     .scroll-container {
         height: 630px;
         overflow-y: scroll;
@@ -104,9 +106,8 @@
         height:22px;
         font-size:12px;
     }
-
     .modal-body {
-        padding: 5px 5px 5px 5px;
+        padding: 10px 30px 5px 30px;
     }
 
     .modal-dialog-wrap {
@@ -114,7 +115,6 @@
         table-layout: fixed;
         width: 100%;
         height: 100%;
-        font-size: 11px;
     }
 
     .modal-dialog {
@@ -147,7 +147,7 @@
     }
 
     .form-horizontal .control-label {
-        text-align: center;
+        text-align: left;
     }
     .wrapper-content {
         padding: 10px !important;
@@ -183,4 +183,10 @@
     .ui-th-column-header {
         text-align: center;
     }
+    .text-truncate {
+        text-overflow: ellipsis;
+        overflow-x: hidden;
+        white-space: nowrap;
+    }
+    .grid-full-height .ui-jqgrid-bdiv {min-height: 400px;}
 </style>
