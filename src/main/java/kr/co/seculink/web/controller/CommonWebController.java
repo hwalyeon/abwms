@@ -253,6 +253,10 @@ public class CommonWebController {
 	@RequestMapping("/stat/hc/fatpStss.pg")
 	public String getStatHcFatpStss() {return "stat/hc/fatpStss";}
 
+	// 스트레스지수 추이분석
+	@RequestMapping("/stat/hc/strsStss.pg")
+	public String getStatHcStrsStss() {return "stat/hc/strsStss";}
+
 	// 평균 칼로리섭취 추이분석
 	@RequestMapping("/stat/hc/avalCalStss.pg")
 	public String getStatHcAvalCalStss() {return "stat/hc/avalCalStss";}

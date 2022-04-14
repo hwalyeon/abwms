@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{common/layout/defaultLayout}">
+<head>
+	<meta charset="UTF-8">
+	<title>스트레스 추이분석</title>
+</head>
+<body>
+<div layout:fragment="content">
+	<div class="wrapper-content" id="strsStss">
+		<!-- 검색조건 영역 -->
+		<div class="ibox m-b-sm">
+			<div class="ibox-title">
+				<i class="fa fa-title-bar"></i>
+				<h5>검색조건</h5>
+				<div class="ibox-tools">
+					<a class="collapse-link">
+						<i class="fa fa-chevron-up"></i>
+					</a>
+				</div>
+			</div>
+			<div class="ibox-content">
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-xs-1 control-label">구분</label>
+						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;">
+							<select id="perdDivCd" name="mmDd" class="form-control width_100" style=" margin-right:15px;" v-model="params.perdDivCd" v-on:change="changePerdDiv">
+								<option v-for="item in code.perdDivList" v-bind:value="item.value" v-text="item.text"></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">기간</label>
+						<div class="col-xs-3" v-show="params.perdDivCd === 'DAY' ">
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndDtFrPicker">
+									<input type="text" id="stndDtFr" name="stndDtFr" v-model="params.stndDtFr" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndDtToPicker">
+									<input type="text" id ="stndDtTo" name="stndDtTo" v-model="params.stndDtTo" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-3" v-show="params.perdDivCd !== 'DAY' ">
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndMmFrPicker">
+									<input type="text" id="stndMmFr" name="stndMmFr" v-model="params.stndMmFr" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
+							<div class="float_left width_150">
+								<div class="input-group date" id="stndMmToPicker">
+									<input type="text" id="stndMmTo" name="stndMmTo" v-model="params.stndMmTo" class="form-control" readonly>
+									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+						<label class="col-xs-1 control-label">성별</label>
+						<div class="col-xs-1">
+							<select id="sexCd" name="sexCd" class="form-control" v-model="params.sexCd">
+								<option value="">전체</option>
+								<option v-for="item in code.sexCdList" :value="item.cdVal" v-text="item.cdNm" ></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">나이</label>
+						<div class="col-xs-1">
+							<input type="text" id="ageYcntFr" name="ageYcntFr" v-model="params.ageYcntFr" class="form-control">
+						</div>
+						<div class="col-xs-1">
+							<input type="text" id="ageYcntTo" name="ageYcntTo" v-model="params.ageYcntTo" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-xs-1 control-label">스트레스 구분</label>
+						<div class="col-xs-6">
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="" >
+							</div>
+							<label class="col-xs-1 mg_top_5 width_60">전체</label>
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="MSTRS">
+							</div>
+							<label class="col-xs-1 mg_top_5 width_120">정신적스트레스</label>
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="PSTRS">
+							</div>
+							<label class="col-xs-1 mg_top_5 width_120">신체적스트레스</label>
+							<div class="float_left mg_top_3 width_15">
+								<input type="radio" v-model="params.strsTypeCd" value="CSTRS">
+							</div>
+							<label class="col-xs-1 mg_top_5 width_150">스트레스대처능력</label>
+						</div>
+					</div>
+
+					<div class="form-group mg_none">
+						<div class="text-center">
+							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
+								<span class="glyphicon glyphicon-refresh"> 초기화</span>
+							</button>&nbsp;
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="initSearch()"><span>조회</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 검색조건 영역 -->
+
+		<div class="row">
+			<div class="col-xs-8">
+				<div class="ibox">
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>스트레스지수</h5>
+					</div>
+					<div class="ibox-content">
+						<div class="form-group">
+							<div id="chartStrs">
+								<canvas id="strsChart" width="1068" height="350"> </canvas>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="float_right">
+								<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+							</div>
+							<div class="clear_both"></div>
+						</div>
+						<div class="form-group">
+							<div id="strs_list_wrapper">
+								<table id="strs_list"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-4">
+				<div class="ibox">
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>성장판정상태</h5>
+						<div class="float_right">
+							<input type="radio" v-model="params.occrDivCd" value="01" @change="updateStrsJudgChart()"><span> 발생건수</span></input>
+							<input type="radio" v-model="params.occrDivCd" value="02" @change="updateStrsJudgChart()"><span> 발생비율(%)</span></input>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="form-group">
+							<div id="chartStrsJudg">
+								<canvas id="strsJudgChart" width="500" height="400"> </canvas>
+							</div>
+						</div>
+						<div class="form-group">
+							<div id="strsJudg_list_wrapper">
+								<table id="strsJudg_list"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+<section layout:fragment="user_script">
+	<script type="text/javascript" th:src="@{/js/stat/statComponent.js}"></script>
+	<script type="text/javascript" th:src="@{/js/stat/hc/strsStss.js}"></script>
+</section>
+</body>
+</html>
