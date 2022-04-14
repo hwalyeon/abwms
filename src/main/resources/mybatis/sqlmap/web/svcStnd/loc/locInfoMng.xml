@@ -420,7 +420,6 @@
 		<if test=' paging == "Y" '>
 		LIMIT 		${rowCount} OFFSET ${currentIndex}
 		</if>
-		) A
 
 	</select>
 

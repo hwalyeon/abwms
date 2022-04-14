@@ -753,13 +753,11 @@ let locInfoMng = new Vue({
                 Swal.alert(['장소를 마킹하여 범위를 지정해주세요.', 'info']);
                 return false;
             }
-
             return true;
         },
         //학생 및 보호자 search 팝업
         locStdtGuarPopup: function() {
             locStdtGuarPopup.initialize(this.setPopupData);
-            console.log("jcw 팝업 후 :: ");
         },
         //(학생 및 보호자 번호 , 학교명) 팝업 Grid 값 부모창 input 값에 삽입
         setPopupData: function(data) {
