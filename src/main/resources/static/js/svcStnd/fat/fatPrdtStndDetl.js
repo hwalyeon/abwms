@@ -3,66 +3,39 @@ let fatPrdtStndDetl = new Vue({
     data: {
     	params: {
 			crud: 'C',
-            userId       : '' ,
-            actDivCd     : '' , //활동_구분_코드
-            hbitStatCd   : '' , //심박_상태_코드
-            plcClssCd    : '' , //장소_구분_코드
-            tempStatCd   : '' , //체온_상태_코드
-            dgemStatCd   : '' , //위험감정_상태_코드 
-            dgemIdx      : '' , //위험감정_지수 
-            dgemSmryCntn : '' , //위험감정_요약_내용
-            dgemStatCntn : '' , //위험감정_상세_내용
-			currEvalCntn : '' ,
-			prdtEvalCntn : ''
-    	},
-		summerNoteId1 : 'summerNoteId1',
-		summerNoteId2 : 'summerNoteId2',
- 		code: {
-            actDivCdList   : [] , //활동_구분_코드_리스트
-        	hbitStatCdList : [] , //심박_상태_코드_리스트
-            plcClssCdList  : [] , //장소_구분_코드_리스트
-        	tempStatCdList : [] , //체온_상태_코드_리스트
-            dgemStatCdList : [] , //위험감정_상태_코드_리스트
-		}
+            userId          : '' ,
+			fatJudgCd       : '' , //비만_판정_코드
+			fatpJudgCd      : '' , //비만예측_판정_코드
+			fatPrdtSmryCntn : '' , //요약_내용
+			fatPrdtStatCntn : '' , //상세_내용
+     	},
+		summerNoteFatPrdtStnd1 : 'summerNoteFatPrdtStnd1' ,
+		summerNoteFatPrdtStnd2 : 'summerNoteFatPrdtStnd2'
+
 	},
 
 	components: {'summer-note': summernote},
     methods: {
 
         initialize: function() {
-        	
-        	let $this = this;
-        	
-        	$this.initCodeList();      
-        	        	
-        },
-        initCodeList: function() {
-        	let $this = this;
-            getCommonCodeList('ACT_DIV_CD'  , $this.code.actDivCdList);   //활동_구분_코드_리스트          
-            getCommonCodeList('HBIT_STAT_CD', $this.code.hbitStatCdList); //심박_상태_코드_리스트          
-            getCommonCodeList('PLC_CLSS_CD' , $this.code.plcClssCdList);  //장소_구분_코드_리스트          
-            getCommonCodeList('TEMP_STAT_CD', $this.code.tempStatCdList); //체온_상태_코드_리스트          
-            getCommonCodeList('DGEM_STAT_CD', $this.code.dgemStatCdList); //위험감정_상태_코드_리스트        
-          
-        },
-        initPage: function(actDivCd, hbitStatCd, plcClssCd, tempStatCd, dgemStatCd) {
-        	
-        	let $this = this;
-        	$this.resetDgemStndInfo();
 
+        	let $this = this;
+
+        },
+        initPage: function(fatJudgCd, fatpJudgCd) {
         	
-        	if ( !WebUtil.isNull(actDivCd, hbitStatCd, plcClssCd, tempStatCd, dgemStatCd) )
+        	let $this = this;
+        	$this.resetFatPrdtStndInfo();
+
+        	if ( !WebUtil.isNull(fatJudgCd, fatpJudgCd) )
     		{	
         	
         		let params = {
-        			'actDivCd'   : actDivCd   ,
-        			'hbitStatCd' : hbitStatCd ,
-        			'plcClssCd'  : plcClssCd  ,
-        			'tempStatCd' : tempStatCd ,
-        			'dgemStatCd' : dgemStatCd 
+        			'fatJudgCd'  : fatJudgCd   ,
+        			'fatpJudgCd' : fatpJudgCd ,
         		}
         		AjaxUtil.post({
-                    url: "/svcStnd/dgem/dgemStndMng/searchDgemStndInfo.ab",
+                    url: "/svcStnd/fat/fatPrdtStndMng/searchFatPrdtList.ab",
                     param: params,
                     success: function(response) {
                     	if ( !!response.rtnData.result ) {
@@ -82,48 +55,17 @@ let fatPrdtStndDetl = new Vue({
         	
         	let $this = this;        	        	
         	
-        	if ( WebUtil.isNull($this.params.actDivCd) ) {
-        		Swal.alert(['활동 구분을 선택하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.hbitStatCd) ) {
-        		Swal.alert(['심박 상태를 선택하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.plcClssCd) ) {
-        		Swal.alert(['장소 구분을 선택하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.tempStatCd) ) {
-        		Swal.alert(['체온 상태를 선택하세요.', 'info']);
-        		return false;
-        	}
-        	
-        	if ( WebUtil.isNull($this.params.dgemStatCd) ) {
-        		Swal.alert(['위험감정 상태를 선택하세요.', 'info']);
-        		return false;
-        	}
+
         	
         	return true;
         },
 
 		saveInfo: function() {
-			
+
 			let $this = this;
 
             if ( !this.isValid() ) {
                 return false;
-            }
-            if($this.params.crud=='C'){
-            	if(!$this.searchDupCdCk()){
-            
-                Swal.alert(["이미 등록된 코드 입니다.", 'warning']);
-                return false;
-            
-            	}
             }
 
 			AjaxUtil.post({
@@ -183,19 +125,14 @@ let fatPrdtStndDetl = new Vue({
                 }
             });
 		},
-		resetDgemStndInfo: function() {
+		resetFatPrdtStndInfo: function() {
 			this.params = {
 				crud: 'C',
-	            userId       : '' ,
-	            actDivCd     : '' , //활동_구분_코드
-	            hbitStatCd   : '' , //심박_상태_코드
-	            plcClssCd    : '' , //장소_구분_코드
-	            tempStatCd   : '' , //체온_상태_코드
-	            dgemStatCd   : '' , //위험감정_상태_코드
-	            dgemSmryCntn : '' , //위험감정_요약_내용
-	            dgemStatCntn : '' , //위험감정_상세_내용
-				currEvalCntn : '' ,
-				prdtEvalCntn : ''
+				userId          : '' ,
+				fatJudgCd       : '' , //비만_판정_코드
+				fatpJudgCd      : '' , //비만예측_판정_코드
+				fatPrdtSmryCntn : '' , //요약_내용
+				fatPrdtStatCntn : '' , //상세_내용
 	    	}
 		}
     },

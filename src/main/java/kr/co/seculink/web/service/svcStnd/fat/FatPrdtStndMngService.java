@@ -9,9 +9,5 @@ public interface FatPrdtStndMngService
 {
 	public List<Map<String, String>> searchFatPrdtList(Map<String, String> params) throws BizException;
 
-	public void saveFatPrdtList(Map<String, Object> params) throws BizException;
-	//중복 조회
-	public Map<String, String> searchDupCdCk(Map<String, String> params) throws BizException;
-
 }
  
