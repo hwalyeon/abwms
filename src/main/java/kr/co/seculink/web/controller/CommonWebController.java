@@ -136,6 +136,10 @@ public class CommonWebController {
 	@RequestMapping("/devc/band/bandOpenInfoMng.pg")
 	public String getDevcBandBandOpenInfoMng() {return "devc/band/bandOpenInfoMng";}
 
+	//API기준
+	@RequestMapping("/cmon/stnd/apiStndMng.pg")
+	public String getCmonStndApiStndMng() {return "cmon/stnd/apiStndMng";}
+
 	//약관정보
 	@RequestMapping("/cmon/stnd/termInfoMng.pg")
 	public String getCmonStndTermInfoMng() {return "cmon/stnd/termInfoMng";}

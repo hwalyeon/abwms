@@ -15,7 +15,6 @@
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
@@ -29,6 +28,7 @@
         <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
             and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
         </if>
+        and eagr_div_cd = #{eagrDivCd}
         ) x
         <choose>
             <when test="perdDivCd.equals('WEEK_NM')">
@@ -52,9 +52,9 @@
         as
         (
             select
-            x.stnd_dt
-            , count(x.OBJ_CNT)                        as OBJ_CNT
-            , round(sum(x.NEAT_CNT)/count(x.OBJ_CNT),2) as NEAT_CNT
+              x.stnd_dt
+            , sum(x.OBJ_CNT)                 as OBJ_CNT
+            , sum(x.NEAT_CNT)                as NEAT_CNT
             from
                 (select
                        case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
@@ -66,18 +66,23 @@
                              ,NEAT_CNT
                 from tt_neat_stss
                 where 1=1
-                <if test="eagrDivCd != null and eagrDivCd != ''">
-                    and eagr_div_cd = #{eagrDivCd}
+                <if test='(mmelYn != null and mmelYn !="" and mmelYn !="N") or (amelYn != null and amelYn != "" and amelYn != "N") or (emelYn != null and emelYn != "" and emelYn != "N")'>/*아침,점심,저녁 */
+                    and
+                    (
+                    <trim prefixOverrides="OR">
+                        <if test ='mmelYn == "MORN"'>
+                            OR etim_div_cd = #{mmelYn}
+                        </if>
+                        <if test ='amelYn == "AFTN"'>
+                            OR	etim_div_cd = #{amelYn}
+                        </if>
+                        <if test ='emelYn == "EVEN"'>
+                            OR	etim_div_cd = #{emelYn}
+                        </if>
+                    </trim>
+                    )
                 </if>
-                <if test="mmelYn != null and mmelYn != ''">
-                    and etim_div_cd = #{mmelYn}
-                </if>
-                <if test="amelYn != null and amelYn != ''">
-                    or etim_div_cd = #{amelYn}
-                </if>
-                <if test="emelYn != null and emelYn != ''">
-                    or etim_div_cd = #{emelYn}
-                </if>
+
                 <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
                     and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
                 </if>
@@ -92,6 +97,7 @@
                 <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
                     and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
                 </if>
+                and eagr_div_cd = #{eagrDivCd}
                 ) x
             <choose>
                 <when test="perdDivCd.equals('WEEK_NM')">
@@ -108,11 +114,17 @@
                 </otherwise>
             </choose>
         )select   stnd_dt as stnd_dt
-                , ROUND(avg(NEAT_CNT),2)  as NEAT_CNT
-                , ROUND(NEAT_CNT/0.07,2) as NEAT_PER
+            <choose>
+                <when test="eagrDivCd.equals('QUST')">
+                    , ROUND(NEAT_CNT ,2)  as NEAT_CNT
+                    , ROUND(NEAT_CNT/0.07,2) as NEAT_PER
+                </when>
+                <otherwise>
+                    , NEAT_CNT  as NEAT_CNT
+                    , ROUND(NEAT_CNT/OBJ_CNT * 100 ,2) as NEAT_PER
+                </otherwise>
+            </choose>
          from tt_neat_stss_temp
-        group by STND_DT ,ROUND(NEAT_CNT/0.07,2)
-
     </select>
 
 </mapper>

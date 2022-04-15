@@ -57,6 +57,7 @@
 		on     TZDS.LOC_NO = TLIB.LOC_NO
 		where  1=1
 		and    TZDS.LOC_APNT_CD = 'GORG'
+		and    TLIB.DEL_YN = 'N'
 		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
 		and    TZDS.STND_DT between #{entrDtFr} and #{entrDtTo}</if>
 		<if test=" plcClssCd != null and plcClssCd !='' ">
