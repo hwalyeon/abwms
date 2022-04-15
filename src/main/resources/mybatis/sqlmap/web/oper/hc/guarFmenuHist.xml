@@ -27,8 +27,25 @@
 		WHERE  1 = 1
 		<if test=" fmenuNm != null and fmenuNm !='' ">/*식단표_명*/
 			and tfb.fmenu_nm like CONCAT('%',#{fmenuNm},'%')</if>
-		<if test=" mmelYn != null and mmelYn !='' or amelYn != null and amelYn !='' or emelYn != null and emelYn !=''  or smelYn != null and smelYn !='' ">/*아침,점심,저녁,간식_여부*/
-			and tfb.mmel_yn = #{mmelYn} or tfb.amel_yn = #{amelYn}or tfb.emel_yn = #{emelYn}or tfb.smel_yn = #{smelYn}</if>
+		<if test="(mmelYn != null and mmelYn !='') or (amelYn != null and amelYn !='') or (emelYn != null and emelYn !='')  or (smelYn != null and smelYn !='') ">/*아침,점심,저녁,간식_여부*/
+		    and
+		    (
+			<trim prefixOverrides="OR">
+		    	<if test ='mmelYn == "Y"'>
+					OR tfb.mmel_yn = #{mmelYn}
+				</if>
+				<if test ='amelYn == "Y"'>
+					OR	tfb.amel_yn = #{amelYn}
+				</if>
+				<if test ='emelYn == "Y"'>
+					OR	tfb.emel_yn = #{emelYn}
+				</if>
+				<if test ='smelYn == "Y"'>
+					OR	tfb.smel_yn = #{smelYn}
+				</if>
+			</trim>
+			)
+		</if>
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tfb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
