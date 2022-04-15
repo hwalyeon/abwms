@@ -15,23 +15,19 @@ let locStdtGuarPopup = new Vue({
 		},
 		callback: null
 	},
-
 	methods: {
 		initialize: function(callback) {
 			let $this = this;
-			console.log("jcw :: ");
 			$this.callback = callback;
 
 			setTimeout(function() {
 				$this.initGrid();
 				$this.searchLocStdtGuarList(true);
-				console.log("jcw ??? :: ");
-				console.log($this.params);
 			},300);
 		},
-		initGrid: function()
-		{
+		initGrid: function() {
 			let $this = this;
+
 			let colModels = [
 				{name: "crud"              , index: "crud"         , label: "crud"		 	    , hidden: true                    },
 				{name: "stdtNo"            , index: "stdtNo"       , label: "학생번호"		 	, width: 80     , align: "center" },
@@ -41,13 +37,13 @@ let locStdtGuarPopup = new Vue({
 				{name: "guarTelNo"         , index: "guarTelNo"    , label: "보호자 전화번호"	    , width: 100    , align: "center" ,fixed:true},
 			];
 
-			$("#stdtGuar_list").jqGrid("GridUnload");
-			$("#stdtGuar_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+			$("#locStdtGuar_list").jqGrid("GridUnload");
+			$("#locStdtGuar_list").jqGrid($.extend(true, {}, commonGridOptions(), {
 				datatype: "local",
 				mtype: 'post',
 				url: '/svcStnd/loc/locInfoMng/searchLocStdtGuarList.ab',
 				pager: '#locStdtGuar_pager_list',
-				height: 270,
+				height: 250,
 				colModel: colModels,
 				onPaging : function(data) {
 					onPagingCommon(data, this, function(resultMap) {
@@ -61,7 +57,7 @@ let locStdtGuarPopup = new Vue({
 					let item = $('#locStdtGuar_list').jqGrid('getRowData', rowId);
 					$this.callback(item);
 					closeModal($('#locStdtGuarPopup'));
-					//self.closeModal();
+					// self.close();
 				},
 				gridComplete: function () {
 					var grid = this;
@@ -86,22 +82,17 @@ let locStdtGuarPopup = new Vue({
 				params.currentIndex = 0;
 			}
 
-			console.log("jcw 22 :: ");
 			$("#locStdtGuar_list").setGridParam({
 				datatype: "json",
 				postData: JSON.stringify(params),
 				page: 1,
 				loadComplete: function (response) {
-					console.log("jcw 입수 :: ");
 					console.log(response);
 					if ( response["rtnData"].result === 0 ) {
 						Swal.alert(['조회할 내용이 없습니다.', "info"]);
 					}
-					console.log("jcw 입수 :: ");
 				}
 			}).trigger("reloadGrid");
-
-			console.log("jcw 33 :: ");
 		},
 		resetSearchParam: function () {
 			let $this = this;
@@ -126,8 +117,5 @@ let locStdtGuarPopup = new Vue({
 	},
 	mounted: function() {
 		let self = this;
-		// $(document).ready(function() {
-		// 	self.initialize();
-		// });
 	}
 });
