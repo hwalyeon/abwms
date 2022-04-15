@@ -83,7 +83,7 @@ let fatpQustBaseDetl = new Vue({
                 }
             });
 		},
-		delete: function() {
+		deleteInfo: function() {
 			
 			let $this = this;
 			
