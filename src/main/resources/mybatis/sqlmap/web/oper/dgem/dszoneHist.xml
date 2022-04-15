@@ -55,7 +55,7 @@
 		inner  join
 		TS_LOC_INFO_BASE TLIB
 		on     TZDS.LOC_NO = TLIB.LOC_NO
-		inner  join
+		left outer  join
 		TM_GUAR_APNT_PLC TGAP
 		on     TLIB.LOC_NO = TGAP.LOC_NO
 		left   outer join
@@ -71,6 +71,7 @@
 		TI_EORG_BASE TEB
 		on     TSB.EORG_LOC_NO = TEB.LOC_NO
 		where  1=1
+		and    TLIB.DEL_YN = 'N'
 		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
 			and    TZDS.STND_DT between #{entrDtFr} and #{entrDtTo}</if>
 		<if test=" plcClssCd != null and plcClssCd !='' ">
@@ -171,8 +172,6 @@
 				AND 	TLIB.DEL_YN = 'N'
 				<if test="locNo != null and locNo !=''">
 				AND 	TLIB.LOC_NO = #{locNo}::NUMERIC</if>
-				<if test="stdtNo != null and stdtNo !=''">
-				AND 	TGAP.STDT_NO = #{stdtNo}::NUMERIC</if>
 				GROUP BY TLIB.LOC_NO,
 						TLIB.LOC_NM,
 						TLIB.PLC_CLSS_CD,
@@ -200,7 +199,6 @@
 						LIMIT ${rowCount} OFFSET ${currentIndex}
 					</if>
 				) A
-
 	</select>
 
 	<!--TS_LOC_INFO_BASE 인서트-->

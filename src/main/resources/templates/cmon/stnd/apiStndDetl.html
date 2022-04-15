@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:remove="tag">
+<div class="modal fade" id="apiStndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog-wrap">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 1150px; height: 670px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>사용자 정보</h5>
+					</div>
+				</div>
+				<div class="modal-body" >
+
+						<div class="pd_left_none pd_right_none col-xs-6 float_left">
+							<div class="ibox-content border-style_none"  style="padding-bottom:0px; border-bottom:none;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="col-xs-4" />
+										<col class="col-xs-8" />
+									</colgroup>
+									<tbody>
+									<tr>
+										<th scope="row">서버 ID</th>
+										<td v-if="userInfo.crud == 'C'">
+											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk" maxlength="40"/>
+											<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
+										</td>
+										<td v-else="userInfo.crud == 'U'">
+											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control" @input="userIdChk"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">서버 명</th>
+										<td>
+											<input type="text" name="svrNm" v-model="userInfo.svrNm" class="form-control ime-han" maxlength="40"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">API-URL</th>
+										<td>
+											<input type="text" id="apiUrl" name="apiUrl" v-model="userInfo.apiUrl" class="form-control" maxlength="100"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">GPS정기핑 기본 주기</th>
+										<td>
+											<input type="text" id="gpsBaseCycl" name="gpsBaseCycl" v-model="userInfo.gpsBaseCycl" class="form-control" maxlength="100"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">GPS정기핑 다음 주기</th>
+										<td>
+											<input type="text" id="gpsNextCycl" name="gpsNextCycl" v-model="userInfo.gpsNextCycl" class="form-control" maxlength="20" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">정기판정 다음 주기</th>
+										<td>
+											<input type="text" id="rdetNextCycl" name="rdetNextCycl" v-model="userInfo.rdetNextCycl" class="form-control" maxlength="20" />
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">정기판정 기본 주기</th>
+										<td>
+											<input type="email" id="rdetBaseCycl" name="rdetBaseCycl" v-model="userInfo.rdetBaseCycl" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">LED 슬립 시간</th>
+										<td>
+											<input type="email" id="ledSlepTcnt" name="ledSlepTcnt" v-model="userInfo.ledSlepTcnt" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="pd_left_none pd_right_none col-xs-6 float_right">
+							<div class="ibox-content border-style_none" style="padding-bottom:0px;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="width_per_30" />
+										<col class="width_per_70" />
+									</colgroup>
+									<tbody>
+									<tr>
+										<th scope="row">모션센서 감지 레벨</th>
+										<td>
+											<input type="email" id="msorSsngLevl" name="msorSsngLevl" v-model="userInfo.msorSsngLevl" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">심박센서 내부감지 주기</th>
+										<td>
+											<input type="email" id="hsorIsngCycl" name="hsorIsngCycl" v-model="userInfo.hsorIsngCycl" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">체온센서 내부감지 주기</th>
+										<td>
+											<input type="email" id="tsorIsngCycl" name="tsorIsngCycl" v-model="userInfo.tsorIsngCycl" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">체온센서 이벤트 하한값</th>
+										<td>
+											<input type="email" id="tsorEvntMinval" name="tsorEvntMinval" v-model="userInfo.tsorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">체온센서 이벤트 상한값</th>
+										<td>
+											<input type="email" id="tsorEvntMaxval" name="tsorEvntMaxval" v-model="userInfo.tsorEvntMaxval" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">심박수 중간값 하한값</th>
+										<td>
+											<input type="email" id="hbitcntMdanMinVal" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">심박수 중간값 하한값</th>
+										<td>
+											<input type="email" id="hbitcntMdanMaxVal" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">모션센서 이벤트 하한값</th>
+										<td>
+											<input type="email" id="msorEvntMinval" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+							<div class="ibox-content border-style_none" style="padding-top:0px;">
+							<table class="table table-bordered table_view">
+							<tbody>
+							<tr>
+								<th scope="row">모션센서 이벤트 하한값</th>
+								<td>
+									<input type="email" id="msorEvntMinval2" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+								</td>
+							</tr>
+							</tbody>
+							</table>
+							</div>
+				</div>
+            	<div class="modal-footer" style="">
+					<div class="text-center">
+						<div class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveUser">저장</button>
+						</div>
+						<div v-if="userInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteUser">삭제</button>
+						</div>
+						<div class="disp_in_block width_per_20">
+							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
