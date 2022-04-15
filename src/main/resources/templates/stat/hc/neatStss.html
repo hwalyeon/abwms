@@ -27,15 +27,15 @@
 						<div class="col-xs-2" style="padding-left:35px;">
 							<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">아침</label>
 							<div class="col-xs-1"  style=" padding:6px 0px 0px 0px; width:30px;" >
-								<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="MORN" false-value="">
+								<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="MORN" false-value="N">
 							</div>
 							<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;" >점심</label>
 							<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;" >
-								<input type="checkbox" name="amelYn" v-model="params.amelYn" true-value="AFTN" false-value="" :disabled="params.eagrDivCd=='QUST'">
+								<input type="checkbox" name="amelYn" v-model="params.amelYn" true-value="AFTN" false-value="N" :disabled="params.eagrDivCd=='QUST'">
 							</div>
 							<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">저녁</label>
 							<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;">
-								<input type="checkbox" name="emelYn" v-model="params.emelYn" true-value="EVEN" false-value=""  :disabled="params.eagrDivCd=='QUST'">
+								<input type="checkbox" name="emelYn" v-model="params.emelYn" true-value="EVEN" false-value="N"  :disabled="params.eagrDivCd=='QUST'">
 							</div>
 						</div>
 						<label class="col-xs-1 control-label">구분</label>
