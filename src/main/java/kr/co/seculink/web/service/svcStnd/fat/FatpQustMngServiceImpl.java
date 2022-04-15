@@ -1,36 +1,42 @@
 package kr.co.seculink.web.service.svcStnd.fat;
 
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.service.cmon.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
 @Service("fatpQustStndMngService")
-public class FatpQustStndMngServiceImpl implements FatpQustStndMngService
+public class FatpQustMngServiceImpl implements FatpQustMngService
 {
 	@Autowired
 	private FileService fileService;
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
-	
-	public List<Map<String, String>> searchFatpQustList(Map<String, String> params) throws BizException
+
+	//비만예측_설문_기본_리스트 조회
+	public List<Map<String, String>> searchFatpQustBaseList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.fatpQust.fatpQustStndMng.searchTcFatpQustStatBase", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatpQustMng.selectTcFatpQustStatBase", params);
 		
 		return result;
 	}
 
+	//비만예측_설문_상세_리스트 조회
+	public List<Map<String, String>> searchFatpQustSpecList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatpQustMng.searchFatpQustSpecList", params);
+
+		return result;
+	}
+/*
 	@Transactional
 	public void saveFatpQustList(Map<String, Object> params) throws BizException
 	{
@@ -71,5 +77,5 @@ public class FatpQustStndMngServiceImpl implements FatpQustStndMngService
 		}
 
 		return rtnMap;
-	}
+	}*/
 }

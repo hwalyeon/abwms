@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!--  -->
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{common/layout/defaultLayout}">
@@ -9,11 +9,10 @@
 <body>
 <div layout:fragment="content">
 	<div class="wrapper-content" id="fatpQustMng">
-
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
 			<div class="ibox-title">
-				<i class="fa fa-title-bar"></i>1
+				<i class="fa fa-title-bar"></i>
 				<h5>검색조건</h5>
 				<div class="ibox-tools">
 					<a class="collapse-link">
@@ -24,13 +23,19 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">그룹코드</label>
+						<label class="col-xs-1 control-label">설문 버전</label>
 						<div class="col-xs-2">
-							<input type="text"  id="cdGrp" name="cdGrp" class="form-control"  :value="params.cdGrp.cdGrp"  v-model="params.cdGrp.cdGrp" v-on:input="cdMng_typing">
+							<select id="qustVer" name="qustVer" class="form-control" v-model="params.fatpQustBase.qustVer">
+								<option value=""></option>
+								<option v-for="item in code.qustVerList" v-bind:value="item.qustVer" v-text="item.qustVer"></option>
+							</select>
 						</div>
-						<label class="col-xs-1 control-label">그룹코드명</label>
+						<label class="col-xs-1 control-label">설문 번호</label>
 						<div class="col-xs-2">
-							<input type="text" id="cdGrpNm" name="cdGrpNm" class="form-control"  :value="params.cdGrpNm" v-model="params.cdGrp.cdGrpNm" v-on:input="cdMng_typing">
+							<select id="qustNo" name="qustNo" class="form-control" v-model="params.fatpQustBase.qustNo">
+								<option value=""></option>
+								<option v-for="item in code.qustNoList" v-bind:value="item.qustNo" v-text="item.qustNo"></option>
+							</select>
 						</div>
 					</div>
 
@@ -39,7 +44,7 @@
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchCdGrpList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchFatpQustBaseList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -48,39 +53,39 @@
 		<!-- 검색조건 영역 -->
 
 		<div class="row">
-			<div class="col-xs-4">
+			<div class="col-xs-6">
 				<div class="ibox-title">
-					<i class="fa fa-title-bar"></i>
-					<h5>코드그룹 현황</h5>
-					<div class="float_right">
-						<button type="button" id="btnCdGrpReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#cdGrpDetlPopup" v-on:click="regCdGrpPop()">&nbsp;코드그룹등록</button>
-						<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcelCdGrp"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+					<i class="fa fa-title-bar" ></i>
+					<h5>비만예측설문 기본</h5>
+					<div class="float_right"  style="border: none;">
+						<button type="button" id="btnRegFatpQustBasePop" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#fatpQustBaseDetlPopup" v-on:click="regFatpQustBaseDetlPop()">&nbsp;비만예측설문 등록</button>
+						<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcelFatpQustBase"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 				</div>
-				<div class="ibox-content">
+				<div class="ibox-content" style="border: none; clear: none">
 					<div class="form-group">
-						<div id="cdGrp_jqGrid_wrapper">
-							<table id="cdGrp_list"></table>
-							<div id="cdGrp_pager_list"></div>
+						<div id="fatpQustBase_jqGrid_wrapper">
+							<table id="fatpQustBase_list"></table>
+							<div id="fatpQustBase_pager_list"></div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-8">
+			<div class="col-xs-6">
 				<div class="ibox">
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>코드 현황</h5>
+						<h5>비만예측설문 상세</h5>
 						<div class="float_right">
-							<button type="button" id="btnCdSpecReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="regCdSpecPop()">&nbsp;코드등록</button>
-							<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcelCdSpec"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+							<button type="button" id="btnRegFatpQustSpecPop" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#fatpQustSpecDetlPopup" v-on:click="regFatpQustSpecDetlPop()">&nbsp;비만예측설문 상세 등록</button>
+							<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcelFatpQustSpec"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 						</div>
 					</div>
-					<div class="ibox-content">
+					<div class="ibox-content" style="border: none; clear: none">
 						<div class="form-group">
-							<div id="cdSpec_jqGrid_wrapper">
-								<table id="cdSpec_list"></table>
-								<div id="cdSpec_pager_list"></div>
+							<div id="fatpQustSpec_jqGrid_wrapper">
+								<table id="fatpQustSpec_list"></table>
+								<div id="fatpQustSpec_pager_list"></div>
 							</div>
 						</div>
 					</div>
@@ -88,10 +93,13 @@
 			</div>
 		</div>
     </div>
+	<div th:insert="~{svcStnd/fat/fatpQustBaseDetl :: body}"></div>
+	<div th:insert="~{svcStnd/fat/fatpQustSpecDetl :: body}"></div>
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatpQustMng.js}"></script>
-
+	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatpQustBaseDetl.js}"></script>
+<!--	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatpQustSpecDetl.js}"></script>-->
 </section>
 </body>
 </html>
