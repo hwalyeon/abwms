@@ -12,6 +12,6 @@ FROM openjdk:11-jre-slim
 RUN apt-get update && apt-get install curl -y
 
 COPY --from=BUILD /usr/src/apps/target/*.jar app.jar
-ENV profile=D01
+ENV profile=${PROFILE}
 
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=D01", "app.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${profile}", "app.jar"]
