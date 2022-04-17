@@ -45,3 +45,7 @@ upload:
   event: /upload/
   temp: /upload/
   hwork: /upload/
+
+api:
+  url:
+    abejd: http://127.0.0.1:7080/
