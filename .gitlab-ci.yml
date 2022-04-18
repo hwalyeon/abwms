@@ -8,31 +8,35 @@ variables:
 before_script:
   - export COMMIT_TIME=$(git show -s --format=%ct $CI_COMMIT_SHA)
   - export ECR_PATH=200510064673.dkr.ecr.ap-northeast-2.amazonaws.com/ab000ecr
-  - export APP_NAME=abwms
+  - export APP_NAME=wms
+  - export APP_NAME_UPPER=Wms
+  - export PROFILE=${profile}
 
-build-D01:       # This job runs in the build stage, which runs first.
+build:       # This job runs in the build stage, which runs first.
   stage: build
   only: 
     variables: 
-      - $profile == "D01" && $CI_PIPELINE_SOURCE == "web"
+      - $CI_PIPELINE_SOURCE == "web"
   tags: 
     - abD01Scd01
   script:
+    - echo profile=${profile}
     - echo ${COMMIT_TIME}
-    - sudo docker build --tag ${ECR_PATH}/${APP_NAME}:${profile}-${COMMIT_TIME} --tag ${ECR_PATH}/${APP_NAME}:${profile}-latest .
+    - sudo docker build --build-arg PROFILE=${PROFILE} --tag ${ECR_PATH}/ab${APP_NAME}:${profile}-${COMMIT_TIME} --tag ${ECR_PATH}/ab${APP_NAME}:${profile}-latest .
     - sudo aws ecr get-login-password --region ap-northeast-2 | sudo docker login --username AWS --password-stdin 200510064673.dkr.ecr.ap-northeast-2.amazonaws.com
-    - sudo docker push ${ECR_PATH}/${APP_NAME}:${profile}-${COMMIT_TIME}
-    - sudo docker push ${ECR_PATH}/${APP_NAME}:${profile}-latest
+    - sudo docker push ${ECR_PATH}/ab${APP_NAME}:${profile}-${COMMIT_TIME}
+    - sudo docker push ${ECR_PATH}/ab${APP_NAME}:${profile}-latest
 
-deploy-D01:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+deploy:
+  stage: deploy
   variables: 
     GIT_STRATEGY: none 
   only: 
     variables: 
-      - $profile == "D01" && $CI_PIPELINE_SOURCE == "web"
+      - $CI_PIPELINE_SOURCE == "web"
   tags: 
       - abD01Scd01
   script:
+    - echo profile=${profile}
     - sudo docker images
-    - sudo aws ecs update-service --cluster abD01C01 --service abD01Wms --force-new-deployment
+    - sudo aws ecs update-service --cluster ab${profile}C01 --service ab${profile}${APP_NAME_UPPER} --force-new-deployment
