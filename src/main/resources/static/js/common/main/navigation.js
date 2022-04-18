@@ -1,12 +1,13 @@
 var navigation = null;
 navigation = new Vue({
-	/* template: ..., */
 	el: '#navigation',
 	data: {
         searchAuthParam : {
             searchClass : '01',
             empNo : 0
         },
+        currentMenu: null,
+        menuTree: [],
         menuList: [
 	/*
 			{ menuNo: 'A', upprMenuNo: '0', menuNm: '작업정의', menuUrl: '/def', menuId: 'A', menuPath: '작업정의', menuIcon: 'fa fa-book', lev:0, child: [
@@ -59,79 +60,124 @@ navigation = new Vue({
                 url: "/cmon/menu/searchMenuList.ab",
                 param: $this.searchAuthParam,
                 success: function(response) {
-                	
-                	if ( !!response.rtnData.result ) {
 
-                		let data = response;
-                        if ( response.rtnData ) {
-                            data = response.rtnData.result;
+                    // 1뎁스
+                    let data = response.rtnData.result;
+                    data.filter(menu => menu.levl === 1).forEach(menu => {
+                        const pos = $this.menuList.push({...menu, child:[], active: false, idPath: [menu.menuNo]});
+                        $this.menuTree.push($this.menuList[pos - 1]);
+                    });
+
+                    // 나머지뎁스
+                    data.filter(menu => menu.levl !== 1).forEach(menu => {
+                        if ( !!menu.menuUrl ) {
+                            menu.menuUrl = menu.menuUrl + '.pg';
                         }
+                        const sub = {...menu, child:[], active: false, idPath: [menu.menuNo]};
+                        $this.menuList.push(sub);
 
-    					let currentIndex1 = 0;
-                        let currentIndex2 = 0;
-                        let currentMenu;
-                        for ( let i in data )
-                        {
-                            data[i].child = [];
+                        const parentMenu = $this.menuList.find(m => m.menuNo === sub.upprMenuNo);
+                        sub.idPath.push(...parentMenu.idPath);
+                        parentMenu.child.push(sub);
+                    });
 
-							if ( !!data[i].menuUrl ) {
-								data[i].menuUrl = data[i].menuUrl + '.pg';
-							}
-
-                            // 메뉴가 1뎁스인 경우
-                        	if ( data[i].upprMenuNo === '0' )
-                        	{
-                        		data[i].menuUrl = '';
-                                currentIndex1 = $this.menuList.push(data[i]);
-    						}
-
-                            // 현재 1뎁스 메뉴
-                            currentMenu = $this.menuList[currentIndex1 - 1];
-
-                            // 메뉴가 2뎁스인 경우
-    						if ( data[i].upprMenuNo === currentMenu.menuNo && currentMenu ) {
-                                currentIndex2 = currentMenu.child.push(data[i]);
-    						} else {
-                                // 메뉴가 3뎁스인 경우
-                                for ( let j = 0 ; j < currentMenu.child.length ; j++ )
-                                {
-                                    if ( data[i].upprMenuNo === currentMenu.child[j].menuNo ) {
-                                        currentMenu.child[j].child.push(data[i]);
-                                        j = currentMenu.child[j].length;
-                                    }
-                                }
-                            }
-                        }
-                	}                    		
+                    Vue.nextTick(() => {
+                        document.querySelectorAll(".sidebar-collapse .nav").forEach(el => {
+                            el.style.setProperty("--max-height", el.scrollHeight + "px");
+                        });
+                    });
                 },
                 error: function (response) {
                 	Swal.alert([response, 'error']);
                 }
             });
         },
-        newTab: function(menuNm, menuUrl, menuId) {
-            if(menuUrl != null && menuUrl != '' ) {
-                //console.log(menuPath.split(' > '));
-                index.newTab(menuNm, menuUrl, menuId, '');//menuPath.split(' > '));
+        getSortOrd: function(menuNo) {
+            let sortOrd = 0;
+            if ( !!menuNo.substring(1) ) {
+                sortOrd = Number(menuNo.substring(1));
+            }
+            return sortOrd;
+        },
+        // 탭에 의한 메뉴 선택
+        selectMenu: function(menuNo) {
+            this.menuList.filter(menu => menu.active).forEach(menu => menu.active = false);
 
-                $('li', '#side-menu').removeClass("active");
+            if (menuNo === '1') {
+                this.currentMenu = null;
+                return;
+            }
+            this.currentMenu = this.menuList.find(menu => menu.menuNo === menuNo);
+            this.activeMenu(this.currentMenu);
+        },
 
-                var menuTree = ($('#' + menuId, $('#side-menu')).attr("menuTree")).split('_');
-
-                for(var i = 0; i < menuTree.length; i++) {
-                    $('#' + menuTree[i]).addClass("active");
+        // 선택된 메뉴 활성화
+        activeMenu: function(menu) {
+            let $this = this;
+            if ( !!menu ) {
+                menu.active = true;
+                const paths = menu.idPath;
+                if (paths.length > 1) {
+                    for (const path of paths) {
+                        const selMenu = $this.menuList.find(m => m.menuNo === path);
+                        if (selMenu) {
+                            selMenu.active = true;
+                        }
+                    }
                 }
             }
         },
+
+        // 탭 추가 또는 하위메뉴 열기
+        handlerMenu: function(menu) {
+            if ( !!menu.menuUrl )
+            {
+                this.currentMenu = menu;
+                menu.active = true;
+                // this.$emit('add:tab', {name: menu.menuNm, url: menu.menuUrl, id: menu.menuNo});
+                this.selectMenu(menu.menuNo);
+                index.newTab(menu);
+            }
+            else
+            {
+                if ( menu.active )
+                {
+                    menu.active = false;
+                }
+                else
+                {
+                    this.menuList.filter(menu => menu.active).forEach(menu => menu.active = false);
+                    this.activeMenu(menu);
+                }
+            }
+        },
+
+        getMenuFromId: function(id) {
+            const flatMenus = _.flatMapDeep(this.menuList);
+            const menu = flatMenus.find(m => m.menuNo === parseInt(id));
+            if (menu) {
+                return {name: menu.menuNm, url: menu.menuUrl, id: menu.menuNo};
+            }
+            return null;
+        },
+
+        getMenuFromUrl: function(url, simulate = false) {
+            const flatMenus = _.flatMapDeep(this.menuList);
+            const menu = flatMenus.find(m => m.menuUrl === url);
+            if (!menu && simulate) {
+                return flatMenus.find(m => m.menuUrl.indexOf(url) === 0);
+            }
+            if (menu) {
+                return {name: menu.menuNm, url: menu.menuUrl, id: menu.menuNo};
+            }
+            return null;
+        }
 	},
 	mounted: function () {
-		var self = this;
-        $(document).ready(function() {
-             self.getMenuList();
-        });
+        this.getMenuList();
 	},
     updated: function () {
-    	$('#side-menu').metisMenu();
+    	// $('#side-menu').metisMenu();
     }
 })
 	

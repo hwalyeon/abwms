@@ -42,20 +42,17 @@ let userMng = new Vue({
                 {name: "blngNm"     , index: "blngNm"     , label: "소속"        , width: 80, align: "center"},
                 {name: "telNo"      , index: "telNo"      , label: "전화번호"     , width: 80, align: "center"
                 	,formatter:function(cellValue, options, rowObject){
-                		console.log(phoneFormatter(cellValue));
                 		return phoneFormatter(cellValue);
                 	}
                 },
                 {name: "mtelNo"     , index: "mtelNo"     , label: "휴대전화번호"  , width: 80, align: "center"
                 	,formatter:function(cellValue, options, rowObject){
-                		console.log(phoneFormatter(cellValue));
                 		return phoneFormatter(cellValue);
                 	}
                 },
                 {name: "mailAddr"   , index: "mailAddr"   , label: "이메일"      , width: 80, align: "center"},
                 {name: "entrDt"     , index: "acdmYn"     , label: "가입일자"     , width: 80, align: "center"
                 	,formatter: function(cellValue, options, rowObject) {
-                		console.log(formatDate(cellValue));
                 		return formatDate(cellValue);
                 	}
                 },
@@ -106,7 +103,6 @@ let userMng = new Vue({
                 postData: JSON.stringify(params),
                 page: 1,
                 loadComplete: function (response) {
-                    console.log(response.rtnData.result);
                     if ( response.rtnData.result == 0 ) {
                         Swal.alert(['조회할 내용이 없습니다.', "info"]);
                     }

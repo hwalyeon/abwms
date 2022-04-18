@@ -6,10 +6,10 @@
 	<select id="searchUserInfo" parameterType="Map" resultType="MybatisMap">
     
 	SELECT USER_ID
-	      ,USER_NM
+	      ,DECR(USER_NM)   AS USER_NM
 	      ,BLNG_NM
-	      ,DECR(TEL_NO) AS TEL_NO
-	      ,DECR(MTEL_NO) AS MTEL_NO
+	      ,DECR(TEL_NO)    AS TEL_NO
+	      ,DECR(MTEL_NO)   AS MTEL_NO
 	      ,DECR(MAIL_ADDR) AS MAIN_ADDR
 	FROM   TC_USER_BASE
 	WHERE  1 = 1
@@ -20,24 +20,33 @@
 	</select>
 
 	<select id="searchMenuList" parameterType="Map" resultType="MybatisMap">
-    
-SELECT A.MENU_NO
-      ,A.MENU_NM
-      ,A.UPPR_MENU_NO
-	  ,B.MENU_NM        AS UPPR_MENU_NM
-	  ,A.ICON_INFO
-	  ,A.MENU_URL 
-FROM   TC_MENU_BASE A
-       INNER JOIN TC_MENU_BASE B
-       ON  B.MENU_NO = A.UPPR_MENU_NO
-       INNER JOIN TC_MENU_ROLE C
-       ON  C.MENU_NO = A.MENU_NO
-       INNER JOIN TC_USER_ROLE D
-       ON  D.ROLE_CD = C.ROLE_CD
-WHERE  1 = 1
-AND    A.USE_YN  = 'Y'
-AND    D.USER_ID = #{userId}
-ORDER BY A.MENU_NO
+
+WITH TMP AS
+(
+	SELECT A.MENU_NO
+          ,A.MENU_NM
+          ,A.UPPR_MENU_NO
+          ,CASE WHEN A.UPPR_MENU_NO = '0' THEN 1
+                WHEN A.UPPR_MENU_NO != '0' AND LENGTH(A.uppr_menu_no) = 1 THEN 2
+                ELSE 3
+           END              AS LEVL
+          ,B.MENU_NM        AS UPPR_MENU_NM
+          ,A.ICON_INFO
+          ,A.MENU_URL
+    FROM   TC_MENU_BASE A
+           INNER JOIN TC_MENU_BASE B
+           ON  B.MENU_NO = A.UPPR_MENU_NO
+           INNER JOIN TC_MENU_ROLE C
+           ON  C.MENU_NO = A.MENU_NO
+           INNER JOIN TC_USER_ROLE D
+           ON  D.ROLE_CD = C.ROLE_CD
+    WHERE  1 = 1
+    AND    A.USE_YN  = 'Y'
+    AND    D.USER_ID = #{userId}
+)
+SELECT *
+FROM   TMP
+ORDER BY LEVL, MENU_NO
 
 	</select>
 	

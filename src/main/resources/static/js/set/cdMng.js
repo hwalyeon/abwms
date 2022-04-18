@@ -96,7 +96,7 @@ let cdMng = new Vue({
                 }
             }));
 
-            resizeJqGridWidth("cdGrp_list", "cdGrp_list_wrapper");
+            resizeJqGridWidth("cdGrp_list", "cdGrp_jqGrid_wrapper");
             
   
             let cdSpecColModels = [
@@ -144,7 +144,7 @@ let cdMng = new Vue({
                 }
             }));
            	
-            resizeJqGridWidth("cdSpec_list", "cdSpec_list_wrapper");
+            resizeJqGridWidth("cdSpec_list", "cdSpec_jqGrid_wrapper");
             
 		},
 		searchCdGrpList: function(isSearch) {
