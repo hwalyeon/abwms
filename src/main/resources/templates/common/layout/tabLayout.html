@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">WMS</title>
+	<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">AbWms</title>
 	<th:block th:replace="~{common/fragments/commonHeader}"></th:block>
+	<link rel="stylesheet" type="text/css" href="/css/index.css"/>
 </head>
 <body>
 	<div id="wrapper">
 		<div th:replace="~{common/fragments/navigation :: navigation}"></div>
 		
 		<div id="page-wrapper" class="gray-bg">
-					
+
+			<div th:replace="~{common/fragments/topNavBar :: topNavBar}"></div>
+
 			<div layout:fragment="content" th:remove="tag"></div>
 			
 			<div class="footer-blank">&nbsp;</div>

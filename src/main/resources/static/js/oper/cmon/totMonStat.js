@@ -1228,7 +1228,7 @@ let totMonStat = new Vue({
                     return true;
                 }
             }
-            opener.call(menuInfo.menuNm, menuInfo.menuUrl, menuInfo.menuNo);
+            opener.navigation.handlerMenu(menuInfo);
             self.close();
         },
         getMenuList: function() {
