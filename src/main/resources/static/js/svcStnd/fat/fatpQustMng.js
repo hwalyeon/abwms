@@ -104,7 +104,7 @@ let fatpQustMng = new Vue({
                 }
             }));
 
-            resizeJqGridWidth("fatpQustBase_list", "fatpQustBase_list_wrapper");
+            resizeJqGridWidth("fatpQustBase_list", "fatpQustBase_jqGrid_wrapper");
 
 			//비만예측_설문_상세_ColModels
             let fatpQustSpecColModels = [
@@ -148,7 +148,7 @@ let fatpQustMng = new Vue({
                 }
             }));
            	
-            resizeJqGridWidth("fatpQustSpec_list", "fatpQustSpec_list_wrapper");
+            resizeJqGridWidth("fatpQustSpec_list", "fatpQustSpec_jqGrid_wrapper");
 		},
 
 		//비만예측_설문_기본_리스트 조회
