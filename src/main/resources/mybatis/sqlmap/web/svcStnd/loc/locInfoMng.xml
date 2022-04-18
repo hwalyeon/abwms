@@ -126,6 +126,8 @@
 				AND 	SPLIT_PART(TLIB.ADDR_BASE, ' ', 2) = #{wordHead2}</if>
 				<if test="addrSpec != null and addrSpec !=''">
 				AND 	TLIB.ADDR_SPEC LIKE CONCAT('%',#{addrSpec},'%')</if>
+				<if test="locNm != null and locNm !=''">
+				AND 	TLIB.LOC_NM LIKE CONCAT('%',#{locNm},'%')</if>
 				<if test="rdGorgGuarDiv =='GORG'">
 				AND 	TLIB.LOC_NO BETWEEN '1' AND '999999'</if>
 				<if test="rdGorgGuarDiv =='GUAR'">
@@ -135,9 +137,9 @@
 				<if test="stdtNo != null and stdtNo !=''">
 				AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
 				<if test="guarNm != null and guarNm !=''">
-				AND  	TGB.GUAR_NM = LIKE CONCAT('%',#{guarNm},'%')</if>
+				AND  	DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%')</if>
 				<if test="stdtNm != null and stdtNm !=''">
-				AND  	TSB.STDT_NM = LIKE CONCAT('%',#{stdtNm},'%')</if>
+				AND  	DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%')</if>
 				GROUP BY TLIB.LOC_NO,
 						TSB.STDT_NO
 				ORDER BY TLIB.LOC_NO
