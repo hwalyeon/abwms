@@ -29,53 +29,76 @@ public class FatpQustMngServiceImpl implements FatpQustMngService
 		return result;
 	}
 
+	//비만예측_설문_기본 저장
+	public void saveFatpQustBaseDetl(Map<String,Object> params) throws BizException{
+
+		int saveCnt = 0;
+
+		if("C".equals(params.get("crud"))){
+			List<Map<String, String>> exists = dao.selectList("svcStnd.fat.fatpQustMng.selectTcFatpQustStatBase", params);
+
+			if(exists.size() == 0)
+			{
+				saveCnt += dao.insert("svcStnd.fat.fatpQustMng.insertTiFatpQustStnd", params);
+			}else
+			{
+				throw new BizException("ECOM999", new String[]{"이미 등록된 설문 번호입니다."});
+			}
+		}else if("U".equals(params.get("crud"))){
+			saveCnt += dao.update("svcStnd.fat.fatpQustMng.updateTiFatpQustStnd", params);
+		}else if("D".equals(params.get("crud"))){
+			saveCnt += dao.update("svcStnd.fat.fatpQustMng.deleteTiFatpQustStnd", params);
+		}
+		if ( saveCnt == 0 ) {
+			throw new BizException("ECOM999", new String[]{"비만예측설문 기본 저장이 실패하였습니다."});
+		}
+	}
+
 	//비만예측_설문_상세_리스트 조회
 	public List<Map<String, String>> searchFatpQustSpecList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatpQustMng.searchFatpQustSpecList", params);
+		List<Map<String, String>> result = dao.selectList("svcStnd.fat.fatpQustMng.selectFatpQustSpecList", params);
 
 		return result;
 	}
-/*
-	@Transactional
-	public void saveFatpQustList(Map<String, Object> params) throws BizException
+
+	//비만예측_설문_상세_정보 조회(팝업)
+	public Map<String, Object> searchFatpQustSpecInfo(Map<String, String> params) throws BizException
 	{
-		int saveCnt = 0;
+		Map<String, Object> result = dao.selectOne("svcStnd.fat.fatpQustMng.selectFatpQustSpecList", params);
 
-
-		List<Map<String, String>> gridData = (List<Map<String, String>>) params.get("gridList");
-		for (Map<String, String> info : gridData) {
-			log.debug("crud         : " +  info.get("crud"));
-			log.debug("fatpQustStatCd   : " +  info.get("fatpQustStatCd"));
-			log.debug("fatpQustStatCntn : " +  info.get("fatpQustStatCntn"));
-
-			if( "C".equals(info.get("crud"))){
-				saveCnt += dao.insert("svcStnd.fatpQust.fatpQustStndMng.insertTiFatpQustStnd", info);
-			}else if( "U".equals(info.get("crud"))){
-				saveCnt += dao.update("svcStnd.fatpQust.fatpQustStndMng.updateTiFatpQustStnd", info);
-			}else if( "D".equals(info.get("crud"))){
-				saveCnt += dao.delete("svcStnd.fatpQust.fatpQustStndMng.deleteTiFatpQustStnd", info);
-			}
-		}
-
-		if ( saveCnt == 0 ) {
-			throw new BizException("ECOM999", new String[]{"위험감정기준 상태 코드 저장이 실패하였습니다."});
-		}
+		return result;
 	}
 
+	//비만예측_설문_상세 저장(팝업)
+	public void saveFatpQustSpecDetl(Map<String,Object> params) throws BizException{
 
-	//중복 조회
-	public Map<String, String> searchDupCdCk(Map<String, String> params) throws BizException
-	{
-		Map<String, String> result = dao.selectOne("svcStnd.fatpQust.fatpQustStndMng.searchDupCdCk", params);
+		int saveCnt = 0;
 
-		Map<String, String> rtnMap = new HashMap<>();
-		if ( result == null || GEUtil.isEmpty(result.get("actDivCd")) ) {
-			rtnMap.put("existsYn", "N");
-		} else {
-			rtnMap.put("existsYn", "Y");
+		if("C".equals(params.get("crud")))
+		{
+			List<Map<String, String>> exists = dao.selectList("svcStnd.fat.fatpQustMng.selectFatpQustSpecList", params);
+
+			if(exists.size() == 0)
+			{
+				saveCnt += dao.insert("svcStnd.fat.fatpQustMng.insertFatpQustSpecList", params);
+			}
+			else
+			{
+				throw new BizException("ECOM999", new String[]{"이미 등록된 설문 상세정보입니다."});
+			}
+		}else if("U".equals(params.get("crud")))
+		{
+			saveCnt += dao.update("svcStnd.fat.fatpQustMng.updateTiFatpQustSpec", params);
+		}
+		else if("D".equals(params.get("crud")))
+		{
+			saveCnt += dao.update("svcStnd.fat.fatpQustMng.deleteTiFatpQustSpec", params);
 		}
 
-		return rtnMap;
-	}*/
+		if ( saveCnt == 0 )
+		{
+			throw new BizException("ECOM999", new String[]{"비만예측설문 상세 저장이 실패하였습니다."});
+		}
+	}
 }

@@ -4,7 +4,7 @@
 <div class="modal fade" id="fatpQustBaseDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 500px; height: 350px">
+			<div class="modal-content" style="width: 500px; padding-bottom: 20px;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -23,13 +23,13 @@
 							<tr>
 								<th scope="row">설문 버전</th>
 								<td>
-									<input type="text"  id="qustVer"  name="qustVer" class="form-control"   v-model="params.cdGrp"  :value="params.qustVer" />
+									<input type="text"  id="qustVer"  name="qustVer" class="form-control"   v-model="params.qustVer"  :value="params.qustVer" :readonly="params.crud=='U'" v-digitonly.number/>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">설문 번호</th>
 								<td>
-									<input type="text" id="qustNo" name="qustNo" class="form-control"  v-model="params.cdGrpNm"  :value="params.qustNo"  />
+									<input type="text" id="qustNo" name="qustNo" class="form-control"  v-model="params.qustNo"  :value="params.qustNo":readonly="params.crud=='U'" v-digitonly.number/>
 								</td>
 							</tr>
 							<tr>
@@ -49,14 +49,13 @@
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveFatpQustBaseDetl">저장</button>
 						</div>
 						<div v-if="params.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteInfo">삭제</button>
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteFatpQustBaseDetl">삭제</button>
 						</div>
 						<div class="disp_in_block width_per_20">
 							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
 						</div>
 					</div>
 				</div>
-
             </div>
         </div>
     </div>

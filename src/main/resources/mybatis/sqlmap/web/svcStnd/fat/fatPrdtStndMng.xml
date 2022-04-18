@@ -73,8 +73,8 @@
 
 	<update id="updateTmGuarInfoList"  parameterType="java.util.Map">
 		UPDATE ti_fat_judg_spec
-		SET    UPT_DT           =  TO_CHAR(NOW(), 'YYYYMMDD')
-		    ,  UPT_TM           = TO_CHAR(NOW(),'HH24MISS')
+		SET    UPT_DT       =  TO_CHAR(NOW(), 'YYYYMMDD')
+		    ,  UPT_TM       = TO_CHAR(NOW(),'HH24MISS')
 		    ,  UPT_USER_ID  = #{uptUserId}
 		       <if test="fatpEvalSmry != null"> , fatp_eval_smry  = #{fatpEvalSmry} /* fatp_eval_smry 비만예측_평가_요약 character varying(1000) */	</if>
 			   <if test="fatpEvalCntn != null">	, fatp_eval_cntn = #{fatpEvalCntn} /* fatp_eval_cntn 비만예측_평가_내용 character varying(4000) */</if>

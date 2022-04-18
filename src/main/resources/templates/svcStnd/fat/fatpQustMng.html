@@ -25,26 +25,20 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label">설문 버전</label>
 						<div class="col-xs-2">
-							<select id="qustVer" name="qustVer" class="form-control" v-model="params.fatpQustBase.qustVer">
-								<option value=""></option>
-								<option v-for="item in code.qustVerList" v-bind:value="item.qustVer" v-text="item.qustVer"></option>
-							</select>
+							<input type="number" id="qustVer" name="qustVer" class="form-control" v-model="params.fatpQustBase.qustVer" v-digitonly.number />
 						</div>
 						<label class="col-xs-1 control-label">설문 번호</label>
 						<div class="col-xs-2">
-							<select id="qustNo" name="qustNo" class="form-control" v-model="params.fatpQustBase.qustNo">
-								<option value=""></option>
-								<option v-for="item in code.qustNoList" v-bind:value="item.qustNo" v-text="item.qustNo"></option>
-							</select>
+								<input type="number" id="qustNo" class="form-control" v-model="params.fatpQustBase.qustNo" v-digitonly.number />
 						</div>
 					</div>
 
 					<div class="form-group mg_none">
 						<div class="text-center">
-							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
+							<button class="btn btn-secondary" @click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchFatpQustBaseList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" @click="searchFatpQustBaseList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -58,8 +52,8 @@
 					<i class="fa fa-title-bar" ></i>
 					<h5>비만예측설문 기본</h5>
 					<div class="float_right"  style="border: none;">
-						<button type="button" id="btnRegFatpQustBasePop" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#fatpQustBaseDetlPopup" v-on:click="regFatpQustBaseDetlPop()">&nbsp;비만예측설문 등록</button>
-						<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcelFatpQustBase"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+						<button type="button" id="btnRegFatpQustBasePop" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#fatpQustBaseDetlPopup" @click="regFatpQustBaseDetlPop()">&nbsp;비만예측설문 등록</button>
+						<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="downloadExcelFatpQustBase"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 				</div>
 				<div class="ibox-content" style="border: none; clear: none">
@@ -77,8 +71,8 @@
 						<i class="fa fa-title-bar"></i>
 						<h5>비만예측설문 상세</h5>
 						<div class="float_right">
-							<button type="button" id="btnRegFatpQustSpecPop" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#fatpQustSpecDetlPopup" v-on:click="regFatpQustSpecDetlPop()">&nbsp;비만예측설문 상세 등록</button>
-							<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcelFatpQustSpec"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+							<button type="button" id="btnRegFatpQustSpecPop" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-target="#fatpQustSpecDetlPopup" @click="regFatpQustSpecDetlPop()">&nbsp;비만예측설문 상세 등록</button>
+							<button type="button" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="downloadExcelFatpQustSpec"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 						</div>
 					</div>
 					<div class="ibox-content" style="border: none; clear: none">
@@ -99,7 +93,7 @@
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatpQustMng.js}"></script>
 	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatpQustBaseDetl.js}"></script>
-<!--	<script type="text/javascript" th:src="@{/js/svcStnd/fat/fatpQustSpecDetl.js}"></script>-->
+    <script type="text/javascript" th:src="@{/js/svcStnd/fat/fatpQustSpecDetl.js}"></script>-
 </section>
 </body>
 </html>

@@ -19,19 +19,12 @@ let fatpQustMng = new Vue({
 				qustVer      : '' , //설문_버전
 				qustNo       : '' , //설문_번호
 				ansSeq       : '' , //답변_순번
-				ansVal       : '' , //답변_값
-				ansCntn      : '' , //답변_내용
 	            totalCount   : 0  ,
 	            rowCount     : 30 ,
 	            currentPage  : 1  ,
 	            currentIndex : 0
 			}
 		},
-		code :
-		{
-			qustVerList : [] , // 설문_버전_리스트
-			qustNoList  : []   // 설문_번호_리스트
-		}
 	},
     methods: {
 
@@ -60,7 +53,7 @@ let fatpQustMng = new Vue({
                 {name: "qustVer"     , index: "qustVer"      , label: "설문 버전"     , align: "center" , width: 60  },
                 {name: "qustNo"      , index: "qustNo"       , label: "설문 번호"     , align: "center" , width: 50  },
                 {name: "qustCntn"    , index: "qustCntn"     , label: "설문 내용"     , align: "left"   , width: 220 },
-                {name: "fatpQustBaseDetlPopup", index: "fatpQustBaseDetlPopup" , label: "비만예측설문"  , align: "center" , width: 60  ,
+                {name: "fatpQustBaseDetlPopup", index: "fatpQustBaseDetlPopup" , label: "비만예측 설문"  , align: "center" , width: 60  ,
 					formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="fatpQustMng.regFatpQustBaseDetlPop(\'' + rowObject.qustVer + '\',\'' + rowObject.qustNo + '\')" value="상세보기" data-toggle="modal" data-target="#fatpQustBaseDetlPopup" />';
                     }
@@ -85,7 +78,7 @@ let fatpQustMng = new Vue({
                     	$this.searchFatpQustBaseList(false);
                     })
                 },
-				//비만예측설문 선택 시
+				//비만예측_설문 선택 시
                 onSelectRow: function(rowId, status, e)
 				{
                 	let item = $('#fatpQustBase_list').jqGrid('getRowData', rowId);
@@ -97,8 +90,8 @@ let fatpQustMng = new Vue({
                     	$this.searchFatpQustSpecList(true);
                     }
                 },
-               /* 머지?
-                  gridComplete: function () {
+
+                 gridComplete: function () {
                     var grid = this;
 
                     $('td[rowspan="1"]', grid).each(function () {
@@ -108,7 +101,7 @@ let fatpQustMng = new Vue({
                             $(this).attr('rowspan', spans);
                         }
                     });
-                }*/
+                }
             }));
 
             resizeJqGridWidth("fatpQustBase_list", "fatpQustBase_list_wrapper");
@@ -120,9 +113,9 @@ let fatpQustMng = new Vue({
                 {name: "ansSeq"       , index: "ansSeq"       , label: "답변 순번" , align: "center" , width: 50},
                 {name: "ansVal"       , index: "ansVal"       , label: "답변 값"   , align: "center" , width: 60},
                 {name: "ansCntn"      , index: "ansCntn"      , label: "답변 내용" , align: "left"   , width: 100},
-				{name: "fatpQustSpecDetlPop", index: "fatpQustSpecDetlPop" , label: "비만예측설문 상세" , align: "center"  , width: 60  ,
+				{name: "fatpQustSpecDetlPop", index: "fatpQustSpecDetlPop" , label: "비만예측 설문 상세" , align: "center"  , width: 60  ,
 					formatter: function(cellValue, options, rowObject) {
-                    	return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="regFatpQustSpecDetlPop(\'' + rowObject.qustVer + '\',\'' + rowObject.qustNo + '\')" value="상세보기" data-toggle="modal" data-target="#fatpQustSpecDetlPopup" />';
+                    	return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="fatpQustMng.regFatpQustSpecDetlPop(\'' + rowObject.ansSeq + '\')" value="상세보기" data-target="#fatpQustSpecDetlPopup" />';
                     }
                 }
             ];
@@ -143,21 +136,22 @@ let fatpQustMng = new Vue({
                     	$this.searchFatpQustSpecList(false);
                     })
                 },
-				// 머지?
-                // loadComplete: function(datas) {
-                // 	var grid = this;
-                //     $('td[rowspan="1"]', grid).each(function () {
-                //     	var spans = $('td[rowspanid="' + this.id + '"]', grid).length + 1;
-                //     	if (spans > 1) {
-                //     		$(this).attr('rowspan', spans);
-                //     	}
-                //     });
-                // }
+
+                loadComplete: function(datas) {
+                	var grid = this;
+                    $('td[rowspan="1"]', grid).each(function () {
+                    	var spans = $('td[rowspanid="' + this.id + '"]', grid).length + 1;
+                    	if (spans > 1) {
+                    		$(this).attr('rowspan', spans);
+                    	}
+                    });
+                }
             }));
            	
             resizeJqGridWidth("fatpQustSpec_list", "fatpQustSpec_list_wrapper");
-            
 		},
+
+		//비만예측_설문_기본_리스트 조회
 		searchFatpQustBaseList: function(isSearch) {
 			
 			let $this = this;
@@ -195,11 +189,12 @@ let fatpQustMng = new Vue({
             }).trigger("reloadGrid");
 		},
 
+		//비만예측_설문_상세_리스트 조회
 		searchFatpQustSpecList : function(isSearch) {
 			
 			let $this = this;
 			let params = $.extend(true, {}, $this.params.fatpQustSpec);
-			
+
             if ( isSearch ) {
                 params.currentPage  = 1;
                 params.currentIndex = 0;
@@ -217,36 +212,38 @@ let fatpQustMng = new Vue({
             }).trigger("reloadGrid");
 		},
 
+		//비만예측설문_기본_엑셀_다운로드
 		downloadExcelFatpQustBase : function() {
 			
 			let $this = this;
 			
-			let params = $.extend(true, {}, $this.params.cdGrp);
+			let params = $.extend(true, {}, $this.params.fatpQustBase);
 			
 			AjaxUtil.post({
 				dataType: 'binary',
-                url: "/svcStnd/fat/fatpQustMng/searchCdGrpList/excel.ab",
+                url: "/svcStnd/fat/fatpQustMng/searchFatpQustBaseList/excel.ab",
                 param: params,
                 success: function(response) {
-                	saveFileLocal(response, 'CodeGroup.xls');
+                	saveFileLocal(response, 'fatpQustBase.xls');
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
                 }
             });
 		},
+		//비만예측설문_상세_엑셀_다운로드
 		downloadExcelFatpQustSpec : function() {
 			
 			let $this = this;
 			
-			let params = $.extend(true, {}, $this.params.cdSpec);
+			let params = $.extend(true, {}, $this.params.fatpQustSpec);
 			
 			AjaxUtil.post({
 				dataType: 'binary',
-                url: "/svcStnd/fat/fatpQustMng/searchCdSpecList/excel.ab",
+                url: "/svcStnd/fat/fatpQustMng/searchFatpQustSpecList/excel.ab",
                 param: params,
                 success: function(response) {
-                	saveFileLocal(response, 'CodeSpec.xls');
+                	saveFileLocal(response, 'fatpQustSpec.xls');
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
@@ -254,52 +251,50 @@ let fatpQustMng = new Vue({
             });
 		},
 
+		//비만예측설문_기본_팝업
 		regFatpQustBaseDetlPop: function(qustVer, qustNo) {
 
 			fatpQustBaseDetl.initPage(qustVer, qustNo);
 		},
-		regFatpQustSpecDetlPop: function(qustVer, qustNo) {
+
+		//비만예측설문_상세_팝업
+		regFatpQustSpecDetlPop: function(ansSeq) {
 			
 			let $this = this;
-			
-			if ( WebUtil.isNull($this.params.fatpQustBase.qustVer))
+			if (WebUtil.isNull($this.params.fatpQustSpec.qustVer))
 			{
-				Swal.alert(['비만예측설문 기본을 먼저 조회하시기 바랍니다.', 'info']);
-			}
-			else
+				Swal.alert(['비만예측 설문 기본을 먼저 조회하시기 바랍니다.', 'info']);
+			}else
 			{
-				let crud = 'U';
-				if ( WebUtil.isNull(ansSeq) ) {
-					crud    = 'C';
-					qustVer = $this.params.fatpQustSpec.qustVer;
-					qustNo  = $this.params.fatpQustSpec.qustNo;
-				}
-
 				$('#fatpQustSpecDetlPopup').modal('show');
-				fatpQustSpecDetl.initPage(qustVer, qustNo);
-
+				fatpQustSpecDetl.initPage($this.params.fatpQustSpec.qustVer, $this.params.fatpQustSpec.qustNo, ansSeq)
 			}
 		},
 		resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
-				cdGrp : {
-					cdGrp: '',
-					cdGrpNm: '',
-					paging: 'Y',
-		            totalCount: 0,
-		            rowCount: 30,
-		            currentPage: 1,
-		            currentIndex: 0
-				},
-				cdSpec: {
-					cdGrp: '',
-					paging: 'Y',
-		            totalCount: 0,
-		            rowCount: 30,
-		            currentPage: 1,
-		            currentIndex: 0
-				}
+				//비만예측_설문_기본
+				fatpQustBase :
+					{
+						qustVer      : '' , //설문_버전
+						qustNo       : '' , //설문_번호
+						qustCntn     : '' , //설문_내용
+						totalCount   : 0  ,
+						rowCount     : 30 ,
+						currentPage  : 1  ,
+						currentIndex : 0
+					},
+				//비만예측_설문_상세
+				fatpQustSpec :
+					{
+						qustVer      : '' , //설문_버전
+						qustNo       : '' , //설문_번호
+						ansSeq       : '' , //답변_순번
+						totalCount   : 0  ,
+						rowCount     : 30 ,
+						currentPage  : 1  ,
+						currentIndex : 0
+					}
 			}
 		}
 
