@@ -1,5 +1,6 @@
 package kr.co.seculink.feign.service;
 
+import com.netflix.client.ClientException;
 import feign.FeignException;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.feign.client.AbEjdClient;
@@ -57,6 +58,10 @@ public class FeignServiceImpl implements FeignService
         } catch ( Exception e ) {
             e.printStackTrace();
             log.error("ABEJD 서비스 호출 중 에러가 발생하였습니다.");
+
+            rtnVO = new AlrmVO();
+            rtnVO.setRsltCd("99");
+            rtnVO.setRsltCntn("ABEJD 서비스와 연결할 수 없습니다.");
         } finally {
             log.debug("rsltCd/rsltCntn:{}/{}", rtnVO.getRsltCd(), rtnVO.getRsltCntn());
         }

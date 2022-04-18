@@ -44,6 +44,11 @@ upload:
   temp: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\temp\\
   hwork: C:\\project\\workspace\\wms\\src\\main\\resources\\static\\uploads\\
 
-api:
-  url:
-    abejd: http://127.0.0.1:7080/
+eureka:
+  instance:
+    prefer-ip-address: true       # 서비스 이름 대신 IP 주소 등록
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
+    register-with-eureka: true    # 유레카 서버에 서비스 등록
+    fetch-registry: true          # 레지스트리 정보를 로컬에 캐싱
