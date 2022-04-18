@@ -46,8 +46,8 @@
                ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
                ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
                ,pal_val /* pal_val 신체활동수준_값 numeric */
-               ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
-               ,act에너placecsumqty_val /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
+               ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+               ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
                ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
                ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
                ,rmrk /* rmrk 비고 character varying(4000) */
@@ -132,8 +132,8 @@
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
-		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
-		    ,act에너placecsumqty_val /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
+		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -221,8 +221,8 @@
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
-		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
-		    ,#{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
+		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -354,11 +354,11 @@
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
 		</if>
-		<if test="bmrVal != null">
-		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		<if test="bcsmVal != null">
+		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
-		<if test="act에너placecsumqtyVal != null">
-		    ,act에너placecsumqty_val = #{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
+		<if test="acsmVal != null">
+		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
 		<if test="palCd != null">
 		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
@@ -449,8 +449,8 @@
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
-		    ,bmr_val /* bmr_val 기초에너지소모량_값 numeric */
-		    ,act에너placecsumqty_val /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
+		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -538,8 +538,8 @@
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
-		    ,#{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
-		    ,#{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
+		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -668,11 +668,11 @@
 		<if test="palVal != null">
 		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
 		</if>
-		<if test="bmrVal != null">
-		    ,bmr_val = #{bmrVal} /* bmr_val 기초에너지소모량_값 numeric */
+		<if test="bcsmVal != null">
+		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
-		<if test="act에너placecsumqtyVal != null">
-		    ,act에너placecsumqty_val = #{act에너placecsumqtyVal} /* act에너placecsumqty_val 활동에너지소모량_값 numeric */
+		<if test="acsmVal != null">
+		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
 		<if test="palCd != null">
 		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */

@@ -118,11 +118,11 @@ public class TsGfixHistVo implements Serializable {
 	/* pal_val 신체활동수준_값 numeric(null) */
 	private Double palVal;
 
-	/* bmr_val 기초에너지소모량_값 numeric(null) */
-	private Double bmrVal;
+	/* bcsm_val 기초에너지소모량_값 numeric(null) */
+	private Double bcsmVal;
 
-	/* act에너placecsumqty_val 활동에너지소모량_값 numeric(null) */
-	private Double act에너placecsumqtyVal;
+	/* acsm_val 활동에너지소모량_값 numeric(null) */
+	private Double acsmVal;
 
 	/* pal_cd 신체활동수준_코드 character varying(20) */
 	private String palCd;
@@ -708,34 +708,34 @@ public class TsGfixHistVo implements Serializable {
 		this.palVal = palVal;
 	}
 	/**
-	 * Get bmr_val 기초에너지소모량_값 numeric(null)
-	 * @Return Double bmrVal
+	 * Get bcsm_val 기초에너지소모량_값 numeric(null)
+	 * @Return Double bcsmVal
 	 */
-	public Double getBmrVal() {
-		return this.bmrVal;
+	public Double getBcsmVal() {
+		return this.bcsmVal;
 	}
 	
 	/**
-	 * Set bmr_val 기초에너지소모량_값 numeric(null)
-	 * @Param Double bmrVal
+	 * Set bcsm_val 기초에너지소모량_값 numeric(null)
+	 * @Param Double bcsmVal
 	 */
-	public void setBmrVal(Double bmrVal) {
-		this.bmrVal = bmrVal;
+	public void setBcsmVal(Double bcsmVal) {
+		this.bcsmVal = bcsmVal;
 	}
 	/**
-	 * Get act에너placecsumqty_val 활동에너지소모량_값 numeric(null)
-	 * @Return Double act에너placecsumqtyVal
+	 * Get acsm_val 활동에너지소모량_값 numeric(null)
+	 * @Return Double acsmVal
 	 */
-	public Double getAct에너placecsumqtyVal() {
-		return this.act에너placecsumqtyVal;
+	public Double getAcsmVal() {
+		return this.acsmVal;
 	}
 	
 	/**
-	 * Set act에너placecsumqty_val 활동에너지소모량_값 numeric(null)
-	 * @Param Double act에너placecsumqtyVal
+	 * Set acsm_val 활동에너지소모량_값 numeric(null)
+	 * @Param Double acsmVal
 	 */
-	public void setAct에너placecsumqtyVal(Double act에너placecsumqtyVal) {
-		this.act에너placecsumqtyVal = act에너placecsumqtyVal;
+	public void setAcsmVal(Double acsmVal) {
+		this.acsmVal = acsmVal;
 	}
 	/**
 	 * Get pal_cd 신체활동수준_코드 character varying(20)

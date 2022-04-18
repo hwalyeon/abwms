@@ -47,18 +47,36 @@
 		<if test="strsJudgDttm != null">
 		    ,strs_judg_dttm /* strs_judg_dttm 스트레스_판정_일시 character(14) */
 		</if>
+		<if test="strsIdx != null">
 		    ,strs_idx /* strs_idx 스트레스_지수 numeric */
+		</if>
+		<if test="hbitMdan != null">
 		    ,hbit_mdan /* hbit_mdan 심박_중간값 numeric */
+		</if>
+		<if test="mindStrsPnt != null">
 		    ,mind_strs_pnt /* mind_strs_pnt 정신적_스트레스_점수 numeric */
+		</if>
+		<if test="mindStrsStatCd != null">
 		    ,mind_strs_stat_cd /* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="physStrsPnt != null">
 		    ,phys_strs_pnt /* phys_strs_pnt 신체적_스트레스_점수 numeric */
+		</if>
+		<if test="physStrsStatCd != null">
 		    ,phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsCopePnt != null">
 		    ,strs_cope_pnt /* strs_cope_pnt 스트레스_대처_점수 numeric */
+		</if>
 		<if test="strsCopeStatCd != null">
 		    ,strs_cope_stat_cd /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
 		</if>
+		<if test="avgHbitCnt != null">
 		    ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
+		</if>
+		<if test="abnmHbitCnt != null">
 		    ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
+		</if>
 		<if test="strsStatCd != null">
 		    ,strs_stat_cd /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
 		</if>
@@ -89,18 +107,36 @@
 		<if test="strsJudgDttm != null">
 		    ,#{strsJudgDttm} /* strs_judg_dttm 스트레스_판정_일시 character(14) */
 		</if>
+		<if test="strsIdx != null">
 		    ,#{strsIdx} /* strs_idx 스트레스_지수 numeric */
+		</if>
+		<if test="hbitMdan != null">
 		    ,#{hbitMdan} /* hbit_mdan 심박_중간값 numeric */
+		</if>
+		<if test="mindStrsPnt != null">
 		    ,#{mindStrsPnt} /* mind_strs_pnt 정신적_스트레스_점수 numeric */
+		</if>
+		<if test="mindStrsStatCd != null">
 		    ,#{mindStrsStatCd} /* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="physStrsPnt != null">
 		    ,#{physStrsPnt} /* phys_strs_pnt 신체적_스트레스_점수 numeric */
+		</if>
+		<if test="physStrsStatCd != null">
 		    ,#{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsCopePnt != null">
 		    ,#{strsCopePnt} /* strs_cope_pnt 스트레스_대처_점수 numeric */
+		</if>
 		<if test="strsCopeStatCd != null">
 		    ,#{strsCopeStatCd} /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
 		</if>
+		<if test="avgHbitCnt != null">
 		    ,#{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
+		</if>
+		<if test="abnmHbitCnt != null">
 		    ,#{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
+		</if>
 		<if test="strsStatCd != null">
 		    ,#{strsStatCd} /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
 		</if>
@@ -195,18 +231,36 @@
 		<if test="strsJudgDttm != null">
 		    ,strs_judg_dttm /* strs_judg_dttm 스트레스_판정_일시 character(14) */
 		</if>
+		<if test="strsIdx != null">
 		    ,strs_idx /* strs_idx 스트레스_지수 numeric */
+		</if>
+		<if test="hbitMdan != null">
 		    ,hbit_mdan /* hbit_mdan 심박_중간값 numeric */
+		</if>
+		<if test="mindStrsPnt != null">
 		    ,mind_strs_pnt /* mind_strs_pnt 정신적_스트레스_점수 numeric */
+		</if>
+		<if test="mindStrsStatCd != null">
 		    ,mind_strs_stat_cd /* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="physStrsPnt != null">
 		    ,phys_strs_pnt /* phys_strs_pnt 신체적_스트레스_점수 numeric */
+		</if>
+		<if test="physStrsStatCd != null">
 		    ,phys_strs_stat_cd /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsCopePnt != null">
 		    ,strs_cope_pnt /* strs_cope_pnt 스트레스_대처_점수 numeric */
+		</if>
 		<if test="strsCopeStatCd != null">
 		    ,strs_cope_stat_cd /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
 		</if>
+		<if test="avgHbitCnt != null">
 		    ,avg_hbit_cnt /* avg_hbit_cnt 평균_심박_수 numeric */
+		</if>
+		<if test="abnmHbitCnt != null">
 		    ,abnm_hbit_cnt /* abnm_hbit_cnt 이상_심박_수 numeric */
+		</if>
 		<if test="strsStatCd != null">
 		    ,strs_stat_cd /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
 		</if>
@@ -237,18 +291,36 @@
 		<if test="strsJudgDttm != null">
 		    ,#{strsJudgDttm} /* strs_judg_dttm 스트레스_판정_일시 character(14) */
 		</if>
+		<if test="strsIdx != null">
 		    ,#{strsIdx} /* strs_idx 스트레스_지수 numeric */
+		</if>
+		<if test="hbitMdan != null">
 		    ,#{hbitMdan} /* hbit_mdan 심박_중간값 numeric */
+		</if>
+		<if test="mindStrsPnt != null">
 		    ,#{mindStrsPnt} /* mind_strs_pnt 정신적_스트레스_점수 numeric */
+		</if>
+		<if test="mindStrsStatCd != null">
 		    ,#{mindStrsStatCd} /* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="physStrsPnt != null">
 		    ,#{physStrsPnt} /* phys_strs_pnt 신체적_스트레스_점수 numeric */
+		</if>
+		<if test="physStrsStatCd != null">
 		    ,#{physStrsStatCd} /* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+		</if>
+		<if test="strsCopePnt != null">
 		    ,#{strsCopePnt} /* strs_cope_pnt 스트레스_대처_점수 numeric */
+		</if>
 		<if test="strsCopeStatCd != null">
 		    ,#{strsCopeStatCd} /* strs_cope_stat_cd 스트레스_대처_상태_코드 character varying(20) */
 		</if>
+		<if test="avgHbitCnt != null">
 		    ,#{avgHbitCnt} /* avg_hbit_cnt 평균_심박_수 numeric */
+		</if>
+		<if test="abnmHbitCnt != null">
 		    ,#{abnmHbitCnt} /* abnm_hbit_cnt 이상_심박_수 numeric */
+		</if>
 		<if test="strsStatCd != null">
 		    ,#{strsStatCd} /* strs_stat_cd 스트레스_상태_코드 character varying(20) */
 		</if>
