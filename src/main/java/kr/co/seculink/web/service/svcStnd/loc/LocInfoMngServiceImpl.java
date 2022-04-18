@@ -56,7 +56,7 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 
 		if( "C".equals(params.get("crud"))) {
 			saveCnt += dao.insert("svcStnd.loc.locInfoMng.insertTsLocInfoBase", params);
-			if("guar".equals(params.get("rdGorgGuarDivSpec"))) {
+			if("GUAR".equals(params.get("rdGorgGuarDivSpec"))) {
 				if(chkRegLimit(params)) {
 					saveCnt += dao.insert("svcStnd.loc.locInfoMng.insertTmGuarApntPlc", params);
 				}
@@ -65,7 +65,7 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 			saveCnt += dao.update("svcStnd.loc.locInfoMng.updateTsLocInfoBase", params);
 		}else if( "D".equals(params.get("crud"))) {
 			saveCnt += dao.update("svcStnd.loc.locInfoMng.deleteTsLocInfoBase", params);
-			if("guar".equals(params.get("rdGorgGuarDivSpec"))) {
+			if("GUAR".equals(params.get("rdGorgGuarDivSpec"))) {
 				saveCnt += dao.delete("svcStnd.loc.locInfoMng.deleteTmGuarApntPlc", params);
 			}
 		}

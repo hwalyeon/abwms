@@ -524,10 +524,8 @@ let locInfoMng = new Vue({
             }
             if (isSearch) {
                 params = $.extend(true, {}, $this.locInfo);
-                console.log($this.locInfo);
             } else {
                 params = $.extend(true, {}, $this.locInfo);
-                console.log($this.locInfo);
             }
             AjaxUtil.post({
                 url: "/svcStnd/loc/locInfoMng/searchLocInfoSpec.ab",
@@ -538,6 +536,7 @@ let locInfoMng = new Vue({
                             $this.locInfoSpec.crud = 'U',
                                 $this.locInfoSpec.rdGorgGuarDivSpec = item.rdGorgGuarDiv,
                                 // $this.locInfoSpec.guarNo = item.guarNo,
+                                $this.locInfoSpec.guarNo = '',
                                 $this.locInfoSpec.stdtNo = item.stdtNo,
                                 $this.locInfoSpec.locNo = item.locNo,
                                 $this.locInfoSpec.locNm = item.locNm,
@@ -761,8 +760,8 @@ let locInfoMng = new Vue({
         },
         //(학생 및 보호자 번호 , 학교명) 팝업 Grid 값 부모창 input 값에 삽입
         setPopupData: function(data) {
-            console.log(data);
             let $this = this;
+
             if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined) {
                 $this.params.stdtNo = data.stdtNo;
                 $this.params.stdtNm = data.stdtNm;
@@ -853,6 +852,13 @@ let locInfoMng = new Vue({
                     $this.params.guarNo = item.guarNo;
                 }
             })
+        },
+        changeGorgNoSpec : function () {
+            let $this = this;
+
+            $this.locInfoSpec.guarNo = '';
+            $this.locInfoSpec.stdtNo = '';
+
         },
         changeGuarNoSpec : function () {
             let $this = this;

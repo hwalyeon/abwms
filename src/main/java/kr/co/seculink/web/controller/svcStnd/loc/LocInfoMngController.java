@@ -179,7 +179,6 @@ public class LocInfoMngController
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
-		log.info("jcw :: ");
 		List<Map<String, String>> result = locInfoMngService.searchLocStdtGuarList(params);
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
