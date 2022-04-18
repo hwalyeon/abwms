@@ -3,7 +3,7 @@
  * */
 
 const summernote = {
-    template: `<textarea class="summernote" :id="summerNoteId" name="summerNoteId" ref="summerNoteId"></textarea>`,
+    template: `<textarea class="summernote" :id="summerNoteId" :name="summerNoteId" ref="summerNoteId"></textarea>`,
     data() {
         return {
             changeValue: '',
@@ -78,7 +78,7 @@ const summernote = {
                     ['fontname', ['fontname']],
                     ['fontsize', ['fontsize']],
                     ['style', ['bold', 'italic', 'underline','clear']],
-                    ['color', ['forecolor','color']],
+                    ['color', ['forecolor','backcolor']],
                     ['table', ['']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['height', ['height']],
@@ -103,6 +103,7 @@ const summernote = {
                     ]
                 },
                 callbacks: {},
+                pickerName : $this.summerNoteId
             };
 
             /*
