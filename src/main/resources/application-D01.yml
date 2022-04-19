@@ -46,6 +46,9 @@ upload:
   temp: /upload/
   hwork: /upload/
 
-api:
-  url:
-    abejd: http://127.0.0.1:7080/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://ip-172-31-38-229.ap-northeast-2.compute.internal:8761/eureka
+    register-with-eureka: true    # 유레카 서버에 서비스 등록
+    fetch-registry: true          # 레지스트리 정보를 로컬에 캐싱
