@@ -39,24 +39,24 @@
 						</div>
 						<!--이번 달-->
 						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px;  margin-right:20px;">
-							<select id="bDPer" name="bDPer" class="form-control" style=" margin-right:15px;" v-model="params.bDPer" v-on:change="bDPerSelect">
+							<select id="bDPer" name="bDPer" class="form-control" style=" margin-right:15px;" v-model="params.bDPer" @change="bDPerSelect">
 								<option value="">전체</option>
-								<option v-for="item in code.bDPerList" v-bind:value="item.value" v-text="item.text"></option>
+								<option v-for="item in code.bDPerList" :value="item.value" v-text="item.text"></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label" >질문 번호</label>
+						<label class="col-xs-1 control-label" >질문자 명</label>
 						<div class="col-xs-1" style="padding:0px" >
-							<input type="text" name="stdtNo" class="form-control"  v-model="params.quatGuarNo" v-digitonly.number>
+							<input type="text" name="qustGuarNm" class="form-control"  v-model="params.qustGuarNm">
 						</div>
-						<label class="col-xs-1 control-label" >질문 내용</label>
+						<label class="col-xs-1 control-label" >질문자 번호</label>
 						<div class="col-xs-1" style="padding:0px" >
-							<input type="text" name="stdtNo" class="form-control"  v-model="params.stdtNo" v-digitonly.number>
+							<input type="text" name="qustGuarNo" class="form-control"  v-model="params.qustGuarNo" v-digitonly.number/>
 						</div>
 					</div>
 				</div>
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label" >기준일자</label>
+						<label class="col-xs-1 control-label" >답변일자</label>
 						<div class="col-xs-2">
 							<div class="input-group date" id="ansDtFrPicker">
 								<input type="text" id="ansDtFr" name="ansDtFr" v-model="params.ansDtFr" class="form-control">
@@ -71,29 +71,44 @@
 						</div>
 						<!--이번 달-->
 						<div class="col-xs-1" style="padding-left:0px; padding-right:0px; margin-left:15px; margin-right:20px;">
-							<select id="bDPerAns" name="bDPerAns" class="form-control" style=" margin-right:15px;" v-model="params.bDPerAns" v-on:change="bDPerAnsSelect">
+							<select id="bDPerAns" name="bDPerAns" class="form-control" style=" margin-right:15px;" v-model="params.bDPerAns" @change="bDPerAnsSelect">
 								<option value="">전체</option>
-								<option v-for="item in code.bDPerAnsList" v-bind:value="item.value" v-text="item.text"></option>
+								<option v-for="item in code.bDPerAnsList" :value="item.value" v-text="item.text"></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label" >답변 내용</label>
+						<label class="col-xs-1 control-label" >답변자 ID</label>
 						<div class="col-xs-1" style="padding:0px" >
-							<input type="text" name="stdtNo" class="form-control"  v-model="params.stdtNo" v-digitonly.number>
+							<input type="text" name="ansUserId" class="form-control"  v-model="params.ansUserId" />
+						</div>
+						<label class="col-xs-1 control-label" >QnA 번호</label>
+						<div class="col-xs-1" style="padding:0px" >
+							<input type="text" name="qnaNo" class="form-control"  v-model="params.qnaNo" v-digitonly.number />
+						</div>
+					</div>
+				</div>
+				<div class="form-horizontal">
+					<div class="form-group">
+						<label class="col-xs-1 control-label">질문 내용</label>
+						<div class="col-xs-3">
+							<input type="text" name="qustCntn" class="form-control"  v-model="params.qustCntn" />
+						</div>
+						<label class="col-xs-1 control-label">답변 내용</label>
+						<div class="col-xs-3">
+							<input type="text" name="ansCntn" class="form-control"  v-model="params.ansCntn" />
 						</div>
 					</div>
 				</div>
 				<div class="form-group mg_none">
 					<div class="text-center">
-						<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
+						<button class="btn btn-secondary" @click="resetSearchParam()" type="button">
 							<span class="glyphicon glyphicon-refresh"> 초기화</span>
 						</button>&nbsp;
-						<button type="button" class="btn btn-w-m btn-primary" v-on:click="searchDgemList(true)"><span>조회</span></button>
+						<button type="button" class="btn btn-w-m btn-primary" @click="searchDgemList(true)"><span>조회</span></button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- 검색조건 영역 -->
-		
 		<!-- 결과 리스트 영역 -->
 		<div class="ibox">                                 
 			<div class="ibox-content">
@@ -105,16 +120,16 @@
 						</div>
 					</div>
 					<div class="float_right">
-<!-- 						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" v-on:click="btnSave">&nbsp;저장</button> -->
-						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#dgemStndDetlPopup" v-on:click="regDgemStndDetlPop()">&nbsp;신규 등록</button>
-						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
+<!-- 						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" @click="btnSave">&nbsp;저장</button> -->
+						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#dgemStndDetlPopup" @click="regDgemStndDetlPop()">&nbsp;신규 등록</button>
+						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
 				</div>
 				<div class="form-group">
-					<div id="dgem_list_wrapper">
-						<table id="dgem_list"></table>
-						<div id="dgem_pager_list"></div>
+					<div id="qna_list_wrapper">
+						<table id="qna_list"></table>
+						<div id="qna_pager_list"></div>
 					</div>
 				</div>
 			</div>
