@@ -54,13 +54,9 @@ navigation = new Vue({
 
             let $this = this;
 
-            if ( $this.searchAuthParam.searchClass == '' || $this.searchAuthParam.empNo < 0) {
-                return;
-			}
-            
             AjaxUtil.post({
                 url: "/cmon/menu/searchMenuList.ab",
-                param: $this.searchAuthParam,
+                param: $this.params,
                 success: function(response) {
 
                     // 1뎁스

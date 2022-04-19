@@ -12,7 +12,6 @@ public class CommonWebController {
 	// thymleaf 적용하지 않을경우 static의 index.html로 간다.
 	@GetMapping(path = "/")
 	public String index() {
-		log.debug("index!!");
 		return "common/main/index";
 	}
 
