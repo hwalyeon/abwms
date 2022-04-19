@@ -6,13 +6,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import kr.co.seculink.util.XUtil;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
@@ -20,13 +17,12 @@ import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Controller
+@RestController
 public class CmonController
 {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 	
-	@ResponseBody
 	@RequestMapping("/cmon/code/searchCmonCdList.ab")
 	public RtnMsg searchCmonCdList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
@@ -45,19 +41,19 @@ public class CmonController
 		return vo;
 	}
 	
-	@ResponseBody
 	@RequestMapping("/cmon/menu/searchMenuList.ab")
-	public RtnMsg searchMenuList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	public RtnMsg searchMenuList(@RequestBody(required=false) Map<String, String> params)
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userId"  , GEUtil.getSessionUserId());
-		param.put("roleList", GEUtil.getRoleList());
-//		param.put("userId"  , GEUtil.getSessionUserId());
+		if (XUtil.isEmpty(params.get("userId")) ) {
+			param.put("userId"  , GEUtil.getSessionUserId());
+		}
+
 //		param.put("roleList", GEUtil.getRoleList());
-		
+
 		List<Map<String, String>> result = dao.selectList("cmon.user.searchMenuList", param);
 		
 		rtnMap.put("result", result);
@@ -66,7 +62,6 @@ public class CmonController
 		return vo;
 	}
 	
-	@ResponseBody
 	@RequestMapping("/cmon/deleteImage.ab")
 	public RtnMsg deleteImage(String key) throws BizException
 	{
