@@ -1,16 +1,13 @@
-package kr.co.seculink.web.service.cmon.stnd;
+package kr.co.seculink.web.service.cmon.blbd;
 
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
-import kr.co.seculink.util.XUtil;
-import kr.co.seculink.web.model.cmon.TcFileVO;
 import kr.co.seculink.web.service.cmon.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -18,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@Service("apiStndMngService")
-public class ApiStndMngServiceImpl implements ApiStndMngService
+@Service("notiMngService")
+public class NotiMngServiceImpl implements NotiMngService
 {
 	@Autowired
 	private FileService fileService;
@@ -29,21 +26,21 @@ public class ApiStndMngServiceImpl implements ApiStndMngService
 	
 	public List<Map<String, String>> searchUserList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("cmon.stnd.apiStndMng.searchTcUserBase", params);
+		List<Map<String, String>> result = dao.selectList("cmon.blbd.notiMng.searchTcUserBase", params);
 		
 		return result;
 	}
 	
 	public Map<String, String> searchUserInfo(Map<String, String> params) throws BizException
 	{
-		Map<String, String> result = dao.selectOne("cmon.stnd.apiStndMng.searchTcUserBase", params);
-		
+		Map<String, String> result = dao.selectOne("cmon.blbd.notiMng.searchTcUserBase", params);
+
 		return result;
 	}
 	
 	public Map<String, String> searchDupUserId(Map<String, String> params) throws BizException
 	{
-		Map<String, String> user = dao.selectOne("cmon.stnd.apiStndMng.searchTcUserBase", params);
+		Map<String, String> user = dao.selectOne("cmon.blbd.notiMng.searchTcUserBase", params);
 		
 		Map<String, String> rtnMap = new HashMap<>();
 		if ( user == null || GEUtil.isEmpty(user.get("svrId")) ) {
@@ -64,13 +61,13 @@ public class ApiStndMngServiceImpl implements ApiStndMngService
 		
 			Map<String, String> existUserParam = new HashMap<>();
 			existUserParam.put("svrId", (String) params.get("svrId"));
-			Map<String, String> user = dao.selectOne("cmon.stnd.apiStndMng.searchTcUserBase", existUserParam);
+			Map<String, String> user = dao.selectOne("cmon.blbd.apiStndMng.searchTcUserBase", existUserParam);
 
-			saveCnt = dao.insert("cmon.stnd.apiStndMng.insertTcUserBase", params);
+			saveCnt = dao.insert("cmon.blbd.apiStndMng.insertTcUserBase", params);
 			
 		} else if ( "U".equals(params.get("crud")) ) {
 			
-			saveCnt = dao.update("cmon.stnd.apiStndMng.updateTcUserBase", params);
+			saveCnt = dao.update("cmon.blbd.apiStndMng.updateTcUserBase", params);
 			
 		} else if ( "D".equals(params.get("crud")) ) {
 			
@@ -78,7 +75,7 @@ public class ApiStndMngServiceImpl implements ApiStndMngService
 			deleteMap.put("svrId", params.get("svrId"));
 			deleteMap.put("useYn" , "N");
 			
-			saveCnt = dao.delete("cmon.stnd.apiStndMng.deleteTcUserBase", deleteMap);
+			saveCnt = dao.delete("cmon.blbd.apiStndMng.deleteTcUserBase", deleteMap);
 
 		}
 			

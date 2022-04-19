@@ -1,73 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="cmon.stnd.apiStndMng">
+<mapper namespace="cmon.blbd.notiMng">
 	
 	<select id="searchTcUserBase" parameterType="java.util.Map" resultType="MybatisMap">
-	SELECT SVR_ID
-		  ,SVR_NM
-		  ,API_URL
-		  ,GPS_BASE_CYCL
-		  ,GPS_NEXT_CYCL
-		  ,RDET_NEXT_CYCL
-		  ,RDET_BASE_CYCL
-		  ,LED_SLEP_TCNT
-		  ,MSOR_SSNG_LEVL
-		  ,HSOR_ISNG_CYCL
-		  ,TSOR_ISNG_CYCL
-		  ,TSOR_EVNT_MINVAL
-		  ,TSOR_EVNT_MAXVAL
-		  ,HBITCNT_MDAN_MINVAL
-		  ,HBITCNT_MDAN_MAXVAL
-		  ,MSOR_EVNT_MINVAL
-		  ,MSOR_EVNT_MAXVAL
-		  ,REG_DT
-		  ,REG_TM
-		  ,REG_USER_ID
-		  ,UPT_DT
-		  ,UPT_TM
-		  ,UPT_USER_ID
-	FROM   TC_API_STND
-	WHERE  1=1
-	<if test=" svrId != null and svrId !=''">
-	AND    SVR_ID LIKE CONCAT('%',#{svrId},'%')
-	</if>
-	<if test=" svrNm != null and svrNm !=''">
-	AND    SVR_NM LIKE CONCAT('%',#{svrNm},'%')
-	</if>
+	    select blbd_no
+	    	  ,blbd_strt_dt
+	    	  ,blbd_expr_dt
+	    	  ,blbd_type_cd
+		      ,blbd_titl
+			  ,blbd_cntn
+			  ,srch_cnt
+			  ,alam_yn
+			  ,reg_dt
+			  ,reg_tm
+			  ,reg_user_id
+			  ,upt_dt
+			  ,upt_tm
+			  ,upt_user_id
+		from   TS_BLBD_BASE
+		where  1=1
+		<if test=" userId != null and userId != '' ">
+		and    blbd_no = #{blbdNo}		        </if>
+		order  by blbd_no
 	<if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 
-	<select id="searchApiList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT SVR_ID
-		,SVR_NM
-		,API_URL
-		,GPS_BASE_CYCL
-		,GPS_NEXT_CYCL
-		,RDET_NEXT_CYCL
-		,RDET_BASE_CYCL
-		,LED_SLEP_TCNT
-		,MSOR_SSNG_LEVL
-		,HSOR_ISNG_CYCL
-		,TSOR_ISNG_CYCL
-		,TSOR_EVNT_MINVAL
-		,TSOR_EVNT_MAXVAL
-		,HBITCNT_MDAN_MINVAL
-		,HBITCNT_MDAN_MAXVAL
-		,MSOR_EVNT_MINVAL
-		,MSOR_EVNT_MAXVAL
-		,REG_DT
-		,REG_TM
-		,REG_USER_ID
-		,UPT_DT
-		,UPT_TM
-		,UPT_USER_ID
-		FROM   TC_API_STND
-		WHERE  1=1
-		AND    SVR_ID = #{svrId}
-		<if test=' paging == "Y" '>
-			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	<select id="searchNotiList" parameterType="java.util.Map" resultType="MybatisMap">
+		select blbd_no
+		,blbd_strt_dt
+		,blbd_expr_dt
+		,blbd_type_cd
+		,blbd_titl
+		,blbd_cntn
+		,srch_cnt
+		,alam_yn
+		,reg_dt
+		,reg_tm
+		,reg_user_id
+		,upt_dt
+		,upt_tm
+		,upt_user_id
+		from   TS_BLBD_BASE
+		where  1=1
+		and    blbd_no = #{blbdNo}
 	</select>
 	
 	<insert id="insertTcUserBase" parameterType="java.util.Map">
