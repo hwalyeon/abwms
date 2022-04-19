@@ -19,23 +19,23 @@ public class TsQnaBaseVo implements Serializable {
 	/* qust_tm 질문_시각 character(6) */
 	private String qustTm;
 
-	/* qust_titl 질문_제목 character varying(200) */
+	/* qust_titl 질문_제목 character varying(100) */
 	private String qustTitl;
 
 	/* qust_cntn 질문_내용 text(null) */
 	private String qustCntn;
 
-	/* answer_user_id 답변_사용자_ID character varying(40) */
-	private String answerUserId;
+	/* ans_user_id 답변_사용자_ID character varying(20) */
+	private String ansUserId;
 
-	/* answer_dt 답변_일자 character(8) */
-	private String answerDt;
+	/* ans_dt 답변_일자 character(8) */
+	private String ansDt;
 
-	/* answer_tm 답변_시각 character(6) */
-	private String answerTm;
+	/* ans_tm 답변_시각 character(6) */
+	private String ansTm;
 
-	/* answer_cntn 답변_내용 text(null) */
-	private String answerCntn;
+	/* ans_cntn 답변_내용 text(null) */
+	private String ansCntn;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -117,7 +117,7 @@ public class TsQnaBaseVo implements Serializable {
 		this.qustTm = qustTm;
 	}
 	/**
-	 * Get qust_titl 질문_제목 character varying(200)
+	 * Get qust_titl 질문_제목 character varying(100)
 	 * @Return String qustTitl
 	 */
 	public String getQustTitl() {
@@ -125,7 +125,7 @@ public class TsQnaBaseVo implements Serializable {
 	}
 	
 	/**
-	 * Set qust_titl 질문_제목 character varying(200)
+	 * Set qust_titl 질문_제목 character varying(100)
 	 * @Param String qustTitl
 	 */
 	public void setQustTitl(String qustTitl) {
@@ -147,64 +147,64 @@ public class TsQnaBaseVo implements Serializable {
 		this.qustCntn = qustCntn;
 	}
 	/**
-	 * Get answer_user_id 답변_사용자_ID character varying(40)
-	 * @Return String answerUserId
+	 * Get ans_user_id 답변_사용자_ID character varying(20)
+	 * @Return String ansUserId
 	 */
-	public String getAnswerUserId() {
-		return this.answerUserId;
+	public String getAnsUserId() {
+		return this.ansUserId;
 	}
 	
 	/**
-	 * Set answer_user_id 답변_사용자_ID character varying(40)
-	 * @Param String answerUserId
+	 * Set ans_user_id 답변_사용자_ID character varying(20)
+	 * @Param String ansUserId
 	 */
-	public void setAnswerUserId(String answerUserId) {
-		this.answerUserId = answerUserId;
+	public void setAnsUserId(String ansUserId) {
+		this.ansUserId = ansUserId;
 	}
 	/**
-	 * Get answer_dt 답변_일자 character(8)
-	 * @Return String answerDt
+	 * Get ans_dt 답변_일자 character(8)
+	 * @Return String ansDt
 	 */
-	public String getAnswerDt() {
-		return this.answerDt;
-	}
-	
-	/**
-	 * Set answer_dt 답변_일자 character(8)
-	 * @Param String answerDt
-	 */
-	public void setAnswerDt(String answerDt) {
-		this.answerDt = answerDt;
-	}
-	/**
-	 * Get answer_tm 답변_시각 character(6)
-	 * @Return String answerTm
-	 */
-	public String getAnswerTm() {
-		return this.answerTm;
+	public String getAnsDt() {
+		return this.ansDt;
 	}
 	
 	/**
-	 * Set answer_tm 답변_시각 character(6)
-	 * @Param String answerTm
+	 * Set ans_dt 답변_일자 character(8)
+	 * @Param String ansDt
 	 */
-	public void setAnswerTm(String answerTm) {
-		this.answerTm = answerTm;
+	public void setAnsDt(String ansDt) {
+		this.ansDt = ansDt;
 	}
 	/**
-	 * Get answer_cntn 답변_내용 text(null)
-	 * @Return String answerCntn
+	 * Get ans_tm 답변_시각 character(6)
+	 * @Return String ansTm
 	 */
-	public String getAnswerCntn() {
-		return this.answerCntn;
+	public String getAnsTm() {
+		return this.ansTm;
 	}
 	
 	/**
-	 * Set answer_cntn 답변_내용 text(null)
-	 * @Param String answerCntn
+	 * Set ans_tm 답변_시각 character(6)
+	 * @Param String ansTm
 	 */
-	public void setAnswerCntn(String answerCntn) {
-		this.answerCntn = answerCntn;
+	public void setAnsTm(String ansTm) {
+		this.ansTm = ansTm;
+	}
+	/**
+	 * Get ans_cntn 답변_내용 text(null)
+	 * @Return String ansCntn
+	 */
+	public String getAnsCntn() {
+		return this.ansCntn;
+	}
+	
+	/**
+	 * Set ans_cntn 답변_내용 text(null)
+	 * @Param String ansCntn
+	 */
+	public void setAnsCntn(String ansCntn) {
+		this.ansCntn = ansCntn;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

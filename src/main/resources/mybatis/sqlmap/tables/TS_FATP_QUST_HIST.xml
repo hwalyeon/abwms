@@ -38,19 +38,13 @@
 		    ,qust_ver /* qust_ver 설문_버전 numeric */
 		    ,qust_no /* qust_no 질문_번호 numeric */
 		    ,ans_seq /* ans_seq 답변_순번 numeric */
-		<if test="ansVal != null">
 		    ,ans_val /* ans_val 답변_값 character varying(20) */
-		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -59,19 +53,13 @@
 		     ,#{qustVer} /* qust_ver 설문_버전 numeric */
 		     ,#{qustNo} /* qust_no 질문_번호 numeric */
 		    ,#{ansSeq} /* ans_seq 답변_순번 numeric */
-		<if test="ansVal != null">
 		    ,#{ansVal} /* ans_val 답변_값 character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -107,19 +95,13 @@
 		     qust_ver /* qust_ver 설문_버전 numeric */
 		     qust_no /* qust_no 질문_번호 numeric */
 		    ,ans_seq /* ans_seq 답변_순번 numeric */
-		<if test="ansVal != null">
 		    ,ans_val /* ans_val 답변_값 character varying(20) */
-		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -128,19 +110,13 @@
 		     #{qustVer} /* qust_ver 설문_버전 numeric */
 		     #{qustNo} /* qust_no 질문_번호 numeric */
 		    ,#{ansSeq} /* ans_seq 답변_순번 numeric */
-		<if test="ansVal != null">
 		    ,#{ansVal} /* ans_val 답변_값 character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT ON CONSTRAINT ts_fatp_qust_hist_pkey
 		DO UPDATE SET

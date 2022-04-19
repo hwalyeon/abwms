@@ -92,14 +92,18 @@
 		<if test="growStndNo != null">
 		    ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
+		<if test="gidx != null">
 		    ,gidx /* gidx 성장지수 numeric */
+		</if>
 		<if test="growJudgCd != null">
 		    ,grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
 		<if test="growJudgDesc != null">
 		    ,grow_judg_desc /* grow_judg_desc 성장_판정_설명 character varying(4000) */
 		</if>
+		<if test="growPrdtIdx != null">
 		    ,grow_prdt_idx /* grow_prdt_idx 성장_예측_지수 numeric */
+		</if>
 		<if test="growPrdtCd != null">
 		    ,grow_prdt_cd /* grow_prdt_cd 성장_예측_코드 character varying(20) */
 		</if>
@@ -112,8 +116,12 @@
 		<if test="fatStndNo != null">
 		    ,fat_stnd_no /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		<if test="nutrEatQty != null">
 		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
+		<if test="fidx != null">
 		    ,fidx /* fidx 비만지수 numeric */
+		</if>
 		<if test="fatJudgCd != null">
 		    ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>
@@ -123,17 +131,27 @@
 		<if test="fatpQustStndDt != null">
 		    ,fatp_qust_stnd_dt /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
 		</if>
+		<if test="fatpBmiVal != null">
 		    ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		</if>
+		<if test="fatpIdx != null">
 		    ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
+		</if>
 		<if test="fatpJudgCd != null">
 		    ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
 		<if test="fatpJudgDesc != null">
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
+		<if test="palVal != null">
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
+		</if>
+		<if test="bcsmVal != null">
 		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+		</if>
+		<if test="acsmVal != null">
 		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -145,14 +163,10 @@
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -181,14 +195,18 @@
 		<if test="growStndNo != null">
 		    ,#{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
+		<if test="gidx != null">
 		    ,#{gidx} /* gidx 성장지수 numeric */
+		</if>
 		<if test="growJudgCd != null">
 		    ,#{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
 		<if test="growJudgDesc != null">
 		    ,#{growJudgDesc} /* grow_judg_desc 성장_판정_설명 character varying(4000) */
 		</if>
+		<if test="growPrdtIdx != null">
 		    ,#{growPrdtIdx} /* grow_prdt_idx 성장_예측_지수 numeric */
+		</if>
 		<if test="growPrdtCd != null">
 		    ,#{growPrdtCd} /* grow_prdt_cd 성장_예측_코드 character varying(20) */
 		</if>
@@ -201,8 +219,12 @@
 		<if test="fatStndNo != null">
 		    ,#{fatStndNo} /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		<if test="nutrEatQty != null">
 		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
+		<if test="fidx != null">
 		    ,#{fidx} /* fidx 비만지수 numeric */
+		</if>
 		<if test="fatJudgCd != null">
 		    ,#{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>
@@ -212,17 +234,27 @@
 		<if test="fatpQustStndDt != null">
 		    ,#{fatpQustStndDt} /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
 		</if>
+		<if test="fatpBmiVal != null">
 		    ,#{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		</if>
+		<if test="fatpIdx != null">
 		    ,#{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
+		</if>
 		<if test="fatpJudgCd != null">
 		    ,#{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
 		<if test="fatpJudgDesc != null">
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
+		<if test="palVal != null">
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
+		</if>
+		<if test="bcsmVal != null">
 		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		</if>
+		<if test="acsmVal != null">
 		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -234,14 +266,10 @@
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -409,14 +437,18 @@
 		<if test="growStndNo != null">
 		    ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
+		<if test="gidx != null">
 		    ,gidx /* gidx 성장지수 numeric */
+		</if>
 		<if test="growJudgCd != null">
 		    ,grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
 		<if test="growJudgDesc != null">
 		    ,grow_judg_desc /* grow_judg_desc 성장_판정_설명 character varying(4000) */
 		</if>
+		<if test="growPrdtIdx != null">
 		    ,grow_prdt_idx /* grow_prdt_idx 성장_예측_지수 numeric */
+		</if>
 		<if test="growPrdtCd != null">
 		    ,grow_prdt_cd /* grow_prdt_cd 성장_예측_코드 character varying(20) */
 		</if>
@@ -429,8 +461,12 @@
 		<if test="fatStndNo != null">
 		    ,fat_stnd_no /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		<if test="nutrEatQty != null">
 		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
+		<if test="fidx != null">
 		    ,fidx /* fidx 비만지수 numeric */
+		</if>
 		<if test="fatJudgCd != null">
 		    ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>
@@ -440,17 +476,27 @@
 		<if test="fatpQustStndDt != null">
 		    ,fatp_qust_stnd_dt /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
 		</if>
+		<if test="fatpBmiVal != null">
 		    ,fatp_bmi_val /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		</if>
+		<if test="fatpIdx != null">
 		    ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
+		</if>
 		<if test="fatpJudgCd != null">
 		    ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
 		<if test="fatpJudgDesc != null">
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
+		<if test="palVal != null">
 		    ,pal_val /* pal_val 신체활동수준_값 numeric */
+		</if>
+		<if test="bcsmVal != null">
 		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
+		</if>
+		<if test="acsmVal != null">
 		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -462,14 +508,10 @@
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -498,14 +540,18 @@
 		<if test="growStndNo != null">
 		    ,#{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
+		<if test="gidx != null">
 		    ,#{gidx} /* gidx 성장지수 numeric */
+		</if>
 		<if test="growJudgCd != null">
 		    ,#{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
 		<if test="growJudgDesc != null">
 		    ,#{growJudgDesc} /* grow_judg_desc 성장_판정_설명 character varying(4000) */
 		</if>
+		<if test="growPrdtIdx != null">
 		    ,#{growPrdtIdx} /* grow_prdt_idx 성장_예측_지수 numeric */
+		</if>
 		<if test="growPrdtCd != null">
 		    ,#{growPrdtCd} /* grow_prdt_cd 성장_예측_코드 character varying(20) */
 		</if>
@@ -518,8 +564,12 @@
 		<if test="fatStndNo != null">
 		    ,#{fatStndNo} /* fat_stnd_no 비만_기준_번호 numeric */
 		</if>
+		<if test="nutrEatQty != null">
 		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
+		</if>
+		<if test="fidx != null">
 		    ,#{fidx} /* fidx 비만지수 numeric */
+		</if>
 		<if test="fatJudgCd != null">
 		    ,#{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>
@@ -529,17 +579,27 @@
 		<if test="fatpQustStndDt != null">
 		    ,#{fatpQustStndDt} /* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
 		</if>
+		<if test="fatpBmiVal != null">
 		    ,#{fatpBmiVal} /* fatp_bmi_val 비만예측_BMI_값 numeric */
+		</if>
+		<if test="fatpIdx != null">
 		    ,#{fatpIdx} /* fatp_idx 비만예측_지수 numeric */
+		</if>
 		<if test="fatpJudgCd != null">
 		    ,#{fatpJudgCd} /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
 		</if>
 		<if test="fatpJudgDesc != null">
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
+		<if test="palVal != null">
 		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
+		</if>
+		<if test="bcsmVal != null">
 		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
+		</if>
+		<if test="acsmVal != null">
 		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
@@ -551,14 +611,10 @@
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT ON CONSTRAINT ts_gfix_hist_pkey
 		DO UPDATE SET

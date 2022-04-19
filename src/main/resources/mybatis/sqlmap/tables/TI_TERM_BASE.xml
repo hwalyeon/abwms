@@ -33,47 +33,31 @@
 		(
 		     term_div_cd /* term_div_cd 약관_구분_코드 character varying(20) */
 		    ,term_ver /* term_ver 약관_버전 character varying(20) */
-		<if test="aplyStrtDt != null">
 		    ,aply_strt_dt /* aply_strt_dt 적용_시작_일자 character(8) */
-		</if>
-		<if test="termCntn != null">
 		    ,term_cntn /* term_cntn 약관_내용 text */
-		</if>
 		    ,essn_yn /* essn_yn 필수_여부 character(1) */
 		    ,sort_ord /* sort_ord 정렬_순서 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{termDivCd} /* term_div_cd 약관_구분_코드 character varying(20) */
 		     ,#{termVer} /* term_ver 약관_버전 character varying(20) */
-		<if test="aplyStrtDt != null">
 		    ,#{aplyStrtDt} /* aply_strt_dt 적용_시작_일자 character(8) */
-		</if>
-		<if test="termCntn != null">
 		    ,#{termCntn} /* term_cntn 약관_내용 text */
-		</if>
 		    ,#{essnYn} /* essn_yn 필수_여부 character(1) */
 		    ,#{sortOrd} /* sort_ord 정렬_순서 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -110,47 +94,31 @@
 		(
 		     term_div_cd /* term_div_cd 약관_구분_코드 character varying(20) */
 		     term_ver /* term_ver 약관_버전 character varying(20) */
-		<if test="aplyStrtDt != null">
 		    ,aply_strt_dt /* aply_strt_dt 적용_시작_일자 character(8) */
-		</if>
-		<if test="termCntn != null">
 		    ,term_cntn /* term_cntn 약관_내용 text */
-		</if>
 		    ,essn_yn /* essn_yn 필수_여부 character(1) */
 		    ,sort_ord /* sort_ord 정렬_순서 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{termDivCd} /* term_div_cd 약관_구분_코드 character varying(20) */
 		     #{termVer} /* term_ver 약관_버전 character varying(20) */
-		<if test="aplyStrtDt != null">
 		    ,#{aplyStrtDt} /* aply_strt_dt 적용_시작_일자 character(8) */
-		</if>
-		<if test="termCntn != null">
 		    ,#{termCntn} /* term_cntn 약관_내용 text */
-		</if>
 		    ,#{essnYn} /* essn_yn 필수_여부 character(1) */
 		    ,#{sortOrd} /* sort_ord 정렬_순서 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT ON CONSTRAINT ti_term_base_pkey
 		DO UPDATE SET

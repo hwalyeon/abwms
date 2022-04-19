@@ -49,7 +49,9 @@
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
+		<if test="mnthWeekSeq != null">
 		    ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
+		</if>
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -57,14 +59,10 @@
 		    ,stdt_cnt /* stdt_cnt 학생_수 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -77,7 +75,9 @@
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
+		<if test="mnthWeekSeq != null">
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
+		</if>
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -85,14 +85,10 @@
 		    ,#{stdtCnt} /* stdt_cnt 학생_수 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -143,7 +139,9 @@
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
+		<if test="mnthWeekSeq != null">
 		    ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
+		</if>
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -151,14 +149,10 @@
 		    ,stdt_cnt /* stdt_cnt 학생_수 numeric */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -171,7 +165,9 @@
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
+		<if test="mnthWeekSeq != null">
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
+		</if>
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -179,14 +175,10 @@
 		    ,#{stdtCnt} /* stdt_cnt 학생_수 numeric */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT ON CONSTRAINT tt_zone_dtct_stss_pkey
 		DO UPDATE SET

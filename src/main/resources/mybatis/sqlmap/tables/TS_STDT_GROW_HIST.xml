@@ -38,25 +38,27 @@
 		<if test="hghtUnitCd != null">
 		    ,hght_unit_cd /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,hght_val /* hght_val 키_값 numeric */
+		</if>
 		<if test="wghtUnitCd != null">
 		    ,wght_unit_cd /* wght_unit_cd 체중_단위_코드 character varying(20) */
 		</if>
+		<if test="wghtVal != null">
 		    ,wght_val /* wght_val 체중_값 numeric */
+		</if>
 		<if test="wastUnitCd != null">
 		    ,wast_unit_cd /* wast_unit_cd 허리_단위_코드 character varying(20) */
 		</if>
+		<if test="wastVal != null">
 		    ,wast_val /* wast_val 허리_값 numeric */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -65,25 +67,27 @@
 		<if test="hghtUnitCd != null">
 		    ,#{hghtUnitCd} /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,#{hghtVal} /* hght_val 키_값 numeric */
+		</if>
 		<if test="wghtUnitCd != null">
 		    ,#{wghtUnitCd} /* wght_unit_cd 체중_단위_코드 character varying(20) */
 		</if>
+		<if test="wghtVal != null">
 		    ,#{wghtVal} /* wght_val 체중_값 numeric */
+		</if>
 		<if test="wastUnitCd != null">
 		    ,#{wastUnitCd} /* wast_unit_cd 허리_단위_코드 character varying(20) */
 		</if>
+		<if test="wastVal != null">
 		    ,#{wastVal} /* wast_val 허리_값 numeric */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -129,25 +133,27 @@
 		<if test="hghtUnitCd != null">
 		    ,hght_unit_cd /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,hght_val /* hght_val 키_값 numeric */
+		</if>
 		<if test="wghtUnitCd != null">
 		    ,wght_unit_cd /* wght_unit_cd 체중_단위_코드 character varying(20) */
 		</if>
+		<if test="wghtVal != null">
 		    ,wght_val /* wght_val 체중_값 numeric */
+		</if>
 		<if test="wastUnitCd != null">
 		    ,wast_unit_cd /* wast_unit_cd 허리_단위_코드 character varying(20) */
 		</if>
+		<if test="wastVal != null">
 		    ,wast_val /* wast_val 허리_값 numeric */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
@@ -156,25 +162,27 @@
 		<if test="hghtUnitCd != null">
 		    ,#{hghtUnitCd} /* hght_unit_cd 키_단위_코드 character varying(20) */
 		</if>
+		<if test="hghtVal != null">
 		    ,#{hghtVal} /* hght_val 키_값 numeric */
+		</if>
 		<if test="wghtUnitCd != null">
 		    ,#{wghtUnitCd} /* wght_unit_cd 체중_단위_코드 character varying(20) */
 		</if>
+		<if test="wghtVal != null">
 		    ,#{wghtVal} /* wght_val 체중_값 numeric */
+		</if>
 		<if test="wastUnitCd != null">
 		    ,#{wastUnitCd} /* wast_unit_cd 허리_단위_코드 character varying(20) */
 		</if>
+		<if test="wastVal != null">
 		    ,#{wastVal} /* wast_val 허리_값 numeric */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT ON CONSTRAINT ts_stdt_grow_hist_pkey
 		DO UPDATE SET

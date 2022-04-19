@@ -33,10 +33,18 @@
 		     stdt_no /* stdt_no 학생_번호 numeric */
 		    ,stnd_dt /* stnd_dt 기준_일자 character(8) */
 		    ,vald_yn /* vald_yn 유효_여부 character(1) */
+		<if test="accuAvgVal != null">
 		    ,accu_avg_val /* accu_avg_val 누적_평균_값 numeric */
+		</if>
+		<if test="accuSdevVal != null">
 		    ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
+		</if>
+		<if test="downStndVal != null">
 		    ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
+		</if>
+		<if test="upprStndVal != null">
 		    ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
+		</if>
 		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
 		    ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
 		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
@@ -47,10 +55,18 @@
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
 		     ,#{stndDt} /* stnd_dt 기준_일자 character(8) */
 		    ,#{valdYn} /* vald_yn 유효_여부 character(1) */
+		<if test="accuAvgVal != null">
 		    ,#{accuAvgVal} /* accu_avg_val 누적_평균_값 numeric */
+		</if>
+		<if test="accuSdevVal != null">
 		    ,#{accuSdevVal} /* accu_sdev_val 누적_표준편차_값 numeric */
+		</if>
+		<if test="downStndVal != null">
 		    ,#{downStndVal} /* down_stnd_val 하위_기준_값 numeric */
+		</if>
+		<if test="upprStndVal != null">
 		    ,#{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
+		</if>
 		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
 		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
 		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */
@@ -102,10 +118,18 @@
 		     stdt_no /* stdt_no 학생_번호 numeric */
 		     stnd_dt /* stnd_dt 기준_일자 character(8) */
 		    ,vald_yn /* vald_yn 유효_여부 character(1) */
+		<if test="accuAvgVal != null">
 		    ,accu_avg_val /* accu_avg_val 누적_평균_값 numeric */
+		</if>
+		<if test="accuSdevVal != null">
 		    ,accu_sdev_val /* accu_sdev_val 누적_표준편차_값 numeric */
+		</if>
+		<if test="downStndVal != null">
 		    ,down_stnd_val /* down_stnd_val 하위_기준_값 numeric */
+		</if>
+		<if test="upprStndVal != null">
 		    ,uppr_stnd_val /* uppr_stnd_val 상위_기준_값 numeric */
+		</if>
 		    ,bot_blck_val /* bot_blck_val 최하위_구간_값 numeric */
 		    ,down_blck_val /* down_blck_val 하위_구간_값 numeric */
 		    ,uppr_blck_val /* uppr_blck_val 상위_구간_값 numeric */
@@ -116,10 +140,18 @@
 		     #{stdtNo} /* stdt_no 학생_번호 numeric */
 		     #{stndDt} /* stnd_dt 기준_일자 character(8) */
 		    ,#{valdYn} /* vald_yn 유효_여부 character(1) */
+		<if test="accuAvgVal != null">
 		    ,#{accuAvgVal} /* accu_avg_val 누적_평균_값 numeric */
+		</if>
+		<if test="accuSdevVal != null">
 		    ,#{accuSdevVal} /* accu_sdev_val 누적_표준편차_값 numeric */
+		</if>
+		<if test="downStndVal != null">
 		    ,#{downStndVal} /* down_stnd_val 하위_기준_값 numeric */
+		</if>
+		<if test="upprStndVal != null">
 		    ,#{upprStndVal} /* uppr_stnd_val 상위_기준_값 numeric */
+		</if>
 		    ,#{botBlckVal} /* bot_blck_val 최하위_구간_값 numeric */
 		    ,#{downBlckVal} /* down_blck_val 하위_구간_값 numeric */
 		    ,#{upprBlckVal} /* uppr_blck_val 상위_구간_값 numeric */

@@ -37,13 +37,9 @@
 		<if test="foodMclsNm != null">
 		    ,food_mcls_nm /* food_mcls_nm 식품_중분류_명 character varying(100) */
 		</if>
-		<if test="foodNm != null">
 		    ,food_nm /* food_nm 식품_명 character varying(100) */
-		</if>
 		    ,otim_eat_qty /* otim_eat_qty 1회_섭취_용량 numeric */
-		<if test="eatUnitCd != null">
 		    ,eat_unit_cd /* eat_unit_cd 섭취_단위_코드 character varying(20) */
-		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -60,13 +56,9 @@
 		<if test="foodMclsNm != null">
 		    ,#{foodMclsNm} /* food_mcls_nm 식품_중분류_명 character varying(100) */
 		</if>
-		<if test="foodNm != null">
 		    ,#{foodNm} /* food_nm 식품_명 character varying(100) */
-		</if>
 		    ,#{otimEatQty} /* otim_eat_qty 1회_섭취_용량 numeric */
-		<if test="eatUnitCd != null">
 		    ,#{eatUnitCd} /* eat_unit_cd 섭취_단위_코드 character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -116,13 +108,9 @@
 		<if test="foodMclsNm != null">
 		    ,food_mcls_nm /* food_mcls_nm 식품_중분류_명 character varying(100) */
 		</if>
-		<if test="foodNm != null">
 		    ,food_nm /* food_nm 식품_명 character varying(100) */
-		</if>
 		    ,otim_eat_qty /* otim_eat_qty 1회_섭취_용량 numeric */
-		<if test="eatUnitCd != null">
 		    ,eat_unit_cd /* eat_unit_cd 섭취_단위_코드 character varying(20) */
-		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -139,13 +127,9 @@
 		<if test="foodMclsNm != null">
 		    ,#{foodMclsNm} /* food_mcls_nm 식품_중분류_명 character varying(100) */
 		</if>
-		<if test="foodNm != null">
 		    ,#{foodNm} /* food_nm 식품_명 character varying(100) */
-		</if>
 		    ,#{otimEatQty} /* otim_eat_qty 1회_섭취_용량 numeric */
-		<if test="eatUnitCd != null">
 		    ,#{eatUnitCd} /* eat_unit_cd 섭취_단위_코드 character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */

@@ -50,12 +50,8 @@
 		INSERT INTO tm_guar_base
 		(
 		     guar_no /* guar_no 보호자_번호 numeric */
-		<if test="guarNm != null">
 		    ,guar_nm /* guar_nm 보호자_명 character varying(256) */
-		</if>
-		<if test="guarTelNo != null">
 		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
-		</if>
 		<if test="guarPw != null">
 		    ,guar_pw /* guar_pw 보호자_비밀번호 character varying(400) */
 		</if>
@@ -100,24 +96,16 @@
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{guarNo} /* guar_no 보호자_번호 numeric */
-		<if test="guarNm != null">
 		    ,#{guarNm} /* guar_nm 보호자_명 character varying(256) */
-		</if>
-		<if test="guarTelNo != null">
 		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
-		</if>
 		<if test="guarPw != null">
 		    ,#{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
 		</if>
@@ -162,14 +150,10 @@
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 	</insert>
 	
@@ -264,12 +248,8 @@
 		INSERT INTO tm_guar_base
 		(
 		     guar_no /* guar_no 보호자_번호 numeric */
-		<if test="guarNm != null">
 		    ,guar_nm /* guar_nm 보호자_명 character varying(256) */
-		</if>
-		<if test="guarTelNo != null">
 		    ,guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(256) */
-		</if>
 		<if test="guarPw != null">
 		    ,guar_pw /* guar_pw 보호자_비밀번호 character varying(400) */
 		</if>
@@ -314,24 +294,16 @@
 		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		VALUES
 		(
 		     #{guarNo} /* guar_no 보호자_번호 numeric */
-		<if test="guarNm != null">
 		    ,#{guarNm} /* guar_nm 보호자_명 character varying(256) */
-		</if>
-		<if test="guarTelNo != null">
 		    ,#{guarTelNo} /* guar_tel_no 보호자_전화_번호 character varying(256) */
-		</if>
 		<if test="guarPw != null">
 		    ,#{guarPw} /* guar_pw 보호자_비밀번호 character varying(400) */
 		</if>
@@ -376,14 +348,10 @@
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
-		<if test="regUserId != null">
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
-		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
-		<if test="uptUserId != null">
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
-		</if>
 		)
 		ON CONFLICT ON CONSTRAINT tm_guar_base_pkey
 		DO UPDATE SET

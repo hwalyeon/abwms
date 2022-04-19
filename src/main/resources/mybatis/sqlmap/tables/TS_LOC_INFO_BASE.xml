@@ -41,15 +41,9 @@
 		INSERT INTO ts_loc_info_base
 		(
 		     loc_no /* loc_no 위치_번호 numeric */
-		<if test="locNm != null">
 		    ,loc_nm /* loc_nm 위치_명 character varying(100) */
-		</if>
-		<if test="plcCd != null">
 		    ,plc_cd /* plc_cd 장소_코드 character varying(20) */
-		</if>
-		<if test="plcClssCd != null">
 		    ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		</if>
 		<if test="locApntCd != null">
 		    ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
@@ -84,15 +78,9 @@
 		VALUES
 		(
 		     #{locNo} /* loc_no 위치_번호 numeric */
-		<if test="locNm != null">
 		    ,#{locNm} /* loc_nm 위치_명 character varying(100) */
-		</if>
-		<if test="plcCd != null">
 		    ,#{plcCd} /* plc_cd 장소_코드 character varying(20) */
-		</if>
-		<if test="plcClssCd != null">
 		    ,#{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		</if>
 		<if test="locApntCd != null">
 		    ,#{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
@@ -190,15 +178,9 @@
 		INSERT INTO ts_loc_info_base
 		(
 		     loc_no /* loc_no 위치_번호 numeric */
-		<if test="locNm != null">
 		    ,loc_nm /* loc_nm 위치_명 character varying(100) */
-		</if>
-		<if test="plcCd != null">
 		    ,plc_cd /* plc_cd 장소_코드 character varying(20) */
-		</if>
-		<if test="plcClssCd != null">
 		    ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		</if>
 		<if test="locApntCd != null">
 		    ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
@@ -233,15 +215,9 @@
 		VALUES
 		(
 		     #{locNo} /* loc_no 위치_번호 numeric */
-		<if test="locNm != null">
 		    ,#{locNm} /* loc_nm 위치_명 character varying(100) */
-		</if>
-		<if test="plcCd != null">
 		    ,#{plcCd} /* plc_cd 장소_코드 character varying(20) */
-		</if>
-		<if test="plcClssCd != null">
 		    ,#{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
-		</if>
 		<if test="locApntCd != null">
 		    ,#{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		</if>
