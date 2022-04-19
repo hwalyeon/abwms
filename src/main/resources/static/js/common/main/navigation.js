@@ -2,9 +2,8 @@ var navigation = null;
 navigation = new Vue({
 	el: '#navigation',
 	data: {
-        searchAuthParam : {
-            searchClass : '01',
-            empNo : 0
+        params : {
+            userId: '',
         },
         currentMenu: null,
         menuTree: [],
@@ -48,6 +47,9 @@ navigation = new Vue({
 	},
 	/* Vue Instance 내 method 정의 */
 	methods: {
+        init: function() {
+            this.params.userId = SessionUtil.getUserId();
+        },
         getMenuList: function() {
 
             let $this = this;
@@ -174,6 +176,7 @@ navigation = new Vue({
         }
 	},
 	mounted: function () {
+        this.init();
         this.getMenuList();
 	},
     updated: function () {

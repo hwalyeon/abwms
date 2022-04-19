@@ -7,7 +7,6 @@ const index = new Vue({
 			{ menuNm: 'Main', menuUrl: '/main.pg', menuNo: '1', active: true, interval: null}
 		],	
         searchAuthParam : {
-            searchClass : '01',
             userId : 'admin',
             userNm : '원격사용자'
         },
