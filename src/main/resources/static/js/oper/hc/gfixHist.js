@@ -200,6 +200,30 @@ let gfixHist = new Vue({
                 $this.params.gfixDtTo = $('#gfixDtTo').val();
             });
         },
+        //성장지수_추이분석_탭_열기
+        regGidxStss: function()
+        {
+            let menuNo = 'S210';
+            let params = $.extend(true, {}, this.params);
+            top.navigation.openMenuByMenuNo(menuNo, "gfixHist", params);
+            top.index.$emit('SET_PARAM', params);
+        },
+        //비만지수_추이분석_탭_열기
+        regFidxStss: function()
+        {
+            let menuNo = 'S220';
+            let params = $.extend(true, {}, this.params);
+            top.navigation.openMenuByMenuNo(menuNo, "gfixHist2", params);
+            top.index.$emit('SET_PARAM', params);
+        },
+        //비만예측지수_추이분석_탭_열기
+        regFatpStss: function()
+        {
+            let menuNo = 'S230';
+            let params = $.extend(true, {}, this.params);
+            top.navigation.openMenuByMenuNo(menuNo, "gfixHist3", params);
+            top.index.$emit('SET_PARAM', params);
+        },
         //기준_일자_기간_선택
         bDPerSelect: function()
         {

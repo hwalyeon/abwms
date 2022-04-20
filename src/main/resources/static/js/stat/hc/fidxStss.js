@@ -39,9 +39,6 @@ let fidxStss = new Vue({
             $this.setDatepicker();
 
             $this.initData();
-
-            $this.initSearch();
-
         	
         },
 
@@ -595,6 +592,26 @@ let fidxStss = new Vue({
 			// $this.initGrid();
 
         },
+        //gfidxHist 화면에서 팝업 호출 시 param 값 세팅
+        setParam: function(param) {
+            let $this =this;
+
+            let params;
+            if (WebUtil.isNull(param)) {
+                params = WebUtil.getStorageData('window:gfixHist2:params', true);
+                WebUtil.setStorageData('window:gfixHist2:params', {}, true);
+            } else {
+                params = param;
+            }
+
+            $this.params.perdDivCd = 'DAY';
+            $this.params.occrDivCd = '02';
+            $this.params.stndDtFr  = params.gfixDtFr;
+            $this.params.stndDtTo  = params.gfixDtTo;
+            $this.params.sexCd     = params.sexCd;
+            $this.params.ageYcntFr = params.ageFr;
+            $this.params.ageYcntTo = params.ageTo;
+        }
     },
     computed: {
 
@@ -606,6 +623,13 @@ let fidxStss = new Vue({
         let self = this;
         $(document).ready(function() {
             self.initialize();
+            top.index.$on('GET_PARAM', function(params) {
+                self.setParam(params);
+                self.initSearch();
+            });
+            self.setParam();
+            self.initSearch();
+
         });
     }
 });

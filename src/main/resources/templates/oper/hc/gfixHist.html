@@ -125,6 +125,7 @@
 		<div class="ibox">                                 
 			<div class="ibox-content">
 				<div class="form-group">
+
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
@@ -132,9 +133,9 @@
 						</div>
 					</div>
 					<div class="float_right">
-						<button type="button"  id="" class="btn btn-w-m btn-primary mg_right_5" @click=""><span>성장지수 추이분석</span></button>
-						<button type="button" class="btn btn-w-m btn-primary mg_right_5" @click=""><span>비만지수 추이분석</span></button>
-						<button type="button" class="btn btn-w-m btn-primary mg_right_5" @click=""><span>비만예측지수 추이분석</span></button>
+						<button type="button" class="btn btn-w-m btn-primary mg_right_5" @click="regGidxStss"><span>성장지수 추이분석</span></button>
+						<button type="button" class="btn btn-w-m btn-primary mg_right_5" @click="regFidxStss"><span>비만지수 추이분석</span></button>
+						<button type="button" class="btn btn-w-m btn-primary mg_right_5" @click="regFatpStss"><span>비만예측지수 추이분석</span></button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button " data-style="zoom-in" v-on:click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>
