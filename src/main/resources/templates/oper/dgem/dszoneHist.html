@@ -81,9 +81,9 @@
 					<div class="form-group">
 					<label class="col-xs-1 control-label">위치지정명</label>
 					<div class="col-xs-2">
-						<input type="radio" name="rdPublGuarDiv" v-model="params.locApntCd" value="" /><span style="margin-right:5px;">&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-						<input type="radio" name="rdPublGuarDiv" v-model="params.locApntCd" value="GORG"/><span>&nbsp;&nbsp;공공기관&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-						<input type="radio" name="rdPublGuarDiv" v-model="params.locApntCd" value="GUAR"/><span>&nbsp;&nbsp;보호자지정</span>
+						<input type="radio" name="rdPublGuarDiv" v-icheck v-model="params.locApntCd" value="" /><span style="margin-right:5px;">&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<input type="radio" name="rdPublGuarDiv" v-icheck v-model="params.locApntCd" value="GORG"/><span>&nbsp;&nbsp;공공기관&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<input type="radio" name="rdPublGuarDiv" v-icheck v-model="params.locApntCd" value="GUAR"/><span>&nbsp;&nbsp;보호자지정</span>
 					</div>
 					</div>
 					<div class="form-group mg_none">
@@ -128,8 +128,8 @@
 						<div class="form-group">
 							<div class="col-xs-4">
 								<li>자료구분</li>
-								<input type="radio" name="rdPublGuarDivSpec" v-model="locInfoSpec.rdPublGuarDivSpec" value="publ" :disabled="locInfoSpec.crud=='U'"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-								<input type="radio" name="rdPublGuarDivSpec" v-model="locInfoSpec.rdPublGuarDivSpec" value="prnt" :disabled="locInfoSpec.crud=='U'" v-on:click="changePrntNoSpec()"/><span>&nbsp;&nbsp;학부모지정</span>
+								<input type="radio" name="rdPublGuarDivSpec" v-icheck v-model="locInfoSpec.rdPublGuarDivSpec" value="publ" :disabled="locInfoSpec.crud=='U'"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio" name="rdPublGuarDivSpec" v-icheck v-model="locInfoSpec.rdPublGuarDivSpec" value="prnt" :disabled="locInfoSpec.crud=='U'" v-on:click="changePrntNoSpec()"/><span>&nbsp;&nbsp;학부모지정</span>
 								<br><br>
 								<li>위치번호</li>
 								<input type="text" name ="locNo" class="form-control" v-model="locInfoSpec.locNo" :disabled="true">

@@ -89,9 +89,9 @@
 							<input id="locNm" type="text" name ="locNm" class="form-control" v-model="params.locNm" v-on:input="input_lenth">
 						</div>
 						<div class="col-xs-3">
-							<input type="radio" name="rdGorgGuarDiv" v-model="params.rdGorgGuarDiv" value="ALL" /><span style="margin-right:5px;">&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							<input type="radio" name="rdGorgGuarDiv" v-model="params.rdGorgGuarDiv" value="GORG"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							<input type="radio" name="rdGorgGuarDiv" v-model="params.rdGorgGuarDiv" value="GUAR"/><span>&nbsp;&nbsp;보호자지정</span>
+							<input type="radio" v-icheck name="rdGorgGuarDiv" v-model="params.rdGorgGuarDiv" value="ALL" /><span style="margin-right:5px;">&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<input type="radio" v-icheck name="rdGorgGuarDiv" v-model="params.rdGorgGuarDiv" value="GORG"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<input type="radio" v-icheck name="rdGorgGuarDiv" v-model="params.rdGorgGuarDiv" value="GUAR"/><span>&nbsp;&nbsp;보호자지정</span>
 						</div>
 <!--						<label class="col-xs-1 control-label">보호자번호</label>-->
 <!--						<div class="col-xs-2">-->
@@ -166,8 +166,8 @@
 						<div class="form-group">
 							<div class="col-xs-4">
 								자료구분<br>
-								<input type="radio" name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GORG" :disabled="locInfoSpec.crud=='U'" v-on:click="changeGorgNoSpec()"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-								<input type="radio" name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GUAR" :disabled="locInfoSpec.crud=='U'" v-on:click="changeGuarNoSpec()"/><span>&nbsp;&nbsp;보호자지정</span>
+								<input type="radio" v-icheck name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GORG" :disabled="locInfoSpec.crud=='U'" v-on:click="changeGorgNoSpec()"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio" v-icheck name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GUAR" :disabled="locInfoSpec.crud=='U'" v-on:click="changeGuarNoSpec()"/><span>&nbsp;&nbsp;보호자지정</span>
 								<br><br>
 								위치번호
 								<input type="text" name ="locNo" class="form-control" v-model="locInfoSpec.locNo" :disabled="true">
