@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import java.util.*;
 
@@ -187,6 +186,36 @@ public class LocInfoMngController
 		}
 
 		rtnMap.put("result", result);
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
+	// 위치정보_관리_지역_리스트_조회
+	@ResponseBody
+	@RequestMapping("/svcStnd/loc/locInfoMng/searchLocZoneList.ab")
+	public RtnMsg<Map<String, Object>> searchLocZoneList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	{
+
+		log.info("jcw list 12 :: ", params);
+//		List<TsLocInfoBaseVo> list = locInfoMngService.searchLocZoneList(params);
+//
+//		log.info("jcw list :: ", list);
+//		RtnMsg rtnMsg = new RtnMsg();
+//		rtnMsg.setRtnData(list);
+//
+//		return rtnMsg;
+
+
+		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
+		Map<String, Object> rtnMap = new HashMap<>();
+		List<Map<String, String>> result = locInfoMngService.searchLocZoneList(params);
+		rtnMap.put("result", result);
+		if ( !GEUtil.isEmpty(params.get("paging")) ) {
+			params.put("paging", "N");
+			vo.setTotalCount(locInfoMngService.searchLocZoneList(params).size());
+		}
+
 		vo.setRtnData(rtnMap, params);
 
 		return vo;

@@ -39,7 +39,7 @@
 								<option v-for="item in code.plcCdListFilter" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label text-right"> 학부모 / 학생</label>
+						<label class="col-xs-1 control-label text-right"> 보호자 / 학생</label>
 
 						<div class="col-xs-1 width_40">
 							<button type="button" id="btnStdtGuarPopup" class="btn btn-outline btn-primary ladda-button mg_left_none height_34" data-style="zoom-in" data-toggle="modal" data-target="#locStdtGuarPopup" v-on:click="locStdtGuarPopup">
@@ -133,24 +133,25 @@
 			<div class="col-xs-8">
 				<div class="ibox">
 					<div class="ibox-title">
-						<i class="fa fa-title-bar"></i>
-						<h5>상세 정보</h5>
-						<div class="float_center">
-							<label class="col-xs-2 control-label text-right mg_top_8 pd_right_none">보호자 / 학생</label>
-							<div class="col-xs-2" style="padding-right: 0px;">
+						<div class="col-xs-1">
+							<h5>상세정보</h5>
+						</div>
+						<div class="float_center col-xs-4">
+							<label class="col-xs-4 control-label text-right mg_top_8 pd_right_none">보호자 / 학생</label>
+							<div class="col-xs-4" style="padding-right: 0px;">
 								<select id="guarNoSpec" name="guarNo" class="form-control" v-model="locInfoSpec.guarNo" :disabled="locInfoSpec.rdGorgGuarDivSpec!='GUAR' || locInfoSpec.crud=='U'" @change="changeGuarNoSpec()">
 									<option value="">전체</option>
 									<option v-for="item in code.guarNoListSpec" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 								</select>
 							</div>
-							<div class="col-xs-2" style="padding-left: 0px;">
+							<div class="col-xs-4" style="padding-left: 0px;">
 								<select id="stdtNoSpec" name="stdtNo" class="form-control" v-model="locInfoSpec.stdtNo" :disabled="locInfoSpec.rdGorgGuarDivSpec!='GUAR' || locInfoSpec.crud=='U'" @change="changeStdtNoSpec()">
 									<option value="">전체</option>
 									<option v-for="item in code.stdtNoListFilterSpec" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 								</select>
 							</div>
 						</div>
-						<div class="float_right">
+						<div class="float_right col-xs-7">
 							<button class="btn btn-secondary" v-on:click="resetSearchParamSpecRe()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 추가</span>
 							</button>
@@ -194,9 +195,9 @@
 								<input type="text" name ="addrBase" class="form-control" v-model="locInfoSpec.addrBase" :disabled="true">
 								<input id="locInfoSpecAddrSpec" type="text" name ="addrSpec" class="form-control" v-model="locInfoSpec.addrSpec" v-on:input="input_lenth">
 							</div>
-							<div id="locInfoMngMap" style="width:650px;height:470px;"></div>
+							<div id="locInfoMngMap" style="width:700px;height:520px;"></div>
 							<div class="button-group">
-								<input type="range" class="prog" v-show="draw.cntrPos!==null" v-model="draw.dist" min="20" max="2000" style="width:650px;height:50px; background-color: #434343;"/>
+								<input type="range" class="prog" v-show="draw.cntrPos!==null" v-model="draw.dist" min="3" max="2000" style="width:650px;height:50px; background-color: #434343;"/>
 								<div v-show="draw.cntrPos!==null">{{draw.dist}}m</div>
 							</div>
 						</div>
