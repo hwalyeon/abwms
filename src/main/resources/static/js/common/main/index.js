@@ -223,3 +223,5 @@ const index = new Vue({
 		}
 	},
 });
+
+window.index = index;
