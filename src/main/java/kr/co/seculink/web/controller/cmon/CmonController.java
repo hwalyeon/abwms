@@ -50,6 +50,8 @@ public class CmonController
 		Map<String, Object> param = new HashMap<String, Object>();
 		if (XUtil.isEmpty(params.get("userId")) ) {
 			param.put("userId"  , GEUtil.getSessionUserId());
+		} else {
+			param.put("userId"  , params.get("userId"));
 		}
 
 //		param.put("roleList", GEUtil.getRoleList());
