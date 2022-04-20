@@ -69,15 +69,15 @@ let qnaMng = new Vue({
             [
                 {name: "crud"           , index: "crud"           , label: "crud"         , hidden: true    },
                 {name: "qnaNo"          , index: "qnaNo"          , label: "QnA 번호"    , width: 40 , align: "center"  },
-                {name: "qustDt"         , index: "qustDt"         , label: "질문 일자" 	 , width: 40 , align: "center" },
+                {name: "qustDt"         , index: "qustDt"         , label: "질문 일자" 	 , width: 40 , align: "center" , formatter: function(cellValue, option, rowObject){return formatDate(cellValue);}},
                 {name: "qustGuarNo"     , index: "qustGuarNo"     , label: "질문자 번호"  , width: 40 , align: "center" },
                 {name: "guarNm"         , index: "guarNm"         , label: "질문자 명" 	 , width: 40 , align: "center" },
                 {name: "qustTitl"       , index: "qustTitl"       , label: "질문 제목" 	 , width: 100 , align: "left"   },
                 {name: "qustCntn"       , index: "qustCntn"       , label: "질문 내용"    , width: 100 , align: "left"   },
-                {name: "ansDt"          , index: "ansDt"          , label: "답변 일자" 	 , width: 40 , align: "center" },
-                {name: "ansTm"          , index: "ansTm"          , label: "답변 시각" 	 , width: 40 , align: "center" },
+                {name: "ansDt"          , index: "ansDt"          , label: "답변 일자" 	 , width: 40 , align: "center" , formatter: function(cellValue, option, rowObject){return formatDate(cellValue);}},
+                {name: "ansTm"          , index: "ansTm"          , label: "답변 시각" 	 , width: 40 , align: "center" , formatter: function(cellValue, option, rowObject){return formatTime(cellValue);}},
                 {name: "ansCntn"        , index: "ansCntn"        , label: "답변 내용" 	 , width:  100, align: "left"   },
-                {name: "ansUserId"      , index: "ansUserId"      , label: "답변자ID" 	 , width: 40 , align: "left"   },
+                {name: "ansUserId"      , index: "ansUserId"      , label: "답변자 ID" 	 , width: 40 , align: "left"   },
                 {name: "ansDelete"      , index: "ansDelete"      , label: "답변삭제하기" , width: 40 , align: "center" ,
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" onclick="qnaMng.ansDelete(\'' + rowObject.qnaNo + '\',\'' + rowObject.ansCntn + '\',\'' + rowObject.ansDt + '\')" value="삭제하기"/>';

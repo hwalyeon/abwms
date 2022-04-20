@@ -83,7 +83,7 @@ let qnaDetl = new Vue({
 					success: function(response) {
 						Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
 							closeModal($('#qnaDetlPopup'));
-							//qnaMng.searchQnaList(false);
+							qnaMng.searchQnaList(false);
 						});
 					},
 					error: function (response) {
