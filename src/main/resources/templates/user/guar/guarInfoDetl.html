@@ -139,86 +139,86 @@
 										<tr>
 											<th scope="row">자동 로그인 여부</th>
 											<td>
-												<input type="radio" name="autoLoginYn" v-model="params.autoLoginYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="autoLoginYn" v-model="params.autoLoginYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="autoLoginYn" v-model="params.autoLoginYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="autoLoginYn" v-model="params.autoLoginYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 										<tr>
 											<th scope="row">위험지역 알림 여부</th>
 											<td>
-												<input type="radio" name="dzoneAlamYn" v-model="params.dzoneAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="dzoneAlamYn" v-model="params.dzoneAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="dzoneAlamYn" v-model="params.dzoneAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="dzoneAlamYn" v-model="params.dzoneAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">세이프존 알림 여부</th>
 											<td>
-												<input type="radio" name="szoneAlamYn" v-model="params.szoneAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="szoneAlamYn" v-model="params.szoneAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="szoneAlamYn" v-model="params.szoneAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="szoneAlamYn" v-model="params.szoneAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">낙상 발생 알림 여부</th>
 											<td>
-												<input type="radio" name="fallAlamYn" v-model="params.fallAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="fallAlamYn" v-model="params.fallAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="fallAlamYn" v-model="params.fallAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="fallAlamYn" v-model="params.fallAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">심박 이상 알림 여부</th>
 											<td>
-												<input type="radio" name="hbitAbnmAlamYn" v-model="params.hbitAbnmAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="hbitAbnmAlamYn" v-model="params.hbitAbnmAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="hbitAbnmAlamYn" v-model="params.hbitAbnmAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="hbitAbnmAlamYn" v-model="params.hbitAbnmAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">체온 이상 알림 여부</th>
 											<td>
-												<input type="radio" name="tempAbnmAlamYn" v-model="params.tempAbnmAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="tempAbnmAlamYn" v-model="params.tempAbnmAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="tempAbnmAlamYn" v-model="params.tempAbnmAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="tempAbnmAlamYn" v-model="params.tempAbnmAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">신체 기록 알림 여부</th>
 											<td>
-												<input type="radio" name="bodyHistAlamYn" v-model="params.bodyHistAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="bodyHistAlamYn" v-model="params.bodyHistAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="bodyHistAlamYn" v-model="params.bodyHistAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="bodyHistAlamYn" v-model="params.bodyHistAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">식사 미입력 알림 여부</th>
 											<td>
-												<input type="radio" name="mealNinpAlamYn" v-model="params.mealNinpAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="mealNinpAlamYn" v-model="params.mealNinpAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="mealNinpAlamYn" v-model="params.mealNinpAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="mealNinpAlamYn" v-model="params.mealNinpAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">운동 미입력 알림 여부</th>
 											<td>
-												<input type="radio" name="excsNinpAlamYn" v-model="params.excsNinpAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="excsNinpAlamYn" v-model="params.excsNinpAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="excsNinpAlamYn" v-model="params.excsNinpAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="excsNinpAlamYn" v-model="params.excsNinpAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">캐시비 사용 알림 여부</th>
 											<td>
-												<input type="radio" name="cbeeUseAlamYn" v-model="params.cbeeUseAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="cbeeUseAlamYn" v-model="params.cbeeUseAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="cbeeUseAlamYn" v-model="params.cbeeUseAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="cbeeUseAlamYn" v-model="params.cbeeUseAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">배터리 부족 알림 여부</th>
 											<td>
-												<input type="radio" name="batrLackAlamYn" v-model="params.batrLackAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="batrLackAlamYn" v-model="params.batrLackAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="batrLackAlamYn" v-model="params.batrLackAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="batrLackAlamYn" v-model="params.batrLackAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 										<tr>
 											<th scope="row">장기 미사용 알림 여부</th>
 											<td>
-												<input type="radio" name="ltrmNuseAlamYn" v-model="params.ltrmNuseAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
-												<input type="radio" name="ltrmNuseAlamYn" v-model="params.ltrmNuseAlamYn" value="N"/><span>&nbspN</span>
+												<input type="radio" v-icheck name="ltrmNuseAlamYn" v-model="params.ltrmNuseAlamYn" value="Y" /><span style="margin-right:5px;">&nbspY</span>
+												<input type="radio" v-icheck name="ltrmNuseAlamYn" v-model="params.ltrmNuseAlamYn" value="N"/><span>&nbspN</span>
 											</td>
 										</tr>
 									</tbody>
