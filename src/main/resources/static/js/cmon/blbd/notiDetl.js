@@ -1,32 +1,29 @@
-let apiStndDetl = new Vue({
-    el: "#apiStndDetlPopup",
+let notiDetl = new Vue({
+    el: "#notiDetlPopup",
     data: {
     	userInfo: {
     		crud: 'C',
-			svrId:'',
-    		svrNm:'',
-			apiUrl:'',
-			gpsBaseCycl:'',
-			gpsNextCycl:'',
-			rdetNextCycl:'',
-			rdetBaseCycl:'',
-			ledSlepTcnt:'',
-			msorSsngLevl:'',
-			hsorIsngCycl:'',
-			tsorIsngCycl:'',
-			tsorEvntMinval:'',
-			tsorEvntMaxval:'',
-			hbitcntMdanMinval:'',
-			hbitcntMdanMaxval:'',
-			msorEvntMinval:'',
-			msorEvntMaxval:'',
+			blbdNo:'',
+    		blbdStrtDt:'',
+			blbdExprDt:'',
+			blbdTypeCd:'',
+			blbdTitl:'',
+			blbdCntn:'',
+			srchCnt:'',
+			alamYn:'',
+			regDt:'',
+			regTm:'',
+			regUserId:'',
+			uptDt:'',
+			uptTm:'',
+			uptUserId:'',
     		checkDupUserId: 'N'
     	},
 		code: {
 			useYnList: []
 		}
 	},
-	
+	components: {'summer-note': summernote },
     methods: {
 
         initialize: function() {
@@ -38,20 +35,20 @@ let apiStndDetl = new Vue({
         },
         initCodeList: function() {
         },
-        initPage: function(svrId) {
+        initPage: function(blbdNo) {
         	
         	let $this = this;
         	$this.resetUserInfo();
 
         	
-        	if ( !WebUtil.isNull(svrId) )
+        	if ( !WebUtil.isNull(blbdNo) )
     		{
         		let params = {
-        			'svrId' : svrId
+        			'blbdNo' : blbdNo
         		}
         		
         		AjaxUtil.post({
-                    url: "/cmon/stnd/searchUserInfo.ab",
+                    url: "/cmon/blbd/searchUserInfo.ab",
                     param: params,
                     success: function(response) {
                     	if ( !!response.rtnData.result ) {
@@ -171,7 +168,7 @@ let apiStndDetl = new Vue({
         	}
         	
 			AjaxUtil.post({
-                url: "/cmon/stnd/searchDupUserId.ab",
+                url: "/cmon/blbd/searchDupUserId.ab",
                 param: params,
                 success: function(response) {
                 	if ( response.rtnData.result.existsYn === 'N' ) {
@@ -209,7 +206,7 @@ let apiStndDetl = new Vue({
 
             
 			AjaxUtil.post({
-                url: "/cmon/stnd/saveUser.ab",
+                url: "/cmon/blbd/saveUser.ab",
                 param: $this.userInfo,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
@@ -229,7 +226,7 @@ let apiStndDetl = new Vue({
 			$this.userInfo.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/cmon/stnd/saveUser.ab",
+                url: "/cmon/blbd/saveUser.ab",
                 param: $this.userInfo,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {

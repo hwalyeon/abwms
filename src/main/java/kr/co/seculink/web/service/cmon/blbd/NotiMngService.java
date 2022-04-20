@@ -1,12 +1,11 @@
-package kr.co.seculink.web.service.cmon.stnd;
+package kr.co.seculink.web.service.cmon.blbd;
 
 import kr.co.seculink.exception.BizException;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
 
-public interface ApiStndMngService
+public interface NotiMngService
 {
 	public List<Map<String, String>> searchUserList(Map<String, String> params) throws BizException;
 	

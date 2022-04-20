@@ -4,7 +4,7 @@
 <div class="modal fade" id="apiStndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 1150px; height: 670px">
+			<div class="modal-content" style="width: 1150px; height: 650px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -12,10 +12,8 @@
 						<h5>사용자 정보</h5>
 					</div>
 				</div>
-				<div class="modal-body" >
-
 						<div class="pd_left_none pd_right_none col-xs-6 float_left">
-							<div class="ibox-content border-style_none"  style="padding-bottom:0px; border-bottom:none;">
+							<div class="ibox-content border-style_none"  style="padding-bottom:0px;">
 								<table class="table table-bordered table_view">
 									<colgroup>
 										<col class="col-xs-4" />
@@ -29,19 +27,13 @@
 											<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
 										</td>
 										<td v-else="userInfo.crud == 'U'">
-											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control" @input="userIdChk"/>
+											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control" @input="userIdChk" readonly/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">서버 명</th>
 										<td>
 											<input type="text" name="svrNm" v-model="userInfo.svrNm" class="form-control ime-han" maxlength="40"/>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row">API-URL</th>
-										<td>
-											<input type="text" id="apiUrl" name="apiUrl" v-model="userInfo.apiUrl" class="form-control" maxlength="100"/>
 										</td>
 									</tr>
 									<tr>
@@ -74,6 +66,12 @@
 											<input type="email" id="ledSlepTcnt" name="ledSlepTcnt" v-model="userInfo.ledSlepTcnt" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
+									<tr>
+										<th scope="row">모션센서 감지 레벨</th>
+										<td>
+											<input type="email" id="msorSsngLevl" name="msorSsngLevl" v-model="userInfo.msorSsngLevl" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
 									</tbody>
 								</table>
 							</div>
@@ -86,12 +84,6 @@
 										<col class="width_per_70" />
 									</colgroup>
 									<tbody>
-									<tr>
-										<th scope="row">모션센서 감지 레벨</th>
-										<td>
-											<input type="email" id="msorSsngLevl" name="msorSsngLevl" v-model="userInfo.msorSsngLevl" class="form-control ime-eng" maxlength="50"/>
-										</td>
-									</tr>
 									<tr>
 										<th scope="row">심박센서 내부감지 주기</th>
 										<td>
@@ -119,13 +111,13 @@
 									<tr>
 										<th scope="row">심박수 중간값 하한값</th>
 										<td>
-											<input type="email" id="hbitcntMdanMinVal" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="hbitcntMdanMinval" name="hbitcntMdanMinval" v-model="userInfo.hbitcntMdanMinval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">심박수 중간값 하한값</th>
 										<td>
-											<input type="email" id="hbitcntMdanMaxVal" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="hbitcntMdanMaxval" name="hbitcntMdanMaxval" v-model="userInfo.hbitcntMdanMaxval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
@@ -134,23 +126,35 @@
 											<input type="email" id="msorEvntMinval" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
+									<tr>
+										<th scope="row">모션센서 이벤트 상한값</th>
+										<td>
+											<input type="email" id="msorEvntMaxval" name="msorEvntMaxval" v-model="userInfo.msorEvntMaxval" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
-							<div class="ibox-content border-style_none" style="padding-top:0px;">
+					<div class="pd_left_none pd_right_none col-xs-12">
+							<div class="ibox-content border-style_none" style="padding-top:0px; border:none;">
 							<table class="table table-bordered table_view">
+								<colgroup>
+									<col class="col-xs-2"  />
+									<col class="col-xs-10" />
+								</colgroup>
 							<tbody>
 							<tr>
-								<th scope="row">모션센서 이벤트 하한값</th>
+								<th scope="row">API-URL</th>
 								<td>
-									<input type="email" id="msorEvntMinval2" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+									<input type="email" id="apiUrl" name="apiUrl" v-model="userInfo.apiUrl" class="form-control ime-eng" maxlength="50"/>
 								</td>
 							</tr>
 							</tbody>
 							</table>
 							</div>
-				</div>
+					</div>
+
             	<div class="modal-footer" style="">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">

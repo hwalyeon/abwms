@@ -6,8 +6,7 @@ const index = new Vue({
 		menuList: [
 			{ menuNm: 'Main', menuUrl: '/main.pg', menuNo: '1', active: true, interval: null}
 		],	
-        searchAuthParam : {
-            searchClass : '01',
+        params : {
             userId : 'admin',
             userNm : '원격사용자'
         },
@@ -169,7 +168,7 @@ const index = new Vue({
 
 			AjaxUtil.post({
 				url: "/v1/auth/logout.ab",
-				param: $this.searchAuthParam,
+				param: $this.params,
 				success: function(response) {
 
 					SessionUtil.initSession();

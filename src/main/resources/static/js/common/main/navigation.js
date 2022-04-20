@@ -2,9 +2,8 @@ var navigation = null;
 navigation = new Vue({
 	el: '#navigation',
 	data: {
-        searchAuthParam : {
-            searchClass : '01',
-            empNo : 0
+        params : {
+            userId: '',
         },
         currentMenu: null,
         menuTree: [],
@@ -48,17 +47,16 @@ navigation = new Vue({
 	},
 	/* Vue Instance 내 method 정의 */
 	methods: {
+        init: function() {
+            this.params.userId = SessionUtil.getUserId();
+        },
         getMenuList: function() {
 
             let $this = this;
 
-            if ( $this.searchAuthParam.searchClass == '' || $this.searchAuthParam.empNo < 0) {
-                return;
-			}
-            
             AjaxUtil.post({
                 url: "/cmon/menu/searchMenuList.ab",
-                param: $this.searchAuthParam,
+                param: $this.params,
                 success: function(response) {
 
                     // 1뎁스
@@ -174,6 +172,7 @@ navigation = new Vue({
         }
 	},
 	mounted: function () {
+        this.init();
         this.getMenuList();
 	},
     updated: function () {

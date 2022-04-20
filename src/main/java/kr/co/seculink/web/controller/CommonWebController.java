@@ -12,7 +12,6 @@ public class CommonWebController {
 	// thymleaf 적용하지 않을경우 static의 index.html로 간다.
 	@GetMapping(path = "/")
 	public String index() {
-		log.debug("index!!");
 		return "common/main/index";
 	}
 
@@ -135,6 +134,10 @@ public class CommonWebController {
 	//밴드/개통정보
 	@RequestMapping("/devc/band/bandOpenInfoMng.pg")
 	public String getDevcBandBandOpenInfoMng() {return "devc/band/bandOpenInfoMng";}
+
+	//공지사항관리
+	@RequestMapping("/cmon/blbd/notiMng.pg")
+	public String getCmonBlbdNotiMng() {return "/cmon/blbd/notiMng";}
 
 	//질의응답관리
 	@RequestMapping("/cmon/blbd/qnaMng.pg")

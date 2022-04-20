@@ -1,10 +1,10 @@
-package kr.co.seculink.web.controller.cmon.stnd;
+package kr.co.seculink.web.controller.cmon.blbd;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
-import kr.co.seculink.web.service.cmon.stnd.ApiStndMngService;
+import kr.co.seculink.web.service.cmon.blbd.NotiMngService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,27 +19,27 @@ import java.util.*;
 
 @Slf4j
 @Controller
-public class ApiStndMngController
+public class NotiMngController
 {
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 
 	@Autowired
-	private ApiStndMngService apiStndMngService;
+	private NotiMngService notiMngService;
 	
 	@ResponseBody
-	@RequestMapping("/cmon/stnd/searchUserList.ab")
+	@RequestMapping("/cmon/blbd/searchUserList.ab")
 	public RtnMsg searchUserList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
-		List<Map<String, String>> result = apiStndMngService.searchUserList(params);
+		List<Map<String, String>> result = notiMngService.searchUserList(params);
 		rtnMap.put("result", result);
 		
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)apiStndMngService.searchUserList(params)).size());
+			vo.setTotalCount(((List)notiMngService.searchUserList(params)).size());
 		}
 		
 		vo.setRtnData(rtnMap, params);
@@ -48,15 +48,15 @@ public class ApiStndMngController
 	}
 	
 	@ResponseBody
-	@RequestMapping("/cmon/stnd/searchUserInfo.ab")
+	@RequestMapping("/cmon/blbd/searchUserInfo.ab")
 	public RtnMsg searchUserInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
-		Map<String, String> result = apiStndMngService.searchUserInfo(params);
+		Map<String, String> result = notiMngService.searchUserInfo(params);
 		
-		List<Map<String, String>> roleList = dao.selectList("cmon.stnd.apiStndMng.searchApiList", params);
+		List<Map<String, String>> roleList = dao.selectList("cmon.blbd.notiMng.searchNotiList", params);
 		
 		rtnMap.put("result", result);
 		rtnMap.put("roleList", roleList);
@@ -66,13 +66,13 @@ public class ApiStndMngController
 	}
 	
 	@ResponseBody
-	@RequestMapping("/cmon/stnd/saveUser.ab")
+	@RequestMapping("/cmon/blbd/saveUser.ab")
 	public RtnMsg saveUser(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		System.out.println("params" + params);
-		apiStndMngService.saveUser(params);
+		notiMngService.saveUser(params);
 		
 		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap);
@@ -81,13 +81,13 @@ public class ApiStndMngController
 	}
 	
 	@ResponseBody
-	@RequestMapping("/cmon/stnd/searchDupUserId.ab")
+	@RequestMapping("/cmon/blbd/searchDupUserId.ab")
 	public RtnMsg searchDupUserId(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 	
-		Map<String, String> user = apiStndMngService.searchDupUserId(params);
+		Map<String, String> user = notiMngService.searchDupUserId(params);
 		
 		rtnMap.put("result", user);
 		vo.setRtnData(rtnMap);
@@ -96,11 +96,11 @@ public class ApiStndMngController
 	}
 	
 	@ResponseBody
-	@RequestMapping("/cmon/stnd/searchUserList/excel.ab")
+	@RequestMapping("/cmon/blbd/searchUserList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{	
 		params.put("paging", "N");
-		List<Map<String, String>> result = dao.selectList("cmon.stnd.apiStndMng.searchTcUserBase", params);
+		List<Map<String, String>> result = dao.selectList("cmon.blbd.notiMng.searchTcUserBase", params);
 		
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
