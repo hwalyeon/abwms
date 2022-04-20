@@ -4,11 +4,11 @@
 	  layout:decorate="~{common/layout/defaultLayout}">
 <head>
 	<meta charset="UTF-8">
-	<title>위험감정</title>
+	<title>QnA</title>
 </head>
 <body>
-<div layout:fragment="content">
-	<div class="wrapper-content" id="qnaMng">
+<div layout:fragment="content"  >
+	<div class="wrapper-content" style="padding-top:-40px;" id="qnaMng">
 
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
@@ -46,7 +46,7 @@
 						</div>
 						<label class="col-xs-1 control-label" >질문자 명</label>
 						<div class="col-xs-1" style="padding:0px" >
-							<input type="text" name="qustGuarNm" class="form-control"  v-model="params.qustGuarNm">
+							<input type="text" name="guarNm" class="form-control"  v-model="params.guarNm">
 						</div>
 						<label class="col-xs-1 control-label" >질문자 번호</label>
 						<div class="col-xs-1" style="padding:0px" >
@@ -88,13 +88,17 @@
 				</div>
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">질문 내용</label>
-						<div class="col-xs-3">
-							<input type="text" name="qustCntn" class="form-control"  v-model="params.qustCntn" />
+						<label class="col-xs-1 control-label">질문 제목</label>
+						<div class="col-xs-2">
+							<input type="text" name="qustTitl" class="form-control"  v-model="params.qustTitl" />
 						</div>
-						<label class="col-xs-1 control-label">답변 내용</label>
-						<div class="col-xs-3">
-							<input type="text" name="ansCntn" class="form-control"  v-model="params.ansCntn" />
+						<label class="col-xs-1 control-label">질문 내용</label>
+						<div class="col-xs-2">
+							<input type="text" name="qustCntn" class="form-control"  v-model="params.qustCntn" style="width:110%;"/>
+						</div>
+						<label class="col-xs-1 control-label" style="margin-left: 2%;" >답변 내용</label>
+						<div class="col-xs-2" style=" padding-left:0px">
+							<input type="text" name="ansCntn" class="form-control"  v-model="params.ansCntn" style="width:110%;;" />
 						</div>
 					</div>
 				</div>
@@ -103,7 +107,7 @@
 						<button class="btn btn-secondary" @click="resetSearchParam()" type="button">
 							<span class="glyphicon glyphicon-refresh"> 초기화</span>
 						</button>&nbsp;
-						<button type="button" class="btn btn-w-m btn-primary" @click="searchDgemList(true)"><span>조회</span></button>
+						<button type="button" class="btn btn-w-m btn-primary" @click="searchQnaList(true)"><span>조회</span></button>
 					</div>
 				</div>
 			</div>
@@ -116,12 +120,10 @@
 					<div class="float_left">
 						<div class="ibox-title pd_none mg_top_10" style="min-height: 0px;">
 							<i class="fa fa-title-bar"></i>
-							<h5>위험감정기준 목록</h5>
+							<h5>QnA 목록</h5>
 						</div>
 					</div>
 					<div class="float_right">
-<!-- 						<button type="button" id="btnSave" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" @click="btnSave">&nbsp;저장</button> -->
-						<button type="button" id="btnReg" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" data-toggle="modal" data-target="#dgemStndDetlPopup" @click="regDgemStndDetlPop()">&nbsp;신규 등록</button>
 						<button type="button" id="btnDownloadExcel" class="btn btn-outline btn-primary ladda-button mg_left_10" data-style="zoom-in" @click="downloadExcel"><i class="fa fa-file-excel-o"></i>&nbsp;엑셀다운로드</button>
 					</div>
 					<div class="clear_both"></div>

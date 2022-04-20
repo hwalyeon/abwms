@@ -6,14 +6,16 @@ let qnaMng = new Vue({
         {
             userId       : ''  ,
             qnaNo        : ''  , //질의응답_번호
-            qustGuarNo   : ''  , //지문_보호자_번호
+            qustGuarNo   : ''  , //질문_보호자_번호
+            guarNm       : ''  , //질문자_명
             qustDtFr     : ''  , //질문_일자(FROM)
             qustDtTo     : ''  , //질문_일자(To)
             bDPer        : 'THIS_MONTH'  , //질문_일자_기간
+            qustTitl     : ''  , //질문_제목
             qustCntn     : ''  , //질문_내용
             ansDtFr      : ''  , //답변_일자(FROM)
             ansDtTo      : ''  , //답변_일자(To)
-            bDPerAns     : 'THIS_MONTH'  , //답변_일자_기간
+            bDPerAns     : ''  , //답변_일자_기간
             ansCntn      : ''  , //답변_내용
     		paging       : 'Y' ,
     		totalCount   : 0   ,
@@ -35,8 +37,8 @@ let qnaMng = new Vue({
 
             $this.initValue();
         	$this.initCodeList();
-/*        	$this.initGrid();
-            $this.searchDgemList(true);*/
+        	$this.initGrid();
+            $this.searchQnaList(true);
             $this.setDatepicker();
         },
         initValue: function()
@@ -66,22 +68,21 @@ let qnaMng = new Vue({
         	let colModels =
             [
                 {name: "crud"           , index: "crud"           , label: "crud"         , hidden: true    },
-                {name: "qnaNo"          , index: "qnaNo"          , label: "QnA 번호"     , align: "center"  },
-                {name: "qustDt"         , index: "qustDt"         , label: "질문 일자" 	  , align: "center" },
-                {name: "qustGuarNo"     , index: "qustGuarNo"     , label: "질문자 번호"   , align: "center" },
-                {name: "guarNm"         , index: "guarNm"         , label: "질문자 명" 	  , align: "center" },
-                {name: "qustTitl"       , index: "qustTitl"       , label: "질문 제목" 	  , align: "left"   },
-                {name: "qustCntn"       , index: "qustCntn"       , label: "질문 내용"     , align: "left"   },
-                {name: "ansDt"          , index: "ansDt"          , label: "답변 일자" 	  , align: "center" },
-                {name: "ansTm"          , index: "ansTm"          , label: "답변 시각" 	  , align: "center" },
-                {name: "ansCntn"        , index: "ansCntn"        , label: "답변 내용" 	  , align: "left"   },
-                {name: "ansUserId"      , index: "ansUserId"      , label: "답변자ID" 	  , align: "left"   },
-                {name: "regDt"          , index: "regDt"          , label: "등록일자"      , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
-                {name: "regTm"          , index: "regTm"          , label: "등록시각"      , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
-                {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"  , align: "center" },
-                {name: "uptDt"          , index: "uptDt"          , label: "수정일자"      , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
-                {name: "uptTm"          , index: "uptTm"          , label: "수정시각"      , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
-                {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"  , align: "center" }
+                {name: "qnaNo"          , index: "qnaNo"          , label: "QnA 번호"    , width: 40 , align: "center"  },
+                {name: "qustDt"         , index: "qustDt"         , label: "질문 일자" 	 , width: 40 , align: "center" },
+                {name: "qustGuarNo"     , index: "qustGuarNo"     , label: "질문자 번호"  , width: 40 , align: "center" },
+                {name: "guarNm"         , index: "guarNm"         , label: "질문자 명" 	 , width: 40 , align: "center" },
+                {name: "qustTitl"       , index: "qustTitl"       , label: "질문 제목" 	 , width: 100 , align: "left"   },
+                {name: "qustCntn"       , index: "qustCntn"       , label: "질문 내용"    , width: 100 , align: "left"   },
+                {name: "ansDt"          , index: "ansDt"          , label: "답변 일자" 	 , width: 40 , align: "center" },
+                {name: "ansTm"          , index: "ansTm"          , label: "답변 시각" 	 , width: 40 , align: "center" },
+                {name: "ansCntn"        , index: "ansCntn"        , label: "답변 내용" 	 , width:  100, align: "left"   },
+                {name: "ansUserId"      , index: "ansUserId"      , label: "답변자ID" 	 , width: 40 , align: "left"   },
+                {name: "ansDelete"      , index: "ansDelete"      , label: "답변삭제하기" , width: 40 , align: "center" ,
+                    formatter: function(cellValue, options, rowObject) {
+                        return '<input type="button" onclick="qnaMng.ansDelete(\'' + rowObject.qnaNo + '\',\'' + rowObject.ansCntn + '\',\'' + rowObject.ansDt + '\')" value="삭제하기"/>';
+                    }
+                }
             ];
   
             $("#qna_list").jqGrid("GridUnload");
@@ -105,15 +106,16 @@ let qnaMng = new Vue({
                 },
                 onSelectRow: function(rowId, status, e)
                 {
-                    let $this = this;
                     let item  = $('#qna_list').jqGrid('getRowData', rowId);
                     //질의응답 상세 팝업 호출 함수 호출
-                    $this.regQnaDetlPop(item.qnaNo);
 
+                    let qnaNo = item.qnaNo;
+                    $this.regQnaDetlPop(qnaNo);
                 },
             }));
             resizeJqGridWidth("qna_list", "qna_list_wrapper");
         },
+        //QnA 리스트 조회
         searchQnaList: function(isSearch)
         {
 			let $this     = this;
@@ -142,6 +144,35 @@ let qnaMng = new Vue({
 		regQnaDetlPop: function(qnaNo)
         {
 			qnaDetl.initPage(qnaNo);
+        },
+        //답변 삭제하기
+        ansDelete: function(qnaNo, cntn, ansDt, crud)
+        {
+            let $this = this;
+
+            crud = 'D';
+
+            if ((cntn=='' || cntn ==null )&&(ansDt=='' || ansDt ==null))
+            {
+                Swal.alert(['삭제할 내용이 없습니다.', 'info']);
+                return false;
+            }
+            else
+            {
+               AjaxUtil.post(
+                   {
+                    url    : "/cmon/blbd/qnaMng/saveInfo.ab",
+                    param  : {'qnaNo':qnaNo,'crud':crud},
+                    success: function(response) {
+                        Swal.alert(['삭제 완료되었습니다.', 'success']).then(function() {
+                            $this.searchQnaList(false);
+                        });
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
+            }
         },
 
         //기준_일자 선택
@@ -221,7 +252,7 @@ let qnaMng = new Vue({
 			let params = $.extend(true, {}, $this.params);
 			
 			AjaxUtil.post(
-{
+       {
 				dataType : 'binary',
                 url      : "/cmon/blbd/qnaMng/searchQnaList/excel.ab",
                 param    : params,

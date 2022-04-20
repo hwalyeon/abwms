@@ -1,10 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cmon.blbd.qnaMng">
+
     <!--질의응답_리스트 조회-->
-
+    <select id = "selectTsQnaBaseList" parameterType="java.util.Map"  resultType="MybatisMap">
+        SELECT  tqb.qna_no          as qna_no           /* qna_no         질의응답_번호    numeric                */
+              , tqb.qust_guar_no    as qust_guar_no     /* qust_guar_no   질문_보호자_번호 numeric                */
+              , DECR(tgb.guar_nm)   as guar_nm          /* guar_nm        보호자_명        character varying(256) */
+              , tqb.qust_dt         as qust_dt          /* qust_dt        질문_일자        character(8)           */
+              , tqb.qust_tm         as qust_tm          /* qust_tm        질문_시각        character(6)           */
+              , tqb.qust_titl       as qust_titl        /* qust_titl      질문_제목        character varying(100) */
+              , tqb.qust_cntn       as qust_cntn        /* qust_cntn      질문_내용        text                   */
+              , tqb.ans_user_id     as ans_user_id      /* ans_user_id    답변_사용자_ID   character varying(40)  */
+              , tqb.ans_dt          as ans_dt           /* ans_dt         답변_일자        character(8)           */
+              , tqb.ans_tm          as ans_tm           /* ans_tm         답변_시각        character(6)           */
+              , tqb.ans_cntn        as ans_cntn         /* ans_cntn       답변_내용        text                   */
+              , tqb.reg_dt          as reg_dt           /* reg_dt         등록_일자        character(8)           */
+              , tqb.reg_tm          as reg_tm           /* reg_tm         등록_시각        character(6)           */
+              , tqb.reg_user_id     as reg_user_id      /* reg_user_id    등록_사용자_ID   character varying(20)  */
+              , tqb.upt_dt          as upt_dt           /* upt_dt         수정_일자        character(8)           */
+              , tqb.upt_tm          as upt_tm           /* upt_tm         수정_시각        character(6)           */
+              , tqb.upt_user_id     as upt_user_id      /* upt_user_id    수정_사용자_ID   character varying(20)  */
+        FROM    ts_qna_base tqb                       --질의응답_기본
+                LEFT OUTER JOIN tm_guar_base tgb      --보호자_기본
+                             ON tqb.qust_guar_no = tgb.guar_no
+        WHERE   1=1
+               <if test ="qustDtFr != null and qustDtFr !='' and qustDtTo != null and qustDtTo !=''">
+        AND    to_char(to_date(tqb.qust_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{qustDtFr} and #{qustDtTo}</if> --질문 일자
+               <if test ="guarNm != null and guarNm !='' ">
+        AND    tgb.guar_nm LIKE CONCAT('%',#{guarNm},'%') </if>                                                   --질문자_명
+               <if test ="qustGuarNo != null and qustGuarNo !='' ">
+        AND    tqb.qust_guar_no = #{qustGuarNo}::NUMERIC</if>                                                     --질문자_번호
+               <if test ="ansDtFr != null and ansDtFr !='' and ansDtTo != null and ansDtTo !=''">
+        AND    to_char(to_date(tqb.ans_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{ansDtFr} and #{ansDtTo}</if>    --답변 일자
+               <if test ="ansUserId != null and ansUserId !='' ">
+        AND    tqb.ans_user_id =  #{ansUserId}</if>                                                               --답변_사용자_id
+               <if test ="qnaNo != null and qnaNo !='' ">
+        AND    tqb.qna_no =  #{qnaNo}::NUMERIC</if>                                                               --질문_번호
+               <if test ="qustTitl != null and qustTitl !='' ">
+        AND    tqb.qust_titl LIKE CONCAT('%',#{qustTitl},'%') </if>                                               --질문_제목
+               <if test ="qustCntn != null and qustCntn !='' ">
+        AND    tqb.qust_cntn LIKE CONCAT('%',#{qustCntn},'%') </if>                                               --질문_내용
+               <if test ="ansCntn != null and ansCntn !='' ">
+        AND    tqb.ans_cntn LIKE CONCAT('%',#{ansCntn},'%') </if>                                                 --답변_내용
+               <if test=' paging == "Y" '>
+               LIMIT ${rowCount} OFFSET ${currentIndex}
+               </if>
+    </select>
     <!--질의응답_답변_수정-->
+    <update id="updateTsQnaBase" >
+        /* Generated SQL SQL ID : ts_qna_base.update */
+        UPDATE ts_qna_base
+        SET    <if test="ansUserId != null and ansUserId != ''">
+               ans_user_id = #{ansUserId}                 </if>    /* ans_user_id 답변_사용자_ID character varying(20) */
+               <if test="ansDt != null and ansDt != ''">
+             , ans_dt      = to_char(now(), 'YYYYMMDD')   </if>    /* ans_dt      답변_일자      character(8)          */
+               <if test="ansTm != null and ansTm != '' ">
+             , ans_tm      = to_char(now(), 'HH24MISS')   </if>    /* ans_tm      답변_시각      character(6)          */
+               <if test="ansCntn != null and ansCntn != '' ">
+             , ans_cntn    = #{ansCntn}                   </if>    /* ans_cntn    답변_내용      text                  */
+             , upt_dt      = to_char(now(), 'YYYYMMDD')            /* upt_dt      수정_일자      character(8)          */
+             , upt_tm      = to_char(now(), 'HH24MISS')            /* upt_tm      수정_시각      character(6)          */
+               <if test="uptUserId != null and uptUserId != '' ">
+             , upt_user_id = #{uptUserId}</if>                     /* upt_user_id  수정_사용자_ID character varying(20) */
+        WHERE  1 = 1
+        AND    qna_no = ${qnaNo}                       /* qna_no 질의응답_번호 numeric */
+    </update>
 
-    <!--질의응답_삭제-->
+
+    <!--질의응답_답변_삭제-->
+    <update id="deleteAns" >
+        UPDATE ts_qna_base
+        SET    <if test="ansUserId != null and ansUserId != ''">
+               ans_user_id = null                         </if>    /* ans_user_id 답변_사용자_ID character varying(20) */
+               <if test="ansDt != null and ansDt != ''">
+             , ans_dt      =  null                        </if>    /* ans_dt      답변_일자      character(8)          */
+               <if test="ansTm != null and ansTm != '' ">
+             , ans_tm      = null                         </if>    /* ans_tm      답변_시각      character(6)          */
+               <if test="ansCntn != null and ansCntn != '' ">
+             , ans_cntn    = null                         </if>    /* ans_cntn    답변_내용      text                  */
+             , upt_dt      = to_char(now(), 'YYYYMMDD')            /* upt_dt      수정_일자      character(8)          */
+             , upt_tm      = to_char(now(), 'HH24MISS')            /* upt_tm      수정_시각      character(6)          */
+               <if test="uptUserId != null and uptUserId = '' ">
+             , upt_user_id = #{uptUserId}</if>                     /* upt_user_id  수정_사용자_ID character varying(20) */
+        WHERE  1 = 1
+        AND    qna_no = #{qnaNo}::NUMERIC                          /* qna_no 질의응답_번호 numeric */
+    </update>
 
 </mapper>

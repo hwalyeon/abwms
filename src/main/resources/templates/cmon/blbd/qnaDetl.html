@@ -1,111 +1,185 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body th:remove="tag">
-<div class="modal fade" id="qndDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="qnaDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 850px; height: 870px;">
+			<div class="modal-content" style="width: 850px; padding-bottom: 20px;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>위험감정기준 정보</h5>
+						<h5>QnA 정보</h5>
 					</div>
 				</div>
-				<div class="modal-body">
-					<div class="ibox-content border-style_none">
-						<table class="table table-bordered table_view">
-		                    <colgroup>
-		                        <col class="col-xs-2" />
-		                        <col class="col-xs-10" />
-		                    </colgroup>
-		                    <tbody>
-			                    <tr>
-			                        <th scope="row">활동 구분</th>
-			                        <td>
-										<select id="actDivCd" name="actDivCd" class="form-control" v-model="params.actDivCd" :disabled="params.crud=='U'">
-											<option value="">전체</option>
-											<option v-for="item in code.actDivCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-										</select>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">심박 상태</th>
-			                        <td>
-				                        <select id="hbitStatCd" name="hbitStatCd" class="form-control" v-model="params.hbitStatCd" :disabled="params.crud=='U'">
-											<option value="">전체</option>
-											<option v-for="item in code.hbitStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-										</select>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">장소 분류</th>
-			                        <td>
-				                       <select id="plcClssCd" name="plcClssCd" class="form-control" v-model="params.plcClssCd" :disabled="params.crud=='U'">
-											<option value="">전체</option>
-											<option v-for="item in code.plcClssCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-										</select>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">체온 상태</th>
-			                        <td>
-				                        <select id="tempStatCd" namd="tempStatCd" class="form-control" v-model="params.tempStatCd" :disabled="params.crud=='U'">
-											<option value="">전체</option>
-											<option v-for="item in code.tempStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-										</select>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">위험감정 상태</th>
-			                        <td>
-				                       <select id="dgemStatCd" name="dgemStatCd" class="form-control" v-model="params.dgemStatCd" :disabled="params.crud=='U'">
-											<option value="">전체</option>
-											<option v-for="item in code.dgemStatCdList" v-bind:value="item.cdVal" v-text="item.cdNm" >
-										</select>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                    	<th scope="row">위험감정 지수</th>
-			                    	<td>
-			                    		<input type="text" name="dgemIdx" class="form-control" v-model="params.dgemIdx">
-			                    	</td>
-			                    </tr>
-			                    <tr>	
-			                        <th scope="row">요약내용</th>
-			                        <td>
-										<div>
-											<summer-note
-													v-model="params.dgemSmryCntn"
-													ref="dgemSmryCntn"
-													:summer-note-id="summerNoteId1"
-													:options="{height:60, notUseVideo:true, maxImageWidth: 1280}"/>
-										</div>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">상세내용</th>
-			                        <td>
-			                        	<div>
-											<summer-note
-													v-model="params.dgemStatCntn"
-													ref="dgemStatCntn"
-													:summer-note-id="summerNoteId2"
-													:options="{height:60, notUseVideo:true, maxImageWidth: 1280}"/>
-										</div>
-									</td>
-			                    </tr>
-							</tbody>
-		                </table>
+				<div class="modal-body" style="border:none;">
+					<div class="ibox-content border-style_none" style="border:none; padding-top:0px" >
+						<div class="ibox-title" style=" padding-bottom:0px;">
+							<h5>질문 정보</h5>
+						</div>
+						<div class="pd_left_none pd_right_none col-xs-6 float_left">
+							<div class="ibox-content border-style_none" style="padding-right:0px; padding-bottom:0px; padding-top:0px;border:none;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="col-xs-4" />
+										<col class="col-xs-8" />
+									</colgroup>
+									<tbody>
+									<tr>
+										<th scope="row">질문 번호</th>
+										<td>
+											<div>
+												<input type="text" name="qnaNo" v-model="params.qnaNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly" style="background-color: #fff"/>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">질문 일자</th>
+										<td>
+											<div>
+												<input type="text" name="qustDt" v-model="params.qustDt" class="form-control float_left width_per_100 ime-eng" readonly="readonly"style="background-color: #fff" />
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="pd_left_none pd_right_none col-xs-6 float_left">
+							<div class="ibox-content border-style_none" style="padding-left:0px; padding-bottom:0px; padding-top:0px; border:none;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="col-xs-4" />
+										<col class="col-xs-8" />
+									</colgroup>
+									<tbody>
+									<tr>
+										<th scope="row">질문자 번호</th>
+										<td>
+											<div>
+												<input type="text" name="qustGuarNo" v-model="params.qustGuarNo" class="form-control float_left width_per_100 ime-eng" readonly="readonly" style="background-color: #fff" />
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">질문자 명</th>
+										<td>
+											<div>
+												<input type="text" name="guarNm" v-model="params.guarNm" class="form-control float_left width_per_100 ime-eng" readonly="readonly" style="background-color: #fff" />
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="pd_left_none pd_right_none col-xs-12 float_left">
+							<div class="ibox-content border-style_none" style="padding-top:0px; border-top:none;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="col-xs-2" />
+										<col class="col-xs-10" />
+									</colgroup>
+									<tbody>
+									<tr>
+										<th scope="row">질문 제목</th>
+										<td>
+											<div>
+												<input type="text" name="qustTitl" v-model="params.qustTitl" class="form-control float_left width_per_100 ime-eng" readonly="readonly"style="background-color: #fff" />
+											</div>
+										</td>
+									</tr>
+									<tr style="height: 100px; ">
+										<th scope="row">질문 내용</th>
+										<td>
+											<div>
+												<input type="text" name="qustCntn" v-model="params.qustCntn" class="form-control float_left width_per_100 ime-eng" readonly="readonly" style="height: 100px; overflow: auto; background-color: #fff;"/>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+            		</div>
+
+
+					<div class="ibox-content border-style_none" style="border:none; padding-top:0px" >
+						<div class="ibox-title" style=" padding-bottom:0px;">
+							<h5>답변 정보</h5>
+						</div>
+						<div class="pd_left_none pd_right_none col-xs-6 float_left">
+							<div class="ibox-content border-style_none" style="padding-right:0px; padding-bottom:0px; padding-top:0px;border:none;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="col-xs-4" />
+										<col class="col-xs-8" />
+									</colgroup>
+									<tbody>
+									<tr>
+										<th scope="row">답변자 ID </th>
+										<td>
+											<div>
+												<input type="text" name="ansUserId" v-model="params.ansUserId" class="form-control float_left width_per_100 ime-eng" readonly="readonly" />
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="pd_left_none pd_right_none col-xs-6 float_left">
+							<div class="ibox-content border-style_none" style="padding-left:0px; padding-bottom:0px; padding-top:0px; border:none;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="col-xs-4" />
+										<col class="col-xs-8" />
+									</colgroup>
+									<tbody>
+									<tr>
+										<th scope="row">답변 삭제</th>
+										<td>
+											<div>
+												<button type="button" class="btn btn-w-m btn-primary" v-on:click="deleteInfo"  :disabled="params.ansCntn==''" v-digitonly.number><span>답변 삭제</span></button>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="pd_left_none pd_right_none col-xs-12 float_left">
+							<div class="ibox-content border-style_none" style="padding-top:0px; border-top:none;">
+								<table class="table table-bordered table_view">
+									<colgroup>
+										<col class="col-xs-2" />
+										<col class="col-xs-10" />
+									</colgroup>
+									<tbody>
+									<tr style="height: 100px; ">
+										<th scope="row">답변 내용</th>
+										<td>
+											<div>
+												<summer-note
+														v-model="params.ansCntn"
+														ref    ="ansCntn"
+														:summer-note-id="ansSummerNoteId"
+														:options="{height:100, notUseVideo:true, maxImageWidth: 1280}"
+												/>
+											</div>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
             		</div>
             	</div>
-            	<div class="modal-footer" style="">
+				<div class="clear_both"></div>
+            	<div class="modal-footer"  style="border:none;">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveInfo">저장</button>
-						</div>
-						<div v-if="params.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteInfo">삭제</button>
+							<button type="button" class="btn btn-outline btn-primary form-control" @click="saveQustDetlInfo">저장</button>
 						</div>
 						<div class="disp_in_block width_per_20">
 							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">

@@ -9,5 +9,8 @@ public interface QnaMngService
 {
     //질의응답_리스트 조회
     public List<Map<String, Object>> searchQnaList(Map<String,String> params) throws BizException;
+
+    //질의응답_저장
+    public void saveInfo(Map<String,String> params) throws BizException;
 }
  
