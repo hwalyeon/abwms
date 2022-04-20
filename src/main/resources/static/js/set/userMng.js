@@ -57,9 +57,7 @@ let userMng = new Vue({
                 	}
                 },
                 {name: "relsDt"     , index: "lctrYn"     , label: "해지일자"     , width: 80, align: "center"
-                	,formatter: function(cellValue, options, rowObject) {
-                    return moment(cellValue, 'YYYYMMDD').format("YYYY-MM-DD");
-                }},
+                	,formatter: formatDate},
                 {name: "useYn"     , index: "stdtYn"     , label: "사용여부"     , width: 80, align: "center"},
                 {name: "userDetlPop", index: "userDetlPop", label: "사용자 정보보기", width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {

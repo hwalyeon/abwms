@@ -31,7 +31,7 @@
 	<if test=" mailAddr != null and mailAddr != '' ">
 	AND   DECR(MAIL_ADDR) LIKE CONCAT ('%', #{mailAddr}, '%')		</if>
 	<if test=" useYn != null and useYn != '' ">
-	AND   USE_YN LIKE CONCAT('%',#{useYn},'%')</if>
+	AND   USE_YN = #{useYn}		</if>
 	ORDER BY USER_ID
 	<if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex} </if>

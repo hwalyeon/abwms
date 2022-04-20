@@ -24,7 +24,7 @@
 			                        <th scope="row">사용자ID</th>
 			                        <td v-if="userInfo.crud == 'C'">
 			                            <input type="text" name="userId" v-model="userInfo.userId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk" maxlength="40"/>
-			                            <button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
+			                            <button type="button" class="btn btn-w-m btn-primary float_right" @click="searchDupUserId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
 			                        </td>
 			                        <td v-else="userInfo.crud == 'U'">
 			                            <input type="text" name="userId" v-model="userInfo.userId" class="form-control" @input="userIdChk"/>			                            
@@ -71,8 +71,8 @@
 			                    <tr>
 			                        <th scope="row">사용여부</th>
 			                        <td>
-			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="Y" />&nbspY
-			                        	<input type="radio" id="useYn" name="useYn" v-model="userInfo.useYn" value="N"/>&nbspN			                        	
+			                        	<input type="radio" name="useYn" v-icheck v-model="userInfo.useYn" value="Y" />&nbspY
+			                        	<input type="radio" name="useYn" v-icheck v-model="userInfo.useYn" value="N"/>&nbspN
 			                        </td>
 			                    </tr>
 							</tbody>
