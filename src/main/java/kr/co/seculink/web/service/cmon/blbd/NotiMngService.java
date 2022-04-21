@@ -7,11 +7,9 @@ import java.util.Map;
 
 public interface NotiMngService
 {
-	public List<Map<String, String>> searchUserList(Map<String, String> params) throws BizException;
+	public List<Map<String, String>> searchNotiList(Map<String, String> params) throws BizException;
 	
-	public Map<String, String> searchUserInfo(Map<String, String> params) throws BizException;
+	public Map<String, String> searchNotiInfo(Map<String, String> params) throws BizException;
 	
-	public void saveUser(Map<String, String> params) throws BizException;
-	
-	public Map<String, String> searchDupUserId(Map<String, String> params) throws BizException;
+	public void saveNoti(Map<String, String> params) throws BizException;
 }

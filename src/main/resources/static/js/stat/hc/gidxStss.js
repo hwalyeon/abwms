@@ -40,7 +40,8 @@ let gidxStss = new Vue({
 
             $this.initData();
 
-            $this.initSearch();
+            //$this.initSearch();
+
         },
 
         // 기본 날짜 세팅
@@ -336,7 +337,6 @@ let gidxStss = new Vue({
 
             $this.chartGidxJudg.data = dataGidxJudg;
             $this.chartGidxJudg.update();
-
         },
 
         // 조회
@@ -344,6 +344,8 @@ let gidxStss = new Vue({
             let $this = this;
             let params = $.extend(true, {}, $this.params);
 
+            console.log(params);
+            return false;
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
@@ -419,6 +421,26 @@ let gidxStss = new Vue({
 			// $this.initGrid();
 
         },
+        //gfidxHist 화면에서 팝업 호출 시 param 값 세팅
+        setParam: function(param) {
+            let $this =this;
+
+            let params;
+            if (WebUtil.isNull(param)) {
+                params = WebUtil.getStorageData('window:gfixHist:params', true);
+                WebUtil.setStorageData('window:gfixHist:params', {}, true);
+            } else {
+                params = param;
+            }
+
+            $this.params.perdDivCd = 'DAY';
+            $this.params.occrDivCd = '02';
+            $this.params.stndDtFr  = params.gfixDtFr;
+            $this.params.stndDtTo  = params.gfixDtTo;
+            $this.params.sexCd     = params.sexCd;
+            $this.params.ageYcntFr = params.ageFr;
+            $this.params.ageYcntTo = params.ageTo;
+        }
     },
     computed: {
 
@@ -430,6 +452,13 @@ let gidxStss = new Vue({
         let self = this;
         $(document).ready(function() {
             self.initialize();
+            top.index.$on('GET_PARAM', function(params) {
+                self.setParam(params);
+                self.initSearch();
+            });
+            self.setParam();
+            self.initSearch();
+
         });
     }
 });

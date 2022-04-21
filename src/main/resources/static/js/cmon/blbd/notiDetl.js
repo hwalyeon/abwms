@@ -1,7 +1,7 @@
 let notiDetl = new Vue({
     el: "#notiDetlPopup",
     data: {
-    	userInfo: {
+    	blbdInfo: {
     		crud: 'C',
 			blbdNo:'',
     		blbdStrtDt:'',
@@ -16,11 +16,10 @@ let notiDetl = new Vue({
 			regUserId:'',
 			uptDt:'',
 			uptTm:'',
-			uptUserId:'',
-    		checkDupUserId: 'N'
+			uptUserId:''
     	},
 		code: {
-			useYnList: []
+			blbdTypeList: []
 		}
 	},
 	components: {'summer-note': summernote },
@@ -34,27 +33,36 @@ let notiDetl = new Vue({
         	        	
         },
         initCodeList: function() {
+        	let $this = this;
+			getCommonCodeList('BLBD_TYPE_CD',$this.code.blbdTypeList);
         },
         initPage: function(blbdNo) {
         	
         	let $this = this;
         	$this.resetUserInfo();
 
-        	
+        	$this.setDatepicker();
+
         	if ( !WebUtil.isNull(blbdNo) )
     		{
         		let params = {
         			'blbdNo' : blbdNo
         		}
-        		
+
         		AjaxUtil.post({
-                    url: "/cmon/blbd/searchUserInfo.ab",
+                    url: "/cmon/blbd/searchNotiInfo.ab",
                     param: params,
                     success: function(response) {
                     	if ( !!response.rtnData.result ) {
-                    		$this.userInfo.crud = 'U';
+                    		console.log($this.blbdInfo);
+                    		$this.blbdInfo.crud = 'U';
                     		$.each(response.rtnData.result, function(key, val) {
-            					$this.userInfo[key] = val;
+            					$this.blbdInfo[key] = val;
+            					val.blbdExprDt = '20202020';
+            					if($this.blbdInfo.blbdExprDt != null) {
+            						$this.blbdInfo.blbdStrtDt = formatDate($this.blbdInfo.blbdStrtDt);
+									$this.blbdInfo.blbdExprDt = formatDate($this.blbdInfo.blbdExprDt);
+								}
             				});
                     	}                    		
                     },
@@ -66,152 +74,90 @@ let notiDetl = new Vue({
         },
         isValid: function() {
         	
-        	let $this = this;        	        	
+        	let $this = this;
+
+        	//현재날짜 YYYY-MM-DD
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = ('0' + (today.getMonth() + 1)).slice(-2);
+			var day = ('0' + today.getDate()).slice(-2);
+			var dateString = year + '-' + month  + '-' + day;
+
+			if ( $this.blbdInfo.blbdStrtDt < dateString) {
+				Swal.alert(['게시시작 일자가 오늘이거나 지난일자는 입력할 수 없습니다.', 'info']);
+				return false;
+			}
+
+			if ( $this.blbdInfo.blbdStrtDt >= $this.blbdInfo.blbdExprDt) {
+				Swal.alert(['정확한 게시만기 일자를 입력하세요.', 'info']);
+				return false;
+			}
         	
-        	if ( WebUtil.isNull($this.userInfo.svrId) ) {
-        		Swal.alert(['서버ID를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.blbdInfo.blbdTypeCd) ) {
+        		Swal.alert(['게시유형 코드를 입력하세요.', 'info']);
         		return false;
         	}
 
-			if ( WebUtil.isNull($this.userInfo.svrNm) ) {
-				Swal.alert(['서버명을 입력하세요.', 'info']);
+			if ( WebUtil.isNull($this.blbdInfo.blbdTitl) ) {
+				Swal.alert(['게시제목을 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.userInfo.apiUrl) ) {
-				Swal.alert(['API-URL 입력하세요.', 'info']);
+			if ( WebUtil.isNull($this.blbdInfo.blbdCntn) ) {
+				Swal.alert(['게시내용을 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.userInfo.gpsBaseCycl) ) {
-				Swal.alert(['GPS정기핑 기본 주기를 입력하세요.', 'info']);
+			if ( WebUtil.isNull($this.blbdInfo.alamYn) ) {
+				Swal.alert(['알림여부를 입력하세요.', 'info']);
 				return false;
 			}
 
-			if ( WebUtil.isNull($this.userInfo.gpsNextCycl) ) {
-				Swal.alert(['GPS정기핑 다음 주기를 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.rdetNextCycl) ) {
-				Swal.alert(['정기판정 다음 주기를 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.rdetBaseCycl) ) {
-				Swal.alert(['정기판정 기본 주기를 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.ledSlepTcnt) ) {
-				Swal.alert(['LED슬립시간을 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.msorSsngLevl) ) {
-				Swal.alert(['모션센서 감지 레벨을 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.hsorIsngCycl) ) {
-				Swal.alert(['심박센서 내부감지 주기를 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.tsorIsngCycl) ) {
-				Swal.alert(['체온센서 내부감지 주기를 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.tsorEvntMinval) ) {
-				Swal.alert(['체온센서 이벤트 하한값을 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.tsorEvntMaxval) ) {
-				Swal.alert(['체온센서 이벤트 상한값을 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.hbitcntMdanMinval) ) {
-				Swal.alert(['심박수 중간값 하한값을 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.hbitcntMdanMaxval) ) {
-				Swal.alert(['심박수 중간값 상한값을 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.msorEvntMinval) ) {
-				Swal.alert(['모션센서 이벤트 하한값을 입력하세요.', 'info']);
-				return false;
-			}
-
-			if ( WebUtil.isNull($this.userInfo.msorEvntMaxval) ) {
-				Swal.alert(['모션센서 이벤트 상한값을 입력하세요.', 'info']);
-				return false;
-			}
-        	
         	return true;
         },
-        searchDupUserId: function() {
-        	let $this = this;
-			
-        	if ( WebUtil.isNull($this.userInfo.svrId) ) {
-        		Swal.alert(['서버ID를 입력하세요.', 'info']);
-        		return false;
-        	}
-			
-        	let params = {
-				svrId : $this.userInfo.svrId
-        	}
-        	
-			AjaxUtil.post({
-                url: "/cmon/blbd/searchDupUserId.ab",
-                param: params,
-                success: function(response) {
-                	if ( response.rtnData.result.existsYn === 'N' ) {
-                		$this.userInfo.checkDupUserId = 'Y';
-                		Swal.alert(['해당 아이디는 사용할 수 있습니다.', 'success']);
-                	} else {
-                		$this.userInfo.svrId = '';
-                		Swal.alert(['해당 아이디는 이미 사용중입니다.', 'info']);
-                	}
-                },
-                error: function (response) {
-                	Swal.alert([response, 'error']);
-                }
-            });
-        },
-		saveUser: function() {
+		setDatepicker : function() {
+			let $this = this;
+			$('#blbdStrtDtFrPicker').datepicker({
+				todayBtn: "linked",
+				keyboardNavigation: false,
+				forceParse: false,
+				calendarWeeks: true,
+				format: 'yyyy-mm-dd',
+				autoclose: true,
+				todayHighlight: true,
+			}).on("changeDate", function() {
+				$this.blbdInfo.blbdStrtDt = $('#blbdStrtDt').val();
+			});
+			$('#blbdExprDtFrPicker').datepicker({
+				todayBtn: "linked",
+				keyboardNavigation: false,
+				forceParse: false,
+				calendarWeeks: true,
+				format: 'yyyy-mm-dd',
+				autoclose: true,
+				todayHighlight: true,
+			}).on("changeDate", function() {
+				$this.blbdInfo.blbdExprDt = $('#blbdExprDt').val();
+			});
+		},
+		saveNoti: function() {
 			
 			let $this = this;
 			
             if ( !this.isValid() ) {
                 return false;
             }
-			
-            if ( $this.userInfo.crud === 'C' ) {
-	            if ( $this.userInfo.checkDupUserId != 'Y' ) {
-	        		Swal.alert(['ID 중복체크를 하세요.', 'info']);
-	        		return false;
-	        	}
-	            if ( isValidEmail($this.userInfo.apiUrl)==false){
-	            	Swal.alert(['이메일을 형식에 맞춰 입력 하세요','info']);
-	            	return false;
-	            }
-            }
-            
-
+			//YYYY-MM-DD 형식 YYYYMMDD로 변환
+			$this.blbdInfo.blbdStrtDt = $this.blbdInfo.blbdStrtDt.replace(/\-/g,'');
+			$this.blbdInfo.blbdExprDt = $this.blbdInfo.blbdExprDt.replace(/\-/g,'');
             
 			AjaxUtil.post({
-                url: "/cmon/blbd/saveUser.ab",
-                param: $this.userInfo,
+                url: "/cmon/blbd/saveNoti.ab",
+                param: $this.blbdInfo,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                		closeModal($('#apiStndDetlPopup'));
-               		 	apiStndMng.searchUserList(true);
+                		closeModal($('#notiDetlPopup'));
+               		 	notiMng.searchNotiList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -223,15 +169,15 @@ let notiDetl = new Vue({
 			
 			let $this = this;
 			
-			$this.userInfo.crud = 'D';
+			$this.blbdInfo.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/cmon/blbd/saveUser.ab",
-                param: $this.userInfo,
+                url: "/cmon/blbd/saveNoti.ab",
+                param: $this.blbdInfo,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                		 closeModal($('#apiStndDetlPopup'));
-						apiStndMng.searchUserList(true);
+                		 closeModal($('#notiDetlPopup'));
+						 notiMng.searchNotiList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -240,29 +186,20 @@ let notiDetl = new Vue({
             });
 		},
 		resetUserInfo: function() {
-			this.userInfo = {
-				crud: 'C',
-				svrId:'',
-				svrNm:'',
-	    		checkDupUserId: 'N'
+			this.blbdInfo = {
+				crud          :'C',
+				blbdNo        :'',
+				blbdStrtDt    :'',
+				blbdExprDt    :'',
+	    		checkDupUserId:'N'
 	    	}
 		},
-		userIdChk : function(){
-	      const reg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-
-	      if(reg.exec(this.userInfo.userId)!==null){
-	    	  this.userInfo.userId = '';
-	    	  Swal.alert(["아이디에 한글은 사용할 수 없습니다.", 'info']);
-	      }
-		}
     },
     computed: {
 
     },
     watch: {
-    	'userInfo.svrId': function(newVal, oldVal) {
-    		this.userInfo.checkDupUserId = 'N';
-    	}
+
     },
     mounted: function() {
         let self = this;

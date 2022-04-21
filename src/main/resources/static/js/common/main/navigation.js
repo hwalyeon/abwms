@@ -149,27 +149,37 @@ navigation = new Vue({
                 }
             }
         },
-
-        getMenuFromId: function(id) {
+        openMenuByMenuNo(menuNo, key, params) {
+            const menu = this.getMenuByMenuNo(menuNo);
+            this.openWithParams(menu, key, params);
+        },
+        getMenuByMenuNo: function(menuNo) {
             const flatMenus = _.flatMapDeep(this.menuList);
-            const menu = flatMenus.find(m => m.menuNo === parseInt(id));
-            if (menu) {
-                return {name: menu.menuNm, url: menu.menuUrl, id: menu.menuNo};
+            const menu = flatMenus.find(m => m.menuNo === menuNo);
+            if (!!menu) {
+                return menu;
             }
             return null;
         },
+        openWithParams(menu, key, params) {
+            let rtnVal;
+            if ( !!menu ) {
+                if (params) {
+                    WebUtil.setStorageData("window:" + key + ":params", params);
+                }
+                if (!index.checkTab(menu.menuNo)) {
+                    this.selectMenu(menu.menuNo)
+                    rtnVal = 'N';
+                }
+                else {
+                    // new menu
+                    this.handlerMenu(menu);
+                    rtnVal = 'Y';
+                }
+            }
 
-        getMenuFromUrl: function(url, simulate = false) {
-            const flatMenus = _.flatMapDeep(this.menuList);
-            const menu = flatMenus.find(m => m.menuUrl === url);
-            if (!menu && simulate) {
-                return flatMenus.find(m => m.menuUrl.indexOf(url) === 0);
-            }
-            if (menu) {
-                return {name: menu.menuNm, url: menu.menuUrl, id: menu.menuNo};
-            }
-            return null;
-        }
+            return rtnVal;
+        },
 	},
 	mounted: function () {
         this.init();
@@ -179,4 +189,5 @@ navigation = new Vue({
     	// $('#side-menu').metisMenu();
     }
 })
-	
+
+window.navigation = navigation;

@@ -1,5 +1,6 @@
 package kr.co.seculink.web.service.svcStnd.loc;
 
+import kr.co.seculink.domain.vo.TsLocInfoBaseVo;
 import kr.co.seculink.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -90,4 +91,14 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 	public List<Map<String, String>> searchLocStdtGuarList(Map<String, String> params) {
 		return dao.selectList("svcStnd.loc.locInfoMng.searchLocStdtGuarList", params);
 	}
+
+	//위치정보_관리_지역_리스트_조회
+//	public List<Map<String, String>> searchLocZoneList(Map<String, String> params) {
+//		return dao.selectList("svcStnd.loc.locInfoMng.searchLocZoneList", params);
+//	}
+	public List<Map<String, String>> searchLocZoneList(Map<String, String> params)
+	{
+		return dao.selectList("svcStnd.loc.locInfoMng.searchLocZoneList", params);
+	}
+
 }

@@ -24,58 +24,43 @@ public class NotiMngServiceImpl implements NotiMngService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 	
-	public List<Map<String, String>> searchUserList(Map<String, String> params) throws BizException
+	public List<Map<String, String>> searchNotiList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("cmon.blbd.notiMng.searchTcUserBase", params);
+		List<Map<String, String>> result = dao.selectList("cmon.blbd.notiMng.searchTsBlbdBase", params);
 		
 		return result;
 	}
 	
-	public Map<String, String> searchUserInfo(Map<String, String> params) throws BizException
+	public Map<String, String> searchNotiInfo(Map<String, String> params) throws BizException
 	{
-		Map<String, String> result = dao.selectOne("cmon.blbd.notiMng.searchTcUserBase", params);
+		Map<String, String> result = dao.selectOne("cmon.blbd.notiMng.searchNotiList", params);
 
 		return result;
 	}
 	
-	public Map<String, String> searchDupUserId(Map<String, String> params) throws BizException
-	{
-		Map<String, String> user = dao.selectOne("cmon.blbd.notiMng.searchTcUserBase", params);
-		
-		Map<String, String> rtnMap = new HashMap<>();
-		if ( user == null || GEUtil.isEmpty(user.get("svrId")) ) {
-			rtnMap.put("existsYn", "N");
-		} else {
-			rtnMap.put("existsYn", "Y");
-		}
-		
-		return rtnMap;
-	}
-	
 	@Transactional
-	public void saveUser(Map<String, String> params) throws BizException
+	public void saveNoti(Map<String, String> params) throws BizException
 	{
 		int saveCnt = 0;
 		
 		if ( "C".equals(params.get("crud")) ) {
 		
 			Map<String, String> existUserParam = new HashMap<>();
-			existUserParam.put("svrId", (String) params.get("svrId"));
-			Map<String, String> user = dao.selectOne("cmon.blbd.apiStndMng.searchTcUserBase", existUserParam);
+			existUserParam.put("blbdNo", (String) params.get("blbdNo"));
 
-			saveCnt = dao.insert("cmon.blbd.apiStndMng.insertTcUserBase", params);
+			saveCnt = dao.insert("cmon.blbd.notiMng.insertTsBlbdBase", params);
 			
 		} else if ( "U".equals(params.get("crud")) ) {
 			
-			saveCnt = dao.update("cmon.blbd.apiStndMng.updateTcUserBase", params);
+			saveCnt = dao.update("cmon.blbd.notiMng.updateTsBlbdBase", params);
 			
 		} else if ( "D".equals(params.get("crud")) ) {
 			
 			Map<String, String> deleteMap = new HashMap<String, String>();
-			deleteMap.put("svrId", params.get("svrId"));
+			deleteMap.put("blbdNo", params.get("blbdNo"));
 			deleteMap.put("useYn" , "N");
 			
-			saveCnt = dao.delete("cmon.blbd.apiStndMng.deleteTcUserBase", deleteMap);
+			saveCnt = dao.delete("cmon.blbd.notiMng.deleteTcBlbdBase", deleteMap);
 
 		}
 			

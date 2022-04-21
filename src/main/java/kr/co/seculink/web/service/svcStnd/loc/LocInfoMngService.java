@@ -1,5 +1,6 @@
 package kr.co.seculink.web.service.svcStnd.loc;
 
+import kr.co.seculink.domain.vo.TsLocInfoBaseVo;
 import kr.co.seculink.exception.BizException;
 
 import java.util.List;
@@ -31,4 +32,7 @@ public interface LocInfoMngService
 	// 위치정보_관리_학생_보호자_조회
 	List<Map<String, String>> searchLocStdtGuarList(Map<String, String> params) throws BizException;
 
+	// 위치정보_관리_지역_리스트_조회
+//	List<Map<String, String>> searchLocZoneList(Map<String, String> params) throws BizException;
+	List<Map<String, String>> searchLocZoneList(Map<String, String> params) throws BizException;
 }
