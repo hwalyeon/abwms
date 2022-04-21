@@ -184,7 +184,7 @@
        VALUES
        (
             #{stdtNo}
-           ,TO_CHAR(NOW(), 'YYYYMMDD')
+           ,to_char(now() - '1 day':: interval  , 'YYYYMMDD')
            ,'CM'
            ,${hghtVal}
            ,'KG'
@@ -220,7 +220,7 @@
        )
        select
              ${stdtNo}                                                         as stdt_no
-            ,to_char(now(), 'YYYYMMDD')                                        as stnd_dt
+            ,to_char(now() - '1 day':: interval  , 'YYYYMMDD')                 as stnd_dt
             ,'N'                                                               as vald_yn
             ,max(case when hbit_stat_cd = 'LOW'   then hbit_cnt_fr else 0 end) as bot_blck_val
             ,max(case when hbit_stat_cd = 'NORM'  then hbit_cnt_fr else 0 end) as down_blck_val
