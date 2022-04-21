@@ -50,7 +50,7 @@ let notiMng = new Vue({
                 {name: "blbdTitl"   , index: "blbdTitl"   , label: "게시제목"     , width: 80, align: "center"},
                 {name: "blbdCntn"   , index: "blbdCntn"   , label: "게시내용"     , width: 80, align: "center"},
                 {name: "srchCnt"    , index: "srchCnt"    , label: "조회건수"     , width: 80, align: "center"},
-                {name: "alamYn"     , index: "alamYn"     , label: "알림 여부"    , width: 80, align: "center"},
+                {name: "alamYn"     , index: "alamYn"     , label: "알림여부"    , width: 80, align: "center"},
                 {name: "regDt"      , index: "regDt"      , label: "등록일자"     , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
                 {name: "regTm"      , index: "regTm"      , label: "등록시각"     , width: 80, align: "center"
@@ -121,7 +121,7 @@ let notiMng = new Vue({
                 url: "/cmon/blbd/searchNotiList/excel.ab",
                 param: params,
                 success: function(response) {
-                	saveFileLocal(response, 'notiMng.xls');
+                	saveFileLocal(response, 'NotiMng.xls');
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);

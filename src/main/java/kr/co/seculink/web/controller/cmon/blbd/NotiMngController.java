@@ -92,7 +92,7 @@ public class NotiMngController
 	
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
     {
-        String [] arrHeader = {"사용자ID","사용자명","소속","전화번호","휴대전화번호","이메일","학원여부","강사여부","학생여부"};
+        String [] arrHeader = {"게시번호","게시시작 일자","게시만기 일자","게시유형 코드","게시제목","게시내용","조회건수","알림여부","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
         List<String> headerList = Arrays.asList(arrHeader);
 
         List<List<String>> dataList = new ArrayList<List<String>>();
@@ -101,13 +101,13 @@ public class NotiMngController
         for ( Map<String, String> info : list )
         {
             data = new ArrayList<String>();
-            data.add(info.get("blbdNo"));
+			data.add(String.valueOf(info.get("blbdNo")));
             data.add(info.get("blbdStrtDt"));
             data.add(info.get("blbdExprDt"));
             data.add(info.get("blbdTypeCd"));
             data.add(info.get("blbdTitl"));
             data.add(info.get("blbdCntn"));
-            data.add(info.get("srchCnt"));
+			data.add(String.valueOf(info.get("srchCnt")));
             data.add(info.get("alamYn"));
             data.add(info.get("regDt"));
 			data.add(info.get("regTm"));

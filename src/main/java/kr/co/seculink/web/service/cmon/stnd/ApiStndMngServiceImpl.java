@@ -27,36 +27,36 @@ public class ApiStndMngServiceImpl implements ApiStndMngService
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
 	
-	public List<Map<String, String>> searchUserList(Map<String, String> params) throws BizException
+	public List<Map<String, String>> searchApiList(Map<String, String> params) throws BizException
 	{
-		List<Map<String, String>> result = dao.selectList("cmon.stnd.apiStndMng.searchTcUserBase", params);
+		List<Map<String, String>> result = dao.selectList("cmon.stnd.apiStndMng.searchTcApiStnd", params);
 		
 		return result;
 	}
 	
-	public Map<String, String> searchUserInfo(Map<String, String> params) throws BizException
+	public Map<String, String> searchApiInfo(Map<String, String> params) throws BizException
 	{
-		Map<String, String> result = dao.selectOne("cmon.stnd.apiStndMng.searchTcUserBase", params);
+		Map<String, String> result = dao.selectOne("cmon.stnd.apiStndMng.searchTcApiStnd", params);
 		
 		return result;
 	}
-	
-	public Map<String, String> searchDupUserId(Map<String, String> params) throws BizException
+
+	public Map<String, String> searchDupSvrId(Map<String, String> params) throws BizException
 	{
-		Map<String, String> user = dao.selectOne("cmon.stnd.apiStndMng.searchTcUserBase", params);
-		
+		Map<String, String> user = dao.selectOne("cmon.stnd.apiStndMng.searchTcApiStnd", params);
+
 		Map<String, String> rtnMap = new HashMap<>();
 		if ( user == null || GEUtil.isEmpty(user.get("svrId")) ) {
 			rtnMap.put("existsYn", "N");
 		} else {
 			rtnMap.put("existsYn", "Y");
 		}
-		
+
 		return rtnMap;
 	}
 	
 	@Transactional
-	public void saveUser(Map<String, String> params) throws BizException
+	public void saveApi(Map<String, String> params) throws BizException
 	{
 		int saveCnt = 0;
 		
@@ -64,13 +64,13 @@ public class ApiStndMngServiceImpl implements ApiStndMngService
 		
 			Map<String, String> existUserParam = new HashMap<>();
 			existUserParam.put("svrId", (String) params.get("svrId"));
-			Map<String, String> user = dao.selectOne("cmon.stnd.apiStndMng.searchTcUserBase", existUserParam);
+			Map<String, String> user = dao.selectOne("cmon.stnd.apiStndMng.searchTcApiStnd", existUserParam);
 
-			saveCnt = dao.insert("cmon.stnd.apiStndMng.insertTcUserBase", params);
+			saveCnt = dao.insert("cmon.stnd.apiStndMng.insertTcApiStnd", params);
 			
 		} else if ( "U".equals(params.get("crud")) ) {
 			
-			saveCnt = dao.update("cmon.stnd.apiStndMng.updateTcUserBase", params);
+			saveCnt = dao.update("cmon.stnd.apiStndMng.updateTcApiStnd", params);
 			
 		} else if ( "D".equals(params.get("crud")) ) {
 			
@@ -78,7 +78,7 @@ public class ApiStndMngServiceImpl implements ApiStndMngService
 			deleteMap.put("svrId", params.get("svrId"));
 			deleteMap.put("useYn" , "N");
 			
-			saveCnt = dao.delete("cmon.stnd.apiStndMng.deleteTcUserBase", deleteMap);
+			saveCnt = dao.delete("cmon.stnd.apiStndMng.deleteTcApiStnd", deleteMap);
 
 		}
 			

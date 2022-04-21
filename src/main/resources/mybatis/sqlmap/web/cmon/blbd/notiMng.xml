@@ -44,7 +44,8 @@
 		,upt_user_id
 		from   TS_BLBD_BASE
 		where  1=1
-		and    blbd_no = #{blbdNo}::numeric
+		<if test=" blbdNo != null and blbdNo != '' ">
+		and    blbd_no = #{blbdNo}::numeric     </if>
 	</select>
 	
 	<insert id="insertTsBlbdBase" parameterType="java.util.Map">

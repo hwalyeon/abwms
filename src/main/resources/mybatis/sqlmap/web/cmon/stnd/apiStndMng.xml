@@ -3,7 +3,7 @@
 
 <mapper namespace="cmon.stnd.apiStndMng">
 	
-	<select id="searchTcUserBase" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="searchTcApiStnd" parameterType="java.util.Map" resultType="MybatisMap">
 	SELECT SVR_ID
 		  ,SVR_NM
 		  ,API_URL
@@ -70,7 +70,7 @@
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
 	
-	<insert id="insertTcUserBase" parameterType="java.util.Map">
+	<insert id="insertTcApiStnd" parameterType="java.util.Map">
 	insert into tc_api_stnd
 	(
 		 svr_id
@@ -125,7 +125,7 @@
 	)
 	</insert>
 	
-	<update id="updateTcUserBase" parameterType="java.util.Map">
+	<update id="updateTcApiStnd" parameterType="java.util.Map">
 	UPDATE TC_API_STND
 	SET    UPT_DT      = TO_CHAR(NOW(), 'YYYYMMDD')
 	      ,UPT_TM      = TO_CHAR(NOW(), 'HH24MMIS')
@@ -151,7 +151,7 @@
 	     AND    SVR_ID  = #{svrId}
 	</update>
 	
-	<delete id="deleteTcUserBase" parameterType="java.util.Map">
+	<delete id="deleteTcApiStnd" parameterType="java.util.Map">
 	DELETE
 	FROM   TC_API_STND
 	WHERE  SVR_ID = #{svrId}
