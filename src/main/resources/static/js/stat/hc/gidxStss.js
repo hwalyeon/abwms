@@ -153,15 +153,15 @@ let gidxStss = new Vue({
                     {
                         label: '성장지수',
                         data: [],
-                        borderColor : "#fcdd84",
-                        backgroundColor: "#0000ff",
+                        borderColor : "#d6e5eb",
+                        backgroundColor: "#d6e5eb",
                         order : 1
                     } ,
                     {
                         label: '',
                         data: [],
-                        borderColor: "#f60636",
-                        backgroundColor: "#f50940",
+                        borderColor: "#FBD5B0",
+                        backgroundColor: "#FBD5B0",
                         type: 'line',
                         order: 0
                     }
@@ -344,8 +344,6 @@ let gidxStss = new Vue({
             let $this = this;
             let params = $.extend(true, {}, $this.params);
 
-            console.log(params);
-            return false;
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;
@@ -421,6 +419,7 @@ let gidxStss = new Vue({
 			// $this.initGrid();
 
         },
+
         //gfidxHist 화면에서 팝업 호출 시 param 값 세팅
         setParam: function(param) {
             let $this =this;
@@ -433,19 +432,25 @@ let gidxStss = new Vue({
                 params = param;
             }
 
-            $this.params.perdDivCd = 'DAY';
-            $this.params.occrDivCd = '02';
-            $this.params.stndDtFr  = params.gfixDtFr;
-            $this.params.stndDtTo  = params.gfixDtTo;
-            $this.params.sexCd     = params.sexCd;
-            $this.params.ageYcntFr = params.ageFr;
-            $this.params.ageYcntTo = params.ageTo;
+            if(WebUtil.isNotNull(params.gfixDtFr)){
+                $this.params.perdDivCd = 'DAY';
+                $this.params.occrDivCd = '02';
+                $this.params.stndDtFr  = params.gfixDtFr;
+                $this.params.stndDtTo  = params.gfixDtTo;
+                $this.params.sexCd     = params.sexCd;
+                $this.params.ageYcntFr = params.ageFr;
+                $this.params.ageYcntTo = params.ageTo;
+            }
         }
     },
     computed: {
 
     },
     watch: {
+        'params.occrDivCd': function() {
+            let $this = this;
+            $this.updateGidxJudgChart();
+        },
 
     },
     mounted: function() {

@@ -191,15 +191,15 @@ let strsStss = new Vue({
                     {
                         label: '스트레스지수',
                         data: [],
-                        borderColor : "#fcdd84",
-                        backgroundColor: "#0000ff",
+                        borderColor : "#d6e5eb",
+                        backgroundColor: "#d6e5eb",
                         order : 1
                     } ,
                     {
                         label: '',
                         data: [],
-                        borderColor: "#f60636",
-                        backgroundColor: "#f50940",
+                        borderColor: "#FBD5B0",
+                        backgroundColor: "#FBD5B0",
                         type: 'line',
                         order: 0
                     }
@@ -486,6 +486,10 @@ let strsStss = new Vue({
 
     },
     watch: {
+        'params.occrDivCd': function() {
+            let $this = this;
+            $this.updateStrsJudgChart();
+        },
 
     },
     mounted: function() {

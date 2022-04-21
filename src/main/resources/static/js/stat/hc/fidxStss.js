@@ -157,7 +157,7 @@ let fidxStss = new Vue({
                 labels : [],
                 datasets: [
                     {
-                        label: '성장지수',
+                        label: '비만지수',
                         data: [],
                         borderColor : "#fcdd84",
                         backgroundColor: "#0000ff",
@@ -233,7 +233,7 @@ let fidxStss = new Vue({
             $this.chartFidxJudg = new Chart(ctxFidxJudg, configFidxJudg);
         },
 
-        // 성장지수 차트
+        // 비만지수 차트
         updateFidxChart: function() {
             let $this = this;
 
@@ -256,10 +256,10 @@ let fidxStss = new Vue({
                 labels : fidxLabels,
                 datasets: [
                     {
-                        label: '성장지수',
+                        label: '비만지수',
                         data: fidxData,
-                        borderColor : "#fcdd84",
-                        backgroundColor: "#D6E5EB",
+                        borderColor : "#d6e5eb",
+                        backgroundColor: "#d6e5eb",
                         order : 1,
                         datalabels:{
                             display:false
@@ -284,7 +284,7 @@ let fidxStss = new Vue({
 
         },
 
-        // 성장판정상태 차트
+        // 비만판정상태 차트
         updateFidxJudgChart: function() {
             let $this = this;
 
@@ -603,21 +603,25 @@ let fidxStss = new Vue({
             } else {
                 params = param;
             }
-
-            $this.params.perdDivCd = 'DAY';
-            $this.params.occrDivCd = '02';
-            $this.params.stndDtFr  = params.gfixDtFr;
-            $this.params.stndDtTo  = params.gfixDtTo;
-            $this.params.sexCd     = params.sexCd;
-            $this.params.ageYcntFr = params.ageFr;
-            $this.params.ageYcntTo = params.ageTo;
+            if(WebUtil.isNotNull(params.gfixDtFr)) {
+                $this.params.perdDivCd = 'DAY';
+                $this.params.occrDivCd = '02';
+                $this.params.stndDtFr = params.gfixDtFr;
+                $this.params.stndDtTo = params.gfixDtTo;
+                $this.params.sexCd = params.sexCd;
+                $this.params.ageYcntFr = params.ageFr;
+                $this.params.ageYcntTo = params.ageTo;
+            }
         }
     },
     computed: {
 
     },
     watch: {
-
+        'params.occrDivCd': function() {
+            let $this = this;
+            $this.updateFidxJudgChart();
+        },
     },
     mounted: function() {
         let self = this;
