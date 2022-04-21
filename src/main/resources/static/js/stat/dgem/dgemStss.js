@@ -19,11 +19,11 @@ let dgemStss = new Vue({
         code : {
             perdDivList : [],
             stndDtList: [],
-            growJudgCdList : [],
+            dgemStssCdList : [],
             sexCdList : []
         },
-        chartGidx : null,
-        chartGidxJudg : null,
+        chartDgem : null,
+        chartDgemStss : null,
     },
     mixins: [statComponent],
     methods: {
@@ -70,10 +70,10 @@ let dgemStss = new Vue({
                             $this.code.stndDtList.push({'stndDt':item.stndDt});
                         });
                     }
-                    $this.code.growJudgCdList = [];
-                    if ( !!response.rtnData.growJudgCdList && response.rtnData.growJudgCdList.length > 0 ) {
-                        $.each(response.rtnData.growJudgCdList, function(index, item) {
-                            $this.code.growJudgCdList.push({'cdVal':item.cdVal, 'cdNm':item.cdNm});
+                    $this.code.dgemStssCdList = [];
+                    if ( !!response.rtnData.dgemStssCdList && response.rtnData.dgemStssCdList.length > 0 ) {
+                        $.each(response.rtnData.dgemStssCdList, function(index, item) {
+                            $this.code.dgemStssCdList.push({'cdVal':item.cdVal, 'cdNm':item.cdNm});
                         });
                     }
 
@@ -101,8 +101,8 @@ let dgemStss = new Vue({
                 }
             }
 
-            $("#gidx_list").jqGrid("GridUnload");
-            $("#gidx_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+            $("#dgem_list").jqGrid("GridUnload");
+            $("#dgem_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
                 pginput : false,
@@ -111,41 +111,41 @@ let dgemStss = new Vue({
                 colModel: colModels
             }));
 
-            resizeJqGridWidth("gidx_list", "gidx_list_wrapper");
+            resizeJqGridWidth("dgem_list", "dgem_list_wrapper");
 
 
 
-            let colModelsJudg = [
+            let colModelsStss = [
                 {name: "divCd"      , index: "divCd"      , label: "구분"   , width: 100, align: "center"},
                 {name: "total"      , index: "total"      , label: "TOTAL"   , width: 80, align: "center"}
             ];
 
-            if($this.code.growJudgCdList.length > 0){
-                for(var i in $this.code.growJudgCdList ){
-                    var data = $this.code.growJudgCdList[i];
-                    colModelsJudg.push( {name:data.cdVal , index:data.cdVal , label:data.cdNm ,  width: 80} );
+            if($this.code.dgemStssCdList.length > 0){
+                for(var i in $this.code.dgemStssCdList ){
+                    var data = $this.code.dgemStssCdList[i];
+                    colModelsStss.push( {name:data.cdVal , index:data.cdVal , label:data.cdNm ,  width: 80} );
                 }
             }
 
-            $("#gidxJudg_list").jqGrid("GridUnload");
-            $("#gidxJudg_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+            $("#dgemStss_list").jqGrid("GridUnload");
+            $("#dgemStss_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
                 pginput : false,
                 height: 60,
                 url: '/stat/dgem/dgemStss/searchDgemJudgList.ab',
-                colModel: colModelsJudg
+                colModel: colModelsStss
             }));
 
 
-            resizeJqGridWidth("gidxJudg_list", "gidxJudg_list_wrapper");
+            resizeJqGridWidth("dgemStss_list", "dgemStss_list_wrapper");
         },
 
         initChart: function (){
             let $this = this;
-            if ($this.chartGidx != null )  $this.chartGidx.destroy();
-            if ($this.chartGidxJudg != null ) $this.chartGidxJudg.destroy();
-            let dataGidx = {
+            if ($this.chartDgem != null )  $this.chartDgem.destroy();
+            if ($this.chartDgemStss != null ) $this.chartDgemStss.destroy();
+            let dataDgem = {
                 labels : [],
                 datasets: [
                     {
@@ -166,7 +166,7 @@ let dgemStss = new Vue({
                 ]
             };
 
-            let dataGidxJudg = {
+            let dataDgemStss = {
                 labels : [],
                 datasets: [
                     {
@@ -177,7 +177,7 @@ let dgemStss = new Vue({
                 ]
             };
 
-            let optionsGidx = {
+            let optionsDgem = {
                 responsive : false,
                 plugins: {
                     legend: {
@@ -190,7 +190,7 @@ let dgemStss = new Vue({
                 }
             };
 
-            let optionsGidxJudg = {
+            let optionsDgemStss = {
                 responsive : false,
                 plugins: {
                     legend: {
@@ -202,54 +202,54 @@ let dgemStss = new Vue({
                 }
             };
 
-            let ctxGidx = document.getElementById('gidxChart').getContext('2d');
-            let ctxGidxJudg = document.getElementById('gidxJudgChart').getContext('2d');
+            let ctxDgem = document.getElementById('dgemChart').getContext('2d');
+            let ctxDgemStss = document.getElementById('dgemStssChart').getContext('2d');
 
-            let configGidx = {
+            let configDgem = {
                 type : 'bar',
-                data : dataGidx,
-                options: optionsGidx,
+                data : dataDgem,
+                options: optionsDgem,
                 plugins: [ChartDataLabels]
             };
 
 
 
-            let configGidxJudg = {
+            let configDgemStss = {
                 type : 'pie',
-                data : dataGidxJudg,
-                options: optionsGidxJudg,
+                data : dataDgemStss,
+                options: optionsDgemStss,
                 plugins: [ChartDataLabels]
             };
 
-            $this.chartGidx = new Chart(ctxGidx, configGidx);
-            $this.chartGidxJudg = new Chart(ctxGidxJudg, configGidxJudg);
+            $this.chartDgem = new Chart(ctxDgem, configDgem);
+            $this.chartDgemStss = new Chart(ctxDgemStss, configDgemStss);
         },
 
         // 위험감정지수 차트
-        updateGidxChart: function() {
+        updateDgemChart: function() {
             let $this = this;
 
-            var gridData = $("#gidx_list").getRowData(1);
-            let gridColModel = $("#gidx_list").jqGrid("getGridParam","colModel");
+            var gridData = $("#dgem_list").getRowData(1);
+            let gridColModel = $("#dgem_list").jqGrid("getGridParam","colModel");
 
-            var gidxLabels = [];
-            var gidxData = [];
+            var dgemLabels = [];
+            var dgemData = [];
 
             if(gridData != null){
                 for (let data in gridColModel) {
                     if(gridColModel[data].name != 'divCd') {
-                        gidxLabels.push(gridColModel[data].name);
-                        gidxData.push(gridData[gridColModel[data].name]);
+                        dgemLabels.push(gridColModel[data].name);
+                        dgemData.push(gridData[gridColModel[data].name]);
                     }
                 }
             }
 
-            let dataGidx = {
-                labels : gidxLabels,
+            let dataDgem = {
+                labels : dgemLabels,
                 datasets: [
                     {
                         label: '위험감정지수',
-                        data: gidxData,
+                        data: dgemData,
                         borderColor : "#d6e5eb",
                         backgroundColor: "#d6e5eb",
                         order : 1,
@@ -259,7 +259,7 @@ let dgemStss = new Vue({
                     } ,
                     {
                         label: '',
-                        data: gidxData,
+                        data: dgemData,
                         borderColor: "#FBD5B0",
                         backgroundColor: "#FBD5B0",
                         type: 'line',
@@ -271,41 +271,41 @@ let dgemStss = new Vue({
                 ]
             };
 
-            $this.chartGidx.data = dataGidx;
-            $this.chartGidx.update();
+            $this.chartDgem.data = dataDgem;
+            $this.chartDgem.update();
 
         },
 
-        // 성장판정상태 차트
-        updateGidxJudgChart: function() {
+        // 위험감정상태 차트
+        updateDgemStssChart: function() {
             let $this = this;
 
-            var gridData = $("#gidxJudg_list").getRowData(1);
-            var gridData2 = $("#gidxJudg_list").getRowData(2);
-            let gridColModel = $("#gidxJudg_list").jqGrid("getGridParam","colModel");
+            var gridData = $("#dgemStss_list").getRowData(1);
+            var gridData2 = $("#dgemStss_list").getRowData(2);
+            let gridColModel = $("#dgemStss_list").jqGrid("getGridParam","colModel");
 
-            var gidxLabels = [];
-            var gidxData = [];
-            var gidxColor = [];
+            var dgemLabels = [];
+            var dgemData = [];
+            var dgemColor = [];
 
             if(gridData != null){
                 for (let data in gridColModel) {
                     if(gridColModel[data].name != 'divCd' &&  gridColModel[data].name != 'total') {
-                        gidxLabels.push(gridColModel[data].label);
+                        dgemLabels.push(gridColModel[data].label);
                         if($this.params.occrDivCd == '01') {
-                            gidxData.push(gridData[gridColModel[data].name]);
+                            dgemData.push(gridData[gridColModel[data].name]);
                         }else {
-                            gidxData.push(gridData2[gridColModel[data].name]);
+                            dgemData.push(gridData2[gridColModel[data].name]);
                         }
                     }
                 }
             }
 
-            let dataGidxJudg = {
-                labels : gidxLabels,
+            let dataDgemStss = {
+                labels : dgemLabels,
                 datasets: [
                     {
-                        data: gidxData,
+                        data: dgemData,
                         borderColor : ["#fcf8f8" , "#fcf8f8" , "#fcf8f8", "#fcf8f8", "#fcf8f8"],
                         backgroundColor: ["#FEAFAB" , "#FBD5B0" , "#D6E5EB", "#D9F1F2", "#FBDEE2"],
                         datalabels:{
@@ -333,8 +333,8 @@ let dgemStss = new Vue({
                 ]
             };
 
-            $this.chartGidxJudg.data = dataGidxJudg;
-            $this.chartGidxJudg.update();
+            $this.chartDgemStss.data = dataDgemStss;
+            $this.chartDgemStss.update();
 
         },
 
@@ -348,7 +348,7 @@ let dgemStss = new Vue({
                 params.currentIndex = 0;
             }
 
-            $("#gidx_list").setGridParam({
+            $("#dgem_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,
@@ -356,12 +356,12 @@ let dgemStss = new Vue({
                     if ( response.rtnData.result == 0 ) {
                         Swal.alert(['조회할 내용이 없습니다.', "info"]);
                     }
-                    $this.updateGidxChart();
+                    $this.updateDgemChart();
                 }
             }).trigger("reloadGrid");
 
 
-            $("#gidxJudg_list").setGridParam({
+            $("#dgemStss_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,
@@ -369,7 +369,7 @@ let dgemStss = new Vue({
                     if ( response.rtnData.result == 0 ) {
                         Swal.alert(['조회할 내용이 없습니다.', "info"]);
                     }
-                    $this.updateGidxJudgChart();
+                    $this.updateDgemStssChart();
 
                 }
             }).trigger("reloadGrid");
@@ -414,9 +414,6 @@ let dgemStss = new Vue({
             }
 
             $this.initData();
-            // $this.initChart();
-            // $this.initGrid();
-
         },
     },
     computed: {
