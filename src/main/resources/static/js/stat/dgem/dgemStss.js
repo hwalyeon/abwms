@@ -420,7 +420,10 @@ let dgemStss = new Vue({
 
     },
     watch: {
-
+        'params.occrDivCd': function() {
+            let $this = this;
+            $this.updateDgemStssChart();
+        },
     },
     mounted: function() {
         let self = this;

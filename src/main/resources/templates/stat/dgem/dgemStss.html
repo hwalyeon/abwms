@@ -121,8 +121,8 @@
 						<i class="fa fa-title-bar"></i>
 						<h5>위험감정상태</h5>
 						<div class="float_right">
-							<input type="radio" v-icheck v-model="params.occrDivCd" value="01" @change="updateDgemStssChart()"><span>발생건수</span></input>
-							<input type="radio" v-icheck v-model="params.occrDivCd" value="02" @change="updateDgemStssChart()"><span>발생비율(%)</span></input>
+							<input type="radio" v-model="params.occrDivCd" value="01" v-icheck><span>  발생건수</span></input>
+							<input type="radio" v-model="params.occrDivCd" value="02" v-icheck><span>  발생비율(%)</span></input>
 						</div>
 					</div>
 					<div class="ibox-content">

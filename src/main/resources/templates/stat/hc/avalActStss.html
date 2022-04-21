@@ -87,9 +87,9 @@
 				<i class="fa fa-title-bar"></i>
 				<h5>평균 운동시간</h5>
 				<div class="float_right">
-					<input type="radio" v-icheck v-model="params.occrDivCd" value="1" @change="updateAvalActChart($event.target.value)"><span>운동시간(분)</span></input>
+					<input type="radio" v-model="params.occrDivCd" value="1" v-icheck><span>  운동시간(분)</span></input>
 					<span style="padding-right:10px;"></span>
-					<input type="radio" v-icheck v-model="params.occrDivCd" value="2" @change="updateAvalActChart($event.target.value)"><span>칼로리(g)</span></input>
+					<input type="radio" v-model="params.occrDivCd" value="2" v-icheck><span>  칼로리(g)</span></input>
 				</div>
 			</div>
 			<div class="ibox-content">

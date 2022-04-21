@@ -87,9 +87,9 @@
 					<i class="fa fa-title-bar"></i>
 					<h5>위험지역 발생 추이</h5>
 					<div class="float_right">
-						<input type="radio" v-icheck v-model="params.occrDivCd" value="1" @change="updateDzoneStssChart($event.target.value)"><span>발생건수</span></input>
+						<input type="radio" v-model="params.occrDivCd" value="1" v-icheck><span>  발생건수</span></input>
 						<span style="padding-right:10px;"></span>
-						<input type="radio" v-icheck v-model="params.occrDivCd" value="2" @change="updateDzoneStssChart($event.target.value)"><span>발생학생수</span></input>
+						<input type="radio" v-model="params.occrDivCd" value="2" v-icheck><span>  발생학생수</span></input>
 					</div>
 				</div>
 				<div class="ibox-content">

@@ -24,7 +24,7 @@ let neatStss = new Vue({
                 },
             title:
                 {
-                    text:''
+                    text:'결식건수'
                 },
             code :
                 {
@@ -64,12 +64,9 @@ let neatStss = new Vue({
             {
                 let $this = this;
 
-                var nowDate = new Date();
+                $this.statInitData();
 
-                $this.params.stndDtFr =moment(nowDate).add(-7, "days").format(dateFormatPattern);
-                $this.params.stndDtTo =moment(nowDate).add(-1, "days").format(dateFormatPattern);
-
-                $this.params.perdDivCd = 'DAY';
+                $this.params.occrDivCd = '1';
             },
             initSearch: function()
             {
@@ -343,7 +340,10 @@ let neatStss = new Vue({
 
     },
     watch: {
-
+        'params.occrDivCd': function(value) {
+            let $this = this;
+            $this.updateNeatChart(value);
+        },
     },
     mounted: function() {
         let self = this;
