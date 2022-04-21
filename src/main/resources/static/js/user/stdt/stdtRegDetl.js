@@ -32,7 +32,7 @@ let stdtRegDetl = new Vue({
         	let $this = this;
 
         	$this.initCodeList();
-		//	$this.initChart();
+
         },
         initCodeList: function() {
         	let $this = this;
@@ -43,7 +43,7 @@ let stdtRegDetl = new Vue({
         },
         initPage: function() {
         	let $this = this;
-			//$this.resetParam();
+			$this.resetParam();
         },
         isValid: function() {
         	let $this = this;
@@ -85,7 +85,16 @@ let stdtRegDetl = new Vue({
 		resetParam: function() {
 			let $this = this;
 			$this.params = {
-				crud : 'C'
+				crud : 'C',
+				stdtNm : '',
+				bandId : '',
+				eorgLocNo : '',
+				sgrdCd : '',
+				sexCd : '',
+				raceDivCd : '',
+				hghtVal : 0,
+				wghtVal : 0,
+				wastVal : 0
 			}
 		}
 
