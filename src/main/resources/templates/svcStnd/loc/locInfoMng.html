@@ -167,8 +167,9 @@
 						<div class="form-group">
 							<div class="col-xs-4">
 								자료구분<br>
-								<input type="radio" v-icheck name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GORG" :disabled="locInfoSpec.crud=='U'" v-on:click="changeGorgNoSpec()"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-								<input type="radio" v-icheck name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GUAR" :disabled="locInfoSpec.crud=='U'" v-on:click="changeGuarNoSpec()"/><span>&nbsp;&nbsp;보호자지정</span>
+
+								<input type="radio"  name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GORG" :disabled="locInfoSpec.crud=='U'" v-icheck /><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<input type="radio"  name="rdGorgGuarDivSpec" v-model="locInfoSpec.rdGorgGuarDivSpec" value="GUAR" :disabled="locInfoSpec.crud=='U'" v-icheck /><span>&nbsp;&nbsp;보호자지정</span>
 								<br><br>
 								위치번호
 								<input type="text" name ="locNo" class="form-control" v-model="locInfoSpec.locNo" :disabled="true">
