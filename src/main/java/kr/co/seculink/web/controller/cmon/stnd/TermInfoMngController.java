@@ -59,7 +59,8 @@ public class TermInfoMngController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"성장판정코드","성장판정코드명","성장지수_FORM","성장지수_TO","요약내용","상세내용","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
+		String [] arrHeader = {"약관구분코드","약관구분코드명","약관버전","적용시작일자","약관내용","필수여부"
+					          ,"정렬순서","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
 		List<String> headerList = Arrays.asList(arrHeader);
 
 		List<List<String>> dataList = new ArrayList<List<String>>();
@@ -68,12 +69,13 @@ public class TermInfoMngController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<String>();
-			data.add(String.valueOf(info.get("growJudgCd")));
-			data.add(String.valueOf(info.get("growJudgNm")));
-			data.add(String.valueOf(info.get("gidxFr")));
-			data.add(String.valueOf(info.get("gidxTo")));
-			data.add(String.valueOf(info.get("smryCntn")));
-			data.add(String.valueOf(info.get("specCntn")));
+			data.add(info.get("termDivCd"));
+			data.add(info.get("termDivNm"));
+			data.add(info.get("termVer"));
+			data.add(info.get("aplyStrtDt"));
+			data.add(info.get("termCntn"));
+			data.add(info.get("essnYn"));
+			data.add(String.valueOf(info.get("sortOrd")));
 			data.add(info.get("regDt"));
 			data.add(info.get("regTm"));
 			data.add(info.get("regUserId"));

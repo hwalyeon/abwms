@@ -60,10 +60,10 @@ let csInfoDetl = new Vue({
         	
         	let $this = this;        	        	
         	
-        	if ( WebUtil.isNull($this.csInfoMngInfo.regNo) ) {
+        	/*if ( WebUtil.isNull($this.csInfoMngInfo.regNo) ) {
         		Swal.alert(['등록번호를 입력하세요.', 'info']);
         		return false;
-        	}
+        	}*/
         	
         	if ( WebUtil.isNull($this.csInfoMngInfo.csTelNo) ) {
         		Swal.alert(['고객지원 전화번호를 입력하세요.', 'info']);
@@ -95,6 +95,13 @@ let csInfoDetl = new Vue({
                 return false;
             }
 
+			if ( $this.csInfoMngInfo.crud === 'C' ) {
+				if ( isValidEmail($this.csInfoMngInfo.csMailAddr)==false){
+					Swal.alert(['이메일을 형식에 맞춰 입력 하세요','info']);
+					return false;
+				}
+			}
+
 			AjaxUtil.post({
                 url: "/cmon/stnd/csInfoMng/saveInfo.ab",
                 param: $this.csInfoMngInfo,
@@ -107,6 +114,7 @@ let csInfoDetl = new Vue({
                 error: function (response) {
                 	Swal.alert([response, 'error']);
                 }
+
             });
 
 		},

@@ -20,6 +20,7 @@
               <if test=" regNo != null and regNo!= '' ">
 		AND    reg_no = #{regNo}::NUMERIC /* reg_no 등록_번호 numeric */
               </if>
+        order  by reg_no
         </select>
 
        <insert id="insertTsCsInfo"  parameterType="java.util.Map" >
@@ -58,7 +59,7 @@
               )
               VALUES
               (
-                      #{regNo}::NUMERIC  /* reg_no 등록_번호 numeric */
+                     (select max(reg_no)+1 from ts_cs_info)  /* reg_no 등록_번호 numeric */
               <if test="csTelNo != null">
                      ,#{csTelNo}/* cs_tel_no 고객지원_전화_번호 character varying(20) */
               </if>
@@ -68,7 +69,7 @@
               <if test="csUrl != null">
                      ,#{csUrl} /* cs_url 고객지원_URL character varying(4000) */
               </if>
-                     ,#{bandHpgeUrl}::NUMERIC /* band_hpge_url 밴드_홈페이지_URL numeric */
+                     ,#{bandHpgeUrl}  /* band_hpge_url 밴드_홈페이지_URL numeric */
               <if test="regDt != null">
                      ,#{regDt} /* reg_dt 등록_일자 character(8) */
               </if>

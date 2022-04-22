@@ -69,8 +69,8 @@ let csInfoMng = new Vue({
 
 
 
-            $("#grid_list").jqGrid("GridUnload");
-            $("#grid_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+            $("#csInfo_list").jqGrid("GridUnload");
+            $("#csInfo_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
                 url: '/cmon/stnd/csInfoMng/searchCsInfoList.ab',
@@ -87,7 +87,7 @@ let csInfoMng = new Vue({
                 }
             }));
 
-            resizeJqGridWidth("grid_list", "grid_list_wrapper");
+            resizeJqGridWidth("csInfo_list", "csInfo_list_wrapper");
         },
         searchCsInfoList: function(isSearch) {
 
@@ -98,7 +98,7 @@ let csInfoMng = new Vue({
                 params.currentIndex = 0;
             }
 
-            $("#grid_list").setGridParam({
+            $("#csInfo_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,

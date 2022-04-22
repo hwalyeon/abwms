@@ -96,7 +96,7 @@ let dzoneStss = new Vue({
 
                 let colModels =
                     [
-                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center" }
+                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center"}
                     ];
 
                 if($this.code.stndDtList.length > 0){
@@ -217,8 +217,6 @@ let dzoneStss = new Vue({
                 }else{
                     $this.title.text ='발생학생수'
                 }
-
-
 
                 var gridData      = $("#dzoneStss_list").getRowData(rowId);
                 let gridColModel  = $("#dzoneStss_list").jqGrid("getGridParam","colModel");

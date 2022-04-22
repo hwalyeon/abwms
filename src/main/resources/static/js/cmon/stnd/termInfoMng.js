@@ -54,10 +54,10 @@ let termInfoMng = new Vue({
                 {name: "regTm"                , index: "regTm"                , label: "등록시각"            , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                               }},
                 {name: "regUserId"            , index: "regUserId"            , label: "등록사용자ID"        , width: 80, align: "center"},
-                {name: "uptTm"                , index: "uptTm"                , label: "수정시각"            , width: 80, align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                               }},
                 {name: "uptDt"                , index: "uptDt"                , label: "수정일자"            , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                               }},
+                {name: "uptTm"                , index: "uptTm"                , label: "수정시각"            , width: 80, align: "center"
+                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                               }},
                 {name: "uptUserId"            , index: "uptUserId"            , label: "수정사용자ID"        , width: 80, align: "center"},
                 {name: "termInfoDetlPop"  , index: "termInfoDetlPop"      , label: "상세정보보기"        , width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {

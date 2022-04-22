@@ -9,7 +9,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
 						<i class="fa fa-title-bar"></i>
-						<h5>사용자 정보</h5>
+						<h5>API 기준 정보</h5>
 					</div>
 				</div>
 						<div class="pd_left_none pd_right_none col-xs-6 float_left">
@@ -22,54 +22,54 @@
 									<tbody>
 									<tr>
 										<th scope="row">서버 ID</th>
-										<td v-if="userInfo.crud == 'C'">
-											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk" maxlength="40"/>
-											<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupSvrId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
+										<td v-if="apiInfo.crud == 'C'">
+											<input type="text" name="svrId" v-model="apiInfo.svrId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk" maxlength="40"/>
+											<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupSvrId()" v-show="apiInfo.crud == 'C'"><span>중복조회</span></button>
 										</td>
-										<td v-else="userInfo.crud == 'U'">
-											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control" @input="userIdChk" readonly/>
+										<td v-else="apiInfo.crud == 'U'">
+											<input type="text" name="svrId" v-model="apiInfo.svrId" class="form-control" @input="userIdChk" readonly/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">서버 명</th>
 										<td>
-											<input type="text" name="svrNm" v-model="userInfo.svrNm" class="form-control ime-han" maxlength="40"/>
+											<input type="text" name="svrNm" v-model="apiInfo.svrNm" class="form-control ime-han" maxlength="40"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">GPS정기핑 기본 주기</th>
 										<td>
-											<input type="text" id="gpsBaseCycl" name="gpsBaseCycl" v-model="userInfo.gpsBaseCycl" class="form-control" maxlength="100"/>
+											<input type="text" id="gpsBaseCycl" name="gpsBaseCycl" v-model="apiInfo.gpsBaseCycl" class="form-control" maxlength="100"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">GPS정기핑 다음 주기</th>
 										<td>
-											<input type="text" id="gpsNextCycl" name="gpsNextCycl" v-model="userInfo.gpsNextCycl" class="form-control" maxlength="20" />
+											<input type="text" id="gpsNextCycl" name="gpsNextCycl" v-model="apiInfo.gpsNextCycl" class="form-control" maxlength="20" />
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">정기판정 다음 주기</th>
 										<td>
-											<input type="text" id="rdetNextCycl" name="rdetNextCycl" v-model="userInfo.rdetNextCycl" class="form-control" maxlength="20" />
+											<input type="text" id="rdetNextCycl" name="rdetNextCycl" v-model="apiInfo.rdetNextCycl" class="form-control" maxlength="20" />
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">정기판정 기본 주기</th>
 										<td>
-											<input type="email" id="rdetBaseCycl" name="rdetBaseCycl" v-model="userInfo.rdetBaseCycl" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="rdetBaseCycl" name="rdetBaseCycl" v-model="apiInfo.rdetBaseCycl" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">LED 슬립 시간</th>
 										<td>
-											<input type="email" id="ledSlepTcnt" name="ledSlepTcnt" v-model="userInfo.ledSlepTcnt" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="ledSlepTcnt" name="ledSlepTcnt" v-model="apiInfo.ledSlepTcnt" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">모션센서 감지 레벨</th>
 										<td>
-											<input type="email" id="msorSsngLevl" name="msorSsngLevl" v-model="userInfo.msorSsngLevl" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="msorSsngLevl" name="msorSsngLevl" v-model="apiInfo.msorSsngLevl" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									</tbody>
@@ -87,49 +87,49 @@
 									<tr>
 										<th scope="row">심박센서 내부감지 주기</th>
 										<td>
-											<input type="email" id="hsorIsngCycl" name="hsorIsngCycl" v-model="userInfo.hsorIsngCycl" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="hsorIsngCycl" name="hsorIsngCycl" v-model="apiInfo.hsorIsngCycl" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">체온센서 내부감지 주기</th>
 										<td>
-											<input type="email" id="tsorIsngCycl" name="tsorIsngCycl" v-model="userInfo.tsorIsngCycl" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="tsorIsngCycl" name="tsorIsngCycl" v-model="apiInfo.tsorIsngCycl" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">체온센서 이벤트 하한값</th>
 										<td>
-											<input type="email" id="tsorEvntMinval" name="tsorEvntMinval" v-model="userInfo.tsorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="tsorEvntMinval" name="tsorEvntMinval" v-model="apiInfo.tsorEvntMinval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">체온센서 이벤트 상한값</th>
 										<td>
-											<input type="email" id="tsorEvntMaxval" name="tsorEvntMaxval" v-model="userInfo.tsorEvntMaxval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="tsorEvntMaxval" name="tsorEvntMaxval" v-model="apiInfo.tsorEvntMaxval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">심박수 중간값 하한값</th>
 										<td>
-											<input type="email" id="hbitcntMdanMinval" name="hbitcntMdanMinval" v-model="userInfo.hbitcntMdanMinval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="hbitcntMdanMinval" name="hbitcntMdanMinval" v-model="apiInfo.hbitcntMdanMinval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">심박수 중간값 상한값</th>
 										<td>
-											<input type="email" id="hbitcntMdanMaxval" name="hbitcntMdanMaxval" v-model="userInfo.hbitcntMdanMaxval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="hbitcntMdanMaxval" name="hbitcntMdanMaxval" v-model="apiInfo.hbitcntMdanMaxval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">모션센서 이벤트 하한값</th>
 										<td>
-											<input type="email" id="msorEvntMinval" name="msorEvntMinval" v-model="userInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="msorEvntMinval" name="msorEvntMinval" v-model="apiInfo.msorEvntMinval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row">모션센서 이벤트 상한값</th>
 										<td>
-											<input type="email" id="msorEvntMaxval" name="msorEvntMaxval" v-model="userInfo.msorEvntMaxval" class="form-control ime-eng" maxlength="50"/>
+											<input type="email" id="msorEvntMaxval" name="msorEvntMaxval" v-model="apiInfo.msorEvntMaxval" class="form-control ime-eng" maxlength="50"/>
 										</td>
 									</tr>
 									</tbody>
@@ -147,7 +147,7 @@
 							<tr>
 								<th scope="row">API-URL</th>
 								<td>
-									<input type="email" id="apiUrl" name="apiUrl" v-model="userInfo.apiUrl" class="form-control ime-eng" maxlength="50"/>
+									<input type="email" id="apiUrl" name="apiUrl" v-model="apiInfo.apiUrl" class="form-control ime-eng" maxlength="50"/>
 								</td>
 							</tr>
 							</tbody>
@@ -160,7 +160,7 @@
 						<div class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveApi">저장</button>
 						</div>
-						<div v-if="userInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
+						<div v-if="apiInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteApi">삭제</button>
 						</div>
 						<div class="disp_in_block width_per_20">
