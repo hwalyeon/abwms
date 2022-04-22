@@ -208,14 +208,7 @@ let bandOpenInfoMng = new Vue({
                     $this.params.uptDtTo = $('#uptDtTo').val();
                 });
             },
-            //기준_일자_기간_선택
-            bDPerSelect: function()
-            {
-                let $this = this;
-                const terms = getPeriodDate($this.params.bDPer);
-                this.params.uptDtFr = terms.strDt;
-                this.params.uptDtTo = terms.endDt;
-            },
+
             //밴드/개통 정보 목록 조회
             searchBandOpenInfoList: function(isSearch)
             {
