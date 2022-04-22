@@ -63,6 +63,9 @@ let locInfoMng = new Vue({
         locNoList           : null,
         positionList        : null,
         rectangleList       : null,
+        markerList          : [],
+        drawManager         : null,
+        drawRectangle       : [],
         drawList: {
             flag            : false,
             locNo           : -1,
@@ -107,7 +110,7 @@ let locInfoMng = new Vue({
             northLat        : 0,
             westLng         : 0,
             eastLng         : 0,
-            dist            : 5,
+            dist            : 10,
             title           : '',
             infoWndw        : null,
         },
@@ -119,12 +122,12 @@ let locInfoMng = new Vue({
             wordHead1List       : [],
             wordHead2List       : [],
             wordHead2ListFilter : [],
-            guarNoList          : [],
-            stdtNoList          : [],
-            stdtNoListFilter    : [],
-            guarNoListSepc      : [],
-            stdtNoListSpec      : [],
-            stdtNoListFilterSpec : [],
+            // guarNoList          : [], // jcw : 팝업 조회로 변경하여 불필요.
+            // stdtNoList          : [], // jcw : 팝업 조회로 변경하여 불필요.
+            // stdtNoListFilter    : [], // jcw : 팝업 조회로 변경하여 불필요.
+            // guarNoListSpec      : [], // jcw : 팝업 조회로 변경하여 불필요.
+            // stdtNoListSpec      : [], // jcw : 팝업 조회로 변경하여 불필요.
+            // stdtNoListFilterSpec : [], // jcw : 팝업 조회로 변경하여 불필요.
             locApntCdList       : []
         }
     },
@@ -175,6 +178,7 @@ let locInfoMng = new Vue({
                 $this.map.setCenter($this.getLatLng($this.locInfoSpec.latVal, $this.locInfoSpec.lonVal));
             }
 
+
             $this.map.setDraggable(true);
             $this.map.setZoomable(true);
 
@@ -198,10 +202,85 @@ let locInfoMng = new Vue({
             // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
             searchAddrFromCoords($this.map.getCenter(), displayCenterInfo);
 
+
+
+
+            if (!$this.drawManager) {
+
+                let options = { // Drawing Manager를 생성할 때 사용할 옵션입니다
+                    map: $this.map, // Drawing Manager로 그리기 요소를 그릴 map 객체입니다
+                    drawingMode: [
+                        kakao.maps.Drawing.OverlayType.RECTANGLE,
+                    ],
+                    // 사용자에게 제공할 그리기 가이드 툴팁입니다
+                    // 사용자에게 도형을 그릴때, 드래그할때, 수정할때 가이드 툴팁을 표시하도록 설정합니다
+                    guideTooltip: ['draw', 'drag', 'edit'],
+                    markerOptions: {
+                        draggable       : true,
+                        editable        : true, // 그린 후 수정할 수 있도록 설정합니다
+                        removable       : true
+                    },
+                    rectangleOptions: {
+                        draggable       : true,
+                        removable       : true,
+                        strokeWeight    : 1, // 선의 두께입니다
+                        strokeColor     : '#39f', // 선의 색깔입니다
+                        strokeOpacity   : 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                        strokeStyle     : 'shortdashdot', // 선의 스타일입니다
+                        fillColor       : '#39f', // 채우기 색깔입니다
+                        fillOpacity     : 0.4 // 채우기 불투명도 입니다
+                    },
+                };
+
+                // 위에 작성한 옵션으로 Drawing Manager를 생성합니다
+                $this.drawManager = new kakao.maps.Drawing.DrawingManager(options);
+
+                // console.log('jcw manager.getData() :: ', $this.drawManager.getData());
+                // Toolbox를 생성합니다.
+                // Toolbox 생성 시 위에서 생성한 DrawingManager 객체를 설정합니다.
+                // DrawingManager 객체를 꼭 설정해야만 그리기 모드와 매니저의 상태를 툴박스에 설정할 수 있습니다.
+                let toolbox = new kakao.maps.Drawing.Toolbox({drawingManager: $this.drawManager});
+
+                // 지도 위에 Toolbox를 표시합니다
+                // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOP은 위 가운데를 의미합니다.
+                $this.map.addControl(toolbox.getElement(), kakao.maps.ControlPosition.TOP);
+
+            }
+
+            // jcw 테스트 중...
+            // 직사각형과 정사각형 그리는 방식 중 한가지만 되도록..
+            // 1. 정사각형 그리기 시도 시 $this.drawRectangle.length 가 0보다 클 때 못하도록 (체크 완료!)
+            // 2. 직사각형 그리기 시도 시 $this.draw.rectangle.length 가 0보다 클 때 못하다록?? (이건 체크 필요!!)
+            {
+                // $this.drawManager.addListener('drawstart', function(drawstartMouseEvent) { });
+
+                $this.drawManager.addListener('drawend', function(drawendMouseEvent) {
+
+                    let jcwTest = $this.drawManager.getData();
+
+                    console.log("jcw !! jcwTest !! :: ", jcwTest.rectangle[0].sPoint.y);
+                    $this.drawRectangle.push(drawendMouseEvent);
+
+                    console.log("jcw $this.drawRectangle 초기화 전 :: ", $this.drawRectangle);
+                    console.log("jcw $this.drawRectangle 초기화 전 length :: ", $this.drawRectangle.length);
+
+                    if($this.drawRectangle.length > 1) {
+                        $this.drawRectangle[0].target.setMap(null);
+                        $this.drawRectangle[0].target._closeButton.setMap(null);
+                        $this.drawRectangle = [];
+                        $this.drawRectangle[0] = drawendMouseEvent;
+                    }
+                });
+            }
+
+
+
             // 지도에 클릭 이벤트를 등록합니다
             // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
             // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
             kakao.maps.event.addListener($this.map, 'click', function(mouseEvent) {
+
+
 
                 $this.mapCont.mouseEvent = mouseEvent;
                 $this.locInfoSpec.valdRngeDist = $this.draw.dist;
@@ -235,7 +314,18 @@ let locInfoMng = new Vue({
 
                             // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                             $this.infowindow.setContent(content);
-                            $this.infowindow.open($this.map, $this.mapCont.marker);
+
+                            // 마커에 마우스오버 이벤트를 등록합니다
+                            kakao.maps.event.addListener($this.mapCont.marker, 'mouseover', function() {
+                                // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                                $this.infowindow.open($this.map, $this.mapCont.marker);
+                            });
+
+                            // 마커에 마우스아웃 이벤트를 등록합니다
+                            kakao.maps.event.addListener($this.mapCont.marker, 'mouseout', function() {
+                                // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                                $this.infowindow.close();
+                            });
 
                             $this.locInfoSpec.pstno     = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.zone_no : $this.mapCont.result[0].address.zip_code;
                             $this.locInfoSpec.addrBase  = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.address_name : $this.mapCont.result[0].address.address_name;
@@ -280,7 +370,17 @@ let locInfoMng = new Vue({
 
                 // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                 $this.infowindow.setContent(content);
-                $this.infowindow.open($this.map, $this.mapCont.marker);
+                // 마커에 마우스오버 이벤트를 등록합니다
+                kakao.maps.event.addListener($this.mapCont.marker, 'mouseover', function() {
+                    // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+                    $this.infowindow.open($this.map, $this.mapCont.marker);
+                });
+
+                // 마커에 마우스아웃 이벤트를 등록합니다
+                kakao.maps.event.addListener($this.mapCont.marker, 'mouseout', function() {
+                    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+                    $this.infowindow.close();
+                });
 
                 $this.setRectangle();
 
@@ -293,7 +393,7 @@ let locInfoMng = new Vue({
 
             // 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
             kakao.maps.event.addListener($this.map, 'dragend', function() {
-                alert("jcw 지도이동 ");
+                // alert("jcw 지도이동 ");
                 $this.changedBound();
             });
 
@@ -344,17 +444,17 @@ let locInfoMng = new Vue({
             $this.currNeLat = neLat;
             $this.currNeLng = neLng;
 
-            console.log($this.currLat, $this.currLng, $this.currSwLat, $this.currSwLng, $this.currNeLat, $this.currNeLng);
-            console.log(cntrLat, cntrLng, swLat, swLng, neLat, neLng);
+            // console.log($this.currLat, $this.currLng, $this.currSwLat, $this.currSwLng, $this.currNeLat, $this.currNeLng);
+            // console.log(cntrLat, cntrLng, swLat, swLng, neLat, neLng);
             $this.searchZoneList();
         },
         searchZoneList: function() {
             let $this = this;
-            console.log("jcw searchZoneList :: ");
+            // console.log("jcw searchZoneList :: ");
             if ( $this.currSwLat > 0.0 && $this.currSwLng > 0.0 && $this.currNeLat > 0.0 && $this.currNeLng > 0.0 )
             {
-                alert("jcw search currSwLat !!! "+ $this.currSwLat+ " / "+ $this.oldSwLat);
-                console.log("jcw search currSwLat !!! ", $this.currSwLat, " / ", $this.oldSwLat);
+                // alert("jcw search currSwLat !!! "+ $this.currSwLat+ " / "+ $this.oldSwLat);
+                // console.log("jcw search currSwLat !!! ", $this.currSwLat, " / ", $this.oldSwLat);
                 const params = {
                     latVal          : $this.currLat,
                     lonVal          : $this.currLng,
@@ -367,18 +467,18 @@ let locInfoMng = new Vue({
                     oldNestLatVal   : $this.oldNeLat,
                     oldNestLonVal   : $this.oldNeLng
                 }
-                console.log("jcw 11 :: ");
+                // console.log("jcw 11 :: ");
                 AjaxUtil.post({
                     url: '/svcStnd/loc/locInfoMng/searchLocZoneList.ab',
                     param: params,
                     success: function(response) {
-                        console.log("jcw 22 :: ", response);
-                        console.log("jcw 22 !!response rtnData :: ", !!response["rtnData"]);
-                        console.log("jcw 22 !!response rtnData result :: ", !!response["rtnData"].result);
-                        console.log("jcw 22 !!response length :: ", response["rtnData"].result.length);
+                        // console.log("jcw 22 :: ", response);
+                        // console.log("jcw 22 !!response rtnData :: ", !!response["rtnData"]);
+                        // console.log("jcw 22 !!response rtnData result :: ", !!response["rtnData"].result);
+                        // console.log("jcw 22 !!response length :: ", response["rtnData"].result.length);
                         if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 )
                         {
-                            // const markerObj = _.cloneDeep($this.markerList);
+                            const markerObj = _.cloneDeep($this.markerList);
                             // let markerCreateObjList = [];
                             // $this.zoneList = [];
                             // $.each(response["rtnData"].result, function(index, data) {
@@ -388,28 +488,32 @@ let locInfoMng = new Vue({
                             //         // $this.markerList.push(data.locNo);
                             //     }
                             // });
-                            console.log("jcw 44 :: ");
+                            // console.log("jcw 44 :: ");
                             // $.each(markerCreateObjList, function(index, marker) {
                             $.each(response["rtnData"].result, function(index, marker) {
-                                let markerImage = {
-                                    plcCd     : marker.plcCd,
-                                    plcClssCd : marker.plcClssCd,
-                                    locApntCd : marker.locApntCd
-                                };
-                                // console.log("jcw 55 :: ", markerCreateObjList);
-                                console.log("jcw marker :: ", marker);
-                                $this.setDraw(marker);
-                                console.log("jcw markerImage :: ", markerImage);
-                                $this.setMarker($this.drawList.cntrPos, markerImage);
-                                $this.setRectangleList();
+                                if ( markerObj.length === 0 || markerObj.findIndex( (locNo) => locNo === marker.locNo ) === -1 ) {
+                                    $this.markerList.push(marker.locNo);
 
-                                // jcw
-                                // if ( marker.locApntCd === 'GUAR' ) {
-                                //     $this.zoneList.push($this.drawList);
-                                // }
-                                // $this.zoneList.push($this.drawList);
-                                console.log("jcw initDrawValue 전 :: ");
-                                $this.initDrawValue();
+                                    let markerImage = {
+                                        plcCd     : marker.plcCd,
+                                        plcClssCd : marker.plcClssCd,
+                                        locApntCd : marker.locApntCd
+                                    };
+                                    // console.log("jcw 55 :: ", markerCreateObjList);
+                                    // console.log("jcw marker :: ", marker);
+                                    $this.setDraw(marker);
+                                    // console.log("jcw markerImage :: ", markerImage);
+                                    $this.setMarker($this.drawList.cntrPos, markerImage);
+                                    $this.setRectangleList(markerImage.plcClssCd);
+
+                                    // jcw
+                                    // if ( marker.locApntCd === 'GUAR' ) {
+                                    //     $this.zoneList.push($this.drawList);
+                                    // }
+                                    // $this.zoneList.push($this.drawList);
+                                    // console.log("jcw initDrawValue 전 :: ");
+                                    $this.initDrawValue();
+                                }
                             });
                         }
 
@@ -448,12 +552,12 @@ let locInfoMng = new Vue({
         },
         setDraw: function(params) {
             let $this = this;
-            console.log("jcw setDraw params :: ", params);
-            console.log("jcw setDraw params.plcClssCd :: ", params.plcClssCd);
-            console.log("jcw setDraw params.plcNm :: ", params.plcNm);
-            console.log("jcw setDraw params.latVal :: ", params.latVal);
-            console.log("jcw setDraw params.lonVal :: ", params.lonVal);
-            console.log("jcw setDraw params.lonVal typeof :: ", typeof params.lonVal);
+            // console.log("jcw setDraw params :: ", params);
+            // console.log("jcw setDraw params.plcClssCd :: ", params.plcClssCd);
+            // console.log("jcw setDraw params.plcNm :: ", params.plcNm);
+            // console.log("jcw setDraw params.latVal :: ", params.latVal);
+            // console.log("jcw setDraw params.lonVal :: ", params.lonVal);
+            // console.log("jcw setDraw params.lonVal typeof :: ", typeof params.lonVal);
             $this.drawList = {
                 flag         : false,
                 locNo        : params.locNo,
@@ -485,7 +589,7 @@ let locInfoMng = new Vue({
             if ( WebUtil.isNotNull(pos.getLat()) && WebUtil.isNotNull(pos.getLng()) ) {
 
                 let marker = $this.addMarker(pos, markerImage);
-                console.log("jcw setMarker marker :: ", marker);
+                // console.log("jcw setMarker marker :: ", marker);
 
                 // 인포윈도우를 생성합니다
                 const infowindow = new kakao.maps.InfoWindow({
@@ -693,8 +797,8 @@ let locInfoMng = new Vue({
             let overOrigin   = new kakao.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
             // console.log("jcw getZoneMarkerImage 메소드 SPRITE");
-            console.log(SPRITE_HEIGHT);
-            console.log(originY);
+            // console.log(SPRITE_HEIGHT);
+            // console.log(originY);
 
             // 기본 마커이미지, 오버 마커이미지, 클릭 마커이미지를 생성합니다
             let normal = $this.splitImage(imageFile, markerSize    , markerOffset    , normalOrigin, spriteImageSize);
@@ -730,9 +834,9 @@ let locInfoMng = new Vue({
             return 1 / (88.8 * 1000);
         },
         getLatLng: function(lat, lng) {
-            console.log("jcw getLatLng lat :: " , lat);
-            console.log("jcw getLatLng lng :: " , lng);
-            console.log("jcw getLatLng lng :: " , typeof lat);
+            // console.log("jcw getLatLng lat :: " , lat);
+            // console.log("jcw getLatLng lng :: " , lng);
+            // console.log("jcw getLatLng lng :: " , typeof lat);
             // console.log("jcw getLatLng lat.lat :: " , lat.lat);
             // console.log("jcw getLatLng lat.lng :: " , lat.lng);
             if ( typeof lat === 'object' ) {
@@ -825,26 +929,55 @@ let locInfoMng = new Vue({
             // 사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
             return new kakao.maps.LatLngBounds(sw, ne);
         },
-        setRectangleList : function() {
+        setRectangleList : function(div) {
             let $this = this;
 
             // 사각형을 구성하는 영역정보를 생성합니다
             // 사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
             var rectangleBounds = $this.getRectBoundList();
 
-            // 지도에 표시할 사각형을 생성합니다
-            if ( !$this.drawList.rectangle ) {
-                $this.drawList.rectangle = new kakao.maps.Rectangle({
-                    bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
-                    strokeWeight    : 1, // 선의 두께입니다
-                    strokeColor     : '#39f', // 선의 색깔입니다
-                    strokeOpacity   : 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                    strokeStyle     : 'shortdashdot', // 선의 스타일입니다
-                    fillColor       : '#39f', // 채우기 색깔입니다
-                    fillOpacity     : 0.4 // 채우기 불투명도 입니다
-                });
+            if(div === 'SZONE') {
+                // 지도에 표시할 사각형을 생성합니다
+                if ( !$this.drawList.rectangle ) {
+                    $this.drawList.rectangle = new kakao.maps.Rectangle({
+                        bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
+                        strokeWeight    : 1, // 선의 두께입니다
+                        strokeColor     : '#3dccb2', // 선의 색깔입니다
+                        strokeOpacity   : 0.3, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                        strokeStyle     : 'shortdashdot', // 선의 스타일입니다
+                        fillColor       : '#3dccb2', // 채우기 색깔입니다
+                        fillOpacity     : 0.2 // 채우기 불투명도 입니다
+                    });
+                }
+            } else if(div === 'DZONE') {
+                // 지도에 표시할 사각형을 생성합니다
+                if ( !$this.drawList.rectangle ) {
+                    $this.drawList.rectangle = new kakao.maps.Rectangle({
+                        bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
+                        strokeWeight    : 1, // 선의 두께입니다
+                        strokeColor     : '#ec4f42', // 선의 색깔입니다
+                        strokeOpacity   : 0.3, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                        strokeStyle     : 'shortdashdot', // 선의 스타일입니다
+                        fillColor       : '#ec4f42', // 채우기 색깔입니다
+                        fillOpacity     : 0.2 // 채우기 불투명도 입니다
+                    });
+                }
+            } else {
+                // 지도에 표시할 사각형을 생성합니다
+                if ( !$this.drawList.rectangle ) {
+                    $this.drawList.rectangle = new kakao.maps.Rectangle({
+                        bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
+                        strokeWeight    : 1, // 선의 두께입니다
+                        strokeColor     : '#ffee33', // 선의 색깔입니다
+                        strokeOpacity   : 0.4, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+                        strokeStyle     : 'shortdashdot', // 선의 스타일입니다
+                        fillColor       : '#ffee33', // 채우기 색깔입니다
+                        fillOpacity     : 0.3 // 채우기 불투명도 입니다
+                    });
+                }
             }
-            console.log("jcw setRectangleList :: ");
+
+            // console.log("jcw setRectangleList :: ");
             $this.drawList.rectangle.setBounds(rectangleBounds);
             // 지도에 사각형을 표시합니다
             $this.drawList.rectangle.setMap($this.map);
@@ -882,7 +1015,8 @@ let locInfoMng = new Vue({
             $this.code.plcCdListFilter      = $this.code.plcCdList;
             $this.code.plcCdListFilterSpec  = $this.code.plcCdList;
             $this.searchAddrHeadList();
-            $this.searchGuarStdtList();
+            // jcw 팝업 조회로 변경하여 불필요.
+            // $this.searchGuarStdtList();
         },
         initGrid: function() {
             let $this = this;
@@ -894,7 +1028,7 @@ let locInfoMng = new Vue({
                 {name: "plcNm"          , index: "plcNm"        , label: "장소구분상세"  , width: 63         , align: "center"},
                 {name: "guarNm"         , index: "guarNo"       , label: "보호자"       , width: 50         , align: "center"},
                 {name: "stdtNm"         , index: "stdtNo"       , label: "학생"        , width: 50          , align: "center"},
-                {name: "regUserId"      , index: "regUserId"    , label: "등록자"       , width: 35         , align: "center"},
+                // {name: "regUserId"      , index: "regUserId"    , label: "등록자"       , width: 35         , align: "center"},
                 {name: "stdtNo"         , index: "stdtNo"       , label: "학생"         , width: 35         , align: "center"     , hidden:true}
             ];
 
@@ -922,6 +1056,7 @@ let locInfoMng = new Vue({
                         $this.mapCont.draggable  = 'true';
                         $this.setMarking();
                         $this.searchLocInfoSpec(true);
+                        // $this.searchZoneList();
                     }
                 },
                 gridComplete: function () {
@@ -988,6 +1123,7 @@ let locInfoMng = new Vue({
                 }
             });
         },
+        // jcw : 팝업 조회로 변경하여 불필요.
         searchGuarStdtList : function() {
             let $this = this;
 
@@ -1263,8 +1399,12 @@ let locInfoMng = new Vue({
             return true;
         },
         //학생 및 보호자 search 팝업
-        locStdtGuarPopup: function() {
-            locStdtGuarPopup.initialize(this.setPopupData);
+        locStdtGuarPopup: function(div) {
+            if(div === "search") {
+                locStdtGuarPopup.initialize(this.setPopupData);
+            } else if( div === "reg") {
+                locStdtGuarPopup.initialize(this.setRegPopupData);
+            }
         },
         //(학생 및 보호자 번호 , 학교명) 팝업 Grid 값 부모창 input 값에 삽입
         setPopupData: function(data) {
@@ -1275,6 +1415,15 @@ let locInfoMng = new Vue({
                 $this.params.stdtNm = data.stdtNm;
                 $this.params.guarNo = data.guarNo;
                 $this.params.guarNm = data.guarNm;
+            }
+        },
+        //(학생 및 보호자 번호 , 학교명) 팝업 Grid 값 부모창 input 값에 삽입
+        setRegPopupData: function(data) {
+            let $this = this;
+
+            if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined) {
+                $this.locInfoSpec.stdtNo = data.stdtNo;
+                $this.locInfoSpec.guarNo = data.guarNo;
             }
         },
         changePlcClssCd : function () {
@@ -1408,10 +1557,8 @@ let locInfoMng = new Vue({
     watch: {
         'locInfoSpec.rdGorgGuarDivSpec': function(value) {
             let $this = this;
-            if(value == 'GORG'){
+            if(value === 'GORG'){
                 $this.changeGorgNoSpec();
-            }else if(value == 'GUAR'){
-                $this.changeGuarNoSpec();
             }
         },
         currLevel: function(newVal, oldVal) {
