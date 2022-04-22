@@ -208,14 +208,7 @@ let bandOpenInfoMng = new Vue({
                     $this.params.uptDtTo = $('#uptDtTo').val();
                 });
             },
-            //기준_일자_기간_선택
-            bDPerSelect: function()
-            {
-                let $this = this;
-                const terms = getPeriodDate($this.params.bDPer);
-                this.params.uptDtFr = terms.strDt;
-                this.params.uptDtTo = terms.endDt;
-            },
+
             //밴드/개통 정보 목록 조회
             searchBandOpenInfoList: function(isSearch)
             {
@@ -298,7 +291,7 @@ let bandOpenInfoMng = new Vue({
             },
             //학생정보상세 팝업
             regStdtInfoDetlPopup: function(stdtNo, guarNo){
-                stdtInfoDetl.initPage(stdtNo, guarNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
+                stdtRegDetl.initPage(stdtNo, guarNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
             resetSearchParam: function()
             {

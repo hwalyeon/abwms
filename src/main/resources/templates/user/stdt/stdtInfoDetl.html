@@ -4,7 +4,7 @@
 <div class="modal fade" id="stdtInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 1600px; height: 930px">
+			<div class="modal-content" style="width: 1600px; padding-bottom:20px;">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -86,175 +86,356 @@
 										</div>
 									</td>
 								</tr>
-			                    <tr>
-									<th scope="row">보호자 및 학부모정보</th>
-									<td>
-										<div class="form-horizontal">
-											<div class="form-group">
+								<!--보호자 및 학부모 정보-->
+			                    <tr style="border-top: 7px solid #e5e6e7">
+									<td colspan="2" style="border-right: 7px solid #e5e6e7; padding-top:0px;" >
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">보호자 및 학부모 정보</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:105%; margin:0px 0px 20px -15px"></div>
+
 												<label class="col-xs-2 control-label">보호자번호</label>
-												<div class="col-xs-2"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.guarNo" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												<div class="col-xs-3">
+													<input type="text" name="" v-model="stdtInfo.guarNo" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<label class="col-xs-2 control-label">학부모번호</label>
-												<div class="col-xs-2"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.prntNo" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												<div class="col-xs-3">
+													<input type="text" name="" v-model="stdtInfo.prntNo" class="form-control"  :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 											</div>
-											<div class="form-group">
+											<div class="form-group" style="margin-bottom: 5px;">
 												<label class="col-xs-2 control-label">보호자명</label>
-												<div class="col-xs-2"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.guarNm" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												<div class="col-xs-3">
+													<input type="text" name="" v-model="stdtInfo.guarNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<label class="col-xs-2 control-label">학부모_남자</label>
-												<div class="col-xs-2"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.prntMale" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												<div class="col-xs-3" >
+													<input type="text" name="" v-model="stdtInfo.prntMale" class="form-control":readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+												<div class="col-xs-2" >
+													<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="" v-on:click="">학부모 정보</button>
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="col-xs-2 control-label">보호자전화번호</label>
-												<div class="col-xs-2"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.guarTelNo" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												<div class="col-xs-3">
+													<input type="text" name="" v-model="stdtInfo.guarTelNo" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<label class="col-xs-2 control-label">학부모_여자</label>
-												<div class="col-xs-2"  style="padding:0px">
-													<input type="text" name="" v-model="stdtInfo.prntFemale" class="form-control" style="height:20px" :readonly="stdtInfo.crud=='U'"/>
+												<div class="col-xs-3">
+													<input type="text" name="" v-model="stdtInfo.prntFemale" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 											</div>
 										</div>
 									</td>
-			                        <th scope="row">밴드상태</th>
-									<td>
-										<div id="chartBand" class ="float_left">
-											<canvas id="bandStatChart" width="120" height="100">
-												<span>정상</span>
-											</canvas>
+									<!--밴드 상태-->
+									<td style="border-right: none; padding-top:0px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">밴드 상태</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
+
+												<div id="chartBand" class ="float_left">
+													<canvas id="bandStatChart" width="120" height="122">
+														<span>정상</span>
+													</canvas>
+												</div>
+											</div>
 										</div>
-										<div id="bandDetl">
-											<label class="col-xs-2 control-label">밴드ID</label>
-											<input type="text" name="" v-model="stdtInfo.bandId" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-2 control-label">밴드전화번호</label>
-											<input type="text" name="" v-model="stdtInfo.bandTelNo" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-2 control-label">밴드상태</label>
-											<input type="text" name="" v-model="stdtInfo.bandStatNm" class="" :readonly="stdtInfo.crud=='U'"/></br>
-
-											<label class="col-xs-2 control-label">최근통신</label>
-											<input type="text" name="" v-model="stdtInfo.bandCommDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+									</td>
+									<td style="border-left: none; padding:0px 8px 5px 30px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<div id="bandDetl" style="margin-top:40px;">
+													<label class="col-xs-2 control-label">밴드ID</label>
+													<div class="col-xs-4" style="height: 34px;">
+														<input type="text" name="" v-model="stdtInfo.bandId" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+													</div>
+													<label class="col-xs-2 control-label"></label>
+													<label class="col-xs-2 control-label" style="margin-right: 0px;padding-right: 0px;">최근통신</label>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label" style="padding-right: 0px">밴드전화번호</label>
+												<div class="col-xs-4"style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.bandTelNo" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-2 control-label"></label>
+												<!--최근 통신-->
+												<div class="col-xs-4"style="height: 34px; margin-left:0px;">
+													<input type="text" name="" v-model="stdtInfo.bandCommDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label">밴드상태</label>
+												<div class="col-xs-4"style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.bandStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/></br>
+												</div>
+											</div>
 										</div>
 									</td>
 			                    </tr>
-								<tr>
-									<th scope="row">학생위치</th>
-									<td>
-										<div id=chartLoc  class ="float_left">
-											<canvas id="stdtLocChart" width="120" height="100">
+								<!--학생 위치-->
+								<tr style="border-top: 7px solid #e5e6e7; padding-top:0px; ">
+									<td style="border-right: none; padding-top:0px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px;margin-left:-20px">학생 위치</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 
-											</canvas>
-										</div>
-										<div id="locDetl">
-											<label class="col-xs-2 control-label">위치분류</label>
-											<input type="text" name="" v-model="stdtInfo.plcClssNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+												<div id=chartLoc  class ="float_left">
+													<canvas id="stdtLocChart" width="120" height="122">
 
-											<label class="col-xs-2 control-label">위치명</label>
-											<input type="text" name="" v-model="stdtInfo.locNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-2 control-label">위도/경도</label>
-											<input type="text" name="" v-model="stdtInfo.latLonVal" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-2 control-label">최근통신</label>
-											<input type="text" name="" v-model="stdtInfo.occrDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+													</canvas>
+												</div>
+											</div>
 										</div>
 									</td>
-									<th scope="row">위험감정지수</th>
-									<td>
-										<div id="chartDgem" class ="float_left">
-											<canvas id="dgemChart" width="120" height="100">
-
-											</canvas>
+									<td style="border-left: none; border-right: 7px solid #e5e6e7; padding:0px 8px 5px 30px;" >
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<div id="locDetl" style="margin-top:40px;">
+													<label class="col-xs-2 control-label">위치분류</label>
+													<div class="col-xs-4"style="height: 34px;">
+														<input type="text" name="" v-model="stdtInfo.plcClssNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+													</div>
+													<label class="col-xs-2 control-label"></label>
+													<label class="col-xs-4 control-label" style="margin-right: 0px;padding-right: 0px;">최근통신</label>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label">위치명</label>
+												<div class="col-xs-4"style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.locNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-2 control-label"></label>
+												<!--최근 통신-->
+												<div class="col-xs-4"style="height: 34px; ">
+													<input type="text" name="" v-model="stdtInfo.occrDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label">위도/경도</label>
+												<div class="col-xs-4"style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.latLonVal" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-2 control-label"></label>
+												<div class="col-xs-4" >
+													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">학생위치 정보</button>
+												</div>
+											</div>
 										</div>
-										<div class="">
-											<div id="dgemDetl">
-												<p class="level_tit mt60"><span style="font-size: 15px;" >{{stdtInfo.dgemStatNm}}</span></p>
-												<div id="dgemCntn"></div></br>
-												<label class="col-xs-2 control-label">최근통신</label>
-												<input type="text" name="" v-model="stdtInfo.locMesuDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+									</td>
+									<!--위험감정지수-->
+									<td style="border-right: none;padding-top:0px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">위험감정지수</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
+
+												<div id="chartDgem" class ="float_left">
+													<canvas id="dgemChart" width="120" height="122">
+
+													</canvas>
+												</div>
+											</div>
+										</div>
+									</td>
+									<td style=" padding:0px 8px 5px 30px; border-left: none; ">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<div class="col-xs-8" style="height: 14px;">
+													<div id="dgemDetl" style="margin-top:40px;">
+														<p class="level_tit mt60"><span style="font-size: 15px;" >{{stdtInfo.dgemStatNm}}</span></p>
+													</div>
+												</div>
+												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 55px;">
+													<div id="dgemCntn"></div></br>
+												</div>
+												<label class="col-xs-2 control-label"style="margin-top:36px;"><span style="display:inline-block; margin-bottom:13px;">최근통신</span></label>
+												<div class="col-xs-4"style="height: 34px; margin-bottom: 5px;">
+													<input type="text" name="" v-model="stdtInfo.locMesuDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+												<div class="col-xs-4" >
+													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">위험감정 상세</button>
+												</div>
 											</div>
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<th scope="row">성장지수</th>
-									<td>
-										<div id=chartGrow class ="float_left">
-											<canvas id="growChart" width="120" height="100">
+								<!--성장 지수-->
+								<tr style="border-top: 7px solid #e5e6e7">
+									<td style="border-right: none; padding-top:0px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px;margin-top:0px; margin-left:-20px">성장지수</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 
-											</canvas>
-										</div>
-										<div id="growDetl">
-											<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.growJudgNm}}</span></p>
-											<div id="growCntn"></div></br>
-											<label class="col-xs-2 control-label">최근통신</label>
-											<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+												<div id=chartGrow class ="float_left">
+													<canvas id="growChart" width="120" height="122">
+
+													</canvas>
+												</div>
+											</div>
 										</div>
 									</td>
-									<th scope="row">비만지수</th>
-									<td>
-										<div id="chartFat" class ="float_left">
-											<canvas id="fatChart" width="120" height="100">
-
-											</canvas>
+									<td style="padding-left:30px; border-left: none; border-right: 7px solid #e5e6e7; padding-top:0px;" >
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<div class="col-xs-8"style="height: 14px;">
+													<div id="growDetl"style="margin-top:40px;">
+														<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.growJudgNm}}</span></p>
+													</div>
+												</div>
+												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 55px;">
+													<div id="growCntn"></div></br>
+												</div>
+												<label class="col-xs-2 control-label"style="margin-top:36px;"><span style="display:inline-block; margin-bottom:13px;">최근통신</span></label>
+												<div class="col-xs-4"style="height: 34px; margin-bottom: 5px;">
+													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+												<div class="col-xs-4" >
+													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">성장 상세</button>
+												</div>
+											</div>
 										</div>
-										<div id="fatDetl">
-											<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.fatJudgNm}} -> {{stdtInfo.fatpJudgNm}}</span></p>
-											<div id="fatCntn"></div></br>
-											<label class="col-xs-2 control-label">최근통신</label>
-											<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+									</td>
+									<!--비만 지수-->
+									<td style="border-right: none;padding-top:0px; ">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px; margin-left:-20px">비만지수</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
+												<div id="chartFat" class ="float_left">
+													<canvas id="fatChart" width="120" height="122">
+
+													</canvas>
+												</div>
+											</div>
+										</div>
+									</td>
+									<td style="padding-left:30px; border-left: none; padding-top:0px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<div class="col-xs-8"style="height: 14px;">
+													<div id="fatDetl" style="margin-top:40px;">
+														<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.fatJudgNm}} -> {{stdtInfo.fatpJudgNm}}</span></p>
+													</div>
+												</div>
+												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 55px;">
+													<div id="fatCntn"></div></br>
+												</div>
+												<label class="col-xs-2 control-label"style="margin-top:36px;"><span style="display:inline-block; margin-bottom:13px;">최근통신</span></label>
+												<div class="col-xs-4"style="height: 34px; margin-bottom: 5px;">
+													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+												<div class="col-xs-4" >
+													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">비만 상세</button>
+												</div>
+											</div>
 										</div>
 									</td>
 								</tr>
-								<tr>
-									<th scope="row">영양섭취/운동(칼로리)</th>
-									<td>
-										<div id="nutrEatDetl">
-											<label class="col-xs-2 control-label">일 평균 섭취량</label>
-											<input type="text" name="" v-model="stdtInfo.calEatQty" class="" :readonly="stdtInfo.crud=='U'"/> </br>
+								<!--영양 섭취/운동(칼로리)-->
+								<tr style="border-top: 7px solid #e5e6e7">
+									<td colspan="2"  style="border-right: 7px solid #e5e6e7; padding-top:0px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">영양 섭취/운동(칼로리)</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:105%; margin:0px 0px 20px -15px"></div>
 
-											<label class="col-xs-2 control-label">영양섭취상태</label>
-											<input type="text" name="" v-model="stdtInfo.calNutrStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-2 control-label">일 평균 운동량</label>
-											<input type="text" name="" v-model="stdtInfo.calCsumQty" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-2 control-label">PAL</label>
-											<input type="text" name="" v-model="stdtInfo.palVal" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-2 control-label">최근통신</label>
-											<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+												<label class="col-xs-2 control-label">일 평균 섭취량</label>
+												<div class="col-xs-3"style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.calEatQty" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-4 control-label"></label>
+												<label class="col-xs-2 control-label" style="padding-left:0px;">최근통신</label>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label">영양섭취상태</label>
+												<div class="col-xs-3"style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.calNutrStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-4 control-label"></label>
+												<!--최근통신-->
+												<div class="col-xs-3" style="padding-left:0px;">
+													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label">일 평균 운동량</label>
+												<div class="col-xs-3"style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.calCsumQty" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-4 control-label"></label>
+												<div class="col-xs-3" style="padding-left:0px;" >
+													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">영양섭취상세</button>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label">PAL</label>
+												<div class="col-xs-3" style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.palVal" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-4 control-label"></label>
+												<div class="col-xs-3" style="padding-left:0px;" >
+													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">운동이력</button>
+												</div>
+											</div>
 										</div>
 									</td>
-									<th scope="row">스트레스(정신적/신체적)</th>
-									<td>
-										<div id="chartStrs" class ="float_left">
-											<canvas id="strsChart" width="120" height="100">
+									<!--스트레스(정신적/신체적)-->
+									<td style="border-right: none;padding-top:0px; ">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px; margin-top:-28px;">
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px; margin-left:-20px">스트레스</label>
+												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
+												<div id="chartStrs" class ="float_left">
+													<canvas id="strsChart" width="150" height="122">
 
-											</canvas>
+													</canvas>
+												</div>
+											</div>
 										</div>
-										<div id="strsDetl">
-											<label class="col-xs-3 control-label">평균심박</label>
-											<input type="text" name="" v-model="stdtInfo.avgHbitCnt" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-3 control-label">정신적스트레스</label>
-											<input type="text" name="" v-model="stdtInfo.mentStrsStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-3 control-label">신체적스트레스</label>
-											<input type="text" name="" v-model="stdtInfo.physStrsStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-3 control-label">대처능력</label>
-											<input type="text" name="" v-model="stdtInfo.strsCopeStatNm" class="" :readonly="stdtInfo.crud=='U'"/> </br>
-
-											<label class="col-xs-3 control-label">최근통신</label>
-											<input type="text" name="" v-model="stdtInfo.strsUptDttm" class="" :readonly="stdtInfo.crud=='U'"/>
+									</td>
+									<td style="padding-left:45px; border-left: none; padding-top:0px;">
+										<div class="form-horizontal" style="padding-left: 20px">
+											<div class="form-group" style="margin-bottom: 5px;">
+												<div id="strsDetl" style="margin-top:40px;">
+													<label class="col-xs-2 control-label">평균심박</label>
+													<div class="col-xs-4" style="height: 34px;">
+														<input type="text" name="" v-model="stdtInfo.avgHbitCnt" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+													</div>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label" style="padding-right:0px;">정신적스트레스</label>
+												<div class="col-xs-4" style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.mentStrsStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-2 control-label"></label>
+												<label class="col-xs-2 control-label">최근통신</label>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label" style="padding-right:0px;">신체적스트레스</label>
+												<div class="col-xs-4" style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.physStrsStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-2 control-label"></label>
+												<div class="col-xs-4" style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.strsUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+											</div>
+											<div class="form-group" style="margin-bottom: 5px;">
+												<label class="col-xs-2 control-label">대처능력</label>
+												<div class="col-xs-4" style="height: 34px;">
+													<input type="text" name="" v-model="stdtInfo.strsCopeStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+												</div>
+												<label class="col-xs-2 control-label"></label>
+												<div class="col-xs-4"  >
+													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">스트레스 상세</button>
+												</div>
+											</div>
 										</div>
 									</td>
 								</tr>

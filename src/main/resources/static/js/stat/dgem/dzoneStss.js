@@ -59,6 +59,8 @@ let dzoneStss = new Vue({
                 let $this = this;
 
                 $this.statInitData();
+
+                $this.params.occrDivCd = '1';
             },
             initSearch: function()
             {
@@ -313,7 +315,10 @@ let dzoneStss = new Vue({
 
     },
     watch: {
-
+        'params.occrDivCd': function(value) {
+            let $this = this;
+            $this.updateDzoneStssChart(value);
+        },
     },
     mounted: function() {
         let self = this;
