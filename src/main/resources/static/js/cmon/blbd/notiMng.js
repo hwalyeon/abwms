@@ -31,7 +31,7 @@ let notiMng = new Vue({
         	
         	$this.initGrid();
         	
-        	$this.searchUserList(true);
+        	$this.searchNotiList(true);
 
         	
         },
@@ -42,13 +42,15 @@ let notiMng = new Vue({
         	        	        	
         	let colModels = [
                 {name: "blbdNo"     , index: "blbdNo"     , label: "게시번호"     , width: 80, align: "center"},
-                {name: "blbdStrtDt" , index: "blbdStrtDt" , label: "게시시작 일자" , width: 80, align: "center"},
-                {name: "blbdExprDt" , index: "blbdExprDt" , label: "게시만기 일자" , width: 80, align: "center"},
+                {name: "blbdStrtDt" , index: "blbdStrtDt" , label: "게시시작 일자" , width: 80, align: "center"
+                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
+                {name: "blbdExprDt" , index: "blbdExprDt" , label: "게시만기 일자" , width: 80, align: "center"
+                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
                 {name: "blbdTypeCd" , index: "blbdTypeCd" , label: "게시유형 코드" , width: 80, align: "center"},
                 {name: "blbdTitl"   , index: "blbdTitl"   , label: "게시제목"     , width: 80, align: "center"},
                 {name: "blbdCntn"   , index: "blbdCntn"   , label: "게시내용"     , width: 80, align: "center"},
                 {name: "srchCnt"    , index: "srchCnt"    , label: "조회건수"     , width: 80, align: "center"},
-                {name: "alamYn"     , index: "alamYn"     , label: "알림 여부"    , width: 80, align: "center"},
+                {name: "alamYn"     , index: "alamYn"     , label: "알림여부"    , width: 80, align: "center"},
                 {name: "regDt"      , index: "regDt"      , label: "등록일자"     , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
                 {name: "regTm"      , index: "regTm"      , label: "등록시각"     , width: 80, align: "center"
@@ -59,19 +61,19 @@ let notiMng = new Vue({
                 {name: "uptTm"      , index: "uptTm"      , label: "수정시각"     , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);  }},
                 {name: "uptUserId"  , index: "uptUserId"  , label: "수정사용자ID" , width: 80, align: "center"},
-                {name: "apiStndDetlPop", index: "apiStndDetlPop", label: "사용자 정보보기", width: 80, align: "center",
+                {name: "notiDetlPop", index: "notiDetlPop", label: "사용자 정보보기", width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="notiMng.regUserPop(\'' + rowObject.blbdNo + '\')" value="상세보기" data-toggle="modal" data-target="#notiDetlPopup" />';
                     }
                 }
             ];
   
-            $("#user_list").jqGrid("GridUnload");
-           	$("#user_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+            $("#noti_list").jqGrid("GridUnload");
+           	$("#noti_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-                url: '/cmon/blbd/searchUserList.ab',
-                pager: '#user_pager_list',
+                url: '/cmon/blbd/searchNotiList.ab',
+                pager: '#noti_pager_list',
 				height: 405,
                 colModel: colModels,
                 onPaging : function(data) {
@@ -79,14 +81,14 @@ let notiMng = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchUserList(false);
+                        $this.searchNotiList(false);
                     })
                 }
             }));
 
-            resizeJqGridWidth("user_list", "user_list_wrapper");                        
+            resizeJqGridWidth("noti_list", "noti_list_wrapper");                        
         },
-        searchUserList: function(isSearch) {
+        searchNotiList: function(isSearch) {
 			
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
@@ -96,7 +98,7 @@ let notiMng = new Vue({
                 params.currentIndex = 0;
             }
             
-			$("#user_list").setGridParam({
+			$("#noti_list").setGridParam({
                 datatype: "json",
                 postData: JSON.stringify(params),
                 page: 1,
@@ -116,10 +118,10 @@ let notiMng = new Vue({
 			
 			AjaxUtil.post({
 				dataType: 'binary',
-                url: "/set/userMng/searchUserList/excel.ab",
+                url: "/cmon/blbd/searchNotiList/excel.ab",
                 param: params,
                 success: function(response) {
-                	saveFileLocal(response, 'apiStndMng.xls');
+                	saveFileLocal(response, 'NotiMng.xls');
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);

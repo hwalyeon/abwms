@@ -23,9 +23,8 @@ let apiStndMng = new Vue({
         	
         	$this.initGrid();
         	
-        	$this.searchUserList(true);
+        	$this.searchApiList(true);
 
-        	
         },
         initCodeList: function() {
         	
@@ -57,7 +56,7 @@ let apiStndMng = new Vue({
            	$("#user_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-                url: '/cmon/stnd/searchUserList.ab',
+                url: '/cmon/stnd/searchApiList.ab',
                 pager: '#user_pager_list',
 				height: 405,
                 colModel: colModels,
@@ -66,14 +65,14 @@ let apiStndMng = new Vue({
                         $this.params.currentPage  = resultMap.currentPage;
                         $this.params.rowCount     = resultMap.rowCount;
                         $this.params.currentIndex = resultMap.currentIndex;
-                        $this.searchUserList(false);
+                        $this.searchApiList(false);
                     })
                 }
             }));
 
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
         },
-        searchUserList: function(isSearch) {
+        searchApiList: function(isSearch) {
 			
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
@@ -103,7 +102,7 @@ let apiStndMng = new Vue({
 			
 			AjaxUtil.post({
 				dataType: 'binary',
-                url: "/set/userMng/searchUserList/excel.ab",
+                url: "/cmon/stnd/searchApiList/excel.ab",
                 param: params,
                 success: function(response) {
                 	saveFileLocal(response, 'apiStndMng.xls');

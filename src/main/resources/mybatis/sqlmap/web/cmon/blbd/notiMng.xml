@@ -3,7 +3,7 @@
 
 <mapper namespace="cmon.blbd.notiMng">
 	
-	<select id="searchTcUserBase" parameterType="java.util.Map" resultType="MybatisMap">
+	<select id="searchTsBlbdBase" parameterType="java.util.Map" resultType="MybatisMap">
 	    select blbd_no
 	    	  ,blbd_strt_dt
 	    	  ,blbd_expr_dt
@@ -20,8 +20,8 @@
 			  ,upt_user_id
 		from   TS_BLBD_BASE
 		where  1=1
-		<if test=" userId != null and userId != '' ">
-		and    blbd_no = #{blbdNo}		        </if>
+		<if test=" blbdNo != null and blbdNo != '' ">
+		and    blbd_no = #{blbdNo}::numeric     </if>
 		order  by blbd_no
 	<if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex} </if>
@@ -44,94 +44,68 @@
 		,upt_user_id
 		from   TS_BLBD_BASE
 		where  1=1
-		and    blbd_no = #{blbdNo}
+		<if test=" blbdNo != null and blbdNo != '' ">
+		and    blbd_no = #{blbdNo}::numeric     </if>
 	</select>
 	
-	<insert id="insertTcUserBase" parameterType="java.util.Map">
-	insert into tc_api_stnd
-	(
-		 svr_id
-		,svr_nm
-		,api_url
-		,gps_base_cycl
-		,gps_next_cycl
-		,rdet_next_cycl
-		,rdet_base_cycl
-		,led_slep_tcnt
-		,msor_ssng_levl
-		,hsor_isng_cycl
-		,tsor_isng_cycl
-		,tsor_evnt_minval
-		,tsor_evnt_maxval
-		,hbitcnt_mdan_minval
-		,hbitcnt_mdan_maxval
-		,msor_evnt_minval
-		,msor_evnt_maxval
-		,reg_dt
-		,reg_tm
-		,reg_user_id
-		,upt_dt
-		,upt_tm
-		,upt_user_id
-	)
-	values
-	(
-		 #{svrId}
-		,#{svrNm}
-		,#{apiUrl}
-		,#{gpsBaseCycl}::NUMERIC
-		,#{gpsNextCycl}::NUMERIC
-		,#{rdetNextCycl}::NUMERIC
-		,#{rdetBaseCycl}::NUMERIC
-		,#{ledSlepTcnt}::NUMERIC
-		,#{msorSsngLevl}::NUMERIC
-		,#{hsorIsngCycl}::NUMERIC
-		,#{tsorIsngCycl}::NUMERIC
-		,#{tsorEvntMinval}::NUMERIC
-		,#{tsorEvntMaxval}::NUMERIC
-		,#{hbitcntMdanMinval}::NUMERIC
-		,#{hbitcntMdanMaxval}::NUMERIC
-		,#{msorEvntMinval}::NUMERIC
-		,#{msorEvntMaxval}::NUMERIC
-		,TO_CHAR(NOW(), 'YYYYMMDD')
-		,TO_CHAR(NOW(), 'HH24MISS')
-		,#{regUserId}
-		,TO_CHAR(NOW(), 'YYYYMMDD')
-		,TO_CHAR(NOW(), 'HH24MISS')
-		,#{uptUserId}
-	)
+	<insert id="insertTsBlbdBase" parameterType="java.util.Map">
+		insert into ts_blbd_base
+		(
+			 blbd_no
+			,blbd_strt_dt
+			,blbd_expr_dt
+			,blbd_type_cd
+			,blbd_titl
+			,blbd_cntn
+			,srch_cnt
+			,alam_yn
+			,reg_dt
+			,reg_tm
+			,reg_user_id
+			,upt_dt
+			,upt_tm
+			,upt_user_id
+		)
+		values
+		(
+			(select max(blbd_no)+1 from TS_BLBD_BASE)
+			,#{blbdStrtDt}
+			,#{blbdExprDt}
+			,#{blbdTypeCd}
+			,#{blbdTitl}
+			,#{blbdCntn}
+			,0
+			,#{alamYn}
+			,TO_CHAR(NOW(), 'YYYYMMDD')
+			,TO_CHAR(NOW(), 'HH24MISS')
+			,#{regUserId}
+			,TO_CHAR(NOW(), 'YYYYMMDD')
+			,TO_CHAR(NOW(), 'HH24MISS')
+			,#{uptUserId}
+		)
 	</insert>
 	
-	<update id="updateTcUserBase" parameterType="java.util.Map">
-	UPDATE TC_API_STND
-	SET    UPT_DT      = TO_CHAR(NOW(), 'YYYYMMDD')
-	      ,UPT_TM      = TO_CHAR(NOW(), 'HH24MMIS')
-	      ,UPT_USER_ID = #{uptUserId}
-	      ,SVR_ID = #{svrId}
-    	<if test="svrNm             != null and svrNm             != ''">,svr_nm              = #{svrNm}</if>
-    	<if test="apiUrl            != null and apiUrl            != ''">,api_url             = #{apiUrl}</if>
-    	<if test="gpsBaseCycl       != null and gpsBaseCycl       != ''">,gps_base_cycl       = #{gpsBaseCycl}::NUMERIC</if>
-    	<if test="gpsNextCycl       != null and gpsNextCycl       != ''">,gps_next_cycl       = #{gpsNextCycl}::NUMERIC</if>
-    	<if test="rdetNextCycl      != null and rdetNextCycl      != ''">,rdet_next_cycl      = #{rdetNextCycl}::NUMERIC</if>
-    	<if test="rdetBaseCycl      != null and rdetBaseCycl      != ''">,rdet_base_cycl      = #{rdetBaseCycl}::NUMERIC</if>
-    	<if test="ledSlepTcnt       != null and ledSlepTcnt       != ''">,led_slep_tcnt       = #{ledSlepTcnt}::NUMERIC</if>
-    	<if test="msorSsngLevl      != null and msorSsngLevl      != ''">,msor_ssng_levl      = #{msorSsngLevl}::NUMERIC</if>
-		<if test="hsorIsngCycl      != null and hsorIsngCycl      != ''">,hsor_isng_cycl      = #{hsorIsngCycl}::NUMERIC</if>
-		<if test="tsorIsngCycl      != null and tsorIsngCycl      != ''">,tsor_isng_cycl      = #{tsorIsngCycl}::NUMERIC</if>
-		<if test="tsorEvntMinval    != null and tsorEvntMinval    != ''">,tsor_evnt_minval    = #{tsorEvntMinval}::NUMERIC</if>
-		<if test="tsorEvntMaxval    != null and tsorEvntMaxval    != ''">,tsor_evnt_maxval    = #{tsorEvntMaxval}::NUMERIC</if>
-		<if test="hbitcntMdanMinval != null and hbitcntMdanMinval != ''">,hbitcnt_mdan_minval = #{hbitcntMdanMinval}::NUMERIC</if>
-		<if test="hbitcntMdanMaxval != null and hbitcntMdanMaxval != ''">,hbitcnt_mdan_maxval = #{hbitcntMdanMaxval}::NUMERIC</if>
-		<if test="msorEvntMinval    != null and msorEvntMinval    != ''">,msor_evnt_minval    = #{msorEvntMinval}::NUMERIC</if>
-		<if test="msorEvntMaxval    != null and msorEvntMaxval    != ''">,msor_evnt_maxval    = #{msorEvntMaxval}::NUMERIC</if>
-	     WHERE  1 = 1
-	     AND    SVR_ID  = #{svrId}
+	<update id="updateTsBlbdBase" parameterType="java.util.Map">
+		UPDATE TS_BLBD_BASE
+		SET    UPT_DT      = TO_CHAR(NOW(), 'YYYYMMDD')
+		,UPT_TM      = TO_CHAR(NOW(), 'HH24MMIS')
+		,UPT_USER_ID = #{uptUserId}
+		,BLBD_NO = #{blbdNo}::numeric
+		<if test="blbdStrtDt   != null and blbdStrtDt != ''">,blbd_strt_dt  = #{blbdStrtDt}</if>
+		<if test="blbdExprDt   != null and blbdExprDt != ''">,blbd_expr_dt  = #{blbdExprDt}</if>
+		<if test="blbdTypeCd   != null and blbdTypeCd != ''">,blbd_type_cd  = #{blbdTypeCd}</if>
+		<if test="blbdTitl     != null and blbdTitl   != ''">,blbd_titl     = #{blbdTitl}</if>
+		<if test="blbdCntn     != null and blbdCntn   != ''">,blbd_cntn     = #{blbdCntn}</if>
+		<if test="srchCnt      != null and srchCnt    != ''">,srch_cnt      = #{srchCnt}::NUMERIC</if>
+		<if test="alamYn       != null and alamYn     != ''">,alam_yn       = #{alamYn}</if>
+		WHERE  1 = 1
+		AND    BLBD_NO  = #{blbdNo}::numeric
 	</update>
 	
-	<delete id="deleteTcUserBase" parameterType="java.util.Map">
+	<delete id="deleteTcBlbdBase" parameterType="java.util.Map">
 	DELETE
-	FROM   TC_API_STND
-	WHERE  SVR_ID = #{svrId}
+	FROM   ts_blbd_base
+	WHERE  blbd_no = #{blbdNo}::numeric
 	</delete>
 	
 </mapper>

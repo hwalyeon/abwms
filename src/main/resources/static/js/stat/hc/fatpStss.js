@@ -157,17 +157,17 @@ let fatpStss = new Vue({
                 labels : [],
                 datasets: [
                     {
-                        label: '성장지수',
+                        label: '비만예측지수',
                         data: [],
-                        borderColor : "#fcdd84",
-                        backgroundColor: "#0000ff",
+                        borderColor : "#d6e5eb",
+                        backgroundColor: "#d6e5eb",
                         order : 1
                     } ,
                     {
                         label: '',
                         data: [],
-                        borderColor: "#f60636",
-                        backgroundColor: "#f50940",
+                        borderColor: "#FBD5B0",
+                        backgroundColor: "#FBD5B0",
                         type: 'line',
                         order: 0
                     }
@@ -233,7 +233,7 @@ let fatpStss = new Vue({
             $this.chartFatpJudg = new Chart(ctxFatpJudg, configFatpJudg);
         },
 
-        // 성장지수 차트
+        // 비만예측지수 차트
         updateFatpChart: function() {
             let $this = this;
 
@@ -256,10 +256,10 @@ let fatpStss = new Vue({
                 labels : fatpLabels,
                 datasets: [
                     {
-                        label: '성장지수',
+                        label: '비만예측지수',
                         data: fatpData,
-                        borderColor : "#fcdd84",
-                        backgroundColor: "#D6E5EB",
+                        borderColor : "#d6e5eb",
+                        backgroundColor: "#d6e5eb",
                         order : 1,
                         datalabels:{
                             display:false
@@ -284,7 +284,7 @@ let fatpStss = new Vue({
 
         },
 
-        // 성장판정상태 차트
+        // 비만예측판정상태 차트
         updateFatpJudgChart: function() {
             let $this = this;
 
@@ -602,20 +602,26 @@ let fatpStss = new Vue({
             } else {
                 params = param;
             }
-            $this.params.perdDivCd = 'DAY';
-            $this.params.occrDivCd = '02';
-            $this.params.stndDtFr  = params.gfixDtFr;
-            $this.params.stndDtTo  = params.gfixDtTo;
-            $this.params.sexCd     = params.sexCd;
-            $this.params.ageYcntFr = params.ageFr;
-            $this.params.ageYcntTo = params.ageTo;
+
+            if(WebUtil.isNotNull(params.gfixDtFr)) {
+                $this.params.perdDivCd = 'DAY';
+                $this.params.occrDivCd = '02';
+                $this.params.stndDtFr = params.gfixDtFr;
+                $this.params.stndDtTo = params.gfixDtTo;
+                $this.params.sexCd = params.sexCd;
+                $this.params.ageYcntFr = params.ageFr;
+                $this.params.ageYcntTo = params.ageTo;
+            }
         }
     },
     computed: {
 
     },
     watch: {
-
+        'params.occrDivCd': function() {
+            let $this = this;
+            $this.updateFatpJudgChart();
+        },
     },
     mounted: function() {
         let self = this;

@@ -276,7 +276,7 @@ let guarInfoMng = new Vue({
             },
             //학생정보상세 팝업
             regStdtInfoDetlPopup: function(stdtNo, guarNo){
-                stdtInfoDetl.initPage(stdtNo, guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
+                stdtRegDetl.initPage(stdtNo, guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
             },
             resetSearchParam: function()
             {

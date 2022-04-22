@@ -38,8 +38,8 @@ public class DgemStssController
 		List<Map<String, String>> stndDtList = dao.selectList("stat.dgem.dgemStss.searchDgemStssCdList", params);
 		rtnMap.put("stndDtList", stndDtList);
 
-		List<Map<String, String>> growJudgCdList = dao.selectList("stat.dgem.dgemStss.searchDgemIdxCdList", params);
-		rtnMap.put("growJudgCdList", growJudgCdList);
+		List<Map<String, String>> dgemStssCdList = dao.selectList("stat.dgem.dgemStss.searchDgemIdxCdList", params);
+		rtnMap.put("dgemStssCdList", dgemStssCdList);
 
 		vo.setRtnData(rtnMap, params);
 

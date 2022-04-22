@@ -51,7 +51,7 @@ let apiStndDetl = new Vue({
         		}
         		
         		AjaxUtil.post({
-                    url: "/cmon/stnd/searchUserInfo.ab",
+                    url: "/cmon/stnd/searchApiInfo.ab",
                     param: params,
                     success: function(response) {
                     	if ( !!response.rtnData.result ) {
@@ -158,7 +158,7 @@ let apiStndDetl = new Vue({
         	
         	return true;
         },
-        searchDupUserId: function() {
+        searchDupSvrId: function() {
         	let $this = this;
 			
         	if ( WebUtil.isNull($this.userInfo.svrId) ) {
@@ -171,7 +171,7 @@ let apiStndDetl = new Vue({
         	}
         	
 			AjaxUtil.post({
-                url: "/cmon/stnd/searchDupUserId.ab",
+                url: "/cmon/stnd/searchDupSvrId.ab",
                 param: params,
                 success: function(response) {
                 	if ( response.rtnData.result.existsYn === 'N' ) {
@@ -187,7 +187,7 @@ let apiStndDetl = new Vue({
                 }
             });
         },
-		saveUser: function() {
+		saveApi: function() {
 			
 			let $this = this;
 			
@@ -209,12 +209,12 @@ let apiStndDetl = new Vue({
 
             
 			AjaxUtil.post({
-                url: "/cmon/stnd/saveUser.ab",
+                url: "/cmon/stnd/saveApi.ab",
                 param: $this.userInfo,
                 success: function(response) {
                 	Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
                 		closeModal($('#apiStndDetlPopup'));
-               		 	apiStndMng.searchUserList(true);
+               		 	apiStndMng.searchApiList(true);
                 	});                	
                 },
                 error: function (response) {
@@ -222,19 +222,19 @@ let apiStndDetl = new Vue({
                 }
             });
 		},
-		deleteUser: function() {
+		deleteApi: function() {
 			
 			let $this = this;
 			
 			$this.userInfo.crud = 'D';
 			
             AjaxUtil.post({
-                url: "/cmon/stnd/saveUser.ab",
+                url: "/cmon/stnd/saveApi.ab",
                 param: $this.userInfo,
                 success: function(response) {
                 	Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
                 		 closeModal($('#apiStndDetlPopup'));
-						apiStndMng.searchUserList(true);
+						apiStndMng.searchApiList(true);
                 	});                	
                 },
                 error: function (response) {

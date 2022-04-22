@@ -41,7 +41,7 @@
         (
                                         #{prntNo}::NUMERIC /* prnt_no 학부모_번호 numeric */
                                       , #{sexCd} /* sex_cd 성별_코드 character varying(20) */
-        <if test="prntNm != null">    , #{prntNm} /* prnt_nm 학부모_명 character varying(40) */ </if>
+        <if test="prntNm != null">    , ENCR(#{prntNm}) /* prnt_nm 학부모_명 character varying(40) */ </if>
                                       , #{hghtVal}::NUMERIC /* hght_val 키_값 numeric */
                                       , #{wghtVal}::NUMERIC /* wght_val 체중_값 numeric */
                                       , #{bmiVal}::NUMERIC /* bmi_val BMI_값 numeric */
@@ -61,7 +61,7 @@
         UPDATE tm_prnt_base
         SET
             <if test="prntNm != null">
-                 prnt_nm = #{prntNm} /* prnt_nm 학부모_명 character varying(40) */
+                 prnt_nm = ENCR(#{prntNm}) /* prnt_nm 학부모_명 character varying(40) */
             </if>
             <if test="hghtVal != null">
                 ,hght_val = #{hghtVal} /* hght_val 키_값 numeric */

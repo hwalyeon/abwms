@@ -151,7 +151,7 @@
        ,replace(#{bithDt} , '-' , '') /* bith_dt 생일_일자 character(8) */
        ,#{raceDivCd} /* race_div_cd 인종_구분_코드 character varying(20) */
        ,TO_CHAR(NOW(), 'YYYYMMDD')
-       ,#{prntNo}
+       ,${prntNo}
        ,TO_CHAR(NOW(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
        ,TO_CHAR(NOW(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
        ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -184,7 +184,7 @@
        VALUES
        (
             #{stdtNo}
-           ,TO_CHAR(NOW(), 'YYYYMMDD')
+           ,to_char(now() - '1 day':: interval  , 'YYYYMMDD')
            ,'CM'
            ,${hghtVal}
            ,'KG'
@@ -220,7 +220,7 @@
        )
        select
              ${stdtNo}                                                         as stdt_no
-            ,to_char(now(), 'YYYYMMDD')                                        as stnd_dt
+            ,to_char(now() - '1 day':: interval  , 'YYYYMMDD')                 as stnd_dt
             ,'N'                                                               as vald_yn
             ,max(case when hbit_stat_cd = 'LOW'   then hbit_cnt_fr else 0 end) as bot_blck_val
             ,max(case when hbit_stat_cd = 'NORM'  then hbit_cnt_fr else 0 end) as down_blck_val

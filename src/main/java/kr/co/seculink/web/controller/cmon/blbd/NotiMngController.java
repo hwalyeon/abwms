@@ -28,18 +28,18 @@ public class NotiMngController
 	private NotiMngService notiMngService;
 	
 	@ResponseBody
-	@RequestMapping("/cmon/blbd/searchUserList.ab")
-	public RtnMsg searchUserList(@RequestBody(required=false) Map<String, String> params) throws BizException
+	@RequestMapping("/cmon/blbd/searchNotiList.ab")
+	public RtnMsg searchNotiList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
-		List<Map<String, String>> result = notiMngService.searchUserList(params);
+		List<Map<String, String>> result = notiMngService.searchNotiList(params);
 		rtnMap.put("result", result);
 		
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(((List)notiMngService.searchUserList(params)).size());
+			vo.setTotalCount(((List)notiMngService.searchNotiList(params)).size());
 		}
 		
 		vo.setRtnData(rtnMap, params);
@@ -48,13 +48,13 @@ public class NotiMngController
 	}
 	
 	@ResponseBody
-	@RequestMapping("/cmon/blbd/searchUserInfo.ab")
-	public RtnMsg searchUserInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
+	@RequestMapping("/cmon/blbd/searchNotiInfo.ab")
+	public RtnMsg searchNotiInfo(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		
-		Map<String, String> result = notiMngService.searchUserInfo(params);
+		Map<String, String> result = notiMngService.searchNotiInfo(params);
 		
 		List<Map<String, String>> roleList = dao.selectList("cmon.blbd.notiMng.searchNotiList", params);
 		
@@ -66,13 +66,13 @@ public class NotiMngController
 	}
 	
 	@ResponseBody
-	@RequestMapping("/cmon/blbd/saveUser.ab")
-	public RtnMsg saveUser(@RequestBody(required=false) Map<String, String> params) throws BizException
+	@RequestMapping("/cmon/blbd/saveNoti.ab")
+	public RtnMsg saveNoti(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		System.out.println("params" + params);
-		notiMngService.saveUser(params);
+		notiMngService.saveNoti(params);
 		
 		rtnMap.put("result", params);
 		vo.setRtnData(rtnMap);
@@ -81,33 +81,18 @@ public class NotiMngController
 	}
 	
 	@ResponseBody
-	@RequestMapping("/cmon/blbd/searchDupUserId.ab")
-	public RtnMsg searchDupUserId(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{	
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-	
-		Map<String, String> user = notiMngService.searchDupUserId(params);
-		
-		rtnMap.put("result", user);
-		vo.setRtnData(rtnMap);
-		
-		return vo;
-	}
-	
-	@ResponseBody
-	@RequestMapping("/cmon/blbd/searchUserList/excel.ab")
+	@RequestMapping("/cmon/blbd/searchNotiList/excel.ab")
 	public ModelAndView downloadExcel(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{	
 		params.put("paging", "N");
-		List<Map<String, String>> result = dao.selectList("cmon.blbd.notiMng.searchTcUserBase", params);
+		List<Map<String, String>> result = dao.selectList("cmon.blbd.notiMng.searchTsBlbdBase", params);
 		
 		return new ModelAndView("excelXlsView", getExcelMap(result));
 	}
 	
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
     {
-        String [] arrHeader = {"사용자ID","사용자명","소속","전화번호","휴대전화번호","이메일","학원여부","강사여부","학생여부"};
+        String [] arrHeader = {"게시번호","게시시작 일자","게시만기 일자","게시유형 코드","게시제목","게시내용","조회건수","알림여부","등록일자","등록시각","등록사용자ID","수정일자","수정시각","수정사용자ID"};
         List<String> headerList = Arrays.asList(arrHeader);
 
         List<List<String>> dataList = new ArrayList<List<String>>();
@@ -116,15 +101,20 @@ public class NotiMngController
         for ( Map<String, String> info : list )
         {
             data = new ArrayList<String>();
-            data.add(info.get("userId"));
-            data.add(info.get("userNm"));
-            data.add(info.get("blngNm"));
-            data.add(info.get("telNo"));
-            data.add(info.get("mtelNo"));
-            data.add(info.get("mailAddr"));
-            data.add(info.get("acdmYn"));
-            data.add(info.get("lctrYn"));
-            data.add(info.get("stdtYn"));
+			data.add(String.valueOf(info.get("blbdNo")));
+            data.add(info.get("blbdStrtDt"));
+            data.add(info.get("blbdExprDt"));
+            data.add(info.get("blbdTypeCd"));
+            data.add(info.get("blbdTitl"));
+            data.add(info.get("blbdCntn"));
+			data.add(String.valueOf(info.get("srchCnt")));
+            data.add(info.get("alamYn"));
+            data.add(info.get("regDt"));
+			data.add(info.get("regTm"));
+			data.add(info.get("regUserId"));
+			data.add(info.get("uptDt"));
+			data.add(info.get("uptTm"));
+			data.add(info.get("uptUserId"));
             dataList.add(data);
         }
 

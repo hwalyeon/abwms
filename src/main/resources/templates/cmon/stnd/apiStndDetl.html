@@ -24,7 +24,7 @@
 										<th scope="row">서버 ID</th>
 										<td v-if="userInfo.crud == 'C'">
 											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control float_left width_per_50 ime-eng" @input="userIdChk" maxlength="40"/>
-											<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupUserId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
+											<button type="button" class="btn btn-w-m btn-primary float_right" v-on:click="searchDupSvrId()" v-show="userInfo.crud == 'C'"><span>중복조회</span></button>
 										</td>
 										<td v-else="userInfo.crud == 'U'">
 											<input type="text" name="svrId" v-model="userInfo.svrId" class="form-control" @input="userIdChk" readonly/>
@@ -115,7 +115,7 @@
 										</td>
 									</tr>
 									<tr>
-										<th scope="row">심박수 중간값 하한값</th>
+										<th scope="row">심박수 중간값 상한값</th>
 										<td>
 											<input type="email" id="hbitcntMdanMaxval" name="hbitcntMdanMaxval" v-model="userInfo.hbitcntMdanMaxval" class="form-control ime-eng" maxlength="50"/>
 										</td>
@@ -158,10 +158,10 @@
             	<div class="modal-footer" style="">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveUser">저장</button>
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveApi">저장</button>
 						</div>
 						<div v-if="userInfo.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
-							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteUser">삭제</button>
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteApi">삭제</button>
 						</div>
 						<div class="disp_in_block width_per_20">
 							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">

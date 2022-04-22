@@ -97,8 +97,8 @@
 					</div>
 					<div class="ibox-content">
 						<div class="form-group">
-							<div id="chartGidx">
-								<canvas id="gidxChart" width="1068" height="400"> </canvas>
+							<div id="chartDgem">
+								<canvas id="dgemChart" width="1068" height="400"> </canvas>
 							</div>
 						</div>
 						<div class="form-group">
@@ -108,8 +108,8 @@
 							<div class="clear_both"></div>
 						</div>
 						<div class="form-group">
-							<div id="gidx_list_wrapper">
-								<table id="gidx_list"></table>
+							<div id="dgem_list_wrapper">
+								<table id="dgem_list"></table>
 							</div>
 						</div>
 					</div>
@@ -121,19 +121,19 @@
 						<i class="fa fa-title-bar"></i>
 						<h5>위험감정상태</h5>
 						<div class="float_right">
-							<input type="radio" v-icheck v-model="params.occrDivCd" value="01" @change="updateGidxJudgChart()"><span>발생건수</span></input>
-							<input type="radio" v-icheck v-model="params.occrDivCd" value="02" @change="updateGidxJudgChart()"><span>발생비율(%)</span></input>
+							<input type="radio" v-model="params.occrDivCd" value="01" v-icheck><span>  발생건수</span></input>
+							<input type="radio" v-model="params.occrDivCd" value="02" v-icheck><span>  발생비율(%)</span></input>
 						</div>
 					</div>
 					<div class="ibox-content">
 						<div class="form-group">
-							<div id="chartGidxJudg">
-								<canvas id="gidxJudgChart" width="500" height="400"> </canvas>
+							<div id="chartDgemStss">
+								<canvas id="dgemStssChart" width="500" height="400"> </canvas>
 							</div>
 						</div>
 						<div class="form-group">
-							<div id="gidxJudg_list_wrapper">
-								<table id="gidxJudg_list"></table>
+							<div id="dgemStss_list_wrapper">
+								<table id="dgemStss_list"></table>
 							</div>
 						</div>
 					</div>

@@ -88,9 +88,9 @@ let dgemHist = new Vue({
             let colModels = [
                 {name: "crud"              , index: "crud"              , label: "crud"		 	    , hidden: true                                  },
                 {name: "guarNoTemp"        , index: "guarNoTemp"        , label: "보호자번호"			, width: 80     , align: "center" , hidden: true},
-                {name: "stdtHistSeq"        , index: "stdtHistSeq"        , label: "학생이력"			, width: 80     , align: "center" , hidden: true},
+                {name: "stdtHistSeq"       , index: "stdtHistSeq"       , label: "학생이력"			, width: 80     , align: "center" , hidden: true},
                 {name: "stdtGuarNm"        , index: "stdtGuarNm"        , label: "학생이력"			, width: 80     , align: "center" , hidden: true},
-                {name: "stdtNo"       , index: "stdtNo"       , label: "학생번호"	 , width: 80     , align: "center"  ,fixed:true , formatter: function(cellValue, options, rowObject){
+                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"	        , width: 80     , align: "center" , fixed:true , formatter: function(cellValue, options, rowObject){
                         if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="dgemHist.regStdtInfoDetlPopup(\'' + rowObject.stdtNo + '\', \'' + rowObject.guarNo + '\')" value="신규" data-toggle="modal" data-target="#stdtRegDetlPopup" />';
                         else return`<a data-toggle="modal" class="links" data-target="#stdtInfoDetlPopup" data-stdt data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}" data-stdt-no="${rowObject.stdtNo}">${cellValue}</a>`;}},
                 {name: "dgemHistSeq"       , index: "dgemHistSeq"       , label: "위험감정 이력순번"	, width: 110    , align: "center" , fixed: true},

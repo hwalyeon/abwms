@@ -1406,24 +1406,14 @@ let locInfoMng = new Vue({
 
     },
     watch: {
-        // currSwLat: function(newVal, oldVal) {
-        //     let $this = this;
-        //     alert("jcw watch currSwLat !!! "+ newVal+ " / "+ oldVal);
-        //     console.log("jcw watch currSwLat !!! ", newVal, " / ", oldVal);
-        //     $this.oldSwLat = oldVal;
-        // },
-        // currSwLng: function(newVal, oldVal) {
-        //     let $this = this;
-        //     $this.oldSwLng = oldVal;
-        // },
-        // currNeLat: function(newVal, oldVal) {
-        //     let $this = this;
-        //     $this.oldNeLat = oldVal;
-        // },
-        // currNeLng: function(newVal, oldVal) {
-        //     let $this = this;
-        //     $this.oldNeLng = oldVal;
-        // },
+        'locInfoSpec.rdGorgGuarDivSpec': function(value) {
+            let $this = this;
+            if(value == 'GORG'){
+                $this.changeGorgNoSpec();
+            }else if(value == 'GUAR'){
+                $this.changeGuarNoSpec();
+            }
+        },
         currLevel: function(newVal, oldVal) {
             let $this = this;
             if ( newVal > oldVal ) {
