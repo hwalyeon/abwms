@@ -291,7 +291,7 @@ let bandOpenInfoMng = new Vue({
             },
             //학생정보상세 팝업
             regStdtInfoDetlPopup: function(stdtNo, guarNo){
-                stdtInfoDetl.initPage(stdtNo, guarNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
+                stdtRegDetl.initPage(stdtNo, guarNo, function(){  bandOpenInfoMng.searchBandOpenInfoList(true) });
             },
             resetSearchParam: function()
             {
