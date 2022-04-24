@@ -26,8 +26,8 @@ spring:
     mode: HTML
     cache: false
   redis:
-    host: localhost
-    port: 16379
+    host: abd01dch.ft8b8b.0001.apn2.cache.amazonaws.com
+    port: 6379
 
 server:
   port: 8080

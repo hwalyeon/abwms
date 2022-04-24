@@ -112,7 +112,7 @@ let userMng = new Vue({
 			let $this = this;
 			
 			let params = $.extend(true, {}, $this.params);
-			
+			CommonUtil.formatDate("20201212");
 			AjaxUtil.post({
 				dataType: 'binary',
                 url: "/set/userMng/searchUserList/excel.ab",
