@@ -380,7 +380,7 @@ let locInfoMng = new Vue({
                                 $this.locInfoSpec.addrBase = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.address_name : $this.mapCont.result[0].address.address_name;
                                 $this.locInfoSpec.addrSpec = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.building_name : $this.mapCont.result[0].address.building_name;
 
-                                $this.setRectangle();
+                                $this.setRectangle(true);
                             }
                         });
                     }
@@ -403,6 +403,7 @@ let locInfoMng = new Vue({
 
             kakao.maps.event.addListener($this.map, 'bounds_changed', function() {
                 $this.currLevel = $this.map.getLevel();
+                console.log("jcw currLevel :: ", $this.map.getLevel());
             });
 
             // 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
@@ -534,7 +535,7 @@ let locInfoMng = new Vue({
                 // if(!!$this.toolbox._selected) {
                 //     alert("사각형 그리기 toolbox가 활성화 중입니다.\n맵 상단 toolbox를 클릭하여 비활성화 후 진행해주세요.");
                 // } else {
-                $this.setRectangle();
+                $this.setRectangle(false);
                 // }
 
                 $this.mapCont.searchSpecFg = 'N';
@@ -588,7 +589,8 @@ let locInfoMng = new Vue({
                     oldSwstLatVal   : $this.oldSwLat,
                     oldSwstLonVal   : $this.oldSwLng,
                     oldNestLatVal   : $this.oldNeLat,
-                    oldNestLonVal   : $this.oldNeLng
+                    oldNestLonVal   : $this.oldNeLng,
+                    currLevel       : $this.currLevel
                 }
                 // console.log("jcw 11 :: ");
                 AjaxUtil.post({
@@ -689,8 +691,8 @@ let locInfoMng = new Vue({
                 latVal       : params.latVal,
                 lonVal       : params.lonVal,
                 swstLatVal   : params.swstLatVal,
-                nestLatVal   : params.swstLonVal,
-                swstLonVal   : params.nestLatVal,
+                swstLonVal   : params.swstLonVal,
+                nestLatVal   : params.nestLatVal,
                 nestLonVal   : params.nestLonVal,
                 valdRngeDist : params.valdRngeDist,
                 pstno        : params.pstno,
@@ -715,21 +717,21 @@ let locInfoMng = new Vue({
                 // console.log("jcw setMarker marker :: ", marker);
 
                 // jcw :: 맵 확장이 매우 커질 경우 marker 이벤트 리스너가 너무 많이 호출 되어서 일단 주석..
-                // // 인포윈도우를 생성합니다
-                // const infowindow = new kakao.maps.InfoWindow({
-                //     position: pos,
-                //     content: "위치번호 : " + $this.drawList.locNo
-                //         + "<br>위치명 : " + $this.drawList.locNm
-                //         + "<br>장소구분 : " + $this.drawList.plcNm
-                // });
+                // 인포윈도우를 생성합니다
+                const infowindow = new kakao.maps.InfoWindow({
+                    position: pos,
+                    content: "위치번호 : " + $this.drawList.locNo
+                        + "<br>위치명 : " + $this.drawList.locNm
+                        + "<br>장소구분 : " + $this.drawList.plcNm
+                });
 
                 // jcw :: 맵 확장이 매우 커질 경우 marker 이벤트 리스너가 너무 많이 호출 되어서 일단 주석..
-                // kakao.maps.event.addListener(marker, 'mouseover', function() {
-                //     infowindow.open($this.map, marker);
-                // });
-                // kakao.maps.event.addListener(marker, 'mouseout', function() {
-                //     infowindow.close();
-                // });
+                kakao.maps.event.addListener(marker, 'mouseover', function() {
+                    infowindow.open($this.map, marker);
+                });
+                kakao.maps.event.addListener(marker, 'mouseout', function() {
+                    infowindow.close();
+                });
 
                 if ( !!marker.locNo ) {
                     $this.locNoList = marker.locNo;
@@ -978,40 +980,57 @@ let locInfoMng = new Vue({
                 }
             }
         },
-        getRectBound : function() {
+        getRectBound : function(square) {
             let $this = this;
 
-            let center = $this.draw.cntrPos;
-            let radius = $this.draw.dist;
+            let southLat;
+            let northLat;
+            let westLng;
+            let eastLng;
+            // jcw :: 정사각형일 때
+            if(square) {
+                let center = $this.draw.cntrPos;
+                let radius = $this.draw.dist;
 
-            // 위도거리 : 1도=111Km
-            // 경도거리 위도37도기준 1도=88.8km
-            let unitLat = $this.getLatPerMeter() * radius;
-            let unitLng = $this.getLngPerMeter() * radius;
+                // 위도거리 : 1도=111Km
+                // 경도거리 위도37도기준 1도=88.8km
+                let unitLat = $this.getLatPerMeter() * radius;
+                let unitLng = $this.getLngPerMeter() * radius;
 
-            let southLat = center.getLat() - unitLat;
-            let northLat = center.getLat() + unitLat;
-            let westLng = center.getLng() - unitLng;
-            let eastLng = center.getLng() + unitLng;
+                southLat = center.getLat() - unitLat;
+                northLat = center.getLat() + unitLat;
+                westLng = center.getLng() - unitLng;
+                eastLng = center.getLng() + unitLng;
+
+                $this.locInfoSpec.swstLatVal = southLat;
+                $this.locInfoSpec.swstLonVal = westLng;
+                $this.locInfoSpec.nestLatVal = northLat;
+                $this.locInfoSpec.nestLonVal = eastLng;
+            } else if($this.mapCont.draggable === 'false') {
+                southLat = $this.locInfoSpec.swstLatVal;
+                westLng = $this.locInfoSpec.swstLonVal;
+                northLat = $this.locInfoSpec.nestLatVal;
+                eastLng = $this.locInfoSpec.nestLonVal;
+            } else { // jcw :: 직사각형일 때
+                southLat = $this.locInfoSpec.swstLatVal;
+                westLng = $this.locInfoSpec.swstLonVal;
+                northLat = $this.locInfoSpec.nestLatVal;
+                eastLng = $this.locInfoSpec.nestLonVal;
+            }
 
             let sw = $this.getLatLng(southLat, westLng);
             let ne = $this.getLatLng(northLat, eastLng);
-
-            $this.locInfoSpec.swstLatVal = southLat;
-            $this.locInfoSpec.swstLonVal = westLng;
-            $this.locInfoSpec.nestLatVal = northLat;
-            $this.locInfoSpec.nestLonVal = eastLng;
 
             // 사각형을 구성하는 영역정보를 생성합니다
             // 사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
             return new kakao.maps.LatLngBounds(sw, ne);
         },
-        setRectangle : function() {
+        setRectangle : function(square) {
             let $this = this;
 
             // 사각형을 구성하는 영역정보를 생성합니다
             // 사각형을 생성할 때 영역정보는 LatLngBounds 객체로 넘겨줘야 합니다
-            var rectangleBounds = $this.getRectBound();
+            var rectangleBounds = $this.getRectBound(square);
 
             // 지도에 표시할 사각형을 생성합니다
             if ( !$this.draw.rectangle ) {
@@ -1027,7 +1046,6 @@ let locInfoMng = new Vue({
             } else {
                 $this.draw.rectangle.setMap(null);
                 $this.draw.rectangle = null;
-
                 $this.draw.rectangle = new kakao.maps.Rectangle({
                     bounds: rectangleBounds, // 그려질 사각형의 영역정보입니다
                     strokeWeight    : 1, // 선의 두께입니다
@@ -1050,18 +1068,15 @@ let locInfoMng = new Vue({
         getRectBoundList : function() {
             let $this = this;
 
-            let center = $this.drawList.cntrPos;
-            let radius = $this.drawList.valdRngeDist;
+            let southLat;
+            let northLat;
+            let westLng;
+            let eastLng;
 
-            // 위도거리 : 1도=111Km
-            // 경도거리 위도37도기준 1도=88.8km
-            let unitLat = $this.getLatPerMeter() * radius;
-            let unitLng = $this.getLngPerMeter() * radius;
-
-            let southLat = center.getLat() - unitLat;
-            let northLat = center.getLat() + unitLat;
-            let westLng = center.getLng() - unitLng;
-            let eastLng = center.getLng() + unitLng;
+            southLat = $this.drawList.swstLatVal;
+            westLng = $this.drawList.swstLonVal;
+            northLat = $this.drawList.nestLatVal;
+            eastLng = $this.drawList.nestLonVal;
 
             let sw = $this.getLatLng(southLat, westLng);
             let ne = $this.getLatLng(northLat, eastLng);
@@ -1118,7 +1133,6 @@ let locInfoMng = new Vue({
                 }
             }
 
-            // console.log("jcw setRectangleList :: ");
             $this.drawList.rectangle.setBounds(rectangleBounds);
             // 지도에 사각형을 표시합니다
             $this.drawList.rectangle.setMap($this.map);
@@ -1738,16 +1752,16 @@ let locInfoMng = new Vue({
         'draw.dist': function(newVal, oldVal) {
             let $this = this;
             if ( newVal !== oldVal ) {
-
-                if ( $this.draw.rectangle ) {
-                    let rectangleBounds = this.getRectBound();
+                if ( $this.draw.rectangle && $this.mapCont.draggable === 'true') {
+                    let rectangleBounds = this.getRectBound(true);
                     $this.draw.rectangle.setBounds(rectangleBounds);
 
                     // 지도에 사각형을 표시합니다
                     // $this.draw.rectangle.setMap(null);
                     $this.draw.rectangle.setMap($this.map);
+
+                    $this.locInfoSpec.valdRngeDist = $this.draw.dist;
                 }
-                $this.locInfoSpec.valdRngeDist = $this.draw.dist;
 
                 // 넓은 범위로 확대된 맵으로 디테일하게 이용하고 싶을 수 있으니 주석..
                 // if ($this.locInfoSpec.valdRngeDist < 150) {

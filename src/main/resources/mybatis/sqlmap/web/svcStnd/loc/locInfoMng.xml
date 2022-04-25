@@ -480,6 +480,7 @@
 					,ADDR_SPEC
 		FROM        ZONE_LIST
 		WHERE		1=1
+		<if test="currLevel != null and currLevel !='' and currLevel &gt; 4">
 		AND         LOC_NO NOT IN
 					(
 					SELECT		LOC_NO
@@ -493,7 +494,7 @@
 					AND     	(${oldSwstLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/
 								OR ${oldNestLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/))
 					) -- 기존 맵 영역 기준 박스
-
+		</if>
 	</select>
 
 </mapper>
