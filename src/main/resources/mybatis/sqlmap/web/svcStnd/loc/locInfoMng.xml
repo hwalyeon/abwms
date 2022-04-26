@@ -481,19 +481,91 @@
 		FROM        ZONE_LIST
 		WHERE		1=1
 		<if test="currLevel != null and currLevel !='' and currLevel &gt; 4">
-		AND         LOC_NO NOT IN
-					(
-					SELECT		LOC_NO
-					FROM    	ZONE_LIST B
-					WHERE   	((B.SWST_LAT_VAL  BETWEEN ${oldSwstLatVal} /*남서위도*/ AND ${oldNestLatVal} /*북동위도*/
-								OR B.NEST_LAT_VAL BETWEEN ${oldSwstLatVal} /*남서위도*/ AND ${oldNestLatVal} /*북동위도*/)
-					AND     	(B.SWST_LON_VAL   BETWEEN ${oldSwstLonVal} /*남서경도*/ AND ${oldNestLonVal} /*북동경도*/
-								OR B.NEST_LON_VAL BETWEEN ${oldSwstLonVal} /*남서경도*/ AND ${oldNestLonVal} /*북동경도*/))
-					OR     		((${oldSwstLatVal}  BETWEEN B.SWST_LAT_VAL /*남서위도*/ AND B.NEST_LAT_VAL /*북동위도*/
-								OR ${oldNestLatVal} BETWEEN B.SWST_LAT_VAL /*남서위도*/ AND B.NEST_LAT_VAL /*북동위도*/)
-					AND     	(${oldSwstLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/
-								OR ${oldNestLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/))
-					) -- 기존 맵 영역 기준 박스
+			AND         LOC_NO NOT IN
+			(
+			SELECT		LOC_NO
+			FROM    	ZONE_LIST B
+			WHERE   	((B.SWST_LAT_VAL  BETWEEN ${oldSwstLatVal} /*남서위도*/ AND ${oldNestLatVal} /*북동위도*/
+			OR B.NEST_LAT_VAL BETWEEN ${oldSwstLatVal} /*남서위도*/ AND ${oldNestLatVal} /*북동위도*/)
+			AND     	(B.SWST_LON_VAL   BETWEEN ${oldSwstLonVal} /*남서경도*/ AND ${oldNestLonVal} /*북동경도*/
+			OR B.NEST_LON_VAL BETWEEN ${oldSwstLonVal} /*남서경도*/ AND ${oldNestLonVal} /*북동경도*/))
+			OR     		((${oldSwstLatVal}  BETWEEN B.SWST_LAT_VAL /*남서위도*/ AND B.NEST_LAT_VAL /*북동위도*/
+			OR ${oldNestLatVal} BETWEEN B.SWST_LAT_VAL /*남서위도*/ AND B.NEST_LAT_VAL /*북동위도*/)
+			AND     	(${oldSwstLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/
+			OR ${oldNestLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/))
+			) -- 기존 맵 영역 기준 박스
+		</if>
+	</select>
+
+	<!-- 위치정보_관리_지역_리스트_조회-->
+	<select id="searchLocZoneListTemp" parameterType="java.util.Map" resultType="MybatisMap">
+
+		WITH ZONE_LIST AS
+		(
+		SELECT		A.LOC_NO
+		,A.LOC_NM
+		,A.PLC_CD
+		,FN_GETCDNM('PLC_CD', PLC_CD) AS PLC_NM
+		,A.PLC_CLSS_CD
+		,A.LOC_APNT_CD
+		,A.LAT_VAL
+		,A.LON_VAL
+		,A.VALD_RNGE_DIST
+		,A.SWST_LAT_VAL
+		,A.SWST_LON_VAL
+		,A.NEST_LAT_VAL
+		,A.NEST_LON_VAL
+		,A.PSTNO
+		,A.ADDR_BASE
+		,A.ADDR_SPEC
+		FROM        TS_LOC_INFO_BASE A
+		WHERE       1 = 1
+		AND         (
+		(A.SWST_LAT_VAL  BETWEEN ${swstLatVal} /*남서위도*/ AND ${nestLatVal} /*북동위도*/
+		OR A.NEST_LAT_VAL BETWEEN ${swstLatVal} /*남서위도*/ AND ${nestLatVal} /*북동위도*/)
+		AND         (A.SWST_LON_VAL   BETWEEN ${swstLonVal} /*남서경도*/ AND ${nestLonVal} /*북동경도*/
+		OR A.NEST_LON_VAL BETWEEN ${swstLonVal} /*남서경도*/ AND ${nestLonVal} /*북동경도*/)
+		) -- 현재 맵 영역 기준 박스
+		OR          (
+		(${swstLatVal}  BETWEEN A.SWST_LAT_VAL /*남서위도*/ AND A.NEST_LAT_VAL /*북동위도*/
+		OR ${nestLatVal} BETWEEN A.SWST_LAT_VAL /*남서위도*/ AND A.NEST_LAT_VAL /*북동위도*/)
+		AND         (${swstLonVal} BETWEEN A.SWST_LON_VAL /*남서경도*/ AND A.NEST_LON_VAL /*북동경도*/
+		OR ${nestLonVal} BETWEEN A.SWST_LON_VAL /*남서경도*/ AND A.NEST_LON_VAL /*북동경도*/)
+		) -- 박스 영역 기준 현재 맵
+		AND         A.DEL_YN = 'N'
+		)
+		SELECT		LOC_NO
+		,LOC_NM
+		,PLC_CD
+		,PLC_NM
+		,PLC_CLSS_CD
+		,LOC_APNT_CD
+		,LAT_VAL
+		,LON_VAL
+		,VALD_RNGE_DIST
+		,SWST_LAT_VAL
+		,SWST_LON_VAL
+		,NEST_LAT_VAL
+		,NEST_LON_VAL
+		,PSTNO
+		,ADDR_BASE
+		,ADDR_SPEC
+		FROM        ZONE_LIST
+		WHERE		1=1
+		<if test="currLevel != null and currLevel !='' and currLevel &gt; 4">
+			AND         LOC_NO NOT IN
+			(
+			SELECT		LOC_NO
+			FROM    	ZONE_LIST B
+			WHERE   	((B.SWST_LAT_VAL  BETWEEN ${oldSwstLatVal} /*남서위도*/ AND ${oldNestLatVal} /*북동위도*/
+			OR B.NEST_LAT_VAL BETWEEN ${oldSwstLatVal} /*남서위도*/ AND ${oldNestLatVal} /*북동위도*/)
+			AND     	(B.SWST_LON_VAL   BETWEEN ${oldSwstLonVal} /*남서경도*/ AND ${oldNestLonVal} /*북동경도*/
+			OR B.NEST_LON_VAL BETWEEN ${oldSwstLonVal} /*남서경도*/ AND ${oldNestLonVal} /*북동경도*/))
+			OR     		((${oldSwstLatVal}  BETWEEN B.SWST_LAT_VAL /*남서위도*/ AND B.NEST_LAT_VAL /*북동위도*/
+			OR ${oldNestLatVal} BETWEEN B.SWST_LAT_VAL /*남서위도*/ AND B.NEST_LAT_VAL /*북동위도*/)
+			AND     	(${oldSwstLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/
+			OR ${oldNestLonVal} BETWEEN B.SWST_LON_VAL /*남서경도*/ AND B.NEST_LON_VAL /*북동경도*/))
+			) -- 기존 맵 영역 기준 박스
 		</if>
 	</select>
 

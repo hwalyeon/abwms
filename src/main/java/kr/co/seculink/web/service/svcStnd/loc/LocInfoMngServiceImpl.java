@@ -93,9 +93,6 @@ public class LocInfoMngServiceImpl implements LocInfoMngService
 	}
 
 	//위치정보_관리_지역_리스트_조회
-//	public List<Map<String, String>> searchLocZoneList(Map<String, String> params) {
-//		return dao.selectList("svcStnd.loc.locInfoMng.searchLocZoneList", params);
-//	}
 	public List<Map<String, String>> searchLocZoneList(Map<String, String> params)
 	{
 		return dao.selectList("svcStnd.loc.locInfoMng.searchLocZoneList", params);

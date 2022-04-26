@@ -67,6 +67,9 @@ let locInfoMng = new Vue({
         drawManager         : null,
         drawRectangle       : [],
         toolbox             : null,
+        ps                  : null,
+        psInfowindow        : null,
+        psMarkers           : [],
         drawList: {
             flag            : false,
             locNo           : -1,
@@ -175,10 +178,13 @@ let locInfoMng = new Vue({
                     draggable: false, // 지도를 생성할때 지도 이동 및 확대/축소 제어
                     currLevel: 3 // 지도의 확대 레벨
                 });
+                // jcw :: 2022.04.25 개발중..
+                // $this.searchPlace();
             } else {
                 $this.map.setCenter($this.getLatLng($this.locInfoSpec.latVal, $this.locInfoSpec.lonVal));
             }
 
+            $this.createPs();
 
             $this.map.setDraggable(true);
             $this.map.setZoomable(true);
@@ -235,7 +241,6 @@ let locInfoMng = new Vue({
                 // 위에 작성한 옵션으로 Drawing Manager를 생성합니다
                 $this.drawManager = new kakao.maps.Drawing.DrawingManager(options);
 
-                // console.log('jcw manager.getData() :: ', $this.drawManager.getData());
                 // Toolbox를 생성합니다.
                 // Toolbox 생성 시 위에서 생성한 DrawingManager 객체를 설정합니다.
                 // DrawingManager 객체를 꼭 설정해야만 그리기 모드와 매니저의 상태를 툴박스에 설정할 수 있습니다.
@@ -259,17 +264,12 @@ let locInfoMng = new Vue({
 
                     $this.drawManager.addListener('drawend', function(drawendMouseEvent) {
 
-                        // console.log("jcw toolbox 22 :: ", $this.toolbox);
-                        // console.log("jcw 정사각형 !length ? :: ", !$this.draw.rectangle);
-                        // console.log("jcw 정사각형 length ? :: ", $this.draw.rectangle);
+                        let drawRect = $this.drawManager.getData().rectangle[$this.drawManager.getData().rectangle.length-1];
 
-                        let jcwTest = $this.drawManager.getData().rectangle[$this.drawManager.getData().rectangle.length-1];
-                        // console.log("jcw !! jcwTest !! :: ", jcwTest);
-
-                        let sPointlat = jcwTest.sPoint.y;
-                        let sPointLng = jcwTest.sPoint.x;
-                        let ePointlat = jcwTest.ePoint.y;
-                        let ePointLng = jcwTest.ePoint.x;
+                        let sPointlat = drawRect.sPoint.y;
+                        let sPointLng = drawRect.sPoint.x;
+                        let ePointlat = drawRect.ePoint.y;
+                        let ePointLng = drawRect.ePoint.x;
                         let centLat;
                         let centLng;
 
@@ -297,37 +297,21 @@ let locInfoMng = new Vue({
                             $this.locInfoSpec.nestLonVal = sPointLng;
                         }
 
-                        $this.jcwTesta($this.getLatLng(centLat, centLng));
-                        // let markerPosition  = $this.getLatLng(centLat, centLng);
-                        // $this.mapCont.marker.setPosition(markerPosition);
-                        // $this.mapCont.marker.setMap(null);
-                        // $this.mapCont.marker.setMap($this.map);
-
-                        // console.log("jcw !! jcwTest !! :: ", sPointlat, " / ", sPointLng, " / ", ePointlat, " / ", ePointLng, " / ");
+                        $this.drawMngRect($this.getLatLng(centLat, centLng));
 
                         $this.drawRectangle.push(drawendMouseEvent);
 
-                        // console.log("jcw $this.drawRectangle 초기화 전 :: ", $this.drawRectangle);
-                        // console.log("jcw $this.drawManager 초기화 전 :: ", $this.drawManager);
-                        // console.log("jcw $this.drawRectangle 초기화 전 length :: ", $this.drawRectangle.length);
-                        // console.log("jcw toolbox 33 :: ", $this.toolbox);
                         if($this.drawRectangle.length > 1) {
                             $this.drawRectangle[0].target.setMap(null);
                             $this.drawRectangle[0].target._closeButton.setMap(null);
-                            // console.log("jcw $this.drawRectangle 초기화 중 11 :: ", $this.drawRectangle);
                             $this.drawRectangle = [];
                             $this.drawRectangle[0] = drawendMouseEvent;
-                            // console.log("jcw $this.drawRectangle 초기화 중 22 :: ", $this.drawRectangle);
                         }
                         if($this.draw.rectangle) {
-                            // console.log("jcw $this.draw.rectangle 초기화 중 22 :: ", $this.draw.rectangle);
                             $this.draw.rectangle.setMap(null);
                             $this.mapCont.marker.setMap(null);
                         }
                     });
-                    // $this.drawManager.addListener('dragend', function() {
-                    //     console.log("jcw 직사각형 이동 ::: ");
-                    // });
                 }
             }
 
@@ -335,7 +319,6 @@ let locInfoMng = new Vue({
             // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
             // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
             kakao.maps.event.addListener($this.map, 'click', function(mouseEvent) {
-                // console.log("jcw click");
                 if(!!$this.toolbox._selected && $this.mapCont.draggable === 'true') {
                     // alert("사각형 그리기 toolbox가 활성화 중입니다.\n맵 상단 toolbox를 클릭하여 비활성화 후 진행해주세요.");
                     // console.log("사각형 그리기 toolbox가 활성화 중이고 draggable === true", $this.mapCont.draggable);
@@ -361,7 +344,7 @@ let locInfoMng = new Vue({
                                     '<span class="title">법정동 주소정보</span>' +
                                     $this.mapCont.detailAddr +
                                     '</div>';
-                                // console.log("jcw click 22 ", );
+
                                 // 클릭한 위도, 경도 정보를 가져옵니다
                                 var latlng = $this.mapCont.mouseEvent.latLng;
                                 $this.locInfoSpec.latVal = latlng.getLat();
@@ -403,7 +386,7 @@ let locInfoMng = new Vue({
 
             kakao.maps.event.addListener($this.map, 'bounds_changed', function() {
                 $this.currLevel = $this.map.getLevel();
-                console.log("jcw currLevel :: ", $this.map.getLevel());
+                // console.log("jcw currLevel :: ", $this.map.getLevel());
             });
 
             // 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
@@ -423,8 +406,6 @@ let locInfoMng = new Vue({
             // }
 
             function searchDetailAddrFromCoords(coords, callback) {
-                // console.log("jcw 법정동 11 :: ", coords);
-                // console.log("jcw 법정동 11 :: ", callback);
                 // 좌표로 법정동 상세 주소 정보를 요청합니다
                 $this.mapCont.geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
             }
@@ -434,7 +415,7 @@ let locInfoMng = new Vue({
             //
             // }
         },
-        jcwTesta : function(latLng) {
+        drawMngRect : function(latLng) {
             let $this = this;
             $this.mapCont.mouseEvent.latLng = latLng;
             searchDetailAddrFromCoords($this.mapCont.mouseEvent.latLng, function (result, status) {
@@ -530,8 +511,6 @@ let locInfoMng = new Vue({
                 // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
                 $this.infowindow.setContent(content);
 
-                //
-                // console.log("jcw toolbox._selected 321 :: ", $this.toolbox._selected);
                 // if(!!$this.toolbox._selected) {
                 //     alert("사각형 그리기 toolbox가 활성화 중입니다.\n맵 상단 toolbox를 클릭하여 비활성화 후 진행해주세요.");
                 // } else {
@@ -540,6 +519,211 @@ let locInfoMng = new Vue({
 
                 $this.mapCont.searchSpecFg = 'N';
             }
+        },
+        createPs : function() {
+            // 장소 검색 객체를 생성합니다
+            let $this = this;
+
+            if(!$this.ps) {
+                $this.ps = new kakao.maps.services.Places();
+            }
+            $this.ps.setMap($this.map);
+
+            // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
+            if(!$this.psInfowindow) {
+                $this.psInfowindow = new kakao.maps.InfoWindow({zIndex: 1});
+            }
+        },
+        searchPlaces : function() {
+            let $this = this;
+
+            let keyword = document.getElementById('keyword').value;
+
+            if (!keyword.replace(/^\s+|\s+$/g, '')) {
+                alert('키워드를 입력해주세요!');
+                return false;
+            }
+            // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+            $this.ps.keywordSearch(keyword, $this.placesSearchCB);
+        },
+        placesSearchCB : function(data, status, pagination) {
+            let $this = this;
+
+            if (status === kakao.maps.services.Status.OK) {
+
+                // 정상적으로 검색이 완료됐으면
+                // 검색 목록과 마커를 표출합니다
+                $this.psDisplayPlaces(data);
+
+                // 페이지 번호를 표출합니다
+                $this.psDisplayPagination(pagination);
+
+            } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                alert('검색 결과가 존재하지 않습니다.');
+                return;
+            } else if (status === kakao.maps.services.Status.ERROR) {
+                alert('검색 결과 중 오류가 발생했습니다.');
+                return;
+            }
+        },
+        psDisplayPlaces : function(places) {
+            // 검색 결과 목록과 마커를 표출하는 함수입니다
+            let $this = this;
+
+            var listEl = document.getElementById('placesList'),
+                menuEl = document.getElementById('menu_wrap'),
+                fragment = document.createDocumentFragment(),
+                bounds = new kakao.maps.LatLngBounds(),
+                listStr = '';
+
+            // 검색 결과 목록에 추가된 항목들을 제거합니다
+            $this.psRemoveAllChildNods(listEl);
+
+            // 지도에 표시되고 있는 마커를 제거합니다
+            $this.psRemoveMarker();
+
+            for ( var i=0; i<places.length; i++ ) {
+
+                // 마커를 생성하고 지도에 표시합니다
+                var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+                    marker = $this.psAddMarker(placePosition, i),
+                    itemEl = $this.psGetListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+                // LatLngBounds 객체에 좌표를 추가합니다
+                bounds.extend(placePosition);
+
+                // 마커와 검색결과 항목에 mouseover 했을때
+                // 해당 장소에 인포윈도우에 장소명을 표시합니다
+                // mouseout 했을 때는 인포윈도우를 닫습니다
+                (function(marker, title) {
+                    kakao.maps.event.addListener(marker, 'mouseover', function() {
+                        $this.psDisplayInfowindow(marker, title);
+                    });
+
+                    kakao.maps.event.addListener(marker, 'mouseout', function() {
+                        $this.psInfowindow.close();
+                    });
+
+                    itemEl.onmouseover =  function () {
+                        $this.psDisplayInfowindow(marker, title);
+                    };
+
+                    itemEl.onmouseout =  function () {
+                        $this.psInfowindow.close();
+                    };
+                })(marker, places[i].place_name);
+
+                fragment.appendChild(itemEl);
+            }
+
+            // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
+            listEl.appendChild(fragment);
+            menuEl.scrollTop = 0;
+
+            // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+            $this.map.setBounds(bounds);
+        },
+        psDisplayPagination : function(pagination) {
+            // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
+            let $this = this;
+
+            var paginationEl = document.getElementById('pagination'),
+                fragment = document.createDocumentFragment(),
+                i;
+
+            // 기존에 추가된 페이지번호를 삭제합니다
+            while (paginationEl.hasChildNodes()) {
+                paginationEl.removeChild (paginationEl.lastChild);
+            }
+
+            for (i=1; i<=pagination.last; i++) {
+                var el = document.createElement('a');
+                el.href = "#";
+                el.innerHTML = i;
+
+                if (i===pagination.current) {
+                    el.className = 'on';
+                } else {
+                    el.onclick = (function(i) {
+                        return function() {
+                            pagination.gotoPage(i);
+                        }
+                    })(i);
+                }
+
+                fragment.appendChild(el);
+            }
+            paginationEl.appendChild(fragment);
+        },
+        psRemoveAllChildNods : function (el) {
+            // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+            while (el.hasChildNodes()) {
+                el.removeChild(el.lastChild);
+            }
+        },
+        psRemoveMarker : function () {
+            let $this = this;
+            // 지도 위에 표시되고 있는 마커를 모두 제거합니다
+            for ( var i = 0; i < $this.psMarkers.length; i++ ) {
+                $this.psMarkers[i].setMap(null);
+            }
+            $this.psMarkers = [];
+        },
+        psAddMarker : function (position, idx, title) {
+            // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
+            let $this = this;
+
+            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+                imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+                imgOptions =  {
+                    spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+                    spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+                    offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+                },
+                markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+                marker = new kakao.maps.Marker({
+                    position: position, // 마커의 위치
+                    image: markerImage
+                });
+
+            marker.setMap($this.map); // 지도 위에 마커를 표출합니다
+            $this.psMarkers.push(marker);  // 배열에 생성된 마커를 추가합니다
+
+            return marker;
+        },
+        // 검색결과 항목을 Element로 반환하는 함수입니다
+        psGetListItem : function (index, places) {
+
+            var el = document.createElement('li'),
+                itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+                    '<div class="info">' +
+                    '   <h5>' + places.place_name + '</h5>';
+
+            if (places.road_address_name) {
+                itemStr += '    <span>' + places.road_address_name + '</span>' +
+                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
+            } else {
+                itemStr += '    <span>' +  places.address_name  + '</span>';
+            }
+
+            itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+                '</div>';
+
+            el.innerHTML = itemStr;
+            el.className = 'item';
+
+            return el;
+        },
+        // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
+        // 인포윈도우에 장소명을 표시합니다
+        psDisplayInfowindow : function (marker, title) {
+            let $this = this;
+
+            var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+
+            $this.psInfowindow.setContent(content);
+            $this.psInfowindow.open($this.map, marker);
         },
         changedBound : function() {
             let $this = this;
@@ -574,11 +758,8 @@ let locInfoMng = new Vue({
         },
         searchZoneList: function() {
             let $this = this;
-            // console.log("jcw searchZoneList :: ");
             if ( $this.currSwLat > 0.0 && $this.currSwLng > 0.0 && $this.currNeLat > 0.0 && $this.currNeLng > 0.0 )
             {
-                // alert("jcw search currSwLat !!! "+ $this.currSwLat+ " / "+ $this.oldSwLat);
-                // console.log("jcw search currSwLat !!! ", $this.currSwLat, " / ", $this.oldSwLat);
                 const params = {
                     latVal          : $this.currLat,
                     lonVal          : $this.currLng,
@@ -592,15 +773,10 @@ let locInfoMng = new Vue({
                     oldNestLonVal   : $this.oldNeLng,
                     currLevel       : $this.currLevel
                 }
-                // console.log("jcw 11 :: ");
                 AjaxUtil.post({
                     url: '/svcStnd/loc/locInfoMng/searchLocZoneList.ab',
                     param: params,
                     success: function(response) {
-                        // console.log("jcw 22 :: ", response);
-                        // console.log("jcw 22 !!response rtnData :: ", !!response["rtnData"]);
-                        // console.log("jcw 22 !!response rtnData result :: ", !!response["rtnData"].result);
-                        // console.log("jcw 22 !!response length :: ", response["rtnData"].result.length);
                         if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 )
                         {
                             const markerObj = _.cloneDeep($this.markerList);
@@ -624,10 +800,7 @@ let locInfoMng = new Vue({
                                         plcClssCd : marker.plcClssCd,
                                         locApntCd : marker.locApntCd
                                     };
-                                    // console.log("jcw 55 :: ", markerCreateObjList);
-                                    // console.log("jcw marker :: ", marker);
                                     $this.setDraw(marker);
-                                    // console.log("jcw markerImage :: ", markerImage);
                                     $this.setMarker($this.drawList.cntrPos, markerImage);
                                     $this.setRectangleList(markerImage.plcClssCd);
 
@@ -641,12 +814,71 @@ let locInfoMng = new Vue({
                                 }
                             });
                         }
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
+            }
+        },
+        searchZoneListTemp: function() {
+            let $this = this;
+            if ( $this.currSwLat > 0.0 && $this.currSwLng > 0.0 && $this.currNeLat > 0.0 && $this.currNeLng > 0.0 )
+            {
+                const params = {
+                    latVal          : $this.currLat,
+                    lonVal          : $this.currLng,
+                    swstLatVal      : $this.currSwLat,
+                    swstLonVal      : $this.currSwLng,
+                    nestLatVal      : $this.currNeLat,
+                    nestLonVal      : $this.currNeLng,
+                    oldSwstLatVal   : $this.oldSwLat,
+                    oldSwstLonVal   : $this.oldSwLng,
+                    oldNestLatVal   : $this.oldNeLat,
+                    oldNestLonVal   : $this.oldNeLng,
+                    currLevel       : $this.currLevel
+                }
+                AjaxUtil.post({
+                    url: '/svcStnd/loc/locInfoMng/searchLocZoneList.ab',
+                    param: params,
+                    success: function(response) {
+                        if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 )
+                        {
+                            const markerObj = _.cloneDeep($this.markerList);
+                            // let markerCreateObjList = [];
+                            // $this.zoneList = [];
+                            // $.each(response["rtnData"].result, function(index, data) {
+                            //     console.log("jcw 33 :: ");
+                            //     if ( markerObj.length === 0 || markerObj.findIndex( (locNo) => locNo === data.locNo ) === -1 ) {
+                            //         markerCreateObjList.push(data);
+                            //         // $this.markerList.push(data.locNo);
+                            //     }
+                            // });
+                            // console.log("jcw 44 :: ");
+                            // $.each(markerCreateObjList, function(index, marker) {
+                            $.each(response["rtnData"].result, function(index, marker) {
+                                if ( markerObj.length === 0 || markerObj.findIndex( (locNo) => locNo === marker.locNo ) === -1 ) {
+                                    $this.markerList.push(marker.locNo);
 
-                        // jcw
-                        // if ( $this.flag && WebUtil.isNotNull($this.params.locNo) ) {
-                        //     $this.flag = !$this.flag;
-                        //     $this.searchZoneInfo();
-                        // }
+                                    let markerImage = {
+                                        plcCd     : marker.plcCd,
+                                        plcClssCd : marker.plcClssCd,
+                                        locApntCd : marker.locApntCd
+                                    };
+                                    $this.setDraw(marker);
+                                    $this.setMarker($this.drawList.cntrPos, markerImage);
+                                    $this.setRectangleList(markerImage.plcClssCd);
+
+                                    // jcw
+                                    // if ( marker.locApntCd === 'GUAR' ) {
+                                    //     $this.zoneList.push($this.drawList);
+                                    // }
+                                    // $this.zoneList.push($this.drawList);
+                                    // console.log("jcw initDrawValue 전 :: ");
+                                    $this.initDrawValue();
+                                }
+                            });
+                        }
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
@@ -655,7 +887,9 @@ let locInfoMng = new Vue({
             }
         },
         initDrawValue: function() {
-            this.drawList = {
+            let $this = this;
+
+            $this.drawList = {
                 flag         : false,
                 locNo        : -1,
                 locNm        : '',
@@ -677,12 +911,6 @@ let locInfoMng = new Vue({
         },
         setDraw: function(params) {
             let $this = this;
-            // console.log("jcw setDraw params :: ", params);
-            // console.log("jcw setDraw params.plcClssCd :: ", params.plcClssCd);
-            // console.log("jcw setDraw params.plcNm :: ", params.plcNm);
-            // console.log("jcw setDraw params.latVal :: ", params.latVal);
-            // console.log("jcw setDraw params.lonVal :: ", params.lonVal);
-            // console.log("jcw setDraw params.lonVal typeof :: ", typeof params.lonVal);
             $this.drawList = {
                 flag         : false,
                 locNo        : params.locNo,
@@ -714,7 +942,6 @@ let locInfoMng = new Vue({
             if ( WebUtil.isNotNull(pos.getLat()) && WebUtil.isNotNull(pos.getLng()) ) {
 
                 let marker = $this.addMarker(pos, markerImage);
-                // console.log("jcw setMarker marker :: ", marker);
 
                 // jcw :: 맵 확장이 매우 커질 경우 marker 이벤트 리스너가 너무 많이 호출 되어서 일단 주석..
                 // 인포윈도우를 생성합니다
@@ -882,7 +1109,7 @@ let locInfoMng = new Vue({
             // console.log(markerIndex);
 
             let MARKER_WIDTH        = 33; // 기본, 클릭 마커의 너비      // 마커 한개의 너비
-            let MARKER_HEIGHT       = 36; // 기본, 클릭 마커의 높이      // 마커 한개의 높이
+            let MARKER_HEIGHT       = 38; // 기본, 클릭 마커의 높이      // 마커 한개의 높이
             let OFFSET_X            = 12; // 기본, 클릭 마커의 기준 X좌표
             let OFFSET_Y            = MARKER_HEIGHT; // 기본, 클릭 마커의 기준 Y좌표
 
@@ -923,10 +1150,6 @@ let locInfoMng = new Vue({
             let clickOrigin  = new kakao.maps.Point(gapX, originY);         // 스프라이트 이미지에서 마우스오버 마커로 사용할 영역의 좌상단 좌표
             let overOrigin   = new kakao.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
-            // console.log("jcw getZoneMarkerImage 메소드 SPRITE");
-            // console.log(SPRITE_HEIGHT);
-            // console.log(originY);
-
             // 기본 마커이미지, 오버 마커이미지, 클릭 마커이미지를 생성합니다
             let normal = $this.splitImage(imageFile, markerSize    , markerOffset    , normalOrigin, spriteImageSize);
             let click  = $this.splitImage(imageFile, markerSize    , markerOffset    , clickOrigin , spriteImageSize);
@@ -961,11 +1184,6 @@ let locInfoMng = new Vue({
             return 1 / (88.8 * 1000);
         },
         getLatLng: function(lat, lng) {
-            // console.log("jcw getLatLng lat :: " , lat);
-            // console.log("jcw getLatLng lng :: " , lng);
-            // console.log("jcw getLatLng lng :: " , typeof lat);
-            // console.log("jcw getLatLng lat.lat :: " , lat.lat);
-            // console.log("jcw getLatLng lat.lng :: " , lat.lng);
             if ( typeof lat === 'object' ) {
                 if ( WebUtil.isNotNull(lat.lat) && WebUtil.isNotNull(lat.lng) ) {
                     return new kakao.maps.LatLng(lat.lat, lat.lng);
@@ -1141,7 +1359,6 @@ let locInfoMng = new Vue({
             let $this = this;
             // jcw 변경..
             // let draggable;
-
             if($this.mapCont.draggable === 'false'){
                 $this.mapCont.draggable = 'true';
                 // draggable = true;
@@ -1158,7 +1375,7 @@ let locInfoMng = new Vue({
         getContainer: function(mapId) {
             let id = '';
             if ( WebUtil.isNull(mapId) ) {
-                id = 'locInfoMngMap';
+                id = 'map';
             }
             return document.getElementById(id);
         },
@@ -1715,11 +1932,11 @@ let locInfoMng = new Vue({
         //     handler: function (newVal, oldVal) {
         //         let $this = this;
         //
-        //         let jcwTest = $this.drawManager.getData().rectangle[$this.drawManager.getData().rectangle.length-1];
+        //         let drawRect = $this.drawManager.getData().rectangle[$this.drawManager.getData().rectangle.length-1];
         //
-        //         console.log("jcw jcwTest newVal:: ", newVal);
-        //         console.log("jcw jcwTest oldVal:: ", oldVal);
-        //         console.log("jcw jcwTest x, y:: ", jcwTest.ePoint.x, " / ", jcwTest.ePoint.y);
+        //         console.log("jcw drawRect newVal:: ", newVal);
+        //         console.log("jcw drawRect oldVal:: ", oldVal);
+        //         console.log("jcw drawRect x, y:: ", drawRect.ePoint.x, " / ", drawRect.ePoint.y);
 
         //         // var latlng = $this.mapCont.mouseEvent.latLng;
         //         // $this.locInfoSpec.latVal = latlng.getLat();
@@ -1733,7 +1950,7 @@ let locInfoMng = new Vue({
         //
         //         $this.locInfoSpec.valdRngeDist = $this.draw.dist;
 
-        //         console.log("jcw watch deep !!! ::", jcwTest);
+        //         console.log("jcw watch deep !!! ::", drawRect);
         //     },
         //     deep: true
         // },

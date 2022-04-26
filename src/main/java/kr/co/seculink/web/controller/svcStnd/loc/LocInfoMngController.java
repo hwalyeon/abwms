@@ -196,17 +196,6 @@ public class LocInfoMngController
 	@RequestMapping("/svcStnd/loc/locInfoMng/searchLocZoneList.ab")
 	public RtnMsg<Map<String, Object>> searchLocZoneList(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
-
-		log.info("jcw list 12 :: ", params);
-//		List<TsLocInfoBaseVo> list = locInfoMngService.searchLocZoneList(params);
-//
-//		log.info("jcw list :: ", list);
-//		RtnMsg rtnMsg = new RtnMsg();
-//		rtnMsg.setRtnData(list);
-//
-//		return rtnMsg;
-
-
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 		List<Map<String, String>> result = locInfoMngService.searchLocZoneList(params);
