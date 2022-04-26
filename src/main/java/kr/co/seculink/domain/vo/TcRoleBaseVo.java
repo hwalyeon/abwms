@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_role_base Value Object
  */
+ @ToString
 public class TcRoleBaseVo implements Serializable {
 
 	/* role_cd 역할_코드 character varying(40) */

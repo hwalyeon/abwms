@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_dzone_data_06 Value Object
  */
+ @ToString
 public class TsDzoneData06Vo implements Serializable {
 
 	/* job_dt 작업_일자 character(8) */

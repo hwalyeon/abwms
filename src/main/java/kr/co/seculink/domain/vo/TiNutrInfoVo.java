@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_nutr_info Value Object
  */
+ @ToString
 public class TiNutrInfoVo implements Serializable {
 
 	/* nutr_cd 영양소_코드 character varying(20) */

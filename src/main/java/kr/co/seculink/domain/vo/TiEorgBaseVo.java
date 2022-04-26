@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_eorg_base Value Object
  */
+ @ToString
 public class TiEorgBaseVo implements Serializable {
 
 	/* loc_no 위치_번호 numeric(null) */

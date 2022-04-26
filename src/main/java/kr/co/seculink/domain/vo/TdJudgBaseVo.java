@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * td_judg_base Value Object
  */
+ @ToString
 public class TdJudgBaseVo implements Serializable {
 
 	/* judg_no 판정_번호 numeric(null) */

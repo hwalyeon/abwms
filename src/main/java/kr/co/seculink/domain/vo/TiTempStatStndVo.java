@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_temp_stat_stnd Value Object
  */
+ @ToString
 public class TiTempStatStndVo implements Serializable {
 
 	/* age_ycnt 나이_년수 numeric(null) */

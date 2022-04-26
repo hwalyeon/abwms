@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tm_guar_apnt_plc Value Object
  */
+ @ToString
 public class TmGuarApntPlcVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */

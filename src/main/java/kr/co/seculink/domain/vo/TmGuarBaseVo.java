@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tm_guar_base Value Object
  */
+ @ToString
 public class TmGuarBaseVo implements Serializable {
 
 	/* guar_no 보호자_번호 numeric(null) */

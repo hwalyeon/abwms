@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_job_base Value Object
  */
+ @ToString
 public class TcJobBaseVo implements Serializable {
 
 	/* job_id 작업_ID character varying(20) */

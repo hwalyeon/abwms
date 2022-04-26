@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_blbd_base Value Object
  */
+ @ToString
 public class TsBlbdBaseVo implements Serializable {
 
 	/* blbd_no 게시_번호 numeric(null) */
@@ -30,6 +31,9 @@ public class TsBlbdBaseVo implements Serializable {
 
 	/* alam_yn 알림_여부 character(1) */
 	private String alamYn;
+
+	/* del_yn 삭제_여부 character(1) */
+	private String delYn;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -169,6 +173,21 @@ public class TsBlbdBaseVo implements Serializable {
 	 */
 	public void setAlamYn(String alamYn) {
 		this.alamYn = alamYn;
+	}
+	/**
+	 * Get del_yn 삭제_여부 character(1)
+	 * @Return String delYn
+	 */
+	public String getDelYn() {
+		return this.delYn;
+	}
+	
+	/**
+	 * Set del_yn 삭제_여부 character(1)
+	 * @Param String delYn
+	 */
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

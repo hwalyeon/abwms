@@ -1,10 +1,12 @@
 package kr.co.seculink.domain.vo;
 
-import java.io.Serializable;
+import lombok.ToString;
 
+import java.io.Serializable;
 /**
  * tc_api_stnd Value Object
  */
+ @ToString
 public class TcApiStndVo implements Serializable {
 
 	/* svr_id 서버_ID character varying(20) */

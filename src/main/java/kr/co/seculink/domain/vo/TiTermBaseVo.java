@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_term_base Value Object
  */
+ @ToString
 public class TiTermBaseVo implements Serializable {
 
 	/* term_div_cd 약관_구분_코드 character varying(20) */

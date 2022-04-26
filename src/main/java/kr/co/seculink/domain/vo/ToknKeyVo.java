@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tokn_key Value Object
  */
+ @ToString
 public class ToknKeyVo implements Serializable {
 
 	/* user_id 사용자_ID character varying(40) */

@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_cs_info Value Object
  */
+ @ToString
 public class TsCsInfoVo implements Serializable {
 
 	/* reg_no 등록_번호 numeric(null) */

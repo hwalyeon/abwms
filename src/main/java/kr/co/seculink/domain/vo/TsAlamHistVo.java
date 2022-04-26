@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_alam_hist Value Object
  */
+ @ToString
 public class TsAlamHistVo implements Serializable {
 
 	/* alam_no 알림_번호 numeric(null) */

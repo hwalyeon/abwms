@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_cd_spec Value Object
  */
+ @ToString
 public class TcCdSpecVo implements Serializable {
 
 	/* cd_grp 코드_그룹 character varying(40) */

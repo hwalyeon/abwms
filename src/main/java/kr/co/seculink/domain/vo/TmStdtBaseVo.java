@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tm_stdt_base Value Object
  */
+ @ToString
 public class TmStdtBaseVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */

@@ -1,10 +1,12 @@
 package kr.co.seculink.domain.vo;
 
-import java.io.Serializable;
+import lombok.ToString;
 
+import java.io.Serializable;
 /**
  * ti_dgem_stnd Value Object
  */
+ @ToString
 public class TiDgemStndVo implements Serializable {
 
 	/* act_div_cd 활동_구분_코드 character varying(20) */

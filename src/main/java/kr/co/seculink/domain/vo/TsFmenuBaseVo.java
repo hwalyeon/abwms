@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_fmenu_base Value Object
  */
+ @ToString
 public class TsFmenuBaseVo implements Serializable {
 
 	/* guar_no 보호자_번호 numeric(null) */

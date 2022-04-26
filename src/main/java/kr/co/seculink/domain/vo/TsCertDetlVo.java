@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_cert_detl Value Object
  */
+ @ToString
 public class TsCertDetlVo implements Serializable {
 
 	/* cert_seq 인증_순번 numeric(null) */

@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_fat_act_stnd Value Object
  */
+ @ToString
 public class TiFatActStndVo implements Serializable {
 
 	/* fat_judg_cd 비만_판정_코드 character varying(20) */

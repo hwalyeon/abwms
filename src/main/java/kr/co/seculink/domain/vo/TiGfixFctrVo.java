@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_gfix_fctr Value Object
  */
+ @ToString
 public class TiGfixFctrVo implements Serializable {
 
 	/* gfix_div_cd 성장비만지수_구분_코드 character varying(20) */

@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_food_elem Value Object
  */
+ @ToString
 public class TiFoodElemVo implements Serializable {
 
 	/* food_no 식품_번호 numeric(null) */

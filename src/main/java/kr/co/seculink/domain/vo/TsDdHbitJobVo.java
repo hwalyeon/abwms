@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_dd_hbit_job Value Object
  */
+ @ToString
 public class TsDdHbitJobVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */

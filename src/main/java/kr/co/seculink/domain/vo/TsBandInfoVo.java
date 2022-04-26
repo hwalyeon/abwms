@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_band_info Value Object
  */
+ @ToString
 public class TsBandInfoVo implements Serializable {
 
 	/* band_id 밴드_ID character varying(20) */

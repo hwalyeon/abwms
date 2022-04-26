@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_job_hist Value Object
  */
+ @ToString
 public class TcJobHistVo implements Serializable {
 
 	/* job_hist_no 작업_이력_번호 numeric(null) */

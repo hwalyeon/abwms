@@ -17,6 +17,7 @@
                ,blbd_cntn /* blbd_cntn 게시_내용 text */
                ,srch_cnt /* srch_cnt 조회_건수 numeric */
                ,alam_yn /* alam_yn 알림_여부 character(1) */
+               ,del_yn /* del_yn 삭제_여부 character(1) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -50,6 +51,7 @@
 		</if>
 		    ,srch_cnt /* srch_cnt 조회_건수 numeric */
 		    ,alam_yn /* alam_yn 알림_여부 character(1) */
+		    ,del_yn /* del_yn 삭제_여부 character(1) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -77,6 +79,7 @@
 		</if>
 		    ,#{srchCnt} /* srch_cnt 조회_건수 numeric */
 		    ,#{alamYn} /* alam_yn 알림_여부 character(1) */
+		    ,#{delYn} /* del_yn 삭제_여부 character(1) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -111,6 +114,9 @@
 		<if test="alamYn != null">
 		    ,alam_yn = #{alamYn} /* alam_yn 알림_여부 character(1) */
 		</if>
+		<if test="delYn != null">
+		    ,del_yn = #{delYn} /* del_yn 삭제_여부 character(1) */
+		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
@@ -143,6 +149,7 @@
 		</if>
 		    ,srch_cnt /* srch_cnt 조회_건수 numeric */
 		    ,alam_yn /* alam_yn 알림_여부 character(1) */
+		    ,del_yn /* del_yn 삭제_여부 character(1) */
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -170,6 +177,7 @@
 		</if>
 		    ,#{srchCnt} /* srch_cnt 조회_건수 numeric */
 		    ,#{alamYn} /* alam_yn 알림_여부 character(1) */
+		    ,#{delYn} /* del_yn 삭제_여부 character(1) */
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -200,6 +208,9 @@
 		</if>
 		<if test="alamYn != null">
 		    ,alam_yn = #{alamYn} /* alam_yn 알림_여부 character(1) */
+		</if>
+		<if test="delYn != null">
+		    ,del_yn = #{delYn} /* del_yn 삭제_여부 character(1) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */

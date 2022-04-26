@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_fatp_qust_hist Value Object
  */
+ @ToString
 public class TsFatpQustHistVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */

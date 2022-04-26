@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_addr_head Value Object
  */
+ @ToString
 public class TiAddrHeadVo implements Serializable {
 
 	/* word_head_1 단어_헤더_1 character varying(30) */

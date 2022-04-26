@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_stdt_grow_hist Value Object
  */
+ @ToString
 public class TsStdtGrowHistVo implements Serializable {
 
 	/* stdt_no 학생_번호 numeric(null) */

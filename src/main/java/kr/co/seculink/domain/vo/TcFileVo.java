@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_file Value Object
  */
+ @ToString
 public class TcFileVo implements Serializable {
 
 	/* file_no 파일_번호 numeric(null) */

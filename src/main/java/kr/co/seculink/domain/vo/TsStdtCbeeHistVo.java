@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_stdt_cbee_hist Value Object
  */
+ @ToString
 public class TsStdtCbeeHistVo implements Serializable {
 
 	/* cbee_hist_no 캐시비_이력_번호 numeric(null) */

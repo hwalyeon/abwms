@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_siml_base Value Object
  */
+ @ToString
 public class TcSimlBaseVo implements Serializable {
 
 	/* siml_no 시뮬레이션_번호 numeric(null) */

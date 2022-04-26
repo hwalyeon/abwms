@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_ble_info Value Object
  */
+ @ToString
 public class TsBleInfoVo implements Serializable {
 
 	/* ble_id BLE_ID character varying(40) */

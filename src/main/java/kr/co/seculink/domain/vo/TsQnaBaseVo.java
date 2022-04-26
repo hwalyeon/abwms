@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_qna_base Value Object
  */
+ @ToString
 public class TsQnaBaseVo implements Serializable {
 
 	/* qna_no 질의응답_번호 numeric(null) */
@@ -36,6 +37,9 @@ public class TsQnaBaseVo implements Serializable {
 
 	/* ans_cntn 답변_내용 text(null) */
 	private String ansCntn;
+
+	/* del_yn 삭제_여부 character(1) */
+	private String delYn;
 
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
@@ -205,6 +209,21 @@ public class TsQnaBaseVo implements Serializable {
 	 */
 	public void setAnsCntn(String ansCntn) {
 		this.ansCntn = ansCntn;
+	}
+	/**
+	 * Get del_yn 삭제_여부 character(1)
+	 * @Return String delYn
+	 */
+	public String getDelYn() {
+		return this.delYn;
+	}
+	
+	/**
+	 * Set del_yn 삭제_여부 character(1)
+	 * @Param String delYn
+	 */
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

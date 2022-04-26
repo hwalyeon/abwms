@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_cal Value Object
  */
+ @ToString
 public class TcCalVo implements Serializable {
 
 	/* regi_no 등록_번호 numeric(null) */

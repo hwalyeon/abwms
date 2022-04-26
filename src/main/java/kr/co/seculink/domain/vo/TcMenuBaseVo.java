@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tc_menu_base Value Object
  */
+ @ToString
 public class TcMenuBaseVo implements Serializable {
 
 	/* menu_no 메뉴_번호 character varying(200) */

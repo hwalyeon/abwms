@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ts_dd_eat_hist Value Object
  */
+ @ToString
 public class TsDdEatHistVo implements Serializable {
 
 	/* stnd_dt 기준_일자 character(8) */

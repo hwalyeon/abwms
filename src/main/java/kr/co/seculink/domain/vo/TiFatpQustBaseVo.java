@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_fatp_qust_base Value Object
  */
+ @ToString
 public class TiFatpQustBaseVo implements Serializable {
 
 	/* qust_ver 설문_버전 numeric(null) */

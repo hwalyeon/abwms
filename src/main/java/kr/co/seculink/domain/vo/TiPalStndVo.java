@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_pal_stnd Value Object
  */
+ @ToString
 public class TiPalStndVo implements Serializable {
 
 	/* pal_cd 신체활동수준_코드 character varying(20) */

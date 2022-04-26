@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * tt_fidx_stss Value Object
  */
+ @ToString
 public class TtFidxStssVo implements Serializable {
 
 	/* stnd_dt 기준_일자 character(8) */

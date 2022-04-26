@@ -1,10 +1,11 @@
 package kr.co.seculink.domain.vo;
 
 import java.io.Serializable;
-
+import lombok.ToString;
 /**
  * ti_grow_act_stnd Value Object
  */
+ @ToString
 public class TiGrowActStndVo implements Serializable {
 
 	/* grow_judg_cd 성장_판정_코드 character varying(20) */
