@@ -36,7 +36,7 @@ const gramList = new Vue({
         initGrid : function() {
             const $this = this;
             const colModels = [
-                {name: "gramNo"  , index: "gramNo"  , label: "전문번호"   , hidden: true},
+                {name: "gramNo"  , index: "gramNo"  , label: "전문번호"   , width: 50 , align: "center"},
                 {name: "apiDivCd", index: "apiDivCd", label: "API구분코드", width: 50 , align: "center"},
                 {name: "apiDivNm", index: "apiDivNm", label: "API구분"   , width: 50 , align: "center"},
                 {name: "reqDttm" , index: "reqDttm" , label: "요청일시"   , width: 100, align: "center" ,formatter: formatTimestamp},
