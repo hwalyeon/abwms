@@ -37,4 +37,18 @@ public class MybatisConfig {
 
 
 
+	@Bean(name = "readerSqlSessionFactoryDif")
+	public SqlSessionFactory sqlSessionFactoryDif(@Qualifier("readerDataSourceDif") DataSource dataSource) throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(dataSource);
+		sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis/config/sql-map-config.xml"));
+		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mybatis/sqlmap/**/*.xml"));
+		return sqlSessionFactoryBean.getObject();
+	}
+
+	@Bean(name = "readerDaoDif")
+	public SqlSessionTemplate sqlSessionTemplateDif(@Qualifier("readerSqlSessionFactoryDif") SqlSessionFactory sqlSessionFactory) {
+		return new SqlSessionTemplate(sqlSessionFactory);
+	}
+
 }

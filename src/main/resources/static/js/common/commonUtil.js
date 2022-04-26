@@ -3,25 +3,26 @@
     }catch(e){}
     var dataPickerFormat = "YYYY-MM-DD";
 
-    formatTimestamp = function(date){
-    	 if(value == null) return value;
-         if(isNaN(value)) return value;
-         //value -= serverTime;
-         return moment(value).format(timestampFormatPattern);
-         if(WebUtil.isNull(date)) return '';
-         return moment(date).format(timestampFormatPattern);
+    formatTimestamp = function(value){
+    	 if(value == null)
+			 return value;
+
+         if(isNaN(value))
+			 return value;
+
+         return moment(value, 'YYYYMMDDHHmmss').format(timestampFormatPattern);
     }
 
     formatDate = function(date){
     	 if(date == null) return ;
          if(WebUtil.isNull(date)) return '';
-         return moment( date ).format(dateFormatPattern);
+         return moment(date, 'YYYYMMDD').format(dateFormatPattern);
     }
 
     formatTime = function (date) {
         if(date == null) return ;
         if(WebUtil.isNull(date)) return '';
-        return moment( date,  'HHmmss' ).format(timeFormatPattern);
+        return moment( date, 'HHmmss').format(timeFormatPattern);
     }
 
     numberFormat = function (value) {

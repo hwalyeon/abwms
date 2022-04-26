@@ -292,4 +292,7 @@ public class CommonWebController {
 	@RequestMapping("/stat/etc/alamStss.pg")
 	public String getStatEtcAlamStss() {return "stat/etc/alamStss";}
 
+	// 인터페이스 전문내역
+	@RequestMapping("/intf/gramList.pg")
+	public String getIntfGramList() {return "intf/gramList";}
 }

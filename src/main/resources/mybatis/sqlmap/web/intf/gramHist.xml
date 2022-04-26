@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="intf.gramHist">
+
+	<select id="searchGramList" parameterType="java.util.Map" resultType="MybatisMap">
+	select gram_no
+	      ,api_div_cd
+	      ,case api_div_cd when '11' then '밴드전문'
+	                       when '12' then '등하원전문'
+	                       when '13' then '개통전문'
+	                       when '14' then '서비스URL전문'
+	                       else '' end                  as api_div_nm
+	      ,req_dttm
+	      ,req_gram
+	      ,rsps_gram
+	      ,rsps_cd
+	      ,proc_tcnt
+    from   ti_gram
+	where  1 = 1
+	<if test=" apiDivCd != null and apiDivCd != '' ">
+	and    api_div_cd = #{apiDivCd}					</if>
+	<if test=" reqDtFr != null and reqDtFr != '' and reqDtTo != null and reqDtTo != '' ">
+	and    req_dttm between concat(#{reqDtFr}, '000000') and concat(#{reqDtTo}, '235959')		</if>
+	order by req_dttm
+    <if test=' paging == "Y" '>
+	limit ${rowCount} offset ${currentIndex} </if>
+	</select>
+</mapper>

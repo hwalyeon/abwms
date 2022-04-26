@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @Slf4j
-@Configuration
+//@Configuration
 public class DataSourceConfig
 {
 //    @Bean(name="writerDataSource")
@@ -32,18 +32,18 @@ public class DataSourceConfig
 //    }
 
 
-    @Bean(name="writerHikariConfig")
-    @Primary
-    @ConfigurationProperties(prefix = "spring.datasource.hikari")
-    public HikariConfig writerHikariConfig() {
-        return new HikariConfig();
-    }
-
-    @Bean(name = "writerDataSource")
-    @Primary
-    public DataSource writerDataSource() throws Exception {
-        return new HikariDataSource(writerHikariConfig());
-    }
+//    @Bean(name="writerHikariConfig")
+//    @Primary
+//    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+//    public HikariConfig writerHikariConfig() {
+//        return new HikariConfig();
+//    }
+//
+//    @Bean(name = "writerDataSource")
+//    @Primary
+//    public DataSource writerDataSource() throws Exception {
+//        return new HikariDataSource(writerHikariConfig());
+//    }
 
 //    @Bean(name = "readerHikariConfig")
 //    @ConfigurationProperties(prefix = "spring.datasource.hikari.reader")
