@@ -12,47 +12,36 @@
 						<h5>약관구분코드 정보</h5>
 					</div>
 				</div>
-				<div class="modal-body">
-					<div class="ibox-content border-style_none">
-						<table class="table table-bordered table_view">
-		                    <colgroup>
-		                        <col class="col-xs-1" />
-		                        <col class="col-xs-3" />
+				<div class="modal-body" style="width: 1000px; height: 650px">
+					<div class="ibox-content border-style_none" style="width:35%;float:left;padding-right:0px;">
+						<table class="table table-bordered table_view" style="float:left;">
+							<colgroup>
 								<col class="col-xs-1" />
-								<col class="col-xs-7" />
-		                    </colgroup>
-		                    <tbody>
-			                    <tr>
-			                        <th scope="row">약관구분코드</th>
-			                        <td>
+								<col class="col-xs-3" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">약관구분코드</th>
+									<td>
 										<select id="termDivCd" name="termDivCd" class="form-control" v-model="termInfoMngInfo.termDivCd" :disabled="termInfoMngInfo.crud=='U'">
 											<option value="">선택</option>
 											<option v-for="item in code.termInfoList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 										</select>
-			                        </td>
-									<th scope="row" rowspan="4">약관내용</th>
-									<td rowspan="4">
-										<div class="mg_top_10">
-											<summer-note
-													v-model="termInfoMngInfo.termCntn"
-													ref="termCntn"
-													:options="{height:480, notUseVideo:true, maxImageWidth: 1280}"/>
-										</div>
 									</td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">약관버전</th>
-			                        <td>
-			                        	<input type="number" id="termVer" name="termVer" v-model="termInfoMngInfo.termVer" class="form-control" maxlength="10"/>
-			                        </td>
-			                    </tr>
-			                    <tr>
-			                        <th scope="row">적용시작일자</th>
-			                        <td>
-			                        	<input type="text" id="aplyStrtDt" name="aplyStrtDt" v-model="termInfoMngInfo.aplyStrtDt" class="form-control" maxlength="10"/>
-			                        </td>
-			                    </tr>
-			                    <tr>
+								</tr>
+								<tr>
+									<th scope="row">약관버전</th>
+									<td>
+										<input type="number" id="termVer" name="termVer" v-model="termInfoMngInfo.termVer" class="form-control" maxlength="10"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">적용시작일자</th>
+									<td>
+										<input type="text" id="aplyStrtDt" name="aplyStrtDt" v-model="termInfoMngInfo.aplyStrtDt" class="form-control" maxlength="10"/>
+									</td>
+								</tr>
+								<tr>
 									<th scope="row">필수내용</th>
 									<td>
 										<div class="col-xs-2" style="padding: 5px 0;">
@@ -61,12 +50,38 @@
 											<input type="radio" name="essnYn"  v-model="termInfoMngInfo.essnYn" value="N"> N
 										</div>
 									</td>
-			                    </tr>
+								</tr>
+								<tr>
+									<td colspan="2" style="height:387px">
+
+									</td>
+								</tr>
 							</tbody>
-		                </table>
+						</table>
+					</div>
+					<div style="width:65%;float:right;padding:15px;padding-left:0px;background-color: #ffffff;color: inherit;border-color:#e7eaec;">
+						<table class="table table-bordered table_view" style="float:right">
+							<colgroup>
+								<col class="col-xs-1" />
+								<col class="col-xs-7" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">약관내용</th>
+									<td>
+										<div class="mg_top_10">
+											<summer-note
+													v-model="termInfoMngInfo.termCntn"
+													ref="termCntn"
+													:options="{height:480, notUseVideo:true, maxImageWidth: 1280}"/>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
             		</div>
             	</div>
-            	<div class="modal-footer" style="">
+            	<div class="modal-footer">
 					<div class="text-center">
 						<div class="disp_in_block width_per_20 mg_right_15">
 							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveInfo">저장</button>
