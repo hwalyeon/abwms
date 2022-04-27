@@ -70,6 +70,7 @@ let locInfoMng = new Vue({
         ps                  : null,
         psInfowindow        : null,
         psMarkers           : [],
+        placePositionList   : [],
         drawList: {
             flag            : false,
             locNo           : -1,
@@ -392,7 +393,9 @@ let locInfoMng = new Vue({
             // 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
             kakao.maps.event.addListener($this.map, 'dragend', function() {
                 // alert("jcw 지도이동 ");
-                $this.changedBound();
+                if($this.map.getLevel() < 6) {
+                    $this.changedBound();
+                }
             });
 
             // // 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
@@ -592,7 +595,7 @@ let locInfoMng = new Vue({
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                 // LatLngBounds 객체에 좌표를 추가합니다
                 bounds.extend(placePosition);
-
+                $this.placePositionList.push(placePosition);
                 // 마커와 검색결과 항목에 mouseover 했을때
                 // 해당 장소에 인포윈도우에 장소명을 표시합니다
                 // mouseout 했을 때는 인포윈도우를 닫습니다
@@ -605,8 +608,17 @@ let locInfoMng = new Vue({
                         $this.psInfowindow.close();
                     });
 
-                    itemEl.onmouseover =  function () {
+                    // itemEl.onmouseover =  function () {
+                    //     console.log("jcw 검색 목록 mouseover placePosition :: ", placePosition);
+                    //     $this.psDisplayInfowindow(marker, title);
+                    //
+                    //     // $this.map.setCenter(placePosition);
+                    // };
+
+                    itemEl.onclick =  function () {
                         $this.psDisplayInfowindow(marker, title);
+                        $this.map.setLevel(3);
+                        $this.map.setCenter(marker.getPosition());
                     };
 
                     itemEl.onmouseout =  function () {
@@ -616,13 +628,13 @@ let locInfoMng = new Vue({
 
                 fragment.appendChild(itemEl);
             }
-
             // 검색결과 항목들을 검색결과 목록 Element에 추가합니다
             listEl.appendChild(fragment);
             menuEl.scrollTop = 0;
 
             // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
             $this.map.setBounds(bounds);
+
         },
         psDisplayPagination : function(pagination) {
             // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
@@ -657,10 +669,12 @@ let locInfoMng = new Vue({
             paginationEl.appendChild(fragment);
         },
         psRemoveAllChildNods : function (el) {
+            let $this = this;
             // 검색결과 목록의 자식 Element를 제거하는 함수입니다
             while (el.hasChildNodes()) {
                 el.removeChild(el.lastChild);
             }
+            $this.placePositionList = [];
         },
         psRemoveMarker : function () {
             let $this = this;
@@ -1962,7 +1976,7 @@ let locInfoMng = new Vue({
         },
         currLevel: function(newVal, oldVal) {
             let $this = this;
-            if ( newVal > oldVal ) {
+            if ( newVal > oldVal && newVal < 6) {
                 $this.changedBound();
             }
         },
