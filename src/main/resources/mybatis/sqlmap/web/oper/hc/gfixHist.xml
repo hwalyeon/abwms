@@ -26,6 +26,7 @@
 		     , tgb.guar_no          /* guar_no      보호자_번호      numeric */
 		     , DECR(tgb.guar_nm) as guar_nm          /* guar_nm      보호자_명       character varying(40) */
 		     , DECR(tgb.guar_tel_no) as guar_tel_no      /* guar_tel_no  보호자_전화_번호  character varying(20) */
+		     , tgh.stdt_no || tgh.gfix_dt as gfix_idx
 		FROM   TS_GFIX_HIST tgh                      --성장비만지수_이력 tgh
 		       inner join TM_STDT_BASE tsb           --학생_기본 tsb
 		               on tgh.STDT_NO = tsb.STDT_NO

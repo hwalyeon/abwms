@@ -92,7 +92,8 @@ let gfixHist = new Vue({
                 {name: "telNo"        , index: "telNo"        , label: "학생(밴드)<br/>전화번호" , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);},fixed:true},
                 {name: "guarNo"       , index: "guarNo"       , label: "보호자 번호"             , width: 100 , align: "center" ,fixed:true},
                 {name: "guarNm"       , index: "guarNm"       , label: "보호자 명"               , width: 100 , align: "center" ,fixed:true},
-                {name: "guarTelNo" 	  , index: "guarTelNo" 	  , label: "보호자<br/>전화번호"     , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);},fixed:true}
+                {name: "guarTelNo" 	  , index: "guarTelNo" 	  , label: "보호자<br/>전화번호"     , width: 100 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);},fixed:true},
+                {name: "gfixIdx"      , index: "gfixIdx"       , label: "기준" 	            ,  width: 100 , align: "center" ,fixed:true , hidden:true}
             ];
             $("#gfixHist_list").jqGrid("GridUnload");
            	$("#gfixHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -118,7 +119,8 @@ let gfixHist = new Vue({
                     let grid = this;
 
                     $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","sexCdNm", "ageYcnt","ageMcnt", "hghtVal","wghtVal","telNo"], "stdtNo");
-                    $(grid).tableRowSpan(["gfixDt","calEatQty","calCsumQty","growIdx","gidx","growJudgCdNm", "fidx","fatJudgCdNm", "fatpIdx","fatpJudgCdNm","palVal"], "gfixDt");
+                    $(grid).tableRowSpan(["gfixDt","calEatQty","calCsumQty","growIdx","gidx","growJudgCdNm", "fidx","fatJudgCdNm", "fatpIdx","fatpJudgCdNm","palVal"], "gfixIdx");
+                    $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
                 }
             }));
             resizeJqGridWidth("gfixHist_list", "gfixHist_list_wrapper");
