@@ -11,7 +11,7 @@ topNavBar = new Vue({
         totMonStatPop: function() {
             openWinPop({
                 name: '종합관제현황',
-                url: '/oper/cmon/totMonStatTemp.pg',
+                url: '/oper/cmon/totMonStat.pg',
                 width: screen.width,
                 height: screen.height,
             });

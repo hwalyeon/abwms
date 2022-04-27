@@ -239,10 +239,6 @@ public class CommonWebController {
 	@RequestMapping("/oper/cmon/totMonStat.pg")
 	public String getOperCmonTotMonStat() {return "oper/cmon/totMonStat";}
 
-	//종합관제현황 임시
-	@RequestMapping("/oper/cmon/totMonStatTemp.pg")
-	public String getOperCmonTotMonStatTemp() {return "oper/cmon/totMonStatTemp";}
-
 	/* 통계 */
 	// 위험감정 추이분석
 	@RequestMapping("/stat/dgem/dgemStss.pg")
