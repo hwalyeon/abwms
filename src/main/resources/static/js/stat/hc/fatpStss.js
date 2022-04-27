@@ -603,7 +603,7 @@ let fatpStss = new Vue({
                 params = param;
             }
 
-            if(WebUtil.isNotNull(params.gfixDtFr)) {
+            if(params != null && WebUtil.isNotNull(params.gfixDtFr)){
                 $this.params.perdDivCd = 'DAY';
                 $this.params.occrDivCd = '02';
                 $this.params.stndDtFr = params.gfixDtFr;
