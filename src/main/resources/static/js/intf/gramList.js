@@ -141,6 +141,7 @@ const gramList = new Vue({
                 reqDtFr: '',
                 reqDtTo: '',
                 apiDivCd: '',
+                rspsCd: '',
                 paging : 'Y',
                 totalCount : 0,
                 rowCount : 30,
