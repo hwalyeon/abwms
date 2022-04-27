@@ -1,8 +1,7 @@
 package kr.co.seculink.domain.vo;
 
-import lombok.ToString;
-
 import java.io.Serializable;
+import lombok.ToString;
 /**
  * tc_api_stnd Value Object
  */

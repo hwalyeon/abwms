@@ -1,8 +1,7 @@
 package kr.co.seculink.domain.vo;
 
-import lombok.ToString;
-
 import java.io.Serializable;
+import lombok.ToString;
 /**
  * ti_dgem_stnd Value Object
  */
