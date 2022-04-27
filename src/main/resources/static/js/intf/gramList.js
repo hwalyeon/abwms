@@ -5,6 +5,7 @@ const gramList = new Vue({
             reqDtFr: '',
             reqDtTo: '',
             apiDivCd: '',
+            rspsCd: '',
             paging : 'Y',
             totalCount : 0,
             rowCount : 30,
@@ -12,7 +13,11 @@ const gramList = new Vue({
             currentIndex : 0
         },
         code : {
-            apiDivList : []
+            apiDivList : [],
+            rspsList: [
+                {cdVal: '00', cdNm: '정상'},
+                {cdVal: '99', cdNm: '오류'}
+            ]
         }
     },
     methods : {

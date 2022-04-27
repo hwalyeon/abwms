@@ -19,9 +19,11 @@
 	where  1 = 1
 	<if test=" apiDivCd != null and apiDivCd != '' ">
 	and    api_div_cd = #{apiDivCd}					</if>
+	<if test=" rspsCd != null and rspsCd != '' ">
+	and    rsps_cd = #{rspsCd}					</if>
 	<if test=" reqDtFr != null and reqDtFr != '' and reqDtTo != null and reqDtTo != '' ">
 	and    req_dttm between concat(#{reqDtFr}, '000000') and concat(#{reqDtTo}, '235959')		</if>
-	order by req_dttm
+	order by req_dttm desc
     <if test=' paging == "Y" '>
 	limit ${rowCount} offset ${currentIndex} </if>
 	</select>
