@@ -47,7 +47,7 @@ public class UserMngController
 			params.put("paging", "N");
 			vo.setTotalCount(((List)userMngService.searchUserList(params)).size());
 		}
-		
+
 		vo.setRtnData(rtnMap, params);
 		
 		return vo;
@@ -119,19 +119,19 @@ public class UserMngController
 		
 		return vo;
 	}
-	
-	
+
+
 	@ResponseBody
 	@RequestMapping("/set/userMng/updateUserPw.ab")
 	public RtnMsg updateUserPw(@RequestBody(required=false) Map<String, String> params) throws BizException
-	{	
+	{
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-	
+
 		userMngService.updateUserPw(params);
-		
+
 		vo.setRtnData(rtnMap);
-		
+
 		return vo;
 	}
 	

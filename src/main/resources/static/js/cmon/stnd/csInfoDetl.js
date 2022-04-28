@@ -16,16 +16,6 @@ let csInfoDetl = new Vue({
 	components: {'summer-note': summernote },
     methods: {
 
-        initialize: function() {
-        	
-        	let $this = this;
-        	
-        	$this.initCodeList();
-        	        	
-        },
-        initCodeList: function() {
-        	let $this = this;
-        },
         initPage: function(regNo) {
         	
         	let $this = this;
@@ -88,7 +78,8 @@ let csInfoDetl = new Vue({
         },
 
 		saveInfo: function() {
-			
+
+
 			let $this = this;
 
             if ( !this.isValid() ) {
@@ -158,7 +149,7 @@ let csInfoDetl = new Vue({
     mounted: function() {
         let self = this;
         $(document).ready(function() {
-            self.initialize();
+
         });
     }
 });
