@@ -235,7 +235,7 @@ let locInfoMng = new Vue({
                         removable       : true
                     },
                     rectangleOptions: {
-                        draggable       : true,
+                        draggable       : false,
                         removable       : true,
                         strokeWeight    : 1, // 선의 두께입니다
                         strokeColor     : '#39f', // 선의 색깔입니다
