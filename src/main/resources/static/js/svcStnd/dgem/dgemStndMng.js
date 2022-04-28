@@ -103,7 +103,7 @@ let dgemStndMng = new Vue({
             	mtype    : 'post'  ,
                 url      : '/svcStnd/dgem/dgemStndMng/searchDgemList.ab',
                 pager    : '#dgem_pager_list',
-				height   : 405     ,
+				height   : 500     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

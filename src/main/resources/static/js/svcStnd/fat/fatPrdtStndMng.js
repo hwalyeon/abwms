@@ -75,7 +75,7 @@ let fatPrdtStndMng = new Vue({
             	mtype    : 'post'  ,
                 url      : '/svcStnd/fat/fatPrdtStndMng/searchFatPrdtList.ab',
                 pager    : '#fatPrdt_pager_list',
-				height   : 405     ,
+				height   : 550     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

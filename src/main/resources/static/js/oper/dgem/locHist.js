@@ -99,7 +99,7 @@ let locHist = new Vue({
                 mtype: 'post',
                 url: '/oper/dgem/locHist/searchLocHistList.ab',
                 pager: '#grid_pager_list',
-                height: 450,
+                height: 499,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

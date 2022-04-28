@@ -88,7 +88,7 @@ let ddNutrEatStndMng = new Vue({
                     mtype      : 'post',
                     url            : '/svcStnd/nutr/ddNutrEatStndMng/searchDdNutrEatStndList.ab',
                     pager       : '#ddNutrEatStnd_pager_list',
-                    height      : 405,
+                    height      : 434,
                     autowidth: false,
                     colModel : colModels,
                     afterSaveCell : function (rowid , colId , val, e ){

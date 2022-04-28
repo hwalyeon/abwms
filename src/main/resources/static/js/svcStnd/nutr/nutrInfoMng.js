@@ -90,7 +90,7 @@ let nutrInfoMng = new Vue({
                     mtype      : 'post',
                     url            : '/svcStnd/nutr/nutrInfoMng/searchNutrInfoList.ab',
                     pager       : '#nutrInfo_pager_list',
-                    height      : 405,
+                    height      : 516,
                     colModel : colModels,
                     onPaging : function(data) {
                         onPagingCommon(data, this, function(resultMap)

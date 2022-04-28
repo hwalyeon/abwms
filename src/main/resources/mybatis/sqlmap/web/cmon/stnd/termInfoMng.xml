@@ -21,6 +21,7 @@
         FROM   ti_term_base
 		WHERE  1 = 1
 		AND    term_div_cd LIKE CONCAT (#{termDivCd},'%') /* term_div_cd 약관_구분_코드 character varying(20) */
+		ORDER BY TERM_VER ASC, SORT_ORD ASC
         </select>
 
        <insert id="insertTiTermBase"  parameterType="java.util.Map" >

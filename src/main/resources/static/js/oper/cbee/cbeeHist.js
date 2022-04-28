@@ -75,7 +75,7 @@ let cbeeHist = new Vue({
             	mtype    : 'post'  ,
                 url      : '/oper/cbee/cbeeHist/cbeeHistList.ab',
                 pager    : '#cbeeHist_pager_list',
-				height   : 405     ,
+				height   : 465     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

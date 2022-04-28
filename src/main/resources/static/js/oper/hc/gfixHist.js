@@ -102,7 +102,7 @@ let gfixHist = new Vue({
             	mtype    : 'post'  ,
                 url      : '/oper/hc/gfixHist/searchGfixHistList.ab',
                 pager    : '#gfixHist_pager_list',
-				height   : 405     ,
+				height   : 416     ,
                 colModel : colModels,
                 autowidth: false,
                 onPaging : function(data)

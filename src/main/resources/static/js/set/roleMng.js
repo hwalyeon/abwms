@@ -94,7 +94,7 @@ let roleMng = new Vue(
 											{
 												datatype : "local",
 												mtype : 'post',
-												height : 455,
+												height : 550,
 												url : '/set/roleMng/searchRoleList.ab',
 												pager : '#role_pager_list',
 												colModel : colModels,

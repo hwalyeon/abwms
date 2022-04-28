@@ -97,7 +97,7 @@ let strsHist = new Vue({
             	mtype    : 'post'  ,
                 url      : '/oper/hc/strsHist/strsHistList.ab',
                 pager    : '#strsHist_pager_list',
-				height   : 405     ,
+				height   : 416     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

@@ -113,7 +113,7 @@ let ddRcmdEatStndMng = new Vue({
                         mtype      : 'post',
                         url            : '/svcStnd/nutr/ddRcmdEatStndMng/searchDdRcmdEatStndList.ab',
                         pager       : '#ddRcmdEatStnd_pager_list',
-                        height      : 405,
+                        height      : 516,
                         colModel : colModels,
                         onPaging : function(data) {
                             onPagingCommon(data, this, function(resultMap)

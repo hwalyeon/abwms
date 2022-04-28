@@ -74,7 +74,7 @@ let palStndMng = new Vue({
                     mtype      : 'post',
                     url            : '/svcStnd/act/palStndMng/searchPalStndList.ab',
                     pager       : '#palStnd_pager_list',
-                    height      : 405,
+                    height      : 502,
                     colModel : colModels,
                     onPaging : function(data) {
                         onPagingCommon(data, this, function(resultMap)

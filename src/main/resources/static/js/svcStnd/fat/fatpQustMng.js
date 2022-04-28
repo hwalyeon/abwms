@@ -64,7 +64,7 @@ let fatpQustMng = new Vue({
 			{
             	datatype : "local",
                 mtype    : 'post',
-                height   : 450,
+                height   : 550,
                 url      : '/svcStnd/fat/fatpQustMng/searchFatpQustBaseList.ab',
                 pager    : "#fatpQustBase_pager_list",
                 colModel : fatpQustBaseColModels,
@@ -123,7 +123,7 @@ let fatpQustMng = new Vue({
             $("#fatpQustSpec_list").jqGrid("GridUnload");
            	$("#fatpQustSpec_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 mtype    : 'post',
-                height   : 450,
+                height   : 550,
                 datatype : "local",
                 url      : '/svcStnd/fat/fatpQustMng/searchFatpQustSpecList.ab',
                 pager    : "#fatpQustSpec_pager_list",

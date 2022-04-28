@@ -72,7 +72,7 @@ let growStndMng = new Vue({
                         mtype      : 'post',
                         url            : '/svcStnd/grow/growStndMng/searchGrowStndList.ab',
                         pager       : '#growStnd_pager_list',
-                        height      : 405,
+                        height      : 516,
                         colModel : colModels,
                         onPaging : function(data) {
                             onPagingCommon(data, this, function(resultMap)

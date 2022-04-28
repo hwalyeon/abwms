@@ -78,7 +78,7 @@ let fatJudgStndMng = new Vue({
                 mtype: 'post',
                 url: '/svcStnd/fat/fatJudgStndMng/searchFatJudgList.ab',
                 pager: '#grid_pager_list',
-                height: 405,
+                height: 550,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
