@@ -2033,6 +2033,59 @@ let locInfoMng = new Vue({
 
     },
     watch: {
+        chkMarkerGorg : function(newVal) {
+            let $this = this;
+            let i = 0;
+
+            if(!newVal) {
+                for (i ; i < $this.srchMarkersGorg.length; i++) {
+                    $this.srchMarkersGorg[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersGorg.length; i++) {
+                    $this.srchMarkersGorg[i].setMap($this.map);
+                }
+            }
+        },
+        chkMarkerGuar : function(newVal) {
+            let $this = this;
+            let i = 0;
+            if(!newVal) {
+                for (i ; i < $this.srchMarkersGuar.length; i++) {
+                    $this.srchMarkersGuar[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersGuar.length; i++) {
+                    $this.srchMarkersGuar[i].setMap($this.map);
+                }
+            }
+        },
+        chkMarkerSzon : function(newVal) {
+            let $this = this;
+            let i = 0;
+            if(!newVal) {
+                for (i ; i < $this.srchMarkersSzon.length; i++) {
+                    $this.srchMarkersSzon[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersSzon.length; i++) {
+                    $this.srchMarkersSzon[i].setMap($this.map);
+                }
+            }
+        },
+        chkMarkerDzon : function(newVal) {
+            let $this = this;
+            let i = 0;
+            if(!newVal) {
+                for (i ; i < $this.srchMarkersDzon.length; i++) {
+                    $this.srchMarkersDzon[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersDzon.length; i++) {
+                    $this.srchMarkersDzon[i].setMap($this.map);
+                }
+            }
+        },
         // drawRectangle: {
         //     handler: function (newVal, oldVal) {
         //         let $this = this;
