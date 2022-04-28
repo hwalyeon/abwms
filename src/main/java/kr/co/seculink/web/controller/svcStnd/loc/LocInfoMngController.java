@@ -74,7 +74,7 @@ public class LocInfoMngController
 
 		if ( !GEUtil.isEmpty(params.get("paging")) ) {
 			params.put("paging", "N");
-			vo.setTotalCount(locInfoMngService.searchLocInfoList(params).size());
+			vo.setTotalCount(dao.selectList("svcStnd.loc.locInfoMng.searchLocInfoTotList", params).size());
 		}
 
 		rtnMap.put("result", result);

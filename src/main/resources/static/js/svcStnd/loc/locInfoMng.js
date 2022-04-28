@@ -1467,7 +1467,7 @@ let locInfoMng = new Vue({
             $("#locInfo_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
-                height: 850,
+                height: 842,
                 url: '/svcStnd/loc/locInfoMng/searchLocInfoList.ab',
                 pager: "#locInfo_pager_list",
                 colModel: locListColModels,

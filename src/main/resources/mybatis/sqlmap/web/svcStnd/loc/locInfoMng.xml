@@ -149,6 +149,52 @@
 				) A
 	</select>
 
+	<!-- 위치정보_관리_리스트_조회-->
+	<select id="searchLocInfoTotList" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT	LOC_NO
+		FROM 	(
+				SELECT	TLIB.LOC_NO
+				FROM	ABSV.TS_LOC_INFO_BASE TLIB
+				LEFT OUTER JOIN TM_GUAR_APNT_PLC TGAP
+				ON TGAP.LOC_NO = TLIB.LOC_NO
+				LEFT OUTER JOIN TM_STDT_BASE TSB
+				ON TSB.STDT_NO = TGAP.STDT_NO
+				LEFT OUTER JOIN TM_STDT_GUAR_CONN TSGC
+				ON TSB.STDT_NO = TSGC.STDT_NO
+				LEFT OUTER JOIN TM_GUAR_BASE TGB
+				ON TGB.GUAR_NO  = TSGC.GUAR_NO
+				WHERE	1=1
+				AND 	TLIB.DEL_YN = 'N'
+				<if test="plcClssCd != null and plcClssCd !=''">
+					AND		TLIB.PLC_CLSS_CD = #{plcClssCd}</if>
+				<if test="plcCd != null and plcCd !=''">
+					AND		TLIB.PLC_CD = #{plcCd}</if>
+				<if test="wordHead1 != null and wordHead1 !=''">
+					AND 	SPLIT_PART(TLIB.ADDR_BASE, ' ', 1) = #{wordHead1}</if>
+				<if test="wordHead2 != null and wordHead2 !=''">
+					AND 	SPLIT_PART(TLIB.ADDR_BASE, ' ', 2) = #{wordHead2}</if>
+				<if test="addrSpec != null and addrSpec !=''">
+					AND 	TLIB.ADDR_SPEC LIKE CONCAT('%',#{addrSpec},'%')</if>
+				<if test="locNm != null and locNm !=''">
+					AND 	TLIB.LOC_NM LIKE CONCAT('%',#{locNm},'%')</if>
+				<if test="rdGorgGuarDiv =='GORG'">
+					AND 	TLIB.LOC_NO BETWEEN '1' AND '999999'</if>
+				<if test="rdGorgGuarDiv =='GUAR'">
+					AND 	TLIB.LOC_NO &gt; '999999'</if>
+				<if test="guarNo != null and guarNo !=''">
+					AND  	TGB.GUAR_NO = #{guarNo}::NUMERIC</if>
+				<if test="stdtNo != null and stdtNo !=''">
+					AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
+				<if test="guarNm != null and guarNm !=''">
+					AND  	DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%')</if>
+				<if test="stdtNm != null and stdtNm !=''">
+					AND  	DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%')</if>
+				GROUP BY TLIB.LOC_NO,
+				TSB.STDT_NO
+				ORDER BY TLIB.LOC_NO
+		) A
+	</select>
+
 	<!-- 위치정보_관리_리스트_상세정보_조회-->
 	<select id="searchLocInfoSpec" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT	LOC_NO,
