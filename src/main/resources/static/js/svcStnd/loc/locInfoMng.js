@@ -70,7 +70,14 @@ let locInfoMng = new Vue({
         ps                  : null,
         psInfowindow        : null,
         psMarkers           : [],
-        placePositionList   : [],
+        srchMarkersGorg     : [],
+        srchMarkersGuar     : [],
+        srchMarkersSzon     : [],
+        srchMarkersDzon     : [],
+        chkMarkerGorg        : true,
+        chkMarkerGuar        : true,
+        chkMarkerSzon        : true,
+        chkMarkerDzon        : true,
         drawList: {
             flag            : false,
             locNo           : -1,
@@ -595,7 +602,7 @@ let locInfoMng = new Vue({
                 // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
                 // LatLngBounds 객체에 좌표를 추가합니다
                 bounds.extend(placePosition);
-                $this.placePositionList.push(placePosition);
+                // $this.placePositionList.push(placePosition);
                 // 마커와 검색결과 항목에 mouseover 했을때
                 // 해당 장소에 인포윈도우에 장소명을 표시합니다
                 // mouseout 했을 때는 인포윈도우를 닫습니다
@@ -674,7 +681,7 @@ let locInfoMng = new Vue({
             while (el.hasChildNodes()) {
                 el.removeChild(el.lastChild);
             }
-            $this.placePositionList = [];
+            // $this.placePositionList = [];
         },
         psRemoveMarker : function () {
             let $this = this;
@@ -828,6 +835,10 @@ let locInfoMng = new Vue({
                                 }
                             });
                         }
+                        $this.clickChkMarkerGorg();
+                        $this.clickChkMarkerGuar();
+                        $this.clickChkMarkerSzon();
+                        $this.clickChkMarkerDzon();
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
@@ -956,7 +967,6 @@ let locInfoMng = new Vue({
             if ( WebUtil.isNotNull(pos.getLat()) && WebUtil.isNotNull(pos.getLng()) ) {
 
                 let marker = $this.addMarker(pos, markerImage);
-
                 // jcw :: 맵 확장이 매우 커질 경우 marker 이벤트 리스너가 너무 많이 호출 되어서 일단 주석..
                 // 인포윈도우를 생성합니다
                 const infowindow = new kakao.maps.InfoWindow({
@@ -973,6 +983,19 @@ let locInfoMng = new Vue({
                 kakao.maps.event.addListener(marker, 'mouseout', function() {
                     infowindow.close();
                 });
+
+                if ( markerImage.locApntCd === 'GORG' ) {
+                    $this.srchMarkersGorg.push(marker);
+                }
+                if (markerImage.locApntCd === 'GUAR') {
+                    $this.srchMarkersGuar.push(marker);
+                }
+                if (markerImage.plcClssCd === 'SZONE') {
+                    $this.srchMarkersSzon.push(marker);
+                }
+                if (markerImage.plcClssCd === 'DZONE') {
+                    $this.srchMarkersDzon.push(marker);
+                }
 
                 if ( !!marker.locNo ) {
                     $this.locNoList = marker.locNo;
@@ -1064,7 +1087,6 @@ let locInfoMng = new Vue({
                     //     $this.selectedMarker = marker;
                     // }
                 }
-
                 $this.drawList.marker = marker;
             } else {
                 console.log('add marker position not exists.')
@@ -1124,16 +1146,16 @@ let locInfoMng = new Vue({
 
             let MARKER_WIDTH        = 33; // 기본, 클릭 마커의 너비      // 마커 한개의 너비
             let MARKER_HEIGHT       = 38; // 기본, 클릭 마커의 높이      // 마커 한개의 높이
-            let OFFSET_X            = 12; // 기본, 클릭 마커의 기준 X좌표
+            let OFFSET_X            = 16; // 기본, 클릭 마커의 기준 X좌표
             let OFFSET_Y            = MARKER_HEIGHT; // 기본, 클릭 마커의 기준 Y좌표
 
-            let OVER_MARKER_WIDTH   = 40; // 오버 마커의 너비
-            let OVER_MARKER_HEIGHT  = 42; // 오버 마커의 높이
-            let OVER_OFFSET_X       = 13; // 오버 마커의 기준 X좌표
+            let OVER_MARKER_WIDTH   = 33; // 오버 마커의 너비
+            let OVER_MARKER_HEIGHT  = 38; // 오버 마커의 높이
+            let OVER_OFFSET_X       = 16; // 오버 마커의 기준 X좌표
             let OVER_OFFSET_Y       = OVER_MARKER_HEIGHT; // 오버 마커의 기준 Y좌표
 
-            let SPRITE_WIDTH        = 126; // 스프라이트 이미지 너비     // 이미지 크기
-            let SPRITE_HEIGHT       = 206; // 스프라이트 이미지 높이     // 이미지 크기
+            let SPRITE_WIDTH        = 76; // 스프라이트 이미지 너비     // 이미지 크기
+            let SPRITE_HEIGHT       = 222; // 스프라이트 이미지 높이     // 이미지 크기
             if ( markerImage.locApntCd === 'GUAR' ) {
                 SPRITE_HEIGHT       = 84;
             }
@@ -1142,12 +1164,12 @@ let locInfoMng = new Vue({
             let HEIGHT_GAP          = 10; // 스프라이트 이미지에서 마커간 간격
 
             if ( markerImage.locApntCd === 'GUAR' ) {
-                WIDTH_GAP           = 6;
-                HEIGHT_GAP          = 6;
+                WIDTH_GAP           = 10;
+                HEIGHT_GAP          = 10;
             } else {
                 if ( markerImage.plcClssCd === 'DZONE' ) {
-                    WIDTH_GAP       = 4;
-                    HEIGHT_GAP      = 5;
+                    WIDTH_GAP       = 10;
+                    HEIGHT_GAP      = 10;
                 }
             }
 
@@ -1423,7 +1445,7 @@ let locInfoMng = new Vue({
             $("#locInfo_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
-                height: 450,
+                height: 850,
                 url: '/svcStnd/loc/locInfoMng/searchLocInfoList.ab',
                 pager: "#locInfo_pager_list",
                 colModel: locListColModels,
@@ -1922,6 +1944,58 @@ let locInfoMng = new Vue({
                     $this.locInfoSpec.guarNo = item.guarNo;
                 }
             })
+        },
+        clickChkMarkerGorg : function() {
+            let $this = this;
+            let i = 0;
+            if(!$this.chkMarkerGorg) {
+                for (i ; i < $this.srchMarkersGorg.length; i++) {
+                    $this.srchMarkersGorg[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersGorg.length; i++) {
+                    $this.srchMarkersGorg[i].setMap($this.map);
+                }
+            }
+        },
+        clickChkMarkerGuar : function() {
+            let $this = this;
+            let i = 0;
+            if(!$this.chkMarkerGuar) {
+                for (i ; i < $this.srchMarkersGuar.length; i++) {
+                    $this.srchMarkersGuar[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersGuar.length; i++) {
+                    $this.srchMarkersGuar[i].setMap($this.map);
+                }
+            }
+        },
+        clickChkMarkerSzon : function() {
+            let $this = this;
+            let i = 0;
+            if(!$this.chkMarkerSzon) {
+                for (i ; i < $this.srchMarkersSzon.length; i++) {
+                    $this.srchMarkersSzon[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersSzon.length; i++) {
+                    $this.srchMarkersSzon[i].setMap($this.map);
+                }
+            }
+        },
+        clickChkMarkerDzon : function() {
+            let $this = this;
+            let i = 0;
+            if(!$this.chkMarkerDzon) {
+                for (i ; i < $this.srchMarkersDzon.length; i++) {
+                    $this.srchMarkersDzon[i].setMap(null);
+                }
+            } else {
+                for (i ; i < $this.srchMarkersDzon.length; i++) {
+                    $this.srchMarkersDzon[i].setMap($this.map);
+                }
+            }
         },
         // jcw :: input 데이터 자리수 제한
         input_lenth : function(e){
