@@ -1013,7 +1013,6 @@ let locInfoMng = new Vue({
                     }
                 }
 
-                console.log("jcw complet :: ");
                 if(!$this.chkMarkerGorg) {
                     marker.setMap(null);
                 } else {
@@ -1971,7 +1970,7 @@ let locInfoMng = new Vue({
         clickChkMarkerGorg : function() {
             let $this = this;
             let i = 0;
-            console.log("jcw clickChkMarkerGorg :: ", $this.chkMarkerGorg);
+
             if(!$this.chkMarkerGorg) {
                 for (i ; i < $this.srchMarkersGorg.length; i++) {
                     $this.srchMarkersGorg[i].setMap(null);
