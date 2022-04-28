@@ -58,7 +58,7 @@ let guarFmenuHist = new Vue({
             	mtype    : 'post'  ,
                 url      : '/oper/hc/guarFmenuHist/guarFmenuHistList.ab',
                 pager    : '#guarFmenuHist_pager_list',
-				height   : 529     ,
+				height   : 429     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

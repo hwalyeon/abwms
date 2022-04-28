@@ -106,7 +106,7 @@ let dgemStss = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 pginput : false,
-                height: 30,
+                height: 65,
                 url: '/stat/dgem/dgemStss/searchDgemStssList.ab',
                 colModel: colModels
             }));
@@ -116,14 +116,14 @@ let dgemStss = new Vue({
 
 
             let colModelsStss = [
-                {name: "divCd"      , index: "divCd"      , label: "구분"   , width: 100, align: "center"},
+                {name: "divCd"      , index: "divCd"      , label: "구분"    , width: 100, align: "center"},
                 {name: "total"      , index: "total"      , label: "TOTAL"   , width: 80, align: "center"}
             ];
 
             if($this.code.dgemStssCdList.length > 0){
                 for(var i in $this.code.dgemStssCdList ){
                     var data = $this.code.dgemStssCdList[i];
-                    colModelsStss.push( {name:data.cdVal , index:data.cdVal , label:data.cdNm ,  width: 80} );
+                    colModelsStss.push( {name:data.cdVal , index:data.cdVal , label:data.cdNm ,  width: 80, align:"center"} );
                 }
             }
 
@@ -182,7 +182,7 @@ let dgemStss = new Vue({
                 plugins: {
                     legend: {
                         position: 'top',
-                        display : true
+                        display : false
                     },
                     tooltip : {
                         enabled : true
@@ -194,6 +194,7 @@ let dgemStss = new Vue({
                 responsive : false,
                 plugins: {
                     legend: {
+                        position: 'right',
                         display : true
                     },
                     tooltip : {
@@ -311,7 +312,7 @@ let dgemStss = new Vue({
                         datalabels:{
                             display:true,
                             color:'black',
-                            font:{size:20},
+                            font:{size:12},
                             formatter:function(value,context) {
                                 var idx = context.dataIndex;
                                 var labelText = "";

@@ -109,7 +109,7 @@ let foodEatStss = new Vue({
                     datatype : "local",
                     mtype    : 'post',
                     pginput  : false,
-                    height   : 120,
+                    height   : 180,
                     url      : '/stat/hc/foodEatStss/searchFoodEatStssList.ab',
                     colModel : colModels
                     ,

@@ -125,7 +125,7 @@ let dgemHist = new Vue({
                 mtype: 'post',
                 url: '/oper/dgem/dgemHist/searchDgemHistList.ab',
                 pager: '#dgem_pager_list',
-                height: 450,
+                height: 350,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

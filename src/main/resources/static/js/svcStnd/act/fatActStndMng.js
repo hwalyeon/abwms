@@ -81,7 +81,7 @@ let fatActStndMng = new Vue({
                     mtype       : 'post',
                     url         : '/svcStnd/act/fatActStndMng/searchFatActStndList.ab',
                     pager       : '#fatActStnd_pager_list',
-                    height      : 502,
+                    height      : 402,
                     colModel : colModels,
                     onPaging : function(data) {
                         onPagingCommon(data, this, function(resultMap)

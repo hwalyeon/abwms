@@ -86,7 +86,7 @@ let fatpQustHist = new Vue({
             	mtype    : 'post'  ,
                 url      : '/oper/hc/fatpQustHist/searchFatpQustHistList.ab',
                 pager    : '#fatpQustHist_pager_list',
-				height   : 465     ,
+				height   : 350     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

@@ -72,7 +72,7 @@ let userMng = new Vue({
             	mtype: 'post',
                 url: '/set/userMng/searchUserList.ab',
                 pager: '#user_pager_list',
-				height: 500,
+				height: 400,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

@@ -46,7 +46,7 @@
     <select id="searchCbeeStssList" parameterType="java.util.Map" resultType="MybatisMap">
         select
         x.stnd_dt
-        ,round( avg(x.cbee_amt) , 2) as cbee_amt
+        ,round(avg(x.cbee_amt),0) as cbee_amt
         from
         (select
         case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')

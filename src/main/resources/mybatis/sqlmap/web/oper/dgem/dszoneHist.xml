@@ -42,8 +42,8 @@
 
 	<!-- 위치정보_관리_리스트_조회-->
 	<select id="searchLocInfoList" parameterType="java.util.Map" resultType="MybatisMap">
-		select         TZDS.STND_DT		/*기준일자*/
-		,TZDS.LOC_NO		/*위치번호*/
+		select         --TZDS.STND_DT		/*기준일자*/
+		 TZDS.LOC_NO		/*위치번호*/
 		,TLIB.LOC_NM		/*위치명*/
 		,fn_getCdNm('LOC_APNT_CD',TZDS.LOC_APNT_CD) LOC_APNT_NM 	/*위치지정코드*/
 		,TZDS.LOC_APNT_CD
@@ -89,13 +89,15 @@
 		<if test=" locNm != null and locNm !='' ">
 			and    TEB.LOC_NM = #{locNm}	     /*학교명*/</if>
 		group  by
-		TZDS.STND_DT,	  /*기준일자*/
+		--TZDS.STND_DT,	  /*기준일자*/
 		TZDS.LOC_NO,	  /*위치번호*/
 		TLIB.LOC_NM,      /*위치명*/
 		TZDS.LOC_APNT_CD, /*위치지정명*/
 		TZDS.PLC_CLSS_CD, /*장소분류명*/
 		TZDS.OCCR_CNT,	  /*탐지건수*/
 		TZDS.STDT_CNT	  /*탐지학생수*/
+		
+		ORDER BY TZDS.OCCR_CNT DESC
 	</select>
 
 	<!-- 위치정보_관리_리스트_상세정보_조회-->

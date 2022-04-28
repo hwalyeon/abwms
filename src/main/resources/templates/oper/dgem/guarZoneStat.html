@@ -110,36 +110,36 @@
 					<div class="ibox-content">
 						<div class="form-group">
 							<div class="col-xs-4">
-								<li>자료구분</li>
+								<b>자료구분</b>
 								<input type="radio" name="rdPublGuarDivSpec" v-model="locInfoSpec.rdPublGuarDivSpec" value="publ" :disabled="locInfoSpec.crud=='U'"/><span>&nbsp;&nbsp;공공데이터&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<input type="radio" name="rdPublGuarDivSpec" v-model="locInfoSpec.rdPublGuarDivSpec" value="prnt" :disabled="locInfoSpec.crud=='U'" v-on:click="changePrntNoSpec()"/><span>&nbsp;&nbsp;학부모지정</span>
-								<br><br>
-								<li>위치번호</li>
+								<br>
+								<b>위치번호</b>
 								<input type="text" name ="locNo" class="form-control" v-model="locInfoSpec.locNo" :disabled="true">
-								<li>위치명</li>
+								<b>위치명</b>
 								<input id="locInfoSpecLocNm" type="text" name ="locNm" class="form-control" v-model="locInfoSpec.locNm" v-on:input="input_lenth" :disabled="true">
-								<li>장소구분</li>
+								<b>장소구분</b>
 								<select name="plcClssCd" class="form-control" v-model="locInfoSpec.plcClssCd" @change ="changePlcClssCdSpec()" :disabled="true">
 									<option value="">전체</option>
 									<option v-for="item in code.plcClssCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 								</select>
-								<li>장소구분상세</li>
+								<b>장소구분상세</b>
 								<select name="plcCd" class="form-control" v-model="locInfoSpec.plcCd" @change ="changePlcCdSpec()" :disabled="true">
 									<option value="">전체</option>
 									<option v-for="item in code.plcCdListFilterSpec" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
 								</select>
-								<li>위도</li>
+								<b>위도</b>
 								<input type="text" name ="latVal" class="form-control" v-model="locInfoSpec.latVal" :disabled="true">
-								<li>경도</li>
+								<b>경도</b>
 								<input type="text" name ="lonVal" class="form-control" v-model="locInfoSpec.lonVal" :disabled="true">
-								<li>유효반경 (Meter)</li>
+								<b>유효반경 (Meter)</b>
 								<input type="text" name ="valdRngeDist" class="form-control" v-model="locInfoSpec.valdRngeDist" :disabled="true">
-								<li>주소</li>
+								<b>주소</b>
 								<input type="text" name ="pstno" class="form-control" v-model="locInfoSpec.pstno" :disabled="true">
 								<input type="text" name ="addrBase" class="form-control" v-model="locInfoSpec.addrBase" :disabled="true">
 								<input id="locInfoSpecAddrSpec" type="text" name ="addrSpec" class="form-control" v-model="locInfoSpec.addrSpec" v-on:input="input_lenth">
 							</div>
-							<div id="locInfoMngMap" style="width:650px;height:470px;"></div>
+							<div id="locInfoMngMap" style="width:650px;height:425px;"></div>
 							<div class="button-group">
 								<input type="range" class="prog" v-show="draw.cntrPos!==null" v-model="draw.dist" min="20" max="2000" style="width:650px;height:50px; background-color: #434343;"/>
 								<div v-show="draw.cntrPos!==null">{{draw.dist}}m</div>

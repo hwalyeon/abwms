@@ -93,7 +93,7 @@ let alamHist = new Vue({
                 mtype: 'post',
                 url: '/oper/sys/alamHist/searchAlamHistList.ab',
                 pager: '#grid_pager_list',
-                height: 500,
+                height: 400,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

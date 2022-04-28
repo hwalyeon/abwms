@@ -458,7 +458,7 @@ let porgZoneStat = new Vue({
             $("#locInfo_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
-                height: 517,
+                height: 420,
                 url: '/oper/dgem/porgZoneStat/searchLocInfoList.ab',
                 pager: "#locInfo_pager_list",
                 colModel: locListColModels,

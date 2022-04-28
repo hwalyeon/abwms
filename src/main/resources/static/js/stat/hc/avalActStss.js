@@ -20,7 +20,7 @@ let avalActStss = new Vue({
             },
             title:
             {
-                text:'평균 운동시간'
+                text:'운동시간(분)'
             },
             code :
                 {
@@ -158,7 +158,7 @@ let avalActStss = new Vue({
                     plugins: {
                         legend: {
                             position: 'top',
-                            display : true
+                            display : false
                         },
                         tooltip : {
                             enabled : true
@@ -215,9 +215,9 @@ let avalActStss = new Vue({
                 console.log(rowId);
 
                 if(rowId==1){
-                    $this.title.text ='평균 운동시간'
+                    $this.title.text ='운동시간(분)'
                 }else{
-                    $this.title.text ='평균 칼로리 섭취량'
+                    $this.title.text ='칼로리소모량(㎉)'
                }
 
 

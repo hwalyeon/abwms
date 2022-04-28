@@ -113,7 +113,7 @@ let btchJobHist = new Vue({
                 mtype: 'post',
                 url: '/oper/sys/btchJobHist/searchBtchJobHistList.ab',
                 pager: '#grid_pager_list',
-                height: 500,
+                height: 400,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

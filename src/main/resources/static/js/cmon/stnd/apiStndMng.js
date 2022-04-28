@@ -58,7 +58,7 @@ let apiStndMng = new Vue({
             	mtype: 'post',
                 url: '/cmon/stnd/searchApiList.ab',
                 pager: '#user_pager_list',
-				height: 550,
+				height: 450,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

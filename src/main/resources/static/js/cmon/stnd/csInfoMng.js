@@ -75,7 +75,7 @@ let csInfoMng = new Vue({
                 mtype: 'post',
                 url: '/cmon/stnd/csInfoMng/searchCsInfoList.ab',
                 pager: '#user_pager_list',
-                height: 581,
+                height: 481,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

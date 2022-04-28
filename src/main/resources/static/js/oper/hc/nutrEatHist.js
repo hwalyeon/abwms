@@ -104,7 +104,7 @@ let nutrEatHist = new Vue({
                     mtype     : 'post',
                     url       : '/oper/hc/nutrEatHist/searchNutrEatHistList.ab',
                     pager     : '#nutrEatHist_pager_list',
-                    height    : 365,
+                    height    : 265,
                     autowidth : false,
                     colModel  : colModels,
                     afterSaveCell : function (rowid , colId , val, e ){

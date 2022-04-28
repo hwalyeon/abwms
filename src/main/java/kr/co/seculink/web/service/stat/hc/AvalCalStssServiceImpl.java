@@ -29,7 +29,7 @@ public class AvalCalStssServiceImpl implements AvalCalStssService
             for (Map<String, Object> info : result){
                 newInfo.put(info.get("stndDt").toString(), info.get("avgCalEatQty").toString());
             }
-            newInfo.put("divCd", "평균 칼로리 섭취량");
+            newInfo.put("divCd", "칼로리 섭취량(㎉)");
             newResult.add(newInfo);
         }
         return newResult;

@@ -107,7 +107,7 @@ let gidxStss = new Vue({
             	datatype: "local",
             	mtype: 'post',
                 pginput : false,
-            	height: 30,
+            	height: 65,
                 url: '/stat/hc/gidxStss/searchGidxStssList.ab',
                 colModel: colModels
             }));
@@ -134,7 +134,7 @@ let gidxStss = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 pginput : false,
-                height: 60,
+                height: 65,
                 url: '/stat/hc/gidxStss/searchGidxJudgList.ab',
                 colModel: colModelsJudg
             }));
@@ -184,7 +184,7 @@ let gidxStss = new Vue({
                 plugins: {
                     legend: {
                         position: 'top',
-                        display : true
+                        display : false
                     },
                     tooltip : {
                         enabled : true
@@ -196,6 +196,7 @@ let gidxStss = new Vue({
                 responsive : false,
                 plugins: {
                     legend: {
+                        position: 'right',
                         display : true
                     },
                     tooltip : {
@@ -313,7 +314,7 @@ let gidxStss = new Vue({
                         datalabels:{
                             display:true,
                             color:'black',
-                            font:{size:20},
+                            font:{size:15},
                             formatter:function(value,context) {
                                 var idx = context.dataIndex;
                                 var labelText = "";

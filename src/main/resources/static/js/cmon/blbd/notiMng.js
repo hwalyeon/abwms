@@ -74,7 +74,7 @@ let notiMng = new Vue({
             	mtype: 'post',
                 url: '/cmon/blbd/searchNotiList.ab',
                 pager: '#noti_pager_list',
-				height: 550,
+				height: 450,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

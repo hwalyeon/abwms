@@ -62,7 +62,7 @@ let cdMng = new Vue({
            	$("#cdGrp_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
                 mtype: 'post',
-                height: 550,
+                height: 450,
                 url: '/set/cdMng/searchCdGrpList.ab',
                 pager: "#cdGrp_pager_list",
                 colModel: cdGrpColModels,
@@ -120,7 +120,7 @@ let cdMng = new Vue({
             $("#cdSpec_list").jqGrid("GridUnload");
            	$("#cdSpec_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 mtype: 'post',
-                height: 550,
+                height: 450,
                 datatype: "local",
                 url: '/set/cdMng/searchCdSpecList.ab',
                 pager: "#cdSpec_pager_list",

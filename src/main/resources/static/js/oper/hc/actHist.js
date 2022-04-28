@@ -87,7 +87,7 @@ let actHist = new Vue({
             	mtype    : 'post'  ,
                 url      : '/oper/hc/actHist/actHistList.ab',
                 pager    : '#actHist_pager_list',
-				height   : 465     ,
+				height   : 365     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

@@ -124,7 +124,7 @@ let avalCalStss = new Vue({
                  labels  : [],
                  datasets: [
                      {
-                         label: '평균 칼로리 섭취',
+                         label: '칼로리 섭취량(㎉)',
                          data: [],
                          borderColor : "#d6e5eb",
                          backgroundColor: "#d6e5eb",
@@ -138,7 +138,7 @@ let avalCalStss = new Vue({
                  plugins: {
                      legend: {
                          position: 'top',
-                         display : true
+                         display : false
                      },
                      tooltip : {
                          enabled : true
@@ -213,7 +213,7 @@ let avalCalStss = new Vue({
                  labels : avalCalLabels,
                  datasets: [
                      {
-                         label: '평균 칼로리 섭취',
+                         label: '칼로리 섭취량(㎉)',
                          data: avalCalData,
                          borderColor : "#d6e5eb",
                          backgroundColor: "#d6e5eb",

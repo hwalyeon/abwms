@@ -73,7 +73,7 @@ let menuMng = new Vue({
            	$("#menu_list").jqGrid($.extend(true, {}, commonGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-            	height: 550,
+            	height: 450,
                 url: '/set/menuMng/searchMenuList.ab',
                 pager: '#menu_pager_list',
                 colModel: colModels,

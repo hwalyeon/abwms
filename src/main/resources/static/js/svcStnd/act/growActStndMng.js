@@ -177,7 +177,7 @@ let growActStndMng = new Vue(
 														mtype : 'post',
 														url : '/svcStnd/act/growActStndMng/searchGrowActStndList.ab',
 														pager : '#growActStnd_pager_list',
-														height : 502,
+														height : 402,
 														colModel : colModels,
 														onPaging : function(
 																data) {

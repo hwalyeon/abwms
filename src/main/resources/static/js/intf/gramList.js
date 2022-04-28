@@ -55,6 +55,7 @@ const gramList = new Vue({
             $("#gram_list").jqGrid($.extend(true, {}, commonEditGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
+                height: 450,
                 url: '/intf/gramList/searchGramList.ab',
                 pager: '#gram_pager_list',
                 colModel: colModels,

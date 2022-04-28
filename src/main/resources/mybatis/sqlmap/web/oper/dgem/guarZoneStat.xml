@@ -64,6 +64,8 @@
 	and    SPLIT_PART(TLIB.ADDR_BASE, ' ', 1) = #{wordHead1}</if>
 	<if test="wordHead2 != null and wordHead2 !=''">
 	and    SPLIT_PART(TLIB.ADDR_BASE, ' ', 2) = #{wordHead2}</if>
+	
+	ORDER BY TGDS.DUP_APNT_CNT DESC
 	</select>
 
 	<!-- 위치정보_관리_리스트_상세정보_조회-->

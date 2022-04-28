@@ -448,20 +448,20 @@ let dszoneHist = new Vue({
             let $this = this;
 
             let locListColModels = [
-                {name: "stndDt"         , index: "stndDt"       , label: "기준일자"    , width: 70         , align: "center"   ,fixed:true},
-                {name: "locNo"          , index: "locNo"        , label: "위치번호"    , width: 55         , align: "center"   ,fixed:true},
-                {name: "locNm"          , index: "locNm"        , label: "위치명"      , width: 100        , align: "center"   ,fixed:true},
-                {name: "locApntNm"      , index: "locApntNm"    , label: "위치지정명"   , width: 100        , align: "center"  ,fixed:true},
-                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"  , width: 69          , align: "center"   ,fixed:true},
-                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"    , width: 55          , align: "center"   ,fixed:true},
-                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 55      , align: "center"   ,fixed:true}
+//              {name: "stndDt"         , index: "stndDt"       , label: "기준일자"    , width: 70         , align: "center"   ,fixed:true},
+                {name: "locNo"          , index: "locNo"        , label: "위치번호"    , width: 69         , align: "center"   ,fixed:true},
+                {name: "locNm"          , index: "locNm"        , label: "위치명"      , width: 114        , align: "center"   ,fixed:true},
+                {name: "locApntNm"      , index: "locApntNm"    , label: "위치지정명"   , width: 114        , align: "center"  ,fixed:true},
+                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"  , width: 83          , align: "center"   ,fixed:true},
+                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"    , width: 69          , align: "center"   ,fixed:true},
+                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 69      , align: "center"   ,fixed:true}
             ];
 
             $("#locInfo_list").jqGrid("GridUnload");
             $("#locInfo_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
-                height: 450,
+                height: 344,
                 url: '/oper/dgem/dszoneHist/searchLocInfoList.ab',
                 pager: "#locInfo_pager_list",
                 colModel: locListColModels,
@@ -487,6 +487,7 @@ let dszoneHist = new Vue({
                 },
                 gridComplete: function () {
                     var grid = this;
+                    $this.shrinkToFit = true;
 
                     $('td[rowspan="1"]', grid).each(function () {
                         var spans = $('td[rowspanid="' + this.id + '"]', grid).length + 1;

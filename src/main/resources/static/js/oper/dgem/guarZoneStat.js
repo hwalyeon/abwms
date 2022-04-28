@@ -459,7 +459,7 @@ let guarZoneStat = new Vue({
             $("#locInfo_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 datatype: "local",
                 mtype: 'post',
-                height: 518,
+                height: 420,
                 url: '/oper/dgem/guarZoneStat/searchLocInfoList.ab',
                 pager: "#locInfo_pager_list",
                 colModel: locListColModels,

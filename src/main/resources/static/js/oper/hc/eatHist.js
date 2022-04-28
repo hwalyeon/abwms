@@ -104,7 +104,7 @@ let eatHist = new Vue({
             	mtype    : 'post'  ,
                 url      : '/oper/hc/eatHist/searchEatHistList.ab',
                 pager    : '#eatHist_pager_list',
-				height   : 432     ,
+				height   : 332     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

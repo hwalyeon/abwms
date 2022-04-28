@@ -138,7 +138,7 @@ let bandOpenInfoMng = new Vue({
                         mtype    : 'post',
                         url      : '/devc/band/bandOpenInfoMng/searchBandOpenInfoList.ab',
                         pager    : '#bandOpenInfo_pager_list',
-                        height   : 485,
+                        height   : 385,
                         autowidth: false,
                         colModel : colModels,
                         onPaging : function(data) {

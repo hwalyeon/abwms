@@ -173,7 +173,7 @@ let strsStss = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 pginput : false,
-                height: 60,
+                height: 90,
                 url: '/stat/hc/strsStss/searchStrsJudgList.ab',
                 colModel: colModelsJudg
             }));
@@ -222,7 +222,7 @@ let strsStss = new Vue({
                 plugins: {
                     legend: {
                         position: 'top',
-                        display : true
+                        display : false
                     },
                     tooltip : {
                         enabled : true
@@ -234,6 +234,7 @@ let strsStss = new Vue({
                 responsive : false,
                 plugins: {
                     legend: {
+                        position: 'right',
                         display : true
                     },
                     tooltip : {
@@ -360,7 +361,7 @@ let strsStss = new Vue({
                         datalabels:{
                             display:true,
                             color:'black',
-                            font:{size:20},
+                            font:{size:15},
                             formatter:function(value,context) {
                                 var idx = context.dataIndex;
                                 var labelText = "";

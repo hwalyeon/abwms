@@ -114,7 +114,7 @@ let fidxStss = new Vue({
             	datatype: "local",
             	mtype: 'post',
                 pginput : false,
-            	height: 30,
+            	height: 65,
                 url: '/stat/hc/fidxStss/searchFidxStssList.ab',
                 colModel: colModels
             }));
@@ -140,7 +140,7 @@ let fidxStss = new Vue({
                 datatype: "local",
                 mtype: 'post',
                 pginput : false,
-                height: 60,
+                height: 65,
                 url: '/stat/hc/fidxStss/searchFidxJudgList.ab',
                 colModel: colModelsJudg
             }));
@@ -190,7 +190,7 @@ let fidxStss = new Vue({
                 plugins: {
                     legend: {
                         position: 'top',
-                        display : true
+                        display : false
                     },
                     tooltip : {
                         enabled : true
@@ -202,6 +202,7 @@ let fidxStss = new Vue({
                 responsive : false,
                 plugins: {
                     legend: {
+                        position: 'right',
                         display : true
                     },
                     tooltip : {
@@ -319,7 +320,7 @@ let fidxStss = new Vue({
                         datalabels:{
                             display:true,
                             color:'black',
-                            font:{size:20},
+                            font:{size:15},
                             formatter:function(value,context) {
                                 var idx = context.dataIndex;
                                 var labelText = "";

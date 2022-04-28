@@ -98,7 +98,7 @@ let cbeeStss = new Vue({
                 if($this.code.stndDtList.length > 0){
                     for(var i in $this.code.stndDtList ){
                         var data = $this.code.stndDtList[i];
-                        colModels.push( {name:data.stndDt , index:data.stndDt , label:data.stndDt ,  width: 80} );
+                        colModels.push( {name:data.stndDt , index:data.stndDt , label:data.stndDt ,  width: 80, align:"center", formatter:"integer"} );
                     }
                 }
 
@@ -107,7 +107,7 @@ let cbeeStss = new Vue({
                     datatype : "local",
                     mtype    : 'post',
                     pginput  : false,
-                    height   : 30,
+                    height   : 60,
                     url      : '/stat/etc/cbeeStss/searchCbeeStssList.ab',
                     colModel : colModels
                 }));
@@ -138,7 +138,7 @@ let cbeeStss = new Vue({
                     plugins: {
                         legend: {
                             position: 'top',
-                            display : true
+                            display : false
                         },
                         tooltip : {
                             enabled : true
@@ -230,7 +230,10 @@ let cbeeStss = new Vue({
                             type: 'line',
                             order: 0,
                             datalabels:{
-                                display:true
+                                display:true,
+                                formatter:function(value,context) {
+                                    return WebUtil.addThousandComma(value);
+                                }
                             }
                         }
                     ]

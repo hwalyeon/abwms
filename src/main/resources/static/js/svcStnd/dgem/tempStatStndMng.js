@@ -85,7 +85,7 @@ let tempStatStndMng = new Vue({
             	mtype: 'post',
                 url: '/svcStnd/dgem/tempStatStndMng/searchTempStatStndList.ab',
                 pager: '#temp_pager_list',
-				height: 516,
+				height: 416,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

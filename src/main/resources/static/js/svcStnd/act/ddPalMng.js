@@ -156,7 +156,7 @@ let ddPalMng = new Vue({
             	mtype: 'post',
                 url: '/svcStnd/act/ddPalMng/searchDdPalList.ab',
                 pager: '#user_pager_list',
-				height: 516,
+				height: 416,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

@@ -112,7 +112,7 @@ let guarInfoMng = new Vue({
                         mtype    : 'post',
                         url      : '/user/guar/guarInfoMng/searchGuarInfoList.ab',
                         pager    : '#guarInfo_pager_list',
-                        height   : 405,
+                        height   : 351,
                         colModel : colModels,
                         onPaging : function(data) {
                             onPagingCommon(data, this, function(resultMap)

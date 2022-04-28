@@ -103,7 +103,7 @@ let alamStss = new Vue({
             	datatype: "local",
             	mtype: 'post',
                 pginput : false,
-            	height: 90,
+            	height: 190,
                 url: '/stat/etc/alamStss/searchAlamStssList.ab',
                 colModel: colModels,
                 onSelectRow: function(rowId, status, e){

@@ -69,7 +69,7 @@ let strsStndMng = new Vue({
            	$("#strsStnd_list").jqGrid($.extend(true, {}, commonEditGridOptions(), {
             	datatype: "local",
             	mtype: 'post',
-                height: 550,
+                height: 450,
                 url: '/svcStnd/strs/strsStndMng/searchStrsList.ab',
                 pager: '#strsStnd_pager_list',
                 colModel: colModels,
@@ -101,7 +101,7 @@ let strsStndMng = new Vue({
             $("#strsCdGrp_list").jqGrid("GridUnload");
             $("#strsCdGrp_list").jqGrid($.extend(true, {}, commonGridOptions(), {
                 mtype: 'post',
-                height: 550,
+                height: 450,
                 datatype: "local",
                 url: '/svcStnd/strs/strsStndMng/searchCdSpecList.ab',
                 pager: "#strsCdGrp_pager_list",

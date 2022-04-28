@@ -33,8 +33,8 @@ public class AvalActStssServiceImpl implements AvalActStssService
                 newInfoCalCsumQty.put(info.get("stndDt").toString(), info.get("avgCalCsumQty").toString());
             }
 
-            newInfo.put("divCd", "전체 운동시간(분)");
-            newInfoCalCsumQty.put("divCd", "전체 칼로리 섭취량(g)");
+            newInfo.put("divCd", "운동시간(분)");
+            newInfoCalCsumQty.put("divCd", "칼로리소모량(㎉)");
             newResult.add(newInfo);
             newResult.add(newInfoCalCsumQty);
         }

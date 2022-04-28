@@ -71,7 +71,7 @@ let growJudgStndMng = new Vue({
                 mtype: 'post',
                 url: '/svcStnd/grow/growJudgStndMng/searchGrowJudgList.ab',
                 pager: '#grid_pager_list',
-                height: 550,
+                height: 450,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

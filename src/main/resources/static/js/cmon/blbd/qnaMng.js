@@ -92,7 +92,7 @@ let qnaMng = new Vue({
             	mtype    : 'post'  ,
                 url      : '/cmon/blbd/qnaMng/searchQnaList.ab',
                 pager    : '#qna_pager_list',
-				height   : 450     ,
+				height   : 350     ,
                 colModel : colModels,
                 onPaging : function(data)
                 {

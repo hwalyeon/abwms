@@ -78,7 +78,7 @@ let foodInfoMng = new Vue({
             	mtype: 'post',
                 url: '/svcStnd/food/foodInfoMng/searchFoodInfoList.ab',
                 pager: '#user_pager_list',
-				height: 550,
+				height: 450,
                 colModel: colModels,
                 onPaging : function(data) {
 

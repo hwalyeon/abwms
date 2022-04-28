@@ -74,7 +74,7 @@ let termInfoMng = new Vue({
                 mtype: 'post',
                 url: '/cmon/stnd/termInfoMng/searchTermInfoList.ab',
                 pager: '#grid_pager_list',
-                height: 550,
+                height: 450,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

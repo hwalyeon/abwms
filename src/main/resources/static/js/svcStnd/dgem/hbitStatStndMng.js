@@ -99,7 +99,7 @@ let hbitStatStndMng = new Vue({
             	mtype: 'post',
                 url: '/svcStnd/dgem/hbitStatStndMng/searchHbitStatStndList.ab',
                 pager: '#hbit_pager_list',
-				height: 516,
+				height: 416,
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {

@@ -76,7 +76,7 @@ let bpalCalcStndMng = new Vue({
                     mtype      : 'post'   ,
                     url            : '/svcStnd/fat/bpalCalcStndMng/searchBpalCalcStndList.ab',
                     pager       : '#bpalCalcStnd_pager_list',
-                    height      : 516,
+                    height      : 416,
                     colModel : colModels,
                     onPaging : function(data) {
                         onPagingCommon(data, this, function(resultMap)
