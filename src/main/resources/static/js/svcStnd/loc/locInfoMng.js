@@ -400,7 +400,7 @@ let locInfoMng = new Vue({
             // 마우스 드래그로 지도 이동이 완료되었을 때 마지막 파라미터로 넘어온 함수를 호출하도록 이벤트를 등록합니다
             kakao.maps.event.addListener($this.map, 'dragend', function() {
                 // alert("jcw 지도이동 ");
-                if($this.map.getLevel() < 6) {
+                if($this.map.getLevel() < 7) {
                     $this.changedBound();
                 }
             });
@@ -835,10 +835,6 @@ let locInfoMng = new Vue({
                                 }
                             });
                         }
-                        $this.clickChkMarkerGorg();
-                        $this.clickChkMarkerGuar();
-                        $this.clickChkMarkerSzon();
-                        $this.clickChkMarkerDzon();
                     },
                     error: function (response) {
                         Swal.alert([response, 'error']);
@@ -986,15 +982,42 @@ let locInfoMng = new Vue({
 
                 if ( markerImage.locApntCd === 'GORG' ) {
                     $this.srchMarkersGorg.push(marker);
+                    if(!$this.chkMarkerGorg) {
+                        marker.setMap(null);
+                    } else {
+                        marker.setMap($this.map);
+                    }
                 }
                 if (markerImage.locApntCd === 'GUAR') {
                     $this.srchMarkersGuar.push(marker);
+                    if(!$this.chkMarkerGuar) {
+                        marker.setMap(null);
+                    } else {
+                        marker.setMap($this.map);
+                    }
                 }
                 if (markerImage.plcClssCd === 'SZONE') {
                     $this.srchMarkersSzon.push(marker);
+                    if(!$this.chkMarkerSzon) {
+                        marker.setMap(null);
+                    } else {
+                        marker.setMap($this.map);
+                    }
                 }
                 if (markerImage.plcClssCd === 'DZONE') {
                     $this.srchMarkersDzon.push(marker);
+                    if(!$this.chkMarkerDzon) {
+                        marker.setMap(null);
+                    } else {
+                        marker.setMap($this.map);
+                    }
+                }
+
+                console.log("jcw complet :: ");
+                if(!$this.chkMarkerGorg) {
+                    marker.setMap(null);
+                } else {
+                    marker.setMap($this.map);
                 }
 
                 if ( !!marker.locNo ) {
@@ -1087,7 +1110,7 @@ let locInfoMng = new Vue({
                     //     $this.selectedMarker = marker;
                     // }
                 }
-                $this.drawList.marker = marker;
+                // $this.drawList.marker = marker;
             } else {
                 console.log('add marker position not exists.')
             }
@@ -1948,6 +1971,7 @@ let locInfoMng = new Vue({
         clickChkMarkerGorg : function() {
             let $this = this;
             let i = 0;
+            console.log("jcw clickChkMarkerGorg :: ", $this.chkMarkerGorg);
             if(!$this.chkMarkerGorg) {
                 for (i ; i < $this.srchMarkersGorg.length; i++) {
                     $this.srchMarkersGorg[i].setMap(null);
@@ -2050,7 +2074,7 @@ let locInfoMng = new Vue({
         },
         currLevel: function(newVal, oldVal) {
             let $this = this;
-            if ( newVal > oldVal && newVal < 6) {
+            if ( newVal > oldVal && newVal < 7) {
                 $this.changedBound();
             }
         },
