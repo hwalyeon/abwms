@@ -1013,12 +1013,6 @@ let locInfoMng = new Vue({
                     }
                 }
 
-                if(!$this.chkMarkerGorg) {
-                    marker.setMap(null);
-                } else {
-                    marker.setMap($this.map);
-                }
-
                 if ( !!marker.locNo ) {
                     $this.locNoList = marker.locNo;
                 }
