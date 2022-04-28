@@ -4,21 +4,25 @@ let eorgInfoMng = new Vue({
         {
             params:
                 {
-                    growStndVer : ''  ,    // 성장_기준_번호
-                    ageYcnt         : ''  ,     // 나이_년수
-                    sexCd            : ''   ,    // 성별_코드
-                    paging          : 'Y',
-                    totalCount    : 0  ,
-                    rowCount     : 30,
-                    currentPage : 1  ,
-                    currentIndex: 0
+                    plcClssCd     : ''  , // 장소_분류_코드
+                    plcCd         : ''  , // 장소_코드
+                    locNm         : ''  , // 장소_명
+                    wordHead1     : ''  , // 단어_헤드_1
+                    wordHead2     : ''  , // 단어_헤드_2
+                    addrSpec      : ''  , // 상세_주소
+                    paging        : 'Y' ,
+                    totalCount    : 0   ,
+                    rowCount      : 30  ,
+                    currentPage   : 1   ,
+                    currentIndex  : 0
                 },
             code:
                 {
-                    growStndVerList : [],  // 성장_기준_버전_리스트
-                    ageYcntList         : [],  // 나이_년수_리스트
-                    sexCdList             : [{cdVal:'MALE', cdNm:'남성'},{cdVal:'FEMALE', cdNm:'여성'}] // 성별_리스트
-                },
+                    plcClssCdList : []  , // 장소_구분_코드_리스트
+                    plcCdList     : []  , // 장소_코드_리스트
+                    wordHead1List : []  , // 단어_헤드_1_리스트
+                    wordHead2List : []    // 단어_헤드_2_리스트
+                }
         },
     methods:
         {
@@ -30,22 +34,28 @@ let eorgInfoMng = new Vue({
 
                 $this.initGrid();
 
-                $this.searchGrowStndList(true);
+                $this.searchEorgInfoList(true);
             },
             initCodeList : function()
             {
-
                 let $this = this;
-                // 나이_년수_리스트_조회
-                AjaxUtil.post({
-                    url: "/svcStnd/grow/growStndMng/ageYcntList.ab",
-                    param: {},
-                    success: function(response) {
 
-                        $this.code.ageYcntList = [];
-                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                            $.each(response.rtnData.result, function(index, item) {
-                                $this.code.ageYcntList.push({'cdVal':item.ageYcnt});
+                // 단어_헤드_리스트
+                $this.searchWordHead1List();
+
+                // 장소_구분_코드_리스트
+                getCommonCodeList('PLC_CLSS_CD', $this.code.plcClssCdList);
+
+                // 장소_코드_리스트
+                AjaxUtil.post({
+                    url    : "/svcStnd/loc/eorgInfoMng/searchPlcCdList.ab",
+                    param  : {},
+                    success: function (response) {
+
+                        $this.code.plcCdList = [];
+                        if (!!response.rtnData.result && response.rtnData.result.length > 0) {
+                            $.each(response.rtnData.result, function (index, item) {
+                                $this.code.plcCdList.push({cdVal: item.plcCd, cdNm: item.plcCdNm})
                             });
                         }
                     },
@@ -54,58 +64,87 @@ let eorgInfoMng = new Vue({
                     }
                 });
 
-                // 성장_기준_버전_리스트_조회
+            },
+            // 단어_헤드_1_리스트_조회
+            searchWordHead1List: function()
+            {
+                let $this = this;
+                let params = $.extend(true, {}, $this.params);
+
                 AjaxUtil.post({
-                    url: "/svcStnd/grow/growStndMng/growStndVerList.ab",
-                    param: {},
-                    success: function(response) {
-                        $this.code.growStndVerList = [];
-                        if ( !!response.rtnData.result && response.rtnData.result.length > 0 ) {
-                            $.each(response.rtnData.result, function(index, item) {
-                                $this.code.growStndVerList.push({'cdVal':item.growStndVer});
+                    url    : "/svcStnd/loc/eorgInfoMng/searchWordHeadList.ab",
+                    param  : params,
+                    success: function (response) {
+
+                        $this.code.wordHead1List = [];
+                        if (!!response.rtnData.resultHead1 && response.rtnData.resultHead1.length > 0) {
+                            $.each(response.rtnData.resultHead1, function (index, item) {
+                                $this.code.wordHead1List.push({cdVal: item.wordHead1})
                             });
                         }
                     },
-                    error: function (response)
-                    {
+                    error: function (response) {
                         Swal.alert([response, 'error']);
                     }
                 });
+            },
+            // 단어_헤드_2_리스트_조회
+            searchWordHead2List: function()
+            {
+                let $this = this;
+                let params = $.extend(true, {}, $this.params);
+
+                AjaxUtil.post({
+                    url    : "/svcStnd/loc/eorgInfoMng/searchWordHeadList.ab",
+                    param  : params,
+                    success: function (response) {
+
+                        $this.code.wordHead2List = [];
+                        if (!!response.rtnData.resultHead2 && response.rtnData.resultHead2.length > 0) {
+                            $.each(response.rtnData.resultHead2, function (index, item) {
+                                $this.code.wordHead2List.push({cdVal: item.wordHead2})
+                            });
+                        }
+                    },
+                    error: function (response) {
+                        Swal.alert([response, 'error']);
+                    }
+                });
+
             },
             initGrid: function()
             {  
                 let $this = this;
                 let colModels =
                 [
-                    {name: "growStndVer"     , index: "growStndVer"     , label: "성장기준버전"          , width: 80         , align: "center"},
-                    {name: "growStndNo"     , index: "growStndNo"      , label: "성장기준번호"          , width: 80         , align: "center"},
-                    {name: "sexCd"                , index: "sexCd"                 , label: "성별코드"                  , width: 80          , align: "center",  hidden:true},
-                    {name: "fnGetcdnm"       , index: "fnGetcdnm"         , label: "성별"                          , width: 80          , align: "center"},
-                    {name: "ageYcnt"            , index: "ageYcnt"              , label: "나이(년)"                    , width: 80          , align: "center"},
-                    {name: "ageMcnt"           , index: "ageMcnt"            , label: "나이(개월)"                , width: 80          , align: "center"},
-                    {name: "p3Gidx"              , index: "p3Gidx"              , label: "백분위3 성장지수"     , width: 80          , align: "center"},
-                    {name: "p50Gidx"            , index: "p50Gidx"            , label: "백분위50 성장지수"   , width: 80          , align: "center"},
-                    {name: "p97Gidx"            , index: "p97Gidx"            , label: "백분위97 성장지수"   , width: 80          , align: "center"},
-                    {name: "regDt"                , index: "regDt"                , label: "등록일자"                    , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                    {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                    {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"            , width: 80          , align: "center"},
-                    {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                    {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                    {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"}
+                    { name: "locNo"        , index: "locNo"        , label: "위치 번호"        , width: 50    , align: "center" ,  fixed: true },
+                    { name: "locNm"        , index: "locNm"        , label: "위치 명"          , width: 140   , align: "left"   ,  fixed: true },
+                    { name: "plcClssCdNm"  , index: "plcClssCdNm"  , label: "장소 분류 코드명" , width: 80    , align: "center" ,  fixed: true },
+                    { name: "plcCdNm"      , index: "plcCdNm"      , label: "장소 코드명 "     , width: 80    , align: "center" ,  fixed: true },
+                    { name: "roadAddr"     , index: "roadAddr"     , label: "도로명 주소"      , width: 260   , align: "left"   ,  fixed: true },
+                    { name: "jibnAddr"     , index: "jibnAddr"     , label: "지번 주소"        , width: 260   , align: "left"   ,  fixed: true },
+                    { name: "latVal"       , index: "latVal"       , label: "위도 값"          , width: 100   , align: "left"   ,  fixed: true },
+                    { name: "lonVal"       , index: "lonVal"       , label: "경도 값"          , width: 100   , align: "left"   ,  fixed: true },
+                    { name: "mngOrgnNm"    , index: "mngOrgnNm"    , label: "관리 기관 명"     , width: 150   , align: "left"   ,  fixed: true },
+                    { name: "mngPolcNm"    , index: "mngPolcNm"    , label: "관할 경찰서 명"   , width: 80    , align: "center" ,  fixed: true },
+                    { name: "cctvYn"       , index: "cctvYn"       , label: "CCTV 여부"        , width: 80    , align: "center" ,  fixed: true },
+                    { name: "cctvCnt"      , index: "cctvCnt"      , label: "CCTV 대수"        , width: 80    , align: "center" ,  fixed: true },
+                    { name: "roadWdthDesc" , index: "roadWdthDesc" , label: "도로 넓이 설명"   , width: 80    , align: "center" ,  fixed: true },
+                    { name: "dataStndDt"   , index: "dataStndDt"   , label: "자료 기준 일자"   , width: 80    , align: "center" ,  fixed: true
+                      , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
+                    { name: "provOrgnCd"   , index: "provOrgnCd"   , label: "제공 기관 코드"   , width: 80    , align: "center"  ,  fixed: true },
+                    { name: "provOrgnNm"   , index: "provOrgnNm"   , label: "제공 기관 명"     , width: 120   , align: "center"  ,  fixed: true },
                 ];
 
-                $("#growStnd_list").jqGrid("GridUnload");
-                $("#growStnd_list").jqGrid($.extend(true, {}, commonGridOptions(),
+                $("#eorgInfo_list").jqGrid("GridUnload");
+                $("#eorgInfo_list").jqGrid($.extend(true, {}, commonGridOptions(),
                 {
-                    datatype  : "local",
-                    mtype      : 'post',
-                    url            : '/svcStnd/grow/growStndMng/searchGrowStndList.ab',
-                    pager       : '#growStnd_pager_list',
-                    height      : 405,
+                    datatype : "local",
+                    mtype    : 'post',
+                    url      : '/svcStnd/loc/eorgInfoMng/searchEorgInfoList.ab',
+                    pager    : '#eorgInfo_pager_list',
+                    height   : 405,
+                    autowidth: false,
                     colModel : colModels,
                     onPaging : function(data) {
                         onPagingCommon(data, this, function(resultMap)
@@ -113,13 +152,14 @@ let eorgInfoMng = new Vue({
                             $this.params.currentPage  = resultMap.currentPage;
                             $this.params.rowCount     = resultMap.rowCount;
                             $this.params.currentIndex = resultMap.currentIndex;
-                            $this.searchGrowStndList(false);
+                            $this.searchEorgInfoList(false);
                         })
                     }
                 }));
-                resizeJqGridWidth("growStnd_list", "growStnd_list_wrapper");
+                resizeJqGridWidth("eorgInfo_list", "eorgInfo_list_wrapper");
             },
-            searchGrowStndList: function(isSearch)
+            /* 교육시설_정보_조회 */
+            searchEorgInfoList: function(isSearch)
             {
                 let $this = this;
                 let params = $.extend(true, {}, $this.params);
@@ -129,12 +169,11 @@ let eorgInfoMng = new Vue({
                     params.currentPage = 1;
                     params.currentIndex = 0;
                 }
-
-                $("#growStnd_list").setGridParam(
+                $("#eorgInfo_list").setGridParam(
                     {
-                        datatype: "json",
-                        postData: JSON.stringify(params),
-                        page: 1,
+                        datatype    : "json",
+                        postData    : JSON.stringify(params),
+                        page        : 1,
                         loadComplete: function (response)
 
                         {
@@ -145,6 +184,13 @@ let eorgInfoMng = new Vue({
                         }
                     }).trigger("reloadGrid");
             },
+            selectWordHead1: function()
+            {
+                let $this = this;
+
+                $this.searchWordHead2List();
+            },
+            /* 교육시설_정보_엑셀_다운로드*/
             downloadExcel : function()
             {
                 let $this = this;
@@ -153,11 +199,11 @@ let eorgInfoMng = new Vue({
                 AjaxUtil.post(
                     {
                         dataType: 'binary',
-                        url: "/svcStnd/grow/growStndMng/searchGrowStndList/excel.ab",
-                        param: params,
-                        success: function(response)
+                        url     : "/svcStnd/loc/eorgInfoMng/searchEorgInfoList/excel.ab",
+                        param   : params,
+                        success : function(response)
                         {
-                            saveFileLocal(response, 'growStndMng.xls');
+                            saveFileLocal(response, 'eorgInfo.xls');
                         },
                         error: function (response)
                         {
@@ -167,15 +213,20 @@ let eorgInfoMng = new Vue({
             },
             resetSearchParam: function() {
                 let $this = this;
-                $this.params = {
-                    growStndVer : ''  ,    // 성장_기준_번호
-                    ageYcnt         : ''  ,     // 나이_년수
-                    sexCd            : ''   ,    // 성별_코드
-                    paging          : 'Y',
-                    totalCount    : 0  ,
-                    rowCount     : 30,
-                    currentPage : 1  ,
-                    currentIndex: 0
+                $this.params =
+                {
+                    plcClssCd     : ''  , // 장소_분류_코드
+                    plcCd         : ''  , // 장소_코드
+                    locNm         : ''  , // 장소_명
+                    wordHead1     : ''  , // 단어_헤드_1
+                    wordHead2     : ''  , // 단어_헤드_2
+                    addrSpec      : ''  , // 상세_주소
+                    paging        : 'Y' ,
+                    totalCount    : 0   ,
+                    rowCount      : 30  ,
+                    currentPage   : 1   ,
+                    currentIndex  : 0
+
                 }
             }
         },

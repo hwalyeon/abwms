@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="svcStnd.loc.eorgInfoMng">
+
+	<!-- 주소_헤더_단어_1_리스트_조회-->
+	<select id="selectWordHead1List" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT   DISTINCT WORD_HEAD_1 as WORD_HEAD_1 /* word_head_1 단어_헤더_1 character varying(30) */
+		FROM     TI_ADDR_HEAD         -- 주소헤더
+		WHERE    1 = 1
+		ORDER BY WORD_HEAD_1
+	</select>
+
+    <!-- 주소_헤더_단어_2_리스트_조회-->
+    <select id="selectWordHead2List" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT   DISTINCT WORD_HEAD_2 as WORD_HEAD_2 /* word_head_2 단어_헤더_2 character varying(30) */
+		FROM     TI_ADDR_HEAD         -- 주소헤더
+		WHERE    1 = 1
+        <if test="wordHead1 != null and wordHead1 != ''">  -- 장소_분류_코드
+        AND      WORD_HEAD_1 = #{wordHead1} </if>
+        ORDER BY WORD_HEAD_2
+	</select>
+
+    <!-- 장소_코드_리스트_조회-->
+    <select id="selectPlcCdList" parameterType="java.util.Map" resultType="MybatisMap">
+        SELECT DISTINCT plc_cd                      as plc_cd      /* plc_cd         장소_코드      character varying(20)  */
+                      , fn_getCdNm('PLC_CD',plc_cd) as plc_cd_nm   /* cd_nm          코드_명        character varying(100) */
+        FROM   ti_eorg_base teb  --교육시설_기본
+        WHERE  1=1
+	</select>
+
+    <!--교육시설_정보_조회-->
+	<select id="selectEorgInfoList" resultType="MybatisMap">
+        WITH EORG_BASE_TEMP
+        AS
+        (
+            SELECT  teb.loc_no                                                as  loc_no         /* loc_no         위치_번호      numeric                */
+                  , teb.loc_nm                                                as  loc_nm         /* loc_nm         위치_명        character varying(100) */
+                  , tlib.plc_clss_cd                                          as  plc_clss_cd    /* plc_clss_cd    장소_분류_코드 character varying(20) */
+                  , teb.plc_cd                                                as  plc_cd         /* plc_cd         장소_코드      character varying(20)  */
+                  , fn_getCdNm('PLC_CLSS_CD',tlib.plc_clss_cd)                as  plc_clss_cd_nm /* cd_nm          코드_명        character varying(100) */
+                  , fn_getCdNm('PLC_CD',teb.plc_cd)                           as  plc_cd_nm      /* cd_nm          코드_명        character varying(100) */
+                  , CASE WHEN teb.road_addr != ''  THEN teb.road_addr                            /* road_addr      도로명_주소    character varying(400) */
+                         ELSE tlib.addr_base|| tlib.addr_spec                                    /* addr_base      주소_기본      character varying(400) */ /* addr_spec 주소_상세 character varying(200) */
+                                                                              END road_addr
+                  , teb.jibn_addr                                             as  jibn_addr      /* jibn_addr      지번_주소      character varying(400) */
+                  , teb.lat_val                                               as  lat_val        /* lat_val        위도_값        numeric                */
+                  , teb.lon_val                                               as  lon_val        /* lon_val        경도_값        numeric                */
+                  , teb.mng_orgn_nm                                           as  mng_orgn_nm    /* mng_orgn_nm    관리_기관_명   character varying(100) */
+                  , teb.mng_polc_nm                                           as  mng_polc_nm    /* mng_polc_nm    관할_경찰서_명 character varying(100) */
+                  , teb.cctv_yn                                               as  cctv_yn        /* cctv_yn        CCTV_여부      character(1)           */
+                  , teb.cctv_cnt                                              as  cctv_cnt       /* cctv_cnt       CCTV_대수      numeric                */
+                  , teb.road_wdth_desc                                        as  road_wdth_desc /* road_wdth_desc 도로_넓이_설명 character varying(50)  */
+                  , teb.data_stnd_dt                                          as  data_stnd_dt   /* data_stnd_dt   자료_기준_일자 character(8)           */
+                  , teb.prov_orgn_cd                                          as  prov_orgn_cd   /* prov_orgn_cd   제공_기관_코드 character varying(20)  */
+                  , teb.prov_orgn_nm                                          as  prov_orgn_nm   /* prov_orgn_nm   제공_기관_명   character varying(100) */
+                  , teb.reg_dt                                                as  reg_dt         /* reg_dt         등록_일자      character(8)           */
+                  , teb.reg_tm                                                as  reg_tm         /* reg_tm         등록_시각      character(6)           */
+                  , teb.reg_user_id                                           as  reg_user_id    /* reg_user_id    등록_사용자_ID character varying(20)  */
+                  , teb.upt_dt                                                as  upt_dt         /* upt_dt         수정_일자      character(8)           */
+                  , teb.upt_tm                                                as  upt_tm         /* upt_tm         수정_시각      character(6)           */
+                  , teb.upt_user_id                                           as  upt_user_id    /* upt_user_id    수정_사용자_ID character varying(20)  */
+            FROM    ti_eorg_base teb                      --교육시설_기본
+                    LEFT OUTER JOIN ts_loc_info_base tlib --위치_정보_기본
+                                 ON teb.loc_no = tlib.loc_no
+            WHERE   1=1
+        )
+        SELECT  ebt.*
+        FROM    EORG_BASE_TEMP ebt
+        WHERE   1=1
+        <if test="plcClssCd != null and plcClssCd != ''">  -- 장소_분류_코드
+        AND     ebt.plc_clss_cd = #{plcClssCd}                                                                          </if>
+        <if test="plcCd     != null and plcCd     != ''">  -- 장소_코드
+        AND     ebt.plc_cd      = #{plcCd}                                                                              </if>
+        <if test="locNm     != null and locNm     != ''">  -- 교육기관_명
+        AND     ebt.loc_nm      LIKE CONCAT('%',#{locNm},'%')                                                           </if>
+        <if test="wordHead1 != null and wordHead1 != ''">  -- 단어_헤드_1
+        AND     ((ebt.road_addr LIKE CONCAT(#{wordHead1},'%'))     OR (ebt.jibn_addr LIKE CONCAT(#{wordHead1},'%')))    </if>
+        <if test="wordHead2 != null and wordHead2 != ''">  -- 단어_헤드_2
+        AND     ((ebt.road_addr LIKE CONCAT('%',#{wordHead2},'%')) OR (ebt.jibn_addr LIKE CONCAT('%',#{wordHead2},'%')))</if>
+        <if test="addrSpec  != null and addrSpec  != ''">  -- 상세_주소
+        AND     ((ebt.road_addr LIKE CONCAT('%',#{addrSpec},'%'))  OR (ebt.jibn_addr LIKE CONCAT('%',#{addrSpec},'%'))) </if>
+        <if test=' paging == "Y" '>
+                 LIMIT ${rowCount} OFFSET ${currentIndex}                                                               </if>
+    </select>
+</mapper>

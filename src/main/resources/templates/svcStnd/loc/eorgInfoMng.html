@@ -10,7 +10,6 @@
 <div layout:fragment="content">
 	<div class="wrapper-content" id="eorgInfoMng">
 
-
 		<!-- 검색조건 영역 -->
 		<div class="ibox m-b-sm">
 			<div class="ibox-title">
@@ -25,26 +24,43 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
-						<label class="col-xs-1 control-label">성장기준버전</label>
+						<label class="col-xs-1 control-label">장소 분류</label>
 						<div class="col-xs-2">
-							<select id="growStndVer" name="growStndVer" class="form-control" v-model="params.growStndVer">
+							<select id="plcClssCd" name="plcClssCd" class="form-control" v-model="params.plcClssCd">
 								<option value="">전체</option>
-								<option v-for="item in code.growStndVerList" :value="item.cdVal" v-text="item.cdVal" ></option>
+								<option v-for="item in code.plcClssCdList" :value="item.cdVal" v-text="item.cdNm" ></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label">나이</label>
+						<label class="col-xs-1 control-label">장소 구분</label>
 						<div class="col-xs-2">
-							<select id="ageYcnt" name="ageYctn" class="form-control" v-model="params.ageYcnt" >
+							<select id="plcCd" name="plcCd" class="form-control" v-model="params.plcCd" >
 								<option value="">전체</option>
-								<option v-for="item in code.ageYcntList" :value="item.cdVal" v-text="item.cdVal" ></option>
+								<option v-for="item in code.plcCdList" :value="item.cdVal" v-text="item.cdNm" ></option>
 							</select>
 						</div>
-						<label class="col-xs-1 control-label">성별</label>
+						<label class="col-xs-1 control-label">교육기관명</label>
 						<div class="col-xs-2">
-							<select id="sexCd" name="sexCd" class="form-control" v-model="params.sexCd">
+							<input type="text" id ="locNm" name="locNm" class="form-control" v-model="params.locNm">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-1 control-label">지역</label>
+						<div class="col-xs-2">
+							<select id="wordHead1" name="wordHead1" class="form-control" v-model="params.wordHead1" @change="selectWordHead1">
 								<option value="">전체</option>
-								<option v-for="item in code.sexCdList" :value="item.cdVal" v-text="item.cdNm" ></option>
+								<option v-for="item in code.wordHead1List" :value="item.cdVal" v-text="item.cdVal" ></option>
 							</select>
+						</div>
+						<label class="col-xs-1 control-label">도시 명</label>
+						<div class="col-xs-2">
+							<select id="wordHead2" name="wordHead2" class="form-control" v-model="params.wordHead2" >
+								<option value="">전체</option>
+								<option v-for="item in code.wordHead2List" :value="item.cdVal" v-text="item.cdVal" ></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">상세 주소</label>
+						<div class="col-xs-2">
+							<input type="text" id ="addrSpec" name="locNm" class="form-control" v-model="params.addrSpec">
 						</div>
 					</div>
 					<div class="form-group mg_none">
@@ -52,7 +68,7 @@
 							<button class="btn btn-secondary" @click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" @click="searchGrowStndList(true)"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" @click="searchEorgInfoList(true)"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
@@ -77,9 +93,9 @@
 					<div class="clear_both"></div>
 				</div>
 				<div class="form-group">
-					<div id="growStnd_list_wrapper">
-						<table id="growStnd_list"></table>
-						<div id="growStnd_pager_list"></div>
+					<div id="eorgInfo_list_wrapper">
+						<table id="eorgInfo_list"></table>
+						<div id="eorgInfo_pager_list"></div>
 					</div>
 				</div>
 			</div>
