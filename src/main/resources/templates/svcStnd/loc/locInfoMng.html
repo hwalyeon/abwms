@@ -325,10 +325,11 @@
 									<div class="option">
 										<div>
 											<form v-on:submit.prevent="searchPlaces(); return false;">
-												키워드 : <input type="text" value="" id="keyword" size="15">
-												<button type="submit">검색하기</button>
+												키워드 : <input type="text" value="" id="keyword" size="10">
+												<button type="submit">검색</button>
+												<button type="button" v-on:click="psRemoveMarker()">마커삭제</button>
 											</form>
-											<button type="button" v-on:click="psRemoveMarker()">검색마커삭제</button>
+
 										</div>
 									</div>
 									<hr>
