@@ -19,7 +19,7 @@
 		FROM		TS_STDT_DGEM_HIST TSDH
 		WHERE		1 = 1
 		ORDER BY	DGEM_DT DESC, DGEM_TM DESC
-		LIMIT 		10
+		LIMIT 		11
 	</select>
 
 	<!-- 종합관제현황_메뉴_리스트_조회 -->

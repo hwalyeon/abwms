@@ -25,7 +25,7 @@
             padding: 15px 0px;
         }
         .chart-padding-1 {
-            padding: 21px 20px;
+            padding: 20px 20px;
         }
         .chart-padding-2 {
             padding-right: 0px;
@@ -44,12 +44,12 @@
             padding: 15px 15px;
         }
         .minMax-height-140 {
-            min-height: 140px;
-            max-height: 140px;
+            min-height: 170px;
+            max-height: 170px;
         }
         .minMax-height-160 {
-            min-height: 160px;
-            max-height: 160px;
+            min-height: 181px;
+            max-height: 181px;
         }
         .activeButton {
             background-color: #059368;
@@ -109,9 +109,9 @@
                                     </canvas>
                                 </div>
                                 <div id="growFatDetl">
-                                    <span class="col-xs-8 text-center" style="padding-top: 10px;"> 성장 / 비만</span>
-                                    <span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
-                                    <span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
+                                    <span class="col-xs-8 text-center pd_none" style="padding-top: 10px;"> 성장 / 비만</span>
+                                    <span class="col-xs-8 text-center pd_none"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
+                                    <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
                                 </div>
                             </div>
                             <div class="col-xs-12 chart-padding-0 minMax-height-140" style="padding-top: 28px;">
@@ -120,9 +120,9 @@
                                     </canvas>
                                 </div>
                                 <div id="fatPrdtDetl">
-                                    <span class="col-xs-8 text-center" style="padding-top: 10px;"> 비만 예측</span>
-                                    <span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
-                                    <span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
+                                    <span class="col-xs-8 text-center pd_none" style="padding-top: 10px;"> 비만 예측</span>
+                                    <span class="col-xs-8 text-center pd_none"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
+                                    <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
                                 </div>
                             </div>
                             <div class="col-xs-12 chart-padding-0 minMax-height-140" style="padding-top: 28px;">
@@ -131,15 +131,15 @@
                                     </canvas>
                                 </div>
                                 <div id="strsDetl">
-                                    <span class="col-xs-8 text-center" style="padding-top: 10px;"> 스트레스</span>
-                                    <span class="col-xs-8 text-center"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
-                                    <span class="col-xs-8 text-center"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
+                                    <span class="col-xs-8 text-center pd_none" style="padding-top: 10px;"> 스트레스</span>
+                                    <span class="col-xs-8 text-center pd_none"> TOTAL&nbsp;: {{totMonStat.tmpTotal}} 명</span>
+                                    <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-8 border-line" style="padding-bottom: 10px;">
+                <div class="col-xs-8 border-line" style="padding-bottom: 20px; padding-top: 15px;">
                     위험안전발생
                     <div class="form-group">
                         <div class="col-xs-6 border-line minMax-height-160">
@@ -246,8 +246,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-160" style="padding-bottom: 30px;" v-on:click="linkCall('O250')">
-                            <span class="col-xs-12 chart-padding-0" v-on:click="linkCall('O250')">보호자가 많이 지정한 위험지역 TOP3</span>
+                        <div class="col-xs-6 border-line minMax-height-160 pd_top_15" v-on:click="linkCall('O250')">
+                            <span class="col-xs-10 chart-padding-0" v-on:click="linkCall('O250')">보호자가 많이 지정한 위험지역 TOP3</span>
+                            <span class="col-xs-2 chart-padding-0 text-right">+ more</span>
                             <input type="text" name="plcCdPrntTop1" class="col-xs-3" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
                             <input type="text" name="addrPrntTop1" class="col-xs-7" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
                             <input type="text" name="cntPrntTop1" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
@@ -260,8 +261,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 border-line" style="padding-bottom: 14px;">
-                    <div class="form-group">
+                <div class="col-xs-2 border-line" style="padding-bottom: 21px;">
+                    <div class="form-group pd_top_10">
                         <div class="col-xs-12 border-line chart-padding">
                             <button class="col-xs-3 chart-padding" style="background-color: #000000" v-on:click="initCycl(5000)" type="button">
                                 <span>갱신주기 : </span>
@@ -269,7 +270,7 @@
                             <button class="col-xs-3" v-bind:class="[cyclButton.button1 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(5000)" type="button">
                                 <span> 5 sec </span>
                             </button>
-                            <button class="col-xs-3" v-bind:class="[cyclButton.button2 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
+                            <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button2 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
                                 <span> 30 sec </span>
                             </button>
                             <button class="col-xs-3" v-bind:class="[cyclButton.button3 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(60000)" type="button">
@@ -285,12 +286,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-xs-12 border-line" v-on:click="linkCall('O210')">
+                        <div class="col-xs-12 border-line" style="padding-bottom: 3px;" v-on:click="linkCall('O210')">
                             <div class="col-xs-2">
-                                <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemDt }} </span>
                             </div>
                             <div class="col-xs-2">
-                                <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 12px;"> {{ item.dgemTm }} </span>
+                                <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemTm }} </span>
                             </div>
                             <div class="col-xs-3">
                                 <i v-for="item in totMonStatDgemHist" v-if="item.dgemStatCd === 'NORM'" class="fa-solid fa-triangle-exclamation fa-2x" style="color: #5bff16; padding-top: 10px; padding-left: 10px;"></i>
@@ -301,12 +302,12 @@
                                 <i v-else class="fa-solid fa-temperature-quarter fa-4x" style="color: #ee5e5e"></i>
                             </div>
                             <div class="col-xs-5">
-                                <span class="col-xs-12 text-left chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 12px;"> {{ item.dgemStatNm }} </span>
+                                <span class="col-xs-12 text-left chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemStatNm }} </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-10 border-line" style="padding-bottom: 10px;">
+                <div class="col-xs-10 border-line" style="padding-bottom: 15px; padding-top: 15px">
                     헬스케어
                     <div class="form-group">
                         <div class="col-xs-12 border-line minMax-height-160">

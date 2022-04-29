@@ -105,7 +105,7 @@ const index = new Vue({
 			navigation.selectMenu(menuNo);
 			this.onFocusTab(menuNo);
 		},
-		moveTab: function (direction, offset = 150) {
+		moveScroll: function (direction, offset = 150) {
 			const tabContainer = document.querySelector("ul#tab-list");
 			if (direction === "left" && tabContainer.scrollLeft > 0) {
 				tabContainer.scrollBy(-offset, 0);
@@ -124,7 +124,7 @@ const index = new Vue({
 
 						this.activeTab(this.menuList[this.menuList.length - 1].menuNo);
 						this.$nextTick(() => {
-							this.moveTab('right', 0);
+							this.moveScroll('right', 0);
 						});
 					}
 				});
@@ -153,12 +153,14 @@ const index = new Vue({
 					});
 			}
 		},
-		closeAllInterval: function (menuIndex) {
-			for (var index in this.menuList) {
-				if (index >= menuIndex) {
-					clearInterval(this.menuList[index].interval);
-					this.menuList[index].interval = null;
-
+		closeAllInterval: function (menuIndex)
+		{
+			for ( let idx in this.menuList )
+			{
+				if ( idx >= menuIndex )
+				{
+					clearInterval(this.menuList[idx].interval);
+					this.menuList[idx].interval = null;
 				}
 			}
 		},
