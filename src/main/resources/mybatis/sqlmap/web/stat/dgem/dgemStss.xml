@@ -47,28 +47,11 @@
 
 
     <select id="searchDgemIdxCdList" parameterType="java.util.Map" resultType="MybatisMap">
-        select  dgem_stat_cd as cd_val
-        ,tcs.cd_nm
-        from TT_DGEM_STAT_STSS tgjs
-        inner join tc_cd_spec tcs
-        on tgjs.dgem_stat_cd = tcs.cd_val
-        and tcs.cd_grp = 'DGEM_STAT_CD'
+        select  tcs.cd_val
+               ,tcs.cd_nm
+        from  tc_cd_spec tcs
         where 1=1
-        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-        </if>
-
-        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
-        </if>
-
-        <if test="sexCd != null and sexCd != ''">
-            and sex_cd = #{sexCd}
-        </if>
-        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
-            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
-        </if>
-        group by tgjs.dgem_stat_cd, tcs.cd_nm, tcs.sort_ord
+        and tcs.cd_grp = 'DGEM_STAT_CD'
         order by tcs.sort_ord
     </select>
 
@@ -78,12 +61,12 @@
         ,round( avg(x.avg_idx) , 2) as avg_idx
         from
         (select
-        case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
-        when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
-        when #{perdDivCd} = 'WEEK_NM' then week_nm
-        else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
-        end as stnd_dt
-        ,avg_idx
+                case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
+                     when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
+                     when #{perdDivCd} = 'WEEK_NM' then week_nm
+                     else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
+                 end as stnd_dt
+                ,avg_idx
         from TT_DGEM_IDX_STSS
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
@@ -120,10 +103,12 @@
     <select id="searchDgemJudgList" parameterType="java.util.Map" resultType="MybatisMap">
         with tt_dgem_stat_stss_temp  as
         ( select
-        dgem_stat_cd
-        ,sum(occr_cnt) as occr_cnt
-        from tt_dgem_stat_stss tgjs
-        where 1=1
+                 tcs.cd_val as  dgem_stat_cd
+                ,coalesce(sum(tgjs.occr_cnt) ,0) as occr_cnt
+                ,tcs.sort_ord
+        from  tc_cd_spec tcs
+        left outer join tt_dgem_stat_stss tgjs
+        on tcs.cd_val = tgjs.dgem_stat_cd
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
         </if>
@@ -138,12 +123,16 @@
         <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
             and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
         </if>
-        group by  dgem_stat_cd
+        where 1=1
+        and tcs.cd_grp = 'DGEM_STAT_CD'
+        group by  tcs.cd_val , tcs.sort_ord
         )
-        select  dgem_stat_cd
-        ,occr_cnt
-        ,sum(occr_cnt) over()                          as tot_cnt
-        ,round(sum(occr_cnt) over(partition by dgem_stat_cd) / sum(occr_cnt) over() * 100 , 2) as occr_per
+        select
+               dgem_stat_cd
+              ,occr_cnt
+              ,sum(occr_cnt) over()                          as tot_cnt
+              ,case when occr_cnt > 0 then round(sum(occr_cnt) over(partition by dgem_stat_cd) / sum(occr_cnt) over() * 100 , 2)
+                    else 0 end as occr_per
         from tt_dgem_stat_stss_temp tgjs
         where 1=1
         order by dgem_stat_cd
