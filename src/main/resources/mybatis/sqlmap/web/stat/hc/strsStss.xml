@@ -51,11 +51,10 @@
 
 
     <select id="searchStrsStatCdList" parameterType="java.util.Map" resultType="MybatisMap">
-    select  strs_stat_cd as cd_val
+    select  tcs.cd_val
            ,tcs.cd_nm
-    from tt_strs_judg_stss tsjs
-    inner join tc_cd_spec tcs
-    on tsjs.strs_stat_cd = tcs.cd_val
+    from tc_cd_spec tcs
+    where 1=1
     <choose>
         <when test="strsTypeCd.equals('CSTRS')">
             and tcs.cd_grp = 'STRS_COPE_STAT_CD'
@@ -64,22 +63,6 @@
             and tcs.cd_grp = 'STRS_STAT_CD'
         </otherwise>
     </choose>
-    where 1=1
-        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-        </if>
-
-        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
-        </if>
-        <if test="sexCd != null and sexCd != ''">
-            and sex_cd = #{sexCd}
-        </if>
-        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
-            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
-        </if>
-        and strs_type_cd = #{subStrsTypeCd}
-    group by tsjs.strs_stat_cd, tcs.cd_nm, tcs.sort_ord
     order by tcs.sort_ord
     </select>
 
@@ -137,34 +120,44 @@
     <select id="searchStrsJudgList" parameterType="java.util.Map" resultType="MybatisMap">
      with ts_strs_judg_stss_temp  as
     ( select
-          strs_stat_cd
-       ,sum(occr_cnt) as occr_cnt
-      from tt_strs_judg_stss tsjs
+          tcs.cd_val as strs_stat_cd
+         ,coalesce (sum(tsjs.occr_cnt) , 0) as occr_cnt
+         ,tcs.sort_ord
+      from tc_cd_spec tcs
+      left outer join  tt_strs_judg_stss tsjs
+      on tcs.cd_val = tsjs.strs_stat_cd
+      <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
+         and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+      </if>
+      <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
+         and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+      </if>
+      <if test="sexCd != null and sexCd != ''">
+         and sex_cd = #{sexCd}
+      </if>
+      <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
+        and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+      </if>
+      and strs_type_cd = #{subStrsTypeCd}
       where 1=1
-        <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-        </if>
-
-        <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
-        </if>
-
-        <if test="sexCd != null and sexCd != ''">
-            and sex_cd = #{sexCd}
-        </if>
-        <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
-            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
-        </if>
-        and strs_type_cd = #{subStrsTypeCd}
-      group by  strs_stat_cd
+      <choose>
+        <when test="strsTypeCd.equals('CSTRS')">
+           and tcs.cd_grp = 'STRS_COPE_STAT_CD'
+        </when>
+        <otherwise>
+           and tcs.cd_grp = 'STRS_STAT_CD'
+        </otherwise>
+      </choose>
+      group by  tcs.cd_val, tcs.sort_ord
     )
     select  strs_stat_cd
            ,occr_cnt
            ,sum(occr_cnt) over()                          as tot_cnt
-           ,round(sum(occr_cnt) over(partition by strs_stat_cd) / sum(occr_cnt) over() * 100 , 2) as occr_per
+           ,case when occr_cnt > 0 then round(sum(occr_cnt) over(partition by strs_stat_cd) / sum(occr_cnt) over() * 100 , 2)
+                                   else 0 end as occr_per
     from ts_strs_judg_stss_temp tsjs
     where 1=1
-    order by strs_stat_cd
+    order by sort_ord
     </select>
 
 </mapper>

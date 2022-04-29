@@ -71,11 +71,10 @@ let strsStss = new Vue({
                         $.each(response.rtnData.stndDtList, function(index, item) {
                             $this.code.stndDtList.push({'stndDt':item.stndDt});
                         });
-
-                        // 그리드 초기화 및 조회
-                        $this.initStrsGrid();
-                        $this.searchStrsStssList(true);
                     }
+                    // 그리드 초기화 및 조회
+                    $this.initStrsGrid();
+                    $this.searchStrsStssList(true);
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
@@ -357,7 +356,7 @@ let strsStss = new Vue({
                     {
                         data: strsData,
                         borderColor : ["#fcf8f8" , "#fcf8f8" , "#fcf8f8", "#fcf8f8", "#fcf8f8"],
-                        backgroundColor: ["#FEAFAB" , "#FBD5B0" , "#D6E5EB", "#D9F1F2", "#FBDEE2"],
+                        backgroundColor: ["#D6E5EB", "#D9F1F2" , "#FBD5B0" , "#FBDEE2","#FEAFAB"],
                         datalabels:{
                             display:true,
                             color:'black',
