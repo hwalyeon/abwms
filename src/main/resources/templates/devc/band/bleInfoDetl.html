@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body th:remove="tag">
+<div class="modal fade" id="bleInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog-wrap">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="width: 580px; height: 400px">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<div class="ibox-title">
+						<i class="fa fa-title-bar"></i>
+						<h5>BLE 정보</h5>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="ibox-content border-style_none">
+						<table class="table table-bordered table_view">
+							<colgroup>
+								<col class="col-xs-2" />
+								<col class="col-xs-4" />
+								<col class="col-xs-2" />
+								<col class="col-xs-4" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row">BLE ID</th>
+									<td colspan="3">
+										<div>
+											<input type="text" name="bleId" v-model="params.bleId" class="form-control float_left width_per_80 ime-eng" :readonly="params.crud=='U'" @change="idChange()"/>
+											<button type="button" class="btn btn-outline btn-primary float_right"  v-on:click="bleDupSearch()" :readonly="params.crud=='U'">중복검색</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">BLE 시작일</th>
+									<td>
+										<div class="input-group date" id="bleInstDtPicker">
+											<input type="text" id="bleInstDt" name="bleInstDt" v-model="params.bleInstDt" class="form-control">
+											<span class="input-group-addon"><i class="fa fa-calendar" ></i></span>
+										</div>
+									</td>
+									
+									<th scope="row">BLE 시작시각</th>
+									<td>
+										<input type="time" step="2"  name="bleInstTm" :value="params.bleInstTm"v-model="params.bleInstTm" class="form-control float_left width_per_100 ime-eng"/>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">교육시설</th>
+									<td colspan="3">
+										<div>
+											<input type="text" name="locNo" v-model="params.locNo" class="form-control mg_right_5 float_left width_per_15 ime-eng" readonly="true"/>
+										</div>
+										<div>
+											<input type="text" name="locNm" v-model="params.locNm" class="form-control float_left width_per_70 ime-eng" readonly="true"/>
+											<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#locSearchPopup" v-on:click="locSearchPop()">검색</button>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">비고</th>
+									<td colspan="3">
+										<div>
+											<input type="text" name="bleId" v-model="params.rmrk" class="form-control float_left width_per_100 ime-eng"/>
+										</div>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+            	</div>
+            	<div class="modal-footer">
+					<div class="text-center">
+						<div class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="saveBleInfo">저장</button>
+						</div>
+						<div v-if="params.crud=='U'" class="disp_in_block width_per_20 mg_right_15">
+							<button type="button" class="btn btn-outline btn-primary form-control" v-on:click="deleteBleInfo">삭제</button>
+						</div>
+						<div class="disp_in_block width_per_20">
+							<input type="button" data-dismiss="modal" class="form-control" th:value="닫기">
+						</div>
+					</div>
+				</div>			
+            </div>
+        </div>
+    </div>
+</div>
