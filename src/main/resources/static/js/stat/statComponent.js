@@ -162,6 +162,7 @@ const statComponent = {
 
         changePerdDiv : function (){
             let $this = this;
+
             $this.params.stndDtFr = '';
             $this.params.stndDtTo = '';
             $this.params.stndMmFr = '';
@@ -171,6 +172,25 @@ const statComponent = {
             $("#stndDtToPicker").datepicker('setDate' , '');
             $("#stndMmFrPicker").datepicker('setDate' , '');
             $("#stndMmToPicker").datepicker('setDate' , '');
+            
+            if ($this.params.perdDivCd == "DAY")
+        	{
+                $this.params.stndDtFr =moment().add(-7, "days").format(dateFormatPattern);
+                $this.params.stndDtTo =moment().add(-1, "days").format(dateFormatPattern);
+
+                $this.params.perdDivCd = 'DAY';
+                $this.params.occrDivCd = '02';
+        	}
+            else 
+        	{
+            	
+                $this.params.stndMmFr =moment().add(-3, "months").format("YYYY-MM");
+                $this.params.stndMmTo =moment().add(-1, "months").format("YYYY-MM");
+
+//                $this.params.perdDivCd = 'DAY';
+//                $this.params.occrDivCd = '02';
+        	}
+
         },
 
         statCodeList: function() {
