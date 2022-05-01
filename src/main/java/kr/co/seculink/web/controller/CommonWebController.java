@@ -135,6 +135,10 @@ public class CommonWebController {
 	@RequestMapping("/devc/band/bandOpenInfoMng.pg")
 	public String getDevcBandBandOpenInfoMng() {return "devc/band/bandOpenInfoMng";}
 
+	//BLE정보
+	@RequestMapping("/devc/band/bleInfoMng.pg")
+	public String getDevcBandBleInfoMng() {return "devc/band/bleInfoMng";}
+
 	//공지사항관리
 	@RequestMapping("/cmon/blbd/notiMng.pg")
 	public String getCmonBlbdNotiMng() {return "/cmon/blbd/notiMng";}

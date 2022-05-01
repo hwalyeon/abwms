@@ -80,13 +80,13 @@ const statComponent = {
                     }
                 }
 
-                if(($this.params.stndDtTo == null || $this.params.stndDtTo == '') && ($this.params.stndDtFr == null || $this.params.stndDtFr != '')){
+                if(($this.params.stndDtTo == null || $this.params.stndDtTo == '') && ($this.params.stndDtFr == null || $this.params.stndDtFr == '')){
                     Swal.alert(["기간을 입력하여 주시기 바랍니다.", "warning"]);
                     return false;
                 }
 
-                if(($this.params.stndDtFr != null && $this.params.stndDtFr != '' && ($this.params.stndDtTo == null || $this.params.stndDtTo == ''))
-                    || ($this.params.stndDtTo != null && $this.params.stndDtTo != '' && ($this.params.stndDtFr == null || $this.params.stndDtFr == '')) ){
+                if(($this.params.stndDtFr != null && $this.params.stndDtFr != '') && ($this.params.stndDtTo == null || $this.params.stndDtTo == '')
+                    || ($this.params.stndDtTo != null && $this.params.stndDtTo != '') && ($this.params.stndDtFr == null || $this.params.stndDtFr == '') ){
                     Swal.alert(["기간을 입력하여 주시기 바랍니다.", "warning"]);
                     return false;
                 }
@@ -119,13 +119,13 @@ const statComponent = {
                     }
                 }
 
-                if(($this.params.stndMmTo == null || $this.params.stndMmTo == '') && ($this.params.stndMmFr == null || $this.params.stndMmFr != '')){
+                if(($this.params.stndMmTo == null || $this.params.stndMmTo == '') && ($this.params.stndMmFr == null || $this.params.stndMmFr == '')){
                     Swal.alert(["기간을 입력하여 주시기 바랍니다.", "warning"]);
                     return false;
                 }
 
-                if(($this.params.stndMmFr != null && $this.params.stndMmFr != '' && ($this.params.stndMmTo == null || $this.params.stndMmTo == ''))
-                    || ($this.params.stndMmTo != null && $this.params.stndMmTo != '' && ($this.params.stndMmFr == null || $this.params.stndMmFr == '')) ){
+                if(($this.params.stndMmFr != null && $this.params.stndMmFr != '') && ($this.params.stndMmTo == null || $this.params.stndMmTo == '')
+                    || ($this.params.stndMmTo != null && $this.params.stndMmTo != '') && ($this.params.stndMmFr == null || $this.params.stndMmFr == '') ){
                     Swal.alert(["기간을 입력하여 주시기 바랍니다.", "warning"]);
                     return false;
                 }

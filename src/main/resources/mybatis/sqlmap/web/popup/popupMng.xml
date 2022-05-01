@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="popup.popupMng">
+
+	<!--위치 리스트 조회 -->
+	<select id="searchLocList" parameterType="java.util.Map" resultType="MybatisMap">
+		select
+               tlib.loc_no
+              ,tlib.loc_nm
+              ,addr_base
+              ,tlib.plc_cd
+              ,fn_getcdnm('PLC_CD' , tlib.plc_cd) as PLC_NM
+              ,tlib.plc_clss_cd
+              ,fn_getcdnm('PLC_CLSS_CD' , tlib.plc_clss_cd) as plc_clss_nm
+		from  ts_loc_info_base tlib
+		where 1=1
+		and plc_clss_cd = 'SZONE'
+		<if test="wordHead1 != null and wordHead1 !=''">
+			and    split_part(tlib.addr_base, ' ', 1) = #{wordHead1}
+		</if>
+		<if test="wordHead2 != null and wordHead2 !=''">
+			and    split_part(tlib.addr_base, ' ', 2) = #{wordHead2}
+		</if>
+		<if test="locNm != null and locNm !=''">
+			and    tlib.loc_nm like concat ('%',#{locNm},'%')
+		</if>
+		<if test="roadAddr != null and roadAddr !=''">
+			and    tlib.addr_base like concat ('%',#{locNm},'%')
+		</if>
+		<if test=' paging == "Y" '>
+			LIMIT ${rowCount} OFFSET ${currentIndex}
+		</if>
+	</select>
+
+</mapper>

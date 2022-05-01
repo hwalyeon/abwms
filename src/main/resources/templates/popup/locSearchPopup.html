@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="search">
+<div class="modal fade" id="locSearchPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog-wrap">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 600px; padding-bottom: 20px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="ibox-title">
+                        <i class="fa fa-title-bar"></i>
+                        <h5>교육시설정보 조회</h5>
+                    </div>
+                </div>
+                <div class="modal-body pd_15">
+                    <!-- 검색조건 -->
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label pd_right_none">시/도</label>
+                            <div class="col-sm-4">
+                                <select id="wordHead1" name="wordHead1" class="form-control" v-model="params.wordHead1" @change="changeWordHead1()">
+                                    <option value="">전체</option>
+                                    <option v-for="item in code.wordHead1List" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label pd_right_none">시/군/구</label>
+                            <div class="col-sm-4">
+                                <select id="wordHead2" name="wordHead2" class="form-control" v-model="params.wordHead2" @change="changeWordHead2()">
+                                    <option value="">전체</option>
+                                    <option v-for="item in code.wordHead2ListFilter" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label pd_right_none">장소명</label>
+                            <div class="col-sm-4">
+                                <input id="locNm" type="text" name ="locNm" class="form-control" v-model="params.locNm">
+                            </div>
+                            <label class="col-sm-2 control-label pd_right_none">주소</label>
+                            <div class="col-sm-4">
+                                <<input id="roadAddr" type="text" name ="roadAddr" class="form-control" v-model="params.roadAddr">
+                            </div>
+                        </div>
+                        <div class="form-group mg_btm_10">
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" v-on:click="resetSearchParam">
+                                    <span class="glyphicon glyphicon-refresh">&nbsp;초기화</span>
+                                </button>
+                                <button type="button" class="btn btn-w-m btn-primary mg_left_5" v-on:click="searchLocInfoList(true)">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 그리드 -->
+                    <div id="locSearch_list_wrapper">
+                        <table id="locSearch_list"></table>
+                        <div id="locSearch_pager_list"></div>
+                    </div>
+                    <!-- //그리드 -->
+                </div>
+                <div class="modal-footer">
+                    <div class="text-center">
+                        <div class="disp_in_block width_per_20 mg_right_15" v-show="callback != null">
+                            <button type="button" class="btn btn-outline btn-primary form-control" v-on:click="chooseRow">적용</button>
+                        </div>
+                        <div class="disp_in_block width_per_20">
+                            <button type="button" class="btn btn-outline btn-default form-control" data-dismiss="modal">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
