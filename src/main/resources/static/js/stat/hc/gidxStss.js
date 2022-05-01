@@ -98,7 +98,7 @@ let gidxStss = new Vue({
             if($this.code.stndDtList.length > 0){
                 for(var i in $this.code.stndDtList ){
                     var data = $this.code.stndDtList[i];
-                    colModels.push( {name:data.stndDt , index:data.stndDt , label:data.stndDt ,  width: 80} );
+                    colModels.push( {name:data.stndDt , index:data.stndDt , label:data.stndDt ,  width: 80, align:"center"} );
                 }
             }
   
@@ -125,7 +125,7 @@ let gidxStss = new Vue({
                 for(var i in $this.code.growJudgCdList )
                 {
                     var data = $this.code.growJudgCdList[i];
-                    colModelsJudg.push( {name:data.cdVal , index:data.cdVal , label:data.cdNm ,  width: 80} );
+                    colModelsJudg.push( {name:data.cdVal , index:data.cdVal , label:data.cdNm ,  width: 80, align:"center"} );
                 }
             }
 

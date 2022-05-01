@@ -188,7 +188,7 @@ const statComponent = {
                 $this.params.stndMmTo =moment().add(-1, "months").format("YYYY-MM");
 
 //                $this.params.perdDivCd = 'DAY';
-//                $this.params.occrDivCd = '02';
+                $this.params.occrDivCd = '02';
         	}
 
         },
