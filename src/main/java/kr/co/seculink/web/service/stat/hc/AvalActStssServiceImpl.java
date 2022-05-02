@@ -27,14 +27,39 @@ public class AvalActStssServiceImpl implements AvalActStssService
         if(result != null && result.size() > 0){
             Map<String, Object> newInfo          = new HashMap<String, Object>();
             Map<String, Object> newInfoCalCsumQty = new HashMap<>();
+            String actDivCd = null;
+            String actDivNm = null;
 
             for (Map<String, Object> info : result){
+                if(actDivCd != null && !actDivCd.equals(info.get("foodNm"))){
+                    newInfo.put("actDivCd", actDivCd);
+                    newInfo.put("actDivNm", actDivNm);
+                    newInfo.put("divCd", "01");
+                    newInfo.put("divNm", "운동시간(분)");
+                    newInfoCalCsumQty.put("actDivCd", actDivCd);
+                    newInfoCalCsumQty.put("actDivNm", actDivNm);
+                    newInfoCalCsumQty.put("divCd", "02");
+                    newInfoCalCsumQty.put("divNm", "칼로리소모량(㎉)");
+                    newResult.add(newInfo);
+                    newResult.add(newInfoCalCsumQty);
+                    newInfo = new HashMap<String, Object>();
+                    newInfoCalCsumQty = new HashMap<String, Object>();
+
+                }
                 newInfo.put(info.get("stndDt").toString(), info.get("avgActTcntMcnt").toString());
                 newInfoCalCsumQty.put(info.get("stndDt").toString(), info.get("avgCalCsumQty").toString());
-            }
 
-            newInfo.put("divCd", "운동시간(분)");
-            newInfoCalCsumQty.put("divCd", "칼로리소모량(㎉)");
+                actDivCd = info.get("actDivCd").toString();
+                actDivNm = info.get("actDivNm").toString();
+            }
+            newInfo.put("actDivCd", actDivCd);
+            newInfo.put("actDivNm", actDivNm);
+            newInfo.put("divCd", "01");
+            newInfo.put("divNm", "운동시간(분)");
+            newInfoCalCsumQty.put("actDivCd", actDivCd);
+            newInfoCalCsumQty.put("actDivNm", actDivNm);
+            newInfoCalCsumQty.put("divCd", "02");
+            newInfoCalCsumQty.put("divNm", "칼로리소모량(㎉)");
             newResult.add(newInfo);
             newResult.add(newInfoCalCsumQty);
         }

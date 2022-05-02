@@ -98,7 +98,10 @@ let avalActStss = new Vue({
 
                 let colModels =
                     [
-                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center" }
+                        {name: "divCd", index: "divCd", label: "구분", width:80, align: "center",hidden:true },
+                        {name: "divNm", index: "divNm", label: "구분", width:80, align: "center" },
+                        {name: "actDivCd", index: "actDivCd", label: "구분", width:80, align: "center",hidden:true },
+                        {name: "actDivNm", index: "actDivNm", label: "활동구분", width:80, align: "center" }
                     ];
 
                 if($this.code.stndDtList.length > 0){
@@ -119,7 +122,7 @@ let avalActStss = new Vue({
                     ,
                     onSelectRow: function(rowId, status, e){
 
-                        $this.updateAvalActChart(rowId);
+                        $this.updateAvalActChart();
                     }
 
                 }));
@@ -201,28 +204,37 @@ let avalActStss = new Vue({
                             Swal.alert(['조회할 내용이 없습니다.', "info"]);
                         }else
                         {
-                            $this.updateAvalActChart(1);
+                            $this.updateAvalActChart();
                         }
                     }
                 }).trigger("reloadGrid");
 
             },
             // 평균 운동시간 차트
-            updateAvalActChart: function(rowId)
+            updateAvalActChart: function()
             {
                 let $this = this;
 
-                console.log(rowId);
+               let rowData = null;
 
-                if(rowId==1){
+                if($("#avalAct_list").jqGrid("getGridParam","selrow") != null) {
+                    rowData = $("#avalAct_list").getRowData($("#avalAct_list").jqGrid("getGridParam","selrow") + "");
+                }
+                else {
+                    rowData = $("#avalAct_list").getRowData(1 + "");
+                }
+
+
+                if(rowData.divCd == '01'){
                     $this.title.text ='운동시간(분)'
                 }else{
                     $this.title.text ='칼로리소모량(㎉)'
-               }
+                }
+
+                $this.params.occrDivCd = rowData.divCd;
 
 
-
-                var gridData      = $("#avalAct_list").getRowData(rowId);
+                var gridData      = rowData;
                 let gridColModel  = $("#avalAct_list").jqGrid("getGridParam","colModel");
                 var avalActLabels = [];
                 var avalActData   = [];
@@ -231,7 +243,7 @@ let avalActStss = new Vue({
                 {
                     for (let data in gridColModel)
                     {
-                        if(gridColModel[data].name != 'divCd')
+                        if(gridColModel[data].name != 'divCd' && gridColModel[data].name != 'divNm' && gridColModel[data].name != 'actDivCd' && gridColModel[data].name != 'actDivNm')
                         {
                             avalActLabels.push(gridColModel[data].name);
                             avalActData.push(gridData[gridColModel[data].name]);
