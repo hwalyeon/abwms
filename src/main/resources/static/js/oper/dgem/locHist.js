@@ -162,7 +162,10 @@ let locHist = new Vue({
         },
         //학교명 search 팝업
         locSearchDetlPopup: function() {
-            locSearchDetl.initialize(this.setData);
+            let $this = this;
+            locSearchPopup.initpage( { callback : function(rowData) {
+                    $this.params.locNm = rowData.locNm;
+            }});
         },
         setDatepicker : function() {
             let $this = this;

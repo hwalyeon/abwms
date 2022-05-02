@@ -117,14 +117,8 @@
 			</div>
 		</div>
 	</div>
-	<div th:insert="~{oper/dgem/stdtGuarDetl  :: body}"></div> <!-- 학생 및 보호자 번호 검색 팝업 -->
-	<div th:insert="~{oper/dgem/locSearchDetl :: body}"></div> <!-- 학교(위치번호) 검색 팝업 -->
-	<div th:insert="~{user/stdt/stdtInfoDetl  :: body}"></div> <!-- 학생 상세보기 팝업 -->
 </div>
 <section layout:fragment="user_script">
-	<script type="text/javascript" th:src="@{/js/oper/dgem/stdtGuarDetl.js}"></script> <!-- 학생 및 보호자 번호 검색 팝업 -->
-	<script type="text/javascript" th:src="@{/js/oper/dgem/locSearchDetl.js}"></script> <!-- 학교(위치번호) 검색 팝업 -->
-	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoDetl.js}"></script> <!-- 학생 상세보기 팝업 -->
 	<script type="text/javascript" th:src="@{/js/oper/sys/btchJobHist.js}"></script>
 </section>
 </body>

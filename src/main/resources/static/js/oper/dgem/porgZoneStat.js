@@ -301,12 +301,6 @@ let porgZoneStat = new Vue({
                 $this.params.locNm  = data.locNm;
             }
         },
-        locSearchDetlPopup: function() {
-            locSearchDetl.initialize();
-        },
-        stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize();
-        },
         //datepicker
         setDatepicker : function() {
             let $this = this;
