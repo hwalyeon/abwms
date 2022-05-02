@@ -27,9 +27,11 @@
 		<if test="roadAddr != null and roadAddr !=''">
 			and    tlib.addr_base like concat ('%',#{locNm},'%')
 		</if>
+		order by tlib.loc_no
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex}
 		</if>
+
 	</select>
 
 </mapper>

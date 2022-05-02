@@ -6,6 +6,7 @@ let locSearchPopup = new Vue({
             wordHead2:'',
             locNm:'',
             addrBase:'',
+            paging  :'Y',
             totalCount: 0,
             rowCount: 30,
             currentPage: 1,
@@ -63,7 +64,7 @@ let locSearchPopup = new Vue({
                 mtype: 'post',
                 height: 270,
                 url: '/popup/popupMng/searchLocList.ab',
-                pager: "#locsearch_pager_list",
+                pager: "#locSearch_pager_list",
                 colModel: colModels,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
@@ -170,9 +171,11 @@ let locSearchPopup = new Vue({
                 wordHead2   : '',
                 locNm       : '',
                 addrBase    : '',
+                paging      :'Y',
                 rowCount    : 30,
                 currentPage : 1 ,
-                currentIndex: 0
+                currentIndex: 0,
+                totalCount  : 0
             }
         }
     },

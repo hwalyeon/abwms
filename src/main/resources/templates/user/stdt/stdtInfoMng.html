@@ -117,14 +117,14 @@
 	<div th:insert="~{user/stdt/stdtRegDetl :: body}"></div>
 	<div th:insert="~{user/guar/guarInfoDetl :: body}"></div>
 	<div th:insert="~{user/prnt/prntInfoDetl :: body}"></div>
-	<div th:insert="~{user/stdt/stdtEorgLocPop :: body}"></div>
+	<div th:insert="~{popup/locSearchPopup     :: body}"></div> <!--교육시설 검색 팝업-->
 	<div th:insert="~{user/guar/termAgreYnInfoDetl :: body}"></div>  <!--약관동의여부 상세        -->
 	<div th:insert="~{user/stdt/bandPop :: body}"></div>
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/devc/band/bandOpenInfoDetl.js}"></script>
-	<script type="text/javascript" th:src="@{/js/user/stdt/stdtEorgLocPop.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/stdt/bandPop.js}"></script>
+	<script type="text/javascript" th:src="@{/js/popup/locSearchPopup.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtRegDetl.js}"></script>
 	<script type="text/javascript" th:src="@{/js/user/guar/guarInfoDetl.js}"></script>

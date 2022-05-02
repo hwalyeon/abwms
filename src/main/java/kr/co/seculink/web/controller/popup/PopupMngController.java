@@ -2,6 +2,7 @@ package kr.co.seculink.web.controller.popup;
 
 import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.GEUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,11 @@ public class PopupMngController
 		List<Map<String, String>> result = dao.selectList("popup.popupMng.searchLocList", params);
 		rtnMap.put("result", result);
 		vo.setRtnData(rtnMap, params);
+
+		if (!GEUtil.isEmpty(params.get("paging"))) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List)dao.selectList("popup.popupMng.searchLocList", params)).size());
+		}
 
 		return vo;
 	}
