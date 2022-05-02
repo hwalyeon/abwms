@@ -53,7 +53,7 @@
     <if test=" plcClssCd != null and plcClssCd !='' ">
     and     TSLH.PLC_CLSS_CD    like CONCAT ('%',#{plcClssCd},'%')  /* 장소분류 코드 */</if>
     <if test=" locNm != null and locNm !='' ">
-    and     TEB.LOC_NM       like CONCAT ('%',#{schlNm},'%')      /* 학교명       */</if>
+    and     TEB.LOC_NM       like CONCAT ('%',#{locNm},'%')      /* 학교명       */</if>
     <if test=" stdtNo != null and stdtNo !='' ">
     and     TSLH.STDT_NO      = #{stdtNo}::numeric                /* 학생번호     */</if>
     <if test=" stdtNm != null and stdtNm !='' ">
