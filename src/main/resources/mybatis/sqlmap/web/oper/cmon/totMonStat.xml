@@ -12,8 +12,8 @@
 
 	<!-- 종합관제현황_위험감정_이력_조회 -->
 	<select id="searchTotMonStatDgemHist" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT		SUBSTRING(DGEM_DT, 5, 4) AS DGEM_DT,
-				  	SUBSTRING(DGEM_TM, 1, 4) AS DGEM_TM,
+		SELECT		TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
+				  	TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'AM HH12:MI') AS DGEM_TM,
 				  	DGEM_STAT_CD,
 				  	FN_GETCDNM('DGEM_STAT_CD', DGEM_STAT_CD) AS DGEM_STAT_NM
 		FROM		TS_STDT_DGEM_HIST TSDH

@@ -305,13 +305,13 @@
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12 border-line" style="padding-bottom: 3px;" v-on:click="linkCall('O210')">
-                            <div class="col-xs-2">
+                            <div class="col-xs-2 pd_left_none">
                                 <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemDt }} </span>
                             </div>
-                            <div class="col-xs-2">
+                            <div class="col-xs-3 pd_none">
                                 <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemTm }} </span>
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-xs-2 pd_none">
                                 <i v-for="item in totMonStatDgemHist" v-if="item.dgemStatCd === 'NORM'" class="fa-solid fa-triangle-exclamation fa-2x" style="color: #5bff16; padding-top: 10px; padding-left: 10px;"></i>
                                 <i v-else-if="item.dgemStatCd === 'CHK'" 	class="fa-regular fa-square-check fa-2x" 		style="color: #ff7f20; padding-top: 10px; padding-left: 10px"></i>
                                 <i v-else-if="item.dgemStatCd === 'WARN'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>
@@ -319,7 +319,7 @@
                                 <i v-else-if="item.dgemStatCd === 'DNGR'" 	class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #fdb915; padding-top: 10px; padding-left: 10px"></i>
                                 <i v-else class="fa-solid fa-temperature-quarter fa-4x" style="color: #ee5e5e"></i>
                             </div>
-                            <div class="col-xs-5">
+                            <div class="col-xs-5 pd_left_10 pd_right_none">
                                 <span class="col-xs-12 text-left chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemStatNm }} </span>
                             </div>
                         </div>
