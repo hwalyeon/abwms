@@ -156,23 +156,6 @@ public class StdtInfoMngController
 		return vo;
 	}
 
-	@ResponseBody
-	@RequestMapping("/user/stdt/stdtInfoMng/searchStdtEorgLocList.ab")
-	public RtnMsg searchStdtEorgLocList(@RequestBody(required = false) Map<String, String> params) throws BizException
-	{
-
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-
-		List<Map<String, String>> result = dao.selectList("user.stdt.stdtInfoMng.searchStdtEorgLocList", params);
-
-		rtnMap.put("result", result);
-
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
 
 	@ResponseBody
 	@RequestMapping("/user/stdt/stdtInfoMng/searchBandList.ab")

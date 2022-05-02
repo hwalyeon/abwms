@@ -599,20 +599,6 @@
                           and    guar_no = d.guar_no)
     </insert>
 
-    <select id="searchStdtEorgLocList" parameterType="java.util.Map" resultType="MybatisMap">
-        select
-             loc_no
-            ,loc_nm
-            ,road_addr
-        from ti_eorg_base teb
-        where 1=1
-        <if test="locNm != null and locNm !='' ">
-            and loc_nm like '%' || #{locNm} || '%'
-        </if>
-        <if test="roadAddr != null and roadAddr !='' ">
-            and road_addr like '%' || #{roadAddr} || '%'
-        </if>
-    </select>
 
     <select id="searchBandList" parameterType="java.util.Map" resultType="MybatisMap">
         select
