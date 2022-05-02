@@ -154,17 +154,11 @@
 		</div>
 		<!-- 결과 리스트 영역 끝 -->
 	</div>
-	<div th:insert="~{oper/dgem/stdtGuarDetl  :: body}"></div> <!-- 학생 및 보호자 번호 검색 팝업 -->
-	<div th:insert="~{oper/dgem/locSearchDetl :: body}"></div> <!-- 학교(위치번호) 검색 팝업 -->
 </div>
 <section layout:fragment="user_script">
 	<!-- kakaoMap services 라이브러리 불러오기 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e9404310d886e0de8d93c2409516f9c0&libraries=services"></script>
 	<script type="text/javascript" th:src="@{/js/oper/dgem/porgZoneStat.js}"></script>
-	<script type="text/javascript" th:src="@{/js/oper/dgem/locHist.js}"></script> <!-- 위치이력 -->
-	<script type="text/javascript" th:src="@{/js/oper/dgem/dgemHist.js}"></script> <!-- 위험감정 발생이력 -->
-	<script type="text/javascript" th:src="@{/js/oper/dgem/stdtGuarDetl.js}"></script> <!-- 학생 및 보호자 번호 검색 팝업 -->
-	<script type="text/javascript" th:src="@{/js/oper/dgem/locSearchDetl.js}"></script> <!-- 학교(위치번호) 검색 팝업 -->
 </section>
 </body>
 </html>
