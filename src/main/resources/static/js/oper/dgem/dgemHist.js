@@ -198,7 +198,10 @@ let dgemHist = new Vue({
         },
         //학교명 정보 search 팝업
         locSearchDetlPopup: function() {
-            locSearchDetl.initialize(this.setData);
+            let $this = this;
+            locSearchPopup.initpage( { callback : function(rowData) {
+                $this.params.locNm = rowData.locNm;
+            }});
         },
         setDatepicker : function() {
             let $this = this;

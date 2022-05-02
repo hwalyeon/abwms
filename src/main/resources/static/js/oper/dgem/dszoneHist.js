@@ -302,7 +302,10 @@ let dszoneHist = new Vue({
             }
         },
         locSearchDetlPopup: function() {
-            locSearchDetl.initialize(this.setData);
+            let $this = this;
+            locSearchPopup.initpage( { callback : function(rowData) {
+                    $this.params.locNm = rowData.locNm;
+            }});
         },
         stdtGuarDetlPopup: function() {
             stdtGuarDetl.initialize(this.setData);
