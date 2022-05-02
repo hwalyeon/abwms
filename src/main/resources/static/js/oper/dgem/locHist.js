@@ -163,7 +163,7 @@ let locHist = new Vue({
         //학교명 search 팝업
         locSearchDetlPopup: function() {
             let $this = this;
-            locSearchPopup.initpage( { callback : function(rowData) {
+            locSearchPopup.initPage( { callback : function(rowData) {
                     $this.params.locNm = rowData.locNm;
             }});
         },

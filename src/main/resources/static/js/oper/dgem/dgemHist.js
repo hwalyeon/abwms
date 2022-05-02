@@ -199,7 +199,7 @@ let dgemHist = new Vue({
         //학교명 정보 search 팝업
         locSearchDetlPopup: function() {
             let $this = this;
-            locSearchPopup.initpage( { callback : function(rowData) {
+            locSearchPopup.initPage( { callback : function(rowData) {
                 $this.params.locNm = rowData.locNm;
             }});
         },

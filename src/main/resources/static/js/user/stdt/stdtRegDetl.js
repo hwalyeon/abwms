@@ -51,7 +51,7 @@ let stdtRegDetl = new Vue({
 
 		eorgLocPop : function (){
         	let $this = this;
-			locSearchPopup.initpage( { callback : function(rowData) {
+			locSearchPopup.initPage( { callback : function(rowData) {
 				$this.params.eorgLocNo = rowData.locNo;
 				$this.params.eorgLocNm = rowData.locNm;
 			}});

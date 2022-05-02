@@ -41,7 +41,7 @@ let bleInfoDetl = new Vue({
 
 		locSearchPop : function (){
         	let $this = this;
-			locSearchPopup.initpage( { callback : function(rowData) {
+			locSearchPopup.initPage( { callback : function(rowData) {
 				$this.params.locNo = rowData.locNo;
 				$this.params.locNm = rowData.locNm;
 			}});

@@ -30,13 +30,13 @@ let locSearchPopup = new Vue({
 
         initModal: function() {
             let $this = this;
-            $("#locSearchPopup").off("shown.bs.modal").on("shown.bs.modal", function(e) {
+            $("#stdtGuarPopup").off("shown.bs.modal").on("shown.bs.modal", function(e) {
                 $this.initGrid();
                 $this.searchLocInfoList(true);
             });
         },
 
-        initpage : function(vo){
+        initPage : function(vo){
             let $this = this;
             if(vo != null){
                 $this.callback = vo.callback;

@@ -425,7 +425,7 @@ let stdtInfoDetl = new Vue({
 
 		stdtInfoEorgLocPop : function (){
 			let $this = this;
-			locSearchPopup.initpage( { callback : function(rowData) {
+			locSearchPopup.initPage( { callback : function(rowData) {
 				$this.stdtInfo.eorgLocNo = rowData.locNo;
 				$this.stdtInfo.eorgLocNm = rowData.locNm;
 			}});
