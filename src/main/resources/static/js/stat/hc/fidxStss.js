@@ -544,13 +544,6 @@ let fidxStss = new Vue({
             }).trigger("reloadGrid");
 
 		},
-        changePerdDiv : function (){
-            let $this = this;
-            $this.params.stndDtFr = '';
-            $this.params.stndDtTo = '';
-            $this.params.stndMmFr = '';
-            $this.params.stndMmTo = '';
-        },
 		downloadExcel : function() {
 			
 			let $this = this;
