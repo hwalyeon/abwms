@@ -81,7 +81,7 @@
                 on x.stnd_dt = tcs.cd_val
                 and tcs.cd_grp = 'WEEK_CD'
                 where 1=1
-                group by x.stnd_dt , tcs.sort_ord,TFI.food_nm
+                group by x.stnd_dt , tcs.sort_ord,x.food_nm
                 order by tcs.sort_ord ,  x.stnd_dt
             </when>
             <otherwise>
