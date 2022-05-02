@@ -1133,20 +1133,20 @@ let locInfoMng = new Vue({
 
                 if ( markerImage.locApntCd === 'GORG' ) {
 
-                    // 유흥/유해
-                    if ( markerImage.plcCd === 'DEHM' ) {
-                        markerIndex = 1;
-                    }
                     // 공사/위험물
-                    else if ( markerImage.plcCd === 'DECG' ) {
-                        markerIndex = 2;
-                    }
-                    // 교통사고다발
-                    else if ( markerImage.plcCd === 'ACDZ' ) {
-                        markerIndex = 3;
+                    if ( markerImage.plcCd === 'DECG' ) {
+                        markerIndex = 1;
                     }
                     // 우범지역
                     else if ( markerImage.plcCd === 'CRMN' ) {
+                        markerIndex = 2;
+                    }
+                    // 유흥/유해
+                    else if ( markerImage.plcCd === 'DEHM' ) {
+                        markerIndex = 3;
+                    }
+                    // 교통사고다발
+                    else if ( markerImage.plcCd === 'ACDZ' ) {
                         markerIndex = 4;
                     } else {
                         markerIndex = -1;

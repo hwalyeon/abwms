@@ -983,7 +983,7 @@ let totMonStat = new Vue({
             return quoti;
         },
         toNumber: function (value) {
-            return value.toLocaleString('ko-KR');
+            return value.toLocaleString('ko-KR', { hour12: true });
         },
         clock: function() {
             let $this = this;

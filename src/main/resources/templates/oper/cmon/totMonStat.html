@@ -44,11 +44,15 @@
         .chart-padding-6 {
             padding: 15px 15px;
         }
-        .minMax-height-140 {
+        .minMax-height-165 {
+            min-height: 165px;
+            max-height: 165px;
+        }
+        .minMax-height-170 {
             min-height: 170px;
             max-height: 170px;
         }
-        .minMax-height-160 {
+        .minMax-height-181 {
             min-height: 181px;
             max-height: 181px;
         }
@@ -75,7 +79,7 @@
                     <div class="form-group">
                         <span class="float_left">가동 현황</span>
                         <span class="float_right" style="color: gold" v-on:click="linkCall('F310')">+ more</span>
-                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-140" style="padding-top: 40px" v-on:click="linkCall('F310')">
+                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px" v-on:click="linkCall('F310')">
                             <div id=chartOperStat class ="float_left">
                                 <canvas id="operStatChart" width="80" height="80">
                                 </canvas>
@@ -89,7 +93,7 @@
                         </div>
                         <span class="float_left" style="padding-top: 1px">개통 현황</span>
                         <span class="float_right" style="color: gold" v-on:click="linkCall('H110')">+ more</span>
-                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-140" style="padding-top: 40px" v-on:click="linkCall('H110')">
+                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px" v-on:click="linkCall('H110')">
                             <div id=chartOpenStat class ="float_left">
                                 <canvas id="openStatChart" width="80" height="80">
                                 </canvas>
@@ -104,7 +108,7 @@
                         <span class="float_left" style="padding-top: 1px">헬스케어 활용율</span>
                         <span class="float_right" style="color: gold" v-on:click="linkCall('O310')">+ more</span>
                         <div class="col-xs-12 form-group border-line chart-padding-1" style="padding-left: 10px;padding-right: 5px;" v-on:click="linkCall('O310')">
-                            <div class="col-xs-12 chart-padding-0 minMax-height-140" style="padding-top: 30px;">
+                            <div class="col-xs-12 chart-padding-0 minMax-height-165" style="padding-top: 30px;">
                                 <div id=chartGrowFat class ="float_left">
                                     <canvas id="growFatChart" width="80" height="80">
                                     </canvas>
@@ -115,7 +119,7 @@
                                     <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
                                 </div>
                             </div>
-                            <div class="col-xs-12 chart-padding-0 minMax-height-140" style="padding-top: 30px;">
+                            <div class="col-xs-12 chart-padding-0 minMax-height-165" style="padding-top: 30px;">
                                 <div id=chartFatPrdt class ="float_left">
                                     <canvas id="fatPrdtChart" width="80" height="80">
                                     </canvas>
@@ -126,7 +130,7 @@
                                     <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{totMonStat.tmpUsage}} 명</span>
                                 </div>
                             </div>
-                            <div class="col-xs-12 chart-padding-0 minMax-height-140" style="padding-top: 30px;">
+                            <div class="col-xs-12 chart-padding-0 minMax-height-165" style="padding-top: 30px;">
                                 <div id=chartStrs class ="float_left">
                                     <canvas id="strsChart" width="80" height="80">
                                     </canvas>
@@ -143,7 +147,7 @@
                 <div class="col-xs-8 border-line" style="padding-bottom: 20px; padding-top: 15px;">
                     위험안전발생
                     <div class="form-group">
-                        <div class="col-xs-6 border-line minMax-height-160 pd_top_15">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15">
                             <div class="col-xs-3 chart-padding-1">
                                 <div id=chartDngrSafeOccr class ="float_left">
                                     <canvas id="dngrSafeOccrChart" width="110" height="110">
@@ -168,7 +172,7 @@
                                 <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber11}} 건</span>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-160 pd_top_15" v-on:click="linkCall('F310')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('F310')">
                             <div class="col-xs-3 text-center" style="width:22%">
                                 <span class="col-xs-12 chart-padding-0">TOTAL</span>
                                 <i class="fa-regular fa-square-check fa-4x" style="color: #2a99ec"></i>
@@ -195,7 +199,7 @@
                                 <span class="col-xs-12 chart-padding-0">{{totCnt.tmpTmepAbnmCnt}} 건</span>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-160 pd_top_15" v-on:click="linkCall('F310')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('F310')">
                             <span class="col-xs-12 chart-padding-0">위험지역 추이</span>
                             <div id=chartDngrZoneProg class ="col-xs-8 float_left">
                                 <canvas id="dngrZoneProgChart" width="420" height="99">
@@ -207,7 +211,7 @@
                                 <span class="col-xs-12 text-center"> +1.8% </span>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-160 pd_top_15" style="padding-bottom: 30px;" v-on:click="linkCall('O240')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="padding-bottom: 30px;" v-on:click="linkCall('O240')">
                             <div class="col-xs-12 chart-padding chart-padding-5">
                                 <span v-on:click="linkCall('O240')">자주 방문하는 위험지역 top3 (공공기준)</span>
                             </div>
@@ -226,7 +230,7 @@
                                 <input type="text" name="cntPublTop3" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-160 pd_top_15" v-on:click="linkCall('O230')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('O230')">
                             <div class="col-xs-6" >
                                 <span class="col-xs-12 chart-padding-0 text-center">공공 안전위험지역 활용(탐지율)</span>
                                 <div id=chartPublSafeDtct class ="col-xs-6">
@@ -254,7 +258,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-160 pd_top_15" v-on:click="linkCall('O250')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('O250')">
                             <div class="col-xs-12 chart-padding chart-padding-5">
                                 <span v-on:click="linkCall('O250')">보호자가 많이 지정한 위험지역 TOP3</span>
                             </div>
@@ -321,10 +325,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-10 border-line" style="padding-bottom: 15px; padding-top: 15px">
+                <div class="col-xs-10 border-line" style="padding-bottom: 15px; padding-top: 12px">
                     헬스케어
                     <div class="form-group">
-                        <div class="col-xs-12 border-line minMax-height-160 pd_top_15">
+                        <div class="col-xs-12 border-line minMax-height-170 pd_top_15">
                             <div class ="col-xs-2 chart-padding-2" v-on:click="linkCall('F310')">
                                 <div id=chartCareBmiBodyIdx class ="col-xs-4 chart-padding float_left">
                                     <canvas id="careBmiBodyIdxChart" width="100" height="110">
@@ -386,7 +390,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 border-line minMax-height-160 pd_top_15">
+                        <div class="col-xs-12 border-line minMax-height-170 pd_top_15">
                             <div class ="col-xs-2 chart-padding-2" v-on:click="linkCall('F310')">
                                 <div id=chartCareExcsTime class ="col-xs-4 chart-padding-0 float_left">
                                     <canvas id="careExcsTimeChart" width="100" height="110">
