@@ -6,24 +6,21 @@
         select TAH.SEND_DTTM    /*발생일시*/
         ,TAH.GUAR_NO	    /*보호자번호*/
         ,DECR(TGB.GUAR_NM) AS GUAR_NM      /*보호자명*/
-        ,DECR(TBS.GUAR_TEL_NO) AS GUAR_TEL_NO  /*보호자전화번호*/
+        ,DECR(TGB.GUAR_TEL_NO) AS GUAR_TEL_NO  /*보호자전화번호*/
         ,TSB.STDT_NO      /*학생번호*/
         ,DECR(TSB.STDT_NM) AS STDT_NM      /*학생명*/
         ,TAH.ALAM_CHNL_CD /*채널종류*/
         ,TAH.ALAM_TYPE_CD /*알림유형*/
         ,TAH.ALAM_TITL    /*알림제목*/
         ,case when TAH.SEND_RSLT_CD = '00' then '성공'   /*발송여부*/
-              when TAH.SEND_RSLT_CD = '01' then '미발송'
-              when TAH.SEND_RSLT_CD = '11' then 'key없음'
-              when TAH.SEND_RSLT_CD = '99' then '발송 실패(기타)'
-              end  as SEND_RSLT_CD
+        when TAH.SEND_RSLT_CD = '01' then '미발송'
+        when TAH.SEND_RSLT_CD = '11' then 'key없음'
+        when TAH.SEND_RSLT_CD = '99' then '발송 실패(기타)'
+        end  as SEND_RSLT_CD
         from   TS_ALAM_HIST TAH
         left   outer join
         TM_STDT_BASE TSB
         on     TAH.STDT_NO = TSB.STDT_NO
-        left   outer join
-        TS_BAND_SPEC TBS
-        on     TBS.BAND_ID = TSB.BAND_ID
         left   outer join
         TM_GUAR_BASE TGB
         on     TGB.GUAR_NO = TAH.GUAR_NO
