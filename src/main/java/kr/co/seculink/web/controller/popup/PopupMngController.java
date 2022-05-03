@@ -42,4 +42,28 @@ public class PopupMngController
 		return vo;
 	}
 
+	//학생정보 및 보호자 정보 리스트 조회
+	@ResponseBody
+	@RequestMapping("/popup/popupMng/searchStdtGuarList.ab")
+	public RtnMsg searchStdtGuarList(@RequestBody(required = false) Map<String, String> params) throws BizException
+	{
+
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
+
+
+		List<Map<String, String>> result = dao.selectList("popup.popupMng.searchStdtGuarList", params);
+		rtnMap.put("result", result);
+
+
+		if (!GEUtil.isEmpty(params.get("paging"))) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List)dao.selectList("popup.popupMng.searchStdtGuarList", params)).size());
+		}
+
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
+
 }

@@ -60,7 +60,7 @@
 							<input type="number" name="guarNo" class="form-control" v-model="params.guarNo">
 						</div>
 						<div>
-							<button type="button" id="btn1" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
+							<button type="button" id="btn1" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
 						</div>
 					</div>
 					<div class="form-group">
@@ -95,7 +95,7 @@
 							<input type="number" name="stdtNo" class="form-control" v-model="params.stdtNo">
 						</div>
 						<div>
-							<button type="button" id="btn2" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarDetlPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
+							<button type="button" id="btn2" class="btn btn-outline btn-primary ladda-button mg_left_10 height_34" data-style="zoom-in" data-toggle="modal" data-target="#stdtGuarPopup" v-on:click="stdtGuarDetlPopup"><i class="fa fa-search" aria-hidden="true"></i></button>
 						</div>
 					</div>
 					<div class="form-group">
@@ -144,13 +144,13 @@
 			</div>
 		</div>
 	</div>
-	<div th:insert="~{oper/dgem/stdtGuarDetl  :: body}"></div> <!-- 학생 및 보호자 번호 검색 팝업 -->
-	<div th:insert="~{popup/locSearchPopup     :: body}"></div> <!--교육시설 검색 팝업-->
+	<div th:insert="~{popup/stdtGuarPopup     :: body}"></div> <!--학생/학부모 검색 팝업-->
+	<div th:insert="~{popup/locSearchPopup    :: body}"></div> <!--교육시설 검색 팝업-->
 	<div th:insert="~{user/stdt/stdtInfoDetl  :: body}"></div> <!-- 학생 상세보기 팝업 -->
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/oper/dgem/dgemHist.js}"></script> <!-- 위험감정 발생이력 -->
-	<script type="text/javascript" th:src="@{/js/oper/dgem/stdtGuarDetl.js}"></script> <!-- 학생 및 보호자 번호 검색 팝업 -->
+	<script type="text/javascript" th:src="@{/js/popup/stdtGuarPopup.js}"></script> <!--학생/학부모 검색 팝업-->
 	<script type="text/javascript" th:src="@{/js/popup/locSearchPopup.js}"></script> <!--교육시설 검색 팝업-->
 	<script type="text/javascript" th:src="@{/js/user/stdt/stdtInfoDetl.js}"></script> <!-- 학생 상세보기 팝업 -->
 </section>

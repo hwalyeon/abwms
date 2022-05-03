@@ -286,21 +286,6 @@ let dszoneHist = new Vue({
 
             }
         },
-        setData: function(data) {
-            console.log(data);
-            let $this = this;
-            if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined)
-            {
-                $this.params.stdtNo = data.stdtNo;
-                $this.params.stdtNm = data.stdtNm;
-                $this.params.guarNo = data.guarNo;
-                $this.params.guarNm = data.guarNm;
-            }
-            if(data.locNm !== undefined)
-            {
-                $this.params.locNm  = data.locNm;
-            }
-        },
         locSearchDetlPopup: function() {
             let $this = this;
             locSearchPopup.initPage( { callback : function(rowData) {
@@ -308,7 +293,13 @@ let dszoneHist = new Vue({
             }});
         },
         stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize(this.setData);
+            let $this = this;
+            stdtGuarPopup.initPage({ callback : function(rowData) {
+                    $this.params.stdtNo = rowData.stdtNo;
+                    $this.params.stdtNm = rowData.stdtNm;
+                    $this.params.guarNo = rowData.guarNo;
+                    $this.params.guarNm = rowData.guarNm;
+            }});
         },
         //datepicker
         setDatepicker : function() {

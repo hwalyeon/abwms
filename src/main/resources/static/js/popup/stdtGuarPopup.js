@@ -1,5 +1,5 @@
-let stdtGuarDetl = new Vue({
-	el: "#stdtGuarDetlPopup",
+let stdtGuarPopup = new Vue({
+	el: "#stdtGuarPopup",
 	data: {
 		params: {
 			stdtNo      :'',
@@ -23,31 +23,32 @@ let stdtGuarDetl = new Vue({
 
 	methods: {
 
-		initialize: function(callback) {
+		initialize: function() {
 
 			let $this = this;
 
-			$this.callback = callback;
-
-			$this.initValue();
-
-			$this.initCodeList();
-
-			setTimeout(function()
-			{
-				$this.initGrid();
-				$this.searchStdtGuarList(true);
-			},300);
+			$this.initModal();
 		},
+
+		initModal: function() {
+			let $this = this;
+			$("#stdtGuarPopup").off("shown.bs.modal").on("shown.bs.modal", function(e) {
+				$this.initGrid();
+				$this.searchStdtGuarInfoList(true);
+			});
+		},
+
 		initValue: function() {
 			let $this = this;
 		},
 		initCodeList: function() {
 			let $this = this;
 		},
-		initPage: function() {
+		initPage: function(vo) {
 			let $this = this;
-
+			if(vo != null){
+				$this.callback = vo.callback;
+			}
 		},
 		isValid: function() {
 			let $this = this;
@@ -64,12 +65,12 @@ let stdtGuarDetl = new Vue({
 				{name: "guarTelNo"         , index: "guarTelNo"    , label: "보호자 전화번호"	    , width: 100    , align: "center" ,fixed:true},
 			];
 
-			$("#stdtguar_list").jqGrid("GridUnload");
-			$("#stdtguar_list").jqGrid($.extend(true, {}, commonGridOptions(), {
+			$("#stdtGuar_list").jqGrid("GridUnload");
+			$("#stdtGuar_list").jqGrid($.extend(true, {}, commonGridOptions(), {
 				datatype: "local",
 				mtype: 'post',
-				url: '/oper/dgem/dgemHist/searchStdtGuarList.ab',
-				pager: '#stdtguar_pager_list',
+				url: '/popup/popupMng/searchStdtGuarList.ab',
+				pager: '#stdtGuar_pager_list',
 				height: 270,
 				colModel: colModels,
 				onPaging : function(data) {
@@ -77,16 +78,11 @@ let stdtGuarDetl = new Vue({
 						$this.params.currentPage  = resultMap.currentPage;
 						$this.params.rowCount     = resultMap.rowCount;
 						$this.params.currentIndex = resultMap.currentIndex;
-						$this.searchStdtGuarList(false);
+						$this.searchStdtGuarInfoList(false);
 					})
 				},
 				ondblClickRow: function(rowId, status, e) {
-					let item = $('#stdtguar_list').jqGrid('getRowData', rowId);
-					$this.callback(item);
-					/*dgemHist.setData(item);
-					locHist.setData(item);
-					dszoneHist.setData(item);*/
-					closeModal($('#stdtGuarDetlPopup'));
+					$this.chooseRow();
 				},
 				gridComplete: function(rowId, rowObject) {
 					let grid = this;
@@ -94,9 +90,9 @@ let stdtGuarDetl = new Vue({
 				},
 			}));
 
-			resizeJqGridWidth("stdtguar_list", "stdtguar_list_wrapper");
+			resizeJqGridWidth("stdtGuar_list", "stdtGuar_list_wrapper");
 		},
-		searchStdtGuarList: function(isSearch) {
+		searchStdtGuarInfoList: function(isSearch) {
 
 			let $this = this;
 			let params = $.extend(true, {}, $this.params);
@@ -105,7 +101,7 @@ let stdtGuarDetl = new Vue({
 				params.currentIndex = 0;
 			}
 
-			$("#stdtguar_list").setGridParam({
+			$("#stdtGuar_list").setGridParam({
 				datatype: "json",
 				postData: JSON.stringify(params),
 				page: 1,
@@ -116,6 +112,19 @@ let stdtGuarDetl = new Vue({
 				}
 			}).trigger("reloadGrid");
 
+		},
+		chooseRow : function (){
+			let $this = this;
+
+			// 콜백함수 실행
+			if ( typeof $this.callback === "function")
+			{
+				var rowData = $("#stdtGuar_list").getRowData($("#stdtGuar_list").jqGrid("getGridParam","selrow") + "");
+
+				$this.callback(rowData);
+
+				closeModal($('#stdtGuarPopup'));
+			}
 		},
 		resetSearchParam: function () {
 			let $this = this;
@@ -128,7 +137,8 @@ let stdtGuarDetl = new Vue({
 				totalCount: 0,
 				rowCount: 30,
 				currentPage: 1,
-				currentIndex: 0
+				currentIndex: 0,
+				paging      :'Y'
 			}
 		}
 	},
