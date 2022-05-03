@@ -78,8 +78,8 @@
                 <div class="col-xs-2 border-line" style="padding-top: 15px;">
                     <div class="form-group">
                         <span class="float_left">가동 현황</span>
-                        <span class="float_right" style="color: gold" v-on:click="linkCall('F310')">+ more</span>
-                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px" v-on:click="linkCall('F310')">
+                        <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('F310')">+ more</span>
+                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px; cursor:pointer;" v-on:click="linkCall('F310')">
                             <div id=chartOperStat class ="float_left">
                                 <canvas id="operStatChart" width="80" height="80">
                                 </canvas>
@@ -92,8 +92,8 @@
                             </div>
                         </div>
                         <span class="float_left" style="padding-top: 1px">개통 현황</span>
-                        <span class="float_right" style="color: gold" v-on:click="linkCall('H110')">+ more</span>
-                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px" v-on:click="linkCall('H110')">
+                        <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('H110')">+ more</span>
+                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px; cursor:pointer;" v-on:click="linkCall('H110')">
                             <div id=chartOpenStat class ="float_left">
                                 <canvas id="openStatChart" width="80" height="80">
                                 </canvas>
@@ -106,8 +106,8 @@
                             </div>
                         </div>
                         <span class="float_left" style="padding-top: 1px">헬스케어 활용율</span>
-                        <span class="float_right" style="color: gold" v-on:click="linkCall('O310')">+ more</span>
-                        <div class="col-xs-12 form-group border-line chart-padding-1" style="padding-left: 10px;padding-right: 5px;" v-on:click="linkCall('O310')">
+                        <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('O310')">+ more</span>
+                        <div class="col-xs-12 form-group border-line chart-padding-1" style="padding-left: 10px;padding-right: 5px; cursor:pointer;" v-on:click="linkCall('O310')">
                             <div class="col-xs-12 chart-padding-0 minMax-height-165" style="padding-top: 30px;">
                                 <div id=chartGrowFat class ="float_left">
                                     <canvas id="growFatChart" width="80" height="80">
@@ -149,17 +149,17 @@
                     <div class="form-group">
                         <div class="col-xs-6 border-line minMax-height-181 pd_top_15">
                             <div class="col-xs-3 chart-padding-1">
-                                <div id=chartDngrSafeOccr class ="float_left">
+                                <div id=chartDngrSafeOccr class ="float_left" style="cursor: pointer;">
                                     <canvas id="dngrSafeOccrChart" width="110" height="110">
                                     </canvas>
                                 </div>
                             </div>
-                            <div class="col-xs-4" style="padding-top: 30px; padding-right: 30px;">
+                            <div class="col-xs-4" style="cursor: pointer; padding-top: 30px; padding-right: 30px;">
                                 <span class="col-xs-12 text-right" style="font-size: 24px;color: #2a99ec"> {{totMonStat.tmpDngrSafeOcrrTd}} 건</span>
                                 <span class="col-xs-12 text-right"> 평균대비 : {{totMonStat.tmpDngrSafeOcrrDif}} 건</span>
                                 <span class="col-xs-12 text-right"> 연평균: {{totMonStat.tmpDngrSafeOcrrYav}} 건</span>
                             </div>
-                            <div class="col-xs-5" style="padding-top: 30px; padding-left: 0px; padding-right: 20px;">
+                            <div class="col-xs-5" style="cursor: pointer; padding-top: 30px; padding-left: 0px; padding-right: 20px;">
                                 <span class="col-xs-6 float_left" style="color: #09ea09"> 정상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
                                 <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber7}} 건</span>
                                 <span class="col-xs-6 float_left" style="color: #09ea09"> 정상(유의)&nbsp;&nbsp;&nbsp;: </span>
@@ -172,7 +172,7 @@
                                 <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber11}} 건</span>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('F310')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="cursor:pointer;" v-on:click="linkCall('F310')">
                             <div class="col-xs-3 text-center" style="width:22%">
                                 <span class="col-xs-12 chart-padding-0">TOTAL</span>
                                 <i class="fa-regular fa-square-check fa-4x" style="color: #2a99ec"></i>
@@ -199,7 +199,7 @@
                                 <span class="col-xs-12 chart-padding-0">{{totCnt.tmpTmepAbnmCnt}} 건</span>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('F310')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="cursor:pointer;" v-on:click="linkCall('F310')">
                             <span class="col-xs-12 chart-padding-0">위험지역 추이</span>
                             <div id=chartDngrZoneProg class ="col-xs-8 float_left">
                                 <canvas id="dngrZoneProgChart" width="420" height="99">
@@ -211,26 +211,26 @@
                                 <span class="col-xs-12 text-center"> +1.8% </span>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="padding-bottom: 30px;" v-on:click="linkCall('O240')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="padding-bottom: 30px;">
                             <div class="col-xs-12 chart-padding chart-padding-5">
-                                <span v-on:click="linkCall('O240')">자주 방문하는 위험지역 top3 (공공기준)</span>
+                                <span style="cursor:pointer;" v-on:click="linkCall('O240')">자주 방문하는 위험지역 TOP3 (공공기준)</span>
                             </div>
                             <div class="col-xs-12 chart-padding pd_btm_none text-right">
-                                <span style="color: gold">+ more</span>
+                                <span style="color: gold; cursor:pointer;" v-on:click="linkCall('O240')">+ more</span>
                             </div>
                             <div class="col-xs-12 chart-padding">
-                                <input type="text" name="plcCdPublTop1" class="col-xs-3" 			style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.plcCdPublTop1">
-                                <input type="text" name="addrPublTop1" class="col-xs-7" 			style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.addrPublTop1">
-                                <input type="text" name="cntPublTop1" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #80bce1;" v-model="totMonStat.cntPublTop1">
-                                <input type="text" name="plcCdPublTop2" class="col-xs-3" 			style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.plcCdPublTop2">
-                                <input type="text" name="addrPublTop2" class="col-xs-7" 			style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.addrPublTop2">
-                                <input type="text" name="cntPublTop2" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.cntPublTop2">
-                                <input type="text" name="plcCdPublTop3" class="col-xs-3" 			style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.plcCdPublTop3">
-                                <input type="text" name="addrPublTop3" class="col-xs-7" 			style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.addrPublTop3">
-                                <input type="text" name="cntPublTop3" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
+                                <input type="text" name="plcCdPublTop1" class="col-xs-3" 			style="cursor: pointer; color: #ffffff; background-color: #80bce1;" v-model="totMonStat.plcCdPublTop1">
+                                <input type="text" name="addrPublTop1" class="col-xs-7" 			style="cursor: pointer; color: #ffffff; background-color: #80bce1;" v-model="totMonStat.addrPublTop1">
+                                <input type="text" name="cntPublTop1" class="col-xs-2 text-right" 	style="cursor: pointer; color: #ffffff; background-color: #80bce1;" v-model="totMonStat.cntPublTop1">
+                                <input type="text" name="plcCdPublTop2" class="col-xs-3" 			style="cursor: pointer; color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.plcCdPublTop2">
+                                <input type="text" name="addrPublTop2" class="col-xs-7" 			style="cursor: pointer; color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.addrPublTop2">
+                                <input type="text" name="cntPublTop2" class="col-xs-2 text-right" 	style="cursor: pointer; color: #ffffff; background-color: #3aa0de;" v-model="totMonStat.cntPublTop2">
+                                <input type="text" name="plcCdPublTop3" class="col-xs-3" 			style="cursor: pointer; color: #ffffff; background-color: #048de3;" v-model="totMonStat.plcCdPublTop3">
+                                <input type="text" name="addrPublTop3" class="col-xs-7" 			style="cursor: pointer; color: #ffffff; background-color: #048de3;" v-model="totMonStat.addrPublTop3">
+                                <input type="text" name="cntPublTop3" class="col-xs-2 text-right" 	style="cursor: pointer; color: #ffffff; background-color: #048de3;" v-model="totMonStat.cntPublTop3">
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('O230')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="cursor:pointer;" v-on:click="linkCall('O230')">
                             <div class="col-xs-6" >
                                 <span class="col-xs-12 chart-padding-0 text-center">공공 안전위험지역 활용(탐지율)</span>
                                 <div id=chartPublSafeDtct class ="col-xs-6">
@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-6">
-                                <span class="col-xs-12 chart-padding-0 text-center">학부모 지정지역 활용(탐지율)</span>
+                                <span style="cursor:pointer;" class="col-xs-12 chart-padding-0 text-center">학부모 지정지역 활용(탐지율)</span>
                                 <div id=chartPrntSafeDtct class ="col-xs-6">
                                     <canvas id="prntSafeDtctChart" width="70" height="70" style="margin-left: 16px;">
                                     </canvas>
@@ -258,69 +258,78 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15" v-on:click="linkCall('O250')">
+                        <div class="col-xs-6 border-line minMax-height-181 pd_top_15">
                             <div class="col-xs-12 chart-padding chart-padding-5">
-                                <span v-on:click="linkCall('O250')">보호자가 많이 지정한 위험지역 TOP3</span>
+                                <span style="cursor:pointer;" v-on:click="linkCall('O250')">보호자가 많이 지정한 위험지역 TOP3</span>
                             </div>
                             <div class="col-xs-12 chart-padding pd_btm_none text-right">
-                                <span style="color: gold">+ more</span>
+                                <span style="color: gold; cursor:pointer;" v-on:click="linkCall('O250')">+ more</span>
                             </div>
                             <div class="col-xs-12 chart-padding">
-                                <input type="text" name="plcCdPrntTop1" class="col-xs-3" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
-                                <input type="text" name="addrPrntTop1" class="col-xs-7" 			style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
-                                <input type="text" name="cntPrntTop1" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
-                                <input type="text" name="plcCdPrntTop2" class="col-xs-3" 			style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.plcCdPrntTop2">
-                                <input type="text" name="addrPrntTop2" class="col-xs-7" 			style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.addrPrntTop2">
-                                <input type="text" name="cntPrntTop2" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.cntPrntTop2">
-                                <input type="text" name="plcCdPrntTop3" class="col-xs-3"			style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.plcCdPrntTop3">
-                                <input type="text" name="addrPrntTop3" class="col-xs-7" 			style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.addrPrntTop3">
-                                <input type="text" name="cntPrntTop3" class="col-xs-2 text-right" 	style="color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.cntPrntTop3">
+                                <input type="text" name="plcCdPrntTop1" class="col-xs-3" 			style="cursor: pointer; color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.plcCdPrntTop1">
+                                <input type="text" name="addrPrntTop1" class="col-xs-7" 			style="cursor: pointer; color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.addrPrntTop1">
+                                <input type="text" name="cntPrntTop1" class="col-xs-2 text-right" 	style="cursor: pointer; color: #ffffff; background-color: #e5a2a2;" v-model="totMonStat.cntPrntTop1">
+                                <input type="text" name="plcCdPrntTop2" class="col-xs-3" 			style="cursor: pointer; color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.plcCdPrntTop2">
+                                <input type="text" name="addrPrntTop2" class="col-xs-7" 			style="cursor: pointer; color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.addrPrntTop2">
+                                <input type="text" name="cntPrntTop2" class="col-xs-2 text-right" 	style="cursor: pointer; color: #ffffff; background-color: #ea6a6a;" v-model="totMonStat.cntPrntTop2">
+                                <input type="text" name="plcCdPrntTop3" class="col-xs-3"			style="cursor: pointer; color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.plcCdPrntTop3">
+                                <input type="text" name="addrPrntTop3" class="col-xs-7" 			style="cursor: pointer; color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.addrPrntTop3">
+                                <input type="text" name="cntPrntTop3" class="col-xs-2 text-right" 	style="cursor: pointer; color: #ffffff; background-color: #e04b4b;" v-model="totMonStat.cntPrntTop3">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 border-line" style="padding-bottom: 21px;">
-                    <div class="form-group pd_top_10">
-                        <div class="col-xs-12 border-line chart-padding">
-                            <button class="col-xs-3 chart-padding" style="background-color: #000000" v-on:click="initCycl(5000)" type="button">
-                                <span>갱신주기 : </span>
-                            </button>
-                            <button class="col-xs-3" v-bind:class="[cyclButton.button1 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(5000)" type="button">
-                                <span> 5 sec </span>
-                            </button>
-                            <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button2 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
-                                <span> 30 sec </span>
-                            </button>
-                            <button class="col-xs-3" v-bind:class="[cyclButton.button3 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(60000)" type="button">
-                                <span> 1 min </span>
-                            </button>
-                        </div>
+                <div class="col-xs-2 border-line" style="padding-bottom: 14px;">
+                    <div class="col-xs-12 border-line chart-padding">
+                        <button class="col-xs-3 chart-padding" style="background-color: #000000" v-on:click="initCycl(5000)" type="button">
+                            <span>갱신주기 : </span>
+                        </button>
+                        <button class="col-xs-3" v-bind:class="[cyclButton.button1 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(5000)" type="button">
+                            <span> 5 sec </span>
+                        </button>
+                        <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button2 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
+                            <span> 30 sec </span>
+                        </button>
+                        <button class="col-xs-3" v-bind:class="[cyclButton.button3 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(60000)" type="button">
+                            <span> 1 min </span>
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-12 border-line" style="padding-top: 10px;">
-                            <span class="col-xs-12 text-center chart-padding" style="font-size: 36px;">{{clockParam.amPm}} {{clockParam.hhmmss}}</span>
-                            <span class="col-xs-12 text-center" style="font-size: 24px;color: #09ea09">{{clockParam.yyyymmdd}}{{clockParam.ddd}}</span>
-                            <span class="float_right" style="color: gold" v-on:click="linkCall('O210')">+ more</span>
-                        </div>
+                    <div class="col-xs-12 border-line" style="padding-top: 10px;">
+                        <span class="col-xs-12 text-center chart-padding" style="font-size: 36px;">{{clockParam.amPm}} {{clockParam.hhmmss}}</span>
+                        <span class="col-xs-12 text-center" style="font-size: 24px; color: #09ea09">{{clockParam.yyyymmdd}}{{clockParam.ddd}}</span>
+                        <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('O210')">+ more</span>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-12 border-line" style="padding-bottom: 3px;" v-on:click="linkCall('O210')">
+                    <div class="col-xs-12 border-line" style="overflow: hidden; min-height: 440px; max-height: 440px; cursor:pointer;">
+                        <div class="col-xs-12 " style="padding-bottom: 2px;" v-on:click="linkCall('O210')" v-for="item in totMonStatDgemHist">
                             <div class="col-xs-2 pd_left_none">
-                                <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-12 text-center chart-padding-4" style="font-size: 12px;"> {{ item.dgemDt }} </span>
                             </div>
                             <div class="col-xs-3 pd_none">
-                                <span class="col-xs-12 text-center chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemTm }} </span>
+                                <span class="col-xs-12 text-center chart-padding-4" style="font-size: 12px;"> {{ item.dgemTm }} </span>
                             </div>
-                            <div class="col-xs-2 pd_none">
-                                <i v-for="item in totMonStatDgemHist" v-if="item.dgemStatCd === 'NORM'" class="fa-solid fa-triangle-exclamation fa-2x" style="color: #5bff16; padding-top: 10px; padding-left: 10px;"></i>
-                                <i v-else-if="item.dgemStatCd === 'CHK'" 	class="fa-regular fa-square-check fa-2x" 		style="color: #ff7f20; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-else-if="item.dgemStatCd === 'WARN'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-else-if="item.dgemStatCd === 'PDNGR'" 	class="fa-solid fa-heart-pulse fa-2x" 			style="color: #f1071b; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-else-if="item.dgemStatCd === 'DNGR'" 	class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #fdb915; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-else class="fa-solid fa-temperature-quarter fa-4x" style="color: #ee5e5e"></i>
+<!--                            <div class="col-xs-2 pd_none">-->
+<!--                                <i v-if="item.dgemStatCd === 'NORM'" class="fa-solid fa-triangle-exclamation fa-2x"         style="color: #5bff16; padding-top: 10px; padding-left: 10px;"></i>-->
+<!--                                <i v-else-if="item.dgemStatCd === 'CHK'" 	class="fa-regular fa-square-check fa-2x" 		style="color: #ff7f20; padding-top: 10px; padding-left: 10px"></i>-->
+<!--                                <i v-else-if="item.dgemStatCd === 'WARN'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>-->
+<!--                                <i v-else-if="item.dgemStatCd === 'PDNGR'" 	class="fa-solid fa-heart-pulse fa-2x" 			style="color: #f1071b; padding-top: 10px; padding-left: 10px"></i>-->
+<!--                                <i v-else-if="item.dgemStatCd === 'DNGR'" 	class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #fdb915; padding-top: 10px; padding-left: 10px"></i>-->
+<!--                                <i v-else class="fa-solid fa-temperature-quarter fa-4x" style="color: #ee5e5e"></i>-->
+<!--                            </div>-->
+                            <div class="col-xs-2 pd_none" style="cursor:pointer;">
+                                <i v-if="item.abnmHistDzon === 'DZONE'"         class="fa-solid fa-triangle-exclamation fa-2x"  style="color: #f1071b; padding-top: 10px; padding-left: 10px;"></i>
+                                <i v-if="item.abnmHistFall === 'FALL'" 	        class="fa-regular fa-square-check fa-2x" 		style="color: #ff7f20; padding-top: 10px; padding-left: 10px"></i>
+                                <i v-if="item.abnmHistHbitVslow === 'VSLOW'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>
+                                <i v-if="item.abnmHistHbitVfast === 'VFAST'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>
+                                <i v-if="item.abnmHistTempVlow === 'VLOW'" 	    class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #f6c349; padding-top: 10px; padding-left: 10px"></i>
+                                <i v-if="item.abnmHistTempVhigh === 'VHIGH'" 	class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #f6c349; padding-top: 10px; padding-left: 10px"></i>
                             </div>
-                            <div class="col-xs-5 pd_left_10 pd_right_none">
-                                <span class="col-xs-12 text-left chart-padding-4" v-for="item in totMonStatDgemHist" style="font-size: 14px;"> {{ item.dgemStatNm }} </span>
+                            <div class="col-xs-5 pd_left_10 pd_right_none" style="cursor:pointer;">
+                                <span v-if="item.abnmHistDzon === 'DZONE'"      class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistDzonNm }} </span>
+                                <span v-if="item.abnmHistFall === 'FALL'"       class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistFallNm }} </span>
+                                <span v-if="item.abnmHistHbitVslow === 'VSLOW'" class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistHbitVslowNm }} </span>
+                                <span v-if="item.abnmHistHbitVfast === 'VFAST'" class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistHbitVfastNm }} </span>
+                                <span v-if="item.abnmHistTempVlow === 'VLOW'"   class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistTempVlowNm }} </span>
+                                <span v-if="item.abnmHistTempVhigh === 'VHIGH'" class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistTempVhighNm }} </span>
                             </div>
                         </div>
                     </div>
@@ -329,7 +338,7 @@
                     헬스케어
                     <div class="form-group">
                         <div class="col-xs-12 border-line minMax-height-170 pd_top_15">
-                            <div class ="col-xs-2 chart-padding-2" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-2" style="cursor: pointer;" v-on:click="linkCall('F310')">
                                 <div id=chartCareBmiBodyIdx class ="col-xs-4 chart-padding float_left">
                                     <canvas id="careBmiBodyIdxChart" width="100" height="110">
                                     </canvas>
@@ -341,7 +350,7 @@
                                     <span class="col-xs-12 text-center">최대 : {{ totMonStat.careBmiBodyIdxMax }}</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-3 chart-padding-1" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-3 chart-padding-1" style="cursor: pointer;" v-on:click="linkCall('F310')">
                                 <div id=chartCareGrowIdx class ="col-xs-5 chart-padding-0">
                                     <canvas id="careGrowIdxChart" width="80" height="80" style="margin-left: 50px;">
                                     </canvas>
@@ -353,7 +362,7 @@
                                     <span class="col-xs-12 text-center">저성장 : {{ totMonStat.careGrowLowRt }} %</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-1" style="cursor: pointer; width:19%;" v-on:click="linkCall('F310')">
                                 <div id=chartCareFatIdx class ="col-xs-5 chart-padding-0">
                                     <canvas id="careFatIdxChart" width="80" height="80" style="margin-left: 20px;">
                                     </canvas>
@@ -365,7 +374,7 @@
                                     <span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatIdxUndrRt }} %</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-1" style="cursor: pointer; width:19%;" v-on:click="linkCall('F310')">
                                 <div id=chartCareFatPrdt class ="col-xs-5 chart-padding-0">
                                     <canvas id="careFatPrdtChart" width="80" height="80" style="margin-left: 20px;">
                                     </canvas>
@@ -377,7 +386,7 @@
                                     <span class="col-xs-12 text-center">저체중 : {{ totMonStat.careFatPrdtUndrRt }} %</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-1" style="cursor: pointer; width:19%;" v-on:click="linkCall('F310')">
                                 <div id=chartCareStrs class ="col-xs-5 chart-padding-0">
                                     <canvas id="careStrsChart" width="80" height="80" style="margin-left: 20px;">
                                     </canvas>
@@ -391,7 +400,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12 border-line minMax-height-170 pd_top_15">
-                            <div class ="col-xs-2 chart-padding-2" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-2" style="cursor: pointer;" v-on:click="linkCall('F310')">
                                 <div id=chartCareExcsTime class ="col-xs-4 chart-padding-0 float_left">
                                     <canvas id="careExcsTimeChart" width="100" height="110">
                                     </canvas>
@@ -403,7 +412,7 @@
                                     <span class="col-xs-12 text-center">전일 : {{ totMonStat.careExcsTimeBfDay }} h</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-3 chart-padding-1" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-3 chart-padding-1" style="cursor: pointer;" v-on:click="linkCall('F310')">
                                 <div id=chartCareCalEat class ="col-xs-5 chart-padding">
                                     <canvas id="careCalEatChart" width="110" height="110">
                                     </canvas>
@@ -415,7 +424,7 @@
                                     <span class="col-xs-12 text-center">전일 : {{ totMonStat.careCalEatbfDay }} kcal</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-1" style="cursor: pointer; width:19%;" v-on:click="linkCall('F310')">
                                 <div id=chartCareFmenuTop class ="col-xs-5 chart-padding-0">
                                     <canvas id="careFmenuTopChart" width="80" height="80" style="margin-left: 20px;">
                                     </canvas>
@@ -427,7 +436,7 @@
                                     <span class="col-xs-12 text-center">{{ totMonStat.careFmenuCdTop3 }} : {{ totMonStat.careFmenuRtTop3 }} %</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-1" style="cursor: pointer; width:19%;" v-on:click="linkCall('F310')">
                                 <div id=chartCareMmelNeatFmenu class ="col-xs-5 chart-padding-0">
                                     <canvas id="careMmelNeatFmenuChart" width="80" height="80" style="margin-left: 20px;">
                                     </canvas>
@@ -438,7 +447,7 @@
                                     <span class="col-xs-12 text-center">대상 : {{ totMonStat.careMmelNeatFmenuObj }} 명</span>
                                 </div>
                             </div>
-                            <div class ="col-xs-2 chart-padding-1" style="width:19%" v-on:click="linkCall('F310')">
+                            <div class ="col-xs-2 chart-padding-1" style="cursor: pointer; width:19%;" v-on:click="linkCall('F310')">
                                 <div id=chartCareMmelNeatQust class ="col-xs-5 chart-padding-0">
                                     <canvas id="careMmelNeatQustChart" width="80" height="80" style="margin-left: 20px;">
                                     </canvas>

@@ -287,7 +287,22 @@ let totMonStat = new Vue({
                         }
                         if ( !!response["rtnData"]["result2"] ) {
                             $.each(response["rtnData"]["result2"], function(index, item) {
-                                $this.totMonStatDgemHist.push({'dgemDt':item.dgemDt, 'dgemTm':item.dgemTm, 'dgemStatCd':item.dgemStatCd, 'dgemStatNm':item.dgemStatNm});
+                                $this.totMonStatDgemHist.push({
+                                    'dgemDt'                :item.dgemDt,
+                                    'dgemTm'                :item.dgemTm,
+                                    'abnmHistDzon'          :item.abnmHistDzon,
+                                    'abnmHistDzonNm'        :item.abnmHistDzonNm,
+                                    'abnmHistFall'          :item.abnmHistFall,
+                                    'abnmHistFallNm'        :item.abnmHistFallNm,
+                                    'abnmHistHbitVslow'     :item.abnmHistHbitVslow,
+                                    'abnmHistHbitVslowNm'   :item.abnmHistHbitVslowNm,
+                                    'abnmHistHbitVfast'     :item.abnmHistHbitVfast,
+                                    'abnmHistHbitVfastNm'   :item.abnmHistHbitVfastNm,
+                                    'abnmHistTempVlow'      :item.abnmHistTempVlow,
+                                    'abnmHistTempVlowNm'    :item.abnmHistTempVlowNm,
+                                    'abnmHistTempVhigh'     :item.abnmHistTempVhigh,
+                                    'abnmHistTempVhighNm'   :item.abnmHistTempVhighNm
+                                });
                             });
                         }
                         $this.updateChart();
@@ -989,7 +1004,7 @@ let totMonStat = new Vue({
             let $this = this;
             let date = moment().lang("ko");
 
-            $this.clockParam.hhmmss = date.format(timeFormatPattern);
+            $this.clockParam.hhmmss = date.format(time12FormatPattern);
             $this.clockParam.yyyymmdd = date.format(dateFormatPattern);
             $this.clockParam.ddd = date.format("(ddd)");
             $this.clockParam.amPm = date.format("a");
