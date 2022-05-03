@@ -4,34 +4,64 @@
 
 	<!--위치 리스트 조회 -->
 	<select id="searchLocList" parameterType="java.util.Map" resultType="MybatisMap">
-		select
-               tlib.loc_no
-              ,tlib.loc_nm
-              ,addr_base
-              ,tlib.plc_cd
-              ,fn_getcdnm('PLC_CD' , tlib.plc_cd) as PLC_NM
-              ,tlib.plc_clss_cd
-              ,fn_getcdnm('PLC_CLSS_CD' , tlib.plc_clss_cd) as plc_clss_nm
-		from  ts_loc_info_base tlib
-		where 1=1
-		and plc_clss_cd = 'SZONE'
-		<if test="wordHead1 != null and wordHead1 !=''">
-			and    split_part(tlib.addr_base, ' ', 1) = #{wordHead1}
-		</if>
-		<if test="wordHead2 != null and wordHead2 !=''">
-			and    split_part(tlib.addr_base, ' ', 2) = #{wordHead2}
-		</if>
-		<if test="locNm != null and locNm !=''">
-			and    tlib.loc_nm like concat ('%',#{locNm},'%')
-		</if>
-		<if test="roadAddr != null and roadAddr !=''">
-			and    tlib.addr_base like concat ('%',#{locNm},'%')
-		</if>
-		order by tlib.loc_no
-		<if test=' paging == "Y" '>
-			LIMIT ${rowCount} OFFSET ${currentIndex}
-		</if>
+	select
+		   tlib.loc_no
+		  ,tlib.loc_nm
+		  ,addr_base
+		  ,tlib.plc_cd
+		  ,fn_getcdnm('PLC_CD' , tlib.plc_cd) as PLC_NM
+		  ,tlib.plc_clss_cd
+		  ,fn_getcdnm('PLC_CLSS_CD' , tlib.plc_clss_cd) as plc_clss_nm
+	from  ts_loc_info_base tlib
+	where 1=1
+	and plc_clss_cd = 'SZONE'
+	<if test="wordHead1 != null and wordHead1 !=''">
+		and    split_part(tlib.addr_base, ' ', 1) = #{wordHead1}
+	</if>
+	<if test="wordHead2 != null and wordHead2 !=''">
+		and    split_part(tlib.addr_base, ' ', 2) = #{wordHead2}
+	</if>
+	<if test="locNm != null and locNm !=''">
+		and    tlib.loc_nm like concat ('%',#{locNm},'%')
+	</if>
+	<if test="roadAddr != null and roadAddr !=''">
+		and    tlib.addr_base like concat ('%',#{locNm},'%')
+	</if>
+	order by tlib.loc_no
+	<if test=' paging == "Y" '>
+		LIMIT ${rowCount} OFFSET ${currentIndex}
+	</if>
+	</select>
 
+	<!--학생정보 및 보호자 정보 select-->
+	<select id="searchStdtGuarList" parameterType="java.util.Map" resultType="MybatisMap">
+    select
+          A.STDT_NO
+         ,DECR(A.STDT_NM) as STDT_NM
+         ,C.GUAR_NO
+         ,DECR(C.GUAR_NM) as GUAR_NM
+         ,DECR(C.GUAR_TEL_NO) as GUAR_TEL_NO
+    from   TM_STDT_BASE A
+    left outer join TM_STDT_GUAR_CONN B
+    on     A.STDT_NO = B.STDT_NO
+    left outer join TM_GUAR_BASE C
+    on     B.GUAR_NO = C.GUAR_NO
+    where  1=1
+    <if test=" stdtNo != null and stdtNo !='' ">
+	  and    A.STDT_NO = #{stdtNo}::numeric</if>
+    <if test=" stdtNm != null and stdtNm !='' ">
+	  and    DECR(A.STDT_NM) = #{stdtNm}</if>
+    <if test=" guarNo != null and guarNo !='' ">
+	  and    C.GUAR_NO = #{guarNo}::numeric</if>
+    <if test=" guarNm != null and guarNm !='' ">
+	  and    DECR(C.GUAR_NM) = #{guarNm}</if>
+    <if test=" guarTelNo != null and guarTelNo !='' ">
+	  and    DECR(C.GUAR_TEL_NO) = #{guarTelNo}</if>
+    group  by A.STDT_NO , A.STDT_NM , C.GUAR_NO , C.GUAR_NM
+    order  by A.stdt_no
+    <if test=' paging == "Y" '>
+	  LIMIT ${rowCount} OFFSET ${currentIndex}
+    </if>
 	</select>
 
 </mapper>
