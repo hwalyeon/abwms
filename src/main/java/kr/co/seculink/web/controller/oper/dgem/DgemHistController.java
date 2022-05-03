@@ -53,30 +53,6 @@ public class DgemHistController
 	}
 
 
-	//학생정보 및 보호자 정보 리스트 조회
-	@ResponseBody
-	@RequestMapping("/oper/dgem/dgemHist/searchStdtGuarList.ab")
-	public RtnMsg searchStdtGuarList(@RequestBody(required = false) Map<String, String> params) throws BizException
-	{
-
-		RtnMsg vo = new RtnMsg();
-		Map<String, Object> rtnMap = new HashMap<String, Object>();
-
-
-		List<Map<String, String>> result = dao.selectList("oper.dgem.dgemHist.searchStdtGuarList", params);
-		rtnMap.put("result", result);
-
-
-		if (!GEUtil.isEmpty(params.get("paging"))) {
-			params.put("paging", "N");
-			vo.setTotalCount(((List)dao.selectList("oper.dgem.dgemHist.searchStdtGuarList", params)).size());
-		}
-
-		vo.setRtnData(rtnMap, params);
-
-		return vo;
-	}
-
 	//학교정보 리스트 조회
 	@ResponseBody
 	@RequestMapping("/oper/dgem/dgemHist/searchLocList.ab")
