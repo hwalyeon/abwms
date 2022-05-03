@@ -127,26 +127,16 @@ let alamHist = new Vue({
                 }
             }).trigger("reloadGrid");
         },
-            //보호자 번호 팝업 Grid 값 부모창 input 값에 삽입
-            setData: function(data) {
-                console.log(data);
-                let $this = this;
-                if(data.stdtNo !== undefined && data.stdtNm !== undefined && data.guarNo !== undefined && data.guarNm !== undefined)
-                {
-                    $this.params.stdtNo = data.stdtNo;
-                    $this.params.stdtNm = data.stdtNm;
-                    $this.params.guarNo = data.guarNo;
-                    $this.params.guarNm = data.guarNm;
-                }
-                if(data.locNm !== undefined)
-                {
-                    $this.params.locNm  = data.locNm;
-                }
-            },
 
         //학생 및 보호자 정보 search 팝업
         stdtGuarDetlPopup: function() {
-            stdtGuarDetl.initialize(this.setData);
+            let $this = this;
+            stdtGuarPopup.initPage({ callback : function(rowData) {
+                    $this.params.stdtNo = rowData.stdtNo;
+                    $this.params.stdtNm = rowData.stdtNm;
+                    $this.params.guarNo = rowData.guarNo;
+                    $this.params.guarNm = rowData.guarNm;
+            }});
         },
 
         setDatepicker : function() {
