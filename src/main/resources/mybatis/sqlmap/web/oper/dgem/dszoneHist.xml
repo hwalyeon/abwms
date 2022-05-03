@@ -79,13 +79,13 @@
 		<if test=" locApntCd != null and locApntCd !='' ">
 			and    TZDS.LOC_APNT_CD = #{locApntCd}</if>
 		<if test=" stdtNo != null and stdtNo !='' ">
-			and	   TSB.STDT_NO = #{stdtNo}			 /*학생번호*/</if>
+			and	   TSB.STDT_NO = cast(#{stdtNo} as numeric)		 /*학생번호*/</if>
 		<if test=" stdtNm != null and stdtNm !='' ">
 			and	   DECR(TSB.STDT_NM) = #{stdtNm}			 /*학생명*/</if>
 		<if test=" guarNm != null and guarNm !='' ">
 			and    TGB.GUAR_NM = #{guarNm}/*보호자명*/</if>
 		<if test=" guarNo != null and guarNo !='' ">
-			and    TGB.GUAR_NO = #{guarNo}	         /*보호자번호*/</if>
+			and    TGB.GUAR_NO = cast(#{guarNo} as numeric)          /*보호자번호*/</if>
 		<if test=" locNm != null and locNm !='' ">
 			and    TEB.LOC_NM = #{locNm}	     /*학교명*/</if>
 		group  by
