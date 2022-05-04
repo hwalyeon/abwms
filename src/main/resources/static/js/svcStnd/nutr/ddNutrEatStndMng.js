@@ -65,18 +65,18 @@ let ddNutrEatStndMng = new Vue({
                 // , frozen:true
                 let colModels =
                 [
-                    {name:"crud"       , index:"crud"                     , label: "crud"                  , hidden: true },
-                    {name: "sexCd"     , index: "sexCd"                  , label: "성별"                    , width: 80          , align: "center"  ,  fixed: true    , formatter:"select", editoptions:{value:sexCdList}},
-                    {name: "ageYcnt"   , index: "ageYcnt"              , label: "나이(년)"                   , width: 80          , align: "center"     ,  fixed: true  }
+                    {name:"crud"       , index:"crud"        , label: "crud"      , hidden: true },
+                    {name: "sexCd"     , index: "sexCd"      , label: "성별"      , width: 80  , align: "center"  ,  fixed: true    , formatter:"select", editoptions:{value:sexCdList}},
+                    {name: "ageYcnt"   , index: "ageYcnt"    , label: "나이(년)"  , width: 80  , align: "center"  ,  fixed: true  }
                 ];
 
                 if($this.code.nutrCdNmList.length > 0){
                     for(var i in $this.code.nutrCdNmList ){
                         var data = $this.code.nutrCdNmList[i];
                         if(data.cdVal === 'VIT_B' || data.cdVal === 'AMNO' || data.cdVal==='EPA_DHA'){
-                            colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")" , editable :false , width: 80 ,  fixed: true } );
+                            colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")" , editable :false , width: 80 ,  fixed: true, align:"center" } );
                         }else {
-                            colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")" , editable :true , width: 80 ,  fixed: true } );
+                            colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")" , editable :true , width: 80 ,  fixed: true, align:"center" } );
                         }
                     }
                 }
