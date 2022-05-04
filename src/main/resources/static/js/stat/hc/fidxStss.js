@@ -593,10 +593,11 @@ let fidxStss = new Vue({
             let params;
             if (WebUtil.isNull(param)) {
                 params = WebUtil.getStorageData('window:gfixHist2:params', true);
-                WebUtil.setStorageData('window:gfixHist2:params', {}, true);
             } else {
                 params = param;
             }
+            WebUtil.removeStorageData('window:gfixHist2:params');
+
             if(params != null && WebUtil.isNotNull(params.gfixDtFr)){
                 $this.params.perdDivCd = 'DAY';
                 $this.params.occrDivCd = '02';

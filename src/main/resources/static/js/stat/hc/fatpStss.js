@@ -593,10 +593,10 @@ let fatpStss = new Vue({
             let params;
             if (WebUtil.isNull(param)) {
                 params = WebUtil.getStorageData('window:gfixHist3:params', true);
-                WebUtil.setStorageData('window:gfixHist3:params', {}, true);
             } else {
                 params = param;
             }
+            WebUtil.removeStorageData('window:gfixHist3:params');
 
             if(params != null && WebUtil.isNotNull(params.gfixDtFr)){
                 $this.params.perdDivCd = 'DAY';

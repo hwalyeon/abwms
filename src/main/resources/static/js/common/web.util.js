@@ -387,8 +387,8 @@ var WebUtil = {
     },
     
     removeStorageData: function(key) {
-//    	window.localStorage.removeItem(key);
-    	window.sessionStorage.removeItem(key);
+    	window.localStorage.removeItem(key);
+//    	window.sessionStorage.removeItem(key);
     },
     
     clearStorageData: function() {
