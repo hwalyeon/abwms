@@ -2,45 +2,161 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oper.cmon.totMonStat">
 
-	<!-- 종합관제현황_조회 -->
-	<select id="searchTotMonStat" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT		123456 	AS OPEN_CNT
-				  , 97456 	AS OPER_CNT
-				  , 24561 	AS NO_RSPS
-		FROM		NOW()
-	</select>
-
-	<!-- 종합관제현황_위험감정_이력_조회 -->
-	<select id="searchTotMonStatDgemHist" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT      DGEM_DT,
-					DGEM_TM,
-					ABNM_HIST_DZON AS ABNM_HIST_DZON,
-					FN_GETCDNM('PLC_CLSS_CD', ABNM_HIST_DZON) AS ABNM_HIST_DZON_NM,
-					ABNM_HIST_FALL AS ABNM_HIST_FALL,
-					FN_GETCDNM('ACT_DIV_CD', ABNM_HIST_FALL) AS ABNM_HIST_FALL_NM,
-					ABNM_HIST_HBIT_VSLOW AS ABNM_HIST_HBIT_VSLOW,
-					FN_GETCDNM('HBIT_STAT_CD', ABNM_HIST_HBIT_VSLOW) AS ABNM_HIST_HBIT_VSLOW_NM,
-					ABNM_HIST_HBIT_VFAST AS ABNM_HIST_HBIT_VFAST,
-					FN_GETCDNM('HBIT_STAT_CD', ABNM_HIST_HBIT_VFAST) AS ABNM_HIST_HBIT_VFAST_NM,
-					ABNM_HIST_TEMP_VLOW AS ABNM_HIST_TEMP_VLOW,
-					FN_GETCDNM('TEMP_STAT_CD', ABNM_HIST_TEMP_VLOW) AS ABNM_HIST_TEMP_VLOW_NM,
-					ABNM_HIST_TEMP_VHIGH AS ABNM_HIST_TEMP_VHIGH,
-					FN_GETCDNM('TEMP_STAT_CD', ABNM_HIST_TEMP_VHIGH) AS ABNM_HIST_TEMP_VHIGH_NM
+	<!-- 위험안전발생 -->
+	<select id="searchDgsfOccr" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH STDT_CNT AS
+					(
+					SELECT      COALESCE(COUNT(1), 0) AS STDT_CNT
+					FROM        TM_STDT_BASE
+					WHERE       1=1
+					AND         BAND_STAT_CD = 'NORM'
+					GROUP BY    BAND_STAT_CD
+					)
+		SELECT      SUM(MNTH_DNGR_AVG)                                      AS MNTH_DNGR_AVG,
+					SUM(TDAY_NORM)                                          AS TDAY_NORM,
+					SUM(TDAY_CHK)                                           AS TDAY_CHK,
+					SUM(TDAY_WARN)                                          AS TDAY_WARN,
+					SUM(TDAY_PDNGR)                                         AS TDAY_PDNGR,
+					SUM(TDAY_DNGR)                                          AS TDAY_DNGR,
+					SUM(TDAY_DNGR_SUM)                                      AS TDAY_DNGR_SUM,
+					SUM(TDAY_DNGR_SUM) - SUM(MNTH_DNGR_AVG)                 AS DIF_CNT,
+					SUM(TDAY_DNGR_SUM) / (SELECT STDT_CNT FROM STDT_CNT)    AS PERS_AVG
 		FROM        (
-					SELECT      TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
-								TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'AM HH12:MI') AS DGEM_TM,
-								CASE WHEN PLC_CLSS_CD   = 'DZONE'   THEN 'DZONE'    END AS ABNM_HIST_DZON,
-								CASE WHEN ACT_DIV_CD    = 'FALL'    THEN 'FALL'     END AS ABNM_HIST_FALL,
-								CASE WHEN HBIT_STAT_CD  = 'VSLOW'   THEN 'VSLOW'    END AS ABNM_HIST_HBIT_VSLOW,
-								CASE WHEN HBIT_STAT_CD  = 'VFAST'   THEN 'VFAST'    END AS ABNM_HIST_HBIT_VFAST,
-								CASE WHEN TEMP_STAT_CD  = 'VLOW'    THEN 'VLOW'     END AS ABNM_HIST_TEMP_VLOW,
-								CASE WHEN TEMP_STAT_CD  = 'VHIGH'   THEN 'VHIGH'    END AS ABNM_HIST_TEMP_VHIGH
+					SELECT      AVG(CNT)    AS MNTH_DNGR_AVG,
+								0           AS TDAY_NORM,
+								0           AS TDAY_CHK,
+								0           AS TDAY_WARN,
+								0           AS TDAY_PDNGR,
+								0           AS TDAY_DNGR,
+								0           AS TDAY_DNGR_SUM
+					FROM        (
+					SELECT      COUNT(1) AS CNT
 					FROM        TS_STDT_DGEM_HIST TSDH
 					WHERE       1=1
-				  	AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '1 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
-					ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
-					LIMIT       11
+					AND         DGEM_STAT_CD IN ('PDNGR', 'DNGR')
+					AND         DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+					GROUP BY    DGEM_DT
+					) MNTH_AVG
+					UNION ALL
+					SELECT      0,
+								SUM(NORM)   AS TDAY_NORM,
+								SUM(CHK)    AS TDAY_CHK,
+								SUM(WARN)   AS TDAY_WARN,
+								SUM(PDNGR)  AS TDAY_PDNGR,
+								SUM(DNGR)   AS TDAY_DNGR,
+								SUM(PDNGR) + SUM(DNGR) AS TDAY_DNGR_SUM
+					FROM        (
+								SELECT      CASE WHEN DGEM_STAT_CD = 'NORM'     THEN SUM(CNT) ELSE 0 END AS NORM,
+											CASE WHEN DGEM_STAT_CD = 'CHK'      THEN SUM(CNT) ELSE 0 END AS CHK,
+											CASE WHEN DGEM_STAT_CD = 'WARN'     THEN SUM(CNT) ELSE 0 END AS WARN,
+											CASE WHEN DGEM_STAT_CD = 'PDNGR'    THEN SUM(CNT) ELSE 0 END AS PDNGR,
+											CASE WHEN DGEM_STAT_CD = 'DNGR'     THEN SUM(CNT) ELSE 0 END AS DNGR
+								FROM        (
+								SELECT      COUNT(1) AS CNT, DGEM_STAT_CD
+								FROM        TS_STDT_DGEM_HIST TSDH
+								WHERE       1=1
+								AND         DGEM_DT = TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								GROUP BY    DGEM_STAT_CD) A
+								GROUP BY    DGEM_STAT_CD
+								) DAY_TOT
+					) DGEM_TOT_CNT
+	</select>
+
+	<!-- 위험감정_카운트 -->
+	<select id="searchDgemCnt" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH DGEM_DZON AS
+					(
+					SELECT      COUNT(1) AS DGEM_DZON
+					FROM        TS_STDT_LOC_HIST
+					WHERE       1=1
+					AND         OCCR_DTTM BETWEEN TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+					AND         PLC_CLSS_CD = 'DZONE'
+					)
+		SELECT      COALESCE(SUM(DGEM_DZON) + SUM(DGEM_FALL) + SUM(DGEM_HBIT) + SUM(DGEM_TEMP), 0) AS DGEM_TOTL,
+					COALESCE(SUM(DGEM_DZON), 0) AS DGEM_DZON,
+					COALESCE(SUM(DGEM_FALL), 0) AS DGEM_FALL,
+					COALESCE(SUM(DGEM_HBIT), 0) AS DGEM_HBIT,
+					COALESCE(SUM(DGEM_TEMP), 0) AS DGEM_TEMP
+		FROM        (
+					SELECT      0                                                                       AS DGEM_DZON,
+								CASE WHEN ACT_DIV_CD    = 'FALL'            THEN COUNT(1) ELSE 0 END    AS DGEM_FALL,
+								CASE WHEN HBIT_STAT_CD IN ('VSLOW','VFAST') THEN COUNT(1) ELSE 0 END    AS DGEM_HBIT,
+								CASE WHEN TEMP_STAT_CD IN ('VLOW', 'VHIGH') THEN COUNT(1) ELSE 0 END    AS DGEM_TEMP
+					FROM        TS_STDT_DGEM_HIST
+					WHERE       1=1
+					AND         DGEM_DT BETWEEN TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+					GROUP BY    PLC_CLSS_CD, ACT_DIV_CD, HBIT_STAT_CD, TEMP_STAT_CD
+					UNION ALL
+					SELECT      DGEM_DZON,
+								0,
+								0,
+								0
+					FROM 		DGEM_DZON
+					) DGEM_TOT_CN
+	</select>
+
+	<!-- 위험감정_이력 -->
+	<select id="searchDgemHist" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      DGEM_DT,
+					DGEM_TM,
+					DGEM_HIST_STAT_CD,
+					DGEM_HIST_STAT_NM
+		FROM        (
+						(
+							SELECT     TO_CHAR(TO_DATE(OCCR_DTTM, 'YYYYMMDDHH24MISS'::TEXT), 'MM/DD') AS DGEM_DT,
+									   TO_CHAR(TO_TIMESTAMP(OCCR_DTTM, 'YYYYMMDDHH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+									   PLC_CLSS_CD AS DGEM_HIST_STAT_CD,
+									   FN_GETCDNM('PLC_CLSS_CD', PLC_CLSS_CD) AS DGEM_HIST_STAT_NM
+							FROM        TS_STDT_LOC_HIST
+							WHERE       1=1
+							AND         OCCR_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+							AND         PLC_CLSS_CD = 'DZONE'
+							ORDER BY    OCCR_DTTM DESC
+							LIMIT       11
+						)
+						UNION ALL
+						(
+							SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
+									   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+									   ACT_DIV_CD AS DGEM_HIST_STAT_CD,
+									   FN_GETCDNM('ACT_DIV_CD', ACT_DIV_CD) AS DGEM_HIST_STAT_NM
+							FROM        TS_STDT_DGEM_HIST TSDH
+							WHERE       1=1
+							AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+							AND         ACT_DIV_CD = 'FALL'
+							ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
+							LIMIT       11
+						)
+						UNION ALL
+						(
+							SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
+									   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+									   HBIT_STAT_CD AS DGEM_HIST_STAT_CD,
+									   FN_GETCDNM('HBIT_STAT_CD', HBIT_STAT_CD) AS DGEM_HIST_STAT_NM
+							FROM        TS_STDT_DGEM_HIST TSDH
+							WHERE       1=1
+							AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+							AND         HBIT_STAT_CD IN ('VSLOW', 'VFAST')
+							ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
+								LIMIT       11
+						)
+						UNION ALL
+						(
+							SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
+									   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+									   TEMP_STAT_CD AS DGEM_HIST_STAT_CD,
+									   FN_GETCDNM('TEMP_STAT_CD', TEMP_STAT_CD) AS DGEM_HIST_STAT_NM
+							FROM        TS_STDT_DGEM_HIST TSDH
+							WHERE       1=1
+							AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+							AND         TEMP_STAT_CD IN ('VLOW', 'VHIGH')
+							ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
+							LIMIT       11
+						)
 					) ABNM_HIST
+		WHERE       1=1
+		ORDER BY    DGEM_DT DESC, DGEM_TM DESC
+		LIMIT       11
 	</select>
 
 	<!-- 종합관제현황_위험감정_이력_조회_임시 -->

@@ -6,12 +6,37 @@ let totMonStat = new Vue({
             searchClass : '01',
             empNo : 0
         },
-        totMonStatDgemHist:[{
+        //위험안전발생
+        dgsfOccr : {
+            mnthDngrAvg : '',
+            tdayNorm    : '',
+            tdayChk     : '',
+            tdayWarn    : '',
+            tdayPdngr   : '',
+            tdayDngr    : '',
+            tdayDngrSum : '',
+            difCnt      : '',
+            persAvg     : ''
+        },
+        //위험감정_카운트
+        dgemCnt:{
+            dgemTotl : '',
+            dgemDzon : '',
+            dgemFall : '',
+            dgemHbit : '',
+            dgemTemp : ''
+        },
+        //위험감정_이력
+        dgemHist:[{
             dgemDt : '',
             dgemTm : '',
-            dgemStatCd : '',
-            dgemStatNm : ''
+            dgemHistStatCd : '',
+            dgemHistStatNm : ''
         }],
+
+
+
+        ////////////////////// 임시 //////////////////////
         totMonStat: {
             openCnt             : 0,
             operCnt             : 0,
@@ -277,34 +302,35 @@ let totMonStat = new Vue({
                 $this.initData();
 
                 AjaxUtil.post({
-                    url: "/oper/cmon/totMonStat/searchTotMonStat.ab",
+                    url: "/oper/cmon/totMonStat/searchDgemHist.ab",
                     param: params,
                     success: function(response) {
-                        if ( !!response["rtnData"].result ) {
-                            $.each(response["rtnData"].result, function(key, val) {
-                                $this.totMonStat[key] = val;
+
+                        // 위험안전발생
+                        if ( !!response["rtnData"]["result1"] ) {
+                            $.each(response["rtnData"]["result1"], function(key, val) {
+                                $this.dgsfOccr[key] = val;
                             });
                         }
+                        // 위험감정_카운트
                         if ( !!response["rtnData"]["result2"] ) {
-                            $.each(response["rtnData"]["result2"], function(index, item) {
-                                $this.totMonStatDgemHist.push({
-                                    'dgemDt'                :item.dgemDt,
-                                    'dgemTm'                :item.dgemTm,
-                                    'abnmHistDzon'          :item.abnmHistDzon,
-                                    'abnmHistDzonNm'        :item.abnmHistDzonNm,
-                                    'abnmHistFall'          :item.abnmHistFall,
-                                    'abnmHistFallNm'        :item.abnmHistFallNm,
-                                    'abnmHistHbitVslow'     :item.abnmHistHbitVslow,
-                                    'abnmHistHbitVslowNm'   :item.abnmHistHbitVslowNm,
-                                    'abnmHistHbitVfast'     :item.abnmHistHbitVfast,
-                                    'abnmHistHbitVfastNm'   :item.abnmHistHbitVfastNm,
-                                    'abnmHistTempVlow'      :item.abnmHistTempVlow,
-                                    'abnmHistTempVlowNm'    :item.abnmHistTempVlowNm,
-                                    'abnmHistTempVhigh'     :item.abnmHistTempVhigh,
-                                    'abnmHistTempVhighNm'   :item.abnmHistTempVhighNm
+                            $.each(response["rtnData"]["result2"], function(key, val) {
+                                $this.dgemCnt[key] = val;
+                            });
+                        }
+                        // 위험감정_이력
+                        if ( !!response["rtnData"]["result3"] ) {
+                            $.each(response["rtnData"]["result3"], function(index, item) {
+                                $this.dgemHist.push({
+                                    dgemDt              :item.dgemDt,
+                                    dgemTm              :item.dgemTm,
+                                    dgemHistStatCd      :item.dgemHistStatCd,
+                                    dgemHistStatNm      :item.dgemHistStatNm
                                 });
                             });
                         }
+
+                        console.log("jcw :: ", response["rtnData"].result);
                         $this.updateChart();
                         $this.initCycl($this.cycl.timeCycl);
                     },
@@ -345,7 +371,7 @@ let totMonStat = new Vue({
 
             // 위험안전 발생 Data
             let tmpDngrSafeOcrrTd   = 2170;
-            let tmpDngrSafeOcrrAv   = 2600;
+            // let tmpDngrSafeOcrrAv   = 2600;
 
             // 위험지역 추이 Data
             let tmpDngrZoneProg4wb  = 1400;
@@ -430,7 +456,7 @@ let totMonStat = new Vue({
             let dataDngrSafeOccr = {
                 labels              : ['평균','오늘'],
                 datasets: [{
-                    data            : [tmpDngrSafeOcrrAv        , tmpDngrSafeOcrrTd],
+                    data            : [$this.dgsfOccr.mnthDngrAvg   , tmpDngrSafeOcrrTd],
                     backgroundColor : [colorYel                 , colorOra],
                     borderColor     : [colorYel                 , colorOra],
                     borderWidth     : 0
@@ -710,6 +736,7 @@ let totMonStat = new Vue({
                 options : $this.options,
                 plugins : pluginsStrs
             };
+            // 위험안전_발생
             let configDngrSafeOccr = {
                 type    : 'bar',
                 data    : dataDngrSafeOccr,
@@ -885,7 +912,34 @@ let totMonStat = new Vue({
         // },
         initData: function () {
             let $this = this;
-            $this.totMonStatDgemHist = [];
+
+            $this.dgsfOccr = {
+                mnthDngrAvg : '',
+                tdayNorm    : '',
+                tdayChk     : '',
+                tdayWarn    : '',
+                tdayPdngr   : '',
+                tdayDngr    : '',
+                tdayDngrSum : '',
+                difCnt      : '',
+                persAvg     : ''
+            },
+            $this.dgemCnt = {
+                dgemTotl : '',
+                dgemDzon : '',
+                dgemFall : '',
+                dgemHbit : '',
+                dgemTemp : ''
+            },
+            $this.dgemHist = [{
+                dgemDt          : '',
+                dgemTm          : '',
+                dgemHistStatCd  : '',
+                dgemHistStatNm  : ''
+            }];
+
+
+            ////////////////////// 임시 //////////////////////
             $this.totMonStat = {
                 openCnt             : '',
                 operCnt             : '',

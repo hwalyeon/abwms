@@ -155,48 +155,48 @@
                                 </div>
                             </div>
                             <div class="col-xs-4" style="cursor: pointer; padding-top: 30px; padding-right: 30px;">
-                                <span class="col-xs-12 text-right" style="font-size: 24px;color: #2a99ec"> {{totMonStat.tmpDngrSafeOcrrTd}} 건</span>
-                                <span class="col-xs-12 text-right"> 평균대비 : {{totMonStat.tmpDngrSafeOcrrDif}} 건</span>
-                                <span class="col-xs-12 text-right"> 연평균: {{totMonStat.tmpDngrSafeOcrrYav}} 건</span>
+                                <span class="col-xs-12 text-right" style="font-size: 24px;color: #2a99ec"> {{dgsfOccr.tdayDngrSum}} 건</span>
+                                <span class="col-xs-12 text-right"> 평균대비 : {{dgsfOccr.difCnt}} 건</span>
+                                <span class="col-xs-12 text-right"> 인평균: {{dgsfOccr.persAvg}} 건</span>
                             </div>
                             <div class="col-xs-5" style="cursor: pointer; padding-top: 30px; padding-left: 0px; padding-right: 20px;">
                                 <span class="col-xs-6 float_left" style="color: #09ea09"> 정상&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
-                                <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber7}} 건</span>
+                                <span class="float_right" style="color: #09ea09">	{{dgsfOccr.tdayNorm}} 건</span>
                                 <span class="col-xs-6 float_left" style="color: #09ea09"> 정상(유의)&nbsp;&nbsp;&nbsp;: </span>
-                                <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber8}} 건</span>
+                                <span class="float_right" style="color: #09ea09">	{{dgsfOccr.tdayChk}} 건</span>
                                 <span class="col-xs-6 float_left" style="color: #09ea09"> 주의&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
-                                <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber9}} 건</span>
+                                <span class="float_right" style="color: #09ea09">	{{dgsfOccr.tdayWarn}} 건</span>
                                 <span class="col-xs-6 float_left" style="color: #09ea09"> 위험가능성&nbsp;&nbsp;: </span>
-                                <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber10}} 건</span>
+                                <span class="float_right" style="color: #09ea09">	{{dgsfOccr.tdayPdngr}} 건</span>
                                 <span class="col-xs-6 float_left" style="color: #09ea09"> 위험&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span>
-                                <span class="float_right" style="color: #09ea09">	{{totMonStat.tmpNumber11}} 건</span>
+                                <span class="float_right" style="color: #09ea09">	{{dgsfOccr.tdayDngr}} 건</span>
                             </div>
                         </div>
                         <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="cursor:pointer;" v-on:click="linkCall('F310')">
                             <div class="col-xs-3 text-center" style="width:22%">
                                 <span class="col-xs-12 chart-padding-0">TOTAL</span>
                                 <i class="fa-regular fa-square-check fa-4x" style="color: #2a99ec"></i>
-                                <span class="col-xs-12 chart-padding-0">{{totCnt.tmpTotalCnt}} 건</span>
+                                <span class="col-xs-12 chart-padding-0">{{dgemCnt.dgemTotl}} 건</span>
                             </div>
                             <div class="col-xs-2 text-center" style="width:19%">
                                 <span class="col-xs-12 chart-padding-0">위험 지역</span>
                                 <i class="fa-solid fa-triangle-exclamation fa-4x" style="color: #ff0015"></i>
-                                <span class="col-xs-12 chart-padding-0">{{totCnt.tmpDngrZoneCnt}} 건</span>
+                                <span class="col-xs-12 chart-padding-0">{{dgemCnt.dgemDzon}} 건</span>
                             </div>
                             <div class="col-xs-2 text-center" style="width:19%">
                                 <span class="col-xs-12 chart-padding-0">낙상</span>
                                 <i class="fa-solid fa-person-falling-burst fa-4x" style="color: #ff0015"></i>
-                                <span class="col-xs-12 chart-padding-0">{{totCnt.tmpFallDownCnt}} 건</span>
+                                <span class="col-xs-12 chart-padding-0">{{dgemCnt.dgemFall}} 건</span>
                             </div>
                             <div class="col-xs-2 text-center" style="width:19%">
                                 <span class="col-xs-12 chart-padding-0">심박 의심</span>
                                 <i class="fa-solid fa-heart-pulse fa-4x" style="color: #ff0015"></i>
-                                <span class="col-xs-12 chart-padding-0">{{totCnt.tmpHbitAbnmCnt}} 건</span>
+                                <span class="col-xs-12 chart-padding-0">{{dgemCnt.dgemHbit}} 건</span>
                             </div>
                             <div class="col-xs-2 text-center" style="width:19%">
                                 <span class="col-xs-12 chart-padding-0">체온 의심</span>
                                 <i class="fa-solid fa-temperature-quarter fa-4x" style="color: #ff0015"></i>
-                                <span class="col-xs-12 chart-padding-0">{{totCnt.tmpTmepAbnmCnt}} 건</span>
+                                <span class="col-xs-12 chart-padding-0">{{dgemCnt.dgemTemp}} 건</span>
                             </div>
                         </div>
                         <div class="col-xs-6 border-line minMax-height-181 pd_top_15" style="cursor:pointer;" v-on:click="linkCall('F310')">
@@ -299,38 +299,52 @@
                         <span class="col-xs-12 text-center" style="font-size: 24px; color: #09ea09">{{clockParam.yyyymmdd}}{{clockParam.ddd}}</span>
                         <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('O210')">+ more</span>
                     </div>
-                    <div class="col-xs-12 border-line" style="overflow: hidden; min-height: 440px; max-height: 440px; cursor:pointer;">
-                        <div class="col-xs-12 " style="padding-bottom: 2px;" v-on:click="linkCall('O210')" v-for="item in totMonStatDgemHist">
-                            <div class="col-xs-2 pd_left_none">
-                                <span class="col-xs-12 text-center chart-padding-4" style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                    <div class="col-xs-12 border-line pd_none" style="overflow: hidden; min-height: 440px; max-height: 440px; cursor:pointer;">
+                        <div class="col-xs-12 " style="padding-bottom: 2px;" v-on:click="linkCall('O210')" v-for="item in dgemHist">
+
+                            <div v-if="item.dgemHistStatCd === 'DZONE'">
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemTm }} </span>
+                                <i class="col-xs-2 fa-solid fa-triangle-exclamation fa-2x"  style="color: #f1071b; padding-top: 10px; padding-left: 10px;"></i>
+                                <span class="col-xs-6 text-left chart-padding-4"            style="padding-left: 10px; font-size: 12px;"> {{ item.dgemHistStatNm }} </span>
                             </div>
-                            <div class="col-xs-3 pd_none">
-                                <span class="col-xs-12 text-center chart-padding-4" style="font-size: 12px;"> {{ item.dgemTm }} </span>
+
+                            <div v-else-if="item.dgemHistStatCd === 'FALL'">
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemTm }} </span>
+                                <i class="col-xs-2 fa-regular fa-square-check fa-2x"        style="color: #ff7f20; padding-top: 10px; padding-left: 10px;"></i>
+                                <span class="col-xs-6 text-left chart-padding-4"            style="padding-left: 10px; font-size: 12px;"> {{ item.dgemHistStatNm }} </span>
                             </div>
-<!--                            <div class="col-xs-2 pd_none">-->
-<!--                                <i v-if="item.dgemStatCd === 'NORM'" class="fa-solid fa-triangle-exclamation fa-2x"         style="color: #5bff16; padding-top: 10px; padding-left: 10px;"></i>-->
-<!--                                <i v-else-if="item.dgemStatCd === 'CHK'" 	class="fa-regular fa-square-check fa-2x" 		style="color: #ff7f20; padding-top: 10px; padding-left: 10px"></i>-->
-<!--                                <i v-else-if="item.dgemStatCd === 'WARN'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>-->
-<!--                                <i v-else-if="item.dgemStatCd === 'PDNGR'" 	class="fa-solid fa-heart-pulse fa-2x" 			style="color: #f1071b; padding-top: 10px; padding-left: 10px"></i>-->
-<!--                                <i v-else-if="item.dgemStatCd === 'DNGR'" 	class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #fdb915; padding-top: 10px; padding-left: 10px"></i>-->
-<!--                                <i v-else class="fa-solid fa-temperature-quarter fa-4x" style="color: #ee5e5e"></i>-->
-<!--                            </div>-->
-                            <div class="col-xs-2 pd_none" style="cursor:pointer;">
-                                <i v-if="item.abnmHistDzon === 'DZONE'"         class="fa-solid fa-triangle-exclamation fa-2x"  style="color: #f1071b; padding-top: 10px; padding-left: 10px;"></i>
-                                <i v-if="item.abnmHistFall === 'FALL'" 	        class="fa-regular fa-square-check fa-2x" 		style="color: #ff7f20; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-if="item.abnmHistHbitVslow === 'VSLOW'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-if="item.abnmHistHbitVfast === 'VFAST'" 	class="fa-solid fa-person-falling-burst fa-2x" 	style="color: #e019ff; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-if="item.abnmHistTempVlow === 'VLOW'" 	    class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #f6c349; padding-top: 10px; padding-left: 10px"></i>
-                                <i v-if="item.abnmHistTempVhigh === 'VHIGH'" 	class="fa-solid fa-triangle-exclamation fa-2x" 	style="color: #f6c349; padding-top: 10px; padding-left: 10px"></i>
+
+                            <div v-else-if="item.dgemHistStatCd === 'VSLOW'">
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemTm }} </span>
+                                <i class="col-xs-2 fa-solid fa-person-falling-burst fa-2x"  style="color: #e019ff; padding-top: 10px; padding-left: 10px;"></i>
+                                <span class="col-xs-6 text-left chart-padding-4"            style="padding-left: 10px; font-size: 12px;"> {{ item.dgemHistStatNm }} </span>
                             </div>
-                            <div class="col-xs-5 pd_left_10 pd_right_none" style="cursor:pointer;">
-                                <span v-if="item.abnmHistDzon === 'DZONE'"      class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistDzonNm }} </span>
-                                <span v-if="item.abnmHistFall === 'FALL'"       class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistFallNm }} </span>
-                                <span v-if="item.abnmHistHbitVslow === 'VSLOW'" class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistHbitVslowNm }} </span>
-                                <span v-if="item.abnmHistHbitVfast === 'VFAST'" class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistHbitVfastNm }} </span>
-                                <span v-if="item.abnmHistTempVlow === 'VLOW'"   class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistTempVlowNm }} </span>
-                                <span v-if="item.abnmHistTempVhigh === 'VHIGH'" class="col-xs-12 text-left chart-padding-4"     style="font-size: 12px;"> {{ item.abnmHistTempVhighNm }} </span>
+
+                            <div v-else-if="item.dgemHistStatCd === 'VFAST'">
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemTm }} </span>
+                                <i class="col-xs-2 fa-solid fa-person-falling-burst fa-2x"  style="color: #e019ff; padding-top: 10px; padding-left: 10px;"></i>
+                                <span class="col-xs-6 text-left chart-padding-4"            style="padding-left: 10px; font-size: 12px;"> {{ item.dgemHistStatNm }} </span>
                             </div>
+
+                            <div v-else-if="item.dgemHistStatCd === 'VLOW'">
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemTm }} </span>
+                                <i class="col-xs-2 fa-solid fa-triangle-exclamation fa-2x"  style="color: #f1071b; padding-top: 10px; padding-left: 10px;"></i>
+                                <span class="col-xs-6 text-left chart-padding-4"            style="padding-left: 10px; font-size: 12px;"> {{ item.dgemHistStatNm }} </span>
+                            </div>
+
+                            <div v-else-if="item.dgemHistStatCd === 'VHIGH'">
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemDt }} </span>
+                                <span class="col-xs-2 text-center chart-padding-4"          style="font-size: 12px;"> {{ item.dgemTm }} </span>
+                                <i class="col-xs-2 fa-solid fa-triangle-exclamation fa-2x"  style="color: #f6c349; padding-top: 10px; padding-left: 10px;"></i>
+                                <span class="col-xs-6 text-left chart-padding-4"            style="padding-left: 10px; font-size: 12px;"> {{ item.dgemHistStatNm }} </span>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

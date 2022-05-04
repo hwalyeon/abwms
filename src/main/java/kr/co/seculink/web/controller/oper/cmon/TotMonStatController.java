@@ -24,19 +24,24 @@ public class TotMonStatController
 	@Autowired
 	private TotMonStatService totMonStatService;
 
-	// 종합관제현황_조회
+	// 종합관제현황_위험감정이력_조회
 	@ResponseBody
-	@RequestMapping("/oper/cmon/totMonStat/searchTotMonStat.ab")
-	public RtnMsg<Map<String, Object>> searchTotMonStat(@RequestBody(required=false) Map<String, String> params) throws BizException
+	@RequestMapping("/oper/cmon/totMonStat/searchDgemHist.ab")
+	public RtnMsg<Map<String, Object>> searchDgemHist(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
-		Map<String, String> result = totMonStatService.searchTotMonStat(params);
-		List<Map<String, String>> result2 = totMonStatService.searchTotMonStatDgemHist(params);
+		// 위험안전발생
+		Map<String, String> result1 = totMonStatService.searchDgsfOccr(params);
+		// 위험감정_카운트
+		Map<String, String> result2 = totMonStatService.searchDgemCnt(params);
+		// 위험감정_이력
+		List<Map<String, String>> result3 = totMonStatService.searchDgemHist(params);
 
-		rtnMap.put("result", result);
+		rtnMap.put("result1", result1);
 		rtnMap.put("result2", result2);
+		rtnMap.put("result3", result3);
 
 		vo.setRtnData(rtnMap);
 
