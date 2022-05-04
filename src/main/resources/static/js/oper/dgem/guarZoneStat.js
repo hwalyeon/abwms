@@ -444,7 +444,7 @@ let guarZoneStat = new Vue({
             let locListColModels = [
                 {name: "latVal"         , index: "latVal"       , label: "위도"           , width: 90        , align: "center"  },
                 {name: "lonVal"         , index: "lonVal"       , label: "경도"           , width: 90        , align: "center" },
-                {name: "nearAddr"       , index: "nearAddr"     , label: "주소"           , width: 144       , align: "center" },
+                {name: "nearAddr"       , index: "nearAddr"     , label: "주소"           , width: 144       , align: "left" },
                 {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류"        , width: 55        , align: "center" },
                 {name: "dupApntCnt"     , index: "dupApntCnt"   , label: "보호자 지정건수"  , width: 55        , align: "center" },
                 {name: "locNo"          , index: "locNo"        , label: "장소번호"        , width: 55        , align: "center" ,hidden:true}

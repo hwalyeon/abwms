@@ -74,6 +74,8 @@
 		TZDS.PLC_CLSS_CD, /*장소분류명*/
 		TZDS.OCCR_CNT,	  /*탐지건수*/
 		TZDS.STDT_CNT	  /*탐지학생수*/
+		
+		ORDER BY TZDS.OCCR_CNT DESC
 	</select>
 
 	<!-- 위치정보_관리_리스트_상세정보_조회-->
