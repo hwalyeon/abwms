@@ -79,7 +79,7 @@ const summernote = {
                     ['fontsize', ['fontsize']],
                     ['style', ['bold', 'italic', 'underline','clear']],
                     ['color', ['forecolor','backcolor']],
-                    ['table', ['']],
+                    ['table', ['table']],
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['height', ['height']],
                     ['insert',['link']],
