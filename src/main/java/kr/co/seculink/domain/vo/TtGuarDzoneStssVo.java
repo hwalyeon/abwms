@@ -20,17 +20,35 @@ public class TtGuarDzoneStssVo implements Serializable {
 	/* lon_val 경도_값 numeric(null) */
 	private Double lonVal;
 
+	/* addr_head_1 주소_헤더_1 character varying(30) */
+	private String addrHead1;
+
+	/* addr_head_2 주소_헤더_2 character varying(30) */
+	private String addrHead2;
+
 	/* near_addr 인근_주소 character varying(200) */
 	private String nearAddr;
 
 	/* dup_apnt_cnt 중복_지정_건수 numeric(null) */
 	private Double dupApntCnt;
 
-	/* addr_head_1 주소_헤더_1 character varying(30) */
-	private String addrHead1;
+	/* reg_dt 등록_일자 character(8) */
+	private String regDt;
 
-	/* addr_head_2 주소_헤더_2 character varying(30) */
-	private String addrHead2;
+	/* reg_tm 등록_시각 character(6) */
+	private String regTm;
+
+	/* reg_user_id 등록_사용자_ID character varying(20) */
+	private String regUserId;
+
+	/* upt_dt 수정_일자 character(8) */
+	private String uptDt;
+
+	/* upt_tm 수정_시각 character(6) */
+	private String uptTm;
+
+	/* upt_user_id 수정_사용자_ID character varying(20) */
+	private String uptUserId;
 
 
 	/**
@@ -94,6 +112,36 @@ public class TtGuarDzoneStssVo implements Serializable {
 		this.lonVal = lonVal;
 	}
 	/**
+	 * Get addr_head_1 주소_헤더_1 character varying(30)
+	 * @Return String addrHead1
+	 */
+	public String getAddrHead1() {
+		return this.addrHead1;
+	}
+	
+	/**
+	 * Set addr_head_1 주소_헤더_1 character varying(30)
+	 * @Param String addrHead1
+	 */
+	public void setAddrHead1(String addrHead1) {
+		this.addrHead1 = addrHead1;
+	}
+	/**
+	 * Get addr_head_2 주소_헤더_2 character varying(30)
+	 * @Return String addrHead2
+	 */
+	public String getAddrHead2() {
+		return this.addrHead2;
+	}
+	
+	/**
+	 * Set addr_head_2 주소_헤더_2 character varying(30)
+	 * @Param String addrHead2
+	 */
+	public void setAddrHead2(String addrHead2) {
+		this.addrHead2 = addrHead2;
+	}
+	/**
 	 * Get near_addr 인근_주소 character varying(200)
 	 * @Return String nearAddr
 	 */
@@ -124,34 +172,94 @@ public class TtGuarDzoneStssVo implements Serializable {
 		this.dupApntCnt = dupApntCnt;
 	}
 	/**
-	 * Get addr_head_1 주소_헤더_1 character varying(30)
-	 * @Return String addrHead1
+	 * Get reg_dt 등록_일자 character(8)
+	 * @Return String regDt
 	 */
-	public String getAddrHead1() {
-		return this.addrHead1;
+	public String getRegDt() {
+		return this.regDt;
 	}
 	
 	/**
-	 * Set addr_head_1 주소_헤더_1 character varying(30)
-	 * @Param String addrHead1
+	 * Set reg_dt 등록_일자 character(8)
+	 * @Param String regDt
 	 */
-	public void setAddrHead1(String addrHead1) {
-		this.addrHead1 = addrHead1;
+	public void setRegDt(String regDt) {
+		this.regDt = regDt;
 	}
 	/**
-	 * Get addr_head_2 주소_헤더_2 character varying(30)
-	 * @Return String addrHead2
+	 * Get reg_tm 등록_시각 character(6)
+	 * @Return String regTm
 	 */
-	public String getAddrHead2() {
-		return this.addrHead2;
+	public String getRegTm() {
+		return this.regTm;
 	}
 	
 	/**
-	 * Set addr_head_2 주소_헤더_2 character varying(30)
-	 * @Param String addrHead2
+	 * Set reg_tm 등록_시각 character(6)
+	 * @Param String regTm
 	 */
-	public void setAddrHead2(String addrHead2) {
-		this.addrHead2 = addrHead2;
+	public void setRegTm(String regTm) {
+		this.regTm = regTm;
+	}
+	/**
+	 * Get reg_user_id 등록_사용자_ID character varying(20)
+	 * @Return String regUserId
+	 */
+	public String getRegUserId() {
+		return this.regUserId;
+	}
+	
+	/**
+	 * Set reg_user_id 등록_사용자_ID character varying(20)
+	 * @Param String regUserId
+	 */
+	public void setRegUserId(String regUserId) {
+		this.regUserId = regUserId;
+	}
+	/**
+	 * Get upt_dt 수정_일자 character(8)
+	 * @Return String uptDt
+	 */
+	public String getUptDt() {
+		return this.uptDt;
+	}
+	
+	/**
+	 * Set upt_dt 수정_일자 character(8)
+	 * @Param String uptDt
+	 */
+	public void setUptDt(String uptDt) {
+		this.uptDt = uptDt;
+	}
+	/**
+	 * Get upt_tm 수정_시각 character(6)
+	 * @Return String uptTm
+	 */
+	public String getUptTm() {
+		return this.uptTm;
+	}
+	
+	/**
+	 * Set upt_tm 수정_시각 character(6)
+	 * @Param String uptTm
+	 */
+	public void setUptTm(String uptTm) {
+		this.uptTm = uptTm;
+	}
+	/**
+	 * Get upt_user_id 수정_사용자_ID character varying(20)
+	 * @Return String uptUserId
+	 */
+	public String getUptUserId() {
+		return this.uptUserId;
+	}
+	
+	/**
+	 * Set upt_user_id 수정_사용자_ID character varying(20)
+	 * @Param String uptUserId
+	 */
+	public void setUptUserId(String uptUserId) {
+		this.uptUserId = uptUserId;
 	}
 
 } // end of class

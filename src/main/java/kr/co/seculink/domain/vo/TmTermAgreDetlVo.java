@@ -14,8 +14,8 @@ public class TmTermAgreDetlVo implements Serializable {
 	/* term_div_cd 약관_구분_코드 character varying(20) */
 	private String termDivCd;
 
-	/* term_ver 약관_버전 numeric(null) */
-	private Double termVer;
+	/* term_ver 약관_버전 character varying(20) */
+	private String termVer;
 
 	/* term_agre_yn 약관_동의_여부 character(1) */
 	private String termAgreYn;
@@ -73,18 +73,18 @@ public class TmTermAgreDetlVo implements Serializable {
 		this.termDivCd = termDivCd;
 	}
 	/**
-	 * Get term_ver 약관_버전 numeric(null)
-	 * @Return Double termVer
+	 * Get term_ver 약관_버전 character varying(20)
+	 * @Return String termVer
 	 */
-	public Double getTermVer() {
+	public String getTermVer() {
 		return this.termVer;
 	}
 	
 	/**
-	 * Set term_ver 약관_버전 numeric(null)
-	 * @Param Double termVer
+	 * Set term_ver 약관_버전 character varying(20)
+	 * @Param String termVer
 	 */
-	public void setTermVer(Double termVer) {
+	public void setTermVer(String termVer) {
 		this.termVer = termVer;
 	}
 	/**
