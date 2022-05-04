@@ -2213,7 +2213,7 @@ div.dt-button-info {
   border-bottom: 1px solid #ddd;
 }
 .ui-jqgrid tr.jqgrow td {
-  padding: 6px;
+  padding : 8px 6px 6px 6px;
 }
 .ui-jqdialog .ui-jqdialog-titlebar {
   padding: 10px 10px;
