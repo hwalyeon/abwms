@@ -8,7 +8,7 @@
         select   TPB.PRNT_NO       /* prnt_no 학부모_번호 numeric */
                , TPB.SEX_CD        /* sex_cd 성별_코드 character varying(20) */
                , fn_getCdNm('SEX_CD', TPB.SEX_CD) AS SEX_CD_NM        /* sex_cd 성별_코드 character varying(20) */
-               , TPB.PRNT_NM       /* prnt_nm 학부모_명 character varying(40) */
+               , decr(TPB.PRNT_NM)   as PRNT_NM     /* prnt_nm 학부모_명 character varying(40) */
                , TPB.HGHT_VAL      /* hght_val 키_값 numeric */
                , TPB.WGHT_VAL      /* wght_val 체중_값 numeric */
                , TPB.BMI_VAL       /* bmi_val BMI_값             numeric */
