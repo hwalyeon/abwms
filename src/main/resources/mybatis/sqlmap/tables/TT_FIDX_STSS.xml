@@ -23,6 +23,8 @@
                ,upt_dt /* upt_dt 수정_일자 character(8) */
                ,upt_tm /* upt_tm 수정_시각 character(6) */
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+               ,min_bmi_val /* min_bmi_val 최소_BMI_값 numeric */
+               ,max_bmi_val /* max_bmi_val 최대_BMI_값 numeric */
         FROM   tt_fidx_stss
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
@@ -40,9 +42,7 @@
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -54,6 +54,8 @@
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,min_bmi_val /* min_bmi_val 최소_BMI_값 numeric */
+		    ,max_bmi_val /* max_bmi_val 최대_BMI_값 numeric */
 		)
 		VALUES
 		(
@@ -63,9 +65,7 @@
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -77,6 +77,8 @@
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,#{minBmiVal} /* min_bmi_val 최소_BMI_값 numeric */
+		    ,#{maxBmiVal} /* max_bmi_val 최대_BMI_값 numeric */
 		)
 	</insert>
 	
@@ -104,6 +106,12 @@
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
+		<if test="minBmiVal != null">
+		    ,min_bmi_val = #{minBmiVal} /* min_bmi_val 최소_BMI_값 numeric */
+		</if>
+		<if test="maxBmiVal != null">
+		    ,max_bmi_val = #{maxBmiVal} /* max_bmi_val 최대_BMI_값 numeric */
+		</if>
 		</trim>
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
@@ -121,9 +129,7 @@
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -135,6 +141,8 @@
 		    ,upt_dt /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm /* upt_tm 수정_시각 character(6) */
 		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,min_bmi_val /* min_bmi_val 최소_BMI_값 numeric */
+		    ,max_bmi_val /* max_bmi_val 최대_BMI_값 numeric */
 		)
 		VALUES
 		(
@@ -144,9 +152,7 @@
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -158,6 +164,8 @@
 		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		    ,#{minBmiVal} /* min_bmi_val 최소_BMI_값 numeric */
+		    ,#{maxBmiVal} /* max_bmi_val 최대_BMI_값 numeric */
 		)
 		ON CONFLICT ON CONSTRAINT tt_fidx_stss_pkey
 		DO UPDATE SET
@@ -181,6 +189,12 @@
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
 		<if test="uptUserId != null">
 		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
+		</if>
+		<if test="minBmiVal != null">
+		    ,min_bmi_val = #{minBmiVal} /* min_bmi_val 최소_BMI_값 numeric */
+		</if>
+		<if test="maxBmiVal != null">
+		    ,max_bmi_val = #{maxBmiVal} /* max_bmi_val 최대_BMI_값 numeric */
 		</if>
 		</trim>
 	</update>

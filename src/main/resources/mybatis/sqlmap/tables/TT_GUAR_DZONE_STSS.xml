@@ -13,10 +13,16 @@
                ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
                ,lat_val /* lat_val 위도_값 numeric */
                ,lon_val /* lon_val 경도_값 numeric */
-               ,near_addr /* near_addr 인근_주소 character varying(200) */
-               ,dup_apnt_cnt /* dup_apnt_cnt 중복_지정_건수 numeric */
                ,addr_head_1 /* addr_head_1 주소_헤더_1 character varying(30) */
                ,addr_head_2 /* addr_head_2 주소_헤더_2 character varying(30) */
+               ,near_addr /* near_addr 인근_주소 character varying(200) */
+               ,dup_apnt_cnt /* dup_apnt_cnt 중복_지정_건수 numeric */
+               ,reg_dt /* reg_dt 등록_일자 character(8) */
+               ,reg_tm /* reg_tm 등록_시각 character(6) */
+               ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+               ,upt_dt /* upt_dt 수정_일자 character(8) */
+               ,upt_tm /* upt_tm 수정_시각 character(6) */
+               ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   tt_guar_dzone_stss
 		WHERE  1 = 1
 		AND    stnd_dt = #{stndDt} /* stnd_dt 기준_일자 character(8) */
@@ -33,16 +39,22 @@
 		    ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
 		    ,lat_val /* lat_val 위도_값 numeric */
 		    ,lon_val /* lon_val 경도_값 numeric */
-		<if test="nearAddr != null">
-		    ,near_addr /* near_addr 인근_주소 character varying(200) */
-		</if>
-		    ,dup_apnt_cnt /* dup_apnt_cnt 중복_지정_건수 numeric */
 		<if test="addrHead1 != null">
 		    ,addr_head_1 /* addr_head_1 주소_헤더_1 character varying(30) */
 		</if>
 		<if test="addrHead2 != null">
 		    ,addr_head_2 /* addr_head_2 주소_헤더_2 character varying(30) */
 		</if>
+		<if test="nearAddr != null">
+		    ,near_addr /* near_addr 인근_주소 character varying(200) */
+		</if>
+		    ,dup_apnt_cnt /* dup_apnt_cnt 중복_지정_건수 numeric */
+		    ,reg_dt /* reg_dt 등록_일자 character(8) */
+		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,upt_dt /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
 		VALUES
 		(
@@ -50,16 +62,22 @@
 		     ,#{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
 		     ,#{latVal} /* lat_val 위도_값 numeric */
 		     ,#{lonVal} /* lon_val 경도_값 numeric */
-		<if test="nearAddr != null">
-		    ,#{nearAddr} /* near_addr 인근_주소 character varying(200) */
-		</if>
-		    ,#{dupApntCnt} /* dup_apnt_cnt 중복_지정_건수 numeric */
 		<if test="addrHead1 != null">
 		    ,#{addrHead1} /* addr_head_1 주소_헤더_1 character varying(30) */
 		</if>
 		<if test="addrHead2 != null">
 		    ,#{addrHead2} /* addr_head_2 주소_헤더_2 character varying(30) */
 		</if>
+		<if test="nearAddr != null">
+		    ,#{nearAddr} /* near_addr 인근_주소 character varying(200) */
+		</if>
+		    ,#{dupApntCnt} /* dup_apnt_cnt 중복_지정_건수 numeric */
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */ 
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
 	</insert>
 	
@@ -67,17 +85,22 @@
 		/* Generated SQL SQL ID : tt_guar_dzone_stss.update */
 		UPDATE tt_guar_dzone_stss
 		<trim prefix="SET" prefixOverrides=",">
+		<if test="addrHead1 != null">
+		    ,addr_head_1 = #{addrHead1} /* addr_head_1 주소_헤더_1 character varying(30) */
+		</if>
+		<if test="addrHead2 != null">
+		    ,addr_head_2 = #{addrHead2} /* addr_head_2 주소_헤더_2 character varying(30) */
+		</if>
 		<if test="nearAddr != null">
 		    ,near_addr = #{nearAddr} /* near_addr 인근_주소 character varying(200) */
 		</if>
 		<if test="dupApntCnt != null">
 		    ,dup_apnt_cnt = #{dupApntCnt} /* dup_apnt_cnt 중복_지정_건수 numeric */
 		</if>
-		<if test="addrHead1 != null">
-		    ,addr_head_1 = #{addrHead1} /* addr_head_1 주소_헤더_1 character varying(30) */
-		</if>
-		<if test="addrHead2 != null">
-		    ,addr_head_2 = #{addrHead2} /* addr_head_2 주소_헤더_2 character varying(30) */
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptUserId != null">
+		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
 		WHERE  1 = 1
@@ -95,16 +118,22 @@
 		     plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
 		     lat_val /* lat_val 위도_값 numeric */
 		     lon_val /* lon_val 경도_값 numeric */
-		<if test="nearAddr != null">
-		    ,near_addr /* near_addr 인근_주소 character varying(200) */
-		</if>
-		    ,dup_apnt_cnt /* dup_apnt_cnt 중복_지정_건수 numeric */
 		<if test="addrHead1 != null">
 		    ,addr_head_1 /* addr_head_1 주소_헤더_1 character varying(30) */
 		</if>
 		<if test="addrHead2 != null">
 		    ,addr_head_2 /* addr_head_2 주소_헤더_2 character varying(30) */
 		</if>
+		<if test="nearAddr != null">
+		    ,near_addr /* near_addr 인근_주소 character varying(200) */
+		</if>
+		    ,dup_apnt_cnt /* dup_apnt_cnt 중복_지정_건수 numeric */
+		    ,reg_dt /* reg_dt 등록_일자 character(8) */
+		    ,reg_tm /* reg_tm 등록_시각 character(6) */
+		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,upt_dt /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm /* upt_tm 수정_시각 character(6) */
+		    ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
 		VALUES
 		(
@@ -112,31 +141,42 @@
 		     #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
 		     #{latVal} /* lat_val 위도_값 numeric */
 		     #{lonVal} /* lon_val 경도_값 numeric */
-		<if test="nearAddr != null">
-		    ,#{nearAddr} /* near_addr 인근_주소 character varying(200) */
-		</if>
-		    ,#{dupApntCnt} /* dup_apnt_cnt 중복_지정_건수 numeric */
 		<if test="addrHead1 != null">
 		    ,#{addrHead1} /* addr_head_1 주소_헤더_1 character varying(30) */
 		</if>
 		<if test="addrHead2 != null">
 		    ,#{addrHead2} /* addr_head_2 주소_헤더_2 character varying(30) */
 		</if>
+		<if test="nearAddr != null">
+		    ,#{nearAddr} /* near_addr 인근_주소 character varying(200) */
+		</if>
+		    ,#{dupApntCnt} /* dup_apnt_cnt 중복_지정_건수 numeric */
+		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
+		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
+		    ,to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		    ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		)
 		ON CONFLICT ON CONSTRAINT tt_guar_dzone_stss_pkey
 		DO UPDATE SET
 		<trim prefix="" prefixOverrides=",">
+		<if test="addrHead1 != null">
+		    ,addr_head_1 = #{addrHead1} /* addr_head_1 주소_헤더_1 character varying(30) */
+		</if>
+		<if test="addrHead2 != null">
+		    ,addr_head_2 = #{addrHead2} /* addr_head_2 주소_헤더_2 character varying(30) */
+		</if>
 		<if test="nearAddr != null">
 		    ,near_addr = #{nearAddr} /* near_addr 인근_주소 character varying(200) */
 		</if>
 		<if test="dupApntCnt != null">
 		    ,dup_apnt_cnt = #{dupApntCnt} /* dup_apnt_cnt 중복_지정_건수 numeric */
 		</if>
-		<if test="addrHead1 != null">
-		    ,addr_head_1 = #{addrHead1} /* addr_head_1 주소_헤더_1 character varying(30) */
-		</if>
-		<if test="addrHead2 != null">
-		    ,addr_head_2 = #{addrHead2} /* addr_head_2 주소_헤더_2 character varying(30) */
+		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
+		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
+		<if test="uptUserId != null">
+		    ,upt_user_id = #{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
 		</if>
 		</trim>
 	</update>

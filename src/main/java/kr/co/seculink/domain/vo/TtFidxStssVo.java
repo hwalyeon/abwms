@@ -50,6 +50,12 @@ public class TtFidxStssVo implements Serializable {
 	/* upt_user_id 수정_사용자_ID character varying(20) */
 	private String uptUserId;
 
+	/* min_bmi_val 최소_BMI_값 numeric(null) */
+	private Double minBmiVal;
+
+	/* max_bmi_val 최대_BMI_값 numeric(null) */
+	private Double maxBmiVal;
+
 
 	/**
 	 * Get stnd_dt 기준_일자 character(8)
@@ -260,6 +266,36 @@ public class TtFidxStssVo implements Serializable {
 	 */
 	public void setUptUserId(String uptUserId) {
 		this.uptUserId = uptUserId;
+	}
+	/**
+	 * Get min_bmi_val 최소_BMI_값 numeric(null)
+	 * @Return Double minBmiVal
+	 */
+	public Double getMinBmiVal() {
+		return this.minBmiVal;
+	}
+	
+	/**
+	 * Set min_bmi_val 최소_BMI_값 numeric(null)
+	 * @Param Double minBmiVal
+	 */
+	public void setMinBmiVal(Double minBmiVal) {
+		this.minBmiVal = minBmiVal;
+	}
+	/**
+	 * Get max_bmi_val 최대_BMI_값 numeric(null)
+	 * @Return Double maxBmiVal
+	 */
+	public Double getMaxBmiVal() {
+		return this.maxBmiVal;
+	}
+	
+	/**
+	 * Set max_bmi_val 최대_BMI_값 numeric(null)
+	 * @Param Double maxBmiVal
+	 */
+	public void setMaxBmiVal(Double maxBmiVal) {
+		this.maxBmiVal = maxBmiVal;
 	}
 
 } // end of class

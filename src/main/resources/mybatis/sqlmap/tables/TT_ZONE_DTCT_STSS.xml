@@ -14,6 +14,7 @@
                ,age_ycnt /* age_ycnt 나이_년수 numeric */
                ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
                ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
+               ,plc_cd /* plc_cd 장소_코드 character varying(20) */
                ,loc_no /* loc_no 위치_번호 numeric */
                ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
                ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
@@ -33,6 +34,7 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		AND    plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		AND    plc_cd = #{plcCd} /* plc_cd 장소_코드 character varying(20) */
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</select>
 
@@ -45,13 +47,12 @@
 		    ,age_ycnt /* age_ycnt 나이_년수 numeric */
 		    ,loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		    ,plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		    ,plc_cd /* plc_cd 장소_코드 character varying(20) */
 		    ,loc_no /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -71,13 +72,12 @@
 		     ,#{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		     ,#{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		     ,#{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		     ,#{plcCd} /* plc_cd 장소_코드 character varying(20) */
 		     ,#{locNo} /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -123,6 +123,7 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		AND    plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		AND    plc_cd = #{plcCd} /* plc_cd 장소_코드 character varying(20) */
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</update>
 	
@@ -135,13 +136,12 @@
 		     age_ycnt /* age_ycnt 나이_년수 numeric */
 		     loc_apnt_cd /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		     plc_clss_cd /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		     plc_cd /* plc_cd 장소_코드 character varying(20) */
 		     loc_no /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,stnd_yymm /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,mnth_week_seq /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,week_nm /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -161,13 +161,12 @@
 		     #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		     #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		     #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		     #{plcCd} /* plc_cd 장소_코드 character varying(20) */
 		     #{locNo} /* loc_no 위치_번호 numeric */
 		<if test="stndYymm != null">
 		    ,#{stndYymm} /* stnd_yymm 기준_년월 character(6) */
 		</if>
-		<if test="mnthWeekSeq != null">
 		    ,#{mnthWeekSeq} /* mnth_week_seq 월별_주차 numeric */
-		</if>
 		<if test="weekNm != null">
 		    ,#{weekNm} /* week_nm 요일_명 character varying(10) */
 		</if>
@@ -215,6 +214,7 @@
 		AND    age_ycnt = #{ageYcnt} /* age_ycnt 나이_년수 numeric */
 		AND    loc_apnt_cd = #{locApntCd} /* loc_apnt_cd 위치_지정_코드 character varying(20) */
 		AND    plc_clss_cd = #{plcClssCd} /* plc_clss_cd 장소_분류_코드 character varying(20) */
+		AND    plc_cd = #{plcCd} /* plc_cd 장소_코드 character varying(20) */
 		AND    loc_no = #{locNo} /* loc_no 위치_번호 numeric */
 	</delete>
 </mapper>

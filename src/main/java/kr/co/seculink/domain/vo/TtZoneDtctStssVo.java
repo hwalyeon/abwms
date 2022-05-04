@@ -23,6 +23,9 @@ public class TtZoneDtctStssVo implements Serializable {
 	/* plc_clss_cd 장소_분류_코드 character varying(20) */
 	private String plcClssCd;
 
+	/* plc_cd 장소_코드 character varying(20) */
+	private String plcCd;
+
 	/* loc_no 위치_번호 numeric(null) */
 	private Double locNo;
 
@@ -134,6 +137,21 @@ public class TtZoneDtctStssVo implements Serializable {
 	 */
 	public void setPlcClssCd(String plcClssCd) {
 		this.plcClssCd = plcClssCd;
+	}
+	/**
+	 * Get plc_cd 장소_코드 character varying(20)
+	 * @Return String plcCd
+	 */
+	public String getPlcCd() {
+		return this.plcCd;
+	}
+	
+	/**
+	 * Set plc_cd 장소_코드 character varying(20)
+	 * @Param String plcCd
+	 */
+	public void setPlcCd(String plcCd) {
+		this.plcCd = plcCd;
 	}
 	/**
 	 * Get loc_no 위치_번호 numeric(null)
