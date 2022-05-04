@@ -103,7 +103,7 @@ public class StrsStndMngController
 		{
 			data = new ArrayList<String>();
 			data.add(String.valueOf(info.get("mindStrsStatCd")));
-			data.add(String.valueOf(info.get("mentStrsStatNm")));
+			data.add(String.valueOf(info.get("mindStrsStatNm")));
 			data.add(String.valueOf(info.get("physStrsStatCd")));
 			data.add(String.valueOf(info.get("physStrsStatNm")));
 			data.add(String.valueOf(info.get("strsJudgCntn")));
