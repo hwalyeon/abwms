@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oper.cmon.totMonStat">
 
+
+
+
 	<!-- 위험안전발생 -->
 	<select id="searchDgsfOccr" parameterType="java.util.Map" resultType="MybatisMap">
 		WITH STDT_CNT AS
@@ -62,6 +65,72 @@
 					) DGEM_TOT_CNT
 	</select>
 
+	<!-- 위험지역_추이 -->
+	<select id="searchDzonTrnd" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH BDAY AS
+					(
+					SELECT      COALESCE(SUM(OCCR_CNT), 0) AS BDAY_1
+					FROM        TT_DGEM_STAT_STSS
+					WHERE       1=1
+					AND         STND_DT = TO_CHAR(NOW() - INTERVAL '1 DAY', 'YYYYMMDD'::TEXT)
+					AND         DGEM_STAT_CD IN ('PDNGR', 'DNGR')
+					)
+		SELECT      (SELECT BDAY_1 FROM BDAY)   AS BDAY_1,
+					SUM(WEEK_1_AGO)             AS WEEK_1_AGO,
+					SUM(WEEK_2_AGO)             AS WEEK_2_AGO,
+					SUM(WEEK_3_AGO)             AS WEEK_3_AGO,
+					SUM(WEEK_4_AGO)             AS WEEK_4_AGO
+		FROM        (
+					SELECT      CASE WHEN WEEK_SEQ = 1 THEN SUM(OCCR_CNT) END WEEK_1_AGO,
+								CASE WHEN WEEK_SEQ = 2 THEN SUM(OCCR_CNT) END WEEK_2_AGO,
+								CASE WHEN WEEK_SEQ = 3 THEN SUM(OCCR_CNT) END WEEK_3_AGO,
+								CASE WHEN WEEK_SEQ = 4 THEN SUM(OCCR_CNT) END WEEK_4_AGO
+					FROM        (
+								SELECT      STND_YYMM,
+											MNTH_WEEK_SEQ,
+											ROUND(AVG(OCCR_CNT),2) AS OCCR_CNT,
+											ROW_NUMBER () OVER (ORDER BY STND_YYMM DESC, MNTH_WEEK_SEQ DESC) AS WEEK_SEQ
+								FROM        (
+											SELECT      STND_DT, STND_YYMM,
+														MNTH_WEEK_SEQ,
+														SUM(OCCR_CNT) AS OCCR_CNT
+											FROM        TT_DGEM_STAT_STSS
+											WHERE       DGEM_STAT_CD IN ('PDNGR', 'DNGR')
+											GROUP BY    STND_DT, STND_YYMM, MNTH_WEEK_SEQ
+											ORDER BY    STND_YYMM DESC, MNTH_WEEK_SEQ DESC
+											) A
+								WHERE       1=1
+								GROUP BY    STND_YYMM, MNTH_WEEK_SEQ
+								ORDER BY    STND_YYMM DESC, MNTH_WEEK_SEQ DESC
+								LIMIT       4
+								) B
+					WHERE       1=1
+					GROUP BY    WEEK_SEQ
+					) DZON_TRND
+	</select>
+
+	<!-- 안전위험지역_탐지율 -->
+	<select id="searchDgsfDtct" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      SUM(GORG_DZON) AS GORG_DZON, SUM(GORG_SZON) AS GORG_SZON, SUM(GUAR_DZON) AS GUAR_DZON, SUM(GUAR_SZON) AS GUAR_SZON
+		FROM        (
+					WITH TOT_CNT AS (
+								SELECT      SUM(OCCR_CNT) AS TOT_CNT
+								FROM        TT_ZONE_DTCT_STSS TZDS
+								WHERE       1=1
+								AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								)
+					SELECT      CASE WHEN LOC_APNT_CD = 'GORG' AND PLC_CLSS_CD = 'DZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GORG_DZON,
+								CASE WHEN LOC_APNT_CD = 'GORG' AND PLC_CLSS_CD = 'SZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GORG_SZON,
+								CASE WHEN LOC_APNT_CD = 'GUAR' AND PLC_CLSS_CD = 'DZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GUAR_DZON,
+								CASE WHEN LOC_APNT_CD = 'GUAR' AND PLC_CLSS_CD = 'SZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GUAR_SZON
+					FROM        TT_ZONE_DTCT_STSS TZDS
+								LEFT OUTER JOIN TOT_CNT TSC ON 1=1
+					WHERE       1=1
+					AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+					GROUP BY    LOC_APNT_CD, PLC_CLSS_CD, TOT_CNT
+					) GORG_GUAR_DTCT
+	</select>
+
 	<!-- 위험감정_카운트 -->
 	<select id="searchDgemCnt" parameterType="java.util.Map" resultType="MybatisMap">
 		WITH DGEM_DZON AS
@@ -95,6 +164,74 @@
 					) DGEM_TOT_CN
 	</select>
 
+	<!-- 위험지역_TOP3_공공 -->
+	<select id="searchDngrTop3Gorg" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      MAX(GORG_DTOP3_PLC_NM_1)    AS GORG_DTOP3_PLC_NM_1,
+					MAX(GORG_DTOP3_ADDR_1)      AS GORG_DTOP3_ADDR_1,
+					SUM(GORG_DTOP3_CNT_1)       AS GORG_DTOP3_CNT_1,
+					MAX(GORG_DTOP3_PLC_NM_2)    AS GORG_DTOP3_PLC_NM_2,
+					MAX(GORG_DTOP3_ADDR_2)      AS GORG_DTOP3_ADDR_2,
+					SUM(GORG_DTOP3_CNT_2)       AS GORG_DTOP3_CNT_2,
+					MAX(GORG_DTOP3_PLC_NM_3)    AS GORG_DTOP3_PLC_NM_3,
+					MAX(GORG_DTOP3_ADDR_3)      AS GORG_DTOP3_ADDR_3,
+					SUM(GORG_DTOP3_CNT_3)       AS GORG_DTOP3_CNT_3
+		FROM        (
+					SELECT      CASE WHEN GORG_DTOP3_RANK = 1 THEN GORG_DTOP3_PLC_NM    END GORG_DTOP3_PLC_NM_1,
+								CASE WHEN GORG_DTOP3_RANK = 1 THEN GORG_DTOP3_ADDR      END GORG_DTOP3_ADDR_1,
+								CASE WHEN GORG_DTOP3_RANK = 1 THEN GORG_DTOP3_CNT       END GORG_DTOP3_CNT_1,
+								CASE WHEN GORG_DTOP3_RANK = 2 THEN GORG_DTOP3_PLC_NM    END GORG_DTOP3_PLC_NM_2,
+								CASE WHEN GORG_DTOP3_RANK = 2 THEN GORG_DTOP3_ADDR      END GORG_DTOP3_ADDR_2,
+								CASE WHEN GORG_DTOP3_RANK = 2 THEN GORG_DTOP3_CNT       END GORG_DTOP3_CNT_2,
+								CASE WHEN GORG_DTOP3_RANK = 3 THEN GORG_DTOP3_PLC_NM    END GORG_DTOP3_PLC_NM_3,
+								CASE WHEN GORG_DTOP3_RANK = 3 THEN GORG_DTOP3_ADDR      END GORG_DTOP3_ADDR_3,
+								CASE WHEN GORG_DTOP3_RANK = 3 THEN GORG_DTOP3_CNT       END GORG_DTOP3_CNT_3
+					FROM        (
+								SELECT      FN_GETCDNM('PLC_CD', TLIB.PLC_CD) AS GORG_DTOP3_PLC_NM,
+											TLIB.ADDR_BASE || ' ' || TLIB.ADDR_SPEC AS GORG_DTOP3_ADDR,
+											COUNT(1) AS GORG_DTOP3_CNT,
+											ROW_NUMBER () OVER (ORDER BY COUNT(1) DESC) AS GORG_DTOP3_RANK
+								FROM        TT_ZONE_DTCT_STSS TZDS
+											INNER JOIN
+											TS_LOC_INFO_BASE TLIB
+											ON TZDS.LOC_NO = TLIB.LOC_NO
+								WHERE       1=1
+								AND         TZDS.STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								AND         TZDS.PLC_CLSS_CD = 'DZONE'
+								AND         TZDS.LOC_APNT_CD = 'GORG'
+								GROUP BY    TZDS.LOC_NO, TLIB.PLC_CD, TLIB.ADDR_BASE, TLIB.ADDR_SPEC /* ADDR_SPEC 수정이 일어났을 경우 같은 LOC_NO라도 다르게 집계될 수 있네. */
+								LIMIT       3
+								) A
+					) GORG_DTOP3
+	</select>
+
+	<!-- 보호자_지정_위험지역_TOP3 -->
+	<select id="searchGuarApntDngrTop3" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      MAX(GUAR_DTOP3_ADDR_1)      AS GUAR_DTOP3_ADDR_1,
+					SUM(GUAR_DTOP3_CNT_1)       AS GUAR_DTOP3_CNT_1,
+					MAX(GUAR_DTOP3_ADDR_2)      AS GUAR_DTOP3_ADDR_2,
+					SUM(GUAR_DTOP3_CNT_2)       AS GUAR_DTOP3_CNT_2,
+					MAX(GUAR_DTOP3_ADDR_3)      AS GUAR_DTOP3_ADDR_3,
+					SUM(GUAR_DTOP3_CNT_3)       AS GUAR_DTOP3_CNT_3
+		FROM        (
+					SELECT      CASE WHEN GUAR_DTOP3_RANK = 1 THEN GUAR_DTOP3_ADDR      END GUAR_DTOP3_ADDR_1,
+								CASE WHEN GUAR_DTOP3_RANK = 1 THEN GUAR_DTOP3_CNT       END GUAR_DTOP3_CNT_1,
+								CASE WHEN GUAR_DTOP3_RANK = 2 THEN GUAR_DTOP3_ADDR      END GUAR_DTOP3_ADDR_2,
+								CASE WHEN GUAR_DTOP3_RANK = 2 THEN GUAR_DTOP3_CNT       END GUAR_DTOP3_CNT_2,
+								CASE WHEN GUAR_DTOP3_RANK = 3 THEN GUAR_DTOP3_ADDR      END GUAR_DTOP3_ADDR_3,
+								CASE WHEN GUAR_DTOP3_RANK = 3 THEN GUAR_DTOP3_CNT       END GUAR_DTOP3_CNT_3
+					FROM        (
+								SELECT      NEAR_ADDR       AS GUAR_DTOP3_ADDR,
+											COUNT(1)        AS GUAR_DTOP3_CNT,
+											ROW_NUMBER () OVER (ORDER BY COUNT(1) DESC) AS GUAR_DTOP3_RANK
+								FROM        TT_GUAR_DZONE_STSS TGDS
+								WHERE       1=1
+								AND         TGDS.STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								GROUP BY    LAT_VAL, LON_VAL, NEAR_ADDR
+								LIMIT       3
+								) A
+					)GUAR_DTOP3
+	</select>
+
 	<!-- 위험감정_이력 -->
 	<select id="searchDgemHist" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT      DGEM_DT,
@@ -103,55 +240,55 @@
 					DGEM_HIST_STAT_NM
 		FROM        (
 						(
-							SELECT     TO_CHAR(TO_DATE(OCCR_DTTM, 'YYYYMMDDHH24MISS'::TEXT), 'MM/DD') AS DGEM_DT,
-									   TO_CHAR(TO_TIMESTAMP(OCCR_DTTM, 'YYYYMMDDHH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
-									   PLC_CLSS_CD AS DGEM_HIST_STAT_CD,
-									   FN_GETCDNM('PLC_CLSS_CD', PLC_CLSS_CD) AS DGEM_HIST_STAT_NM
-							FROM        TS_STDT_LOC_HIST
-							WHERE       1=1
-							AND         OCCR_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
-							AND         PLC_CLSS_CD = 'DZONE'
-							ORDER BY    OCCR_DTTM DESC
-							LIMIT       11
+						SELECT     TO_CHAR(TO_DATE(OCCR_DTTM, 'YYYYMMDDHH24MISS'::TEXT), 'MM/DD') AS DGEM_DT,
+								   TO_CHAR(TO_TIMESTAMP(OCCR_DTTM, 'YYYYMMDDHH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+								   PLC_CLSS_CD AS DGEM_HIST_STAT_CD,
+								   FN_GETCDNM('PLC_CLSS_CD', PLC_CLSS_CD) AS DGEM_HIST_STAT_NM
+						FROM        TS_STDT_LOC_HIST
+						WHERE       1=1
+						AND         OCCR_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+						AND         PLC_CLSS_CD = 'DZONE'
+						ORDER BY    OCCR_DTTM DESC
+						LIMIT       11
 						)
 						UNION ALL
 						(
-							SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
-									   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
-									   ACT_DIV_CD AS DGEM_HIST_STAT_CD,
-									   FN_GETCDNM('ACT_DIV_CD', ACT_DIV_CD) AS DGEM_HIST_STAT_NM
-							FROM        TS_STDT_DGEM_HIST TSDH
-							WHERE       1=1
-							AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
-							AND         ACT_DIV_CD = 'FALL'
-							ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
-							LIMIT       11
+						SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
+								   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+								   ACT_DIV_CD AS DGEM_HIST_STAT_CD,
+								   FN_GETCDNM('ACT_DIV_CD', ACT_DIV_CD) AS DGEM_HIST_STAT_NM
+						FROM        TS_STDT_DGEM_HIST TSDH
+						WHERE       1=1
+						AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+						AND         ACT_DIV_CD = 'FALL'
+						ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
+						LIMIT       11
 						)
 						UNION ALL
 						(
-							SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
-									   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
-									   HBIT_STAT_CD AS DGEM_HIST_STAT_CD,
-									   FN_GETCDNM('HBIT_STAT_CD', HBIT_STAT_CD) AS DGEM_HIST_STAT_NM
-							FROM        TS_STDT_DGEM_HIST TSDH
-							WHERE       1=1
-							AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
-							AND         HBIT_STAT_CD IN ('VSLOW', 'VFAST')
-							ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
-								LIMIT       11
+						SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
+								   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+								   HBIT_STAT_CD AS DGEM_HIST_STAT_CD,
+								   FN_GETCDNM('HBIT_STAT_CD', HBIT_STAT_CD) AS DGEM_HIST_STAT_NM
+						FROM        TS_STDT_DGEM_HIST TSDH
+						WHERE       1=1
+						AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+						AND         HBIT_STAT_CD IN ('VSLOW', 'VFAST')
+						ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
+						LIMIT       11
 						)
 						UNION ALL
 						(
-							SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
-									   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
-									   TEMP_STAT_CD AS DGEM_HIST_STAT_CD,
-									   FN_GETCDNM('TEMP_STAT_CD', TEMP_STAT_CD) AS DGEM_HIST_STAT_NM
-							FROM        TS_STDT_DGEM_HIST TSDH
-							WHERE       1=1
-							AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
-							AND         TEMP_STAT_CD IN ('VLOW', 'VHIGH')
-							ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
-							LIMIT       11
+						SELECT     TO_CHAR(TO_DATE(DGEM_DT, 'YYYYMMDD'::TEXT), 'MM/DD') AS DGEM_DT,
+								   TO_CHAR(TO_TIMESTAMP(DGEM_TM, 'HH24MISS'::TEXT), 'HH24:MI') AS DGEM_TM,
+								   TEMP_STAT_CD AS DGEM_HIST_STAT_CD,
+								   FN_GETCDNM('TEMP_STAT_CD', TEMP_STAT_CD) AS DGEM_HIST_STAT_NM
+						FROM        TS_STDT_DGEM_HIST TSDH
+						WHERE       1=1
+						AND         TSDH.DGEM_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT) /* 사실 최근 이력 가져오는 것이라 기간은 없어야 하지만.. */
+						AND         TEMP_STAT_CD IN ('VLOW', 'VHIGH')
+						ORDER BY    TSDH.DGEM_DT DESC, TSDH.DGEM_TM DESC
+						LIMIT       11
 						)
 					) ABNM_HIST
 		WHERE       1=1

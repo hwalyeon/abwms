@@ -26,22 +26,40 @@ public class TotMonStatController
 
 	// 종합관제현황_위험감정이력_조회
 	@ResponseBody
-	@RequestMapping("/oper/cmon/totMonStat/searchDgemHist.ab")
-	public RtnMsg<Map<String, Object>> searchDgemHist(@RequestBody(required=false) Map<String, String> params) throws BizException
+	@RequestMapping("/oper/cmon/totMonStat/searchDgsfOccr.ab")
+	public RtnMsg<Map<String, Object>> searchDgsfOccr(@RequestBody(required=false) Map<String, String> params) throws BizException
 	{
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap = new HashMap<>();
 
 		// 위험안전발생
 		Map<String, String> result1 = totMonStatService.searchDgsfOccr(params);
+
+		// 위험지역_추이
+		Map<String, String> result2 = totMonStatService.searchDzonTrnd(params);
+
+		// 안전위험지역_탐지율
+		Map<String, String> result3 = totMonStatService.searchDgsfDtct(params);
+
 		// 위험감정_카운트
-		Map<String, String> result2 = totMonStatService.searchDgemCnt(params);
+		Map<String, String> result4 = totMonStatService.searchDgemCnt(params);
+
+		// 위험지역_TOP3_공공
+		Map<String, String> result5 = totMonStatService.searchDngrTop3Gorg(params);
+
+		// 보호자_지정_위험지역_TOP3
+		Map<String, String> result6 = totMonStatService.searchGuarApntDngrTop3(params);
+
 		// 위험감정_이력
-		List<Map<String, String>> result3 = totMonStatService.searchDgemHist(params);
+		List<Map<String, String>> result7 = totMonStatService.searchDgemHist(params);
 
 		rtnMap.put("result1", result1);
 		rtnMap.put("result2", result2);
 		rtnMap.put("result3", result3);
+		rtnMap.put("result4", result4);
+		rtnMap.put("result5", result5);
+		rtnMap.put("result6", result6);
+		rtnMap.put("result7", result7);
 
 		vo.setRtnData(rtnMap);
 

@@ -1,39 +1,76 @@
 let totMonStat = new Vue({
     el: "#totMonStat",
     data: {
-        menuList: [],
+        menuList : [],
         searchAuthParam : {
             searchClass : '01',
             empNo : 0
         },
         //위험안전발생
         dgsfOccr : {
-            mnthDngrAvg : '',
-            tdayNorm    : '',
-            tdayChk     : '',
-            tdayWarn    : '',
-            tdayPdngr   : '',
-            tdayDngr    : '',
-            tdayDngrSum : '',
-            difCnt      : '',
-            persAvg     : ''
+            mnthDngrAvg : 0,
+            tdayNorm    : 0,
+            tdayChk     : 0,
+            tdayWarn    : 0,
+            tdayPdngr   : 0,
+            tdayDngr    : 0,
+            tdayDngrSum : 0,
+            difCnt      : 0,
+            persAvg     : 0
+        },
+        //위험지역_추이
+        dzonTrnd : {
+            bday1       : 0,
+            week1Ago    : 0,
+            week2Ago    : 0,
+            week3Ago    : 0,
+            week4Ago    : 0,
+            lowHighDif  : 0,
+            trnd        : ''
+        },
+        //안전위험지역_탐지율
+        dgsfDtct : {
+            gorgDzon    : 0,
+            gorgSzon    : 0,
+            guarDzon    : 0,
+            guarSzon    : 0
         },
         //위험감정_카운트
-        dgemCnt:{
-            dgemTotl : '',
-            dgemDzon : '',
-            dgemFall : '',
-            dgemHbit : '',
-            dgemTemp : ''
+        dgemCnt : {
+            dgemTotl : 0,
+            dgemDzon : 0,
+            dgemFall : 0,
+            dgemHbit : 0,
+            dgemTemp : 0
+        },
+        //위험지역_TOP3_공공
+        gorgDtop3 : {
+            gorgDtop3PlcNm1  : '',
+            gorgDtop3Addr1   : '',
+            gorgDtop3Cnt1    : 0,
+            gorgDtop3PlcNm2  : '',
+            gorgDtop3Addr2   : '',
+            gorgDtop3Cnt2    : 0,
+            gorgDtop3PlcNm3  : '',
+            gorgDtop3Addr3   : '',
+            gorgDtop3Cnt3    : 0
+        },
+        //보호자_지정_위험지역_TOP3
+        guarDtop3 : {
+            guarDtop3Addr1   : '',
+            guarDtop3Cnt1    : 0,
+            guarDtop3Addr2   : '',
+            guarDtop3Cnt2    : 0,
+            guarDtop3Addr3   : '',
+            guarDtop3Cnt3    : 0
         },
         //위험감정_이력
-        dgemHist:[{
+        dgemHist : [{
             dgemDt : '',
             dgemTm : '',
             dgemHistStatCd : '',
             dgemHistStatNm : ''
         }],
-
 
 
         ////////////////////// 임시 //////////////////////
@@ -43,9 +80,9 @@ let totMonStat = new Vue({
             noRsps              : 0,
 
             temp                : null,
-            tmpDngrSafeOcrrTd   : 0,
-            tmpDngrSafeOcrrDif  : 0,
-            tmpDngrSafeOcrrYav  : 5.8,
+            // tmpDngrSafeOcrrTd   : 0,
+            // tmpDngrSafeOcrrDif  : 0,
+            // tmpDngrSafeOcrrYav  : 5.8,
 
             tmpTotal            : 200000,
             tmpUsage            : 140000,
@@ -193,12 +230,12 @@ let totMonStat = new Vue({
         chartGrowFat        : null,
         chartFatPrdt        : null,
         chartStrs           : null,
-        chartDngrSafeOccr   : null,
-        chartDngrZoneProg   : null,
-        chartPublSafeDtct   : null,
-        chartPublDngrDtct   : null,
-        chartPrntSafeDtct   : null,
-        chartPrntDngrDtct   : null,
+        chartDgsfOccr   : null,
+        chartDzonTrnd   : null,
+        chartGorgSafeDtct   : null,
+        chartGorgDngrDtct   : null,
+        chartGuarSafeDtct   : null,
+        chartGuarDngrDtct   : null,
 
         chartCareBmiBodyIdx : null,
         chartCareGrowIdx    : null,
@@ -244,12 +281,12 @@ let totMonStat = new Vue({
             if ($this.chartGrowFat      != null )   $this.chartGrowFat.destroy();
             if ($this.chartFatPrdt      != null )   $this.chartFatPrdt.destroy();
             if ($this.chartStrs         != null )   $this.chartStrs.destroy();
-            if ($this.chartDngrSafeOccr != null )   $this.chartDngrSafeOccr.destroy();
-            if ($this.chartDngrZoneProg != null )   $this.chartDngrZoneProg.destroy();
-            if ($this.chartPublSafeDtct != null )   $this.chartPublSafeDtct.destroy();
-            if ($this.chartPublDngrDtct != null )   $this.chartPublDngrDtct.destroy();
-            if ($this.chartPrntSafeDtct != null )   $this.chartPrntSafeDtct.destroy();
-            if ($this.chartPrntDngrDtct != null )   $this.chartPrntDngrDtct.destroy();
+            if ($this.chartDgsfOccr     != null )   $this.chartDgsfOccr.destroy();
+            if ($this.chartDzonTrnd     != null )   $this.chartDzonTrnd.destroy();
+            if ($this.chartGorgSafeDtct != null )   $this.chartGorgSafeDtct.destroy();
+            if ($this.chartGorgDngrDtct != null )   $this.chartGorgDngrDtct.destroy();
+            if ($this.chartGuarSafeDtct != null )   $this.chartGuarSafeDtct.destroy();
+            if ($this.chartGuarDngrDtct != null )   $this.chartGuarDngrDtct.destroy();
 
             if ($this.chartCareBmiBodyIdx   != null )   $this.chartCareBmiBodyIdx.destroy();
             if ($this.chartCareGrowIdx      != null )   $this.chartCareGrowIdx.destroy();
@@ -302,7 +339,7 @@ let totMonStat = new Vue({
                 $this.initData();
 
                 AjaxUtil.post({
-                    url: "/oper/cmon/totMonStat/searchDgemHist.ab",
+                    url: "/oper/cmon/totMonStat/searchDgsfOccr.ab",
                     param: params,
                     success: function(response) {
 
@@ -312,15 +349,39 @@ let totMonStat = new Vue({
                                 $this.dgsfOccr[key] = val;
                             });
                         }
-                        // 위험감정_카운트
+                        // 위험지역_추이
                         if ( !!response["rtnData"]["result2"] ) {
                             $.each(response["rtnData"]["result2"], function(key, val) {
+                                $this.dzonTrnd[key] = val;
+                            });
+                        }
+                        // 안전위험지역_탐지율
+                        if ( !!response["rtnData"]["result3"] ) {
+                            $.each(response["rtnData"]["result3"], function(key, val) {
+                                $this.dgsfDtct[key] = val;
+                            });
+                        }
+                        // 위험감정_카운트
+                        if ( !!response["rtnData"]["result4"] ) {
+                            $.each(response["rtnData"]["result4"], function(key, val) {
                                 $this.dgemCnt[key] = val;
                             });
                         }
+                        // 위험지역_TOP3_공공
+                        if ( !!response["rtnData"]["result5"] ) {
+                            $.each(response["rtnData"]["result5"], function(key, val) {
+                                $this.gorgDtop3[key] = val;
+                            });
+                        }
+                        // 보호자_지정_위험지역_TOP3
+                        if ( !!response["rtnData"]["result6"] ) {
+                            $.each(response["rtnData"]["result6"], function(key, val) {
+                                $this.guarDtop3[key] = val;
+                            });
+                        }
                         // 위험감정_이력
-                        if ( !!response["rtnData"]["result3"] ) {
-                            $.each(response["rtnData"]["result3"], function(index, item) {
+                        if ( !!response["rtnData"]["result7"] ) {
+                            $.each(response["rtnData"]["result7"], function(index, item) {
                                 $this.dgemHist.push({
                                     dgemDt              :item.dgemDt,
                                     dgemTm              :item.dgemTm,
@@ -330,7 +391,8 @@ let totMonStat = new Vue({
                             });
                         }
 
-                        console.log("jcw :: ", response["rtnData"].result);
+                        console.log("jcw rtnData :: ", response["rtnData"].result6);
+                        console.log("jcw $this.guarDtop3 :: ", $this.guarDtop3);
                         $this.updateChart();
                         $this.initCycl($this.cycl.timeCycl);
                     },
@@ -370,26 +432,26 @@ let totMonStat = new Vue({
             let tmpStrsIdx          = 65;
 
             // 위험안전 발생 Data
-            let tmpDngrSafeOcrrTd   = 2170;
+            // let tmpDngrSafeOcrrTd   = 2170;
             // let tmpDngrSafeOcrrAv   = 2600;
 
             // 위험지역 추이 Data
-            let tmpDngrZoneProg4wb  = 1400;
-            let tmpDngrZoneProg3wb  = 1000;
-            let tmpDngrZoneProg2wb  = 1100;
-            let tmpDngrZoneProg1wb  = 1200;
-            let tmpDngrZoneProgBfDay= 1300;
+            // let $this.dzonTrnd.week4Ago  = 1400;
+            // let $this.dzonTrnd.week3Ago  = 1000;
+            // let $this.dzonTrnd.week2Ago  = 1100;
+            // let $this.dzonTrnd.week1Ago  = 1200;
+            // let $this.dzonTrnd.bday1= 1300;
 
             // 공공 안전/위험지역 활용(탐지) Data
-            let tmpPublSafeDtct   = 83.1;
-            let tmpPublDngrDtct   = 33.1;
+            // let $this.dgsfDtct.gorgSzon   = 83.1;
+            // let $this.dgsfDtct.gorgDzon   = 33.1;
 
             // 학부모 안전/위험지역 활용(탐지) Data
-            let tmpPrntSafeDtct   = 89.5;
-            let tmpPrntDngrDtct   = 35.6;
+            // let $this.dgsfDtct.guarSzon   = 89.5;
+            // let $this.dgsfDtct.guarDzon   = 35.6;
 
-            $this.totMonStat.tmpDngrSafeOcrrTd = tmpDngrSafeOcrrTd;
-            $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrTd - tmpDngrSafeOcrrAv;
+            // $this.totMonStat.tmpDngrSafeOcrrTd = tmpDngrSafeOcrrTd;
+            // $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrTd - tmpDngrSafeOcrrAv;
 
             // 백분율 몫 구하기
             let operCntQuotiIdx     = $this.chartPerQuoti($this.totMonStat.operCnt, $this.totMonStat.openCnt);
@@ -401,12 +463,12 @@ let totMonStat = new Vue({
             let growFatModIdx       = $this.chartPerModIdx(tmpGrowFatIdx);
             let fatPrdtModIdx       = $this.chartPerModIdx(tmpFatPrdtIdx);
             let strsModIdx          = $this.chartPerModIdx(tmpStrsIdx);
-            let publSafeDtctModIdx  = $this.chartPerModIdx(tmpPublSafeDtct);
-            let publDngrDtctModIdx  = $this.chartPerModIdx(tmpPublDngrDtct);
-            let prntSafeDtctModIdx  = $this.chartPerModIdx(tmpPrntSafeDtct);
-            let prntDngrDtctModIdx  = $this.chartPerModIdx(tmpPrntDngrDtct);
-            let NeatFmenuModIdx       = $this.chartPerModIdx(NeatFmenuQuotiIdx);
-            let NeatQustModIdx       = $this.chartPerModIdx(NeatQustQuotiIdx);
+            let dgsfDtctGorgSzonMod = $this.chartPerModIdx($this.dgsfDtct.gorgSzon);
+            let dgsfDtctGorgDzonMod = $this.chartPerModIdx($this.dgsfDtct.gorgDzon);
+            let dgsfDtctGuarSzonMod = $this.chartPerModIdx($this.dgsfDtct.guarSzon);
+            let dgsfDtctGuarDzonMod = $this.chartPerModIdx($this.dgsfDtct.guarDzon);
+            let NeatFmenuModIdx     = $this.chartPerModIdx(NeatFmenuQuotiIdx);
+            let NeatQustModIdx      = $this.chartPerModIdx(NeatQustQuotiIdx);
 
             let dataOperStat = {
                 labels              : ['가동','무응답'],
@@ -453,19 +515,19 @@ let totMonStat = new Vue({
                     borderWidth     : 10
                 }]
             };
-            let dataDngrSafeOccr = {
+            let dataDgsfOccr = {
                 labels              : ['평균','오늘'],
                 datasets: [{
-                    data            : [$this.dgsfOccr.mnthDngrAvg   , tmpDngrSafeOcrrTd],
-                    backgroundColor : [colorYel                 , colorOra],
-                    borderColor     : [colorYel                 , colorOra],
+                    data            : [$this.dgsfOccr.mnthDngrAvg   , $this.dgsfOccr.tdayDngrSum],
+                    backgroundColor : [colorYel                     , colorOra],
+                    borderColor     : [colorYel                     , colorOra],
                     borderWidth     : 0
                 }]
             };
-            let dataDngrZoneProg = {
+            let dataDzonTrnd = {
                 labels              : ['-4주','-3주','-2주','-1주','전일'],
                 datasets: [{
-                    data            : [tmpDngrZoneProg4wb       , tmpDngrZoneProg3wb        , tmpDngrZoneProg2wb        , tmpDngrZoneProg1wb        , tmpDngrZoneProgBfDay],
+                    data            : [$this.dzonTrnd.week4Ago       , $this.dzonTrnd.week3Ago        , $this.dzonTrnd.week2Ago        , $this.dzonTrnd.week1Ago        , $this.dzonTrnd.bday1],
                     backgroundColor : [colorBlu                 , colorBlu                  , colorBlu                  , colorBlu                  , colorBlu],
                     borderColor     : [colorBlu                 , colorBlu                  , colorBlu                  , colorBlu                  , colorBlu],
                     borderWidth     : 0,
@@ -473,37 +535,37 @@ let totMonStat = new Vue({
                     barPercentage   : 0.4
                 }]
             };
-            let dataPublSafeDtct = {
+            let dataGorgSafeDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [tmpPublSafeDtct          , publSafeDtctModIdx],
+                    data            : [$this.dgsfDtct.gorgSzon  , dgsfDtctGorgSzonMod],
                     backgroundColor : [colorGre                 , colorGra],
                     borderColor     : [colorGre                 , colorGra],
                     borderWidth     : 5
                 }]
             };
-            let dataPublDngrDtct = {
+            let dataGorgDngrDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [tmpPublDngrDtct          , publDngrDtctModIdx],
+                    data            : [$this.dgsfDtct.gorgDzon  , dgsfDtctGorgDzonMod],
                     backgroundColor : [colorOra                 , colorGra],
                     borderColor     : [colorOra                 , colorGra],
                     borderWidth     : 5
                 }]
             };
-            let dataPrntSafeDtct = {
+            let dataGuarSafeDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [tmpPrntSafeDtct          , prntSafeDtctModIdx],
+                    data            : [$this.dgsfDtct.guarSzon  , dgsfDtctGuarSzonMod],
                     backgroundColor : [colorGre                 , colorGra],
                     borderColor     : [colorGre                 , colorGra],
                     borderWidth     : 5
                 }]
             };
-            let dataPrntDngrDtct = {
+            let dataGuarDngrDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [tmpPrntDngrDtct          , prntDngrDtctModIdx],
+                    data            : [$this.dgsfDtct.guarDzon  , dgsfDtctGuarDzonMod],
                     backgroundColor : [colorOra                 , colorGra],
                     borderColor     : [colorOra                 , colorGra],
                     borderWidth     : 5
@@ -629,32 +691,32 @@ let totMonStat = new Vue({
                     $this.textCenter('strsChart', srcIdx, $this.chartStrs, colorBlu, '' , '');
                 }
             }];
-            let pluginsPublSafeDtct = [{
+            let pluginsGorgSafeDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpPublSafeDtct != null ) srcIdx = tmpPublSafeDtct;
-                    $this.textCenter('publSafeDtctChart', srcIdx, $this.chartPublSafeDtct, colorGre, '' , '');
+                    if($this.dgsfDtct.gorgSzon != null ) srcIdx = $this.dgsfDtct.gorgSzon;
+                    $this.textCenter('gorgSafeDtctChart', srcIdx, $this.chartGorgSafeDtct, colorGre, '' , '');
                 }
             }];
-            let pluginsPublDngrDtct = [{
+            let pluginsGorgDngrDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpPublDngrDtct != null ) srcIdx = tmpPublDngrDtct;
-                    $this.textCenter('publDngrDtctChart', srcIdx, $this.chartPublDngrDtct, colorOra, '' , '');
+                    if($this.dgsfDtct.gorgDzon != null ) srcIdx = $this.dgsfDtct.gorgDzon;
+                    $this.textCenter('gorgDngrDtctChart', srcIdx, $this.chartGorgDngrDtct, colorOra, '' , '');
                 }
             }];
-            let pluginsPrntSafeDtct = [{
+            let pluginsGuarSafeDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpPrntSafeDtct != null ) srcIdx = tmpPrntSafeDtct;
-                    $this.textCenter('prntSafeDtctChart', srcIdx, $this.chartPrntSafeDtct, colorGre, '' , '');
+                    if($this.dgsfDtct.guarSzon != null ) srcIdx = $this.dgsfDtct.guarSzon;
+                    $this.textCenter('guarSafeDtctChart', srcIdx, $this.chartGuarSafeDtct, colorGre, '' , '');
                 }
             }];
-            let pluginsPrntDngrDtct = [{
+            let pluginsGuarDngrDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpPrntDngrDtct != null ) srcIdx = tmpPrntDngrDtct;
-                    $this.textCenter('prntDngrDtctChart', srcIdx, $this.chartPrntDngrDtct, colorOra, '' , '');
+                    if($this.dgsfDtct.guarDzon != null ) srcIdx = $this.dgsfDtct.guarDzon;
+                    $this.textCenter('guarDngrDtctChart', srcIdx, $this.chartGuarDngrDtct, colorOra, '' , '');
                 }
             }];
             // 의미 확인 후 centerText 수정 필요
@@ -737,41 +799,41 @@ let totMonStat = new Vue({
                 plugins : pluginsStrs
             };
             // 위험안전_발생
-            let configDngrSafeOccr = {
+            let configDgsfOccr = {
                 type    : 'bar',
-                data    : dataDngrSafeOccr,
+                data    : dataDgsfOccr,
                 options : $this.optionsBarVert,
                 plugins : [{}]
             };
-            let configDngrZoneProg = {
+            let configDzonTrnd = {
                 type    : 'bar',
-                data    : dataDngrZoneProg,
+                data    : dataDzonTrnd,
                 options : $this.optionsBarVert,
                 plugins : [{}]
             };
-            let configPublSafeDtct = {
+            let configGorgSafeDtct = {
                 type    : 'doughnut',
-                data    : dataPublSafeDtct,
+                data    : dataGorgSafeDtct,
                 options : $this.options,
-                plugins : pluginsPublSafeDtct
+                plugins : pluginsGorgSafeDtct
             };
-            let configPublDngrDtct = {
+            let configGorgDngrDtct = {
                 type    : 'doughnut',
-                data    : dataPublDngrDtct,
+                data    : dataGorgDngrDtct,
                 options : $this.options,
-                plugins : pluginsPublDngrDtct
+                plugins : pluginsGorgDngrDtct
             };
-            let configPrntSafeDtct = {
+            let configGuarSafeDtct = {
                 type    : 'doughnut',
-                data    : dataPrntSafeDtct,
+                data    : dataGuarSafeDtct,
                 options : $this.options,
-                plugins : pluginsPrntSafeDtct
+                plugins : pluginsGuarSafeDtct
             };
-            let configPrntDngrDtct = {
+            let configGuarDngrDtct = {
                 type    : 'doughnut',
-                data    : dataPrntDngrDtct,
+                data    : dataGuarDngrDtct,
                 options : $this.options,
-                plugins : pluginsPrntDngrDtct
+                plugins : pluginsGuarDngrDtct
             };
             let configCareBmiBodyIdx = {
                 type    : 'bar',
@@ -839,12 +901,12 @@ let totMonStat = new Vue({
             let ctxGrowFat              = document.getElementById('growFatChart').getContext('2d');
             let ctxFatPrdt              = document.getElementById('fatPrdtChart').getContext('2d');
             let ctxStrs                 = document.getElementById('strsChart').getContext('2d');
-            let ctxDngrSafeOccr         = document.getElementById('dngrSafeOccrChart').getContext('2d');
-            let ctxDngrZoneProg         = document.getElementById('dngrZoneProgChart').getContext('2d');
-            let ctxPublSafeDtct         = document.getElementById('publSafeDtctChart').getContext('2d');
-            let ctxPublDngrDtct         = document.getElementById('publDngrDtctChart').getContext('2d');
-            let ctxPrntSafeDtct         = document.getElementById('prntSafeDtctChart').getContext('2d');
-            let ctxPrntDngrDtct         = document.getElementById('prntDngrDtctChart').getContext('2d');
+            let ctxDgsfOccr             = document.getElementById('dgsfOccrChart').getContext('2d');
+            let ctxDzonTrnd             = document.getElementById('dzonTrndChart').getContext('2d');
+            let ctxGorgSafeDtct         = document.getElementById('gorgSafeDtctChart').getContext('2d');
+            let ctxGorgDngrDtct         = document.getElementById('gorgDngrDtctChart').getContext('2d');
+            let ctxGuarSafeDtct         = document.getElementById('guarSafeDtctChart').getContext('2d');
+            let ctxGuarDngrDtct         = document.getElementById('guarDngrDtctChart').getContext('2d');
 
             let ctxCareBmiBodyIdx       = document.getElementById('careBmiBodyIdxChart').getContext('2d');
             let ctxCareGrowIdx          = document.getElementById('careGrowIdxChart').getContext('2d');
@@ -864,12 +926,12 @@ let totMonStat = new Vue({
             $this.chartGrowFat          = new Chart(ctxGrowFat      , configGrowFat);
             $this.chartFatPrdt          = new Chart(ctxFatPrdt      , configFatPrdt);
             $this.chartStrs             = new Chart(ctxStrs         , configStrs);
-            $this.chartDngrSafeOccr     = new Chart(ctxDngrSafeOccr , configDngrSafeOccr);
-            $this.chartDngrZoneProg     = new Chart(ctxDngrZoneProg , configDngrZoneProg);
-            $this.chartPublSafeDtct     = new Chart(ctxPublSafeDtct , configPublSafeDtct);
-            $this.chartPublDngrDtct     = new Chart(ctxPublDngrDtct , configPublDngrDtct);
-            $this.chartPrntSafeDtct     = new Chart(ctxPrntSafeDtct , configPrntSafeDtct);
-            $this.chartPrntDngrDtct     = new Chart(ctxPrntDngrDtct , configPrntDngrDtct);
+            $this.chartDgsfOccr         = new Chart(ctxDgsfOccr     , configDgsfOccr);
+            $this.chartDzonTrnd         = new Chart(ctxDzonTrnd     , configDzonTrnd);
+            $this.chartGorgSafeDtct     = new Chart(ctxGorgSafeDtct , configGorgSafeDtct);
+            $this.chartGorgDngrDtct     = new Chart(ctxGorgDngrDtct , configGorgDngrDtct);
+            $this.chartGuarSafeDtct     = new Chart(ctxGuarSafeDtct , configGuarSafeDtct);
+            $this.chartGuarDngrDtct     = new Chart(ctxGuarDngrDtct , configGuarDngrDtct);
 
             $this.chartCareBmiBodyIdx   = new Chart(ctxCareBmiBodyIdx   , configCareBmiBodyIdx);
             $this.chartCareGrowIdx      = new Chart(ctxCareGrowIdx      , configCareGrowIdx);
@@ -946,9 +1008,9 @@ let totMonStat = new Vue({
                 noRsps              : '',
 
                 temp                : null,
-                tmpDngrSafeOcrrTd   : 0,
-                tmpDngrSafeOcrrDif  : 0,
-                tmpDngrSafeOcrrYav  : 5.8,
+                // tmpDngrSafeOcrrTd   : 0,
+                // tmpDngrSafeOcrrDif  : 0,
+                // tmpDngrSafeOcrrYav  : 5.8,
 
                 tmpTotal            : 200000,
                 tmpUsage            : 140000,
@@ -1095,6 +1157,156 @@ let totMonStat = new Vue({
         numCountAnimate: function () {
             let $this = this;
 
+
+            // 위험안전발생 : 위험가능성+위험
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.tdayDngrSum }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험안전발생 : 평균대비
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.difCnt }, {
+                duration: 1000,
+                step: function() {
+                    console.log("jcw animate difCnt :: ", this.val);
+                    console.log("jcw animate difCnt :: ", Math.floor(this.val));
+                    console.log("jcw animate difCnt :: ", $this.toNumber(Math.floor(this.val)));
+                    $this.dgsfOccr.difCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.difCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험안전발생 : 인평균
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.persAvg }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfOccr.persAvg = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.persAvg = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험안전발생 : 정상
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.tdayNorm }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfOccr.tdayNorm = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.tdayNorm = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험안전발생 : 정상(유의)
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.tdayChk }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfOccr.tdayChk = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.tdayChk = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험안전발생 : 주의
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.tdayWarn }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfOccr.tdayWarn = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.tdayWarn = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험안전발생 : 위험가능성
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.tdayPdngr }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfOccr.tdayPdngr = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.tdayPdngr = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험안전발생 : 위험
+            $({ val : 0 }).animate({ val : $this.dgsfOccr.tdayDngr }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfOccr.tdayDngr = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgsfOccr.tdayDngr = $this.toNumber(Math.floor(this.val));
+                }
+            });
+
+            // 위험지역추이 : 최저/최고대비
+            $({ val : 0 }).animate({ val : $this.dzonTrnd.lowHighDif }, {
+                duration: 1000,
+                step: function() {
+                    $this.dzonTrnd.lowHighDif = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dzonTrnd.lowHighDif = $this.toNumber(Math.floor(this.val));
+                }
+            });
+
+            // 위험감정_카운트 : TOTAL
+            $({ val : 0 }).animate({ val : $this.dgemCnt.dgemTotl }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgemCnt.dgemTotl = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgemCnt.dgemTotl = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험감정_카운트 : 위험지역
+            $({ val : 0 }).animate({ val : $this.dgemCnt.dgemDzon }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgemCnt.dgemDzon = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgemCnt.dgemDzon = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험감정_카운트 : 낙상
+            $({ val : 0 }).animate({ val : $this.dgemCnt.dgemFall }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgemCnt.dgemFall = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgemCnt.dgemFall = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험감정_카운트 : 심박의심
+            $({ val : 0 }).animate({ val : $this.dgemCnt.dgemHbit }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgemCnt.dgemHbit = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgemCnt.dgemHbit = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 위험감정_카운트 : 체온의심
+            $({ val : 0 }).animate({ val : $this.dgemCnt.dgemTemp }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgemCnt.dgemTemp = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.dgemCnt.dgemTemp = $this.toNumber(Math.floor(this.val));
+                }
+            });
+
+
+
+            ////////////////////// 임시 //////////////////////
             let tmpNumber1          = $this.totMonStat.tmpNumber1;
             let tmpNumber2          = $this.totMonStat.tmpNumber2;
             let tmpNumber3          = $this.totMonStat.tmpNumber3;
@@ -1109,7 +1321,7 @@ let totMonStat = new Vue({
 
             let tmpTotal            = $this.totMonStat.tmpTotal;
             let tmpUsage            = $this.totMonStat.tmpUsage;
-            let tmpDngrSafeOcrrTd   = $this.totMonStat.tmpDngrSafeOcrrTd;
+            let tdayDngrSum         = $this.dgsfOccr.tdayDngrSum;
             let tmpDngrZoneCnt      = $this.totCnt.tmpDngrZoneCnt;
             let tmpFallDownCnt      = $this.totCnt.tmpFallDownCnt;
             let tmpHbitAbnmCnt      = $this.totCnt.tmpHbitAbnmCnt;
@@ -1224,13 +1436,13 @@ let totMonStat = new Vue({
                     $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
                 }
             });
-            $({ val : 0 }).animate({ val : tmpDngrSafeOcrrTd }, {
+            $({ val : 0 }).animate({ val : tdayDngrSum }, {
                 duration: 1000,
                 step: function() {
-                    $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(Math.floor(this.val));
+                    $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
                 },
                 complete: function() {
-                    $this.totMonStat.tmpDngrSafeOcrrTd = $this.toNumber(Math.floor(this.val));
+                    $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
                 }
             });
             $({ val : 0 }).animate({ val : tmpUsage }, {
