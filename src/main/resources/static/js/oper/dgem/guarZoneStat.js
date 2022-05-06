@@ -37,6 +37,7 @@ let guarZoneStat = new Vue({
             rdPublGuarDivSpec: '',
             prntNo:'',
             stdtNo:'',
+            nearAddr:'',
             locNo: '',
             locNm: '',
             plcClssCd: '',
@@ -60,7 +61,7 @@ let guarZoneStat = new Vue({
         },
         map: null,
         currLat: 37.48170530421067,
-        currLng:126.88481997057949,
+        currLng: 126.88481997057949,
         mapCont: {
             draggable: 'false',
             marker:null,
@@ -90,17 +91,9 @@ let guarZoneStat = new Vue({
         code : {
             plcClssCdList:[],
             plcCdList:[],
-            plcCdListFilter:[],
-            plcCdListFilterSpec:[],
             wordHead1List: [],
             wordHead2List: [],
             wordHead2ListFilter:[],
-            prntNoList: [],
-            stdtNoList: [],
-            stdtNoListFilter:[],
-            prntNoListSepc: [],
-            stdtNoListSpec: [],
-            stdtNoListFilterSpec:[],
             mmDdList           : []
         }
     },
@@ -181,75 +174,16 @@ let guarZoneStat = new Vue({
             // 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
             searchAddrFromCoords($this.map.getCenter(), displayCenterInfo);
 
-            // 지도에 클릭 이벤트를 등록합니다
-            // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-            // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-            kakao.maps.event.addListener($this.map, 'click', function(mouseEvent) {
-
-                $this.mapCont.mouseEvent = mouseEvent;
-
-                if($this.mapCont.draggable === 'true') {
-                    searchDetailAddrFromCoords($this.mapCont.mouseEvent.latLng, function(result, status) {
-                        $this.mapCont.result = result;
-                        if (status === kakao.maps.services.Status.OK) {
-                            var detailAddr = !!$this.mapCont.result[0].road_address ? '<div>도로명 : ' + $this.mapCont.result[0].road_address.address_name + '</div>' : '';
-
-                            // $this.mapCont.detailAddr = [];
-                            $this.mapCont.detailAddr = detailAddr;
-                            $this.mapCont.detailAddr += '<div>지번 : ' + $this.mapCont.result[0].address.address_name + '</div>';
-
-                            var content = '<div class="bAddr">' +
-                                '<span class="title">법정동 주소정보</span>' +
-                                $this.mapCont.detailAddr +
-                                '</div>';
-
-                            // 클릭한 위도, 경도 정보를 가져옵니다
-                            var latlng = $this.mapCont.mouseEvent.latLng;
-                            $this.locInfoSpec.latVal = latlng.getLat();
-                            $this.locInfoSpec.lonVal = latlng.getLng();
-
-                            $this.draw.cntrPos = latlng;
-                            // 마커를 클릭한 위치에 표시합니다
-                            $this.mapCont.marker.setPosition(latlng);
-                            $this.mapCont.marker.setMap($this.map);
-
-                            // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                            infowindow.setContent(content);
-                            infowindow.open($this.map, $this.mapCont.marker);
-
-                            $this.locInfoSpec.pstno     = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.zone_no : $this.mapCont.result[0].address.zip_code;
-                            $this.locInfoSpec.addrBase  = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.address_name : $this.mapCont.result[0].address.address_name;
-                            $this.locInfoSpec.addrSpec  = !!$this.mapCont.result[0].road_address ? $this.mapCont.result[0].road_address.building_name : $this.mapCont.result[0].address.building_name;
-
-                            $this.setRectangle();
-                        }
-                    });
-                }
-            });
-
             if($this.mapCont.searchSpecFg === 'Y') {
 
-                if ($this.locInfoSpec.valdRngeDist < 50) {
-                    $this.map.setLevel(2);
-                } else if ($this.locInfoSpec.valdRngeDist < 200) {
-                    $this.map.setLevel(3);
-                } else if ($this.locInfoSpec.valdRngeDist < 500) {
-                    $this.map.setLevel(4);
-                } else if ($this.locInfoSpec.valdRngeDist < 1000) {
-                    $this.map.setLevel(5);
-                } else if ($this.locInfoSpec.valdRngeDist < 1600) {
-                    $this.map.setLevel(6);
-                } else {
-                    $this.map.setLevel(7);
-                }
                 $this.draw.dist = $this.locInfoSpec.valdRngeDist;
+                console.log($this.locInfoSpec.nearAddr + "이건우 :: ");
+                $this.mapCont.detailAddr = !!$this.locInfoSpec.nearAddr ? '<div>주소 : ' + $this.locInfoSpec.nearAddr + '</div>' : '';
 
-                $this.mapCont.detailAddr = !!$this.locInfoSpec.addrBase ? '<div>도로명 : ' + $this.locInfoSpec.addrBase + '</div>' : '';
-                $this.mapCont.detailAddr += !!$this.locInfoSpec.addrSpec ? '<div>상세 : ' + $this.locInfoSpec.addrSpec + '</div>' : '';
-
-                var content = '<div class="bAddr">' +
+                var content = '<div class="bAddr" style="width:260px;">' +
                     '<span class="title">법정동 주소정보</span>' +
                     $this.mapCont.detailAddr +
+                    '<br>' +
                     '</div>';
 
                 var markerPosition  = $this.getLatLng($this.locInfoSpec.latVal, $this.locInfoSpec.lonVal);
@@ -468,15 +402,17 @@ let guarZoneStat = new Vue({
                 },
                 onSelectRow: function(rowId, status, e) {
                     let item = $('#locInfo_list').jqGrid('getRowData', rowId);
-                    if ( !!item.locNo )
-                    {
                         $this.locInfo.locNo      = item.locNo;
                         $this.locInfo.locNm      = item.locNm;
                         $this.locInfo.stdtNo     = item.stdtNo;
                         $this.mapCont.draggable  = 'true';
                         $this.setMarking();
-                        $this.searchLocInfoSpec(true);
-                    }
+                        $this.mapCont.searchSpecFg = 'Y';
+                        $this.locInfoSpec.latVal   = item.latVal;
+                        $this.locInfoSpec.lonVal   = item.lonVal;
+                        $this.locInfoSpec.nearAddr = item.nearAddr;
+                        $this.createMap();
+                        console.log($this.locInfoSpec.nearAddr);
                 },
                 gridComplete: function () {
                     var grid = this;
@@ -625,7 +561,7 @@ let guarZoneStat = new Vue({
                 url: "/oper/dgem/guarZoneStat/searchLocInfoList/excel.ab",
                 param: params,
                 success: function(response) {
-                    saveFileLocal(response, '위치정보목록.xls');
+                    saveFileLocal(response, '보호자관심지역 현황.xls');
                 },
                 error: function (response) {
                     Swal.alert([response, 'error']);
@@ -655,306 +591,13 @@ let guarZoneStat = new Vue({
                 currentPage: 1,
                 currentIndex: 0
             }
-        },
-        resetSearchParamSpec: function() {
-            let $this = this;
-            $this.locInfoSpec = {
-                crud:'C',
-                rdPublGuarDivSpec: 'publ',
-                prntNo:'',
-                stdtNo:'',
-                locNo: '',
-                locNm: '',
-                plcClssCd: '',
-                plcCd: '',
-                latVal: '',
-                lonVal: '',
-                valdRngeDist: '',
-                swstLatVal:'',
-                swstLonVal:'',
-                nestLatVal:'',
-                nestLonVal:'',
-                pstno: '',
-                addrBase: '',
-                addrSpec: '',
-                delYn:'',
-                paging: 'Y',
-                totalCount: 0,
-                rowCount: 30,
-                currentPage: 1,
-                currentIndex: 0
-            }
-
-            // $this.currLat = 37.48170530421067;
-            // $this.currLng = 126.88481997057949;
-            // $this.mapCont.marker.setMap(null);
-            // $this.draw.rectangle.setMap(null);
-            // $this.initMapPosition();
-            // $this.createMap();
-        },
-        regLocInfoSpec : function () {
-            let $this = this;
-
-            if ( !this.beforeSave() ) {
-                return false;
-            }
-
-            AjaxUtil.post({
-                url: "/oper/dgem/guarZoneStat/saveLocInfoSpec.ab",
-                param: $this.locInfoSpec,
-                success: function(response) {
-                    Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                        guarZoneStat.searchLocInfoSpec(false);
-                    });
-                },
-                error: function (response) {
-                    Swal.alert([response, 'error']);
-                }
-            });
-        },
-        delLocInfoSpec : function() {
-            let $this = this;
-
-            if(!confirm(["위치정보 상세 내역을 삭제하시겠습니까?"])) {
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.locNo) && $this.locInfoSpec.crud !== 'U' ) {
-                Swal.alert(['위치목록에서 대상 조회 후 삭제해주세요.', 'info']);
-                return false;
-            }
-
-            $this.locInfoSpec.crud = 'D';
-
-            AjaxUtil.post({
-                url: "/oper/dgem/guarZoneStat/saveLocInfoSpec.ab",
-                param: $this.locInfoSpec,
-                success: function(response) {
-                    Swal.alert(['삭제가 완료되었습니다.', 'success']).then(function() {
-                        guarZoneStat.searchLocInfoList(true);
-                    });
-                },
-                error: function (response) {
-                    Swal.alert([response, 'error']);
-                }
-            });
-        },
-        beforeSave : function() {
-            let $this = this;
-
-            if ( WebUtil.isNull($this.locInfoSpec.rdPublGuarDivSpec) ) {
-                Swal.alert(['자료구분을 입력해주세요.', 'info']);
-                return false;
-            }
-
-            if ( $this.locInfoSpec.rdPublGuarDivSpec === 'prnt' &&
-                WebUtil.isNull($this.locInfoSpec.stdtNo)) {
-                Swal.alert(['학부모 지정일땐 학생을 입력해주세요.', 'info']);
-                return false;
-            } else if($this.locInfoSpec.rdPublGuarDivSpec === 'publ') {
-                $this.locInfoSpec.stdtNo = '';
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.locNm) ) {
-                Swal.alert(['위치명을 입력해주세요.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.plcClssCd) ) {
-                Swal.alert(['장소구분을 선택해주세요.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.plcCd) ) {
-                Swal.alert(['장소구분상세를 선택해주세요.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.latVal) ) {
-                Swal.alert(['위도 값이 입력되지 않았습니다.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.lonVal) ) {
-                Swal.alert(['경도 값이 입력되지 않았습니다.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.valdRngeDist) ) {
-                Swal.alert(['유효반경이 입력되지 않았습니다.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.addrBase) ) {
-                Swal.alert(['기본주소를 입력해주세요.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.addrSpec) ) {
-                Swal.alert(['상세주소를 입력해주세요.', 'info']);
-                return false;
-            }
-
-            if ( WebUtil.isNull($this.locInfoSpec.swstLatVal) || WebUtil.isNull($this.locInfoSpec.swstLonVal) ||
-                WebUtil.isNull($this.locInfoSpec.nestLatVal) || WebUtil.isNull($this.locInfoSpec.nestLonVal)) {
-                Swal.alert(['장소를 마킹하여 범위를 지정해주세요.', 'info']);
-                return false;
-            }
-
-            return true;
-        },
-        changePlcClssCd : function () {
-            let $this = this;
-
-            if($this.params.plcClssCd === ''){
-                $this.code.plcCdListFilter = $this.code.plcCdList;
-            }
-            else{
-                $this.code.plcCdListFilter = _.filter($this.code.plcCdList, function(item) {
-                    return item.fltrVal1 === $this.params.plcClssCd;
-                })
-            }
-        },
-        changePlcCd : function () {
-            let $this = this;
-
-            _.filter($this.code.plcCdList, function (item){
-                if(item.cdVal === $this.params.plcCd){
-                    $this.params.plcClssCd = item.fltrVal1;
-                }
-            })
-        },
-        changePlcClssCdSpec : function () {
-            let $this = this;
-
-            if($this.locInfoSpec.plcClssCd === ''){
-                $this.code.plcCdListFilterSpec = $this.code.plcCdList;
-            }
-            else{
-                $this.code.plcCdListFilterSpec = _.filter($this.code.plcCdList, function(item) {
-                    return item.fltrVal1 === $this.locInfoSpec.plcClssCd;
-                })
-            }
-        },
-        changePlcCdSpec : function () {
-            let $this = this;
-
-            _.filter($this.code.plcCdList, function (item){
-                if(item.cdVal === $this.locInfoSpec.plcCd){
-                    $this.locInfoSpec.plcClssCd = item.fltrVal1;
-                }
-            })
-        },
-        changeWordHead1 : function () {
-            let $this = this;
-
-            if($this.params.wordHead1 === ''){
-                $this.code.wordHead2ListFilter = $this.code.wordHead2List;
-            }
-            else{
-                $this.code.wordHead2ListFilter = _.filter($this.code.wordHead2List, function(item) {
-                    return item.wordHead1 === $this.params.wordHead1;
-                })
-            }
-        },
-        changeWordHead2 : function () {
-            let $this = this;
-
-            _.filter($this.code.wordHead2List, function(item) {
-                if(item.cdVal === $this.params.wordHead2){
-                    $this.params.wordHead1 = item.wordHead1;
-                }
-            })
-        },
-        changePrntNo : function () {
-            let $this = this;
-
-            if($this.params.prntNo === ''){
-                $this.code.stdtNoListFilter = $this.code.stdtNoList;
-            }
-            else{
-                $this.code.stdtNoListFilter = _.filter($this.code.stdtNoList, function(item) {
-                    return item.prntNo === $this.params.prntNo;
-                })
-            }
-        },
-        changeStdtNo : function () {
-            let $this = this;
-
-            _.filter($this.code.stdtNoList, function(item) {
-                if(item.cdVal === $this.params.stdtNo){
-                    $this.params.prntNo = item.prntNo;
-                }
-            })
-        },
-        changePrntNoSpec : function () {
-            let $this = this;
-            if($this.locInfoSpec.prntNo === ''){
-                $this.code.stdtNoListFilterSpec = $this.code.stdtNoListSpec;
-            }
-            else{
-                $this.code.stdtNoListFilterSpec = _.filter($this.code.stdtNoListSpec, function(item) {
-                    return item.prntNo === $this.locInfoSpec.prntNo;
-                })
-            }
-        },
-        changeStdtNoSpec : function () {
-            let $this = this;
-            _.filter($this.code.stdtNoListSpec, function(item) {
-                if(item.cdVal === $this.locInfoSpec.stdtNo){
-                    $this.locInfoSpec.prntNo = item.prntNo;
-                }
-            })
-        },
-        // jcw :: input 데이터 자리수 제한
-        input_lenth : function(e){
-            this.max_length(e, 200, '#addrSpec');
-            this.max_length(e, 100, '#locInfoSpecLocNm');
-            this.max_length(e, 200, '#locInfoSpecAddrSpec');
-        },
-        max_length : function(e, len,id)
-        {
-            var val =  e.target.value;
-            if (val.length > len){
-                Swal.alert(['최대 글자수를 초과하였습니다.' ]);
-                $(id).val(val.substring(0, len));
-            }
         }
     },
     computed: {
 
-
     },
     watch: {
-        'draw.dist': function(newVal, oldVal) {
-            let $this = this;
-            if ( newVal !== oldVal ) {
 
-                if ( $this.draw.rectangle ) {
-                    let rectangleBounds = this.getRectBound();
-                    $this.draw.rectangle.setBounds(rectangleBounds);
-
-                    // 지도에 사각형을 표시합니다
-                    $this.draw.rectangle.setMap($this.map);
-                }
-                $this.locInfoSpec.valdRngeDist = $this.draw.dist;
-
-                // 넓은 범위로 확대된 맵으로 디테일하게 이용하고 싶을 수 있으니 주석..
-                // if ($this.locInfoSpec.valdRngeDist < 150) {
-                //     $this.map.setLevel(2);
-                // } else if ($this.locInfoSpec.valdRngeDist < 250) {
-                //     $this.map.setLevel(3);
-                // } else if ($this.locInfoSpec.valdRngeDist < 500) {
-                //     $this.map.setLevel(4);
-                // } else if ($this.locInfoSpec.valdRngeDist < 1000) {
-                //     $this.map.setLevel(5);
-                // } else if ($this.locInfoSpec.valdRngeDist < 1700) {
-                //     $this.map.setLevel(6);
-                // } else {
-                //     $this.map.setLevel(7);
-                // }
-            }
-        }
     },
     mounted: function() {
         let self = this;

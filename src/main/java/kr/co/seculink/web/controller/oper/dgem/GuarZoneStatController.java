@@ -113,7 +113,7 @@ public class GuarZoneStatController
 
 	private Map<String, Object> getExcelMap(List<Map<String, String>> list)
 	{
-		String [] arrHeader = {"기준일자","위치번호","위치명","위치지정명","장소분류명","탐지건수","탐지학생수"};
+		String [] arrHeader = {"위도","경도","주소","장소분류","보호자 지정건수"};
 		List<String> headerList = Arrays.asList(arrHeader);
 		List<List<String>> dataList = new ArrayList<>();
 		List<String> data;
@@ -121,13 +121,11 @@ public class GuarZoneStatController
 		for ( Map<String, String> info : list )
 		{
 			data = new ArrayList<>();
-			data.add(String.valueOf(info.get("stndDt")));
-			data.add(String.valueOf(info.get("locNo")));
-			data.add(String.valueOf(info.get("locNm")));
-			data.add(String.valueOf(info.get("locApntNm")));
+			data.add(String.valueOf(info.get("latVal")));
+			data.add(String.valueOf(info.get("lonVal")));
+			data.add(String.valueOf(info.get("nearAddr")));
 			data.add(String.valueOf(info.get("plcClssNm")));
-			data.add(String.valueOf(info.get("occrCnt")));
-			data.add(String.valueOf(info.get("stdtCnt")));
+			data.add(String.valueOf(info.get("dupApntCnt")));
 			dataList.add(data);
 		}
 		Map<String, Object> map = new HashMap<>();
