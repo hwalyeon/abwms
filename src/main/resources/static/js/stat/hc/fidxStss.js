@@ -25,7 +25,7 @@ let fidxStss = new Vue({
         chartFidx : null,
         chartFidxJudg : null,
 	},
-	
+    mixins: [statComponent],
     methods: {
 
         initialize: function() {

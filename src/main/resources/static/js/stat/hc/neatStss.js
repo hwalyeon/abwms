@@ -286,9 +286,7 @@ let neatStss = new Vue({
                 }
 
             },
-            changePerdDiv: function(value)
-            {
-            },
+
             //식품별 섭취 통계 엑셀 다운로드
             downloadExcel: function()
             {

@@ -25,7 +25,7 @@ let fatpStss = new Vue({
         chartFatp : null,
         chartFatpJudg : null,
 	},
-	
+    mixins: [statComponent],
     methods: {
 
         initialize: function() {
