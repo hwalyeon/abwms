@@ -50,14 +50,14 @@ let strsStndMng = new Vue({
             let strsStatList = commonGridCmonCd($this.code.strsStatList);
         	let colModels = [
                 {name: "crud"               , index: "crud"               , label: "crud"              , hidden:true},
-                {name: "mindStrsStatCd"	    , index: "mindStrsStatCd"	  , label: "정신적스트레스상태명"  , width: 80   ,align:"center"
+                {name: "mindStrsStatCd"	    , index: "mindStrsStatCd"	  , label: "정신적스트레스상태명"  , width: 50   ,align:"center"
                     ,edittype:"select"	    , formatter:"select"          , editable :true             , editoptions : {value:strsStatList}},
                 {name: "mindStrsStatCdTemp" , index: "mindStrsStatCdTemp" , label: "정신적스트레스상태명"  , hidden:true},
-                {name: "physStrsStatCd"	    , index: "physStrsStatCd"	  , label: "신체적스트레스상태명"  , width: 80   ,align:"center"
+                {name: "physStrsStatCd"	    , index: "physStrsStatCd"	  , label: "신체적스트레스상태명"  , width: 50   ,align:"center"
                     ,edittype:"select"	    , formatter:"select"          , editable :true             , editoptions : {value:strsStatList}},
                 {name: "physStrsStatTemp"   , index: "physStrsStatTemp"   , label: "신체적스트레스상태명"  , hidden:true},
-                {name: "strsJudgCntn"       , index: "strsJudgCntn"       , label: "스트레스판정내용"     , width: 80   , align: "center"},
-                {name: "strsStndDetlPop"    , index: "strsStndDetlPop"    , label: "코드 정보보기"       , width: 70   , align: "center",
+                {name: "strsJudgCntn"       , index: "strsJudgCntn"       , label: "스트레스판정내용"     , width: 150   , align: "center"},
+                {name: "strsStndDetlPop"    , index: "strsStndDetlPop"    , label: "코드 정보보기"       , width: 40   , align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" ' + 'onclick="strsStndMng.regStrsStndPop(\'' + rowObject.mindStrsStatCd + '\',\''+ rowObject.physStrsStatCd + '\')" value="상세보기" data-toggle="modal" data-target="#strsStndDetlPopup"/>';
                     }
@@ -86,9 +86,9 @@ let strsStndMng = new Vue({
             resizeJqGridWidth("strsStnd_list", "strsStnd_list_wrapper");
 
             let strsCdGrpModels = [
-                {name: "cdVal"        , index: "cdVal"        , label: "코드값"      , width: 90  , align: "center"},
-                {name: "cdNm"         , index: "cdNm"         , label: "코드명"      , width: 90  , align: "left"  },
-                {name: "cdDesc"       , index: "cdDesc"       , label: "코드내용"    , width: 100 , align: "left"  },
+                {name: "cdVal"        , index: "cdVal"        , label: "코드값"      , width: 60  , align: "center"},
+                {name: "cdNm"         , index: "cdNm"         , label: "코드명"      , width: 60  , align: "left"  },
+                {name: "cdDesc"       , index: "cdDesc"       , label: "코드내용"    , width: 150 , align: "left"  },
                 {name: "sortOrd"      , index: "sortOrd"      , label: "정렬순서"    , width: 50  , align: "center"},
                 {name: "useYn"        , index: "useYn"        , label: "사용여부"    , width: 50  , align: "center"},
                 {name: "cdSpecDetlPop", index: "cdSpecDetlPop", label: "코드 정보보기", width: 70  , align: "center",
