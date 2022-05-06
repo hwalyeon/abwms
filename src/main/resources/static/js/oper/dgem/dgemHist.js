@@ -56,7 +56,7 @@ let dgemHist = new Vue({
 
             $this.initGrid();
 
-            $this.searchDgemHistList(true);
+            //$this.searchDgemHistList(true);
 
             $this.setDatepicker();
 
@@ -237,17 +237,58 @@ let dgemHist = new Vue({
                 }
             });
         },
+        //stdtInfoDetl 화면에서 팝업 호출 시 param 값 세팅
+        setParam: function(param) {
+            let $this =this;
+
+            let params;
+            if (WebUtil.isNull(param)) {
+                params = WebUtil.getStorageData('window:stdtInfoDetl:params', true);
+            } else {
+                params = param;
+            }
+
+            WebUtil.removeStorageData('window:stdtInfoDetl:params');
+
+            if(params != null && WebUtil.isNotNull(params.stdtNo)){
+                $this.params.stdtNo = params.stdtNo;
+            }
+        },
         //초기화
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                stdtNo:'',
-                mmDd:'',
-                paging: 'Y',
-                totalCount: 0,
-                rowCount: 30,
-                currentPage: 1,
-                currentIndex: 0
+                entrDtFr       :'',  //일자_From
+                entrDtTo       :'',  //일자_To
+                stdtNo         :'',  //학생번호
+                dgemHistSeq    :'',  //위험감정 이력순번
+                dgemDt         :'',  //위험감정 일자
+                dgemTm         :'',  //위험감정 시각
+                dgemIdx        :'',  //위험감정 지수
+                dgemStatCd     :'',  //위험감정 상태코드
+                dgemStatCntn   :'',  //위험감정 요약내용
+                dgemSmryCntn   :'',  //위험감정 상태내용
+                locHistNo      :'',  //위치이력 번호
+                currLatVal     :'',  //현재위도 값
+                currLonVal     :'',  //현재경도 값
+                locMesuDttm    :'',  //위치측정일시
+                actDivCd       :'',  //활동구분코드
+                hbitStatCd     :'',  //심박상태코드
+                plcClssCd      :'',  //장소분류코드
+                tempStatCd     :'',  //체온상태코드
+                judgNo         :'',  //판정번호
+                rmrk           :'',  //비고
+                dgemAlamNo     :'',  //위험감정알림번호
+                locNm          :'',  //학교명
+                guarNo         :'',  //보호자번호
+                guarNm         :'',  //보호자명
+                guarTelNo      :'',  //보호자전화번호
+                mmDd           :'THIS_MONTH',
+                paging         :'Y',
+                totalCount     : 0,
+                rowCount       : 30,
+                currentPage    : 1,
+                currentIndex   : 0
             }
         }
     },
@@ -262,5 +303,11 @@ let dgemHist = new Vue({
         $(document).ready(function() {
             self.initialize();
         });
+        top.index.$on('GET_PARAM', function(params) {
+            self.setParam(params);
+            self.searchDgemHistList(true);
+        });
+        self.setParam();
+        self.searchDgemHistList(true);
     }
 });

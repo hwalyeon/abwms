@@ -33,7 +33,7 @@ let cbeeHist = new Vue({
             $this.initValue();
             $this.initCodeList();
         	$this.initGrid();
-            $this.searchCbeeHistList(true);
+            //$this.searchCbeeHistList(true);
             $this.setDatepicker();
         },
         initValue: function()
@@ -56,13 +56,13 @@ let cbeeHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "occrDttm"    , index: "occrDttm"    , label: "발생 일시" 	             , width: 50 , align: "center" },
+                {name: "occrDttm"    , index: "occrDttm"    , label: "발생 일시" 	             , width: 50 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTimestamp(cellValue);}},
                 {name: "locNm"       , index: "locNm"       , label: "학교 명" 	                 , width: 50 , align: "center" },
                 {name: "stdtNo"      , index: "stdtNo"      , label: "학생 번호" 	             , width: 50 , align: "center" },
                 {name: "stdtNm"      , index: "stdtNm"      , label: "학생 명" 	                 , width: 50 , align: "center" },
                 {name: "cbeeUseCdNm" , index: "cbeeUseCdNm" , label: "발생 구분<br/>(적립/소진)"  , width: 50 , align: "center" },
-                {name: "useCbeeAmt"  , index: "useCbeeAmt"  , label: "발생 금액"                 , width: 50 , align: "center" },
-                {name: "cbeeBal"     , index: "cbeeBal"     , label: "누적 잔액"                 , width: 50 , align: "center" },
+                {name: "useCbeeAmt"  , index: "useCbeeAmt"  , label: "발생 금액"                 , width: 50 , align: "center" , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue);}},
+                {name: "cbeeBal"     , index: "cbeeBal"     , label: "누적 잔액"                 , width: 50 , align: "center" , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue);}},
                 {name: "telNo"       , index: "telNo"       , label: "학생(밴드)<br/>전화번호"   , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
                 {name: "guarNo"      , index: "guarNo"      , label: "보호자 번호"               , width: 50 , align: "center" },
                 {name: "guarNm"      , index: "guarNm"      , label: "보호자 명"                 , width: 50 , align: "center" },
@@ -203,6 +203,25 @@ let cbeeHist = new Vue({
             }
             return true;
         },
+
+        //stdtInfoDetl 화면에서 팝업 호출 시 param 값 세팅
+        setParam: function(param) {
+            let $this =this;
+
+            let params;
+            if (WebUtil.isNull(param)) {
+                params = WebUtil.getStorageData('window:stdtInfoDetl:params', true);
+            } else {
+                params = param;
+            }
+
+            WebUtil.removeStorageData('window:stdtInfoDetl:params');
+
+            if(params != null && WebUtil.isNotNull(params.stdtNo)){
+                $this.params.stdtNo = params.stdtNo;
+            }
+        },
+
 		resetSearchParam: function()
         {
 			let $this = this;
@@ -234,9 +253,14 @@ let cbeeHist = new Vue({
     mounted: function()
     {
         let self = this;
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
             self.initialize();
+            top.index.$on('GET_PARAM', function(params) {
+                self.setParam(params);
+                self.searchCbeeHistList(true);
+            });
+            self.setParam();
+            self.searchCbeeHistList(true);
         });
     }
 });

@@ -93,13 +93,9 @@ let stdtInfoMng = new Vue({
                         return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;},fixed:true},
                 {name: "guarNm"            , index: "guarNm"            , label: "보호자명"	        , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
                         return `<a data-toggle="modal" class="links" data-target="#guarInfoDetlPopup" data-guar data-placement="bottom" title="${cellValue}" data-guar-no="${rowObject.guarNo}">${cellValue}</a>`;},fixed:true},
-                {name: "prntNo"            , index: "prntNo"            , label: "학부모번호"	        , width: 80     , align: "center"  , fixed: true},
-                {name: "prntNm"            , index: "prntNm"            , label: "학부모명1"	        , width: 80     , align: "center"  , formatter: function(cellValue, options, rowObject){
-                        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regPrntInfoDetlPopup(\'' + rowObject.bandId + '\', \'' + rowObject.stdtNo + '\',\'' + 'MALE' + '\')" value="신규" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
-                        else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="MALE">${cellValue}</a>`;},fixed:true},
-                {name: "prntNm2"           , index: "prntNm2"           , label: "학부모명2" 	    , width: 100    , align: "center"  , fixed: true ,formatter: function(cellValue, options, rowObject){
-                        if(WebUtil.isNull(cellValue)) return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="guarInfoMng.regPrntInfoDetlPopup(\'' + rowObject.bandId + '\', \'' + rowObject.stdtNo + '\',\'' + 'FEMALE' + '\')" value="신규" data-toggle="modal" data-target="#prntInfoDetlPopup" />';
-                        else return`<a data-toggle="modal" class="links" data-target="#prntInfoDetlPopup" data-prnt data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}" data-prnt-no="${rowObject.prntNo}" data-sex-cd="FEMALE">${cellValue}</a>`;}},
+                {name: "prntNo"            , index: "prntNo"            , label: "학부모번호"	        , width: 80     , align: "center"  , fixed:true},
+                {name: "prntNm"            , index: "prntNm"            , label: "학부모명1"	        , width: 80     , align: "center"  , fixed:true },
+                {name: "prntNm2"           , index: "prntNm2"           , label: "학부모명2" 	    , width: 100    , align: "center"  , fixed:true },
                 {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"		 	, width: 80     , align: "center"  , fixed: true},
                 {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 	, width: 80     , align: "center"  , fixed: true},
                 {name: "telNo"            , index: "telNo"              , label: "전화번호"		    , width: 100    , align: "center"  , fixed: true  ,formatter: function(cellValue, options, rowObject) {

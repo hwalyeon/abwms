@@ -50,7 +50,7 @@ let locHist = new Vue({
 
             $this.initGrid();
 
-            $this.searchLocHistList(true);
+            //$this.searchLocHistList(true);
 
             $this.setDatepicker();
         },
@@ -203,21 +203,54 @@ let locHist = new Vue({
                 }
             });
         },
+        //stdtInfoDetl 화면에서 팝업 호출 시 param 값 세팅
+        setParam: function(param) {
+            let $this =this;
+
+            let params;
+            if (WebUtil.isNull(param)) {
+                params = WebUtil.getStorageData('window:stdtInfoDetl:params', true);
+            } else {
+                params = param;
+            }
+
+            WebUtil.removeStorageData('window:stdtInfoDetl:params');
+
+            if(params != null && WebUtil.isNotNull(params.stdtNo)){
+                $this.params.stdtNo = params.stdtNo;
+            }
+        },
         //초기화
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                mmDd:'',
-                plcClssCd:'',
-                schlNm:'',
-                guarNm:'',
-                guarNo:'',
-                stdtNm:'',
-                stdtNo:'',
-                paging: 'Y',
-                totalCount: 0,
-                rowCount: 30,
-                currentPage: 1,
+                emtrDtFr    :'',        //일자_From
+                entrDtTo    :'',        //일자_To
+                schlNm      :'',        //학교명
+                occrDttm    :'',        //발생일시
+                locNm       :'',        //장소
+                stdtNo      :'',        //학생번호
+                stdtNm      :'',        //학생명
+                plcClssCd   :'DZONE',   //장소분류
+                latVal      :'',        //위도
+                lonVal      :'',        //경도
+                nearLocNo   :'',        //위치명
+                addrBase    :'',        //주소
+                telNo       :'',        //학생 전화번호
+                guarNo      :'',        //보호자번호
+                guarNm      :'',        //보호자명
+                guarTelNo   :'',        //보호자 전화번호
+                regDt       :'',        //등록일자
+                regTm       :'',        //등록시각
+                regUserId   :'',        //등록사용자ID
+                uptDt       :'',        //수정일자
+                uptTm       :'',        //수정시각
+                uptUserId   :'',        //수정사용자ID
+                mmDd        :'THIS_MONTH',
+                paging      :'Y',
+                totalCount  : 0,
+                rowCount    : 30,
+                currentPage : 1,
                 currentIndex: 0
             }
         }
@@ -232,6 +265,12 @@ let locHist = new Vue({
         let self = this;
         $(document).ready(function() {
             self.initialize();
+            top.index.$on('GET_PARAM', function(params) {
+                self.setParam(params);
+                self.searchLocHistList(true);
+            });
+            self.setParam();
+            self.searchLocHistList(true);
         });
     }
 });

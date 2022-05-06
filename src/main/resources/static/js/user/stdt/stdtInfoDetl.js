@@ -35,7 +35,7 @@ let stdtInfoDetl = new Vue({
 			fatpJudgNm : '',
 			gfixUptDttm : '',
 			avgHbitCnt : '',
-			mentStrsStatNm : '',
+			mindStrsStatNm : '',
 			physStrsStatNm : '',
 			strsCopeStatNm : '',
 			strsUptDttm : ''
@@ -431,6 +431,70 @@ let stdtInfoDetl = new Vue({
 			}});
 		},
 
+		// 학부모 정보
+		goPrntInfo : function (prntNo , sexCd){
+        	let $this = this;
+			prntInfoDetl.initPage(prntNo, sexCd, function(){ stdtInfoDetl.searchStdtDetlInfo($this.stdtInfo.stdtNo, $this.stdtInfo.guarNo) });
+		},
+
+		// 위치 이력 이동
+		goLocHist : function (){
+			let menuNo = 'O220';
+			let params = $.extend(true, {}, this.stdtInfo);
+			top.navigation.openMenuByMenuNo(menuNo, "stdtInfoDetl", params);
+			top.index.$emit('SET_PARAM', params);
+		},
+
+		// 위험감정 이력 이동
+		goDgemHist : function (){
+			let menuNo = 'O210';
+			let params = $.extend(true, {}, this.stdtInfo);
+			top.navigation.openMenuByMenuNo(menuNo, "stdtInfoDetl", params);
+			top.index.$emit('SET_PARAM', params);
+		},
+
+		// 성장,비만이력
+		goGfixHist : function (){
+			let menuNo = 'O310';
+			let params = $.extend(true, {}, this.stdtInfo);
+			top.navigation.openMenuByMenuNo(menuNo, "stdtInfoDetl", params);
+			top.index.$emit('SET_PARAM', params);
+		},
+
+		// 섭취이력
+		goEatHist : function (){
+			let menuNo = 'O330';
+			let params = $.extend(true, {}, this.stdtInfo);
+			top.navigation.openMenuByMenuNo(menuNo, "stdtInfoDetl", params);
+			top.index.$emit('SET_PARAM', params);
+		},
+
+		// 활동이력
+		goActHist : function (){
+			let menuNo = 'O340';
+			let params = $.extend(true, {}, this.stdtInfo);
+			top.navigation.openMenuByMenuNo(menuNo, "stdtInfoDetl", params);
+			top.index.$emit('SET_PARAM', params);
+		},
+
+		// 스트레스이력
+		goStrsHist : function (){
+			let menuNo = 'O320';
+			let params = $.extend(true, {}, this.stdtInfo);
+			top.navigation.openMenuByMenuNo(menuNo, "stdtInfoDetl", params);
+			top.index.$emit('SET_PARAM', params);
+		},
+
+		// 캐시비이력
+		goCbeeHist : function (){
+			let menuNo = 'O410';
+			let params = $.extend(true, {}, this.stdtInfo);
+			top.navigation.openMenuByMenuNo(menuNo, "stdtInfoDetl", params);
+			top.index.$emit('SET_PARAM', params);
+		},
+
+
+		
 		resetParam: function() {
 			let $this = this;
 			$this.stdtInfo = {
@@ -467,7 +531,7 @@ let stdtInfoDetl = new Vue({
 				fatpJudgNm : '',
 				gfixUptDttm : '',
 				avgHbitCnt : '',
-				mentStrsStatNm : '',
+				mindStrsStatNm : '',
 				physStrsStatNm : '',
 				strsCopeStatNm : '',
 				strsUptDttm : ''

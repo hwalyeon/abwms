@@ -51,6 +51,7 @@
 												<div class="col-xs-1"  style="padding:0px">
 													<input type="text" name="" v-model="stdtInfo.bithDt" class="form-control"/>
 												</div>
+												<button type="button" class="btn btn-outline btn-primary float_right" style="margin-right: 20px" v-on:click="goCbeeHist()">캐시비 이력</button>
 											</div>
 											<div class="form-group">
 												<label class="col-xs-1 control-label">인종</label>
@@ -113,7 +114,7 @@
 													<input type="text" name="" v-model="stdtInfo.prntMale" class="form-control":readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<div class="col-xs-2" >
-													<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="" v-on:click="">학부모 정보</button>
+													<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#prntInfoDetlPopup" v-on:click="goPrntInfo(stdtInfo.prntNo , 'MALE')">학부모 정보</button>
 												</div>
 											</div>
 											<div class="form-group">
@@ -124,6 +125,9 @@
 												<label class="col-xs-2 control-label">학부모_여자</label>
 												<div class="col-xs-3">
 													<input type="text" name="" v-model="stdtInfo.prntFemale" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
+												</div>
+												<div class="col-xs-2" >
+													<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#prntInfoDetlPopup" v-on:click="goPrntInfo(stdtInfo.prntNo , 'FEMALE')">학부모 정보</button>
 												</div>
 											</div>
 										</div>
@@ -221,7 +225,7 @@
 												</div>
 												<label class="col-xs-2 control-label"></label>
 												<div class="col-xs-4" >
-													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">학생위치 정보</button>
+													<button type="button" class="btn btn-outline btn-primary" v-on:click="goLocHist()">학생위치 정보</button>
 												</div>
 											</div>
 										</div>
@@ -257,7 +261,7 @@
 													<input type="text" name="" v-model="stdtInfo.locMesuDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<div class="col-xs-4" >
-													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">위험감정 상세</button>
+													<button type="button" class="btn btn-outline btn-primary" v-on:click="goDgemHist()">위험감정 이력</button>
 												</div>
 											</div>
 										</div>
@@ -295,7 +299,7 @@
 													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<div class="col-xs-4" >
-													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">성장 상세</button>
+													<button type="button" class="btn btn-outline btn-primary" v-on:click="goGfixHist()">성장 이력</button>
 												</div>
 											</div>
 										</div>
@@ -330,7 +334,7 @@
 													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<div class="col-xs-4" >
-													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">비만 상세</button>
+													<button type="button" class="btn btn-outline btn-primary" v-on:click="goGfixHist()">비만 이력</button>
 												</div>
 											</div>
 										</div>
@@ -369,7 +373,7 @@
 												</div>
 												<label class="col-xs-4 control-label"></label>
 												<div class="col-xs-3" style="padding-left:0px;" >
-													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">영양섭취상세</button>
+													<button type="button" class="btn btn-outline btn-primary"  v-on:click="goEatHist()">섭취이력</button>
 												</div>
 											</div>
 											<div class="form-group" style="margin-bottom: 5px;">
@@ -379,7 +383,7 @@
 												</div>
 												<label class="col-xs-4 control-label"></label>
 												<div class="col-xs-3" style="padding-left:0px;" >
-													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">운동이력</button>
+													<button type="button" class="btn btn-outline btn-primary" v-on:click="goActHist()">운동이력</button>
 												</div>
 											</div>
 										</div>
@@ -411,7 +415,7 @@
 											<div class="form-group" style="margin-bottom: 5px;">
 												<label class="col-xs-2 control-label" style="padding-right:0px;">정신적스트레스</label>
 												<div class="col-xs-4" style="height: 34px;">
-													<input type="text" name="" v-model="stdtInfo.mentStrsStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
+													<input type="text" name="" v-model="stdtInfo.mindStrsStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
 												</div>
 												<label class="col-xs-2 control-label"></label>
 												<label class="col-xs-2 control-label">최근통신</label>
@@ -433,7 +437,7 @@
 												</div>
 												<label class="col-xs-2 control-label"></label>
 												<div class="col-xs-4"  >
-													<button type="button" class="btn btn-outline btn-primary" data-toggle="modal" data-target="" v-on:click="">스트레스 상세</button>
+													<button type="button" class="btn btn-outline btn-primary"  v-on:click="goStrsHist()">스트레스 이력</button>
 												</div>
 											</div>
 										</div>

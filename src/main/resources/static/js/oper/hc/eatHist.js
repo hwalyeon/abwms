@@ -39,7 +39,7 @@ let eatHist = new Vue({
             $this.initValue();
         	$this.initCodeList();
         	$this.initGrid();
-            $this.searchEatHistList(true);
+            //$this.searchEatHistList(true);
             $this.setDatepicker();
         },
         initValue: function()
@@ -247,6 +247,24 @@ let eatHist = new Vue({
         regEatHistDetlPopup: function(fmenuSeq, guarNo) {
             eatHistDetl.initPage(fmenuSeq, guarNo);
         },
+
+        //stdtInfoDetl 화면에서 팝업 호출 시 param 값 세팅
+        setParam: function(param) {
+            let $this =this;
+
+            let params;
+            if (WebUtil.isNull(param)) {
+                params = WebUtil.getStorageData('window:stdtInfoDetl:params', true);
+            } else {
+                params = param;
+            }
+
+            WebUtil.removeStorageData('window:stdtInfoDetl:params');
+
+            if(params != null && WebUtil.isNotNull(params.stdtNo)){
+                $this.params.stdtNo = params.stdtNo;
+            }
+        },
 		resetSearchParam: function()
         {
 			let $this = this;
@@ -284,9 +302,14 @@ let eatHist = new Vue({
     mounted: function()
     {
         let self = this;
-        $(document).ready(function()
-        {
+        $(document).ready(function() {
             self.initialize();
+            top.index.$on('GET_PARAM', function(params) {
+                self.setParam(params);
+                self.searchEatHistList(true);
+            });
+            self.setParam();
+            self.searchEatHistList(true);
         });
     }
 });
