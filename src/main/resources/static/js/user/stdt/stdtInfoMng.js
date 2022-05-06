@@ -58,6 +58,8 @@ let stdtInfoMng = new Vue({
 
             $this.initGrid();
 
+            $this.setDatepicker();
+
             $this.searchStdtInfoList(true);
 
         },
@@ -247,6 +249,32 @@ let stdtInfoMng = new Vue({
                 {
                     Swal.alert([response, 'error']);
                 }
+            });
+        },
+
+        setDatepicker : function() {
+            let $this = this;
+            $('#entrDtFrPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtFr = $('#entrDtFr').val();
+            });
+            $('#entrDtToPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.entrDtTo = $('#entrDtTo').val();
             });
         },
 
