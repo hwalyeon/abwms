@@ -161,7 +161,7 @@ let fatpQustHist = new Vue({
             if($this.params.bDPer!=='')
             {$this.params.bDPer = '' ;}
 
-            $('#stndDtFrPicker').datepicker({
+            $('#fatpQustDtFrPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
@@ -169,9 +169,9 @@ let fatpQustHist = new Vue({
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
-                $this.params.stndDtFr = $('#stndDtFr').val();
+                $this.params.stndDtFr = $('#fatpQustDtFr').val();
             });
-            $('#stndDtToPicker').datepicker({
+            $('#fatpQustDtToPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
@@ -179,7 +179,7 @@ let fatpQustHist = new Vue({
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
-                $this.params.stndDtTo = $('#stndDtTo').val();
+                $this.params.stndDtTo = $('#fatpQustDtTo').val();
             });
         },
         //기준_일자_기간_선택
@@ -187,8 +187,8 @@ let fatpQustHist = new Vue({
         {
             let $this = this;
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.stndDtFr = terms.strDt;
-            this.params.stndDtTo = terms.endDt;
+            this.params.fatpQustDtFr = terms.strDt;
+            this.params.fatpQustDtTo = terms.endDt;
         },
         //유효성_검증
         isValid: function() {
