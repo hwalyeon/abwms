@@ -25,40 +25,42 @@
 				<div class="form-horizontal">
 					<div class="form-group">
 						<label class="col-xs-1 control-label" >시작일자</label>
-						<div class="col-xs-1" style="width: 10%">
+						<div class="col-xs-1" style="width: 10%;padding-right: 0px">
 							<div class="input-group date" id="entrDtFrPicker">
 								<input type="text" id="entrDtFr" name="entrDtFr" v-model="params.entrDtFr" class="form-control">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
-						<div class="col-xs-1" style="width: 10%">
+						<div class="col-xs-1" style="width: 10%;padding-left: 0px;padding-right: 0px;">
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
 							<div class="input-group date" id="entrDtToPicker">
 								<input type="text" id="entrDtTo" name="entrDtTo" v-model="params.entrDtTo" class="form-control">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
 						<!--이번 달-->
-						<div class="col-xs-1" style="padding:0px; margin-right:5px;" >
+						<div class="col-xs-1" style="padding:0px; margin-right:5px;margin-left:5px;" >
 							<select id="mmDd" name="mmDd" class="form-control" style=" margin-right:15px;" v-model="params.mmDd" v-on:change="mmDdSelect">
 								<option value="">전체</option>
 								<option v-for="item in code.mmDdList" v-bind:value="item.value" v-text="item.text"></option>
 							</select>
 						</div>
 						<label class="col-xs-1 control-label" >종료일자</label>
-						<div class="col-xs-1" style="width: 10%">
+						<div class="col-xs-1" style="width: 10%;padding-right: 0px">
 							<div class="input-group date" id="endDtFrPicker">
 								<input type="text" id="endDtFr" name="endDtFr" v-model="params.endDtFr" class="form-control">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
-						<div class="col-xs-1" style="width: 10%">
+						<div class="col-xs-1" style="width: 10%;padding-left: 0px;padding-right: 0px;">
+							<div class="float_left width_20 mg_top_8 text-center">~</div>
 							<div class="input-group date" id="endDtToPicker">
 								<input type="text" id="endDtTo" name="endDtTo" v-model="params.endDtTo" class="form-control">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 							</div>
 						</div>
 						<!--이번 달-->
-						<div class="col-xs-1" style="padding:0px; margin-right:5px;" >
+						<div class="col-xs-1" style="padding:0px; margin-right:5px; margin-left: 5px" >
 							<select id="mmDd2" name="mmDd2" class="form-control" style=" margin-right:15px;" v-model="params.mmDd2" v-on:change="mmDdSelect2">
 								<option value="">전체</option>
 								<option v-for="item in code.mmDdList2" v-bind:value="item.value" v-text="item.text"></option>
@@ -72,7 +74,7 @@
 							<input type="text" name="jobId" class="form-control" v-model="params.jobId">
 						</div>
 						<label class="col-xs-1 control-label" style="width: 10%">작업명</label>
-						<div class="col-xs-1" style="padding:0px; margin-right:5px;">
+						<div class="col-xs-1" style="padding:0px; margin-right:5px;margin-left: 5px">
 							<input type="text" name="jobNm" class="form-control" v-model="params.jobNm">
 						</div>
 						<label class="col-xs-1 control-label">결과코드</label>
