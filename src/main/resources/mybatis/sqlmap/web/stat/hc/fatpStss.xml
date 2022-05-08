@@ -7,7 +7,7 @@
     from
         (select
               case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
-                   when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
+                   when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , '`YY.MM') || ' ' || mnth_week_seq ||'주차'
                    when #{perdDivCd} = 'WEEK_NM' then week_nm
                    else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD') end as stnd_dt
         from tt_fatp_idx_stss
@@ -62,7 +62,7 @@
     from
         (select
              case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
-                  when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM') || '-' || mnth_week_seq
+                  when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , '`YY.MM') || ' ' || mnth_week_seq ||'주차'
                   when #{perdDivCd} = 'WEEK_NM' then week_nm
                   else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
              end as stnd_dt
