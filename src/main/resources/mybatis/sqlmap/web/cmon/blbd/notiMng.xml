@@ -8,6 +8,7 @@
 	    	  ,blbd_strt_dt
 	    	  ,blbd_expr_dt
 	    	  ,blbd_type_cd
+	          ,fn_getCdNm('BLBD_TYPE_CD', blbd_type_cd) as blbd_type_nm
 		      ,blbd_titl
 			  ,blbd_cntn
 			  ,srch_cnt
@@ -28,24 +29,33 @@
 	</select>
 
 	<select id="searchNotiList" parameterType="java.util.Map" resultType="MybatisMap">
-		select blbd_no
-		,blbd_strt_dt
-		,blbd_expr_dt
-		,blbd_type_cd
-		,blbd_titl
-		,blbd_cntn
-		,srch_cnt
-		,alam_yn
-		,reg_dt
-		,reg_tm
-		,reg_user_id
-		,upt_dt
-		,upt_tm
-		,upt_user_id
-		from   TS_BLBD_BASE
-		where  1=1
-		<if test=" blbdNo != null and blbdNo != '' ">
-		and    blbd_no = #{blbdNo}::numeric     </if>
+	select blbd_no
+	      ,blbd_strt_dt
+		  ,blbd_expr_dt
+		  ,blbd_type_cd
+		  ,fn_getCdNm('BLBD_TYPE_CD', blbd_type_cd) as blbd_type_nm
+		  ,blbd_titl
+		  ,blbd_cntn
+		  ,srch_cnt
+		  ,alam_yn
+		  ,reg_dt
+		  ,reg_tm
+		  ,reg_user_id
+		  ,upt_dt
+		  ,upt_tm
+		  ,upt_user_id
+	from   TS_BLBD_BASE
+	where  1=1
+	<if test=" blbdNo != null and blbdNo != '' ">
+	and    blbd_no = #{blbdNo}::numeric     </if>
+	<if test=" blbdStrtDt != null and blbdStrtDt != '' and blbdExprtDt != null and blbdExprtDt != '' ">
+	and    blbd_strt_dt &lt;= #{blbdStrtDt} or blbd_expr_dt &gt;= #{blbdExprDt}		</if>
+	<if test=" blbdTypeCd != null and blbdTypeCd != '' ">
+	and    blbd_type_cd = #{blbdTypeCd}						</if>
+	<if test=" blbdTitl != null and blbdTitl != '' ">
+	and    blbd_titl like concat('%', #{blbdTitl}, '%')		</if>
+	<if test=" blbdCntn != null and blbdCntn != '' ">
+	and    blbd_cntn like concat('%', #{blbdCntn}, '%')		</if>
 	</select>
 	
 	<insert id="insertTsBlbdBase" parameterType="java.util.Map">

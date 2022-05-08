@@ -10,6 +10,7 @@ let notiMng = new Vue({
             blbdCntn:'',
             srchCnt:'',
             alamYn:'',
+            blbdPeri: 'THIS_MONTH',
             regDt:'',
             regTm:'',
             regUserId:'',
@@ -18,7 +19,11 @@ let notiMng = new Vue({
             rowCount: 30,
             currentPage: 1,
             currentIndex: 0
-    	}
+    	},
+        code:
+        {
+            blbdPeriList : []
+        },
 	},
 	
     methods: {
@@ -30,13 +35,20 @@ let notiMng = new Vue({
         	$this.initCodeList();
         	
         	$this.initGrid();
-        	
+
+            $this.setDatepicker();
+
         	$this.searchNotiList(true);
 
         	
         },
         initCodeList: function() {
-        	
+            let $this = this;
+            $this.code.blbdPeriList    = CodeUtil.getPeriodDateList();
+
+            const period = getPeriodDate($this.params.blbdPeri);
+            this.params.blbdStrtDt = period.strDt;
+            this.params.blbdExprDt = period.endDt;
         },
         initGrid: function() {
         	        	        	
@@ -46,11 +58,12 @@ let notiMng = new Vue({
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
                 {name: "blbdExprDt" , index: "blbdExprDt" , label: "게시만기 일자" , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
-                {name: "blbdTypeCd" , index: "blbdTypeCd" , label: "게시유형 코드" , width: 80, align: "center"},
-                {name: "blbdTitl"   , index: "blbdTitl"   , label: "게시제목"     , width: 80, align: "center"},
-                {name: "blbdCntn"   , index: "blbdCntn"   , label: "게시내용"     , width: 80, align: "center"},
+                {name: "blbdTypeCd" , index: "blbdTypeCd" , label: "게시유형 코드" , hidden: true},
+                {name: "blbdTypeNm" , index: "blbdTypeNm" , label: "게시유형"     , width: 80, align: "center"},
+                {name: "blbdTitl"   , index: "blbdTitl"   , label: "게시제목"     , width: 150},
+                {name: "blbdCntn"   , index: "blbdCntn"   , label: "게시내용"     , width: 200},
                 {name: "srchCnt"    , index: "srchCnt"    , label: "조회건수"     , width: 80, align: "center"},
-                {name: "alamYn"     , index: "alamYn"     , label: "알림여부"    , width: 80, align: "center"},
+                {name: "alamYn"     , index: "alamYn"     , label: "알림여부"     , width: 80, align: "center"},
                 {name: "regDt"      , index: "regDt"      , label: "등록일자"     , width: 80, align: "center"
                     , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
                 {name: "regTm"      , index: "regTm"      , label: "등록시각"     , width: 80, align: "center"
@@ -131,7 +144,40 @@ let notiMng = new Vue({
 		regUserPop: function(blbdNo) {
 			notiDetl.initPage(blbdNo);
 		},
-		resetSearchParam: function() {
+        setDatepicker : function() {
+            let $this = this;
+
+            $('#blbdStrtDtPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.blbdStrtDt = $('#blbdStrtDt').val();
+            });
+
+            $('#blbdExprDtPicker').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true,
+            }).on("changeDate", function() {
+                $this.params.blbdExprDt = $('#blbdExprDt').val();
+            });
+        },
+
+        blbdPeriSelect: function() {
+            let $this = this;
+            const period = getPeriodDate($this.params.blbdPeri);
+            this.params.blbdStrtDt = period.strDt;
+            this.params.blbdExprDt = period.endDt;
+        },
+
+        resetSearchParam: function() {
 			let $this = this;
 			$this.params = {
 				userId: '',
