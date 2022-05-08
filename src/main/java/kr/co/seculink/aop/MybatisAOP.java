@@ -203,7 +203,7 @@ public class MybatisAOP {
 
 						if (rSqls.length == 1 && sqlParamList.size() == 1)
 						{
-							String fieldName = (sqlParamList.get(0).getProperty()).toLowerCase();
+							String fieldName = "get" + (sqlParamList.get(0).getProperty()).toLowerCase();
 							List<Method> getMethods = methods.stream().filter(x -> x.getName().toLowerCase().endsWith(fieldName)).collect(Collectors.toList());
 
 							try {
