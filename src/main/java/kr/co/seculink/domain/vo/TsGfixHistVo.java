@@ -83,12 +83,6 @@ public class TsGfixHistVo implements Serializable {
 	/* grow_prdt_desc 성장_예측_설명 character varying(4000) */
 	private String growPrdtDesc;
 
-	/* unit_gidx 단위_성장지수 numeric(null) */
-	private Double unitGidx;
-
-	/* unit_grow_judg_cd 단위_성장_판정_코드 character varying(20) */
-	private String unitGrowJudgCd;
-
 	/* fat_stnd_ver 비만_기준_버전 character varying(20) */
 	private String fatStndVer;
 
@@ -106,12 +100,6 @@ public class TsGfixHistVo implements Serializable {
 
 	/* fat_judg_desc 비만_판정_설명 character varying(4000) */
 	private String fatJudgDesc;
-
-	/* unit_fidx 단위_비만지수 numeric(null) */
-	private Double unitFidx;
-
-	/* unit_fat_judg_cd 단위_비만_판정_코드 character varying(20) */
-	private String unitFatJudgCd;
 
 	/* fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8) */
 	private String fatpQustStndDt;
@@ -541,36 +529,6 @@ public class TsGfixHistVo implements Serializable {
 		this.growPrdtDesc = growPrdtDesc;
 	}
 	/**
-	 * Get unit_gidx 단위_성장지수 numeric(null)
-	 * @Return Double unitGidx
-	 */
-	public Double getUnitGidx() {
-		return this.unitGidx;
-	}
-	
-	/**
-	 * Set unit_gidx 단위_성장지수 numeric(null)
-	 * @Param Double unitGidx
-	 */
-	public void setUnitGidx(Double unitGidx) {
-		this.unitGidx = unitGidx;
-	}
-	/**
-	 * Get unit_grow_judg_cd 단위_성장_판정_코드 character varying(20)
-	 * @Return String unitGrowJudgCd
-	 */
-	public String getUnitGrowJudgCd() {
-		return this.unitGrowJudgCd;
-	}
-	
-	/**
-	 * Set unit_grow_judg_cd 단위_성장_판정_코드 character varying(20)
-	 * @Param String unitGrowJudgCd
-	 */
-	public void setUnitGrowJudgCd(String unitGrowJudgCd) {
-		this.unitGrowJudgCd = unitGrowJudgCd;
-	}
-	/**
 	 * Get fat_stnd_ver 비만_기준_버전 character varying(20)
 	 * @Return String fatStndVer
 	 */
@@ -659,36 +617,6 @@ public class TsGfixHistVo implements Serializable {
 	 */
 	public void setFatJudgDesc(String fatJudgDesc) {
 		this.fatJudgDesc = fatJudgDesc;
-	}
-	/**
-	 * Get unit_fidx 단위_비만지수 numeric(null)
-	 * @Return Double unitFidx
-	 */
-	public Double getUnitFidx() {
-		return this.unitFidx;
-	}
-	
-	/**
-	 * Set unit_fidx 단위_비만지수 numeric(null)
-	 * @Param Double unitFidx
-	 */
-	public void setUnitFidx(Double unitFidx) {
-		this.unitFidx = unitFidx;
-	}
-	/**
-	 * Get unit_fat_judg_cd 단위_비만_판정_코드 character varying(20)
-	 * @Return String unitFatJudgCd
-	 */
-	public String getUnitFatJudgCd() {
-		return this.unitFatJudgCd;
-	}
-	
-	/**
-	 * Set unit_fat_judg_cd 단위_비만_판정_코드 character varying(20)
-	 * @Param String unitFatJudgCd
-	 */
-	public void setUnitFatJudgCd(String unitFatJudgCd) {
-		this.unitFatJudgCd = unitFatJudgCd;
 	}
 	/**
 	 * Get fatp_qust_stnd_dt 비만예측_설문_기준_일자 character(8)
