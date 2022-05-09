@@ -92,9 +92,7 @@
 		<if test="growStndNo != null">
 		    ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
-		<if test="gidx != null">
 		    ,gidx /* gidx 성장지수 numeric */
-		</if>
 		<if test="growJudgCd != null">
 		    ,grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
@@ -119,9 +117,7 @@
 		<if test="nutrEatQty != null">
 		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
 		</if>
-		<if test="fidx != null">
 		    ,fidx /* fidx 비만지수 numeric */
-		</if>
 		<if test="fatJudgCd != null">
 		    ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>
@@ -195,9 +191,7 @@
 		<if test="growStndNo != null">
 		    ,#{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
-		<if test="gidx != null">
 		    ,#{gidx} /* gidx 성장지수 numeric */
-		</if>
 		<if test="growJudgCd != null">
 		    ,#{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
@@ -222,9 +216,7 @@
 		<if test="nutrEatQty != null">
 		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
 		</if>
-		<if test="fidx != null">
 		    ,#{fidx} /* fidx 비만지수 numeric */
-		</if>
 		<if test="fatJudgCd != null">
 		    ,#{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>
@@ -437,9 +429,7 @@
 		<if test="growStndNo != null">
 		    ,grow_stnd_no /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
-		<if test="gidx != null">
 		    ,gidx /* gidx 성장지수 numeric */
-		</if>
 		<if test="growJudgCd != null">
 		    ,grow_judg_cd /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
@@ -464,9 +454,7 @@
 		<if test="nutrEatQty != null">
 		    ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
 		</if>
-		<if test="fidx != null">
 		    ,fidx /* fidx 비만지수 numeric */
-		</if>
 		<if test="fatJudgCd != null">
 		    ,fat_judg_cd /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>
@@ -540,9 +528,7 @@
 		<if test="growStndNo != null">
 		    ,#{growStndNo} /* grow_stnd_no 성장_기준_번호 numeric */
 		</if>
-		<if test="gidx != null">
 		    ,#{gidx} /* gidx 성장지수 numeric */
-		</if>
 		<if test="growJudgCd != null">
 		    ,#{growJudgCd} /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		</if>
@@ -567,9 +553,7 @@
 		<if test="nutrEatQty != null">
 		    ,#{nutrEatQty} /* nutr_eat_qty 영양소_섭취_량 numeric */
 		</if>
-		<if test="fidx != null">
 		    ,#{fidx} /* fidx 비만지수 numeric */
-		</if>
 		<if test="fatJudgCd != null">
 		    ,#{fatJudgCd} /* fat_judg_cd 비만_판정_코드 character varying(20) */
 		</if>

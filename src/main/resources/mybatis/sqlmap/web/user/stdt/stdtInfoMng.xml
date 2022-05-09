@@ -379,7 +379,7 @@
               ,tslh.loc_hist_no
               ,tslh.plc_clss_cd
               ,fn_getcdnm('PLC_CLSS_CD'               ,tslh.plc_clss_cd) as plc_clss_nm
-              ,tlib.loc_nm
+              ,tslh.loc_nm
               ,tslh.lat_val
               ,tslh.lon_val
               ,to_char(to_timestamp(tslh.occr_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as occr_dttm
@@ -387,8 +387,6 @@
         inner join stdt_info stdt
            on tslh.stdt_no = stdt.stdt_no
           and tslh.loc_hist_no = stdt.loc_hist_no
-        inner join ts_loc_info_base tlib
-           on tslh.near_loc_no = tlib.loc_no
     )
     , grow_stat_list as (
     /* 위험감정 */
@@ -399,16 +397,15 @@
              ,tds.dgem_stat_cntn
              ,tslh.plc_clss_cd
              ,fn_getcdnm('PLC_CLSS_CD' ,tslh.plc_clss_cd) as plc_clss_nm
-             ,tlib.loc_nm
-             ,tlib.plc_cd
-             ,fn_getcdnm('PLC_CD' , tlib.plc_cd) as plc_nm
+             ,tslh.loc_nm
+             ,tslh.plc_cd
+             ,fn_getcdnm('PLC_CD' , tslh.plc_cd) as plc_nm
              ,tjb.hbit_mdan
              ,tsdh.hbit_stat_cd
              ,fn_getcdnm('HBIT_STAT_CD' , tsdh.hbit_stat_cd) as hbit_stat_nm
              ,tjb.temp_val
              ,fn_getcdnm('TEMP_STAT_CD' , tsdh.temp_stat_cd) as temp_stat_nm
-             -- ,to_char(to_timestamp(tsdh.loc_mesu_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as loc_mesu_dttm
-             ,'' as loc_mesu_dttm
+             ,to_char(to_timestamp(tsdh.reg_dt || tsdh.reg_tm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD HH24:MI:SS') as loc_mesu_dttm
              ,tsdh.dgem_idx
              ,tsdh.dgem_stat_cd
              ,fn_getcdnm('DGEM_STAT_CD' , tsdh.dgem_stat_cd) as dgem_stat_nm
@@ -424,8 +421,6 @@
          inner join ts_stdt_loc_hist tslh
            on  tsdh.stdt_no = tslh.stdt_no
           and tsdh.loc_hist_no = tslh.loc_hist_no
-         inner join ts_loc_info_base tlib
-           on tslh.near_loc_no = tlib.loc_no
          inner join td_judg_base tjb
            on tsdh.judg_no = tjb.judg_no
     )
