@@ -151,7 +151,7 @@ let guarInfoMng = new Vue({
                             });
                             //학생정보 상세 팝업
                             $("#guarInfo_list").find('A.links[data-stdt]').on('click', function(e) {
-                                guarInfoMng.regStdtInfoDetlPopup($(e.target).data('stdt-no'), $(e.target).data('guar-no'))
+                                guarInfoMng.searchStdtInfoDetlPopup($(e.target).data('stdt-no'), $(e.target).data('guar-no'))
                             });
                         }
                     }));
@@ -277,6 +277,11 @@ let guarInfoMng = new Vue({
             //학생정보상세 팝업
             regStdtInfoDetlPopup: function(stdtNo, guarNo){
                 stdtRegDetl.initPage(stdtNo, guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
+            },
+
+            //학생정보상세 팝업
+            searchStdtInfoDetlPopup: function(stdtNo, guarNo){
+                stdtInfoDetl.initPage(stdtNo, guarNo, function(){ guarInfoMng.searchGuarInfoList(true) });
             },
             resetSearchParam: function()
             {
