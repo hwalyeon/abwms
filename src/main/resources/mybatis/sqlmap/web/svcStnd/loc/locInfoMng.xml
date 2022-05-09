@@ -142,7 +142,7 @@
 				AND  	DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%')</if>
 				GROUP BY TLIB.LOC_NO,
 						TSB.STDT_NO
-				ORDER BY TLIB.LOC_NO
+				ORDER BY TLIB.LOC_NM
 				<if test=' paging == "Y" '>
 				LIMIT ${rowCount} OFFSET ${currentIndex}
 				</if>
