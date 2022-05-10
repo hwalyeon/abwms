@@ -1413,7 +1413,7 @@ let totMonStat = new Vue({
         },
         clock: function() {
             let $this = this;
-            let date = moment().lang("ko", { hour12: true });
+            let date = moment().lang("ko-KR", { hour12: true });
 
             $this.clockParam.hhmmss = date.format(time12FormatPattern);
             $this.clockParam.yyyymmdd = date.format(dateFormatPattern);
@@ -2336,8 +2336,6 @@ let totMonStat = new Vue({
         },
         getMenuList: function() {
             let $this = this;
-
-			console.log('getMenuList');
 
             AjaxUtil.post({
                 url: "/oper/cmon/totMonStat/searchTotMonStatMenuList.ab",
