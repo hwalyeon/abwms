@@ -1413,7 +1413,8 @@ let totMonStat = new Vue({
         },
         clock: function() {
             let $this = this;
-            let date = moment().lang("ko-KR", { hour12: true });
+            let date = moment().locale('ko', { hour12: true });
+
 
             $this.clockParam.hhmmss = date.format(time12FormatPattern);
             $this.clockParam.yyyymmdd = date.format(dateFormatPattern);
