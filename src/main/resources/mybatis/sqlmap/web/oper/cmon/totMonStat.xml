@@ -2,8 +2,94 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="oper.cmon.totMonStat">
 
+	<!-- 가동_현황 -->
+	<select id="searchBandOperStat" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT  SUM(BAND_OPER_OPEN) AS BAND_OPER_OPEN,
+				SUM(BAND_OPER_NORM) AS BAND_OPER_NORM,
+				SUM(BAND_OPER_OPEN) - SUM(BAND_OPER_NORM) AS BAND_OPER_NASR,
+				ROUND(SUM(BAND_OPER_NORM) / SUM(BAND_OPER_OPEN) * 100, 1) AS BAND_OPER_RT
+		FROM    (
+					SELECT  COUNT(1) AS BAND_OPER_OPEN,
+							CASE WHEN BAND_STAT_CD = 'NORM' THEN COUNT(1) ELSE 0 END AS BAND_OPER_NORM
+					FROM    TM_STDT_BASE
+					WHERE   1=1
+					GROUP BY BAND_STAT_CD
+				) STDT_BASE
+		WHERE   1=1
+	</select>
 
+	<!-- 개통_현황 -->
+	<select id="searchBandOpenStat" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT  SUM(BAND_OPEN_OPEN) AS BAND_OPEN_OPEN,
+				SUM(BAND_OPEN_PRNT) AS BAND_OPEN_PRNT,
+				SUM(BAND_OPEN_NORM) AS BAND_OPEN_NORM,
+				ROUND(SUM(BAND_OPEN_OPEN) / SUM(BAND_OPEN_TOTL) * 100, 1) AS BAND_OPEN_OPEN_RT,
+				ROUND(SUM(BAND_OPEN_PRNT) / SUM(BAND_OPEN_TOTL) * 100, 1) AS BAND_OPEN_PRNT_RT,
+				ROUND(SUM(BAND_OPEN_NORM) / SUM(BAND_OPEN_TOTL) * 100, 1) AS BAND_OPEN_NORM_RT
+		FROM    (
+					SELECT  CASE WHEN BAND_OPEN_STAT_CD = 'OPEN' THEN COUNT(1) ELSE 0 END AS BAND_OPEN_OPEN,
+							CASE WHEN BAND_OPEN_STAT_CD = 'PRNT' THEN COUNT(1) ELSE 0 END AS BAND_OPEN_PRNT,
+							CASE WHEN BAND_OPEN_STAT_CD = 'NORM' THEN COUNT(1) ELSE 0 END AS BAND_OPEN_NORM,
+							CASE WHEN BAND_OPEN_STAT_CD IN ('OPEN', 'PRNT', 'NORM') THEN COUNT(1) ELSE 0 END AS BAND_OPEN_TOTL
+					FROM    TS_BAND_INFO
+					WHERE   1=1
+					GROUP BY BAND_OPEN_STAT_CD
+				) BAND_INFO
+		WHERE   1=1
+	</select>
 
+	<!-- 헬스케어_활용율 -->
+	<select id="searchHcUseRt" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH        STDT_CNT as /* 학생_수 */
+						(
+							SELECT      COALESCE(COUNT(1), 0) AS STDT_CNT
+							FROM        TM_STDT_BASE
+							WHERE       1=1
+							  AND         BAND_STAT_CD = 'NORM'
+							GROUP BY    BAND_STAT_CD
+						),
+					GFIX_CNT as /* 성장/비만_학생_수 */
+						(
+							SELECT      COUNT(1) AS GFIX_CNT
+							FROM        (
+											SELECT      STDT_NO AS GFIX_CNT
+											FROM        TS_GFIX_HIST
+											WHERE       1=1
+											  AND         GFIX_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+											GROUP BY    STDT_NO
+										) GFIX_CNT
+						),
+					FATP_CNT AS /* 비만예측_학생_수 */
+						(
+							SELECT      COUNT(1) AS FATP_CNT
+							FROM        (
+											SELECT      STDT_NO AS FATP_CNT
+											FROM        TS_FATP_QUST_HIST
+											WHERE       1=1
+											  AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+											GROUP BY    STDT_NO
+										) FATP_CNT
+						),
+					STRS_CNT AS /* 스트레스_학생_수 */
+						(
+							SELECT      COUNT(1) AS STRS_CNT
+							FROM        (
+											SELECT      STDT_NO AS STRS_CNT
+											FROM        TS_STDT_STRS_HIST
+											WHERE       1=1
+											  AND         STRS_JUDG_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+											GROUP BY    STDT_NO
+										) STRS_CNT
+						)
+		SELECT      SUM(STDT_CNT)                                   AS HC_USE_STDT_CNT,
+					SUM(GFIX_CNT)                                   AS HC_USE_GFIX_CNT,
+					ROUND(SUM(GFIX_CNT) / SUM(STDT_CNT) * 100, 1)   AS HC_USE_GFIX_RT,
+					SUM(FATP_CNT)                                   AS HC_USE_FATP_CNT,
+					ROUND(SUM(FATP_CNT) / SUM(STDT_CNT) * 100, 1)   AS HC_USE_FATP_RT,
+					SUM(STRS_CNT)                                   AS HC_USE_STRS_CNT,
+					ROUND(SUM(STRS_CNT) / SUM(STDT_CNT) * 100, 1)   AS HC_USE_STRS_RT
+		FROM        STDT_CNT, GFIX_CNT, FATP_CNT, STRS_CNT
+	</select>
 
 	<!-- 위험안전발생 -->
 	<select id="searchDgsfOccr" parameterType="java.util.Map" resultType="MybatisMap">
@@ -79,12 +165,14 @@
 					SUM(WEEK_1_AGO)             AS WEEK_1_AGO,
 					SUM(WEEK_2_AGO)             AS WEEK_2_AGO,
 					SUM(WEEK_3_AGO)             AS WEEK_3_AGO,
-					SUM(WEEK_4_AGO)             AS WEEK_4_AGO
+					SUM(WEEK_4_AGO)             AS WEEK_4_AGO,
+					MAX(MIN_MAX) / MIN(MIN_MAX) AS MIN_MAX_RT
 		FROM        (
 					SELECT      CASE WHEN WEEK_SEQ = 1 THEN SUM(OCCR_CNT) END WEEK_1_AGO,
 								CASE WHEN WEEK_SEQ = 2 THEN SUM(OCCR_CNT) END WEEK_2_AGO,
 								CASE WHEN WEEK_SEQ = 3 THEN SUM(OCCR_CNT) END WEEK_3_AGO,
-								CASE WHEN WEEK_SEQ = 4 THEN SUM(OCCR_CNT) END WEEK_4_AGO
+								CASE WHEN WEEK_SEQ = 4 THEN SUM(OCCR_CNT) END WEEK_4_AGO,
+								SUM(OCCR_CNT) AS MIN_MAX
 					FROM        (
 								SELECT      STND_YYMM,
 											MNTH_WEEK_SEQ,
@@ -119,10 +207,10 @@
 								WHERE       1=1
 								AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
 								)
-					SELECT      CASE WHEN LOC_APNT_CD = 'GORG' AND PLC_CLSS_CD = 'DZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GORG_DZON,
-								CASE WHEN LOC_APNT_CD = 'GORG' AND PLC_CLSS_CD = 'SZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GORG_SZON,
-								CASE WHEN LOC_APNT_CD = 'GUAR' AND PLC_CLSS_CD = 'DZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GUAR_DZON,
-								CASE WHEN LOC_APNT_CD = 'GUAR' AND PLC_CLSS_CD = 'SZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,2) ELSE 0 END AS GUAR_SZON
+					SELECT      CASE WHEN LOC_APNT_CD = 'GORG' AND PLC_CLSS_CD = 'DZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,1) ELSE 0 END AS GORG_DZON,
+								CASE WHEN LOC_APNT_CD = 'GORG' AND PLC_CLSS_CD = 'SZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,1) ELSE 0 END AS GORG_SZON,
+								CASE WHEN LOC_APNT_CD = 'GUAR' AND PLC_CLSS_CD = 'DZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,1) ELSE 0 END AS GUAR_DZON,
+								CASE WHEN LOC_APNT_CD = 'GUAR' AND PLC_CLSS_CD = 'SZONE' THEN ROUND(SUM(OCCR_CNT)/TSC.TOT_CNT*100,1) ELSE 0 END AS GUAR_SZON
 					FROM        TT_ZONE_DTCT_STSS TZDS
 								LEFT OUTER JOIN TOT_CNT TSC ON 1=1
 					WHERE       1=1
@@ -305,7 +393,200 @@
 		FROM		TS_STDT_DGEM_HIST TSDH
 		WHERE		1 = 1
 		ORDER BY	DGEM_DT DESC, DGEM_TM DESC
-			LIMIT 		11
+		LIMIT 		11
+	</select>
+
+	<!-- 헬스케어_성장지수 -->
+	<select id="searchHcGidx" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH        GIDX AS
+						(
+							SELECT      COALESCE(ROUND(AVG(AVG_IDX),1), 0) AS GIDX_AVG
+							FROM        TT_GIDX_STSS
+							WHERE       1=1
+							AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						)
+		SELECT      ROUND(SUM(GIDX_VLOW)  / SUM(GIDX_TOTL) * 100, 1)    AS HC_GIDX_VLOW,
+					ROUND(SUM(GIDX_OHIGH) / SUM(GIDX_TOTL) * 100, 1)    AS HC_GIDX_OHIGH,
+					(SELECT GIDX_AVG FROM GIDX) AS HC_GIDX_AVG
+		FROM        (
+						SELECT      COALESCE(SUM(OCCR_CNT), 0) AS GIDX_TOTL,
+									CASE WHEN GROW_JUDG_CD = 'VLOW'  THEN SUM(OCCR_CNT) ELSE 0 END GIDX_VLOW,
+									CASE WHEN GROW_JUDG_CD = 'OHIGH' THEN SUM(OCCR_CNT) ELSE 0 END GIDX_OHIGH
+						FROM        TT_GROW_JUDG_STSS
+						WHERE       1=1
+						AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						GROUP BY    GROW_JUDG_CD
+					) GIDX_JUDG
+		WHERE       1=1
+	</select>
+
+	<!-- 헬스케어_비만지수 -->
+	<select id="searchHcFidx" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH        FIDX AS
+						(
+							SELECT      COALESCE(ROUND(AVG(AVG_IDX),1), 0) AS FIDX_AVG
+							FROM        TT_FIDX_STSS
+							WHERE       1=1
+							AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						)
+		SELECT      ROUND(SUM(FIDX_VLOW) / SUM(FIDX_TOTL) * 100, 1) AS HC_FIDX_VLOW,
+					ROUND(SUM(FIDX_FAT)  / SUM(FIDX_TOTL) * 100, 1) AS HC_FIDX_FAT,
+					ROUND(SUM(FIDX_FFAT) / SUM(FIDX_TOTL) * 100, 1) AS HC_FIDX_FFAT,
+					(SELECT FIDX_AVG FROM FIDX) AS HC_FIDX_AVG
+		FROM        (
+						SELECT      COALESCE(SUM(OCCR_CNT), 0) AS FIDX_TOTL,
+									CASE WHEN FAT_JUDG_CD = 'VLOW'  THEN SUM(OCCR_CNT) ELSE 0 END FIDX_VLOW,
+									CASE WHEN FAT_JUDG_CD = 'FAT'   THEN SUM(OCCR_CNT) ELSE 0 END FIDX_FAT,
+									CASE WHEN FAT_JUDG_CD = 'FFAT'  THEN SUM(OCCR_CNT) ELSE 0 END FIDX_FFAT
+						FROM        TT_FAT_JUDG_STSS
+						WHERE       1=1
+						AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						GROUP BY    FAT_JUDG_CD
+					) FIDX_JUDG
+		WHERE       1=1
+	</select>
+
+	<!-- 헬스케어_비만예측 -->
+	<select id="searchHcFpidx" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH        FPIDX AS
+						(
+							SELECT      COALESCE(ROUND(AVG(AVG_IDX),1), 0) AS FPIDX_AVG
+							FROM        TT_FATP_IDX_STSS
+							WHERE       1=1
+							AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						)
+		SELECT      ROUND(SUM(FPIDX_VLOW) / SUM(FPIDX_TOTL) * 100, 1)   AS HC_FPIDX_VLOW,
+					ROUND(SUM(FPIDX_FAT)  / SUM(FPIDX_TOTL) * 100, 1)   AS HC_FPIDX_FAT,
+					ROUND(SUM(FPIDX_FFAT) / SUM(FPIDX_TOTL) * 100, 1)   AS HC_FPIDX_FFAT,
+					(SELECT FPIDX_AVG FROM FPIDX) AS HC_FPIDX_AVG
+		FROM        (
+						SELECT      COALESCE(SUM(OCCR_CNT), 0) AS FPIDX_TOTL,
+									CASE WHEN FATP_JUDG_CD = 'VLOW'  THEN SUM(OCCR_CNT) ELSE 0 END FPIDX_VLOW,
+									CASE WHEN FATP_JUDG_CD = 'FAT'   THEN SUM(OCCR_CNT) ELSE 0 END FPIDX_FAT,
+									CASE WHEN FATP_JUDG_CD = 'FFAT'  THEN SUM(OCCR_CNT) ELSE 0 END FPIDX_FFAT
+						FROM        TT_FATP_JUDG_STSS
+						WHERE       1=1
+						AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						GROUP BY    FATP_JUDG_CD
+					) FPIDX_JUDG
+		WHERE       1=1
+	</select>
+
+	<!-- 헬스케어_스트레스 -->
+	<select id="searchHcStrs" parameterType="java.util.Map" resultType="MybatisMap">
+		WITH        STRS_IDX AS
+						(
+							SELECT      COALESCE(ROUND(AVG(AVG_IDX),1), 0) AS STRS_IDX_AVG
+							FROM        TT_STRS_IDX_STSS
+							WHERE       1=1
+							AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						)
+		SELECT      ROUND(SUM(STRS_HIGH)  / SUM(STRS_TOTL) * 100, 1)    AS HC_STRS_HIGH,
+					ROUND(SUM(STRS_OHIGH) / SUM(STRS_TOTL) * 100, 1)    AS HC_STRS_OHIGH,
+					(SELECT STRS_IDX_AVG FROM STRS_IDX) AS HC_STRS_AVG
+		FROM        (
+						SELECT      COALESCE(SUM(OCCR_CNT), 0) AS STRS_TOTL,
+									CASE WHEN STRS_STAT_CD = 'HIGH'     THEN SUM(OCCR_CNT) ELSE 0 END STRS_HIGH,
+									CASE WHEN STRS_STAT_CD = 'OHIGH'    THEN SUM(OCCR_CNT) ELSE 0 END STRS_OHIGH
+						FROM        TT_STRS_JUDG_STSS
+						WHERE       1=1
+						AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						GROUP BY    STRS_STAT_CD
+					) STRS_JUDG
+		WHERE       1=1
+	</select>
+
+	<!-- 헬스케어_평균_운동시간 -->
+	<select id="searchHcAvgAct" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      SUM(AVG_ACT)                        AS HC_AVG_ACT,
+					SUM(PDAY_AVG_ACT)                   AS HC_PDAY_AVG_ACT,
+					SUM(PDAY_AVG_ACT) - SUM(AVG_ACT)    AS HC_AVG_ACT_DIF
+		FROM        (
+						SELECT      COALESCE(ROUND(AVG(AVG_ACT_TCNT_MCNT)/60,1), 0) AS AVG_ACT,
+									0 AS PDAY_AVG_ACT
+						FROM        TT_ACT_STSS
+						WHERE       1=1
+						AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						UNION ALL
+						SELECT      0 AS AVG_ACT,
+									COALESCE(ROUND(AVG(AVG_ACT_TCNT_MCNT)/60,1), 0) AS PDAY_AVG_ACT
+						FROM        TT_ACT_STSS
+						WHERE       1=1
+						AND         STND_DT = TO_CHAR(NOW() - INTERVAL '1 DAY', 'YYYYMMDD'::TEXT)
+					) AVG_ACT
+		WHERE       1=1
+	</select>
+
+	<!-- 헬스케어_평균_칼로리_섭취 -->
+	<select id="searchHcAvgCalEat" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      SUM(CAL_EAT)                        AS HC_CAL_EAT,
+					SUM(PDAY_CAL_EAT)                   AS HC_PDAY_CAL_EAT,
+					SUM(PDAY_CAL_EAT) - SUM(CAL_EAT)    AS HC_CAL_EAT_DIF
+		FROM        (
+						SELECT      COALESCE(ROUND(AVG(AVG_CAL_EAT_QTY),0), 0) AS CAL_EAT,
+									0 AS PDAY_CAL_EAT
+						FROM        TT_CAL_EAT_STSS
+						WHERE       1=1
+						AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						UNION ALL
+						SELECT      0 AS CAL_EAT,
+									COALESCE(ROUND(AVG(AVG_CAL_EAT_QTY),0), 0) AS PDAY_CAL_EAT
+						FROM        TT_CAL_EAT_STSS
+						WHERE       1=1
+						AND         STND_DT = TO_CHAR(NOW() - INTERVAL '1 DAY', 'YYYYMMDD'::TEXT)
+					) CAL_EAT
+		WHERE       1=1
+	</select>
+
+	<!-- 헬스케어_주요식단_TOP3 -->
+	<select id="searchHcFmenuTop3" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      MAX(EAT_FOOD_1)                                     AS HC_EAT_FOOD_1,
+					(SELECT FOOD_LCLS_NM FROM TI_FOOD_INFO X WHERE X.FOOD_NO = MAX(FOOD.EAT_FOOD_1)) AS HC_EAT_FOOD_NM_1,
+					ROUND(SUM(EAT_CNT_1) / SUM(EAT_CNT_TOTL) * 100, 1)  AS HC_EAT_CNT_1,
+					MAX(EAT_FOOD_2)                                     AS HC_EAT_FOOD_2,
+					(SELECT FOOD_LCLS_NM FROM TI_FOOD_INFO X WHERE X.FOOD_NO = MAX(FOOD.EAT_FOOD_2)) AS HC_EAT_FOOD_NM_2,
+					ROUND(SUM(EAT_CNT_2) / SUM(EAT_CNT_TOTL) * 100, 1)  AS HC_EAT_CNT_2,
+					MAX(EAT_FOOD_3)                                     AS HC_EAT_FOOD_3,
+					(SELECT FOOD_LCLS_NM FROM TI_FOOD_INFO X WHERE X.FOOD_NO = MAX(FOOD.EAT_FOOD_3)) AS HC_EAT_FOOD_NM_3,
+					ROUND(SUM(EAT_CNT_3) / SUM(EAT_CNT_TOTL) * 100, 1)  AS HC_EAT_CNT_3
+		FROM        (
+					SELECT      CASE WHEN EAT_RANK = 1 THEN FOOD_NO ELSE 0 END AS EAT_FOOD_1,
+								CASE WHEN EAT_RANK = 1 THEN EAT_CNT ELSE 0 END AS EAT_CNT_1,
+								CASE WHEN EAT_RANK = 2 THEN FOOD_NO ELSE 0 END AS EAT_FOOD_2,
+								CASE WHEN EAT_RANK = 2 THEN EAT_CNT ELSE 0 END AS EAT_CNT_2,
+								CASE WHEN EAT_RANK = 3 THEN FOOD_NO ELSE 0 END AS EAT_FOOD_3,
+								CASE WHEN EAT_RANK = 3 THEN EAT_CNT ELSE 0 END AS EAT_CNT_3,
+								CASE WHEN 1=1 THEN EAT_CNT ELSE 0 END AS EAT_CNT_TOTL
+					FROM        (
+					SELECT      FOOD_NO, SUM(EAT_CNT) AS EAT_CNT, ROW_NUMBER () OVER (ORDER BY SUM(EAT_CNT) DESC) AS EAT_RANK
+					FROM        TT_FOOD_EAT_STSS
+					WHERE       1=1
+					AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+					GROUP BY    FOOD_NO
+					) A
+		WHERE       1=1
+		AND         EAT_RANK &lt; 4
+		) FOOD
+	</select>
+
+	<!-- 헬스케어_아침식사_결식율 -->
+	<select id="searchHcMmelNeat" parameterType="java.util.Map" resultType="MybatisMap">
+		SELECT      SUM(NEAT_HIST_OBJ_CNT)  AS HC_NEAT_HIST_OBJ_CNT,
+					SUM(NEAT_HIST_NEAT_CNT) AS HC_NEAT_HIST_NEAT_CNT,
+					ROUND(SUM(NEAT_HIST_NEAT_CNT) / SUM(NEAT_HIST_OBJ_CNT) * 100, 1) AS HC_NEAT_HIST_NEAT_RT,
+					SUM(NEAT_QUST_OBJ_CNT)  AS HC_NEAT_QUST_OBJ_CNT,
+					SUM(NEAT_QUST_NEAT_CNT) AS HC_NEAT_QUST_NEAT_CNT,
+					ROUND(SUM(NEAT_QUST_NEAT_CNT) / SUM(NEAT_QUST_OBJ_CNT) * 100, 1) AS HC_NEAT_QUST_NEAT_RT
+		FROM        (
+						SELECT      CASE WHEN EAGR_DIV_CD = 'HIST' THEN OBJ_CNT     ELSE 0 END NEAT_HIST_OBJ_CNT,
+									CASE WHEN EAGR_DIV_CD = 'HIST' THEN NEAT_CNT    ELSE 0 END NEAT_HIST_NEAT_CNT,
+									CASE WHEN EAGR_DIV_CD = 'QUST' THEN OBJ_CNT     ELSE 0 END NEAT_QUST_OBJ_CNT,
+									CASE WHEN EAGR_DIV_CD = 'QUST' THEN NEAT_CNT    ELSE 0 END NEAT_QUST_NEAT_CNT
+						FROM        TT_NEAT_STSS
+						WHERE       1=1
+						AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+						AND         ETIM_DIV_CD = 'MORN'
+					) MORN_NEAT
 	</select>
 
 	<!-- 종합관제현황_메뉴_리스트_조회 -->

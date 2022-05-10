@@ -6,6 +6,32 @@ let totMonStat = new Vue({
             searchClass : '01',
             empNo : 0
         },
+        //가동_현황
+        bandOperStat : {
+            bandOperOpen : 0,
+            bandOperNorm : 0,
+            bandOperNasr : 0,
+            bandOperRt   : 0
+        },
+        //개통_현황
+        bandOpenStat : {
+            bandOpenOpen    : 0,
+            bandOpenPrnt    : 0,
+            bandOpenNorm    : 0,
+            bandOpenOpenRt  : 0,
+            bandOpenPrntRt  : 0,
+            bandOpenNormRt  : 0,
+        },
+        //헬스케어_활용율
+        hcUseRt : {
+            hcUseStdtCnt : 0,
+            hcUseGfixCnt : 0,
+            hcUseGfixRt  : 0,
+            hcUseFatpCnt : 0,
+            hcUseFatpRt  : 0,
+            hcUseStrsCnt : 0,
+            hcUseStrsRt  : 0
+        },
         //위험안전발생
         dgsfOccr : {
             mnthDngrAvg : 0,
@@ -25,7 +51,7 @@ let totMonStat = new Vue({
             week2Ago    : 0,
             week3Ago    : 0,
             week4Ago    : 0,
-            lowHighDif  : 0,
+            minMaxRt    : 0,
             trnd        : ''
         },
         //안전위험지역_탐지율
@@ -71,99 +97,157 @@ let totMonStat = new Vue({
             dgemHistStatCd : '',
             dgemHistStatNm : ''
         }],
-
+        //헬스케어_성장지수
+        hcGidx : {
+            hcGidxVlow  : 0,
+            hcGidxOhigh : 0,
+            hcGidxAvg   : 0
+        },
+        //헬스케어_비만지수
+        hcFidx : {
+            hcFidxVlow  : 0,
+            hcFidxFat   : 0,
+            hcFidxFfat  : 0,
+            hcFidxAvg   : 0
+        },
+        //헬스케어_비만예측
+        hcFpidx : {
+            hcFpidxVlow : 0,
+            hcFpidxFat  : 0,
+            hcFpidxFfat : 0,
+            hcFpidxAvg  : 0
+        },
+        //헬스케어_스트레스
+        hcStrs : {
+            hcStrsHigh  : 0,
+            hcStrsOhigh : 0,
+            hcStrsAvg   : 0
+        },
+        //헬스케어_평균_운동시간
+        hcAvgAct : {
+            hcAvgAct    : 0,
+            hcPdayAvgAct: 0,
+            hcAvgActDif : 0
+        },
+        //헬스케어_평균_칼로리_섭취
+        hcAvgCalEat : {
+            hcCalEat    : 0,
+            hcPdayCalEat: 0,
+            hcCalEatDif : 0
+        },
+        //헬스케어_주요식단_TOP3
+        hcFmenuTop3 : {
+            hcEatFood1  : 0,
+            hcEatFoodNm1: '',
+            hcEatCnt1   : 0,
+            hcEatFood2  : 0,
+            hcEatFoodNm2: '',
+            hcEatCnt2   : 0,
+            hcEatFood3  : 0,
+            hcEatFoodNm3: '',
+            hcEatCnt3   : 0
+        },
+        //헬스케어_아침식사_결식율
+        hcMmelNeat : {
+            hcNeatHistObjCnt    : 0,
+            hcNeatHistNeatCnt   : 0,
+            hcNeatHistNeatRt    : 0,
+            hcNeatQustObjCnt    : 0,
+            hcNeatQustNeatCnt   : 0,
+            hcNeatQustNeatRt    : 0
+        },
 
         ////////////////////// 임시 //////////////////////
-        totMonStat: {
-            openCnt             : 0,
-            operCnt             : 0,
-            noRsps              : 0,
-
-            temp                : null,
-            // tmpDngrSafeOcrrTd   : 0,
-            // tmpDngrSafeOcrrDif  : 0,
-            // tmpDngrSafeOcrrYav  : 5.8,
-
-            tmpTotal            : 200000,
-            tmpUsage            : 140000,
-            tmpNumber1          : 200000,
-            tmpNumber2          : 180000,
-            tmpNumber3          : 20000,
-            tmpNumber4          : 500000,
-            tmpNumber5          : 300000,
-            tmpNumber6          : 200000,
-            tmpNumber7          : 200000,
-            tmpNumber8          : 14000,
-            tmpNumber9          : 10000,
-            tmpNumber10         : 13000,
-            tmpNumber11         : 30,
-
-            plcCdPublTop1       : '유흥/유해',
-            plcCdPublTop2       : '공사/위험물',
-            plcCdPublTop3       : '우범지역',
-            addrPublTop1        : '서울특별시 마포구 마포대로12 한신빌딩 911',
-            addrPublTop2        : '서울특별시 금천구 디지털로9길 99 스타밸리빌',
-            addrPublTop3        : '서울시 금천구 가산동 1234-17 우리벤처타워',
-            cntPublTop1         : 123,
-            cntPublTop2         : 78,
-            cntPublTop3         : 50,
-            plcCdPrntTop1       : '우범지역',
-            plcCdPrntTop2       : '유흥/유해',
-            plcCdPrntTop3       : '공사/위험물',
-            addrPrntTop1        : '서울특별시 송파구 송파대로8길 17',
-            addrPrntTop2        : '제주특별자치도 제주시 첨단로 242',
-            addrPrntTop3        : '서울특별시 용산구 국방부',
-            cntPrntTop1         : 123,
-            cntPrntTop2         : 78,
-            cntPrntTop3         : 999,
-
-            careBmiBodyIdxAvg       : 27.56,
-            careBmiBodyIdxMin       : 17.12,
-            careBmiBodyIdxMax       : 42.78,
-
-            careGrowLowRt           : 20,
-            careGrowOverRt          : 27,
-
-            careFatIdxHighRt        : 10,
-            careFatIdxGnrlRt        : 20,
-            careFatIdxUndrRt        : 10,
-
-            careFatPrdtHighRt       : 10,
-            careFatPrdtGnrlRt       : 20,
-            careFatPrdtUndrRt       : 10,
-
-            careStrsHigh            : 20,
-            careStrsVeryHigh        : 10,
-
-            careExcsTimeAvg         : 1.2,
-            careExcsTimeBfDay       : 1.5,
-            careExcsTimeDif         : 0.3,
-
-            careCalEatAvg           : 2113,
-            careCalEatbfDay         : 2238,
-            careCalEatDif           : 125,
-
-            careFmenuCdTop1         : '밥',
-            careFmenuRtTop1         : 33.1,
-            careFmenuCdTop2         : '빵',
-            careFmenuRtTop2         : 27.5,
-            careFmenuCdTop3         : '튀김',
-            careFmenuRtTop3         : 12.9,
-
-            careMmelNeatFmenuCnt    : 11853,
-            careMmelNeatFmenuObj    : 20000,
-
-            careMmelNeatQustCnt     : 11853,
-            careMmelNeatQustObj     : 20000,
-
-        },
-        totCnt: {
-            tmpDngrZoneCnt      : 4400,
-            tmpFallDownCnt      : 2400,
-            tmpHbitAbnmCnt      : 1200,
-            tmpTmepAbnmCnt      : 3300,
-            tmpTotalCnt         : 20000
-        },
+        // totMonStat: {
+        //     openCnt             : 0,
+        //     operCnt             : 0,
+        //     noRsps              : 0,
+        //
+        //     temp                : null,
+        //     // tmpDngrSafeOcrrTd   : 0,
+        //     // tmpDngrSafeOcrrDif  : 0,
+        //     // tmpDngrSafeOcrrYav  : 5.8,
+        //
+        //     tmpTotal            : 200000,
+        //     tmpUsage            : 140000,
+        //     tmpNumber1          : 200000,
+        //     tmpNumber2          : 180000,
+        //     tmpNumber3          : 20000,
+        //     tmpNumber4          : 500000,
+        //     tmpNumber5          : 300000,
+        //     tmpNumber6          : 200000,
+        //     tmpNumber7          : 200000,
+        //     tmpNumber8          : 14000,
+        //     tmpNumber9          : 10000,
+        //     tmpNumber10         : 13000,
+        //     tmpNumber11         : 30,
+        //
+        //     plcCdPublTop1       : '유흥/유해',
+        //     plcCdPublTop2       : '공사/위험물',
+        //     plcCdPublTop3       : '우범지역',
+        //     addrPublTop1        : '서울특별시 마포구 마포대로12 한신빌딩 911',
+        //     addrPublTop2        : '서울특별시 금천구 디지털로9길 99 스타밸리빌',
+        //     addrPublTop3        : '서울시 금천구 가산동 1234-17 우리벤처타워',
+        //     cntPublTop1         : 123,
+        //     cntPublTop2         : 78,
+        //     cntPublTop3         : 50,
+        //     plcCdPrntTop1       : '우범지역',
+        //     plcCdPrntTop2       : '유흥/유해',
+        //     plcCdPrntTop3       : '공사/위험물',
+        //     addrPrntTop1        : '서울특별시 송파구 송파대로8길 17',
+        //     addrPrntTop2        : '제주특별자치도 제주시 첨단로 242',
+        //     addrPrntTop3        : '서울특별시 용산구 국방부',
+        //     cntPrntTop1         : 123,
+        //     cntPrntTop2         : 78,
+        //     cntPrntTop3         : 999,
+        //
+        //     careBmiBodyIdxAvg       : 27.56,
+        //     careBmiBodyIdxMin       : 17.12,
+        //     careBmiBodyIdxMax       : 42.78,
+        //
+        //     careGrowLowRt           : 20,
+        //     careGrowOverRt          : 27,
+        //
+        //     careFatIdxHighRt        : 10,
+        //     careFatIdxGnrlRt        : 20,
+        //     careFatIdxUndrRt        : 10,
+        //
+        //     careFatPrdtHighRt       : 10,
+        //     careFatPrdtGnrlRt       : 20,
+        //     careFatPrdtUndrRt       : 10,
+        //
+        //     careStrsHigh            : 20,
+        //     careStrsVeryHigh        : 10,
+        //
+        //     careExcsTimeAvg         : 1.2,
+        //     careExcsTimeBfDay       : 1.5,
+        //     careExcsTimeDif         : 0.3,
+        //
+        //     careCalEatAvg           : 2113,
+        //     careCalEatbfDay         : 2238,
+        //     careCalEatDif           : 125,
+        //
+        //     careFmenuCdTop1         : '밥',
+        //     careFmenuRtTop1         : 33.1,
+        //     careFmenuCdTop2         : '빵',
+        //     careFmenuRtTop2         : 27.5,
+        //     careFmenuCdTop3         : '튀김',
+        //     careFmenuRtTop3         : 12.9,
+        //
+        //     careMmelNeatFmenuCnt    : 11853,
+        //     careMmelNeatFmenuObj    : 20000,
+        //
+        //     careMmelNeatQustCnt     : 11853,
+        //     careMmelNeatQustObj     : 20000,
+        //
+        // },
+        // totCnt: {
+        //     tmpDngrZoneCnt      : 4400,
+        //     tmpFallDownCnt      : 2400,
+        //     tmpHbitAbnmCnt      : 1200,
+        //     tmpTmepAbnmCnt      : 3300,
+        //     tmpTotalCnt         : 20000
+        // },
         clockParam: {
             hhmmss                  : '',
             yyyymmdd                : '',
@@ -225,28 +309,33 @@ let totMonStat = new Vue({
                 }
             }
         },
-        chartOperStat       : null,
-        chartOpenStat       : null,
-        chartGrowFat        : null,
-        chartFatPrdt        : null,
-        chartStrs           : null,
-        chartDgsfOccr   : null,
-        chartDzonTrnd   : null,
-        chartGorgSafeDtct   : null,
-        chartGorgDngrDtct   : null,
-        chartGuarSafeDtct   : null,
-        chartGuarDngrDtct   : null,
+        chartBandOperStat       : null,
+        chartBandOpenStat       : null,
+        chartHcUseGfix          : null,
+        chartHcUseFatp          : null,
+        chartHcUseStrs          : null,
+
+        chartDgsfOccr           : null,
+        chartDzonTrnd           : null,
+        chartGorgSafeDtct       : null,
+        chartGorgDngrDtct       : null,
+        chartGuarSafeDtct       : null,
+        chartGuarDngrDtct       : null,
+
+        ////////////////////// 임시 //////////////////////
 
         chartCareBmiBodyIdx : null,
-        chartCareGrowIdx    : null,
-        chartCareFatIdx     : null,
-        chartCareFatPrdt    : null,
-        chartCareStrs       : null,
-        chartCareExcsTime   : null,
-        chartCareCalEat     : null,
-        chartCareFmenuTop   : null,
-        chartCareMmelNeatFmenu  : null,
-        chartCareMmelNeatQust   : null
+
+
+        chartHcGidx             : null,
+        chartHcFidx             : null,
+        chartHcFpidx            : null,
+        chartHcStrs             : null,
+        chartHcAvgAct           : null,
+        chartHcAvgCalEat        : null,
+        chartHcFmenuTop3        : null,
+        chartHcMmelNeatHist     : null,
+        chartHcMmelNeatQust     : null
     },
     methods: {
 
@@ -276,30 +365,32 @@ let totMonStat = new Vue({
         initChart: function() {
             let $this = this;
 
-            if ($this.chartOperStat     != null )   $this.chartOperStat.destroy();
-            if ($this.chartOpenStat     != null )   $this.chartOpenStat.destroy();
-            if ($this.chartGrowFat      != null )   $this.chartGrowFat.destroy();
-            if ($this.chartFatPrdt      != null )   $this.chartFatPrdt.destroy();
-            if ($this.chartStrs         != null )   $this.chartStrs.destroy();
-            if ($this.chartDgsfOccr     != null )   $this.chartDgsfOccr.destroy();
-            if ($this.chartDzonTrnd     != null )   $this.chartDzonTrnd.destroy();
-            if ($this.chartGorgSafeDtct != null )   $this.chartGorgSafeDtct.destroy();
-            if ($this.chartGorgDngrDtct != null )   $this.chartGorgDngrDtct.destroy();
-            if ($this.chartGuarSafeDtct != null )   $this.chartGuarSafeDtct.destroy();
-            if ($this.chartGuarDngrDtct != null )   $this.chartGuarDngrDtct.destroy();
+            if ($this.chartBandOperStat     != null )   $this.chartBandOperStat.destroy();
+            if ($this.chartBandOpenStat     != null )   $this.chartBandOpenStat.destroy();
+            if ($this.chartHcUseGfix        != null )   $this.chartHcUseGfix.destroy();
+            if ($this.chartHcUseFatp        != null )   $this.chartHcUseFatp.destroy();
+            if ($this.chartHcUseStrs        != null )   $this.chartHcUseStrs.destroy();
+            if ($this.chartDgsfOccr         != null )   $this.chartDgsfOccr.destroy();
+            if ($this.chartDzonTrnd         != null )   $this.chartDzonTrnd.destroy();
+            if ($this.chartGorgSafeDtct     != null )   $this.chartGorgSafeDtct.destroy();
+            if ($this.chartGorgDngrDtct     != null )   $this.chartGorgDngrDtct.destroy();
+            if ($this.chartGuarSafeDtct     != null )   $this.chartGuarSafeDtct.destroy();
+            if ($this.chartGuarDngrDtct     != null )   $this.chartGuarDngrDtct.destroy();
 
+            ////////////////////// 임시 //////////////////////
             if ($this.chartCareBmiBodyIdx   != null )   $this.chartCareBmiBodyIdx.destroy();
-            if ($this.chartCareGrowIdx      != null )   $this.chartCareGrowIdx.destroy();
-            if ($this.chartCareFatIdx       != null )   $this.chartCareFatIdx.destroy();
-            if ($this.chartCareFatPrdt      != null )   $this.chartCareFatPrdt.destroy();
-            if ($this.chartCareStrs         != null )   $this.chartCareStrs.destroy();
-            if ($this.chartCareExcsTime     != null )   $this.chartCareExcsTime.destroy();
-            if ($this.chartCareCalEat       != null )   $this.chartCareCalEat.destroy();
-            if ($this.chartCareFmenuTop     != null )   $this.chartCareFmenuTop.destroy();
-            if ($this.chartCareMmelNeatFmenu!= null )   $this.chartCareMmelNeatFmenu.destroy();
-            if ($this.chartCareMmelNeatQust != null )   $this.chartCareMmelNeatQust.destroy();
+
+            if ($this.chartHcGidx           != null )   $this.chartHcGidx.destroy();
+            if ($this.chartHcFidx           != null )   $this.chartHcFidx.destroy();
+            if ($this.chartHcFpidx          != null )   $this.chartHcFpidx.destroy();
+            if ($this.chartHcStrs           != null )   $this.chartHcStrs.destroy();
+            if ($this.chartHcAvgAct         != null )   $this.chartHcAvgAct.destroy();
+            if ($this.chartHcAvgCalEat      != null )   $this.chartHcAvgCalEat.destroy();
+            if ($this.chartHcFmenuTop3      != null )   $this.chartHcFmenuTop3.destroy();
+            if ($this.chartHcMmelNeatHist   != null )   $this.chartHcMmelNeatHist.destroy();
+            if ($this.chartHcMmelNeatQust   != null )   $this.chartHcMmelNeatQust.destroy();
         },
-        textCenter: function(chartDivId , txt , chartId, color, fontSize, fontStyle) {
+        textCenter: function(chartDivId , txt , chartId, color, fontSize, fontStyle, txtUnit) {
             const ctx = document.getElementById(chartDivId).getContext('2d');
 
             let fontSizeTemp    = fontSize || '20';
@@ -308,6 +399,10 @@ let totMonStat = new Vue({
             if (txt.length <= 3) {
             } else {
                 fontSizeTemp = 15;
+            }
+
+            if (!!txtUnit) {
+                txt += txtUnit;
             }
 
             ctx.textAlign       = 'center';
@@ -343,6 +438,24 @@ let totMonStat = new Vue({
                     param: params,
                     success: function(response) {
 
+                        // 가동_현황
+                        if ( !!response["rtnData"]["bandOperStat"] ) {
+                            $.each(response["rtnData"]["bandOperStat"], function(key, val) {
+                                $this.bandOperStat[key] = val;
+                            });
+                        }
+                        // 개통_현황
+                        if ( !!response["rtnData"]["bandOpenStat"] ) {
+                            $.each(response["rtnData"]["bandOpenStat"], function(key, val) {
+                                $this.bandOpenStat[key] = val;
+                            });
+                        }
+                        // 헬스케어_활용율
+                        if ( !!response["rtnData"]["hcUseRt"] ) {
+                            $.each(response["rtnData"]["hcUseRt"], function(key, val) {
+                                $this.hcUseRt[key] = val;
+                            });
+                        }
                         // 위험안전발생
                         if ( !!response["rtnData"]["result1"] ) {
                             $.each(response["rtnData"]["result1"], function(key, val) {
@@ -354,6 +467,11 @@ let totMonStat = new Vue({
                             $.each(response["rtnData"]["result2"], function(key, val) {
                                 $this.dzonTrnd[key] = val;
                             });
+                            if ($this.dzonTrnd.week1Ago > $this.dzonTrnd.week2Ago ) {
+                                $this.dzonTrnd.trnd = '증가 추세';
+                            } else {
+                                $this.dzonTrnd.trnd = '감소 추세';
+                            }
                         }
                         // 안전위험지역_탐지율
                         if ( !!response["rtnData"]["result3"] ) {
@@ -390,9 +508,55 @@ let totMonStat = new Vue({
                                 });
                             });
                         }
+                        // 헬스케어_성장지수
+                        if ( !!response["rtnData"]["hcGidx"] ) {
+                            $.each(response["rtnData"]["hcGidx"], function(key, val) {
+                                $this.hcGidx[key] = val;
+                            });
+                        }
+                        // 헬스케어_비만지수
+                        if ( !!response["rtnData"]["hcFidx"] ) {
+                            $.each(response["rtnData"]["hcFidx"], function(key, val) {
+                                $this.hcFidx[key] = val;
+                            });
+                        }
+                        // 헬스케어_비만예측
+                        if ( !!response["rtnData"]["hcFpidx"] ) {
+                            $.each(response["rtnData"]["hcFpidx"], function(key, val) {
+                                $this.hcFpidx[key] = val;
+                            });
+                        }
+                        // 헬스케어_스트레스
+                        if ( !!response["rtnData"]["hcStrs"] ) {
+                            $.each(response["rtnData"]["hcStrs"], function(key, val) {
+                                $this.hcStrs[key] = val;
+                            });
+                        }
+                        // 헬스케어_평균_운동시간
+                        if ( !!response["rtnData"]["hcAvgAct"] ) {
+                            $.each(response["rtnData"]["hcAvgAct"], function(key, val) {
+                                $this.hcAvgAct[key] = val;
+                            });
+                        }
+                        // 헬스케어_평균_칼로리_섭취
+                        if ( !!response["rtnData"]["hcAvgCalEat"] ) {
+                            $.each(response["rtnData"]["hcAvgCalEat"], function(key, val) {
+                                $this.hcAvgCalEat[key] = val;
+                            });
+                        }
+                        // 헬스케어_주요식단_TOP3
+                        if ( !!response["rtnData"]["hcFmenuTop3"] ) {
+                            $.each(response["rtnData"]["hcFmenuTop3"], function(key, val) {
+                                $this.hcFmenuTop3[key] = val;
+                            });
+                        }
+                        // 헬스케어_아침식사_결식율
+                        if ( !!response["rtnData"]["hcMmelNeat"] ) {
+                            $.each(response["rtnData"]["hcMmelNeat"], function(key, val) {
+                                $this.hcMmelNeat[key] = val;
+                            });
+                        }
 
-                        console.log("jcw rtnData :: ", response["rtnData"].result6);
-                        console.log("jcw $this.guarDtop3 :: ", $this.guarDtop3);
                         $this.updateChart();
                         $this.initCycl($this.cycl.timeCycl);
                     },
@@ -425,11 +589,12 @@ let totMonStat = new Vue({
             let colorLggre = '#c0dc5c';
             let colorBla = '#000000';
             let colorWhi = '#ffffff';
+            let colorSil = '#c6d3d1';
 
             // 헬스케어 활용율 Data
-            let tmpGrowFatIdx       = 80;
-            let tmpFatPrdtIdx       = 70;
-            let tmpStrsIdx          = 65;
+            // let tmpGrowFatIdx       = 80;
+            // let tmpFatPrdtIdx       = 70;
+            // let tmpStrsIdx          = 65;
 
             // 위험안전 발생 Data
             // let tmpDngrSafeOcrrTd   = 2170;
@@ -454,64 +619,66 @@ let totMonStat = new Vue({
             // $this.totMonStat.tmpDngrSafeOcrrDif = tmpDngrSafeOcrrTd - tmpDngrSafeOcrrAv;
 
             // 백분율 몫 구하기
-            let operCntQuotiIdx     = $this.chartPerQuoti($this.totMonStat.operCnt, $this.totMonStat.openCnt);
-            let NeatFmenuQuotiIdx   = $this.chartPerQuoti($this.totMonStat.careMmelNeatFmenuCnt, $this.totMonStat.careMmelNeatFmenuObj);
-            let NeatQustQuotiIdx    = $this.chartPerQuoti($this.totMonStat.careMmelNeatQustCnt, $this.totMonStat.careMmelNeatQustObj);
+            // let operCntQuotiIdx     = $this.chartPerQuoti($this.totMonStat.operCnt, $this.bandOperStat.);
+            // let NeatFmenuQuotiIdx   = $this.chartPerQuoti($this.totMonStat.careMmelNeatFmenuCnt, $this.totMonStat.careMmelNeatFmenuObj);
+            // let NeatQustQuotiIdx    = $this.chartPerQuoti($this.totMonStat.careMmelNeatQustCnt, $this.totMonStat.careMmelNeatQustObj);
 
             // 나머지 구하기
-            let operCntModIdx       = $this.chartPerModIdx(operCntQuotiIdx);
-            let growFatModIdx       = $this.chartPerModIdx(tmpGrowFatIdx);
-            let fatPrdtModIdx       = $this.chartPerModIdx(tmpFatPrdtIdx);
-            let strsModIdx          = $this.chartPerModIdx(tmpStrsIdx);
-            let dgsfDtctGorgSzonMod = $this.chartPerModIdx($this.dgsfDtct.gorgSzon);
-            let dgsfDtctGorgDzonMod = $this.chartPerModIdx($this.dgsfDtct.gorgDzon);
-            let dgsfDtctGuarSzonMod = $this.chartPerModIdx($this.dgsfDtct.guarSzon);
-            let dgsfDtctGuarDzonMod = $this.chartPerModIdx($this.dgsfDtct.guarDzon);
-            let NeatFmenuModIdx     = $this.chartPerModIdx(NeatFmenuQuotiIdx);
-            let NeatQustModIdx      = $this.chartPerModIdx(NeatQustQuotiIdx);
+            // let operCntModIdx       = $this.chartPerModIdx(operCntQuotiIdx);
+            // let growFatModIdx       = $this.chartPerModIdx(tmpGrowFatIdx);
+            // let fatPrdtModIdx       = $this.chartPerModIdx(tmpFatPrdtIdx);
+            // let strsModIdx          = $this.chartPerModIdx(tmpStrsIdx);
+            // let dgsfDtctGorgSzonMod = $this.chartPerModIdx($this.dgsfDtct.gorgSzon);
+            // let dgsfDtctGorgDzonMod = $this.chartPerModIdx($this.dgsfDtct.gorgDzon);
+            // let dgsfDtctGuarSzonMod = $this.chartPerModIdx($this.dgsfDtct.guarSzon);
+            // let dgsfDtctGuarDzonMod = $this.chartPerModIdx($this.dgsfDtct.guarDzon);
+            // let NeatFmenuModIdx     = $this.chartPerModIdx(NeatFmenuQuotiIdx);
+            // let NeatQustModIdx      = $this.chartPerModIdx(NeatQustQuotiIdx);
 
-            let dataOperStat = {
+            $this.numCountAnimate();
+
+            let dataBandOperStat = {
                 labels              : ['가동','무응답'],
                 datasets: [{
-                    data            : [operCntQuotiIdx          , operCntModIdx],
-                    backgroundColor : [colorBlu                 , colorBla],
-                    borderColor     : [colorBlu                 , colorBla],
+                    data            : [$this.bandOperStat.bandOperRt    , 100 - $this.bandOperStat.bandOperRt],
+                    backgroundColor : [colorBlu                         , colorGra],
+                    borderColor     : [colorBlu                         , colorGra],
                     borderWidth     : 10
                 }]
             };
-            let dataOpenStat = {
+            let dataBandOpenStat = {
                 labels              : ['개통','제출','가입'],
                 datasets: [{
-                    data            : [50       , 30        , 20        ],
-                    backgroundColor : [colorBlu , colorOra  , colorLggre  ],
-                    borderColor     : [colorBlu , colorOra  , colorLggre  ],
+                    data            : [$this.bandOpenStat.bandOpenOpen  , $this.bandOpenStat.bandOpenPrnt   , $this.bandOpenStat.bandOpenNorm],
+                    backgroundColor : [colorBlu                         , colorOra                          , colorSil  ],
+                    borderColor     : [colorBlu                         , colorOra                          , colorSil  ],
                     borderWidth     : 22
                 }]
             };
-            let dataGrowFat = {
+            let dataHcUseGfix = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [tmpGrowFatIdx            , growFatModIdx],
-                    backgroundColor : [colorBlu                 , colorBla],
-                    borderColor     : [colorBlu                 , colorBla],
+                    data            : [$this.hcUseRt.hcUseGfixRt        , 100 - $this.hcUseRt.hcUseGfixRt],
+                    backgroundColor : [colorBlu                         , colorBla],
+                    borderColor     : [colorBlu                         , colorBla],
                     borderWidth     : 10
                 }]
             };
-            let dataFatPrdt = {
+            let dataHcUseFatp = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [tmpFatPrdtIdx            , fatPrdtModIdx],
-                    backgroundColor : [colorBlu                 , colorBla],
-                    borderColor     : [colorBlu                 , colorBla],
+                    data            : [$this.hcUseRt.hcUseFatpRt        , 100 - $this.hcUseRt.hcUseFatpRt],
+                    backgroundColor : [colorBlu                         , colorBla],
+                    borderColor     : [colorBlu                         , colorBla],
                     borderWidth     : 10
                 }]
             };
-            let dataStrs = {
+            let dataHcUseStrs = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [tmpStrsIdx               , strsModIdx],
-                    backgroundColor : [colorBlu                 , colorBla],
-                    borderColor     : [colorBlu                 , colorBla],
+                    data            : [$this.hcUseRt.hcUseStrsRt        , 100 - $this.hcUseRt.hcUseStrsRt],
+                    backgroundColor : [colorBlu                         , colorBla],
+                    borderColor     : [colorBlu                         , colorBla],
                     borderWidth     : 10
                 }]
             };
@@ -538,7 +705,7 @@ let totMonStat = new Vue({
             let dataGorgSafeDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [$this.dgsfDtct.gorgSzon  , dgsfDtctGorgSzonMod],
+                    data            : [$this.dgsfDtct.gorgSzon  , 100 - $this.dgsfDtct.gorgSzon],
                     backgroundColor : [colorGre                 , colorGra],
                     borderColor     : [colorGre                 , colorGra],
                     borderWidth     : 5
@@ -547,7 +714,7 @@ let totMonStat = new Vue({
             let dataGorgDngrDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [$this.dgsfDtct.gorgDzon  , dgsfDtctGorgDzonMod],
+                    data            : [$this.dgsfDtct.gorgDzon  , 100 - $this.dgsfDtct.gorgDzon],
                     backgroundColor : [colorOra                 , colorGra],
                     borderColor     : [colorOra                 , colorGra],
                     borderWidth     : 5
@@ -556,7 +723,7 @@ let totMonStat = new Vue({
             let dataGuarSafeDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [$this.dgsfDtct.guarSzon  , dgsfDtctGuarSzonMod],
+                    data            : [$this.dgsfDtct.guarSzon  , 100 - $this.dgsfDtct.guarSzon],
                     backgroundColor : [colorGre                 , colorGra],
                     borderColor     : [colorGre                 , colorGra],
                     borderWidth     : 5
@@ -565,7 +732,7 @@ let totMonStat = new Vue({
             let dataGuarDngrDtct = {
                 labels              : ['USAGE','NUSAGE'],
                 datasets: [{
-                    data            : [$this.dgsfDtct.guarDzon  , dgsfDtctGuarDzonMod],
+                    data            : [$this.dgsfDtct.guarDzon  , 100 - $this.dgsfDtct.guarDzon],
                     backgroundColor : [colorOra                 , colorGra],
                     borderColor     : [colorOra                 , colorGra],
                     borderWidth     : 5
@@ -575,228 +742,228 @@ let totMonStat = new Vue({
             let dataCareBmiBodyIdx = {
                 labels              : ['최저','최대'],
                 datasets: [{
-                    data            : [$this.totMonStat.careBmiBodyIdxMin   , $this.totMonStat.careBmiBodyIdxMax],
+                    data            : [30   , 33],
                     backgroundColor : [colorOra                             , colorWhi],
                     borderColor     : [colorOra                             , colorWhi],
                     borderWidth     : 0
                 }]
             };
-            let dataCareGrowIdx = {
-                labels              : ['과성장','저성장'],
+            let dataHcGidx = {
+                labels              : ['성장지수','성장지수'],
                 datasets: [{
-                    data            : [tmpGrowFatIdx      , growFatModIdx],
+                    data            : [$this.hcGidx.hcGidxAvg               , 100 - $this.hcGidx.hcGidxAvg],
                     backgroundColor : [colorGre                             , colorGra],
                     borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
-            let dataCareFatIdx = {
-                labels              : ['고도비만','비만','저체중'],
+            let dataHcFidx = {
+                labels              : ['비만지수','비만지수'],
                 datasets: [{
-                    data            : [$this.totMonStat.careFatIdxHighRt    , $this.totMonStat.careFatIdxGnrlRt     , $this.totMonStat.careFatIdxUndrRt],
-                    backgroundColor : [colorBlu                             , colorOra                              , colorLggre],
-                    borderColor     : [colorBlu                             , colorOra                              , colorLggre],
-                    borderWidth     : 22
+                    data            : [$this.hcFidx.hcFidxAvg               , 100 - $this.hcFidx.hcFidxAvg],
+                    backgroundColor : [colorGre                             , colorGra],
+                    borderColor     : [colorGre                             , colorGra],
+                    borderWidth     : 10
                 }]
             };
-            let dataCareFatPrdt = {
-                labels              : ['고도비만','비만','저체중'],
+            let dataHcFpidx = {
+                labels              : ['비만예측','비만예측'],
                 datasets: [{
-                    data            : [$this.totMonStat.careFatPrdtHighRt   , $this.totMonStat.careFatPrdtGnrlRt    , $this.totMonStat.careFatPrdtUndrRt],
-                    backgroundColor : [colorBlu                             , colorOra                              , colorLggre],
-                    borderColor     : [colorBlu                             , colorOra                              , colorLggre],
-                    borderWidth     : 22
+                    data            : [$this.hcFpidx.hcFpidxAvg             , 100 - $this.hcFpidx.hcFpidxAvg],
+                    backgroundColor : [colorGre                             , colorGra],
+                    borderColor     : [colorGre                             , colorGra],
+                    borderWidth     : 10
                 }]
             };
-            let dataCareStrs = {
+            let dataHcStrs = {
                 labels              : ['높음','매우높음'],
                 datasets: [{
-                    data            : [tmpStrsIdx        , strsModIdx],
+                    data            : [$this.hcStrs.hcStrsAvg               , 100 - $this.hcStrs.hcStrsAvg],
                     backgroundColor : [colorGre                             , colorGra],
                     borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
-            let dataCareExcsTime = {
+            let dataHcAvgAct = {
                 labels              : ['평균','전일'],
                 datasets: [{
-                    data            : [$this.totMonStat.careExcsTimeAvg     , $this.totMonStat.careExcsTimeBfDay],
+                    data            : [$this.hcAvgAct.hcAvgAct              , $this.hcAvgAct.hcPdayAvgAct],
                     backgroundColor : [colorYel                             , colorBlu],
                     borderColor     : [colorYel                             , colorBlu],
                     borderWidth     : 0
                 }]
             };
-            let dataCareCalEat = {
+            let dataHcAvgCalEat = {
                 labels              : ['평균','전일'],
                 datasets: [{
-                    data            : [$this.totMonStat.careCalEatAvg       , $this.totMonStat.careCalEatbfDay],
+                    data            : [$this.hcAvgCalEat.hcCalEat           , $this.hcAvgCalEat.hcPdayCalEat],
                     backgroundColor : [colorYel                             , colorOra],
                     borderColor     : [colorYel                             , colorOra],
                     borderWidth     : 0
                 }]
             };
-            let dataCareFmenuTop = {
+            let dataHcFmenuTop3 = {
                 labels              : ['밥','빵','튀김'],
                 datasets: [{
-                    data            : [$this.totMonStat.careFmenuRtTop1     , $this.totMonStat.careFmenuRtTop2      , $this.totMonStat.careFmenuRtTop3],
-                    backgroundColor : [colorBlu                             , colorOra                              , colorLggre],
-                    borderColor     : [colorBlu                             , colorOra                              , colorLggre],
+                    data            : [$this.hcFmenuTop3.hcEatCnt1          , $this.hcFmenuTop3.hcEatCnt2           , $this.hcFmenuTop3.hcEatCnt3],
+                    backgroundColor : [colorBlu                             , colorOra                              , colorSil],
+                    borderColor     : [colorBlu                             , colorOra                              , colorSil],
                     borderWidth     : 22
                 }]
             };
-            let dataCareMmelNeatFmenut = {
+            let dataHcMmelNeatHist = {
                 labels              : ['결식','대상'],
                 datasets: [{
-                    data            : [NeatFmenuQuotiIdx                    , NeatFmenuModIdx],
+                    data            : [$this.hcMmelNeat.hcNeatHistNeatRt    , 100 - $this.hcMmelNeat.hcNeatHistNeatRt],
                     backgroundColor : [colorGre                             , colorGra],
                     borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
-            let dataCareMmelNeatQust = {
+            let dataHcMmelNeatQust = {
                 labels              : ['결식','대상'],
                 datasets: [{
-                    data            : [NeatQustQuotiIdx                     , NeatQustModIdx],
+                    data            : [$this.hcMmelNeat.hcNeatQustNeatRt    , 100 - $this.hcMmelNeat.hcNeatQustNeatRt],
                     backgroundColor : [colorGre                             , colorGra],
                     borderColor     : [colorGre                             , colorGra],
                     borderWidth     : 10
                 }]
             };
 
-            let pluginsOperStat = [{
+            let pluginsBandOperStat = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(operCntQuotiIdx != null ) srcIdx = operCntQuotiIdx;
-                    $this.textCenter('operStatChart', srcIdx, $this.chartOperStat, colorBlu, '' , '');
+                    if($this.bandOperStat.bandOperRt != null ) srcIdx = $this.bandOperStat.bandOperRt;
+                    $this.textCenter('bandOperStatChart', srcIdx, $this.chartBandOperStat, colorBlu, '' , '', '%');
                 }
             }];
-            let pluginsGrowFat = [{
+            let pluginsHcUseGfix = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpGrowFatIdx != null ) srcIdx = tmpGrowFatIdx;
-                    $this.textCenter('growFatChart', srcIdx, $this.chartGrowFat, colorBlu, '' , '');
+                    if($this.hcUseRt.hcUseGfixRt != null ) srcIdx = $this.hcUseRt.hcUseGfixRt;
+                    $this.textCenter('hcUseGfixChart', srcIdx, $this.chartHcUseGfix, colorBlu, '' , '', '%');
                 }
             }];
-            let pluginsFatPrdt = [{
+            let pluginsHcUseFatp = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpFatPrdtIdx != null ) srcIdx = tmpFatPrdtIdx;
-                    $this.textCenter('fatPrdtChart', srcIdx, $this.chartFatPrdt, colorBlu, '' , '');
+                    if($this.hcUseRt.hcUseFatpRt != null ) srcIdx = $this.hcUseRt.hcUseFatpRt;
+                    $this.textCenter('hcUseFatpChart', srcIdx, $this.chartHcUseFatp, colorBlu, '' , '', '%');
                 }
             }];
-            let pluginsStrs = [{
+            let pluginsHcUseStrs = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-                    $this.textCenter('strsChart', srcIdx, $this.chartStrs, colorBlu, '' , '');
+                    if($this.hcUseRt.hcUseStrsRt != null ) srcIdx = $this.hcUseRt.hcUseStrsRt;
+                    $this.textCenter('hcUseStrsChart', srcIdx, $this.chartHcUseStrs, colorBlu, '' , '', '%');
                 }
             }];
             let pluginsGorgSafeDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if($this.dgsfDtct.gorgSzon != null ) srcIdx = $this.dgsfDtct.gorgSzon;
-                    $this.textCenter('gorgSafeDtctChart', srcIdx, $this.chartGorgSafeDtct, colorGre, '' , '');
+                    $this.textCenter('gorgSafeDtctChart', srcIdx, $this.chartGorgSafeDtct, colorGre, '' , '', '%');
                 }
             }];
             let pluginsGorgDngrDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if($this.dgsfDtct.gorgDzon != null ) srcIdx = $this.dgsfDtct.gorgDzon;
-                    $this.textCenter('gorgDngrDtctChart', srcIdx, $this.chartGorgDngrDtct, colorOra, '' , '');
+                    $this.textCenter('gorgDngrDtctChart', srcIdx, $this.chartGorgDngrDtct, colorOra, '' , '', '%');
                 }
             }];
             let pluginsGuarSafeDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if($this.dgsfDtct.guarSzon != null ) srcIdx = $this.dgsfDtct.guarSzon;
-                    $this.textCenter('guarSafeDtctChart', srcIdx, $this.chartGuarSafeDtct, colorGre, '' , '');
+                    $this.textCenter('guarSafeDtctChart', srcIdx, $this.chartGuarSafeDtct, colorGre, '' , '', '%');
                 }
             }];
             let pluginsGuarDngrDtct = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
                     if($this.dgsfDtct.guarDzon != null ) srcIdx = $this.dgsfDtct.guarDzon;
-                    $this.textCenter('guarDngrDtctChart', srcIdx, $this.chartGuarDngrDtct, colorOra, '' , '');
+                    $this.textCenter('guarDngrDtctChart', srcIdx, $this.chartGuarDngrDtct, colorOra, '' , '', '%');
                 }
             }];
             // 의미 확인 후 centerText 수정 필요
-            let pluginsCareGrowIdx = [{
+            let pluginsHcGidx = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpGrowFatIdx != null ) srcIdx = tmpGrowFatIdx;
-                    $this.textCenter('careGrowIdxChart', srcIdx, $this.chartCareGrowIdx, colorGre, '' , '');
+                    if($this.hcGidx.hcGidxAvg != null ) srcIdx = $this.hcGidx.hcGidxAvg;
+                    $this.textCenter('hcGidxChart', srcIdx, $this.chartHcGidx, colorGre, '' , '');
                 }
             }];
             // 의미 확인 후 centerText 수정 필요
-            // let pluginsCareFatIdx = [{
-            //     beforeDraw: function () {
-            //         let srcIdx = '-';
-            //         if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-            //         $this.textCenter('careFatIdxChart', srcIdx, $this.chartCareFatIdx, colorBlu, '' , '');
-            //     }
-            // }];
+            let pluginsHcFidx = [{
+                beforeDraw: function () {
+                    let srcIdx = '-';
+                    if($this.hcFidx.hcFidxAvg != null ) srcIdx = $this.hcFidx.hcFidxAvg;
+                    $this.textCenter('hcFidxChart', srcIdx, $this.chartHcFidx, colorGre, '' , '');
+                }
+            }];
             // // 의미 확인 후 centerText 수정 필요
-            // let pluginsCareFatPrdt = [{
-            //     beforeDraw: function () {
-            //         let srcIdx = '-';
-            //         if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-            //         $this.textCenter('careFatPrdtChart', srcIdx, $this.chartCareFatPrdt, colorBlu, '' , '');
-            //     }
-            // }];
+            let pluginsHcFpidx = [{
+                beforeDraw: function () {
+                    let srcIdx = '-';
+                    if($this.hcFpidx.hcFpidxAvg != null ) srcIdx = $this.hcFpidx.hcFpidxAvg;
+                    $this.textCenter('hcFpidxChart', srcIdx, $this.chartHcFpidx, colorGre, '' , '');
+                }
+            }];
             // 의미 확인 후 centerText 수정 필요
-            let pluginsCareStrs = [{
+            let pluginsHcStrs = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(tmpStrsIdx != null ) srcIdx = tmpStrsIdx;
-                    $this.textCenter('careStrsChart', srcIdx, $this.chartCareStrs, colorGre, '' , '');
+                    if($this.hcStrs.hcStrsAvg != null ) srcIdx = $this.hcStrs.hcStrsAvg;
+                    $this.textCenter('hcStrsChart', srcIdx, $this.chartHcStrs, colorGre, '' , '');
                 }
             }];
-            let pluginsCareMmelNeatFmenu = [{
+            let pluginsHcMmelNeatHist = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(NeatFmenuQuotiIdx != null ) srcIdx = NeatFmenuQuotiIdx;
-                    $this.textCenter('careMmelNeatFmenuChart', srcIdx, $this.chartCareMmelNeatFmenu, colorGre, '' , '');
+                    if($this.hcMmelNeat.hcNeatHistNeatRt != null ) srcIdx = $this.hcMmelNeat.hcNeatHistNeatRt;
+                    $this.textCenter('hcMmelNeatHistChart', srcIdx, $this.chartHcMmelNeatHist, colorGre, '' , '', '%');
                 }
             }];
-            let pluginsCareMmelNeatQust = [{
+            let pluginsHcMmelNeatQust = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
-                    if(NeatQustQuotiIdx != null ) srcIdx = NeatQustQuotiIdx;
-                    $this.textCenter('careMmelNeatQustChart', srcIdx, $this.chartCareMmelNeatQust, colorGre, '' , '');
+                    if($this.hcMmelNeat.hcNeatQustNeatRt != null ) srcIdx = $this.hcMmelNeat.hcNeatQustNeatRt;
+                    $this.textCenter('hcMmelNeatQustChart', srcIdx, $this.chartHcMmelNeatQust, colorGre, '' , '', '%');
                 }
             }];
             // jcw : 신기하네.. 왜 updateChart에서 호출할땐 오브젝트고.. 여기서 넘겨서 할땐 널일까..
-            // let pluginsOperStat = $this.chartPluginsCenter('operStatChart'  , $this.totMonStat.growIdx  , $this.chartOperStat   , operStatChartColor, '' , '');
-            // let pluginsGrowFat  = $this.chartPluginsCenter('growFatChart'   , tmpGrowFatIdx             , $this.chartGrowFat    , colorBlu          , '' , '');
+            // let pluginsBandOperStat = $this.chartPluginsCenter('operStatChart'  , $this.totMonStat.growIdx  , $this.chartBandOperStat   , operStatChartColor, '' , '');
+            // let pluginsHcUseGfix  = $this.chartPluginsCenter('hcUseGfixChart'   , $this.hcGidx.hcGidxAvg             , $this.chartHcUseGfix    , colorBlu          , '' , '');
 
-            let configOperStat = {
+            let configBandOperStat = {
                 type    : 'doughnut',
-                data    : dataOperStat,
+                data    : dataBandOperStat,
                 options : $this.options,
-                plugins : pluginsOperStat
+                plugins : pluginsBandOperStat
             };
-            let configOpenStat = {
+            let configBandOpenStat = {
                 type    : 'doughnut',
-                data    : dataOpenStat,
+                data    : dataBandOpenStat,
                 options : $this.options
             };
-            let configGrowFat = {
+            let configHcUseGfix = {
                 type    : 'doughnut',
-                data    : dataGrowFat,
+                data    : dataHcUseGfix,
                 options : $this.options,
-                plugins : pluginsGrowFat
+                plugins : pluginsHcUseGfix
             };
-            let configFatPrdt = {
+            let configHcUseFatp = {
                 type    : 'doughnut',
-                data    : dataFatPrdt,
+                data    : dataHcUseFatp,
                 options : $this.options,
-                plugins : pluginsFatPrdt
+                plugins : pluginsHcUseFatp
             };
-            let configStrs = {
+            let configHcUseStrs = {
                 type    : 'doughnut',
-                data    : dataStrs,
+                data    : dataHcUseStrs,
                 options : $this.options,
-                plugins : pluginsStrs
+                plugins : pluginsHcUseStrs
             };
             // 위험안전_발생
             let configDgsfOccr = {
@@ -841,66 +1008,66 @@ let totMonStat = new Vue({
                 options : $this.optionsBarVert,
                 plugins : [{}]
             };
-            let configCareGrowIdx = {
+            let configHcGidx = {
                 type    : 'doughnut',
-                data    : dataCareGrowIdx,
+                data    : dataHcGidx,
                 options : $this.options,
-                plugins : pluginsCareGrowIdx
+                plugins : pluginsHcGidx
             };
-            let configCareFatIdx = {
+            let configHcFidx = {
                 type    : 'doughnut',
-                data    : dataCareFatIdx,
+                data    : dataHcFidx,
                 options : $this.options,
-                plugins : [{}]
+                plugins : pluginsHcFidx
             };
-            let configCareFatPrdt = {
+            let configHcFpidx = {
                 type    : 'doughnut',
-                data    : dataCareFatPrdt,
+                data    : dataHcFpidx,
                 options : $this.options,
-                plugins : [{}]
+                plugins : pluginsHcFpidx
             };
-            let configCareStrs = {
+            let configHcStrs = {
                 type    : 'doughnut',
-                data    : dataCareStrs,
+                data    : dataHcStrs,
                 options : $this.options,
-                plugins : pluginsCareStrs
+                plugins : pluginsHcStrs
             };
-            let configCareExcsTime = {
+            let configHcAvgAct = {
                 type    : 'bar',
-                data    : dataCareExcsTime,
+                data    : dataHcAvgAct,
                 options : $this.optionsBarVert,
                 plugins : [{}]
             };
-            let configCareCalEat = {
+            let configHcAvgCalEat = {
                 type    : 'bar',
-                data    : dataCareCalEat,
+                data    : dataHcAvgCalEat,
                 options : $this.optionsBarVert,
                 plugins : [{}]
             };
-            let configCareFmenuTop = {
+            let configHcFmenuTop3 = {
                 type    : 'doughnut',
-                data    : dataCareFmenuTop,
+                data    : dataHcFmenuTop3,
                 options : $this.options,
                 plugins : [{}]
             };
-            let configCareMmelNeatFmenu = {
+            let configHcMmelNeatHist = {
                 type    : 'doughnut',
-                data    : dataCareMmelNeatFmenut,
+                data    : dataHcMmelNeatHist,
                 options : $this.options,
-                plugins : pluginsCareMmelNeatFmenu
+                plugins : pluginsHcMmelNeatHist
             };
-            let configCareMmelNeatQust = {
+            let configHcMmelNeatQust = {
                 type    : 'doughnut',
-                data    : dataCareMmelNeatQust,
+                data    : dataHcMmelNeatQust,
                 options : $this.options,
-                plugins : pluginsCareMmelNeatQust
+                plugins : pluginsHcMmelNeatQust
             };
 
-            let ctxOperStat             = document.getElementById('operStatChart').getContext('2d');
-            let ctxOpenStat             = document.getElementById('openStatChart').getContext('2d');
-            let ctxGrowFat              = document.getElementById('growFatChart').getContext('2d');
-            let ctxFatPrdt              = document.getElementById('fatPrdtChart').getContext('2d');
-            let ctxStrs                 = document.getElementById('strsChart').getContext('2d');
+            let ctxBandOperStat         = document.getElementById('bandOperStatChart').getContext('2d');
+            let ctxBandOpenStat         = document.getElementById('bandOpenStatChart').getContext('2d');
+            let ctxHcUseGfix            = document.getElementById('hcUseGfixChart').getContext('2d');
+            let ctxHcUseFatp            = document.getElementById('hcUseFatpChart').getContext('2d');
+            let ctxHcUseStrs            = document.getElementById('hcUseStrsChart').getContext('2d');
             let ctxDgsfOccr             = document.getElementById('dgsfOccrChart').getContext('2d');
             let ctxDzonTrnd             = document.getElementById('dzonTrndChart').getContext('2d');
             let ctxGorgSafeDtct         = document.getElementById('gorgSafeDtctChart').getContext('2d');
@@ -909,50 +1076,52 @@ let totMonStat = new Vue({
             let ctxGuarDngrDtct         = document.getElementById('guarDngrDtctChart').getContext('2d');
 
             let ctxCareBmiBodyIdx       = document.getElementById('careBmiBodyIdxChart').getContext('2d');
-            let ctxCareGrowIdx          = document.getElementById('careGrowIdxChart').getContext('2d');
-            let ctxCareFatIdx           = document.getElementById('careFatIdxChart').getContext('2d');
-            let ctxCareFatPrdt          = document.getElementById('careFatPrdtChart').getContext('2d');
-            let ctxCareStrs             = document.getElementById('careStrsChart').getContext('2d');
-            let ctxCareExcsTime         = document.getElementById('careExcsTimeChart').getContext('2d');
-            let ctxCareCalEat           = document.getElementById('careCalEatChart').getContext('2d');
-            let ctxCareFmenuTop         = document.getElementById('careFmenuTopChart').getContext('2d');
-            let ctxCareMmelNeatFmenu    = document.getElementById('careMmelNeatFmenuChart').getContext('2d');
-            let ctxCareMmelNeatQust     = document.getElementById('careMmelNeatQustChart').getContext('2d');
+
+            let ctxHcGidx               = document.getElementById('hcGidxChart').getContext('2d');
+            let ctxHcFidx               = document.getElementById('hcFidxChart').getContext('2d');
+            let ctxHcFpidx              = document.getElementById('hcFpidxChart').getContext('2d');
+            let ctxHcStrs               = document.getElementById('hcStrsChart').getContext('2d');
+            let ctxHcAvgAct             = document.getElementById('hcAvgActChart').getContext('2d');
+            let ctxHcAvgCalEat          = document.getElementById('hcAvgCalEatChart').getContext('2d');
+            let ctxHcFmenuTop3          = document.getElementById('hcFmenuTop3Chart').getContext('2d');
+            let ctxHcMmelNeatHist       = document.getElementById('hcMmelNeatHistChart').getContext('2d');
+            let ctxHcMmelNeatQust       = document.getElementById('hcMmelNeatQustChart').getContext('2d');
 
             $this.initChart();
 
-            $this.chartOperStat         = new Chart(ctxOperStat     , configOperStat);
-            $this.chartOpenStat         = new Chart(ctxOpenStat     , configOpenStat);
-            $this.chartGrowFat          = new Chart(ctxGrowFat      , configGrowFat);
-            $this.chartFatPrdt          = new Chart(ctxFatPrdt      , configFatPrdt);
-            $this.chartStrs             = new Chart(ctxStrs         , configStrs);
-            $this.chartDgsfOccr         = new Chart(ctxDgsfOccr     , configDgsfOccr);
-            $this.chartDzonTrnd         = new Chart(ctxDzonTrnd     , configDzonTrnd);
-            $this.chartGorgSafeDtct     = new Chart(ctxGorgSafeDtct , configGorgSafeDtct);
-            $this.chartGorgDngrDtct     = new Chart(ctxGorgDngrDtct , configGorgDngrDtct);
-            $this.chartGuarSafeDtct     = new Chart(ctxGuarSafeDtct , configGuarSafeDtct);
-            $this.chartGuarDngrDtct     = new Chart(ctxGuarDngrDtct , configGuarDngrDtct);
+            $this.chartBandOperStat     = new Chart(ctxBandOperStat     , configBandOperStat);
+            $this.chartBandOpenStat     = new Chart(ctxBandOpenStat     , configBandOpenStat);
+            $this.chartHcUseGfix        = new Chart(ctxHcUseGfix        , configHcUseGfix);
+            $this.chartHcUseFatp        = new Chart(ctxHcUseFatp        , configHcUseFatp);
+            $this.chartHcUseStrs        = new Chart(ctxHcUseStrs        , configHcUseStrs);
+            $this.chartDgsfOccr         = new Chart(ctxDgsfOccr         , configDgsfOccr);
+            $this.chartDzonTrnd         = new Chart(ctxDzonTrnd         , configDzonTrnd);
+            $this.chartGorgSafeDtct     = new Chart(ctxGorgSafeDtct     , configGorgSafeDtct);
+            $this.chartGorgDngrDtct     = new Chart(ctxGorgDngrDtct     , configGorgDngrDtct);
+            $this.chartGuarSafeDtct     = new Chart(ctxGuarSafeDtct     , configGuarSafeDtct);
+            $this.chartGuarDngrDtct     = new Chart(ctxGuarDngrDtct     , configGuarDngrDtct);
 
             $this.chartCareBmiBodyIdx   = new Chart(ctxCareBmiBodyIdx   , configCareBmiBodyIdx);
-            $this.chartCareGrowIdx      = new Chart(ctxCareGrowIdx      , configCareGrowIdx);
-            $this.chartCareFatIdx       = new Chart(ctxCareFatIdx       , configCareFatIdx);
-            $this.chartCareFatPrdt      = new Chart(ctxCareFatPrdt      , configCareFatPrdt);
-            $this.chartCareStrs         = new Chart(ctxCareStrs         , configCareStrs);
-            $this.chartCareExcsTime     = new Chart(ctxCareExcsTime     , configCareExcsTime);
-            $this.chartCareCalEat       = new Chart(ctxCareCalEat       , configCareCalEat);
-            $this.chartCareFmenuTop     = new Chart(ctxCareFmenuTop     , configCareFmenuTop);
-            $this.chartCareMmelNeatFmenu= new Chart(ctxCareMmelNeatFmenu, configCareMmelNeatFmenu);
-            $this.chartCareMmelNeatQust = new Chart(ctxCareMmelNeatQust , configCareMmelNeatQust);
 
-            $this.totMonStat.careCalEatAvg          = $this.toNumber($this.totMonStat.careCalEatAvg);
-            $this.totMonStat.careCalEatbfDay        = $this.toNumber($this.totMonStat.careCalEatbfDay);
-            $this.totMonStat.careMmelNeatFmenuCnt   = $this.toNumber($this.totMonStat.careMmelNeatFmenuCnt);
-            $this.totMonStat.careMmelNeatFmenuObj   = $this.toNumber($this.totMonStat.careMmelNeatFmenuObj);
-            $this.totMonStat.careMmelNeatQustCnt    = $this.toNumber($this.totMonStat.careMmelNeatQustCnt);
-            $this.totMonStat.careMmelNeatQustObj    = $this.toNumber($this.totMonStat.careMmelNeatQustObj);
+            $this.chartHcGidx           = new Chart(ctxHcGidx           , configHcGidx);
+            $this.chartHcFidx           = new Chart(ctxHcFidx           , configHcFidx);
+            $this.chartHcFpidx          = new Chart(ctxHcFpidx          , configHcFpidx);
+            $this.chartHcStrs           = new Chart(ctxHcStrs           , configHcStrs);
+            $this.chartHcAvgAct         = new Chart(ctxHcAvgAct         , configHcAvgAct);
+            $this.chartHcAvgCalEat      = new Chart(ctxHcAvgCalEat      , configHcAvgCalEat);
+            $this.chartHcFmenuTop3      = new Chart(ctxHcFmenuTop3      , configHcFmenuTop3);
+            $this.chartHcMmelNeatHist   = new Chart(ctxHcMmelNeatHist   , configHcMmelNeatHist);
+            $this.chartHcMmelNeatQust   = new Chart(ctxHcMmelNeatQust   , configHcMmelNeatQust);
 
-            $this.numCountAnimate();
-            // $this.chartStrs = new Chart(ctxStrs, configStrs);
+            // $this.totMonStat.careCalEatAvg          = $this.toNumber($this.totMonStat.careCalEatAvg);
+            // $this.totMonStat.careCalEatbfDay        = $this.toNumber($this.totMonStat.careCalEatbfDay);
+            // $this.totMonStat.careMmelNeatFmenuCnt   = $this.toNumber($this.totMonStat.careMmelNeatFmenuCnt);
+            // $this.totMonStat.careMmelNeatFmenuObj   = $this.toNumber($this.totMonStat.careMmelNeatFmenuObj);
+            // $this.totMonStat.careMmelNeatQustCnt    = $this.toNumber($this.totMonStat.careMmelNeatQustCnt);
+            // $this.totMonStat.careMmelNeatQustObj    = $this.toNumber($this.totMonStat.careMmelNeatQustObj);
+
+            // $this.numCountAnimate();
+            // $this.chartHcUseStrs = new Chart(ctxStrs, configHcUseStrs);
 
             // const operStatCntn = document.getElementById('operStatCntn');
             // operStatCntn.innerHTML = $this.stdtInfo.smryCntn;
@@ -975,122 +1144,248 @@ let totMonStat = new Vue({
         initData: function () {
             let $this = this;
 
+            //가동_현황
+            $this.bandOperStat = {
+                bandOperOpen : 0,
+                bandOperNorm : 0,
+                bandOperNasr : 0,
+                bandOperRt   : 0
+            },
+            //개통_현황
+            $this.bandOpenStat = {
+                bandOpenOpen    : 0,
+                bandOpenPrnt    : 0,
+                bandOpenNorm    : 0,
+                bandOpenOpenRt  : 0,
+                bandOpenPrntRt  : 0,
+                bandOpenNormRt  : 0,
+            },
+            //헬스케어_활용율
+            $this.hcUseRt = {
+                hcUseStdtCnt : 0,
+                hcUseGfixCnt : 0,
+                hcUseGfixRt  : 0,
+                hcUseFatpCnt : 0,
+                hcUseFatpRt  : 0,
+                hcUseStrsCnt : 0,
+                hcUseStrsRt  : 0
+            },
+            //위험안전발생
             $this.dgsfOccr = {
-                mnthDngrAvg : '',
-                tdayNorm    : '',
-                tdayChk     : '',
-                tdayWarn    : '',
-                tdayPdngr   : '',
-                tdayDngr    : '',
-                tdayDngrSum : '',
-                difCnt      : '',
-                persAvg     : ''
+                mnthDngrAvg : 0,
+                tdayNorm    : 0,
+                tdayChk     : 0,
+                tdayWarn    : 0,
+                tdayPdngr   : 0,
+                tdayDngr    : 0,
+                tdayDngrSum : 0,
+                difCnt      : 0,
+                persAvg     : 0
             },
+            //위험지역_추이
+            $this.dzonTrnd = {
+                bday1       : 0,
+                week1Ago    : 0,
+                week2Ago    : 0,
+                week3Ago    : 0,
+                week4Ago    : 0,
+                minMaxRt    : 0,
+                trnd        : ''
+            },
+            //안전위험지역_탐지율
+            $this.dgsfDtct = {
+                gorgDzon    : 0,
+                gorgSzon    : 0,
+                guarDzon    : 0,
+                guarSzon    : 0
+            },
+            //위험감정_카운트
             $this.dgemCnt = {
-                dgemTotl : '',
-                dgemDzon : '',
-                dgemFall : '',
-                dgemHbit : '',
-                dgemTemp : ''
+                dgemTotl : 0,
+                dgemDzon : 0,
+                dgemFall : 0,
+                dgemHbit : 0,
+                dgemTemp : 0
             },
+            //위험지역_TOP3_공공
+            $this.gorgDtop3 = {
+                gorgDtop3PlcNm1  : '',
+                gorgDtop3Addr1   : '',
+                gorgDtop3Cnt1    : 0,
+                gorgDtop3PlcNm2  : '',
+                gorgDtop3Addr2   : '',
+                gorgDtop3Cnt2    : 0,
+                gorgDtop3PlcNm3  : '',
+                gorgDtop3Addr3   : '',
+                gorgDtop3Cnt3    : 0
+            },
+            //보호자_지정_위험지역_TOP3
+            $this.guarDtop3 = {
+                guarDtop3Addr1   : '',
+                guarDtop3Cnt1    : 0,
+                guarDtop3Addr2   : '',
+                guarDtop3Cnt2    : 0,
+                guarDtop3Addr3   : '',
+                guarDtop3Cnt3    : 0
+            },
+            //위험감정_이력
             $this.dgemHist = [{
-                dgemDt          : '',
-                dgemTm          : '',
-                dgemHistStatCd  : '',
-                dgemHistStatNm  : ''
-            }];
+                dgemDt : '',
+                dgemTm : '',
+                dgemHistStatCd : '',
+                dgemHistStatNm : ''
+            }],
+            //헬스케어_성장지수
+            $this.hcGidx = {
+                hcGidxVlow  : 0,
+                hcGidxOhigh : 0,
+                hcGidxAvg   : 0
+            },
+            //헬스케어_비만지수
+            $this.hcFidx = {
+                hcFidxVlow  : 0,
+                hcFidxFat   : 0,
+                hcFidxFfat  : 0,
+                hcFidxAvg   : 0
+            },
+            //헬스케어_비만예측
+            $this.hcFpidx = {
+                hcFpidxVlow : 0,
+                hcFpidxFat  : 0,
+                hcFpidxFfat : 0,
+                hcFpidxAvg  : 0
+            },
+            //헬스케어_스트레스
+            $this.hcStrs = {
+                hcStrsHigh  : 0,
+                hcStrsOhigh : 0,
+                hcStrsAvg   : 0
+            },
+            //헬스케어_평균_운동시간
+            $this.hcAvgAct = {
+                hcAvgAct    : 0,
+                hcPdayAvgAct: 0,
+                hcAvgActDif : 0
+            },
+            //헬스케어_평균_칼로리_섭취
+            $this.hcAvgCalEat = {
+                hcCalEat    : 0,
+                hcPdayCalEat: 0,
+                hcCalEatDif : 0
+            },
+            //헬스케어_주요식단_TOP3
+            $this.hcFmenuTop3 = {
+                hcEatFood1  : 0,
+                hcEatFoodNm1: '',
+                hcEatCnt1   : 0,
+                hcEatFood2  : 0,
+                hcEatFoodNm2: '',
+                hcEatCnt2   : 0,
+                hcEatFood3  : 0,
+                hcEatFoodNm3: '',
+                hcEatCnt3   : 0
+            },
+            //헬스케어_아침식사_결식율
+            $this.hcMmelNeat = {
+                hcNeatHistObjCnt    : 0,
+                hcNeatHistNeatCnt   : 0,
+                hcNeatHistNeatRt    : 0,
+                hcNeatQustObjCnt    : 0,
+                hcNeatQustNeatCnt   : 0,
+                hcNeatQustNeatRt    : 0
+            }
 
 
             ////////////////////// 임시 //////////////////////
-            $this.totMonStat = {
-                openCnt             : '',
-                operCnt             : '',
-                noRsps              : '',
-
-                temp                : null,
-                // tmpDngrSafeOcrrTd   : 0,
-                // tmpDngrSafeOcrrDif  : 0,
-                // tmpDngrSafeOcrrYav  : 5.8,
-
-                tmpTotal            : 200000,
-                tmpUsage            : 140000,
-                tmpNumber1          : 200000,
-                tmpNumber2          : 180000,
-                tmpNumber3          : 20000,
-                tmpNumber4          : 500000,
-                tmpNumber5          : 300000,
-                tmpNumber6          : 200000,
-                tmpNumber7          : 200000,
-                tmpNumber8          : 14000,
-                tmpNumber9          : 10000,
-                tmpNumber10         : 13000,
-                tmpNumber11         : 30,
-
-                plcCdPublTop1       : '유흥/유해',
-                plcCdPublTop2       : '공사/위험물',
-                plcCdPublTop3       : '우범지역',
-                addrPublTop1        : '서울특별시 마포구 마포대로12 한신빌딩 911',
-                addrPublTop2        : '서울특별시 금천구 디지털로9길 99 스타밸리빌',
-                addrPublTop3        : '서울시 금천구 가산동 1234-17 우리벤처타워',
-                cntPublTop1         : 123,
-                cntPublTop2         : 78,
-                cntPublTop3         : 50,
-                plcCdPrntTop1       : '우범지역',
-                plcCdPrntTop2       : '유흥/유해',
-                plcCdPrntTop3       : '공사/위험물',
-                addrPrntTop1        : '서울특별시 송파구 송파대로8길 17',
-                addrPrntTop2        : '제주특별자치도 제주시 첨단로 242',
-                addrPrntTop3        : '서울특별시 용산구 국방부',
-                cntPrntTop1         : 123,
-                cntPrntTop2         : 78,
-                cntPrntTop3         : 999,
-
-                careBmiBodyIdxAvg       : 27.56,
-                careBmiBodyIdxMin       : 17.12,
-                careBmiBodyIdxMax       : 42.78,
-
-                careGrowLowRt           : 20,
-                careGrowOverRt          : 27,
-
-                careFatIdxHighRt        : 10,
-                careFatIdxGnrlRt        : 20,
-                careFatIdxUndrRt        : 10,
-
-                careFatPrdtHighRt       : 10,
-                careFatPrdtGnrlRt       : 20,
-                careFatPrdtUndrRt       : 10,
-
-                careStrsHigh            : 20,
-                careStrsVeryHigh        : 10,
-
-                careExcsTimeAvg         : 1.2,
-                careExcsTimeBfDay       : 1.5,
-                careExcsTimeDif         : 0.3,
-
-                careCalEatAvg           : 2113,
-                careCalEatbfDay         : 2238,
-                careCalEatDif           : 125,
-
-                careFmenuCdTop1         : '밥',
-                careFmenuRtTop1         : 33.1,
-                careFmenuCdTop2         : '빵',
-                careFmenuRtTop2         : 27.5,
-                careFmenuCdTop3         : '튀김',
-                careFmenuRtTop3         : 12.9,
-
-                careMmelNeatFmenuCnt    : 11853,
-                careMmelNeatFmenuObj    : 20000,
-
-                careMmelNeatQustCnt     : 11853,
-                careMmelNeatQustObj     : 20000,
-            },
-            $this.totCnt = {
-                tmpDngrZoneCnt          : 4400,
-                tmpFallDownCnt          : 2400,
-                tmpHbitAbnmCnt          : 1200,
-                tmpTmepAbnmCnt          : 3300,
-                tmpTotalCnt             : 20000
-            }
+            // $this.totMonStat = {
+            //     openCnt             : '',
+            //     operCnt             : '',
+            //     noRsps              : '',
+            //
+            //     temp                : null,
+            //     // tmpDngrSafeOcrrTd   : 0,
+            //     // tmpDngrSafeOcrrDif  : 0,
+            //     // tmpDngrSafeOcrrYav  : 5.8,
+            //
+            //     tmpTotal            : 200000,
+            //     tmpUsage            : 140000,
+            //     tmpNumber1          : 200000,
+            //     tmpNumber2          : 180000,
+            //     tmpNumber3          : 20000,
+            //     tmpNumber4          : 500000,
+            //     tmpNumber5          : 300000,
+            //     tmpNumber6          : 200000,
+            //     tmpNumber7          : 200000,
+            //     tmpNumber8          : 14000,
+            //     tmpNumber9          : 10000,
+            //     tmpNumber10         : 13000,
+            //     tmpNumber11         : 30,
+            //
+            //     plcCdPublTop1       : '유흥/유해',
+            //     plcCdPublTop2       : '공사/위험물',
+            //     plcCdPublTop3       : '우범지역',
+            //     addrPublTop1        : '서울특별시 마포구 마포대로12 한신빌딩 911',
+            //     addrPublTop2        : '서울특별시 금천구 디지털로9길 99 스타밸리빌',
+            //     addrPublTop3        : '서울시 금천구 가산동 1234-17 우리벤처타워',
+            //     cntPublTop1         : 123,
+            //     cntPublTop2         : 78,
+            //     cntPublTop3         : 50,
+            //     plcCdPrntTop1       : '우범지역',
+            //     plcCdPrntTop2       : '유흥/유해',
+            //     plcCdPrntTop3       : '공사/위험물',
+            //     addrPrntTop1        : '서울특별시 송파구 송파대로8길 17',
+            //     addrPrntTop2        : '제주특별자치도 제주시 첨단로 242',
+            //     addrPrntTop3        : '서울특별시 용산구 국방부',
+            //     cntPrntTop1         : 123,
+            //     cntPrntTop2         : 78,
+            //     cntPrntTop3         : 999,
+            //
+            //     careBmiBodyIdxAvg       : 27.56,
+            //     careBmiBodyIdxMin       : 17.12,
+            //     careBmiBodyIdxMax       : 42.78,
+            //
+            //     careGrowLowRt           : 20,
+            //     careGrowOverRt          : 27,
+            //
+            //     careFatIdxHighRt        : 10,
+            //     careFatIdxGnrlRt        : 20,
+            //     careFatIdxUndrRt        : 10,
+            //
+            //     careFatPrdtHighRt       : 10,
+            //     careFatPrdtGnrlRt       : 20,
+            //     careFatPrdtUndrRt       : 10,
+            //
+            //     careStrsHigh            : 20,
+            //     careStrsVeryHigh        : 10,
+            //
+            //     careExcsTimeAvg         : 1.2,
+            //     careExcsTimeBfDay       : 1.5,
+            //     careExcsTimeDif         : 0.3,
+            //
+            //     careCalEatAvg           : 2113,
+            //     careCalEatbfDay         : 2238,
+            //     careCalEatDif           : 125,
+            //
+            //     careFmenuCdTop1         : '밥',
+            //     careFmenuRtTop1         : 33.1,
+            //     careFmenuCdTop2         : '빵',
+            //     careFmenuRtTop2         : 27.5,
+            //     careFmenuCdTop3         : '튀김',
+            //     careFmenuRtTop3         : 12.9,
+            //
+            //     careMmelNeatFmenuCnt    : 11853,
+            //     careMmelNeatFmenuObj    : 20000,
+            //
+            //     careMmelNeatQustCnt     : 11853,
+            //     careMmelNeatQustObj     : 20000,
+            // },
+            // $this.totCnt = {
+            //     tmpDngrZoneCnt          : 4400,
+            //     tmpFallDownCnt          : 2400,
+            //     tmpHbitAbnmCnt          : 1200,
+            //     tmpTmepAbnmCnt          : 3300,
+            //     tmpTotalCnt             : 20000
+            // }
         },
         chartPerModIdx: function(srcIdx, perIdx) {
             if (WebUtil.isNull(perIdx)) {
@@ -1114,11 +1409,11 @@ let totMonStat = new Vue({
             return quoti;
         },
         toNumber: function (value) {
-            return value.toLocaleString('ko-KR', { hour12: true });
+            return value.toLocaleString();
         },
         clock: function() {
             let $this = this;
-            let date = moment().lang("ko");
+            let date = moment().lang("ko", { hour12: true });
 
             $this.clockParam.hhmmss = date.format(time12FormatPattern);
             $this.clockParam.yyyymmdd = date.format(dateFormatPattern);
@@ -1157,6 +1452,106 @@ let totMonStat = new Vue({
         numCountAnimate: function () {
             let $this = this;
 
+            // 가동_현황 : 개통
+            $({ val : 0 }).animate({ val : $this.bandOperStat.bandOperOpen }, {
+                duration: 1000,
+                step: function() {
+                    $this.bandOperStat.bandOperOpen = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.bandOperStat.bandOperOpen = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 가동_현황 : 가동
+            $({ val : 0 }).animate({ val : $this.bandOperStat.bandOperNorm }, {
+                duration: 1000,
+                step: function() {
+                    $this.bandOperStat.bandOperNorm = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.bandOperStat.bandOperNorm = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 가동_현황 : 무응답
+            $({ val : 0 }).animate({ val : $this.bandOperStat.bandOperNasr }, {
+                duration: 1000,
+                step: function() {
+                    $this.bandOperStat.bandOperNasr = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.bandOperStat.bandOperNasr = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 개통_현황 : 밴드개통
+            $({ val : 0 }).animate({ val : $this.bandOpenStat.bandOpenOpen }, {
+                duration: 1000,
+                step: function() {
+                    $this.bandOpenStat.bandOpenOpen = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.bandOpenStat.bandOpenOpen = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 개통_현황 : 서류제출
+            $({ val : 0 }).animate({ val : $this.bandOpenStat.bandOpenPrnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.bandOpenStat.bandOpenPrnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.bandOpenStat.bandOpenPrnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 개통_현황 : 회원가입
+            $({ val : 0 }).animate({ val : $this.bandOpenStat.bandOpenNorm }, {
+                duration: 1000,
+                step: function() {
+                    $this.bandOpenStat.bandOpenNorm = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.bandOpenStat.bandOpenNorm = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 헬스케어_활용율 : TOTAL
+            $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseStdtCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcUseRt.hcUseStdtCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcUseRt.hcUseStdtCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 헬스케어_활용율 : 성장/비만 USAGE
+            $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseGfixCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcUseRt.hcUseGfixCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcUseRt.hcUseGfixCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 헬스케어_활용율 : 비만예측 USAGE
+            $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseFatpCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcUseRt.hcUseFatpCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcUseRt.hcUseFatpCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 헬스케어_활용율 : 스트레스 USAGE
+            $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseStrsCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcUseRt.hcUseStrsCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcUseRt.hcUseStrsCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
 
             // 위험안전발생 : 위험가능성+위험
             $({ val : 0 }).animate({ val : $this.dgsfOccr.tdayDngrSum }, {
@@ -1172,23 +1567,20 @@ let totMonStat = new Vue({
             $({ val : 0 }).animate({ val : $this.dgsfOccr.difCnt }, {
                 duration: 1000,
                 step: function() {
-                    console.log("jcw animate difCnt :: ", this.val);
-                    console.log("jcw animate difCnt :: ", Math.floor(this.val));
-                    console.log("jcw animate difCnt :: ", $this.toNumber(Math.floor(this.val)));
-                    $this.dgsfOccr.difCnt = $this.toNumber(Math.floor(this.val));
+                    $this.dgsfOccr.difCnt = $this.toNumber(this.val.toFixed(1));
                 },
                 complete: function() {
-                    $this.dgsfOccr.difCnt = $this.toNumber(Math.floor(this.val));
+                    $this.dgsfOccr.difCnt = $this.toNumber(this.val.toFixed(1));
                 }
             });
             // 위험안전발생 : 인평균
             $({ val : 0 }).animate({ val : $this.dgsfOccr.persAvg }, {
                 duration: 1000,
                 step: function() {
-                    $this.dgsfOccr.persAvg = $this.toNumber(Math.floor(this.val));
+                    $this.dgsfOccr.persAvg = $this.toNumber(this.val.toFixed(1));
                 },
                 complete: function() {
-                    $this.dgsfOccr.persAvg = $this.toNumber(Math.floor(this.val));
+                    $this.dgsfOccr.persAvg = $this.toNumber(this.val.toFixed(1));
                 }
             });
             // 위험안전발생 : 정상
@@ -1241,15 +1633,14 @@ let totMonStat = new Vue({
                     $this.dgsfOccr.tdayDngr = $this.toNumber(Math.floor(this.val));
                 }
             });
-
             // 위험지역추이 : 최저/최고대비
-            $({ val : 0 }).animate({ val : $this.dzonTrnd.lowHighDif }, {
+            $({ val : 0 }).animate({ val : $this.dzonTrnd.minMaxRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.dzonTrnd.lowHighDif = $this.toNumber(Math.floor(this.val));
+                    $this.dzonTrnd.minMaxRt = $this.toNumber(this.val.toFixed(1));
                 },
                 complete: function() {
-                    $this.dzonTrnd.lowHighDif = $this.toNumber(Math.floor(this.val));
+                    $this.dzonTrnd.minMaxRt = $this.toNumber(this.val.toFixed(1));
                 }
             });
 
@@ -1303,203 +1694,634 @@ let totMonStat = new Vue({
                     $this.dgemCnt.dgemTemp = $this.toNumber(Math.floor(this.val));
                 }
             });
+            // 자주 방문하는 위험지역 TOP3 : TOP1
+            $({ val : 0 }).animate({ val : $this.gorgDtop3.gorgDtop3Cnt1 }, {
+                duration: 1000,
+                step: function() {
+                    $this.gorgDtop3.gorgDtop3Cnt1 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.gorgDtop3.gorgDtop3Cnt1 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 자주 방문하는 위험지역 TOP3 : TOP2
+            $({ val : 0 }).animate({ val : $this.gorgDtop3.gorgDtop3Cnt2 }, {
+                duration: 1000,
+                step: function() {
+                    $this.gorgDtop3.gorgDtop3Cnt2 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.gorgDtop3.gorgDtop3Cnt2 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 자주 방문하는 위험지역 TOP3 : TOP3
+            $({ val : 0 }).animate({ val : $this.gorgDtop3.gorgDtop3Cnt3 }, {
+                duration: 1000,
+                step: function() {
+                    $this.gorgDtop3.gorgDtop3Cnt3 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.gorgDtop3.gorgDtop3Cnt3 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 보호자가 많이 지정한 위험지역 TOP3 : TOP1
+            $({ val : 0 }).animate({ val : $this.guarDtop3.guarDtop3Cnt1 }, {
+                duration: 1000,
+                step: function() {
+                    $this.guarDtop3.guarDtop3Cnt1 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.guarDtop3.guarDtop3Cnt1 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 보호자가 많이 지정한 위험지역 TOP3 : TOP2
+            $({ val : 0 }).animate({ val : $this.guarDtop3.guarDtop3Cnt2 }, {
+                duration: 1000,
+                step: function() {
+                    $this.guarDtop3.guarDtop3Cnt2 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.guarDtop3.guarDtop3Cnt2 = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 보호자가 많이 지정한 위험지역 TOP3 : TOP3
+            $({ val : 0 }).animate({ val : $this.guarDtop3.guarDtop3Cnt3 }, {
+                duration: 1000,
+                step: function() {
+                    $this.guarDtop3.guarDtop3Cnt3 = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.guarDtop3.guarDtop3Cnt3 = $this.toNumber(Math.floor(this.val));
+                }
+            });
 
+            // 헬스케어 : 성장지수 과성장
+            $({ val : 0 }).animate({ val : $this.hcGidx.hcGidxOhigh }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcGidx.hcGidxOhigh = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcGidx.hcGidxOhigh = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 성장지수 저성장
+            $({ val : 0 }).animate({ val : $this.hcGidx.hcGidxVlow }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcGidx.hcGidxVlow = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcGidx.hcGidxVlow = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 비만지수 고도비만
+            $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxFfat }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFidx.hcFidxFfat = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFidx.hcFidxFfat = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 비만지수 비만
+            $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxFat }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFidx.hcFidxFat = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFidx.hcFidxFat = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 비만지수 저체중
+            $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxVlow }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFidx.hcFidxVlow = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFidx.hcFidxVlow = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 비만예측 과체중
+            $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxFfat }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFpidx.hcFpidxFfat = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFpidx.hcFpidxFfat = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 비만예측 비만
+            $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxFat }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFpidx.hcFpidxFat = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFpidx.hcFpidxFat = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 비만예측 저체중
+            $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxVlow }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFpidx.hcFpidxVlow = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFpidx.hcFpidxVlow = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 스트레스 높음
+            $({ val : 0 }).animate({ val : $this.hcStrs.hcStrsHigh }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcStrs.hcStrsHigh = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcStrs.hcStrsHigh = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 스트레스 매우높음
+            $({ val : 0 }).animate({ val : $this.hcStrs.hcStrsOhigh }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcStrs.hcStrsOhigh = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcStrs.hcStrsOhigh = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 평균_운동시간 차이
+            $({ val : 0 }).animate({ val : $this.hcAvgAct.hcAvgActDif }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcAvgAct.hcAvgActDif = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcAvgAct.hcAvgActDif = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 평균_운동시간 평균
+            $({ val : 0 }).animate({ val : $this.hcAvgAct.hcAvgAct }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcAvgAct.hcAvgAct = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcAvgAct.hcAvgAct = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 평균_운동시간 전일
+            $({ val : 0 }).animate({ val : $this.hcAvgAct.hcPdayAvgAct }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcAvgAct.hcPdayAvgAct = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcAvgAct.hcPdayAvgAct = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 평균_칼로리_섭취 차이
+            $({ val : 0 }).animate({ val : $this.hcAvgCalEat.hcCalEatDif }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcAvgCalEat.hcCalEatDif = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcAvgCalEat.hcCalEatDif = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 평균_칼로리_섭취 평균
+            $({ val : 0 }).animate({ val : $this.hcAvgCalEat.hcCalEat }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcAvgCalEat.hcCalEat = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcAvgCalEat.hcCalEat = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 평균_칼로리_섭취 전일
+            $({ val : 0 }).animate({ val : $this.hcAvgCalEat.hcPdayCalEat }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcAvgCalEat.hcPdayCalEat = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcAvgCalEat.hcPdayCalEat = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 주요식단_TOP3 TOP1
+            $({ val : 0 }).animate({ val : $this.hcFmenuTop3.hcEatCnt1 }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFmenuTop3.hcEatCnt1 = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFmenuTop3.hcEatCnt1 = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 주요식단_TOP3 TOP2
+            $({ val : 0 }).animate({ val : $this.hcFmenuTop3.hcEatCnt2 }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFmenuTop3.hcEatCnt2 = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFmenuTop3.hcEatCnt2 = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 주요식단_TOP3 TOP3
+            $({ val : 0 }).animate({ val : $this.hcFmenuTop3.hcEatCnt3 }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFmenuTop3.hcEatCnt3 = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFmenuTop3.hcEatCnt3 = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 헬스케어 : 아침결식율_식단 결식
+            $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatHistNeatCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcMmelNeat.hcNeatHistNeatCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcMmelNeat.hcNeatHistNeatCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 헬스케어 : 아침결식율_식단 대상
+            $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatHistObjCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcMmelNeat.hcNeatHistObjCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcMmelNeat.hcNeatHistObjCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 헬스케어 : 아침결식율_설문 결식
+            $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatQustNeatCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcMmelNeat.hcNeatQustNeatCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcMmelNeat.hcNeatQustNeatCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
+            // 헬스케어 : 아침결식율_설문 대상
+            $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatQustObjCnt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcMmelNeat.hcNeatQustObjCnt = $this.toNumber(Math.floor(this.val));
+                },
+                complete: function() {
+                    $this.hcMmelNeat.hcNeatQustObjCnt = $this.toNumber(Math.floor(this.val));
+                }
+            });
 
+            // 차트 텍스트 : 가동현황 가동율
+            $({ val : 0 }).animate({ val : $this.bandOperStat.bandOperRt }, {
+                duration: 1000,
+                step: function() {
+                    $this.bandOperStat.bandOperRt = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.bandOperStat.bandOperRt = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어_활용율 성장/비만
+            $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseGfixRt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcUseRt.hcUseGfixRt = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcUseRt.hcUseGfixRt = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어_활용율 비만예측
+            $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseFatpRt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcUseRt.hcUseFatpRt = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcUseRt.hcUseFatpRt = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어_활용율 스트레스
+            $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseStrsRt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcUseRt.hcUseStrsRt = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcUseRt.hcUseStrsRt = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 위험안전탐지율 - 공공안전
+            $({ val : 0 }).animate({ val : $this.dgsfDtct.gorgSzon }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfDtct.gorgSzon = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.dgsfDtct.gorgSzon = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 위험안전탐지율 - 공공위험
+            $({ val : 0 }).animate({ val : $this.dgsfDtct.gorgDzon }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfDtct.gorgDzon = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.dgsfDtct.gorgDzon = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 위험안전탐지율 - 보호자안전
+            $({ val : 0 }).animate({ val : $this.dgsfDtct.guarSzon }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfDtct.guarSzon = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.dgsfDtct.guarSzon = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 위험안전탐지율 - 보호자위험
+            $({ val : 0 }).animate({ val : $this.dgsfDtct.guarDzon }, {
+                duration: 1000,
+                step: function() {
+                    $this.dgsfDtct.guarDzon = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.dgsfDtct.guarDzon = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어 - 성장지수
+            $({ val : 0 }).animate({ val : $this.hcGidx.hcGidxAvg }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcGidx.hcGidxAvg = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcGidx.hcGidxAvg = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어 - 비만지수
+            $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxAvg }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFidx.hcFidxAvg = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFidx.hcFidxAvg = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어 - 비만예측
+            $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxAvg }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcFpidx.hcFpidxAvg = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcFpidx.hcFpidxAvg = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어 - 스트레스
+            $({ val : 0 }).animate({ val : $this.hcStrs.hcStrsAvg }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcStrs.hcStrsAvg = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcStrs.hcStrsAvg = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어 - 아침결식율_식단
+            $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatHistNeatRt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcMmelNeat.hcNeatHistNeatRt = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcMmelNeat.hcNeatHistNeatRt = $this.toNumber(this.val.toFixed(1));
+                }
+            });
+            // 차트 텍스트 : 헬스케어 - 아침결식율_설문
+            $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatQustNeatRt }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcMmelNeat.hcNeatQustNeatRt = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcMmelNeat.hcNeatQustNeatRt = $this.toNumber(this.val.toFixed(1));
+                }
+            });
 
             ////////////////////// 임시 //////////////////////
-            let tmpNumber1          = $this.totMonStat.tmpNumber1;
-            let tmpNumber2          = $this.totMonStat.tmpNumber2;
-            let tmpNumber3          = $this.totMonStat.tmpNumber3;
-            let tmpNumber4          = $this.totMonStat.tmpNumber4;
-            let tmpNumber5          = $this.totMonStat.tmpNumber5;
-            let tmpNumber6          = $this.totMonStat.tmpNumber6;
-            let tmpNumber7          = $this.totMonStat.tmpNumber7;
-            let tmpNumber8          = $this.totMonStat.tmpNumber8;
-            let tmpNumber9          = $this.totMonStat.tmpNumber9;
-            let tmpNumber10         = $this.totMonStat.tmpNumber10;
-            let tmpNumber11         = $this.totMonStat.tmpNumber11;
-
-            let tmpTotal            = $this.totMonStat.tmpTotal;
-            let tmpUsage            = $this.totMonStat.tmpUsage;
-            let tdayDngrSum         = $this.dgsfOccr.tdayDngrSum;
-            let tmpDngrZoneCnt      = $this.totCnt.tmpDngrZoneCnt;
-            let tmpFallDownCnt      = $this.totCnt.tmpFallDownCnt;
-            let tmpHbitAbnmCnt      = $this.totCnt.tmpHbitAbnmCnt;
-            let tmpTmepAbnmCnt      = $this.totCnt.tmpTmepAbnmCnt;
-            let tmpTotalCnt         = $this.totCnt.tmpTotalCnt;
-
-            $({ val : 0 }).animate({ val : tmpNumber1 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber2 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber3 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber4 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber5 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber6 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber7 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber8 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber9 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber10 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpNumber11 }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpTotal }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tdayDngrSum }, {
-                duration: 1000,
-                step: function() {
-                    $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpUsage }, {
-                duration: 1000,
-                step: function() {
-                    $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpDngrZoneCnt }, {
-                duration: 1000,
-                step: function() {
-                    $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpFallDownCnt }, {
-                duration: 1000,
-                step: function() {
-                    $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpHbitAbnmCnt }, {
-                duration: 1000,
-                step: function() {
-                    $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpTmepAbnmCnt }, {
-                duration: 1000,
-                step: function() {
-                    $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
-                }
-            });
-            $({ val : 0 }).animate({ val : tmpTotalCnt }, {
-                duration: 1000,
-                step: function() {
-                    $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
-                },
-                complete: function() {
-                    $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
-                }
-            });
+            // let tmpNumber1          = $this.totMonStat.tmpNumber1;
+            // let tmpNumber2          = $this.totMonStat.tmpNumber2;
+            // let tmpNumber3          = $this.totMonStat.tmpNumber3;
+            // let tmpNumber4          = $this.totMonStat.tmpNumber4;
+            // let tmpNumber5          = $this.totMonStat.tmpNumber5;
+            // let tmpNumber6          = $this.totMonStat.tmpNumber6;
+            // let tmpNumber7          = $this.totMonStat.tmpNumber7;
+            // let tmpNumber8          = $this.totMonStat.tmpNumber8;
+            // let tmpNumber9          = $this.totMonStat.tmpNumber9;
+            // let tmpNumber10         = $this.totMonStat.tmpNumber10;
+            // let tmpNumber11         = $this.totMonStat.tmpNumber11;
+            //
+            // let tmpTotal            = $this.totMonStat.tmpTotal;
+            // let tmpUsage            = $this.totMonStat.tmpUsage;
+            // let tdayDngrSum         = $this.dgsfOccr.tdayDngrSum;
+            // let tmpDngrZoneCnt      = $this.totCnt.tmpDngrZoneCnt;
+            // let tmpFallDownCnt      = $this.totCnt.tmpFallDownCnt;
+            // let tmpHbitAbnmCnt      = $this.totCnt.tmpHbitAbnmCnt;
+            // let tmpTmepAbnmCnt      = $this.totCnt.tmpTmepAbnmCnt;
+            // let tmpTotalCnt         = $this.totCnt.tmpTotalCnt;
+            //
+            // $({ val : 0 }).animate({ val : tmpNumber1 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber2 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber3 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber4 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber5 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber6 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber7 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber8 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber9 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber10 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpNumber11 }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpTotal }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tdayDngrSum }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpUsage }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpDngrZoneCnt }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpFallDownCnt }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpHbitAbnmCnt }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpTmepAbnmCnt }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
+            // $({ val : 0 }).animate({ val : tmpTotalCnt }, {
+            //     duration: 1000,
+            //     step: function() {
+            //         $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
+            //     },
+            //     complete: function() {
+            //         $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
+            //     }
+            // });
         },
+
         linkCall: function (menuNo) {
             let $this = this;
 
