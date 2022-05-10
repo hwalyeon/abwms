@@ -342,15 +342,15 @@
                     <div class="form-group">
                         <div class="col-xs-12 border-line minMax-height-170 pd_top_15">
                             <div class ="col-xs-2 chart-padding-2" style="cursor: pointer;" v-on:click="linkCall('F310')">
-                                <div id=chartCareBmiBodyIdx class ="col-xs-4 chart-padding float_left">
-                                    <canvas id="careBmiBodyIdxChart" width="100" height="110">
+                                <div id=chartHcBmiIdx class ="col-xs-4 chart-padding float_left">
+                                    <canvas id="hcBmiIdxChart" width="100" height="110">
                                     </canvas>
                                 </div>
                                 <div id="careBmiBodyIdxDetl" class="col-xs-8 chart-padding-0">
                                     <span class="col-xs-12 text-center">[BMI-체질량지수]</span>
-                                    <span class="col-xs-12 text-center" style="font-size: 18px; color: #09ea09;">{{ hcGidx.hcGidxAvg }}</span>
-                                    <span class="col-xs-12 text-center">최저 : {{ hcGidx.hcGidxVlow }}</span>
-                                    <span class="col-xs-12 text-center">최대 : {{ hcGidx.hcGidxOhigh }}</span>
+                                    <span class="col-xs-12 text-center" style="font-size: 18px; color: #09ea09;">{{ hcBmiIdx.hcAvgBmi }}</span>
+                                    <span class="col-xs-12 text-center">최저 : {{ hcBmiIdx.hcMinBmi }}</span>
+                                    <span class="col-xs-12 text-center">최대 : {{ hcBmiIdx.hcMaxBmi }}</span>
                                 </div>
                             </div>
                             <div class ="col-xs-3 chart-padding-1" style="cursor: pointer;" v-on:click="linkCall('F310')">

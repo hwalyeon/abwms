@@ -37,6 +37,9 @@ public interface TotMonStatService
 	// 위험감정_이력
 	List<Map<String, String>> searchDgemHist(Map<String, String> params) throws BizException;
 
+	// 헬스케어_BMI_체질량지수
+	Map<String, String> searchHcBmiIdx(Map<String, String> params) throws BizException;
+
 	// 헬스케어_성장지수
 	Map<String, String> searchHcGidx(Map<String, String> params) throws BizException;
 

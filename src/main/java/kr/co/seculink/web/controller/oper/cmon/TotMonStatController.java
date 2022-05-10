@@ -62,6 +62,9 @@ public class TotMonStatController
 		// 위험감정_이력
 		List<Map<String, String>> result7 = totMonStatService.searchDgemHist(params);
 
+		// 헬스케어_BMI_체질량지수
+		Map<String, String> hcBmiIdx = totMonStatService.searchHcBmiIdx(params);
+
 		// 헬스케어_성장지수
 		Map<String, String> hcGidx = totMonStatService.searchHcGidx(params);
 
@@ -96,6 +99,7 @@ public class TotMonStatController
 		rtnMap.put("result5"		, result5);
 		rtnMap.put("result6"		, result6);
 		rtnMap.put("result7"		, result7);
+		rtnMap.put("hcBmiIdx"		, hcBmiIdx);
 		rtnMap.put("hcGidx"			, hcGidx);
 		rtnMap.put("hcFidx"			, hcFidx);
 		rtnMap.put("hcFpidx"		, hcFpidx);

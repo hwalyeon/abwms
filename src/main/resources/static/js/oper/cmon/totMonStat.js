@@ -97,6 +97,12 @@ let totMonStat = new Vue({
             dgemHistStatCd : '',
             dgemHistStatNm : ''
         }],
+        // 헬스케어_BMI체질량지수
+        hcBmiIdx : {
+            hcAvgBmi    : 0,
+            hcMinBmi    : 0,
+            hcMaxBmi    : 0
+        },
         //헬스케어_성장지수
         hcGidx : {
             hcGidxVlow  : 0,
@@ -156,98 +162,6 @@ let totMonStat = new Vue({
             hcNeatQustNeatCnt   : 0,
             hcNeatQustNeatRt    : 0
         },
-
-        ////////////////////// 임시 //////////////////////
-        // totMonStat: {
-        //     openCnt             : 0,
-        //     operCnt             : 0,
-        //     noRsps              : 0,
-        //
-        //     temp                : null,
-        //     // tmpDngrSafeOcrrTd   : 0,
-        //     // tmpDngrSafeOcrrDif  : 0,
-        //     // tmpDngrSafeOcrrYav  : 5.8,
-        //
-        //     tmpTotal            : 200000,
-        //     tmpUsage            : 140000,
-        //     tmpNumber1          : 200000,
-        //     tmpNumber2          : 180000,
-        //     tmpNumber3          : 20000,
-        //     tmpNumber4          : 500000,
-        //     tmpNumber5          : 300000,
-        //     tmpNumber6          : 200000,
-        //     tmpNumber7          : 200000,
-        //     tmpNumber8          : 14000,
-        //     tmpNumber9          : 10000,
-        //     tmpNumber10         : 13000,
-        //     tmpNumber11         : 30,
-        //
-        //     plcCdPublTop1       : '유흥/유해',
-        //     plcCdPublTop2       : '공사/위험물',
-        //     plcCdPublTop3       : '우범지역',
-        //     addrPublTop1        : '서울특별시 마포구 마포대로12 한신빌딩 911',
-        //     addrPublTop2        : '서울특별시 금천구 디지털로9길 99 스타밸리빌',
-        //     addrPublTop3        : '서울시 금천구 가산동 1234-17 우리벤처타워',
-        //     cntPublTop1         : 123,
-        //     cntPublTop2         : 78,
-        //     cntPublTop3         : 50,
-        //     plcCdPrntTop1       : '우범지역',
-        //     plcCdPrntTop2       : '유흥/유해',
-        //     plcCdPrntTop3       : '공사/위험물',
-        //     addrPrntTop1        : '서울특별시 송파구 송파대로8길 17',
-        //     addrPrntTop2        : '제주특별자치도 제주시 첨단로 242',
-        //     addrPrntTop3        : '서울특별시 용산구 국방부',
-        //     cntPrntTop1         : 123,
-        //     cntPrntTop2         : 78,
-        //     cntPrntTop3         : 999,
-        //
-        //     careBmiBodyIdxAvg       : 27.56,
-        //     careBmiBodyIdxMin       : 17.12,
-        //     careBmiBodyIdxMax       : 42.78,
-        //
-        //     careGrowLowRt           : 20,
-        //     careGrowOverRt          : 27,
-        //
-        //     careFatIdxHighRt        : 10,
-        //     careFatIdxGnrlRt        : 20,
-        //     careFatIdxUndrRt        : 10,
-        //
-        //     careFatPrdtHighRt       : 10,
-        //     careFatPrdtGnrlRt       : 20,
-        //     careFatPrdtUndrRt       : 10,
-        //
-        //     careStrsHigh            : 20,
-        //     careStrsVeryHigh        : 10,
-        //
-        //     careExcsTimeAvg         : 1.2,
-        //     careExcsTimeBfDay       : 1.5,
-        //     careExcsTimeDif         : 0.3,
-        //
-        //     careCalEatAvg           : 2113,
-        //     careCalEatbfDay         : 2238,
-        //     careCalEatDif           : 125,
-        //
-        //     careFmenuCdTop1         : '밥',
-        //     careFmenuRtTop1         : 33.1,
-        //     careFmenuCdTop2         : '빵',
-        //     careFmenuRtTop2         : 27.5,
-        //     careFmenuCdTop3         : '튀김',
-        //     careFmenuRtTop3         : 12.9,
-        //
-        //     careMmelNeatFmenuCnt    : 11853,
-        //     careMmelNeatFmenuObj    : 20000,
-        //
-        //     careMmelNeatQustCnt     : 11853,
-        //     careMmelNeatQustObj     : 20000,
-        //
-        // },
-        // totCnt: {
-        //     tmpDngrZoneCnt      : 4400,
-        //     tmpFallDownCnt      : 2400,
-        //     tmpHbitAbnmCnt      : 1200,
-        //     tmpTmepAbnmCnt      : 3300,
-        //     tmpTotalCnt         : 20000
-        // },
         clockParam: {
             hhmmss                  : '',
             yyyymmdd                : '',
@@ -321,12 +235,7 @@ let totMonStat = new Vue({
         chartGorgDngrDtct       : null,
         chartGuarSafeDtct       : null,
         chartGuarDngrDtct       : null,
-
-        ////////////////////// 임시 //////////////////////
-
-        chartCareBmiBodyIdx : null,
-
-
+        chartHcBmiIdx           : null,
         chartHcGidx             : null,
         chartHcFidx             : null,
         chartHcFpidx            : null,
@@ -354,13 +263,12 @@ let totMonStat = new Vue({
         initCodeList: function() {
             // let $this = this;
 
-            // getCommonCodeList('SEX_CD',$this.code.sexCdList);
         },
-        initPage: function(stdtNo, guarNo) {
+        initPage: function() {
             let $this = this;
 
             $this.initChart();
-            $this.searchStdtDetlInfo(stdtNo, guarNo);
+            $this.searchStdtDetlInfo();
         },
         initChart: function() {
             let $this = this;
@@ -376,10 +284,7 @@ let totMonStat = new Vue({
             if ($this.chartGorgDngrDtct     != null )   $this.chartGorgDngrDtct.destroy();
             if ($this.chartGuarSafeDtct     != null )   $this.chartGuarSafeDtct.destroy();
             if ($this.chartGuarDngrDtct     != null )   $this.chartGuarDngrDtct.destroy();
-
-            ////////////////////// 임시 //////////////////////
-            if ($this.chartCareBmiBodyIdx   != null )   $this.chartCareBmiBodyIdx.destroy();
-
+            if ($this.chartHcBmiIdx         != null )   $this.chartHcBmiIdx.destroy();
             if ($this.chartHcGidx           != null )   $this.chartHcGidx.destroy();
             if ($this.chartHcFidx           != null )   $this.chartHcFidx.destroy();
             if ($this.chartHcFpidx          != null )   $this.chartHcFpidx.destroy();
@@ -418,153 +323,147 @@ let totMonStat = new Vue({
             ctx.fillStyle       = color;
             ctx.fillText(txt, centerX, centerY);
         },
-        searchStdtDetlInfo: function (stdtNo, guarNo){
+        searchStdtDetlInfo: function (){
             let $this = this;
 
-            // jcw 임시 로직
-            stdtNo = 1;
-            guarNo = 1;
-            if ( !WebUtil.isNull(stdtNo) )
-            {
-                let params = {
-                    'stdtNo'    : stdtNo
-                    ,'guarNo'   : guarNo
-                }
+            $this.initData();
 
-                $this.initData();
+            AjaxUtil.post({
+                url: "/oper/cmon/totMonStat/searchDgsfOccr.ab",
+                success: function(response) {
 
-                AjaxUtil.post({
-                    url: "/oper/cmon/totMonStat/searchDgsfOccr.ab",
-                    param: params,
-                    success: function(response) {
-
-                        // 가동_현황
-                        if ( !!response["rtnData"]["bandOperStat"] ) {
-                            $.each(response["rtnData"]["bandOperStat"], function(key, val) {
-                                $this.bandOperStat[key] = val;
-                            });
-                        }
-                        // 개통_현황
-                        if ( !!response["rtnData"]["bandOpenStat"] ) {
-                            $.each(response["rtnData"]["bandOpenStat"], function(key, val) {
-                                $this.bandOpenStat[key] = val;
-                            });
-                        }
-                        // 헬스케어_활용율
-                        if ( !!response["rtnData"]["hcUseRt"] ) {
-                            $.each(response["rtnData"]["hcUseRt"], function(key, val) {
-                                $this.hcUseRt[key] = val;
-                            });
-                        }
-                        // 위험안전발생
-                        if ( !!response["rtnData"]["result1"] ) {
-                            $.each(response["rtnData"]["result1"], function(key, val) {
-                                $this.dgsfOccr[key] = val;
-                            });
-                        }
-                        // 위험지역_추이
-                        if ( !!response["rtnData"]["result2"] ) {
-                            $.each(response["rtnData"]["result2"], function(key, val) {
-                                $this.dzonTrnd[key] = val;
-                            });
-                            if ($this.dzonTrnd.week1Ago > $this.dzonTrnd.week2Ago ) {
-                                $this.dzonTrnd.trnd = '증가 추세';
-                            } else {
-                                $this.dzonTrnd.trnd = '감소 추세';
-                            }
-                        }
-                        // 안전위험지역_탐지율
-                        if ( !!response["rtnData"]["result3"] ) {
-                            $.each(response["rtnData"]["result3"], function(key, val) {
-                                $this.dgsfDtct[key] = val;
-                            });
-                        }
-                        // 위험감정_카운트
-                        if ( !!response["rtnData"]["result4"] ) {
-                            $.each(response["rtnData"]["result4"], function(key, val) {
-                                $this.dgemCnt[key] = val;
-                            });
-                        }
-                        // 위험지역_TOP3_공공
-                        if ( !!response["rtnData"]["result5"] ) {
-                            $.each(response["rtnData"]["result5"], function(key, val) {
-                                $this.gorgDtop3[key] = val;
-                            });
-                        }
-                        // 보호자_지정_위험지역_TOP3
-                        if ( !!response["rtnData"]["result6"] ) {
-                            $.each(response["rtnData"]["result6"], function(key, val) {
-                                $this.guarDtop3[key] = val;
-                            });
-                        }
-                        // 위험감정_이력
-                        if ( !!response["rtnData"]["result7"] ) {
-                            $.each(response["rtnData"]["result7"], function(index, item) {
-                                $this.dgemHist.push({
-                                    dgemDt              :item.dgemDt,
-                                    dgemTm              :item.dgemTm,
-                                    dgemHistStatCd      :item.dgemHistStatCd,
-                                    dgemHistStatNm      :item.dgemHistStatNm
-                                });
-                            });
-                        }
-                        // 헬스케어_성장지수
-                        if ( !!response["rtnData"]["hcGidx"] ) {
-                            $.each(response["rtnData"]["hcGidx"], function(key, val) {
-                                $this.hcGidx[key] = val;
-                            });
-                        }
-                        // 헬스케어_비만지수
-                        if ( !!response["rtnData"]["hcFidx"] ) {
-                            $.each(response["rtnData"]["hcFidx"], function(key, val) {
-                                $this.hcFidx[key] = val;
-                            });
-                        }
-                        // 헬스케어_비만예측
-                        if ( !!response["rtnData"]["hcFpidx"] ) {
-                            $.each(response["rtnData"]["hcFpidx"], function(key, val) {
-                                $this.hcFpidx[key] = val;
-                            });
-                        }
-                        // 헬스케어_스트레스
-                        if ( !!response["rtnData"]["hcStrs"] ) {
-                            $.each(response["rtnData"]["hcStrs"], function(key, val) {
-                                $this.hcStrs[key] = val;
-                            });
-                        }
-                        // 헬스케어_평균_운동시간
-                        if ( !!response["rtnData"]["hcAvgAct"] ) {
-                            $.each(response["rtnData"]["hcAvgAct"], function(key, val) {
-                                $this.hcAvgAct[key] = val;
-                            });
-                        }
-                        // 헬스케어_평균_칼로리_섭취
-                        if ( !!response["rtnData"]["hcAvgCalEat"] ) {
-                            $.each(response["rtnData"]["hcAvgCalEat"], function(key, val) {
-                                $this.hcAvgCalEat[key] = val;
-                            });
-                        }
-                        // 헬스케어_주요식단_TOP3
-                        if ( !!response["rtnData"]["hcFmenuTop3"] ) {
-                            $.each(response["rtnData"]["hcFmenuTop3"], function(key, val) {
-                                $this.hcFmenuTop3[key] = val;
-                            });
-                        }
-                        // 헬스케어_아침식사_결식율
-                        if ( !!response["rtnData"]["hcMmelNeat"] ) {
-                            $.each(response["rtnData"]["hcMmelNeat"], function(key, val) {
-                                $this.hcMmelNeat[key] = val;
-                            });
-                        }
-
-                        $this.updateChart();
-                        $this.initCycl($this.cycl.timeCycl);
-                    },
-                    error: function (response) {
-                        Swal.alert([response, 'error']);
+                    // 가동_현황
+                    if ( !!response["rtnData"]["bandOperStat"] ) {
+                        $.each(response["rtnData"]["bandOperStat"], function(key, val) {
+                            $this.bandOperStat[key] = val;
+                        });
                     }
-                });
-            }
+                    // 개통_현황
+                    if ( !!response["rtnData"]["bandOpenStat"] ) {
+                        $.each(response["rtnData"]["bandOpenStat"], function(key, val) {
+                            $this.bandOpenStat[key] = val;
+                        });
+                    }
+                    // 헬스케어_활용율
+                    if ( !!response["rtnData"]["hcUseRt"] ) {
+                        $.each(response["rtnData"]["hcUseRt"], function(key, val) {
+                            $this.hcUseRt[key] = val;
+                        });
+                    }
+                    // 위험안전발생
+                    if ( !!response["rtnData"]["result1"] ) {
+                        $.each(response["rtnData"]["result1"], function(key, val) {
+                            $this.dgsfOccr[key] = val;
+                        });
+                    }
+                    // 위험지역_추이
+                    if ( !!response["rtnData"]["result2"] ) {
+                        $.each(response["rtnData"]["result2"], function(key, val) {
+                            $this.dzonTrnd[key] = val;
+                        });
+                        if ($this.dzonTrnd.week1Ago > $this.dzonTrnd.week2Ago ) {
+                            $this.dzonTrnd.trnd = '증가 추세';
+                        } else {
+                            $this.dzonTrnd.trnd = '감소 추세';
+                        }
+                    }
+                    // 안전위험지역_탐지율
+                    if ( !!response["rtnData"]["result3"] ) {
+                        $.each(response["rtnData"]["result3"], function(key, val) {
+                            $this.dgsfDtct[key] = val;
+                        });
+                    }
+                    // 위험감정_카운트
+                    if ( !!response["rtnData"]["result4"] ) {
+                        $.each(response["rtnData"]["result4"], function(key, val) {
+                            $this.dgemCnt[key] = val;
+                        });
+                    }
+                    // 위험지역_TOP3_공공
+                    if ( !!response["rtnData"]["result5"] ) {
+                        $.each(response["rtnData"]["result5"], function(key, val) {
+                            $this.gorgDtop3[key] = val;
+                        });
+                    }
+                    // 보호자_지정_위험지역_TOP3
+                    if ( !!response["rtnData"]["result6"] ) {
+                        $.each(response["rtnData"]["result6"], function(key, val) {
+                            $this.guarDtop3[key] = val;
+                        });
+                    }
+                    // 위험감정_이력
+                    if ( !!response["rtnData"]["result7"] ) {
+                        $.each(response["rtnData"]["result7"], function(index, item) {
+                            $this.dgemHist.push({
+                                dgemDt              :item.dgemDt,
+                                dgemTm              :item.dgemTm,
+                                dgemHistStatCd      :item.dgemHistStatCd,
+                                dgemHistStatNm      :item.dgemHistStatNm
+                            });
+                        });
+                    }
+                    // 헬스케어_BMI_체질량지수
+                    if ( !!response["rtnData"]["hcBmiIdx"] ) {
+                        $.each(response["rtnData"]["hcBmiIdx"], function(key, val) {
+                            $this.hcBmiIdx[key] = val;
+                        });
+                    }
+                    // 헬스케어_성장지수
+                    if ( !!response["rtnData"]["hcGidx"] ) {
+                        $.each(response["rtnData"]["hcGidx"], function(key, val) {
+                            $this.hcGidx[key] = val;
+                        });
+                    }
+                    // 헬스케어_비만지수
+                    if ( !!response["rtnData"]["hcFidx"] ) {
+                        $.each(response["rtnData"]["hcFidx"], function(key, val) {
+                            $this.hcFidx[key] = val;
+                        });
+                    }
+                    // 헬스케어_비만예측
+                    if ( !!response["rtnData"]["hcFpidx"] ) {
+                        $.each(response["rtnData"]["hcFpidx"], function(key, val) {
+                            $this.hcFpidx[key] = val;
+                        });
+                    }
+                    // 헬스케어_스트레스
+                    if ( !!response["rtnData"]["hcStrs"] ) {
+                        $.each(response["rtnData"]["hcStrs"], function(key, val) {
+                            $this.hcStrs[key] = val;
+                        });
+                    }
+                    // 헬스케어_평균_운동시간
+                    if ( !!response["rtnData"]["hcAvgAct"] ) {
+                        $.each(response["rtnData"]["hcAvgAct"], function(key, val) {
+                            $this.hcAvgAct[key] = val;
+                        });
+                    }
+                    // 헬스케어_평균_칼로리_섭취
+                    if ( !!response["rtnData"]["hcAvgCalEat"] ) {
+                        $.each(response["rtnData"]["hcAvgCalEat"], function(key, val) {
+                            $this.hcAvgCalEat[key] = val;
+                        });
+                    }
+                    // 헬스케어_주요식단_TOP3
+                    if ( !!response["rtnData"]["hcFmenuTop3"] ) {
+                        $.each(response["rtnData"]["hcFmenuTop3"], function(key, val) {
+                            $this.hcFmenuTop3[key] = val;
+                        });
+                    }
+                    // 헬스케어_아침식사_결식율
+                    if ( !!response["rtnData"]["hcMmelNeat"] ) {
+                        $.each(response["rtnData"]["hcMmelNeat"], function(key, val) {
+                            $this.hcMmelNeat[key] = val;
+                        });
+                    }
+
+                    $this.updateChart();
+                    $this.initCycl($this.cycl.timeCycl);
+                },
+                error: function (response) {
+                    Swal.alert([response, 'error']);
+                }
+            });
         },
         updateChart : function() {
             let $this = this;
@@ -739,10 +638,10 @@ let totMonStat = new Vue({
                 }]
             };
             // 막대차트 미구현, 누적막대 의미 확인 필요
-            let dataCareBmiBodyIdx = {
+            let dataHcBmiIdx = {
                 labels              : ['최저','최대'],
                 datasets: [{
-                    data            : [30   , 33],
+                    data            : [$this.hcBmiIdx.hcMinBmi              , $this.hcBmiIdx.hcMaxBmi],
                     backgroundColor : [colorOra                             , colorWhi],
                     borderColor     : [colorOra                             , colorWhi],
                     borderWidth     : 0
@@ -1002,9 +901,9 @@ let totMonStat = new Vue({
                 options : $this.options,
                 plugins : pluginsGuarDngrDtct
             };
-            let configCareBmiBodyIdx = {
+            let configHcBmiIdx = {
                 type    : 'bar',
-                data    : dataCareBmiBodyIdx,
+                data    : dataHcBmiIdx,
                 options : $this.optionsBarVert,
                 plugins : [{}]
             };
@@ -1074,9 +973,7 @@ let totMonStat = new Vue({
             let ctxGorgDngrDtct         = document.getElementById('gorgDngrDtctChart').getContext('2d');
             let ctxGuarSafeDtct         = document.getElementById('guarSafeDtctChart').getContext('2d');
             let ctxGuarDngrDtct         = document.getElementById('guarDngrDtctChart').getContext('2d');
-
-            let ctxCareBmiBodyIdx       = document.getElementById('careBmiBodyIdxChart').getContext('2d');
-
+            let ctxHcBmiIdx             = document.getElementById('hcBmiIdxChart').getContext('2d');
             let ctxHcGidx               = document.getElementById('hcGidxChart').getContext('2d');
             let ctxHcFidx               = document.getElementById('hcFidxChart').getContext('2d');
             let ctxHcFpidx              = document.getElementById('hcFpidxChart').getContext('2d');
@@ -1100,9 +997,7 @@ let totMonStat = new Vue({
             $this.chartGorgDngrDtct     = new Chart(ctxGorgDngrDtct     , configGorgDngrDtct);
             $this.chartGuarSafeDtct     = new Chart(ctxGuarSafeDtct     , configGuarSafeDtct);
             $this.chartGuarDngrDtct     = new Chart(ctxGuarDngrDtct     , configGuarDngrDtct);
-
-            $this.chartCareBmiBodyIdx   = new Chart(ctxCareBmiBodyIdx   , configCareBmiBodyIdx);
-
+            $this.chartHcBmiIdx         = new Chart(ctxHcBmiIdx         , configHcBmiIdx);
             $this.chartHcGidx           = new Chart(ctxHcGidx           , configHcGidx);
             $this.chartHcFidx           = new Chart(ctxHcFidx           , configHcFidx);
             $this.chartHcFpidx          = new Chart(ctxHcFpidx          , configHcFpidx);
@@ -1113,25 +1008,10 @@ let totMonStat = new Vue({
             $this.chartHcMmelNeatHist   = new Chart(ctxHcMmelNeatHist   , configHcMmelNeatHist);
             $this.chartHcMmelNeatQust   = new Chart(ctxHcMmelNeatQust   , configHcMmelNeatQust);
 
-            // $this.totMonStat.careCalEatAvg          = $this.toNumber($this.totMonStat.careCalEatAvg);
-            // $this.totMonStat.careCalEatbfDay        = $this.toNumber($this.totMonStat.careCalEatbfDay);
-            // $this.totMonStat.careMmelNeatFmenuCnt   = $this.toNumber($this.totMonStat.careMmelNeatFmenuCnt);
-            // $this.totMonStat.careMmelNeatFmenuObj   = $this.toNumber($this.totMonStat.careMmelNeatFmenuObj);
-            // $this.totMonStat.careMmelNeatQustCnt    = $this.toNumber($this.totMonStat.careMmelNeatQustCnt);
-            // $this.totMonStat.careMmelNeatQustObj    = $this.toNumber($this.totMonStat.careMmelNeatQustObj);
-
-            // $this.numCountAnimate();
-            // $this.chartHcUseStrs = new Chart(ctxStrs, configHcUseStrs);
-
-            // const operStatCntn = document.getElementById('operStatCntn');
-            // operStatCntn.innerHTML = $this.stdtInfo.smryCntn;
-
         },
         // jcw : 신기하네.. 왜 updateChart에서 호출할땐 오브젝트고.. 여기서 넘겨서 할땐 널일까..
         // chartPluginsCenter: function(chartDivId, srcIdx, chartId, centerColor, fontSize, fontStyle) {
         //     let $this = this;
-        //
-        //     alert("jcw chartCenter asasa :: " + chartId);
         //
         //     return [{
         //         beforeDraw: function () {
@@ -1294,98 +1174,6 @@ let totMonStat = new Vue({
                 hcNeatQustNeatCnt   : 0,
                 hcNeatQustNeatRt    : 0
             }
-
-
-            ////////////////////// 임시 //////////////////////
-            // $this.totMonStat = {
-            //     openCnt             : '',
-            //     operCnt             : '',
-            //     noRsps              : '',
-            //
-            //     temp                : null,
-            //     // tmpDngrSafeOcrrTd   : 0,
-            //     // tmpDngrSafeOcrrDif  : 0,
-            //     // tmpDngrSafeOcrrYav  : 5.8,
-            //
-            //     tmpTotal            : 200000,
-            //     tmpUsage            : 140000,
-            //     tmpNumber1          : 200000,
-            //     tmpNumber2          : 180000,
-            //     tmpNumber3          : 20000,
-            //     tmpNumber4          : 500000,
-            //     tmpNumber5          : 300000,
-            //     tmpNumber6          : 200000,
-            //     tmpNumber7          : 200000,
-            //     tmpNumber8          : 14000,
-            //     tmpNumber9          : 10000,
-            //     tmpNumber10         : 13000,
-            //     tmpNumber11         : 30,
-            //
-            //     plcCdPublTop1       : '유흥/유해',
-            //     plcCdPublTop2       : '공사/위험물',
-            //     plcCdPublTop3       : '우범지역',
-            //     addrPublTop1        : '서울특별시 마포구 마포대로12 한신빌딩 911',
-            //     addrPublTop2        : '서울특별시 금천구 디지털로9길 99 스타밸리빌',
-            //     addrPublTop3        : '서울시 금천구 가산동 1234-17 우리벤처타워',
-            //     cntPublTop1         : 123,
-            //     cntPublTop2         : 78,
-            //     cntPublTop3         : 50,
-            //     plcCdPrntTop1       : '우범지역',
-            //     plcCdPrntTop2       : '유흥/유해',
-            //     plcCdPrntTop3       : '공사/위험물',
-            //     addrPrntTop1        : '서울특별시 송파구 송파대로8길 17',
-            //     addrPrntTop2        : '제주특별자치도 제주시 첨단로 242',
-            //     addrPrntTop3        : '서울특별시 용산구 국방부',
-            //     cntPrntTop1         : 123,
-            //     cntPrntTop2         : 78,
-            //     cntPrntTop3         : 999,
-            //
-            //     careBmiBodyIdxAvg       : 27.56,
-            //     careBmiBodyIdxMin       : 17.12,
-            //     careBmiBodyIdxMax       : 42.78,
-            //
-            //     careGrowLowRt           : 20,
-            //     careGrowOverRt          : 27,
-            //
-            //     careFatIdxHighRt        : 10,
-            //     careFatIdxGnrlRt        : 20,
-            //     careFatIdxUndrRt        : 10,
-            //
-            //     careFatPrdtHighRt       : 10,
-            //     careFatPrdtGnrlRt       : 20,
-            //     careFatPrdtUndrRt       : 10,
-            //
-            //     careStrsHigh            : 20,
-            //     careStrsVeryHigh        : 10,
-            //
-            //     careExcsTimeAvg         : 1.2,
-            //     careExcsTimeBfDay       : 1.5,
-            //     careExcsTimeDif         : 0.3,
-            //
-            //     careCalEatAvg           : 2113,
-            //     careCalEatbfDay         : 2238,
-            //     careCalEatDif           : 125,
-            //
-            //     careFmenuCdTop1         : '밥',
-            //     careFmenuRtTop1         : 33.1,
-            //     careFmenuCdTop2         : '빵',
-            //     careFmenuRtTop2         : 27.5,
-            //     careFmenuCdTop3         : '튀김',
-            //     careFmenuRtTop3         : 12.9,
-            //
-            //     careMmelNeatFmenuCnt    : 11853,
-            //     careMmelNeatFmenuObj    : 20000,
-            //
-            //     careMmelNeatQustCnt     : 11853,
-            //     careMmelNeatQustObj     : 20000,
-            // },
-            // $this.totCnt = {
-            //     tmpDngrZoneCnt          : 4400,
-            //     tmpFallDownCnt          : 2400,
-            //     tmpHbitAbnmCnt          : 1200,
-            //     tmpTmepAbnmCnt          : 3300,
-            //     tmpTotalCnt             : 20000
-            // }
         },
         chartPerModIdx: function(srcIdx, perIdx) {
             if (WebUtil.isNull(perIdx)) {
@@ -1756,6 +1544,16 @@ let totMonStat = new Vue({
                 }
             });
 
+            // 헬스케어 : BMI_체질량지수
+            $({ val : 0 }).animate({ val : $this.hcBmiIdx.hcAvgBmi }, {
+                duration: 1000,
+                step: function() {
+                    $this.hcBmiIdx.hcAvgBmi = $this.toNumber(this.val.toFixed(1));
+                },
+                complete: function() {
+                    $this.hcBmiIdx.hcAvgBmi = $this.toNumber(this.val.toFixed(1));
+                }
+            });
             // 헬스케어 : 성장지수 과성장
             $({ val : 0 }).animate({ val : $this.hcGidx.hcGidxOhigh }, {
                 duration: 1000,
@@ -2127,200 +1925,6 @@ let totMonStat = new Vue({
                     $this.hcMmelNeat.hcNeatQustNeatRt = $this.toNumber(this.val.toFixed(1));
                 }
             });
-
-            ////////////////////// 임시 //////////////////////
-            // let tmpNumber1          = $this.totMonStat.tmpNumber1;
-            // let tmpNumber2          = $this.totMonStat.tmpNumber2;
-            // let tmpNumber3          = $this.totMonStat.tmpNumber3;
-            // let tmpNumber4          = $this.totMonStat.tmpNumber4;
-            // let tmpNumber5          = $this.totMonStat.tmpNumber5;
-            // let tmpNumber6          = $this.totMonStat.tmpNumber6;
-            // let tmpNumber7          = $this.totMonStat.tmpNumber7;
-            // let tmpNumber8          = $this.totMonStat.tmpNumber8;
-            // let tmpNumber9          = $this.totMonStat.tmpNumber9;
-            // let tmpNumber10         = $this.totMonStat.tmpNumber10;
-            // let tmpNumber11         = $this.totMonStat.tmpNumber11;
-            //
-            // let tmpTotal            = $this.totMonStat.tmpTotal;
-            // let tmpUsage            = $this.totMonStat.tmpUsage;
-            // let tdayDngrSum         = $this.dgsfOccr.tdayDngrSum;
-            // let tmpDngrZoneCnt      = $this.totCnt.tmpDngrZoneCnt;
-            // let tmpFallDownCnt      = $this.totCnt.tmpFallDownCnt;
-            // let tmpHbitAbnmCnt      = $this.totCnt.tmpHbitAbnmCnt;
-            // let tmpTmepAbnmCnt      = $this.totCnt.tmpTmepAbnmCnt;
-            // let tmpTotalCnt         = $this.totCnt.tmpTotalCnt;
-            //
-            // $({ val : 0 }).animate({ val : tmpNumber1 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber1 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber2 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber2 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber3 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber3 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber4 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber4 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber5 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber5 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber6 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber6 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber7 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber7 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber8 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber8 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber9 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber9 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber10 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber10 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpNumber11 }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpNumber11 = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpTotal }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpTotal = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tdayDngrSum }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.dgsfOccr.tdayDngrSum = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpUsage }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totMonStat.tmpUsage = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpDngrZoneCnt }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totCnt.tmpDngrZoneCnt = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpFallDownCnt }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totCnt.tmpFallDownCnt = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpHbitAbnmCnt }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totCnt.tmpHbitAbnmCnt = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpTmepAbnmCnt }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totCnt.tmpTmepAbnmCnt = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
-            // $({ val : 0 }).animate({ val : tmpTotalCnt }, {
-            //     duration: 1000,
-            //     step: function() {
-            //         $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
-            //     },
-            //     complete: function() {
-            //         $this.totCnt.tmpTotalCnt = $this.toNumber(Math.floor(this.val));
-            //     }
-            // });
         },
 
         linkCall: function (menuNo) {

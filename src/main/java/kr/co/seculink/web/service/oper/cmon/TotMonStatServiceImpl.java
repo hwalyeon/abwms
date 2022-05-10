@@ -71,6 +71,11 @@ public class TotMonStatServiceImpl implements TotMonStatService
 		return dao.selectOne("oper.cmon.totMonStat.searchHcGidx", params);
 	}
 
+	// 헬스케어_BMI_체질량지수
+	public Map<String, String> searchHcBmiIdx(Map<String, String> params) {
+		return dao.selectOne("oper.cmon.totMonStat.searchHcBmiIdx", params);
+	}
+
 	// 헬스케어_비만지수
 	public Map<String, String> searchHcFidx(Map<String, String> params) {
 		return dao.selectOne("oper.cmon.totMonStat.searchHcFidx", params);
