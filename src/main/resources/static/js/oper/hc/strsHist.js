@@ -112,7 +112,7 @@ let strsHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["strsJudgDttm","locNm","stdtNo","stdtNm","sexCdNm", "ageYy","ageMm", "strsStatCdNm","mindStrsStatCdNm","physStrsStatCdNm","strsCopeStatCd","telNo"], "stdtNo");
+                    $(grid).tableRowSpan(["strsJudgDttm","locNm","stdtNo","stdtNm","sexCdNm", "ageYy","ageMm","telNo"], "stdtNo");
                 }
             }));
             resizeJqGridWidth("strsHist_list", "strsHist_list_wrapper");

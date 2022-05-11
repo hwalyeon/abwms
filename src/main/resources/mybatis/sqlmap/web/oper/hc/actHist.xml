@@ -22,7 +22,6 @@
 			           on tdah.ACT_CD = tas.ACT_CD
 			   inner join TM_STDT_BASE tsb             --학생_기본 tsb
 			           on tdah.STDT_NO = tsb.STDT_NO
-			          and tdah.STND_DT = tsb.ACT_STND_DT
 			   left outer join ts_GFIX_HIST tgh        --성장비만지수_이력 TGH
 			           on  tsb.STDT_NO = tgh.STDT_NO
 			   and tsb.GFIX_DT = tgh.GFIX_DT
