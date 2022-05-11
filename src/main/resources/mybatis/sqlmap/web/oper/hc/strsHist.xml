@@ -50,7 +50,7 @@
 		<if test=" mindStrsStatCd != null and mindStrsStatCd !='' ">              /*정신적_스트레스_상태_코드*/
 			and tssh.mind_strs_stat_cd = #{mindStrsStatCd}</if>
 		<if test=" physStrsStatCd != null and physStrsStatCd !='' ">              /*신체적_스트레스_상태_코드*/
-			and tssh.phys_strs_stat_cd_cd = #{physStrsStatCd}</if>
+			and tssh.phys_strs_stat_cd = #{physStrsStatCd}</if>
 		<if test=" strsCopeStatCd != null and strsCopeStatCd !='' ">              /*스트레스_대처_상태_코드*/
 			and tssh.strs_cope_stat_cd = #{strsCopeStatCd}</if>
 		<if test=" locNm != null and locNm !='' ">                                /*지역_명*/
