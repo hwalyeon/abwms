@@ -92,7 +92,7 @@ public class BandOpenInfoMngServiceImpl implements BandOpenInfoMngService
 						info.put("bandId",(String)params.get("bandId"));
 
 						saveCnt += dao.insert("devc.band.bandOpenInfoMng.insertTmBandSpecList", info);
-						System.out.println("info:"+info);
+
 					}else{
 						throw new BizException("ECOM999", new String[]{"이미 등록된 보호자 번호입니다."});
 					}

@@ -55,7 +55,6 @@ public class DdRcmdEatStndMngController
 	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("파람"+params);
 		ddRcmdEatStndMngService.saveDdRcmdEatStnd(params);
 
 	

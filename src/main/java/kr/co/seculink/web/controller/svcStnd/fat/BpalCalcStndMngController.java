@@ -52,7 +52,7 @@ public class BpalCalcStndMngController
 	
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
-		System.out.println("파람"+params);
+
 		bpalCalcStndMngService.saveBpalStnd(params);
 
 	

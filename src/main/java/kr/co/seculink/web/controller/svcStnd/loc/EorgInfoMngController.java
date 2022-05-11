@@ -56,7 +56,6 @@ public class EorgInfoMngController
 		RtnMsg<Map<String, Object>> vo = new RtnMsg<>();
 		Map<String, Object> rtnMap     = new HashMap<>();
 
-		System.out.println("params얌 :"+ params);
 		// 단어_헤드_1_리스트_조회
 		if(params.get("wordHead1") == "" || params.get("wordHead1") == null)
 		{

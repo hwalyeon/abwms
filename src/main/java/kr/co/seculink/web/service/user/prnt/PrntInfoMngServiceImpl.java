@@ -34,7 +34,6 @@ public class PrntInfoMngServiceImpl implements PrntInfoMngService
 
 		int saveCnt = 0;
 
-		System.out.println("params:"+params);
 		if ("C".equals(params.get("crud"))) {
 			saveCnt += dao.insert("user.prnt.prntInfoMng.insertTmPrntBase", params);
 		} else if ("U".equals(params.get("crud"))) {
