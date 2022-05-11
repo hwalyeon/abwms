@@ -28,7 +28,7 @@
 			    on tsb.EORG_LOC_NO = TLIB.LOC_NO
 		WHERE  1 = 1
 		<if test="occrDttmFr != null and occrDttmFr != null and occrDttmTo !='' and occrDttmTo !='' ">/*발생 일시*/
-			and tsch.occr_dttm between replace(#{occrDttmFr},'-','') and replace(#{occrDttmTo},'-','')</if>
+			and tsch.occr_dttm between replace(#{occrDttmFr},'-','')||'000000' and replace(#{occrDttmTo},'-','')||'235959'</if>
 		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
 			and tsch.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
