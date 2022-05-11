@@ -5,7 +5,7 @@
     <!--캐시_이력 리비스트 조회-->
 	<select id="selectCbeeHistList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT   tsch.occr_dttm       /* occr_dttm 발생_일시 character(14) */
-		       , teb.loc_nm           /*loc_nm 학교_명 varchar(100) */
+		       , TLIB.loc_nm           /*loc_nm 학교_명 varchar(100) */
 		       , tsch.stdt_no         /* stdt_no 학생_번호 numeric */
 		       , decr(tsb.stdt_nm) as stdt_nm         /*stdt_nm 학생_명 varchar(40) */
 		       , fn_getcdnm('CBEE_USE_CD',tsch.cbee_use_cd)  as  cbee_use_cd_nm  /* cbee_use_cd 캐시비_사용_코드 character varying(20) */
@@ -24,8 +24,8 @@
 			    on tsgc.STDT_NO = tsb.STDT_NO
 			    inner join  TM_GUAR_BASE tgb     --보호자_기본 tgb
 			    on tsgc.GUAR_NO = tgb.GUAR_NO
-			    left outer join TI_EORG_BASE teb --교육기관_기본 teb
-			    on tsb.EORG_LOC_NO = teb.LOC_NO
+			    left outer join TS_LOC_INFO_BASE TLIB--교육기관_기본 TLIB
+			    on tsb.EORG_LOC_NO = TLIB.LOC_NO
 		WHERE  1 = 1
 		<if test="occrDttmFr != null and occrDttmFr != null and occrDttmTo !='' and occrDttmTo !='' ">/*발생 일시*/
 			and tsch.occr_dttm between replace(#{occrDttmFr},'-','') and replace(#{occrDttmTo},'-','')</if>
@@ -34,7 +34,7 @@
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
 			and decr(tsb.stdt_NM) like CONCAT('%',#{stdtNm},'%')</if>
 		<if test=" locNm != null and locNm !='' ">/*학교(학원)명*/
-			and teb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+			and TLIB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/

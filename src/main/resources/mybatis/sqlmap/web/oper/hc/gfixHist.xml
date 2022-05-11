@@ -5,7 +5,7 @@
     <!--성장/비만_지수_이력 리스트 조회-->
 	<select id="selectGfixHistList" parameterType="java.util.Map" resultType="MybatisMap">
 		SELECT tgh.gfix_dt          /* gfix_dt      성장비만지수_일자 char(8) */
-		     , teb.loc_nm           /* loc_nm       학교_명        varchar(100) */
+		     , TLIB.loc_nm           /* loc_nm       학교_명        varchar(100) */
 		     , tgh.stdt_no          /* stdt_no      학생_번호       numeric */
 		     , DECR(tsb.stdt_nm) as stdt_nm          /* stdt_nm      학생_명        varchar(40) */
 		     , fn_getcdnm('SEX_CD', tsb.sex_cd) as sex_cd_nm --성별_코드_명
@@ -36,8 +36,8 @@
 		               on tsgc.STDT_NO = tsb.STDT_NO
 		       inner join  TM_GUAR_BASE tgb          --보호자_기본 tgb
 		               on tsgc.GUAR_NO = tgb.GUAR_NO
-		       left outer join TI_EORG_BASE teb      --교육기관_기본 teb
-		               on tsb.EORG_LOC_NO = teb.LOC_NO
+		       left outer join TS_LOC_INFO_BASE TLIB      --교육기관_기본 TLIB
+		               on tsb.EORG_LOC_NO = TLIB.LOC_NO
 		WHERE  1 = 1
 		<if test="gfixDtFr != null and gfixDtFr != null and gfixDtTo !='' and gfixDtTo !='' ">/*발생 일시*/
 			and tgh.gfix_dt between replace(#{gfixDtFr},'-','') and replace(#{gfixDtTo},'-','')</if>
@@ -60,7 +60,7 @@
 		<if test=" fatpJudgCd != null and fatpJudgCd !='' ">/*비만_예측_판정_코드*/
 			and tgh.fatp_judg_cd = #{fatpJudgCd}</if>
 		<if test=" locNm != null and locNm !='' ">
-			and teb.loc_nm like CONCAT('%',#{locNm},'%')</if>
+			and TLIB.loc_nm like CONCAT('%',#{locNm},'%')</if>
 			order by  tgh.stdt_no
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>

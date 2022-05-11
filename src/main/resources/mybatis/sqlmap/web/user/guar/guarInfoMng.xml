@@ -12,7 +12,7 @@
 		     , TGB.ENTR_DT       --가입_일자
 		     , TGB.ENTR_STAT_CD  --가입_상태_코드
 		     , fn_getCdNm('ENTR_STAT_CD',ENTR_STAT_CD) as ENTR_STAT_CD_NM --가입_상태_코드_명
-		     , TEB.LOC_NM        --위치_명
+		     , TLIB.LOC_NM        --위치_명
 		     , TBI.BAND_ID                    -- 밴드_ID
 		     , DECR(TBI.TEL_NO) as TEL_NO     -- 전화_번호(밴드)
 		     , TGB.PRNT_NO                    -- 학부모_번호
@@ -20,19 +20,19 @@
 		     , DECR(TPB2.PRNT_NM) as PRNT_NM_FEMALE --학부모_명_여자
 		from   TM_GUAR_BASE TGB                        --보호자_기본
 			   left outer join TM_STDT_GUAR_CONN TSGC  --학생_보호자_연결
-			                on   TGB.GUAR_NO  = TSGC.GUAR_NO
+			                on TGB.GUAR_NO  = TSGC.GUAR_NO
 			   left outer JOIN TM_STDT_BASE TSB        --학생_기본
-			                on   TSGC.STDT_NO = TSB.STDT_NO
-			   left outer join TI_EORG_BASE TEB        --교육시설_기본
-			                on   TSB.EORG_LOC_NO = TEB.LOC_NO
+			                on TSGC.STDT_NO = TSB.STDT_NO
+			   left outer join TS_LOC_INFO_BASE TLIB   --위치정보_기본
+			                on TSB.EORG_LOC_NO = TLIB.LOC_NO
 			   left outer join TM_PRNT_BASE TPB        --학부모_기본
-			                on   TGB.PRNT_NO = TPB.PRNT_NO
-			               and  TPB.SEX_CD  = 'MALE'
+			                on TGB.PRNT_NO = TPB.PRNT_NO
+			               and TPB.SEX_CD  = 'MALE'
 			   left outer join TM_PRNT_BASE TPB2       --학부모_기본
-			                on   TGB.PRNT_NO = TPB2.PRNT_NO
+			                on TGB.PRNT_NO = TPB2.PRNT_NO
 			   and  TPB2.SEX_CD = 'FEMALE'
 			   left outer join TS_BAND_SPEC TBS        --밴드_상세
-			                on  TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
+			                on TGB.GUAR_TEL_NO = TBS.GUAR_TEL_NO
 			               and TSB.BAND_ID     = TBS.BAND_ID
 			   left outer join TS_BAND_INFO TBI
 	       	                on TBS.BAND_ID = TBI.BAND_ID
@@ -54,11 +54,11 @@
 		<if test=" guarTelNo != null and guarTelNo !='' ">
 			and TGB.GUAR_TEL_NO = ENCR(#{guarTelNo})</if>
 		<if test=" locNm != null and locNm !='' ">
-			and TEB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+			and TLIB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" entrStatCd != null and entrStatCd !='' ">
 			and TGB.ENTR_STAT_CD = #{entrStatCd}</if>
-		group by TGB.GUAR_NO, TBS.GUAR_TEL_NO, TBI.BAND_ID, TSB.STDT_NO, TEB.LOC_NM, TPB.PRNT_NO, TPB.PRNT_NM, TPB2.PRNT_NM
-		order by ENTR_STAT_CD_NM, TGB.GUAR_NO, TGB.GUAR_NM, TSB.STDT_NO, TGB.ENTR_DT, TEB.LOC_NM, TBI.BAND_ID
+		group by TGB.GUAR_NO, TBS.GUAR_TEL_NO, TBI.BAND_ID, TSB.STDT_NO, TLIB.LOC_NM, TPB.PRNT_NO, TPB.PRNT_NM, TPB2.PRNT_NM
+		order by ENTR_STAT_CD_NM, TGB.GUAR_NO, TGB.GUAR_NM, TSB.STDT_NO, TGB.ENTR_DT, TLIB.LOC_NM, TBI.BAND_ID
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex}
 		</if>

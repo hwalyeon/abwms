@@ -7,7 +7,7 @@
 		SELECT   tdah.stnd_dt                          /* stnd_dt      기준_일자       character(8)  */
 			   , tdah.stdt_no                          /* stdt_no      학생_번호       numeric       */
 			   , decr(tsb.stdt_nm) as stdt_nm          /* stdt_nm      학생_명         varchar(40)   */
-			   , teb.loc_nm                            /* loc_nm       학교_명         varchar(100)  */
+			   , TLIB.loc_nm                            /* loc_nm       학교_명         varchar(100)  */
 			   , tas.act_nm                            -- 활동_명
 			   , tdah.act_mcnt                         /* act_mcnt     활동_시간_분수  numeric       */
 			   , tdah.rpet_act_cnt                     /* rpet_act_cnt 반복_활동_수    numeric       */
@@ -32,8 +32,8 @@
 			           on tsgc.STDT_NO = tsb.STDT_NO
 			   inner join  TM_GUAR_BASE tgb            --보호자_기본 tgb
 			           on tsgc.GUAR_NO = tgb.GUAR_NO
-			   left outer join TI_EORG_BASE teb        --교육기관_기본 teb
-			           on tsb.EORG_LOC_NO = teb.LOC_NO
+			   left outer join TS_LOC_INFO_BASE TLIB        --교육기관_기본 TLIB
+			           on tsb.EORG_LOC_NO = TLIB.LOC_NO
 		WHERE  1 = 1
 		<if test="stndDtFr != null and stndDtFr != null and stndDtTo !='' and stndDtTo !='' ">/*발생 일시*/
 			and tdah.stnd_dt between replace(#{stndDtFr},'-','') and replace(#{stndDtTo},'-','')</if>
@@ -46,7 +46,7 @@
 		<if test=" actCd != null and actCd !='' ">              /*활동_코드*/
 			and tas.act_cd = #{actCd}</if>
 		<if test=" locNm != null and locNm !='' ">              /*지역_명*/
-			and teb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+			and TLIB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" guarNo != null and guarNo !='' ">            /*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">            /*보호자_명*/

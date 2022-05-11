@@ -43,7 +43,7 @@
 		  where  1=1
 		)
 		select tdeh.stnd_dt                         as stnd_dt    /* stnd_dt 기준_일자 character(8) */
-		     , teb.loc_nm                           as loc_nm     /* loc_nm  학교_명   varchar(100) */
+		     , TLIB.loc_nm                           as loc_nm     /* loc_nm  학교_명   varchar(100) */
 		     , tdeh.stdt_no                         as stdt_no    /* stdt_no 학생_번호 numeric      */
 		     , DECR(tsb.stdt_nm)                    as stdt_nm    /* stdt_nm 학생_명   varchar(40)  */
 		     , coalesce( MAX(nutrInfo.CAL)    , 0 ) as CAL
@@ -87,8 +87,8 @@
 			          on tsb.BAND_ID = tbi.BAND_ID
 			  inner join  TM_GUAR_BASE tgb            --보호자_기본 tgb
 			          on tdeh.GUAR_NO = tgb.GUAR_NO
-			  left outer join TI_EORG_BASE teb        --교육기관_기본 teb
-			          on tsb.EORG_LOC_NO = teb.LOC_NO
+			  left outer join TS_LOC_INFO_BASE  TLIB      --교육기관_기본 TLIB
+			          on tsb.EORG_LOC_NO = TLIB.LOC_NO
 		where 1=1
 		<if test="stndDtFr != null and stndDtFr != null and stndDtTo !='' and stndDtTo !='' ">/*발생 일시*/
 			and tdeh.stnd_dt between replace(#{stndDtFr},'-','') and replace(#{stndDtTo},'-','')</if>
@@ -97,12 +97,12 @@
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
 			and DECR(tsb.stdt_nm) like CONCAT('%',#{stdtNm},'%')</if>
 		<if test=" locNm != null and locNm !='' ">/*학교(학원)명*/
-			and teb.LOC_NM like CONCAT('%',#{locNm},'%')</if>
+			and TLIB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
 			and DECR(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>
-		group by tdeh.stnd_dt, tdeh.stdt_no, teb.loc_nm, tsb.stdt_nm, tbi.tel_no, tdeh.guar_no, tgb.guar_nm, tgb.guar_tel_no
+		group by tdeh.stnd_dt, tdeh.stdt_no, TLIB.loc_nm, tsb.stdt_nm, tbi.tel_no, tdeh.guar_no, tgb.guar_nm, tgb.guar_tel_no
 		<if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

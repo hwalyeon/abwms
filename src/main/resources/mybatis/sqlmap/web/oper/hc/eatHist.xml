@@ -6,7 +6,7 @@
 	<select id="selectEatHistList" parameterType="java.util.Map" resultType="MybatisMap">
 		select *from
 		(select  tdeh.stnd_dt         as stnd_dt /* stnd_dt 기준_일자 character(8) */
-		       , teb.loc_nm           as loc_nm/* loc_nm  학교_명   varchar(100) */
+		       , TLIB.loc_nm           as loc_nm/* loc_nm  학교_명   varchar(100) */
 		       , tdeh.stdt_no         as stdt_no /* stdt_no 학생_번호 numeric      */
 		       , DECR(tsb.stdt_nm)          as stdt_nm/* stdt_nm 학생_명   varchar(40)  */
 		       , max(case when tfb.mmel_yn = 'Y' then 'Y' else 'N' end)  as mmel_yn        /* fmenu_yn       아침_여부   char                   */
@@ -31,8 +31,8 @@
 		                and tdeh.fmenu_seq = tfb.fmenu_seq
 		         inner join TM_STDT_BASE tsb                --학생_기본 tsb
 		                 on tdeh.stdt_no = tsb.stdt_no
-		         inner join TI_EORG_BASE teb                --교육기관_기본 teb
-		                 on tsb.eorg_loc_no = teb.loc_no
+		         inner join TS_LOC_INFO_BASE TLIB                --교육기관_기본 TLIB
+		                 on tsb.eorg_loc_no = TLIB.LOC_NO
 		         inner join TS_BAND_INFO tbi                --밴드_정보 tbi
 		                 on tsb.band_id = tbi.band_id
 		         inner join TM_GUAR_BASE tgb                --보호자_기본 tgb
@@ -52,7 +52,7 @@
 		and DECR(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>            /*보호자_명*/
 		<if test=" locNm != null and locNm !='' ">
 		and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>                    /*학교_명*/
-		group by tdeh.stnd_dt, teb.loc_nm , tdeh.stdt_no, tsb.stdt_nm, tdeh.guar_no, tbi.tel_no , tgb.guar_nm  , tgb.guar_tel_no
+		group by tdeh.stnd_dt, TLIB.loc_nm , tdeh.stdt_no, tsb.stdt_nm, tdeh.guar_no, tbi.tel_no , tgb.guar_nm  , tgb.guar_tel_no
 		) fmenuData
 		where 1=1
 		<if test=" mmelYn != null and mmelYn !=''">		/*아침,점심,저녁,간식_식사_여부*/
