@@ -90,9 +90,6 @@ let cbeeHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","telNo"], "stdtNo");
-                    $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
-                    $(grid).tableRowSpan(["occrDttm","cbeeUseCdNm","useCbeeAmt","cbeeBal",], "occrDttm");
 
                 }
             }));
