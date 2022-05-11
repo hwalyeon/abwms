@@ -119,8 +119,9 @@ let stdtInfoMng = new Vue({
                 {name: "locNo"             , index: "locNo"             , label: "소속학교번호"	 	, width: 100    , align: "center" , fixed: true},
                 {name: "locNm"             , index: "locNm"             , label: "소속학교명"		 	, width: 100    , align: "center" , fixed: true},
                 {name: "age"               , index: "age"               , label: "(만)나이"  		, width: 80     , align: "center" , fixed: true},
-                {name: "bandStatNm"        , index: "bandStatNm"        , label: "밴드<br/>개통상태"  , width: 60     , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
+                {name: "bandOpenStatNm"        , index: "bandOpenStatNm"        , label: "밴드<br/>개통상태"  , width: 60     , align: "center" , fixed: true  , formatter: function(cellValue, options, rowObject) {
                         return `<a data-toggle="modal" class="links" data-target="#bandOpenInfoDetlPopup" data-band data-placement="bottom" title="${cellValue}" data-band-id="${rowObject.bandId}">${cellValue}</a>`;}},
+                {name: "bandStatNm"        , index: "bandStatNm"        , label: "밴드<br/>현재상태"  , width: 60     , align: "center" , fixed: true},
                 {name: "mindStrsStatNm"    , index: "mindStrsStatNm"    , label: "신체적스트레스상태" 	, width: 110    , align: "center" , fixed: true},
                 {name: "physStrsStatNm"    , index: "physStrsStatNm"    , label: "정신적스트레스상태" 	, width: 110    , align: "center" , fixed: true},
                 {name: "useTotal"          , index: "useTotal"          , label: "캐시비 적립 총액"	, width: 125    , align: "center"

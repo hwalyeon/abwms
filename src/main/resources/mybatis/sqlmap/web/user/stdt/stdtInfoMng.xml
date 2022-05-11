@@ -3,47 +3,49 @@
 <mapper namespace="user.stdt.stdtInfoMng">
     <!-- 학생정보 리스트 조회 -->
     <select id="searchStdtInfoList" parameterType="java.util.Map" resultType="MybatisMap">
-        select     B.ENTR_DT/*가입일자*/
-        ,B.GUAR_NO/*학부모번호*/
-        ,DECR(B.GUAR_NM) AS GUAR_NM/*학부모명*/
-        ,B.PRNT_NO/*학부모번호*/
-        ,DECR(C.PRNT_NM) AS PRNT_NM/*학부모1*/
-        ,DECR(B.GUAR_TEL_NO) AS GUAR_TEL_NO /*학부모전화번호*/
-        ,DECR(C.PRNT_NM) as PRNT_NM_MALE
-        ,DECR(CC.PRNT_NM) as prnt_nm2/*학부모2*/
-        ,A.STDT_NO/*학생번호*/
-        ,DECR(A.STDT_NM) as STDT_NM/*학생명*/
-        ,fn_getCdNm('PLC_CLSS_CD',HI.PLC_CLSS_CD) as PLC_CLSS_NM/*현재위치분류*/
-        ,HI.LOC_NM as CURR_LOC_NM/*현재위치*/
-        ,H.DGEM_STAT_CD/*위험감정상태*/
-        ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
-        ,F.STRS_IDX/*스트레스상태*/
-        ,G.GIDX /*성장상태*/
-        ,G.FIDX /*비만상태*/
-        ,I.BAND_ID/*밴드ID*/
-        ,DECR(I.TEL_NO) AS TEL_NO /*전화번호*/
-        ,I.BLTH_ID/*블루투스 ID*/
-        ,A.SEX_CD/*성별*/
-        ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_NM
-        ,A.BITH_DT/*생년월일*/
-        ,D.LOC_NO/*소속학교번호*/
-        ,D.LOC_NM/*소속학교명*/
-        ,fn_getage(A.BITH_DT) as AGE/*나이*/
-        ,A.BAND_STAT_CD/*현재상태*/
-        ,fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) as BAND_STAT_NM
-        ,mind_strs_stat_cd/* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
-        ,fn_getCdNm('STRS_STAT_CD', F.mind_strs_stat_cd) AS mind_strs_stat_nm
-        ,phys_strs_stat_cd/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
-        ,fn_getCdNm('STRS_STAT_CD', F.PHYS_STRS_STAT_CD) AS PHYS_STRS_STAT_NM
-        ,(select SUM(USE_CBEE_AMT)
-        from   TS_STDT_CBEE_HIST X
-        where  X.STDT_NO = A.STDT_NO
-        and    X.CBEE_USE_CD = 'SAVE') as SAVE_TOTAL /*적립 캐시비 사용금액*/
-        ,(select SUM(USE_CBEE_AMT)
-        from   TS_STDT_CBEE_HIST X
-        where  X.STDT_NO = A.STDT_NO
-        and    X.CBEE_USE_CD = 'USE')  as USE_TOTAL /*사용 사용금액*/
-        ,K.CBEE_BAL/*캐시비 잔액*/
+        select
+               B.ENTR_DT/*가입일자*/
+              ,B.GUAR_NO/*학부모번호*/
+              ,DECR(B.GUAR_NM) AS GUAR_NM/*학부모명*/
+              ,B.PRNT_NO/*학부모번호*/
+              ,DECR(C.PRNT_NM) AS PRNT_NM/*학부모1*/
+              ,DECR(B.GUAR_TEL_NO) AS GUAR_TEL_NO /*학부모전화번호*/
+              ,DECR(C.PRNT_NM) as PRNT_NM_MALE
+              ,DECR(CC.PRNT_NM) as prnt_nm2/*학부모2*/
+              ,A.STDT_NO/*학생번호*/
+              ,DECR(A.STDT_NM) as STDT_NM/*학생명*/
+              ,fn_getCdNm('PLC_CLSS_CD',HI.PLC_CLSS_CD) as PLC_CLSS_NM/*현재위치분류*/
+              ,HI.LOC_NM as CURR_LOC_NM/*현재위치*/
+              ,H.DGEM_STAT_CD/*위험감정상태*/
+              ,fn_getCdNm('DGEM_STAT_CD',H.DGEM_STAT_CD) as DGEM_STAT_NM
+              ,F.STRS_IDX/*스트레스상태*/
+              ,G.GIDX /*성장상태*/
+              ,G.FIDX /*비만상태*/
+              ,I.BAND_ID/*밴드ID*/
+              ,DECR(I.TEL_NO) AS TEL_NO /*전화번호*/
+              ,I.BLTH_ID/*블루투스 ID*/
+              ,A.SEX_CD/*성별*/
+              ,fn_getCdNm('SEX_CD',A.SEX_CD) as SEX_NM
+              ,A.BITH_DT/*생년월일*/
+              ,D.LOC_NO/*소속학교번호*/
+              ,D.LOC_NM/*소속학교명*/
+              ,fn_getage(A.BITH_DT) as AGE/*나이*/
+              ,coalesce (fn_getCdNm('BAND_OPEN_STAT_CD',I.BAND_OPEN_STAT_CD) , '') as BAND_OPEN_STAT_NM
+              ,A.BAND_STAT_CD/*현재상태*/
+              ,coalesce (fn_getCdNm('BAND_STAT_CD',A.BAND_STAT_CD) , '') as BAND_STAT_NM
+              ,mind_strs_stat_cd/* mind_strs_stat_cd 정신적_스트레스_상태_코드 character varying(20) */
+              ,fn_getCdNm('STRS_STAT_CD', F.mind_strs_stat_cd) AS mind_strs_stat_nm
+              ,phys_strs_stat_cd/* phys_strs_stat_cd 신체적_스트레스_상태_코드 character varying(20) */
+              ,fn_getCdNm('STRS_STAT_CD', F.PHYS_STRS_STAT_CD) AS PHYS_STRS_STAT_NM
+              ,(select SUM(USE_CBEE_AMT)
+                from   TS_STDT_CBEE_HIST X
+                where  X.STDT_NO = A.STDT_NO
+                and    X.CBEE_USE_CD = 'SAVE') as SAVE_TOTAL /*적립 캐시비 사용금액*/
+              ,(select SUM(USE_CBEE_AMT)
+                from   TS_STDT_CBEE_HIST X
+                where  X.STDT_NO = A.STDT_NO
+                and    X.CBEE_USE_CD = 'USE')  as USE_TOTAL /*사용 사용금액*/
+              ,K.CBEE_BAL/*캐시비 잔액*/
         from     TM_STDT_BASE A
         inner join
         TS_BAND_INFO I
@@ -66,7 +68,7 @@
         on         B.PRNT_NO   = CC.PRNT_NO
         and        CC.SEX_CD   = 'FEMALE'
         left outer join
-        TI_EORG_BASE D
+        TS_LOC_INFO_BASE D
         on       A.EORG_LOC_NO = D.LOC_NO
         left outer join
         TS_STDT_STRS_HIST F
@@ -222,10 +224,10 @@
              ${stdtNo}                                                         as stdt_no
             ,to_char(now() - '1 day':: interval  , 'YYYYMMDD')                 as stnd_dt
             ,'N'                                                               as vald_yn
-            ,max(case when hbit_stat_cd = 'LOW'   then hbit_cnt_fr else 0 end) as bot_blck_val
+            ,max(case when hbit_stat_cd = 'SLOW'  then hbit_cnt_fr else 0 end) as bot_blck_val
             ,max(case when hbit_stat_cd = 'NORM'  then hbit_cnt_fr else 0 end) as down_blck_val
-            ,max(case when hbit_stat_cd = 'HIGH'  then hbit_cnt_fr else 0 end) as uppr_blck_val
-            ,max(case when hbit_stat_cd = 'VHIGH' then hbit_cnt_fr else 0 end) as top_blck_val
+            ,max(case when hbit_stat_cd = 'FAST'  then hbit_cnt_fr else 0 end) as uppr_blck_val
+            ,max(case when hbit_stat_cd = 'VFAST' then hbit_cnt_fr else 0 end) as top_blck_val
             ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
             ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
             ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -234,7 +236,7 @@
             ,#{uptUserId} /* upt_user_id 수정_사용자_ID character varying(20) */
        from   ti_hbit_stat_stnd a
        where  1 = 1
-       and    hbit_stat_cd != 'VLOW'
+       and    hbit_stat_cd != 'VSLOW'
        and    exists(select 1
                       from   tm_stdt_base
                       where  1 = 1
@@ -285,13 +287,13 @@
         UPDATE ts_stdt_grow_hist
         <trim prefix="SET" prefixOverrides=",">
             <if test="hghtVal != null">
-                ,hght_val = #{hghtVal}
+                ,hght_val = cast(#{hghtVal} as numeric)
             </if>
             <if test="wghtVal != null">
-                ,wght_val = #{wghtVal}
+                ,wght_val = cast(#{wghtVal} as numeric)
             </if>
             <if test="wastVal != null">
-                ,wast_val = #{wastVal}
+                ,wast_val = cast(#{wastVal} as numeric)
             </if>
             ,upt_dt = TO_CHAR(NOW(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
             ,upt_tm = TO_CHAR(NOW(), 'HH24MISS')  /* upt_tm 수정_시각 character(6) */
@@ -301,6 +303,20 @@
         AND    stdt_no = #{stdtNo}
         AND    mesu_dt = #{growMesuDt}
     </update>
+
+
+    <!--학생정보 update -->
+    <select id="selectTsStdtGrowHist"  parameterType="java.util.Map"  resultType="MybatisMap" >
+        /* selectTsStdtGrowHist */
+        select
+             case when hght_val = cast(#{hghtVal} as numeric) then 'N' else 'Y' end hght_val_yn
+            ,case when wght_val = cast(#{wghtVal} as numeric) then 'N' else 'Y' end wght_val_yn
+            ,case when wast_val = cast(#{wastVal} as numeric) then 'N' else 'Y' end wast_val_yn
+        from ts_stdt_grow_hist
+        where  1 = 1
+        and    stdt_no = #{stdtNo}
+        and    mesu_dt = #{growMesuDt}
+    </select>
 
    <!--학생정보 delete -->
    <delete id="deleteTmStdtBase"  parameterType="java.util.Map" >
@@ -320,7 +336,7 @@
                ,tsgc.guar_no
                ,tsb.band_id
                ,tsb.eorg_loc_no
-               ,(select loc_nm from ti_eorg_base where loc_no = tsb.eorg_loc_no limit 1) as eorg_loc_nm
+               ,(select loc_nm from ts_loc_info_base where loc_no = tsb.eorg_loc_no limit 1) as eorg_loc_nm
                ,tsb.sgrd_cd
                ,fn_getcdnm('SGRD_CD',tsb.sgrd_cd) as sgrd_nm
                ,tsb.sex_cd
