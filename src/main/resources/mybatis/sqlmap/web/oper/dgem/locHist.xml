@@ -3,53 +3,39 @@
 <mapper namespace="oper.dgem.locHist">
     <!-- 위험감정 발생이력 조회 -->
     <select id="searchLocHistList" parameterType="java.util.Map" resultType="MybatisMap">
-    select TSLH.OCCR_DTTM
-    ,TEB.LOC_NM as SCHL_NM
-    ,TSLH.STDT_NO
-    ,DECR(TSB.STDT_NM) AS STDT_NM
-    ,TSLH.LOC_NM
-    ,TSLH.PLC_CLSS_CD
-    ,TSLH.LAT_VAL
-    ,TSLH.LON_VAL
-    ,TSLH.NEAR_LOC_NO
-    ,TLIB.ADDR_BASE
-    ,DECR(TBI.TEL_NO) AS TEL_NO
-    ,TGB.GUAR_NO
-    ,DECR(TGB.GUAR_NM) AS GUAR_NM
-    ,DECR(TBS.GUAR_TEL_NO) AS GUAR_TEL_NO
-    ,TSLH.REG_DT
-    ,TSLH.REG_TM
-    ,TSLH.REG_USER_ID
-    ,TSLH.UPT_DT
-    ,TSLH.UPT_TM
-    ,TSLH.UPT_USER_ID
-    from   TS_STDT_LOC_HIST TSLH
-    left   outer join
-    TM_STDT_BASE TSB
-    on     TSLH.LOC_HIST_NO = TSB.LOC_HIST_NO
-    and    TSLH.STDT_NO     = TSB.STDT_NO
-    left   outer join
-    TS_LOC_INFO_BASE TLIB
-    on     TLIB.LOC_NO      = TSLH.LOC_HIST_NO
-    left   outer join
-    TI_EORG_BASE TEB
-    on     TEB.LOC_NO       = TSB.EORG_LOC_NO
-    left   outer join
-    TS_BAND_INFO TBI
-    on     TBI.BAND_ID      = TSB.BAND_ID
-    left   outer join
-    TS_BAND_SPEC TBS
-    on     TBI.BAND_ID      = TBS.BAND_ID
-    left   outer join
-    TM_STDT_GUAR_CONN TSGC
-    on     TSB.STDT_NO      = TSGC.STDT_NO
-    inner  join
-    TM_GUAR_BASE TGB
-    on     TSGC.GUAR_NO     = TGB.GUAR_NO
-    and    TGB.GUAR_TEL_NO  = TBS.GUAR_TEL_NO
-    where  1=1
+        select  TSLH.OCCR_DTTM /* 발생일시 */
+        ,TLIB.LOC_NM as SCHL_NM/* 학교명 */
+        ,TSLH.STDT_NO/* 학생번호 */
+        ,DECR(TSB.STDT_NM) as STDT_NM/* 학생명 */
+        ,TSLH.LOC_NM/* 장소 */
+        ,TSLH.PLC_CLSS_CD/* 장소분류 */
+        ,TLIB.LAT_VAL/* 위도 */
+        ,TLIB.LON_VAL/* 경도 */
+        ,TLIB.LOC_NM as NEAR_LOC_NM/* 위치명 */
+        ,COALESCE(TLIB.ADDR_BASE,TSLH.LOC_NM) as ADDR_BASE/* 주소 */
+        ,DECR(TBI.TEL_NO) as TEL_NO/* 학생전번 */
+        ,TGB.GUAR_NO as GUAR_NO/* 보호지번호 */
+        ,DECR(TGB.GUAR_NM) as GUAR_NM/* 보호자명 */
+        ,DECR(TGB.GUAR_TEL_NO) as GUAR_TEL_NO/* 보호자전번 */
+        from   TS_STDT_LOC_HIST TSLH
+        inner join
+        TS_LOC_INFO_BASE TLIB
+        on     TSLH.near_loc_no = TLIB.LOC_NO
+        left   outer join
+        TM_STDT_BASE TSB
+        on     TSB.STDT_NO = TSLH.STDT_NO
+        left   outer join
+        TM_STDT_GUAR_CONN TSGC
+        on     TSB.STDT_NO = TSGC.STDT_NO
+        left   outer join
+        TM_GUAR_BASE TGB
+        on     TSGC.GUAR_NO = TGB.GUAR_NO
+        left   outer join
+        TS_BAND_INFO TBI
+        on     TSB.BAND_ID = TBI.BAND_ID
+        WHERE    1=1
     <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-    and     TSLH.OCCR_DTTM between #{entrDtFr} and #{entrDtTo}        /* 위험감정 일자 */</if>
+    and     TSLH.OCCR_DTTM between replace(#{entrDtFr},'-','') and replace(#{entrDtTo},'-','')        /* 위험감정 일자 */</if>
     <if test=" plcClssCd != null and plcClssCd !='' ">
     and     TSLH.PLC_CLSS_CD    like CONCAT ('%',#{plcClssCd},'%')  /* 장소분류 코드 */</if>
     <if test=" locNm != null and locNm !='' ">
