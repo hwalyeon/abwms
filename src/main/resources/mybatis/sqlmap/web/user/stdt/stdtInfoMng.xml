@@ -73,6 +73,7 @@
         left outer join
         TS_STDT_STRS_HIST F
         on		 A.STDT_NO   = F.STDT_NO
+        and      A.STRS_HIST_SEQ = F.STRS_HIST_SEQ
         left outer join
         TS_STDT_DGEM_HIST H
         on	     A.STDT_NO   = H.STDT_NO
