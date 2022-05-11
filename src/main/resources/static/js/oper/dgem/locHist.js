@@ -88,7 +88,7 @@ let locHist = new Vue({
                 {name: "plcClssCd"         , index: "plcClssCd"         , label: "장소분류"	     , width: 80     , align: "center" },
                 {name: "latVal"            , index: "latVal"            , label: "위도"	         , width: 110    , align: "center" },
                 {name: "lonVal"            , index: "lonVal"            , label: "경도"           , width: 110    , align: "center" },
-                {name: "nearLocNm"         , index: "nearLocNm"         , label: "위치명"	     , width: 110    , align: "center" },
+                {name: "locNm"             , index: "locNm"             , label: "위치명"	     , width: 110    , align: "center" },
                 {name: "addrBase"          , index: "addrBase"          , label: "주소"		     , width: 110     , align: "center"},
                 {name: "telNo"             , index: "telNo"             , label: "학생 전화번호"	 , width: 80     , align: "center"
                     ,formatter:function(cellValue, options, rowObject){
@@ -121,7 +121,7 @@ let locHist = new Vue({
                 // gridComplete: function() {
                 //     let grid = this;
                 //
-                //     $(grid).tableRowSpan(["occrDttm","schlNm","stdtNo","stdtNm","locNm","plcClssCd","latVal","lonVal","nearLocNo","addrBase"
+                //     $(grid).tableRowSpan(["occrDttm","schlNm","stdtNo","stdtNm","locNm","plcClssCd","latVal","lonVal","nearLocNm","addrBase"
                 //                                  ,"telNo","regDt","regTm","regUserId","uptDt","uptTm","uptUserId"], "stdtNo");
                 // }
             }));
