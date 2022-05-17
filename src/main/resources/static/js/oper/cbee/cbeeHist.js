@@ -40,16 +40,17 @@ let cbeeHist = new Vue({
         {
             let $this = this;
             $this.userId = SessionUtil.getUserId();
-        },
-        initCodeList : function()
-        {
-            let $this = this;
 
             //기준_일자_기간_리스트
             $this.code.bDPerList = CodeUtil.getPeriodDateList();
             const terms = getPeriodDate($this.params.bDPer);
             this.params.occrDttmFr = terms.strDt;
             this.params.occrDttmTo = terms.endDt;
+        },
+        initCodeList : function()
+        {
+            let $this = this;
+
         },
         initGrid: function()
         {
@@ -239,6 +240,7 @@ let cbeeHist = new Vue({
                 currentPage  : 1  ,
                 currentIndex : 0
 	    	}
+			$this.initValue();
 		}
     },
     computed:

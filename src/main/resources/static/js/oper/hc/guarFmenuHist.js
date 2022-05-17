@@ -6,10 +6,10 @@ let guarFmenuHist = new Vue({
         {
             userId        : '' ,
             fmenuNm       : '' , //식단표_명
-            mmelYn        : '' , //아침_여부
-            amelYn        : '' , //점심_여부
-            emelYn        : '' , //저녁_여부
-            smelYn        : '' , //간식_여부
+            mmelYn        : 'Y' , //아침_여부
+            amelYn        : 'Y' , //점심_여부
+            emelYn        : 'Y' , //저녁_여부
+            smelYn        : 'Y' , //간식_여부
             guarNo        : '' , //보호자_번호
             guarNm        : '' , //보호자_명
     		paging        : 'Y',
@@ -36,6 +36,11 @@ let guarFmenuHist = new Vue({
         {
             let $this = this;
             $this.userId = SessionUtil.getUserId();
+
+            $this.params.mmelYn = 'Y'; //아침_여부
+            $this.params.amelYn = 'Y'; //점심_여부
+            $this.params.emelYn = 'Y'; //저녁_여부
+            $this.params.smelYn = 'Y'; //간식_여부
         },
         initGrid: function()
         {
@@ -143,6 +148,7 @@ let guarFmenuHist = new Vue({
                 currentPage   : 1  ,
                 currentIndex  : 0
 	    	}
+			$this.initValue();
 		}
     },
     computed:

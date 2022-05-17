@@ -657,6 +657,7 @@ let dszoneHist = new Vue({
                 currentPage: 1,
                 currentIndex: 0
             }
+            $this.initValue();
         },
         resetSearchParamSpec: function() {
             let $this = this;

@@ -3,28 +3,35 @@
 <mapper namespace="oper.sys.btchJobHist">
     <!-- 배치작업 이력 조회 -->
     <select id="searchBtchJobHistList" parameterType="java.util.Map" resultType="MybatisMap">
-    select TJB.JOB_ID
-          ,TJB.JOB_NM
-          ,TJB.JOB_HIST_NO
-          ,TJB.RMRK
-          ,TJH.RSLT_CNTN
-          ,TJH.RSLT_CD
-          ,TJH.STRT_DT
-          ,TJH.END_DT
-    from   TC_JOB_BASE TJB
-    inner  join
-    TC_JOB_HIST TJH
-    on     TJB.JOB_ID = TJH.JOB_ID
-    where  1=1
+    --
+    SELECT  A.JOB_HIST_NO                       AS JOB_HIST_NO,
+            A.STRT_DT                           AS STRT_DT,
+            A.END_DT                            AS END_DT,
+            A.JOB_ID                            AS JOB_ID,
+            COALESCE(B.JOB_NM, '(미등록작업)')  AS JOB_NM,
+            COALESCE(B.RMRK  , ''            )  AS RMRK,
+            A.RSLT_CD                           AS RSLT_CD,
+            A.RSLT_CNTN                         AS RSLT_CNTN
+
+    FROM    ABSV.TC_JOB_HIST  A
+
+            LEFT OUTER JOIN
+            ABSV.TC_JOB_BASE  B
+            ON  B.JOB_ID = A.JOB_ID
+
+    WHERE   1=1
     <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-    and TJH.STRT_DT between replace(#{entrDtFr},'-','') and replace(#{entrDtTo},'-','')</if>
+     AND    A.STRT_DT BETWEEN replace(#{entrDtFr},'-','') AND replace(#{entrDtTo},'-','')</if>
     <if test="endDtFr  != null and endDtFr  != null and endDtTo  !='' and endDtTo !='' ">
-    and TJH.END_DT  between replace(#{endDtFr},'-','')  and replace(#{endDtTo},'-','')</if>
+     AND    A.END_DT  BETWEEN replace(#{endDtFr},'-','')  AND replace(#{endDtTo},'-','')</if>
     <if test=" jobId != null and jobId != '' ">
-    and TJB.JOB_ID  = #{jobId}</if>
+     AND    UPPER(A.JOB_ID)  LIKE '%'||UPPER(#{jobId})||'%'</if>
     <if test=" jobNm != null and jobNm != '' ">
-    and TJB.JOB_NM  = #{jobNm}</if>
+     AND    UPPER(B.JOB_NM)  LIKE '%'||UPPER(#{jobNm})||'%'</if>
+     
+    ORDER BY A.JOB_HIST_NO DESC
     <if test=' paging == "Y" '>
+    
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>
     </select>

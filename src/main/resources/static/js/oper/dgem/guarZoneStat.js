@@ -591,6 +591,7 @@ let guarZoneStat = new Vue({
                 currentPage: 1,
                 currentIndex: 0
             }
+            $this.initValue();
         }
     },
     computed: {

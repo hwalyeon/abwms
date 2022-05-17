@@ -28,7 +28,7 @@ let btchJobHist = new Vue({
             uptTm       :'',
             uptUserId   :'',
             mmDd        :'THIS_MONTH',
-            mmDd2       :'THIS_MONTH',
+            mmDd2       :'',
             paging      :'Y',
             totalCount  : 0,
             rowCount    : 30,
@@ -67,8 +67,8 @@ let btchJobHist = new Vue({
             const terms = getPeriodDate($this.params.mmDd);
             this.params.entrDtFr = terms.strDt;
             this.params.entrDtTo = terms.endDt;
-            this.params.endDtFr  = terms.strDt;
-            this.params.endDtTo  = terms.endDt;
+//          this.params.endDtFr  = terms.strDt;
+//          this.params.endDtTo  = terms.endDt;
         },
         mmDdSelect: function()
         {
@@ -96,15 +96,15 @@ let btchJobHist = new Vue({
         {
             let $this = this;
             let colModels = [
-                {name: "crud"           , index: "crud"           , label: "crud"		 , hidden: true                    },
-                {name: "strtDt"         , index: "strtDt"         , label: "시작일자"	 , width: 80     , align: "center" },
-                {name: "endDt"          , index: "endDt"          , label: "종료일자"	 , width: 80     , align: "center" },
-                {name: "jobId"          , index: "jobId"          , label: "작업ID"		 , width: 80     , align: "center" },
-                {name: "jobNm"          , index: "jobNm"          , label: "작업명"		 , width: 80     , align: "center" },
-                {name: "jobHistNo"      , index: "jobHistNo"      , label: "작업이력번호"	 , width: 110    , align: "center" },
-                {name: "rmrk"           , index: "rmrk"           , label: "비고"		 , width: 80     , align: "center" },
-                {name: "rsltCntn"       , index: "rsltCntn"       , label: "결과내용"	 , width: 80     , align: "center" },
-                {name: "rsltCd"         , index: "rsltCd"         , label: "결과코드"	 , width: 80     , align: "center" }
+                {name: "crud"           , index: "crud"           , label: "crud"		 , hidden: true                     },
+                {name: "jobHistNo"      , index: "jobHistNo"      , label: "작업이력번호", width:  45     , align: "center" },
+                {name: "strtDt"         , index: "strtDt"         , label: "시작일자"	 , width:  50     , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                {name: "endDt"          , index: "endDt"          , label: "종료일자"	 , width:  50     , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                {name: "jobId"          , index: "jobId"          , label: "작업ID"		 , width:  60     , align: "left"   },
+                {name: "jobNm"          , index: "jobNm"          , label: "작업명"		 , width:  70     , align: "left"   },
+                {name: "rmrk"           , index: "rmrk"           , label: "비고"		 , width:  80     , align: "left"   },
+                {name: "rsltCd"         , index: "rsltCd"         , label: "결과코드"	 , width:  40     , align: "center" },
+                {name: "rsltCntn"       , index: "rsltCntn"       , label: "결과내용"	 , width: 300     , align: "left"   }
             ];
 
             $("#grid_list").jqGrid("GridUnload");
@@ -150,6 +150,9 @@ let btchJobHist = new Vue({
         },
         setDatepicker : function() {
             let $this = this;
+            if($this.params.bDPer!=='')
+            {$this.params.bDPer = '' ;}
+
             $('#entrDtFrPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -161,6 +164,7 @@ let btchJobHist = new Vue({
             }).on("changeDate", function() {
                 $this.params.entrDtFr = $('#entrDtFr').val();
             });
+            
             $('#entrDtToPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -172,6 +176,7 @@ let btchJobHist = new Vue({
             }).on("changeDate", function() {
                 $this.params.entrDtTo = $('#entrDtTo').val();
             });
+            
             $('#endDtFrPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -181,8 +186,9 @@ let btchJobHist = new Vue({
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
-                $this.params.entrDtFr = $('#endDtFr').val();
+                $this.params.endDtFr = $('#endDtFr').val();
             });
+            
             $('#endDtToPicker').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -192,8 +198,9 @@ let btchJobHist = new Vue({
                 autoclose: true,
                 todayHighlight: true,
             }).on("changeDate", function() {
-                $this.params.entrDtTo = $('#endDtTo').val();
+                $this.params.endDtTo = $('#endDtTo').val();
             });
+            
         },
         downloadExcel : function()
         {
@@ -218,7 +225,7 @@ let btchJobHist = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                mmDd:'',
+                mmDd:'THIS_MONTH',
                 mmDd2:'',
                 plcClssCd:'',
                 schlNm:'',
@@ -232,6 +239,7 @@ let btchJobHist = new Vue({
                 currentPage: 1,
                 currentIndex: 0
             }
+            $this.initValue();
         }
     },
     computed: {

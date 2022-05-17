@@ -14,8 +14,8 @@
         ,TAH.ALAM_TITL    /*알림제목*/
         ,case when TAH.SEND_RSLT_CD = '00' then '성공'   /*발송여부*/
         when TAH.SEND_RSLT_CD = '01' then '미발송'
-        when TAH.SEND_RSLT_CD = '11' then 'key없음'
-        when TAH.SEND_RSLT_CD = '99' then '발송 실패(기타)'
+        when TAH.SEND_RSLT_CD = '11' then 'TOKEN없음'
+        when TAH.SEND_RSLT_CD = '99' then '발송실패(기타)'
         end  as SEND_RSLT_CD
         from   TS_ALAM_HIST TAH
         left   outer join

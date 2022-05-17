@@ -44,16 +44,16 @@ let actHist = new Vue({
         {
             let $this = this;
             $this.userId = SessionUtil.getUserId();
-        },
-        initCodeList : function()
-        {
-            let $this = this;
 
             //기준_일자_기간_리스트
             $this.code.bDPerList = CodeUtil.getPeriodDateList();
             const terms = getPeriodDate($this.params.bDPer);
             this.params.stndDtFr = terms.strDt;
             this.params.stndDtTo = terms.endDt;
+        },
+        initCodeList : function()
+        {
+            let $this = this;
 
             //활동_분류_코드_리스트
             getCommonCodeList('ACT_CLSS_CD' , $this.code.actClssCdList);
@@ -280,6 +280,7 @@ let actHist = new Vue({
                 currentPage  : 1  ,
                 currentIndex : 0
 	    	}
+			$this.initValue();
 		}
     },
     computed: {

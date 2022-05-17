@@ -43,6 +43,12 @@ let fatpQustHist = new Vue({
         {
             let $this = this;
             $this.userId = SessionUtil.getUserId();
+
+            //기준_일자_기간_리스트
+            $this.code.bDPerList = CodeUtil.getPeriodDateList();
+            const terms = getPeriodDate($this.params.bDPer);
+            this.params.stndDtFr = terms.strDt;
+            this.params.stndDtTo = terms.endDt;
         },
         initCodeList : function()
         {
@@ -187,8 +193,8 @@ let fatpQustHist = new Vue({
         {
             let $this = this;
             const terms = getPeriodDate($this.params.bDPer);
-            this.params.fatpQustDtFr = terms.strDt;
-            this.params.fatpQustDtTo = terms.endDt;
+            this.params.stndDtFr = terms.strDt;
+            this.params.stndDtTo = terms.endDt;
         },
         //유효성_검증
         isValid: function() {
@@ -252,6 +258,7 @@ let fatpQustHist = new Vue({
                 currentPage    : 1  ,
                 currentIndex   : 0
 	    	}
+			$this.initValue();
 		}
     },
     computed:

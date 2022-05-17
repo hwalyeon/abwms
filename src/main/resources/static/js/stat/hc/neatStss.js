@@ -5,7 +5,7 @@ let neatStss = new Vue({
             params:
                 {
                     eagrDivCd   : 'HIST' , //섭취집계_구분_코드
-                    mmelYn      : '' ,     //아침_여부
+                    mmelYn      : 'MORN' ,     //아침_여부
                     amelYn      : '' ,     //점심_여부
                     emelYn      : '' ,     //저녁_여부
                     stndDtFr    : '' ,     //기준_일자_Fr
@@ -312,7 +312,7 @@ let neatStss = new Vue({
                 $this.params =
                     {
                         eagrDivCd   : 'HIST' , //섭취집계_구분_코드
-                        mmelYn      : '' ,     //아침_여부
+                        mmelYn      : 'MORN' , //아침_여부
                         amelYn      : '' ,     //점심_여부
                         emelYn      : '' ,     //저녁_여부
                         stndDtFr    : '' ,     //기준_일자_Fr
