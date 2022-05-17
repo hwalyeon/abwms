@@ -2,7 +2,6 @@ let alamHist = new Vue({
     el: "#alamHist",
     data: {
         params: {
-            emtrDtFr    :'',
             entrDtTo    :'',
             sendDttm    :'',
             guarNo      :'',
@@ -188,8 +187,8 @@ let alamHist = new Vue({
         resetSearchParam: function() {
             let $this = this;
             $this.params = {
-                mmDd        :'',
-                emtrDtFr    :'',
+                mmDd        :'THIS_MONTH',
+                entrDtFr    :'',
                 entrDtTo    :'',
                 sendDttm    :'',
                 guarNo      :'',
@@ -207,6 +206,7 @@ let alamHist = new Vue({
                 currentPage: 1,
                 currentIndex: 0
             }
+            $this.initValue();
         }
     },
     computed: {
