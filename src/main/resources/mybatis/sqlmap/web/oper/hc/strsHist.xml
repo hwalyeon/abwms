@@ -32,7 +32,7 @@
 			   on tsb.EORG_LOC_NO = teb.LOC_NO
 		WHERE  1 = 1
 		<if test="strsJudgDttmFr != null and strsJudgDttmFr != null and strsJudgDttmTo !='' and strsJudgDttmTo !='' ">/*발생 일시*/
-			and tssh.strs_judg_dttm between replace(#{strsJudgDttmFr},'-','') and replace(#{strsJudgDttmTo},'-','')</if>
+			and tssh.strs_judg_dttm between replace(#{strsJudgDttmFr},'-','') ||'000000' and replace(#{strsJudgDttmTo},'-','') || '235959'</if>
 		<if test=" stdtNo != null and stdtNo !='' ">                              /*학생_번호*/
 			and tssh.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">                              /*학생_명*/
@@ -50,7 +50,7 @@
 		<if test=" mindStrsStatCd != null and mindStrsStatCd !='' ">              /*정신적_스트레스_상태_코드*/
 			and tssh.mind_strs_stat_cd = #{mindStrsStatCd}</if>
 		<if test=" physStrsStatCd != null and physStrsStatCd !='' ">              /*신체적_스트레스_상태_코드*/
-			and tssh.phys_strs_stat_cd_cd = #{physStrsStatCd}</if>
+			and tssh.phys_strs_stat_cd = #{physStrsStatCd}</if>
 		<if test=" strsCopeStatCd != null and strsCopeStatCd !='' ">              /*스트레스_대처_상태_코드*/
 			and tssh.strs_cope_stat_cd = #{strsCopeStatCd}</if>
 		<if test=" locNm != null and locNm !='' ">                                /*지역_명*/

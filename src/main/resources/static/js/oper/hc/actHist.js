@@ -103,7 +103,6 @@ let actHist = new Vue({
                     let grid = this;
 
                     $(grid).tableRowSpan(["stndDt","stdtNo","stdtNm","locNm","telNo"], "stdtNo");
-                    $(grid).tableRowSpan(["actNm", "actMcnt","rpetActCnt", "calCsumQty","judgNo"], "actNm");
                 }
             }));
             resizeJqGridWidth("actHist_list", "actHist_list_wrapper");
