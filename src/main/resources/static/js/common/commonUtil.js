@@ -4,7 +4,7 @@
     var dataPickerFormat = "YYYY-MM-DD";
 
     formatTimestamp = function(value){
-    	 if(value == null)
+    	 if(value == null || value == 'null' || value == 'Null' || value == '')
 			 return value;
 
          if(isNaN(value))

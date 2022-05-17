@@ -4,6 +4,7 @@ let alamHist = new Vue({
         params: {
             entrDtTo    :'',
             sendDttm    :'',
+            occrDttm    :'',
             guarNo      :'',
             guarNm      :'',
             guarTelNo   :'',
@@ -13,6 +14,7 @@ let alamHist = new Vue({
             alamTypeCd  :'',
             alamTitl    :'',
             sendRsltCd  :'',
+            alamCntn    :'',
             regDt       :'',
             regTm       :'',
             regUserId   :'',
@@ -73,17 +75,19 @@ let alamHist = new Vue({
         {
             let $this = this;
             let colModels = [
-                {name: "crud"              , index: "crud"           , label: "crud"		 , hidden: true                                  },
-                {name: "sendDttm"          , index: "sendDttm"       , label: "발생일시"		 , width: 80     , align: "center" },
-                {name: "guarNo"            , index: "guarNo"         , label: "보호자번호"	 , width: 80     , align: "center" },
-                {name: "guarNm"            , index: "guarNm"         , label: "보호자명"	     , width: 110    , align: "center" },
-                {name: "guarTelNo"         , index: "guarTelNo"      , label: "보호자전화번호"	 , width: 80     , align: "center" },
-                {name: "stdtNo"            , index: "stdtNo"         , label: "학생번호"		 , width: 80     , align: "center" },
-                {name: "stdtNm"            , index: "stdtNm"         , label: "학생명"	     , width: 80     , align: "center" },
-                {name: "alamChnlCd"        , index: "alamChnlCd"     , label: "채널종류"	     , width: 110    , align: "center" },
-                {name: "alamTypeCd"        , index: "alamTypeCd"     , label: "알림유형"       , width: 110    , align: "center" },
-                {name: "alamTitl"          , index: "alamTitl"       , label: "알림제목"	     , width: 110    , align: "center" },
-                {name: "sendRsltCd"        , index: "sendRsltCd"     , label: "발송여부"		 , width: 110     , align: "center" }
+                {name: "crud"        , index: "crud"        , label: "crud"          , hidden: true                   },
+                {name: "occrDttm"    , index: "occrDttm"    , label: "발생일시"      , width:  80   , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTimestamp(cellValue);}},
+                {name: "guarNo"      , index: "guarNo"      , label: "보호자번호"    , width:  50   , align: "center" },
+                {name: "guarNm"      , index: "guarNm"      , label: "보호자명"      , width:  50   , align: "center" },
+                {name: "guarTelNo"   , index: "guarTelNo"   , label: "보호자전화번호", width:  80   , align: "center" },
+                {name: "stdtNo"      , index: "stdtNo"      , label: "학생번호"      , width:  50   , align: "center" },
+                {name: "stdtNm"      , index: "stdtNm"      , label: "학생명"        , width:  50   , align: "center" },
+                {name: "alamChnlCd"  , index: "alamChnlCd"  , label: "채널종류"      , width:  50   , align: "center" },
+                {name: "alamTypeCd"  , index: "alamTypeCd"  , label: "알림유형"      , width:  50   , align: "center" },
+                {name: "alamTitl"    , index: "alamTitl"    , label: "알림제목"      , width: 110   , align: "left"   },
+                {name: "sendRsltCd"  , index: "sendRsltCd"  , label: "처리상태"      , width:  60   , align: "center" },
+                {name: "sendDttm"    , index: "sendDttm"    , label: "전송일시"      , width:  80   , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTimestamp(cellValue);}},
+                {name: "alamCntn"    , index: "alamCntn"    , label: "알림내용"      , width: 180   , align: "center" }
             ];
 
             $("#grid_list").jqGrid("GridUnload");

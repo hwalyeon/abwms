@@ -3,40 +3,45 @@
 <mapper namespace="oper.sys.alamHist">
     <!-- 위험감정 발생이력 조회 -->
     <select id="searchAlamHistList" parameterType="java.util.Map" resultType="MybatisMap">
-        select TAH.SEND_DTTM    /*발생일시*/
-        ,TAH.GUAR_NO	    /*보호자번호*/
-        ,DECR(TGB.GUAR_NM) AS GUAR_NM      /*보호자명*/
-        ,DECR(TGB.GUAR_TEL_NO) AS GUAR_TEL_NO  /*보호자전화번호*/
-        ,TSB.STDT_NO      /*학생번호*/
-        ,DECR(TSB.STDT_NM) AS STDT_NM      /*학생명*/
-        ,TAH.ALAM_CHNL_CD /*채널종류*/
-        ,TAH.ALAM_TYPE_CD /*알림유형*/
-        ,TAH.ALAM_TITL    /*알림제목*/
-        ,case when TAH.SEND_RSLT_CD = '00' then '성공'   /*발송여부*/
-        when TAH.SEND_RSLT_CD = '01' then '미발송'
-        when TAH.SEND_RSLT_CD = '11' then 'TOKEN없음'
-        when TAH.SEND_RSLT_CD = '99' then '발송실패(기타)'
-        end  as SEND_RSLT_CD
-        from   TS_ALAM_HIST TAH
-        left   outer join
-        TM_STDT_BASE TSB
-        on     TAH.STDT_NO = TSB.STDT_NO
-        left   outer join
-        TM_GUAR_BASE TGB
-        on     TGB.GUAR_NO = TAH.GUAR_NO
-        where  1=1
-        <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-        and    TAH.SEND_DTTM between #{entrDtFr} and #{entrDtTo}</if>
-        <if test=" alamChnlCd != null and alamChnlCd !='' ">
-        and    TAH.ALAM_CHNL_CD    = #{alamChnlCd}</if>
-        <if test=" alamTypeCd != null and alamTypeCd !='' ">
-        and    TAH.ALAM_TYPE_CD    = #{alamTypeCd}</if>
-        <if test=" sendRsltCd != null and sendRsltCd !='' ">
-        and    TAH.SEND_RSLT_CD    = #{sendRsltCd}</if>
-        <if test=" guarNo != null and guarNo !='' ">
-        and    TAH.GUAR_NO         = #{guarNo}::numeric</if>
-        <if test=" guarNm != null and guarNm !='' ">
-        and    DECR(TGB.GUAR_NM)   = #{guarNm}</if>
+    --
+      SELECT  A.REG_DT||A.REG_TM                              AS OCCR_DTTM     -- 발생일시
+             ,A.GUAR_NO	                                      AS GUAR_NO       -- 보호자번호
+             ,DECR(C.GUAR_NM    )                             AS GUAR_NM       -- 보호자명
+             ,DECR(C.GUAR_TEL_NO)                             AS GUAR_TEL_NO   -- 보호자전화번호
+             ,B.STDT_NO                                       AS STDT_NO       -- 학생번호
+             ,DECR(B.STDT_NM)                                 AS STDT_NM       -- 학생명
+             ,A.ALAM_CHNL_CD                                  AS ALAM_CHNL_CD  -- 채널종류
+             ,A.ALAM_TYPE_CD                                  AS ALAM_TYPE_CD  -- 알림유형
+             ,A.ALAM_TITL                                     AS ALAM_TITL     -- 알림제목
+             ,ABSV.FN_GETCDNM('SEND_RSLT_CD',A.SEND_RSLT_CD)  AS SEND_RSLT_CD  -- 전송결과코드
+             ,COALESCE(A.SEND_DTTM,'')                        AS SEND_DTTM     -- 전송일시
+             ,A.ALAM_CNTN
+
+      FROM   TS_ALAM_HIST  A
+
+              LEFT   OUTER JOIN
+              TM_STDT_BASE B
+              ON     A.STDT_NO = B.STDT_NO
+
+              LEFT   OUTER JOIN
+              TM_GUAR_BASE C
+              ON     C.GUAR_NO = A.GUAR_NO
+
+      WHERE  1=1
+      <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
+<!--   AND    A.SEND_DTTM between #{entrDtFr} and #{entrDtTo} -->
+       AND    A.REG_DT BETWEEN REPLACE(#{entrDtFr},'-','') AND REPLACE(#{entrDtTo},'-','')</if>
+      <if test=" alamChnlCd != null and alamChnlCd !='' ">
+       AND    A.ALAM_CHNL_CD = #{alamChnlCd}</if>
+      <if test=" alamTypeCd != null and alamTypeCd !='' ">
+       AND    A.ALAM_TYPE_CD = #{alamTypeCd}</if>
+      <if test=" sendRsltCd != null and sendRsltCd !='' ">
+       AND    A.SEND_RSLT_CD = #{sendRsltCd}</if>
+      <if test=" guarNo != null and guarNo !='' ">
+       AND    A.GUAR_NO      = #{guarNo}::numeric</if>
+      <if test=" guarNm != null and guarNm !='' ">
+       AND    C.GUAR_NM      = ABSV.ENCR(#{guarNm})</if>
+
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>
