@@ -48,19 +48,19 @@ let palStndMng = new Vue({
                 let palCdList = commonGridCmonCd($this.code.palCdList);
                 let colModels =
                 [
-                    {name:"crud"                , index: "crud"                 , label:"crud"                          , hidden:true},
-                    {name: "palCd"              , index: "palCd"                , label: "신체활동수준 코드"               , width: 80        , align: "center"  , editable: false},
-                    {name: "palNm"              , index: "palNm"                , label: "신체활동수준 명"                 , width: 80       , align: "center" , editable: false},
-                    {name: "palValFr"           , index: "palValFr"             , label: "신체활동수준 값 From"            , width: 80        , align: "right" , editable: false   , editrules:{number:true}},
-                    {name: "palValTo"           , index: "palValTo"             , label: "신체활동수준 값 To"              , width: 80        , align: "right" , editable: false   , editrules:{number:true}},
-                    {name: "palEatRmrk"         , index: "palEatRmrk"           , label: "신체활동수준 섭취 비고"           , width: 700       , align: "center" , editable: false},
-                    {name: "regDt"              , index: "regDt"                , label: "등록일자"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
-                    {name: "regTm"              , index: "regTm"                , label: "등록시각"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);  }},
-                    {name: "regUserId"          , index: "regUserId"            , label: "등록사용자 ID"                  , width: 80       , align: "center"},
-                    {name: "uptDt"              , index: "uptDt"                , label: "수정일자"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);   }},
-                    {name: "uptTm"              , index: "uptTm"                , label: "수정시각"                       , width: 80       , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);   }},
-                    {name: "uptUserId"          , index: "uptUserId"            , label: "수정사용자 ID"                  , width: 80        , align: "center"},
-                    {name: "palStndPop"         , index: "palStndPop"           , label: "상세정보 보기"                   , width: 80       , align: "center",
+                    {name:"crud"                , index: "crud"                 , label:"crud"                   , hidden:true},
+                    {name: "palCd"              , index: "palCd"                , label: "신체활동수준 코드"     , width: 80        , align: "center" , editable: false},
+                    {name: "palNm"              , index: "palNm"                , label: "신체활동수준 명"       , width: 80        , align: "center" , editable: false},
+                    {name: "palValFr"           , index: "palValFr"             , label: "PAL 값(FROM)"          , width: 80        , align: "center" , editable: false   , editrules:{number:true}},
+                    {name: "palValTo"           , index: "palValTo"             , label: "PAL 값(TO)"            , width: 80        , align: "center" , editable: false   , editrules:{number:true}},
+                    {name: "palEatRmrk"         , index: "palEatRmrk"           , label: "신체활동수준 설명"     , width: 400       , align: "left"   , editable: false},
+                    {name: "regDt"              , index: "regDt"                , label: "등록일자"              , width: 60        , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);  }},
+                    {name: "regTm"              , index: "regTm"                , label: "등록시각"              , width: 60        , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);  }},
+                    {name: "regUserId"          , index: "regUserId"            , label: "등록사용자 ID"         , width: 60        , align: "center"},
+                    {name: "uptDt"              , index: "uptDt"                , label: "수정일자"              , width: 60        , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);   }},
+                    {name: "uptTm"              , index: "uptTm"                , label: "수정시각"              , width: 60        , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);   }},
+                    {name: "uptUserId"          , index: "uptUserId"            , label: "수정사용자 ID"         , width: 60        , align: "center"},
+                    {name: "palStndPop"         , index: "palStndPop"           , label: "상세정보 보기"         , width: 60        , align: "center",
                         formatter: function(cellValue, options, rowObject) {
                             return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="palStndMng.regPalStndPop(\'' + rowObject.palCd + '\')" value="상세보기" data-toggle="modal" data-target="#palStndDetlPopup" />';
                         }

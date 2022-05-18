@@ -54,22 +54,16 @@ let bleInfoMng = new Vue({
             let $this              = this;
             let colModels =
             [
-                {name: "bleId"             , index: "bleId"             , label: "BLE ID"     ,width:100              },
-                {name: "bleInstDt"         , index: "bleInstDt"         , label: "BLE설치일자" ,width:100 , formatter: function(cellValue, options, rowObject) {
-                    if(WebUtil.isNull(cellValue)) return '';
-                    else return formatDate(cellValue);
-                }},
-                {name: "bleInstTm"         , index: "bleInstTm"         , label: "BLE설치시간" ,width:100 , formatter: function(cellValue, options, rowObject) {
-                    if(WebUtil.isNull(cellValue)) return '';
-                    else return formatTime(cellValue);
-                }},
-                {name: "plcCd"             , index: "plcCd"             , label: "장소코드"    ,width:100, hidden:true },
-                {name: "plcNm"             , index: "plcNm"             , label: "장소명"      ,width:100              },
-                {name: "locNo"             , index: "locNo"             , label: "위치번호"    ,width:100, hidden:true	},
-                {name: "locNm"             , index: "locNm"             , label: "위치명"      ,width:100              },
-                {name: "addrBase"          , index: "addrBase"          , label: "위치주소"     ,width:200             },
-                {name: "rmrk"              , index: "rmrk"              , label: "비고"        ,width:200             },
-                {name: "bleDetl"           , index: "bleDetl"           , label: "상세정보보기"           , align: "center"   , width: 100   ,
+                {name: "bleId"             , index: "bleId"             , label: "BLE ID"       , align:"center" , width:100               },
+                {name: "bleInstDt"         , index: "bleInstDt"         , label: "BLE설치일자"  , align:"center" , width:100 , formatter: function(cellValue, options, rowObject) { if(WebUtil.isNull(cellValue)) return ''; else return formatDate(cellValue); }},
+                {name: "bleInstTm"         , index: "bleInstTm"         , label: "BLE설치시간"  , align:"center" , width:100 , formatter: function(cellValue, options, rowObject) { if(WebUtil.isNull(cellValue)) return ''; else return formatTime(cellValue); }},
+                {name: "plcCd"             , index: "plcCd"             , label: "장소코드"     , align:"center" , width:100 , hidden:true },
+                {name: "plcNm"             , index: "plcNm"             , label: "장소명"       , align:"center" , width:100               },
+                {name: "locNo"             , index: "locNo"             , label: "위치번호"     , align:"center" , width:100 , hidden:true },
+                {name: "locNm"             , index: "locNm"             , label: "위치명"       , align:"left"   , width:100               },
+                {name: "addrBase"          , index: "addrBase"          , label: "위치주소"     , align:"left"   , width:200               },
+                {name: "rmrk"              , index: "rmrk"              , label: "비고"         , align:"left"   , width:200               },
+                {name: "bleDetl"           , index: "bleDetl"           , label: "상세정보보기" , align:"center" , width: 100   ,
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="bleInfoMng.regBleInfo(\'' + rowObject.bleId + '\')" value="상세보기" data-toggle="modal" data-target="#bleInfoDetlPopup" />';
                     }
