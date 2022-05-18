@@ -3,6 +3,8 @@ let csInfoMng = new Vue({
     data: {
         params: {
             regNo:'',
+            csCmpyCd:'',
+            csCmpyNm:'',
             csTelNo:'',
             csMailAddr:'',
             csUrl:'',
@@ -45,28 +47,25 @@ let csInfoMng = new Vue({
         initGrid: function() {
 
             let colModels = [
-                {name: "regNo"                , index: "regNo"                , label: "등록번호"            , width: 80, align: "center"},
-                {name: "csTelNo"              , index: "csTelNo"              , label: "고객지원 전화번호"     , width: 80, align: "center"},
-                {name: "csMailAddr"           , index: "csMailAddr"           , label: "고객지원 메일주소"     , width: 80, align: "center"},
-                {name: "csUrl"                , index: "csUrl"                , label: "고객지원 URL"        , width: 80, align: "center"},
-                {name: "bandHpgeUrl"          , index: "bandHpgeUrl"          , label: "밴드 홈페이지 URL"    , width: 80, align: "center"},
-                {name: "regDt"                , index: "regDt"                , label: "등록일자"            , width: 80, align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                               }},
-                {name: "regTm"                , index: "regTm"                , label: "등록시각"            , width: 80, align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                               }},
-                {name: "regUserId"            , index: "regUserId"            , label: "등록사용자ID"        , width: 80, align: "center"},
-                {name: "uptTm"                , index: "uptTm"                , label: "수정시각"            , width: 80, align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                               }},
-                {name: "uptDt"                , index: "uptDt"                , label: "수정일자"            , width: 80, align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                               }},
-                {name: "uptUserId"            , index: "uptUserId"            , label: "수정사용자ID"        , width: 80, align: "center"},
+                {name: "regNo"         , index: "regNo"         , label: "등록번호"          , width: 80, align: "center"},
+                {name: "csCmpyCd"      , index: "csCmpyCd"      , label: "업체코드"          , width: 80, align: "center"},
+                {name: "csCmpyNm"      , index: "csCmpyNm"      , label: "업체명"            , width: 80, align: "center"},
+                {name: "csTelNo"       , index: "csTelNo"       , label: "담당 전화번호"     , width: 80, align: "center"},
+                {name: "csMailAddr"    , index: "csMailAddr"    , label: "담당 메일주소"     , width: 80, align: "center"},
+                {name: "csUrl"         , index: "csUrl"         , label: "고객지원 URL"      , width: 80, align: "center"},
+                {name: "bandHpgeUrl"   , index: "bandHpgeUrl"   , label: "홈페이지 URL"      , width: 80, align: "center"},
+                {name: "regDt"         , index: "regDt"         , label: "등록일자"          , width: 80, align: "center", formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                {name: "regTm"         , index: "regTm"         , label: "등록시각"          , width: 80, align: "center", formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
+                {name: "regUserId"     , index: "regUserId"     , label: "등록사용자ID"      , width: 80, align: "center"},
+                {name: "uptTm"         , index: "uptTm"         , label: "수정시각"          , width: 80, align: "center", formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
+                {name: "uptDt"         , index: "uptDt"         , label: "수정일자"          , width: 80, align: "center", formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                {name: "uptUserId"     , index: "uptUserId"     , label: "수정사용자ID"      , width: 80, align: "center"},
                 {name: "csInfoDetlPopup"      , index: "csInfoDetlPopup"      , label: "상세정보보기"         , width: 80, align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="csInfoMng.regCsInfoMngPop(\'' + rowObject.regNo + '\')" value="상세보기" data-toggle="modal" data-target="#csInfoDetlPopup" />';
                     }
                 }
             ];
-
 
 
             $("#csInfo_list").jqGrid("GridUnload");

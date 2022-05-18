@@ -113,7 +113,7 @@ public class CsInfoMngController
 
 	@ResponseBody
 	@RequestMapping("/cmon/stnd/csInfoMng/saveInfo.ab")
-	public RtnMsg saveTermInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
+	public RtnMsg saveCsInfo(@RequestBody(required=false) Map<String, Object> params) throws BizException {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 

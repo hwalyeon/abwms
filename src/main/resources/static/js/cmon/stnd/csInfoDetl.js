@@ -4,18 +4,31 @@ let csInfoDetl = new Vue({
 		csInfoMngInfo: {
     		crud: 'C',
 			regNo:'',
+			csCmpyCd:'',
 			csTelNo:'',
 			csMailAddr:'',
 			csUrl:'',
 			bandHpgeUrl:''
     	},
 		code: {
-			csInfoList: []
+			csCmpyCdList: []
 		}
 	},
 	components: {'summer-note': summernote },
     methods: {
-
+        initialize: function() {
+        	
+        	let $this = this;
+        	
+        	$this.initCodeList();      
+        	        	
+        },
+        initCodeList: function() {
+        	let $this = this;
+        	
+			$this.code.csCmpyCdList = [];
+			getCommonCodeList('CS_CMPY_CD',$this.code.csCmpyCdList);
+        },
         initPage: function(regNo) {
         	
         	let $this = this;
@@ -50,10 +63,10 @@ let csInfoDetl = new Vue({
         	
         	let $this = this;        	        	
         	
-        	/*if ( WebUtil.isNull($this.csInfoMngInfo.regNo) ) {
-        		Swal.alert(['등록번호를 입력하세요.', 'info']);
+        	if ( WebUtil.isNull($this.csInfoMngInfo.csCmpyCd) ) {
+        		Swal.alert(['고객지원업체를 선택하세요.', 'info']);
         		return false;
-        	}*/
+        	}
         	
         	if ( WebUtil.isNull($this.csInfoMngInfo.csTelNo) ) {
         		Swal.alert(['고객지원 전화번호를 입력하세요.', 'info']);
@@ -149,7 +162,7 @@ let csInfoDetl = new Vue({
     mounted: function() {
         let self = this;
         $(document).ready(function() {
-
+            self.initialize();
         });
     }
 });

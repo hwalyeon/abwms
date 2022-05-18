@@ -5,6 +5,8 @@
        <select id="searchCsInfoList" parameterType="java.util.Map" resultType="MybatisMap">
 	    /* Generated SQL SQL ID : ts_cs_info.select */
         SELECT  reg_no /* reg_no 등록_번호 numeric */
+               ,cs_cmpy_cd
+               ,ABSV.FN_GETCDNM('CS_CMPY_CD',cs_cmpy_cd) AS CS_CMPY_NM
                ,cs_tel_no /* cs_tel_no 고객지원_전화_번호 character varying(20) */
                ,cs_mail_addr /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
                ,cs_url /* cs_url 고객지원_URL character varying(4000) */
@@ -30,6 +32,9 @@
                       reg_no /* reg_no 등록_번호 numeric */
               <if test="csTelNo != null">
                      ,cs_tel_no /* cs_tel_no 고객지원_전화_번호 character varying(20) */
+              </if>
+              <if test="csCmpyCd != null">
+                     ,cs_cmpy_cd 
               </if>
               <if test="csMailAddr != null">
                      ,cs_mail_addr /* cs_mail_addr 고객지원_메일_주소 character varying(100) */
@@ -60,6 +65,9 @@
               VALUES
               (
                      (select max(reg_no)+1 from ts_cs_info)  /* reg_no 등록_번호 numeric */
+              <if test="csCmpyCd != null">
+                     ,#{csCmpyCd}
+              </if>
               <if test="csTelNo != null">
                      ,#{csTelNo}/* cs_tel_no 고객지원_전화_번호 character varying(20) */
               </if>
@@ -95,6 +103,9 @@
               /* Generated SQL SQL ID : ts_cs_info.update */
               UPDATE ts_cs_info
               <trim prefix="SET" prefixOverrides=",">
+                     <if test="csCmpyCd != null">
+                            ,cs_cmpy_cd = #{csCmpyCd}
+                     </if>
                      <if test="csTelNo != null">
                             ,cs_tel_no = #{csTelNo} /* cs_tel_no 고객지원_전화_번호 character varying(20) */
                      </if>

@@ -4,7 +4,7 @@
 <div class="modal fade" id="csInfoDetlPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog-wrap">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content" style="width: 750px; height: 420px">
+			<div class="modal-content" style="width: 750px; height: 445px">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<div class="ibox-title">
@@ -21,27 +21,36 @@
 		                    </colgroup>
 		                    <tbody>
 			                    <tr>
+			                        <th scope="row">고객지원업체</th>
+			                        <td colspan="3">
+										<select id="csCmpyCd" name="csCmpyCd" class="form-control" v-model="csInfoMngInfo.csCmpyCd">
+											<option value="">선택</option>
+											<option v-for="item in code.csCmpyCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+										</select>
+			                        </td>
+			                    </tr>
+			                    <tr>
 			                        <th scope="row">고객지원 전화번호</th>
 			                        <td>
-			                        	<input type="number" id="csTelNo" name="csTelNo" v-model="csInfoMngInfo.csTelNo" class="form-control" maxlength="10"/>
+			                        	<input type="text" id="csTelNo" name="csTelNo" v-model="csInfoMngInfo.csTelNo" class="form-control" maxlength="13"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">고객지원 메일주소</th>
 			                        <td>
-			                        	<input type="text" id="csMailAddr" name="csMailAddr" v-model="csInfoMngInfo.csMailAddr" class="form-control" maxlength="30"/>
+			                        	<input type="text" id="csMailAddr" name="csMailAddr" v-model="csInfoMngInfo.csMailAddr" class="form-control" maxlength="50"/>
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">고객지원 URL</th>
 			                        <td>
-										<input type="text" id="csUrl" name="csUrl" v-model="csInfoMngInfo.csUrl" class="form-control" maxlength="30" />
+										<input type="text" id="csUrl" name="csUrl" v-model="csInfoMngInfo.csUrl" class="form-control" maxlength="100" />
 			                        </td>
 			                    </tr>
 			                    <tr>
 			                        <th scope="row">밴드 홈페이지 URL</th>
 			                        <td>
-										<input type="text" id="bandHpgeUrl" name="bandHpgeUrl" v-model="csInfoMngInfo.bandHpgeUrl" class="form-control" maxlength="30"/>
+										<input type="text" id="bandHpgeUrl" name="bandHpgeUrl" v-model="csInfoMngInfo.bandHpgeUrl" class="form-control" maxlength="100"/>
 			                        </td>
 			                    </tr>
 							</tbody>
