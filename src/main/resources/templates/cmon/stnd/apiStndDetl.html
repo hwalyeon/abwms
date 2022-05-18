@@ -49,15 +49,15 @@
 										</td>
 									</tr>
 									<tr>
-										<th scope="row">정기판정 다음 주기</th>
-										<td>
-											<input type="text" id="rdetNextCycl" name="rdetNextCycl" v-model="apiInfo.rdetNextCycl" class="form-control" maxlength="20" />
-										</td>
-									</tr>
-									<tr>
 										<th scope="row">정기판정 기본 주기</th>
 										<td>
 											<input type="email" id="rdetBaseCycl" name="rdetBaseCycl" v-model="apiInfo.rdetBaseCycl" class="form-control ime-eng" maxlength="50"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row">정기판정 다음 주기</th>
+										<td>
+											<input type="text" id="rdetNextCycl" name="rdetNextCycl" v-model="apiInfo.rdetNextCycl" class="form-control" maxlength="20" />
 										</td>
 									</tr>
 									<tr>
@@ -147,7 +147,7 @@
 							<tr>
 								<th scope="row">API-URL</th>
 								<td>
-									<input type="email" id="apiUrl" name="apiUrl" v-model="apiInfo.apiUrl" class="form-control ime-eng" maxlength="50"/>
+									<input type="email" id="apiUrl" name="apiUrl" v-model="apiInfo.apiUrl" class="form-control ime-eng" maxlength="200"/>
 								</td>
 							</tr>
 							</tbody>
