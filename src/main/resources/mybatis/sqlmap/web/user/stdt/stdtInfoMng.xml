@@ -330,6 +330,7 @@
    </delete>
 
     <select id="searchStdtDetlInfo" parameterType="java.util.Map" resultType="MybatisMap">
+<![CDATA[
     with stdt_info as (
           select
                 tsb.stdt_no
@@ -453,11 +454,11 @@
              ,tgjs.smry_cntn
              ,tgjs.spec_cntn
              ,fn_getcdnm('FAT_JUDG_CD' , tgh.fat_judg_cd) as fat_judg_nm
-             ,tfjs.curr_eval_cntn
+             ,tgh.fat_judg_desc||'<br><br>'||COALESCE(tgh.fatp_judg_desc,'<FONT COLOR=GREY>(설문조사를 하지않아 비만예측정보가 없습니다)<FONT>') AS CURR_EVAL_CNTN
              ,fn_getcdnm('FAT_JUDG_CD' , tgh.fatp_judg_cd) as fatp_judg_nm
              ,tgh.cal_eat_qty
-             ,tgh.cal_csum_qty
-             ,tgh.pal_val
+             ,tgh.AVG_cal_csum_qty AS cal_csum_qty
+             ,tgh.AVG_pal_val AS PAL_VAL
              ,tgh.cal_nutr_stat_cd
              ,fn_getcdnm('NUTR_STAT_CD' , tgh.cal_nutr_stat_cd) as cal_nutr_stat_nm
              ,to_char(to_timestamp(tgh.upt_dt||tgh.upt_tm ,'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') as gfix_upt_dttm
@@ -527,7 +528,7 @@
          ,gfix.fidx
          ,gfix.fat_judg_nm
          ,gfix.curr_eval_cntn
-         ,gfix.fatp_judg_nm
+         ,COALESCE(gfix.fatp_judg_nm,'[예측설문없음]') AS FATP_JUDG_NM
          ,strs.avg_hbit_cnt
          ,strs.mind_strs_pnt
          ,strs.mind_strs_stat_cd
@@ -560,6 +561,7 @@
       on stdt.stdt_no = gfix.stdt_no
     left outer join strs_list strs
       on stdt.stdt_no = strs.stdt_no
+]]>
     </select>
 
     <select id="searchBandGuarTelNo" parameterType="java.util.Map" resultType="MybatisMap">

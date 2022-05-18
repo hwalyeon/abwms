@@ -92,7 +92,8 @@
 									<td colspan="2" style="border-right: 7px solid #e5e6e7; padding-top:0px;" >
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">보호자 및 학부모 정보</label>
+												<!-- <label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">보호자 및 학부모 정보</label> -->
+												<label class="control-label float_left width_150" style="padding-left:0px; padding-bottom: 5px; text-align:left;">보호자 및 학부모 정보</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:105%; margin:0px 0px 20px -15px"></div>
 
 												<label class="col-xs-2 control-label">보호자번호</label>
@@ -105,29 +106,29 @@
 												</div>
 											</div>
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-2 control-label">보호자명</label>
+												<label class="col-xs-2 control-label">보 호 자 명</label>
 												<div class="col-xs-3">
 													<input type="text" name="" v-model="stdtInfo.guarNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
-												<label class="col-xs-2 control-label">학부모_남자</label>
+												<label class="col-xs-2 control-label">학부모 (부)</label>
 												<div class="col-xs-3" >
 													<input type="text" name="" v-model="stdtInfo.prntMale" class="form-control":readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<div class="col-xs-2" >
-													<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#prntInfoDetlPopup" v-on:click="goPrntInfo(stdtInfo.prntNo , 'MALE')">학부모 정보</button>
+													<button type="button" class="btn btn-outline btn-primary float_left" data-toggle="modal" data-target="#prntInfoDetlPopup" v-on:click="goPrntInfo(stdtInfo.prntNo , 'MALE')">상세정보</button>
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-xs-2 control-label">보호자전화번호</label>
+												<label class="col-xs-2 control-label">전 화 번 호</label>
 												<div class="col-xs-3">
 													<input type="text" name="" v-model="stdtInfo.guarTelNo" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
-												<label class="col-xs-2 control-label">학부모_여자</label>
+												<label class="col-xs-2 control-label">학부모 (모)</label>
 												<div class="col-xs-3">
 													<input type="text" name="" v-model="stdtInfo.prntFemale" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 												<div class="col-xs-2" >
-													<button type="button" class="btn btn-outline btn-primary float_right" data-toggle="modal" data-target="#prntInfoDetlPopup" v-on:click="goPrntInfo(stdtInfo.prntNo , 'FEMALE')">학부모 정보</button>
+													<button type="button" class="btn btn-outline btn-primary float_left" data-toggle="modal" data-target="#prntInfoDetlPopup" v-on:click="goPrntInfo(stdtInfo.prntNo , 'FEMALE')">상세정보</button>
 												</div>
 											</div>
 										</div>
@@ -136,7 +137,7 @@
 									<td style="border-right: none; padding-top:0px;">
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">밴드 상태</label>
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px; text-align:left;">밴드 상태</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 
 												<div id="chartBand" class ="float_left">
@@ -156,7 +157,7 @@
 														<input type="text" name="" v-model="stdtInfo.bandId" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
 													</div>
 													<label class="col-xs-2 control-label"></label>
-													<label class="col-xs-2 control-label" style="margin-right: 0px;padding-right: 0px;">최근통신</label>
+													<label class="col-xs-2 control-label" style="margin-right: 0px;padding-right: 0px; text-align:left;">마지막 연결</label>
 												</div>
 											</div>
 											<div class="form-group" style="margin-bottom: 5px;">
@@ -184,7 +185,7 @@
 									<td style="border-right: none; padding-top:0px;">
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px;margin-left:-20px">학생 위치</label>
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px;margin-left:-20px; text-align:left;">학생 위치</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 
 												<div id=chartLoc  class ="float_left">
@@ -204,7 +205,7 @@
 														<input type="text" name="" v-model="stdtInfo.plcClssNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
 													</div>
 													<label class="col-xs-2 control-label"></label>
-													<label class="col-xs-4 control-label" style="margin-right: 0px;padding-right: 0px;">최근통신</label>
+													<label class="col-xs-4 control-label" style="margin-right: 0px;padding-right: 0px; text-align:left;">최종확인</label>
 												</div>
 											</div>
 											<div class="form-group" style="margin-bottom: 5px;">
@@ -234,7 +235,7 @@
 									<td style="border-right: none;padding-top:0px;">
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">위험감정지수</label>
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px; text-align:left;">위험감정지수</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 
 												<div id="chartDgem" class ="float_left">
@@ -256,7 +257,7 @@
 												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 55px;">
 													<div id="dgemCntn"></div></br>
 												</div>
-												<label class="col-xs-2 control-label"style="margin-top:36px;"><span style="display:inline-block; margin-bottom:13px;">최근통신</span></label>
+												<label class="col-xs-2 control-label"style="margin-top:36px;text-align:left;"><span style="display:inline-block; margin-bottom:13px;">최종확인</span></label>
 												<div class="col-xs-4"style="height: 34px; margin-bottom: 5px;">
 													<input type="text" name="" v-model="stdtInfo.locMesuDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
@@ -272,7 +273,7 @@
 									<td style="border-right: none; padding-top:0px;">
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px;margin-top:0px; margin-left:-20px">성장지수</label>
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px;margin-top:0px; margin-left:-20px;  text-align:left;">성장지수</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 
 												<div id=chartGrow class ="float_left">
@@ -287,14 +288,14 @@
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
 												<div class="col-xs-8"style="height: 14px;">
-													<div id="growDetl"style="margin-top:40px;">
+													<div id="growDetl"style="margin-top:90px;">
 														<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.growJudgNm}}</span></p>
 													</div>
 												</div>
-												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 55px;">
+												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 105px;">
 													<div id="growCntn"></div></br>
 												</div>
-												<label class="col-xs-2 control-label"style="margin-top:36px;"><span style="display:inline-block; margin-bottom:13px;">최근통신</span></label>
+												<label class="col-xs-2 control-label"style="margin-top:80px; text-align:left;"><span style="display:inline-block; margin-bottom:13px;">최종확인</span></label>
 												<div class="col-xs-4"style="height: 34px; margin-bottom: 5px;">
 													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
@@ -308,7 +309,7 @@
 									<td style="border-right: none;padding-top:0px; ">
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px; margin-left:-20px">비만지수</label>
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px; margin-left:-20px;  text-align:left;">비만지수</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 												<div id="chartFat" class ="float_left">
 													<canvas id="fatChart" width="120" height="122">
@@ -322,14 +323,14 @@
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
 												<div class="col-xs-8"style="height: 14px;">
-													<div id="fatDetl" style="margin-top:40px;">
+													<div id="fatDetl" style="margin-top:90px;">
 														<p class="level_tit mt60"><span style="font-size: 15px">{{stdtInfo.fatJudgNm}} -> {{stdtInfo.fatpJudgNm}}</span></p>
 													</div>
 												</div>
-												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 55px;">
+												<div class="col-xs-8"style="height: 105px; overflow: auto; margin-top: 105px;">
 													<div id="fatCntn"></div></br>
 												</div>
-												<label class="col-xs-2 control-label"style="margin-top:36px;"><span style="display:inline-block; margin-bottom:13px;">최근통신</span></label>
+												<label class="col-xs-2 control-label"style="margin-top:80px; text-align:left;"><span style="display:inline-block; margin-bottom:13px;">최종확인</span></label>
 												<div class="col-xs-4"style="height: 34px; margin-bottom: 5px;">
 													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
@@ -345,7 +346,7 @@
 									<td colspan="2"  style="border-right: 7px solid #e5e6e7; padding-top:0px;">
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px">영양 섭취/운동(칼로리)</label>
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-left:-20px; text-align:left">영양 섭취/운동(칼로리)</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:105%; margin:0px 0px 20px -15px"></div>
 
 												<label class="col-xs-2 control-label">일 평균 섭취량</label>
@@ -353,7 +354,7 @@
 													<input type="text" name="" v-model="stdtInfo.calEatQty" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
 												</div>
 												<label class="col-xs-4 control-label"></label>
-												<label class="col-xs-2 control-label" style="padding-left:0px;">최근통신</label>
+												<label class="col-xs-2 control-label" style="padding-left:0px; text-align:left;">최종확인</label>
 											</div>
 											<div class="form-group" style="margin-bottom: 5px;">
 												<label class="col-xs-2 control-label">영양섭취상태</label>
@@ -361,13 +362,13 @@
 													<input type="text" name="" v-model="stdtInfo.calNutrStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
 												</div>
 												<label class="col-xs-4 control-label"></label>
-												<!--최근통신-->
+												<!--최종확인-->
 												<div class="col-xs-3" style="padding-left:0px;">
 													<input type="text" name="" v-model="stdtInfo.gfixUptDttm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/>
 												</div>
 											</div>
 											<div class="form-group" style="margin-bottom: 5px;">
-												<label class="col-xs-2 control-label">일 평균 운동량</label>
+												<label class="col-xs-2 control-label">일 평균 소모량</label>
 												<div class="col-xs-3"style="height: 34px;">
 													<input type="text" name="" v-model="stdtInfo.calCsumQty" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
 												</div>
@@ -392,7 +393,7 @@
 									<td style="border-right: none;padding-top:0px; ">
 										<div class="form-horizontal" style="padding-left: 20px">
 											<div class="form-group" style="margin-bottom: 5px; margin-top:-28px;">
-												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px; margin-left:-20px">스트레스</label>
+												<label class="col-xs-12 control-label" style="margin-bottom: 5px; margin-top:0px; margin-left:-20px; text-align:left;">스트레스</label>
 												<div style="clear:both; border-bottom:1px solid #c8c8c8; width:755px; margin:0px 0px 20px -15px"></div>
 												<div id="chartStrs" class ="float_left">
 													<canvas id="strsChart" width="150" height="122">
@@ -418,7 +419,7 @@
 													<input type="text" name="" v-model="stdtInfo.mindStrsStatNm" class="form-control" :readonly="stdtInfo.crud=='U'" style="background-color: #fff;"/> </br>
 												</div>
 												<label class="col-xs-2 control-label"></label>
-												<label class="col-xs-2 control-label">최근통신</label>
+												<label class="col-xs-2 control-label" style="text-align:left;">최종확인</label>
 											</div>
 											<div class="form-group" style="margin-bottom: 5px;">
 												<label class="col-xs-2 control-label" style="padding-right:0px;">신체적스트레스</label>

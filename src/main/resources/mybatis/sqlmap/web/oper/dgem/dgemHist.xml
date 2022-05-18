@@ -4,6 +4,7 @@
     <!-- 위험감정 발생이력 조회 -->
     <select id="searchDgemHistList" parameterType="java.util.Map" resultType="MybatisMap">
         select  A.STDT_NO		 /* 학생번호 */
+        ,ABSV.DECR(C.STDT_NM) AS STDT_NM
         ,A.DGEM_HIST_SEQ  /* 위험감정 이력 순번 */
         ,A.STDT_NO || '_' || A.DGEM_HIST_SEQ AS STDT_HIST_SEQ  /* 위험감정 이력 순번 */
         ,A.STDT_NO || '_' || F.GUAR_NM       AS STDT_GUAR_NM  /* 위험감정 이력 순번 */
@@ -75,9 +76,7 @@
     and     F.GUAR_NO      = #{guarNo}::numeric                /* 보호자번호    */</if>
     <if test=" guarNm != null and guarNm !='' ">
     and     DECR(F.GUAR_NM)      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
-    ORDER BY A.STDT_NO,
-             A.DGEM_HIST_SEQ,
-             F.GUAR_NO
+    ORDER BY A.DGEM_DT DESC, A.DGEM_TM DESC, A.STDT_NO, A.DGEM_HIST_SEQ DESC
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>
