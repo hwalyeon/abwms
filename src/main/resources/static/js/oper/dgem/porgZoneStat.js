@@ -441,11 +441,11 @@ let porgZoneStat = new Vue({
             let $this = this;
 
             let locListColModels = [
-                {name: "locNo"          , index: "locNo"        , label: "위치번호"       , width: 55         , align: "center"  },
-                {name: "locNm"          , index: "locNm"        , label: "위치명"         , width: 200        , align: "left" },
-                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"      , width: 69         , align: "center" },
-                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"        , width: 55         , align: "center" },
-                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 55         , align: "center" }
+                {name: "locNo"     , index: "locNo"     , label: "위치번호"        ,  width:  55 ,  align: "center"  },
+                {name: "locNm"     , index: "locNm"     , label: "위치명"          ,  width: 200 ,  align: "left"    },
+                {name: "plcClssNm" , index: "plcClssNm" , label: "장소분류명"      ,  width:  69 ,  align: "center"  },
+                {name: "occrCnt"   , index: "occrCnt"   , label: "탐지건수"        ,  width:  55 ,  align: "right" , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
+                {name: "stdtCnt"   , index: "stdtCnt"   , label: "탐지<br>학생수"  ,  width:  55 ,  align: "right" , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
             ];
 
             $("#locInfo_list").jqGrid("GridUnload");

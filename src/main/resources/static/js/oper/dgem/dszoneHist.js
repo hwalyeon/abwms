@@ -442,13 +442,13 @@ let dszoneHist = new Vue({
             let $this = this;
 
             let locListColModels = [
-//              {name: "stndDt"         , index: "stndDt"       , label: "기준일자"    , width: 70         , align: "center"   ,fixed:true},
-                {name: "locNo"          , index: "locNo"        , label: "위치번호"    , width: 69         , align: "center"   ,fixed:true},
-                {name: "locNm"          , index: "locNm"        , label: "위치명"      , width: 114        , align: "left"   ,fixed:true},
-                {name: "locApntNm"      , index: "locApntNm"    , label: "위치지정명"   , width: 114        , align: "center"  ,fixed:true},
-                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"  , width: 83          , align: "center"   ,fixed:true},
-                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"    , width: 69          , align: "center"   ,fixed:true},
-                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 69      , align: "center"   ,fixed:true}
+//              {name: "stndDt"         , index: "stndDt"       , label: "기준일자"    , width: 70         , align: "center" ,fixed:true},
+                {name: "locNo"          , index: "locNo"        , label: "위치번호"    , width: 65         , align: "center" ,fixed:true},
+                {name: "locNm"          , index: "locNm"        , label: "위치명"      , width: 120        , align: "left"   ,fixed:true},
+                {name: "locApntNm"      , index: "locApntNm"    , label: "위치지정명"   , width:100        , align: "center" ,fixed:true},
+                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"  , width: 80         , align: "center" ,fixed:true},
+                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"    , width: 69         , align: "right"  ,fixed:true , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
+                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 69     , align: "right"  ,fixed:true , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
             ];
 
             $("#locInfo_list").jqGrid("GridUnload");
@@ -459,6 +459,7 @@ let dszoneHist = new Vue({
                 url: '/oper/dgem/dszoneHist/searchLocInfoList.ab',
                 pager: "#locInfo_pager_list",
                 colModel: locListColModels,
+                autowidth: true,
                 onPaging : function(data) {
                     onPagingCommon(data, this, function(resultMap) {
                         $this.params.currentPage    = resultMap.currentPage;
