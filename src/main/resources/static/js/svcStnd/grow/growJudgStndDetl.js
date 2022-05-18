@@ -12,7 +12,9 @@ let growJudgStndDetl = new Vue({
     	},
 		code: {
 			mentGrowJudgCdList: []
-		}
+		},
+		smrySummerNoteId : 'smrySummerNoteId',
+		specSummerNoteId : 'specSummerNoteId'
 	},
 	components: {'summer-note': summernote },
     methods: {
