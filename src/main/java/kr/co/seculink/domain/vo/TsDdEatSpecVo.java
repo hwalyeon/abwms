@@ -23,6 +23,12 @@ public class TsDdEatSpecVo implements Serializable {
 	/* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 	private String nutrStatCd;
 
+	/* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+	private String avgNutrEatQty;
+
+	/* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
+	private String avgNutrStatCd;
+
 	/* reg_dt 등록_일자 character(8) */
 	private String regDt;
 
@@ -116,6 +122,36 @@ public class TsDdEatSpecVo implements Serializable {
 	 */
 	public void setNutrStatCd(String nutrStatCd) {
 		this.nutrStatCd = nutrStatCd;
+	}
+	/**
+	 * Get avg_nutr_eat_qty 평균_영양소_섭취_량 character(18)
+	 * @Return String avgNutrEatQty
+	 */
+	public String getAvgNutrEatQty() {
+		return this.avgNutrEatQty;
+	}
+	
+	/**
+	 * Set avg_nutr_eat_qty 평균_영양소_섭취_량 character(18)
+	 * @Param String avgNutrEatQty
+	 */
+	public void setAvgNutrEatQty(String avgNutrEatQty) {
+		this.avgNutrEatQty = avgNutrEatQty;
+	}
+	/**
+	 * Get avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18)
+	 * @Return String avgNutrStatCd
+	 */
+	public String getAvgNutrStatCd() {
+		return this.avgNutrStatCd;
+	}
+	
+	/**
+	 * Set avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18)
+	 * @Param String avgNutrStatCd
+	 */
+	public void setAvgNutrStatCd(String avgNutrStatCd) {
+		this.avgNutrStatCd = avgNutrStatCd;
 	}
 	/**
 	 * Get reg_dt 등록_일자 character(8)

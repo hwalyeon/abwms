@@ -41,6 +41,12 @@ public class TsGfixHistVo implements Serializable {
 	/* cal_csum_qty 칼로리_소모_량 numeric(null) */
 	private Double calCsumQty;
 
+	/* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null) */
+	private Double avgCalEatQty;
+
+	/* avg_cal_csum_qty 평균_칼로리_소모_량 numeric(null) */
+	private Double avgCalCsumQty;
+
 	/* mom_hght_val 엄마_키_값 numeric(null) */
 	private Double momHghtVal;
 
@@ -116,20 +122,29 @@ public class TsGfixHistVo implements Serializable {
 	/* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 	private String fatpJudgDesc;
 
-	/* pal_val 신체활동수준_값 numeric(null) */
-	private Double palVal;
-
 	/* bcsm_val 기초에너지소모량_값 numeric(null) */
 	private Double bcsmVal;
 
 	/* acsm_val 활동에너지소모량_값 numeric(null) */
 	private Double acsmVal;
 
+	/* pal_val 신체활동수준_값 numeric(null) */
+	private Double palVal;
+
 	/* pal_cd 신체활동수준_코드 character varying(20) */
 	private String palCd;
 
 	/* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
 	private String calNutrStatCd;
+
+	/* avg_pal_val 평균_신체활동수준_값 numeric(null) */
+	private Double avgPalVal;
+
+	/* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+	private String avgPalCd;
+
+	/* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
+	private String avgCalNutrStatCd;
 
 	/* rmrk 비고 character varying(4000) */
 	private String rmrk;
@@ -317,6 +332,36 @@ public class TsGfixHistVo implements Serializable {
 	 */
 	public void setCalCsumQty(Double calCsumQty) {
 		this.calCsumQty = calCsumQty;
+	}
+	/**
+	 * Get avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
+	 * @Return Double avgCalEatQty
+	 */
+	public Double getAvgCalEatQty() {
+		return this.avgCalEatQty;
+	}
+	
+	/**
+	 * Set avg_cal_eat_qty 평균_칼로리_섭취_량 numeric(null)
+	 * @Param Double avgCalEatQty
+	 */
+	public void setAvgCalEatQty(Double avgCalEatQty) {
+		this.avgCalEatQty = avgCalEatQty;
+	}
+	/**
+	 * Get avg_cal_csum_qty 평균_칼로리_소모_량 numeric(null)
+	 * @Return Double avgCalCsumQty
+	 */
+	public Double getAvgCalCsumQty() {
+		return this.avgCalCsumQty;
+	}
+	
+	/**
+	 * Set avg_cal_csum_qty 평균_칼로리_소모_량 numeric(null)
+	 * @Param Double avgCalCsumQty
+	 */
+	public void setAvgCalCsumQty(Double avgCalCsumQty) {
+		this.avgCalCsumQty = avgCalCsumQty;
 	}
 	/**
 	 * Get mom_hght_val 엄마_키_값 numeric(null)
@@ -694,21 +739,6 @@ public class TsGfixHistVo implements Serializable {
 		this.fatpJudgDesc = fatpJudgDesc;
 	}
 	/**
-	 * Get pal_val 신체활동수준_값 numeric(null)
-	 * @Return Double palVal
-	 */
-	public Double getPalVal() {
-		return this.palVal;
-	}
-	
-	/**
-	 * Set pal_val 신체활동수준_값 numeric(null)
-	 * @Param Double palVal
-	 */
-	public void setPalVal(Double palVal) {
-		this.palVal = palVal;
-	}
-	/**
 	 * Get bcsm_val 기초에너지소모량_값 numeric(null)
 	 * @Return Double bcsmVal
 	 */
@@ -739,6 +769,21 @@ public class TsGfixHistVo implements Serializable {
 		this.acsmVal = acsmVal;
 	}
 	/**
+	 * Get pal_val 신체활동수준_값 numeric(null)
+	 * @Return Double palVal
+	 */
+	public Double getPalVal() {
+		return this.palVal;
+	}
+	
+	/**
+	 * Set pal_val 신체활동수준_값 numeric(null)
+	 * @Param Double palVal
+	 */
+	public void setPalVal(Double palVal) {
+		this.palVal = palVal;
+	}
+	/**
 	 * Get pal_cd 신체활동수준_코드 character varying(20)
 	 * @Return String palCd
 	 */
@@ -767,6 +812,51 @@ public class TsGfixHistVo implements Serializable {
 	 */
 	public void setCalNutrStatCd(String calNutrStatCd) {
 		this.calNutrStatCd = calNutrStatCd;
+	}
+	/**
+	 * Get avg_pal_val 평균_신체활동수준_값 numeric(null)
+	 * @Return Double avgPalVal
+	 */
+	public Double getAvgPalVal() {
+		return this.avgPalVal;
+	}
+	
+	/**
+	 * Set avg_pal_val 평균_신체활동수준_값 numeric(null)
+	 * @Param Double avgPalVal
+	 */
+	public void setAvgPalVal(Double avgPalVal) {
+		this.avgPalVal = avgPalVal;
+	}
+	/**
+	 * Get avg_pal_cd 평균_신체활동수준_코드 character varying(20)
+	 * @Return String avgPalCd
+	 */
+	public String getAvgPalCd() {
+		return this.avgPalCd;
+	}
+	
+	/**
+	 * Set avg_pal_cd 평균_신체활동수준_코드 character varying(20)
+	 * @Param String avgPalCd
+	 */
+	public void setAvgPalCd(String avgPalCd) {
+		this.avgPalCd = avgPalCd;
+	}
+	/**
+	 * Get avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20)
+	 * @Return String avgCalNutrStatCd
+	 */
+	public String getAvgCalNutrStatCd() {
+		return this.avgCalNutrStatCd;
+	}
+	
+	/**
+	 * Set avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20)
+	 * @Param String avgCalNutrStatCd
+	 */
+	public void setAvgCalNutrStatCd(String avgCalNutrStatCd) {
+		this.avgCalNutrStatCd = avgCalNutrStatCd;
 	}
 	/**
 	 * Get rmrk 비고 character varying(4000)

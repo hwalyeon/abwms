@@ -11,6 +11,9 @@ public class TsCsInfoVo implements Serializable {
 	/* reg_no 등록_번호 numeric(null) */
 	private Double regNo;
 
+	/* cs_cmpy_cd 고객지원_업체_코드 character varying(20) */
+	private String csCmpyCd;
+
 	/* cs_tel_no 고객지원_전화_번호 character varying(20) */
 	private String csTelNo;
 
@@ -56,6 +59,21 @@ public class TsCsInfoVo implements Serializable {
 	 */
 	public void setRegNo(Double regNo) {
 		this.regNo = regNo;
+	}
+	/**
+	 * Get cs_cmpy_cd 고객지원_업체_코드 character varying(20)
+	 * @Return String csCmpyCd
+	 */
+	public String getCsCmpyCd() {
+		return this.csCmpyCd;
+	}
+	
+	/**
+	 * Set cs_cmpy_cd 고객지원_업체_코드 character varying(20)
+	 * @Param String csCmpyCd
+	 */
+	public void setCsCmpyCd(String csCmpyCd) {
+		this.csCmpyCd = csCmpyCd;
 	}
 	/**
 	 * Get cs_tel_no 고객지원_전화_번호 character varying(20)

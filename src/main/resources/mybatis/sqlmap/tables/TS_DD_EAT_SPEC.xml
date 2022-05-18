@@ -14,6 +14,8 @@
                ,nutr_cd /* nutr_cd 영양소_코드 character varying(20) */
                ,nutr_eat_qty /* nutr_eat_qty 영양소_섭취_량 numeric */
                ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+               ,avg_nutr_eat_qty /* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+               ,avg_nutr_stat_cd /* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
                ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -40,6 +42,12 @@
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		</if>
+		<if test="avgNutrEatQty != null">
+		    ,avg_nutr_eat_qty /* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+		</if>
+		<if test="avgNutrStatCd != null">
+		    ,avg_nutr_stat_cd /* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -57,6 +65,12 @@
 		</if>
 		<if test="nutrStatCd != null">
 		    ,#{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgNutrEatQty != null">
+		    ,#{avgNutrEatQty} /* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+		</if>
+		<if test="avgNutrStatCd != null">
+		    ,#{avgNutrStatCd} /* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
 		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */ 
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
@@ -76,6 +90,12 @@
 		</if>
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgNutrEatQty != null">
+		    ,avg_nutr_eat_qty = #{avgNutrEatQty} /* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+		</if>
+		<if test="avgNutrStatCd != null">
+		    ,avg_nutr_stat_cd = #{avgNutrStatCd} /* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */
@@ -102,6 +122,12 @@
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		</if>
+		<if test="avgNutrEatQty != null">
+		    ,avg_nutr_eat_qty /* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+		</if>
+		<if test="avgNutrStatCd != null">
+		    ,avg_nutr_stat_cd /* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
+		</if>
 		    ,reg_dt /* reg_dt 등록_일자 character(8) */
 		    ,reg_tm /* reg_tm 등록_시각 character(6) */
 		    ,reg_user_id /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -120,6 +146,12 @@
 		<if test="nutrStatCd != null">
 		    ,#{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
 		</if>
+		<if test="avgNutrEatQty != null">
+		    ,#{avgNutrEatQty} /* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+		</if>
+		<if test="avgNutrStatCd != null">
+		    ,#{avgNutrStatCd} /* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
+		</if>
 		    ,to_char(now(), 'YYYYMMDD') /* reg_dt 등록_일자 character(8) */
 		    ,to_char(now(), 'HH24MISS') /* reg_tm 등록_시각 character(6) */
 		    ,#{regUserId} /* reg_user_id 등록_사용자_ID character varying(20) */
@@ -135,6 +167,12 @@
 		</if>
 		<if test="nutrStatCd != null">
 		    ,nutr_stat_cd = #{nutrStatCd} /* nutr_stat_cd 영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgNutrEatQty != null">
+		    ,avg_nutr_eat_qty = #{avgNutrEatQty} /* avg_nutr_eat_qty 평균_영양소_섭취_량 character(18) */
+		</if>
+		<if test="avgNutrStatCd != null">
+		    ,avg_nutr_stat_cd = #{avgNutrStatCd} /* avg_nutr_stat_cd 평균_영양섭취_상태_코드 character(18) */
 		</if>
 		    ,upt_dt = to_char(now(), 'YYYYMMDD') /* upt_dt 수정_일자 character(8) */
 		    ,upt_tm = to_char(now(), 'HH24MISS') /* upt_tm 수정_시각 character(6) */

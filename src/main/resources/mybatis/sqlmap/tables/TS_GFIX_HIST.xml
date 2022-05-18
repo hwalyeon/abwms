@@ -20,6 +20,8 @@
                ,wast_size /* wast_size 허리_사이즈 numeric */
                ,cal_eat_qty /* cal_eat_qty 칼로리_섭취_량 numeric */
                ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
+               ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
+               ,avg_cal_csum_qty /* avg_cal_csum_qty 평균_칼로리_소모_량 numeric */
                ,mom_hght_val /* mom_hght_val 엄마_키_값 numeric */
                ,mom_wght_val /* mom_wght_val 엄마_몸무게_값 numeric */
                ,mom_bmi_val /* mom_bmi_val 엄마_BMI_값 numeric */
@@ -45,11 +47,14 @@
                ,fatp_idx /* fatp_idx 비만예측_지수 numeric */
                ,fatp_judg_cd /* fatp_judg_cd 비만예측_판정_코드 character varying(20) */
                ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
-               ,pal_val /* pal_val 신체활동수준_값 numeric */
                ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
                ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
+               ,pal_val /* pal_val 신체활동수준_값 numeric */
                ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
                ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+               ,avg_pal_val /* avg_pal_val 평균_신체활동수준_값 numeric */
+               ,avg_pal_cd /* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+               ,avg_cal_nutr_stat_cd /* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
                ,rmrk /* rmrk 비고 character varying(4000) */
                ,reg_dt /* reg_dt 등록_일자 character(8) */
                ,reg_tm /* reg_tm 등록_시각 character(6) */
@@ -78,14 +83,36 @@
 		    ,wght_val /* wght_val 몸무게_값 numeric */
 		    ,bmi_val /* bmi_val BMI_값 numeric */
 		    ,wast_size /* wast_size 허리_사이즈 numeric */
+		<if test="calEatQty != null">
 		    ,cal_eat_qty /* cal_eat_qty 칼로리_섭취_량 numeric */
+		</if>
+		<if test="calCsumQty != null">
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
+		</if>
+		<if test="avgCalEatQty != null">
+		    ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
+		</if>
+		<if test="avgCalCsumQty != null">
+		    ,avg_cal_csum_qty /* avg_cal_csum_qty 평균_칼로리_소모_량 numeric */
+		</if>
+		<if test="momHghtVal != null">
 		    ,mom_hght_val /* mom_hght_val 엄마_키_값 numeric */
+		</if>
+		<if test="momWghtVal != null">
 		    ,mom_wght_val /* mom_wght_val 엄마_몸무게_값 numeric */
+		</if>
+		<if test="momBmiVal != null">
 		    ,mom_bmi_val /* mom_bmi_val 엄마_BMI_값 numeric */
+		</if>
+		<if test="dadHghtVal != null">
 		    ,dad_hght_val /* dad_hght_val 아빠_키_값 numeric */
+		</if>
+		<if test="dadWghtVal != null">
 		    ,dad_wght_val /* dad_wght_val 아빠_몸무게_값 numeric */
+		</if>
+		<if test="dadBmiVal != null">
 		    ,dad_bmi_val /* dad_bmi_val 아빠_BMI_값 numeric */
+		</if>
 		<if test="growStndVer != null">
 		    ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -139,20 +166,29 @@
 		<if test="fatpJudgDesc != null">
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
-		<if test="palVal != null">
-		    ,pal_val /* pal_val 신체활동수준_값 numeric */
-		</if>
 		<if test="bcsmVal != null">
 		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
 		<if test="acsmVal != null">
 		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
+		<if test="palVal != null">
+		    ,pal_val /* pal_val 신체활동수준_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
 		<if test="calNutrStatCd != null">
 		    ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgPalVal != null">
+		    ,avg_pal_val /* avg_pal_val 평균_신체활동수준_값 numeric */
+		</if>
+		<if test="avgPalCd != null">
+		    ,avg_pal_cd /* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+		</if>
+		<if test="avgCalNutrStatCd != null">
+		    ,avg_cal_nutr_stat_cd /* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
 		</if>
 		<if test="rmrk != null">
 		    ,rmrk /* rmrk 비고 character varying(4000) */
@@ -177,14 +213,36 @@
 		    ,#{wghtVal} /* wght_val 몸무게_값 numeric */
 		    ,#{bmiVal} /* bmi_val BMI_값 numeric */
 		    ,#{wastSize} /* wast_size 허리_사이즈 numeric */
+		<if test="calEatQty != null">
 		    ,#{calEatQty} /* cal_eat_qty 칼로리_섭취_량 numeric */
+		</if>
+		<if test="calCsumQty != null">
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
+		</if>
+		<if test="avgCalEatQty != null">
+		    ,#{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
+		</if>
+		<if test="avgCalCsumQty != null">
+		    ,#{avgCalCsumQty} /* avg_cal_csum_qty 평균_칼로리_소모_량 numeric */
+		</if>
+		<if test="momHghtVal != null">
 		    ,#{momHghtVal} /* mom_hght_val 엄마_키_값 numeric */
+		</if>
+		<if test="momWghtVal != null">
 		    ,#{momWghtVal} /* mom_wght_val 엄마_몸무게_값 numeric */
+		</if>
+		<if test="momBmiVal != null">
 		    ,#{momBmiVal} /* mom_bmi_val 엄마_BMI_값 numeric */
+		</if>
+		<if test="dadHghtVal != null">
 		    ,#{dadHghtVal} /* dad_hght_val 아빠_키_값 numeric */
+		</if>
+		<if test="dadWghtVal != null">
 		    ,#{dadWghtVal} /* dad_wght_val 아빠_몸무게_값 numeric */
+		</if>
+		<if test="dadBmiVal != null">
 		    ,#{dadBmiVal} /* dad_bmi_val 아빠_BMI_값 numeric */
+		</if>
 		<if test="growStndVer != null">
 		    ,#{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -238,20 +296,29 @@
 		<if test="fatpJudgDesc != null">
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
-		<if test="palVal != null">
-		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
-		</if>
 		<if test="bcsmVal != null">
 		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
 		<if test="acsmVal != null">
 		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
+		<if test="palVal != null">
+		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
 		<if test="calNutrStatCd != null">
 		    ,#{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgPalVal != null">
+		    ,#{avgPalVal} /* avg_pal_val 평균_신체활동수준_값 numeric */
+		</if>
+		<if test="avgPalCd != null">
+		    ,#{avgPalCd} /* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+		</if>
+		<if test="avgCalNutrStatCd != null">
+		    ,#{avgCalNutrStatCd} /* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
 		</if>
 		<if test="rmrk != null">
 		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
@@ -296,6 +363,12 @@
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
 		</if>
+		<if test="avgCalEatQty != null">
+		    ,avg_cal_eat_qty = #{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
+		</if>
+		<if test="avgCalCsumQty != null">
+		    ,avg_cal_csum_qty = #{avgCalCsumQty} /* avg_cal_csum_qty 평균_칼로리_소모_량 numeric */
+		</if>
 		<if test="momHghtVal != null">
 		    ,mom_hght_val = #{momHghtVal} /* mom_hght_val 엄마_키_값 numeric */
 		</if>
@@ -371,20 +444,29 @@
 		<if test="fatpJudgDesc != null">
 		    ,fatp_judg_desc = #{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
-		<if test="palVal != null">
-		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
-		</if>
 		<if test="bcsmVal != null">
 		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
 		<if test="acsmVal != null">
 		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
+		<if test="palVal != null">
+		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
 		<if test="calNutrStatCd != null">
 		    ,cal_nutr_stat_cd = #{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgPalVal != null">
+		    ,avg_pal_val = #{avgPalVal} /* avg_pal_val 평균_신체활동수준_값 numeric */
+		</if>
+		<if test="avgPalCd != null">
+		    ,avg_pal_cd = #{avgPalCd} /* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+		</if>
+		<if test="avgCalNutrStatCd != null">
+		    ,avg_cal_nutr_stat_cd = #{avgCalNutrStatCd} /* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
 		</if>
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
@@ -415,14 +497,36 @@
 		    ,wght_val /* wght_val 몸무게_값 numeric */
 		    ,bmi_val /* bmi_val BMI_값 numeric */
 		    ,wast_size /* wast_size 허리_사이즈 numeric */
+		<if test="calEatQty != null">
 		    ,cal_eat_qty /* cal_eat_qty 칼로리_섭취_량 numeric */
+		</if>
+		<if test="calCsumQty != null">
 		    ,cal_csum_qty /* cal_csum_qty 칼로리_소모_량 numeric */
+		</if>
+		<if test="avgCalEatQty != null">
+		    ,avg_cal_eat_qty /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
+		</if>
+		<if test="avgCalCsumQty != null">
+		    ,avg_cal_csum_qty /* avg_cal_csum_qty 평균_칼로리_소모_량 numeric */
+		</if>
+		<if test="momHghtVal != null">
 		    ,mom_hght_val /* mom_hght_val 엄마_키_값 numeric */
+		</if>
+		<if test="momWghtVal != null">
 		    ,mom_wght_val /* mom_wght_val 엄마_몸무게_값 numeric */
+		</if>
+		<if test="momBmiVal != null">
 		    ,mom_bmi_val /* mom_bmi_val 엄마_BMI_값 numeric */
+		</if>
+		<if test="dadHghtVal != null">
 		    ,dad_hght_val /* dad_hght_val 아빠_키_값 numeric */
+		</if>
+		<if test="dadWghtVal != null">
 		    ,dad_wght_val /* dad_wght_val 아빠_몸무게_값 numeric */
+		</if>
+		<if test="dadBmiVal != null">
 		    ,dad_bmi_val /* dad_bmi_val 아빠_BMI_값 numeric */
+		</if>
 		<if test="growStndVer != null">
 		    ,grow_stnd_ver /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -476,20 +580,29 @@
 		<if test="fatpJudgDesc != null">
 		    ,fatp_judg_desc /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
-		<if test="palVal != null">
-		    ,pal_val /* pal_val 신체활동수준_값 numeric */
-		</if>
 		<if test="bcsmVal != null">
 		    ,bcsm_val /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
 		<if test="acsmVal != null">
 		    ,acsm_val /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
+		<if test="palVal != null">
+		    ,pal_val /* pal_val 신체활동수준_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,pal_cd /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
 		<if test="calNutrStatCd != null">
 		    ,cal_nutr_stat_cd /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgPalVal != null">
+		    ,avg_pal_val /* avg_pal_val 평균_신체활동수준_값 numeric */
+		</if>
+		<if test="avgPalCd != null">
+		    ,avg_pal_cd /* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+		</if>
+		<if test="avgCalNutrStatCd != null">
+		    ,avg_cal_nutr_stat_cd /* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
 		</if>
 		<if test="rmrk != null">
 		    ,rmrk /* rmrk 비고 character varying(4000) */
@@ -514,14 +627,36 @@
 		    ,#{wghtVal} /* wght_val 몸무게_값 numeric */
 		    ,#{bmiVal} /* bmi_val BMI_값 numeric */
 		    ,#{wastSize} /* wast_size 허리_사이즈 numeric */
+		<if test="calEatQty != null">
 		    ,#{calEatQty} /* cal_eat_qty 칼로리_섭취_량 numeric */
+		</if>
+		<if test="calCsumQty != null">
 		    ,#{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
+		</if>
+		<if test="avgCalEatQty != null">
+		    ,#{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
+		</if>
+		<if test="avgCalCsumQty != null">
+		    ,#{avgCalCsumQty} /* avg_cal_csum_qty 평균_칼로리_소모_량 numeric */
+		</if>
+		<if test="momHghtVal != null">
 		    ,#{momHghtVal} /* mom_hght_val 엄마_키_값 numeric */
+		</if>
+		<if test="momWghtVal != null">
 		    ,#{momWghtVal} /* mom_wght_val 엄마_몸무게_값 numeric */
+		</if>
+		<if test="momBmiVal != null">
 		    ,#{momBmiVal} /* mom_bmi_val 엄마_BMI_값 numeric */
+		</if>
+		<if test="dadHghtVal != null">
 		    ,#{dadHghtVal} /* dad_hght_val 아빠_키_값 numeric */
+		</if>
+		<if test="dadWghtVal != null">
 		    ,#{dadWghtVal} /* dad_wght_val 아빠_몸무게_값 numeric */
+		</if>
+		<if test="dadBmiVal != null">
 		    ,#{dadBmiVal} /* dad_bmi_val 아빠_BMI_값 numeric */
+		</if>
 		<if test="growStndVer != null">
 		    ,#{growStndVer} /* grow_stnd_ver 성장_기준_버전 character varying(20) */
 		</if>
@@ -575,20 +710,29 @@
 		<if test="fatpJudgDesc != null">
 		    ,#{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
-		<if test="palVal != null">
-		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
-		</if>
 		<if test="bcsmVal != null">
 		    ,#{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
 		<if test="acsmVal != null">
 		    ,#{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
+		<if test="palVal != null">
+		    ,#{palVal} /* pal_val 신체활동수준_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,#{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
 		<if test="calNutrStatCd != null">
 		    ,#{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgPalVal != null">
+		    ,#{avgPalVal} /* avg_pal_val 평균_신체활동수준_값 numeric */
+		</if>
+		<if test="avgPalCd != null">
+		    ,#{avgPalCd} /* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+		</if>
+		<if test="avgCalNutrStatCd != null">
+		    ,#{avgCalNutrStatCd} /* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
 		</if>
 		<if test="rmrk != null">
 		    ,#{rmrk} /* rmrk 비고 character varying(4000) */
@@ -629,6 +773,12 @@
 		</if>
 		<if test="calCsumQty != null">
 		    ,cal_csum_qty = #{calCsumQty} /* cal_csum_qty 칼로리_소모_량 numeric */
+		</if>
+		<if test="avgCalEatQty != null">
+		    ,avg_cal_eat_qty = #{avgCalEatQty} /* avg_cal_eat_qty 평균_칼로리_섭취_량 numeric */
+		</if>
+		<if test="avgCalCsumQty != null">
+		    ,avg_cal_csum_qty = #{avgCalCsumQty} /* avg_cal_csum_qty 평균_칼로리_소모_량 numeric */
 		</if>
 		<if test="momHghtVal != null">
 		    ,mom_hght_val = #{momHghtVal} /* mom_hght_val 엄마_키_값 numeric */
@@ -705,20 +855,29 @@
 		<if test="fatpJudgDesc != null">
 		    ,fatp_judg_desc = #{fatpJudgDesc} /* fatp_judg_desc 비만예측_판정_설명 character varying(4000) */
 		</if>
-		<if test="palVal != null">
-		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
-		</if>
 		<if test="bcsmVal != null">
 		    ,bcsm_val = #{bcsmVal} /* bcsm_val 기초에너지소모량_값 numeric */
 		</if>
 		<if test="acsmVal != null">
 		    ,acsm_val = #{acsmVal} /* acsm_val 활동에너지소모량_값 numeric */
 		</if>
+		<if test="palVal != null">
+		    ,pal_val = #{palVal} /* pal_val 신체활동수준_값 numeric */
+		</if>
 		<if test="palCd != null">
 		    ,pal_cd = #{palCd} /* pal_cd 신체활동수준_코드 character varying(20) */
 		</if>
 		<if test="calNutrStatCd != null">
 		    ,cal_nutr_stat_cd = #{calNutrStatCd} /* cal_nutr_stat_cd 칼로리_영양섭취_상태_코드 character varying(20) */
+		</if>
+		<if test="avgPalVal != null">
+		    ,avg_pal_val = #{avgPalVal} /* avg_pal_val 평균_신체활동수준_값 numeric */
+		</if>
+		<if test="avgPalCd != null">
+		    ,avg_pal_cd = #{avgPalCd} /* avg_pal_cd 평균_신체활동수준_코드 character varying(20) */
+		</if>
+		<if test="avgCalNutrStatCd != null">
+		    ,avg_cal_nutr_stat_cd = #{avgCalNutrStatCd} /* avg_cal_nutr_stat_cd 평균_칼로리_영양섭취_상태_코드 character varying(20) */
 		</if>
 		<if test="rmrk != null">
 		    ,rmrk = #{rmrk} /* rmrk 비고 character varying(4000) */
