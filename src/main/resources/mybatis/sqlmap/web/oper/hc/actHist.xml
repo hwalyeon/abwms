@@ -10,8 +10,8 @@
 			   , TLIB.loc_nm                            /* loc_nm       학교_명         varchar(100)  */
 			   , tas.act_nm                            -- 활동_명
 			   , tdah.act_mcnt                         /* act_mcnt     활동_시간_분수  numeric       */
-			   , tdah.rpet_act_cnt                     /* rpet_act_cnt 반복_활동_수    numeric       */
-			   , tgh.cal_csum_qty                      /* cal_csum_qty 칼로리_소모_량  numeric       */
+			   , (CASE WHEN TAS.ACT_NM LIKE '%걷기%' THEN CAST(tdah.rpet_act_cnt AS VARCHAR) ELSE '' END) RPET_ACT_CNT /* rpet_act_cnt 반복_활동_수    numeric       */
+			   , ROUND(tgh.cal_csum_qty,1)||'㎉' AS CAL_CSUM_QTY                      /* cal_csum_qty 칼로리_소모_량  numeric       */
 			   , tdah.judg_no                          /* judg_no      판정_번호       numeric       */
 			   , decr(tbi.tel_no) as tel_no            /* tel_no       전화_번호       character varying(20) */
 			   , tgb.guar_no                           /* guar_no      보호자_번호     numeric       */
@@ -61,5 +61,6 @@
 	    from   ti_act_stnd tas
 	    where  1=1
 		<if test=" actClssCd != null and actClssCd !='' ">and  tas.act_clss_cd = #{actClssCd}</if>
+		ORDER BY TAS.ACT_NM
 	</select>
 </mapper>

@@ -66,19 +66,19 @@ let actHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "stndDt"      , index: "stndDt"      , label: "기준 일자" 	               ,  width: 50 , align: "center" },
-                {name: "stdtNo"      , index: "stdtNo"      , label: "학생 번호" 	               ,  width: 50 , align: "center" },
-                {name: "stdtNm"      , index: "stdtNm"      , label: "학생 명" 	                   ,  width: 50 , align: "center" },
-                {name: "locNm"       , index: "locNm"       , label: "학교 명" 	                   ,  width: 50 , align: "center" },
-                {name: "actNm"       , index: "actNm"       , label: "활동명"	                   ,  width: 50 , align: "center" },
-                {name: "actMcnt"     , index: "actMcnt"     , label: "활동시간(분)"                 , width: 50 , align: "center" },
-                {name: "rpetActCnt"  , index: "rpetActCnt"  , label: "발생 건수<br/>(반복 활동 수)"  , width: 50 , align: "center" },
-                {name: "calCsumQty"  , index: "calCsumQty"  , label: "칼로리 소모량"                , width: 50 , align: "center" },
-                {name: "judgNo"      , index: "judgNo"      , label: "판정 번호"                    , width: 50 , align: "center" },
-                {name: "telNo"       , index: "telNo"       , label: "학생(밴드)<br/>전화번호"      , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
-                {name: "guarNo"      , index: "guarNo"      , label: "보호자 번호"                  , width: 50 , align: "center" },
-                {name: "guarNm"      , index: "guarNm"      , label: "보호자 명"                    , width: 50 , align: "center" },
-                {name: "guarTelNo" 	 , index: "guarTelNo" 	, label: "보호자<br/>전화번호"          , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
+                {name: "stndDt"      , index: "stndDt"      , label: "기준 일자" 	            , width:  50 , align: "center" ,formatter:function(cellValue, options, rowObject){ return formatDate(cellValue);}},
+                {name: "stdtNo"      , index: "stdtNo"      , label: "학생 번호" 	            , width:  50 , align: "center" },
+                {name: "stdtNm"      , index: "stdtNm"      , label: "학생 명" 	                , width:  50 , align: "center" },
+                {name: "locNm"       , index: "locNm"       , label: "학교 명" 	                , width:  80 , align: "left"   },
+                {name: "actNm"       , index: "actNm"       , label: "활동명"	                , width:  50 , align: "center" },
+                {name: "actMcnt"     , index: "actMcnt"     , label: "활동시간<br>(분)"         , width:  50 , align: "right"  ,formatter:function(cellValue, options, rowObject){ return cellValue+" 분 ";}},
+                {name: "rpetActCnt"  , index: "rpetActCnt"  , label: "반복횟수<br>(걸음수)"     , width:  50 , align: "right"  ,formatter:function(cellValue, options, rowObject){ if (cellValue == '') return ''; else return numberFormat(cellValue) + " 걸음 ";}},
+                {name: "calCsumQty"  , index: "calCsumQty"  , label: "칼로리 소모량"            , width:  50 , align: "center" },
+                {name: "judgNo"      , index: "judgNo"      , label: "판정 번호"                , width:  50 , align: "center" },
+                {name: "telNo"       , index: "telNo"       , label: "학생(밴드)<br/>전화번호"  , width:  50 , align: "center" ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
+                {name: "guarNo"      , index: "guarNo"      , label: "보호자 번호"              , width:  50 , align: "center" },
+                {name: "guarNm"      , index: "guarNm"      , label: "보호자 명"                , width:  50 , align: "center" },
+                {name: "guarTelNo" 	 , index: "guarTelNo" 	, label: "보호자<br/>전화번호"      , width:  50 , align: "center" ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
             ];
             $("#actHist_list").jqGrid("GridUnload");
            	$("#actHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -102,7 +102,7 @@ let actHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["stndDt","stdtNo","stdtNm","locNm","telNo"], "stdtNo");
+//                  $(grid).tableRowSpan(["stndDt","stdtNo","stdtNm","locNm","telNo"], "stdtNo");
                 }
             }));
             resizeJqGridWidth("actHist_list", "actHist_list_wrapper");
