@@ -74,21 +74,30 @@ let strsHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "strsJudgDttm"     , index: "strsJudgDttm"     , label: "발생 일시" 	            ,  width: 50 , align: "center" },
-                {name: "locNm"            , index: "locNm"            , label: "학교 명" 	            ,  width: 50 , align: "center" },
-                {name: "stdtNo"           , index: "stdtNo"           , label: "학생 번호" 	            ,  width: 50 , align: "center" },
-                {name: "stdtNm"           , index: "stdtNm"           , label: "학생 명" 	            ,  width: 50 , align: "center" },
-                {name: "sexCdNm"          , index: "sexCdNm"          , label: "성별"	                ,  width: 50 , align: "center" },
-                {name: "ageYy"            , index: "ageYy"            , label: "나이(년)"                , width: 50 , align: "center" },
-                {name: "ageMm"            , index: "ageMm"            , label: "나이(개월)"              , width: 50 , align: "center" },
-                {name: "strsStatCdNm"     , index: "strsStatCdNm"     , label: "스트레스 상태"           , width: 50 , align: "center" },
-                {name: "mindStrsStatCdNm" , index: "mindStrsStatCdNm" , label: "정신적 상태"             , width: 50 , align: "center" },
-                {name: "physStrsStatCdNm" , index: "physStrsStatCdNm" , label: "신체적 상태"             , width: 50 , align: "center" },
-                {name: "strsCopeStatCd"   , index: "strsCopeStatCd"   , label: "대처 능력"               , width: 50 , align: "center" },
-                {name: "telNo"            , index: "telNo"            , label: "학생(밴드)<br/>전화번호" , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
-                {name: "guarNo"           , index: "guarNo"           , label: "보호자 번호"             , width: 50 , align: "center" },
-                {name: "guarNm"           , index: "guarNm"           , label: "보호자 명"               , width: 50 , align: "center" },
-                {name: "guarTelNo" 	      , index: "guarTelNo" 	      , label: "보호자<br/>전화번호"     , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
+                {name: "strsJudgDttm"     , index: "strsJudgDttm"     , label: "발생 일시" 	                 , width: 120 , align: "center" ,fixed:true ,formatter:function(cellValue, options, rowObject){ return formatTimestamp(cellValue);}},
+                {name: "stdtNo"           , index: "stdtNo"           , label: "학생번호" 	                 , width:  60 , align: "center" ,fixed:true},
+                {name: "stdtNm"           , index: "stdtNm"           , label: "학생명" 	                 , width:  80 , align: "center" ,fixed:true},
+                {name: "sexCdNm"          , index: "sexCdNm"          , label: "성별"	                     , width:  60 , align: "center" ,fixed:true},
+                {name: "ageYy"            , index: "ageYy"            , label: "나이<br>(년)"                , width:  60 , align: "center" ,fixed:true},
+                {name: "ageMm"            , index: "ageMm"            , label: "나이<br>(개월)"              , width:  60 , align: "center" ,fixed:true},
+                {name: "strsIdx"          , index: "strsIdx"          , label: "스트레스지수"                , width:  80 , align: "center" ,fixed:true},
+                {name: "strsStatCdNm"     , index: "strsStatCdNm"     , label: "스트레스 상태"               , width:  80 , align: "center" ,fixed:true},
+                {name: "mindStrsPnt"      , index: "mindStrsPnt"      , label: "스트레스 점수<br>(정신적)"   , width:  80 , align: "center" ,fixed:true},
+                {name: "mindStrsStatCdNm" , index: "mindStrsStatCdNm" , label: "스트레스 상태<br>(정신적)"   , width:  80 , align: "center" ,fixed:true},
+                {name: "physStrsPnt"      , index: "physStrsPnt"      , label: "스트레스 점수<br>(신체적)"   , width:  80 , align: "center" ,fixed:true},
+                {name: "physStrsStatCdNm" , index: "physStrsStatCdNm" , label: "스트레스 상태<br>(신체적)"   , width:  80 , align: "center" ,fixed:true},
+                {name: "strsCopePnt"      , index: "strsCopePnt"      , label: "스트레스 점수<br>(대처점수)" , width:  80 , align: "center" ,fixed:true},
+                {name: "strsCopeStatCd"   , index: "strsCopeStatCd"   , label: "스트레스<br>대처능력"        , width:  80 , align: "center" ,fixed:true},
+                {name: "hbitMdan"         , index: "hbitMdan"         , label: "심박수<br>중간값"            , width:  80 , align: "center" ,fixed:true},
+                {name: "avgHbitCnt"       , index: "avgHbitCnt"       , label: "평균 심박수<br>(분당)"       , width:  70 , align: "center" ,fixed:true},
+                {name: "abnmHbitCnt"      , index: "abnmHbitCnt"      , label: "이상<br>심박수"              , width:  80 , align: "center" ,fixed:true},
+                {name: "judgNo"           , index: "judgNo"           , label: "판정번호"                    , width:  80 , align: "center" ,fixed:true},
+                {name: "strsProcStatNm"   , index: "strsProcStatNm"   , label: "판정상태"                    , width:  80 , align: "center" ,fixed:true},
+                {name: "locNm"            , index: "locNm"            , label: "학교명" 	                 , width: 120 , align: "left"   ,fixed:true},
+                {name: "guarNo"           , index: "guarNo"           , label: "보호자 번호"                 , width:  80 , align: "center" ,fixed:true},
+                {name: "guarNm"           , index: "guarNm"           , label: "보호자 명"                   , width:  80 , align: "center" ,fixed:true},
+                {name: "guarTelNo" 	      , index: "guarTelNo" 	      , label: "보호자<br/>전화번호"         , width:  80 , align: "center" ,fixed:true ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
+                {name: "telNo"            , index: "telNo"            , label: "학생(밴드)<br/>전화번호"     , width:  80 , align: "center" ,fixed:true ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
             ];
             $("#strsHist_list").jqGrid("GridUnload");
            	$("#strsHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -98,6 +107,7 @@ let strsHist = new Vue({
                 url      : '/oper/hc/strsHist/strsHistList.ab',
                 pager    : '#strsHist_pager_list',
 				height   : 316     ,
+				autowidth:false,
                 colModel : colModels,
                 onPaging : function(data)
                 {
@@ -112,10 +122,19 @@ let strsHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["strsJudgDttm","locNm","stdtNo","stdtNm","sexCdNm", "ageYy","ageMm","telNo"], "stdtNo");
+//                    $(grid).tableRowSpan(["strsJudgDttm","locNm","stdtNo","stdtNm","sexCdNm", "ageYy","ageMm","telNo"], "stdtNo");
                 }
             }));
             resizeJqGridWidth("strsHist_list", "strsHist_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	
+        	
+        	
+        	$this.searchStrsHistList(true);
         },
         //스트레스_지수_이력 리스트 조회
         searchStrsHistList: function(isSearch)
@@ -207,23 +226,30 @@ let strsHist = new Vue({
 
             let $this = this;
 
-            if( ((WebUtil.isNotNull($this.params.ageFr)) && (WebUtil.isNull($this.params.ageTo))) || ((WebUtil.isNotNull($this.params.ageTo)) && (WebUtil.isNull($this.params.ageFr))) )
+            if ((WebUtil.isNotNull($this.params.ageFr)) && (WebUtil.isNull($this.params.ageTo)))
             {
-                Swal.alert(['나머지 나이 범위를 입력하세요.', 'info']);
+                $this.params.ageTo = 18;
+                return false;
+            }
+            if ((WebUtil.isNotNull($this.params.ageTo)) && (WebUtil.isNull($this.params.ageFr)))
+            {
+                $this.params.ageFr = 4;
                 return false;
             }
             if ((WebUtil.isNotNull($this.params.ageFr) && WebUtil.isNotNull($this.params.ageTo)) &&parseInt($this.params.ageFr) > parseInt($this.params.ageTo)){
                 Swal.alert(['정확한 나이 범위를 입력하세요.', 'info']);
                 return false;
             }
-            if( ((WebUtil.isNotNull($this.params.strsJudgDttmFr)) && (WebUtil.isNull($this.params.strsJudgDttmTo))) || ((WebUtil.isNotNull($this.params.strsJudgDttmTo)) && (WebUtil.isNull($this.params.strsJudgDttmFr))) )
+            if  (WebUtil.isNull($this.params.strsJudgDttmFr))
             {
-                Swal.alert(['나머지 기준 일자를 선택하세요.', 'info']);
+                Swal.alert(['기준일자(FROM)는 반드시 입력해야 합니다.', 'info']);
+                document.getElementById("strsJudgDttmFr").focus();
                 return false;
             }
-            if( ((WebUtil.isNotNull($this.params.strsJudgDttmFr) && WebUtil.isNotNull($this.params.strsJudgDttmTo)) && $this.params.strsJudgDttmFr > $this.params.strsJudgDttmTo) )
+            if  (WebUtil.isNull($this.params.strsJudgDttmTo))
             {
-                Swal.alert(['정확한 기준 일자를 선택하세요.', 'info']);
+                Swal.alert(['기준일자(TO)는 반드시 입력해야 합니다.', 'info']);
+                document.getElementById("strsJudgDttmTo").focus();
                 return false;
             }
             return true;
