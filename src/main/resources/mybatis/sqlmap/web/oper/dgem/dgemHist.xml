@@ -44,7 +44,7 @@
         TM_STDT_BASE C
         on      A.STDT_NO = C.STDT_NO
         inner join
-        TI_EORG_BASE D
+        TS_LOC_INFO_BASE D
         on      C.EORG_LOC_NO = D.LOC_NO
         inner join
         TM_STDT_GUAR_CONN E

@@ -28,7 +28,7 @@
 			   on tsgc.STDT_NO = tsb.STDT_NO
 			   inner join  TM_GUAR_BASE tgb     --보호자_기본 tgb
 			   on tsgc.GUAR_NO = tgb.GUAR_NO
-			   left outer join TI_EORG_BASE teb --교육기관_기본 teb
+			   left outer join TS_LOC_INFO_BASE teb --위치정보기본 teb
 			   on tsb.EORG_LOC_NO = teb.LOC_NO
 		WHERE  1 = 1
 		<if test="strsJudgDttmFr != null and strsJudgDttmFr != null and strsJudgDttmTo !='' and strsJudgDttmTo !='' ">/*발생 일시*/
