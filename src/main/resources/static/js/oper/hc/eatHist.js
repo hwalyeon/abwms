@@ -11,10 +11,10 @@ let eatHist = new Vue({
             stdtNo         : '' , //학생_번호
             stdtNm         : '' , //학생_명
             fmenuNm        : '' , //식단표_명
-            mmelYn         : '' , //아침_여부
-            amelYn         : '' , //점심_여부
-            emelYn         : '' , //저녁_여부
-            smelYn         : '' , //간식_여부
+            mmelYn         : 'Y' , //아침_여부
+            amelYn         : 'Y' , //점심_여부
+            emelYn         : 'Y' , //저녁_여부
+            smelYn         : 'Y' , //간식_여부
             mmelStarvYn    : '' , //아침_결식_여부
             guarNo         : '' , //보호자_번호
             guarNm         : '' , //보호자_명
