@@ -71,7 +71,7 @@ let gfixHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "gfixDt"       , index: "gfixDt"       , label: "기준 일자" 	            ,  width: 100 , align: "center" ,fixed:true},
+                {name: "gfixDt"       , index: "gfixDt"       , label: "기준 일자" 	            ,  width: 100 , align: "center" ,formatter:function(cellValue, options, rowObject){ return formatDate(cellValue);},fixed:true},
                 {name: "locNm"        , index: "locNm"        , label: "학교 명" 	            ,  width: 100 , align: "center" ,fixed:true},
                 {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	            ,  width: 100 , align: "center" ,fixed:true},
                 {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	            ,  width: 100 , align: "center" ,fixed:true},
@@ -118,9 +118,9 @@ let gfixHist = new Vue({
                 gridComplete: function () {
                     let grid = this;
 
-                    $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","sexCdNm", "ageYcnt","ageMcnt", "hghtVal","wghtVal","telNo"], "stdtNo");
-                    $(grid).tableRowSpan(["gfixDt","calEatQty","calCsumQty","growIdx","gidx","growJudgCdNm", "fidx","fatJudgCdNm", "fatpIdx","fatpJudgCdNm","palVal"], "gfixIdx");
-                    $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
+//                    $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","sexCdNm", "ageYcnt","ageMcnt", "hghtVal","wghtVal","telNo"], "stdtNo");
+//                    $(grid).tableRowSpan(["gfixDt","calEatQty","calCsumQty","growIdx","gidx","growJudgCdNm", "fidx","fatJudgCdNm", "fatpIdx","fatpJudgCdNm","palVal"], "gfixIdx");
+//                    $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
                 }
             }));
             resizeJqGridWidth("gfixHist_list", "gfixHist_list_wrapper");

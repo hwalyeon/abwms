@@ -3,83 +3,88 @@
 <mapper namespace="oper.dgem.dgemHist">
     <!-- 위험감정 발생이력 조회 -->
     <select id="searchDgemHistList" parameterType="java.util.Map" resultType="MybatisMap">
-        select  A.STDT_NO		 /* 학생번호 */
-        ,ABSV.DECR(C.STDT_NM) AS STDT_NM
-        ,A.DGEM_HIST_SEQ  /* 위험감정 이력 순번 */
-        ,A.STDT_NO || '_' || A.DGEM_HIST_SEQ AS STDT_HIST_SEQ  /* 위험감정 이력 순번 */
-        ,A.STDT_NO || '_' || F.GUAR_NM       AS STDT_GUAR_NM  /* 위험감정 이력 순번 */
-        ,A.DGEM_DT        /* 위험감정 일자 */
-        ,A.DGEM_TM        /* 위험감정 시각 */
-        ,A.DGEM_IDX       /* 위험감정 지수 */
-        ,fn_getCdnm('DGEM_STAT_CD',A.DGEM_STAT_CD) as DGEM_STAT_CD/* 위험감정 상태 코드 */
-        ,A.DGEM_STAT_CNTN /* 위험감정 요약 내용 */
-        ,A.DGEM_SMRY_CNTN /* 위험감정 상태 내용 */
-        ,A.LOC_HIST_NO    /* 위치 이력 번호 */
-        /*,A.CURR_LAT_VAL   /* 현재 위도 값 */
-        ,A.CURR_LON_VAL   /* 현재 경도 값 */
-        ,A.LOC_MESU_DTTM  /* 위치 측정 일시 */*/
-        ,fn_getCdnm('ACT_DIV_CD',A.ACT_DIV_CD) as ACT_DIV_CD       /* 활동 구분 코드 */
-        ,fn_getCdnm('HBIT_STAT_CD',A.HBIT_STAT_CD)as HBIT_STAT_CD  /* 심박 상태 코드 */
-        ,fn_getCdnm('PLC_CLSS_CD',A.PLC_CLSS_CD) as PLC_CLSS_CD    /* 장소 분류 코드 */
-        ,fn_getCdnm('TEMP_STAT_CD',A.TEMP_STAT_CD) as TEMP_STAT_CD /* 체온 상태 코드 */
-        ,A.JUDG_NO        /* 판정 번호 */
-        ,A.RMRK			 /* 비고 */
-        ,A.DGEM_ALAM_NO   /* 위험감정 알림 번호 */
-        ,D.LOC_NM	     /* 학교명 */
-        ,F.GUAR_NO 		 /* 보호자번호 */
-        ,DECR(F.GUAR_NM) as GUAR_NM	 /* 보호자명 */
-        ,DECR(F.GUAR_TEL_NO) as GUAR_TEL_NO    /* 보호자전화번호 */
-        ,fn_getCdNm('EVNT_DIV_CD',B.evnt_div_cd) as evnt_div_nm /* 이벤트 구분 명 */
-        ,A.REG_DT
-        ,A.REG_TM
-        ,A.REG_USER_ID
-        ,A.UPT_DT
-        ,A.UPT_TM
-        ,A.UPT_USER_ID
-        from    TS_STDT_DGEM_HIST A
-        left    outer join
-        TD_JUDG_BASE B
-        on      A.JUDG_NO = B.JUDG_NO
-        inner join
-        TM_STDT_BASE C
-        on      A.STDT_NO = C.STDT_NO
-        inner join
-        TS_LOC_INFO_BASE D
-        on      C.EORG_LOC_NO = D.LOC_NO
-        inner join
-        TM_STDT_GUAR_CONN E
-        on      C.STDT_NO = E.STDT_NO
-        inner join
-        TM_GUAR_BASE F
-        on      E.GUAR_NO = F.GUAR_NO
-        where   1=1
-        and     B.evnt_div_cd in('ndt','edt')
-    <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-    and     DGEM_DT between #{entrDtFr} and #{entrDtTo}        /* 위험감정 일자 */</if>
-    <if test=" dgemTm != null and dgemTm !='' ">
-    and     DGEM_TM        like CONCAT ('%',#{dgemTm},'%')     /* 위험감정 시각 */</if>
-    <if test=" dgemStatCd != null and dgemStatCd !='' ">
-    and     DGEM_STAT_CD   like CONCAT ('%',#{dgemStatCd},'%') /* 위험감정 상태 */</if>
-    <if test=" plcClssCd != null and plcClssCd !='' ">
-    and     PLC_CLSS_CD    like CONCAT ('%',#{plcClssCd},'%')  /* 장소분류 코드 */</if>
-    <if test=" hbitStatCd != null and hbitStatCd !='' ">
-    and     A.HBIT_STAT_CD like CONCAT ('%',#{hbitStatCd},'%') /* 심박상태 코드 */</if>
-    <if test=" tempStatCd != null and tempStatCd !='' ">
-    and     TEMP_STAT_CD   like CONCAT ('%',#{tempStatCd},'%') /* 체온상태 코드 */</if>
-    <if test=" locNm != null and locNm !='' ">
-    and     D.LOC_NM       like CONCAT ('%',#{locNm},'%')      /* 학교명       */</if>
-    <if test=" stdtNo != null and stdtNo !='' ">
-    and     C.STDT_NO      = #{stdtNo}::numeric                /* 학생번호     */</if>
-    <if test=" stdtNm != null and stdtNm !='' ">
-    and     DECR(C.STDT_NM)      like CONCAT ('%',#{stdtNm},'%')     /* 학생명       */</if>
-    <if test=" guarNo != null and guarNo !='' ">
-    and     F.GUAR_NO      = #{guarNo}::numeric                /* 보호자번호    */</if>
-    <if test=" guarNm != null and guarNm !='' ">
-    and     DECR(F.GUAR_NM)      like CONCAT ('%',#{guarNm},'%')     /* 보호자명     */</if>
-    ORDER BY A.DGEM_DT DESC, A.DGEM_TM DESC, A.STDT_NO, A.DGEM_HIST_SEQ DESC
-    <if test=' paging == "Y" '>
-    LIMIT ${rowCount} OFFSET ${currentIndex}
-    </if>
+		--
+		SELECT  A.DGEM_DT                                                  AS DGEM_DT       ,
+		        A.DGEM_TM                                                  AS DGEM_TM       ,
+		        A.STDT_NO                                                  AS STDT_NO       ,
+		        ABSV.DECR(B.STDT_NM)                                       AS STDT_NM       ,
+		        ABSV.FN_GETCDNM('SEX_CD'      , B.SEX_CD      )            AS SEX_CD        ,
+		        ABSV.FN_GETAGE(B.BITH_DT)                                  AS AGE_YCNT      ,
+		        G.LOC_NM                                                   AS EORG_LOC_NM   ,
+		        A.DGEM_HIST_SEQ                                            AS DGEM_HIST_SEQ ,
+		        A.DGEM_IDX                                                 AS DGEM_IDX      ,
+		        ABSV.FN_GETCDNM('DGEM_STAT_CD', A.DGEM_STAT_CD)            AS DGEM_STAT_CD  ,
+		        A.DGEM_SMRY_CNTN                                           AS DGEM_SMRY_CNTN,
+		        A.DGEM_STAT_CNTN                                           AS DGEM_STAT_CNTN,
+		        A.LOC_HIST_NO                                              AS LOC_HIST_NO   ,
+		        ABSV.FN_GETCDNM('ACT_DIV_CD'  , A.ACT_DIV_CD  )            AS ACT_DIV_CD    ,
+		        ABSV.FN_GETCDNM('HBIT_STAT_CD', A.HBIT_STAT_CD)||' 편'     AS HBIT_STAT_CD  ,
+		        F.HBIT_MDAN                                                AS HBIT_MDAN     ,
+		        ABSV.FN_GETCDNM('PLC_CLSS_CD' , E.PLC_CLSS_CD )            AS PLC_CLSS_CD   ,
+		        E.LOC_NM                                                   AS LOC_NM        ,
+		        ABSV.FN_GETCDNM('TEMP_STAT_CD', A.TEMP_STAT_CD)||(CASE WHEN A.TEMP_STAT_CD LIKE 'V%' THEN '(추정)' ELSE ' 편' END)     AS TEMP_STAT_CD  ,
+		        F.TEMP_VAL                                                 AS TEMP_VAL      ,
+		        A.JUDG_NO                                                  AS JUDG_NO       ,
+		        A.RMRK                                                     AS RMRK          ,
+		        A.DGEM_ALAM_NO                                             AS DGEM_ALAM_NO  ,
+		        D.GUAR_NO                                                  AS GUAR_NO       ,
+		        ABSV.DECR(D.GUAR_NM)                                       AS GUAR_NM       ,
+		        ABSV.DECR(D.GUAR_TEL_NO)                                   AS GUAR_TEL_NO
+		
+		
+		FROM    ABSV.TS_STDT_DGEM_HIST   A
+		
+		        LEFT OUTER JOIN
+		        ABSV.TM_STDT_BASE        B
+		        ON  B.STDT_NO  = A.STDT_NO
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TM_STDT_GUAR_CONN   C
+		        ON  C.STDT_NO  = B.STDT_NO
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TM_GUAR_BASE        D
+		        ON  D.GUAR_NO  = C.GUAR_NO
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TS_STDT_LOC_HIST    E
+		        ON  E.LOC_HIST_NO = A.LOC_HIST_NO
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TD_JUDG_BASE        F
+		        ON  F.JUDG_NO     = A.JUDG_NO
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TS_LOC_INFO_BASE    G
+		        ON  G.LOC_NO      = B.EORG_LOC_NO
+		
+		WHERE   1=1
+		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
+		 AND    A.DGEM_DT  BETWEEN REPLACE(#{entrDtFr},'-','') AND REPLACE(#{entrDtTo},'-','')</if>
+		<if test=" dgemStatCd != null and dgemStatCd !='' ">
+		 AND    A.DGEM_STAT_CD = #{dgemStatCd}</if>
+		<if test=" guarNo != null and guarNo !='' ">
+		 AND    C.GUAR_NO      = #{guarNo}::numeric</if>
+		<if test=" guarNm != null and guarNm !='' ">
+		 AND    D.GUAR_NM      = ABSV.ENCR(#{guarNm})</if>
+		<if test=" hbitStatCd != null and hbitStatCd !='' ">
+		 AND    A.HBIT_STAT_CD = #{hbitStatCd}</if>
+		<if test=" tempStatCd != null and tempStatCd !='' ">
+		 AND    A.TEMP_STAT_CD = #{tempStatCd}</if>
+		<if test=" plcClssCd != null and plcClssCd !='' ">
+		 AND    A.PLC_CLSS_CD  = #{plcClssCd}</if>
+		<if test=" stdtNo != null and stdtNo !='' ">
+		 AND    A.STDT_NO      = #{stdtNo}::numeric</if>
+		<if test=" stdtNm != null and stdtNm !='' ">
+		 AND    B.STDT_NM      = ABSV.ENCR(#{stdtNm})</if>
+		<if test=" locNm != null and locNm !='' ">
+		 AND    G.LOC_NM  LIKE '%'||#{locNm}||'%'</if>
+		 
+		ORDER BY A.DGEM_DT DESC, A.DGEM_TM DESC, A.STDT_NO, A.DGEM_HIST_SEQ DESC
+		
+		<if test=' paging == "Y" '>
+		LIMIT ${rowCount} OFFSET ${currentIndex}
+		</if>
     </select>
 
 
