@@ -42,70 +42,58 @@
 
 	<!-- 위치정보_관리_리스트_조회-->
 	<select id="searchLocInfoList" parameterType="java.util.Map" resultType="MybatisMap">
-		--
-		WITH TEMP_OBJ AS 
-		(
-		  SELECT A.LOC_NO       
-		        ,B.LOC_NM       
-		        ,A.LOC_APNT_CD
-		        ,A.PLC_CLSS_CD
-		        ,SUM(A.OCCR_CNT)  AS OCCR_CNT    /*탐지건수*/
-		        ,SUM(A.STDT_CNT)  AS STDT_CNT    /*탐지학생수*/
-		
-		  FROM   TT_ZONE_DTCT_STSS A
-		
-		         INNER  JOIN
-		         TS_LOC_INFO_BASE B
-		         ON     A.LOC_NO = B.LOC_NO
-		
-		         LEFT OUTER  JOIN
-		         TM_GUAR_APNT_PLC C
-		         ON     B.LOC_NO = C.LOC_NO
-		
-		         LEFT   OUTER JOIN
-		         TM_STDT_BASE D
-		         ON     C.STDT_NO = D.STDT_NO
-		
-		         LEFT   OUTER JOIN
-		         TM_STDT_GUAR_CONN E
-		         ON     E.STDT_NO = D.STDT_NO
-		
-		         LEFT   OUTER JOIN
-		         TM_GUAR_BASE F
-		         ON     E.GUAR_NO = F.GUAR_NO
-		
-		  WHERE  1=1
-		<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-		   AND    A.STND_DT BETWEEN #{entrDtFr} AND #{entrDtTo}</if>
-		<if test=" plcClssCd != null and plcClssCd !='' ">
-		   AND    A.PLC_CLSS_CD = #{plcClssCd}</if>
-		<if test=" locApntCd != null and locApntCd !='' ">
-		   AND    A.LOC_APNT_CD = #{locApntCd}</if>
-		<if test=" stdtNo != null and stdtNo !='' ">
-		   AND       D.STDT_NO = cast(#{stdtNo} as numeric)</if>
-		<if test=" stdtNm != null and stdtNm !='' ">
-		   AND       DECR(D.STDT_NM) = #{stdtNm}</if>
-		<if test=" guarNm != null and guarNm !='' ">
-		   AND    F.GUAR_NM = ABSV.ENCR(#{guarNm})</if>
-		<if test=" guarNo != null and guarNo !='' ">
-		   AND    F.GUAR_NO = cast(#{guarNo} as numeric)</if>
-		<if test=" locNm != null and locNm !='' ">
-		   AND    B.LOC_NM LIKE '%'||#{locNm}||'%'</if>
-		
-		  GROUP BY A.LOC_NO, B.LOC_NM, A.LOC_APNT_CD, A.PLC_CLSS_CD 
-		)
-		SELECT  A.LOC_NO        AS LOC_NO,
-		        A.LOC_NM        AS LOC_NM,
-		        ABSV.FN_GETCDNM('LOC_APNT_CD',A.LOC_APNT_CD) AS LOC_APNT_NM,
-		        ABSV.FN_GETCDNM('PLC_CLSS_CD',A.PLC_CLSS_CD) AS PLC_CLSS_NM,
-		        A.OCCR_CNT    AS OCCR_CNT,
-		        A.STDT_CNT    AS STDT_CNT
-		
-		FROM    TEMP_OBJ   A
-		
-		WHERE   1=1
-		
-		ORDER BY A.OCCR_CNT DESC, A.STDT_CNT DESC, A.LOC_NO
+	-- 
+	SELECT  A.LOC_HIST_NO                                  AS LOC_HIST_NO,  -- HIDDEN으로 처리할 것
+	        A.OCCR_DTTM                                    AS OCCR_DTTM,
+	        COALESCE(CAST(A.NEAR_LOC_NO AS VARCHAR),'(없음)') AS LOC_NO,
+	        A.LOC_NM                                       AS LOC_NM,
+	        ABSV.FN_GETCDNM('PLC_CLSS_CD',A.PLC_CLSS_CD)   AS PLC_CLSS_NM,
+	        ABSV.FN_GETCDNM('PLC_CD'     ,A.PLC_CD     )   AS PLC_NM,
+	        COALESCE(ABSV.FN_GETCDNM('LOC_APNT_CD',B.LOC_APNT_CD),'일반도로')   AS LOC_APNT_NM,
+	        C.STDT_NO                                      AS STDT_NO, 
+	        DECR(C.STDT_NM)                                AS STDT_NM, 
+	        E.GUAR_NO                                      AS GUAR_NO, 
+	        DECR(E.GUAR_NM)                                AS GUAR_NM, 
+	        A.LAT_VAL                                      AS LAT_VAL,
+	        A.LON_VAL                                      AS LON_VAL
+	
+	FROM    ABSV.TS_STDT_LOC_HIST  A
+	
+	        LEFT OUTER JOIN
+	        ABSV.TS_LOC_INFO_BASE  B
+	        ON  B.LOC_NO = A.NEAR_LOC_NO
+	
+	        LEFT OUTER JOIN
+	        ABSV.TM_STDT_BASE      C
+	        ON  C.STDT_NO = A.STDT_NO
+	
+	        LEFT OUTER JOIN
+	        ABSV.TM_STDT_GUAR_CONN D
+	        ON  D.STDT_NO = C.STDT_NO
+	        
+	        LEFT OUTER JOIN
+	        ABSV.TM_GUAR_BASE      E
+	        ON  E.GUAR_NO = D.GUAR_NO
+	
+	WHERE   1=1
+	<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
+	 AND    A.OCCR_DTTM BETWEEN REPLACE(#{entrDtFr},'-','')||'000000' AND REPLACE(#{entrDtTo},'-','')||'235959'</if>
+	<if test=" plcClssCd != null and plcClssCd !='' ">
+	 AND    A.PLC_CLSS_CD = #{plcClssCd}</if>
+	<if test=" locNm != null and locNm !='' ">
+	 AND    A.LOC_NM LIKE '%'||#{locNm}||'%'</if>
+	<if test=" locApntCd != null and locApntCd !='' ">
+	 AND    B.LOC_APNT_CD =  #{locApntCd}</if>
+	<if test=" stdtNo != null and stdtNo !='' ">
+	 AND    C.STDT_NO = cast(#{stdtNo} as numeric)</if>
+	<if test=" stdtNm != null and stdtNm !='' ">
+	 AND    C.STDT_NM = ABSV.ENCR(#{guarNm})</if>
+	<if test=" guarNo != null and guarNo !='' ">
+	 AND    E.GUAR_NO = cast(#{guarNo} as numeric)</if>
+	<if test=" guarNm != null and guarNm !='' ">
+	 AND    E.GUAR_NM = ABSV.ENCR(#{guarNm})</if>
+	 
+	ORDER BY A.OCCR_DTTM DESC
 	</select>
 
 	<!-- 위치정보_관리_리스트_상세정보_조회-->

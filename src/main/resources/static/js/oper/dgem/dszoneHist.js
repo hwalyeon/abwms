@@ -442,13 +442,23 @@ let dszoneHist = new Vue({
             let $this = this;
 
             let locListColModels = [
-//              {name: "stndDt"         , index: "stndDt"       , label: "기준일자"    , width: 70         , align: "center" ,fixed:true},
-                {name: "locNo"          , index: "locNo"        , label: "위치번호"    , width: 65         , align: "center" ,fixed:true},
-                {name: "locNm"          , index: "locNm"        , label: "위치명"      , width: 120        , align: "left"   ,fixed:true},
-                {name: "locApntNm"      , index: "locApntNm"    , label: "위치지정명"   , width:100        , align: "center" ,fixed:true},
-                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류명"  , width: 80         , align: "center" ,fixed:true},
-                {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"    , width: 69         , align: "right"  ,fixed:true , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
-                {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수"  , width: 69     , align: "right"  ,fixed:true , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
+//              {name: "stndDt"         , index: "stndDt"       , label: "기준일자"       , width: 70     , align: "center" ,fixed:true},
+                {name:"locHistNo"   , index:"locHistNo"   , label:"위치이력번호"   , width:  65   , align:" center" , hidden:true},
+                {name:"occrDttm"    , index:"occrDttm"    , label:"발생일시"       , width: 120   , align:" center" , formatter: function(cellValue, options, rowObject) { return formatTimestamp(cellValue); }},
+                {name:"locNo"       , index:"locNo"       , label:"위치번호"       , width:  65   , align:" center" },
+                {name:"locNm"       , index:"locNm"       , label:"위치명"         , width: 130   , align:" left"   },
+                {name:"plcClssNm"   , index:"plcClssNm"   , label:"장소분류"       , width:  65   , align:" center" },
+                {name:"plcNm"       , index:"plcNm"       , label:"장소명"         , width:  65   , align:" center" },
+                {name:"locApntNm"   , index:"locApntNm"   , label:"지정구분"       , width:  85   , align:" center" },
+                {name:"stdtNo"      , index:"stdtNo"      , label:"학생번호"       , width:  65   , align:" center" },
+                {name:"stdtNm"      , index:"stdtNm"      , label:"학생명"         , width:  65   , align:" center" },
+                {name:"guarNo"      , index:"guarNo"      , label:"보호자번호"     , width:  65   , align:" center" },
+                {name:"guarNm"      , index:"guarNm"      , label:"보호자명"       , width:  65   , align:" center" },
+                {name:"latVal"      , index:"latVal"      , label:"위도"           , width:  65   , align:" center" },
+                {name:"lonVal"      , index:"lonVal"      , label:"경도"           , width:  65   , align:" center" },
+
+//              {name: "occrCnt"        , index: "occrCnt"      , label: "탐지건수"       , width: 69     , align: "right"  ,fixed:true , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
+//              {name: "stdtCnt"        , index: "stdtCnt"      , label: "탐지<br>학생수" , width: 69     , align: "right"  ,fixed:true , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue); }},
             ];
 
             $("#locInfo_list").jqGrid("GridUnload");

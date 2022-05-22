@@ -45,7 +45,7 @@
         ON  G.GUAR_NO = F.GUAR_NO
         WHERE    1=1
     <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-    and     A.OCCR_DTTM between replace(#{entrDtFr},'-','') and replace(#{entrDtTo},'-','')        /* 위험감정 일자 */</if>
+    and     A.OCCR_DTTM between replace(#{entrDtFr},'-','')||'000000' and replace(#{entrDtTo},'-','')||'235959'        /* 위험감정 일자 */</if>
     <if test=" plcClssCd != null and plcClssCd !='' ">
     and     A.PLC_CLSS_CD    like CONCAT ('%',#{plcClssCd},'%')  /* 장소분류 코드 */</if>
     <if test=" locNm != null and locNm !='' ">
