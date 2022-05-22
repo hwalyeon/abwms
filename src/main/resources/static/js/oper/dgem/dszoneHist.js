@@ -487,7 +487,35 @@ let dszoneHist = new Vue({
                         $this.locInfo.stdtNo     = item.stdtNo;
                         $this.mapCont.draggable  = 'true';
                         $this.setMarking();
-                        $this.searchLocInfoSpec(true);
+                        
+                        if (item.locNo == null || item.locNo == "" || item.locNo == "(없음)")
+                        {
+                            $this.locInfoSpec.crud = 'U',
+                            $this.locInfoSpec.rdPublGuarDivSpec  = item.rdPublGuarDiv,
+                            $this.locInfoSpec.prntNo             = item.prntNo,
+                            $this.locInfoSpec.stdtNo             = item.stdtNo,
+                            $this.locInfoSpec.locNo              = item.locNo,
+                            $this.locInfoSpec.locNm              = item.locNm,
+                            $this.locInfoSpec.plcClssCd          = item.plcClssCd,
+                            $this.locInfoSpec.plcCd              = item.plcCd,
+                            $this.locInfoSpec.latVal             = item.latVal,
+                            $this.locInfoSpec.lonVal             = item.lonVal,
+                            $this.locInfoSpec.valdRngeDist       = 15,
+                            $this.locInfoSpec.swstLatVal         = item.swstLatVal,
+                            $this.locInfoSpec.swstLonVal         = item.swstLonVal,
+                            $this.locInfoSpec.nestLatVal         = item.nestLatVal,
+                            $this.locInfoSpec.nestLonVal         = item.nestLonVal,
+                            $this.locInfoSpec.pstno              = item.pstno,
+                            $this.locInfoSpec.addrBase           = item.locNm,
+                            $this.locInfoSpec.addrSpec           = item.addrSpec,
+                            $this.locInfoSpec.delYn              = item.delYn
+                            $this.mapCont.searchSpecFg = 'Y';
+                            $this.createMap();
+                        }
+                        else
+                        {
+                        	$this.searchLocInfoSpec(true);
+                        }
                     }
                 },
                 gridComplete: function () {
@@ -597,24 +625,24 @@ let dszoneHist = new Vue({
                     if ( !!response["rtnData"].result && response["rtnData"].result.length > 0 ) {
                         $.each(response["rtnData"].result, function(index, item) {
                             $this.locInfoSpec.crud = 'U',
-                                $this.locInfoSpec.rdPublGuarDivSpec = item.rdPublGuarDiv,
-                                $this.locInfoSpec.prntNo = item.prntNo,
-                                $this.locInfoSpec.stdtNo = item.stdtNo,
-                                $this.locInfoSpec.locNo = item.locNo,
-                                $this.locInfoSpec.locNm = item.locNm,
-                                $this.locInfoSpec.plcClssCd = item.plcClssCd,
-                                $this.locInfoSpec.plcCd = item.plcCd,
-                                $this.locInfoSpec.latVal = item.latVal,
-                                $this.locInfoSpec.lonVal = item.lonVal,
-                                $this.locInfoSpec.valdRngeDist = item.valdRngeDist,
-                                $this.locInfoSpec.swstLatVal = item.swstLatVal,
-                                $this.locInfoSpec.swstLonVal = item.swstLonVal,
-                                $this.locInfoSpec.nestLatVal = item.nestLatVal,
-                                $this.locInfoSpec.nestLonVal = item.nestLonVal,
-                                $this.locInfoSpec.pstno = item.pstno,
-                                $this.locInfoSpec.addrBase = item.addrBase,
-                                $this.locInfoSpec.addrSpec = item.addrSpec,
-                                $this.locInfoSpec.delYn = item.delYn
+                            $this.locInfoSpec.rdPublGuarDivSpec  = item.rdPublGuarDiv,
+                            $this.locInfoSpec.prntNo             = item.prntNo,
+                            $this.locInfoSpec.stdtNo             = item.stdtNo,
+                            $this.locInfoSpec.locNo              = item.locNo,
+                            $this.locInfoSpec.locNm              = item.locNm,
+                            $this.locInfoSpec.plcClssCd          = item.plcClssCd,
+                            $this.locInfoSpec.plcCd              = item.plcCd,
+                            $this.locInfoSpec.latVal             = item.latVal,
+                            $this.locInfoSpec.lonVal             = item.lonVal,
+                            $this.locInfoSpec.valdRngeDist       = item.valdRngeDist,
+                            $this.locInfoSpec.swstLatVal         = item.swstLatVal,
+                            $this.locInfoSpec.swstLonVal         = item.swstLonVal,
+                            $this.locInfoSpec.nestLatVal         = item.nestLatVal,
+                            $this.locInfoSpec.nestLonVal         = item.nestLonVal,
+                            $this.locInfoSpec.pstno              = item.pstno,
+                            $this.locInfoSpec.addrBase           = item.addrBase,
+                            $this.locInfoSpec.addrSpec           = item.addrSpec,
+                            $this.locInfoSpec.delYn              = item.delYn
                         });
 
                         $this.changePrntNoSpec();
