@@ -119,6 +119,12 @@ let hbitStatStndMng = new Vue({
             }));
             resizeJqGridWidth("hbit_list", "hbit_list_wrapper");                        
         },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchHbitStatStndList(true);
+        },
         searchHbitStatStndList: function(isSearch) {
 			let $this = this;
             let params = $.extend(true, {}, $this.params);

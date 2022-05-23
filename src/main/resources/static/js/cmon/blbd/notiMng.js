@@ -40,7 +40,7 @@ let notiMng = new Vue({
 
         	$this.searchNotiList(true);
 
-        	
+        	document.getElementById("blbdNo").focus();
         },
         initCodeList: function() {
             let $this = this;
@@ -101,11 +101,17 @@ let notiMng = new Vue({
 
             resizeJqGridWidth("noti_list", "noti_list_wrapper");                        
         },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchNotiList(true);
+        },
         searchNotiList: function(isSearch) {
 			
 			let $this = this;
             let params = $.extend(true, {}, $this.params);
-			
+            
             if ( isSearch ) {
                 params.currentPage = 1;
                 params.currentIndex = 0;

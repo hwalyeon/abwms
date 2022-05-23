@@ -25,7 +25,7 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label">역할명</label>
 						<div class="col-xs-2">
-							<input type="text"  id="roleNm"  name="roleNm" class="form-control"  :value="params.roleNm" v-model="params.roleNm"  v-on:input="roleMng_typing" >
+							<input type="text"  id="roleNm"  name="roleNm" class="form-control"  :value="params.roleNm" v-model="params.roleNm"  v-on:input="roleMng_typing"  v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">역할구분</label>
 						<div class="col-xs-2">

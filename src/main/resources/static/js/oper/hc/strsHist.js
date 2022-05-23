@@ -131,9 +131,6 @@ let strsHist = new Vue({
         checkSearch: function()
         {
         	let $this = this;
-        	
-        	
-        	
         	$this.searchStrsHistList(true);
         },
         //스트레스_지수_이력 리스트 조회

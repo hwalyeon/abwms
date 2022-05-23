@@ -34,6 +34,8 @@ let tempStatStndMng = new Vue({
 
         	$this.initValue();
         	$this.initCodeList();
+        	
+        	document.getElementById("ageYcnt").focus();
 
         },
         initValue: function()
@@ -56,27 +58,19 @@ let tempStatStndMng = new Vue({
             let tempStatCdList  = commonGridCmonCd($this.code.tempStatCdList);
         	let colModels =
             [
-                {name:"crud"               , index: "crud"             , label:"crud"               , hidden:true},
-                {name:"ageYcntTemp"        , index: "ageYcntTemp"      , label: "나이년수"            , width: 50        , align: "center", hidden:true},
-                {name:"tempValFrTemp"       , index: "tempValFrTemp"   , label: "FORM"               , width: 50        , align: "center", hidden:true},
-                {name: "ageYcnt"           , index: "ageYcnt"          , label: "나이년수"            , width: 80        , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "tempValFr"         , index: "tempValFr"        , label: "체온값 FORM"         , width: 80        , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "tempValTo"         , index: "tempValTo"        , label: "체온값 TO"           , width: 80        , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "tempStatCd"        , index: "tempStatCd"       , label: "심박상태 코드"        , width: 80        , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select", editoptions : {value:tempStatCdList}},
-                {name: "regDt"             , index: "regDt"            , label: "등록일자"            , width: 80         , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "regTm"             , index: "regTm"            , label: "등록시각"            , width: 80         , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "regUserId"         , index: "regUserId"        , label: "등록사용자ID"         , width: 80        , align: "center"},
-                {name: "uptDt"             , index: "uptDt"            , label: "수정일자"            , width: 80        , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "uptTm"             , index: "uptTm"            , label: "수정시각"            , width: 80        , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "uptUserId"         , index: "uptUserId"        , label: "수정사용자ID"        , width: 80        , align: "center"}
+                {name:"crud"            , index: "crud"           , label:"crud"                                             , hidden:true},
+                {name:"ageYcntTemp"     , index: "ageYcntTemp"    , label: "나이년수"         , width: 50  , align: "center" , hidden:true},
+                {name:"tempValFrTemp"   , index: "tempValFrTemp"  , label: "FORM"             , width: 50  , align: "center" , hidden:true},
+                {name: "ageYcnt"        , index: "ageYcnt"        , label: "나이년수"         , width: 80  , align: "center" , editable: true , editrules:{number:true}},
+                {name: "tempValFr"      , index: "tempValFr"      , label: "체온값 FORM"      , width: 80  , align: "center" , editable: true , editrules:{number:true}},
+                {name: "tempValTo"      , index: "tempValTo"      , label: "체온값 TO"        , width: 80  , align: "center" , editable: true , editrules:{number:true}},
+                {name: "tempStatCd"     , index: "tempStatCd"     , label: "심박상태 코드"    , width: 80  , align: "center" , editable: true  ,edittype:"select"    , formatter:"select", editoptions : {value:tempStatCdList}},
+                {name: "regDt"          , index: "regDt"          , label: "등록일자"         , width: 80  , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue); }},
+                {name: "regTm"          , index: "regTm"          , label: "등록시각"         , width: 80  , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue); }},
+                {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"     , width: 80  , align: "center" },
+                {name: "uptDt"          , index: "uptDt"          , label: "수정일자"         , width: 80  , align: "center" , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue); }},
+                {name: "uptTm"          , index: "uptTm"          , label: "수정시각"         , width: 80  , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue); }},
+                {name: "uptUserId"      , index: "uptUserId"      , label: "수정사용자ID"     , width: 80  , align: "center" }
             ];
   
             $("#temp_list").jqGrid("GridUnload");
@@ -104,6 +98,12 @@ let tempStatStndMng = new Vue({
                 }
             }));
             resizeJqGridWidth("temp_list", "temp_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchTempStatStndList(true);
         },
         searchTempStatStndList: function(isSearch) {
 			let $this = this;

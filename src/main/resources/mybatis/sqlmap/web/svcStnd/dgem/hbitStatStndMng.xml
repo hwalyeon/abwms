@@ -22,14 +22,14 @@
         ,upt_user_id
         from    ti_hbit_stat_stnd
         where   1=1
-        <if test="sexCd != null">
-        and     sex_cd       like concat ('%',#{sexCd} ,'%')
+        <if test=" sexCd != null and sexCd !=''">
+        and     sex_cd    = #{sexCd}
         </if>
         <if test="ageYcnt != null and ageYcnt != ''">
         and     age_ycnt = #{ageYcnt} ::numeric
         </if>
-        <if test="hbitStatCd != null">
-        and     hbit_stat_cd like concat ('%',#{hbitStatCd},'%')
+        <if test=" hbitStatCd != null and hbitStatCd !=''">
+        and     hbit_stat_cd = #{hbitStatCd}
         </if>
         order by age_ycnt
         <if test=' paging == "Y" '>

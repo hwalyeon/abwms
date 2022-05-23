@@ -21,6 +21,8 @@
 			  ,upt_user_id
 		from   TS_BLBD_BASE
 		where  1=1
+		<if test=" blbdTitl != null and blbdTitl != '' ">
+		and    blbd_titl like '%'||#{blbdTitl}||'%'    </if>
 		<if test=" blbdNo != null and blbdNo != '' ">
 		and    blbd_no = #{blbdNo}::numeric     </if>
 		order  by blbd_no

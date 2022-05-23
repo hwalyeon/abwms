@@ -33,9 +33,9 @@ WHERE 1=1
 	FROM   TC_CD_GRP
 	WHERE 1 = 1
 	<if test=" cdGrp != null and cdGrp != '' ">
-	AND   CD_GRP LIKE CONCAT('%',#{cdGrp},'%')		</if>
+	AND   UPPER(CD_GRP) LIKE CONCAT('%',UPPER(#{cdGrp}),'%')		</if>
 	<if test=" cdGrpNm != null and cdGrpNm != '' ">
-	AND   CD_GRP_NM LIKE CONCAT('%', #{cdGrpNm}, '%')	</if>
+	AND   UPPER(CD_GRP_NM) LIKE CONCAT('%', UPPER(#{cdGrpNm}), '%')	</if>
 	ORDER BY CD_GRP
 	<if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex} </if>

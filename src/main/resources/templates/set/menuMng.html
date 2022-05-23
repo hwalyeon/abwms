@@ -32,7 +32,7 @@
 						</div>
 						<label class="col-xs-1 control-label">메뉴명</label>
 						<div class="col-xs-2">
-							<input type="text" name="menuNm" class="form-control" v-model="params.menuNm">
+							<input type="text" name="menuNm" class="form-control" v-model="params.menuNm" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					

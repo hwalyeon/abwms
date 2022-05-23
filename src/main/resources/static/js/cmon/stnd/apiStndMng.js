@@ -24,6 +24,8 @@ let apiStndMng = new Vue({
         	$this.initGrid();
         	
         	$this.searchApiList(true);
+        	
+        	document.getElementById("svrId").focus();
 
         },
         initCodeList: function() {
@@ -71,6 +73,12 @@ let apiStndMng = new Vue({
             }));
 
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchApiList(true);
         },
         searchApiList: function(isSearch) {
 			

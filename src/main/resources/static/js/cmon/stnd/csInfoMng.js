@@ -38,8 +38,8 @@ let csInfoMng = new Vue({
             $this.initGrid();
 
             $this.searchCsInfoList(true);
-
-
+            
+            document.getElementById("csCmpyNm").focus();
         },
         initCodeList: function() {
             let $this = this;
@@ -87,6 +87,12 @@ let csInfoMng = new Vue({
             }));
 
             resizeJqGridWidth("csInfo_list", "csInfo_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchCsInfoList(true);
         },
         searchCsInfoList: function(isSearch) {
 

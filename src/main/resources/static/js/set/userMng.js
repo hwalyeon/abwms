@@ -86,6 +86,12 @@ let userMng = new Vue({
 
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
         },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchUserList(true);
+        },
         searchUserList: function(isSearch) {
 			
 			let $this = this;

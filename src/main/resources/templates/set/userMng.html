@@ -26,29 +26,29 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label">사용자ID</label>
 						<div class="col-xs-2">
-							<input type="text" name="userId" class="form-control" v-model="params.userId">
+							<input type="text" name="userId" class="form-control" v-model="params.userId" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">사용자명</label>
 						<div class="col-xs-2">
-							<input type="text" name="userNm" class="form-control" v-model="params.userNm">
+							<input type="text" name="userNm" class="form-control" v-model="params.userNm" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">소속</label>
 						<div class="col-xs-2">
-							<input type="text" name="blngNm" class="form-control" v-model="params.blngNm">
+							<input type="text" name="blngNm" class="form-control" v-model="params.blngNm" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">전화번호</label>
 						<div class="col-xs-2">
-							<input type="number" name="telNo" class="form-control" v-model="params.telNo">							
+							<input type="number" name="telNo" class="form-control" v-model="params.telNo" v-on:keyup.enter="checkSearch">							
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-1 control-label">휴대전화번호</label>
 						<div class="col-xs-2">
-							<input type="number" name="mtelNo" class="form-control" v-model="params.mtelNo">
+							<input type="number" name="mtelNo" class="form-control" v-model="params.mtelNo" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">이메일</label>
 						<div class="col-xs-2">
-							<input type="text" name="mailAddr" class="form-control" v-model="params.mailAddr">
+							<input type="text" name="mailAddr" class="form-control" v-model="params.mailAddr" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">사용여부</label>
 						<div class="col-xs-2" style="padding: 6px 12px;">

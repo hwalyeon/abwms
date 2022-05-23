@@ -33,7 +33,7 @@
 						</div>
 						<label class="col-xs-1 control-label">나이 년수</label>
 						<div class="col-xs-2">
-							<input type="number" id="ageYcnt" name="ageYcnt" class="form-control" v-model="params.ageYcnt">
+							<input type="number" id="ageYcnt" name="ageYcnt" class="form-control" v-model="params.ageYcnt" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">심박상태코드</label>
 						<div class="col-xs-2">

@@ -37,6 +37,8 @@ let cdMng = new Vue({
         	$this.initGrid();
         	
         	$this.searchCdGrpList(true);
+        	
+        	document.getElementById("cdGrp").focus();
 
 		},
 		initCodeList : function() {
@@ -147,6 +149,12 @@ let cdMng = new Vue({
             resizeJqGridWidth("cdSpec_list", "cdSpec_jqGrid_wrapper");
             
 		},
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchCdGrpList(true);
+        },
 		searchCdGrpList: function(isSearch) {
 			
 			let $this = this;

@@ -19,8 +19,8 @@
                ,upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
         FROM   ts_cs_info
 		WHERE  1 = 1
-              <if test=" regNo != null and regNo!= '' ">
-		AND    reg_no = #{regNo}::NUMERIC /* reg_no 등록_번호 numeric */
+              <if test=" csCmpyNm != null and csCmpyNm != '' ">
+		AND    ABSV.FN_GETCDNM('CS_CMPY_CD',cs_cmpy_cd) LIKE '%'||#{csCmpyNm}||'%'
               </if>
         order  by reg_no
         </select>

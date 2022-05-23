@@ -153,6 +153,12 @@ let dgemHist = new Vue({
 
             resizeJqGridWidth("dgem_list", "dgem_list_wrapper");
         },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchDgemHistList(true);
+        },
         searchDgemHistList: function(isSearch) {
 
             let $this = this;

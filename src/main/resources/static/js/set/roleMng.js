@@ -115,6 +115,12 @@ let roleMng = new Vue(
 
 			resizeJqGridWidth("role_list", "role_list_wrapper");
 		},
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchRoleList(true);
+        },
 		searchRoleList : function(isSearch) {
 
 			let $this = this;

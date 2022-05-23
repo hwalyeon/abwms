@@ -26,11 +26,11 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label">그룹코드</label>
 						<div class="col-xs-2">
-							<input type="text"  id="cdGrp" name="cdGrp" class="form-control"  :value="params.cdGrp.cdGrp"  v-model="params.cdGrp.cdGrp" v-on:input="cdMng_typing">
+							<input type="text"  id="cdGrp" name="cdGrp" class="form-control"  :value="params.cdGrp.cdGrp"  v-model="params.cdGrp.cdGrp" v-on:input="cdMng_typing" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">그룹코드명</label>
 						<div class="col-xs-2">
-							<input type="text" id="cdGrpNm" name="cdGrpNm" class="form-control"  :value="params.cdGrpNm" v-model="params.cdGrp.cdGrpNm" v-on:input="cdMng_typing">
+							<input type="text" id="cdGrpNm" name="cdGrpNm" class="form-control"  :value="params.cdGrpNm" v-model="params.cdGrp.cdGrpNm" v-on:input="cdMng_typing" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					

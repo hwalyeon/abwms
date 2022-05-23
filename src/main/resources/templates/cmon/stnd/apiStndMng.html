@@ -26,11 +26,11 @@
 					<div class="form-group">
 						<label class="col-xs-1 control-label">서버 ID</label>
 						<div class="col-xs-2">
-							<input type="text" name="svrId" class="form-control" v-model="params.svrId">
+							<input type="text" name="svrId" class="form-control" v-model="params.svrId" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">서버 명</label>
 						<div class="col-xs-2">
-							<input type="text" name="svrNm" class="form-control" v-model="params.svrNm">
+							<input type="text" name="svrNm" class="form-control" v-model="params.svrNm" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					

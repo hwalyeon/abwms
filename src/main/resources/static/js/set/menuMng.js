@@ -89,6 +89,12 @@ let menuMng = new Vue({
 
             resizeJqGridWidth("menu_list", "menu_list_wrapper");
         },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchMenuList(true);
+        },
 		searchMenuList: function(isSearch) {
 			
 			let $this = this;
