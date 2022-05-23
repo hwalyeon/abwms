@@ -41,6 +41,7 @@ let eatHist = new Vue({
         	$this.initGrid();
             //$this.searchEatHistList(true);
             $this.setDatepicker();
+            document.getElementById("stdtNm").focus();
         },
         initValue: function()
         {

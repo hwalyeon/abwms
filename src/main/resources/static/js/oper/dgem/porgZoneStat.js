@@ -117,6 +117,7 @@ let porgZoneStat = new Vue({
             $this.initGrid();
             $this.searchLocInfoList(true);
             $this.setDatepicker();
+            document.getElementById("addrSpec").focus();
         },
         initValue: function() {
             let $this = this;
@@ -490,6 +491,12 @@ let porgZoneStat = new Vue({
             }));
 
             resizeJqGridWidth("locInfo_list", "locInfo_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchLocInfoList(true);
         },
         searchLocInfoList: function(isSearch) {
             let $this = this;

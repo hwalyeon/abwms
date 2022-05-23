@@ -60,7 +60,7 @@
 							</select>
 						</div>
 						<div class="col-xs-1" style="width: 12%;padding: 0px;margin-right: 5px">
-							<input id="addrSpec" type="text" name ="addrSpec" class="form-control" v-model="params.addrSpec" v-on:input="input_lenth">
+							<input id="addrSpec" type="text" name ="addrSpec" class="form-control" v-model="params.addrSpec" v-on:input="input_lenth" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label" style="">장소구분</label>
 						<div class="col-xs-1" style="padding:0px; margin-right:5px;">

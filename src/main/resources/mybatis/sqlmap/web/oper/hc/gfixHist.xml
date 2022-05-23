@@ -44,7 +44,7 @@
 		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
 			and tgh.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
-			and decr(tsb.stdt_NM) like CONCAT('%',#{stdtNm},'%')</if>
+			and tsb.stdt_NM = ABSV.ENCR(#{stdtNm})</if>
 		<if test="ageFr != null and ageFr != null and ageTo !='' and ageTo !='' ">/*나이*/
 			and tgh.age_ycnt  between #{ageFr}::NUMERIC  and #{ageTo}::NUMERIC </if>
 		<if test=" sexCd != null and sexCd !='' ">/*성별*/
@@ -52,7 +52,7 @@
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
-			and decr(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>
+			and tgb.guar_nm = ABSV.ENCR(#{guarNm})</if>
 		<if test=" growJudgCd != null and growJudgCd !='' ">/*성장_판정_코드*/
 			and tgh.grow_judg_cd = #{growJudgCd}</if>
 		<if test=" fatJudgCd != null and fatJudgCd !='' ">/*비만_판정_코드*/

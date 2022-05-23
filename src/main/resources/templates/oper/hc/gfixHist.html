@@ -47,23 +47,23 @@
 						</div>
 						<label class="col-xs-1 control-label" >학생번호</label>
 						<div class="col-xs-1" style="padding:0px" >
-							<input type="text" name="stdtNo" class="form-control"  v-model="params.stdtNo" v-digitonly.number>
+							<input type="text" id="stdtNo" name="stdtNo" class="form-control"  v-model="params.stdtNo" v-digitonly.number v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">학생명</label>
 						<div class="col-xs-2"  style="padding-left:0px;" >
-							<input type="text" name="stdtNm" class="form-control" v-model="params.stdtNm">
+							<input type="text" name="stdtNm" class="form-control" v-model="params.stdtNm" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-xs-1 control-label" >나이</label>
 						<div class="col-xs-1"  style="padding:0px; margin-left: 15px;" >
-							<input type="text" name="ageFr" class="form-control"  v-model="params.ageFr" v-digitonly.number>
+							<input type="text" name="ageFr" class="form-control"  v-model="params.ageFr" v-digitonly.number v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label"style="margin-left:10px; width:5px;">~</label>
-						<label class="col-xs-1 control-label" style="margin-left: -40px;" >나이</label>
 						<div class="col-xs-1" style="padding:0px;">
-							<input type="text" name="ageTo" class="form-control" style="padding-left:0px; padding-right:0px;"v-model="params.ageTo" v-digitonly.number>
+							<input type="text" name="ageTo" class="form-control" style="padding-left:0px; padding-right:0px;"v-model="params.ageTo" v-digitonly.number v-on:keyup.enter="checkSearch">
 						</div>
+						<label class="col-xs-1 control-label" style="margin-left: -40px;" > </label>
 						<label class="col-xs-1 control-label">성별</label>
 						<div class="col-xs-1"style="padding-left:0px; padding-right:0px; margin-left:0px;">
 							<select id="sexCd" name="sexCd" class="form-control" v-model="params.sexCd">
@@ -73,11 +73,11 @@
 						</div>
 						<label class="col-xs-1 control-label" >보호자번호</label>
 						<div class="col-xs-1"   style="padding:0px">
-							<input type="text" name="guarNo" class="form-control" v-model="params.guarNo" v-digitonly.number>
+							<input type="text" name="guarNo" class="form-control" v-model="params.guarNo" v-digitonly.number v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">보호자명</label>
 						<div class="col-xs-2"  style="padding-left:0px;" >
-							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
+							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					<div class="form-group">
@@ -107,7 +107,7 @@
 						</div>
 						<label class="col-xs-1 control-label">학교(학원)명</label>
 						<div class="col-xs-1" style="padding:0px;">
-							<input type="text" name="locNm" class="form-control" v-model="params.locNm">
+							<input type="text" name="locNm" class="form-control" v-model="params.locNm" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					<div class="form-group mg_none">

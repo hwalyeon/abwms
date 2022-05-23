@@ -89,16 +89,16 @@
 							</button>
 						</div>
 						<div class="col-xs-1 pd_right_none">
-							<input type="text" name="guarNo" class="form-control"  v-model="params.guarNo">
+							<input type="text" name="guarNo" class="form-control"  v-model="params.guarNo" v-on:keyup.enter="checkSearch">
 						</div>
 						<div class="col-xs-1 pd_none">
-							<input type="text" name="guarNm" class="form-control"  v-model="params.guarNm">
+							<input type="text" name="guarNm" class="form-control"  v-model="params.guarNm" v-on:keyup.enter="checkSearch">
 						</div>
 						<div class="col-xs-1 pd_right_none">
-							<input type="text" name="stdtNo" class="form-control"  v-model="params.stdtNo">
+							<input type="text" name="stdtNo" class="form-control"  v-model="params.stdtNo" v-on:keyup.enter="checkSearch">
 						</div>
 						<div class="col-xs-1 pd_none">
-							<input type="text" name="stdtNm" class="form-control"  v-model="params.stdtNm">
+							<input type="text" name="stdtNm" class="form-control"  v-model="params.stdtNm" v-on:keyup.enter="checkSearch">
 						</div>
 <!--						<div class="col-xs-2">-->
 <!--							<select id="guarNo" name="guarNo" class="form-control" v-model="params.guarNo" @change="changeGuarNo()">-->
@@ -128,7 +128,7 @@
 							</select>
 						</div>
 						<div class="col-xs-2">
-							<input id="locNm" type="text" name ="locNm" class="form-control" v-model="params.locNm" v-on:input="input_lenth">
+							<input id="locNm" type="text" name ="locNm" class="form-control" v-model="params.locNm" v-on:input="input_lenth" v-on:keyup.enter="checkSearch">
 						</div>
 						<div class="col-xs-3">
 							<label>

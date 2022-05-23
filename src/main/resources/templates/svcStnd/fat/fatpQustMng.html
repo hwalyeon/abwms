@@ -24,13 +24,15 @@
 				<div class="form-horizontal">
 					<div class="form-group">
 						<label class="col-xs-1 control-label">설문 버전</label>
-						<div class="col-xs-2">
-							<input type="number" id="qustVer" name="qustVer" class="form-control" v-model="params.fatpQustBase.qustVer" v-digitonly.number />
+						<div class="col-xs-1">
+							<input type="number" id="qustVer" name="qustVer" class="form-control" v-model="params.fatpQustBase.qustVer" v-on:keyup.enter="checkSearch"  v-digitonly.number />
 						</div>
+<!-- 						
 						<label class="col-xs-1 control-label">설문 번호</label>
 						<div class="col-xs-2">
 								<input type="number" id="qustNo" class="form-control" v-model="params.fatpQustBase.qustNo" v-digitonly.number />
 						</div>
+ -->						
 					</div>
 
 					<div class="form-group mg_none">

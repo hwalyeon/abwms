@@ -48,6 +48,8 @@ let ddPalMng = new Vue({
 
         	$this.initValue();
         	$this.initCodeList();
+        	
+        	document.getElementById("ageYcnt").focus();
 
         },
         initValue: function()
@@ -175,6 +177,12 @@ let ddPalMng = new Vue({
                 }
             }));
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchDdPalList(true);
         },
         searchDdPalList: function(isSearch) {
 			let $this = this;

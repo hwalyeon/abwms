@@ -29,6 +29,8 @@ let ddNutrEatStndMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                
+                document.getElementById("ageYcnt").focus();
             },
             initValue: function()
             {
@@ -122,6 +124,12 @@ let ddNutrEatStndMng = new Vue({
 //                $("#ddNutrEatStnd_list").jqGrid("setFrozenColumns");
 
                 resizeJqGridWidth("ddNutrEatStnd_list", "ddNutrEatStnd_list_wrapper");
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchDdNutrEatStndList(true);
             },
             searchDdNutrEatStndList: function(isSearch)
             {

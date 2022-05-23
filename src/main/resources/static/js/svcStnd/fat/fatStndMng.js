@@ -7,6 +7,7 @@ let fatStndMng = new Vue({
                     userId            : ''  ,
                     fatStndVer     : ''  ,    // 비만_기준_번호
                     ageYcnt         : ''  ,     // 나이_년수
+                    ageMcnt         : '' ,
                     sexCd            : ''   ,    // 성별_코드
                     paging          : 'Y',
                     totalCount    : 0  ,
@@ -27,6 +28,8 @@ let fatStndMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                
+                document.getElementById("ageYcnt").focus();
             },
             initValue: function()
             {
@@ -92,6 +95,12 @@ let fatStndMng = new Vue({
                     }
                 }));
                 resizeJqGridWidth("fatStnd_list", "fatStnd_list_wrapper");
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchFatStndList(true);
             },
             searchFatStndList: function(isSearch)
             {

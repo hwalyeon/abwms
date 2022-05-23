@@ -39,6 +39,7 @@ let actHist = new Vue({
         	$this.initGrid();
             //$this.searchActHistList(true);
             $this.setDatepicker();
+            document.getElementById("stdtNm").focus();
         },
         initValue: function()
         {
@@ -106,6 +107,12 @@ let actHist = new Vue({
                 }
             }));
             resizeJqGridWidth("actHist_list", "actHist_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchActHistList(true);
         },
         //활동_이력리스트 조회
         searchActHistList: function(isSearch)

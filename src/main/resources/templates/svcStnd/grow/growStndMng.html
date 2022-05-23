@@ -23,13 +23,28 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
+						<label class="col-xs-1 control-label">성별</label>
+						<div class="col-xs-1">
+							<select id="sexCd" name="sexCd" class="form-control" v-model="params.sexCd">
+								<option value="">전체</option>
+								<option v-for="item in code.sexCdList" v-bind:value="item.cdVal" v-text="item.cdNm"></option>
+							</select>
+						</div>
+						<label class="col-xs-1 control-label">나이(년수)</label>
+						<div class="col-xs-1">
+							<input type="text" id ="ageYcnt" name ="ageYcnt" class="form-control" v-model="params.ageYcnt" v-on:keyup.enter="checkSearch">
+						</div>
+						<label class="col-xs-1 control-label">나이(개월수)</label>
+						<div class="col-xs-1">
+							<input type="text" id ="ageMcnt" name ="ageMcnt" class="form-control" v-model="params.ageMcnt" v-on:keyup.enter="checkSearch">
+						</div>
 						<label class="col-xs-1 control-label">성장기준버전</label>
 						<div class="col-xs-2">
-							<input type ="text" name ="growStndVer" class ="form-control" v-model="params.growStndVer">
+							<input type ="text" id="growStndVer" name ="growStndVer" class ="form-control" v-model="params.growStndVer" v-on:keyup.enter="checkSearch">
 						</div>
 						<label class="col-xs-1 control-label">성장기준번호</label>
 						<div class="col-xs-2">
-							<input type="text" name ="growStndNo" class="form-control" v-model="params.growStndNo" v-digitonly.number>
+							<input type="text" name ="growStndNo" class="form-control" v-model="params.growStndNo" v-digitonly.number v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					<div class="form-group mg_none">

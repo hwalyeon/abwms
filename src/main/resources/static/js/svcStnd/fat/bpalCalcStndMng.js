@@ -26,6 +26,8 @@ let bpalCalcStndMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                
+                document.getElementById("ageYcntFr").focus();
             },
             initValue: function()
             {
@@ -94,6 +96,12 @@ let bpalCalcStndMng = new Vue({
                     }
                 }));
                 resizeJqGridWidth("bpalCalcStnd_list", "bpalCalcStnd_list_wrapper");
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchBpalCalcStndList(true);
             },
             searchBpalCalcStndList: function(isSearch)
             {

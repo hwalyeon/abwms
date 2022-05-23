@@ -52,7 +52,7 @@
 		          <if test="uptDtFr != null and uptDtTo != null and uptDtFr !='' and uptDtTo !='' ">
 		and       TBI.UPT_DT between #{uptDtFr} and #{uptDtTo}</if>
 		          <if test=" stdtNm != null and stdtNm !='' ">
-		and       DECR(TSB.STDT_NM) like CONCAT('%',#{stdtNm},'%')</if>
+		and       TSB.STDT_NM  = absv.encr(#{stdtNm})</if>
 		          <if test="telNo != null and telNo !='' ">
 		and       TBI.TEL_NO = ENCR(#{telNo})</if>
 		          <if test="bandYtypCd != null and bandYtypCd !='' ">
@@ -64,7 +64,7 @@
 		          <if test="guarTelNo != null and guarTelNo !='' ">
 		and       TBS.GUAR_TEL_NO = ENCR(#{guarTelNo}) </if>
 		          <if test="guarNm != null and guarNm !='' ">
-		and       TGB.GUAR_NM like CONCAT('%',#{guarNm},'%')</if>
+		and       TGB.GUAR_NM  = ABSV.ENCR(#{guarNm})</if>
 		ORDER BY  TBI.UPT_DT, TBI.REG_DT, T1.BAND_YTYP, TBI.BAND_ID, TGB.GUAR_NO, TGB.GUAR_NM
 		          <if test=' paging == "Y" '>
 			      LIMIT ${rowCount} OFFSET ${currentIndex} </if>

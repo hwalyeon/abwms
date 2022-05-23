@@ -37,6 +37,8 @@ let fatpQustMng = new Vue({
         	$this.initGrid();
 
         	$this.searchFatpQustBaseList(true);
+        	
+        	document.getElementById("qustVer").focus();
 
 		},
 		initCodeList : function() {
@@ -151,6 +153,12 @@ let fatpQustMng = new Vue({
             resizeJqGridWidth("fatpQustSpec_list", "fatpQustSpec_jqGrid_wrapper");
 		},
 
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchFatpQustBaseList(true);
+        },
 		//비만예측_설문_기본_리스트 조회
 		searchFatpQustBaseList: function(isSearch) {
 			

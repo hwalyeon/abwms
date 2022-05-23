@@ -14,7 +14,7 @@ let dszoneHist = new Vue({
             locNm        :'',
             rdPublGuarDiv:'all',
             locApntCd    :'',
-            mmDd         :'TODAY',
+            mmDd         :'THIS_WEEK',
             plcClssCd    :'DZONE',
             paging       :'Y',
             totalCount   : 0,
@@ -117,6 +117,7 @@ let dszoneHist = new Vue({
             $this.initGrid();
             $this.searchLocInfoList(true);
             $this.setDatepicker();
+            document.getElementById("locNm").focus();
         },
         initValue: function() {
             let $this = this;
@@ -533,6 +534,12 @@ let dszoneHist = new Vue({
             }));
 
             resizeJqGridWidth("locInfo_list", "locInfo_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchLocInfoList(true);
         },
         searchLocInfoList: function(isSearch) {
             let $this = this;

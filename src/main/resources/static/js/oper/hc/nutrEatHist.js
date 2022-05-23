@@ -47,6 +47,8 @@ let nutrEatHist = new Vue({
             const terms = getPeriodDate($this.params.bDPer);
             this.params.stndDtFr = terms.strDt;
             this.params.stndDtTo = terms.endDt;
+            
+            document.getElementById("stdtNm").focus();
         },
         initCodeList : function()
         {
@@ -132,13 +134,19 @@ let nutrEatHist = new Vue({
             $("#nutrEatHist_list").jqGrid("setGroupHeaders",{
                 useColSpanStyle: true,
                 groupHeaders: [
-                    {startColumnName: 'vitB', numberOfColumns: 6, titleText: '비타민_B(비타민B1,B2,B12,나이아신,엽산)'},
+                    {startColumnName: 'vitB', numberOfColumns: 6, titleText: '비타민_B (비타민B1,B2,B12,나이아신,엽산)'},
                     {startColumnName: 'amno', numberOfColumns: 4, titleText: '아미노산'},
                     {startColumnName: 'epa', numberOfColumns: 3, titleText: 'EPA+DHA'}
                 ]
             });
 
             resizeJqGridWidth("nutrEatHist_list", "nutrEatHist_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchNutrEatHistList(true);
         },
         //영양소_섭취_이력 리스트 조회
         searchNutrEatHistList: function(isSearch)

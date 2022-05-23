@@ -60,7 +60,8 @@ let dgemHist = new Vue({
             //$this.searchDgemHistList(true);
 
             $this.setDatepicker();
-
+            
+            document.getElementById("guarNm").focus();
         },
         initValue: function() {
             let $this = this;

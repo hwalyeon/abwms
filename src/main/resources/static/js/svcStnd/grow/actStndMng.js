@@ -25,6 +25,8 @@ let actStndMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                
+                document.getElementById("actNm").focus();
             },
             initValue: function(){
 
@@ -119,6 +121,12 @@ let actStndMng = new Vue({
                     }
                 }));
                 resizeJqGridWidth("actStnd_list", "actStnd_list_wrapper");
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchActStndList(true);
             },
             searchActStndList: function(isSearch)
             {

@@ -20,7 +20,7 @@
 		FROM        TI_FAT_ACT_STND
 		WHERE     	1 = 1
 		<if test=" fatJudgCd != null and fatJudgCd != '' ">
-		AND         FAT_JUDG_CD = #{ㄹatJudgCd}   </if>
+		AND         FAT_JUDG_CD = #{fatJudgCd}   </if>
 		<if test=" fatpJudgCd != null and fatpJudgCd != '' ">
 		AND         fatp_JUDG_CD = #{fatpJudgCd}   </if>
 		<if test=" palCd != null and palCd != '' ">

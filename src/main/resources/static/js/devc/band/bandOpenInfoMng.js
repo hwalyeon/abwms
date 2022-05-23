@@ -8,7 +8,7 @@ let bandOpenInfoMng = new Vue({
                     userId         : '' ,
                     uptDtFr        : '' ,  //기준_일자From
                     uptDtTo        : '' ,  //기준_일자To
-                    bDPer          : 'TISH_MONTH' ,  //기준_일자 _이번달
+                    bDPer          : 'PRE_SIX_MONTH' ,  //기준_일자 _이번달
                     stdtNm         : '' ,  //학생_명
                     telNo          : '' ,  //밴드_전화_번호
                     bandId         : '' ,  //밴드_ID
@@ -39,6 +39,8 @@ let bandOpenInfoMng = new Vue({
                 $this.initValue();
                 $this.initCodeList();
                 $this.setDatepicker();
+                
+                document.getElementById("stdtNm").focus();
             },
             initValue: function()
             {
@@ -209,6 +211,12 @@ let bandOpenInfoMng = new Vue({
                 });
             },
 
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchBandOpenInfoList(true);
+            },
             //밴드/개통 정보 목록 조회
             searchBandOpenInfoList: function(isSearch)
             {

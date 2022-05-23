@@ -16,7 +16,7 @@
         COALESCE(D.ADDR_BASE,A.LOC_NM)  AS ADDR_BASE,
         DECR(E.TEL_NO)                  AS TEL_NO,
         G.GUAR_NO                       AS GUAR_NO,
-        G.GUAR_NM                       AS GUAR_NM,
+        ABSV.DECR(G.GUAR_NM)            AS GUAR_NM,
         ABSV.DECR(G.GUAR_TEL_NO)        AS GUAR_TEL_NO,
         A.REG_DT                        AS REG_DT,
         A.REG_TM                        AS REG_TM,

@@ -67,23 +67,23 @@ let fatpQustHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "stndDt"       , index: "stndDt"       , label: "기준 일자" 	                            , align: "center"    },
-                {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	                            , align: "center"    },
-                {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	                            , align: "center"    },
-                {name: "sexCd"        , index: "sexCd"        , label: "성별"	                                , align: "center"    },
-                {name: "ageYcnt"      , index: "ageYcnt"      , label: "나이(년)"                               , align: "center"   },
-                {name: "qustNo1"      , index: "qustNo1"     , label: "주 평균 </br>라면 섭취 횟수"              , align: "center"   , width: 250 },
-                {name: "qustNo2"      , index: "qustNo2"     , label: "주 평균</br>음료수 섭취 횟수"             , align: "center"   , width: 250 },
-                {name: "qustNo3"      , index: "qustNo3"     , label: "주 평균</br>패스트푸드 섭취 횟수"         , align: "center"   , width: 250 },
-                {name: "qustNo4"      , index: "qustNo4"     , label: "주 평균</br>육류 섭취 횟수"               , align: "center"  , width: 250  },
-                {name: "qustNo5"      , index: "qustNo5"     , label: "주 평균</br>유제품 섭취 횟수"             , align: "center"   , width: 250 },
-                {name: "qustNo6"      , index: "qustNo6"     , label: "주 평균</br>과일 섭취 횟수"               , align: "center"   , width: 250 },
-                {name: "qustNo7"      , index: "qustNo7"     , label: "주 평균</br>야채 (김치 제외) 섭취 횟수"   , align: "center" , width: 250 },
-                {name: "qustNo8"      , index: "qustNo8"     , label: "주 평균</br>아침 결식 횟수"               , align: "center" , width: 250 },
-                {name: "fatpBmiVal"   , index: "fatpBmiVal"   , label: "비만 예측 BMI"                          , align: "center" },
-                {name: "fatpIdx"      , index: "fatpIdx"      , label: "비만 예측지수"                          , align: "center"  },
-                {name: "fatpJudgCd"   , index: "fatpJudgCd"   , label: "비만 예측</br>판정코드"                 , align: "center"  },
-                {name: "fatpJudgDesc" , index: "fatpJudgDesc" , label: "비만 예측</br>판정설명"                 , align: "center"  }
+                {name: "stndDt"       , index: "stndDt"       , label: "기준 일자" 	                            , align: "center" , width: 80 },
+                {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	                            , align: "center" , width: 60 },
+                {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	                            , align: "center" , width: 80 },
+                {name: "sexCd"        , index: "sexCd"        , label: "성별"	                                , align: "center" , width: 50 },
+                {name: "ageYcnt"      , index: "ageYcnt"      , label: "나이(년)"                               , align: "center" , width: 50 , formatter:function(cellValue){ if (cellValue==null || cellValue=='') return '-'; else return cellValue+" 세";}},
+                {name: "qustNo1"      , index: "qustNo1"      , label: "주 평균 </br>라면 섭취 횟수"            , align: "center" , width: 100 },
+                {name: "qustNo2"      , index: "qustNo2"      , label: "주 평균</br>음료수 섭취 횟수"           , align: "center" , width: 100 },
+                {name: "qustNo3"      , index: "qustNo3"      , label: "주 평균</br>패스트푸드 섭취 횟수"       , align: "center" , width: 100 },
+                {name: "qustNo4"      , index: "qustNo4"      , label: "주 평균</br>육류 섭취 횟수"             , align: "center" , width: 100 },
+                {name: "qustNo5"      , index: "qustNo5"      , label: "주 평균</br>유제품 섭취 횟수"           , align: "center" , width: 100 },
+                {name: "qustNo6"      , index: "qustNo6"      , label: "주 평균</br>과일 섭취 횟수"             , align: "center" , width: 100 },
+                {name: "qustNo7"      , index: "qustNo7"      , label: "주 평균</br>야채 (김치 제외) 섭취 횟수" , align: "center" , width: 100 },
+                {name: "qustNo8"      , index: "qustNo8"      , label: "주 평균</br>아침 결식 횟수"             , align: "center" , width: 100 },
+                {name: "fatpBmiVal"   , index: "fatpBmiVal"   , label: "비만예측<br>BMI"                        , align: "center" , width:  80 },
+                {name: "fatpIdx"      , index: "fatpIdx"      , label: "비만예측<br>지수"                       , align: "center" , width:  60 },
+                {name: "fatpJudgCd"   , index: "fatpJudgCd"   , label: "비만 예측</br>판정코드"                 , align: "center" , width: 100 },
+                {name: "fatpJudgDesc" , index: "fatpJudgDesc" , label: "비만 예측</br>판정설명"                 , align: "left"   , width: 250 }
             ];
             $("#fatpQustHist_list").jqGrid("GridUnload");
            	$("#fatpQustHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -104,10 +104,10 @@ let fatpQustHist = new Vue({
                         $this.searchFatpQustHistList(false);
                     })
                 },
-                gridComplete: function () {
-                    let grid = this;
-                    $(grid).tableRowSpan(["stdtNo", "stdtNm", "sexCd","ageYcnt"], "stdtNo");
-                }
+//                gridComplete: function () {
+//                    let grid = this;
+//                    $(grid).tableRowSpan(["stdtNo", "stdtNm", "sexCd","ageYcnt"], "stdtNo");
+//                }
             }));
             resizeJqGridWidth("fatpQustHist_list", "fatpQustHist_list_wrapper");
         },

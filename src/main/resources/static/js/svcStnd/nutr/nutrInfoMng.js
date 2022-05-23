@@ -27,6 +27,8 @@ let nutrInfoMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                
+                document.getElementById("nutrNm").focus();
             },
             initValue: function()
             {
@@ -50,37 +52,25 @@ let nutrInfoMng = new Vue({
                 let useYnList     = commonGridCmonCd($this.code.useYnList);
                 let colModels =
                 [
-                    {name: "crud"               , index: "crud"                  , label: "crud"                                   , hidden:true},
-                    {name: "nutrCd"            , index: "nutrCd"              , label: "영양소코드"                       , editable :true	,  width: 80        , align: "center"},
-                    {name: "nutrCdTemp"   , index: "nutrCdTemp"    , label: "영양소코드"                       , hidden: true                             },
-                    {name: "nutrNm"           , index: "nutrNm"            , label: "영양소명"                           , editable :true  , width: 80        , align: "center"},
-                    {name: "nutrUnitCd"     , index: "nutrUnitCd"        , label: "영양소 단위 코드"             , editable :true  , width: 80         , align: "center"},
-                    {name: "gfixDivCd"	     , index: "gfixDivCd"	 , label: "성장비만지수 구분" , width: 80  	 ,align:"center"
-                    ,edittype:"select"		 , formatter:"select"	 , editable :true		  , editoptions : {value:gfixDivCdList}},
-                    {name: "sortOrd"           , index: "sortOrd"             , label: "정렬순서"                         , editable :true	, editrules : {number : true} , width: 80          , align: "center"},
-                    {name: "useYn"                 , index: "useYn"            , label: "사용여부"                   , width: 80          , align: "center"       , editable: true
-                        , edittype:"select"            , formatter:"select" ,editoptions:{value:useYnList}},
-                    {name: "regDt"              , index: "regDt"                , label: "등록일자"                         , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                        }},
-                    {name: "regTm"            , index: "regTm"               , label: "등록시각"                          , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                       }},
-                    {name: "regUserId"       , index: "regUserId"         , label: "등록사용자ID"                  , width: 80          , align: "center"},
-                    {name: "uptDt"             , index: "uptDt"                , label: "수정일자"                          , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                       }},
-                    {name: "uptTm"            , index: "uptTm"               , label: "수정시각"                         , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                       }},
-                    {name: "uptUserId"       , index: "uptUserId"         , label: "수정사용자ID"                  , width: 80          , align: "center"}
-                    ,{name: "nutrStatStndDetlPopup" , index: "nutrStatStndDetlPopup" , label: "영양소상태기준", width: 80, align: "center",
-                        formatter: function(cellValue, options, rowObject) {
-                            return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrStatStndPop(\'' + rowObject.nutrCd + '\')" value="상세보기" data-toggle="modal" data-target="#nutrStatStndDetlPopup" />';
-                        }
-                    }
-                    ,{name: "nutrEatStndDetlPopup" , index: "nutrEatStndDetlPopup" , label: "영양소섭취기준", width: 80, align: "center",
-                    formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrEatStndPop(\'' + rowObject.nutrCd + '\' , \'' + rowObject.nutrNm + '\' )" value="상세보기" data-toggle="modal" data-target="#nutrEatStndDetlPopup" />';
-                     }
-                    }
-                    ,{name: "nutrEatBlckDetlPopup" , index: "nutrEatBlckDetlPopup" , label: "영양소섭취구간", width: 80, align: "center"}
+                    {name: "crud"                     , index: "crud"                    , label: "crud"                                   ,              hidden   :true },
+                    {name: "nutrCd"                   , index: "nutrCd"                  , label: "영양소코드"          , width: 80    , align: "center", editable :true },
+                    {name: "nutrCdTemp"               , index: "nutrCdTemp"              , label: "영양소코드"                                          , hidden   :true },
+                    {name: "nutrNm"                   , index: "nutrNm"                  , label: "영양소명"            , width: 80    , align: "center", editable :true },
+                    {name: "nutrUnitCd"               , index: "nutrUnitCd"              , label: "영양소 단위 코드"    , width: 80    , align: "center", editable :true },
+                    {name: "gfixDivCd"                , index: "gfixDivCd"               , label: "성장비만지수 구분"   , width: 80    , align: "center", editable :true, edittype:"select", formatter:"select", editoptions : {value:gfixDivCdList}},
+                    {name: "sortOrd"                  , index: "sortOrd"                 , label: "정렬순서"            , width: 80    , align: "center", editable :true, editrules : {number : true}                           },
+                    {name: "useYn"                    , index: "useYn"                   , label: "사용여부"            , width: 80    , align: "center", editable: true, edittype:"select"            , formatter:"select" ,editoptions:{value:useYnList}},
+                    {name: "regDt"                    , index: "regDt"                   , label: "등록일자"            , width: 80    , align: "center", formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                    {name: "regTm"                    , index: "regTm"                   , label: "등록시각"            , width: 80    , align: "center", formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
+                    {name: "regUserId"                , index: "regUserId"               , label: "등록사용자ID"        , width: 80    , align: "center"},
+                    {name: "uptDt"                    , index: "uptDt"                   , label: "수정일자"            , width: 80    , align: "center", formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
+                    {name: "uptTm"                    , index: "uptTm"                   , label: "수정시각"            , width: 80    , align: "center", formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}},
+                    {name: "uptUserId"                , index: "uptUserId"               , label: "수정사용자ID"        , width: 80    , align: "center"},
+                    {name: "nutrStatStndDetlPopup"    , index: "nutrStatStndDetlPopup"   , label: "영양소상태기준"      , width: 80    , align: "center"
+                          , formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrStatStndPop(\'' + rowObject.nutrCd + '\')" value="상세보기" data-toggle="modal" data-target="#nutrStatStndDetlPopup" />';}},
+                    {name: "nutrEatStndDetlPopup"     , index: "nutrEatStndDetlPopup"    , label: "영양소섭취기준"      , width: 80    , align: "center"
+                          , formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrEatStndPop(\'' + rowObject.nutrCd + '\' , \'' + rowObject.nutrNm + '\' )" value="상세보기" data-toggle="modal" data-target="#nutrEatStndDetlPopup" />';}},
+                    {name: "nutrEatBlckDetlPopup"     , index: "nutrEatBlckDetlPopup"    , label: "영양소섭취구간"      , width: 80    , align: "center"}
                 ];
 
                 $("#nutrInfo_list").jqGrid("GridUnload");
@@ -108,6 +98,12 @@ let nutrInfoMng = new Vue({
                     }
                 }));
                 resizeJqGridWidth("nutrInfo_list", "nutrInfo_list_wrapper");
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchNutrInfoList(true);
             },
             searchNutrInfoList: function(isSearch)
             {

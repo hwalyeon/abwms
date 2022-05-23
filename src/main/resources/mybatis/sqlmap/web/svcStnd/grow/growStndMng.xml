@@ -23,9 +23,13 @@
 		WHERE      1 = 1
 		<if test=" growStndVer != null and growStndVer != '' ">
 		AND          GROW_STND_VER LIKE CONCAT('%', #{growStndVer},'%')</if>
-		<if test=" growStndNo != null and growStndNo != '' ">
-		AND          GROW_STND_NO = #{growStndNo}::NUMERIC</if>
-		ORDER BY GROW_STND_VER, GROW_STND_NO
+		<if test=" sexCd != null and sexCd != '' ">
+		AND         SEX_CD   = #{sexCd}    </if>
+		<if test=" ageYcnt != null and ageYcnt != '' ">
+		AND         AGE_YCNT   = #{ageYcnt}::numeric    </if>
+		<if test=" ageMcnt != null and ageMcnt != '' ">
+		AND         AGE_MCNT   = #{ageMcnt}::numeric    </if>
+		ORDER BY GROW_STND_VER, SEX_CD DESC, AGE_MCNT
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

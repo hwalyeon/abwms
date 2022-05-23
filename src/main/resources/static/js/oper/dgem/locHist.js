@@ -53,6 +53,8 @@ let locHist = new Vue({
             //$this.searchLocHistList(true);
 
             $this.setDatepicker();
+            
+            document.getElementById("locNm").focus();
         },
         initValue: function() {
             let $this = this;
@@ -127,6 +129,12 @@ let locHist = new Vue({
             }));
 
             resizeJqGridWidth("grid_list", "grid_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchLocHistList(true);
         },
         searchLocHistList: function(isSearch) {
 

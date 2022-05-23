@@ -39,7 +39,7 @@
 		<if test=" stdtNo != null and stdtNo !='' ">            /*학생_번호*/
 			and tdah.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">            /*학생_명*/
-			and decr(tsb.stdt_NM) like CONCAT('%',#{stdtNm},'%')</if>
+			and tsb.stdt_NM  = ABSV.ENCR(#{stdtNm})</if>
 		<if test=" actClssCd != null and actClssCd !='' ">      /*활동_분류_코드*/
 			and tas.act_clss_cd = #{actClssCd}</if>
 		<if test=" actCd != null and actCd !='' ">              /*활동_코드*/
@@ -49,7 +49,7 @@
 		<if test=" guarNo != null and guarNo !='' ">            /*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">            /*보호자_명*/
-			and decr(tgb.guar_NM) like CONCAT('%',#{guarNm},'%')</if>
+			and tgb.guar_NM = ABSV.ENCR(#{guarNm})</if>
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

@@ -7,6 +7,9 @@ let growStndMng = new Vue({
                     userId             : ''   ,
                     growStndVer  : ''  ,  //성장_기준_버전
                     growStndNo  : ''  ,  //성장_기준_번호
+                    sexCd       : '',
+                    ageYcnt     : '',
+                    ageMcnt     : '',
                     paging            : 'Y',
                     totalCount      : 0  ,
                     rowCount        : 30,
@@ -26,6 +29,8 @@ let growStndMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                
+                document.getElementById("ageYcnt").focus();
             },
             initValue: function()
             {
@@ -48,9 +53,9 @@ let growStndMng = new Vue({
                 let colModels =
                     [
                         {name: "crud"           , index: "crud"           , label: "crud"              , hidden: true  },
-                        {name: "growStndNoTemp" , index: "growStndNoTemp" , label: "성장기준번호"       , hidden: true  },
-                        {name: "growStndVer"    , index: "growStndVer"    , label: "성장기준버전"       , width: 80  , align: "center"  , editable: true  },
-                        {name: "growStndNo"     , index: "growStndNo"     , label: "성장기준번호"       , width: 80  , align: "center"  , editable: true  , editrules: {number:true}  },
+                        {name: "growStndNoTemp" , index: "growStndNoTemp" , label: "성장기준번호"      , hidden: true  },
+                        {name: "growStndVer"    , index: "growStndVer"    , label: "성장기준버전"      , width: 80  , align: "center"  , editable: true  },
+                        {name: "growStndNo"     , index: "growStndNo"     , label: "성장기준번호"      , width: 80  , align: "center"  , editable: true  , editrules: {number:true}  },
                         {name: "sexCd"          , index: "sexCd"          , label: "성별"              , width: 80   , align: "center"  , edittype : "select", formatter: "select", editable: true, editoptions: {value: sexCdList}  },
                         {name: "ageYcnt"        , index: "ageYcnt"        , label: "나이(년)"          , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
                         {name: "ageMcnt"        , index: "ageMcnt"        , label: "나이(개월)"        , width: 80   , align: "center"  , editable: true  , editrules: {number:true}  },
@@ -92,6 +97,12 @@ let growStndMng = new Vue({
                         }
                 }));
                 resizeJqGridWidth("growStnd_list", "growStnd_list_wrapper");
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchGrowStndList(true);
             },
             searchGrowStndList: function(isSearch)
             {

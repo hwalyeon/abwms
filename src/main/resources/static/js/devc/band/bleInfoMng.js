@@ -10,7 +10,7 @@ let bleInfoMng = new Vue({
             eorgNo         : '' ,  //교육시설번호
             eorgNm         : '' ,  //교육시설명
             addr           : '' ,  //주소
-            bDPer          : 'TISH_MONTH' ,  //기준_일자 _이번달
+            bDPer          : 'PRE_SIX_MONTH' ,  //기준_일자 _이번달
             paging         : 'Y',//
             totalCoun      : 0  ,
             rowCount       : 30 ,
@@ -127,6 +127,12 @@ let bleInfoMng = new Vue({
             this.params.bleInstDtTo = terms.endDt;
         },
 
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchBleInfoList(true);
+        },
         // ble정보 조회
         searchBleInfoList: function(isSearch)
         {

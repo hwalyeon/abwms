@@ -5,6 +5,7 @@ let foodInfoMng = new Vue({
             foodNo:'',
             foodLclsNm:'',
             foodMclsNm:'',
+            foodClssNm:'',
             foodNm:'',
             otimEatQty:'',
             eatUnitCd:'',
@@ -39,7 +40,7 @@ let foodInfoMng = new Vue({
 
         	$this.searchFoodInfoList(true);
 
-        	
+        	document.getElementById("foodClssNm").focus();
         },
         initCodeList: function() {
             let $this = this;
@@ -48,27 +49,19 @@ let foodInfoMng = new Vue({
         initGrid: function() {
             let $this = this;
         	let colModels = [
-                {name: "foodNo"     , index: "foodNo"   , label: "식품번호"   , width: 80, align: "center"},
-                {name: "foodLclsNm"     , index: "foodLclsNm"   , label: "식품 대분류 명"   , width: 80, align: "center"},
-                {name: "foodMclsNm"     , index: "foodMclsNm"   , label: "식품 중분류 명"   , width: 80, align: "center"},
-                {name: "foodNm"     , index: "foodNm"   , label: "식품명"   , width: 80, align: "center"},
-                {name: "otimEatQty"       , index: "otimEatQty"     , label: "1회 섭취용량"        , width: 80, align: "center"},
-                {name: "eatUnitCd"       , index: "eatUnitCd"     , label: "섭취단위코드"        , width: 80, align: "center"},
-                {name: "regDt"                , index: "regDt"                , label: "등록일자"                    , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "regTm"               , index: "regTm"               , label: "등록시각"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "regUserId"          , index: "regUserId"         , label: "등록사용자ID"            , width: 80          , align: "center"},
-                {name: "uptDt"                , index: "uptDt"                , label: "수정일자"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "uptTm"               , index: "uptTm"               , label: "수정시각"                   , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "uptUserId"          , index: "uptUserId"         , label: "수정사용자ID"            , width: 80          , align: "center"},
-                {name: "foodInfoDetlPopup" , index: "foodInfoDetlPopup" , label: "상세정보보기", width: 50, align: "center",
-                    formatter: function(cellValue, options, rowObject) {
-                        return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="foodInfoMng.foodInfoDetlPop(\'' + rowObject.foodNo + '\')" value="상세보기" data-toggle="modal" data-target="#foodInfoDetlPopup" />';
-                    }
-                }
+                {name: "foodNo"             , index: "foodNo"               , label: "식품번호"          , width: 60, align: "center"},
+                {name: "foodLclsNm"         , index: "foodLclsNm"           , label: "식품대분류명"      , width: 80, align: "left"  },
+                {name: "foodMclsNm"         , index: "foodMclsNm"           , label: "식품중분류명"      , width: 80, align: "left"  },
+                {name: "foodNm"             , index: "foodNm"               , label: "식품명"            , width:100, align: "left"  },
+                {name: "otimEatQty"         , index: "otimEatQty"           , label: "1회<br>섭취용량"   , width: 60, align: "center"},
+                {name: "eatUnitCd"          , index: "eatUnitCd"            , label: "섭취<br>단위코드"  , width: 60, align: "center"},
+                {name: "regDt"              , index: "regDt"                , label: "등록일자"          , width: 60, align: "center", formatter: function(cellValue, options, rowObject) { return formatDate(cellValue); }},
+                {name: "regTm"              , index: "regTm"                , label: "등록시각"          , width: 60, align: "center", formatter: function(cellValue, options, rowObject) { return formatTime(cellValue); }},
+                {name: "regUserId"          , index: "regUserId"            , label: "등록사용자ID"      , width: 60, align: "center"},
+                {name: "uptDt"              , index: "uptDt"                , label: "수정일자"          , width: 60, align: "center", formatter: function(cellValue, options, rowObject) { return formatDate(cellValue); }},
+                {name: "uptTm"              , index: "uptTm"                , label: "수정시각"          , width: 60, align: "center", formatter: function(cellValue, options, rowObject) { return formatTime(cellValue); }},
+                {name: "uptUserId"          , index: "uptUserId"            , label: "수정사용자ID"      , width: 60, align: "center"},
+                {name: "foodInfoDetlPopup"  , index: "foodInfoDetlPopup"    , label: "상세정보보기"      , width: 50, align: "center", formatter: function(cellValue, options, rowObject) { return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="foodInfoMng.foodInfoDetlPop(\'' + rowObject.foodNo + '\')" value="상세보기" data-toggle="modal" data-target="#foodInfoDetlPopup" />'; }}
 
             ];
 
@@ -92,6 +85,12 @@ let foodInfoMng = new Vue({
             }));
 
             resizeJqGridWidth("user_list", "user_list_wrapper");                        
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchFoodInfoList(true);
         },
         searchFoodInfoList: function(isSearch) {
 

@@ -34,7 +34,7 @@
 						</div>-->
 						<label class="col-xs-1 control-label">활동명</label>
 						<div class="col-xs-2">
-							<input type="text" name ="actNm" class="form-control" v-model="params.actNm">
+							<input type="text" id="actNm" name ="actNm" class="form-control" v-model="params.actNm" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					<div class="form-group mg_none">

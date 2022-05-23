@@ -27,6 +27,8 @@ let palStndMng = new Vue({
 
                 $this.initValue();
                 $this.initCodeList();
+                
+                document.getElementById("palNm").focus();
             },
             initValue: function()
             {
@@ -92,6 +94,12 @@ let palStndMng = new Vue({
                     }
                 }));
                 resizeJqGridWidth("palStnd_list", "palStnd_list_wrapper");
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchPalStndList(true);
             },
             searchPalStndList: function(isSearch)
             {

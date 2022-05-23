@@ -27,8 +27,16 @@
            ,A.upt_user_id /* upt_user_id 수정_사용자_ID character varying(20) */
            FROM   ti_dd_pal_blck A
            WHERE  1 = 1
-		AND    fat_judg_cd like concat('%',#{fatJudgCd},'%')
-		AND    fatp_judg_cd like concat('%',#{fatpJudgCd},'%')
+		<if test=" fatJudgCd != null and fatJudgCd != '' ">
+		AND    fat_judg_cd = #{fatJudgCd} </if>
+		<if test=" fatpJudgCd != null and fatpJudgCd != '' ">
+		AND    fatp_judg_cd = #{fatpJudgCd}</if>
+		<if test=" sexCd != null and sexCd != '' ">
+		AND    A.SEX_CD = #{sexCd}</if>
+		<if test=" ageYcnt != null and ageYcnt != '' ">
+		AND    A.AGE_YCNT = #{ageYcnt}::numeric</if>
+		
+		ORDER BY A.FAT_JUDG_CD, A.FATP_JUDG_CD, A.SEX_CD desc, A.AGE_YCNT
         <if test=' paging == "Y" '>
         LIMIT ${rowCount} OFFSET ${currentIndex} </if>
         </select>

@@ -62,7 +62,7 @@ let growActStndMng = new Vue(
 								name : "growJudgNm",
 								index : "growJudgNm",
 								label : "성장판정 명",
-								width : 80,
+								width : 100,
 								align : "center",
 								editable : false
 							},
@@ -78,16 +78,16 @@ let growActStndMng = new Vue(
 								name : "palNm",
 								index : "palNm",
 								label : "신체활동수준 명",
-								width : 80,
+								width : 100,
 								align : "center",
 								editable : false
 							},
 							{
 								name : "growActRmrk",
 								index : "growActRmrk",
-								label : "성장활동 비고",
-								width : 700,
-								align : "center",
+								label : "성장활동 평가",
+								width : 600,
+								align : "left",
 								editable : false
 							},
 							{

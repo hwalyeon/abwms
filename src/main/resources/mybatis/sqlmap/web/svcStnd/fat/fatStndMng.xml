@@ -22,10 +22,14 @@
 		FROM        TI_FAT_STND
 		WHERE     1 = 1
 		<if test=" fatStndVer != null and fatStndVer != '' ">
-		AND         FAT_STND_VER LIKE CONCAT('%',#{fatStndVer},'%')   </if>
-		<if test=" fatStndNo != null and fatStndNo != '' ">
-		AND         FAT_STND_NO   = #{fatStndNo}::NUMERIC    </if>
-		ORDER BY FAT_STND_VER, FAT_STND_NO
+		AND         FAT_STND_VER LIKE '%'||#{fatStndVer}||'%'   </if>
+		<if test=" sexCd != null and sexCd != '' ">
+		AND         SEX_CD   = #{sexCd}    </if>
+		<if test=" ageYcnt != null and ageYcnt != '' ">
+		AND         AGE_YCNT   = #{ageYcnt}::numeric    </if>
+		<if test=" ageMcnt != null and ageMcnt != '' ">
+		AND         AGE_MCNT   = #{ageMcnt}::numeric    </if>
+		ORDER BY FAT_STND_VER, SEX_CD DESC, AGE_MCNT
 		<if test=' paging == "Y" '>
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>
