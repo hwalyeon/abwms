@@ -33,14 +33,12 @@ let dgemStss = new Vue({
             let $this = this;
 
             $this.initCodeList();
-
             $this.initChart();
-
             $this.setDatepicker();
-
             $this.initData();
 
             $this.initSearch();
+            document.getElementById("ageYcntFr").focus();
         },
 
         // 기본 날짜 세팅
@@ -337,6 +335,13 @@ let dgemStss = new Vue({
             $this.chartDgemStss.data = dataDgemStss;
             $this.chartDgemStss.update();
 
+        },
+
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchDgemStssList(true);
         },
 
         // 조회

@@ -32,6 +32,7 @@ let alamHist = new Vue({
             mmDdList            : [] ,
             alamChnlCdList      : [] ,
             alamTypeCdList      : [] ,
+            sendRsltCdList      : [] ,
         },
     },
 
@@ -43,14 +44,11 @@ let alamHist = new Vue({
             let $this = this;
 
             $this.initValue();
-
             $this.initCodeList();
-
             $this.initGrid();
-
             $this.searchAlamHistList(true);
-
             $this.setDatepicker();
+            document.getElementById("guarNm").focus();
         },
         initValue: function() {
             let $this = this;
@@ -70,6 +68,7 @@ let alamHist = new Vue({
             let $this = this;
             getCommonCodeList('ALAM_CHNL_CD', $this.code.alamChnlCdList);
             getCommonCodeList('ALAM_TYPE_CD', $this.code.alamTypeCdList);
+            getCommonCodeList('SEND_RSLT_CD', $this.code.sendRsltCdList);
         },
         initGrid: function()
         {
@@ -79,7 +78,7 @@ let alamHist = new Vue({
                 {name: "occrDttm"    , index: "occrDttm"    , label: "발생일시"      , width:  80   , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTimestamp(cellValue);}},
                 {name: "guarNo"      , index: "guarNo"      , label: "보호자번호"    , width:  50   , align: "center" },
                 {name: "guarNm"      , index: "guarNm"      , label: "보호자명"      , width:  50   , align: "center" },
-                {name: "guarTelNo"   , index: "guarTelNo"   , label: "보호자전화번호", width:  80   , align: "center" },
+                {name: "guarTelNo"   , index: "guarTelNo"   , label: "보호자전화번호", width:  80   , align: "center" , formatter: function(cellValue, options, rowObject) { return phoneFormatter(cellValue);}},
                 {name: "stdtNo"      , index: "stdtNo"      , label: "학생번호"      , width:  50   , align: "center" },
                 {name: "stdtNm"      , index: "stdtNm"      , label: "학생명"        , width:  50   , align: "center" },
                 {name: "alamChnlCd"  , index: "alamChnlCd"  , label: "채널종류"      , width:  50   , align: "center" },
@@ -87,7 +86,7 @@ let alamHist = new Vue({
                 {name: "alamTitl"    , index: "alamTitl"    , label: "알림제목"      , width: 110   , align: "left"   },
                 {name: "sendRsltCd"  , index: "sendRsltCd"  , label: "처리상태"      , width:  60   , align: "center" },
                 {name: "sendDttm"    , index: "sendDttm"    , label: "전송일시"      , width:  80   , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTimestamp(cellValue);}},
-                {name: "alamCntn"    , index: "alamCntn"    , label: "알림내용"      , width: 180   , align: "center" }
+                {name: "alamCntn"    , index: "alamCntn"    , label: "알림내용"      , width: 200   , align: "center" }
             ];
 
             $("#grid_list").jqGrid("GridUnload");
@@ -109,6 +108,12 @@ let alamHist = new Vue({
             }));
 
             resizeJqGridWidth("grid_list", "grid_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchAlamHistList(true);
         },
         searchAlamHistList: function(isSearch) {
 

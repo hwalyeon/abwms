@@ -28,10 +28,11 @@
 	</select>
 	<!--활동_분류_코드_리스트 조회-->
 	<select id="searchActClssCdList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT       DISTINCT  ACT_CLSS_CD
-		FROM         TI_ACT_STND
-		WHERE      1 = 1
-		ORDER BY ACT_CLSS_CD
+		SELECT  CD_VAL, CD_NM
+		FROM    ABSV.TC_CD_SPEC
+		WHERE   1=1
+		 AND    CD_GRP = 'ACT_CLSS_CD' 
+		ORDER BY SORT_ORD
 	</select>
 
 	<insert id="insertTiActStndList" parameterType="java.util.Map">

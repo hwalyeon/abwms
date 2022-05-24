@@ -112,43 +112,28 @@ let ddPalMng = new Vue({
             let nutrCdNmList    = commonGridCmonCd($this.code.nutrCdNmList);
         	let colModels =
             [
-                {name:"crud"               , index: "crud"            , label:"crud"               , hidden:true},
-                {name: "fatJudgCdTemp" , index: "fatJudgCdTemp", label: "현재비만판정"            , width: 80   , align: "center", hidden  : true  },
-                {name: "fatJudgCd"     , index: "fatJudgCd"   , label: "현재비만판정"     , width: 80   , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
-                {name: "fatpJudgCdTemp" , index: "fatpJudgCdTemp", label: "예측비만판정"            , width: 80   , align: "center", hidden  : true  },
-                {name: "fatpJudgCd"     , index: "fatpJudgCd"   , label: "예측비만판정"     , width: 80   , align: "center" , editable: true
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:mentDdPalCdList}},
-                {name: "sexCdTemp"         , index: "sexCdTemp"       , label: "성별"            , width: 80   , align: "center", hidden  : true  },
-                {name: "sexCd"             , index: "sexCd"           , label: "성별"            , width: 80   , align: "center" , editable: true
-                    , editable: true  ,edittype:"select"	, formatter:"select", editoptions : {value:sexCdList}},
-                {name: "ageYcntTemp"       , index: "ageYcntTemp"     , label: "나이년수"         , width: 80   , align: "center", hidden  : true  },
-                {name: "ageYcnt"           , index: "ageYcnt"         , label: "나이년수"            , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "calQtyFr"          , index: "calQtyFr"        , label: "칼로리량 FORM"       , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "calQtyTo"          , index: "calQtyTo"        , label: "칼로리량 TO"         , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "ddCalQty"          , index: "ddCalQty"        , label: "일일칼로리량"         , width: 80   , align: "center"
-                    , editable: true , editrules:{number:true}},
-                {name: "palCd"             , index: "palCd"           , label: "신체활동수준코드"      , width: 80   , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:palCdList}},
-                {name: "nutrCd"            , index: "nutrCd"          , label: "영양소코드"           , width: 80   , align: "center"
-                    , editable: true  ,edittype:"select"	, formatter:"select" , editoptions : {value:nutrCdNmList}},
-                {name: "nutrStatCdTemp"    , index: "nutrStatCdTemp"  , label: "영양섭취상태"           , width: 80   , align: "center"
-                    , hidden  : true},
-                {name: "nutrStatCd"        , index: "nutrStatCd"      , label: "영양섭취상태"      , width: 80   , align: "center"
-                    , editable: true , edittype:"select"	, formatter:"select", editoptions : {value:nutrStatCdList}},
-                {name: "regDt"             , index: "regDt"           , label: "등록일자"        , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "regTm"               , index: "regTm"         , label: "등록시각"       , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "regUserId"          , index: "regUserId"      , label: "등록사용자ID"      , width: 80          , align: "center"},
-                {name: "uptDt"                , index: "uptDt"        , label: "수정일자"     , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);                                              }},
-                {name: "uptTm"               , index: "uptTm"         , label: "수정시각"       , width: 80          , align: "center"
-                    , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);                                              }},
-                {name: "uptUserId"          , index: "uptUserId"      , label: "수정사용자ID"      , width: 80          , align: "center"}
+                {name:"crud"          , index:"crud"          , label:"crud"                                           , hidden: true , editable: false                                                                                      },
+                {name:"fatJudgCdTemp" , index:"fatJudgCdTemp" , label:"현재비만판정"      , width:  80, align:"center" , hidden: true , editable: false                                                                                      },
+                {name:"fatJudgCd"     , index:"fatJudgCd"     , label:"현재비만판정"      , width:  80, align:"center" , hidden: false, editable: true , formatter:"select", edittype:"select", editoptions: {value:mentDdPalCdList}         },
+                {name:"fatpJudgCdTemp", index:"fatpJudgCdTemp", label:"예측비만판정"      , width:  80, align:"center" , hidden: true , editable: false                                                                                      },
+                {name:"fatpJudgCd"    , index:"fatpJudgCd"    , label:"예측비만판정"      , width:  80, align:"center" , hidden: false, editable: true , formatter:"select", edittype:"select", editoptions: {value:mentDdPalCdList}         },
+                {name:"sexCdTemp"     , index:"sexCdTemp"     , label:"성별"              , width:  80, align:"center" , hidden: true , editable: false                                                                                      },
+                {name:"sexCd"         , index:"sexCd"         , label:"성별"              , width:  80, align:"center" , hidden: false, editable: true , formatter:"select", edittype:"select", editoptions: {value:sexCdList      }         },
+                {name:"ageYcntTemp"   , index:"ageYcntTemp"   , label:"나이년수"          , width:  80, align:"center" , hidden: true , editable: false                                                                                      },
+                {name:"ageYcnt"       , index:"ageYcnt"       , label:"나이년수"          , width:  80, align:"center" , hidden: false, editable: true , editrules:{number:true}                                                             },
+                {name:"calQtyFr"      , index:"calQtyFr"      , label:"칼로리량<br>(FORM)", width:  80, align:"center" , hidden: false, editable: true , editrules:{number:true}                                                             },
+                {name:"calQtyTo"      , index:"calQtyTo"      , label:"칼로리량<br>(TO)"  , width:  80, align:"center" , hidden: false, editable: true , editrules:{number:true}                                                             },
+                {name:"ddCalQty"      , index:"ddCalQty"      , label:"일일칼로리량"      , width:  80, align:"center" , hidden: false, editable: true , editrules:{number:true}                                                             },
+                {name:"palCd"         , index:"palCd"         , label:"신체활동수준코드"  , width:  80, align:"center" , hidden: false, editable: true , formatter:"select", edittype:"select", editoptions: {value:palCdList      }         },
+                {name:"nutrCd"        , index:"nutrCd"        , label:"영양소코드"        , width:  80, align:"center" , hidden: true , editable: true                                                                                       },
+                {name:"nutrStatCdTemp", index:"nutrStatCdTemp", label:"영양섭취상태"      , width:  80, align:"center" , hidden: true , editable: false                                                                                      },
+                {name:"nutrStatCd"    , index:"nutrStatCd"    , label:"영양섭취상태"      , width:  80, align:"center" , hidden: false, editable: true , formatter:"select", edittype:"select", editoptions : {value:nutrStatCdList}         },
+                {name:"regDt"         , index:"regDt"         , label:"등록일자"          , width:  60, align:"center" , hidden: false, editable: false, formatter: function(cellValue, options, rowObject) { return formatDate(cellValue); }},
+                {name:"regTm"         , index:"regTm"         , label:"등록시각"          , width:  60, align:"center" , hidden: false, editable: false, formatter: function(cellValue, options, rowObject) { return formatTime(cellValue); }},
+                {name:"regUserId"     , index:"regUserId"     , label:"등록사용자ID"      , width:  60, align:"center" , hidden: false, editable: false                                                                                      },
+                {name:"uptDt"         , index:"uptDt"         , label:"수정일자"          , width:  60, align:"center" , hidden: false, editable: false, formatter: function(cellValue, options, rowObject) { return formatDate(cellValue); }},
+                {name:"uptTm"         , index:"uptTm"         , label:"수정시각"          , width:  60, align:"center" , hidden: false, editable: false, formatter: function(cellValue, options, rowObject) { return formatTime(cellValue); }},
+                {name:"uptUserId"     , index:"uptUserId"     , label:"수정사용자ID"      , width:  60, align:"center" , hidden: false                                                                                                       }
             ];
         	console.log("1");
   
@@ -228,7 +213,7 @@ let ddPalMng = new Vue({
                 ,calQtyTo:""
                 ,ddCalQty:""
                 ,palCd:""
-                ,nutrCd:""
+                ,nutrCd:"CAL"
                 ,nutrStatCd:""
                 ,regDt:date
                 ,regTm:date

@@ -35,6 +35,7 @@ let cbeeHist = new Vue({
         	$this.initGrid();
             //$this.searchCbeeHistList(true);
             $this.setDatepicker();
+            document.getElementById("stdtNm").focus();
         },
         initValue: function()
         {
@@ -44,6 +45,7 @@ let cbeeHist = new Vue({
             //기준_일자_기간_리스트
             $this.code.bDPerList = CodeUtil.getPeriodDateList();
             const terms = getPeriodDate($this.params.bDPer);
+
             this.params.occrDttmFr = terms.strDt;
             this.params.occrDttmTo = terms.endDt;
         },
@@ -57,17 +59,17 @@ let cbeeHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "occrDttm"    , index: "occrDttm"    , label: "발생 일시" 	             , width: 50 , align: "center" , formatter: function(cellValue, options, rowObject) { return formatTimestamp(cellValue);}},
-                {name: "locNm"       , index: "locNm"       , label: "학교 명" 	                 , width: 50 , align: "center" },
+                {name: "occrDttm"    , index: "occrDttm"    , label: "발생 일시" 	             , width: 50 , align: "center" , formatter: function(cellValue) { return formatTimestamp(cellValue);}},
+                {name: "locNm"       , index: "locNm"       , label: "학교 명" 	                 , width: 50 , align: "left"   },
                 {name: "stdtNo"      , index: "stdtNo"      , label: "학생 번호" 	             , width: 50 , align: "center" },
                 {name: "stdtNm"      , index: "stdtNm"      , label: "학생 명" 	                 , width: 50 , align: "center" },
-                {name: "cbeeUseCdNm" , index: "cbeeUseCdNm" , label: "발생 구분<br/>(적립/소진)"  , width: 50 , align: "center" },
-                {name: "useCbeeAmt"  , index: "useCbeeAmt"  , label: "발생 금액"                 , width: 50 , align: "center" , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue);}},
-                {name: "cbeeBal"     , index: "cbeeBal"     , label: "누적 잔액"                 , width: 50 , align: "center" , formatter: function(cellValue, options, rowObject) { return numberFormat(cellValue);}},
-                {name: "telNo"       , index: "telNo"       , label: "학생(밴드)<br/>전화번호"   , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}},
+                {name: "cbeeUseCdNm" , index: "cbeeUseCdNm" , label: "발생 구분<br/>(적립/소진)" , width: 50 , align: "center" },
+                {name: "useCbeeAmt"  , index: "useCbeeAmt"  , label: "발생 금액"                 , width: 50 , align: "center" , formatter: function(cellValue) { return numberFormat(cellValue);  }},
+                {name: "cbeeBal"     , index: "cbeeBal"     , label: "누적 잔액"                 , width: 50 , align: "center" , formatter: function(cellValue) { return numberFormat(cellValue);  }},
+                {name: "telNo"       , index: "telNo"       , label: "학생(밴드)<br/>전화번호"   , width: 50 , align: "center"  ,formatter: function(cellValue) { return phoneFormatter(cellValue);}},
                 {name: "guarNo"      , index: "guarNo"      , label: "보호자 번호"               , width: 50 , align: "center" },
                 {name: "guarNm"      , index: "guarNm"      , label: "보호자 명"                 , width: 50 , align: "center" },
-                {name: "guarTelNo" 	 , index: "guarTelNo" 	, label: "보호자<br/>전화번호"       , width: 50 , align: "center"  ,formatter:function(cellValue, options, rowObject){ return phoneFormatter(cellValue);}}
+                {name: "guarTelNo" 	 , index: "guarTelNo" 	, label: "보호자<br/>전화번호"       , width: 50 , align: "center" , formatter:function(cellValue)  { return phoneFormatter(cellValue);}}
             ];
             $("#cbeeHist_list").jqGrid("GridUnload");
            	$("#cbeeHist_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -95,6 +97,12 @@ let cbeeHist = new Vue({
                 }
             }));
             resizeJqGridWidth("cbeeHist_list", "cbeeHist_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchCbeeHistList(true);
         },
         //캐시비 이력 리스트 조회
         searchCbeeHistList: function(isSearch)

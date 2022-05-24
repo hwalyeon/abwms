@@ -50,15 +50,11 @@ let btchJobHist = new Vue({
             let $this = this;
 
             $this.initValue();
-
             $this.initCodeList();
-
             $this.initGrid();
-
-            $this.searchLocHistList(true);
-
             $this.setDatepicker();
-
+            $this.searchLocHistList(true);
+            document.getElementById("jobNm").focus();
         },
         initValue: function() {
             let $this = this;
@@ -126,6 +122,12 @@ let btchJobHist = new Vue({
             }));
 
             resizeJqGridWidth("grid_list", "grid_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchLocHistList(true);
         },
         searchLocHistList: function(isSearch) {
 

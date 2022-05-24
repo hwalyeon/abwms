@@ -777,12 +777,6 @@ let locInfoMng = new Vue({
             // console.log(cntrLat, cntrLng, swLat, swLng, neLat, neLng);
             $this.searchZoneList();
         },
-        // 조회검증
-        checkSearch: function()
-        {
-        	let $this = this;
-        	$this.searchZoneList(true);
-        },
         searchZoneList: function() {
             let $this = this;
             if ( $this.currSwLat > 0.0 && $this.currSwLng > 0.0 && $this.currNeLat > 0.0 && $this.currNeLng > 0.0 )
@@ -1504,6 +1498,12 @@ let locInfoMng = new Vue({
             }));
 
             resizeJqGridWidth("locInfo_list", "locInfo_list_wrapper");
+        },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	$this.searchLocInfoList(true);
         },
         searchLocInfoList: function(isSearch) {
             let $this = this;
