@@ -1,6 +1,5 @@
 package kr.co.seculink.web.service.oper.cmon;
 
-import kr.co.seculink.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;

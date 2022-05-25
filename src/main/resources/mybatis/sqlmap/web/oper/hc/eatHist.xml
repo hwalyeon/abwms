@@ -43,13 +43,13 @@
 		<if test=" stdtNo != null and stdtNo !='' ">
 		and tdeh.stdt_no = #{stdtNo}::NUMERIC </if>                          /*학생_번호*/
 		<if test=" stdtNm != null and stdtNm !='' ">
-		and  DECR(tsb.stdt_nm) like CONCAT('%',#{stdtNm},'%')</if>          /*학생_명*/
+		and tsb.stdt_nm = ENCR(#{stdtNm})</if>          /*학생_명*/
 		<if test=" fmenuNm != null and fmenuNm !='' ">
 		and tfb.fmenu_nm like CONCAT('%',#{fmenuNm},'%')</if>                /*식단표_명*/
 		<if test=" guarNo != null and guarNo !='' ">
 		and tdeh.guar_no = #{guarNo}::NUMERIC </if>                          /*보호자_번호*/
 		<if test=" guarNm != null and guarNm !='' ">
-		and DECR(tgb.guar_nm) like CONCAT('%',#{guarNm},'%')</if>            /*보호자_명*/
+		and tgb.guar_nm = ENCR(#{guarNm})</if>            /*보호자_명*/
 		<if test=" locNm != null and locNm !='' ">
 		and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>                    /*학교_명*/
 		group by tdeh.stnd_dt, TLIB.loc_nm , tdeh.stdt_no, tsb.stdt_nm, tdeh.guar_no, tbi.tel_no , tgb.guar_nm  , tgb.guar_tel_no

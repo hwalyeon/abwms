@@ -47,72 +47,72 @@
                 and    X.CBEE_USE_CD = 'USE')  as USE_TOTAL /*사용 사용금액*/
               ,K.CBEE_BAL/*캐시비 잔액*/
         from     TM_STDT_BASE A
-        inner join
-        TS_BAND_INFO I
-        on		 A.BAND_ID     = I.BAND_ID
-        left outer join
-        TS_STDT_LOC_HIST HI
-        on       A.loc_hist_no = HI.LOC_HIST_NO
-        left outer join
-        TM_STDT_GUAR_CONN AA
-        on       A.STDT_NO  = AA.STDT_NO
-        left outer join
-        TM_GUAR_BASE B
-        on       AA.GUAR_NO = B.GUAR_NO
-        left outer join
-        TM_PRNT_BASE C
-        on		 B.PRNT_NO   = C.PRNT_NO
-        and        C.SEX_CD    = 'MALE'
-        left outer join
-        TM_PRNT_BASE CC
-        on         B.PRNT_NO   = CC.PRNT_NO
-        and        CC.SEX_CD   = 'FEMALE'
-        left outer join
-        TS_LOC_INFO_BASE D
-        on       A.EORG_LOC_NO = D.LOC_NO
-        left outer join
-        TS_STDT_STRS_HIST F
-        on		 A.STDT_NO   = F.STDT_NO
-        and      A.STRS_HIST_SEQ = F.STRS_HIST_SEQ
-        left outer join
-        TS_STDT_DGEM_HIST H
-        on	     A.STDT_NO   = H.STDT_NO
-        and        A.DGEM_HIST_SEQ = H.DGEM_HIST_SEQ
-        left outer join
-        TI_DGEM_STND E
-        on		 H.ACT_DIV_CD   = E.ACT_DIV_CD
-        and        H.HBIT_STAT_CD = E.HBIT_STAT_CD
-        and        H.DGEM_STAT_CD = E.DGEM_STAT_CD
-        and        H.PLC_CLSS_CD  = E.PLC_CLSS_CD
-        and        H.TEMP_STAT_CD = E.TEMP_STAT_CD
-        left outer join
-        TS_GFIX_HIST G
-        on  	 A.STDT_NO     = G.STDT_NO
-        and      A.GFIX_DT     = G.GFIX_DT
-        left outer join
-        TS_STDT_CBEE_HIST K
-        on		 A.STDT_NO      = K.STDT_NO
-        and      A.CBEE_HIST_NO = K.CBEE_HIST_NO
+                 inner join
+                 TS_BAND_INFO I
+                 on		 A.BAND_ID     = I.BAND_ID
+                 left outer join
+                 TS_STDT_LOC_HIST HI
+                 on       A.loc_hist_no = HI.LOC_HIST_NO
+                 left outer join
+                 TM_STDT_GUAR_CONN AA
+                 on       A.STDT_NO  = AA.STDT_NO
+                 left outer join
+                 TM_GUAR_BASE B
+                 on       AA.GUAR_NO = B.GUAR_NO
+                 left outer join
+                 TM_PRNT_BASE C
+                 on		 B.PRNT_NO   = C.PRNT_NO
+                 and        C.SEX_CD    = 'MALE'
+                 left outer join
+                 TM_PRNT_BASE CC
+                 on         B.PRNT_NO   = CC.PRNT_NO
+                 and        CC.SEX_CD   = 'FEMALE'
+                 left outer join
+                 TS_LOC_INFO_BASE D
+                 on       A.EORG_LOC_NO = D.LOC_NO
+                 left outer join
+                 TS_STDT_STRS_HIST F
+                 on		 A.STDT_NO   = F.STDT_NO
+                 and      A.STRS_HIST_SEQ = F.STRS_HIST_SEQ
+                 left outer join
+                 TS_STDT_DGEM_HIST H
+                 on	     A.STDT_NO   = H.STDT_NO
+                 and        A.DGEM_HIST_SEQ = H.DGEM_HIST_SEQ
+                 left outer join
+                 TI_DGEM_STND E
+                 on		 H.ACT_DIV_CD   = E.ACT_DIV_CD
+                 and        H.HBIT_STAT_CD = E.HBIT_STAT_CD
+                 and        H.DGEM_STAT_CD = E.DGEM_STAT_CD
+                 and        H.PLC_CLSS_CD  = E.PLC_CLSS_CD
+                 and        H.TEMP_STAT_CD = E.TEMP_STAT_CD
+                 left outer join
+                 TS_GFIX_HIST G
+                 on  	 A.STDT_NO     = G.STDT_NO
+                 and      A.GFIX_DT     = G.GFIX_DT
+                 left outer join
+                 TS_STDT_CBEE_HIST K
+                 on		 A.STDT_NO      = K.STDT_NO
+                 and      A.CBEE_HIST_NO = K.CBEE_HIST_NO
         where      1=1
     <if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-    and B.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>
+        and B.ENTR_DT between #{entrDtFr} and #{entrDtTo}</if>
     <if test=" stdtNo != null and stdtNo !='' ">
-    and      A.STDT_NO     = #{stdtNo}::numeric</if>
+        and      A.STDT_NO     = #{stdtNo}::numeric</if>
     <if test=" stdtNm != null and stdtNm !='' ">
-    and      DECR(A.STDT_NM)     like concat('%',#{stdtNm},'%')</if>
+        and      A.STDT_NM  = ENCR(#{stdtNm})</if>
     <if test=" telNo != null and telNo !='' ">
-    and      DECR(I.TEL_NO)      like concat('%',#{telNo},'%')</if>
+        and      DECR(I.TEL_NO)      like concat('%',#{telNo},'%')</if>
     <if test=" bandId != null and bandId !='' ">
-    and      I.BAND_ID     like concat('%',#{bandId},'%')</if>
+        and      I.BAND_ID     like concat('%',#{bandId},'%')</if>
     <if test=" guarNo != null and guarNo !='' ">
-    and      B.GUAR_NO     = #{guarNo}::numeric</if>
+        and      B.GUAR_NO     = #{guarNo}::numeric</if>
     <if test=" prntNm != null and prntNm !='' ">
-    and    (  DECR(C.PRNT_NM) 	   like concat('%',#{prntNm},'%')  OR  DECR(CC.PRNT_NM) 	   like concat('%',#{prntNm},'%') )</if>
+        and    (  DECR(C.PRNT_NM) 	   like concat('%',#{prntNm},'%')  OR  DECR(CC.PRNT_NM) 	   like concat('%',#{prntNm},'%') )</if>
     <if test=" guarTelNo != null and guarTelNo !='' ">
-    and      DECR(B.GUAR_TEL_NO) like concat('%',#{guarTelNo},'%')</if>
+        and      DECR(B.GUAR_TEL_NO) like concat('%',#{guarTelNo},'%')</if>
     <if test=" locNm != null and locNm !='' ">
-    and      D.LOC_NM      like concat('%',#{locNm},'%')</if>
-    ORDER BY A.STDT_NO
+        and      D.LOC_NM      like concat('%',#{locNm},'%')</if>
+        ORDER BY A.STDT_NO
     <if test=' paging == "Y" '>
     LIMIT ${rowCount} OFFSET ${currentIndex}
     </if>
@@ -364,13 +364,13 @@
                ,tsgh.wast_val
                ,tgb.prnt_no
          from tm_stdt_base tsb                 /* 학생 */
-         inner join tm_stdt_guar_conn tsgc
-           on tsb.stdt_no = tsgc.stdt_no
-         inner join tm_guar_base tgb           /* 보호자 */
-           on tsgc.guar_no = tgb.guar_no
-         left outer join ts_stdt_grow_hist tsgh /*학생 성장기록*/
-           on tsb.stdt_no  = tsgh.stdt_no
-          and tsb.grow_mesu_dt  = tsgh.mesu_dt
+              inner join tm_stdt_guar_conn tsgc
+              on tsb.stdt_no = tsgc.stdt_no
+              inner join tm_guar_base tgb           /* 보호자 */
+              on tsgc.guar_no = tgb.guar_no
+              left outer join ts_stdt_grow_hist tsgh /*학생 성장기록*/
+              on tsb.stdt_no  = tsgh.stdt_no
+              and tsb.grow_mesu_dt  = tsgh.mesu_dt
          where tsb.stdt_no = #{stdtNo}::numeric
           and  tgb.guar_no = #{guarNo}::numeric
     )
@@ -385,8 +385,8 @@
                  ,case when tpb.sex_cd = 'MALE' then decr(tpb.prnt_nm) else '' end as prnt_male
                  ,case when tpb.sex_cd = 'FEMALE' then decr(tpb.prnt_nm) else '' end as prnt_female
             from stdt_info stdt
-            inner join tm_prnt_base tpb
-            on stdt.prnt_no = tpb.prnt_no
+                 inner join tm_prnt_base tpb
+                 on stdt.prnt_no = tpb.prnt_no
             ) as prnt
         group by prnt_no
     )
@@ -402,9 +402,9 @@
               ,tslh.lon_val
               ,to_char(to_timestamp(tslh.occr_dttm  , 'YYYYMMDDhh24miss') , 'YYYY-MM-DD hh24:mi:ss') as occr_dttm
         from ts_stdt_loc_hist tslh
-        inner join stdt_info stdt
-           on tslh.stdt_no = stdt.stdt_no
-          and tslh.loc_hist_no = stdt.loc_hist_no
+             inner join stdt_info stdt
+              on tslh.stdt_no = stdt.stdt_no
+             and tslh.loc_hist_no = stdt.loc_hist_no
     )
     , grow_stat_list as (
     /* 위험감정 */
@@ -428,19 +428,19 @@
              ,tsdh.dgem_stat_cd
              ,fn_getcdnm('DGEM_STAT_CD' , tsdh.dgem_stat_cd) as dgem_stat_nm
          from ts_stdt_dgem_hist tsdh      /* 학생위험상태 */
-         inner join stdt_info stdt
-           on tsdh.stdt_no = stdt.stdt_no
-          and tsdh.dgem_hist_seq = stdt.dgem_hist_seq
-         inner join ti_dgem_stnd tds
-           on tsdh.act_div_cd = tds.act_div_cd
-          and tsdh.hbit_stat_cd = tds.hbit_stat_cd
-          and tsdh.plc_clss_cd = tds.plc_clss_cd
-          and tsdh.temp_stat_cd = tds.temp_stat_cd
-         inner join ts_stdt_loc_hist tslh
-           on  tsdh.stdt_no = tslh.stdt_no
-          and tsdh.loc_hist_no = tslh.loc_hist_no
-         inner join td_judg_base tjb
-           on tsdh.judg_no = tjb.judg_no
+              inner join stdt_info stdt
+               on tsdh.stdt_no = stdt.stdt_no
+              and tsdh.dgem_hist_seq = stdt.dgem_hist_seq
+              inner join ti_dgem_stnd tds
+               on tsdh.act_div_cd = tds.act_div_cd
+              and tsdh.hbit_stat_cd = tds.hbit_stat_cd
+              and tsdh.plc_clss_cd = tds.plc_clss_cd
+              and tsdh.temp_stat_cd = tds.temp_stat_cd
+              inner join ts_stdt_loc_hist tslh
+               on  tsdh.stdt_no = tslh.stdt_no
+              and tsdh.loc_hist_no = tslh.loc_hist_no
+              inner join td_judg_base tjb
+               on tsdh.judg_no = tjb.judg_no
     )
    , gfix_list as (
     /* 성장,비만지수 */
@@ -463,13 +463,13 @@
              ,fn_getcdnm('NUTR_STAT_CD' , tgh.cal_nutr_stat_cd) as cal_nutr_stat_nm
              ,to_char(to_timestamp(tgh.upt_dt||tgh.upt_tm ,'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') as gfix_upt_dttm
         from ts_gfix_hist tgh /* 성장이력 */
-        inner join stdt_info stdt
-           on tgh.stdt_no = tgh.stdt_no
-          and tgh.gfix_dt = stdt.gfix_dt
-        inner join ti_grow_judg_stnd tgjs
-           on tgh.grow_judg_cd = tgjs.grow_judg_cd
-        inner join ti_fat_judg_stnd tfjs
-           on tgh.fat_judg_cd = tfjs.fat_judg_cd
+             inner join stdt_info stdt
+              on tgh.stdt_no = tgh.stdt_no
+             and tgh.gfix_dt = stdt.gfix_dt
+             inner join ti_grow_judg_stnd tgjs
+              on tgh.grow_judg_cd = tgjs.grow_judg_cd
+             inner join ti_fat_judg_stnd tfjs
+              on tgh.fat_judg_cd = tfjs.fat_judg_cd
     )
     , strs_list as (
     /* 스트레스 */
@@ -489,9 +489,9 @@
              ,fn_getcdnm('STRS_COPE_STAT_CD' , tssh.strs_cope_stat_cd) as strs_cope_stat_nm
              ,to_char(to_timestamp(tssh.upt_dt||tssh.upt_tm ,'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') as strs_upt_dttm
         from ts_stdt_strs_hist tssh
-        inner join stdt_info stdt
-           on tssh.stdt_no = stdt.stdt_no
-        and tssh.strs_hist_seq = stdt.strs_hist_seq
+             inner join stdt_info stdt
+              on tssh.stdt_no = stdt.stdt_no
+             and tssh.strs_hist_seq = stdt.strs_hist_seq
     )
     select
           stdt.*
@@ -549,18 +549,18 @@
          ,gfix.cal_nutr_stat_nm
          ,gfix.gfix_upt_dttm
     from stdt_info stdt
-    inner join prnt_info prnt
-      on stdt.prnt_no = prnt.prnt_no
-    inner join  ts_band_info tbi
-      on stdt.band_id = tbi.band_id
-    left outer join loc_list loc
-      on stdt.stdt_no = loc.stdt_no
-    left outer join grow_stat_list grow
-      on stdt.stdt_no = grow.stdt_no
-    left outer join gfix_list gfix
-      on stdt.stdt_no = gfix.stdt_no
-    left outer join strs_list strs
-      on stdt.stdt_no = strs.stdt_no
+         inner join prnt_info prnt
+         on stdt.prnt_no = prnt.prnt_no
+         inner join ts_band_info tbi
+         on stdt.band_id = tbi.band_id
+         left outer join loc_list loc
+         on stdt.stdt_no = loc.stdt_no
+         left outer join grow_stat_list grow
+         on stdt.stdt_no = grow.stdt_no
+         left outer join gfix_list gfix
+         on stdt.stdt_no = gfix.stdt_no
+         left outer join strs_list strs
+         on stdt.stdt_no = strs.stdt_no
 ]]>
     </select>
 
@@ -570,10 +570,10 @@
             ,count(distinct tpb.prnt_no) as prnt_no_cnt
             ,max(tpb.prnt_no) as prnt_no
         from ts_band_spec tbs
-        inner join tm_guar_base tgb
-          on tbs.guar_tel_no = tgb.guar_tel_no
-        left outer join tm_prnt_base tpb
-          on tgb.prnt_no = tpb.prnt_no
+             inner join tm_guar_base tgb
+             on tbs.guar_tel_no = tgb.guar_tel_no
+             left outer join tm_prnt_base tpb
+             on tgb.prnt_no = tpb.prnt_no
         where tbs.band_id = #{bandId}
     </select>
 
@@ -599,12 +599,15 @@
               ,to_char(now(), 'HH24MISS')
               ,#{uptUserId}
         from   ts_band_info a
-        inner join ts_band_spec b
-        on  b.band_id = a.band_id
-        inner join tm_stdt_base c
-        on  c.band_id = a.band_id
-        inner join tm_guar_base d
-        on  d.guar_tel_no = b.guar_tel_no
+               inner join
+               ts_band_spec b
+               on  b.band_id = a.band_id
+               inner join
+               tm_stdt_base c
+               on  c.band_id = a.band_id
+               inner join
+               tm_guar_base d
+               on  d.guar_tel_no = b.guar_tel_no
         where  1 = 1
         and    c.stdt_no = ${stdtNo}
         and    not exists(select 1

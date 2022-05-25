@@ -134,12 +134,12 @@
 				AND 	TLIB.LOC_NO &gt; '999999'</if>
 				<if test="guarNo != null and guarNo !=''">
 				AND  	TGB.GUAR_NO = #{guarNo}::NUMERIC</if>
-				<if test="stdtNo != null and stdtNo !=''">
+			<if test="stdtNo != null and stdtNo !=''">
 				AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
 				<if test="guarNm != null and guarNm !=''">
-				AND  	DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%')</if>
+				AND  	TGB.GUAR_NM = ENCR(#{guarNm})</if>
 				<if test="stdtNm != null and stdtNm !=''">
-				AND  	DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%')</if>
+				AND  	TSB.STDT_NM = ENCR(#{stdtNm})</if>
 				GROUP BY TLIB.LOC_NO,
 						TSB.STDT_NO
 				ORDER BY TLIB.LOC_NM
@@ -186,9 +186,9 @@
 				<if test="stdtNo != null and stdtNo !=''">
 					AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
 				<if test="guarNm != null and guarNm !=''">
-					AND  	DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%')</if>
+					AND  	TGB.GUAR_NM = ENCR(#{guarNm})</if>
 				<if test="stdtNm != null and stdtNm !=''">
-					AND  	DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%')</if>
+					AND  	TSB.STDT_NM = ENCR(#{stdtNm})</if>
 				GROUP BY TLIB.LOC_NO,
 				TSB.STDT_NO
 				ORDER BY TLIB.LOC_NO
@@ -382,15 +382,15 @@
 					UPT_DT		= TO_CHAR(NOW(), 'YYYYMMDD'::TEXT),
 					UPT_TM		= TO_CHAR(NOW(), 'HH24MISS'::TEXT),
 					UPT_USER_ID	= ''
-		WHERE		LOC_NO		= #{locNo}
+		WHERE		LOC_NO		= #{locNo}::NUMERIC
 	</delete>
 
 	<!--TM_GUAR_APNT_PLC 삭제-->
 	<delete id ="deleteTmGuarApntPlc" parameterType="java.util.Map">
 		DELETE
 		FROM    	TM_GUAR_APNT_PLC
-		WHERE		LOC_NO		= #{locNo}
-		AND 		STDT_NO		= #{stdtNo}
+		WHERE		LOC_NO		= #{locNo}::NUMERIC
+		AND 		STDT_NO		= #{stdtNo}::NUMERIC
 	</delete>
 
 	<!--TM_GUAR_APNT_PLC 인서트-->
@@ -447,21 +447,18 @@
 					DECR(TGB.GUAR_TEL_NO)   AS GUAR_TEL_NO
 		FROM        TM_STDT_BASE TSB
 					INNER JOIN
-					TM_STDT_GUAR_CONN TSGC
-					ON TSB.STDT_NO = TSGC.STDT_NO
-					INNER JOIN
 					TM_GUAR_BASE TGB
-					ON TSGC.GUAR_NO  = TGB.GUAR_NO
+					ON TSB.PRNT_NO  = TGB.PRNT_NO
 		WHERE       1=1
 		AND         TSB.DEL_YN = 'N'
 		<if test="stdtNo != null and stdtNo !=''">
-		AND         TSB.STDT_NO = #{stdtNo} </if>
+		AND         TSB.STDT_NO = #{stdtNo}::NUMERIC </if>
 		<if test="guarNo != null and guarNo !=''">
-		AND         TSGC.GUAR_NO = #{guarNo} </if>
+		AND         TGB.GUAR_NO = #{guarNo}::NUMERIC  </if>
 		<if test="stdtNm != null and stdtNm !=''">
-		AND         DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%') </if>
+		AND         TSB.STDT_NM = ENCR(#{stdtNm}) </if>
 		<if test="guarNm != null and guarNm !=''">
-		AND         DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%') </if>
+		AND         TGB.GUAR_NM = ENCR(#{guarNm}) </if>
 		<if test="guarTelNo != null and guarTelNo !=''">
 		AND         DECR(TGB.GUAR_TEL_NO) LIKE CONCAT('%',#{guarTelNo},'%') </if>
 		ORDER BY    TSB.STDT_NO
