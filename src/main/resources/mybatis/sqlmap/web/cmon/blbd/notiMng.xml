@@ -100,9 +100,9 @@
 	<update id="updateTsBlbdBase" parameterType="java.util.Map">
 		UPDATE TS_BLBD_BASE
 		SET    UPT_DT      = TO_CHAR(NOW(), 'YYYYMMDD')
-		,UPT_TM      = TO_CHAR(NOW(), 'HH24MMIS')
-		,UPT_USER_ID = #{uptUserId}
-		,BLBD_NO = #{blbdNo}::numeric
+			  ,UPT_TM      = TO_CHAR(NOW(), 'HH24MMIS')
+			  ,UPT_USER_ID = #{uptUserId}
+			  ,BLBD_NO = #{blbdNo}::numeric
 		<if test="blbdStrtDt   != null and blbdStrtDt != ''">,blbd_strt_dt  = #{blbdStrtDt}</if>
 		<if test="blbdExprDt   != null and blbdExprDt != ''">,blbd_expr_dt  = #{blbdExprDt}</if>
 		<if test="blbdTypeCd   != null and blbdTypeCd != ''">,blbd_type_cd  = #{blbdTypeCd}</if>
