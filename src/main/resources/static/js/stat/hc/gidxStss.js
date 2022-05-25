@@ -421,7 +421,7 @@ let gidxStss = new Vue({
 
         },
 
-        //gfidxHist 화면에서 팝업 호출 시 param 값 세팅
+        //gfidxHist 화면에서 호출 시 param 값 세팅
         setParam: function(param) {
             let $this =this;
 

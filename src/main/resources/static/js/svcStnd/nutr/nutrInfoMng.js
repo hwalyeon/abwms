@@ -4,18 +4,18 @@ let nutrInfoMng = new Vue({
         {
             params:
                 {
-                    userId            : ''  ,
+                    userId          : ''  ,
                     nutrNm          : ''  ,    // 영양소_명
-                    gfixDivCd      : ''  ,    // 성장비만지수_구분_코드
+                    gfixDivCd       : ''  ,    // 성장비만지수_구분_코드
                     paging          : 'Y',
-                    totalCount    : 0  ,
-                    rowCount     : 30,
-                    currentPage : 1  ,
-                    currentIndex: 0
+                    totalCount      : 0  ,
+                    rowCount        : 30,
+                    currentPage     : 1  ,
+                    currentIndex    : 0
                 },
             code:
                 {
-                    gfixDivCdList : []
+                    gfixDivCdList    : []
                   , useYnList        : [{'cdVal':'Y', 'cdNm':'Y'},{'cdVal':'N', 'cdNm':'N'}]  //영양상태코드명 리스트
                 },
         },
@@ -56,8 +56,8 @@ let nutrInfoMng = new Vue({
                     {name: "nutrCd"                   , index: "nutrCd"                  , label: "영양소코드"          , width: 80    , align: "center", editable :true },
                     {name: "nutrCdTemp"               , index: "nutrCdTemp"              , label: "영양소코드"                                          , hidden   :true },
                     {name: "nutrNm"                   , index: "nutrNm"                  , label: "영양소명"            , width: 80    , align: "center", editable :true },
-                    {name: "nutrUnitCd"               , index: "nutrUnitCd"              , label: "영양소 단위 코드"    , width: 80    , align: "center", editable :true },
-                    {name: "gfixDivCd"                , index: "gfixDivCd"               , label: "성장비만지수 구분"   , width: 80    , align: "center", editable :true, edittype:"select", formatter:"select", editoptions : {value:gfixDivCdList}},
+                    {name: "nutrUnitCd"               , index: "nutrUnitCd"              , label: "영양소 단위 코드"     , width: 80    , align: "center", editable :true },
+                    {name: "gfixDivCd"                , index: "gfixDivCd"               , label: "성장비만지수 구분"    , width: 80    , align: "center", editable :true, edittype:"select", formatter:"select", editoptions : {value:gfixDivCdList}},
                     {name: "sortOrd"                  , index: "sortOrd"                 , label: "정렬순서"            , width: 80    , align: "center", editable :true, editrules : {number : true}                           },
                     {name: "useYn"                    , index: "useYn"                   , label: "사용여부"            , width: 80    , align: "center", editable: true, edittype:"select"            , formatter:"select" ,editoptions:{value:useYnList}},
                     {name: "regDt"                    , index: "regDt"                   , label: "등록일자"            , width: 80    , align: "center", formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}},
@@ -70,7 +70,8 @@ let nutrInfoMng = new Vue({
                           , formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrStatStndPop(\'' + rowObject.nutrCd + '\')" value="상세보기" data-toggle="modal" data-target="#nutrStatStndDetlPopup" />';}},
                     {name: "nutrEatStndDetlPopup"     , index: "nutrEatStndDetlPopup"    , label: "영양소섭취기준"      , width: 80    , align: "center"
                           , formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.regNutrEatStndPop(\'' + rowObject.nutrCd + '\' , \'' + rowObject.nutrNm + '\' )" value="상세보기" data-toggle="modal" data-target="#nutrEatStndDetlPopup" />';}},
-                    {name: "nutrEatBlckDetlPopup"     , index: "nutrEatBlckDetlPopup"    , label: "영양소섭취구간"      , width: 80    , align: "center"}
+                    {name: "nutrEatBlckDetlPopup"     , index: "nutrEatBlckDetlPopup"    , label: "영양소권장섭취량기준"      , width: 80    , align: "center"
+                         , formatter: function(cellValue, options, rowObject) {return '<input type="button" class="btn btn-xs btn-outline btn-success" onclick="nutrInfoMng.moveDdRcmdEatStndMng(\'' + rowObject.nutrNm + '\')" value="권장섭취량기준" />';}},
                 ];
 
                 $("#nutrInfo_list").jqGrid("GridUnload");
@@ -132,138 +133,144 @@ let nutrInfoMng = new Vue({
                     }).trigger("reloadGrid");
             },
             /**/
-        btnAddRow  :  function()
-        {
-            let $this = this;
-            let date = new Date();
-            var cnt = $("#nutrInfo_list").jqGrid("getGridParam", "records")+1;
-
-            var addRow =
+            btnAddRow  :  function()
             {
-                crud	    : "C" ,
-                nutrCd      : "" ,
-                nutrCdTemp  : "" ,
-                nutrNm          : "" ,
-                nutrUnitCd     : "" ,
-                gfixDivCd      : "" ,
-                sortOrd          : "" ,
-                useYn             : "" ,
-                regDt            : date  ,
-                regTm           : date  ,
-                regUserId     : $this.userId  ,
-                uptDt            : date  ,
-                uptTm           : date  ,
-                uptUserId      : $this.userId
-            };
-            $("#nutrInfo_list").addRowData(cnt, addRow);
+                let $this = this;
+                let date = new Date();
+                var cnt = $("#nutrInfo_list").jqGrid("getGridParam", "records")+1;
 
-        },
-        btnDelRow : function() {
-
-            //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
-            let checkIds = $("#nutrInfo_list").jqGrid("getGridParam","selrow") + "";  // 단건
-            if ( checkIds == "" )
-            {
-                alert("삭제할 행을 선택해주십시요.");
-                return false;
-            }
-
-            let checkId = checkIds.split(",");
-            for ( var i in checkId )
-            {
-                if ( $("#nutrInfo_list").getRowData(checkId[i]).crud == "C" )
+                var addRow =
                 {
-                    $("#nutrInfo_list").setRowData(checkId[i], {crud:"N"});
-                    $("#"+checkId[i],"#nutrInfo_list").css({display:"none"});
-                }
-                else
-                {
-                    $("#nutrInfo_list").setRowData(checkId[i], {crud:"D"});
-                    $("#"+checkId[i],"#nutrInfo_list").css({display:"none"});
-                }
-            }
-        },
-        btnSave  :  function() {
-            let $this = this;
-            let gridData = commonGridGetDataNew($("#nutrInfo_list"));
+                    crud	    : "C" ,
+                    nutrCd      : "" ,
+                    nutrCdTemp  : "" ,
+                    nutrNm          : "" ,
+                    nutrUnitCd     : "" ,
+                    gfixDivCd      : "" ,
+                    sortOrd          : "" ,
+                    useYn             : "" ,
+                    regDt            : date  ,
+                    regTm           : date  ,
+                    regUserId     : $this.userId  ,
+                    uptDt            : date  ,
+                    uptTm           : date  ,
+                    uptUserId      : $this.userId
+                };
+                $("#nutrInfo_list").addRowData(cnt, addRow);
 
-            if(gridData.length > 0){
-                for (let data in gridData){
-                    if(gridData[data].crud === 'C' || gridData[data].crud === 'U'){
-                        if(WebUtil.isNull(gridData[data].nutrCd)){
-                            Swal.alert(["영양소코드는 필수 입력입니다.", 'warning']);
-                            return false;
-                        }
-                        if(WebUtil.isNull(gridData[data].sortOrd)){
-                            Swal.alert(["정렬순서는 필수 입력입니다.", 'warning']);
-                            return false;
-                        }
-                        if(WebUtil.isNull(gridData[data].useYn)){
-                            Swal.alert(["사용여부는 필수 입력입니다.", 'warning']);
-                            return false;
-                        }
+            },
+            btnDelRow : function() {
+
+                //var checkIds = $("#dgem_list").jqGrid("getGridParam","selarrrow") + ""; // 멀티
+                let checkIds = $("#nutrInfo_list").jqGrid("getGridParam","selrow") + "";  // 단건
+                if ( checkIds == "" )
+                {
+                    alert("삭제할 행을 선택해주십시요.");
+                    return false;
+                }
+
+                let checkId = checkIds.split(",");
+                for ( var i in checkId )
+                {
+                    if ( $("#nutrInfo_list").getRowData(checkId[i]).crud == "C" )
+                    {
+                        $("#nutrInfo_list").setRowData(checkId[i], {crud:"N"});
+                        $("#"+checkId[i],"#nutrInfo_list").css({display:"none"});
+                    }
+                    else
+                    {
+                        $("#nutrInfo_list").setRowData(checkId[i], {crud:"D"});
+                        $("#"+checkId[i],"#nutrInfo_list").css({display:"none"});
                     }
                 }
-            }else {
-                Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
-                return false;
-            }
-            let param = { gridList : []}
-            param.gridList = gridData;
+            },
+            btnSave  :  function() {
+                let $this = this;
+                let gridData = commonGridGetDataNew($("#nutrInfo_list"));
 
-            AjaxUtil.post({
-                url: "/svcStnd/nutr/nutrInfoMng/saveNutrInfo.ab",
-                param: param,
-                success: function(response) {
-                    Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
-                        $this.searchNutrInfoList(true);
-                    });
-                },
-                error: function (response) {
-                    Swal.alert([response, 'error']);
+                if(gridData.length > 0){
+                    for (let data in gridData){
+                        if(gridData[data].crud === 'C' || gridData[data].crud === 'U'){
+                            if(WebUtil.isNull(gridData[data].nutrCd)){
+                                Swal.alert(["영양소코드는 필수 입력입니다.", 'warning']);
+                                return false;
+                            }
+                            if(WebUtil.isNull(gridData[data].sortOrd)){
+                                Swal.alert(["정렬순서는 필수 입력입니다.", 'warning']);
+                                return false;
+                            }
+                            if(WebUtil.isNull(gridData[data].useYn)){
+                                Swal.alert(["사용여부는 필수 입력입니다.", 'warning']);
+                                return false;
+                            }
+                        }
+                    }
+                }else {
+                    Swal.alert(["저장 대상 데이터가 없습니다.", 'warning']);
+                    return false;
                 }
-            });
-        },
-        /**/
-        downloadExcel : function()
-        {
-            let $this = this;
-            let params = $.extend(true, {}, $this.params);
+                let param = { gridList : []}
+                param.gridList = gridData;
 
-            AjaxUtil.post(
-                {
-                    dataType: 'binary',
-                    url: "/svcStnd/nutr/nutrInfoMng/searchNutrInfoList/excel.ab",
-                    param: params,
-                    success: function(response)
-                    {
-                        saveFileLocal(response, 'nutrInfoMng.xls');
+                AjaxUtil.post({
+                    url: "/svcStnd/nutr/nutrInfoMng/saveNutrInfo.ab",
+                    param: param,
+                    success: function(response) {
+                        Swal.alert(['저장이 완료되었습니다.', 'success']).then(function() {
+                            $this.searchNutrInfoList(true);
+                        });
                     },
-                    error: function (response)
-                    {
+                    error: function (response) {
                         Swal.alert([response, 'error']);
                     }
                 });
-        },
-        regNutrStatStndPop : function (nutrCd){
-            nutrStatStndDetl.initPage(nutrCd);
-        },
-        regNutrEatStndPop : function (nutrCd, nutrNm){
-            nutrEatStndDetl.initPage(nutrCd, nutrNm);
-        },
-        resetSearchParam: function()
-        {
-            let $this = this;
-            $this.params =
+            },
+            /**/
+            downloadExcel : function()
             {
-                nutrNm          : ''  ,    // 영양소_명
-                paging          : 'Y',
-                totalCount    : 0  ,
-                rowCount     : 30,
-                currentPage : 1  ,
-                currentIndex: 0
+                let $this = this;
+                let params = $.extend(true, {}, $this.params);
+
+                AjaxUtil.post(
+                    {
+                        dataType: 'binary',
+                        url: "/svcStnd/nutr/nutrInfoMng/searchNutrInfoList/excel.ab",
+                        param: params,
+                        success: function(response)
+                        {
+                            saveFileLocal(response, 'nutrInfoMng.xls');
+                        },
+                        error: function (response)
+                        {
+                            Swal.alert([response, 'error']);
+                        }
+                    });
+            },
+            regNutrStatStndPop : function (nutrCd){
+                nutrStatStndDetl.initPage(nutrCd);
+            },
+            regNutrEatStndPop : function (nutrCd, nutrNm){
+                nutrEatStndDetl.initPage(nutrCd, nutrNm);
+            },
+            moveDdRcmdEatStndMng : function (nutrNm){
+                let menuNo = 'F640';
+                let params = {'nutrNm' : nutrNm}
+                top.navigation.openMenuByMenuNo(menuNo, "nutrInfoMng", params);
+                top.index.$emit('SET_PARAM', params);
+            },
+            resetSearchParam: function()
+            {
+                let $this = this;
+                $this.params =
+                {
+                    nutrNm          : ''  ,    // 영양소_명
+                    paging          : 'Y',
+                    totalCount    : 0  ,
+                    rowCount     : 30,
+                    currentPage : 1  ,
+                    currentIndex: 0
+                }
             }
-        }
     },
     computed:
         {
