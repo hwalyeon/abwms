@@ -38,14 +38,12 @@ let dzoneStss = new Vue({
                 let $this = this;
 
                 $this.initCodeList();
-
                 $this.initChart();
-
                 $this.setDatepicker();
-
                 $this.initData();
-
+                
                 $this.initSearch();
+                document.getElementById("ageYcntFr").focus();
             },
             initCodeList: function()
             {
@@ -176,6 +174,12 @@ let dzoneStss = new Vue({
                 };
 
                 $this.chartDzoneStss = new Chart(ctxDzoneStss, configDzoneStss);
+            },
+            // 조회검증
+            checkSearch: function()
+            {
+            	let $this = this;
+            	$this.searchDzoneStssList(true);
             },
             searchDzoneStssList: function(isSearch )
             {
