@@ -106,11 +106,11 @@
         <if test=" stdtNo != null and stdtNo !='' ">
             and    A.STDT_NO = #{stdtNo}::numeric</if>
         <if test=" stdtNm != null and stdtNm !='' ">
-            and    DECR(A.STDT_NM) = #{stdtNm}</if>
+            and    A.STDT_NM = ENCR(#{stdtNm})</if>
         <if test=" guarNo != null and guarNo !='' ">
             and    C.GUAR_NO = #{guarNo}::numeric</if>
         <if test=" guarNm != null and guarNm !='' ">
-            and    DECR(C.GUAR_NM) = #{guarNm}</if>
+            and    C.GUAR_NM = ENCR(#{guarNm})</if>
         <if test=" guarTelNo != null and guarTelNo !='' ">
             and    DECR(C.GUAR_TEL_NO) = #{guarTelNo}</if>
         group  by A.STDT_NO , A.STDT_NM , C.GUAR_NO , C.GUAR_NM

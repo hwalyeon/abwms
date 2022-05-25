@@ -42,19 +42,19 @@
          ,DECR(C.GUAR_NM) as GUAR_NM
          ,DECR(C.GUAR_TEL_NO) as GUAR_TEL_NO
     from   TM_STDT_BASE A
-    left outer join TM_STDT_GUAR_CONN B
-    on     A.STDT_NO = B.STDT_NO
-    left outer join TM_GUAR_BASE C
-    on     B.GUAR_NO = C.GUAR_NO
+           left outer join TM_STDT_GUAR_CONN B
+           on     A.STDT_NO = B.STDT_NO
+           left outer join TM_GUAR_BASE C
+           on     B.GUAR_NO = C.GUAR_NO
     where  1=1
     <if test=" stdtNo != null and stdtNo !='' ">
 	  and    A.STDT_NO = #{stdtNo}::numeric</if>
     <if test=" stdtNm != null and stdtNm !='' ">
-	  and    DECR(A.STDT_NM) = #{stdtNm}</if>
+	  and    A.STDT_NM = ENCR(#{stdtNm})</if>
     <if test=" guarNo != null and guarNo !='' ">
 	  and    C.GUAR_NO = #{guarNo}::numeric</if>
     <if test=" guarNm != null and guarNm !='' ">
-	  and    DECR(C.GUAR_NM) = #{guarNm}</if>
+	  and    C.GUAR_NM = ENCR(#{guarNm})</if>
     <if test=" guarTelNo != null and guarTelNo !='' ">
 	  and    DECR(C.GUAR_TEL_NO) = #{guarTelNo}</if>
     group  by A.STDT_NO , A.STDT_NM , C.GUAR_NO , C.GUAR_NM

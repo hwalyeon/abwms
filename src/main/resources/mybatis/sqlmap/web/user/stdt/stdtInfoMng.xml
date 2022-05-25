@@ -99,7 +99,7 @@
     <if test=" stdtNo != null and stdtNo !='' ">
         and      A.STDT_NO     = #{stdtNo}::numeric</if>
     <if test=" stdtNm != null and stdtNm !='' ">
-        and      DECR(A.STDT_NM)     like concat('%',#{stdtNm},'%')</if>
+        and      A.STDT_NM  = ENCR(#{stdtNm})</if>
     <if test=" telNo != null and telNo !='' ">
         and      DECR(I.TEL_NO)      like concat('%',#{telNo},'%')</if>
     <if test=" bandId != null and bandId !='' ">

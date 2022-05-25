@@ -28,7 +28,7 @@
                <if test ="qustDtFr != null and qustDtFr !='' and qustDtTo != null and qustDtTo !=''">
         AND    to_char(to_date(tqb.qust_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{qustDtFr} and #{qustDtTo}</if> --질문 일자
                <if test ="guarNm != null and guarNm !='' ">
-        AND    tgb.guar_nm LIKE CONCAT('%',#{guarNm},'%') </if>                                                   --질문자_명
+        AND    tgb.guar_nm  = ENCR(#{guarNm}) </if>                                                   --질문자_명
                <if test ="qustGuarNo != null and qustGuarNo !='' ">
         AND    tqb.qust_guar_no = #{qustGuarNo}::NUMERIC</if>                                                     --질문자_번호
                <if test ="ansDtFr != null and ansDtFr !='' and ansDtTo != null and ansDtTo !=''">
