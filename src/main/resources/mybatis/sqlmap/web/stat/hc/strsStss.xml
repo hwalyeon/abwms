@@ -124,21 +124,22 @@
          ,coalesce (sum(tsjs.occr_cnt) , 0) as occr_cnt
          ,tcs.sort_ord
       from tc_cd_spec tcs
-      left outer join  tt_strs_judg_stss tsjs
-      on tcs.cd_val = tsjs.strs_stat_cd
+           left outer join
+           tt_strs_judg_stss tsjs
+           on tcs.cd_val = tsjs.strs_stat_cd
       <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-         and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+           and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
       </if>
       <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-         and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+           and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
       </if>
       <if test="sexCd != null and sexCd != ''">
-         and sex_cd = #{sexCd}
+           and sex_cd = #{sexCd}
       </if>
       <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
-        and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+           and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
       </if>
-      and strs_type_cd = #{subStrsTypeCd}
+           and strs_type_cd = #{subStrsTypeCd}
       where 1=1
       <choose>
         <when test="strsTypeCd.equals('CSTRS')">

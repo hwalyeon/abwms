@@ -107,8 +107,9 @@
            ,coalesce(sum(tfjs.occr_cnt) ,0)as occr_cnt
            ,tcs.sort_ord
       from tc_cd_spec tcs
-      left outer join tt_fatp_judg_stss tfjs
-      on tcs.cd_val = tfjs.fatp_judg_cd
+           left outer join
+           tt_fatp_judg_stss tfjs
+           on tcs.cd_val = tfjs.fatp_judg_cd
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
             and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
         </if>
