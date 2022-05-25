@@ -38,6 +38,7 @@ let dgemStss = new Vue({
             $this.initData();
 
             $this.initSearch();
+
             document.getElementById("ageYcntFr").focus();
         },
 
