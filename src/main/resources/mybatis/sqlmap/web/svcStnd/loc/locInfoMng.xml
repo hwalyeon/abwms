@@ -137,9 +137,9 @@
 				<if test="stdtNo != null and stdtNo !=''">
 				AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
 				<if test="guarNm != null and guarNm !=''">
-				AND  	DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%')</if>
+				AND  	TGB.GUAR_NM = ENCR(#{guarNm})</if>
 				<if test="stdtNm != null and stdtNm !=''">
-				AND  	DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%')</if>
+				AND  	TSB.STDT_NM = ENCR(#{stdtNm})</if>
 				GROUP BY TLIB.LOC_NO,
 						TSB.STDT_NO
 				ORDER BY TLIB.LOC_NM
@@ -186,9 +186,9 @@
 				<if test="stdtNo != null and stdtNo !=''">
 					AND  	TSB.STDT_NO = #{stdtNo}::NUMERIC</if>
 				<if test="guarNm != null and guarNm !=''">
-					AND  	DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%')</if>
+					AND  	TGB.GUAR_NM = ENCR(#{guarNm})</if>
 				<if test="stdtNm != null and stdtNm !=''">
-					AND  	DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%')</if>
+					AND  	TSB.STDT_NM = ENCR(#{stdtNm})</if>
 				GROUP BY TLIB.LOC_NO,
 				TSB.STDT_NO
 				ORDER BY TLIB.LOC_NO
@@ -459,9 +459,9 @@
 		<if test="guarNo != null and guarNo !=''">
 		AND         TSGC.GUAR_NO = #{guarNo} </if>
 		<if test="stdtNm != null and stdtNm !=''">
-		AND         DECR(TSB.STDT_NM) LIKE CONCAT('%',#{stdtNm},'%') </if>
+		AND         TSB.STDT_NM = ENCR(#{stdtNm}) </if>
 		<if test="guarNm != null and guarNm !=''">
-		AND         DECR(TGB.GUAR_NM) LIKE CONCAT('%',#{guarNm},'%') </if>
+		AND         TGB.GUAR_NM = ENCR(#{guarNm}) </if>
 		<if test="guarTelNo != null and guarTelNo !=''">
 		AND         DECR(TGB.GUAR_TEL_NO) LIKE CONCAT('%',#{guarTelNo},'%') </if>
 		ORDER BY    TSB.STDT_NO

@@ -42,7 +42,7 @@
 		<if test=" stdtNo != null and stdtNo !='' ">
 			and TSB.STDT_NO = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">
-			and DECR(TSB.STDT_NM) like CONCAT('%',#{stdtNm},'%')</if>
+			and TSB.STDT_NM = ENCR(#{stdtNm})</if>
 		<if test=" bandId != null and bandId !='' ">
 			and TBI.BAND_ID like CONCAT('%',#{bandId},'%')</if>
 		<if test=" telNo != null and telNo !='' ">
@@ -50,7 +50,7 @@
 		<if test=" guarNo != null and guarNo !='' ">
 			and TGB.GUAR_NO = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">
-			and DECR(TGB.GUAR_NM) like CONCAT('%',#{guarNm},'%')</if>
+			and TGB.GUAR_NM = ENCR(#{guarNm})</if>
 		<if test=" guarTelNo != null and guarTelNo !='' ">
 			and TGB.GUAR_TEL_NO = ENCR(#{guarTelNo})</if>
 		<if test=" locNm != null and locNm !='' ">

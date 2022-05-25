@@ -53,7 +53,7 @@
     <if test=" stdtNo != null and stdtNo !='' ">
     and     A.STDT_NO      = #{stdtNo}::numeric                /* 학생번호     */</if>
     <if test=" stdtNm != null and stdtNm !='' ">
-    and     DECR(B.STDT_NM)      like CONCAT ('%',#{stdtNm},'%')     /* 학생명       */</if>
+    and     B.STDT_NM      = ENCR(#{stdtNm})     /* 학생명       */</if>
     <if test=" guarNo != null and guarNo !='' ">
     and     G.GUAR_NO      = #{guarNo}::numeric                /* 보호자번호    */</if>
     <if test=" guarNm != null and guarNm !='' ">
