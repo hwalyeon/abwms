@@ -1738,6 +1738,9 @@ let totMonStat = new Vue({
             $({ val : 0 }).animate({ val : $this.hcFmenuTop3.hcEatCnt3 }, {
                 duration: 1000,
                 step: function() {
+                	if ($this.hcFmenuTop3.hcEatFoodNm1 == null || $this.hcFmenuTop3.hcEatFoodNm1 == '') $this.hcFmenuTop3.hcEatFoodNm1 = "(식단없음)";
+                	if ($this.hcFmenuTop3.hcEatFoodNm2 == null || $this.hcFmenuTop3.hcEatFoodNm2 == '') $this.hcFmenuTop3.hcEatFoodNm2 = "(식단없음)";
+                	if ($this.hcFmenuTop3.hcEatFoodNm3 == null || $this.hcFmenuTop3.hcEatFoodNm3 == '') $this.hcFmenuTop3.hcEatFoodNm3 = "(식단없음)";
                     $this.hcFmenuTop3.hcEatCnt3 = $this.toNumber(this.val.toFixed(1));
                 },
                 complete: function() {
