@@ -10,12 +10,11 @@
         from tt_food_eat_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -57,15 +56,15 @@
         ,tt_food_eat_stss.avg_cal_eat_qty
         ,TFI.food_nm
         from tt_food_eat_stss
-        inner join TI_FOOD_INFO TFI
-        on tt_food_eat_stss.FOOD_NO =TFI.FOOD_NO
+             inner join TI_FOOD_INFO TFI
+             on tt_food_eat_stss.FOOD_NO =TFI.FOOD_NO
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">

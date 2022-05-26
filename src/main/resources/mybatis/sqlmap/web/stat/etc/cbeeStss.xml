@@ -11,12 +11,11 @@
         from tt_cbee_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -45,24 +44,24 @@
 
     <select id="searchCbeeStssList" parameterType="java.util.Map" resultType="MybatisMap">
         select
-        x.stnd_dt
-        ,round(avg(x.cbee_amt),0) as cbee_amt
+             x.stnd_dt
+            ,round(avg(x.cbee_amt),0) as cbee_amt
         from
         (select
-        case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
-             when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , '`YY.MM') || ' ' || mnth_week_seq ||'주차'
-             when #{perdDivCd} = 'WEEK_NM' then week_nm
-             else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
-        end as stnd_dt
-        ,cbee_amt
+              case when #{perdDivCd} = 'MONTH'   then to_char(to_date(stnd_yymm , 'YYYYMM') , 'YYYY-MM')
+                   when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , '`YY.MM') || ' ' || mnth_week_seq ||'주차'
+                   when #{perdDivCd} = 'WEEK_NM' then week_nm
+                   else to_char(to_date(stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
+              end as stnd_dt
+             ,cbee_amt
         from tt_cbee_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">

@@ -13,12 +13,11 @@
         from TT_DGEM_IDX_STSS
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -70,11 +69,11 @@
         from TT_DGEM_IDX_STSS
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -107,21 +106,21 @@
                 ,coalesce(sum(tgjs.occr_cnt) ,0) as occr_cnt
                 ,tcs.sort_ord
         from  tc_cd_spec tcs
-        left outer join tt_dgem_stat_stss tgjs
-        on tcs.cd_val = tgjs.dgem_stat_cd
+              left outer join tt_dgem_stat_stss tgjs
+              on tcs.cd_val = tgjs.dgem_stat_cd
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+              and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+              and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">
-            and sex_cd = #{sexCd}
+              and sex_cd = #{sexCd}
         </if>
         <if test="ageYcntFr != null and ageYcntFr != '' and ageYcntTo != null and ageYcntTo != ''">
-            and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
+              and age_ycnt between ${ageYcntFr} and ${ageYcntTo}
         </if>
         where 1=1
         and tcs.cd_grp = 'DGEM_STAT_CD'

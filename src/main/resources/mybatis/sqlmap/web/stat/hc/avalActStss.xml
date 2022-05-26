@@ -11,12 +11,11 @@
         from tt_act_stss
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
-
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">
@@ -47,24 +46,25 @@
     <select id="searchAvalActStssList" parameterType="java.util.Map" resultType="MybatisMap">
        with tt_act_stss_temp as
        (select
-                         case when #{perdDivCd} = 'MONTH'   then to_char(to_date(x.stnd_yymm , 'YYYYMM') , 'YYYY-MM')
-                              when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , '`YY.MM') || ' ' || mnth_week_seq ||'주차'
-                              when #{perdDivCd} = 'WEEK_NM' then week_nm
-                              else to_char(to_date(x.stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD') end as stnd_dt
+                       case when #{perdDivCd} = 'MONTH'   then to_char(to_date(x.stnd_yymm , 'YYYYMM') , 'YYYY-MM')
+                            when #{perdDivCd} = 'WEEK'    then to_char(to_date(stnd_yymm , 'YYYYMM') , '`YY.MM') || ' ' || mnth_week_seq ||'주차'
+                            when #{perdDivCd} = 'WEEK_NM' then week_nm
+                            else to_char(to_date(x.stnd_dt , 'YYYYMMDD') , 'YYYY-MM-DD')
+                       end as stnd_dt
                       ,x.avg_act_tcnt_mcnt
                       ,x.avg_cal_csum_qty
                       ,x.act_cd
                       ,tas.act_nm
         from tt_act_stss x
-        inner join ti_act_stnd tas
-        on x.act_cd = tas.act_cd
+             inner join ti_act_stnd tas
+             on x.act_cd = tas.act_cd
         where 1=1
         <if test ="stndDtFr != null and stndDtFr != '' and  stndDtTo != null  and stndDtTo != '' and perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{stndDtFr} and #{stndDtTo}
+            and stnd_dt between REPLACE(#{stndDtFr},'-','') and REPLACE(#{stndDtTo},'-','')
         </if>
 
         <if test ="stndMmFr != null and stndMmFr != '' and  stndMmTo != null  and stndMmTo != '' and !perdDivCd.equals('DAY') ">
-            and to_char(to_date(stnd_yymm , 'YYYYMM') ,'YYYY-MM' ) between #{stndMmFr} and #{stndMmTo}
+            and stnd_yymm between REPLACE(#{stndMmFr},'-','') and REPLACE(#{stndMmTo},'-','')
         </if>
 
         <if test="sexCd != null and sexCd != ''">
