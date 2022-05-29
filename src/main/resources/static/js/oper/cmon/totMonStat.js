@@ -363,6 +363,8 @@ let totMonStat = new Vue({
                         });
                         if ($this.dzonTrnd.week1Ago > $this.dzonTrnd.week2Ago ) {
                             $this.dzonTrnd.trnd = '증가 추세';
+                        } else if ($this.dzonTrnd.week1Ago === $this.dzonTrnd.week2Ago) {
+                            $this.dzonTrnd.trnd = '변동 없음';
                         } else {
                             $this.dzonTrnd.trnd = '감소 추세';
                         }
@@ -479,13 +481,13 @@ let totMonStat = new Vue({
             //     operStatChartColor = '#2a99ec';
             // }
 
-            let colorRed = '#ff0b21';
+            // let colorRed = '#ff0b21';
             let colorGre = '#09ea09';
             let colorBlu = '#2a99ec';
             let colorYel = '#f3e24a';
             let colorOra = '#fc8f46';
             let colorGra = '#4d4d4d';
-            let colorLggre = '#c0dc5c';
+            // let colorLggre = '#c0dc5c';
             let colorBla = '#000000';
             let colorWhi = '#ffffff';
             let colorSil = '#c6d3d1';
@@ -801,7 +803,7 @@ let totMonStat = new Vue({
                     $this.textCenter('hcFidxChart', srcIdx, $this.chartHcFidx, colorGre, '' , '');
                 }
             }];
-            // // 의미 확인 후 centerText 수정 필요
+            // 의미 확인 후 centerText 수정 필요
             let pluginsHcFpidx = [{
                 beforeDraw: function () {
                     let srcIdx = '-';
@@ -1081,11 +1083,11 @@ let totMonStat = new Vue({
             },
             //위험감정_카운트
             $this.dgemCnt = {
-                dgemTotl : 0,
-                dgemDzon : 0,
-                dgemFall : 0,
-                dgemHbit : 0,
-                dgemTemp : 0
+                dgemTotl    : 0,
+                dgemDzon    : 0,
+                dgemFall    : 0,
+                dgemHbit    : 0,
+                dgemTemp    : 0
             },
             //위험지역_TOP3_공공
             $this.gorgDtop3 = {
@@ -1221,12 +1223,12 @@ let totMonStat = new Vue({
                     $this.cyclButton.button2 = false;
                     $this.cyclButton.button3 = false;
                     break;
-                case 30000  :
+                case 10000  :
                     $this.cyclButton.button1 = false;
                     $this.cyclButton.button2 = true;
                     $this.cyclButton.button3 = false;
                     break;
-                case 60000  :
+                case 30000  :
                     $this.cyclButton.button1 = false;
                     $this.cyclButton.button2 = false;
                     $this.cyclButton.button3 = true;
@@ -1356,20 +1358,20 @@ let totMonStat = new Vue({
             $({ val : 0 }).animate({ val : $this.dgsfOccr.difCnt }, {
                 duration: 1000,
                 step: function() {
-                    $this.dgsfOccr.difCnt = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfOccr.difCnt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.dgsfOccr.difCnt = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfOccr.difCnt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 위험안전발생 : 인평균
             $({ val : 0 }).animate({ val : $this.dgsfOccr.persAvg }, {
                 duration: 1000,
                 step: function() {
-                    $this.dgsfOccr.persAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfOccr.persAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.dgsfOccr.persAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfOccr.persAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 위험안전발생 : 정상
@@ -1426,10 +1428,10 @@ let totMonStat = new Vue({
             $({ val : 0 }).animate({ val : $this.dzonTrnd.minMaxRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.dzonTrnd.minMaxRt = $this.toNumber(this.val.toFixed(1));
+                    $this.dzonTrnd.minMaxRt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.dzonTrnd.minMaxRt = $this.toNumber(this.val.toFixed(1));
+                    $this.dzonTrnd.minMaxRt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
 
@@ -1548,203 +1550,203 @@ let totMonStat = new Vue({
             $({ val : 0 }).animate({ val : $this.hcBmiIdx.hcAvgBmi }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcBmiIdx.hcAvgBmi = $this.toNumber(this.val.toFixed(1));
+                    $this.hcBmiIdx.hcAvgBmi = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcBmiIdx.hcAvgBmi = $this.toNumber(this.val.toFixed(1));
+                    $this.hcBmiIdx.hcAvgBmi = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 성장지수 과성장
             $({ val : 0 }).animate({ val : $this.hcGidx.hcGidxOhigh }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcGidx.hcGidxOhigh = $this.toNumber(this.val.toFixed(1));
+                    $this.hcGidx.hcGidxOhigh = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcGidx.hcGidxOhigh = $this.toNumber(this.val.toFixed(1));
+                    $this.hcGidx.hcGidxOhigh = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 성장지수 저성장
             $({ val : 0 }).animate({ val : $this.hcGidx.hcGidxVlow }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcGidx.hcGidxVlow = $this.toNumber(this.val.toFixed(1));
+                    $this.hcGidx.hcGidxVlow = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcGidx.hcGidxVlow = $this.toNumber(this.val.toFixed(1));
+                    $this.hcGidx.hcGidxVlow = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 비만지수 고도비만
             $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxFfat }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFidx.hcFidxFfat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxFfat = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFidx.hcFidxFfat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxFfat = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 비만지수 비만
             $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxFat }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFidx.hcFidxFat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxFat = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFidx.hcFidxFat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxFat = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 비만지수 저체중
             $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxVlow }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFidx.hcFidxVlow = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxVlow = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFidx.hcFidxVlow = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxVlow = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 비만예측 과체중
             $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxFfat }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFpidx.hcFpidxFfat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxFfat = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFpidx.hcFpidxFfat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxFfat = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 비만예측 비만
             $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxFat }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFpidx.hcFpidxFat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxFat = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFpidx.hcFpidxFat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxFat = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 비만예측 저체중
             $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxVlow }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFpidx.hcFpidxVlow = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxVlow = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFpidx.hcFpidxVlow = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxVlow = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 스트레스 높음
             $({ val : 0 }).animate({ val : $this.hcStrs.hcStrsHigh }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcStrs.hcStrsHigh = $this.toNumber(this.val.toFixed(1));
+                    $this.hcStrs.hcStrsHigh = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcStrs.hcStrsHigh = $this.toNumber(this.val.toFixed(1));
+                    $this.hcStrs.hcStrsHigh = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 스트레스 매우높음
             $({ val : 0 }).animate({ val : $this.hcStrs.hcStrsOhigh }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcStrs.hcStrsOhigh = $this.toNumber(this.val.toFixed(1));
+                    $this.hcStrs.hcStrsOhigh = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcStrs.hcStrsOhigh = $this.toNumber(this.val.toFixed(1));
+                    $this.hcStrs.hcStrsOhigh = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 평균_운동시간 차이
             $({ val : 0 }).animate({ val : $this.hcAvgAct.hcAvgActDif }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcAvgAct.hcAvgActDif = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgAct.hcAvgActDif = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcAvgAct.hcAvgActDif = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgAct.hcAvgActDif = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 평균_운동시간 평균
             $({ val : 0 }).animate({ val : $this.hcAvgAct.hcAvgAct }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcAvgAct.hcAvgAct = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgAct.hcAvgAct = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcAvgAct.hcAvgAct = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgAct.hcAvgAct = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 평균_운동시간 전일
             $({ val : 0 }).animate({ val : $this.hcAvgAct.hcPdayAvgAct }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcAvgAct.hcPdayAvgAct = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgAct.hcPdayAvgAct = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcAvgAct.hcPdayAvgAct = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgAct.hcPdayAvgAct = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 평균_칼로리_섭취 차이
             $({ val : 0 }).animate({ val : $this.hcAvgCalEat.hcCalEatDif }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcAvgCalEat.hcCalEatDif = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgCalEat.hcCalEatDif = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcAvgCalEat.hcCalEatDif = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgCalEat.hcCalEatDif = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 평균_칼로리_섭취 평균
             $({ val : 0 }).animate({ val : $this.hcAvgCalEat.hcCalEat }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcAvgCalEat.hcCalEat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgCalEat.hcCalEat = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcAvgCalEat.hcCalEat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgCalEat.hcCalEat = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 평균_칼로리_섭취 전일
             $({ val : 0 }).animate({ val : $this.hcAvgCalEat.hcPdayCalEat }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcAvgCalEat.hcPdayCalEat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgCalEat.hcPdayCalEat = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcAvgCalEat.hcPdayCalEat = $this.toNumber(this.val.toFixed(1));
+                    $this.hcAvgCalEat.hcPdayCalEat = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 주요식단_TOP3 TOP1
             $({ val : 0 }).animate({ val : $this.hcFmenuTop3.hcEatCnt1 }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFmenuTop3.hcEatCnt1 = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFmenuTop3.hcEatCnt1 = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFmenuTop3.hcEatCnt1 = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFmenuTop3.hcEatCnt1 = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 주요식단_TOP3 TOP2
             $({ val : 0 }).animate({ val : $this.hcFmenuTop3.hcEatCnt2 }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFmenuTop3.hcEatCnt2 = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFmenuTop3.hcEatCnt2 = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFmenuTop3.hcEatCnt2 = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFmenuTop3.hcEatCnt2 = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 주요식단_TOP3 TOP3
             $({ val : 0 }).animate({ val : $this.hcFmenuTop3.hcEatCnt3 }, {
                 duration: 1000,
                 step: function() {
-                	if ($this.hcFmenuTop3.hcEatFoodNm1 == null || $this.hcFmenuTop3.hcEatFoodNm1 == '') $this.hcFmenuTop3.hcEatFoodNm1 = "(식단없음)";
-                	if ($this.hcFmenuTop3.hcEatFoodNm2 == null || $this.hcFmenuTop3.hcEatFoodNm2 == '') $this.hcFmenuTop3.hcEatFoodNm2 = "(식단없음)";
-                	if ($this.hcFmenuTop3.hcEatFoodNm3 == null || $this.hcFmenuTop3.hcEatFoodNm3 == '') $this.hcFmenuTop3.hcEatFoodNm3 = "(식단없음)";
-                    $this.hcFmenuTop3.hcEatCnt3 = $this.toNumber(this.val.toFixed(1));
+                	if ($this.hcFmenuTop3.hcEatFoodNm1 === null || $this.hcFmenuTop3.hcEatFoodNm1 === '') $this.hcFmenuTop3.hcEatFoodNm1 = "(식단없음)";
+                	if ($this.hcFmenuTop3.hcEatFoodNm2 === null || $this.hcFmenuTop3.hcEatFoodNm2 === '') $this.hcFmenuTop3.hcEatFoodNm2 = "(식단없음)";
+                	if ($this.hcFmenuTop3.hcEatFoodNm3 === null || $this.hcFmenuTop3.hcEatFoodNm3 === '') $this.hcFmenuTop3.hcEatFoodNm3 = "(식단없음)";
+                    $this.hcFmenuTop3.hcEatCnt3 = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFmenuTop3.hcEatCnt3 = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFmenuTop3.hcEatCnt3 = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 헬스케어 : 아침결식율_식단 결식
@@ -1792,140 +1794,140 @@ let totMonStat = new Vue({
             $({ val : 0 }).animate({ val : $this.bandOperStat.bandOperRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.bandOperStat.bandOperRt = $this.toNumber(this.val.toFixed(1));
+                    $this.bandOperStat.bandOperRt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.bandOperStat.bandOperRt = $this.toNumber(this.val.toFixed(1));
+                    $this.bandOperStat.bandOperRt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어_활용율 성장/비만
             $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseGfixRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcUseRt.hcUseGfixRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcUseRt.hcUseGfixRt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcUseRt.hcUseGfixRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcUseRt.hcUseGfixRt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어_활용율 비만예측
             $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseFatpRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcUseRt.hcUseFatpRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcUseRt.hcUseFatpRt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcUseRt.hcUseFatpRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcUseRt.hcUseFatpRt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어_활용율 스트레스
             $({ val : 0 }).animate({ val : $this.hcUseRt.hcUseStrsRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcUseRt.hcUseStrsRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcUseRt.hcUseStrsRt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcUseRt.hcUseStrsRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcUseRt.hcUseStrsRt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 위험안전탐지율 - 공공안전
             $({ val : 0 }).animate({ val : $this.dgsfDtct.gorgSzon }, {
                 duration: 1000,
                 step: function() {
-                    $this.dgsfDtct.gorgSzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.gorgSzon = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.dgsfDtct.gorgSzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.gorgSzon = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 위험안전탐지율 - 공공위험
             $({ val : 0 }).animate({ val : $this.dgsfDtct.gorgDzon }, {
                 duration: 1000,
                 step: function() {
-                    $this.dgsfDtct.gorgDzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.gorgDzon = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.dgsfDtct.gorgDzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.gorgDzon = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 위험안전탐지율 - 보호자안전
             $({ val : 0 }).animate({ val : $this.dgsfDtct.guarSzon }, {
                 duration: 1000,
                 step: function() {
-                    $this.dgsfDtct.guarSzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.guarSzon = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.dgsfDtct.guarSzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.guarSzon = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 위험안전탐지율 - 보호자위험
             $({ val : 0 }).animate({ val : $this.dgsfDtct.guarDzon }, {
                 duration: 1000,
                 step: function() {
-                    $this.dgsfDtct.guarDzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.guarDzon = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.dgsfDtct.guarDzon = $this.toNumber(this.val.toFixed(1));
+                    $this.dgsfDtct.guarDzon = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어 - 성장지수
             $({ val : 0 }).animate({ val : $this.hcGidx.hcGidxAvg }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcGidx.hcGidxAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcGidx.hcGidxAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcGidx.hcGidxAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcGidx.hcGidxAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어 - 비만지수
             $({ val : 0 }).animate({ val : $this.hcFidx.hcFidxAvg }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFidx.hcFidxAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFidx.hcFidxAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFidx.hcFidxAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어 - 비만예측
             $({ val : 0 }).animate({ val : $this.hcFpidx.hcFpidxAvg }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcFpidx.hcFpidxAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcFpidx.hcFpidxAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcFpidx.hcFpidxAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어 - 스트레스
             $({ val : 0 }).animate({ val : $this.hcStrs.hcStrsAvg }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcStrs.hcStrsAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcStrs.hcStrsAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcStrs.hcStrsAvg = $this.toNumber(this.val.toFixed(1));
+                    $this.hcStrs.hcStrsAvg = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어 - 아침결식율_식단
             $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatHistNeatRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcMmelNeat.hcNeatHistNeatRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcMmelNeat.hcNeatHistNeatRt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcMmelNeat.hcNeatHistNeatRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcMmelNeat.hcNeatHistNeatRt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
             // 차트 텍스트 : 헬스케어 - 아침결식율_설문
             $({ val : 0 }).animate({ val : $this.hcMmelNeat.hcNeatQustNeatRt }, {
                 duration: 1000,
                 step: function() {
-                    $this.hcMmelNeat.hcNeatQustNeatRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcMmelNeat.hcNeatQustNeatRt = $this.toNumber(Number(this.val.toFixed(1)));
                 },
                 complete: function() {
-                    $this.hcMmelNeat.hcNeatQustNeatRt = $this.toNumber(this.val.toFixed(1));
+                    $this.hcMmelNeat.hcNeatQustNeatRt = $this.toNumber(Number(this.val.toFixed(1)));
                 }
             });
         },

@@ -79,66 +79,106 @@
                     <div class="form-group">
                         <span class="float_left">가동현황 <font style="color:#a0a0a0; font-size:11px;">Activation</font></span>
                         <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('F310')">+ more</span>
-                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px; cursor:pointer;" v-on:click="linkCall('F310')">
-                            <div id=chartBandOperStat class ="float_left">
+                        <div class="col-xs-12 chart-padding-0 form-group border-line minMax-height-165" style="padding-top: 40px; cursor:pointer;" v-on:click="linkCall('F310')">
+                            <div id=chartBandOperStat class ="float_left col-xs-4">
                                 <canvas id="bandOperStatChart" width="80" height="80">
                                 </canvas>
                             </div>
-                            <div id="operStatDetl">
-                                <br>
-                                <span class="col-xs-8 text-center"> 개통&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{bandOperStat.bandOperOpen}} 대</span>
-                                <span class="col-xs-8 text-center"> 가동&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{bandOperStat.bandOperNorm}} 대</span>
-                                <span class="col-xs-8 text-center"> 무응답&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{bandOperStat.bandOperNasr}} 대</span>
+                            <div id="operStatDetl" class="col-xs-8 pd_top_15">
+                                <div class="col-xs-12">
+                                    <span class="col-xs-5 text-left pd_none"> 개&nbsp;&nbsp;&nbsp;통 : </span>
+                                    <span class="col-xs-7 text-right pd_none"> {{bandOperStat.bandOperOpen}} 대</span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <span class="col-xs-5 text-left pd_none"> 가&nbsp;&nbsp;&nbsp;동 : </span>
+                                    <span class="col-xs-7 text-right pd_none"> {{bandOperStat.bandOperNorm}} 대</span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <span class="col-xs-5 text-left pd_none"> 무응답 : </span>
+                                    <span class="col-xs-7 text-right pd_none"> {{bandOperStat.bandOperNasr}} 대</span>
+                                </div>
                             </div>
                         </div>
                         <span class="float_left" style="padding-top: 1px">개통현황  <font style="color:#a0a0a0; font-size:11px;">ASignUp Process</font></span>
                         <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('H110')">+ more</span>
-                        <div class="col-xs-12 chart-padding-3 form-group border-line minMax-height-165" style="padding-top: 40px; cursor:pointer;" v-on:click="linkCall('H110')">
-                            <div id=chartBandOpenStat class ="float_left">
+                        <div class="col-xs-12 chart-padding-0 form-group border-line minMax-height-165" style="padding-top: 40px; cursor:pointer;" v-on:click="linkCall('H110')">
+                            <div id=chartBandOpenStat class ="float_left col-xs-4">
                                 <canvas id="bandOpenStatChart" width="80" height="80">
                                 </canvas>
                             </div>
-                            <div id="openStatDetl">
-                                <br>
-                                <span class="col-xs-8 text-center"> 밴드 개통&nbsp;: {{bandOpenStat.bandOpenOpen}} 건</span>
-                                <span class="col-xs-8 text-center"> 서류 제출&nbsp;: {{bandOpenStat.bandOpenPrnt}} 건</span>
-                                <span class="col-xs-8 text-center"> 회원 가입&nbsp;: {{bandOpenStat.bandOpenNorm}} 건</span>
+                            <div id="openStatDetl" class="col-xs-8 pd_top_15">
+                                <div class="col-xs-12">
+                                    <span class="col-xs-5 text-left pd_none"> 밴드 개통 : </span>
+                                    <span class="col-xs-7 text-right pd_none"> {{bandOpenStat.bandOpenOpen}} 건</span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <span class="col-xs-5 text-left pd_none"> 서류 제출 : </span>
+                                    <span class="col-xs-7 text-right pd_none"> {{bandOpenStat.bandOpenPrnt}} 건</span>
+                                </div>
+                                <div class="col-xs-12">
+                                    <span class="col-xs-5 text-left pd_none"> 회원 가입 : </span>
+                                    <span class="col-xs-7 text-right pd_none"> {{bandOpenStat.bandOpenNorm}} 건</span>
+                                </div>
                             </div>
                         </div>
                         <span class="float_left" style="padding-top: 1px">헬스케어 활용율 <font style="color:#a0a0a0; font-size:11px;">HealthCare Usages</font></span>
                         <span class="float_right" style="color: gold; cursor:pointer;" v-on:click="linkCall('O310')">+ more</span>
                         <div class="col-xs-12 form-group border-line chart-padding-1" style="padding-left: 10px;padding-right: 5px; cursor:pointer;" v-on:click="linkCall('O310')">
                             <div class="col-xs-12 chart-padding-0 minMax-height-165" style="padding-top: 30px;">
-                                <div id=chartHcUseGfix class ="float_left">
+                                <div id=chartHcUseGfix class ="float_left col-xs-4">
                                     <canvas id="hcUseGfixChart" width="80" height="80">
                                     </canvas>
                                 </div>
-                                <div id="growFatDetl">
-                                    <span class="col-xs-8 text-center pd_none" style="padding-top: 10px;"> 성장 / 비만</span>
-                                    <span class="col-xs-8 text-center pd_none"> TOTAL&nbsp;: {{hcUseRt.hcUseStdtCnt}} 명</span>
-                                    <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{hcUseRt.hcUseGfixCnt}} 명</span>
+                                <div id="growFatDetl" class="col-xs-8">
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-12 text-center" style="background-color:#d0951b;"> 성장 / 비만</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-5 text-left pd_none"> TOTAL : </span>
+                                        <span class="col-xs-7 text-right pd_none"> {{hcUseRt.hcUseStdtCnt}} 명</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-5 text-left pd_none"> USAGE : </span>
+                                        <span class="col-xs-7 text-right pd_none"> {{hcUseRt.hcUseGfixCnt}} 명</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xs-12 chart-padding-0 minMax-height-165" style="padding-top: 30px;">
-                                <div id=chartHcUseFatp class ="float_left">
+                                <div id=chartHcUseFatp class ="float_left col-xs-4">
                                     <canvas id="hcUseFatpChart" width="80" height="80">
                                     </canvas>
                                 </div>
-                                <div id="fatPrdtDetl">
-                                    <span class="col-xs-8 text-center pd_none" style="padding-top: 10px;"> 비만 예측</span>
-                                    <span class="col-xs-8 text-center pd_none"> TOTAL&nbsp;: {{hcUseRt.hcUseStdtCnt}} 명</span>
-                                    <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{hcUseRt.hcUseFatpCnt}} 명</span>
+                                <div id="fatPrdtDetl" class="col-xs-8">
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-12 text-center" style="background-color:#d0951b;"> 비만 예측</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-5 text-left pd_none"> TOTAL : </span>
+                                        <span class="col-xs-7 text-right pd_none"> {{hcUseRt.hcUseStdtCnt}} 명</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-5 text-left pd_none"> USAGE : </span>
+                                        <span class="col-xs-7 text-right pd_none"> {{hcUseRt.hcUseFatpCnt}} 명</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-xs-12 chart-padding-0 minMax-height-165" style="padding-top: 30px;">
-                                <div id=chartHcUseStrs class ="float_left">
+                                <div id=chartHcUseStrs class ="float_left col-xs-4">
                                     <canvas id="hcUseStrsChart" width="80" height="80">
                                     </canvas>
                                 </div>
-                                <div id="strsDetl">
-                                    <span class="col-xs-8 text-center pd_none" style="padding-top: 10px;"> 스트레스</span>
-                                    <span class="col-xs-8 text-center pd_none"> TOTAL&nbsp;: {{hcUseRt.hcUseStdtCnt}} 명</span>
-                                    <span class="col-xs-8 text-center pd_none"> USAGE&nbsp;: {{hcUseRt.hcUseStrsCnt}} 명</span>
+                                <div id="strsDetl" class="col-xs-8">
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-12 text-center" style="background-color:#d0951b;"> 스트레스</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-5 text-left pd_none"> TOTAL : </span>
+                                        <span class="col-xs-7 text-right pd_none"> {{hcUseRt.hcUseStdtCnt}} 명</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="col-xs-5 text-left pd_none"> USAGE : </span>
+                                        <span class="col-xs-7 text-right pd_none"> {{hcUseRt.hcUseStrsCnt}} 명</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -284,11 +324,11 @@
                         <button class="col-xs-3" v-bind:class="[cyclButton.button1 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(5000)" type="button">
                             <span> 5 sec </span>
                         </button>
-                        <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button2 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
-                            <span> 30 sec </span>
+                        <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button2 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(10000)" type="button">
+                            <span> 10 sec </span>
                         </button>
-                        <button class="col-xs-3" v-bind:class="[cyclButton.button3 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(60000)" type="button">
-                            <span> 1 min </span>
+                        <button class="col-xs-3" v-bind:class="[cyclButton.button3 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
+                            <span> 30 sec </span>
                         </button>
                     </div>
                     <div class="col-xs-12 border-line" style="padding-top: 10px;">

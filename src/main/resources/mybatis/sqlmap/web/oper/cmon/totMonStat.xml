@@ -164,7 +164,11 @@
 					SUM(WEEK_2_AGO)             AS WEEK_2_AGO,
 					SUM(WEEK_3_AGO)             AS WEEK_3_AGO,
 					SUM(WEEK_4_AGO)             AS WEEK_4_AGO,
-					MAX(MIN_MAX) / MIN(MIN_MAX) AS MIN_MAX_RT
+					MAX(MIN_MAX) / MIN(MIN_MAX) * 100 AS MIN_MAX_RT,
+					CASE
+						WHEN SUM(WEEK_2_AGO) = NULL THEN 0
+						ELSE (SUM(WEEK_1_AGO) / SUM(WEEK_2_AGO) -1) * 100
+						END AS RT <!-- 흠 증감 추세 표현 로직과 같이 가려면 이런식으로 구해야 할거 같은데.. 화면에선 그냥 최저/최고 대비..-->
 		FROM        (
 					SELECT      CASE WHEN WEEK_SEQ = 1 THEN SUM(OCCR_CNT) END WEEK_1_AGO,
 								CASE WHEN WEEK_SEQ = 2 THEN SUM(OCCR_CNT) END WEEK_2_AGO,

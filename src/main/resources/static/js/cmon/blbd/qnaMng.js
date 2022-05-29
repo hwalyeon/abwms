@@ -120,6 +120,9 @@ let qnaMng = new Vue({
         {
 			let $this     = this;
             let params = $.extend(true, {}, $this.params);
+
+            params.qustDtFr = DateUtil.removeDelimiter(params.qustDtFr);
+            params.qustDtTo = DateUtil.removeDelimiter(params.qustDtTo);
 			
             if ( isSearch )
             {
