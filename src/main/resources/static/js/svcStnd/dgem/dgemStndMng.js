@@ -81,7 +81,7 @@ let dgemStndMng = new Vue({
                 {name: "tempStatCdNm"   , index: "tempStatCdNm"   , label: "체온 상태 명" 	  , width: 50 , align: "center" },
                 {name: "dgemIdx" 	    , index: "dgemIdx" 	      , label: "위험감정 지수" 	  , width: 50 , align: "center" },
                 {name: "dgemStatCdNm"   , index: "dgemStatCdNm"   , label: "위험감정 상태 명"    , width: 50 , align: "center" }, 
-                {name: "dgemSmryCntn"   , index: "dgemSmryCntn"   , label: "위험감정 요약내용" , width: 80 , align: "center" 	}, 
+                {name: "dgemSmryCntn"   , index: "dgemSmryCntn"   , label: "위험감정 요약내용" , width: 80 , align: "left" 	}, 
                 {name: "regDt"          , index: "regDt"          , label: "등록일자"   	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatDate(cellValue);}  },
                 {name: "regTm"          , index: "regTm"          , label: "등록시각"   	  , width: 50 , align: "center"  , formatter: function(cellValue, options, rowObject) { return formatTime(cellValue);}  },
                 {name: "regUserId"      , index: "regUserId"      , label: "등록사용자ID"	  , width: 50 , align: "center"  },
