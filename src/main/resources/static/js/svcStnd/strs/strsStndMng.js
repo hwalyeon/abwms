@@ -56,7 +56,7 @@ let strsStndMng = new Vue({
                 {name: "physStrsStatCd"	    , index: "physStrsStatCd"	  , label: "신체적스트레스상태명"  , width: 50   ,align:"center"
                     ,edittype:"select"	    , formatter:"select"          , editable :true             , editoptions : {value:strsStatList}},
                 {name: "physStrsStatTemp"   , index: "physStrsStatTemp"   , label: "신체적스트레스상태명"  , hidden:true},
-                {name: "strsJudgCntn"       , index: "strsJudgCntn"       , label: "스트레스판정내용"     , width: 150   , align: "center"},
+                {name: "strsJudgCntn"       , index: "strsJudgCntn"       , label: "스트레스판정내용"     , width: 150   , align: "left"},
                 {name: "strsStndDetlPop"    , index: "strsStndDetlPop"    , label: "코드 정보보기"       , width: 40   , align: "center",
                     formatter: function(cellValue, options, rowObject) {
                         return '<input type="button" class="btn btn-xs btn-outline btn-success" ' + 'onclick="strsStndMng.regStrsStndPop(\'' + rowObject.mindStrsStatCd + '\',\''+ rowObject.physStrsStatCd + '\')" value="상세보기" data-toggle="modal" data-target="#strsStndDetlPopup"/>';
