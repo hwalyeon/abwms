@@ -183,8 +183,13 @@ const statComponent = {
         	}
             else 
         	{
+            	var tmp = -1;
+            	if      ($this.params.perdDivCd == "MONTH"   ) tmp = tmp*12;
+            	else if ($this.params.perdDivCd == "WEEK"    ) tmp = tmp*3;
+            	else if ($this.params.perdDivCd == "WEEK_NM" ) tmp = tmp*3;
             	
-                $this.params.stndMmFr =moment().add(-3, "months").format("YYYY-MM");
+            	
+                $this.params.stndMmFr =moment().add(tmp, "months").format("YYYY-MM");
                 $this.params.stndMmTo =moment().add(-1, "months").format("YYYY-MM");
 
 //                $this.params.perdDivCd = 'DAY';
