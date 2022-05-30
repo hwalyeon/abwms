@@ -77,19 +77,20 @@ let nutrEatHist = new Vue({
             let $this = this;
             let colModels =
                 [
-                    {name: "stndDt"           , index: "stndDt"           , label: "기준 일자" 	            ,  width: 80 , align: "center" , fixed: true },
-                    {name: "locNm"            , index: "locNm"            , label: "학교 명" 	            ,  width: 120 , align: "center", fixed: true },
-                    {name: "stdtNo"           , index: "stdtNo"           , label: "학생 번호" 	            ,  width: 80 , align: "center" , fixed: true },
-                    {name: "stdtNm"           , index: "stdtNm"           , label: "학생 명" 	            ,  width: 80 , align: "center" , fixed: true },
+                    {name: "stndDt" , index: "stndDt" , label: "기준 일자" ,  width:  80 ,   align: "center" , fixed: true },
+                    {name: "locNm"  , index: "locNm"  , label: "학교 명"   ,  width: 120 ,   align: "left"   , fixed: true },
+                    {name: "stdtNo" , index: "stdtNo" , label: "학생 번호" ,  width:  80 ,   align: "center" , fixed: true },
+                    {name: "stdtNm" , index: "stdtNm" , label: "학생 명"   ,  width:  80 ,   align: "center" , fixed: true },
                 ];
 
             if($this.code.nutrCdNmList.length > 0){
                 for(var i in $this.code.nutrCdNmList ){
                     var data = $this.code.nutrCdNmList[i];
                     if(data.cdVal === 'VIT_B' || data.cdVal === 'AMNO' || data.cdVal==='EPA_DHA'){
-                        colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")" , width: 80 ,  align: "center", fixed: true } );
+//                      colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "<br>("+data.cdVal+")" , width: 80 ,  align: "center", fixed: true } );
+                    	colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:"TOTAL" , width: 80 ,  align: "right", fixed: true } );
                     }else {
-                        colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "("+data.cdVal+")"  , width: 80 , align: "center",  fixed: true } );
+                        colModels.push( {name:toCamelCase(data.cdVal)  , index:toCamelCase(data.cdVal)    , label:data.cdNm + "<br>("+data.cdVal+")"  , width: 80 , align: "right",  fixed: true } );
                     }
                 }
             }
@@ -125,16 +126,16 @@ let nutrEatHist = new Vue({
                     gridComplete: function () {
                         let grid = this;
 
-                        $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","telNo"], "stdtNo");
-                        $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
-                        $(grid).tableRowSpan(["stndDt","cal","prtn","carb","ca","fe","mg","na","vitD3","vitB","vitB1","nia","dfe","chl","fapu","epa","dha","dfib","epaDha","vitB12","vitB2","zn","ile","leu","val","amno","fat"], "stndDt");
+//                        $(grid).tableRowSpan(["locNm","stdtNo","stdtNm","telNo"], "stdtNo");
+//                        $(grid).tableRowSpan(["guarNo","guarNm","guarTelNo"], "guarNo");
+//                        $(grid).tableRowSpan(["stndDt","cal","prtn","carb","ca","fe","mg","na","vitD3","vitB","vitB1","nia","dfe","chl","fapu","epa","dha","dfib","epaDha","vitB12","vitB2","zn","ile","leu","val","amno","fat"], "stndDt");
                     }
                 }));
 
             $("#nutrEatHist_list").jqGrid("setGroupHeaders",{
                 useColSpanStyle: true,
                 groupHeaders: [
-                    {startColumnName: 'vitB', numberOfColumns: 6, titleText: '비타민_B (비타민B1,B2,B12,나이아신,엽산)'},
+                    {startColumnName: 'vitB', numberOfColumns: 6, titleText: '비타민_B (비타민B1, B2, B12, 나이아신, 엽산)'},
                     {startColumnName: 'amno', numberOfColumns: 4, titleText: '아미노산'},
                     {startColumnName: 'epa', numberOfColumns: 3, titleText: 'EPA+DHA'}
                 ]

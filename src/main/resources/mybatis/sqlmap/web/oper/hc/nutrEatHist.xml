@@ -43,7 +43,7 @@
 		  where  1=1
 		)
 		select tdeh.stnd_dt                         as stnd_dt    /* stnd_dt 기준_일자 character(8) */
-		     , TLIB.loc_nm                           as loc_nm     /* loc_nm  학교_명   varchar(100) */
+		     , TLIB.loc_nm                          as loc_nm     /* loc_nm  학교_명   varchar(100) */
 		     , tdeh.stdt_no                         as stdt_no    /* stdt_no 학생_번호 numeric      */
 		     , DECR(tsb.stdt_nm)                    as stdt_nm    /* stdt_nm 학생_명   varchar(40)  */
 		     , coalesce( MAX(nutrInfo.CAL)    , 0 ) as CAL

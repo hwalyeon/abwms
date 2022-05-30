@@ -67,9 +67,9 @@ let fatpQustHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "stndDt"       , index: "stndDt"       , label: "기준 일자" 	                            , align: "center" , width: 80 },
-                {name: "stdtNo"       , index: "stdtNo"       , label: "학생 번호" 	                            , align: "center" , width: 60 },
-                {name: "stdtNm"       , index: "stdtNm"       , label: "학생 명" 	                            , align: "center" , width: 80 },
+                {name: "stndDt"       , index: "stndDt"       , label: "기준일자" 	                            , align: "center" , width: 80 , formatter:function(cellValue) { return formatDate(cellValue);}},
+                {name: "stdtNo"       , index: "stdtNo"       , label: "학생번호" 	                            , align: "center" , width: 60 },
+                {name: "stdtNm"       , index: "stdtNm"       , label: "학생명" 	                            , align: "center" , width: 80 },
                 {name: "sexCd"        , index: "sexCd"        , label: "성별"	                                , align: "center" , width: 50 },
                 {name: "ageYcnt"      , index: "ageYcnt"      , label: "나이(년)"                               , align: "center" , width: 50 , formatter:function(cellValue){ if (cellValue==null || cellValue=='') return '-'; else return cellValue+" 세";}},
                 {name: "qustNo1"      , index: "qustNo1"      , label: "주 평균 </br>라면 섭취 횟수"            , align: "center" , width: 100 },
