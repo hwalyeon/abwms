@@ -32,14 +32,14 @@
 		<if test=" stdtNo != null and stdtNo !='' ">/*학생_번호*/
 			and tsch.stdt_no = #{stdtNo}::NUMERIC </if>
 		<if test=" stdtNm != null and stdtNm !='' ">/*학생_명*/
-			and tsb.stdt_NM = ENCR(#{stdtNm}</if>
+			and tsb.stdt_NM = ENCR(#{stdtNm})</if>
 		<if test=" locNm != null and locNm !='' ">/*학교(학원)명*/
 			and TLIB.LOC_NM like CONCAT('%',#{locNm},'%')</if>
 		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
 			and tgb.guar_no = #{guarNo}::NUMERIC </if>
 		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
 			and tgb.guar_nm = ENCR(#{guarNm})</if>
-			order by tsch.occr_dttm
+			order by tsch.occr_dttm desc, tsch.stdt_no asc
         <if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

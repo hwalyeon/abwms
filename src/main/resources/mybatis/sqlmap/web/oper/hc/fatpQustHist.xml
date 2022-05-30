@@ -63,7 +63,7 @@
             and tsb.sex_cd = #{sexCd} </if>
         <if test="fatpIdxFr != null and fatpIdxFr != null and fatpIdxTo !='' and fatpIdxTo !='' ">/*비만예측지수*/
             and tfqht.fatp_idx  between #{fatpIdxFr}::NUMERIC  and #{fatpIdxTo}::NUMERIC </if>
-        order by  tfqht.stnd_dt
+        order by  tfqht.stnd_dt desc
         <if test=' paging == "Y" '>
             LIMIT ${rowCount} OFFSET ${currentIndex} </if>
     </select>

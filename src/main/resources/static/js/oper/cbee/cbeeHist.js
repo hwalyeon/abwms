@@ -59,17 +59,17 @@ let cbeeHist = new Vue({
             let $this = this;
         	let colModels =
             [
-                {name: "occrDttm"    , index: "occrDttm"    , label: "발생 일시" 	             , width: 50 , align: "center" , formatter: function(cellValue) { return formatTimestamp(cellValue);}},
-                {name: "locNm"       , index: "locNm"       , label: "학교 명" 	                 , width: 50 , align: "left"   },
-                {name: "stdtNo"      , index: "stdtNo"      , label: "학생 번호" 	             , width: 50 , align: "center" },
-                {name: "stdtNm"      , index: "stdtNm"      , label: "학생 명" 	                 , width: 50 , align: "center" },
-                {name: "cbeeUseCdNm" , index: "cbeeUseCdNm" , label: "발생 구분<br/>(적립/소진)" , width: 50 , align: "center" },
-                {name: "useCbeeAmt"  , index: "useCbeeAmt"  , label: "발생 금액"                 , width: 50 , align: "center" , formatter: function(cellValue) { return numberFormat(cellValue);  }},
-                {name: "cbeeBal"     , index: "cbeeBal"     , label: "누적 잔액"                 , width: 50 , align: "center" , formatter: function(cellValue) { return numberFormat(cellValue);  }},
-                {name: "telNo"       , index: "telNo"       , label: "학생(밴드)<br/>전화번호"   , width: 50 , align: "center"  ,formatter: function(cellValue) { return phoneFormatter(cellValue);}},
-                {name: "guarNo"      , index: "guarNo"      , label: "보호자 번호"               , width: 50 , align: "center" },
-                {name: "guarNm"      , index: "guarNm"      , label: "보호자 명"                 , width: 50 , align: "center" },
-                {name: "guarTelNo" 	 , index: "guarTelNo" 	, label: "보호자<br/>전화번호"       , width: 50 , align: "center" , formatter:function(cellValue)  { return phoneFormatter(cellValue);}}
+                {name: "occrDttm"    , index: "occrDttm"    , label: "발생일시" 	             , width:  80 , align: "center" , formatter: function(cellValue) { return formatTimestamp(cellValue);}},
+                {name: "locNm"       , index: "locNm"       , label: "학교명" 	                 , width: 120 , align: "left"   },
+                {name: "stdtNo"      , index: "stdtNo"      , label: "학생번호" 	             , width:  80 , align: "center" },
+                {name: "stdtNm"      , index: "stdtNm"      , label: "학생명" 	                 , width:  80 , align: "center" },
+                {name: "useCbeeAmt"  , index: "useCbeeAmt"  , label: "발생금액"                  , width:  80 , align: "right"  , formatter: function(cellValue) { return numberFormat(cellValue) + " 원 ";  }},
+                {name: "cbeeUseCdNm" , index: "cbeeUseCdNm" , label: "발생구분"                  , width:  50 , align: "left"   },
+                {name: "cbeeBal"     , index: "cbeeBal"     , label: "누적잔액"                  , width:  80 , align: "right"  , formatter: function(cellValue) { return numberFormat(cellValue) + " 원 ";  }},
+                {name: "telNo"       , index: "telNo"       , label: "학생(밴드)<br/>전화번호"   , width:  80 , align: "center"  ,formatter: function(cellValue) { return phoneFormatter(cellValue);}},
+                {name: "guarNo"      , index: "guarNo"      , label: "보호자 번호"               , width:  80 , align: "center" },
+                {name: "guarNm"      , index: "guarNm"      , label: "보호자 명"                 , width:  80 , align: "center" },
+                {name: "guarTelNo" 	 , index: "guarTelNo" 	, label: "보호자<br/>전화번호"       , width:  80 , align: "center" , formatter:function(cellValue)  { return phoneFormatter(cellValue);}}
             ];
             $("#cbeeHist_list").jqGrid("GridUnload");
            	$("#cbeeHist_list").jqGrid($.extend(true, {}, commonGridOptions(),

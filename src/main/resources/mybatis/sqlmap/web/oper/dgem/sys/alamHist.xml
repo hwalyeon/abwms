@@ -44,9 +44,9 @@
 
      ORDER BY A.REG_DT DESC, A.REG_TM DESC 
   
-    <if test=' paging == "Y" '>
+<!--     <if test=' paging == "Y" '> -->
     LIMIT ${rowCount} OFFSET ${currentIndex}
-    </if>
+<!--    </if> -->
     </select>
 
 </mapper>
