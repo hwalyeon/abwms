@@ -167,7 +167,7 @@
 	<select id="selectEatNutrSpecList" parameterType="java.util.Map" resultType="MybatisMap">
 	    select TFE.FOOD_NO                              as FOOD_NO      /* food_no      식품_번호        numeric               */
              , CONCAT(TNI.NUTR_NM,'(',TFE.NUTR_CD,')')  as NUTR_NM      /* nutr_nm      영양소_명        character varying(40) */
-             , (TFE.NUTR_QTY * #{eatQty}::NUMERIC )     as NUTR_QTY     /* nutr_qty     영양소_용량      numeric               */
+             , TRIM(TO_CHAR((TFE.NUTR_QTY * #{eatQty}::NUMERIC),'999,999,999.9'))     as NUTR_QTY     /* nutr_qty     영양소_용량      numeric               */
              , TNI.NUTR_UNIT_CD                         as NUTR_UNIT_CD /* nutr_unit_cd 영양소_단위_코드 character varying(20) */
         FROM   TI_FOOD_ELEM TFE                                          -- 식품_성분  TFE
                inner join TI_NUTR_INFO TNI                               -- 영양소_정보 TNI

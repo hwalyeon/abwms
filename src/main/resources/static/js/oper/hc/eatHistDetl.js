@@ -89,9 +89,9 @@ let eatHistDetl = new Vue({
 				let fmenuSpecColModels =
 				[
 					{name: "foodNo"  , index: "foodNo"  , label: "식품 번호" , width: 30  , align: "center" },
-					{name: "foodNm"  , index: "foodNm"  , label: "식품 명"   , width: 100  , align: "center"},
+					{name: "foodNm"  , index: "foodNm"  , label: "식품 명"   , width: 100 , align: "left"   },
 					{name: "qty"     , index: "qty"     , label: "수량"      , width: 30  , align: "center" },
-					{name: "eatQty"  , index: "eatQty"  , label: "섭취 용량" , width: 50  , align: "center" },
+					{name: "eatQty"  , index: "eatQty"  , label: "섭취 용량" , width: 50  , align: "right"  ,formatter: function(cellValue) { return numberFormat(cellValue) + " ";}}
 				];
 				$("#fmenuSpec_list").jqGrid("GridUnload");
 				$("#fmenuSpec_list").jqGrid($.extend(true, {}, commonGridOptions(),
@@ -140,9 +140,9 @@ let eatHistDetl = new Vue({
 				/*섭취_영양_정보_그리드*/
 				let eatNutrSpecColModels =
 				[
-					{name: "nutrNm"     , index: "nutrNm"     , label: "영양소" , width: 120 , align: "center" },
-					{name: "nutrQty"    , index: "nutrQty"    , label: "섭취량" , width: 90  , align: "left"   },
-					{name: "nutrUnitCd" , index: "nutrUnitCd" , label: "단위"   , width: 60  , align: "center" }
+					{name: "nutrNm"     , index: "nutrNm"     , label: "영양소" , width: 120 , align: "left"  },
+					{name: "nutrQty"    , index: "nutrQty"    , label: "섭취량" , width: 90  , align: "right" , formatter: function(cellValue) { return numberFormat(cellValue)+' '; }},
+					{name: "nutrUnitCd" , index: "nutrUnitCd" , label: "단위"   , width: 60  , align: "center"}
 				];
 				$("#eatNutrSpec_list").jqGrid("GridUnload");
 				$("#eatNutrSpec_list").jqGrid($.extend(true, {}, commonGridOptions(), {
