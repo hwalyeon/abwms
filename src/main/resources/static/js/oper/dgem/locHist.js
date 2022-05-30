@@ -79,24 +79,24 @@ let locHist = new Vue({
             let $this = this;
             let colModels = [
                 {name: "crud"              , index: "crud"              , label: "crud"		 	 , hidden: true                    },
-                {name: "occrDttm"          , index: "occrDttm"          , label: "발생일시"		 , width: 80     , align: "center"
+                {name: "occrDttm"          , index: "occrDttm"          , label: "발생일시"		 , width: 100     , align: "center"
                     ,formatter: function(cellValue, options, rowObject) {
                         return formatTimestamp(cellValue);
                     }},
-                {name: "schlNm"            , index: "schlNm"            , label: "학교명"		 , width: 80     , align: "center" },
-                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"	     , width: 110    , align: "center" },
-                {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 , width: 80     , align: "center" },
-                {name: "locNm"             , index: "locNm"             , label: "장소"		     , width: 80     , align: "center" },
-                {name: "plcClssCd"         , index: "plcClssCd"         , label: "장소분류"	     , width: 80     , align: "center" },
-                {name: "latVal"            , index: "latVal"            , label: "위도"	         , width: 110    , align: "center" },
-                {name: "lonVal"            , index: "lonVal"            , label: "경도"           , width: 110    , align: "center" },
-                {name: "locNm"             , index: "locNm"             , label: "위치명"	     , width: 110    , align: "center" },
-                {name: "addrBase"          , index: "addrBase"          , label: "주소"		     , width: 110     , align: "center"},
+                {name: "schlNm"            , index: "schlNm"            , label: "학교명"		 , width: 110     , align: "left" },
+                {name: "stdtNo"            , index: "stdtNo"            , label: "학생번호"	     , width: 60    , align: "center" },
+                {name: "stdtNm"            , index: "stdtNm"            , label: "학생명"		 , width: 60     , align: "center" },
+                {name: "locNm"             , index: "locNm"             , label: "장소"		     , width: 140     , align: "left" },
+                {name: "plcClssCd"         , index: "plcClssCd"         , label: "장소분류"	     , width: 60     , align: "center" },
+                {name: "latVal"            , index: "latVal"            , label: "위도"	         , width: 100    , align: "center" },
+                {name: "lonVal"            , index: "lonVal"            , label: "경도"           , width: 100    , align: "center" },
+//                {name: "locNm"             , index: "locNm"             , label: "위치명"	     , width: 110    , align: "center" },
+                {name: "addrBase"          , index: "addrBase"          , label: "주소"		     , width: 140     , align: "left"},
                 {name: "telNo"             , index: "telNo"             , label: "학생 전화번호"	 , width: 80     , align: "center"
                     ,formatter:function(cellValue, options, rowObject){
                         return phoneFormatter(cellValue);
                     }},
-                {name: "guarNo"            , index: "guarNo"            , label: "보호자번호"  	 , width: 80     , align: "center" },
+                {name: "guarNo"            , index: "guarNo"            , label: "보호자번호"  	 , width: 60     , align: "center" },
                 {name: "guarNm"            , index: "guarNm"            , label: "보호자명"	 	 , width: 100    , align: "center" },
                 {name: "guarTelNo"         , index: "guarTelNo"         , label: "보호자 전화번호"  , width: 100    , align: "center"
                     ,formatter:function(cellValue, options, rowObject){

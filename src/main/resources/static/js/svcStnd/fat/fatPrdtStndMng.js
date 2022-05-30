@@ -53,7 +53,7 @@ let fatPrdtStndMng = new Vue({
                 {name: "fatJudgCdNm"        , index: "fatJudgCdNm"        , label: "비만 판정 코드명"       , align: "center"   , width: 150  },
                 {name: "fatpJudgCdNm"       , index: "fatpJudgCdNm"       , label: "비만 예측 판정 코드명"  , align: "center"   , width: 150  },
                 {name: "fatpEvalSmry"       , index: "fatpEvalSmry"       , label: "비만예측 평가 요약"     , align: "center"   , width: 150   },
-                {name: "fatpEvalCntn"       , index: "fatpEvalCntn"       , label: "비만예측 평가 내용"     , align: "center"   , width: 350   },
+                {name: "fatpEvalCntn"       , index: "fatpEvalCntn"       , label: "비만예측 평가 내용"     , align: "left"     , width: 350   },
                 {name: "regDt"              , index: "regDt"              , label: "등록 일자"              , align: "center"   , width: 100   },
                 {name: "regTm"              , index: "regTm"              , label: "등록 시각"              , align: "center"   , width: 100    },
                 {name: "regUserId"          , index: "regUserId"          , label: "등록 사용자 ID"         , align: "center"   , width: 100    },
