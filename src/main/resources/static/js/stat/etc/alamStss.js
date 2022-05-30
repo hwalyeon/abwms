@@ -87,14 +87,14 @@ let alamStss = new Vue({
         	let $this = this;
         	
         	let colModels = [
-                {name: "alamTypeCd"      , index: "alamTypeCd"      , label: "구분"   , width: 80, align: "center", hidden:true},
-                {name: "alamTypeNm"      , index: "alamTypeNm"      , label: "구분"   , width: 80, align: "center"}
+                {name: "alamTypeCd"      , index: "alamTypeCd"      , label: "알림유형" , width:  60, align: "center", fixed :true, hidden:false},
+                {name: "alamTypeNm"      , index: "alamTypeNm"      , label: "알림명"   , width: 150, align: "left"  , fixed :true}
             ];
 
             if($this.code.stndDtList.length > 0){
                 for(var i in $this.code.stndDtList ){
                     var data = $this.code.stndDtList[i];
-                    colModels.push( {name:data.stndDt , index:data.stndDt , label:data.stndDt ,  width: 80, align:"center"} );
+                    colModels.push( {name:data.stndDt , index:data.stndDt , label:data.stndDt ,  width: 80, align:"right"} );
                 }
             }
   

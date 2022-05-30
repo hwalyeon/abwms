@@ -1,6 +1,7 @@
 package kr.co.seculink.web.service.stat.etc;
 
 import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.XUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
@@ -23,28 +24,51 @@ public class AlamStssServiceImpl implements AlamStssService
 	{
 		List<Map<String, Object>> result = dao.selectList("stat.etc.alamStss.searchAlamStssList", params);
 
-		List<Map<String, Object>> newResult = new ArrayList<Map<String, Object>>();
-
-		if(result != null && result.size() > 0){
-			Map<String, Object> newInfo = new HashMap<String, Object>();
-			String alamTypeNm = null;
-			String alamTypeCd = null;
-			for (Map<String, Object> info : result){
-				if(alamTypeNm != null && !alamTypeNm.equals(info.get("alamTypeNm").toString())){
-					newInfo.put("alamTypeNm", alamTypeNm);
-					newInfo.put("alamTypeCd", alamTypeCd);
-					newResult.add(newInfo);
-					newInfo = new HashMap<String, Object>();
-				}
-				newInfo.put(info.get("stndDt").toString(), info.get("alamCnt").toString());
-				alamTypeNm = info.get("alamTypeNm").toString();
-				alamTypeCd = info.get("alamTypeCd").toString();
-			}
-			newInfo.put("alamTypeNm", alamTypeNm);
-			newInfo.put("alamTypeCd", alamTypeCd);
-			newResult.add(newInfo);
+		List<Map<String, Object>> outList = new ArrayList<Map<String, Object>>();
+		
+		String currAlamTypeCd = "";
+		Map<String,Object> tmp = new HashMap<String,Object>();
+		boolean bPending = false;
+		
+		for (int i = 0; i < result.size(); i++)
+		{
+		    Map<String,Object> map = result.get(i);
+		    
+		    String alamTypeCd = XUtil.getString (map.get("alamTypeCd"));
+		    String alamTypeNm = XUtil.getString (map.get("alamTypeNm"));
+		    String stndDt     = XUtil.getString (map.get("stndDt"    ));
+		    String alamCnt    = XUtil.getDecimal(map.get("alamCnt"   ));
+		    
+		    if (i == 0)
+		    {
+		        tmp = new HashMap<String,Object>();
+		        bPending = true;
+	            tmp.put("alamTypeCd", alamTypeCd);
+	            tmp.put("alamTypeNm", alamTypeNm);
+	            
+	            currAlamTypeCd = alamTypeCd;
+		    }
+		    else if (alamTypeCd.equals(currAlamTypeCd) == false)
+		    {
+		        outList.add(tmp);
+		        bPending = false;
+		        
+	            tmp = new HashMap<String,Object>();
+	            tmp.put("alamTypeCd", alamTypeCd);
+	            tmp.put("alamTypeNm", alamTypeNm);
+                
+                currAlamTypeCd = alamTypeCd;
+		    }
+		    else if (alamTypeCd.equals(currAlamTypeCd))
+		    {
+		        bPending = true; 
+		    }
+		    
+            tmp.put( stndDt     , alamCnt   );
 		}
-		return newResult;
+		if (bPending) outList.add(tmp);
+		
+		return outList;
 	}
 
 }
