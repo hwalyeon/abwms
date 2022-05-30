@@ -175,8 +175,8 @@ const statComponent = {
             
             if ($this.params.perdDivCd == "DAY")
         	{
-                $this.params.stndDtFr =moment().add(-7, "days").format(dateFormatPattern);
-                $this.params.stndDtTo =moment().add(-1, "days").format(dateFormatPattern);
+                $this.params.stndDtFr =moment().add(-14, "days").format(dateFormatPattern);
+                $this.params.stndDtTo =moment().add( -1, "days").format(dateFormatPattern);
 
                 $this.params.perdDivCd = 'DAY';
                 $this.params.occrDivCd = '02';
