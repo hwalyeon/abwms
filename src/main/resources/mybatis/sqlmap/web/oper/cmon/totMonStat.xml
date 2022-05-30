@@ -41,48 +41,68 @@
 
 	<!-- 헬스케어_활용율 -->
 	<select id="searchHcUseRt" parameterType="java.util.Map" resultType="MybatisMap">
-		WITH        STDT_CNT as /* 학생_수 */
+		WITH        STDT_NO AS /* 학생_번호 */
+					(
+					SELECT      SB.STDT_NO  AS STDT_NO
+					FROM        TS_BAND_INFO BI
+								INNER JOIN
+								TM_STDT_BASE SB
+								ON 	BI.BAND_ID = SB.BAND_ID
+					WHERE       1=1
+				  	AND         SB.DEL_YN = 'N'
+				  	AND         BI.BAND_OPEN_STAT_CD = 'NORM'
+					),
+					STDT_CNT AS /* 학생_수 */
 					(
 					SELECT      COALESCE(COUNT(1), 0) AS STDT_CNT
 					FROM        TS_BAND_INFO BI
 								INNER JOIN
 								TM_STDT_BASE SB
-								ON BI.BAND_ID = SB.BAND_ID
+								ON 	BI.BAND_ID = SB.BAND_ID
 					WHERE       1=1
 					AND         SB.DEL_YN = 'N'
 					AND         BI.BAND_OPEN_STAT_CD = ('NORM')
 					),
-					GFIX_CNT as /* 성장/비만_학생_수 */
+					GFIX_CNT AS /* 성장/비만_학생_수 */
 					(
 					SELECT      COUNT(1) AS GFIX_CNT
 					FROM        (
-								SELECT      STDT_NO AS GFIX_CNT
-								FROM        TS_GFIX_HIST
+								SELECT      GH.STDT_NO AS GFIX_CNT
+								FROM        TS_GFIX_HIST    AS GH
+											INNER JOIN
+											STDT_NO         AS SN
+											ON  GH.STDT_NO = SN.STDT_NO
 								WHERE       1=1
 							  	AND         GFIX_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
-								GROUP BY    STDT_NO
+								GROUP BY    GH.STDT_NO
 								) GFIX_CNT
 					),
 					FATP_CNT AS /* 비만예측_학생_수 */
 					(
 					SELECT      COUNT(1) AS FATP_CNT
 					FROM        (
-								SELECT      STDT_NO AS FATP_CNT
-								FROM        TS_FATP_QUST_HIST
+								SELECT      FQH.STDT_NO AS FATP_CNT
+								FROM        TS_FATP_QUST_HIST   AS FQH
+											INNER JOIN
+											STDT_NO             AS SN
+											ON  FQH.STDT_NO = SN.STDT_NO
 								WHERE       1=1
-							  	AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
-								GROUP BY    STDT_NO
+								AND         FQH.STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								GROUP BY    FQH.STDT_NO
 								) FATP_CNT
 					),
 					STRS_CNT AS /* 스트레스_학생_수 */
 					(
 					SELECT      COUNT(1) AS STRS_CNT
 					FROM        (
-								SELECT      STDT_NO AS STRS_CNT
-								FROM        TS_STDT_STRS_HIST
+								SELECT      SSH.STDT_NO AS STRS_CNT
+								FROM        TS_STDT_STRS_HIST   AS SSH
+											INNER JOIN
+											STDT_NO             AS SN
+											ON  SSH.STDT_NO = SN.STDT_NO
 								WHERE       1=1
-								AND         STRS_JUDG_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
-								GROUP BY    STDT_NO
+							  	AND         SSH.STRS_JUDG_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								GROUP BY    SSH.STDT_NO
 								) STRS_CNT
 					)
 		SELECT      SUM(STDT_CNT)                                   AS HC_USE_STDT_CNT,
