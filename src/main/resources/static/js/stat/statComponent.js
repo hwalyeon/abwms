@@ -206,8 +206,8 @@ const statComponent = {
 
             var nowDate = new Date();
 
-            $this.params.stndDtFr =moment(nowDate).add(-7, "days").format(dateFormatPattern);
-            $this.params.stndDtTo =moment(nowDate).add(-1, "days").format(dateFormatPattern);
+            $this.params.stndDtFr =moment(nowDate).add(-14, "days").format(dateFormatPattern);
+            $this.params.stndDtTo =moment(nowDate).add( -1, "days").format(dateFormatPattern);
 
             $this.params.perdDivCd = 'DAY';
             $this.params.occrDivCd = '02';

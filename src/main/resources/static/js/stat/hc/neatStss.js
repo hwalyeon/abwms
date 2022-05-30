@@ -280,9 +280,11 @@ let neatStss = new Vue({
                 let $this = this;
                 if(value=='QUST'){
                     $this.params.perdDivCd = 'WEEK' ;
+
                     $this.params.mmelYn = 'MORN';
                     $this.params.amelYn = '';
                     $this.params.emelYn = '';
+                    
                 }
 
             },
