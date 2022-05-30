@@ -42,33 +42,20 @@
 
 	<!-- 위치정보_관리_리스트_조회-->
 	<select id="searchLocInfoList" parameterType="java.util.Map" resultType="MybatisMap">
-	SELECT A.STND_DT
-		  ,A.PLC_CLSS_CD
-		  ,FN_GETCDNM('PLC_CLSS_CD',A.PLC_CLSS_CD) AS PLC_CLSS_NM
-		  ,A.LAT_VAL
-		  ,A.LON_VAL
-		  ,A.NEAR_ADDR
---		  ,B.LOC_NO
-		  ,A.DUP_APNT_CNT
-
-	FROM   TT_GUAR_DZONE_STSS A
-/*
-	       LEFT OUTER JOIN
-		   TS_LOC_INFO_BASE   B
-           ON  A.LAT_VAL = B.LAT_VAL
-           AND A.LON_VAL = B.LON_VAL
-*/
+	--
+	SELECT RANK() OVER(PARTITION BY A.STND_DT ORDER BY A.DUP_APNT_CNT DESC) AS SEQ,
+	       A.STND_DT                                      AS STND_DT,
+	       A.PLC_CLSS_CD                                  AS PLC_CLSS_CD,
+	       ABSV.FN_GETCDNM('PLC_CLSS_CD', A.PLC_CLSS_CD)  AS PLC_CLSS_NM,
+	       A.LAT_VAL                                      AS LAT_VAL,
+	       A.LON_VAL                                      AS LON_VAL,
+	       A.NEAR_ADDR                                    AS NEAR_ADDR,
+	       A.DUP_APNT_CNT                                 AS DUP_APNT_CNT
+	FROM   ABSV.TT_GUAR_DZONE_STSS A
 	WHERE  1=1
-	<if test="entrDtFr != null and entrDtFr != null and entrDtTo !='' and entrDtTo !='' ">
-	AND    A.STND_DT between REPLACE(#{entrDtFr},'-','') and REPLACE(#{entrDtTo},'-','')</if>
+	 AND   A.STND_DT = (SELECT MAX(STND_DT) AS RCNT_DT FROM ABSV.TT_GUAR_DZONE_STSS)
 	<if test=" plcClssCd != null and plcClssCd !='' ">
-/*	AND    A.PLC_CLSS_CD = #{plcClssCd} */
-    </if>
-	<if test="wordHead1 != null and wordHead1 !=''">
-/*	AND    B.ADDR_BASE LIKE #{wordHead1}||'%' */
-    </if>
-	<if test="wordHead2 != null and wordHead2 !=''">
-/*	AND    B.ADDR_BASE LIKE '%'||#{wordHead2}'%' */
+     AND   A.PLC_CLSS_CD = #{plcClssCd} 
     </if>
 	
 	ORDER BY A.DUP_APNT_CNT DESC

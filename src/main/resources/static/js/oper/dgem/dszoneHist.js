@@ -14,7 +14,7 @@ let dszoneHist = new Vue({
             locNm        :'',
             rdPublGuarDiv:'all',
             locApntCd    :'',
-            mmDd         :'THIS_WEEK',
+            mmDd         :'RECENT_MONTH',
             plcClssCd    :'DZONE',
             paging       :'Y',
             totalCount   : 0,

@@ -4,69 +4,125 @@
 
     <!--섭취_이력 리스트 조회-->
 	<select id="selectEatHistList" parameterType="java.util.Map" resultType="MybatisMap">
-		select *from
-		(select  tdeh.stnd_dt         as stnd_dt /* stnd_dt 기준_일자 character(8) */
-		       , TLIB.loc_nm           as loc_nm/* loc_nm  학교_명   varchar(100) */
-		       , tdeh.stdt_no         as stdt_no /* stdt_no 학생_번호 numeric      */
-		       , DECR(tsb.stdt_nm)          as stdt_nm/* stdt_nm 학생_명   varchar(40)  */
-		       , max(case when tfb.mmel_yn = 'Y' then 'Y' else 'N' end)  as mmel_yn        /* fmenu_yn       아침_여부   char                   */
-		       , max(case when tfb.mmel_yn = 'Y' then tfb.fmenu_seq end) as mmel_fmenu_seq /* mmel_fmenu_seq 식단표_순번 numeric                */
-		       , max(case when tfb.mmel_yn = 'Y' then tfb.fmenu_nm  end) as mmel_fmenu_nm  /* mmel_fmenu_nm  식단표_명   character varying(100) */
-		       , max(case when tfb.amel_yn = 'Y' then 'Y' else 'N' end)  as amel_yn        /* fmenu_yn       점심_여부   char                   */
-		       , max(case when tfb.amel_yn = 'Y' then tfb.fmenu_seq end) as amel_fmenu_seq /* amel_fmenu_seq 식단표_순번 numeric                */
-		       , max(case when tfb.amel_yn = 'Y' then tfb.fmenu_nm  end) as amel_fmenu_nm  /* amel_fmenu_nm  식단표_명   character varying(100) */
-		       , max(case when tfb.emel_yn = 'Y' then 'Y' else 'N' end)  as emel_yn        /* fmenu_yn       저녁_여부   char                   */
-		       , max(case when tfb.emel_yn = 'Y' then tfb.fmenu_seq end) as emel_fmenu_seq /* emel_fmenu_seq 식단표_순번 numeric                */
-		       , max(case when tfb.emel_yn = 'Y' then tfb.fmenu_nm  end) as emel_fmenu_nm  /* emel_fmenu_nm  식단표_명   character varying(100) */
-		       , max(case when tfb.smel_yn = 'Y' then 'Y' else 'N' end)  as smel_yn        /* smel_yn        간식_여부   char                   */
-		       , max(case when tfb.smel_yn = 'Y' then tfb.fmenu_seq end) as smel_fmenu_seq /* smel_fmenu_seq 식단표_순번 numeric                */
-		       , max(case when tfb.smel_yn = 'Y' then tfb.fmenu_nm  end) as smel_fmenu_nm  /* smel_fmenu_nm  식단표_명   character varying(100) */
-		       , DECR(tbi.tel_no)            as tel_no /* tel_no      전화_번호       character varying(20)  */
-		       , tdeh.guar_no          as guar_no /* guar_no     보호자_번호     numeric                */
-		       , DECR(tgb.guar_nm)           as guar_nm /* guar_nm     보호자_명       character varying(40)  */
-		       , DECR(tgb.guar_tel_no)       as guar_tel_no /* guar_tel_no 보호자_전화_번호 character varying(20) */
-		from     ts_dd_eat_hist tdeh
-		         inner join TS_FMENU_BASE tfb               --식단표_기본 tsb
-		                 on tdeh.guar_no   = tfb.guar_no
-		                and tdeh.fmenu_seq = tfb.fmenu_seq
-		         inner join TM_STDT_BASE tsb                --학생_기본 tsb
-		                 on tdeh.stdt_no = tsb.stdt_no
-		         inner join TS_LOC_INFO_BASE TLIB                --교육기관_기본 TLIB
-		                 on tsb.eorg_loc_no = TLIB.LOC_NO
-		         inner join TS_BAND_INFO tbi                --밴드_정보 tbi
-		                 on tsb.band_id = tbi.band_id
-		         inner join TM_GUAR_BASE tgb                --보호자_기본 tgb
-		                 on tdeh.guar_no = tgb.guar_no
-		where    1=1
+		--
+		WITH TEMP_OBJ AS 
+		(
+		  SELECT  A.STND_DT                                                      AS STND_DT,
+		          A.STDT_NO                                                      AS STDT_NO,
+		          MAX(ABSV.DECR(C.STDT_NM)                                    )  AS STDT_NM,
+		          MAX(C.EORG_LOC_NO)                                             AS EORG_LOC_NO,
+		          A.GUAR_NO                                                      AS GUAR_NO,
+		          MAX(ABSV.DECR(D.GUAR_NM    )                                )  AS GUAR_NM,
+		          MAX(ABSV.DECR(D.GUAR_TEL_NO)                                )  AS GUAR_TEL_NO,
+		          MAX(B.MMEL_YN                                               )  AS MMEL_YN,
+		          MAX(CASE WHEN B.MMEL_YN = 'Y' THEN B.FMENU_SEQ ELSE NULL END)  AS MMEL_FMENU_SEQ,
+		          SUM(CASE WHEN B.MMEL_YN = 'Y' THEN 1           ELSE 0    END)  AS MMEL_FMENU_CNT,
+		          MAX(B.AMEL_YN                                               )  AS AMEL_YN,
+		          MAX(CASE WHEN B.AMEL_YN = 'Y' THEN B.FMENU_SEQ ELSE NULL END)  AS AMEL_FMENU_SEQ,
+		          SUM(CASE WHEN B.AMEL_YN = 'Y' THEN 1           ELSE 0    END)  AS AMEL_FMENU_CNT,
+		          MAX(B.EMEL_YN                                               )  AS EMEL_YN,
+		          MAX(CASE WHEN B.EMEL_YN = 'Y' THEN B.FMENU_SEQ ELSE NULL END)  AS EMEL_FMENU_SEQ,
+		          SUM(CASE WHEN B.EMEL_YN = 'Y' THEN 1           ELSE 0    END)  AS EMEL_FMENU_CNT,
+		          MAX(B.SMEL_YN                                               )  AS SMEL_YN,
+		          MAX(CASE WHEN B.SMEL_YN = 'Y' THEN B.FMENU_SEQ ELSE NULL END)  AS SMEL_FMENU_SEQ,
+		          SUM(CASE WHEN B.SMEL_YN = 'Y' THEN 1           ELSE 0    END)  AS SMEL_FMENU_CNT
+		
+		  FROM    ABSV.TS_DD_EAT_HIST  A
+		
+		          LEFT OUTER JOIN
+		          ABSV.TS_FMENU_BASE   B
+		          ON  B.GUAR_NO   = A.GUAR_NO
+		          AND B.FMENU_SEQ = A.FMENU_SEQ
+		
+		          LEFT OUTER JOIN
+		          ABSV.TM_STDT_BASE    C
+		          ON  C.STDT_NO   = A.STDT_NO
+		
+		          LEFT OUTER JOIN
+		          ABSV.TM_GUAR_BASE    D
+		          ON  D.GUAR_NO   = A.GUAR_NO
+		
+		  WHERE   1=1
 		<if test="stndDtFr != null and stndDtFr != null and stndDtTo !='' and stndDtTo !='' ">
-		and tdeh.stnd_dt between replace(#{stndDtFr},'-','') and replace(#{stndDtTo},'-','')</if> /*기준 일자*/
+		   AND    A.STND_DT BETWEEN #{stndDtFr} AND #{stndDtTo}</if>
 		<if test=" stdtNo != null and stdtNo !='' ">
-		and tdeh.stdt_no = #{stdtNo}::NUMERIC </if>                          /*학생_번호*/
+		   AND    C.STDT_NO = #{stdtNo}</if>
 		<if test=" stdtNm != null and stdtNm !='' ">
-		and tsb.stdt_nm = ENCR(#{stdtNm})</if>          /*학생_명*/
+		   AND    C.STDT_NM = ABSV.ENCR(#{stdtNm})</if>
 		<if test=" fmenuNm != null and fmenuNm !='' ">
-		and tfb.fmenu_nm like CONCAT('%',#{fmenuNm},'%')</if>                /*식단표_명*/
+		   AND    B.FMENU_NM LIKE '%'||#{fmenuNm}||'%'</if>
 		<if test=" guarNo != null and guarNo !='' ">
-		and tdeh.guar_no = #{guarNo}::NUMERIC </if>                          /*보호자_번호*/
+		   AND    D.GUAR_NO = #{guarNo}</if>
 		<if test=" guarNm != null and guarNm !='' ">
-		and tgb.guar_nm = ENCR(#{guarNm})</if>            /*보호자_명*/
-		<if test=" locNm != null and locNm !='' ">
-		and tsb.LOC_NM like CONCAT('%',#{locNm},'%')</if>                    /*학교_명*/
-		group by tdeh.stnd_dt, TLIB.loc_nm , tdeh.stdt_no, tsb.stdt_nm, tdeh.guar_no, tbi.tel_no , tgb.guar_nm  , tgb.guar_tel_no
-		) fmenuData
-		where 1=1
-		<if test=" mmelYn != null and mmelYn !=''">		/*아침,점심,저녁,간식_식사_여부*/
-		and fmenuData.mmel_yn = #{mmelYn} </if>
-		<if test=" amelYn != null and amelYn !=''">		/*아침,점심,저녁,간식_식사_여부*/
-		and fmenuData.amel_yn = #{amelYn}</if>
-		<if test=" emelYn != null and emelYn !=''">		/*아침,점심,저녁,간식_식사_여부*/
-		and fmenuData.emel_yn = #{emelYn}</if>
-		<if test=" smelYn != null and smelYn !=''">		/*아침,점심,저녁,간식_식사_여부*/
-		and fmenuData.smel_yn = #{smelYn} </if>
-		<if test=" mmelStarvYn != null and mmelStarvYn !=''">
-		and fmenuData.mmel_yn = #{mmelStarvYn}</if>    /*아침_결식_여부*/
-		group by fmenuData.stnd_dt, fmenuData.loc_nm , fmenuData.stdt_no, fmenuData.stdt_nm, fmenuData.guar_no, fmenuData.tel_no , fmenuData.guar_nm  , fmenuData.guar_tel_no, fmenuData.mmel_yn, fmenuData.mmel_fmenu_seq, fmenuData.mmel_fmenu_nm
-		, fmenuData.amel_yn, fmenuData.amel_fmenu_seq, fmenuData.amel_fmenu_nm, fmenuData.emel_yn, fmenuData.emel_fmenu_seq, fmenuData.emel_fmenu_nm, fmenuData.smel_yn, fmenuData.smel_fmenu_seq, fmenuData.smel_fmenu_nm
+		   AND    D.GUAR_NM = ABSV.ENCR(#{guarNm})</if>
+		
+		  GROUP BY A.STND_DT, A.STDT_NO, A.GUAR_NO
+		)
+		
+		SELECT  A.STND_DT                     AS STND_DT       ,   
+		        B.LOC_NM                      AS SCHL_NM       ,
+		        A.STDT_NO                     AS STDT_NO       ,    
+		        A.STDT_NM                     AS STDT_NM       ,   
+		        A.GUAR_NO                     AS GUAR_NO       ,  
+		        A.GUAR_NM                     AS GUAR_NM       , 
+		        A.GUAR_TEL_NO                 AS GUAR_TEL_NO   ,
+		        A.MMEL_YN                     AS MMEL_YN       ,   
+		        A.MMEL_FMENU_SEQ              AS MMEL_FMENU_SEQ,
+		        C.FMENU_NM||(CASE WHEN A.MMEL_FMENU_CNT > 1 THEN ' 외 '||(A.MMEL_FMENU_CNT-1) ELSE '' END) AS MMEL_FMENU_NM ,
+		        A.MMEL_FMENU_CNT              AS MMEL_FMENU_CNT,
+		        A.AMEL_YN                     AS AMEL_YN       ,     
+		        A.AMEL_FMENU_SEQ              AS AMEL_FMENU_SEQ,
+		        D.FMENU_NM                    AS AMEL_FMENU_NM ,
+		        A.AMEL_FMENU_CNT              AS AMEL_FMENU_CNT,
+		        A.EMEL_YN                     AS EMEL_YN       ,     
+		        A.EMEL_FMENU_SEQ              AS EMEL_FMENU_SEQ,
+		        E.FMENU_NM                    AS EMEL_FMENU_NM ,
+		        A.EMEL_FMENU_CNT              AS EMEL_FMENU_CNT,
+		        A.SMEL_YN                     AS SMEL_YN       ,     
+		        A.SMEL_FMENU_SEQ              AS SMEL_FMENU_SEQ,
+		        F.FMENU_NM                    AS SMEL_FMENU_NM ,
+		        A.SMEL_FMENU_CNT              AS SMEL_FMENU_CNT 
+		
+		FROM    TEMP_OBJ  A
+		
+		        LEFT OUTER JOIN
+		        ABSV.TS_LOC_INFO_BASE B
+		        ON  B.LOC_NO = A.EORG_LOC_NO
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TS_FMENU_BASE    C
+		        ON  C.GUAR_NO   = A.GUAR_NO
+		        AND C.FMENU_SEQ = A.MMEL_FMENU_SEQ
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TS_FMENU_BASE    D
+		        ON  D.GUAR_NO   = A.GUAR_NO
+		        AND D.FMENU_SEQ = A.AMEL_FMENU_SEQ
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TS_FMENU_BASE    E
+		        ON  E.GUAR_NO   = A.GUAR_NO
+		        AND E.FMENU_SEQ = A.EMEL_FMENU_SEQ
+		        
+		        LEFT OUTER JOIN
+		        ABSV.TS_FMENU_BASE    F
+		        ON  F.GUAR_NO   = A.GUAR_NO
+		        AND F.FMENU_SEQ = A.SMEL_FMENU_SEQ
+		
+		WHERE   1=1
+		<if test=' mmelYn != null and mmelYn !="" and mmelYn != "N"'>	
+		 AND    A.MMEL_FMENU_CNT > 0</if>
+		<if test=' amelYn != null and amelYn !="" and amelYn != "N"'>	
+		 AND    A.AMEL_FMENU_CNT > 0</if>
+		<if test=' emelYn != null and emelYn !="" and emelYn != "N"'>	
+		 AND    A.EMEL_FMENU_CNT > 0</if>
+		<if test=' smelYn != null and smelYn !="" and smelYn != "N"'>	
+		 AND    A.SMEL_FMENU_CNT > 0</if>
+		<if test=' mmelStarvYn != null and mmelStarvYn !="" and mmelStarvYn != "N"'>
+		 AND    A.MMEL_FMENU_CNT = 0</if>
+		 
+		ORDER BY A.STND_DT DESC, A.STDT_NO ASC
+		
 		<if test=' paging == "Y" '>
 		LIMIT ${rowCount} OFFSET ${currentIndex} </if>
 	</select>

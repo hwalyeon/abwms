@@ -376,12 +376,13 @@ let guarZoneStat = new Vue({
             let $this = this;
 
             let locListColModels = [
-                {name: "latVal"         , index: "latVal"       , label: "위도"           , width: 90        , align: "center"  },
-                {name: "lonVal"         , index: "lonVal"       , label: "경도"           , width: 90        , align: "center" },
-                {name: "nearAddr"       , index: "nearAddr"     , label: "주소"           , width: 144       , align: "left" },
-                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류"        , width: 55        , align: "center" },
-                {name: "dupApntCnt"     , index: "dupApntCnt"   , label: "보호자 지정건수"  , width: 55        , align: "center" },
-                {name: "locNo"          , index: "locNo"        , label: "장소번호"        , width: 55        , align: "center" ,hidden:true}
+                {name: "seq"            , index: "seq"          , label: "순위"           , width:  40 , align: "center"  },
+                {name: "latVal"         , index: "latVal"       , label: "위도"           , width:  90 , align: "center"  },
+                {name: "lonVal"         , index: "lonVal"       , label: "경도"           , width:  90 , align: "center"  },
+                {name: "nearAddr"       , index: "nearAddr"     , label: "주소"           , width: 144 , align: "left"    },
+                {name: "plcClssNm"      , index: "plcClssNm"    , label: "장소분류"       , width:  60 , align: "center"  },
+                {name: "dupApntCnt"     , index: "dupApntCnt"   , label: "보호자 지정건수", width:  55 , align: "center"  },
+                {name: "locNo"          , index: "locNo"        , label: "장소번호"       , width:  55 , align: "center", hidden:true}
             ];
 
             $("#locInfo_list").jqGrid("GridUnload");
@@ -428,6 +429,20 @@ let guarZoneStat = new Vue({
             }));
 
             resizeJqGridWidth("locInfo_list", "locInfo_list_wrapper");
+        },
+        changePlcClssCd() {
+        	let $this = this;
+        	var plcClssCd = $this.params.plcClssCd;
+        	
+        	if (plcClssCd == "NZONE")
+    		{
+        		Swal.alert(["세이프존과 위험지역만을 분석하는 화면입니다.", "info"]);
+        		$this.params.plcClssCd = "";
+    		}
+        	else
+    		{
+        		$this.searchLocInfoList(true);
+    		}
         },
         searchLocInfoList: function(isSearch) {
             let $this = this;

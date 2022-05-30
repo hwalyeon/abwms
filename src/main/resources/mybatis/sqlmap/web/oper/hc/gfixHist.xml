@@ -13,8 +13,8 @@
 		     , tgh.age_mcnt         /* age_mcnt     나이_월수       numeric */
 		     , tgh.hght_val         /* hght_val     키_값          numeric */
 		     , tgh.wght_val         /* wght_val     몸무게_값       numeric */
-		     , round(tgh.cal_eat_qty,1)||'㎉' as cal_eat_qty      /* cal_eat_qty  칼로리_섭취_량   numeric */
-		     , round(tgh.cal_csum_qty,1)||'㎉' as cal_csum_qty     /* cal_csum_qty 칼로리_소모_량   numeric */
+		     , trim(to_char(round(tgh.cal_eat_qty ,1),'999,999.9')) as cal_eat_qty      /* cal_eat_qty  칼로리_섭취_량   numeric */
+		     , trim(to_char(round(tgh.cal_csum_qty,1),'999,999.9')) as cal_csum_qty     /* cal_csum_qty 칼로리_소모_량   numeric */
 		     , tgh.gidx             /* gidx     성장_지수       numeric */
 		     , fn_getcdnm('GROW_JUDG_CD', tgh.grow_judg_cd) as grow_judg_cd_nm  /* grow_judg_cd 성장_판정_코드 character varying(20) */
 		     , tgh.fidx          /* fidx      비만_지수       numeric */

@@ -52,13 +52,11 @@ let dgemHist = new Vue({
             let $this = this;
 
             $this.initValue();
-
             $this.initCodeList();
-
             $this.initGrid();
 
-            //$this.searchDgemHistList(true);
 
+            $this.searchDgemHistList(true);
             $this.setDatepicker();
             
             document.getElementById("guarNm").focus();

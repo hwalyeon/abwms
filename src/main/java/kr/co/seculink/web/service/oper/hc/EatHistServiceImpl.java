@@ -24,6 +24,7 @@ public class EatHistServiceImpl implements EatHistService
 	// 섭취_이력 리스트 조회
 	public List<Map<String, String>> searchEatHistList(Map<String, String> params) throws BizException
 	{
+	    System.out.println("음냐=" + params);
 		List<Map<String, String>> result = dao.selectList("oper.hc.eatHist.selectEatHistList", params);
 		
 		return result;
