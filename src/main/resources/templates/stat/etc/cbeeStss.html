@@ -64,11 +64,11 @@
 						</div>
 						<label class="col-xs-1 control-label">나이</label>
 						<div class="col-xs-1" style="padding: 0px">
-							<input type="text" id="ageYcntFr" name="ageYcntFr" v-model="params.ageYcntFr" class="form-control">
+							<input type="text" id="ageYcntFr" name="ageYcntFr" v-model="params.ageYcntFr" class="form-control" v-on:keyup.enter="checkSearch">
 						</div>
 						<div class="float_left width_20 mg_top_8 text-center">~</div>
 						<div class="col-xs-1" style="padding: 0px">
-							<input type="text" id="ageYcntTo" name="ageYcntTo" v-model="params.ageYcntTo" class="form-control">
+							<input type="text" id="ageYcntTo" name="ageYcntTo" v-model="params.ageYcntTo" class="form-control" v-on:keyup.enter="checkSearch">
 						</div>
 					</div>
 					<div class="form-group mg_none">
@@ -76,7 +76,7 @@
 							<button class="btn btn-secondary" v-on:click="resetSearchParam()" type="button">
 								<span class="glyphicon glyphicon-refresh"> 초기화</span>
 							</button>&nbsp;
-							<button type="button" class="btn btn-w-m btn-primary" v-on:click="initSearch()"><span>조회</span></button>
+							<button type="button" class="btn btn-w-m btn-primary" v-on:click="checkSearch"><span>조회</span></button>
 						</div>
 					</div>
 				</div>
