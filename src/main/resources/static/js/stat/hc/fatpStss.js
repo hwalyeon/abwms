@@ -33,13 +33,11 @@ let fatpStss = new Vue({
         	let $this = this;
 
         	$this.initCodeList();
-
         	$this.initChart();
-
             $this.setDatepicker();
-
             $this.initData();
-
+            
+            document.getElementById("ageYcntFr").focus();
         },
 
         // 기본 날짜 세팅
@@ -48,8 +46,8 @@ let fatpStss = new Vue({
 
             var nowDate = new Date();
 
-            $this.params.stndDtFr =moment(nowDate).add(-7, "days").format(dateFormatPattern);
-            $this.params.stndDtTo =moment(nowDate).add(-1, "days").format(dateFormatPattern);
+            $this.params.stndDtFr =moment(nowDate).add(-14, "days").format(dateFormatPattern);
+            $this.params.stndDtTo =moment(nowDate).add( -1, "days").format(dateFormatPattern);
 
             $this.params.perdDivCd = 'DAY';
             $this.params.occrDivCd = '02';
@@ -409,7 +407,7 @@ let fatpStss = new Vue({
             if($this.params.perdDivCd === 'DAY') {
                 const day = moment($this.params.stndDtTo, 'YYYY-MM-DD').diff($this.params.stndDtFr, 'days');
                 if (day > 14) {
-                    Swal.alert(["일자별 조회기간은 최대 14을 넘길 수 없습니다.", "warning"]);
+                    Swal.alert(["일자별 조회기간은 최대 14일을 넘길 수 없습니다.", "warning"]);
                     return false;
                 }
 
@@ -506,7 +504,19 @@ let fatpStss = new Vue({
 
         },
 
-        
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+        	
+        	var ageFr = $this.params.ageYcntFr;
+        	var ageTo = $this.params.ageYcntTo;
+        	
+        	if (WebUtil.isNull(ageFr) && WebUtil.isNull(ageTo) == false) $this.params.ageYcntFr =  4;
+        	if (WebUtil.isNull(ageTo) && WebUtil.isNull(ageFr) == false) $this.params.ageYcntTo = 18;
+        	
+        	$this.initSearch();
+        },
         // 조회
 		searchFatpStssList: function(isSearch) {
             let $this = this;

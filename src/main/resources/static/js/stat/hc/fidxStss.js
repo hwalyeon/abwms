@@ -409,7 +409,7 @@ let fidxStss = new Vue({
             if($this.params.perdDivCd === 'DAY') {
                 const day = moment($this.params.stndDtTo, 'YYYY-MM-DD').diff($this.params.stndDtFr, 'days');
                 if (day > 14) {
-                    Swal.alert(["일자별 조회기간은 최대 14을 넘길 수 없습니다.", "warning"]);
+                    Swal.alert(["일자별 조회기간은 최대 14일을 넘길 수 없습니다.", "warning"]);
                     return false;
                 }
 
