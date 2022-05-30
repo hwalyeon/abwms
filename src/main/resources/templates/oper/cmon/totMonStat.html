@@ -85,15 +85,15 @@
                                 </canvas>
                             </div>
                             <div id="operStatDetl" class="col-xs-8 pd_top_15">
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 pd_right_none">
                                     <span class="col-xs-5 text-left pd_none"> 개&nbsp;&nbsp;&nbsp;통 : </span>
                                     <span class="col-xs-7 text-right pd_none"> {{bandOperStat.bandOperOpen}} 대</span>
                                 </div>
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 pd_right_none">
                                     <span class="col-xs-5 text-left pd_none"> 가&nbsp;&nbsp;&nbsp;동 : </span>
                                     <span class="col-xs-7 text-right pd_none"> {{bandOperStat.bandOperNorm}} 대</span>
                                 </div>
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 pd_right_none">
                                     <span class="col-xs-5 text-left pd_none"> 무응답 : </span>
                                     <span class="col-xs-7 text-right pd_none"> {{bandOperStat.bandOperNasr}} 대</span>
                                 </div>
@@ -107,16 +107,16 @@
                                 </canvas>
                             </div>
                             <div id="openStatDetl" class="col-xs-8 pd_top_15">
-                                <div class="col-xs-12">
-                                    <span class="col-xs-5 text-left pd_none"> 밴드 개통 : </span>
+                                <div class="col-xs-12 pd_right_none">
+                                    <span class="col-xs-5 text-left pd_none"> 밴드개통 : </span>
                                     <span class="col-xs-7 text-right pd_none"> {{bandOpenStat.bandOpenOpen}} 건</span>
                                 </div>
-                                <div class="col-xs-12">
-                                    <span class="col-xs-5 text-left pd_none"> 서류 제출 : </span>
+                                <div class="col-xs-12 pd_right_none">
+                                    <span class="col-xs-5 text-left pd_none"> 서류제출 : </span>
                                     <span class="col-xs-7 text-right pd_none"> {{bandOpenStat.bandOpenPrnt}} 건</span>
                                 </div>
-                                <div class="col-xs-12">
-                                    <span class="col-xs-5 text-left pd_none"> 회원 가입 : </span>
+                                <div class="col-xs-12 pd_right_none">
+                                    <span class="col-xs-5 text-left pd_none"> 회원가입 : </span>
                                     <span class="col-xs-7 text-right pd_none"> {{bandOpenStat.bandOpenNorm}} 건</span>
                                 </div>
                             </div>
@@ -321,13 +321,13 @@
                         <button class="col-xs-3 chart-padding" style="background-color: #000000" v-on:click="initCycl(5000)" type="button">
                             <span>갱신주기 : </span>
                         </button>
-                        <button class="col-xs-3" v-bind:class="[cyclButton.button1 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(5000)" type="button">
+                        <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button1 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(5000)" type="button">
                             <span> 5 sec </span>
                         </button>
                         <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button2 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(10000)" type="button">
                             <span> 10 sec </span>
                         </button>
-                        <button class="col-xs-3" v-bind:class="[cyclButton.button3 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
+                        <button class="col-xs-3 pd_left_none pd_right_none" v-bind:class="[cyclButton.button3 ? 'activeButton' : 'in-activeButton']" v-on:click="initCycl(30000)" type="button">
                             <span> 30 sec </span>
                         </button>
                     </div>
