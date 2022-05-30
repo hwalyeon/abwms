@@ -13,6 +13,7 @@
 							CASE WHEN BAND_STAT_CD = 'NORM' THEN COUNT(1) ELSE 0 END AS BAND_OPER_NORM
 					FROM    TM_STDT_BASE
 					WHERE   1=1
+				  	AND     DEL_YN = 'N'
 					GROUP BY BAND_STAT_CD
 				) STDT_BASE
 		WHERE   1=1
@@ -41,45 +42,49 @@
 	<!-- 헬스케어_활용율 -->
 	<select id="searchHcUseRt" parameterType="java.util.Map" resultType="MybatisMap">
 		WITH        STDT_CNT as /* 학생_수 */
-						(
-							SELECT      COALESCE(COUNT(1), 0) AS STDT_CNT
-							FROM        TM_STDT_BASE
-							WHERE       1=1
-							  AND         BAND_STAT_CD IN ('NORM','DISC')
-						),
+					(
+					SELECT      COALESCE(COUNT(1), 0) AS STDT_CNT
+					FROM        TS_BAND_INFO BI
+								INNER JOIN
+								TM_STDT_BASE SB
+								ON BI.BAND_ID = SB.BAND_ID
+					WHERE       1=1
+					AND         SB.DEL_YN = 'N'
+					AND         BI.BAND_OPEN_STAT_CD = ('NORM')
+					),
 					GFIX_CNT as /* 성장/비만_학생_수 */
-						(
-							SELECT      COUNT(1) AS GFIX_CNT
-							FROM        (
-											SELECT      STDT_NO AS GFIX_CNT
-											FROM        TS_GFIX_HIST
-											WHERE       1=1
-											  AND         GFIX_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
-											GROUP BY    STDT_NO
-										) GFIX_CNT
-						),
+					(
+					SELECT      COUNT(1) AS GFIX_CNT
+					FROM        (
+								SELECT      STDT_NO AS GFIX_CNT
+								FROM        TS_GFIX_HIST
+								WHERE       1=1
+							  	AND         GFIX_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								GROUP BY    STDT_NO
+								) GFIX_CNT
+					),
 					FATP_CNT AS /* 비만예측_학생_수 */
-						(
-							SELECT      COUNT(1) AS FATP_CNT
-							FROM        (
-											SELECT      STDT_NO AS FATP_CNT
-											FROM        TS_FATP_QUST_HIST
-											WHERE       1=1
-											  AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
-											GROUP BY    STDT_NO
-										) FATP_CNT
-						),
+					(
+					SELECT      COUNT(1) AS FATP_CNT
+					FROM        (
+								SELECT      STDT_NO AS FATP_CNT
+								FROM        TS_FATP_QUST_HIST
+								WHERE       1=1
+							  	AND         STND_DT BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								GROUP BY    STDT_NO
+								) FATP_CNT
+					),
 					STRS_CNT AS /* 스트레스_학생_수 */
-						(
-							SELECT      COUNT(1) AS STRS_CNT
-							FROM        (
-											SELECT      STDT_NO AS STRS_CNT
-											FROM        TS_STDT_STRS_HIST
-											WHERE       1=1
-											  AND         STRS_JUDG_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
-											GROUP BY    STDT_NO
-										) STRS_CNT
-						)
+					(
+					SELECT      COUNT(1) AS STRS_CNT
+					FROM        (
+								SELECT      STDT_NO AS STRS_CNT
+								FROM        TS_STDT_STRS_HIST
+								WHERE       1=1
+								AND         STRS_JUDG_DTTM BETWEEN TO_CHAR(NOW() - INTERVAL '3 MONTH' , 'YYYYMMDD'::TEXT) AND TO_CHAR(NOW(), 'YYYYMMDD'::TEXT)
+								GROUP BY    STDT_NO
+								) STRS_CNT
+					)
 		SELECT      SUM(STDT_CNT)                                   AS HC_USE_STDT_CNT,
 					SUM(GFIX_CNT)                                   AS HC_USE_GFIX_CNT,
 					ROUND(SUM(GFIX_CNT) / SUM(STDT_CNT) * 100, 1)   AS HC_USE_GFIX_RT,
@@ -164,11 +169,12 @@
 					SUM(WEEK_2_AGO)             AS WEEK_2_AGO,
 					SUM(WEEK_3_AGO)             AS WEEK_3_AGO,
 					SUM(WEEK_4_AGO)             AS WEEK_4_AGO,
-					MAX(MIN_MAX) / MIN(MIN_MAX) * 100 AS MIN_MAX_RT,
+					--MIN(MIN_MAX) / MAX(MIN_MAX) * 100 AS MIN_MAX_RT,
+		       		-- 재현이형이 시킴
 					CASE
 						WHEN SUM(WEEK_2_AGO) = NULL THEN 0
 						ELSE (SUM(WEEK_1_AGO) / SUM(WEEK_2_AGO) -1) * 100
-						END AS RT <!-- 흠 증감 추세 표현 로직과 같이 가려면 이런식으로 구해야 할거 같은데.. 화면에선 그냥 최저/최고 대비..-->
+					END AS MIN_MAX_RT <!-- 흠 증감 추세 표현 로직과 같이 가려면 이런식으로 구해야 할거 같은데.. 화면에선 그냥 최저/최고 대비..-->
 		FROM        (
 					SELECT      CASE WHEN WEEK_SEQ = 1 THEN SUM(OCCR_CNT) END WEEK_1_AGO,
 								CASE WHEN WEEK_SEQ = 2 THEN SUM(OCCR_CNT) END WEEK_2_AGO,
