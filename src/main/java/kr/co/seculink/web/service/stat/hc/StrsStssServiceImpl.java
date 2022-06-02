@@ -1,6 +1,7 @@
 package kr.co.seculink.web.service.stat.hc;
 
 import kr.co.seculink.exception.BizException;
+import kr.co.seculink.util.XUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,54 @@ public class StrsStssServiceImpl implements StrsStssService
 	public List<Map<String, Object>> searchStrsStssList(Map<String, String> params) throws BizException
 	{
 		List<Map<String, Object>> result = dao.selectList("stat.hc.strsStss.searchStrsStssList", params);
+		
+	      List<Map<String, Object>> outList = new ArrayList<Map<String, Object>>();
+	        
+	        String currStrsTypeCd = "";
+	        Map<String,Object> tmp = new HashMap<String,Object>();
+	        boolean bPending = false;
+	        
+	        for (int i = 0; i < result.size(); i++)
+	        {
+	            Map<String,Object> map = result.get(i);
+	            
+	            String strsTypeCd = XUtil.getString (map.get("strsTypeCd"));
+	            String strsTypeNm = XUtil.getString (map.get("strsTypeNm"));
+	            String stndDt     = XUtil.getString (map.get("stndDt"    ));
+	            String avgIdx     = XUtil.getDecimal(map.get("avgIdx"    ));
+	            
+	            if (i == 0)
+	            {
+	                tmp = new HashMap<String,Object>();
+	                bPending = true;
+	                tmp.put("strsTypeCd", strsTypeCd);
+	                tmp.put("strsTypeNm", strsTypeNm);
+	                
+	                currStrsTypeCd = strsTypeCd;
+	            }
+	            else if (strsTypeCd.equals(currStrsTypeCd) == false)
+	            {
+	                outList.add(tmp);
+	                bPending = false;
+	                
+	                tmp = new HashMap<String,Object>();
+	                tmp.put("strsTypeCd", strsTypeCd);
+	                tmp.put("strsTypeNm", strsTypeNm);
+	                
+	                currStrsTypeCd = strsTypeCd;
+	            }
+	            else if (strsTypeCd.equals(currStrsTypeCd))
+	            {
+	                bPending = true; 
+	            }
+	            
+	            tmp.put( stndDt     , avgIdx   );
+	        }
+	        if (bPending) outList.add(tmp);
+	        
+	        return outList;
 
+/*
 		List<Map<String, Object>> newResult = new ArrayList<Map<String, Object>>();
 
 		if(result != null && result.size() > 0){
@@ -45,6 +93,7 @@ public class StrsStssServiceImpl implements StrsStssService
 			newResult.add(newInfo);
 		}
 		return newResult;
+*/		
 	}
 
 

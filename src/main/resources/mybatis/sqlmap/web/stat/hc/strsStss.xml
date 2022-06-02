@@ -107,7 +107,7 @@
                 and tcs.cd_grp = 'WEEK_CD'
                 where 1=1
                 group by x.stnd_dt ,x.strs_type_cd, tcs.sort_ord
-                order by tcs.sort_ord  , x.strs_type_cd ,  x.stnd_dt
+                order by x.strs_type_cd ,  tcs.sort_ord  , x.stnd_dt
             </when>
             <otherwise>
                 group by x.stnd_dt , x.strs_type_cd
