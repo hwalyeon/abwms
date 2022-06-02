@@ -33,13 +33,9 @@ let alamStss = new Vue({
         	let $this = this;
 
         	$this.initCodeList();
-
         	$this.initChart();
-
             $this.setDatepicker();
-
             $this.initData();
-
             $this.initSearch();
         },
 

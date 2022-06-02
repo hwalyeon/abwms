@@ -35,14 +35,12 @@ let strsStss = new Vue({
         	let $this = this;
 
         	$this.initCodeList();
-
         	$this.initChart();
-
             $this.setDatepicker();
-
             $this.initData();
-
             $this.initSearch();
+            
+            document.getElementById("ageYcntFr").focus();
         },
 
         // 기본 날짜 세팅
@@ -55,9 +53,22 @@ let strsStss = new Vue({
             let $this = this;
             $this.statCodeList();
         },
+        // 조회검증
+        checkSearch: function()
+        {
+        	let $this = this;
+
+        	$this.initSearch();
+        },
         initSearch : function() {
             let $this = this;
 
+            var ageFr = $this.params.ageYcntFr;
+            var ageTo = $this.params.ageYcntTo;
+            
+            if (WebUtil.isNull(ageFr) && WebUtil.isNull(ageTo) == false) $this.params.ageYcntFr =  4;
+            if (WebUtil.isNull(ageTo) && WebUtil.isNull(ageFr) == false) $this.params.ageYcntTo = 18;
+            
             if(!$this.isValid()){
                 return false;
             }
