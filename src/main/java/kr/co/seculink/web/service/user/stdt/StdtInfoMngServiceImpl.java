@@ -1,9 +1,10 @@
 package kr.co.seculink.web.service.user.stdt;
 
 import io.netty.util.internal.StringUtil;
-import kr.co.seculink.domain.RtnMsg;
 import kr.co.seculink.exception.BizException;
-import kr.co.seculink.util.GEUtil;
+import kr.co.seculink.feign.service.FeignService;
+import kr.co.seculink.feign.vo.HlthCareVO;
+import kr.co.seculink.util.XUtil;
 import kr.co.seculink.web.service.cmon.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +21,9 @@ public class StdtInfoMngServiceImpl implements StdtInfoMngService
 {
 	@Autowired
 	private FileService fileService;
+
+	@Autowired
+	private FeignService feignService;
 
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate dao;
@@ -101,10 +104,28 @@ public class StdtInfoMngServiceImpl implements StdtInfoMngService
 
 			// 학생 보호자 저장
 			dao.insert("user.stdt.stdtInfoMng.insertTmStdtGuarConn",params);
+
+			// 헬스케어 판정 호출
+			HlthCareVO hlthCareVO = new HlthCareVO();
+			hlthCareVO.setStdtNo(params.get("stdtNo").toString());
+			hlthCareVO.setStndDt(XUtil.getCurrDate());
+			hlthCareVO.setUserId(params.get("regUserId").toString());
+			feignService.chagneBodyInfo(hlthCareVO);
 		}
 		else if("U".equals(params.get("crud"))){
+			Map<String, String> stdtGrowHist = dao.selectOne("user.stdt.stdtInfoMng.selectTsStdtGrowHist", params);
+
 			dao.update("user.stdt.stdtInfoMng.updateTmStdtBase",params);
 			dao.update("user.stdt.stdtInfoMng.updateTsStdtGrowHist",params);
+
+			if("Y".equals(stdtGrowHist.get("hghtValYn")) || "Y".equals(stdtGrowHist.get("wghtValYn")) || "Y".equals(stdtGrowHist.get("wastValYn"))){
+				// 헬스케어 판정 호출
+				HlthCareVO hlthCareVO = new HlthCareVO();
+				hlthCareVO.setStdtNo(params.get("stdtNo").toString());
+				hlthCareVO.setStndDt(XUtil.getCurrDate());
+				hlthCareVO.setUserId(params.get("regUserId").toString());
+				feignService.chagneBodyInfo(hlthCareVO);
+			}
 		}
 		else if("D".equals(params.get("crud"))) {
 			dao.insert("user.stdt.stdtInfoMng.deleteTmStdtBase",params);
