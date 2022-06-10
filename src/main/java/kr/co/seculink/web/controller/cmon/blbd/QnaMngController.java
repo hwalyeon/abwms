@@ -5,6 +5,7 @@ import kr.co.seculink.exception.BizException;
 import kr.co.seculink.util.GEUtil;
 import kr.co.seculink.web.excel.ExcelConstant;
 import kr.co.seculink.web.service.cmon.blbd.QnaMngService;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class QnaMngController {
 	private QnaMngService qnaMngService;
 
 	//질의응답_리스트 조회
+	@SneakyThrows
 	@RequestMapping("/cmon/blbd/qnaMng/searchQnaList.ab")
 	public RtnMsg searchQnaList(@RequestBody(required = false) Map<String, String> params) throws BizException
 	{

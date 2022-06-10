@@ -26,13 +26,13 @@
                              ON tqb.qust_guar_no = tgb.guar_no
         WHERE   1=1
                <if test ="qustDtFr != null and qustDtFr !='' and qustDtTo != null and qustDtTo !=''">
-        AND    to_char(to_date(tqb.qust_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{qustDtFr} and #{qustDtTo}</if> --질문 일자
+        AND    tqb.qust_dt between  REPLACE(#{qustDtFr},'-','') and REPLACE(#{qustDtTo},'-','') </if> --질문 일자
                <if test ="guarNm != null and guarNm !='' ">
         AND    tgb.guar_nm  = ENCR(#{guarNm}) </if>                                                   --질문자_명
                <if test ="qustGuarNo != null and qustGuarNo !='' ">
         AND    tqb.qust_guar_no = #{qustGuarNo}::NUMERIC</if>                                                     --질문자_번호
                <if test ="ansDtFr != null and ansDtFr !='' and ansDtTo != null and ansDtTo !=''">
-        AND    to_char(to_date(tqb.ans_dt , 'YYYYMMDD') ,'YYYY-MM-DD' ) between #{ansDtFr} and #{ansDtTo}</if>    --답변 일자
+        AND    tqb.ans_dt between REPLACE(#{ansDtFr},'-','') and REPLACE(#{ansDtTo},'-','')</if>    --답변 일자
                <if test ="ansUserId != null and ansUserId !='' ">
         AND    tqb.ans_user_id =  #{ansUserId}</if>                                                               --답변_사용자_id
                <if test ="qnaNo != null and qnaNo !='' ">
