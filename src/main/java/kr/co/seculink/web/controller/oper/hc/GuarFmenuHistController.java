@@ -33,7 +33,11 @@ public class GuarFmenuHistController {
 		RtnMsg vo = new RtnMsg();
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
+		System.out.println("params"+params);
+
 		List<Map<String, String>> result = guarFmenuHistService.searchGuarFmenuHistList(params);
+
+
 		rtnMap.put("result", result);
 
 		if (!GEUtil.isEmpty(params.get("paging"))) {

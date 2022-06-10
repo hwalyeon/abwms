@@ -5,13 +5,16 @@ let guarFmenuHist = new Vue({
     	params:
         {
             userId        : '' ,
-            fmenuNm       : '' , //식단표_명
+            fmenuNm       : '' ,  //식단표_명
+            totCal        : '' ,  //총_칼로리
+            foodNm1       : '' ,  //포함_음식1
+            foodNm2       : '' ,  //포함_음식2
             mmelYn        : 'Y' , //아침_여부
             amelYn        : 'Y' , //점심_여부
             emelYn        : 'Y' , //저녁_여부
             smelYn        : 'Y' , //간식_여부
-            guarNo        : '' , //보호자_번호
-            guarNm        : '' , //보호자_명
+            guarNo        : '' ,  //보호자_번호
+            guarNm        : '' ,  //보호자_명
     		paging        : 'Y',
     		totalCount    : 0  ,
             rowCount      : 30 ,
@@ -50,6 +53,7 @@ let guarFmenuHist = new Vue({
                 {name: "guarNm"    , index: "guarNm"   , label: "보호자 명"    , width: 50 , align: "center" },
                 {name: "fmenuSeq"  , index: "fmenuSeq" , label: "식단표 번호"  , width: 50 , align: "center" },
                 {name: "fmenuNm"   , index: "fmenuNm"  , label: "식단표 명"    , width: 50 , align: "center" },
+                {name: "totCal"   , index: "totCal"   , label: "총 칼로리"    , width: 50 , align: "center" },
                 {name: "mmelYn"    , index: "mmelYn"   , label: "아침 여부"    , width: 50 , align: "center" },
                 {name: "amelYn"    , index: "amelYn"   , label: "점심 여부"    , width: 50 , align: "center" },
                 {name: "emelYn"    , index: "emelYn"   , label: "저녁 여부"    , width: 50 , align: "center" },

@@ -25,32 +25,47 @@
 				<div class="form-horizontal">
 					<div class="form-group">
 						<label class="col-xs-1 control-label" >식단표 명</label>
-						<div class="col-xs-1"  style="padding:0px; margin-left: 15px;" >
+						<div class="col-xs-1"  style="padding:0px;" >
 							<input type="text" name="fmenuNm" class="form-control"  v-model="params.fmenuNm" >
 						</div>
-						<label class="col-xs-1 control-label"style="margin-left:30px;padding:7px 0px 0px 0px; width:40px;">아침</label>
-						<div class="col-xs-1"  style=" padding:6px 0px 0px 0px; width:30px;" >
-							<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="Y" false-value="N">
+						<label class="col-xs-1 control-label" >총 칼로리</label>
+						<div class="col-xs-1"  style="padding:0px;" >
+							<input type="text" name="totCal" class="form-control"  v-model="params.totCal" >
 						</div>
-						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">점심</label>
-						<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;" >
-							<input type="checkbox" name="amelYn" v-model="params.amelYn" true-value="Y" false-value="N">
+						<label class="col-xs-1 control-label" >포함 음식 1</label>
+						<div class="col-xs-1"  style="padding:0px; ">
+							<input type="text" name="foodNm1" class="form-control"  v-model="params.foodNm1" >
 						</div>
-						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">저녁</label>
-						<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;" >
-							<input type="checkbox" name="emelYn" v-model="params.emelYn" true-value="Y" false-value="N">
+						<label class="col-xs-1 control-label" >포함 음식 2</label>
+						<div class="col-xs-1"  style="padding:0px; ">
+							<input type="text" name="foodNm2" class="form-control"  v-model="params.foodNm2" >
 						</div>
-						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">간식</label>
-						<div class="col-xs-1"  style="padding:6px 0px 0px 0px; width:30px;">
-							<input type="checkbox" name="smelYn" v-model="params.smelYn" true-value="Y" false-value="N">
+					</div>
+					<div class="form-group">
+						<label class="col-xs-1 control-label">보호자명 </label>
+						<div class="col-xs-1"  style="padding:0px" >
+							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
 						</div>
 						<label class="col-xs-1 control-label" >보호자번호</label>
 						<div class="col-xs-1"   style="padding:0px">
 							<input type="text" name="guarNo" class="form-control" v-model="params.guarNo" v-digitonly.number>
 						</div>
-						<label class="col-xs-1 control-label">보호자명</label>
-						<div class="col-xs-2"  style="padding-left:0px;" >
-							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
+						<label class="col-xs-1 control-label">식때구분 : </label>
+						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">아침</label>
+						<div class="col-xs-1"  style=" padding:6px 0px 0px 10px; width:30px;" >
+							<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="Y" false-value="N">
+						</div>
+						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">점심</label>
+						<div class="col-xs-1"  style="padding:6px 0px 0px 10px; width:30px;" >
+							<input type="checkbox" name="amelYn" v-model="params.amelYn" true-value="Y" false-value="N">
+						</div>
+						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">저녁</label>
+						<div class="col-xs-1"  style="padding:6px 0px 0px 10px; width:30px;" >
+							<input type="checkbox" name="emelYn" v-model="params.emelYn" true-value="Y" false-value="N">
+						</div>
+						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px;  width:40px;">간식</label>
+						<div class="col-xs-1"  style="padding:6px 0px 0px 10px; width:30px;">
+							<input type="checkbox" name="smelYn" v-model="params.smelYn" true-value="Y" false-value="N">
 						</div>
 					</div>
 					<div class="form-group mg_none">
