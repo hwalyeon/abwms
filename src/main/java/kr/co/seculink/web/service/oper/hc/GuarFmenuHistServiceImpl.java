@@ -28,4 +28,12 @@ public class GuarFmenuHistServiceImpl implements GuarFmenuHistService
 		
 		return result;
 	}
+
+	// 식단_정보 리스트 조회
+	public List<Map<String, String>> searchGuarFmenuSpecList(Map<String, String> params) throws BizException
+	{
+		List<Map<String, String>> result = dao.selectList("oper.hc.guarFmenuHist.selectGuarFmenuSpecList", params);
+
+		return result;
+	}
 }

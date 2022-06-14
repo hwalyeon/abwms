@@ -24,13 +24,17 @@
 			<div class="ibox-content">
 				<div class="form-horizontal">
 					<div class="form-group">
+						<label class="col-xs-1 control-label">보호자명 </label>
+						<div class="col-xs-1"  style="padding:0px" >
+							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
+						</div>
+						<label class="col-xs-1 control-label" >보호자번호</label>
+						<div class="col-xs-1"   style="padding:0px">
+							<input type="text" name="guarNo" class="form-control" v-model="params.guarNo" v-digitonly.number>
+						</div>
 						<label class="col-xs-1 control-label" >식단표 명</label>
 						<div class="col-xs-1"  style="padding:0px;" >
 							<input type="text" name="fmenuNm" class="form-control"  v-model="params.fmenuNm" >
-						</div>
-						<label class="col-xs-1 control-label" >총 칼로리</label>
-						<div class="col-xs-1"  style="padding:0px;" >
-							<input type="text" name="totCal" class="form-control"  v-model="params.totCal" >
 						</div>
 						<label class="col-xs-1 control-label" >포함 음식 1</label>
 						<div class="col-xs-1"  style="padding:0px; ">
@@ -42,15 +46,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-1 control-label">보호자명 </label>
-						<div class="col-xs-1"  style="padding:0px" >
-							<input type="text" name="guarNm" class="form-control" v-model="params.guarNm">
+						<label class="col-xs-1 control-label" >총 칼로리</label>
+						<div class="col-xs-3"  style="padding:0px;" >
+							<select id="totCal" name="totCal" class="form-control"  v-model="params.totCal" @change="selectTotCal($event)">
+								<option v-for="item in code.totCalList" :value="item.value" v-text="item.text" ></option>
+							</select>
 						</div>
-						<label class="col-xs-1 control-label" >보호자번호</label>
-						<div class="col-xs-1"   style="padding:0px">
-							<input type="text" name="guarNo" class="form-control" v-model="params.guarNo" v-digitonly.number>
-						</div>
-						<label class="col-xs-1 control-label">식때구분 : </label>
+						<label class="col-xs-1 control-label">식때 구분 : </label>
 						<label class="col-xs-1 control-label"style="padding:7px 0px 0px 0px; width:40px;">아침</label>
 						<div class="col-xs-1"  style=" padding:6px 0px 0px 10px; width:30px;" >
 							<input type="checkbox" name="mmelYn" v-model="params.mmelYn" true-value="Y" false-value="N">
@@ -105,9 +107,11 @@
 			</div>
 		</div>
     </div>
+	<div th:insert="~{/oper/hc/guarFmenuDetl :: body}"></div>  <!--섭취_이력 상세 -->
 </div>
 <section layout:fragment="user_script">
 	<script type="text/javascript" th:src="@{/js/oper/hc/guarFmenuHist.js}"></script>
+	<script type="text/javascript" th:src="@{/js/oper/hc/guarFmenuDetl.js}"></script>
 </section>
 </body>
 </html>

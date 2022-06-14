@@ -49,7 +49,24 @@ public class GuarFmenuHistController {
 
 		return vo;
 	}
+	// 식단_정보 리스트 조회
+	@ResponseBody
+	@RequestMapping("/oper/hc/guarFmenuHist/searchGuarFmenuSpecList.ab")
+	public RtnMsg searchGuarFmenuSpecList(@RequestBody(required = false) Map<String, String> params) throws BizException {
+		RtnMsg vo = new RtnMsg();
+		Map<String, Object> rtnMap = new HashMap<String, Object>();
 
+		List<Map<String, String>> result = guarFmenuHistService.searchGuarFmenuSpecList(params);
+		rtnMap.put("result", result);
+
+		if (!GEUtil.isEmpty(params.get("paging"))) {
+			params.put("paging", "N");
+			vo.setTotalCount(((List) guarFmenuHistService.searchGuarFmenuSpecList(params)).size());
+		}
+		vo.setRtnData(rtnMap, params);
+
+		return vo;
+	}
 	//보호자_식단표_현황 리스트 엑셀다운로드
 	@ResponseBody
 	@RequestMapping("/oper/hc/guarFmenuHist/guarFmenuHistList/excel.ab")

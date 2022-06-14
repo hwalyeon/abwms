@@ -9,5 +9,9 @@ public interface GuarFmenuHistService
 {
 	//보호자_식단표_현황리스트 조회
 	public List<Map<String, String>> searchGuarFmenuHistList(Map<String, String> params) throws BizException;
+
+	// 식단_정보 리스트 조회
+	public List<Map<String, String>> searchGuarFmenuSpecList(Map<String, String> params) throws BizException;
+
 }
  

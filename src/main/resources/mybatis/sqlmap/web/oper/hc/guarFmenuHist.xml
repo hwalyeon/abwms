@@ -4,39 +4,59 @@
 
     <!--보호자_식단표_현황 리스트 조회-->
 	<select id="selectGuarFmenuHistList" parameterType="java.util.Map" resultType="MybatisMap">
-		SELECT TFB.GUAR_NO                                 as GUAR_NO    /* GUAR_NO   보호자_번호 numeric */
-		     , DECR(TGB.GUAR_NM)                           as GUAR_NM    /* GUAR_NM   보호자_명   character varying(40) */
-		     , TFB.FMENU_SEQ                               as FMENU_SEQ  /* FMENU_SEQ 식단표_순번 numeric */
-		     , TFB.FMENU_NM                                as FMENU_NM   /* FMENU_NM  식단표_명   character varying(100) */
-		     , TFB.MMEL_YN                                 as MMEL_YN    /* MMEL_YN   아침_여부   character(1) */
-		     , TFB.AMEL_YN                                 as AMEL_YN    /* AMEL_YN   점심_여부   character(1) */
-		     , TFB.EMEL_YN                                 as EMEL_YN    /* EMEL_YN   저녁_여부   character(1) */
-		     , TFB.SMEL_YN                                 as SMEL_YN    /* SMEL_YN   간식_여부   character(1) */
-		     , TDEH.FEQ_USE                                as FEQ_USE    /*이용 빈도(수)*/
-		FROM   TS_FMENU_BASE TFB                --식단표_기본 TFB
-			   INNER JOIN TM_GUAR_BASE TGB            --보호자_기본 TGB
-				  	   ON TFB.GUAR_NO = TGB.GUAR_NO
-			   LEFT OUTER JOIN ( SELECT   count(FMENU_SEQ) as FEQ_USE
-										  , GUAR_NO
-										  , FMENU_SEQ
-								  FROM      TS_DD_EAT_HIST
-								  GROUP BY  GUAR_NO,FMENU_SEQ
-								) TDEH                   --일별_섭취_이력 TDEH
-								ON TFB.GUAR_NO = TDEH.GUAR_NO
-		AND    TFB.FMENU_SEQ = TDEH.FMENU_SEQ
-		WHERE  1 = 1
-		<if test=" fmenuNm != null and fmenuNm !='' ">/*식단표_명*/
-			AND TFB.FMENU_NM like CONCAT('%',#{fmenuNm},'%')</if>
-		<if test=" (foodNm1 != null and foodNm1 !='' ) or (foodNm2 != null and foodNm2 !='' )"> /*포함_음식1*/
-			AND TFB.FMENU_SEQ IN (SELECT TFB.FMENU_SEQ FROM TS_FMENU_BASE TFB
-													   INNER JOIN TS_FMENU_SPEC TFS
-													           ON TFB.GUAR_NO = TFS.GUAR_NO
-													          and TFB.FMENU_SEQ = TFS.FMENU_SEQ
-													   INNER JOIN TI_FOOD_INFO TFI
-													           ON TFS.FOOD_NO = TFI.FOOD_NO
-													   WHERE TFB.GUAR_NO = #{guarNo}
-													   AND   TFI.FOOD_NM LIKE CONCAT('%',#{foodNm1},'%'))
-													   OR    TFI.FOOD_NM LIKE CONCAT('%',#{foodNm2},'%'))
+		SELECT  TFB.GUAR_NO       AS GUAR_NO                                  /* GUAR_NO   보호자_번호 numeric */
+		      , DECR(TGB.GUAR_NM) AS GUAR_NM                                  /* GUAR_NM   보호자_명   character varying(40) */
+		      , TFB.FMENU_SEQ     AS FMENU_SEQ                                /* FMENU_SEQ 식단표_순번 numeric */
+		      , TFB.FMENU_NM      AS FMENU_NM                                 /* FMENU_NM  식단표_명   character varying(100) */
+		      , CASE WHEN TFB.MMEL_YN = 'Y' THEN 'O' ELSE 'X'   END MMEL_YN   /* MMEL_YN   아침_여부   character(1) */
+		      , CASE WHEN TFB.AMEL_YN = 'Y' THEN 'O' ELSE 'X'   END AMEL_YN   /* AMEL_YN   점심_여부   character(1) */
+		      , CASE WHEN TFB.EMEL_YN = 'Y' THEN 'O' ELSE 'X'   END EMEL_YN   /* EMEL_YN   저녁_여부   character(1) */
+		      , CASE WHEN TFB.SMEL_YN = 'Y' THEN 'O' ELSE 'X'   END SMEL_YN   /* SMEL_YN   간식_여부   character(1) */
+		      , FMENU_CAL.TOT_CAL AS FMENU_QTY                                /* 총 칼로리*/
+		      , TDEH.FEQ_USE      AS FEQ_USE                                  /* 이용 빈도(수)*/
+		FROM    TS_FMENU_BASE TFB                             --식단표_기본 TFB
+		        INNER JOIN TM_GUAR_BASE TGB                   --보호자_기본 TGB
+		                ON TFB.GUAR_NO = TGB.GUAR_NO
+		        INNER JOIN ( SELECT   TFS.FMENU_SEQ
+		                            , TFS.GUAR_NO
+		                            , ROUND(SUM(TFS.QTY * TFE.NUTR_QTY)) as TOT_CAL
+		                     FROM     TS_FMENU_SPEC TFS      --식단표_상세 TFS
+		                              INNER JOIN TI_FOOD_ELEM TFE
+		                                      ON TFS.FOOD_NO = TFE.FOOD_NO
+							 WHERE    TFE.NUTR_CD ='CAL'
+		                     GROUP BY TFS.FMENU_SEQ ,TFS.GUAR_NO
+		                     ) FMENU_CAL
+		                ON TFB.GUAR_NO   = FMENU_CAL.GUAR_NO
+		               AND TFB.FMENU_SEQ = FMENU_CAL.FMENU_SEQ
+		        LEFT OUTER JOIN ( SELECT   COUNT(FMENU_SEQ)    AS FEQ_USE
+		                                 , GUAR_NO             AS GUAR_NO
+		                                 , FMENU_SEQ           AS FMENU_SEQ
+		                          FROM     TS_DD_EAT_HIST
+		                          GROUP BY GUAR_NO,FMENU_SEQ
+		                          ) TDEH                       --일별_섭취_이력 TDEH
+		                     ON  TFB.GUAR_NO   = TDEH.GUAR_NO
+		                    AND  TFB.FMENU_SEQ = TDEH.FMENU_SEQ
+		WHERE 1=1
+		<if test="guarNm != null and guarNm !='' ">     /* 보호자_명  */
+			AND TGB.GUAR_NM = ENCR(#{guarNm})</if>
+		<if test="guarNo != null and guarNo !='' ">     /* 보호자_번호*/
+			AND TFB.GUAR_NO = #{guarNo}::NUMERIC </if>
+		<if test="fmenuNm != null and fmenuNm !='' ">   /* 식단표_명  */
+			AND TFB.FMENU_NM LIKE CONCAT ('%',#{fmenuNm},'%')</if>
+		<if test="(foodNm1 != null and foodNm1 != '') or (foodNm2 != null and foodNm2= '')">  /*포함음식_명*/
+		AND TFB.FMENU_SEQ in ( SELECT TFS.FMENU_SEQ
+		                       FROM   TS_FMENU_SPEC TFS
+		                              INNER JOIN TI_FOOD_INFO TFI
+		                                      ON TFS.FOOD_NO = TFI.FOOD_NO
+		                       WHERE  1=1
+		                       <if test="foodNm1 != null and foodNm1 != ''">
+							   AND    TFI.FOOD_NM LIKE CONCAT('%',#{foodNm1},'%')</if>
+				    		   <if test="foodNm2 != null and foodNm2 != ''">
+					           AND    TFI.FOOD_NM LIKE CONCAT('%',#{foodNm2},'%')</if>
+							 )
+		</if>
+		<if test="totCalFr != null and totCalFr != '' and totCalTo != '' and totCalTo != null"> /*총_칼로리*/
+			AND FMENU_CAL.TOT_CAL BETWEEN #{totCalFr}::NUMERIC AND #{totCalTo}::NUMERIC
 		</if>
 		<if test='((mmelYn != null and mmelYn !="") and mmelYn != "N") or ((amelYn != null and amelYn !="") and amelYn !="N") or ((emelYn != null and emelYn !="") and emelYn !="N")  or  ((smelYn != null and smelYn !="") and smelYn != "N")'>/*아침,점심,저녁,간식_여부*/
 		    AND
@@ -57,12 +77,41 @@
 			</trim>
 			)
 		</if>
-		<if test=" guarNo != null and guarNo !='' ">/*보호자_번호*/
-			AND TFB.GUAR_NO = #{guarNo}::NUMERIC </if>
-		<if test=" guarNm != null and guarNm !='' ">/*보호자_명*/
-			AND TGB.GUAR_NM = ENCR(#{guarNm})</if>
         <if test=' paging == "Y" '>
         ORDER BY TGB.GUAR_NO, TGB.GUAR_NM, TFB.FMENU_SEQ
 			LIMIT ${rowCount} OFFSET ${currentIndex} </if>
+	</select>
+
+	<select id="selectGuarFmenuSpecList" resultType="MybatisMap">
+		SELECT  TFB.FMENU_NM                  AS FMENU_NM     --식단_명
+			  , FMENU_CAL.TOT_CAL             AS FMENU_QTY    --총_칼로리
+			  , TFS.FOOD_NO                   AS FOOD_NO      --식품_번호
+			  , TFI.FOOD_NM                   AS FOOD_NM      --식품_명
+			  , TFI.OTIM_EAT_QTY              AS OTIM_EAT_QTY --일회_섭취_용량
+			  , TFS.QTY                       AS QTY          --수량
+			  , TFS.QTY * TFI.OTIM_EAT_QTY    AS EAT_QTY      --섭취_용량
+			  , ROUND(TFS.QTY * TFE.NUTR_QTY) AS NUTR_QTY     --영양소_용량
+		FROM    TS_FMENU_SPEC TFS
+				INNER JOIN TS_FMENU_BASE TFB
+						ON TFS.GUAR_NO  = TFB.GUAR_NO
+					   AND TFS.FMENU_SEQ = TFB.FMENU_SEQ
+				INNER JOIN TI_FOOD_INFO TFI
+						ON TFS.FOOD_NO = TFI.FOOD_NO
+				INNER JOIN ( SELECT   TFS.FMENU_SEQ
+						   , TFS.GUAR_NO
+						   , ROUND(SUM(TFS.QTY * TFE.NUTR_QTY)) as TOT_CAL
+							 FROM     TS_FMENU_SPEC TFS      --식단표_상세 TFS
+									  INNER JOIN TI_FOOD_ELEM TFE
+											  ON TFS.FOOD_NO = TFE.FOOD_NO
+							 WHERE    TFE.NUTR_CD ='CAL'
+							 GROUP BY TFS.FMENU_SEQ ,TFS.GUAR_NO
+							 ) FMENU_CAL
+						ON TFB.GUAR_NO   = FMENU_CAL.GUAR_NO
+					   AND TFB.FMENU_SEQ = FMENU_CAL.FMENU_SEQ
+				INNER JOIN TI_FOOD_ELEM TFE
+						ON TFS.FOOD_NO   = TFE.FOOD_NO
+					   AND TFE.NUTR_CD   = 'CAL'
+		WHERE   TFS.GUAR_NO   = #{guarNo}::NUMERIC
+		AND     TFS.FMENU_SEQ = #{fmenuSeq}::NUMERIC
 	</select>
 </mapper>
