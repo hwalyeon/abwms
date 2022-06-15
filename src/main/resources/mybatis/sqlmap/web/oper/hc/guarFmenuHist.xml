@@ -43,17 +43,29 @@
 			AND TFB.GUAR_NO = #{guarNo}::NUMERIC </if>
 		<if test="fmenuNm != null and fmenuNm !='' ">   /* 식단표_명  */
 			AND TFB.FMENU_NM LIKE CONCAT ('%',#{fmenuNm},'%')</if>
-		<if test="(foodNm1 != null and foodNm1 != '') or (foodNm2 != null and foodNm2= '')">  /*포함음식_명*/
-		AND TFB.FMENU_SEQ in ( SELECT TFS.FMENU_SEQ
-		                       FROM   TS_FMENU_SPEC TFS
-		                              INNER JOIN TI_FOOD_INFO TFI
-		                                      ON TFS.FOOD_NO = TFI.FOOD_NO
-		                       WHERE  1=1
-		                       <if test="foodNm1 != null and foodNm1 != ''">
-							   AND    TFI.FOOD_NM LIKE CONCAT('%',#{foodNm1},'%')</if>
-				    		   <if test="foodNm2 != null and foodNm2 != ''">
-					           AND    TFI.FOOD_NM LIKE CONCAT('%',#{foodNm2},'%')</if>
-							 )
+		<if test="(foodNm1 != null and foodNm1 != '') ">  /*포함음식_명1*/
+		    AND TFB.FMENU_SEQ in ( SELECT TFS.FMENU_SEQ
+								   FROM   TS_FMENU_SPEC TFS
+										  INNER JOIN TI_FOOD_INFO TFI
+												  ON TFS.FOOD_NO = TFI.FOOD_NO
+								   WHERE  1=1
+								   AND    TFS.GUAR_NO = TFB.GUAR_NO
+								   <if test="foodNm1 != null and foodNm1 != ''">
+								   AND    TFI.FOOD_NM LIKE CONCAT('%',#{foodNm1},'%')
+								   </if>
+								 )
+		</if>
+		<if test="(foodNm2 != null and foodNm2 != '') ">  /*포함음식_명1*/
+			AND TFB.FMENU_SEQ in ( SELECT TFS.FMENU_SEQ
+							       FROM   TS_FMENU_SPEC TFS
+							       INNER JOIN TI_FOOD_INFO TFI
+							       ON TFS.FOOD_NO = TFI.FOOD_NO
+							       WHERE  1=1
+							       AND    TFS.GUAR_NO = TFB.GUAR_NO
+							       <if test="foodNm2 != null and foodNm2 != ''">
+							       AND    TFI.FOOD_NM LIKE CONCAT('%',#{foodNm2},'%')
+							       </if>
+							       )
 		</if>
 		<if test="totCalFr != null and totCalFr != '' and totCalTo != '' and totCalTo != null"> /*총_칼로리*/
 			AND FMENU_CAL.TOT_CAL BETWEEN #{totCalFr}::NUMERIC AND #{totCalTo}::NUMERIC
